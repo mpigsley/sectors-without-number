@@ -1,5 +1,6 @@
 const theme = {
- dark: '#222222',
+ darkest: '#283647',
+ darker: '#233142',
  light: '#FFFFFF',
 };
 

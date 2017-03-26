@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom';
 import { injectGlobal, ThemeProvider } from 'styled-components';
 
 import theme from './utils/theme';
-
-import App from './App';
+import Home from './components/home';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -17,7 +16,7 @@ injectGlobal`
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <App />
+    <Home />
   </ThemeProvider>,
   document.getElementById('root')
 );
