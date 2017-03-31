@@ -32,7 +32,7 @@ const SubContainer = styled(FlexContainer)`
 `;
 const Title = styled.h1`
   font-size: 5rem;
-  font-weight: 200;
+  font-weight: 300;
   margin: 1rem 0;
 `;
 const SubTitle = styled.h2`
