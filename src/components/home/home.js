@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
 
-import { AbsoluteContainer, FlexContainer, FlexContainerStyle } from '../../primitives';
+import {
+  AbsoluteContainer,
+  FlexContainer,
+  FlexContainerStyle,
+  Header1,
+  Header2,
+} from '../../primitives';
 import Hexagon from '../hexagon';
 import { generateHexCoordinates } from '../../utils/hex-helper';
 
@@ -29,15 +35,6 @@ const ContentContainer = styled(AbsoluteContainer)`
 const SubContainer = styled(FlexContainer)`
   width: 100%;
   text-align: center;
-`;
-const Title = styled.h1`
-  font-size: 5rem;
-  font-weight: 300;
-  margin: 1rem 0;
-`;
-const SubTitle = styled.h2`
-  font-size: 1.8rem;
-  font-weight: 200;
 `;
 
 export default class Home extends Component {
@@ -81,10 +78,10 @@ export default class Home extends Component {
           </svg>
         </HexContainer>
         <ContentContainer direction="column" align="center" justify="center">
-          <Title>Sector.io</Title>
+          <Header1>Sector.io</Header1>
           <SubContainer justify="center" align="center">
             <RowContainer><Row /></RowContainer>
-            <SubTitle>Stars Without Number Generator</SubTitle>
+            <Header2>Stars Without Number Generator</Header2>
             <RowContainer><Row /></RowContainer>
           </SubContainer>
         </ContentContainer>
