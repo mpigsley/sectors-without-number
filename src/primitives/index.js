@@ -1,3 +1,4 @@
+import Media from './other/media-queries';
 import AbsoluteContainer, {
   style as AbsoluteContainerStyle,
 } from './containers/absolute-container';
@@ -16,4 +17,5 @@ export {
   FlexContainerStyle,
   Header1,
   Header2,
+  Media,
 };

@@ -8,9 +8,12 @@ import {
   FlexContainerStyle,
   Header1,
   Header2,
+  Media,
 } from '../../primitives';
 import Hexagon from '../hexagon';
 import { generateHexCoordinates } from '../../utils/hex-helper';
+
+console.log(Media, Media.mobile);
 
 const hexWidth = 50;
 const hexPadding = 2;
@@ -27,6 +30,9 @@ const RowContainer = styled.div`
 `;
 const Row = styled.hr`
   margin: 0 10%;
+  ${Media.tablet`
+    display: none;  
+  `}
 `;
 const ContentContainer = styled(AbsoluteContainer)`
   color: ${props => props.theme.light};
