@@ -9,6 +9,9 @@ import {
   Header1,
   Header2,
 } from './text/headers';
+import Button, {
+  style as ButtonStyle,
+} from './other/button';
 
 export {
   AbsoluteContainer,
@@ -18,4 +21,6 @@ export {
   Header1,
   Header2,
   Media,
+  Button,
+  ButtonStyle,
 };
