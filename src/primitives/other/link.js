@@ -47,7 +47,7 @@ class LinkDuo extends Component {
 }
 
 LinkDuo.propTypes = {
-  to: PropTypes.string.isRequired,
+  to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
 }
 
 export { style };

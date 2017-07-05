@@ -1,4 +1,6 @@
 import React from 'react';
+import Chance from 'chance';
+import { Settings, Zap } from 'react-feather';
 
 import {
   Header1,
@@ -6,6 +8,7 @@ import {
   Link,
   ContentContainer,
   SubContainer,
+  LinkIcon,
 } from '../../primitives';
 import {
   RowContainer,
@@ -22,8 +25,25 @@ export default function Home() {
         <RowContainer><Row right /></RowContainer>
       </SubContainer>
       <SubContainer wrap justify="center" align="center">
-        <Link padded to="/configure">Generate Sector</Link>
-        <Link padded to="https://sinenominepublishing.com/collections/stars-without-number/products/stars-without-number-core-pdf">SWN Source Book</Link>
+        <Link
+          padded
+          to="/configure"
+        >
+          <LinkIcon icon={Settings} size="20" />
+          Configure
+        </Link>
+        <Link
+          padded
+          to={{
+            pathname: '/sector',
+            seed: new Chance().hash({ length: 15 }),
+            rows: 10,
+            columns: 8,
+          }}
+        >
+          <LinkIcon icon={Zap} size="20" />
+          Generate
+        </Link>
       </SubContainer>
     </ContentContainer>
   );

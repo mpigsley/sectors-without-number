@@ -139,9 +139,10 @@ const fullRandomGenerate = (config) => {
 
 export default (config = defaultConfig) => {
   config.seededChance = new Chance(config.seed);
+  const name = config.ngenerateSectorName(config.seededChance);
 
   const sector = {
-    name: generateSectorName(config.seededChance),
+    name: config.name || name,
     seed: config.seed,
     stars: config.randomType === RandomType.fullRandom
       ? fullRandomGenerate(config)
