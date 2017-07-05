@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 import { generateHexCoordinates } from '../../utils/hex-helper';
+import SectorGenerator from '../../utils/sector-generator';
 
 import {
   Header1,
@@ -28,6 +29,7 @@ export default class Home extends Component {
 
   componentDidMount() {
     window.addEventListener('resize', this.onResize.bind(this));
+    console.log(SectorGenerator());
   }
 
   componentWillUnmount() {
