@@ -20,6 +20,7 @@ const style = css`
   box-sizing: border-box;
   font-weight: 400;
   transition: all 0.3s;
+  outline: none;
 
   &:hover {
     color: ${props => props.theme.light};
