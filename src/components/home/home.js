@@ -64,12 +64,12 @@ export default class Home extends Component {
         </HexContainer>
         <ContentContainer direction="column" align="center" justify="center">
           <Header1>Sector.io</Header1>
-          <SubContainer justify="center" align="center">
+          <SubContainer fullWidth justify="center" align="center">
             <RowContainer><Row left /></RowContainer>
             <Header2>Stars Without Number Generator</Header2>
             <RowContainer><Row right /></RowContainer>
           </SubContainer>
-          <SubContainer justify="center" align="center">
+          <SubContainer wrap justify="center" align="center">
             <HomeButton>Generate Sector</HomeButton>
             <HomeButton>SWN Source Book</HomeButton>
           </SubContainer>

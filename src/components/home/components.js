@@ -35,9 +35,11 @@ export const ContentContainer = styled(AbsoluteContainer)`
   ${FlexContainerStyle}
 `;
 export const SubContainer = styled(FlexContainer)`
-  width: 100%;
+  ${props => props.fullWidth ? 'width: calc(100% - 1rem)' : ''}
+  margin: 0 1rem;
   text-align: center;
+  flex-wrap
 `;
 export const HomeButton = styled(Button)`
-  margin: 0 1rem;
+  margin: 0.4rem 1rem;
 `;
