@@ -37,7 +37,7 @@ const style = css`
 class LinkDuo extends Component {
   render() {
     return isExternal(this.props.to) ?
-      <a
+      <a //eslint-disable-line
         href={this.props.to}
         {...this.props}
       />

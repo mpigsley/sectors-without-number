@@ -1,10 +1,6 @@
 import Media from './other/media-queries';
-import AbsoluteContainer, {
-  style as AbsoluteContainerStyle,
-} from './containers/absolute-container';
-import FlexContainer, {
-  style as FlexContainerStyle,
-} from './containers/flex-container';
+import AbsoluteContainer from './containers/absolute-container';
+import FlexContainer from './containers/flex-container';
 import {
   Header1,
   Header2,
@@ -15,9 +11,7 @@ import SubContainer  from './other/sub-container';
 
 export {
   AbsoluteContainer,
-  AbsoluteContainerStyle,
   FlexContainer,
-  FlexContainerStyle,
   Header1,
   Header2,
   Media,
