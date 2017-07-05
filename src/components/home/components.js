@@ -7,15 +7,7 @@ import {
   Media,
   Button,
 } from '../../primitives';
-import Hexagon from '../hexagon';
 
-export const HexContainer = styled.div`
-  backgroundColor: ${props => props.theme.darkest};
-  display: flex;
-`;
-export const Hex = styled(Hexagon)`
-  fill: ${props => props.theme.darker};
-`;
 export const RowContainer = styled.div`
   flex: 1;
 `;
