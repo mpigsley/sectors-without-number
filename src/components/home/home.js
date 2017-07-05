@@ -10,7 +10,7 @@ import {
   Row,
   ContentContainer,
   SubContainer,
-  HomeButton,
+  HomeLink,
 } from './components';
 
 export default function Home() {
@@ -23,8 +23,8 @@ export default function Home() {
         <RowContainer><Row right /></RowContainer>
       </SubContainer>
       <SubContainer wrap justify="center" align="center">
-        <HomeButton>Generate Sector</HomeButton>
-        <HomeButton>SWN Source Book</HomeButton>
+        <HomeLink to="/configure">Generate Sector</HomeLink>
+        <HomeLink to="https://sinenominepublishing.com/collections/stars-without-number/products/stars-without-number-core-pdf">SWN Source Book</HomeLink>
       </SubContainer>
     </ContentContainer>
   );

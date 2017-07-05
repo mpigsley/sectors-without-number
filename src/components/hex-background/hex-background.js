@@ -14,7 +14,7 @@ const hexPadding = 2;
 
 export default class HexBackground extends Component {
   static propTypes = {
-    children: PropTypes.node.isRequried,
+    children: PropTypes.node.isRequired,
   }
 
   state = {

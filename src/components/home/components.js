@@ -1,11 +1,12 @@
 import styled from 'styled-components';
+import Link from '../link';
 
 import {
   AbsoluteContainer,
   FlexContainer,
   FlexContainerStyle,
   Media,
-  Button,
+  ButtonStyle,
 } from '../../primitives';
 
 export const RowContainer = styled.div`
@@ -32,6 +33,7 @@ export const SubContainer = styled(FlexContainer)`
   text-align: center;
   flex-wrap
 `;
-export const HomeButton = styled(Button)`
+export const HomeLink = styled(Link)`
+  ${ButtonStyle}
   margin: 0.4rem 1rem;
 `;

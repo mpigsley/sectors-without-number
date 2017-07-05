@@ -5,7 +5,9 @@
   "dependencies": {
     "chance": "^1.0.10",
     "firebase-tools": "^3.5.0",
+    "is-url-external": "^1.0.3",
     "lodash": "^4.17.4",
+    "prop-types": "^15.5.10",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-router-dom": "^4.1.1",
