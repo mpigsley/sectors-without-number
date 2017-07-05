@@ -4,10 +4,8 @@ import _ from 'lodash';
 
 import { generateHexCoordinates } from '../../utils/hex-helper';
 
-import {
-  HexContainer,
-  Hex,
-} from './components';
+import { HexContainer, Hex } from './components';
+import {AbsoluteContainer } from '../../primitives';
 
 const hexWidth = 50;
 const hexPadding = 2;
@@ -56,7 +54,9 @@ export default class HexBackground extends Component {
             {hexes}
           </svg>
         </HexContainer>
-        {this.props.children}
+        <AbsoluteContainer>
+          {this.props.children}
+        </AbsoluteContainer>
       </div>
     );
   }

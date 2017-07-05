@@ -1,12 +1,7 @@
 import styled from 'styled-components';
-import Link from '../link';
 
 import {
-  AbsoluteContainer,
-  FlexContainer,
-  FlexContainerStyle,
   Media,
-  ButtonStyle,
 } from '../../primitives';
 
 export const RowContainer = styled.div`
@@ -22,18 +17,4 @@ export const Row = styled.hr`
   ${Media.tablet`
     display: none;  
   `}
-`;
-export const ContentContainer = styled(AbsoluteContainer)`
-  color: ${props => props.theme.lightest};
-  ${FlexContainerStyle}
-`;
-export const SubContainer = styled(FlexContainer)`
-  ${props => props.fullWidth ? 'width: calc(100% - 1rem)' : ''}
-  margin: 0 1rem;
-  text-align: center;
-  flex-wrap
-`;
-export const HomeLink = styled(Link)`
-  ${ButtonStyle}
-  margin: 0.4rem 1rem;
 `;

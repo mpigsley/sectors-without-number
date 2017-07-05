@@ -12,8 +12,8 @@ const defaultConfig = {
   seed: new Chance().hash({ length: 15 }),
   randomType: RandomType.fullRandom,
   index: 1,
-  maxRow: 8,
-  maxCol: 10,
+  maxRow: 10,
+  maxCol: 8,
 };
 
 class Star {

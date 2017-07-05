@@ -4,13 +4,13 @@ import _ from 'lodash';
 import {
   Header1,
   Header2,
+  Link,
+  ContentContainer,
+  SubContainer,
 } from '../../primitives';
 import {
   RowContainer,
   Row,
-  ContentContainer,
-  SubContainer,
-  HomeLink,
 } from './components';
 
 export default function Home() {
@@ -23,8 +23,8 @@ export default function Home() {
         <RowContainer><Row right /></RowContainer>
       </SubContainer>
       <SubContainer wrap justify="center" align="center">
-        <HomeLink to="/configure">Generate Sector</HomeLink>
-        <HomeLink to="https://sinenominepublishing.com/collections/stars-without-number/products/stars-without-number-core-pdf">SWN Source Book</HomeLink>
+        <Link padded to="/configure">Generate Sector</Link>
+        <Link padded to="https://sinenominepublishing.com/collections/stars-without-number/products/stars-without-number-core-pdf">SWN Source Book</Link>
       </SubContainer>
     </ContentContainer>
   );

@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import theme from './utils/theme';
 import HexBackground from './components/hex-background';
 import Home from './components/home';
+import Configure from './components/configure';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -21,6 +22,7 @@ ReactDOM.render(
     <ThemeProvider theme={theme}>
       <HexBackground>
         <Route exact path="/" component={Home} />
+        <Route path="/configure" component={Configure} />
       </HexBackground>
     </ThemeProvider>
   </Router>,

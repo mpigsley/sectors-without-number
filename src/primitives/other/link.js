@@ -1,3 +1,7 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
+import isExternal from 'is-url-external';
 import styled, { css } from 'styled-components';
 
 const style = css`
@@ -21,6 +25,7 @@ const style = css`
   font-weight: 400;
   transition: all 0.3s;
   outline: none;
+  ${props => props.padded ? 'margin: 0.4rem 1rem;' : ''}
 
   &:hover {
     color: ${props => props.theme.light};
@@ -29,5 +34,21 @@ const style = css`
   }
 `;
 
+class LinkDuo extends Component {
+  render() {
+    return isExternal(this.props.to) ?
+      <a
+        href={this.props.to}
+        {...this.props}
+      />
+      :
+      <Link {...this.props} />;
+  }
+}
+
+LinkDuo.propTypes = {
+  to: PropTypes.string.isRequired,
+}
+
 export { style };
-export default styled.button`${style}`;
+export default styled(({ padded, ...rest }) => <LinkDuo {...rest} />)`${style}`;
