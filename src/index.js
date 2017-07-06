@@ -6,11 +6,13 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 
 import theme from './utils/theme';
+import registerServiceWorker from './registerServiceWorker';
+import store, { history } from './store';
+
 import HexBackground from './components/hex-background';
 import Home from './components/home';
 import Configure from './components/configure';
-import registerServiceWorker from './registerServiceWorker';
-import store, { history } from './store';
+import Sector from './components/sector';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -28,6 +30,7 @@ ReactDOM.render(
         <HexBackground>
           <Route exact path="/" component={Home} />
           <Route path="/configure" component={Configure} />
+          <Route path="/sector" component={Sector} />
         </HexBackground>
       </ConnectedRouter>
     </Provider>

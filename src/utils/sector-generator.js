@@ -1,17 +1,8 @@
 import Chance from 'chance';
 import _ from 'lodash';
 
-import RandomType from '../constants/random-type';
 import { generateSectorName, generateName } from './name-generator';
 import { isBetween } from '../utils/common';
-
-const defaultConfig = {
-  seed: new Chance().hash({ length: 15 }),
-  randomType: RandomType.fullRandom,
-  index: 1,
-  maxRow: 10,
-  maxCol: 8,
-};
 
 class Star {
   constructor(config, x, y) {
@@ -127,10 +118,10 @@ const randomNeighbor = (neighbors, existingLocs, seededChance) =>
   seededChance.pickone(neighbors.filter(star => !existingLocs.includes(star.key)));
 
 // TODO
-const smartGenerate = () => {
-  const stars = {};
-  return stars;
-};
+// const smartGenerate = () => {
+//   const stars = {};
+//   return stars;
+// };
 
 const fullRandomGenerate = (config) => {
   const stars = {};
@@ -162,9 +153,10 @@ const fullRandomGenerate = (config) => {
   return _.map(stars, s => s.toJSON());
 };
 
-export default (config = defaultConfig) => {
+export default (config) => {
   const newConfig = {
     ...config,
+    index: 1,
     seededChance: new Chance(config.seed),
   };
   const name = generateSectorName(newConfig.seededChance);
@@ -172,10 +164,7 @@ export default (config = defaultConfig) => {
   const sector = {
     name,
     seed: newConfig.seed,
-    stars:
-      newConfig.randomType === RandomType.fullRandom
-        ? fullRandomGenerate(newConfig)
-        : smartGenerate(newConfig),
+    stars: fullRandomGenerate(newConfig),
   };
 
   return sector;
