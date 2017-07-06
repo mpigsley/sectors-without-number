@@ -43,7 +43,7 @@ const LinkDuo = (props) => {
       />
     );
   }
-  return <Link {...this.props} />;
+  return <Link {...props} />;
 };
 
 LinkDuo.propTypes = {
