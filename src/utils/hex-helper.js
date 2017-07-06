@@ -1,9 +1,5 @@
-export const generateHexCoordinates = ({
-  width,
-  height,
-  hexWidth,
-  hexPadding,
-}) => {
+// eslint-disable-next-line
+export const generateHexCoordinates = ({ width, height, hexWidth, hexPadding }) => {
   const hexWidthUnit = hexWidth / 4;
   const hexHeight = (Math.sqrt(3) / 2) * hexWidth;
   const hexHeightUnit = hexHeight / 2;

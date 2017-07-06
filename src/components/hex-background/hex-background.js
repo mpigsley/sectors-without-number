@@ -5,7 +5,7 @@ import _ from 'lodash';
 import { generateHexCoordinates } from '../../utils/hex-helper';
 
 import { HexContainer, Hex } from './components';
-import {AbsoluteContainer } from '../../primitives';
+import { AbsoluteContainer } from '../../primitives';
 
 const hexWidth = 50;
 const hexPadding = 2;
@@ -13,12 +13,12 @@ const hexPadding = 2;
 export default class HexBackground extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-  }
+  };
 
   state = {
     height: window.innerHeight,
     width: window.innerWidth,
-  }
+  };
 
   componentDidMount() {
     window.addEventListener('resize', this.onResize.bind(this));
@@ -33,7 +33,7 @@ export default class HexBackground extends Component {
       height: window.innerHeight,
       width: window.innerWidth,
     });
-  }, 100)
+  }, 100);
 
   render() {
     const { width, height } = this.state;
@@ -47,10 +47,7 @@ export default class HexBackground extends Component {
     return (
       <div>
         <HexContainer>
-          <svg
-            width={width}
-            height={height}
-          >
+          <svg width={width} height={height}>
             {hexes}
           </svg>
         </HexContainer>

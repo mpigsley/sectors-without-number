@@ -9,7 +9,6 @@ import Home from './components/home';
 import Configure from './components/configure';
 import registerServiceWorker from './registerServiceWorker';
 
-
 // eslint-disable-next-line
 injectGlobal`
   body {
@@ -28,7 +27,7 @@ ReactDOM.render(
       </HexBackground>
     </ThemeProvider>
   </Router>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 registerServiceWorker();

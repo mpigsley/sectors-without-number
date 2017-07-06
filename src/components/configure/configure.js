@@ -11,10 +11,7 @@ import {
   Label,
   LinkIcon,
 } from '../../primitives';
-import {
-  ButtonContainer,
-  PaddedButtons,
-} from './components';
+import { ButtonContainer, PaddedButtons } from './components';
 
 export default class Configure extends Component {
   constructor(props) {
@@ -26,7 +23,7 @@ export default class Configure extends Component {
     seed: new Chance().hash({ length: 15 }),
     columns: 8,
     rows: 10,
-  }
+  };
 
   updateInput(e) {
     const key = e.target.getAttribute('data-key');
@@ -39,14 +36,10 @@ export default class Configure extends Component {
       <ContentContainer direction="column" align="center" justify="center">
         <Header2>Configure</Header2>
         <SubContainer noMargin direction="column" align="flex-start">
-          <Label noPadding htmlFor="seed">Seed</Label>
-          <Input
-            data-key="seed"
-            onChange={this.updateInput}
-            name="seed"
-            type="text"
-            value={seed}
-          />
+          <Label noPadding htmlFor="seed">
+            Seed
+          </Label>
+          <Input data-key="seed" onChange={this.updateInput} name="seed" type="text" value={seed} />
           <SubContainer noMargin>
             <ButtonContainer noMargin direction="column" align="flex-start">
               <Label htmlFor="rows">Rows</Label>

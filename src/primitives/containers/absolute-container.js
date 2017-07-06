@@ -9,4 +9,6 @@ const style = css`
 `;
 
 export { style };
-export default styled.div`${style}`;
+export default styled.div`
+  ${style};
+`;

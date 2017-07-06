@@ -22,4 +22,6 @@ const style = css`
 `;
 
 export { style };
-export default styled.input`${style}`;
+export default styled.input`
+  ${style};
+`;

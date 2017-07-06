@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 const { StarDigraphs, GreekLetters } = require('../constants/language');
 const { capitalizeFirstLetter } = require('../utils/common');
 

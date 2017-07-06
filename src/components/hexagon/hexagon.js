@@ -14,12 +14,7 @@ export default function Hexagon(props) {
     hexagon.push(`${x + xOffset},${y + yOffset}`);
   }
 
-  return (
-    <polygon
-      {...newProps}
-      points={hexagon.join(' ')}
-    />
-  );
+  return <polygon {...newProps} points={hexagon.join(' ')} />;
 }
 
 Hexagon.propTypes = {
