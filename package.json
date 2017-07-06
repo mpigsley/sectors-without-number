@@ -18,13 +18,19 @@
   "dependencies": {
     "chance": "^1.0.10",
     "firebase-tools": "^3.5.0",
+    "history": "^4.6.3",
     "is-url-external": "^1.0.3",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
     "react-feather": "^1.0.4",
+    "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
+    "react-router-redux": "next",
+    "redux": "^3.7.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "styled-components": "^1.4.4"
   },
   "devDependencies": {
