@@ -7,5 +7,5 @@ export const HexContainer = styled.div`
   display: flex;
 `;
 export const Hex = styled(Hexagon)`
-  fill: ${props => props.theme.darker};
+  fill: ${props => (props.highlighted ? props.theme.dark : props.theme.darker)};
 `;

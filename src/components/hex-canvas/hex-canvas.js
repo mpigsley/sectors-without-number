@@ -2,15 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-import { generateHexCoordinates } from '../../utils/hex-helper';
+import hexGenerator from '../../utils/hex-generator';
 
 import { HexContainer, Hex } from './components';
 import { AbsoluteContainer } from '../../primitives';
 
-const hexWidth = 50;
-const hexPadding = 2;
-
-export default class HexBackground extends Component {
+export default class HexCanvas extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
   };
@@ -36,18 +33,13 @@ export default class HexBackground extends Component {
   }, 100);
 
   render() {
-    const { width, height } = this.state;
-    const hexes = generateHexCoordinates({
-      width,
-      height,
-      hexWidth,
-      hexPadding,
-    }).map(hex => <Hex {...hex} />);
+    const hexes = hexGenerator({ ...this.state, ...this.props })
+      .map(hex => <Hex {...hex} />);
 
     return (
       <div>
         <HexContainer>
-          <svg width={width} height={height}>
+          <svg width={this.state.width} height={this.state.height}>
             {hexes}
           </svg>
         </HexContainer>

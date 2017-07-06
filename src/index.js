@@ -9,7 +9,7 @@ import theme from './utils/theme';
 import registerServiceWorker from './registerServiceWorker';
 import store, { history } from './store';
 
-import HexBackground from './components/hex-background';
+import HexCanvas from './components/hex-canvas';
 import Home from './components/home';
 import Configure from './components/configure';
 import Sector from './components/sector';
@@ -27,11 +27,11 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <HexBackground>
+        <HexCanvas>
           <Route exact path="/" component={Home} />
           <Route path="/configure" component={Configure} />
           <Route path="/sector" component={Sector} />
-        </HexBackground>
+        </HexCanvas>
       </ConnectedRouter>
     </Provider>
   </ThemeProvider>,

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 export default function Hexagon(props) {
   const points = 6;
-  const { xOffset, yOffset, ...newProps } = props;
+  const { xOffset, yOffset, highlighted, ...newProps } = props;
   const radius = (props.width - props.strokeWidth) / 2;
   const hexagon = [];
 
@@ -19,6 +19,7 @@ export default function Hexagon(props) {
 
 Hexagon.propTypes = {
   width: PropTypes.number.isRequired,
+  highlighted: PropTypes.bool.isRequired,
   strokeWidth: PropTypes.number,
   xOffset: PropTypes.number,
   yOffset: PropTypes.number,

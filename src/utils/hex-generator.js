@@ -1,5 +1,7 @@
-// eslint-disable-next-line
-export const generateHexCoordinates = ({ width, height, hexWidth, hexPadding }) => {
+const hexWidth = 50;
+const hexPadding = 2;
+
+export default ({ width, height, columns, rows, renderSector }) => {
   const hexWidthUnit = hexWidth / 4;
   const hexHeight = (Math.sqrt(3) / 2) * hexWidth;
   const hexHeightUnit = hexHeight / 2;
@@ -18,6 +20,7 @@ export const generateHexCoordinates = ({ width, height, hexWidth, hexPadding }) 
         width: hexWidth - hexPadding,
         xOffset,
         yOffset: j % 2 ? minRowHeight + hexHeightUnit : minRowHeight,
+        highlighted: renderSector && i < rows && j < columns,
       });
       j += 1;
       isWithinWidth = xOffset + (2 * hexWidthUnit) < width;

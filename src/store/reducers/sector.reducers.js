@@ -6,6 +6,7 @@ import sectorGenerator from '../../utils/sector-generator';
 
 const initialState = {
   seed: new Chance().hash({ length: 15 }),
+  renderSector: false,
   columns: 8,
   rows: 10,
 };
@@ -22,10 +23,14 @@ export default function sector(state = initialState, action) {
         const { seed, columns, rows } = state;
         return {
           ...state,
+          renderSector: true,
           ...sectorGenerator({ seed, columns, rows }),
         };
       }
-      return state;
+      return {
+        ...state,
+        renderSector: false,
+      };
     default:
       return state;
   }
