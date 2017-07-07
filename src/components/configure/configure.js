@@ -23,7 +23,7 @@ export default function Configure({
     const key = e.target.getAttribute('data-key');
     let value = e.target.value;
     if (e.target.type === 'number') {
-      value = value ? Number.parseInt(value, 10) : 0;
+      value = value ? Number.parseInt(value, 10) : null;
     }
     updateSector(key, value);
   };
@@ -44,7 +44,7 @@ export default function Configure({
               onChange={updateInput}
               name="rows"
               type="number"
-              value={rows}
+              value={rows || ''}
             />
           </ButtonContainer>
           <ButtonContainer noMargin direction="column" align="flex-start">
@@ -54,7 +54,7 @@ export default function Configure({
               onChange={updateInput}
               name="columns"
               type="number"
-              value={columns}
+              value={columns || ''}
             />
           </ButtonContainer>
         </SubContainer>
@@ -71,7 +71,12 @@ export default function Configure({
 
 Configure.propTypes = {
   seed: PropTypes.string.isRequired,
-  columns: PropTypes.number.isRequired,
-  rows: PropTypes.number.isRequired,
+  columns: PropTypes.number,
+  rows: PropTypes.number,
   updateSector: PropTypes.func.isRequired,
+};
+
+Configure.defaultProps = {
+  columns: null,
+  rows: null,
 };

@@ -24,6 +24,8 @@ export default function sector(state = initialState, action) {
         return {
           ...state,
           renderSector: true,
+          columns: columns || 0,
+          rows: rows || 0,
           ...sectorGenerator({ seed, columns, rows }),
         };
       }
