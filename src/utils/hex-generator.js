@@ -1,5 +1,6 @@
 // Constants
 const hexPadding = 3; // Pixels between Hexes
+const extraHexes = 1; // Extra hexes around canvas edges
 const pixelBuffer = 100; // Pixel buffer between the sector and window
 
 // Size Conversion
@@ -43,15 +44,22 @@ const getGridData = ({
   columns,
 }) => {
   const hexesInVertical = getRows(scaledYBuffer, scaledHeight);
-  const hexesInHorizontal = getColumns(scaledXBuffer, scaledWidth);
-  const paddedRows = Math.ceil(hexesInVertical);
+  const paddedRows = Math.ceil(hexesInVertical) + extraHexes;
+  const extraHexYMultiplier = ((extraHexes * 2) + 1) / 2;
   const totalRows = rows + (2 * paddedRows);
   const yRemainder = Math.trunc(hexesInVertical);
-  const scaledYOffset = ((hexesInVertical - yRemainder) * scaledHeight) - scaledHeight;
-  const paddedColumns = Math.ceil(hexesInHorizontal);
+  const scaledYOffset = ((hexesInVertical - yRemainder) * scaledHeight)
+    - (scaledHeight * extraHexYMultiplier);
+
+  const hexesInHorizontal = getColumns(scaledXBuffer, scaledWidth);
+  let paddedColumns = Math.ceil(hexesInHorizontal) + extraHexes;
+  const extraHexXMultiplier = (((paddedColumns % 2 ? extraHexes + 1 : extraHexes) * 2) + 1) / 4;
+  paddedColumns = paddedColumns % 2 ? paddedColumns + 1 : paddedColumns;
   const totalColumns = columns + (2 * paddedColumns);
   const xRemainder = Math.trunc(hexesInHorizontal);
-  const scaledXOffset = ((hexesInHorizontal - xRemainder) * scaledWidth) - scaledWidth;
+  const scaledXOffset = ((hexesInHorizontal - xRemainder) * scaledWidth)
+    - (scaledWidth * extraHexXMultiplier);
+
   return { paddedRows, totalRows, scaledYOffset, paddedColumns, totalColumns, scaledXOffset };
 };
 
