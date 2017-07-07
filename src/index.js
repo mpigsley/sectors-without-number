@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { injectGlobal, ThemeProvider } from 'styled-components';
-import { Route } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 
 import theme from './utils/theme';
 import registerServiceWorker from './registerServiceWorker';
-import store, { history } from './store';
+import store from './store';
 
 import HexCanvas from './components/hex-canvas';
 import Home from './components/home';
@@ -23,16 +23,18 @@ injectGlobal`
   }
 `;
 
+const history = syncHistoryWithStore(browserHistory, store);
+
 ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
-      <ConnectedRouter history={history}>
-        <HexCanvas>
-          <Route exact path="/" component={Home} />
+      <Router history={history}>
+        <Route path="/" component={HexCanvas}>
+          <IndexRoute component={Home} />
           <Route path="/configure" component={Configure} />
           <Route path="/sector" component={Sector} />
-        </HexCanvas>
-      </ConnectedRouter>
+        </Route>
+      </Router>
     </Provider>
   </ThemeProvider>,
   document.getElementById('root'),
