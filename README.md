@@ -13,15 +13,15 @@ A seeded, random stars without number sector generator based completely in the w
   * [x] Generate a random number of planets (weighted)
   * [ ] Generate planet tags
 * [ ] Draw sector on hexagonal playing grid
-  * [ ] Center grid within view
-  * [ ] Scale view based on size of screen
+  * [x] Center grid within view
+  * [x] Scale view based on size of screen
   * [ ] Draw dots in hexes that contain stars
   * [ ] Draw grid coordinates
 * [ ] Render star/planet information
   * [ ] Create information sidebar (scale hex grid area based on open/close)
   * [ ] Render star information
   * [ ] Render planet information
-* [ ] Generate share link
+* [x] Generate share link
 
 ## Possible Features
 * Create login/signup workflow to save multiple sectors

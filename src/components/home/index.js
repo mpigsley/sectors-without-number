@@ -1,3 +1,11 @@
+import { connect } from 'react-redux';
+
 import Home from './home';
 
-export default Home;
+const mapStateToProps = state => ({
+  seed: state.sector.seed,
+});
+
+export default connect(
+  mapStateToProps,
+)(Home);

@@ -60,7 +60,13 @@ export default function Configure({
         </SubContainer>
       </SubContainer>
       <PaddedButtons wrap justify="center" align="center">
-        <Link padded to="/sector">
+        <Link
+          padded
+          to={{
+            pathname: '/sector',
+            query: { s: seed, c: columns, r: rows },
+          }}
+        >
           <LinkIcon icon={Zap} size="20" />
           Generate
         </Link>
