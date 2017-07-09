@@ -5,14 +5,13 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 
-import theme from './utils/theme';
-import registerServiceWorker from './registerServiceWorker';
-import store from './store';
+import theme from 'utils/theme';
+import registerServiceWorker from 'registerServiceWorker';
+import store from 'store';
 
-import HexCanvas from './components/hex-canvas';
-import Home from './components/home';
-import Configure from './components/configure';
-import Sector from './components/sector';
+import Sector from 'components/sector';
+import Home from 'components/home';
+import Configure from 'components/configure';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -29,11 +28,11 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <Router history={history}>
-        <Route path="/" component={HexCanvas}>
+        <Route path="/" component={Sector}>
           <IndexRoute component={Home} />
           <Route path="/configure" component={Configure} />
-          <Route path="/sector" component={Sector} />
         </Route>
+        <Route path="/sector" component={Sector} />
       </Router>
     </Provider>
   </ThemeProvider>,

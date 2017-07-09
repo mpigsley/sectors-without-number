@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import Sector from './sector';
 
 const mapStateToProps = state => ({
-  columns: state.sector.columns,
+  renderSector: state.sector.renderSector,
   rows: state.sector.rows,
+  columns: state.sector.columns,
+  stars: state.sector.stars,
 });
 
-export default connect(
-  mapStateToProps,
-)(Sector);
+export default connect(mapStateToProps)(Sector);

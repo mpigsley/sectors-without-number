@@ -16,12 +16,13 @@ A seeded, random stars without number sector generator based completely in the w
   * [x] Center grid within view
   * [x] Scale view based on size of screen
   * [x] Draw dots in hexes that contain stars
-  * [ ] Add hexagonal hover state
+  * [x] Add hexagonal hover state
   * [ ] Draw grid coordinates (scale based on size and remove when too small)
-* [ ] Render star/planet information
+* [ ] Render system information
   * [ ] Create information sidebar (scale hex grid area based on open/close)
   * [ ] Render star information
   * [ ] Render planet information
+  * [ ] Render sector hover tooltip with basic system information
 * [x] Generate share link
 
 ## Possible Features

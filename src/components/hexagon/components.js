@@ -1,7 +1,18 @@
 import styled from 'styled-components';
 
-const Circle = styled.circle`
+export const Circle = styled.circle`
   fill: ${props => props.theme.light};
 `;
 
-export default Circle;
+export const Polygon = styled.polygon`
+  fill: ${props => (props.highlighted ? props.theme.dark : props.theme.darker)};
+  transition: all 0.2s;
+`;
+
+export const G = styled.g`
+  cursor: default;
+
+  &:hover polygon {
+    fill: ${props => (props.hoverable ? props.theme.primary : props.theme.darker)};
+  }
+`;
