@@ -6,10 +6,10 @@
     "extends": "airbnb"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "start-prod": "yarn build && firebase serve",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "NODE_PATH=./src react-scripts start",
+    "start-prod": "NODE_PATH=./src yarn build && firebase serve",
+    "build": "NODE_PATH=./src react-scripts build",
+    "test": "NODE_PATH=./src react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "yarn build && firebase deploy",
     "lint": "eslint .",

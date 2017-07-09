@@ -11,18 +11,14 @@ class Star {
     this.planets = [...Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2]))].map(() => ({
       name: generateName(this.config.seededChance),
     }));
-    this.x =
-      x ||
-      this.config.seededChance.integer({
-        min: this.config.index,
-        max: this.config.maxRow,
-      });
-    this.y =
-      y ||
-      this.config.seededChance.integer({
-        min: this.config.index,
-        max: this.config.maxCol,
-      });
+    this.x = x || this.config.seededChance.integer({
+      min: this.config.index,
+      max: this.config.rows,
+    });
+    this.y = y || this.config.seededChance.integer({
+      min: this.config.index,
+      max: this.config.columns,
+    });
   }
 
   get key() {
@@ -114,7 +110,7 @@ class Star {
   }
 }
 
-const randomNeighbor = (neighbors, existingLocs, seededChance) =>
+const randomNeighbor = (neighbors, existingLocs, seededChance) => neighbors.length &&
   seededChance.pickone(neighbors.filter(star => !existingLocs.includes(star.key)));
 
 // TODO

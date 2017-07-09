@@ -15,8 +15,9 @@ A seeded, random stars without number sector generator based completely in the w
 * [ ] Draw sector on hexagonal playing grid
   * [x] Center grid within view
   * [x] Scale view based on size of screen
-  * [ ] Draw dots in hexes that contain stars
-  * [ ] Draw grid coordinates
+  * [x] Draw dots in hexes that contain stars
+  * [ ] Add hexagonal hover state
+  * [ ] Draw grid coordinates (scale based on size and remove when too small)
 * [ ] Render star/planet information
   * [ ] Create information sidebar (scale hex grid area based on open/close)
   * [ ] Render star information

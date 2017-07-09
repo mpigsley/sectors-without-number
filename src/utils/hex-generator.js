@@ -70,7 +70,7 @@ const getGridData = ({
 };
 
 export default (config) => {
-  const { renderSector } = config;
+  const { renderSector, stars } = config;
   const newConfig = renderSector ? config : Object.assign(config, {
     rows: defaultRows,
     columns: defaultColumns,
@@ -86,12 +86,16 @@ export default (config) => {
   let i = 0;
   let j = 0;
 
+  const hasStar = (x, y) => stars
+    .filter(s => s.location.x === x && s.location.y === y).length !== 0;
+
   while (isWithinHeight) {
     const minRowHeight = (heightUnit * 2 * i) + scaledYOffset;
     while (isWithinWidth) {
       const xOffset = (j * 3 * widthUnit) + scaledXOffset;
       hexArray.push({
         key: `${i}-${j}`,
+        hasStar: renderSector && hasStar((i - paddedRows) + 1, (j - paddedColumns) + 1),
         width: scaledWidth - hexPadding,
         xOffset,
         yOffset: j % 2 ? minRowHeight + heightUnit : minRowHeight,

@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Circle from './components';
+
 export default function Hexagon(props) {
   const points = 6;
-  const { xOffset, yOffset, highlighted, ...newProps } = props;
+  const { hasStar, xOffset, yOffset, highlighted, ...newProps } = props;
   const radius = props.width / 2;
   const hexagon = [];
 
@@ -14,7 +16,17 @@ export default function Hexagon(props) {
     hexagon.push(`${x + xOffset},${y + yOffset}`);
   }
 
-  return <polygon {...newProps} points={hexagon.join(' ')} />;
+  let star = null;
+  if (hasStar) {
+    star = <Circle cx={xOffset} cy={yOffset} r={newProps.width / 14} />;
+  }
+
+  return (
+    <g>
+      <polygon {...newProps} points={hexagon.join(' ')} />
+      {star}
+    </g>
+  );
 }
 
 Hexagon.propTypes = {
@@ -22,6 +34,7 @@ Hexagon.propTypes = {
   highlighted: PropTypes.bool.isRequired,
   xOffset: PropTypes.number,
   yOffset: PropTypes.number,
+  hasStar: PropTypes.bool.isRequired,
 };
 
 Hexagon.defaultProps = {
