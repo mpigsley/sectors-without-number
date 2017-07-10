@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Media } from '../../primitives';
+import { Media } from 'primitives';
 
 export const RowContainer = styled.div`flex: 1;`;
 export const Row = styled.hr`

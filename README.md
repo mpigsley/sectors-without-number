@@ -22,7 +22,7 @@ A seeded, random stars without number sector generator based completely in the w
   * [ ] Create information sidebar (scale hex grid area based on open/close)
   * [ ] Render star information
   * [ ] Render planet information
-  * [ ] Render sector hover tooltip with basic system information
+  * [x] Render sector hover tooltip with basic system information
 * [x] Generate share link
 
 ## Possible Features

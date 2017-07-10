@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Settings, Zap } from 'react-feather';
 
-import { Header1, Header2, Link, ContentContainer, SubContainer, LinkIcon } from '../../primitives';
+import { Header1, Header2, Link, ContentContainer, SubContainer, LinkIcon } from 'primitives';
 import { RowContainer, Row } from './components';
 
 export default function Home({ seed }) {

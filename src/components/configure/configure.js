@@ -10,7 +10,7 @@ import {
   Input,
   Label,
   LinkIcon,
-} from '../../primitives';
+} from 'primitives';
 import { ButtonContainer, PaddedButtons } from './components';
 
 export default function Configure({

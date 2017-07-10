@@ -76,7 +76,7 @@ export default (config) => {
     columns: defaultColumns,
   });
   const hexSize = getHexSize(newConfig);
-  const { widthUnit, scaledWidth, heightUnit } = hexSize;
+  const { widthUnit, scaledWidth, scaledHeight, heightUnit } = hexSize;
   const { paddedRows, totalRows, scaledYOffset,
     paddedColumns, totalColumns, scaledXOffset } = getGridData(hexSize, newConfig);
 
@@ -95,6 +95,7 @@ export default (config) => {
         key: `${i},${j}`,
         system: renderSector && system ? system : undefined,
         width: scaledWidth - hexPadding,
+        height: scaledHeight - hexPadding,
         xOffset,
         yOffset: j % 2 ? minRowHeight + heightUnit : minRowHeight,
         highlighted: renderSector

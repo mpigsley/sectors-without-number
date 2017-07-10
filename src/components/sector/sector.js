@@ -7,6 +7,7 @@ import hexGenerator from 'utils/hex-generator';
 
 import System from 'components/system';
 import { AbsoluteContainer } from 'primitives';
+import SystemTooltips from 'components/system-tooltips';
 
 const HexContainer = styled.div`
   backgroundColor: ${props => props.theme.darkest};
@@ -15,6 +16,7 @@ const HexContainer = styled.div`
 export default class Sector extends Component {
   static propTypes = {
     children: PropTypes.node,
+    renderSector: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -41,26 +43,43 @@ export default class Sector extends Component {
     });
   }, 100);
 
-  render() {
-    const hexes = hexGenerator({ ...this.state, ...this.props })
-      .map(hex => <System {...hex} />);
-
-    let childrenNode = null;
-    if (this.props.children) {
-      childrenNode = (
-        <AbsoluteContainer>
-          {this.props.children}
-        </AbsoluteContainer>
-      );
+  renderChildren() {
+    if (!this.props.children) {
+      return null;
     }
+    return (
+      <AbsoluteContainer>
+        {this.props.children}
+      </AbsoluteContainer>
+    );
+  }
+
+  renderTooltips(hexData) {
+    if (!this.props.renderSector) {
+      return null;
+    }
+    const systems = hexData
+      .filter(data => data.system)
+      .map(({ system, height, xOffset, yOffset }) => ({
+        ...system,
+        height,
+        xOffset,
+        yOffset,
+      }));
+    return <SystemTooltips systems={systems} />;
+  }
+
+  render() {
+    const hexeData = hexGenerator({ ...this.state, ...this.props });
 
     return (
       <div>
         <HexContainer>
+          {this.renderTooltips(hexeData)}
           <svg width={this.state.width} height={this.state.height}>
-            {hexes}
+            {hexeData.map(hex => <System {...hex} />)}
           </svg>
-          {childrenNode}
+          {this.renderChildren()}
         </HexContainer>
       </div>
     );

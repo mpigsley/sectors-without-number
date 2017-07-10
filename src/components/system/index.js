@@ -3,9 +3,7 @@ import { connect } from 'react-redux';
 import { sectorHoverStart, sectorHoverEnd } from 'store/actions/sector.actions';
 import System from './system';
 
-const mapStateToProps = state => ({
-  hoverKey: state.sector.hoverKey,
-});
+const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
   sectorHoverStart: (key) => {

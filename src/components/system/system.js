@@ -25,7 +25,7 @@ export default function System(props) {
     if (props.system) {
       return () => func(props.system.key);
     }
-    return null;
+    return () => {};
   };
 
   const Container = props.system ? Hoverable : G;
@@ -46,18 +46,18 @@ export default function System(props) {
 }
 
 System.propTypes = {
-  hoverKey: PropTypes.string,
   width: PropTypes.number.isRequired,
   highlighted: PropTypes.bool.isRequired,
   sectorHoverStart: PropTypes.func.isRequired,
   sectorHoverEnd: PropTypes.func.isRequired,
   xOffset: PropTypes.number,
   yOffset: PropTypes.number,
-  system: PropTypes.shape(),
+  system: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+  }),
 };
 
 System.defaultProps = {
-  hoverKey: null,
   xOffset: 0,
   yOffset: 0,
   system: null,
