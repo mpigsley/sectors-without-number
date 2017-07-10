@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
+import styled from 'styled-components';
 
 import hexGenerator from 'utils/hex-generator';
 
-import Hexagon from 'components/hexagon';
+import System from 'components/system';
 import { AbsoluteContainer } from 'primitives';
-import { HexContainer } from './components';
+
+const HexContainer = styled.div`
+  backgroundColor: ${props => props.theme.darkest};
+`;
 
 export default class Sector extends Component {
   static propTypes = {
@@ -39,7 +43,7 @@ export default class Sector extends Component {
 
   render() {
     const hexes = hexGenerator({ ...this.state, ...this.props })
-      .map(hex => <Hexagon {...hex} />);
+      .map(hex => <System {...hex} />);
 
     let childrenNode = null;
     if (this.props.children) {

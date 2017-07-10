@@ -2,7 +2,7 @@ import Chance from 'chance';
 import QueryString from 'query-string';
 
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { UPDATE_SECTOR } from '../actions/sector.actions';
+import { UPDATE_SECTOR, SECTOR_HOVER_START, SECTOR_HOVER_END } from '../actions/sector.actions';
 import sectorGenerator from '../../utils/sector-generator';
 
 const defaultColumns = 8;
@@ -13,6 +13,7 @@ const initialState = {
   renderSector: false,
   columns: query.c ? Number.parseInt(query.c, 10) : defaultColumns,
   rows: query.r ? Number.parseInt(query.r, 10) : defaultRows,
+  hoverKey: null,
 };
 
 export default function sector(state = initialState, action) {
@@ -39,6 +40,10 @@ export default function sector(state = initialState, action) {
         rows: defaultRows,
         renderSector: false,
       };
+    case SECTOR_HOVER_START:
+      return { ...state, hoverKey: action.key };
+    case SECTOR_HOVER_END:
+      return { ...state, hoverKey: null };
     default:
       return state;
   }

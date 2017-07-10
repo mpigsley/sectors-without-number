@@ -1,10 +1,10 @@
 import Chance from 'chance';
-import _ from 'lodash';
+import { mapValues } from 'lodash';
 
 import { generateSectorName, generateName } from './name-generator';
 import { isBetween } from '../utils/common';
 
-class Star {
+class System {
   constructor(config, x, y) {
     this.config = config;
     this.name = generateName(this.config.seededChance);
@@ -29,6 +29,7 @@ class Star {
     return {
       name: this.name,
       planets: this.planets,
+      key: this.key,
       location: {
         x: this.x,
         y: this.y,
@@ -69,41 +70,41 @@ class Star {
     const neighbors = [];
     if (this.x % 2) {
       if (this.isLocationValid(this.x + 1, this.y)) {
-        neighbors.push(new Star(this.config, this.x + 1, this.y));
+        neighbors.push(new System(this.config, this.x + 1, this.y));
       }
       if (this.isLocationValid(this.x + 1, this.y - 1)) {
-        neighbors.push(new Star(this.config, this.x + 1, this.y - 1));
+        neighbors.push(new System(this.config, this.x + 1, this.y - 1));
       }
       if (this.isLocationValid(this.x, this.y - 1)) {
-        neighbors.push(new Star(this.config, this.x, this.y - 1));
+        neighbors.push(new System(this.config, this.x, this.y - 1));
       }
       if (this.isLocationValid(this.x - 1, this.y - 1)) {
-        neighbors.push(new Star(this.config, this.x - 1, this.y - 1));
+        neighbors.push(new System(this.config, this.x - 1, this.y - 1));
       }
       if (this.isLocationValid(this.x - 1, this.y)) {
-        neighbors.push(new Star(this.config, this.x - 1, this.y));
+        neighbors.push(new System(this.config, this.x - 1, this.y));
       }
       if (this.isLocationValid(this.x, this.y + 1)) {
-        neighbors.push(new Star(this.config, this.x, this.y + 1));
+        neighbors.push(new System(this.config, this.x, this.y + 1));
       }
     } else {
       if (this.isLocationValid(this.x + 1, this.y + 1)) {
-        neighbors.push(new Star(this.config, this.x + 1, this.y + 1));
+        neighbors.push(new System(this.config, this.x + 1, this.y + 1));
       }
       if (this.isLocationValid(this.x + 1, this.y)) {
-        neighbors.push(new Star(this.config, this.x + 1, this.y));
+        neighbors.push(new System(this.config, this.x + 1, this.y));
       }
       if (this.isLocationValid(this.x, this.y - 1)) {
-        neighbors.push(new Star(this.config, this.x, this.y - 1));
+        neighbors.push(new System(this.config, this.x, this.y - 1));
       }
       if (this.isLocationValid(this.x - 1, this.y)) {
-        neighbors.push(new Star(this.config, this.x - 1, this.y));
+        neighbors.push(new System(this.config, this.x - 1, this.y));
       }
       if (this.isLocationValid(this.x - 1, this.y + 1)) {
-        neighbors.push(new Star(this.config, this.x - 1, this.y + 1));
+        neighbors.push(new System(this.config, this.x - 1, this.y + 1));
       }
       if (this.isLocationValid(this.x, this.y + 1)) {
-        neighbors.push(new Star(this.config, this.x, this.y + 1));
+        neighbors.push(new System(this.config, this.x, this.y + 1));
       }
     }
     return neighbors;
@@ -111,42 +112,42 @@ class Star {
 }
 
 const randomNeighbor = (neighbors, existingLocs, seededChance) => neighbors.length &&
-  seededChance.pickone(neighbors.filter(star => !existingLocs.includes(star.key)));
+  seededChance.pickone(neighbors.filter(system => !existingLocs.includes(system.key)));
 
 // TODO
 // const smartGenerate = () => {
-//   const stars = {};
-//   return stars;
+//   const systems = {};
+//   return systems;
 // };
 
 const fullRandomGenerate = (config) => {
-  const stars = {};
-  const starNum = config.seededChance.d10() + 20;
-  let extra = starNum;
+  const systems = {};
+  const systemNum = config.seededChance.d10() + 20;
+  let extra = systemNum;
 
   while (extra) {
     let newExtra = 0;
     [...Array(extra)].forEach(() => {
-      const star = new Star(config);
-      if (stars[star.key]) {
+      const system = new System(config);
+      if (systems[system.key]) {
         const neighbor = randomNeighbor(
-          star.getNeighbors(),
-          Object.keys(stars),
+          system.getNeighbors(),
+          Object.keys(systems),
           config.seededChance,
         );
         if (neighbor) {
-          stars[neighbor.key] = neighbor;
+          systems[neighbor.key] = neighbor;
         } else {
           newExtra += 1;
         }
       } else {
-        stars[star.key] = star;
+        systems[system.key] = system;
       }
     });
     extra = newExtra;
   }
 
-  return _.map(stars, s => s.toJSON());
+  return mapValues(systems, s => s.toJSON());
 };
 
 export default (config) => {
@@ -160,7 +161,7 @@ export default (config) => {
   const sector = {
     name,
     seed: newConfig.seed,
-    stars: fullRandomGenerate(newConfig),
+    systems: fullRandomGenerate(newConfig),
   };
 
   return sector;
