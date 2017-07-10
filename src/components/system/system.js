@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Circle, Polygon, G } from './components';
+import { Circle, Polygon, G, Hoverable } from './components';
 
 export default function System(props) {
   const points = 6;
   const { system, xOffset, yOffset, ...newProps } = props;
-  const isThisSystem = props.system && props.hoverKey === props.system.key;
-  const radius = ((props.width) / 2) + (isThisSystem ? 3 : 0);
+  const radius = props.width / 2;
   const hexagon = [];
 
   for (let i = 0; i < points; i += 1) {
@@ -29,8 +28,10 @@ export default function System(props) {
     return null;
   };
 
+  const Container = props.system ? Hoverable : G;
+
   return (
-    <G
+    <Container
       hoverable={props.highlighted}
       onMouseEnter={isSystem(props.sectorHoverStart)}
       onMouseLeave={isSystem(props.sectorHoverEnd)}
@@ -40,7 +41,7 @@ export default function System(props) {
         points={hexagon.join(' ')}
       />
       {star}
-    </G>
+    </Container>
   );
 }
 

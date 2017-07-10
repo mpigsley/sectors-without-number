@@ -4,7 +4,7 @@ const defaultRows = 10; // Align with SWN rules
 const defaultColumns = 8; // Align with SWN rules
 const hexPadding = 3; // Pixels between Hexes
 const extraHexes = 1; // Extra hexes around canvas edges
-const pixelBuffer = 100; // Pixel buffer between the sector and window
+const pixelBuffer = 75; // Pixel buffer between the sector and window
 
 // Size Conversion
 const sizeDiff = Math.sqrt(3) / 2;
@@ -90,10 +90,10 @@ export default (config) => {
     const minRowHeight = (heightUnit * 2 * i) + scaledYOffset;
     while (isWithinWidth) {
       const xOffset = (j * 3 * widthUnit) + scaledXOffset;
-      const system = systems[`${(i - paddedRows) + 1},${(j - paddedColumns) + 1}`];
+      const system = systems && systems[`${(i - paddedRows) + 1},${(j - paddedColumns) + 1}`];
       hexArray.push({
         key: `${i},${j}`,
-        system: renderSector && system,
+        system: renderSector && system ? system : undefined,
         width: scaledWidth - hexPadding,
         xOffset,
         yOffset: j % 2 ? minRowHeight + heightUnit : minRowHeight,

@@ -11,7 +11,9 @@ export const Polygon = styled.polygon`
 
 export const G = styled.g`
   cursor: default;
+`;
 
+export const Hoverable = styled(G)`
   &:hover polygon {
     fill: ${props => (props.hoverable ? props.theme.primary : props.theme.darker)};
   }
