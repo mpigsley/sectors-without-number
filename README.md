@@ -12,12 +12,12 @@ A seeded, random stars without number sector generator based completely in the w
   * [x] Generate random star names
   * [x] Generate a random number of planets (weighted)
   * [ ] Generate planet tags
-* [ ] Draw sector on hexagonal playing grid
+* [x] Draw sector on hexagonal playing grid
   * [x] Center grid within view
   * [x] Scale view based on size of screen
   * [x] Draw dots in hexes that contain stars
   * [x] Add hexagonal hover state
-  * [ ] Draw grid coordinates (scale based on size and remove when too small)
+  * [x] Draw grid coordinates (scale based on size and remove when too small)
 * [ ] Render system information
   * [ ] Create information sidebar (scale hex grid area based on open/close)
   * [ ] Render star information
