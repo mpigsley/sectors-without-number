@@ -25,17 +25,15 @@ class System {
     return coordinateKey(this.x, this.y);
   }
 
-  toJSON() {
-    return {
-      name: this.name,
-      planets: this.planets,
-      key: this.key,
-      location: {
-        x: this.x,
-        y: this.y,
-      },
-    };
-  }
+  toJSON = () => ({
+    name: this.name,
+    planets: this.planets,
+    key: this.key,
+    location: {
+      x: this.x,
+      y: this.y,
+    },
+  })
 
   isRowValid(num) {
     return isBetween(num, this.config.index, this.config.rows);
@@ -46,7 +44,7 @@ class System {
   }
 
   isLocationValid(x, y) {
-    return this.isRowValid(x) && this.isColumnValid(y);
+    return this.isRowValid(y) && this.isColumnValid(x);
   }
 
   getNeighbors() {
@@ -94,8 +92,10 @@ class System {
   }
 }
 
-const randomNeighbor = (neighbors, existingLocs, seededChance) => neighbors.length &&
-  seededChance.pickone(neighbors.filter(system => !existingLocs.includes(system.key)));
+const randomNeighbor = (neighbors, existingLocs, seededChance) => {
+  const filteredNeighbors = neighbors.filter(system => !existingLocs.includes(system.key));
+  return filteredNeighbors.length && seededChance.pickone(filteredNeighbors);
+};
 
 // TODO
 // const smartGenerate = () => {
@@ -113,11 +113,13 @@ const fullRandomGenerate = (config) => {
     [...Array(extra)].forEach(() => {
       const system = new System(config);
       if (systems[system.key]) {
+        console.log(system.getNeighbors());
         const neighbor = randomNeighbor(
           system.getNeighbors(),
           Object.keys(systems),
           config.seededChance,
         );
+        
         if (neighbor) {
           systems[neighbor.key] = neighbor;
         } else {
