@@ -25,8 +25,8 @@ export default function sector(state = initialState, action) {
       };
     case LOCATION_CHANGE:
       if (action.payload.pathname === '/sector') {
-        const rows = Math.min(state.columns || 0, 30);
-        const columns = Math.min(state.rows || 0, 30);
+        const rows = Math.min(state.rows || 0, 30);
+        const columns = Math.min(state.columns || 0, 30);
         return {
           ...state,
           renderSector: true,

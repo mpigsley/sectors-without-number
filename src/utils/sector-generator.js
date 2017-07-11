@@ -1,8 +1,8 @@
 import Chance from 'chance';
 import { mapValues } from 'lodash';
 
-import { generateSectorName, generateName } from './name-generator';
-import { isBetween } from '../utils/common';
+import { generateSectorName, generateName } from 'utils/name-generator';
+import { isBetween, coordinateKey } from 'utils/common';
 
 class System {
   constructor(config, x, y) {
@@ -13,16 +13,16 @@ class System {
     }));
     this.x = x || this.config.seededChance.integer({
       min: this.config.index,
-      max: this.config.rows,
+      max: this.config.columns,
     });
     this.y = y || this.config.seededChance.integer({
       min: this.config.index,
-      max: this.config.columns,
+      max: this.config.rows,
     });
   }
 
   get key() {
-    return `${this.x},${this.y}`;
+    return coordinateKey(this.x, this.y);
   }
 
   toJSON() {
@@ -37,29 +37,12 @@ class System {
     };
   }
 
-  closestToSideOffset() {
-    return Math.min(
-      this.y - this.config.index,
-      this.config.maxCol - this.y,
-      this.x - this.config.index,
-      this.config.maxRow - this.x,
-    );
-  }
-
-  averageToSideOffset() {
-    return (
-      (Math.min(this.y - this.config.index, this.config.maxCol - this.y) +
-        Math.min(this.x - this.config.index, this.config.maxRow - this.x)) /
-      4
-    );
-  }
-
   isRowValid(num) {
-    return isBetween(num, this.config.index, this.config.maxRow);
+    return isBetween(num, this.config.index, this.config.rows);
   }
 
   isColumnValid(num) {
-    return isBetween(num, this.config.index, this.config.maxCol);
+    return isBetween(num, this.config.index, this.config.columns);
   }
 
   isLocationValid(x, y) {
@@ -164,5 +147,6 @@ export default (config) => {
     systems: fullRandomGenerate(newConfig),
   };
 
+  console.log(sector.systems);
   return sector;
 };

@@ -1,3 +1,5 @@
+import { coordinateKey } from 'utils/common';
+
 // Constants
 const defaultHexWidth = 50; // Hex width when not rendering sector
 const defaultRows = 10; // Align with SWN rules
@@ -90,7 +92,8 @@ export default (config) => {
     const minRowHeight = (heightUnit * 2 * i) + scaledYOffset;
     while (isWithinWidth) {
       const xOffset = (j * 3 * widthUnit) + scaledXOffset;
-      const system = systems && systems[`${(i - paddedRows) + 1},${(j - paddedColumns) + 1}`];
+      const systemKey = coordinateKey((j - paddedColumns) + 1, (i - paddedRows) + 1);
+      const system = systems && systems[systemKey];
       hexArray.push({
         key: `${i},${j}`,
         system: renderSector && system ? system : undefined,
