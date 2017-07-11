@@ -17,3 +17,11 @@ export const ButtonContainer = styled(SubContainer)`
 export const PaddedButtons = styled(SubContainer)`
   margin-top: 2rem;
 `;
+
+export const Invalid = styled.div`
+  color: red;
+  padding: 1rem 0;
+  text-align: center;
+  width: 20rem;
+  margin: 0 auto;
+`;

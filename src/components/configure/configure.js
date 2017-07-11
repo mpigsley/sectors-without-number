@@ -11,7 +11,11 @@ import {
   Label,
   LinkIcon,
 } from 'primitives';
-import { ButtonContainer, PaddedButtons } from './components';
+import {
+  ButtonContainer,
+  PaddedButtons,
+  Invalid,
+} from './components';
 
 export default function Configure({
   seed,
@@ -28,10 +32,15 @@ export default function Configure({
     updateSector(key, value);
   };
 
+  const invalidText = columns > 30 || rows > 30
+    ? <Invalid>Column and row count can not be greater than 30.</Invalid>
+    : null;
+
   return (
     <ContentContainer direction="column" align="center" justify="center">
       <Header2>Configure</Header2>
       <SubContainer noMargin direction="column" align="flex-start">
+        {invalidText}
         <Label noPadding htmlFor="seed">
           Seed
         </Label>

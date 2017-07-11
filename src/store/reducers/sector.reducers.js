@@ -29,8 +29,8 @@ export default function sector(state = initialState, action) {
         return {
           ...state,
           renderSector: true,
-          columns: columns || 0,
-          rows: rows || 0,
+          columns: Math.min(columns || 0, 30),
+          rows: Math.min(rows || 0, 30),
           ...sectorGenerator({ seed, columns, rows }),
         };
       }
