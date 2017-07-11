@@ -10,7 +10,7 @@ const Tooltip = styled.div`
 `;
 
 const TooltipText = styled.div`
-  background-color: ${props => props.theme.lightest};
+  background-color: ${props => props.theme.light4};
   padding: 1rem;
   border-radius: 6px;
   transform: translateX(-50%) translateY(-100%);
@@ -25,7 +25,7 @@ const TooltipText = styled.div`
     border-width: 5px;
     border-style: solid;
     border-color: transparent;
-    border-top-color: ${props => props.theme.lightest};
+    border-top-color: ${props => props.theme.light4};
   }
 `;
 

@@ -95,7 +95,7 @@ export default (config) => {
       const systemKey = coordinateKey((j - paddedColumns) + 1, (i - paddedRows) + 1);
       const system = systems && systems[systemKey];
       hexArray.push({
-        key: `${i},${j}`,
+        systemKey,
         system: renderSector && system ? system : undefined,
         width: scaledWidth - hexPadding,
         height: scaledHeight - hexPadding,

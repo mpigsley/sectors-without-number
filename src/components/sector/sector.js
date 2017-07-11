@@ -10,7 +10,7 @@ import { AbsoluteContainer } from 'primitives';
 import SystemTooltips from 'components/system-tooltips';
 
 const HexContainer = styled.div`
-  backgroundColor: ${props => props.theme.darkest};
+  backgroundColor: ${props => props.theme.dark4};
 `;
 
 export default class Sector extends Component {
@@ -70,14 +70,14 @@ export default class Sector extends Component {
   }
 
   render() {
-    const hexeData = hexGenerator({ ...this.state, ...this.props });
+    const hexData = hexGenerator({ ...this.state, ...this.props });
 
     return (
       <div>
         <HexContainer>
-          {this.renderTooltips(hexeData)}
+          {this.renderTooltips(hexData)}
           <svg width={this.state.width} height={this.state.height}>
-            {hexeData.map(hex => <System {...hex} />)}
+            {hexData.map(hex => <System {...hex} key={hex.systemKey} />)}
           </svg>
           {this.renderChildren()}
         </HexContainer>

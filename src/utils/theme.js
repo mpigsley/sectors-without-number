@@ -1,11 +1,12 @@
 const theme = {
-  darkest: '#283647',
-  darker: '#233142',
-  dark: '#303E4F',
+  dark4: '#283647',
+  dark3: '#233142',
+  dark2: '#303E4F',
   primary: '#863C4E',
-  light: '#B2B2B2',
-  lighter: '#DBDBDB',
-  lightest: '#E3E3E3',
+  light1: '#8F8F8F',
+  light2: '#B2B2B2',
+  light3: '#DBDBDB',
+  light4: '#E3E3E3',
 };
 
 export default theme;

@@ -8,7 +8,7 @@ const style = css`
   display: inline-block;
   height: 38px;
   padding: 0 30px;
-  color: ${props => props.theme.lightest};
+  color: ${props => props.theme.light4};
   text-align: center;
   font-size: 11px;
   font-weight: 600;
@@ -19,7 +19,7 @@ const style = css`
   white-space: nowrap;
   background-color: transparent;
   border-radius: 4px;
-  border: 1px solid ${props => props.theme.lightest};
+  border: 1px solid ${props => props.theme.light4};
   cursor: pointer;
   box-sizing: border-box;
   font-weight: 400;
@@ -28,8 +28,8 @@ const style = css`
   ${props => (props.padded ? 'margin: 0.4rem 1rem;' : '')}
 
   &:hover {
-    color: ${props => props.theme.light};
-    border-color: ${props => props.theme.light};
+    color: ${props => props.theme.light2};
+    border-color: ${props => props.theme.light2};
     outline: 0;
   }
 `;

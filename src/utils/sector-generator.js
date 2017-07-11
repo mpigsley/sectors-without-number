@@ -147,6 +147,5 @@ export default (config) => {
     systems: fullRandomGenerate(newConfig),
   };
 
-  console.log(sector.systems);
   return sector;
 };

@@ -5,8 +5,8 @@ const style = css`
   border: none;
   height: 38px;
   padding: 0 10px;
-  color: ${props => props.theme.darkest};
-  background-color: ${props => props.theme.lightest};
+  color: ${props => props.theme.dark4};
+  background-color: ${props => props.theme.light4};
   font-size: 11px;
   font-weight: 600;
   line-height: 38px;
