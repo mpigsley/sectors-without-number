@@ -113,7 +113,6 @@ const fullRandomGenerate = (config) => {
     [...Array(extra)].forEach(() => {
       const system = new System(config);
       if (systems[system.key]) {
-        console.log(system.getNeighbors());
         const neighbor = randomNeighbor(
           system.getNeighbors(),
           Object.keys(systems),
