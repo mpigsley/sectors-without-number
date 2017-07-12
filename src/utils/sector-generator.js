@@ -118,7 +118,7 @@ const fullRandomGenerate = (config) => {
           Object.keys(systems),
           config.seededChance,
         );
-        
+
         if (neighbor) {
           systems[neighbor.key] = neighbor;
         } else {

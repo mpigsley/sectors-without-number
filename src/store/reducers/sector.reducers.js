@@ -2,8 +2,8 @@ import Chance from 'chance';
 import QueryString from 'query-string';
 
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { UPDATE_SECTOR, SECTOR_HOVER_START, SECTOR_HOVER_END } from '../actions/sector.actions';
 import sectorGenerator from 'utils/sector-generator';
+import { UPDATE_SECTOR, SECTOR_HOVER_START, SECTOR_HOVER_END } from '../actions/sector.actions';
 
 const defaultColumns = 8;
 const defaultRows = 10;
