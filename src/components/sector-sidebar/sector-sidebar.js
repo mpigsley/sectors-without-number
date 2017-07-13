@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Sidebar = styled.div`
@@ -7,6 +8,10 @@ const Sidebar = styled.div`
   width: 300px;
 `;
 
-export default function SectorSidebar() {
-  return <Sidebar />;
+export default function SectorSidebar({ children }) {
+  return <Sidebar>{children}</Sidebar>;
 }
+
+SectorSidebar.propTypes = {
+  children: PropTypes.node.isRequired,
+};

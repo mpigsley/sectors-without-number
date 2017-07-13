@@ -10,9 +10,10 @@ import registerServiceWorker from 'registerServiceWorker';
 import store from 'store';
 
 import HexBackground from 'components/hex-background';
-import Sector from 'components/sector';
 import Home from 'components/home';
 import Configure from 'components/configure';
+import Sector from 'components/sector';
+import SectorInfo from 'components/sector-info';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -33,7 +34,9 @@ ReactDOM.render(
           <IndexRoute component={Home} />
           <Route path="/configure" component={Configure} />
         </Route>
-        <Route path="/sector" component={Sector} />
+        <Route path="/sector" component={Sector}>
+          <IndexRoute component={SectorInfo} />
+        </Route>
       </Router>
     </Provider>
   </ThemeProvider>,

@@ -11,12 +11,8 @@ import HexMap from 'components/hex-map';
 
 export default class Sector extends Component {
   static propTypes = {
-    children: PropTypes.node,
+    children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
-  };
-
-  static defaultProps = {
-    children: null,
   };
 
   constructor(props) {
