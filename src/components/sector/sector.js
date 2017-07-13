@@ -1,20 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
-import styled from 'styled-components';
 
 import hexGenerator from 'utils/hex-generator';
 
-import System from 'components/system';
 import SectorSidebar from 'components/sector-sidebar';
-import { AbsoluteContainer, FlexContainer, FlexContainerStyle } from 'primitives';
+import { FlexContainer } from 'primitives';
 import SystemTooltips from 'components/system-tooltips';
-
-const HexContainer = styled.div`
-  backgroundColor: ${props => props.theme.dark4};
-`;
-
-const Svg = styled.svg`${FlexContainerStyle}`;
+import HexMap from 'components/hex-map';
 
 export default class Sector extends Component {
   static propTypes = {
@@ -26,17 +19,23 @@ export default class Sector extends Component {
     children: null,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.onResize = this.onResize.bind(this);
+  }
+
   state = {
     height: window.innerHeight,
     width: window.innerWidth - 300,
   };
 
   componentDidMount() {
-    window.addEventListener('resize', this.onResize.bind(this));
+    window.addEventListener('resize', this.onResize);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize.bind(this));
+    window.removeEventListener('resize', this.onResize);
   }
 
   onResize = throttle(() => {
@@ -45,17 +44,6 @@ export default class Sector extends Component {
       width: window.innerWidth - 300,
     });
   }, 100);
-
-  renderChildren() {
-    if (!this.props.children) {
-      return null;
-    }
-    return (
-      <AbsoluteContainer>
-        {this.props.children}
-      </AbsoluteContainer>
-    );
-  }
 
   renderTooltips(hexData) {
     if (!this.props.renderSector) {
@@ -73,18 +61,23 @@ export default class Sector extends Component {
   }
 
   render() {
-    const hexData = hexGenerator({ ...this.state, ...this.props });
+    const hexData = hexGenerator({
+      renderSector: true,
+      ...this.state,
+      ...this.props,
+    });
 
     return (
       <FlexContainer direction="row">
-        <HexContainer>
-          {this.renderTooltips(hexData)}
-          <Svg width={this.state.width} height={this.state.height}>
-            {hexData.map(hex => <System {...hex} key={hex.systemKey} />)}
-          </Svg>
-          {this.renderChildren()}
-        </HexContainer>
-        <SectorSidebar />
+        {this.renderTooltips(hexData)}
+        <HexMap
+          width={this.state.width}
+          height={this.state.height}
+          hexData={hexData}
+        />
+        <SectorSidebar>
+          {this.props.children}
+        </SectorSidebar>
       </FlexContainer>
     );
   }

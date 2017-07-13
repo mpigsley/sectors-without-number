@@ -9,6 +9,7 @@ import theme from 'utils/theme';
 import registerServiceWorker from 'registerServiceWorker';
 import store from 'store';
 
+import HexBackground from 'components/hex-background';
 import Sector from 'components/sector';
 import Home from 'components/home';
 import Configure from 'components/configure';
@@ -28,7 +29,7 @@ ReactDOM.render(
   <ThemeProvider theme={theme}>
     <Provider store={store}>
       <Router history={history}>
-        <Route path="/" component={Sector}>
+        <Route path="/" component={HexBackground}>
           <IndexRoute component={Home} />
           <Route path="/configure" component={Configure} />
         </Route>
