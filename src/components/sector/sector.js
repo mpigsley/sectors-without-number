@@ -6,12 +6,15 @@ import styled from 'styled-components';
 import hexGenerator from 'utils/hex-generator';
 
 import System from 'components/system';
-import { AbsoluteContainer } from 'primitives';
+import SectorSidebar from 'components/sector-sidebar';
+import { AbsoluteContainer, FlexContainer, FlexContainerStyle } from 'primitives';
 import SystemTooltips from 'components/system-tooltips';
 
 const HexContainer = styled.div`
   backgroundColor: ${props => props.theme.dark4};
 `;
+
+const Svg = styled.svg`${FlexContainerStyle}`;
 
 export default class Sector extends Component {
   static propTypes = {
@@ -25,7 +28,7 @@ export default class Sector extends Component {
 
   state = {
     height: window.innerHeight,
-    width: window.innerWidth,
+    width: window.innerWidth - 300,
   };
 
   componentDidMount() {
@@ -39,7 +42,7 @@ export default class Sector extends Component {
   onResize = throttle(() => {
     this.setState({
       height: window.innerHeight,
-      width: window.innerWidth,
+      width: window.innerWidth - 300,
     });
   }, 100);
 
@@ -73,15 +76,16 @@ export default class Sector extends Component {
     const hexData = hexGenerator({ ...this.state, ...this.props });
 
     return (
-      <div>
+      <FlexContainer direction="row">
         <HexContainer>
           {this.renderTooltips(hexData)}
-          <svg width={this.state.width} height={this.state.height}>
+          <Svg width={this.state.width} height={this.state.height}>
             {hexData.map(hex => <System {...hex} key={hex.systemKey} />)}
-          </svg>
+          </Svg>
           {this.renderChildren()}
         </HexContainer>
-      </div>
+        <SectorSidebar />
+      </FlexContainer>
     );
   }
 }
