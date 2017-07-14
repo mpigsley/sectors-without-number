@@ -1,6 +1,6 @@
 const theme = {
-  dark4: '#283647',
-  dark3: '#233142',
+  dark4: '#233142',
+  dark3: '#283647',
   dark2: '#303E4F',
   primary: '#863C4E',
   light1: '#8F8F8F',

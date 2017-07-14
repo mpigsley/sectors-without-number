@@ -3,7 +3,7 @@ import AbsoluteContainer from './containers/absolute-container';
 import FlexContainer, { style as FlexContainerStyle } from './containers/flex-container';
 import ContentContainer from './containers/content-container';
 import SubContainer from './containers/sub-container';
-import { Header1, Header2 } from './text/headers';
+import { Header1, Header2, Header3, Header4 } from './text/headers';
 import Link from './other/link';
 import Input from './other/input';
 import Label from './other/label';
@@ -15,6 +15,8 @@ export {
   FlexContainerStyle,
   Header1,
   Header2,
+  Header3,
+  Header4,
   Media,
   Link,
   ContentContainer,

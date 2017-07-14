@@ -6,7 +6,7 @@ import { FlexContainerStyle } from 'primitives';
 import System from 'components/system';
 
 const HexContainer = styled.div`
-  backgroundColor: ${props => props.theme.dark4};
+  background-color: ${props => props.theme.dark3};
 `;
 
 const Svg = styled.svg`${FlexContainerStyle}`;

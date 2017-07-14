@@ -6,6 +6,7 @@ const style = css`
   align-items: ${props => props.align || 'initial'};
   flex-direction: ${props => props.direction || 'row'};
   ${props => (props.wrap ? 'flex-wrap: wrap' : '')}
+  ${props => (props.scroll ? 'overflow: scroll;' : '')}
 `;
 
 export { style };

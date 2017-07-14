@@ -8,3 +8,11 @@ export const coordinateKey = (x, y) => {
   const stringY = y - 1 < 10 ? `0${y - 1}` : `${y - 1}`;
   return `${stringX}${stringY}`;
 };
+
+export const stringSortByKey = key => (a, b) => {
+  const keyA = a[key].toUpperCase();
+  const keyB = b[key].toUpperCase();
+  if (keyA < keyB) return -1;
+  if (keyA > keyB) return 1;
+  return 0;
+};
