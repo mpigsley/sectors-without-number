@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { Header3 } from 'primitives';
 
 export const Tooltip = styled.div`
   pointer-events: none;
@@ -7,7 +6,6 @@ export const Tooltip = styled.div`
   opacity: ${props => (props.hovered ? 1 : 0)};
   transition: opacity 0.5s;
 `;
-
 export const TooltipText = styled.div`
   background-color: ${props => props.theme.light4};
   padding: 1rem;
@@ -27,7 +25,15 @@ export const TooltipText = styled.div`
     border-top-color: ${props => props.theme.light4};
   }
 `;
-
-export const SystemName = styled(Header3)`
-  color: 
+export const Name = styled.div`
+  color: ${props => props.theme.dark4};
+  display: inline-block;
+  font-size: 1.1rem;
+  margin: 0;
+`;
+export const Key = styled.div`
+  color: ${props => props.theme.light1};
+  display: inline-block;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
 `;

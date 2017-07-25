@@ -8,7 +8,7 @@ export const Polygon = styled.polygon`
   transition: all 0.3s;
 `;
 export const G = styled.g`
-  cursor: default;
+  cursor: ${props => (props.clickable ? 'pointer' : 'default')};
 `;
 export const Hoverable = styled(G)`
   &:hover polygon {

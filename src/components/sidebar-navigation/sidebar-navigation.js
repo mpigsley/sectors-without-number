@@ -52,7 +52,7 @@ export default function SidebarNavigation({ name, children, back, type }) {
           <PrinterIcon size={18} />
         </FlexContainer>
       </HeaderContainer>
-      <FlexContainer direction="column" scroll>
+      <FlexContainer direction="column" flex="1" scroll>
         {children}
       </FlexContainer>
     </InfoContainer>

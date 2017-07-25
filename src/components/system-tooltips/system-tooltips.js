@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Tooltip, TooltipText } from './components';
+import { Tooltip, TooltipText, Name, Key } from './components';
 
 export default function SystemTooltips({
   hoverKey,
@@ -17,9 +17,8 @@ export default function SystemTooltips({
       }}
     >
       <TooltipText>
-        <b>Position: </b>{system.key}
-        <br />
-        <b>Sector: </b>{system.name}
+        <Name>{system.name}</Name>
+        <Key>({system.key})</Key>
       </TooltipText>
     </Tooltip>
   );

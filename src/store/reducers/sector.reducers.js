@@ -24,12 +24,16 @@ export default function sector(state = initialState, action) {
         [action.key]: action.value,
       };
     case LOCATION_CHANGE:
-      if (action.payload.pathname.startsWith('/sector')) {
+      if (action.payload.pathname === '/') {
+        return {
+          ...state,
+          seed: new Chance().hash({ length: 15 }),
+        };
+      } else if (action.payload.pathname.startsWith('/sector')) {
         const rows = Math.min(state.rows || 0, 30);
         const columns = Math.min(state.columns || 0, 30);
-        const newQuery = QueryString.parse(window.location.search);
         let sectorGen = {};
-        if (!state.systems || state.seed !== newQuery.s) {
+        if (!state.systems) {
           sectorGen = sectorGenerator({ seed: state.seed, columns, rows });
         }
         return {

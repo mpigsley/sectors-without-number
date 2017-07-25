@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router';
 
 import { Circle, Polygon, G, Hoverable, Text } from './components';
 
-export default function System(props) {
+function System(props) {
   const points = 6;
   const { system, xOffset, yOffset, ...newProps } = props;
   const radius = props.width / 2;
@@ -15,6 +16,19 @@ export default function System(props) {
     const y = radius * Math.sin(pointOnCircle);
     hexagon.push(`${x + xOffset},${y + yOffset}`);
   }
+
+  const isSystem = (func) => {
+    if (props.highlighted) {
+      return () => func(props.systemKey);
+    }
+    return () => {};
+  };
+
+  const onClick = () => {
+    if (system) {
+      props.router.push(`/sector/system/${props.systemKey}${props.location.search}`);
+    }
+  };
 
   let star = null;
   if (system) {
@@ -33,20 +47,15 @@ export default function System(props) {
     );
   }
 
-  const isSystem = (func) => {
-    if (props.highlighted) {
-      return () => func(props.systemKey);
-    }
-    return () => {};
-  };
-
   const Container = props.highlighted ? Hoverable : G;
 
   return (
     <Container
       hoverable={props.highlighted}
+      clickable={!!system}
       onMouseEnter={isSystem(props.sectorHoverStart)}
       onMouseLeave={isSystem(props.sectorHoverEnd)}
+      onClick={onClick}
     >
       <Polygon
         {...newProps}
@@ -70,6 +79,12 @@ System.propTypes = {
   system: PropTypes.shape({
     key: PropTypes.string.isRequired,
   }),
+  router: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  }).isRequired,
 };
 
 System.defaultProps = {
@@ -77,3 +92,5 @@ System.defaultProps = {
   yOffset: 0,
   system: null,
 };
+
+export default withRouter(System);
