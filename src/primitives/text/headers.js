@@ -3,13 +3,14 @@ import styled, { css } from 'styled-components';
 const common = css`
   color: ${props => props.theme.light4};
   font-weight: 200;
+  margin: 1rem 0;
+  text-align: center;
 `;
 
 export const Header1 = styled.h1`
   ${common}
-  font-size: 5rem;
+  font-size: 4rem;
   font-weight: 300;
-  margin: 1rem 0;
 `;
 export const Header2 = styled.h2`
   ${common}
