@@ -24,19 +24,20 @@ export default function sector(state = initialState, action) {
         [action.key]: action.value,
       };
     case LOCATION_CHANGE:
-      if (action.payload.pathname === '/sector') {
+      if (action.payload.pathname.startsWith('/sector')) {
         const rows = Math.min(state.rows || 0, 30);
         const columns = Math.min(state.columns || 0, 30);
+        const sectorGen = state.systems ? {} : sectorGenerator({
+          seed: state.seed,
+          columns,
+          rows,
+        });
         return {
           ...state,
           renderSector: true,
           columns,
           rows,
-          ...sectorGenerator({
-            seed: state.seed,
-            columns,
-            rows,
-          }),
+          ...sectorGen,
         };
       }
       return {

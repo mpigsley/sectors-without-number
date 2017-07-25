@@ -14,6 +14,7 @@ import Home from 'components/home';
 import Configure from 'components/configure';
 import Sector from 'components/sector';
 import SectorInfo from 'components/sector-info';
+import SystemInfo from 'components/system-info';
 
 // eslint-disable-next-line
 injectGlobal`
@@ -36,6 +37,7 @@ ReactDOM.render(
         </Route>
         <Route path="/sector" component={Sector}>
           <IndexRoute component={SectorInfo} />
+          <Route path="system/:system" component={SystemInfo} />
         </Route>
       </Router>
     </Provider>

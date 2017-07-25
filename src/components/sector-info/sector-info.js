@@ -1,38 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import SidebarNavigation from 'components/sidebar-navigation';
+import SidebarLinkRow from 'components/sidebar-link-row';
 import { stringSortByKey } from 'utils/common';
-import { FlexContainer } from 'primitives';
 import {
-  InfoContainer,
-  NameHeader,
-  SectorNameContainer,
   Name,
   Key,
-  RightArrow,
-  SystemContainer,
 } from './components';
 
-export default function SectorInfo({ name, systems }) {
+export default function SectorInfo({ name, systems, location }) {
   return (
-    <InfoContainer direction="column">
-      <NameHeader>{name}</NameHeader>
-      <FlexContainer direction="column" scroll>
-        {systems
-          .sort(stringSortByKey('key'))
-          .map(system => (
-            <SystemContainer key={system.key} to={`/sector/${system.key}`}>
-              <FlexContainer>
-                <SectorNameContainer align="baseline">
-                  <Name>{system.name}</Name>
-                  <Key>({system.key})</Key>
-                </SectorNameContainer>
-                <RightArrow />
-              </FlexContainer>
-            </SystemContainer>
-          ))}
-      </FlexContainer>
-    </InfoContainer>
+    <SidebarNavigation name={name}>
+      {systems
+        .sort(stringSortByKey('key'))
+        .map(system => (
+          <SidebarLinkRow key={system.key} to={`/sector/system/${system.key}${location.search}`}>
+            <Name>{system.name}</Name>
+            <Key>({system.key})</Key>
+          </SidebarLinkRow>
+        ))}
+    </SidebarNavigation>
   );
 }
 
@@ -42,4 +30,7 @@ SectorInfo.propTypes = {
     key: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
   })).isRequired,
+  location: PropTypes.shape({
+    search: PropTypes.string,
+  }).isRequired,
 };
