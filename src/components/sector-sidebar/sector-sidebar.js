@@ -9,6 +9,9 @@ const Sidebar = styled.div`
 `;
 
 export default function SectorSidebar({ children }) {
+  if (window.innerWidth <= 700) {
+    return null;
+  }
   return <Sidebar>{children}</Sidebar>;
 }
 
