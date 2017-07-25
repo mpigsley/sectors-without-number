@@ -1,17 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SidebarNavigation from 'components/sidebar-navigation';
+import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
 import { stringSortByKey } from 'utils/common';
-import {
-  Name,
-  Key,
-} from './components';
+import { SectionHeader } from 'primitives';
+import { Name, Key } from './components';
 
 export default function SectorInfo({ name, systems, location }) {
   return (
-    <SidebarNavigation name={name}>
+    <SidebarNavigation name={name} type={SidebarType.sector}>
+      <SectionHeader>Systems</SectionHeader>
       {systems
         .sort(stringSortByKey('key'))
         .map(system => (

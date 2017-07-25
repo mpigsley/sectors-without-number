@@ -27,11 +27,11 @@ export default function sector(state = initialState, action) {
       if (action.payload.pathname.startsWith('/sector')) {
         const rows = Math.min(state.rows || 0, 30);
         const columns = Math.min(state.columns || 0, 30);
-        const sectorGen = state.systems ? {} : sectorGenerator({
-          seed: state.seed,
-          columns,
-          rows,
-        });
+        const newQuery = QueryString.parse(window.location.search);
+        let sectorGen = {};
+        if (!state.systems || state.seed !== newQuery.s) {
+          sectorGen = sectorGenerator({ seed: state.seed, columns, rows });
+        }
         return {
           ...state,
           renderSector: true,

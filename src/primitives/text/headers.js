@@ -14,7 +14,7 @@ export const Header1 = styled.h1`
 `;
 export const Header2 = styled.h2`
   ${common}
-  font-size: 1.8rem;
+  font-size: 1.7rem;
 `;
 export const Header3 = styled.h3`
   ${common}
@@ -22,5 +22,15 @@ export const Header3 = styled.h3`
 `;
 export const Header4 = styled.h4`
   ${common}
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+`;
+export const SectionHeader = styled.h3`
+  color: ${props => props.theme.light4};
+  border-bottom: 1px solid ${props => props.theme.light1};
+  font-size: 1.3rem;
+  font-weight: 200;
+  margin: 1rem;
+  padding: 0.5rem;
+  text-align: left;
+  width: calc(100% - 3rem);
 `;

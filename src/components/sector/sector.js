@@ -23,7 +23,7 @@ export default class Sector extends Component {
 
   state = {
     height: window.innerHeight,
-    width: window.innerWidth - 300,
+    width: window.innerWidth - 350,
   };
 
   componentDidMount() {
@@ -37,7 +37,7 @@ export default class Sector extends Component {
   onResize = throttle(() => {
     this.setState({
       height: window.innerHeight,
-      width: window.innerWidth - 300,
+      width: window.innerWidth - 350,
     });
   }, 100);
 

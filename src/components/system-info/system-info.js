@@ -1,13 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SidebarNavigation from 'components/sidebar-navigation';
+import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
+import { SectionHeader } from 'primitives';
 import Name from './components';
 
 export default function SectorInfo({ system, location }) {
   return (
-    <SidebarNavigation name={system.name} back={`/sector${location.search}`}>
+    <SidebarNavigation
+      name={system.name}
+      back={`/sector${location.search}`}
+      type={SidebarType.system}
+    >
+      <SectionHeader>Planets</SectionHeader>
       {system.planets.map(planet => (
         <SidebarLinkRow
           key={planet.name}
