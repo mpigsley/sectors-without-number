@@ -7,11 +7,11 @@
   },
   "scripts": {
     "start": "NODE_PATH=./src react-scripts start",
-    "start:prod": "NODE_PATH=./src yarn build && firebase serve",
+    "start:prod": "NODE_PATH=./src npm run build && firebase serve",
     "build": "NODE_PATH=./src react-scripts build",
     "test": "NODE_PATH=./src react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "yarn build && firebase deploy",
+    "deploy": "npm run build && firebase deploy",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
