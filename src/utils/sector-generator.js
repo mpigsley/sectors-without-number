@@ -3,6 +3,7 @@ import { mapValues, zipObject } from 'lodash';
 
 import { generateSectorName, generateName } from 'utils/name-generator';
 import { isBetween, coordinateKey } from 'utils/common';
+import { worldTagKeys } from 'constants/world-tags';
 
 class System {
   constructor(config, x, y) {
@@ -11,6 +12,7 @@ class System {
     const planetArray = [...Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2]))]
       .map(() => ({
         name: generateName(this.config.seededChance),
+        tags: this.config.seededChance.pickset(Object.keys(worldTagKeys), 2),
       }));
     this.planets = zipObject(planetArray.map(planet => planet.name.toLowerCase()), planetArray);
     this.x = x || this.config.seededChance.integer({
