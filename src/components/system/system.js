@@ -35,9 +35,21 @@ function System(props) {
     star = <Circle cx={xOffset} cy={yOffset} r={props.width / 13} />;
   }
 
-  let text = null;
+  let planetNum = null;
+  if (system && props.width > 45) {
+    planetNum = (
+      <Text
+        x={xOffset}
+        y={yOffset - ((props.height / 2) - 8)}
+      >
+        {Object.keys(system.planets).length}
+      </Text>
+    );
+  }
+
+  let number = null;
   if (props.highlighted && props.width > 45) {
-    text = (
+    number = (
       <Text
         x={xOffset}
         y={yOffset + ((props.height / 2) - 3)}
@@ -61,8 +73,9 @@ function System(props) {
         {...newProps}
         points={hexagon.join(' ')}
       />
+      {planetNum}
       {star}
-      {text}
+      {number}
     </Container>
   );
 }
