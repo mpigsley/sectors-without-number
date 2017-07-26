@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { map } from 'lodash';
 
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
@@ -14,10 +15,10 @@ export default function SectorInfo({ system, location }) {
       type={SidebarType.system}
     >
       <SectionHeader>Planets</SectionHeader>
-      {system.planets.map(planet => (
+      {map(system.planets, planet => (
         <SidebarLinkRow
           key={planet.name}
-          to={`${location.pathname}/planet/${planet.name}${location.search}`}
+          to={`${location.pathname}/planet/${planet.name.toLowerCase()}${location.search}`}
         >
           <Name>{planet.name}</Name>
         </SidebarLinkRow>
@@ -30,9 +31,7 @@ SectorInfo.propTypes = {
   system: PropTypes.shape({
     key: PropTypes.string,
     name: PropTypes.string,
-    planets: PropTypes.arrayOf(PropTypes.shape({
-      name: PropTypes.string,
-    })),
+    planets: PropTypes.shape(),
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,

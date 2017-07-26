@@ -1,5 +1,5 @@
 import Chance from 'chance';
-import { mapValues } from 'lodash';
+import { mapValues, zipObject } from 'lodash';
 
 import { generateSectorName, generateName } from 'utils/name-generator';
 import { isBetween, coordinateKey } from 'utils/common';
@@ -8,9 +8,11 @@ class System {
   constructor(config, x, y) {
     this.config = config;
     this.name = generateName(this.config.seededChance);
-    this.planets = [...Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2]))].map(() => ({
-      name: generateName(this.config.seededChance),
-    }));
+    const planetArray = [...Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2]))]
+      .map(() => ({
+        name: generateName(this.config.seededChance),
+      }));
+    this.planets = zipObject(planetArray.map(planet => planet.name.toLowerCase()), planetArray);
     this.x = x || this.config.seededChance.integer({
       min: this.config.index,
       max: this.config.columns,
