@@ -337,5 +337,7 @@ body.toastr-confirm-active {
 
 body {
   margin: 0;
-  padding: 0;
-  font-family: 'Raleway', sans-serif; }
+  padding: 0; }
+
+* {
+  font-family: 'Raleway', sans-serif !important; }
