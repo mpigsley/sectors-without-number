@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import { toastr } from 'react-redux-toastr';
+import copy from 'copy-to-clipboard';
 
 import {
   FlexContainer,
@@ -24,10 +26,19 @@ export const SidebarType = {
 };
 
 export default function SidebarNavigation({ name, children, back, type }) {
+  const onCopy = () => {
+    copy(window.location.href);
+    toastr.success(
+      'Copied to Clipboard',
+      `You have copied a link directly to this ${type}.`,
+    );
+  };
+
   let backBtn = <LeftArrowIcon hidden />;
   if (back) {
     backBtn = <Link to={back}><LeftArrowIcon /></Link>;
   }
+
   const iconSize = 18;
   let typeIcon = <MapIcon hidden size={iconSize} />;
   if (type === SidebarType.sector) {
@@ -37,6 +48,7 @@ export default function SidebarNavigation({ name, children, back, type }) {
   } else if (type === SidebarType.planet) {
     typeIcon = <GlobeIcon size={iconSize} />;
   }
+
   return (
     <InfoContainer direction="column">
       <HeaderContainer>
@@ -48,7 +60,10 @@ export default function SidebarNavigation({ name, children, back, type }) {
           {typeIcon}
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
-          <ShareIcon size={18} />
+          <ShareIcon
+            onClick={onCopy}
+            size={18}
+          />
           <PrinterIcon size={18} />
         </FlexContainer>
       </HeaderContainer>
