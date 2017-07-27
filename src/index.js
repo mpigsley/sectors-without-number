@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ThemeProvider } from 'styled-components';
+import { injectGlobal, ThemeProvider } from 'styled-components';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
@@ -17,7 +17,14 @@ import SectorInfo from 'components/sector-info';
 import SystemInfo from 'components/system-info';
 import PlanetInfo from 'components/planet-info';
 
-import 'global.css';
+// eslint-disable-next-line
+injectGlobal`
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+  }
+`;
 
 const history = syncHistoryWithStore(browserHistory, store);
 
