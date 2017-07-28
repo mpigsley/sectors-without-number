@@ -1,0 +1,6 @@
+.SubContainer {
+  text-align: center; }
+  .SubContainer--fullWidth {
+    width: calc(100% - 1rem); }
+  .SubContainer--margin {
+    margin: 0 1rem; }

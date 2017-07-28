@@ -2,14 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
-import { FlexContainerStyle } from 'primitives';
 import System from 'components/system';
+
+import './style.css';
 
 const HexContainer = styled.div`
   background-color: ${props => props.theme.dark3};
 `;
-
-const Svg = styled.svg`${FlexContainerStyle}`;
 
 export default function HexMap({
   height,
@@ -18,9 +17,9 @@ export default function HexMap({
 }) {
   return (
     <HexContainer>
-      <Svg width={width} height={height}>
+      <svg className="HexMap-SVG" width={width} height={height}>
         {hexData.map(hex => <System {...hex} key={hex.systemKey} />)}
-      </Svg>
+      </svg>
     </HexContainer>
   );
 }
