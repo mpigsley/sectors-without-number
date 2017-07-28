@@ -288,241 +288,373 @@ export default {
   [worldTagKeys.badlandsWorld]: {
     key: worldTagKeys.badlandsWorld,
     name: 'Badlands World',
-    description: '',
+    description: 'Whatever the original climate and atmosphere type, something horrible happened to this world. Biological, chemical, or nanotechnical weaponry has reduced it to a wretched hellscape. Some local life might still be able to survive on its blasted surface, usually at some dire cost in health or humanity.',
     enemies: [
-      '',
+      'mutated badlands fauna',
+      'desperate local',
+      'badlands raider chief',
     ],
     friends: [
-      '',
+      'native desparately wishing to escape the world',
+      'scientist researching ecological repair methods',
+      'ruin scavanger',
     ],
     complications: [
-      '',
+      'radiactivity',
+      'bioweapon traces',
+      'broken terrain',
+      'sudden local plague',
     ],
     things: [
-      '',
+      'maltech research core',
+      'functional pretech weaponry',
+      'an uncontaminated well',
     ],
     places: [
-      '',
+      'untouched oasis',
+      'ruined city',
+      'salt flat',
     ],
   },
   [worldTagKeys.battleground]: {
     key: worldTagKeys.battleground,
     name: 'Battleground',
-    description: '',
+    description: 'The world is a battleground for two or more outside powers. They may be interstellar rivals, or groups operating out of orbitals or other system bodies. Something about the planet is valuable enough for them to fight over, but the natives are too weak to be anything but animate obstacles to the fight.',
     enemies: [
-      '',
+      'ruthless military commander',
+      'looter pack chieftan',
+      'traitorous collaborator',
     ],
     friends: [
-      '',
+      'native desperately seeking protection',
+      'pragmatic military officer',
+      'happless war orphan',
     ],
     complications: [
-      '',
+      'the war just endded as both sides are leaving',
+      'the natives somehow brought this on themselves',
+      'a small group of natives profit tremendously from the fighting',
     ],
     things: [
-      '',
+      'a cache of the resource the invaders seek',
+      'abandoned prototype military gear',
+      'precious spy intelligence lost by someone',
     ],
     places: [
-      '',
+      'artillery-pocked wasteland',
+      'reeking refugee camp',
+      'burnt-out shell of a city',
     ],
   },
   [worldTagKeys.beastmasters]: {
     key: worldTagKeys.beastmasters,
     name: 'Beastmasters',
-    description: '',
+    description: 'The natives have extremely close bonds with the local fauna, possibly having special means of communication and control through tech or gengineering. Local animal life plays a major role in their society, indusutry, or warfare, and new kinds of beasts may be bred to suit their purposes.',
     enemies: [
-      '',
+      'half-feral warlord of a beast swarm',
+      'coldly in- human scientist',
+      'altered beast with human intellect and furious malice',
     ],
     friends: [
-      '',
+      'native bonded with an adorable animal',
+      'herder of very useful beasts',
+      'animal-revering mystic',
     ],
     complications: [
-      '',
+      'the "animals" are very heavily gengineered humans',
+      'the animals actuall run the society',
+      'the animals have the same rights as humans',
     ],
     things: [
-      '',
+      'tech used to alter animal life',
+      'a plague vial that could wipe out the animals',
+      'a pretech device that can perform a wonder if operated by a beast',
     ],
     places: [
-      '',
+      'park designed as a comfortable home for beasts',
+      'public plaza designed to acommodate animal companions',
+      'factory full of animal workers',
     ],
   },
   [worldTagKeys.bubbleCities]: {
     key: worldTagKeys.bubbleCities,
     name: 'Bubble Cities',
-    description: '',
+    description: 'Whether due to a lack of atmosphere or an uninhabitable climate, the world’s cities exist within domes or pressurized buildings. In such sealed environments, techniques of surveillance and control can grow baroque and extreme.',
     enemies: [
-      '',
+      'native deading outsider contamination',
+      'saboteur from another bubble city',
+      'local official hostile to outsider ignorance of laws',
     ],
     friends: [
-      '',
+      'local rebel against the city officials',
+      'maintenance chief in need of help',
+      'surveyor seeking new building sites',
     ],
     complications: [
-      '',
+      'bubble rupture',
+      'failing atmosphere reprocessor',
+      'native revolt against officials',
+      'all-seeing surveillance cameras',
     ],
     things: [
-      '',
+      'pretech habitat technology',
+      'valuable industrial products',
+      'master key codes to a city\'s security system',
     ],
     places: [
-      '',
+      'city power core',
+      'surface of the bubble',
+      'hydroponics complex',
+      'warren-like hab block',
     ],
   },
   [worldTagKeys.cheapLife]: {
     key: worldTagKeys.cheapLife,
     name: 'Cheap Life',
-    description: '',
+    description: 'Human life is near-worthless on this world. Ubiquitous cloning, local conditions that ensure early death, a culture that reveres murder, or a social structure that utterly discounts the value of most human lives ensures that death is the likely outcome for any action that irritates someone consequential.',
     enemies: [
-      '',
+      'master assassin',
+      'bloody-handed judge',
+      'overseer of disposable clones',
     ],
     friends: [
-      '',
+      'endearing local whose life the PCs accidentally bought',
+      'escapee from death seeking outside help',
+      'reformer trying to change local mores',
     ],
     complications: [
-      '',
+      'radiation or local diseases ensure all locals die before twenty-five years of age',
+      'tech ensures that death is just an annoyance',
+      'locals are totally convinced of a blissful afterlife',
     ],
     things: [
-      '',
+      'device that revives or re-embodies the dead',
+      'maltech engine fueled by human life',
+      'priceless treasure held by a now dead owner',
     ],
     places: [
-      '',
+      'thronging execution ground',
+      'extremely cursory cemetery',
+      'factory full of lethal dangers that could be corrected easily',
     ],
   },
   [worldTagKeys.civilWar]: {
     key: worldTagKeys.civilWar,
     name: 'Civil War',
-    description: '',
+    description: 'The world is currently torn between at least two opposing factions, all of which claim legitimacy. The war may be the result of a successful rebel uprising against tyranny, or it might just be the result of schemers who plan to be the new masters once the revolution is complete.',
     enemies: [
-      '',
+      'faction commissar',
+      'angry native',
+      'conspiracy theorist who blames offwolders for the war',
+      'deserter looking out for himself',
+      'guerilla bandit cheiftan',
     ],
     friends: [
-      '',
+      'faction loyalist seeking aid',
+      'native caught in the crossfire',
+      'offworlder seeking passage off the planet',
     ],
     complications: [
-      '',
+      'the front rolls over the group',
+      'famine strikes',
+      'bandit infestations are in the way',
     ],
     things: [
-      '',
+      'ammo dump',
+      'military cache',
+      'treasure buried for after the war',
+      'secret war plans',
     ],
     places: [
-      '',
+      'battle front',
+      'bombed-out town',
+      'rear-area red light zone',
+      'propaganda broadcast tower',
     ],
   },
   [worldTagKeys.coldWar]: {
     key: worldTagKeys.coldWar,
     name: 'Cold War',
-    description: '',
+    description: 'Two or more great powers control the planet, and they have a hostility to each other that’s just barely less than open warfare. The hostility might be ideological in nature, or it might revolve around control of some local resource.',
     enemies: [
-      '',
+      'suspicious chief of intelligence',
+      'native who thinks the outworlders are with the other side',
+      'femme fatale',
     ],
     friends: [
-      '',
+      'apolitical information broker',
+      'spy for the other side',
+      'unjustly accused innocent',
+      '"he\'s a bastard, but he\'s our bastard" official',
     ],
     complications: [
-      '',
+      'police sweep',
+      'low-level skirmishing',
+      '"red scare"',
     ],
     things: [
-      '',
+      'list of traitors in government',
+      'secret military plans',
+      'huge cache of weapons built up in preparation for war',
     ],
     places: [
-      '',
+      'seedy bar in a neutral area',
+      'political rally',
+      'isolated area where fighting is underway',
     ],
   },
   [worldTagKeys.colonizedPopulation]: {
     key: worldTagKeys.colonizedPopulation,
     name: 'Colonized Population',
-    description: '',
+    description: 'A neighboring world has successfully colonized this less-advanced or less-organized planet, and the natives aren’t happy about it. A puppet government may exist, but all real decisions are made by the local viceroy.',
     enemies: [
-      '',
+      'suspicious security personnel',
+      'offworlder-hating natives',
+      'local crime boss preying on rich offworlders',
     ],
     friends: [
-      '',
+      'native resistance leader',
+      'colonial official seeking help',
+      'native caught between the two sides',
     ],
     complications: [
-      '',
+      'natives won\'t talk to offworlders',
+      'colonial represssion',
+      'misunderstood local customs',
     ],
     things: [
-      '',
+      'relic of the resistance movement',
+      'list of collaborators',
+      'precious substance extracted by colonial labor',
     ],
     places: [
-      '',
+      'deep wilderness resistance camp',
+      'city district off-limits to natives',
+      'colonial labor site',
     ],
   },
   [worldTagKeys.culturalPower]: {
     key: worldTagKeys.culturalPower,
     name: 'Cultural Power',
-    description: '',
+    description: 'The world is a considerable cultural power in the sector, producing music, art, philosophy, or some similar intangible that their neighbors find irresistably attractive. Other worlds might have a profound degree of cultural cachet as the inheritor of some venerable artistic tradition.',
     enemies: [
-      '',
+      'murderously eccentric artist',
+      'crazed fan',
+      'failed artist with an obsessive grudge',
+      'critic with a crusade to enact',
     ],
     friends: [
-      '',
+      'struggling young artist',
+      'pupil of the artistic tradition',
+      'scholar of the art',
+      'offworlder hating the source of corrupting alien ways',
     ],
     complications: [
-      '',
+      'the art is slowly lethal to its masters',
+      'the art ismentally or physically addictive',
+      'the art is a fragment of ancient technical or military science',
     ],
     things: [
-      '',
+      'the instrument of a legendary master',
+      'the only copy of a dead master\'s opus',
+      'proof of intellectual property ownership',
     ],
     places: [
-      '',
+      'recording or performance studio',
+      'public festival choked with tourists',
+      'monument to the dead master of the art',
     ],
   },
   [worldTagKeys.cybercommunists]: {
     key: worldTagKeys.cybercommunists,
     name: 'Cybercommunists',
-    description: '',
+    description: 'On this world communism actually works, thanks to pretech computing devices and greater or lesser amounts of psychic precognition. Central planning nodes direct all production and employment on the world. Citizens in good standing have access to ample amounts of material goods for all needs and many wants. Instead of strife over wealth, conflicts erupt over political controls, cultural precepts, or control over the planning nodes. Many cybercommunist worlds show a considerable bias toward the private interests of those who run the planning nodes.',
     enemies: [
-      '',
+      'embittered rebel against perceived unfairness',
+      'offworlder saboteur',
+      'aspiring stalin-figure',
     ],
     friends: [
-      '',
+      'idealistic planning node tech',
+      'cynical anti-corruption cop',
+      'precognitive economist',
     ],
     complications: [
-      '',
+      'the pretech planning computers are breaking down',
+      'the planning only works because the locals have been mentally or physically altered',
+      'the planning computers can\'t handle the increasing population within the system',
     ],
     things: [
-      '',
+      'planning node computer',
+      'wildly destabilizing commodity that can\'t be factored into plans',
+      'a tremendous store of valuables made by accident',
     ],
     places: [
-      '',
+      'humming factory',
+      'apartment block of perfectly equal flats',
+      'mass demonstration of unity',
     ],
   },
   [worldTagKeys.cyborgs]: {
     key: worldTagKeys.cyborgs,
     name: 'Cyborgs',
-    description: '',
+    description: 'The planet\'s population makes heavy use of cybernetics, with many of the inhabitants possessing at least a cosmetic amount of chrome. This may be the result of a strong local cyber tech base, a religious injunction, or simply a necessary measure to survive the local conditions.',
     enemies: [
-      '',
+      'ambitious hacker of cyber implants',
+      'cybertech oligarch',
+      'researcher craving fresh offworlders',
+      'cybered-up gang boss',
     ],
     friends: [
-      '',
+      'charity-woring implant physician',
+      'idealistic young cyber researcher',
+      'avant-garde activist',
     ],
     complications: [
-      '',
+      'the powerful and dangerous come here often for cutting-edge implants',
+      'the cyber has some universal negative side-effect',
+      'cyber and those implanted with it are forbidden to leave the planet as a tech security measure',
     ],
     things: [
-      '',
+      'unique prototype cyber implant',
+      'secret research files',
+      'a virus that debilitates cyborgs',
+      'a cache of critically-needed therapeutic cyber',
     ],
     places: [
-      '',
+      'grimy slum chop-shop',
+      'bloody lair of implant rippers',
+      'stark plaza where everyone is seeing things through their augmented-reality cyber',
     ],
   },
   [worldTagKeys.cyclicalDoom]: {
     key: worldTagKeys.cyclicalDoom,
     name: 'Cyclical Doom',
-    description: '',
+    description: 'The world regularly suffers some apocalyptic catastrophe that wipes out organized civilization on it. The local culture is aware of this cycle and has traditions to ensure a fragment of civilization survives into the next era, but these traditions don\'t always work properly, and sometimes dangerous fragments of the past emerge.',
     enemies: [
-      '',
+      'offwolder seeking to trigger the apocalypse early for profit',
+      'local recklessly taking advantage or preparation stores',
+      'demagogue claiming the cycle is merely a myth of the authorities',
     ],
     friends: [
-      '',
+      'harried official working to prepare',
+      'offworlder studying the cylcles',
+      'local threatened by perils of the cycle\'s initial stages',
     ],
     complications: [
-      '',
+      'the cycles really are a myth of the authorities',
+      'the cycles are controlled by alien constructs',
+      'an outside power is interfering wiht preparation',
     ],
     things: [
-      '',
+      'a lost cache of ancien treasures',
+      'tech or archives that will pinpoint the cycle\'s timing',
+      'keycodes to bypass an ancient vault\'s security',
     ],
     places: [
-      '',
+      'lethally-defended vault of forgotten secrets',
+      'starport crowded with panicked refugees',
+      'town existing in the shadow of some monstrous monument to a former upheaval',
     ],
   },
   [worldTagKeys.desertWorld]: {
@@ -530,19 +662,19 @@ export default {
     name: 'Desert World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.doomedWorld]: {
@@ -550,19 +682,19 @@ export default {
     name: 'Doomed World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.dyingRace]: {
@@ -570,19 +702,19 @@ export default {
     name: 'Dying Race',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.eugenicCult]: {
@@ -590,19 +722,19 @@ export default {
     name: 'Eugenic Cult',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.exchangeConsulate]: {
@@ -610,19 +742,19 @@ export default {
     name: 'Exchange Consulate',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.fallenHegemon]: {
@@ -630,19 +762,19 @@ export default {
     name: 'Fallen Hegemon',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.feralWorld]: {
@@ -650,19 +782,19 @@ export default {
     name: 'Feral World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.flyingCities]: {
@@ -670,19 +802,19 @@ export default {
     name: 'Flying Cities',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.forbiddenTech]: {
@@ -690,19 +822,19 @@ export default {
     name: 'Forbidden Tech',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.formerWarriors]: {
@@ -710,19 +842,19 @@ export default {
     name: 'Former Warriors',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.freakGeology]: {
@@ -730,19 +862,19 @@ export default {
     name: 'Freak Geology',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.freakWeather]: {
@@ -750,19 +882,19 @@ export default {
     name: 'Freak Weather',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.friendlyFoe]: {
@@ -770,19 +902,19 @@ export default {
     name: 'Friendly Foe',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.goldRush]: {
@@ -790,19 +922,19 @@ export default {
     name: 'Gold Rush',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.greatWork]: {
@@ -810,19 +942,19 @@ export default {
     name: 'Great Work',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.hatred]: {
@@ -830,19 +962,19 @@ export default {
     name: 'Hatred',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.heavyIndustry]: {
@@ -850,19 +982,19 @@ export default {
     name: 'Heavy Industry',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.heavyMining]: {
@@ -870,19 +1002,19 @@ export default {
     name: 'Heavy Mining',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.hivemind]: {
@@ -890,19 +1022,19 @@ export default {
     name: 'Hivemind',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.holyWar]: {
@@ -910,19 +1042,19 @@ export default {
     name: 'Holy War',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.hostileBiosphere]: {
@@ -930,19 +1062,19 @@ export default {
     name: 'Hostile Biosphere',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.hostileSpace]: {
@@ -950,19 +1082,19 @@ export default {
     name: 'Hostile Space',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.immortals]: {
@@ -970,19 +1102,19 @@ export default {
     name: 'Immortals',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.localSpecialty]: {
@@ -990,19 +1122,19 @@ export default {
     name: 'Local Specialty',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.localTech]: {
@@ -1010,19 +1142,19 @@ export default {
     name: 'Local Tech',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.majorSpaceyard]: {
@@ -1030,19 +1162,19 @@ export default {
     name: 'Major Spaceyard',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.mandarinate]: {
@@ -1050,19 +1182,19 @@ export default {
     name: 'Mandarinate',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.mandateBase]: {
@@ -1070,19 +1202,19 @@ export default {
     name: 'Mandate Base',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.maneaters]: {
@@ -1090,19 +1222,19 @@ export default {
     name: 'Maneaters',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.megacorps]: {
@@ -1110,19 +1242,19 @@ export default {
     name: 'Megacorps',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.mercenaries]: {
@@ -1130,19 +1262,19 @@ export default {
     name: 'Mercenaries',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.minimalContact]: {
@@ -1150,19 +1282,19 @@ export default {
     name: 'Minimal Contact',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.misandryMisogyny]: {
@@ -1170,19 +1302,19 @@ export default {
     name: 'Misandry/Misogyny',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.nightWorld]: {
@@ -1190,19 +1322,19 @@ export default {
     name: 'Night World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.nomads]: {
@@ -1210,19 +1342,19 @@ export default {
     name: 'Nomads',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.oceanicWorld]: {
@@ -1230,19 +1362,19 @@ export default {
     name: 'Oceanic World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.outOfContact]: {
@@ -1250,19 +1382,19 @@ export default {
     name: 'Out of Contact',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.outpostWorld]: {
@@ -1270,19 +1402,19 @@ export default {
     name: 'Outpost World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.perimeterAgency]: {
@@ -1290,19 +1422,19 @@ export default {
     name: 'Perimeter Agency',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.pilgrimageSite]: {
@@ -1310,19 +1442,19 @@ export default {
     name: 'Pilgrimage Site',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.pleasureWorld]: {
@@ -1330,19 +1462,19 @@ export default {
     name: 'Pleasure World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.policeState]: {
@@ -1350,19 +1482,19 @@ export default {
     name: 'Police State',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.postScarcity]: {
@@ -1370,19 +1502,19 @@ export default {
     name: 'Post-Scarcity',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.preceptorArchive]: {
@@ -1390,19 +1522,19 @@ export default {
     name: 'Preceptor Archive',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.pretechCultists]: {
@@ -1410,19 +1542,19 @@ export default {
     name: 'Pretech Cultists',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.primitiveAliens]: {
@@ -1430,19 +1562,19 @@ export default {
     name: 'Primitive Aliens',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.prisonPlanet]: {
@@ -1450,19 +1582,19 @@ export default {
     name: 'Prison Planet',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.psionicsAcademy]: {
@@ -1470,19 +1602,19 @@ export default {
     name: 'Psionics Academy',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.psionicsFear]: {
@@ -1490,19 +1622,19 @@ export default {
     name: 'Psionics Fear',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.psionicsWorship]: {
@@ -1510,19 +1642,19 @@ export default {
     name: 'Psionics Worship',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.quarantinedWorld]: {
@@ -1530,19 +1662,19 @@ export default {
     name: 'Quarantined World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.radioactiveWorld]: {
@@ -1550,19 +1682,19 @@ export default {
     name: 'Radioactive World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.refugees]: {
@@ -1570,19 +1702,19 @@ export default {
     name: 'Refugees',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.regionalHegemon]: {
@@ -1590,19 +1722,19 @@ export default {
     name: 'Regional Hegemon',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.restrictiveLaws]: {
@@ -1610,19 +1742,19 @@ export default {
     name: 'Restrictive Laws',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.revanchists]: {
@@ -1630,19 +1762,19 @@ export default {
     name: 'Revanchists',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.revolutionaries]: {
@@ -1650,19 +1782,19 @@ export default {
     name: 'Revolutionaries',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.rigidCulture]: {
@@ -1670,19 +1802,19 @@ export default {
     name: 'Rigid Culture',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.risingHegemon]: {
@@ -1690,19 +1822,19 @@ export default {
     name: 'Rising Hegemon',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.ritualCombat]: {
@@ -1710,19 +1842,19 @@ export default {
     name: 'Ritual Combat',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.robots]: {
@@ -1730,19 +1862,19 @@ export default {
     name: 'Robots',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.seagoingCities]: {
@@ -1750,19 +1882,19 @@ export default {
     name: 'Seagoing Cities',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.sealedMenace]: {
@@ -1770,19 +1902,19 @@ export default {
     name: 'Sealed Menace',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.secretMasters]: {
@@ -1790,19 +1922,19 @@ export default {
     name: 'Secret Masters',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.sectarians]: {
@@ -1810,19 +1942,19 @@ export default {
     name: 'Sectarians',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.seismicInstability]: {
@@ -1830,19 +1962,19 @@ export default {
     name: 'Seismic Instability',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.shackledWorld]: {
@@ -1850,19 +1982,19 @@ export default {
     name: 'Shackled World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.societalDespair]: {
@@ -1870,19 +2002,19 @@ export default {
     name: 'Societal Despair',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.soleSupplier]: {
@@ -1890,19 +2022,19 @@ export default {
     name: 'Sole Supplier',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.tabooTreasure]: {
@@ -1910,19 +2042,19 @@ export default {
     name: 'Taboo Treasure',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.terraformFailure]: {
@@ -1930,19 +2062,19 @@ export default {
     name: 'Terraform Failure',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.theocracy]: {
@@ -1950,19 +2082,19 @@ export default {
     name: 'Theocracy',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.tombWorld]: {
@@ -1970,19 +2102,19 @@ export default {
     name: 'Tomb World',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.tradeHub]: {
@@ -1990,19 +2122,19 @@ export default {
     name: 'Trade Hub',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.tyranny]: {
@@ -2010,19 +2142,19 @@ export default {
     name: 'Tyranny',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.unbrakedAi]: {
@@ -2030,19 +2162,19 @@ export default {
     name: 'Unbraked AI',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.urbanizedSurface]: {
@@ -2050,19 +2182,19 @@ export default {
     name: 'Urbanized Surface',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.utopia]: {
@@ -2070,19 +2202,19 @@ export default {
     name: 'Utopia',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.warlords]: {
@@ -2090,19 +2222,19 @@ export default {
     name: 'Warlords',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.xenophiles]: {
@@ -2110,19 +2242,19 @@ export default {
     name: 'Xenophiles',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.xenophobes]: {
@@ -2130,19 +2262,19 @@ export default {
     name: 'Xenophobes',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
   [worldTagKeys.zombies]: {
@@ -2150,19 +2282,19 @@ export default {
     name: 'Zombies',
     description: '',
     enemies: [
-      '',
+      ''
     ],
     friends: [
-      '',
+      ''
     ],
     complications: [
-      '',
+      ''
     ],
     things: [
-      '',
+      ''
     ],
     places: [
-      '',
+      ''
     ],
   },
 };
