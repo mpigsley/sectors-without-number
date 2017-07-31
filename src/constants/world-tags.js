@@ -660,361 +660,549 @@ export default {
   [worldTagKeys.desertWorld]: {
     key: worldTagKeys.desertWorld,
     name: 'Desert World',
-    description: '',
+    description: 'The world may have a breathable atmosphere and a human-tolerable temperature range, but it is an arid, stony waste outside of a few places made habitable by human effort. The deep wastes are largely unexplored and inhabited by outcasts and worse.',
     enemies: [
-      ''
+      'raider cheiftain',
+      'crazed hermit',
+      'angry isolationist',
+      'paranoid mineral prospector',
+      'strange desert beast',
     ],
     friends: [
-      ''
+      'native guide',
+      'research biologist',
+      'aspiring teraformer',
     ],
     complications: [
-      ''
+      'sandstorms',
+      'water supply failuer',
+      'native warfare over water rights',
     ],
     things: [
-      ''
+      'enormous water reservoir',
+      'map of hidden wells',
+      'pretech rainmaking equipment',
     ],
     places: [
-      ''
+      'oasis',
+      '"The Empty Quarter" of the desert',
+      'hidden underground cistern',
     ],
   },
   [worldTagKeys.doomedWorld]: {
     key: worldTagKeys.doomedWorld,
     name: 'Doomed World',
-    description: '',
+    description: 'The world is doomed, and the locals may or may not know it. Some cosmic catastrophe looms before them, and the locals have no realistic way to get everyone to safety. To the extent that the public is aware, society is disintegrating into a combination of religious fervor, abject hedonism, and savage violence.',
     enemies: [
-      ''
+      'crazed prophet of false salvation',
+      'ruthless leader seking ot flee with their treasures',
+      'cynical ship captain selling a one-way trip into hard vacuum as espace ot another world',
     ],
     friends: [
-      ''
+      'appealing waif or family head seeking escape',
+      'offworld relief coordinator',
+      'harried law officer',
     ],
     complications: [
-      ''
+      'the doom is false or won\'t actually kill everyone',
+      'the doom was intentionally triggered by someone',
+      'mass escape is possible if warring groups can somehow be brought to cooperate',
     ],
     things: [
-      ''
+      'clearance for a ship to leave the planet',
+      'a cache of priceless cultural artifacts',
+      'the life savings of someone trying to buy passage out',
+      'data that would prove to the public the end is nigh',
     ],
     places: [
-      ''
+      'open square beneath a sky angry with a foretaste of the impending doom',
+      'orgiastic celebration involving sex and murder in equal parts',
+      'holy site full of desperate petitioners to the diving',
     ],
   },
   [worldTagKeys.dyingRace]: {
     key: worldTagKeys.dyingRace,
     name: 'Dying Race',
-    description: '',
+    description: 'The inhabitants of this world are dying out, and they know it. Through environmental toxins, hostile bio-weapons, or sheer societal despair, the culture cannot replenish its numbers. Members seek mean- ing in their own strange goals or peculiar faiths, though a few might struggle to find some way to reverse their slow yet inevitable doom.',
     enemies: [
-      ''
+      'hostile outsider who wants the locals dead',
+      'offwolder seeking to take advantage of their weakened state',
+      'invaders eager to push the locals out of their former lands',
     ],
     friends: [
-      ''
+      'one of the few youth amonth the population',
+      'determined and hopeful reformer',
+      'researcher seeking a new method of reproduction',
     ],
     complications: [
-      ''
+      'the dying culture\'s values were monstrous',
+      'the race\'s death is somehow necessary to prevent some grand catastrophe',
+      'the race is somehow convined they deserve this fate',
     ],
     things: [
-      ''
+      'extremely valuable reproductive tech',
+      'treasured artifacts of the former age',
+      'bioweapon used on the race',
     ],
     places: [
-      ''
+      'city streets devoid of pedestrians',
+      'mighty edifice now crumbling with disrepair',
+      'small dwelling full of people ina town now othewise empty',
     ],
   },
   [worldTagKeys.eugenicCult]: {
     key: worldTagKeys.eugenicCult,
     name: 'Eugenic Cult',
-    description: '',
+    description: 'Even in the days before the Silence, major improvement of the human genome always seemed to come with unacceptable side-effects. Some worlds host secret cults that perpetuate these improvements regardless of the cost, and a few planets have been taken over entirely by the cults.',
     enemies: [
-      ''
+      'eugenic superiority fanatic',
+      'mentally unstable hom superior',
+      'mad eugenic scientist',
     ],
     friends: [
-      ''
+      'eugenic propagandist',
+      'biotechnical investigator',
+      'local seeking revenge on cult',
     ],
     complications: [
-      ''
+      'the altered cultists look human',
+      'the locals are terrified of any unusual physical appearance',
+      'the genetic modifications, and drawbacks, are contagious with long exposure',
     ],
     things: [
-      ''
+      'serum that induces the alterations',
+      'elixir that reverses the alteration',
+      'pretech biotechnical databanks',
+      'list of secret cult sympathizers',
     ],
     places: [
-      ''
+      'eugenic breeding pit',
+      'isolated settlement of altered humans',
+      'public placeinfiltrated by cult sympathizers',
     ],
   },
   [worldTagKeys.exchangeConsulate]: {
     key: worldTagKeys.exchangeConsulate,
     name: 'Exchange Consulate',
-    description: '',
+    description: 'The Exchange of Light once served as the largest, most trusted banking and diplomatic service in human space. Even after the Silence, some worlds retain a functioning Exchange Consulate where banking services and arbitration can be arranged.',
     enemies: [
-      ''
+      'corrupt exchange official',
+      'indebted native who thinks the players are exchange agents',
+      'exchange official dunning the players for debts occured',
     ],
     friends: [
-      ''
+      'consul in need of offworld help',
+      'local banker seeking to hurt his competition',
+      'exchange diplomat',
     ],
     complications: [
-      ''
+      'the local consulate has been corrupted',
+      'the consulate is cut off from its funds',
+      'a powerful debtor refuses to pay',
     ],
     things: [
-      ''
+      'exchange vault codes',
+      'wealth hidden to conceal it from a bankruptcy judgement',
+      'location of forgotten vault',
     ],
     places: [
-      ''
+      'consulate meeting chamber',
+      'meeting site between factious disputants',
+      'exchange vault',
     ],
   },
   [worldTagKeys.fallenHegemon]: {
     key: worldTagKeys.fallenHegemon,
     name: 'Fallen Hegemon',
-    description: '',
+    description: 'At some point in the past, this world was a hegemonic power over some or all of the sector, thanks to superior tech, expert diplomacy, the weakness of their neighbors, or inherited Mandate legitimacy. Some kind of crash or revolt broke their power, however, and now the world is littered with the wreckage of former glory.',
     enemies: [
-      ''
+      'bitter pretender to a meaningless throne',
+      'resentful official dreaming of empire',
+      'vengeful offworlder seeing to punish their old rulers',
     ],
     friends: [
-      ''
+      'realistic local leader trying to hold things together',
+      'scholar of past glories',
+      'refugee from an overthrown colonial enclave',
     ],
     complications: [
-      ''
+      'the hegemon\'s rule was enlightened and fair',
+      'it collapsed due to its own internal strife rather than external resistance',
+      'it pretends that nothing has happened to its power',
+      'it\'s been counter-colonized by vengeful outsiders',
     ],
     things: [
-      ''
+      'precious insignia of former rule',
+      'relic tech important to its power',
+      'plundered colonial artifact',
     ],
     places: [
-      ''
+      'palace far too grand for its current occupant',
+      'oversized spaceport now in disrepair',
+      'boulevard lined with monuments to past glories',
     ],
   },
   [worldTagKeys.feralWorld]: {
     key: worldTagKeys.feralWorld,
     name: 'Feral World',
-    description: '',
+    description: 'In the long, isolated night of the Silence, some worlds have experienced total moral and cultural collapse. Whatever remains has been twisted beyond recognition into assorted death cults, xenophobic fanaticism, horrific cultural practices, or other behavior unacceptable on more enlightened worlds. These worlds are almost invariably quarantined by other planets.',
     enemies: [
-      ''
+      'decadent noble',
+      'mad cultist',
+      'xenophobic local',
+      'cannibal chief',
+      'maltech researcher',
     ],
     friends: [
-      ''
+      'trapped outworlder',
+      'aspiring reformer',
+      'native wanting to avoid traditional flensing',
     ],
     complications: [
-      ''
+      'horrific local "celebration"',
+      'inexplicable and repugnant social rules',
+      'taboo zones and people',
     ],
     things: [
-      ''
+      'terribly misused piece of pretech',
+      'wealth accumulated through brutal evildoing',
+      'valuable possesion owned by luckless outworlder victim',
     ],
     places: [
-      ''
+      'atrocity amphitheater',
+      'traditional torture parlor',
+      'ordinary location twisted into something terrible',
     ],
   },
   [worldTagKeys.flyingCities]: {
     key: worldTagKeys.flyingCities,
     name: 'Flying Cities',
-    description: '',
+    description: 'Perhaps the world is a gas giant, or plagued with unendurable storms at lower levels of the atmosphere. For whatever reason, the cities of this world fly above the surface of the planet. Perhaps they remain stationary, or perhaps they move from point to point in search of resources.',
     enemies: [
-      ''
+      'rival city pilot',
+      'tech thief attempting to steal outworld gear',
+      'saboteur or scavenger plundering the city\'s tech',
     ],
     friends: [
-      ''
+      'maintenance tech in need of help',
+      'city defence force pilot',
+      'meteorological researcher',
     ],
     complications: [
-      ''
+      'sudden storms',
+      'drastic altitude loss',
+      'rival city attacks',
+      'vital machinery breaks down',
     ],
     things: [
-      ''
+      'precious reined atmostpheric gases',
+      'pretech grav engine plans',
+      'meteorological codex predicting future storms',
     ],
     places: [
-      ''
+      'underside of the city',
+      'the one calm place on the planet\'s surface',
+      'catwalks stretching over unimaginable gulfs below',
     ],
   },
   [worldTagKeys.forbiddenTech]: {
     key: worldTagKeys.forbiddenTech,
     name: 'Forbidden Tech',
-    description: '',
+    description: 'Some group on this planet fabricates or uses maltech. Unbraked AIs doomed to metastasize into insanity, nation-destroying nanowarfare particles, slow-burn DNA corruptives, genetically engineered slaves, or something worse still. The planet’s larger population may or may not be aware of the danger in their midst.',
     enemies: [
-      ''
+      'mad scientist',
+      'maltech buyer from offworld',
+      'security enforcer',
     ],
     friends: [
-      ''
+      'victim of maltech',
+      'permieter agent',
+      'investigative reporter',
+      'conventional arms merchant',
     ],
     complications: [
-      ''
+      'the maltech is being fabricated by an unbraked AI',
+      'the government depends on revenue from maltech sales to offworlders',
+      'citizens insist that it\'s not really maltech',
     ],
     things: [
-      ''
+      'maltech research data',
+      'the maltech itself',
+      'precious pretech equipment used to create it',
     ],
     places: [
-      ''
+      'horrific laboratory',
+      'hellscape sculpted by the maltech\'s use',
+      'government building meeting room',
     ],
   },
   [worldTagKeys.formerWarriors]: {
     key: worldTagKeys.formerWarriors,
     name: 'Former Warriors',
-    description: '',
+    description: 'The locals of this world were once famed for their martial prowess. They may have simply had a very militaristic culture, or were genetically engineered for combat, or developed high-tech weaponry, or had brilliant leadership. Those days are past, however, either due to crushing defeat, external restrictions, or a cultural turn toward peace.',
     enemies: [
-      ''
+      'unreformed warlord leader',
+      'bitter mercenary chief',
+      'victim of their warfare seeking revenge',
     ],
     friends: [
-      ''
+      'partisan of the new peaceful ways',
+      'outsider desperate for military aid',
+      'martial genius repressed by the new dispensation',
     ],
     complications: [
-      ''
+      'neighboring worlds want them pacified or dead',
+      'they only ever used their arts in self-defense',
+      'the source of their gifts has been "turned off" in a reversible way',
     ],
     things: [
-      ''
+      'war trophy taken from a defeated foe',
+      'key to re-activating their martial ways',
+      'secret cache of high-tech military gear',
     ],
     places: [
-      ''
+      'cemetery of dead heroes',
+      'memorial hall now left to dust and silence',
+      'monument plaza dedicated to the new culture',
     ],
   },
   [worldTagKeys.freakGeology]: {
     key: worldTagKeys.freakGeology,
     name: 'Freak Geology',
-    description: '',
+    description: 'The geology or geography of this world is simply freakish. Perhaps it’s composed entirely of enormous mountain ranges, or regular bands of land and sea, or the mineral structures all fragment into perfect cubes. The locals have learned to deal with it and their culture will be shaped by its requirements.',
     enemies: [
-      ''
+      'crank xenogeologist',
+      'cultist who believes it\'s the work of aliens',
     ],
     friends: [
-      ''
+      'research scientist',
+      'prospector',
+      'artist',
     ],
     complications: [
-      ''
+      'local conditions that no one remembers to tell offworlders about',
+      'lethal weather',
+      'seismic activity',
     ],
     things: [
-      ''
+      'unique crystal formations',
+      'hidden veins of a major precious mineral strike',
+      'deed to a location of great natural beauty',
     ],
     places: [
-      ''
+      'atop a bizarrre geological formation',
+      'tourist resort catering to offworlders',
     ],
   },
   [worldTagKeys.freakWeather]: {
     key: worldTagKeys.freakWeather,
     name: 'Freak Weather',
-    description: '',
+    description: 'The planet is plagued with some sort of bizarre or hazardous weather pattern. Perhaps city-flattening storms regularly scourge the surface, or the world’s sun never pierces its thick banks of clouds.',
     enemies: [
-      ''
+      'criminal using the weather as a cover',
+      'weather cultists convinced the offworlders are responsible for some disaster',
+      'native predators dependent on the weather',
     ],
     friends: [
-      ''
+      'meteorological researcher',
+      'holodoc crew wanting shots of the weather',
     ],
     complications: [
-      ''
+      'the weather itself',
+      'malfuncitoning pretech teraforming engines that cause the weather',
     ],
     things: [
-      ''
+      'wind-scoured deposits of precious minerals',
+      'holorecords of a spectacularly and rare weather pattern',
+      'maturally-sculpted objects of intricate beauty',
     ],
     places: [
-      ''
+      'eye of the storm',
+      'the one sunlit place',
+      'terraforming control room',
     ],
   },
   [worldTagKeys.friendlyFoe]: {
     key: worldTagKeys.friendlyFoe,
     name: 'Friendly Foe',
-    description: '',
+    description: 'Some hostile alien race or malevolent cabal has a branch or sect on this world that is actually quite friendly toward outsiders. For whatever internal reason, they are willing to negotiate and deal honestly with strangers, and appear to lack the worst impulses of their fellows.',
     enemies: [
-      ''
+      'driven hater of all their kind',
+      'internal malcontent bent on creature conflict',
+      'secret master who seeks to lure trust',
     ],
     friends: [
-      ''
+      'well-meaning bug-eyed monster',
+      'principled eugenics cultist',
+      'suspicious investigator',
     ],
     complications: [
-      ''
+      'the group actually is a sharmless anbenevolent as they seem',
+      'the group offers a vital service at the cost of moral compromise',
+      'the group still feels bonds of affiliation with their hostile brethren',
     ],
     things: [
-      ''
+      'forbidden xenotech',
+      'eugenic biotech template',
+      'evidence to convince others of their kind they are right',
     ],
     places: [
-      ''
+      'repurposed maltech laboratory',
+      'alien conclave building',
+      'widely-feared starship interior',
     ],
   },
   [worldTagKeys.goldRush]: {
     key: worldTagKeys.goldRush,
     name: 'Gold Rush',
-    description: '',
+    description: 'Gold, silver, and other conventional precious minerals are common and cheap now that asteroid mining is practical for most worlds. But some minerals and compounds remain precious and rare, and this world has recently been discovered to have a supply of them. People from across the sector have come to strike it rich.',
     enemies: [
-      ''
+      'paranoid prospector',
+      'aspiring mining tycoon',
+      'rapacious merchant',
     ],
     friends: [
-      ''
+      'claim-jumped miner',
+      'native alien',
+      'curious tourist',
     ],
     complications: [
-      ''
+      'the strike is a hoax',
+      'the strike is of a dangerous toxic substance',
+      'export of the mineral is prohibited by the planetary government',
+      'the native aliens live around the strike\'s location',
     ],
     things: [
-      ''
+      'cases of the refined element',
+      'pretech mining equipment',
+      'a dead prospector\'s claim deed',
     ],
     places: [
-      ''
+      'secret mine',
+      'native alien village',
+      'processing plant',
+      'boom town',
     ],
   },
   [worldTagKeys.greatWork]: {
     key: worldTagKeys.greatWork,
     name: 'Great Work',
-    description: '',
+    description: 'The locals are obsessed with completing a massive project, one that has consumed them for generations. It might be the completion of a functioning spaceyard, a massive solar power array, a network of terraforming engines, or the universal conversion of their neighbors to their own faith. The purpose of their entire civilization is to progress and some day complete the work.',
     enemies: [
-      ''
+      'local planning to sacrifice the PCs for the work',
+      'local who thinks the PCs threten the work',
+      'obsessive zealot ready to destroy someone or something important to the PCs for the sake of the work',
     ],
     friends: [
-      ''
+      'outsider studying the work',
+      'local with a more temperate attitude',
+      'supplier of work materials',
     ],
     complications: [
-      ''
+      'the work is totally hopeless',
+      'different factions disagree on what the work is',
+      'an outside power is determined to thwart the work',
     ],
     things: [
-      ''
+      'vital supplies for th work',
+      'plans that have been lost',
+      'tech that greatly speeds the work',
     ],
     places: [
-      ''
+      'a bustling work site',
+      'ancestral worker housing',
+      'local community made only semi-livable by the demands of the work',
     ],
   },
   [worldTagKeys.hatred]: {
     key: worldTagKeys.hatred,
     name: 'Hatred',
-    description: '',
+    description: 'For whatever reason, this world’s populace has a burning hatred for the inhabitants of a neighboring system. Perhaps this world was colonized by exiles, or there was a recent interstellar war, or ideas of racial or religious superiority have fanned the hatred. Regardless of the cause, the locals view their neighbor and any sympathizers with loathing.',
     enemies: [
-      ''
+      'native conviced that the offworlders are agents of Them',
+      'cynical politician in need of scapegoats',
     ],
     friends: [
-      ''
+      'intelligence agent needing catspaws',
+      'holodoc producers needing "an inside look"',
+      'unlucky offworlder from the hated system',
     ],
     complications: [
-      ''
+      'the characters are wearing or using items from the hated world',
+      'the characters are known to have done business there',
+      'the characters "look like" the hated others',
     ],
     things: [
-      ''
+      'proof of Their evildoings',
+      'reward for turning in enemy agents',
+      'relic stolen by Them years ago',
     ],
     places: [
-      ''
+      'war crimes museum',
+      'atrocity site',
+      'captured and decommissioned spacehsip kept as a trophy',
     ],
   },
   [worldTagKeys.heavyIndustry]: {
     key: worldTagKeys.heavyIndustry,
     name: 'Heavy Industry',
-    description: '',
+    description: 'With interstellar transport so limited in the bulk it can move, worlds have to be largely self-sufficient in industry. Some worlds are more sufficient than others, however, and this planet has a thriving manufacturing sector capable of producing large amounts of goods appropriate to its tech level. The locals may enjoy a correspondingly higher lifestyle, or the products might be devoted towards vast projects for the aggrandizement of the rulers.',
     enemies: [
-      ''
+      'tycoon monopolist',
+      'industrial spy',
+      'malcontent revolutionary',
     ],
     friends: [
-      ''
+      'aspiring entrepreneur',
+      'worker union leader',
+      'ambitious inventor',
     ],
     complications: [
-      ''
+      'the factories are toxic',
+      'the resources extractable at their tech level are running out',
+      'the masses required the factory output for survival',
+      'the industries\' major output is being obsoleted by offworld tech',
     ],
     things: [
-      ''
+      'confidential industrial data',
+      'secret union membership lists',
+      'ownership shares in an industrial complex',
     ],
     places: [
-      ''
+      'factory floor',
+      'union meeting hall',
+      'toxic waste dump',
+      'R&D complex',
     ],
   },
   [worldTagKeys.heavyMining]: {
     key: worldTagKeys.heavyMining,
     name: 'Heavy Mining',
-    description: '',
+    description: 'This world has large stocks of valuable minerals, usually necessary for local industry, life support, or refinement into loads small enough to export off- world. Major mining efforts are necessary to extract the minerals, and many natives work in the industry.',
     enemies: [
-      ''
+      'Mine boss',
+      'tunnel saboteur',
+      'subterranean predators',
     ],
     friends: [
-      ''
+      'hermit prospector',
+      'offworld investigator',
+      'miner\'s union representative',
     ],
     complications: [
-      ''
+      'the refinery equipment breaks down',
+      'tunnel collapse',
+      'silicate life forms growing in the miner\'s lungs',
     ],
     things: [
-      ''
+      'the mother lode',
+      'smuggled case of refined mineral',
+      'silicate faked crystalline mineral samples',
     ],
     places: [
-      ''
+      'vertical mine face',
+      'tailing piles',
+      'roaring smelting complex',
     ],
   },
   [worldTagKeys.hivemind]: {
