@@ -1208,241 +1208,375 @@ export default {
   [worldTagKeys.hivemind]: {
     key: worldTagKeys.hivemind,
     name: 'Hivemind',
-    description: '',
+    description: 'Natives of this world exist in a kind of mental gestalt, sharing thoughts and partaking of a single identity. Powerful pretech, exotic psionics, alien influence, or some other cause has left the world sharing one identity. Individual members may have greater or lesser degrees of effective coordination with the whole.',
     enemies: [
-      ''
+      'a hivemind that wants to assimilate outsiders',
+      'a hivemind that has no respect for unoined life',
+      'a hivemind that fears and hates unjoined life',
     ],
     friends: [
-      ''
+      'a scholar studying the hivemind',
+      'a person severed from the gestalt',
+      'a relative of someone who has been assimilated',
     ],
     complications: [
-      ''
+      'the hivemind only functions on this world',
+      'the hivemind has strict range limits',
+      'the hivemind has different personality factions',
+      'the hivemind only happens at particular times',
+      'the world is made of semi-sentient drones and a single AI',
     ],
     things: [
-      ''
+      'vital tech for maintaining the mind',
+      'precious treasure held by now-assimilated outsider',
+      'tech that "blinds" the hivemind ot the tech\'s users',
     ],
     places: [
-      ''
+      'barely tolerable living cells for individuals',
+      'workside where individuals casually die in their labors',
+      'community with absolutely no social or group-gathering facilities',
     ],
   },
   [worldTagKeys.holyWar]: {
     key: worldTagKeys.holyWar,
     name: 'Holy War',
-    description: '',
+    description: 'A savage holy war is raging on this world, either between factions of locals or as a united effort against the pagans of some neighboring world. This war might involve a conventional religion, or it might be the result of a branding campaign, political ideology, artistic movement, or any other cause that people use as a substitute for traditional religion.',
     enemies: [
-      ''
+      'blood-mad pontiff',
+      'coldly cynical secular leader',
+      'totalitarian political demagogue',
     ],
     friends: [
-      ''
+      'desperate peacemaker',
+      'hard-pressed refugee of the fighting',
+      'peaceful religious leader who lost the internal debate',
     ],
     complications: [
-      ''
+      'the targets of the war really are doing something diabolically horrible',
+      'the holy war is just a mask for a very traditional casus belli',
+      'the leaders don\'t want the war won but only prolonged',
+      'both this world and the target of the war are religious-obsessed',
     ],
     things: [
-      ''
+      'sacred relic of the faith',
+      'a captured blasphemer under a death sentence',
+      'plunder seized in battle',
     ],
     places: [
-      ''
+      'massive holy structure',
+      'razed community of infidels',
+      'vast shrine to the martyrs dead in war',
     ],
   },
   [worldTagKeys.hostileBiosphere]: {
     key: worldTagKeys.hostileBiosphere,
     name: 'Hostile Biosphere',
-    description: '',
+    description: 'The world is teeming with life, and it hates humans. Perhaps the life is xenoallergenic, forcing filter masks and tailored antiallergens for survival. It could be the native predators are huge and fearless, or the toxic flora ruthlessly outcompetes earth crops.',
     enemies: [
-      ''
+      'local fauna',
+      'nature cultist',
+      'native aliens',
+      'calous labor overseer',
     ],
     friends: [
-      ''
+      'xenobiologist',
+      'tourist on safari',
+      'grizzled local guide',
     ],
     complications: [
-      ''
+      'filter masks fail',
+      'parasitic alien infestation',
+      'crop greenhouses lose bio-integrity',
     ],
     things: [
-      ''
+      'valuable native biological extract',
+      'abandoned colony vault',
+      'remains of an unsuccessful expedition',
     ],
     places: [
-      ''
+      'deceptively peacful glade',
+      'steaming polychrome jungle',
+      'nightfall when surrounded by Things',
     ],
   },
   [worldTagKeys.hostileSpace]: {
     key: worldTagKeys.hostileSpace,
     name: 'Hostile Space',
-    description: '',
+    description: 'The system in which the world exists is a dangerous neighborhood. Something about the system is perilous to inhabitants, either through meteor swarms, stellar radiation, hostile aliens in the asteroid belt, or periodic comet clouds.',
     enemies: [
-      ''
+      'alien raid leader',
+      'meteor-launching terrorists',
+      'paranoid local leader',
     ],
     friends: [
-      ''
+      'astronomic researcher',
+      'local defense commander',
+      'early warning monitor agent',
     ],
     complications: [
-      ''
+      'the natives believe the danger is divine chastisement',
+      'the natives blame outworlders for the danger',
+      'the native elite profit from the danger in some way',
     ],
     things: [
-      ''
+      'early warning of a raid or impact',
+      'abandoned riches in a disaster zone',
+      'key to a secure bunker',
     ],
     places: [
-      ''
+      'city watching an approaching asteroid',
+      'village burnt in an alien raid',
+      'massive ancient crater',
     ],
   },
   [worldTagKeys.immortals]: {
     key: worldTagKeys.immortals,
     name: 'Immortals',
-    description: '',
+    description: 'Natives of this world are effectively immortal. They may have been gengineered for tremendous lifespans, or have found some local anagathic, or be cyborg life forms, or be so totally convinced of reincarnation that death is a cultural irrelevance. Any immortality technique is likely applicable only to them, or else it\'s apt to be a massive draw to outside imperialists.',
     enemies: [
-      ''
+      'outsider determined to steal immortality',
+      'smug local convinced of their immortal wisdom to rule all',
+      'offworlder seeking the world\'s ruin before it becomes a threat to all',
     ],
     friends: [
-      ''
+      'curious longevity researcher',
+      'thrill-seeking local',
     ],
     complications: [
-      ''
+      'immortality requires doing something that outsiders can\'t or won\'t willingly do',
+      'the immortality ends if they leave the world',
+      'death is the punishment for even minor crimes',
+      'immortals must die or go offworld after a certain span',
+      'immortality has brutal side-effects',
     ],
     things: [
-      ''
+      'immortality drug',
+      'masterwork of an ageless artisan',
+      'toxin that only affects immortals',
     ],
     places: [
-      ''
+      'community with no visible children',
+      'unchanging structure of obvious ancient age',
+      'cultural performance relying on a century of in-jokes',
     ],
   },
   [worldTagKeys.localSpecialty]: {
     key: worldTagKeys.localSpecialty,
     name: 'Local Specialty',
-    description: '',
+    description: 'The world may be sophisticated or barely capable of steam engines, but either way it produces something rare and precious to the wider galaxy. It might be some pharmaceutical extract produced by a secret recipe, a remarkably popular cultural product, or even gengineered humans uniquely suited for certain work.',
     enemies: [
-      ''
+      'monopolist',
+      'offworlder seeking prohibition of the specialty',
+      'native who views the specialty as sacred',
     ],
     friends: [
-      ''
+      'spy searching for the source',
+      'artisan seeking protection',
+      'exporter with problems',
     ],
     complications: [
-      ''
+      'the specialty is repugnant in nature',
+      'the crafters refuse to sell to offworlders',
+      'the specialty is made in a remote, dangerous place',
+      'the crafters don\'t make the specialty any more',
     ],
     things: [
-      ''
+      'the specialty itself',
+      'the secret recipe',
+      'sample of a new improved variety',
     ],
     places: [
-      ''
+      'secret manufactory',
+      'hidden cache',
+      'artistic competition for best artisan',
     ],
   },
   [worldTagKeys.localTech]: {
     key: worldTagKeys.localTech,
     name: 'Local Tech',
-    description: '',
+    description: 'The locals can create a particular example of ex- tremely high tech, possibly even something that ex- ceeds pretech standards. They may use unique local resources to do so, or have stumbled on a narrow scientific breakthrough, or still have a functional experimental manufactory.',
     enemies: [
-      ''
+      'keeper of the tech',
+      'offworld industrialist',
+      'automated defenses that suddenly come alive',
+      'native alien mentors',
     ],
     friends: [
-      ''
+      'curious offworld scientist',
+      'eager tech buyer',
+      'native in need of technical help',
     ],
     complications: [
-      ''
+      'the tech is unreliable',
+      'the tech only works on this world',
+      'the tech hs poorly-understood side effects',
+      'the tech is alien in nature',
     ],
     things: [
-      ''
+      'the tech itself',
+      'an unclaimed payment for a large shipment',
+      'the secret blueprints for its construction',
+      'an ancient alien R&D database',
     ],
     places: [
-      ''
+      'alien factory',
+      'lethal R&D center',
+      'tech brokerage vault',
     ],
   },
   [worldTagKeys.majorSpaceyard]: {
     key: worldTagKeys.majorSpaceyard,
     name: 'Major Spaceyard',
-    description: '',
+    description: 'Most worlds of tech level 4 or greater have the necessary tech and orbital facilities to build spike drives and starships. This world is blessed with a major spaceyard facility, either inherited from before the Silence or painstakingly constructed in more recent decades. It can build even capital-class hulls, and do so more quickly and cheaply than its neighbors.',
     enemies: [
-      ''
+      'enemy saboteur',
+      'industrial spy',
+      'scheming construction tycoon',
+      'aspiring ship hijacker',
     ],
     friends: [
-      ''
+      'captain stuck in drydock',
+      'maintenance chief',
+      'mad innovator',
     ],
     complications: [
-      ''
+      'the spaceyard is an alien relic',
+      'the spaceyard is burning out from overuse',
+      'the spaceyard is alive',
+      'the spaceyard relies on maltech to function',
     ],
     things: [
-      ''
+      'intellectual property-locked pretech blueprints',
+      'override keys for activating old pretech facilities',
+      'a purchased but unclaimed spaceship',
     ],
     places: [
-      ''
+      'hidden shipyard bay',
+      'surface of a partially-complete ship',
+      'ship scrap graveyard',
     ],
   },
   [worldTagKeys.mandarinate]: {
     key: worldTagKeys.mandarinate,
     name: 'Mandarinate',
-    description: '',
+    description: 'The planet is ruled by an intellectual elite chosen via ostensibly neutral examinations or tests. The values this system selects for may or may not have anything to do with actual practical leadership skills, and the examinations may be more or less corruptible.',
     enemies: [
-      ''
+      'corrupt test administrator',
+      'incompetent but highly-rated graduate',
+      'ruthless leader of a clan of high-testing relations',
     ],
     friends: [
-      ''
+      'crusader for test reform',
+      'talented but poorly-connected graduate',
+      'genius who tests badly',
     ],
     complications: [
-      ''
+      'the test is totally unrelated to necessary governing skills',
+      'the test was very pertinent in the past but tech or culture has changes',
+      'the test is for a skill that is vital to maintaining society but irrelevant to day-to-day governance',
+      'the test is a sham and passage is based on wealth or influence',
     ],
     things: [
-      ''
+      'answer key to the next test',
+      'lost essay of incredible merit',
+      'proof of cheating',
     ],
     places: [
-      ''
+      'massive structure full of test-taking cubicles',
+      'school filled with desperate students',
+      'ornate government building decorated with scholarly quotes and academic images',
     ],
   },
   [worldTagKeys.mandateBase]: {
     key: worldTagKeys.mandateBase,
     name: 'Mandate Base',
-    description: '',
+    description: 'The Terran Mandate retained its control over this world for much longer than usual, and the world may still consider itself a true inheritor of Mandate legitimacy. Most of these worlds have or had superior technology, but they may still labor under the burden of ancient restrictive tech or monitoring systems designed to prevent them from rebelling.',
     enemies: [
-      ''
+      'deranged mandate monitoring AI',
+      'aspiring sector ruler',
+      'demagogue preaching local superiority over "traitorous rebel worlds"',
     ],
     friends: [
-      ''
+      'idealistic do-gooder local',
+      'missionary for advanced mandate tech',
+      'outsider seeking lost data from Mandate records',
     ],
     complications: [
-      ''
+      'the monitoring system forces the locals to behave in aggressive ways toward "rebel" worlds',
+      'the monitoring system severely hiders offworld use of their tech',
+      'the original colonists are all dead and have been replaced by outsiders who don\'t understand all the details',
     ],
     things: [
-      ''
+      'ultra-advanced pretech',
+      'Mandate military gear',
+      'databank containing precious tech schematics',
     ],
     places: [
-      ''
+      'faded Mandate offices still in use',
+      'vault containing ancient pretech',
+      'carefully-maintained monument to Mandate glory',
     ],
   },
   [worldTagKeys.maneaters]: {
     key: worldTagKeys.maneaters,
     name: 'Maneaters',
-    description: '',
+    description: 'The locals are cannibals, either out of necessity or out of cultural preference. Some worlds may actually eat human flesh, while others simply require the rendering of humans into important chemicals or pharmaceutical compounds, perhaps to prolong the lives of ghoul overlords. This cannibalism plays a major role in their society.',
     enemies: [
-      ''
+      'ruthless ghoul leader',
+      'chieftan of a ravenous tribe',
+      'sophisticated degenerate preaching the splendid authenticity of cannibalism',
     ],
     friends: [
-      ''
+      'sympathetic local fleeing the fork',
+      'escapee from a pharmaceutical rendering plant',
+      'reformer seeking to break the custom or its necessity',
     ],
     complications: [
-      ''
+      'local food or environmental conditions make human consumption grimly necessary',
+      'the locals farm human beings',
+      'outsiders are expected to join in the custom',
+      'the custom is totally unnecessary but jealously maintained by the people',
     ],
     things: [
-      ''
+      'belongings of a recent meal',
+      'an offworlder VIP due for the menu',
+      'a toxin that makes human flesh lethal to consumers',
     ],
     places: [
-      ''
+      'hideous human abattoir',
+      'extremely civilized restaurant',
+      'funeral-home-cum-kitchen',
     ],
   },
   [worldTagKeys.megacorps]: {
     key: worldTagKeys.megacorps,
     name: 'Megacorps',
-    description: '',
+    description: 'The world is dominated by classic cyberpunk-esque megacorporations, each one far more important than the vestigial national remnants that encompass them. These megacorps are usually locked in a cold war, trading and dealing with each other even as they try to strike in deniable ways. An over-council of corporations usually acts to bring into line any that get excessively overt in their activities.',
     enemies: [
-      ''
+      'megalomaniacal executive',
+      'underling looking to use the PCs as catspaws',
+      'ruthless mercenary who wants what the PCs have',
     ],
     friends: [
-      ''
+      'victim of megacorp scheming',
+      'offworlder merchant in far over their head',
+      'local reformer struggling to cope with megacorp indifference',
     ],
     complications: [
-      ''
+      'the megacorps are the only source of something vital to life on this world',
+      'an autonomous Mandate system acts to punish excessively overt violence',
+      'the megacorps are struggling against much more horrible national governments',
     ],
     things: [
-      ''
+      'blackmail on a megacorp exec',
+      'keycodes to critical corp secrets',
+      'proof of corp responsibility for a heinously unacceptable public atrocity',
+      'data on a vital new product line coming out soon',
     ],
     places: [
-      ''
+      'a place plastered in megacorp ads',
+      'a public plaza discreetly branded',
+      'private corp military base',
     ],
   },
   [worldTagKeys.mercenaries]: {
