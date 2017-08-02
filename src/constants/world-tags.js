@@ -1582,201 +1582,310 @@ export default {
   [worldTagKeys.mercenaries]: {
     key: worldTagKeys.mercenaries,
     name: 'Mercenaries',
-    description: '',
+    description: 'The world is either famous for its mercenary bands or it is plagued by countless groups of condottieri in service to whatever magnate can afford to pay or bribe them adequately.',
     enemies: [
-      ''
+      'moral mercenary leader',
+      'rich offworlder trying to buy rule of the world',
+      'mercenary press gang chief forcing locals into service',
     ],
     friends: [
-      ''
+      'young and idealistic mercenary chief',
+      'harried leader of enfeebled national army',
+      'offworlder trying to hire help for a noble cause',
     ],
     complications: [
-      ''
+      'the mercenaries area ll that stand between the locals and a hungry imperial power',
+      'the mercenaries are remnants of a former offial army',
+      'the mercenaries hardly ever actually fight as compared to taking bribes to walk away',
     ],
     things: [
-      ''
+      'lost mercenary payroll shipment',
+      'forbidden military tech',
+      'proof of a band\'s impending treachery against their employers',
     ],
     places: [
-      ''
+      'shabby camp of undisciplined mercs',
+      'burnt-out village occupied by mercenaries',
+      'luxurious and exceedingly well-defended merc leader villa',
     ],
   },
   [worldTagKeys.minimalContact]: {
     key: worldTagKeys.minimalContact,
     name: 'Minimal Contact',
-    description: '',
+    description: 'The locals refuse most contact with offworlders. Only a small, quarantined treaty port is provided for offworld trade, and ships can expect an exhaustive search for contraband. Local governments may be trying to keep the very existence of interstellar trade a secret from their populations, or they may simply consider offworlders too dangerous or repugnant to be allowed among the population.',
     enemies: [
-      ''
+      'customs official',
+      'xenophobic natives',
+      'existing merchant who doesn\'t like competition',
     ],
     friends: [
-      ''
+      'aspiring tourist',
+      'anthropological researcher',
+      'offworld thief',
+      'religious missionary',
     ],
     complications: [
-      ''
+      'the locals carry a disease harmless to them and lethal to outsiders',
+      'the locals hide dark purposes from offworlders',
+      'the locals have something desperately needed but won\'t bring it into the treaty port',
     ],
     things: [
-      ''
+      'contraband trade goods',
+      'security perimeter codes',
+      'black market local products',
     ],
     places: [
-      ''
+      'treaty port bar',
+      'black market zone',
+      'secret smuggler landing site',
     ],
   },
   [worldTagKeys.misandryMisogyny]: {
     key: worldTagKeys.misandryMisogyny,
     name: 'Misandry/Misogyny',
-    description: '',
+    description: 'The culture on this world holds a particular gender in contempt. Members of that gender are not permitted positions of formal power, and may be restricted in their movements and activities. Some worlds may go so far as to scorn both traditional genders, using gengineering techniques to hybridize or alter conventional human biology.',
     enemies: [
-      ''
+      'cultural fundamentalist',
+      'cultural missionary to outworlders',
+      'local rebel driven to pointless and meaningless violence',
     ],
     friends: [
-      ''
+      'oppressed native',
+      'research scientist',
+      'offworld emancipationist',
+      'local reformer',
     ],
     complications: [
-      ''
+      'the oppressed gender is restive against the customs',
+      'the oppressed gender largely supports the customs',
+      'the customs relate to some physical quality of the world',
+      'the oppressed gender has had maltech gengineering done to "tame" them',
     ],
     things: [
-      ''
+      'aerosol reversion formula for undoing genginerring docility',
+      'hidden history of the world',
+      'pretech gengineering equipment',
     ],
     places: [
-      ''
+      'shrine to the virtues of the favored gender',
+      'security center for controlling the oppressed',
+      'gengineering lab',
     ],
   },
   [worldTagKeys.nightWorld]: {
     key: worldTagKeys.nightWorld,
     name: 'Night World',
-    description: '',
+    description: 'The world is plunged into eternal darkness. The only life on this planet derives its energy from other sources, such as geothermal heat, extremely volatile chemical reactions in the planet\'s soil, or light in a non-visible spectrum. Most flora and fauna is voraciously eager to consume other life.',
     enemies: [
-      ''
+      'monstrous thing from the night',
+      'offworlder finding the obscurity of the world convenient for dark purposes',
+      'mad scientist experimenting with local life',
     ],
     friends: [
-      ''
+      'curious offworlder researcher',
+      'hard-pressed colony leader',
+      'high priest of a sect that finds religious significance in the night',
     ],
     complications: [
-      ''
+      'daylight comes as a cataclysmic event at very long intervals',
+      'light causes very dangerous reactions to native life or chemicals here',
+      'the locals have been gengineered to exist without light',
     ],
     things: [
-      ''
+      'rare chemicals created in the darkness',
+      'light source usable on this world',
+      'smuggler cache hidden here in ages past',
     ],
     places: [
-      ''
+      'formlessly pitch-black wilderness',
+      'sea without a sun',
+      'location defined by sounds or smells',
     ],
   },
   [worldTagKeys.nomads]: {
     key: worldTagKeys.nomads,
     name: 'Nomads',
-    description: '',
+    description: 'Most of the natives of this world are nomadic, usually following a traditional cycle of movement through the lands they possess. Promises of rich plunder or local environmental perils can force these groups to strike out against neighbors. Other groups are forced to move constantly due to unpredictable dangers that crop up on the planet.',
     enemies: [
-      ''
+      'desperate tribal leader who needs what the PCs have',
+      'ruthless raider chieftain',
+      'leader seeking to weld the nomads into an army',
     ],
     friends: [
-      ''
+      'free-spirited young nomad',
+      'dreamer imagining a stable life',
+      'offwolder enamoured of the life',
     ],
     complications: [
-      ''
+      'an irresistably lethal swarm of native life forces locals to move regularly',
+      'ancient defense systems destroy too-long-stationary communities',
+      'local chemical patches require careful balancing of exposure times to avoid side effects',
     ],
     things: [
-      ''
+      'cache of rare and precious resource',
+      'plunder seized by a tribal raid',
+      'tech that makes a place safe for long-term inhabitation',
     ],
     places: [
-      ''
+      'temporary nomad camp',
+      'oasis or resource reserve',
+      'trackless waste that kills the unprepared',
     ],
   },
   [worldTagKeys.oceanicWorld]: {
     key: worldTagKeys.oceanicWorld,
     name: 'Oceanic World',
-    description: '',
+    description: 'The world is entirely or almost entirely covered with liquid water. Habitations might be floating cities, or might cling precariously to the few rocky atolls jutting up from the waves, or are planted as bubbles on promontories deep beneath the stormy surface. Survival depends on aquaculture. Planets with inedible alien life rely on gengineered Terran sea crops.',
     enemies: [
-      ''
+      'pirate raider',
+      'violent "salvager" gang',
+      'tentacled sea monster',
     ],
     friends: [
-      ''
+      'daredevil fishermen',
+      'sea hermit',
+      'sapient native life',
     ],
     complications: [
-      ''
+      'the liquid flux confuses grav engines too badly for them to function on this world',
+      'sea is corrosive or toxic',
+      'the seas are wracked by regular storms',
     ],
     things: [
-      ''
+      'buried pirate treasure',
+      'location of enormous schools of fish',
+      'pretech water purification equipment',
     ],
     places: [
-      ''
+      'the only island on the planet',
+      'floating spaceport',
+      'deck of storm-swept ship',
+      'undersea bubble city',
     ],
   },
   [worldTagKeys.outOfContact]: {
     key: worldTagKeys.outOfContact,
     name: 'Out of Contact',
-    description: '',
+    description: 'The natives have been entirely out of contact with the greater galaxy for centuries or longer. Perhaps the original colonists were seeking to hide from the rest of the universe, or the Silence destroyed any means of communication. It may have been so long that human origins on other worlds have regressed into a topic for legends. The players might be on the first offworld ship to land since the First Wave of colonization a thousand years ago.',
     enemies: [
-      ''
+      'fearful local ruler',
+      'zealous native cleric',
+      'sinister power that has kept the world isolated',
     ],
     friends: [
-      ''
+      'scheming native noble',
+      'heretical theologian',
+      'UFO cultist native',
     ],
     complications: [
-      ''
+      'automated defenses fire on ships that try to take off',
+      'the natives want to stay out of contact',
+      'the natives are highly vulnerable to offworld diseases',
+      'the native language is completely unlike any known to the group',
     ],
     things: [
-      ''
+      'ancient pretech equipment',
+      'terran relic brought from earth',
+      'logs of the original colonists',
     ],
     places: [
-      ''
+      'long-lost colonial landing site',
+      'court of the local ruler',
+      'ancient defense battery controls',
     ],
   },
   [worldTagKeys.outpostWorld]: {
     key: worldTagKeys.outpostWorld,
     name: 'Outpost World',
-    description: '',
+    description: 'The world is only a tiny outpost of human habitation planted by an offworld corporation or government. Perhaps the staff is there to serve as a refueling and repair stop for passing ships, or to oversee an automated mining and refinery complex. They might be there to study ancient ruins, or simply serve as a listening and monitoring post for traffic through the system. The outpost is likely well-equipped with defenses against casual piracy.',
     enemies: [
-      ''
+      'space-mad outpost staffer',
+      'outpost commander who wants it to stay undiscovered',
+      'undercover saboteur',
     ],
     friends: [
-      ''
+      'lonely staffer',
+      'fixated researcher',
+      'overtaxed maintenance chief',
     ],
     complications: [
-      ''
+      'the alien ruin defense systems are waking up',
+      'atmospheric disturbances trap the group inside the outpost for a month',
+      'pirates raid the outpost',
+      'the crew have become cnverts to a strange set of beliefs',
     ],
     things: [
-      ''
+      'alien relics',
+      'vital scientific data',
+      'secret corporate exploitation plans',
     ],
     places: [
-      ''
+      'grimy recreation room',
+      'refueling station',
+      'the only building on the planet',
+      'a "starport" of swept bare rock',
     ],
   },
   [worldTagKeys.perimeterAgency]: {
     key: worldTagKeys.perimeterAgency,
     name: 'Perimeter Agency',
-    description: '',
+    description: 'Before the Silence, the Perimeter was a Terran-sponsored organization charged with rooting out use of maltech- technology banned in human space as too dangerous for use or experimentation. Unbraked AIs, gengineered slave species, nanotech replicators, weapons of planetary destruction... the Perimeter hunted down experimenters with a great indifference to planetary laws. Most Perimeter Agencies collapsed during the Silence, but a few managed to hold on to their mission, though modern Perimeter agents often find more work as conventional spies.',
     enemies: [
-      ''
+      'renegade agency director',
+      'maltech researcher',
+      'paranoid intelligence chief',
     ],
     friends: [
-      ''
+      'agent in need of help',
+      'support staffer',
+      '"unjustly" targeted researcher',
     ],
     complications: [
-      ''
+      'the local agency has gone rogue and now uses maltech',
+      'the Agency archives have been compromised',
+      'the Agency has been targeted by a maltech-using organization',
+      'the Agency\'s existance is unkonwn to the locals',
     ],
     things: [
-      ''
+      'agency maltech research archives',
+      'agency pretech spec-ops gear',
+      'file of blackmail on local politicians',
     ],
     places: [
-      ''
+      'interrogation room',
+      'smoky bar',
+      'maltech laboratory',
+      'secret agency base',
     ],
   },
   [worldTagKeys.pilgrimageSite]: {
     key: worldTagKeys.pilgrimageSite,
     name: 'Pilgrimage Site',
-    description: '',
+    description: 'The world is noted for an important spiritual or historical location, and might be the sector headquar- ters for a widespread religion or political movement. The site attracts wealthy pilgrims from throughout nearby space, and those with the money necessary to manage interstellar travel can be quite generous to the site and its keepers. The locals tend to be fiercely protective of the place and its reputation, and some places may forbid the entrance of those not suitably pious or devout.',
     enemies: [
-      ''
+      'saboteur devoted to a rival rival belief',
+      'bitter reformer who resents the current leadership',
+      'swindler conning the pilgrims',
     ],
     friends: [
-      ''
+      'protector of the holy site',
+      'naive offworlder pilgrim',
+      'outsider wanting to learn the sanctum\'s inner secrets',
     ],
     complications: [
-      ''
+      'the site is actually a fake',
+      'the site is run by corrupt and venal keepers',
+      'a natural disaster threatens the site',
     ],
     things: [
-      ''
+      'ancient relic guarded at the site',
+      'proof of the site\'s inauthenticity',
+      'precious offerings from a pilgrim',
     ],
     places: [
-      ''
+      'incense-scented sanctum',
+      'teeming crowd of pilgrims',
+      'imposing holy structure',
     ],
   },
   [worldTagKeys.pleasureWorld]: {
