@@ -1891,241 +1891,380 @@ export default {
   [worldTagKeys.pleasureWorld]: {
     key: worldTagKeys.pleasureWorld,
     name: 'Pleasure World',
-    description: '',
+    description: 'This world provides delights either rare or impermissible elsewhere. Matchless local beauty, stunningly gengineered natives, a wide variety of local drugs, carnal pleasures unacceptable on other worlds, or some other rare delight is readily available here. Most worlds are fully aware of the value of their offerings, and the prices they demand can be in credits or in less tangible recompense.',
     enemies: [
-      ''
+      'purveyor of evil delights',
+      'local seeking to control others with addictions',
+      'offworlder exploiter of native resources',
     ],
     friends: [
-      ''
+      'tourist who\'s in too deep',
+      'native seeking a more meaningful life elsewhere',
+      'offworld entertainer looking for training here',
     ],
     complications: [
-      ''
+      'a deeply repugnant pleasure is offered here by a culture that sees nothing wrong with it',
+      'certain pleasures here are dangerously addictive',
+      'the prices here can involve enaslavement or death',
+      'the world has been seized and exploited by an imperial power',
     ],
     things: [
-      ''
+      'forbidden drug',
+      'a contract for some unspeakable payment',
+      'powerful tech repurposed for hedonistic ends',
     ],
     places: [
-      ''
+      'breathtaking natural feature',
+      'artful but decadent salon',
+      'grimy den of desperate vice',
     ],
   },
   [worldTagKeys.policeState]: {
     key: worldTagKeys.policeState,
     name: 'Police State',
-    description: '',
+    description: 'The world is a totalitarian police state. Any sign of disloyalty to the planet’s rulers is punished severely, and suspicion riddles society. Some worlds might operate by Soviet-style informers and indoctrination, while more technically sophisticated worlds might rely on omnipresent cameras or braked AI “guardian angels”. Outworlders are apt to be treated as a necessary evil at best, and “disappeared” if they become troublesome.',
     enemies: [
-      ''
+      'secret police chief',
+      'scapegoating official',
+      'treacherous native informer',
     ],
     friends: [
-      ''
+      'rebel leader',
+      'offworld agitator',
+      'imprisoned victim',
+      'crime boss',
     ],
     complications: [
-      ''
+      'the natives largely believe in the righteousness of the state',
+      'the police state is automated and its "rulers" can\'t shut it off',
+      'the leaders forment a pogrom against "offworlder spies"',
     ],
     things: [
-      ''
+      'list of police informers',
+      'weath taken from "enemies of the state"',
+      'Dear Leaders\'s private stash',
     ],
     places: [
-      ''
+      'military parade',
+      'gulag',
+      'gray concrete housing block',
+      'surveillance center',
     ],
   },
   [worldTagKeys.postScarcity]: {
     key: worldTagKeys.postScarcity,
     name: 'Post-Scarcity',
-    description: '',
+    description: 'The locals have maintained sufficient Mandate-era tech to be effectively post-scarcity in their economic structure. Everyone has all the necessities and most of the desires they can imagine. Conflict now exists over the apportionment of services and terrestrial space, since anything else can be had in abundance. Military goods and items of mass destruction may still be restricted, and there is probably some reason that the locals do not export their vast wealth.',
     enemies: [
-      ''
+      'frenzied ideologue fighting over an idea',
+      'paranoid local fearing offworlder influence',
+      'grim reformer seeking the destruction of the "enfeebling" productive tech',
     ],
     friends: [
-      ''
+      'offworlder seeking something available only here',
+      'local struggling to maintain the production tech',
+      'native missionary seeking to bring abundance to other worlds',
     ],
     complications: [
-      ''
+      'the tech causes serious side-effects on those who take advantage of it',
+      'the tech is breaking down',
+      'the population is growing too large',
+      'the tech produces only certain things in abundance',
     ],
     things: [
-      ''
+      'a cornucopia device',
+      'a rare commodity that cannot be duplicated',
+      'contract for services',
     ],
     places: [
-      ''
+      'tiny but richly-appointed private quarters',
+      'market for services',
+      'hushed non-duped art salon',
     ],
   },
   [worldTagKeys.preceptorArchive]: {
     key: worldTagKeys.preceptorArchive,
     name: 'Preceptor Archive',
-    description: '',
+    description: 'The Preceptors of the Great Archive were a pre-Silence organization devoted to ensuring the dissemination of human culture, history, and basic technology to frontier worlds that risked losing this information during the human expansion. Most frontier planets had an Archive where natives could learn useful technical skills in addition to human history and art. Those Archives that managed to survive the Silence now strive to send their missionaries of knowledge to new worlds in need of their lore.',
     enemies: [
-      ''
+      'luddite native',
+      'offworld merchant who wants the natives kept ignorant',
+      'religious zealot',
+      'corrupted first speaker who wants to keep a monopoly on learning',
     ],
     friends: [
-      ''
+      'preceptor adept missionary',
+      'offworld scholar',
+      'reluctant student',
+      'roving preceptor adept',
     ],
     complications: [
-      ''
+      'the local Archive has taken a religous and mystical attitude toward their teaching',
+      'the Archive has maintained some replicable pretech science',
+      'the Archive has been corrupted and their teaching is incorrect',
     ],
     things: [
-      ''
+      'lost Archive database',
+      'ancient pretech teaching equipment',
+      'hidden cache of unacceptable tech',
     ],
     places: [
-      ''
+      'Archive lecture hall',
+      'experimental laboratory',
+      'student-local riot',
     ],
   },
   [worldTagKeys.pretechCultists]: {
     key: worldTagKeys.pretechCultists,
     name: 'Pretech Cultists',
-    description: '',
+    description: 'The capacities of human science before the Silence vastly outmatch the technology available since the Scream. The jump gates alone were capable of crossing hundreds of light years in a moment, and they were just one example of the results won by blending psychic artifice with pretech science. Some worlds outright worship the artifacts of their ancestors, see- ing in them the work of more enlightened and perfect humanity. These cultists may or may not understand the operation or replication of these devices, but they seek and guard them jealously.',
     enemies: [
-      ''
+      'cult leader',
+      'artifact supplier',
+      'pretech smuggler',
     ],
     friends: [
-      ''
+      'offworld scientist',
+      'robbed collector',
+      'cult heretic',
     ],
     complications: [
-      ''
+      'the cultists can actually replicate certain forms of pretech',
+      'the cultists abhor use of the devices as "presumption on the holy"',
+      'the cultists mistake the party\'s belongings for pretech',
     ],
     things: [
-      ''
+      'pretech artifacts both functional and broken',
+      'religious-jargon laced pretech replication techniques',
+      'waylaid payment for pretech artifacts',
     ],
     places: [
-      ''
+      'shrine to nonfunctional pretech',
+      'smuggler\'s den',
+      'public procession showing a prized artifact',
     ],
   },
   [worldTagKeys.primitiveAliens]: {
     key: worldTagKeys.primitiveAliens,
     name: 'Primitive Aliens',
-    description: '',
+    description: 'The world is populated by a large number of sapient aliens that have yet to develop advanced technology. The human colonists may have a friendly or hostile relationship with the aliens, but a certain intrinsic tension is likely. Small human colonies might have been enslaved or otherwise subjugated.',
     enemies: [
-      ''
+      'hostile alien chief',
+      'human firebrand',
+      'dangerous local predator',
+      'alien religious zealot',
     ],
     friends: [
-      ''
+      'colonist leader',
+      'peace-faction alien chief',
+      'planetary frontiersman',
+      'xenoresearcher',
     ],
     complications: [
-      ''
+      'the alien numbers are huge and can overwhelm the humans whenver they so choose',
+      'one group is trying to use the other to kill their political opponents',
+      'the aliens are incomprehensibly strange',
+      'one side commits an atrocity',
     ],
     things: [
-      ''
+      'alien religious icon',
+      'ancient alien-human treaty',
+      'alien technology',
     ],
     places: [
-      ''
+      'alien village',
+      'fortified human settlement',
+      'masacre site',
     ],
   },
   [worldTagKeys.prisonPlanet]: {
     key: worldTagKeys.prisonPlanet,
     name: 'Prison Planet',
-    description: '',
+    description: 'This planet is or was intended as a prison. Some such prisons were meant for specific malefactors of the Terran Mandate, while others were to contain entire "dangerous" ethnic groups or alien races. Some may still have warden AIs or automatic systems to prevent any unauthorized person from leaving, and any authorization permits have long since expired.',
     enemies: [
-      ''
+      'crazed warden AI',
+      'brutal heir to gang leadership',
+      'offworlder who\'s somehow acquired warden powers and exploits the locals',
     ],
     friends: [
-      ''
+      'innocent local born here',
+      'native technician forced to maintain the very tech that imprisons them',
+      'offworlder trapped here by accident',
     ],
     complications: [
-      ''
+      'departure permits are a precious currency',
+      'the prison industry still makes valuable pretech devices',
+      'gangs have metamorphosed into governments',
+      'the local nobility descended from the prison staff',
     ],
     things: [
-      ''
+      'a pass to get offworld',
+      'a key to bypass ancient security devices',
+      'contraband forbidden by the security scanners',
     ],
     places: [
-      ''
+      'Mandate-era prison block converted to government building',
+      'industrial facility manned by mandatory numbers of prisoners',
+      'makeshift shop where contraband is assembled',
     ],
   },
   [worldTagKeys.psionicsAcademy]: {
     key: worldTagKeys.psionicsAcademy,
     name: 'Psionics Academy',
-    description: '',
+    description: 'This world is one of the few that have managed to redevelop the basics of psychic training. Without this education, a potential psychic is doomed to either madness or death unless they refrain from using their abilities. Psionic academies are rare enough that offworlders are often sent there to study by wealthy patrons. The secrets of psychic mentorship, the protocols and techniques that allow a psychic to successfully train another, are carefully guarded at these academies. Most are closely affiliated with the planetary government.',
     enemies: [
-      ''
+      'corrupt psychic instructor',
+      'renegade student',
+      'mad psychic researcher',
+      'resentful townie',
     ],
     friends: [
-      ''
+      'offworld researcher',
+      'aspiring student',
+      'wealthy tourist',
     ],
     complications: [
-      ''
+      'the academy curriculum kills a significant percentage of students',
+      'the faculty use students as research subjects',
+      'the students are indoctrinated as sleeper agents',
+      'the local natives hate the academy',
+      'the academy is part of a religion',
     ],
     things: [
-      ''
+      'secretly developed psitech',
+      'a runaway psychic mentor',
+      'psychic research prize',
     ],
     places: [
-      ''
+      'training grounds',
+      'experimental laboratory',
+      'school library',
+      'campus hangout',
     ],
   },
   [worldTagKeys.psionicsFear]: {
     key: worldTagKeys.psionicsFear,
     name: 'Psionics Fear',
-    description: '',
+    description: 'The locals are terrified of psychics. Perhaps their history is studded with feral psychics who went on murderous rampages, or perhaps they simply nurse an unreasoning terror of those “mutant freaks”. Psychics demonstrate their powers at risk of their lives.',
     enemies: [
-      ''
+      'mental purity investigator',
+      'suspicious zealot',
+      'witch-finder',
     ],
     friends: [
-      ''
+      'hidden psychic',
+      'offwolder psychic trapped here',
+      'offworld educator',
     ],
     complications: [
-      ''
+      'psychic potential is much more common here',
+      'some tech is mistaken as psitech',
+      'natives believe certain rituals and customs can protect them from psychic powers',
     ],
     things: [
-      ''
+      'hidden psitech cache',
+      'possessions of convicted psychics',
+      'reward for turning in a psychic',
     ],
     places: [
-      ''
+      'inquisitorial chamber',
+      'lynching site',
+      'museum of psychic atrocities',
     ],
   },
   [worldTagKeys.psionicsWorship]: {
     key: worldTagKeys.psionicsWorship,
     name: 'Psionics Worship',
-    description: '',
+    description: 'These natives view psionic powers as a visible gift of god or sign of superiority. If the world has a functional psychic training academy, psychics occupy almost all major positions of power and are considered the natural and proper rulers of the world. If the world lacks training facilities, it is likely a hodgepodge of demented cults, with each one dedicated to a marginally-coherent feral prophet and their psychopathic ravings.',
     enemies: [
-      ''
+      'psychic inquisitor',
+      'haughty mind-noble',
+      'psychic slaver',
+      'feral prophet',
     ],
     friends: [
-      ''
+      'offworlder psychic researcher',
+      'native rebel',
+      'offworld employer seeking psychics',
     ],
     complications: [
-      ''
+      'the psychic training is imperfect and the psychics all show significant mental illness',
+      'the psychics have developed a unique discipline',
+      'the will of a psychic is law',
+      'psychics in the party are forcibly kidnapped for "enlightening"',
     ],
     things: [
-      ''
+      'ancient psitech',
+      'viluable psychic research records',
+      'permission for psychic training',
     ],
     places: [
-      ''
+      'psitech-imbued council chamber',
+      'temple to the mind',
+      'sanitarium-prison for feral psychics',
     ],
   },
   [worldTagKeys.quarantinedWorld]: {
     key: worldTagKeys.quarantinedWorld,
     name: 'Quarantined World',
-    description: '',
+    description: 'The world is under a quarantine, and space travel to and from it is strictly forbidden. This may be enforced by massive ground batteries that burn any interlopers from the planet’s sky, or it may be that a neighboring world runs a persistent blockade.',
     enemies: [
-      ''
+      'defense installation commander',
+      'suspicious patrol leader',
+      'crazed asteroid hermit',
     ],
     friends: [
-      ''
+      'relative of a person trapped on the world',
+      'humanitarian relief official',
+      'treasure hunter',
     ],
     complications: [
-      ''
+      'the natives want to remain isolated',
+      'the quarantine is enforced by an ancient alien installation',
+      'the world is rife with maltech abominations',
+      'the blockade is meant to starve everyone on the barren world',
     ],
     things: [
-      ''
+      'defense grid key',
+      'bribe for getting someone out',
+      'abandoned alien tech',
     ],
     places: [
-      ''
+      'bridge of a blockading ship',
+      'defense installation control room',
+      'refugee camp',
     ],
   },
   [worldTagKeys.radioactiveWorld]: {
     key: worldTagKeys.radioactiveWorld,
     name: 'Radioactive World',
-    description: '',
+    description: 'Whether due to a legacy of atomic warfare unhindered by nuke snuffers or a simple profusion of radioactive elements, this world glows in the dark. Even heavy vacc suits can filter only so much of the radiation, and most natives suffer a wide variety of cancers, mutations and other illnesses without the protection of advanced medical treatments.',
     enemies: [
-      ''
+      'bitter mutant',
+      'relic warlord',
+      'desperate would be escapee',
     ],
     friends: [
-      ''
+      'reckless prospector',
+      'offworld scavenger',
+      'biogenetic variety seeker',
     ],
     complications: [
-      ''
+      'the radioactivity is steadily growing worse',
+      'the planet\'s medical resources break down',
+      'the radioactivity has inexplicable effects on living creatures',
+      'the radioactivity is the product of a malfunctioning pretech manufactory',
     ],
     things: [
-      ''
+      'ancient atomic weaponry',
+      'pretech anti-radioactivity drugs',
+      'untainted water supply',
     ],
     places: [
-      ''
+      'mutant-infested ruins',
+      'scorched glass plain',
+      'wilderness of bizarre native life',
+      'glowing barrens',
     ],
   },
   [worldTagKeys.refugees]: {
