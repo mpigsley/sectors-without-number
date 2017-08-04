@@ -6,7 +6,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 
 import theme from 'utils/theme';
-import registerServiceWorker from 'registerServiceWorker';
 import store from 'store';
 
 import HexBackground from 'components/hex-background';
@@ -39,5 +38,3 @@ ReactDOM.render(
   </ThemeProvider>,
   document.getElementById('root'),
 );
-
-registerServiceWorker();
