@@ -1844,7 +1844,7 @@ export default {
       'the local agency has gone rogue and now uses maltech',
       'the Agency archives have been compromised',
       'the Agency has been targeted by a maltech-using organization',
-      'the Agency\'s existance is unkonwn to the locals',
+      'the Agency\'s existance is unknown to the locals',
     ],
     things: [
       'agency maltech research archives',

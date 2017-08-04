@@ -17,6 +17,15 @@ export const stringSortByKey = key => (a, b) => {
   return 0;
 };
 
+export const toCommaArray = (element, i) => {
+  let string = '';
+  if (i !== 0) {
+    string += ', ';
+  }
+  string += element;
+  return string;
+};
+
 export const toReadableArray = (element, i, arr) => {
   let string = '';
   if (i === arr.length - 1) {
