@@ -16,3 +16,19 @@ export const stringSortByKey = key => (a, b) => {
   if (keyA > keyB) return 1;
   return 0;
 };
+
+export const toReadableArray = (element, i, arr) => {
+  let string = '';
+  if (i === arr.length - 1) {
+    string += 'and ';
+  }
+  if (i === 0) {
+    string += capitalizeFirstLetter(element);
+  } else {
+    string += element;
+  }
+  if (i < arr.length - 1) {
+    string += ', ';
+  }
+  return string;
+};

@@ -16,7 +16,7 @@ import SectorInfo from 'components/sector-info';
 import SystemInfo from 'components/system-info';
 import PlanetInfo from 'components/planet-info';
 
-import 'global.css';
+import 'styles/global.css';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
