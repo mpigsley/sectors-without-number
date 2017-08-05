@@ -6,7 +6,6 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 
 import theme from 'utils/theme';
-import registerServiceWorker from 'registerServiceWorker';
 import store from 'store';
 
 import HexBackground from 'components/hex-background';
@@ -17,7 +16,7 @@ import SectorInfo from 'components/sector-info';
 import SystemInfo from 'components/system-info';
 import PlanetInfo from 'components/planet-info';
 
-import 'global.css';
+import 'styles/global.css';
 
 const history = syncHistoryWithStore(browserHistory, store);
 
@@ -39,5 +38,3 @@ ReactDOM.render(
   </ThemeProvider>,
   document.getElementById('root'),
 );
-
-registerServiceWorker();
