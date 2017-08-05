@@ -1,2 +1,5 @@
 .HexMap-SVG {
   display: flex; }
+
+.HexMap-Container {
+  background-color: #283647; }

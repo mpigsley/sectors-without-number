@@ -1,14 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 
 import System from 'components/system';
 
 import './style.css';
-
-const HexContainer = styled.div`
-  background-color: ${props => props.theme.dark3};
-`;
 
 export default function HexMap({
   height,
@@ -16,11 +11,11 @@ export default function HexMap({
   hexData,
 }) {
   return (
-    <HexContainer>
+    <div className="HexMap-Container">
       <svg className="HexMap-SVG" width={width} height={height}>
-        {hexData.map(hex => <System {...hex} key={hex.systemKey} />)}
+        {hexData.map(hex => <System data={hex} key={hex.systemKey} />)}
       </svg>
-    </HexContainer>
+    </div>
   );
 }
 

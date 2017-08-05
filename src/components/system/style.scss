@@ -1,0 +1,39 @@
+@import "styles/theme";
+
+.System-Circle {
+  fill: $light3;
+}
+
+.System-Polygon {
+  fill: $dark4;
+  transition: all 0.3s;
+
+  &--highlighted {
+    fill: $dark2;
+  }
+}
+
+.System-Hex {
+  cursor: default;
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &--hoverable {
+    .System-Polygon {
+      fill: $dark2;
+    }
+    &:hover .System-Polygon {
+      fill: $primary;
+    }
+  }
+}
+
+.System-Text {
+  font-size: 9px;
+  font-weight: 100;
+  stroke: $light1;
+  text-anchor: middle;
+  stroke-width: 0.6px;
+}
