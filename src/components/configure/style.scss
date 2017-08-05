@@ -1,0 +1,23 @@
+.Configure-ButtonContainer {
+  margin: 0 1rem;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.Configure-PaddedButtons {
+  margin-top: 2rem;
+}
+
+.Configure-Invalid {
+  color: red;
+  padding: 1rem 0;
+  text-align: center;
+  width: 20rem;
+  margin: 0 auto;
+}

@@ -2,20 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Zap } from 'react-feather';
 
-import {
-  Header2,
-  Link,
-  ContentContainer,
-  SubContainer,
-  Input,
-  Label,
-  LinkIcon,
-} from 'primitives';
-import {
-  ButtonContainer,
-  PaddedButtons,
-  Invalid,
-} from './components';
+import Header, { HeaderType } from 'primitives/text/header';
+import ContentContainer from 'primitives/containers/content-container';
+import SubContainer from 'primitives/containers/sub-container';
+import { Link, Input, Label, LinkIcon } from 'primitives';
+
+import './style.css';
 
 export default function Configure({
   seed,
@@ -33,20 +25,25 @@ export default function Configure({
   };
 
   const invalidText = columns > 30 || rows > 30
-    ? <Invalid>Column and row count can not be greater than 30.</Invalid>
+    ? <div className="Configure-Invalid">Column and row count can not be greater than 30.</div>
     : null;
 
   return (
     <ContentContainer direction="column" align="center" justify="center">
-      <Header2>Configure</Header2>
-      <SubContainer noMargin direction="column" align="flex-start">
+      <Header type={HeaderType.header2}>Configure</Header>
+      <SubContainer noMargin direction="column" align="flexStart">
         {invalidText}
         <Label noPadding htmlFor="seed">
           Seed
         </Label>
         <Input data-key="seed" onChange={updateInput} name="seed" type="text" value={seed} />
         <SubContainer noMargin>
-          <ButtonContainer noMargin direction="column" align="flex-start">
+          <SubContainer
+            className="Configure-ButtonContainer"
+            noMargin
+            direction="column"
+            align="flexStart"
+          >
             <Label htmlFor="rows">Rows</Label>
             <Input
               data-key="rows"
@@ -55,8 +52,13 @@ export default function Configure({
               type="number"
               value={rows || ''}
             />
-          </ButtonContainer>
-          <ButtonContainer noMargin direction="column" align="flex-start">
+          </SubContainer>
+          <SubContainer
+            className="Configure-ButtonContainer"
+            noMargin
+            direction="column"
+            align="flexStart"
+          >
             <Label htmlFor="columns">Columns</Label>
             <Input
               data-key="columns"
@@ -65,10 +67,15 @@ export default function Configure({
               type="number"
               value={columns || ''}
             />
-          </ButtonContainer>
+          </SubContainer>
         </SubContainer>
       </SubContainer>
-      <PaddedButtons wrap justify="center" align="center">
+      <SubContainer
+        className="Configure-PaddedButtons"
+        wrap
+        justify="center"
+        align="center"
+      >
         <Link
           padded
           to={{
@@ -79,7 +86,7 @@ export default function Configure({
           <LinkIcon icon={Zap} size="20" />
           Generate
         </Link>
-      </PaddedButtons>
+      </SubContainer>
     </ContentContainer>
   );
 }

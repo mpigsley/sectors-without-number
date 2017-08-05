@@ -1,0 +1,12 @@
+@import "styles/theme";
+
+.SectionHeader {
+  color: $light4;
+  border-bottom: 1px solid $light1;
+  font-size: 1.3rem;
+  font-weight: 200;
+  margin: 1rem;
+  padding: 0.5rem;
+  text-align: left;
+  width: calc(100% - 3rem);
+}

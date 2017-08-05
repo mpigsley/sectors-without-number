@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { Link } from 'react-router';
 import { ChevronRight } from 'react-feather';
-import { FlexContainer } from 'primitives';
+import FlexContainer from 'primitives/containers/flex-container';
 
 export const LinkContainer = styled(FlexContainer)`
   flex: 1;

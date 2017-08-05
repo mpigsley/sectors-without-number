@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
-import { SectionHeader, Header4 } from 'primitives';
+import SectionHeader from 'primitives/text/section-header';
+import Header, { HeaderType } from 'primitives/text/header';
 import WorldTags from 'constants/world-tags';
 import { toReadableArray } from 'utils/common';
 
@@ -21,7 +22,7 @@ const renderTags = tags => tags
     places,
   }) => (
     <div key={key} className="PlanetInfo-Tag">
-      <Header4>{name}</Header4>
+      <Header type={HeaderType.header4}>{name}</Header>
       <p className="PlanetInfo-Content">{description}</p>
       <p className="PlanetInfo-Content">
         <b>Enemies: </b>

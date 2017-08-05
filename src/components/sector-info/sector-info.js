@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
+import Header, { HeaderType } from 'primitives/text/header';
+import SectionHeader from 'primitives/text/section-header';
 import { stringSortByKey } from 'utils/common';
-import { SectionHeader } from 'primitives';
-import { Name, Key } from './components';
+
+import './style.css';
 
 export default function SectorInfo({ name, systems, location }) {
   return (
@@ -15,8 +17,8 @@ export default function SectorInfo({ name, systems, location }) {
         .sort(stringSortByKey('key'))
         .map(system => (
           <SidebarLinkRow key={system.key} to={`/sector/system/${system.key}${location.search}`}>
-            <Name>{system.name}</Name>
-            <Key>({system.key})</Key>
+            <Header type={HeaderType.header4} className="SectorInfo-Name">{system.name}</Header>
+            <div className="SectorInfo-Key">({system.key})</div>
           </SidebarLinkRow>
         ))}
     </SidebarNavigation>

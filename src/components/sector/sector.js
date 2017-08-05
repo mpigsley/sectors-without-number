@@ -6,7 +6,7 @@ import ReduxToastr from 'react-redux-toastr';
 import hexGenerator from 'utils/hex-generator';
 
 import SectorSidebar from 'components/sector-sidebar';
-import { FlexContainer } from 'primitives';
+import FlexContainer from 'primitives/containers/flex-container';
 import SystemTooltips from 'components/system-tooltips';
 import HexMap from 'components/hex-map';
 

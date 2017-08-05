@@ -4,10 +4,8 @@ import { Link } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
 
-import {
-  FlexContainer,
-  Header2,
-} from 'primitives';
+import FlexContainer from 'primitives/containers/flex-container';
+import Header, { HeaderType } from 'primitives/text/header';
 import {
   InfoContainer,
   HeaderContainer,
@@ -55,7 +53,7 @@ export default function SidebarNavigation({ name, children, back, type }) {
         <FlexContainer align="center" shrink="0">
           {backBtn}
           <FlexContainer flex="1" justify="center">
-            <Header2>{name}</Header2>
+            <Header type={HeaderType.header2}>{name}</Header>
           </FlexContainer>
           {typeIcon}
         </FlexContainer>

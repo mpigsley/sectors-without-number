@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { FlexContainer } from 'primitives';
+import FlexContainer from 'primitives/containers/flex-container';
 import {
   LinkContainer,
   RightArrow,

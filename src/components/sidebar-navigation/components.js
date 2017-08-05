@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { FlexContainer } from 'primitives';
+import FlexContainer from 'primitives/containers/flex-container';
 import { ChevronLeft, Share, Printer, Sun, Globe, Map } from 'react-feather';
 
 export const InfoContainer = styled(FlexContainer)`
