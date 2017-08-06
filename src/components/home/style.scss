@@ -1,0 +1,20 @@
+.Home-RowContainer {
+  flex: 1;
+}
+
+.Home-Row {
+  height: 1px;
+  margin: 0 10%;
+  border: none;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+
+  &--left {
+    background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
+  }
+}
+
+@media (max-width: 768px) {
+  .Home-Row {
+    display: none;
+  }
+}

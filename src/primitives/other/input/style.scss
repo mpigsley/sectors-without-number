@@ -1,12 +1,12 @@
-import styled, { css } from 'styled-components';
+@import "styles/theme";
 
-const style = css`
+.Input {
   display: inline-block;
   border: none;
   height: 38px;
   padding: 0 10px;
-  color: ${props => props.theme.dark4};
-  background-color: ${props => props.theme.light4};
+  color: $dark4;
+  background-color: $light4;
   font-size: 11px;
   font-weight: 600;
   line-height: 38px;
@@ -18,10 +18,5 @@ const style = css`
   font-weight: 400;
   transition: all 0.3s;
   outline: none;
-  width: ${props => props.width || '100%'};
-`;
-
-export { style };
-export default styled.input`
-  ${style};
-`;
+  width: 100%;
+}

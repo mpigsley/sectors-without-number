@@ -3,22 +3,16 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
+import classNames from 'classnames';
+import { ChevronLeft, Share, Printer, Sun, Globe, Map } from 'react-feather';
 
-import {
-  FlexContainer,
-  Header2,
-} from 'primitives';
-import {
-  InfoContainer,
-  HeaderContainer,
-  LeftArrowIcon,
-  ShareIcon,
-  PrinterIcon,
-  MapIcon,
-  SunIcon,
-  GlobeIcon,
-} from './components';
+import FlexContainer from 'primitives/containers/flex-container';
+import Header, { HeaderType } from 'primitives/text/header';
 
+import './style.css';
+
+const linkCss = 'SidebarNavigation-Icon SidebarNavigation-Icon--link';
+const nonLinkCss = 'SidebarNavigation-Icon SidebarNavigation-Icon--nonlink';
 export const SidebarType = {
   sector: 'sector',
   system: 'system',
@@ -34,43 +28,53 @@ export default function SidebarNavigation({ name, children, back, type }) {
     );
   };
 
-  let backBtn = <LeftArrowIcon hidden />;
+  let backBtn = (
+    <ChevronLeft
+      className={classNames(linkCss, {
+        'SidebarNavigation-Icon--hidden': !back,
+      })}
+    />
+  );
   if (back) {
-    backBtn = <Link to={back}><LeftArrowIcon /></Link>;
+    backBtn = <Link to={back}>{backBtn}</Link>;
   }
 
   const iconSize = 18;
-  let typeIcon = <MapIcon hidden size={iconSize} />;
+  let typeIcon = <Map className={nonLinkCss} hidden size={iconSize} />;
   if (type === SidebarType.sector) {
-    typeIcon = <MapIcon size={iconSize} />;
+    typeIcon = <Map className={nonLinkCss} size={iconSize} />;
   } else if (type === SidebarType.system) {
-    typeIcon = <SunIcon size={iconSize} />;
+    typeIcon = <Sun className={nonLinkCss} size={iconSize} />;
   } else if (type === SidebarType.planet) {
-    typeIcon = <GlobeIcon size={iconSize} />;
+    typeIcon = <Globe className={nonLinkCss} size={iconSize} />;
   }
 
   return (
-    <InfoContainer direction="column">
-      <HeaderContainer>
+    <FlexContainer className="SidebarNavigation-Info" direction="column">
+      <div className="SidebarNavigation-Header">
         <FlexContainer align="center" shrink="0">
           {backBtn}
           <FlexContainer flex="1" justify="center">
-            <Header2>{name}</Header2>
+            <Header type={HeaderType.header2}>{name}</Header>
           </FlexContainer>
           {typeIcon}
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
-          <ShareIcon
+          <Share
+            className={linkCss}
             onClick={onCopy}
             size={18}
           />
-          <PrinterIcon size={18} />
+          <Printer
+            className={linkCss}
+            size={18}
+          />
         </FlexContainer>
-      </HeaderContainer>
+      </div>
       <FlexContainer direction="column" flex="1" scroll>
         {children}
       </FlexContainer>
-    </InfoContainer>
+    </FlexContainer>
   );
 }
 

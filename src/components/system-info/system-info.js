@@ -4,10 +4,10 @@ import { map } from 'lodash';
 
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
-import { SectionHeader } from 'primitives';
+import Header, { HeaderType } from 'primitives/text/header';
+import SectionHeader from 'primitives/text/section-header';
 import { toCommaArray } from 'utils/common';
 import WorldTags from 'constants/world-tags';
-import Name from './components';
 
 import './style.css';
 
@@ -24,7 +24,7 @@ export default function SectorInfo({ system, location }) {
           key={planet.name}
           to={`${location.pathname}/planet/${planet.name.toLowerCase()}${location.search}`}
         >
-          <Name>{planet.name}</Name>
+          <Header type={HeaderType.header4} className="SystemInfo-Name">{planet.name}</Header>
           <div className="SystemInfo-Tags">
             ({planet.tags
               .map(tag => WorldTags[tag].name)

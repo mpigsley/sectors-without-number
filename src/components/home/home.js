@@ -2,21 +2,26 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Settings, Zap } from 'react-feather';
 
-import { Header1, Header2, Link, ContentContainer, SubContainer, LinkIcon } from 'primitives';
-import { RowContainer, Row } from './components';
+import Header, { HeaderType } from 'primitives/text/header';
+import ContentContainer from 'primitives/containers/content-container';
+import SubContainer from 'primitives/containers/sub-container';
+import LinkIcon from 'primitives/other/link-icon';
+import Link from 'primitives/other/link';
+
+import './style.css';
 
 export default function Home({ seed }) {
   return (
     <ContentContainer direction="column" align="center" justify="center">
-      <Header1>Sectors Without Number</Header1>
+      <Header type={HeaderType.header1}>Sectors Without Number</Header>
       <SubContainer fullWidth justify="center" align="center">
-        <RowContainer>
-          <Row left />
-        </RowContainer>
-        <Header2>Sector Generator & Notepad</Header2>
-        <RowContainer>
-          <Row right />
-        </RowContainer>
+        <div className="Home-RowContainer">
+          <div className="Home-Row Home-Row--left" />
+        </div>
+        <Header type={HeaderType.header2}>Sector Generator & Notepad</Header>
+        <div className="Home-RowContainer">
+          <div className="Home-Row" />
+        </div>
       </SubContainer>
       <SubContainer wrap justify="center" align="center">
         <Link padded to="/configure">

@@ -1,26 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
-import { Tooltip, TooltipText, Name, Key } from './components';
+import './style.css';
 
 export default function SystemTooltips({
   hoverKey,
   systems,
 }) {
   const renderTooltip = system => (
-    <Tooltip
-      hovered={system.key === hoverKey}
+    <div
+      className={classNames('SystemTooltips-Tooltip', {
+        'SystemTooltips-Tooltip--hovered': system.key === hoverKey,
+      })}
       key={system.key}
       style={{
         top: system.yOffset - (system.height / 2) - 10,
         left: system.xOffset,
       }}
     >
-      <TooltipText>
-        <Name>{system.name}</Name>
-        <Key>({system.key})</Key>
-      </TooltipText>
-    </Tooltip>
+      <div className="SystemTooltips-Text">
+        <div className="SystemTooltips-Name">{system.name}</div>
+        <div className="SystemTooltips-Key">({system.key})</div>
+      </div>
+    </div>
   );
 
   return (

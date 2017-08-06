@@ -1,0 +1,33 @@
+@import "styles/theme";
+
+.SidebarNavigation-Info {
+  height: 100vh;
+  width: 100%;
+}
+
+.SidebarNavigation-Header {
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid $dark2;
+}
+
+.SidebarNavigation-Icon {
+  color: $light2;
+
+  &--hidden {
+    visibility: hidden;
+  }
+
+  &--nonlink {
+    padding: 10px 11px;
+  }
+
+  &--link {
+    cursor: pointer;
+    transition: all 0.3s;
+    padding: 7px 8px;
+
+    &:hover {
+      color: $light1;
+    }
+  }
+}
