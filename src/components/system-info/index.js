@@ -6,6 +6,4 @@ const mapStateToProps = ({ sector }, { routeParams }) => ({
   system: sector.systems ? sector.systems[routeParams.system] || {} : {},
 });
 
-export default connect(
-  mapStateToProps,
-)(SystemInfo);
+export default connect(mapStateToProps)(SystemInfo);

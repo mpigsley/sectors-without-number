@@ -1,11 +1,24 @@
 {
   "parser": "babel-eslint",
-  "extends": "airbnb",
-  "plugins": ["react", "jsx-a11y", "import"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react"
+  ],
+  "plugins": [
+    "react",
+    "jsx-a11y",
+    "import",
+    "prettier"
+  ],
   "env": {
     "browser": true
   },
   "rules": {
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "trailingComma": "all"
+    }],
     "react/jsx-filename-extension": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "off",

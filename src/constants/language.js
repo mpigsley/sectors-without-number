@@ -1,4 +1,5 @@
-export const StarDigraphs = '..lexegezacebisousesarmaindirea.eratenberalavetiedorquanteisrion';
+export const StarDigraphs =
+  '..lexegezacebisousesarmaindirea.eratenberalavetiedorquanteisrion';
 export const GreekLetters = [
   'Alpha',
   'Beta',

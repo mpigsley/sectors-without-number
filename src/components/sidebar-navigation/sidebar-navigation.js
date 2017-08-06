@@ -36,7 +36,11 @@ export default function SidebarNavigation({ name, children, back, type }) {
     />
   );
   if (back) {
-    backBtn = <Link to={back}>{backBtn}</Link>;
+    backBtn = (
+      <Link to={back}>
+        {backBtn}
+      </Link>
+    );
   }
 
   const iconSize = 18;
@@ -55,20 +59,15 @@ export default function SidebarNavigation({ name, children, back, type }) {
         <FlexContainer align="center" shrink="0">
           {backBtn}
           <FlexContainer flex="1" justify="center">
-            <Header type={HeaderType.header2}>{name}</Header>
+            <Header type={HeaderType.header2}>
+              {name}
+            </Header>
           </FlexContainer>
           {typeIcon}
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
-          <Share
-            className={linkCss}
-            onClick={onCopy}
-            size={18}
-          />
-          <Printer
-            className={linkCss}
-            size={18}
-          />
+          <Share className={linkCss} onClick={onCopy} size={18} />
+          <Printer className={linkCss} size={18} />
         </FlexContainer>
       </div>
       <FlexContainer direction="column" flex="1" scroll>

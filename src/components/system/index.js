@@ -6,15 +6,12 @@ import System from './system';
 const mapStateToProps = () => ({});
 
 const mapDispatchToProps = dispatch => ({
-  sectorHoverStart: (key) => {
+  sectorHoverStart: key => {
     dispatch(sectorHoverStart(key));
   },
-  sectorHoverEnd: (key) => {
+  sectorHoverEnd: key => {
     dispatch(sectorHoverEnd(key));
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(System);
+export default connect(mapStateToProps, mapDispatchToProps)(System);

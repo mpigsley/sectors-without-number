@@ -9,20 +9,28 @@ class System {
   constructor(config, x, y) {
     this.config = config;
     this.name = generateName(this.config.seededChance);
-    const planetArray = [...Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2]))]
-      .map(() => ({
-        name: generateName(this.config.seededChance),
-        tags: this.config.seededChance.pickset(Object.keys(worldTagKeys), 2),
-      }));
-    this.planets = zipObject(planetArray.map(planet => planet.name.toLowerCase()), planetArray);
-    this.x = x || this.config.seededChance.integer({
-      min: this.config.index,
-      max: this.config.columns,
-    });
-    this.y = y || this.config.seededChance.integer({
-      min: this.config.index,
-      max: this.config.rows,
-    });
+    const planetArray = [
+      ...Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2])),
+    ].map(() => ({
+      name: generateName(this.config.seededChance),
+      tags: this.config.seededChance.pickset(Object.keys(worldTagKeys), 2),
+    }));
+    this.planets = zipObject(
+      planetArray.map(planet => planet.name.toLowerCase()),
+      planetArray,
+    );
+    this.x =
+      x ||
+      this.config.seededChance.integer({
+        min: this.config.index,
+        max: this.config.columns,
+      });
+    this.y =
+      y ||
+      this.config.seededChance.integer({
+        min: this.config.index,
+        max: this.config.rows,
+      });
   }
 
   get key() {
@@ -37,7 +45,7 @@ class System {
       x: this.x,
       y: this.y,
     },
-  })
+  });
 
   isRowValid(num) {
     return isBetween(num, this.config.index, this.config.rows);
@@ -97,7 +105,9 @@ class System {
 }
 
 const randomNeighbor = (neighbors, existingLocs, seededChance) => {
-  const filteredNeighbors = neighbors.filter(system => !existingLocs.includes(system.key));
+  const filteredNeighbors = neighbors.filter(
+    system => !existingLocs.includes(system.key),
+  );
   return filteredNeighbors.length && seededChance.pickone(filteredNeighbors);
 };
 
@@ -107,7 +117,7 @@ const randomNeighbor = (neighbors, existingLocs, seededChance) => {
 //   return systems;
 // };
 
-const fullRandomGenerate = (config) => {
+const fullRandomGenerate = config => {
   const systems = {};
   const systemNum = config.seededChance.d10() + 20;
   let extra = systemNum;
@@ -138,7 +148,7 @@ const fullRandomGenerate = (config) => {
   return mapValues(systems, s => s.toJSON());
 };
 
-export default (config) => {
+export default config => {
   const newConfig = {
     ...config,
     index: 1,

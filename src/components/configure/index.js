@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { updateSector } from '../../store/actions/sector.actions';
+import { updateSector } from 'store/actions/sector.actions';
 import Configure from './configure';
 
 const mapStateToProps = state => ({
@@ -15,7 +15,4 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Configure);
+export default connect(mapStateToProps, mapDispatchToProps)(Configure);

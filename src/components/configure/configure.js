@@ -12,13 +12,8 @@ import Link from 'primitives/other/link';
 
 import './style.css';
 
-export default function Configure({
-  seed,
-  columns,
-  rows,
-  updateSector,
-}) {
-  const updateInput = (e) => {
+export default function Configure({ seed, columns, rows, updateSector }) {
+  const updateInput = e => {
     const key = e.target.getAttribute('data-key');
     let value = e.target.value;
     if (e.target.type === 'number') {
@@ -27,9 +22,12 @@ export default function Configure({
     updateSector(key, value);
   };
 
-  const invalidText = columns > 30 || rows > 30
-    ? <div className="Configure-Invalid">Column and row count can not be greater than 30.</div>
-    : null;
+  const invalidText =
+    columns > 30 || rows > 30
+      ? <div className="Configure-Invalid">
+          Column and row count can not be greater than 30.
+        </div>
+      : null;
 
   return (
     <ContentContainer direction="column" align="center" justify="center">
@@ -39,7 +37,13 @@ export default function Configure({
         <Label noPadding htmlFor="seed">
           Seed
         </Label>
-        <Input data-key="seed" onChange={updateInput} name="seed" type="text" value={seed} />
+        <Input
+          data-key="seed"
+          onChange={updateInput}
+          name="seed"
+          type="text"
+          value={seed}
+        />
         <SubContainer noMargin>
           <SubContainer
             className="Configure-ButtonContainer"

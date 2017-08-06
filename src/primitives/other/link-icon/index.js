@@ -7,10 +7,7 @@ import './style.css';
 export default function LinkIcon(props) {
   const Icon = props.icon;
   return (
-    <Icon
-      {...props}
-      className={classNames('LinkIcon', props.className)}
-    />
+    <Icon {...props} className={classNames('LinkIcon', props.className)} />
   );
 }
 

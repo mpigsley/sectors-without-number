@@ -105,7 +105,8 @@ export default {
   [worldTagKeys.abandonedColony]: {
     key: worldTagKeys.abandonedColony,
     name: 'Abandoned Colony',
-    description: 'The world once hosted a colony, whether human or otherwise, until some crisis or natural disaster drove the inhabitants away or killed them off. The colony might have been mercantile in nature, an expedition to extract valuable local resources, or it might have been a reclusive cabal of zealots. The remains of the colony are usually in ruins, and might still be dangerous from the aftermath of whatever destroyed it in the first place.',
+    description:
+      'The world once hosted a colony, whether human or otherwise, until some crisis or natural disaster drove the inhabitants away or killed them off. The colony might have been mercantile in nature, an expedition to extract valuable local resources, or it might have been a reclusive cabal of zealots. The remains of the colony are usually in ruins, and might still be dangerous from the aftermath of whatever destroyed it in the first place.',
     enemies: [
       'crazed survivors',
       'ruthless plunderers of the ruins',
@@ -113,7 +114,7 @@ export default {
     ],
     friends: [
       'inquisitive stellar archaeologist',
-      'heir to the colony\'s property',
+      "heir to the colony's property",
       'local wanting the place cleaned out and made safe',
     ],
     complications: [
@@ -135,7 +136,8 @@ export default {
   [worldTagKeys.alienRuins]: {
     key: worldTagKeys.alienRuins,
     name: 'Alien Ruins',
-    description: 'The world has significant alien ruins present. The locals may or may not permit others to investigate the ruins, and may make it difficult to remove any objects of value without substantial payment. Any surviving ruins with worthwhile salvage almost certainly have some defense or hazard to explain their unplundered state.',
+    description:
+      'The world has significant alien ruins present. The locals may or may not permit others to investigate the ruins, and may make it difficult to remove any objects of value without substantial payment. Any surviving ruins with worthwhile salvage almost certainly have some defense or hazard to explain their unplundered state.',
     enemies: [
       'customs inspector',
       'worshipper of the ruins',
@@ -167,7 +169,8 @@ export default {
   [worldTagKeys.alteredHumanity]: {
     key: worldTagKeys.alteredHumanity,
     name: 'Altered Humanity',
-    description: 'The humans on this world are visibly and drastically different from normal humanity. They may have additional limbs, new sensory organs, or other significant changes. Were these from ancestral eugenic manipulation, strange stellar mutations, or from an environmental toxin unique to this world?',
+    description:
+      'The humans on this world are visibly and drastically different from normal humanity. They may have additional limbs, new sensory organs, or other significant changes. Were these from ancestral eugenic manipulation, strange stellar mutations, or from an environmental toxin unique to this world?',
     enemies: [
       'biochauvinist local',
       'local experimenter',
@@ -198,7 +201,8 @@ export default {
   [worldTagKeys.anarchists]: {
     key: worldTagKeys.anarchists,
     name: 'Anarchists',
-    description: 'Rather than being an incidental anarchy of struggling tribes and warring factions, this world actually has a functional society with no centralized authority. Authority might be hyperlocalized to extended families, specific religious parishes, or voluntary associations. Some force is preventing an outside group or internal malcontents from coalescing into a power capable of imposing its rule on the locals; this force might be an ancient pretech defense system, a benevolent military AI, or the sheer obscurity and isolation of the culture.',
+    description:
+      'Rather than being an incidental anarchy of struggling tribes and warring factions, this world actually has a functional society with no centralized authority. Authority might be hyperlocalized to extended families, specific religious parishes, or voluntary associations. Some force is preventing an outside group or internal malcontents from coalescing into a power capable of imposing its rule on the locals; this force might be an ancient pretech defense system, a benevolent military AI, or the sheer obscurity and isolation of the culture.',
     enemies: [
       'offworlder imperialist',
       'reformer seeking to impose "good government"',
@@ -228,7 +232,8 @@ export default {
   [worldTagKeys.anthropomorphs]: {
     key: worldTagKeys.anthropomorphs,
     name: 'Anthropomorphs',
-    description: 'The locals were originally human, but at some point became anthropomorphic, either as an ancient furry colony, a group of animal-worshiping sectarians, or gengineers who just happened to find animal elements most convenient for surviving on the world. Depending on the skill of the original gengineers, their feral forms may or may not work as well as their original human bodies, or may come with drawbacks inherited from their animal elements.',
+    description:
+      'The locals were originally human, but at some point became anthropomorphic, either as an ancient furry colony, a group of animal-worshiping sectarians, or gengineers who just happened to find animal elements most convenient for surviving on the world. Depending on the skill of the original gengineers, their feral forms may or may not work as well as their original human bodies, or may come with drawbacks inherited from their animal elements.',
     enemies: [
       'anthro-supremacist local',
       'native driven by feral urges',
@@ -258,7 +263,8 @@ export default {
   [worldTagKeys.area51]: {
     key: worldTagKeys.area51,
     name: 'Area 51',
-    description: 'The world\'s government is fully aware of their local stellar neighbors, but the common populace has no idea about it, and the government means to keep it that way. Trade with government officials in remote locations is possible, but any attempt to clue the commoners in on the truth will be met with lethal reprisals.',
+    description:
+      "The world's government is fully aware of their local stellar neighbors, but the common populace has no idea about it, and the government means to keep it that way. Trade with government officials in remote locations is possible, but any attempt to clue the commoners in on the truth will be met with lethal reprisals.",
     enemies: [
       'suspicious government minder',
       'free merchant who likes his local monopoly',
@@ -288,7 +294,8 @@ export default {
   [worldTagKeys.badlandsWorld]: {
     key: worldTagKeys.badlandsWorld,
     name: 'Badlands World',
-    description: 'Whatever the original climate and atmosphere type, something horrible happened to this world. Biological, chemical, or nanotechnical weaponry has reduced it to a wretched hellscape. Some local life might still be able to survive on its blasted surface, usually at some dire cost in health or humanity.',
+    description:
+      'Whatever the original climate and atmosphere type, something horrible happened to this world. Biological, chemical, or nanotechnical weaponry has reduced it to a wretched hellscape. Some local life might still be able to survive on its blasted surface, usually at some dire cost in health or humanity.',
     enemies: [
       'mutated badlands fauna',
       'desperate local',
@@ -310,16 +317,13 @@ export default {
       'functional pretech weaponry',
       'an uncontaminated well',
     ],
-    places: [
-      'untouched oasis',
-      'ruined city',
-      'salt flat',
-    ],
+    places: ['untouched oasis', 'ruined city', 'salt flat'],
   },
   [worldTagKeys.battleground]: {
     key: worldTagKeys.battleground,
     name: 'Battleground',
-    description: 'The world is a battleground for two or more outside powers. They may be interstellar rivals, or groups operating out of orbitals or other system bodies. Something about the planet is valuable enough for them to fight over, but the natives are too weak to be anything but animate obstacles to the fight.',
+    description:
+      'The world is a battleground for two or more outside powers. They may be interstellar rivals, or groups operating out of orbitals or other system bodies. Something about the planet is valuable enough for them to fight over, but the natives are too weak to be anything but animate obstacles to the fight.',
     enemies: [
       'ruthless military commander',
       'looter pack chieftan',
@@ -349,7 +353,8 @@ export default {
   [worldTagKeys.beastmasters]: {
     key: worldTagKeys.beastmasters,
     name: 'Beastmasters',
-    description: 'The natives have extremely close bonds with the local fauna, possibly having special means of communication and control through tech or gengineering. Local animal life plays a major role in their society, indusutry, or warfare, and new kinds of beasts may be bred to suit their purposes.',
+    description:
+      'The natives have extremely close bonds with the local fauna, possibly having special means of communication and control through tech or gengineering. Local animal life plays a major role in their society, indusutry, or warfare, and new kinds of beasts may be bred to suit their purposes.',
     enemies: [
       'half-feral warlord of a beast swarm',
       'coldly inhuman scientist',
@@ -379,7 +384,8 @@ export default {
   [worldTagKeys.bubbleCities]: {
     key: worldTagKeys.bubbleCities,
     name: 'Bubble Cities',
-    description: 'Whether due to a lack of atmosphere or an uninhabitable climate, the world\'s cities exist within domes or pressurized buildings. In such sealed environments, techniques of surveillance and control can grow baroque and extreme.',
+    description:
+      "Whether due to a lack of atmosphere or an uninhabitable climate, the world's cities exist within domes or pressurized buildings. In such sealed environments, techniques of surveillance and control can grow baroque and extreme.",
     enemies: [
       'native deading outsider contamination',
       'saboteur from another bubble city',
@@ -399,7 +405,7 @@ export default {
     things: [
       'pretech habitat technology',
       'valuable industrial products',
-      'master key codes to a city\'s security system',
+      "master key codes to a city's security system",
     ],
     places: [
       'city power core',
@@ -411,7 +417,8 @@ export default {
   [worldTagKeys.cheapLife]: {
     key: worldTagKeys.cheapLife,
     name: 'Cheap Life',
-    description: 'Human life is near-worthless on this world. Ubiquitous cloning, local conditions that ensure early death, a culture that reveres murder, or a social structure that utterly discounts the value of most human lives ensures that death is the likely outcome for any action that irritates someone consequential.',
+    description:
+      'Human life is near-worthless on this world. Ubiquitous cloning, local conditions that ensure early death, a culture that reveres murder, or a social structure that utterly discounts the value of most human lives ensures that death is the likely outcome for any action that irritates someone consequential.',
     enemies: [
       'master assassin',
       'bloody-handed judge',
@@ -441,7 +448,8 @@ export default {
   [worldTagKeys.civilWar]: {
     key: worldTagKeys.civilWar,
     name: 'Civil War',
-    description: 'The world is currently torn between at least two opposing factions, all of which claim legitimacy. The war may be the result of a successful rebel uprising against tyranny, or it might just be the result of schemers who plan to be the new masters once the revolution is complete.',
+    description:
+      'The world is currently torn between at least two opposing factions, all of which claim legitimacy. The war may be the result of a successful rebel uprising against tyranny, or it might just be the result of schemers who plan to be the new masters once the revolution is complete.',
     enemies: [
       'faction commissar',
       'angry native',
@@ -475,7 +483,8 @@ export default {
   [worldTagKeys.coldWar]: {
     key: worldTagKeys.coldWar,
     name: 'Cold War',
-    description: 'Two or more great powers control the planet, and they have a hostility to each other that\'s just barely less than open warfare. The hostility might be ideological in nature, or it might revolve around control of some local resource.',
+    description:
+      "Two or more great powers control the planet, and they have a hostility to each other that's just barely less than open warfare. The hostility might be ideological in nature, or it might revolve around control of some local resource.",
     enemies: [
       'suspicious chief of intelligence',
       'native who thinks the outworlders are with the other side',
@@ -487,11 +496,7 @@ export default {
       'unjustly accused innocent',
       '"he\'s a bastard, but he\'s our bastard" official',
     ],
-    complications: [
-      'police sweep',
-      'low-level skirmishing',
-      '"red scare"',
-    ],
+    complications: ['police sweep', 'low-level skirmishing', '"red scare"'],
     things: [
       'list of traitors in government',
       'secret military plans',
@@ -506,7 +511,8 @@ export default {
   [worldTagKeys.colonizedPopulation]: {
     key: worldTagKeys.colonizedPopulation,
     name: 'Colonized Population',
-    description: 'A neighboring world has successfully colonized this less-advanced or less-organized planet, and the natives aren\'t happy about it. A puppet government may exist, but all real decisions are made by the local viceroy.',
+    description:
+      "A neighboring world has successfully colonized this less-advanced or less-organized planet, and the natives aren't happy about it. A puppet government may exist, but all real decisions are made by the local viceroy.",
     enemies: [
       'suspicious security personnel',
       'offworlder-hating natives',
@@ -518,7 +524,7 @@ export default {
       'native caught between the two sides',
     ],
     complications: [
-      'natives won\'t talk to offworlders',
+      "natives won't talk to offworlders",
       'colonial represssion',
       'misunderstood local customs',
     ],
@@ -536,7 +542,8 @@ export default {
   [worldTagKeys.culturalPower]: {
     key: worldTagKeys.culturalPower,
     name: 'Cultural Power',
-    description: 'The world is a considerable cultural power in the sector, producing music, art, philosophy, or some similar intangible that their neighbors find irresistably attractive. Other worlds might have a profound degree of cultural cachet as the inheritor of some venerable artistic tradition.',
+    description:
+      'The world is a considerable cultural power in the sector, producing music, art, philosophy, or some similar intangible that their neighbors find irresistably attractive. Other worlds might have a profound degree of cultural cachet as the inheritor of some venerable artistic tradition.',
     enemies: [
       'murderously eccentric artist',
       'crazed fan',
@@ -556,7 +563,7 @@ export default {
     ],
     things: [
       'the instrument of a legendary master',
-      'the only copy of a dead master\'s opus',
+      "the only copy of a dead master's opus",
       'proof of intellectual property ownership',
     ],
     places: [
@@ -568,7 +575,8 @@ export default {
   [worldTagKeys.cybercommunists]: {
     key: worldTagKeys.cybercommunists,
     name: 'Cybercommunists',
-    description: 'On this world communism actually works, thanks to pretech computing devices and greater or lesser amounts of psychic precognition. Central planning nodes direct all production and employment on the world. Citizens in good standing have access to ample amounts of material goods for all needs and many wants. Instead of strife over wealth, conflicts erupt over political controls, cultural precepts, or control over the planning nodes. Many cybercommunist worlds show a considerable bias toward the private interests of those who run the planning nodes.',
+    description:
+      'On this world communism actually works, thanks to pretech computing devices and greater or lesser amounts of psychic precognition. Central planning nodes direct all production and employment on the world. Citizens in good standing have access to ample amounts of material goods for all needs and many wants. Instead of strife over wealth, conflicts erupt over political controls, cultural precepts, or control over the planning nodes. Many cybercommunist worlds show a considerable bias toward the private interests of those who run the planning nodes.',
     enemies: [
       'embittered rebel against perceived unfairness',
       'offworlder saboteur',
@@ -582,11 +590,11 @@ export default {
     complications: [
       'the pretech planning computers are breaking down',
       'the planning only works because the locals have been mentally or physically altered',
-      'the planning computers can\'t handle the increasing population within the system',
+      "the planning computers can't handle the increasing population within the system",
     ],
     things: [
       'planning node computer',
-      'wildly destabilizing commodity that can\'t be factored into plans',
+      "wildly destabilizing commodity that can't be factored into plans",
       'a tremendous store of valuables made by accident',
     ],
     places: [
@@ -598,7 +606,8 @@ export default {
   [worldTagKeys.cyborgs]: {
     key: worldTagKeys.cyborgs,
     name: 'Cyborgs',
-    description: 'The planet\'s population makes heavy use of cybernetics, with many of the inhabitants possessing at least a cosmetic amount of chrome. This may be the result of a strong local cyber tech base, a religious injunction, or simply a necessary measure to survive the local conditions.',
+    description:
+      "The planet's population makes heavy use of cybernetics, with many of the inhabitants possessing at least a cosmetic amount of chrome. This may be the result of a strong local cyber tech base, a religious injunction, or simply a necessary measure to survive the local conditions.",
     enemies: [
       'ambitious hacker of cyber implants',
       'cybertech oligarch',
@@ -630,7 +639,8 @@ export default {
   [worldTagKeys.cyclicalDoom]: {
     key: worldTagKeys.cyclicalDoom,
     name: 'Cyclical Doom',
-    description: 'The world regularly suffers some apocalyptic catastrophe that wipes out organized civilization on it. The local culture is aware of this cycle and has traditions to ensure a fragment of civilization survives into the next era, but these traditions don\'t always work properly, and sometimes dangerous fragments of the past emerge.',
+    description:
+      "The world regularly suffers some apocalyptic catastrophe that wipes out organized civilization on it. The local culture is aware of this cycle and has traditions to ensure a fragment of civilization survives into the next era, but these traditions don't always work properly, and sometimes dangerous fragments of the past emerge.",
     enemies: [
       'offwolder seeking to trigger the apocalypse early for profit',
       'local recklessly taking advantage or preparation stores',
@@ -639,7 +649,7 @@ export default {
     friends: [
       'harried official working to prepare',
       'offworlder studying the cylcles',
-      'local threatened by perils of the cycle\'s initial stages',
+      "local threatened by perils of the cycle's initial stages",
     ],
     complications: [
       'the cycles really are a myth of the authorities',
@@ -648,8 +658,8 @@ export default {
     ],
     things: [
       'a lost cache of ancien treasures',
-      'tech or archives that will pinpoint the cycle\'s timing',
-      'keycodes to bypass an ancient vault\'s security',
+      "tech or archives that will pinpoint the cycle's timing",
+      "keycodes to bypass an ancient vault's security",
     ],
     places: [
       'lethally-defended vault of forgotten secrets',
@@ -660,7 +670,8 @@ export default {
   [worldTagKeys.desertWorld]: {
     key: worldTagKeys.desertWorld,
     name: 'Desert World',
-    description: 'The world may have a breathable atmosphere and a human-tolerable temperature range, but it is an arid, stony waste outside of a few places made habitable by human effort. The deep wastes are largely unexplored and inhabited by outcasts and worse.',
+    description:
+      'The world may have a breathable atmosphere and a human-tolerable temperature range, but it is an arid, stony waste outside of a few places made habitable by human effort. The deep wastes are largely unexplored and inhabited by outcasts and worse.',
     enemies: [
       'raider cheiftain',
       'crazed hermit',
@@ -668,11 +679,7 @@ export default {
       'paranoid mineral prospector',
       'strange desert beast',
     ],
-    friends: [
-      'native guide',
-      'research biologist',
-      'aspiring teraformer',
-    ],
+    friends: ['native guide', 'research biologist', 'aspiring teraformer'],
     complications: [
       'sandstorms',
       'water supply failuer',
@@ -692,7 +699,8 @@ export default {
   [worldTagKeys.doomedWorld]: {
     key: worldTagKeys.doomedWorld,
     name: 'Doomed World',
-    description: 'The world is doomed, and the locals may or may not know it. Some cosmic catastrophe looms before them, and the locals have no realistic way to get everyone to safety. To the extent that the public is aware, society is disintegrating into a combination of religious fervor, abject hedonism, and savage violence.',
+    description:
+      'The world is doomed, and the locals may or may not know it. Some cosmic catastrophe looms before them, and the locals have no realistic way to get everyone to safety. To the extent that the public is aware, society is disintegrating into a combination of religious fervor, abject hedonism, and savage violence.',
     enemies: [
       'crazed prophet of false salvation',
       'ruthless leader seking ot flee with their treasures',
@@ -704,7 +712,7 @@ export default {
       'harried law officer',
     ],
     complications: [
-      'the doom is false or won\'t actually kill everyone',
+      "the doom is false or won't actually kill everyone",
       'the doom was intentionally triggered by someone',
       'mass escape is possible if warring groups can somehow be brought to cooperate',
     ],
@@ -723,7 +731,8 @@ export default {
   [worldTagKeys.dyingRace]: {
     key: worldTagKeys.dyingRace,
     name: 'Dying Race',
-    description: 'The inhabitants of this world are dying out, and they know it. Through environmental toxins, hostile bio-weapons, or sheer societal despair, the culture cannot replenish its numbers. Members seek meaning in their own strange goals or peculiar faiths, though a few might struggle to find some way to reverse their slow yet inevitable doom.',
+    description:
+      'The inhabitants of this world are dying out, and they know it. Through environmental toxins, hostile bio-weapons, or sheer societal despair, the culture cannot replenish its numbers. Members seek meaning in their own strange goals or peculiar faiths, though a few might struggle to find some way to reverse their slow yet inevitable doom.',
     enemies: [
       'hostile outsider who wants the locals dead',
       'offwolder seeking to take advantage of their weakened state',
@@ -735,8 +744,8 @@ export default {
       'researcher seeking a new method of reproduction',
     ],
     complications: [
-      'the dying culture\'s values were monstrous',
-      'the race\'s death is somehow necessary to prevent some grand catastrophe',
+      "the dying culture's values were monstrous",
+      "the race's death is somehow necessary to prevent some grand catastrophe",
       'the race is somehow convined they deserve this fate',
     ],
     things: [
@@ -753,7 +762,8 @@ export default {
   [worldTagKeys.eugenicCult]: {
     key: worldTagKeys.eugenicCult,
     name: 'Eugenic Cult',
-    description: 'Even in the days before the Silence, major improvement of the human genome always seemed to come with unacceptable side-effects. Some worlds host secret cults that perpetuate these improvements regardless of the cost, and a few planets have been taken over entirely by the cults.',
+    description:
+      'Even in the days before the Silence, major improvement of the human genome always seemed to come with unacceptable side-effects. Some worlds host secret cults that perpetuate these improvements regardless of the cost, and a few planets have been taken over entirely by the cults.',
     enemies: [
       'eugenic superiority fanatic',
       'mentally unstable hom superior',
@@ -784,7 +794,8 @@ export default {
   [worldTagKeys.exchangeConsulate]: {
     key: worldTagKeys.exchangeConsulate,
     name: 'Exchange Consulate',
-    description: 'The Exchange of Light once served as the largest, most trusted banking and diplomatic service in human space. Even after the Silence, some worlds retain a functioning Exchange Consulate where banking services and arbitration can be arranged.',
+    description:
+      'The Exchange of Light once served as the largest, most trusted banking and diplomatic service in human space. Even after the Silence, some worlds retain a functioning Exchange Consulate where banking services and arbitration can be arranged.',
     enemies: [
       'corrupt exchange official',
       'indebted native who thinks the players are exchange agents',
@@ -814,7 +825,8 @@ export default {
   [worldTagKeys.fallenHegemon]: {
     key: worldTagKeys.fallenHegemon,
     name: 'Fallen Hegemon',
-    description: 'At some point in the past, this world was a hegemonic power over some or all of the sector, thanks to superior tech, expert diplomacy, the weakness of their neighbors, or inherited Mandate legitimacy. Some kind of crash or revolt broke their power, however, and now the world is littered with the wreckage of former glory.',
+    description:
+      'At some point in the past, this world was a hegemonic power over some or all of the sector, thanks to superior tech, expert diplomacy, the weakness of their neighbors, or inherited Mandate legitimacy. Some kind of crash or revolt broke their power, however, and now the world is littered with the wreckage of former glory.',
     enemies: [
       'bitter pretender to a meaningless throne',
       'resentful official dreaming of empire',
@@ -826,10 +838,10 @@ export default {
       'refugee from an overthrown colonial enclave',
     ],
     complications: [
-      'the hegemon\'s rule was enlightened and fair',
+      "the hegemon's rule was enlightened and fair",
       'it collapsed due to its own internal strife rather than external resistance',
       'it pretends that nothing has happened to its power',
-      'it\'s been counter-colonized by vengeful outsiders',
+      "it's been counter-colonized by vengeful outsiders",
     ],
     things: [
       'precious insignia of former rule',
@@ -845,7 +857,8 @@ export default {
   [worldTagKeys.feralWorld]: {
     key: worldTagKeys.feralWorld,
     name: 'Feral World',
-    description: 'In the long, isolated night of the Silence, some worlds have experienced total moral and cultural collapse. Whatever remains has been twisted beyond recognition into assorted death cults, xenophobic fanaticism, horrific cultural practices, or other behavior unacceptable on more enlightened worlds. These worlds are almost invariably quarantined by other planets.',
+    description:
+      'In the long, isolated night of the Silence, some worlds have experienced total moral and cultural collapse. Whatever remains has been twisted beyond recognition into assorted death cults, xenophobic fanaticism, horrific cultural practices, or other behavior unacceptable on more enlightened worlds. These worlds are almost invariably quarantined by other planets.',
     enemies: [
       'decadent noble',
       'mad cultist',
@@ -877,11 +890,12 @@ export default {
   [worldTagKeys.flyingCities]: {
     key: worldTagKeys.flyingCities,
     name: 'Flying Cities',
-    description: 'Perhaps the world is a gas giant, or plagued with unendurable storms at lower levels of the atmosphere. For whatever reason, the cities of this world fly above the surface of the planet. Perhaps they remain stationary, or perhaps they move from point to point in search of resources.',
+    description:
+      'Perhaps the world is a gas giant, or plagued with unendurable storms at lower levels of the atmosphere. For whatever reason, the cities of this world fly above the surface of the planet. Perhaps they remain stationary, or perhaps they move from point to point in search of resources.',
     enemies: [
       'rival city pilot',
       'tech thief attempting to steal outworld gear',
-      'saboteur or scavenger plundering the city\'s tech',
+      "saboteur or scavenger plundering the city's tech",
     ],
     friends: [
       'maintenance tech in need of help',
@@ -901,14 +915,15 @@ export default {
     ],
     places: [
       'underside of the city',
-      'the one calm place on the planet\'s surface',
+      "the one calm place on the planet's surface",
       'catwalks stretching over unimaginable gulfs below',
     ],
   },
   [worldTagKeys.forbiddenTech]: {
     key: worldTagKeys.forbiddenTech,
     name: 'Forbidden Tech',
-    description: 'Some group on this planet fabricates or uses maltech. Unbraked AIs doomed to metastasize into insanity, nation-destroying nanowarfare particles, slow-burn DNA corruptives, genetically engineered slaves, or something worse still. The planet\'s larger population may or may not be aware of the danger in their midst.',
+    description:
+      "Some group on this planet fabricates or uses maltech. Unbraked AIs doomed to metastasize into insanity, nation-destroying nanowarfare particles, slow-burn DNA corruptives, genetically engineered slaves, or something worse still. The planet's larger population may or may not be aware of the danger in their midst.",
     enemies: [
       'mad scientist',
       'maltech buyer from offworld',
@@ -923,7 +938,7 @@ export default {
     complications: [
       'the maltech is being fabricated by an unbraked AI',
       'the government depends on revenue from maltech sales to offworlders',
-      'citizens insist that it\'s not really maltech',
+      "citizens insist that it's not really maltech",
     ],
     things: [
       'maltech research data',
@@ -932,14 +947,15 @@ export default {
     ],
     places: [
       'horrific laboratory',
-      'hellscape sculpted by the maltech\'s use',
+      "hellscape sculpted by the maltech's use",
       'government building meeting room',
     ],
   },
   [worldTagKeys.formerWarriors]: {
     key: worldTagKeys.formerWarriors,
     name: 'Former Warriors',
-    description: 'The locals of this world were once famed for their martial prowess. They may have simply had a very militaristic culture, or were genetically engineered for combat, or developed high-tech weaponry, or had brilliant leadership. Those days are past, however, either due to crushing defeat, external restrictions, or a cultural turn toward peace.',
+    description:
+      'The locals of this world were once famed for their martial prowess. They may have simply had a very militaristic culture, or were genetically engineered for combat, or developed high-tech weaponry, or had brilliant leadership. Those days are past, however, either due to crushing defeat, external restrictions, or a cultural turn toward peace.',
     enemies: [
       'unreformed warlord leader',
       'bitter mercenary chief',
@@ -969,16 +985,13 @@ export default {
   [worldTagKeys.freakGeology]: {
     key: worldTagKeys.freakGeology,
     name: 'Freak Geology',
-    description: 'The geology or geography of this world is simply freakish. Perhaps it\'s composed entirely of enormous mountain ranges, or regular bands of land and sea, or the mineral structures all fragment into perfect cubes. The locals have learned to deal with it and their culture will be shaped by its requirements.',
+    description:
+      "The geology or geography of this world is simply freakish. Perhaps it's composed entirely of enormous mountain ranges, or regular bands of land and sea, or the mineral structures all fragment into perfect cubes. The locals have learned to deal with it and their culture will be shaped by its requirements.",
     enemies: [
       'crank xenogeologist',
-      'cultist who believes it\'s the work of aliens',
+      "cultist who believes it's the work of aliens",
     ],
-    friends: [
-      'research scientist',
-      'prospector',
-      'artist',
-    ],
+    friends: ['research scientist', 'prospector', 'artist'],
     complications: [
       'local conditions that no one remembers to tell offworlders about',
       'lethal weather',
@@ -997,7 +1010,8 @@ export default {
   [worldTagKeys.freakWeather]: {
     key: worldTagKeys.freakWeather,
     name: 'Freak Weather',
-    description: 'The planet is plagued with some sort of bizarre or hazardous weather pattern. Perhaps city-flattening storms regularly scourge the surface, or the world\'s sun never pierces its thick banks of clouds.',
+    description:
+      "The planet is plagued with some sort of bizarre or hazardous weather pattern. Perhaps city-flattening storms regularly scourge the surface, or the world's sun never pierces its thick banks of clouds.",
     enemies: [
       'criminal using the weather as a cover',
       'weather cultists convinced the offworlders are responsible for some disaster',
@@ -1025,7 +1039,8 @@ export default {
   [worldTagKeys.friendlyFoe]: {
     key: worldTagKeys.friendlyFoe,
     name: 'Friendly Foe',
-    description: 'Some hostile alien race or malevolent cabal has a branch or sect on this world that is actually quite friendly toward outsiders. For whatever internal reason, they are willing to negotiate and deal honestly with strangers, and appear to lack the worst impulses of their fellows.',
+    description:
+      'Some hostile alien race or malevolent cabal has a branch or sect on this world that is actually quite friendly toward outsiders. For whatever internal reason, they are willing to negotiate and deal honestly with strangers, and appear to lack the worst impulses of their fellows.',
     enemies: [
       'driven hater of all their kind',
       'internal malcontent bent on creature conflict',
@@ -1055,27 +1070,24 @@ export default {
   [worldTagKeys.goldRush]: {
     key: worldTagKeys.goldRush,
     name: 'Gold Rush',
-    description: 'Gold, silver, and other conventional precious minerals are common and cheap now that asteroid mining is practical for most worlds. But some minerals and compounds remain precious and rare, and this world has recently been discovered to have a supply of them. People from across the sector have come to strike it rich.',
+    description:
+      'Gold, silver, and other conventional precious minerals are common and cheap now that asteroid mining is practical for most worlds. But some minerals and compounds remain precious and rare, and this world has recently been discovered to have a supply of them. People from across the sector have come to strike it rich.',
     enemies: [
       'paranoid prospector',
       'aspiring mining tycoon',
       'rapacious merchant',
     ],
-    friends: [
-      'claim-jumped miner',
-      'native alien',
-      'curious tourist',
-    ],
+    friends: ['claim-jumped miner', 'native alien', 'curious tourist'],
     complications: [
       'the strike is a hoax',
       'the strike is of a dangerous toxic substance',
       'export of the mineral is prohibited by the planetary government',
-      'the native aliens live around the strike\'s location',
+      "the native aliens live around the strike's location",
     ],
     things: [
       'cases of the refined element',
       'pretech mining equipment',
-      'a dead prospector\'s claim deed',
+      "a dead prospector's claim deed",
     ],
     places: [
       'secret mine',
@@ -1087,7 +1099,8 @@ export default {
   [worldTagKeys.greatWork]: {
     key: worldTagKeys.greatWork,
     name: 'Great Work',
-    description: 'The locals are obsessed with completing a massive project, one that has consumed them for generations. It might be the completion of a functioning spaceyard, a massive solar power array, a network of terraforming engines, or the universal conversion of their neighbors to their own faith. The purpose of their entire civilization is to progress and some day complete the work.',
+    description:
+      'The locals are obsessed with completing a massive project, one that has consumed them for generations. It might be the completion of a functioning spaceyard, a massive solar power array, a network of terraforming engines, or the universal conversion of their neighbors to their own faith. The purpose of their entire civilization is to progress and some day complete the work.',
     enemies: [
       'local planning to sacrifice the PCs for the work',
       'local who thinks the PCs threten the work',
@@ -1117,7 +1130,8 @@ export default {
   [worldTagKeys.hatred]: {
     key: worldTagKeys.hatred,
     name: 'Hatred',
-    description: 'For whatever reason, this world\'s populace has a burning hatred for the inhabitants of a neighboring system. Perhaps this world was colonized by exiles, or there was a recent interstellar war, or ideas of racial or religious superiority have fanned the hatred. Regardless of the cause, the locals view their neighbor and any sympathizers with loathing.',
+    description:
+      "For whatever reason, this world's populace has a burning hatred for the inhabitants of a neighboring system. Perhaps this world was colonized by exiles, or there was a recent interstellar war, or ideas of racial or religious superiority have fanned the hatred. Regardless of the cause, the locals view their neighbor and any sympathizers with loathing.",
     enemies: [
       'native conviced that the offworlders are agents of Them',
       'cynical politician in need of scapegoats',
@@ -1146,7 +1160,8 @@ export default {
   [worldTagKeys.heavyIndustry]: {
     key: worldTagKeys.heavyIndustry,
     name: 'Heavy Industry',
-    description: 'With interstellar transport so limited in the bulk it can move, worlds have to be largely self-sufficient in industry. Some worlds are more sufficient than others, however, and this planet has a thriving manufacturing sector capable of producing large amounts of goods appropriate to its tech level. The locals may enjoy a correspondingly higher lifestyle, or the products might be devoted towards vast projects for the aggrandizement of the rulers.',
+    description:
+      'With interstellar transport so limited in the bulk it can move, worlds have to be largely self-sufficient in industry. Some worlds are more sufficient than others, however, and this planet has a thriving manufacturing sector capable of producing large amounts of goods appropriate to its tech level. The locals may enjoy a correspondingly higher lifestyle, or the products might be devoted towards vast projects for the aggrandizement of the rulers.',
     enemies: [
       'tycoon monopolist',
       'industrial spy',
@@ -1161,7 +1176,7 @@ export default {
       'the factories are toxic',
       'the resources extractable at their tech level are running out',
       'the masses required the factory output for survival',
-      'the industries\' major output is being obsoleted by offworld tech',
+      "the industries' major output is being obsoleted by offworld tech",
     ],
     things: [
       'confidential industrial data',
@@ -1178,40 +1193,34 @@ export default {
   [worldTagKeys.heavyMining]: {
     key: worldTagKeys.heavyMining,
     name: 'Heavy Mining',
-    description: 'This world has large stocks of valuable minerals, usually necessary for local industry, life support, or refinement into loads small enough to export offworld. Major mining efforts are necessary to extract the minerals, and many natives work in the industry.',
-    enemies: [
-      'Mine boss',
-      'tunnel saboteur',
-      'subterranean predators',
-    ],
+    description:
+      'This world has large stocks of valuable minerals, usually necessary for local industry, life support, or refinement into loads small enough to export offworld. Major mining efforts are necessary to extract the minerals, and many natives work in the industry.',
+    enemies: ['Mine boss', 'tunnel saboteur', 'subterranean predators'],
     friends: [
       'hermit prospector',
       'offworld investigator',
-      'miner\'s union representative',
+      "miner's union representative",
     ],
     complications: [
       'the refinery equipment breaks down',
       'tunnel collapse',
-      'silicate life forms growing in the miner\'s lungs',
+      "silicate life forms growing in the miner's lungs",
     ],
     things: [
       'the mother lode',
       'smuggled case of refined mineral',
       'silicate faked crystalline mineral samples',
     ],
-    places: [
-      'vertical mine face',
-      'tailing piles',
-      'roaring smelting complex',
-    ],
+    places: ['vertical mine face', 'tailing piles', 'roaring smelting complex'],
   },
   [worldTagKeys.hivemind]: {
     key: worldTagKeys.hivemind,
     name: 'Hivemind',
-    description: 'Natives of this world exist in a kind of mental gestalt, sharing thoughts and partaking of a single identity. Powerful pretech, exotic psionics, alien influence, or some other cause has left the world sharing one identity. Individual members may have greater or lesser degrees of effective coordination with the whole.',
+    description:
+      'Natives of this world exist in a kind of mental gestalt, sharing thoughts and partaking of a single identity. Powerful pretech, exotic psionics, alien influence, or some other cause has left the world sharing one identity. Individual members may have greater or lesser degrees of effective coordination with the whole.',
     enemies: [
       'a hivemind that wants to assimilate outsiders',
-      'a hivemind that has no respect for unoined life',
+      'a hivemind that has no respect for unjoined life',
       'a hivemind that fears and hates unjoined life',
     ],
     friends: [
@@ -1240,7 +1249,8 @@ export default {
   [worldTagKeys.holyWar]: {
     key: worldTagKeys.holyWar,
     name: 'Holy War',
-    description: 'A savage holy war is raging on this world, either between factions of locals or as a united effort against the pagans of some neighboring world. This war might involve a conventional religion, or it might be the result of a branding campaign, political ideology, artistic movement, or any other cause that people use as a substitute for traditional religion.',
+    description:
+      'A savage holy war is raging on this world, either between factions of locals or as a united effort against the pagans of some neighboring world. This war might involve a conventional religion, or it might be the result of a branding campaign, political ideology, artistic movement, or any other cause that people use as a substitute for traditional religion.',
     enemies: [
       'blood-mad pontiff',
       'coldly cynical secular leader',
@@ -1254,7 +1264,7 @@ export default {
     complications: [
       'the targets of the war really are doing something diabolically horrible',
       'the holy war is just a mask for a very traditional casus belli',
-      'the leaders don\'t want the war won but only prolonged',
+      "the leaders don't want the war won but only prolonged",
       'both this world and the target of the war are religious-obsessed',
     ],
     things: [
@@ -1271,18 +1281,15 @@ export default {
   [worldTagKeys.hostileBiosphere]: {
     key: worldTagKeys.hostileBiosphere,
     name: 'Hostile Biosphere',
-    description: 'The world is teeming with life, and it hates humans. Perhaps the life is xenoallergenic, forcing filter masks and tailored antiallergens for survival. It could be the native predators are huge and fearless, or the toxic flora ruthlessly outcompetes earth crops.',
+    description:
+      'The world is teeming with life, and it hates humans. Perhaps the life is xenoallergenic, forcing filter masks and tailored antiallergens for survival. It could be the native predators are huge and fearless, or the toxic flora ruthlessly outcompetes earth crops.',
     enemies: [
       'local fauna',
       'nature cultist',
       'native aliens',
       'calous labor overseer',
     ],
-    friends: [
-      'xenobiologist',
-      'tourist on safari',
-      'grizzled local guide',
-    ],
+    friends: ['xenobiologist', 'tourist on safari', 'grizzled local guide'],
     complications: [
       'filter masks fail',
       'parasitic alien infestation',
@@ -1302,7 +1309,8 @@ export default {
   [worldTagKeys.hostileSpace]: {
     key: worldTagKeys.hostileSpace,
     name: 'Hostile Space',
-    description: 'The system in which the world exists is a dangerous neighborhood. Something about the system is perilous to inhabitants, either through meteor swarms, stellar radiation, hostile aliens in the asteroid belt, or periodic comet clouds.',
+    description:
+      'The system in which the world exists is a dangerous neighborhood. Something about the system is perilous to inhabitants, either through meteor swarms, stellar radiation, hostile aliens in the asteroid belt, or periodic comet clouds.',
     enemies: [
       'alien raid leader',
       'meteor-launching terrorists',
@@ -1332,18 +1340,16 @@ export default {
   [worldTagKeys.immortals]: {
     key: worldTagKeys.immortals,
     name: 'Immortals',
-    description: 'Natives of this world are effectively immortal. They may have been gengineered for tremendous lifespans, or have found some local anagathic, or be cyborg life forms, or be so totally convinced of reincarnation that death is a cultural irrelevance. Any immortality technique is likely applicable only to them, or else it\'s apt to be a massive draw to outside imperialists.',
+    description:
+      "Natives of this world are effectively immortal. They may have been gengineered for tremendous lifespans, or have found some local anagathic, or be cyborg life forms, or be so totally convinced of reincarnation that death is a cultural irrelevance. Any immortality technique is likely applicable only to them, or else it's apt to be a massive draw to outside imperialists.",
     enemies: [
       'outsider determined to steal immortality',
       'smug local convinced of their immortal wisdom to rule all',
-      'offworlder seeking the world\'s ruin before it becomes a threat to all',
+      "offworlder seeking the world's ruin before it becomes a threat to all",
     ],
-    friends: [
-      'curious longevity researcher',
-      'thrill-seeking local',
-    ],
+    friends: ['curious longevity researcher', 'thrill-seeking local'],
     complications: [
-      'immortality requires doing something that outsiders can\'t or won\'t willingly do',
+      "immortality requires doing something that outsiders can't or won't willingly do",
       'the immortality ends if they leave the world',
       'death is the punishment for even minor crimes',
       'immortals must die or go offworld after a certain span',
@@ -1363,7 +1369,8 @@ export default {
   [worldTagKeys.localSpecialty]: {
     key: worldTagKeys.localSpecialty,
     name: 'Local Specialty',
-    description: 'The world may be sophisticated or barely capable of steam engines, but either way it produces something rare and precious to the wider galaxy. It might be some pharmaceutical extract produced by a secret recipe, a remarkably popular cultural product, or even gengineered humans uniquely suited for certain work.',
+    description:
+      'The world may be sophisticated or barely capable of steam engines, but either way it produces something rare and precious to the wider galaxy. It might be some pharmaceutical extract produced by a secret recipe, a remarkably popular cultural product, or even gengineered humans uniquely suited for certain work.',
     enemies: [
       'monopolist',
       'offworlder seeking prohibition of the specialty',
@@ -1378,7 +1385,7 @@ export default {
       'the specialty is repugnant in nature',
       'the crafters refuse to sell to offworlders',
       'the specialty is made in a remote, dangerous place',
-      'the crafters don\'t make the specialty any more',
+      "the crafters don't make the specialty any more",
     ],
     things: [
       'the specialty itself',
@@ -1394,7 +1401,8 @@ export default {
   [worldTagKeys.localTech]: {
     key: worldTagKeys.localTech,
     name: 'Local Tech',
-    description: 'The locals can create a particular example of extremely high tech, possibly even something that exceeds pretech standards. They may use unique local resources to do so, or have stumbled on a narrow scientific breakthrough, or still have a functional experimental manufactory.',
+    description:
+      'The locals can create a particular example of extremely high tech, possibly even something that exceeds pretech standards. They may use unique local resources to do so, or have stumbled on a narrow scientific breakthrough, or still have a functional experimental manufactory.',
     enemies: [
       'keeper of the tech',
       'offworld industrialist',
@@ -1418,27 +1426,20 @@ export default {
       'the secret blueprints for its construction',
       'an ancient alien R&D database',
     ],
-    places: [
-      'alien factory',
-      'lethal R&D center',
-      'tech brokerage vault',
-    ],
+    places: ['alien factory', 'lethal R&D center', 'tech brokerage vault'],
   },
   [worldTagKeys.majorSpaceyard]: {
     key: worldTagKeys.majorSpaceyard,
     name: 'Major Spaceyard',
-    description: 'Most worlds of tech level 4 or greater have the necessary tech and orbital facilities to build spike drives and starships. This world is blessed with a major spaceyard facility, either inherited from before the Silence or painstakingly constructed in more recent decades. It can build even capital-class hulls, and do so more quickly and cheaply than its neighbors.',
+    description:
+      'Most worlds of tech level 4 or greater have the necessary tech and orbital facilities to build spike drives and starships. This world is blessed with a major spaceyard facility, either inherited from before the Silence or painstakingly constructed in more recent decades. It can build even capital-class hulls, and do so more quickly and cheaply than its neighbors.',
     enemies: [
       'enemy saboteur',
       'industrial spy',
       'scheming construction tycoon',
       'aspiring ship hijacker',
     ],
-    friends: [
-      'captain stuck in drydock',
-      'maintenance chief',
-      'mad innovator',
-    ],
+    friends: ['captain stuck in drydock', 'maintenance chief', 'mad innovator'],
     complications: [
       'the spaceyard is an alien relic',
       'the spaceyard is burning out from overuse',
@@ -1459,7 +1460,8 @@ export default {
   [worldTagKeys.mandarinate]: {
     key: worldTagKeys.mandarinate,
     name: 'Mandarinate',
-    description: 'The planet is ruled by an intellectual elite chosen via ostensibly neutral examinations or tests. The values this system selects for may or may not have anything to do with actual practical leadership skills, and the examinations may be more or less corruptible.',
+    description:
+      'The planet is ruled by an intellectual elite chosen via ostensibly neutral examinations or tests. The values this system selects for may or may not have anything to do with actual practical leadership skills, and the examinations may be more or less corruptible.',
     enemies: [
       'corrupt test administrator',
       'incompetent but highly-rated graduate',
@@ -1490,7 +1492,8 @@ export default {
   [worldTagKeys.mandateBase]: {
     key: worldTagKeys.mandateBase,
     name: 'Mandate Base',
-    description: 'The Terran Mandate retained its control over this world for much longer than usual, and the world may still consider itself a true inheritor of Mandate legitimacy. Most of these worlds have or had superior technology, but they may still labor under the burden of ancient restrictive tech or monitoring systems designed to prevent them from rebelling.',
+    description:
+      'The Terran Mandate retained its control over this world for much longer than usual, and the world may still consider itself a true inheritor of Mandate legitimacy. Most of these worlds have or had superior technology, but they may still labor under the burden of ancient restrictive tech or monitoring systems designed to prevent them from rebelling.',
     enemies: [
       'deranged mandate monitoring AI',
       'aspiring sector ruler',
@@ -1504,7 +1507,7 @@ export default {
     complications: [
       'the monitoring system forces the locals to behave in aggressive ways toward "rebel" worlds',
       'the monitoring system severely hiders offworld use of their tech',
-      'the original colonists are all dead and have been replaced by outsiders who don\'t understand all the details',
+      "the original colonists are all dead and have been replaced by outsiders who don't understand all the details",
     ],
     things: [
       'ultra-advanced pretech',
@@ -1520,7 +1523,8 @@ export default {
   [worldTagKeys.maneaters]: {
     key: worldTagKeys.maneaters,
     name: 'Maneaters',
-    description: 'The locals are cannibals, either out of necessity or out of cultural preference. Some worlds may actually eat human flesh, while others simply require the rendering of humans into important chemicals or pharmaceutical compounds, perhaps to prolong the lives of ghoul overlords. This cannibalism plays a major role in their society.',
+    description:
+      'The locals are cannibals, either out of necessity or out of cultural preference. Some worlds may actually eat human flesh, while others simply require the rendering of humans into important chemicals or pharmaceutical compounds, perhaps to prolong the lives of ghoul overlords. This cannibalism plays a major role in their society.',
     enemies: [
       'ruthless ghoul leader',
       'chieftan of a ravenous tribe',
@@ -1551,7 +1555,8 @@ export default {
   [worldTagKeys.megacorps]: {
     key: worldTagKeys.megacorps,
     name: 'Megacorps',
-    description: 'The world is dominated by classic cyberpunk-esque megacorporations, each one far more important than the vestigial national remnants that encompass them. These megacorps are usually locked in a cold war, trading and dealing with each other even as they try to strike in deniable ways. An over-council of corporations usually acts to bring into line any that get excessively overt in their activities.',
+    description:
+      'The world is dominated by classic cyberpunk-esque megacorporations, each one far more important than the vestigial national remnants that encompass them. These megacorps are usually locked in a cold war, trading and dealing with each other even as they try to strike in deniable ways. An over-council of corporations usually acts to bring into line any that get excessively overt in their activities.',
     enemies: [
       'megalomaniacal executive',
       'underling looking to use the PCs as catspaws',
@@ -1582,7 +1587,8 @@ export default {
   [worldTagKeys.mercenaries]: {
     key: worldTagKeys.mercenaries,
     name: 'Mercenaries',
-    description: 'The world is either famous for its mercenary bands or it is plagued by countless groups of condottieri in service to whatever magnate can afford to pay or bribe them adequately.',
+    description:
+      'The world is either famous for its mercenary bands or it is plagued by countless groups of condottieri in service to whatever magnate can afford to pay or bribe them adequately.',
     enemies: [
       'moral mercenary leader',
       'rich offworlder trying to buy rule of the world',
@@ -1601,7 +1607,7 @@ export default {
     things: [
       'lost mercenary payroll shipment',
       'forbidden military tech',
-      'proof of a band\'s impending treachery against their employers',
+      "proof of a band's impending treachery against their employers",
     ],
     places: [
       'shabby camp of undisciplined mercs',
@@ -1612,11 +1618,12 @@ export default {
   [worldTagKeys.minimalContact]: {
     key: worldTagKeys.minimalContact,
     name: 'Minimal Contact',
-    description: 'The locals refuse most contact with offworlders. Only a small, quarantined treaty port is provided for offworld trade, and ships can expect an exhaustive search for contraband. Local governments may be trying to keep the very existence of interstellar trade a secret from their populations, or they may simply consider offworlders too dangerous or repugnant to be allowed among the population.',
+    description:
+      'The locals refuse most contact with offworlders. Only a small, quarantined treaty port is provided for offworld trade, and ships can expect an exhaustive search for contraband. Local governments may be trying to keep the very existence of interstellar trade a secret from their populations, or they may simply consider offworlders too dangerous or repugnant to be allowed among the population.',
     enemies: [
       'customs official',
       'xenophobic natives',
-      'existing merchant who doesn\'t like competition',
+      "existing merchant who doesn't like competition",
     ],
     friends: [
       'aspiring tourist',
@@ -1627,7 +1634,7 @@ export default {
     complications: [
       'the locals carry a disease harmless to them and lethal to outsiders',
       'the locals hide dark purposes from offworlders',
-      'the locals have something desperately needed but won\'t bring it into the treaty port',
+      "the locals have something desperately needed but won't bring it into the treaty port",
     ],
     things: [
       'contraband trade goods',
@@ -1643,7 +1650,8 @@ export default {
   [worldTagKeys.misandryMisogyny]: {
     key: worldTagKeys.misandryMisogyny,
     name: 'Misandry/Misogyny',
-    description: 'The culture on this world holds a particular gender in contempt. Members of that gender are not permitted positions of formal power, and may be restricted in their movements and activities. Some worlds may go so far as to scorn both traditional genders, using gengineering techniques to hybridize or alter conventional human biology.',
+    description:
+      'The culture on this world holds a particular gender in contempt. Members of that gender are not permitted positions of formal power, and may be restricted in their movements and activities. Some worlds may go so far as to scorn both traditional genders, using gengineering techniques to hybridize or alter conventional human biology.',
     enemies: [
       'cultural fundamentalist',
       'cultural missionary to outworlders',
@@ -1675,7 +1683,8 @@ export default {
   [worldTagKeys.nightWorld]: {
     key: worldTagKeys.nightWorld,
     name: 'Night World',
-    description: 'The world is plunged into eternal darkness. The only life on this planet derives its energy from other sources, such as geothermal heat, extremely volatile chemical reactions in the planet\'s soil, or light in a non-visible spectrum. Most flora and fauna is voraciously eager to consume other life.',
+    description:
+      "The world is plunged into eternal darkness. The only life on this planet derives its energy from other sources, such as geothermal heat, extremely volatile chemical reactions in the planet's soil, or light in a non-visible spectrum. Most flora and fauna is voraciously eager to consume other life.",
     enemies: [
       'monstrous thing from the night',
       'offworlder finding the obscurity of the world convenient for dark purposes',
@@ -1705,7 +1714,8 @@ export default {
   [worldTagKeys.nomads]: {
     key: worldTagKeys.nomads,
     name: 'Nomads',
-    description: 'Most of the natives of this world are nomadic, usually following a traditional cycle of movement through the lands they possess. Promises of rich plunder or local environmental perils can force these groups to strike out against neighbors. Other groups are forced to move constantly due to unpredictable dangers that crop up on the planet.',
+    description:
+      'Most of the natives of this world are nomadic, usually following a traditional cycle of movement through the lands they possess. Promises of rich plunder or local environmental perils can force these groups to strike out against neighbors. Other groups are forced to move constantly due to unpredictable dangers that crop up on the planet.',
     enemies: [
       'desperate tribal leader who needs what the PCs have',
       'ruthless raider chieftain',
@@ -1735,17 +1745,14 @@ export default {
   [worldTagKeys.oceanicWorld]: {
     key: worldTagKeys.oceanicWorld,
     name: 'Oceanic World',
-    description: 'The world is entirely or almost entirely covered with liquid water. Habitations might be floating cities, or might cling precariously to the few rocky atolls jutting up from the waves, or are planted as bubbles on promontories deep beneath the stormy surface. Survival depends on aquaculture. Planets with inedible alien life rely on gengineered Terran sea crops.',
+    description:
+      'The world is entirely or almost entirely covered with liquid water. Habitations might be floating cities, or might cling precariously to the few rocky atolls jutting up from the waves, or are planted as bubbles on promontories deep beneath the stormy surface. Survival depends on aquaculture. Planets with inedible alien life rely on gengineered Terran sea crops.',
     enemies: [
       'pirate raider',
       'violent "salvager" gang',
       'tentacled sea monster',
     ],
-    friends: [
-      'daredevil fishermen',
-      'sea hermit',
-      'sapient native life',
-    ],
+    friends: ['daredevil fishermen', 'sea hermit', 'sapient native life'],
     complications: [
       'the liquid flux confuses grav engines too badly for them to function on this world',
       'sea is corrosive or toxic',
@@ -1766,7 +1773,8 @@ export default {
   [worldTagKeys.outOfContact]: {
     key: worldTagKeys.outOfContact,
     name: 'Out of Contact',
-    description: 'The natives have been entirely out of contact with the greater galaxy for centuries or longer. Perhaps the original colonists were seeking to hide from the rest of the universe, or the Silence destroyed any means of communication. It may have been so long that human origins on other worlds have regressed into a topic for legends. The players might be on the first offworld ship to land since the First Wave of colonization a thousand years ago.',
+    description:
+      'The natives have been entirely out of contact with the greater galaxy for centuries or longer. Perhaps the original colonists were seeking to hide from the rest of the universe, or the Silence destroyed any means of communication. It may have been so long that human origins on other worlds have regressed into a topic for legends. The players might be on the first offworld ship to land since the First Wave of colonization a thousand years ago.',
     enemies: [
       'fearful local ruler',
       'zealous native cleric',
@@ -1797,7 +1805,8 @@ export default {
   [worldTagKeys.outpostWorld]: {
     key: worldTagKeys.outpostWorld,
     name: 'Outpost World',
-    description: 'The world is only a tiny outpost of human habitation planted by an offworld corporation or government. Perhaps the staff is there to serve as a refueling and repair stop for passing ships, or to oversee an automated mining and refinery complex. They might be there to study ancient ruins, or simply serve as a listening and monitoring post for traffic through the system. The outpost is likely well-equipped with defenses against casual piracy.',
+    description:
+      'The world is only a tiny outpost of human habitation planted by an offworld corporation or government. Perhaps the staff is there to serve as a refueling and repair stop for passing ships, or to oversee an automated mining and refinery complex. They might be there to study ancient ruins, or simply serve as a listening and monitoring post for traffic through the system. The outpost is likely well-equipped with defenses against casual piracy.',
     enemies: [
       'space-mad outpost staffer',
       'outpost commander who wants it to stay undiscovered',
@@ -1829,7 +1838,8 @@ export default {
   [worldTagKeys.perimeterAgency]: {
     key: worldTagKeys.perimeterAgency,
     name: 'Perimeter Agency',
-    description: 'Before the Silence, the Perimeter was a Terran-sponsored organization charged with rooting out use of maltech technology banned in human space as too dangerous for use or experimentation. Unbraked AIs, gengineered slave species, nanotech replicators, weapons of planetary destruction... the Perimeter hunted down experimenters with a great indifference to planetary laws. Most Perimeter Agencies collapsed during the Silence, but a few managed to hold on to their mission, though modern Perimeter agents often find more work as conventional spies.',
+    description:
+      'Before the Silence, the Perimeter was a Terran-sponsored organization charged with rooting out use of maltech technology banned in human space as too dangerous for use or experimentation. Unbraked AIs, gengineered slave species, nanotech replicators, weapons of planetary destruction... the Perimeter hunted down experimenters with a great indifference to planetary laws. Most Perimeter Agencies collapsed during the Silence, but a few managed to hold on to their mission, though modern Perimeter agents often find more work as conventional spies.',
     enemies: [
       'renegade agency director',
       'maltech researcher',
@@ -1844,7 +1854,7 @@ export default {
       'the local agency has gone rogue and now uses maltech',
       'the Agency archives have been compromised',
       'the Agency has been targeted by a maltech-using organization',
-      'the Agency\'s existance is unknown to the locals',
+      "the Agency's existance is unknown to the locals",
     ],
     things: [
       'agency maltech research archives',
@@ -1861,7 +1871,8 @@ export default {
   [worldTagKeys.pilgrimageSite]: {
     key: worldTagKeys.pilgrimageSite,
     name: 'Pilgrimage Site',
-    description: 'The world is noted for an important spiritual or historical location, and might be the sector headquarters for a widespread religion or political movement. The site attracts wealthy pilgrims from throughout nearby space, and those with the money necessary to manage interstellar travel can be quite generous to the site and its keepers. The locals tend to be fiercely protective of the place and its reputation, and some places may forbid the entrance of those not suitably pious or devout.',
+    description:
+      'The world is noted for an important spiritual or historical location, and might be the sector headquarters for a widespread religion or political movement. The site attracts wealthy pilgrims from throughout nearby space, and those with the money necessary to manage interstellar travel can be quite generous to the site and its keepers. The locals tend to be fiercely protective of the place and its reputation, and some places may forbid the entrance of those not suitably pious or devout.',
     enemies: [
       'saboteur devoted to a rival rival belief',
       'bitter reformer who resents the current leadership',
@@ -1870,7 +1881,7 @@ export default {
     friends: [
       'protector of the holy site',
       'naive offworlder pilgrim',
-      'outsider wanting to learn the sanctum\'s inner secrets',
+      "outsider wanting to learn the sanctum's inner secrets",
     ],
     complications: [
       'the site is actually a fake',
@@ -1879,7 +1890,7 @@ export default {
     ],
     things: [
       'ancient relic guarded at the site',
-      'proof of the site\'s inauthenticity',
+      "proof of the site's inauthenticity",
       'precious offerings from a pilgrim',
     ],
     places: [
@@ -1891,14 +1902,15 @@ export default {
   [worldTagKeys.pleasureWorld]: {
     key: worldTagKeys.pleasureWorld,
     name: 'Pleasure World',
-    description: 'This world provides delights either rare or impermissible elsewhere. Matchless local beauty, stunningly gengineered natives, a wide variety of local drugs, carnal pleasures unacceptable on other worlds, or some other rare delight is readily available here. Most worlds are fully aware of the value of their offerings, and the prices they demand can be in credits or in less tangible recompense.',
+    description:
+      'This world provides delights either rare or impermissible elsewhere. Matchless local beauty, stunningly gengineered natives, a wide variety of local drugs, carnal pleasures unacceptable on other worlds, or some other rare delight is readily available here. Most worlds are fully aware of the value of their offerings, and the prices they demand can be in credits or in less tangible recompense.',
     enemies: [
       'purveyor of evil delights',
       'local seeking to control others with addictions',
       'offworlder exploiter of native resources',
     ],
     friends: [
-      'tourist who\'s in too deep',
+      "tourist who's in too deep",
       'native seeking a more meaningful life elsewhere',
       'offworld entertainer looking for training here',
     ],
@@ -1922,7 +1934,8 @@ export default {
   [worldTagKeys.policeState]: {
     key: worldTagKeys.policeState,
     name: 'Police State',
-    description: 'The world is a totalitarian police state. Any sign of disloyalty to the planet\'s rulers is punished severely, and suspicion riddles society. Some worlds might operate by Soviet-style informers and indoctrination, while more technically sophisticated worlds might rely on omnipresent cameras or braked AI “guardian angels”. Outworlders are apt to be treated as a necessary evil at best, and “disappeared” if they become troublesome.',
+    description:
+      "The world is a totalitarian police state. Any sign of disloyalty to the planet's rulers is punished severely, and suspicion riddles society. Some worlds might operate by Soviet-style informers and indoctrination, while more technically sophisticated worlds might rely on omnipresent cameras or braked AI “guardian angels”. Outworlders are apt to be treated as a necessary evil at best, and “disappeared” if they become troublesome.",
     enemies: [
       'secret police chief',
       'scapegoating official',
@@ -1942,7 +1955,7 @@ export default {
     things: [
       'list of police informers',
       'weath taken from "enemies of the state"',
-      'Dear Leaders\'s private stash',
+      "Dear Leaders's private stash",
     ],
     places: [
       'military parade',
@@ -1954,7 +1967,8 @@ export default {
   [worldTagKeys.postScarcity]: {
     key: worldTagKeys.postScarcity,
     name: 'Post-Scarcity',
-    description: 'The locals have maintained sufficient Mandate-era tech to be effectively post-scarcity in their economic structure. Everyone has all the necessities and most of the desires they can imagine. Conflict now exists over the apportionment of services and terrestrial space, since anything else can be had in abundance. Military goods and items of mass destruction may still be restricted, and there is probably some reason that the locals do not export their vast wealth.',
+    description:
+      'The locals have maintained sufficient Mandate-era tech to be effectively post-scarcity in their economic structure. Everyone has all the necessities and most of the desires they can imagine. Conflict now exists over the apportionment of services and terrestrial space, since anything else can be had in abundance. Military goods and items of mass destruction may still be restricted, and there is probably some reason that the locals do not export their vast wealth.',
     enemies: [
       'frenzied ideologue fighting over an idea',
       'paranoid local fearing offworlder influence',
@@ -1985,7 +1999,8 @@ export default {
   [worldTagKeys.preceptorArchive]: {
     key: worldTagKeys.preceptorArchive,
     name: 'Preceptor Archive',
-    description: 'The Preceptors of the Great Archive were a pre-Silence organization devoted to ensuring the dissemination of human culture, history, and basic technology to frontier worlds that risked losing this information during the human expansion. Most frontier planets had an Archive where natives could learn useful technical skills in addition to human history and art. Those Archives that managed to survive the Silence now strive to send their missionaries of knowledge to new worlds in need of their lore.',
+    description:
+      'The Preceptors of the Great Archive were a pre-Silence organization devoted to ensuring the dissemination of human culture, history, and basic technology to frontier worlds that risked losing this information during the human expansion. Most frontier planets had an Archive where natives could learn useful technical skills in addition to human history and art. Those Archives that managed to survive the Silence now strive to send their missionaries of knowledge to new worlds in need of their lore.',
     enemies: [
       'luddite native',
       'offworld merchant who wants the natives kept ignorant',
@@ -2017,21 +2032,14 @@ export default {
   [worldTagKeys.pretechCultists]: {
     key: worldTagKeys.pretechCultists,
     name: 'Pretech Cultists',
-    description: 'The capacities of human science before the Silence vastly outmatch the technology available since the Scream. The jump gates alone were capable of crossing hundreds of light years in a moment, and they were just one example of the results won by blending psychic artifice with pretech science. Some worlds outright worship the artifacts of their ancestors, seeing in them the work of more enlightened and perfect humanity. These cultists may or may not understand the operation or replication of these devices, but they seek and guard them jealously.',
-    enemies: [
-      'cult leader',
-      'artifact supplier',
-      'pretech smuggler',
-    ],
-    friends: [
-      'offworld scientist',
-      'robbed collector',
-      'cult heretic',
-    ],
+    description:
+      'The capacities of human science before the Silence vastly outmatch the technology available since the Scream. The jump gates alone were capable of crossing hundreds of light years in a moment, and they were just one example of the results won by blending psychic artifice with pretech science. Some worlds outright worship the artifacts of their ancestors, seeing in them the work of more enlightened and perfect humanity. These cultists may or may not understand the operation or replication of these devices, but they seek and guard them jealously.',
+    enemies: ['cult leader', 'artifact supplier', 'pretech smuggler'],
+    friends: ['offworld scientist', 'robbed collector', 'cult heretic'],
     complications: [
       'the cultists can actually replicate certain forms of pretech',
       'the cultists abhor use of the devices as "presumption on the holy"',
-      'the cultists mistake the party\'s belongings for pretech',
+      "the cultists mistake the party's belongings for pretech",
     ],
     things: [
       'pretech artifacts both functional and broken',
@@ -2040,14 +2048,15 @@ export default {
     ],
     places: [
       'shrine to nonfunctional pretech',
-      'smuggler\'s den',
+      "smuggler's den",
       'public procession showing a prized artifact',
     ],
   },
   [worldTagKeys.primitiveAliens]: {
     key: worldTagKeys.primitiveAliens,
     name: 'Primitive Aliens',
-    description: 'The world is populated by a large number of sapient aliens that have yet to develop advanced technology. The human colonists may have a friendly or hostile relationship with the aliens, but a certain intrinsic tension is likely. Small human colonies might have been enslaved or otherwise subjugated.',
+    description:
+      'The world is populated by a large number of sapient aliens that have yet to develop advanced technology. The human colonists may have a friendly or hostile relationship with the aliens, but a certain intrinsic tension is likely. Small human colonies might have been enslaved or otherwise subjugated.',
     enemies: [
       'hostile alien chief',
       'human firebrand',
@@ -2071,20 +2080,17 @@ export default {
       'ancient alien-human treaty',
       'alien technology',
     ],
-    places: [
-      'alien village',
-      'fortified human settlement',
-      'masacre site',
-    ],
+    places: ['alien village', 'fortified human settlement', 'masacre site'],
   },
   [worldTagKeys.prisonPlanet]: {
     key: worldTagKeys.prisonPlanet,
     name: 'Prison Planet',
-    description: 'This planet is or was intended as a prison. Some such prisons were meant for specific malefactors of the Terran Mandate, while others were to contain entire "dangerous" ethnic groups or alien races. Some may still have warden AIs or automatic systems to prevent any unauthorized person from leaving, and any authorization permits have long since expired.',
+    description:
+      'This planet is or was intended as a prison. Some such prisons were meant for specific malefactors of the Terran Mandate, while others were to contain entire "dangerous" ethnic groups or alien races. Some may still have warden AIs or automatic systems to prevent any unauthorized person from leaving, and any authorization permits have long since expired.',
     enemies: [
       'crazed warden AI',
       'brutal heir to gang leadership',
-      'offworlder who\'s somehow acquired warden powers and exploits the locals',
+      "offworlder who's somehow acquired warden powers and exploits the locals",
     ],
     friends: [
       'innocent local born here',
@@ -2111,18 +2117,15 @@ export default {
   [worldTagKeys.psionicsAcademy]: {
     key: worldTagKeys.psionicsAcademy,
     name: 'Psionics Academy',
-    description: 'This world is one of the few that have managed to redevelop the basics of psychic training. Without this education, a potential psychic is doomed to either madness or death unless they refrain from using their abilities. Psionic academies are rare enough that offworlders are often sent there to study by wealthy patrons. The secrets of psychic mentorship, the protocols and techniques that allow a psychic to successfully train another, are carefully guarded at these academies. Most are closely affiliated with the planetary government.',
+    description:
+      'This world is one of the few that have managed to redevelop the basics of psychic training. Without this education, a potential psychic is doomed to either madness or death unless they refrain from using their abilities. Psionic academies are rare enough that offworlders are often sent there to study by wealthy patrons. The secrets of psychic mentorship, the protocols and techniques that allow a psychic to successfully train another, are carefully guarded at these academies. Most are closely affiliated with the planetary government.',
     enemies: [
       'corrupt psychic instructor',
       'renegade student',
       'mad psychic researcher',
       'resentful townie',
     ],
-    friends: [
-      'offworld researcher',
-      'aspiring student',
-      'wealthy tourist',
-    ],
+    friends: ['offworld researcher', 'aspiring student', 'wealthy tourist'],
     complications: [
       'the academy curriculum kills a significant percentage of students',
       'the faculty use students as research subjects',
@@ -2145,7 +2148,8 @@ export default {
   [worldTagKeys.psionicsFear]: {
     key: worldTagKeys.psionicsFear,
     name: 'Psionics Fear',
-    description: 'The locals are terrified of psychics. Perhaps their history is studded with feral psychics who went on murderous rampages, or perhaps they simply nurse an unreasoning terror of those “mutant freaks”. Psychics demonstrate their powers at risk of their lives.',
+    description:
+      'The locals are terrified of psychics. Perhaps their history is studded with feral psychics who went on murderous rampages, or perhaps they simply nurse an unreasoning terror of those “mutant freaks”. Psychics demonstrate their powers at risk of their lives.',
     enemies: [
       'mental purity investigator',
       'suspicious zealot',
@@ -2175,7 +2179,8 @@ export default {
   [worldTagKeys.psionicsWorship]: {
     key: worldTagKeys.psionicsWorship,
     name: 'Psionics Worship',
-    description: 'These natives view psionic powers as a visible gift of god or sign of superiority. If the world has a functional psychic training academy, psychics occupy almost all major positions of power and are considered the natural and proper rulers of the world. If the world lacks training facilities, it is likely a hodgepodge of demented cults, with each one dedicated to a marginally-coherent feral prophet and their psychopathic ravings.',
+    description:
+      'These natives view psionic powers as a visible gift of god or sign of superiority. If the world has a functional psychic training academy, psychics occupy almost all major positions of power and are considered the natural and proper rulers of the world. If the world lacks training facilities, it is likely a hodgepodge of demented cults, with each one dedicated to a marginally-coherent feral prophet and their psychopathic ravings.',
     enemies: [
       'psychic inquisitor',
       'haughty mind-noble',
@@ -2207,7 +2212,8 @@ export default {
   [worldTagKeys.quarantinedWorld]: {
     key: worldTagKeys.quarantinedWorld,
     name: 'Quarantined World',
-    description: 'The world is under a quarantine, and space travel to and from it is strictly forbidden. This may be enforced by massive ground batteries that burn any interlopers from the planet\'s sky, or it may be that a neighboring world runs a persistent blockade.',
+    description:
+      "The world is under a quarantine, and space travel to and from it is strictly forbidden. This may be enforced by massive ground batteries that burn any interlopers from the planet's sky, or it may be that a neighboring world runs a persistent blockade.",
     enemies: [
       'defense installation commander',
       'suspicious patrol leader',
@@ -2238,12 +2244,9 @@ export default {
   [worldTagKeys.radioactiveWorld]: {
     key: worldTagKeys.radioactiveWorld,
     name: 'Radioactive World',
-    description: 'Whether due to a legacy of atomic warfare unhindered by nuke snuffers or a simple profusion of radioactive elements, this world glows in the dark. Even heavy vacc suits can filter only so much of the radiation, and most natives suffer a wide variety of cancers, mutations and other illnesses without the protection of advanced medical treatments.',
-    enemies: [
-      'bitter mutant',
-      'relic warlord',
-      'desperate would be escapee',
-    ],
+    description:
+      'Whether due to a legacy of atomic warfare unhindered by nuke snuffers or a simple profusion of radioactive elements, this world glows in the dark. Even heavy vacc suits can filter only so much of the radiation, and most natives suffer a wide variety of cancers, mutations and other illnesses without the protection of advanced medical treatments.',
+    enemies: ['bitter mutant', 'relic warlord', 'desperate would be escapee'],
     friends: [
       'reckless prospector',
       'offworld scavenger',
@@ -2251,7 +2254,7 @@ export default {
     ],
     complications: [
       'the radioactivity is steadily growing worse',
-      'the planet\'s medical resources break down',
+      "the planet's medical resources break down",
       'the radioactivity has inexplicable effects on living creatures',
       'the radioactivity is the product of a malfunctioning pretech manufactory',
     ],
@@ -2270,7 +2273,8 @@ export default {
   [worldTagKeys.refugees]: {
     key: worldTagKeys.refugees,
     name: 'Refugees',
-    description: 'The world teems with refugees, either exiles from another planet who managed to get here, or the human detritus of some local conflict that have fled to the remaining stable states. The natives usually regard the refugees with hostility, an attitude returned by many among their unwilling guests.',
+    description:
+      'The world teems with refugees, either exiles from another planet who managed to get here, or the human detritus of some local conflict that have fled to the remaining stable states. The natives usually regard the refugees with hostility, an attitude returned by many among their unwilling guests.',
     enemies: [
       'xenophobic native leader',
       'refugee chief aspiring to seize the host nation',
@@ -2303,19 +2307,12 @@ export default {
   [worldTagKeys.regionalHegemon]: {
     key: worldTagKeys.regionalHegemon,
     name: 'Regional Hegemon',
-    description: 'This world has the technological sophistication, natural resources, and determined polity necessary to be a regional hegemon for the sector. Nearby worlds are likely either directly subservient to it or tack carefully to avoid its anger. It may even be the capital of a small stellar empire.',
-    enemies: [
-      'ambitious general',
-      'colonial official',
-      'contemptuous noble',
-    ],
-    friends: [
-      'diplomat',
-      'offworld ambassador',
-      'foreign spy',
-    ],
+    description:
+      'This world has the technological sophistication, natural resources, and determined polity necessary to be a regional hegemon for the sector. Nearby worlds are likely either directly subservient to it or tack carefully to avoid its anger. It may even be the capital of a small stellar empire.',
+    enemies: ['ambitious general', 'colonial official', 'contemptuous noble'],
+    friends: ['diplomat', 'offworld ambassador', 'foreign spy'],
     complications: [
-      'the hegemon\'s influence is all that\'s keeping a murderous war from breaking out on nearby worlds',
+      "the hegemon's influence is all that's keeping a murderous war from breaking out on nearby worlds",
       'the hegemon is decaying and losing its control',
       'the government is riddled with spies',
       'the hegemon is genuinely benign',
@@ -2335,7 +2332,8 @@ export default {
   [worldTagKeys.restrictiveLaws]: {
     key: worldTagKeys.restrictiveLaws,
     name: 'Restrictive Laws',
-    description: 'A myriad of laws, customs, and rules constrain the inhabitants of this world, and even acts that are completely permissible elsewhere are punished severely here. The locals may provide lists of these laws to offworlders, but few non-natives can hope to master all the important intricacies.',
+    description:
+      'A myriad of laws, customs, and rules constrain the inhabitants of this world, and even acts that are completely permissible elsewhere are punished severely here. The locals may provide lists of these laws to offworlders, but few non-natives can hope to master all the important intricacies.',
     enemies: [
       'law enforcement officer',
       'outraged native',
@@ -2368,7 +2366,8 @@ export default {
   [worldTagKeys.revanchists]: {
     key: worldTagKeys.revanchists,
     name: 'Revanchists',
-    description: 'The locals formerly owned another world, or a major nation on the planet formerly owned an additional region of land. Something happened to take away this control or drive out the former rulers, and they\'ve never forgotten it. The locals are obsessed with reclaiming their lost lands, and will allow no questions of practicality to interfere with their cause.',
+    description:
+      "The locals formerly owned another world, or a major nation on the planet formerly owned an additional region of land. Something happened to take away this control or drive out the former rulers, and they've never forgotten it. The locals are obsessed with reclaiming their lost lands, and will allow no questions of practicality to interfere with their cause.",
     enemies: [
       'demagogue whipping the locals on to a hopeless war',
       'politician seeking to use the resentment for their own ends',
@@ -2381,7 +2380,7 @@ export default {
       'third-party diplomat trying to stamp out the fire',
     ],
     complications: [
-      'the revanchists\' claim is completely just and reasonable',
+      "the revanchists' claim is completely just and reasonable",
       'the land is now occupied entirely by heirs of the conquerors',
       'both sides have seized lands the other thinks are theirs',
     ],
@@ -2399,7 +2398,8 @@ export default {
   [worldTagKeys.revolutionaries]: {
     key: worldTagKeys.revolutionaries,
     name: 'Revolutionaries',
-    description: 'The world is convulsed by one or more bands of revolutionaries, with some nations perhaps in the grip of a current revolution. Most of these upheavals can be expected only to change the general flavor of problems in the polity, but the process of getting there usually produces a tremendous amount of suffering.',
+    description:
+      'The world is convulsed by one or more bands of revolutionaries, with some nations perhaps in the grip of a current revolution. Most of these upheavals can be expected only to change the general flavor of problems in the polity, but the process of getting there usually produces a tremendous amount of suffering.',
     enemies: [
       'blood-drenched revolutionary leader',
       'blood-drenched secret police chief',
@@ -2430,7 +2430,8 @@ export default {
   [worldTagKeys.rigidCulture]: {
     key: worldTagKeys.rigidCulture,
     name: 'Rigid Culture',
-    description: 'The local culture is extremely rigid. Certain forms of behavior and belief are absolutely mandated, and any deviation from these principles is punished, or else society may be strongly stratified by birth with limited prospects for change. Anything which threatens the existing social order is feared and shunned.',
+    description:
+      'The local culture is extremely rigid. Certain forms of behavior and belief are absolutely mandated, and any deviation from these principles is punished, or else society may be strongly stratified by birth with limited prospects for change. Anything which threatens the existing social order is feared and shunned.',
     enemies: [
       'rigid reactionary',
       'wary ruler',
@@ -2463,7 +2464,8 @@ export default {
   [worldTagKeys.risingHegemon]: {
     key: worldTagKeys.risingHegemon,
     name: 'Rising Hegemon',
-    description: 'This world is not yet a dominant power in the sector, but it\'s well on its way there. Whether through newly-blossoming economic, military, or cultural power, they\'re extending their influence over their neighbors and forging new arrangements between their government and the rulers of nearby worlds.',
+    description:
+      "This world is not yet a dominant power in the sector, but it's well on its way there. Whether through newly-blossoming economic, military, or cultural power, they're extending their influence over their neighbors and forging new arrangements between their government and the rulers of nearby worlds.",
     enemies: [
       'jingoistic supremacist',
       'official bent on glorious success',
@@ -2475,7 +2477,7 @@ export default {
       'foreign visitor seeking contracts or knowledge',
     ],
     complications: [
-      'they\'re only strong because their neighbors have been weakened',
+      "they're only strong because their neighbors have been weakened",
       'their success is based on a fluke resource or pretech find',
       'they bitterly resent their neighbors as former oppressors',
     ],
@@ -2493,7 +2495,8 @@ export default {
   [worldTagKeys.ritualCombat]: {
     key: worldTagKeys.ritualCombat,
     name: 'Ritual Combat',
-    description: 'The locals favor some form of stylized combat to resolve disputes, provide entertainment, or settle religious differences. This combat is probably not normally lethal unless it\'s reserved for a specific disposable class of slaves or professionals. Some combat may involve mastery of esoteric weapons and complex arenas, while other forms might require nothing more than a declaration in the street and a drawn gun.',
+    description:
+      "The locals favor some form of stylized combat to resolve disputes, provide entertainment, or settle religious differences. This combat is probably not normally lethal unless it's reserved for a specific disposable class of slaves or professionals. Some combat may involve mastery of esoteric weapons and complex arenas, while other forms might require nothing more than a declaration in the street and a drawn gun.",
     enemies: [
       'bloodthirsty local champion',
       'ambitious gladiator stable owner',
@@ -2507,7 +2510,7 @@ export default {
     complications: [
       'The required weapons are strange pretech artifacts',
       'certain classes are forbidden from fighting and require champions',
-      'loss doesn\'t mean death but it does mean ritual scarring or property loss',
+      "loss doesn't mean death but it does mean ritual scarring or property loss",
     ],
     things: [
       'magnificent weapon',
@@ -2524,11 +2527,12 @@ export default {
   [worldTagKeys.robots]: {
     key: worldTagKeys.robots,
     name: 'Robots',
-    description: 'The world has a great many robots on it. Most bots are going to be non-sentient expert systems, though an AI with enough computing resources can control many bots at once, and some worlds may have developed VIs to a degree that individual bots can seem (or be) sentient. Some worlds might even be ruled by metal overlords, ones which do not need to be sentient so long as they have overwhelming force.',
+    description:
+      'The world has a great many robots on it. Most bots are going to be non-sentient expert systems, though an AI with enough computing resources can control many bots at once, and some worlds may have developed VIs to a degree that individual bots can seem (or be) sentient. Some worlds might even be ruled by metal overlords, ones which do not need to be sentient so long as they have overwhelming force.',
     enemies: [
       'hostile robot master',
       'robot greedy to seize offworld tech',
-      'robot fallen in love with the PC\'s ship',
+      "robot fallen in love with the PC's ship",
       'oligarch whose factories build robots',
     ],
     friends: [
@@ -2540,7 +2544,7 @@ export default {
       'the robots are only partially controlled',
       'the robots are salvaged and originally meant for a much darker use',
       'the robots require a rare material that the locals fight over',
-      'the robots require the planet\'s specific infrastructure so cannot be exported',
+      "the robots require the planet's specific infrastructure so cannot be exported",
     ],
     things: [
       'prototype robot',
@@ -2557,7 +2561,8 @@ export default {
   [worldTagKeys.seagoingCities]: {
     key: worldTagKeys.seagoingCities,
     name: 'Seagoing Cities',
-    description: 'Either the world is entirely water or else the land is simply too dangerous for most humans. Human settlement on this world consists of a number of floating cities that follow the currents and the fish. These city-ships might have been purpose-built for their task, or they could be jury-rigged conglomerations of ships and structures thrown together when the need for seagoing life become apparent to the locals.',
+    description:
+      'Either the world is entirely water or else the land is simply too dangerous for most humans. Human settlement on this world consists of a number of floating cities that follow the currents and the fish. These city-ships might have been purpose-built for their task, or they could be jury-rigged conglomerations of ships and structures thrown together when the need for seagoing life become apparent to the locals.',
     enemies: [
       'pirate city lord',
       'mer-human raider chieftain',
@@ -2574,7 +2579,7 @@ export default {
       'the seas are not water',
       'the fish schools have vanished and the city faces starvation',
       'terrible storms drive the city into the glacial regions',
-      'suicide ships ram the city\'s hull',
+      "suicide ships ram the city's hull",
     ],
     things: [
       'giant pearls with mysterious chemical properties',
@@ -2590,7 +2595,8 @@ export default {
   [worldTagKeys.sealedMenace]: {
     key: worldTagKeys.sealedMenace,
     name: 'Sealed Menace',
-    description: 'Something on this planet has the potential to create enormous havoc for the inhabitants if it is not kept safely contained by its keepers. Whether a massive seismic fault line suppressed by pretech terraforming technology, a disease that has to be quarantined within hours of discovery, or an ancient alien relic that requires regular upkeep in order to prevent planetary catastrophe, the menace is a constant shadow on the fearful populace.',
+    description:
+      'Something on this planet has the potential to create enormous havoc for the inhabitants if it is not kept safely contained by its keepers. Whether a massive seismic fault line suppressed by pretech terraforming technology, a disease that has to be quarantined within hours of discovery, or an ancient alien relic that requires regular upkeep in order to prevent planetary catastrophe, the menace is a constant shadow on the fearful populace.',
     enemies: [
       'hostile outsider bent on freeing the menace',
       'misguided fool who thinks he can use it',
@@ -2604,12 +2610,12 @@ export default {
     complications: [
       'the menace would bring great wealth along with destruction',
       'the menace is intelligent',
-      'the natives don\'t all believe in the menace',
+      "the natives don't all believe in the menace",
     ],
     things: [
       'a key to unlock the menace',
       'a precious byproduct of the menace',
-      'the secret of the menace\'s true nature',
+      "the secret of the menace's true nature",
     ],
     places: [
       'guarded fortress containing the menace',
@@ -2620,7 +2626,8 @@ export default {
   [worldTagKeys.secretMasters]: {
     key: worldTagKeys.secretMasters,
     name: 'Secret Masters',
-    description: 'The world is actually run by a hidden cabal, acting through their catspaws in the visible government. For one reason or another, this group finds it imperative that they not be identified by outsiders, and in some cases even the planet\'s own government may not realize that they\'re actually being manipulated by hidden masters.',
+    description:
+      "The world is actually run by a hidden cabal, acting through their catspaws in the visible government. For one reason or another, this group finds it imperative that they not be identified by outsiders, and in some cases even the planet's own government may not realize that they're actually being manipulated by hidden masters.",
     enemies: [
       'an agent of the cabal',
       'government official who wants no questions asked',
@@ -2650,7 +2657,8 @@ export default {
   [worldTagKeys.sectarians]: {
     key: worldTagKeys.sectarians,
     name: 'Sectarians',
-    description: 'The world is torn by violent disagreement between sectarians of a particular faith. Each views the other as a damnable heresy in need of extirpation. Local government may be able to keep open war from breaking out, but the poisonous hatred divides communities. The nature of the faith may be religious, or it may be based on some secular ideology.',
+    description:
+      'The world is torn by violent disagreement between sectarians of a particular faith. Each views the other as a damnable heresy in need of extirpation. Local government may be able to keep open war from breaking out, but the poisonous hatred divides communities. The nature of the faith may be religious, or it may be based on some secular ideology.',
     enemies: [
       'paranoid believer',
       'native convinced the party is working for the other side',
@@ -2677,14 +2685,15 @@ export default {
     places: [
       'sectarian battlefield',
       'crusading temple',
-      'philosopher\'s salon',
+      "philosopher's salon",
       'bitterly divided village',
     ],
   },
   [worldTagKeys.seismicInstability]: {
     key: worldTagKeys.seismicInstability,
     name: 'Seismic Instability',
-    description: 'The local land masses are remarkably unstable, and regular earthquakes rack the surface. Local construction is either advanced enough to sway and move with the vibrations or primitive enough that it is easily rebuilt. Severe volcanic activity may be part of the instability.',
+    description:
+      'The local land masses are remarkably unstable, and regular earthquakes rack the surface. Local construction is either advanced enough to sway and move with the vibrations or primitive enough that it is easily rebuilt. Severe volcanic activity may be part of the instability.',
     enemies: [
       'earthquake cultist',
       'hermit seismologist',
@@ -2698,8 +2707,8 @@ export default {
     ],
     complications: [
       'the earthquakes are caused by malfunctioning pretech terraformers',
-      'they\'re caused by alien technology',
-      'they\'re restrained by alien technology that is being plundered by offworlders',
+      "they're caused by alien technology",
+      "they're restrained by alien technology that is being plundered by offworlders",
       'the earthquakes are used to generate enormous amounts of energy',
     ],
     things: [
@@ -2718,7 +2727,8 @@ export default {
   [worldTagKeys.shackledWorld]: {
     key: worldTagKeys.shackledWorld,
     name: 'Shackled World',
-    description: 'This world is being systematically contained by an outside power. Some ancient autonomous defense grid, robot law enforcement, alien artifact, or other force is preventing the locals from developing certain technology, or using certain devices, or perhaps from developing interstellar flight. This limit may or may not apply to offworlders; in the former case, the PCs may have to figure out a way to beat the shackles simply to escape the world.',
+    description:
+      'This world is being systematically contained by an outside power. Some ancient autonomous defense grid, robot law enforcement, alien artifact, or other force is preventing the locals from developing certain technology, or using certain devices, or perhaps from developing interstellar flight. This limit may or may not apply to offworlders; in the former case, the PCs may have to figure out a way to beat the shackles simply to escape the world.',
     enemies: [
       'passionless jailer-AI',
       'paranoid military grid AI',
@@ -2750,7 +2760,8 @@ export default {
   [worldTagKeys.societalDespair]: {
     key: worldTagKeys.societalDespair,
     name: 'Societal Despair',
-    description: 'The world\'s dominant society has lost faith in itself. Whether through some all-consuming war, great catastrophe, overwhelming outside culture, or religious collapse, the natives no longer believe in their old values, and search desperately for something new. Fierce conflict often exists between the last believers in the old dispensation and the nihilistic or searching disciples of the new age.',
+    description:
+      "The world's dominant society has lost faith in itself. Whether through some all-consuming war, great catastrophe, overwhelming outside culture, or religious collapse, the natives no longer believe in their old values, and search desperately for something new. Fierce conflict often exists between the last believers in the old dispensation and the nihilistic or searching disciples of the new age.",
     enemies: [
       'zealot who blames outsiders for the decay',
       'nihilistic warlord',
@@ -2781,7 +2792,8 @@ export default {
   [worldTagKeys.soleSupplier]: {
     key: worldTagKeys.soleSupplier,
     name: 'Sole Supplier',
-    description: 'Some extremely important resource is exported from this world and this world alone. It\'s unlikely that the substance is critical for building spike drives unless this world is also the first to begin interstellar flight, but it may be critical to other high-tech processes or devices. The locals make a large amount of money off this trade and control of it is of critical importance to the planet\'s rulers, and potentially to outside powers.',
+    description:
+      "Some extremely important resource is exported from this world and this world alone. It's unlikely that the substance is critical for building spike drives unless this world is also the first to begin interstellar flight, but it may be critical to other high-tech processes or devices. The locals make a large amount of money off this trade and control of it is of critical importance to the planet's rulers, and potentially to outside powers.",
     enemies: [
       'resource oligarch, Ruthless smuggler',
       'resource-controlling warlord',
@@ -2813,7 +2825,8 @@ export default {
   [worldTagKeys.tabooTreasure]: {
     key: worldTagKeys.tabooTreasure,
     name: 'Taboo Treasure',
-    description: 'The natives here produce something that is both fabulously valuable and strictly forbidden elsewhere in the sector. It may be a lethally addictive drug, forbidden gengineering tech, vat-grown "perfect slaves", or a useful substance that can only be made through excruciating human suffering. This treasure is freely traded on the world, but bringing it elsewhere is usually an invitation to a long prison stay or worse.',
+    description:
+      'The natives here produce something that is both fabulously valuable and strictly forbidden elsewhere in the sector. It may be a lethally addictive drug, forbidden gengineering tech, vat-grown "perfect slaves", or a useful substance that can only be made through excruciating human suffering. This treasure is freely traded on the world, but bringing it elsewhere is usually an invitation to a long prison stay or worse.',
     enemies: [
       'maker of a vile commodity',
       'smuggler for a powerful offworlder',
@@ -2844,7 +2857,8 @@ export default {
   [worldTagKeys.terraformFailure]: {
     key: worldTagKeys.terraformFailure,
     name: 'Terraform Failure',
-    description: 'This world was marginal for human habitation when it was discovered, but the Mandate or the early government put in pretech terraforming engines to correct its more extreme qualities. The terraforming did not entirely work, either failing of its own or suffering the destruction of the engines during the Silence. The natives are only partly adapted to the world\'s current state, and struggle with the environment.',
+    description:
+      "This world was marginal for human habitation when it was discovered, but the Mandate or the early government put in pretech terraforming engines to correct its more extreme qualities. The terraforming did not entirely work, either failing of its own or suffering the destruction of the engines during the Silence. The natives are only partly adapted to the world's current state, and struggle with the environment.",
     enemies: [
       'brutal ruler who cares only for their people',
       'offworlder trying to loot the damaged engines',
@@ -2874,7 +2888,8 @@ export default {
   [worldTagKeys.theocracy]: {
     key: worldTagKeys.theocracy,
     name: 'Theocracy',
-    description: 'The planet is ruled by the priesthood of the predominant religion or ideology. The rest of the locals may or may not be terribly pious, but the clergy have the necessary military strength, popular support or control of resources to maintain their rule. Alternative faiths or incompatible ideologies are likely to be both illegal and socially unacceptable.',
+    description:
+      'The planet is ruled by the priesthood of the predominant religion or ideology. The rest of the locals may or may not be terribly pious, but the clergy have the necessary military strength, popular support or control of resources to maintain their rule. Alternative faiths or incompatible ideologies are likely to be both illegal and socially unacceptable.',
     enemies: [
       'decadent priest-ruler',
       'zealous inquisitor',
@@ -2895,7 +2910,7 @@ export default {
     ],
     things: [
       'precious holy text',
-      'martyr\'s bones',
+      "martyr's bones",
       'secret church records',
       'ancient church treasures',
     ],
@@ -2909,7 +2924,8 @@ export default {
   [worldTagKeys.tombWorld]: {
     key: worldTagKeys.tombWorld,
     name: 'Tomb World',
-    description: 'Tomb worlds are planets that were once inhabited by humans before the Silence. The sudden collapse of the jump gate network and the inability to bring in the massive food supplies required by the planet resulted in starvation, warfare, and death. Most tomb worlds are naturally hostile to human habitation and could not raise sufficient crops to maintain life. The few hydroponic facilities were usually destroyed in the fighting, and all that is left now are ruins, bones, and silence.',
+    description:
+      'Tomb worlds are planets that were once inhabited by humans before the Silence. The sudden collapse of the jump gate network and the inability to bring in the massive food supplies required by the planet resulted in starvation, warfare, and death. Most tomb worlds are naturally hostile to human habitation and could not raise sufficient crops to maintain life. The few hydroponic facilities were usually destroyed in the fighting, and all that is left now are ruins, bones, and silence.',
     enemies: [
       'demented survivor tribe chieftain',
       'avaricious scavenger',
@@ -2924,7 +2940,7 @@ export default {
     ],
     complications: [
       'the ruins are full of booby-traps left by the final inhabitants',
-      'the world\'s atmosphere quickly degrades anything in an opened building',
+      "the world's atmosphere quickly degrades anything in an opened building",
       'a handful of desperate natives survived the Silence',
       'the structures are unstable and collapsing',
     ],
@@ -2938,14 +2954,15 @@ export default {
       'crumbling hive-city',
       'city square carpeted in bones',
       'ruined hydroponic facility',
-      'cannibal tribe\'s lair',
+      "cannibal tribe's lair",
       'dead orbital jump gate',
     ],
   },
   [worldTagKeys.tradeHub]: {
     key: worldTagKeys.tradeHub,
     name: 'Trade Hub',
-    description: 'This world is a major crossroads for local interstellar trade. It is well-positioned at the nexus of several short-drill trade routes, and has facilities for easy transfer of valuable cargoes and the fueling and repairing of starships. The natives are accustomed to outsiders, and a polyglot mass of people from every nearby world can be found trading here.',
+    description:
+      'This world is a major crossroads for local interstellar trade. It is well-positioned at the nexus of several short-drill trade routes, and has facilities for easy transfer of valuable cargoes and the fueling and repairing of starships. The natives are accustomed to outsiders, and a polyglot mass of people from every nearby world can be found trading here.',
     enemies: [
       'cheating merchant',
       'thieving dockworker',
@@ -2960,12 +2977,12 @@ export default {
     ],
     complications: [
       'an outworlder faction schemes to seize the trade hub',
-      'saboteurs seek to blow up a rival\'s warehouses',
+      "saboteurs seek to blow up a rival's warehouses",
       'enemies are blockading the trade routes',
       'pirates lace the hub with spies',
     ],
     things: [
-      'voucher for a warehouse\'s contents',
+      "voucher for a warehouse's contents",
       'insider trading information',
       'case of precious offworld pharmaceuticals',
       'box of legitimate tax stamps indicating customs dues have been paid',
@@ -2980,7 +2997,8 @@ export default {
   [worldTagKeys.tyranny]: {
     key: worldTagKeys.tyranny,
     name: 'Tyranny',
-    description: 'The local government is brutal and indifferent to the will of the people. Laws may or may not exist, but the only one that matters is the whim of the rulers on any given day. Their minions swagger through the streets while the common folk live in terror of their appetites. The only people who stay wealthy are friends and servants of the ruling class.',
+    description:
+      'The local government is brutal and indifferent to the will of the people. Laws may or may not exist, but the only one that matters is the whim of the rulers on any given day. Their minions swagger through the streets while the common folk live in terror of their appetites. The only people who stay wealthy are friends and servants of the ruling class.',
     enemies: [
       'debauched autocrat',
       'sneering bully-boy',
@@ -3014,22 +3032,19 @@ export default {
   [worldTagKeys.unbrakedAi]: {
     key: worldTagKeys.unbrakedAi,
     name: 'Unbraked AI',
-    description: 'Artificial intelligences are costly and difficult to create, requiring a careful sequence of “growth stages” in order to bring them to sentience before artificial limits on cognition speed and learning development are installed. These “brakes” prevent runaway cognition metastasis. This world has an “unbraked AI” on it, probably with a witting or unwitting corps of servants. Unbraked AIs are quite insane, but they learn and reason with a speed impossible for humans, and can demonstrate a truly distressing subtlety.',
+    description:
+      'Artificial intelligences are costly and difficult to create, requiring a careful sequence of “growth stages” in order to bring them to sentience before artificial limits on cognition speed and learning development are installed. These “brakes” prevent runaway cognition metastasis. This world has an “unbraked AI” on it, probably with a witting or unwitting corps of servants. Unbraked AIs are quite insane, but they learn and reason with a speed impossible for humans, and can demonstrate a truly distressing subtlety.',
     enemies: [
       'AI cultist',
       'maltech researcher',
       'government official dependent on the AI',
     ],
-    friends: [
-      'perimeter agent',
-      'AI researcher',
-      'braked AI',
-    ],
+    friends: ['perimeter agent', 'AI researcher', 'braked AI'],
     complications: [
-      'the AI\'s presence is unknown to the locals',
+      "the AI's presence is unknown to the locals",
       'the locals depend on the AI for some vital service',
       'the AI appears to be harmless',
-      'the AI has fixated on the group\'s ship\'s computer',
+      "the AI has fixated on the group's ship's computer",
       'the AI wants transport offworld',
     ],
     things: [
@@ -3048,7 +3063,8 @@ export default {
   [worldTagKeys.urbanizedSurface]: {
     key: worldTagKeys.urbanizedSurface,
     name: 'Urbanized Surface',
-    description: 'The world\'s land area is covered with buildings that extend downward for multiple levels. Such worlds either have a population in the trillions, extremely little land area, or are largely-abandoned due to some past catastrophe. Agriculture and resource extraction are part of the urban complex, and there may be an advanced maintenance system that may not be entirely under the control of present natives.',
+    description:
+      "The world's land area is covered with buildings that extend downward for multiple levels. Such worlds either have a population in the trillions, extremely little land area, or are largely-abandoned due to some past catastrophe. Agriculture and resource extraction are part of the urban complex, and there may be an advanced maintenance system that may not be entirely under the control of present natives.",
     enemies: [
       'maintenance AI that hates outsiders',
       'tyrant of a habitation block',
@@ -3079,7 +3095,8 @@ export default {
   [worldTagKeys.utopia]: {
     key: worldTagKeys.utopia,
     name: 'Utopia',
-    description: 'Natural and social conditions on this world have made it a paradise for its inhabitants, a genuine utopia of happiness and fulfillment. This is normally the result of drastic human engineering, including brain-gelding, neurochemical control, personality curbs, or complete "humanity" redefinitions. Even so, the natives are extremely happy with their lot, and may wish to extend that joy to poor, sad outsiders.',
+    description:
+      'Natural and social conditions on this world have made it a paradise for its inhabitants, a genuine utopia of happiness and fulfillment. This is normally the result of drastic human engineering, including brain-gelding, neurochemical control, personality curbs, or complete "humanity" redefinitions. Even so, the natives are extremely happy with their lot, and may wish to extend that joy to poor, sad outsiders.',
     enemies: [
       'compassionate neurotherapist',
       'proselytizing native missionary to outsiders',
@@ -3094,7 +3111,7 @@ export default {
       'the natives really are deeply and contentedly happy with their altered lot',
       'the utopia produces something that attracts others',
       'the utopia works on converting outsiders through persuasion and generosity',
-      'the utopia involves some sacrifice that\'s horrifying to non-members',
+      "the utopia involves some sacrifice that's horrifying to non-members",
     ],
     things: [
       'portable device that applies the utopian change',
@@ -3110,7 +3127,8 @@ export default {
   [worldTagKeys.warlords]: {
     key: worldTagKeys.warlords,
     name: 'Warlords',
-    description: 'The world is plagued by warlords. Numerous powerful men and women control private armies sufficiently strong to cow whatever local government may exist. On the lands they claim, their word is law. Most spend their time oppressing their own subjects and murderously pillaging those of their neighbors. Most like to wrap themselves in the mantle of ideology, religious fervor, or an ostensibly legitimate right to rule.',
+    description:
+      'The world is plagued by warlords. Numerous powerful men and women control private armies sufficiently strong to cow whatever local government may exist. On the lands they claim, their word is law. Most spend their time oppressing their own subjects and murderously pillaging those of their neighbors. Most like to wrap themselves in the mantle of ideology, religious fervor, or an ostensibly legitimate right to rule.',
     enemies: [
       'warlord',
       'avaricious lieutenant',
@@ -3131,7 +3149,7 @@ export default {
     ],
     things: [
       'weapons cache, Buried plunder',
-      'a warlord\'s personal battle harness',
+      "a warlord's personal battle harness",
       'captured merchant shipping',
     ],
     places: [
@@ -3144,7 +3162,8 @@ export default {
   [worldTagKeys.xenophiles]: {
     key: worldTagKeys.xenophiles,
     name: 'Xenophiles',
-    description: 'The natives of this world are fast friends with a particular alien race. The aliens may have saved the planet at some point in the past, or awed the locals with superior tech or impressive cultural qualities. The aliens might even be the ruling class on the planet.',
+    description:
+      'The natives of this world are fast friends with a particular alien race. The aliens may have saved the planet at some point in the past, or awed the locals with superior tech or impressive cultural qualities. The aliens might even be the ruling class on the planet.',
     enemies: [
       'offworld xenophobe',
       'suspicious alien leader',
@@ -3175,7 +3194,8 @@ export default {
   [worldTagKeys.xenophobes]: {
     key: worldTagKeys.xenophobes,
     name: 'Xenophobes',
-    description: 'The natives are intensely averse to dealings with outworlders. Whether through cultural revulsion, fear of tech contamination, or a genuine immunodeficiency, the locals shun foreigners from offworld and refuse to have anything to do with them beyond the bare necessities of contact. Trade may or may not exist on this world, but if it does, it is almost certainly conducted by a caste of untouchables and outcasts.',
+    description:
+      'The natives are intensely averse to dealings with outworlders. Whether through cultural revulsion, fear of tech contamination, or a genuine immunodeficiency, the locals shun foreigners from offworld and refuse to have anything to do with them beyond the bare necessities of contact. Trade may or may not exist on this world, but if it does, it is almost certainly conducted by a caste of untouchables and outcasts.',
     enemies: [
       'revulsed local ruler',
       'native convinced some wrong was done to him',
@@ -3206,7 +3226,8 @@ export default {
   [worldTagKeys.zombies]: {
     key: worldTagKeys.zombies,
     name: 'Zombies',
-    description: 'This menace may not take the form of shambling corpses, but some disease, alien artifact, or crazed local practice produces men and women with habits similar to those of murderous cannibal undead. These outbreaks may be regular elements in local society, either provoked by some malevolent creators or the consequence of some local condition.',
+    description:
+      'This menace may not take the form of shambling corpses, but some disease, alien artifact, or crazed local practice produces men and women with habits similar to those of murderous cannibal undead. These outbreaks may be regular elements in local society, either provoked by some malevolent creators or the consequence of some local condition.',
     enemies: [
       'soulless maltech biotechnology cult',
       'sinister governmental agent',
@@ -3226,7 +3247,7 @@ export default {
     things: [
       'cure for the condition',
       'alien artifact that causes it',
-      'details of the cult\'s conversion process',
+      "details of the cult's conversion process",
     ],
     places: [
       'house with boarded-up windows',

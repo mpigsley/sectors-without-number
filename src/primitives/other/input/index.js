@@ -11,11 +11,7 @@ export default function Input(props) {
     style = { width };
   }
   return (
-    <input
-      {...rest}
-      className={classNames('Input', className)}
-      style={style}
-    />
+    <input {...rest} className={classNames('Input', className)} style={style} />
   );
 }
 

@@ -7,10 +7,7 @@ import './style.css';
 export default function SectionHeader(props) {
   const { className, ...rest } = props;
   return (
-    <h3
-      {...rest}
-      className={classNames('SectionHeader', className)}
-    >
+    <h3 {...rest} className={classNames('SectionHeader', className)}>
       {props.children}
     </h3>
   );

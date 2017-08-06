@@ -9,43 +9,49 @@ import { toReadableArray } from 'utils/common';
 
 import './style.css';
 
-const renderTags = tags => tags
-  .map(tag => WorldTags[tag])
-  .map(({
-    key,
-    name,
-    description,
-    enemies,
-    friends,
-    complications,
-    things,
-    places,
-  }) => (
-    <div key={key} className="PlanetInfo-Tag">
-      <Header type={HeaderType.header4}>{name}</Header>
-      <p className="PlanetInfo-Content">{description}</p>
-      <p className="PlanetInfo-Content">
-        <b>Enemies: </b>
-        {enemies.map(toReadableArray)}
-      </p>
-      <p className="PlanetInfo-Content">
-        <b>Friends: </b>
-        {friends.map(toReadableArray)}
-      </p>
-      <p className="PlanetInfo-Content">
-        <b>Complications: </b>
-        {complications.map(toReadableArray)}
-      </p>
-      <p className="PlanetInfo-Content">
-        <b>Things: </b>
-        {things.map(toReadableArray)}
-      </p>
-      <p className="PlanetInfo-Content">
-        <b>Places: </b>
-        {places.map(toReadableArray)}
-      </p>
-    </div>
-  ));
+const renderTags = tags =>
+  tags
+    .map(tag => WorldTags[tag])
+    .map(
+      ({
+        key,
+        name,
+        description,
+        enemies,
+        friends,
+        complications,
+        things,
+        places,
+      }) =>
+        <div key={key} className="PlanetInfo-Tag">
+          <Header type={HeaderType.header4}>
+            {name}
+          </Header>
+          <p className="PlanetInfo-Content">
+            {description}
+          </p>
+          <p className="PlanetInfo-Content">
+            <b>Enemies: </b>
+            {enemies.map(toReadableArray)}
+          </p>
+          <p className="PlanetInfo-Content">
+            <b>Friends: </b>
+            {friends.map(toReadableArray)}
+          </p>
+          <p className="PlanetInfo-Content">
+            <b>Complications: </b>
+            {complications.map(toReadableArray)}
+          </p>
+          <p className="PlanetInfo-Content">
+            <b>Things: </b>
+            {things.map(toReadableArray)}
+          </p>
+          <p className="PlanetInfo-Content">
+            <b>Places: </b>
+            {places.map(toReadableArray)}
+          </p>
+        </div>,
+    );
 
 export default function SectorInfo({ planet, location, routeParams }) {
   return (

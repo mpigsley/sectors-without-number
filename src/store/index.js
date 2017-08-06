@@ -7,10 +7,7 @@ import { reducer as toastrReducer } from 'react-redux-toastr';
 
 import reducers from './reducers';
 
-const middleware = [
-  thunk,
-  routerMiddleware(browserHistory),
-];
+const middleware = [thunk, routerMiddleware(browserHistory)];
 
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());

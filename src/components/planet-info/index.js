@@ -8,6 +8,4 @@ const mapStateToProps = ({ sector }, { routeParams }) => ({
     : {},
 });
 
-export default connect(
-  mapStateToProps,
-)(PlanetInfo);
+export default connect(mapStateToProps)(PlanetInfo);
