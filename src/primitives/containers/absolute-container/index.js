@@ -5,7 +5,11 @@ import classNames from 'classnames';
 import './style.css';
 
 export default function AbsoluteContainer({ children, className }) {
-  return <div className={classNames('AbsoluteContainer', className)}>{children}</div>;
+  return (
+    <div className={classNames('AbsoluteContainer', className)}>
+      {children}
+    </div>
+  );
 }
 
 AbsoluteContainer.propTypes = {

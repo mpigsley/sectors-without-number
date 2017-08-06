@@ -5,11 +5,7 @@ import System from 'components/system';
 
 import './style.css';
 
-export default function HexMap({
-  height,
-  width,
-  hexData,
-}) {
+export default function HexMap({ height, width, hexData }) {
   return (
     <div className="HexMap-Container">
       <svg className="HexMap-SVG" width={width} height={height}>
@@ -22,7 +18,9 @@ export default function HexMap({
 HexMap.propTypes = {
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
-  hexData: PropTypes.arrayOf(PropTypes.shape({
-    systemKey: PropTypes.string.isRequired,
-  })).isRequired,
+  hexData: PropTypes.arrayOf(
+    PropTypes.shape({
+      systemKey: PropTypes.string.isRequired,
+    }),
+  ).isRequired,
 };

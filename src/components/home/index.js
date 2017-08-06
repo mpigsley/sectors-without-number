@@ -6,6 +6,4 @@ const mapStateToProps = state => ({
   seed: state.sector.seed,
 });
 
-export default connect(
-  mapStateToProps,
-)(Home);
+export default connect(mapStateToProps)(Home);

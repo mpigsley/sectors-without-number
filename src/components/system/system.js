@@ -12,13 +12,13 @@ function System(props) {
   const hexagon = [];
 
   for (let i = 0; i < points; i += 1) {
-    const pointOnCircle = (i * Math.PI) / 3;
+    const pointOnCircle = i * Math.PI / 3;
     const x = radius * Math.cos(pointOnCircle);
     const y = radius * Math.sin(pointOnCircle);
     hexagon.push(`${x + data.xOffset},${y + data.yOffset}`);
   }
 
-  const isSystem = (func) => {
+  const isSystem = func => {
     if (data.highlighted) {
       return () => func(props.systemKey);
     }
@@ -27,7 +27,9 @@ function System(props) {
 
   const onClick = () => {
     if (data.system) {
-      props.router.push(`/sector/system/${data.systemKey}${props.location.search}`);
+      props.router.push(
+        `/sector/system/${data.systemKey}${props.location.search}`,
+      );
     }
   };
 
@@ -49,7 +51,7 @@ function System(props) {
       <text
         className="System-Text"
         x={data.xOffset}
-        y={data.yOffset - ((data.height / 2) - 8)}
+        y={data.yOffset - (data.height / 2 - 8)}
       >
         {Object.keys(data.system.planets).length}
       </text>
@@ -62,7 +64,7 @@ function System(props) {
       <text
         className="System-Text"
         x={data.xOffset}
-        y={data.yOffset + ((data.height / 2) - 3)}
+        y={data.yOffset + (data.height / 2 - 3)}
       >
         {data.systemKey}
       </text>

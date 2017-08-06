@@ -7,7 +7,11 @@ export default function SectorSidebar({ children }) {
   if (window.innerWidth <= 700) {
     return null;
   }
-  return <div className="SectorSidebar">{children}</div>;
+  return (
+    <div className="SectorSidebar">
+      {children}
+    </div>
+  );
 }
 
 SectorSidebar.propTypes = {

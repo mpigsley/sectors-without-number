@@ -2,13 +2,15 @@
 const { StarDigraphs, GreekLetters } = require('../constants/language');
 const { capitalizeFirstLetter } = require('../utils/common');
 
-const tweakSeeds = (hexSeeds) => {
-  const newSeeds = hexSeeds.concat([hexSeeds.reduce((a, b) => a + b, 0) % 0x10000]);
+const tweakSeeds = hexSeeds => {
+  const newSeeds = hexSeeds.concat([
+    hexSeeds.reduce((a, b) => a + b, 0) % 0x10000,
+  ]);
   newSeeds.shift();
   return newSeeds;
 };
 
-export const generateName = (seededChance) => {
+export const generateName = seededChance => {
   const hash = seededChance.hash({ length: 12 });
   let name = '';
   let hexSeeds = [
@@ -27,7 +29,7 @@ export const generateName = (seededChance) => {
   return capitalizeFirstLetter(name.split('.').join(''));
 };
 
-export const generateSectorName = (seededChance) => {
+export const generateSectorName = seededChance => {
   const greek = seededChance.pickone(GreekLetters);
   return `${generateName(seededChance)} ${greek}`;
 };

@@ -7,6 +7,4 @@ const mapStateToProps = ({ sector }) => ({
   systems: sector.systems ? Object.values(sector.systems) : [],
 });
 
-export default connect(
-  mapStateToProps,
-)(SectorInfo);
+export default connect(mapStateToProps)(SectorInfo);
