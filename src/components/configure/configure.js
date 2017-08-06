@@ -6,7 +6,9 @@ import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/containers/content-container';
 import SubContainer from 'primitives/containers/sub-container';
 import Input from 'primitives/other/input';
-import { Link, Label, LinkIcon } from 'primitives';
+import Label from 'primitives/other/label';
+import LinkIcon from 'primitives/other/link-icon';
+import Link from 'primitives/other/link';
 
 import './style.css';
 

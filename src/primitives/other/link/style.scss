@@ -1,0 +1,34 @@
+@import "styles/theme";
+
+.Link {
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: $light4;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid $light4;
+  cursor: pointer;
+  box-sizing: border-box;
+  font-weight: 400;
+  transition: all 0.3s;
+  outline: none;
+
+  &--padded {
+    margin: 0.4rem 1rem;
+  }
+
+  &:hover {
+    color: $light2;
+    border-color: $light2;
+    outline: 0;
+  }
+}

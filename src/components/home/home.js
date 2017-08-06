@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Settings, Zap } from 'react-feather';
 
-import { Link, LinkIcon } from 'primitives';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/containers/content-container';
 import SubContainer from 'primitives/containers/sub-container';
+import LinkIcon from 'primitives/other/link-icon';
+import Link from 'primitives/other/link';
 
 import './style.css';
 
