@@ -1,5 +1,7 @@
 # Sectors Without Number
 
+[![Build Status](https://travis-ci.org/mpigsley/sectors-without-number.svg?branch=master)](https://travis-ci.org/mpigsley/sectors-without-number)
+
 **Warning: In Progress**
 
 A seeded, random stars without number sector generator based completely in the web.
@@ -7,11 +9,11 @@ A seeded, random stars without number sector generator based completely in the w
 ## Alpha Roadmap
 * [x] Generate a hexagonal playing grid
 * [x] Create way to configure seed/grid size
-* [ ] Generate a sector based on seed and a grid size
+* [x] Generate a sector based on seed and a grid size
   * [x] Generate a random sector name
   * [x] Generate random star names
   * [x] Generate a random number of planets (weighted)
-  * [ ] Generate planet tags
+  * [x] Generate planet tags
 * [x] Draw sector on hexagonal playing grid
   * [x] Center grid within view
   * [x] Scale view based on size of screen
@@ -20,7 +22,7 @@ A seeded, random stars without number sector generator based completely in the w
   * [x] Draw grid coordinates (scale based on size and remove when too small)
 * [ ] Render system information
   * [x] Create information sidebar (scale hex grid area based on open/close)
-  * [ ] Render star information
+  * [x] Render star information
   * [ ] Render planet information
   * [x] Render sector hover tooltip with basic system information
 * [x] Generate share link
