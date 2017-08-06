@@ -1,0 +1,21 @@
+@import "styles/theme";
+
+.SidebarLinkRow-RightArrow {
+  color: $dark3;
+  transition: color 0.5s;
+}
+
+.SidebarLinkRow {
+  color: $dark3;
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  transition: background-color 0.5s;
+
+  &:hover {
+    background-color: $primary;
+
+    .SidebarLinkRow-RightArrow {
+      color: $light4;
+    }
+  }
+}

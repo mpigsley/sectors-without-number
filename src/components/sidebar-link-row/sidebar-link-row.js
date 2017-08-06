@@ -1,23 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
+import { ChevronRight } from 'react-feather';
 
 import FlexContainer from 'primitives/containers/flex-container';
-import {
-  LinkContainer,
-  RightArrow,
-  LinkRow,
-} from './components';
+
+import './style.css';
 
 export default function SidebarLinkRow({ children, to }) {
   return (
-    <LinkRow to={to}>
+    <Link className="SidebarLinkRow" to={to}>
       <FlexContainer>
-        <LinkContainer align="baseline">
+        <FlexContainer flex="1" align="baseline">
           {children}
-        </LinkContainer>
-        <RightArrow />
+        </FlexContainer>
+        <ChevronRight className="SidebarLinkRow-RightArrow" />
       </FlexContainer>
-    </LinkRow>
+    </Link>
   );
 }
 
