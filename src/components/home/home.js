@@ -6,20 +6,21 @@ import { Link, LinkIcon } from 'primitives';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/containers/content-container';
 import SubContainer from 'primitives/containers/sub-container';
-import { RowContainer, Row } from './components';
+
+import './style.css';
 
 export default function Home({ seed }) {
   return (
     <ContentContainer direction="column" align="center" justify="center">
       <Header type={HeaderType.header1}>Sectors Without Number</Header>
       <SubContainer fullWidth justify="center" align="center">
-        <RowContainer>
-          <Row left />
-        </RowContainer>
+        <div className="Home-RowContainer">
+          <div className="Home-Row Home-Row--left" />
+        </div>
         <Header type={HeaderType.header2}>Sector Generator & Notepad</Header>
-        <RowContainer>
-          <Row right />
-        </RowContainer>
+        <div className="Home-RowContainer">
+          <div className="Home-Row" />
+        </div>
       </SubContainer>
       <SubContainer wrap justify="center" align="center">
         <Link padded to="/configure">
