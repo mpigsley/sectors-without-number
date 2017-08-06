@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './style.css';
+
 export default function SectorSidebar({ children }) {
   if (window.innerWidth <= 700) {
     return null;
