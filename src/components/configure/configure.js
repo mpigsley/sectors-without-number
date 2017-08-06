@@ -5,7 +5,8 @@ import { Zap } from 'react-feather';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/containers/content-container';
 import SubContainer from 'primitives/containers/sub-container';
-import { Link, Input, Label, LinkIcon } from 'primitives';
+import Input from 'primitives/other/input';
+import { Link, Label, LinkIcon } from 'primitives';
 
 import './style.css';
 
