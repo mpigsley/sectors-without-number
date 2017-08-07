@@ -10,6 +10,8 @@ import FlexContainer from 'primitives/containers/flex-container';
 import SystemTooltips from 'components/system-tooltips';
 import HexMap from 'components/hex-map';
 
+import './style.css';
+
 export default class Sector extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
@@ -60,25 +62,34 @@ export default class Sector extends Component {
   }
 
   render() {
-    const hexData = hexGenerator({
+    const { hexes, printables } = hexGenerator({
       renderSector: true,
       ...this.state,
       ...this.props,
     });
 
     return (
-      <FlexContainer direction="row">
-        <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
-        {this.renderTooltips(hexData)}
-        <HexMap
-          width={this.state.width}
-          height={this.state.height}
-          hexData={hexData}
-        />
-        <SectorSidebar>
-          {this.props.children}
-        </SectorSidebar>
-      </FlexContainer>
+      <div>
+        <FlexContainer className="Sector" direction="row">
+          <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
+          {this.renderTooltips(hexes)}
+          <HexMap
+            width={this.state.width}
+            height={this.state.height}
+            hexes={hexes}
+          />
+          <SectorSidebar>
+            {this.props.children}
+          </SectorSidebar>
+        </FlexContainer>
+        <div className="Sector-Printable">
+          <HexMap
+            width={printables.width}
+            height={printables.height}
+            hexes={printables.hexes}
+          />
+        </div>
+      </div>
     );
   }
 }

@@ -39,16 +39,18 @@ export default class HexBackground extends Component {
   }, 100);
 
   render() {
+    const { hexes } = hexGenerator({
+      renderSector: false,
+      ...this.state,
+      ...this.props,
+    });
+
     return (
       <div>
         <HexMap
           width={this.state.width}
           height={this.state.height}
-          hexData={hexGenerator({
-            renderSector: false,
-            ...this.state,
-            ...this.props,
-          })}
+          hexes={hexes}
         />
         <AbsoluteContainer>
           {this.props.children}

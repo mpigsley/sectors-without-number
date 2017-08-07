@@ -85,6 +85,25 @@ const getGridData = (
   };
 };
 
+const printableHexWidth = 200;
+const printablePadding = 20;
+const getPrintableData = (hexes, { rows, columns }) => {
+  const printableHexHeight = toHeight(printableHexWidth);
+  const onlySector = hexes.filter(hex => hex.highlighted);
+  const { xOffset, yOffset } = hexes.find(hex => hex.systemKey === '0000');
+  return {
+    width: columns * printableHexWidth + printablePadding * 2,
+    height: rows * printableHexHeight + printablePadding * 2,
+    hexes: onlySector.map(hex => ({
+      ...hex,
+      width: printableHexWidth,
+      height: printableHexHeight,
+      xOffset: hex.xOffset - xOffset + printablePadding,
+      yOffset: hex.yOffset - yOffset + printablePadding,
+    })),
+  };
+};
+
 export default config => {
   const { renderSector, systems } = config;
   const newConfig = renderSector
@@ -104,7 +123,7 @@ export default config => {
     scaledXOffset,
   } = getGridData(hexSize, newConfig);
 
-  const hexArray = [];
+  const hexes = [];
   let isWithinHeight = true;
   let isWithinWidth = true;
   let i = 0;
@@ -119,7 +138,7 @@ export default config => {
         i - paddedRows + 1,
       );
       const system = systems && systems[systemKey];
-      hexArray.push({
+      hexes.push({
         systemKey,
         system: renderSector && system ? system : undefined,
         width: scaledWidth - hexPadding,
@@ -142,5 +161,10 @@ export default config => {
     isWithinHeight = i < totalRows;
   }
 
-  return hexArray;
+  let printables = {};
+  if (renderSector) {
+    printables = getPrintableData(hexes, newConfig);
+  }
+
+  return { hexes, printables };
 };

@@ -5,11 +5,11 @@ import System from 'components/system';
 
 import './style.css';
 
-export default function HexMap({ height, width, hexData }) {
+export default function HexMap({ height, width, hexes }) {
   return (
     <div className="HexMap-Container">
       <svg className="HexMap-SVG" width={width} height={height}>
-        {hexData.map(hex => <System data={hex} key={hex.systemKey} />)}
+        {hexes.map(hex => <System data={hex} key={hex.systemKey} />)}
       </svg>
     </div>
   );
@@ -18,9 +18,13 @@ export default function HexMap({ height, width, hexData }) {
 HexMap.propTypes = {
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
-  hexData: PropTypes.arrayOf(
+  hexes: PropTypes.arrayOf(
     PropTypes.shape({
       systemKey: PropTypes.string.isRequired,
     }),
-  ).isRequired,
+  ),
+};
+
+HexMap.defaultProps = {
+  hexes: [],
 };

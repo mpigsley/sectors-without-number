@@ -1,0 +1,15 @@
+.Sector-Printable {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+}
+
+@media print {
+  .Sector {
+    display: none;
+  }
+
+  .Sector-Printable {
+    display: block;
+  }
+}
