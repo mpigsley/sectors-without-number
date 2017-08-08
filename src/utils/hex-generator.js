@@ -93,9 +93,10 @@ const getPrintableData = (hexes, { rows, columns }) => {
   const { height, xOffset, yOffset, i, j } = hexes.find(
     hex => hex.systemKey === '0000',
   );
-  const newWidth = columns * printableHexWidth + printablePadding * 2;
+  const newWidth =
+    getTotalWidth(printableHexWidth, columns) + printablePadding * 2;
   const newHeight =
-    rows * printableHexHeight + printablePadding * 2 + printableHexHeight / 2;
+    getTotalHeight(printableHexHeight, rows) + printablePadding * 2;
   return {
     viewbox: `0 0 ${newWidth} ${newHeight}`,
     hexes: onlySector.map(hex => ({
