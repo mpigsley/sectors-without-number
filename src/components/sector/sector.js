@@ -62,7 +62,7 @@ export default class Sector extends Component {
   }
 
   render() {
-    const { hexes, printables } = hexGenerator({
+    const { hexes, printable } = hexGenerator({
       renderSector: true,
       ...this.state,
       ...this.props,
@@ -83,11 +83,7 @@ export default class Sector extends Component {
           </SectorSidebar>
         </FlexContainer>
         <div className="Sector-Printable">
-          <HexMap
-            width={printables.width}
-            height={printables.height}
-            hexes={printables.hexes}
-          />
+          <HexMap hexes={printable.hexes} viewbox={printable.viewbox} />
         </div>
       </div>
     );

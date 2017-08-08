@@ -91,9 +91,10 @@ const getPrintableData = (hexes, { rows, columns }) => {
   const printableHexHeight = toHeight(printableHexWidth);
   const onlySector = hexes.filter(hex => hex.highlighted);
   const { xOffset, yOffset } = hexes.find(hex => hex.systemKey === '0000');
+  const width = columns * printableHexWidth + printablePadding * 2;
+  const height = rows * printableHexHeight + printablePadding * 2;
   return {
-    width: columns * printableHexWidth + printablePadding * 2,
-    height: rows * printableHexHeight + printablePadding * 2,
+    viewbox: `0 0 ${width} ${height}`,
     hexes: onlySector.map(hex => ({
       ...hex,
       width: printableHexWidth,
@@ -161,10 +162,10 @@ export default config => {
     isWithinHeight = i < totalRows;
   }
 
-  let printables = {};
+  let printable = {};
   if (renderSector) {
-    printables = getPrintableData(hexes, newConfig);
+    printable = getPrintableData(hexes, newConfig);
   }
 
-  return { hexes, printables };
+  return { hexes, printable };
 };

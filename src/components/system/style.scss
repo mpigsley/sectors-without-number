@@ -37,3 +37,18 @@
   text-anchor: middle;
   stroke-width: 0.6px;
 }
+
+@media print {
+  .System-Circle,
+  .System-Text {
+    fill: $dark4;
+    stroke: $dark4;
+  }
+
+  .System-Polygon,
+  .System-Hex--hoverable .System-Polygon {
+    fill: white;
+    stroke-width: 2px;
+    stroke: $dark4;
+  }
+}
