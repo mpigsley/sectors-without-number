@@ -28,6 +28,10 @@ export default function SidebarNavigation({ name, children, back, type }) {
     );
   };
 
+  const onPrint = () => {
+    window.print();
+  };
+
   let backBtn = (
     <ChevronLeft
       className={classNames(linkCss, {
@@ -67,7 +71,7 @@ export default function SidebarNavigation({ name, children, back, type }) {
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
           <Share className={linkCss} onClick={onCopy} size={18} />
-          <Printer className={linkCss} size={18} />
+          <Printer className={linkCss} onClick={onPrint} size={18} />
         </FlexContainer>
       </div>
       <FlexContainer direction="column" flex="1" scroll>

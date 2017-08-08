@@ -46,12 +46,21 @@
   transform: translateY(-3px);
 }
 
+.System-Name {
+  display: none;
+  transform: translateY(-24px);
+}
+
 @media print {
   .System-Circle,
   .System-Text {
     fill: $dark4;
     stroke: $dark4;
     font-size: 25px;
+  }
+
+  .System-Name {
+    display: block;
   }
 
   .System-Planets {
@@ -65,7 +74,7 @@
   .System-Polygon,
   .System-Hex--hoverable .System-Polygon {
     fill: white;
-    stroke-width: 2px;
+    stroke-width: 3px;
     stroke: $dark4;
   }
 }

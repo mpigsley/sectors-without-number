@@ -19,7 +19,7 @@ export const generateName = seededChance => {
     parseInt(hash.substr(8, 4), 16),
   ];
   const longNameFlag = hexSeeds[0] & 0x40;
-  for (let n = 0; n < 4; n += 1) {
+  for (let n = 0; n < 5; n += 1) {
     const d = ((hexSeeds[2] >> 8) & 0x1f) << 1;
     hexSeeds = tweakSeeds(hexSeeds);
     if (n < 3 || longNameFlag) {

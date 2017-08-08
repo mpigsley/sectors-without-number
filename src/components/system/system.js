@@ -58,6 +58,19 @@ function System(props) {
     );
   }
 
+  let name = null;
+  if (data.system && data.width > 45) {
+    name = (
+      <text
+        className="System-Text System-Name"
+        x={data.xOffset}
+        y={data.yOffset}
+      >
+        {data.system.name}
+      </text>
+    );
+  }
+
   let number = null;
   if (data.highlighted && data.width > 45) {
     number = (
@@ -91,6 +104,7 @@ function System(props) {
       />
       {planetNum}
       {star}
+      {name}
       {number}
     </g>
   );
