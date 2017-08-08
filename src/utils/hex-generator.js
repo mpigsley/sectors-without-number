@@ -87,7 +87,7 @@ const getGridData = (
 
 const printableHexWidth = 200;
 const printablePadding = 40;
-const printableBorder = 2;
+const printableBorder = 3;
 const getPrintableData = (hexes, { rows, columns }) => {
   const printableHexHeight = toHeight(printableHexWidth);
   const onlySector = hexes.filter(hex => hex.highlighted);
@@ -111,13 +111,13 @@ const getPrintableData = (hexes, { rows, columns }) => {
       xOffset:
         hex.xOffset -
         xOffset +
-        (hex.j - j) * (printableHexWidth / 2) +
+        (hex.j - j) * (printableHexWidth / 2 - printableBorder / 2) +
         printableHexWidth / 2 +
         printablePadding,
       yOffset:
         hex.yOffset -
         yOffset +
-        (hex.i - i) * (printableHexHeight / 1.5) +
+        (hex.i - i) * (printableHexHeight / 1.5 - printableBorder / 2) +
         ((hex.j - j) % 2 ? (printableHexHeight - height) / 2 : 0) +
         printableHexHeight / 2 +
         printablePadding,
