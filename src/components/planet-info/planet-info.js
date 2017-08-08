@@ -5,9 +5,23 @@ import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SectionHeader from 'primitives/text/section-header';
 import Header, { HeaderType } from 'primitives/text/header';
 import WorldTags from 'constants/world-tags';
-import { toReadableArray } from 'utils/common';
+import { capitalizeFirstLetter } from 'utils/common';
 
 import './style.css';
+
+const renderList = (title, list) =>
+  <div className="PlanetInfo-Content">
+    <b>
+      {title}:
+    </b>
+    <ul className="PlanetInfo-ContentList">
+      {list.map(capitalizeFirstLetter).map(element =>
+        <li key={element}>
+          {element}
+        </li>,
+      )}
+    </ul>
+  </div>;
 
 const renderTags = tags =>
   tags
@@ -30,26 +44,11 @@ const renderTags = tags =>
           <p className="PlanetInfo-Content">
             {description}
           </p>
-          <p className="PlanetInfo-Content">
-            <b>Enemies: </b>
-            {enemies.map(toReadableArray)}
-          </p>
-          <p className="PlanetInfo-Content">
-            <b>Friends: </b>
-            {friends.map(toReadableArray)}
-          </p>
-          <p className="PlanetInfo-Content">
-            <b>Complications: </b>
-            {complications.map(toReadableArray)}
-          </p>
-          <p className="PlanetInfo-Content">
-            <b>Things: </b>
-            {things.map(toReadableArray)}
-          </p>
-          <p className="PlanetInfo-Content">
-            <b>Places: </b>
-            {places.map(toReadableArray)}
-          </p>
+          {renderList('Enemies', enemies)}
+          {renderList('Friends', friends)}
+          {renderList('Complications', complications)}
+          {renderList('Things', things)}
+          {renderList('Places', places)}
         </div>,
     );
 

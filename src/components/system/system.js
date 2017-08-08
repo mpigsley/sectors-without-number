@@ -19,7 +19,6 @@ function System(props) {
   }
 
   const isSystem = func => {
-    console.log(data);
     if (data.highlighted) {
       return () => func(data.systemKey);
     }
