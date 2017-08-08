@@ -18,7 +18,7 @@ export default function Home({ seed }) {
         <div className="Home-RowContainer">
           <div className="Home-Row Home-Row--left" />
         </div>
-        <Header type={HeaderType.header2}>Sector Generator & Notepad</Header>
+        <Header type={HeaderType.header2}>Sector Generator</Header>
         <div className="Home-RowContainer">
           <div className="Home-Row" />
         </div>
