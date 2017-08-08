@@ -49,9 +49,9 @@ function System(props) {
   if (data.system && data.width > 45) {
     planetNum = (
       <text
-        className="System-Text"
+        className="System-Text System-Planets"
         x={data.xOffset}
-        y={data.yOffset - (data.height / 2 - 8)}
+        y={data.yOffset - data.height / 2}
       >
         {Object.keys(data.system.planets).length}
       </text>
@@ -62,9 +62,9 @@ function System(props) {
   if (data.highlighted && data.width > 45) {
     number = (
       <text
-        className="System-Text"
+        className="System-Text System-Key"
         x={data.xOffset}
-        y={data.yOffset + (data.height / 2 - 3)}
+        y={data.yOffset + data.height / 2}
       >
         {data.systemKey}
       </text>

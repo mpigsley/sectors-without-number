@@ -90,17 +90,31 @@ const printablePadding = 20;
 const getPrintableData = (hexes, { rows, columns }) => {
   const printableHexHeight = toHeight(printableHexWidth);
   const onlySector = hexes.filter(hex => hex.highlighted);
-  const { xOffset, yOffset } = hexes.find(hex => hex.systemKey === '0000');
-  const width = columns * printableHexWidth + printablePadding * 2;
-  const height = rows * printableHexHeight + printablePadding * 2;
+  const { height, xOffset, yOffset, i, j } = hexes.find(
+    hex => hex.systemKey === '0000',
+  );
+  const newWidth = columns * printableHexWidth + printablePadding * 2;
+  const newHeight =
+    rows * printableHexHeight + printablePadding * 2 + printableHexHeight / 2;
   return {
-    viewbox: `0 0 ${width} ${height}`,
+    viewbox: `0 0 ${newWidth} ${newHeight}`,
     hexes: onlySector.map(hex => ({
       ...hex,
       width: printableHexWidth,
       height: printableHexHeight,
-      xOffset: hex.xOffset - xOffset + printablePadding,
-      yOffset: hex.yOffset - yOffset + printablePadding,
+      xOffset:
+        hex.xOffset +
+        (hex.j - j) * (printableHexWidth / 2 + 2) +
+        printableHexWidth / 2 -
+        xOffset +
+        printablePadding,
+      yOffset:
+        hex.yOffset +
+        (hex.i - i) * (printableHexHeight / 1.5 + 2) +
+        ((hex.j - j) % 2 ? (printableHexHeight - height) / 2 : 0) +
+        printableHexHeight / 2 -
+        yOffset +
+        printablePadding,
     })),
   };
 };
@@ -140,6 +154,8 @@ export default config => {
       );
       const system = systems && systems[systemKey];
       hexes.push({
+        i,
+        j,
         systemKey,
         system: renderSector && system ? system : undefined,
         width: scaledWidth - hexPadding,

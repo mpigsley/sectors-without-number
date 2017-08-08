@@ -13,7 +13,7 @@ export default function HexMap({ height, width, viewbox, hexes }) {
         width={width}
         height={height}
         viewBox={viewbox}
-        preserveAspectRation="xMidYMid meet"
+        preserveAspectRatio="xMidYMid meet"
       >
         {hexes.map(hex => <System data={hex} key={hex.systemKey} />)}
       </svg>

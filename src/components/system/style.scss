@@ -38,11 +38,28 @@
   stroke-width: 0.6px;
 }
 
+.System-Planets {
+  transform: translateY(7px);
+}
+
+.System-Key {
+  transform: translateY(-3px);
+}
+
 @media print {
   .System-Circle,
   .System-Text {
     fill: $dark4;
     stroke: $dark4;
+    font-size: 25px;
+  }
+
+  .System-Planets {
+    transform: translateY(21px);
+  }
+
+  .System-Key {
+    transform: translateY(-7px);
   }
 
   .System-Polygon,
