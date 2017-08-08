@@ -5,22 +5,36 @@ import System from 'components/system';
 
 import './style.css';
 
-export default function HexMap({ height, width, hexData }) {
+export default function HexMap({ height, width, viewbox, hexes }) {
   return (
     <div className="HexMap-Container">
-      <svg className="HexMap-SVG" width={width} height={height}>
-        {hexData.map(hex => <System data={hex} key={hex.systemKey} />)}
+      <svg
+        className="HexMap-SVG"
+        width={width}
+        height={height}
+        viewBox={viewbox}
+        preserveAspectRatio="xMidYMid meet"
+      >
+        {hexes.map(hex => <System data={hex} key={hex.systemKey} />)}
       </svg>
     </div>
   );
 }
 
 HexMap.propTypes = {
-  height: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
-  hexData: PropTypes.arrayOf(
+  height: PropTypes.number,
+  width: PropTypes.number,
+  viewbox: PropTypes.string,
+  hexes: PropTypes.arrayOf(
     PropTypes.shape({
       systemKey: PropTypes.string.isRequired,
     }),
-  ).isRequired,
+  ),
+};
+
+HexMap.defaultProps = {
+  height: null,
+  width: null,
+  viewbox: null,
+  hexes: [],
 };

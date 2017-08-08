@@ -25,19 +25,3 @@ export const toCommaArray = (element, i) => {
   string += element;
   return string;
 };
-
-export const toReadableArray = (element, i, arr) => {
-  let string = '';
-  if (i === arr.length - 1) {
-    string += 'and ';
-  }
-  if (i === 0) {
-    string += capitalizeFirstLetter(element);
-  } else {
-    string += element;
-  }
-  if (i < arr.length - 1) {
-    string += ', ';
-  }
-  return string;
-};

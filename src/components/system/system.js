@@ -20,7 +20,7 @@ function System(props) {
 
   const isSystem = func => {
     if (data.highlighted) {
-      return () => func(props.systemKey);
+      return () => func(data.systemKey);
     }
     return () => {};
   };
@@ -49,11 +49,24 @@ function System(props) {
   if (data.system && data.width > 45) {
     planetNum = (
       <text
-        className="System-Text"
+        className="System-Text System-Planets"
         x={data.xOffset}
-        y={data.yOffset - (data.height / 2 - 8)}
+        y={data.yOffset - data.height / 2}
       >
         {Object.keys(data.system.planets).length}
+      </text>
+    );
+  }
+
+  let name = null;
+  if (data.system && data.width > 45) {
+    name = (
+      <text
+        className="System-Text System-Name"
+        x={data.xOffset}
+        y={data.yOffset}
+      >
+        {data.system.name}
       </text>
     );
   }
@@ -62,9 +75,9 @@ function System(props) {
   if (data.highlighted && data.width > 45) {
     number = (
       <text
-        className="System-Text"
+        className="System-Text System-Key"
         x={data.xOffset}
-        y={data.yOffset + (data.height / 2 - 3)}
+        y={data.yOffset + data.height / 2}
       >
         {data.systemKey}
       </text>
@@ -91,6 +104,7 @@ function System(props) {
       />
       {planetNum}
       {star}
+      {name}
       {number}
     </g>
   );

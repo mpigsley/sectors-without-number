@@ -4,7 +4,15 @@ import { Link } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
 import classNames from 'classnames';
-import { ChevronLeft, Share, Printer, Sun, Globe, Map } from 'react-feather';
+import {
+  ChevronLeft,
+  Share,
+  Printer,
+  Sun,
+  Globe,
+  Map,
+  Home,
+} from 'react-feather';
 
 import FlexContainer from 'primitives/containers/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -26,6 +34,10 @@ export default function SidebarNavigation({ name, children, back, type }) {
       'Copied to Clipboard',
       `You have copied a link directly to this ${type}.`,
     );
+  };
+
+  const onPrint = () => {
+    window.print();
   };
 
   let backBtn = (
@@ -66,8 +78,11 @@ export default function SidebarNavigation({ name, children, back, type }) {
           {typeIcon}
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
+          <Link to="/">
+            <Home className={linkCss} size={18} />
+          </Link>
           <Share className={linkCss} onClick={onCopy} size={18} />
-          <Printer className={linkCss} size={18} />
+          <Printer className={linkCss} onClick={onPrint} size={18} />
         </FlexContainer>
       </div>
       <FlexContainer direction="column" flex="1" scroll>

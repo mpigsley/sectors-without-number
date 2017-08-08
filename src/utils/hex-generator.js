@@ -85,6 +85,46 @@ const getGridData = (
   };
 };
 
+const printableHexWidth = 200;
+const printablePadding = 40;
+const printableBorder = 3;
+const getPrintableData = (hexes, { rows, columns }) => {
+  const printableHexHeight = toHeight(printableHexWidth);
+  const onlySector = hexes.filter(hex => hex.highlighted);
+  const { height, xOffset, yOffset, i, j } = hexes.find(
+    hex => hex.systemKey === '0000',
+  );
+  const newWidth =
+    getTotalWidth(printableHexWidth, columns) +
+    printablePadding * 2 +
+    printableBorder * columns;
+  const newHeight =
+    getTotalHeight(printableHexHeight, rows) +
+    printablePadding * 2 +
+    printableBorder * rows;
+  return {
+    viewbox: `0 0 ${newWidth} ${newHeight}`,
+    hexes: onlySector.map(hex => ({
+      ...hex,
+      width: printableHexWidth,
+      height: printableHexHeight,
+      xOffset:
+        hex.xOffset -
+        xOffset +
+        (hex.j - j) * (printableHexWidth / 2 - printableBorder / 2) +
+        printableHexWidth / 2 +
+        printablePadding,
+      yOffset:
+        hex.yOffset -
+        yOffset +
+        (hex.i - i) * (printableHexHeight / 1.5 - printableBorder / 2) +
+        ((hex.j - j) % 2 ? (printableHexHeight - height) / 2 : 0) +
+        printableHexHeight / 2 +
+        printablePadding,
+    })),
+  };
+};
+
 export default config => {
   const { renderSector, systems } = config;
   const newConfig = renderSector
@@ -104,7 +144,7 @@ export default config => {
     scaledXOffset,
   } = getGridData(hexSize, newConfig);
 
-  const hexArray = [];
+  const hexes = [];
   let isWithinHeight = true;
   let isWithinWidth = true;
   let i = 0;
@@ -119,7 +159,9 @@ export default config => {
         i - paddedRows + 1,
       );
       const system = systems && systems[systemKey];
-      hexArray.push({
+      hexes.push({
+        i,
+        j,
         systemKey,
         system: renderSector && system ? system : undefined,
         width: scaledWidth - hexPadding,
@@ -142,5 +184,10 @@ export default config => {
     isWithinHeight = i < totalRows;
   }
 
-  return hexArray;
+  let printable = {};
+  if (renderSector) {
+    printable = getPrintableData(hexes, newConfig);
+  }
+
+  return { hexes, printable };
 };

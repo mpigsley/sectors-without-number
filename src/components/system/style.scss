@@ -37,3 +37,44 @@
   text-anchor: middle;
   stroke-width: 0.6px;
 }
+
+.System-Planets {
+  transform: translateY(7px);
+}
+
+.System-Key {
+  transform: translateY(-3px);
+}
+
+.System-Name {
+  display: none;
+  transform: translateY(-24px);
+}
+
+@media print {
+  .System-Circle,
+  .System-Text {
+    fill: $dark4;
+    stroke: $dark4;
+    font-size: 25px;
+  }
+
+  .System-Name {
+    display: block;
+  }
+
+  .System-Planets {
+    transform: translateY(21px);
+  }
+
+  .System-Key {
+    transform: translateY(-8px);
+  }
+
+  .System-Polygon,
+  .System-Hex--hoverable .System-Polygon {
+    fill: white;
+    stroke-width: 3px;
+    stroke: $dark4;
+  }
+}
