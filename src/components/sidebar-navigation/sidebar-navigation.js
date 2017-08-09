@@ -12,6 +12,7 @@ import {
   Globe,
   Map,
   Home,
+  AlertCircle,
 } from 'react-feather';
 
 import FlexContainer from 'primitives/containers/flex-container';
@@ -83,6 +84,9 @@ export default function SidebarNavigation({ name, children, back, type }) {
           </Link>
           <Share className={linkCss} onClick={onCopy} size={18} />
           <Printer className={linkCss} onClick={onPrint} size={18} />
+          <Link to="https://goo.gl/forms/eOanpGEuglCYYg7u2" target="_blank">
+            <AlertCircle className={linkCss} size={18} />
+          </Link>
         </FlexContainer>
       </div>
       <FlexContainer direction="column" flex="1" scroll>
