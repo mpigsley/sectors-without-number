@@ -4,8 +4,12 @@ import PropTypes from 'prop-types';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SectionHeader from 'primitives/text/section-header';
 import Header, { HeaderType } from 'primitives/text/header';
-import WorldTags from 'constants/world-tags';
 import { capitalizeFirstLetter } from 'utils/common';
+import WorldTags from 'constants/world-tags';
+import Atmosphere from 'constants/atmosphere';
+import Temperature from 'constants/temperature';
+import Biosphere from 'constants/biosphere';
+import Population from 'constants/population';
 
 import './style.css';
 
@@ -52,6 +56,11 @@ const renderTags = tags =>
         </div>,
     );
 
+const renderAttribute = (title, attribute, obj) =>
+  <p className="PlanetInfo-Attribute">
+    <b>{title}:</b> {obj ? obj[attribute].name : attribute}
+  </p>;
+
 export default function SectorInfo({ planet, location, routeParams }) {
   return (
     <SidebarNavigation
@@ -59,6 +68,12 @@ export default function SectorInfo({ planet, location, routeParams }) {
       back={`/sector/system/${routeParams.system}${location.search}`}
       type={SidebarType.planet}
     >
+      <SectionHeader>Attributes</SectionHeader>
+      {renderAttribute('Tech Level', planet.techLevel)}
+      {renderAttribute('Atmosphere', planet.atmosphere, Atmosphere)}
+      {renderAttribute('Temperature', planet.temperature, Temperature)}
+      {renderAttribute('Biosphere', planet.biosphere, Biosphere)}
+      {renderAttribute('Population', planet.population, Population)}
       <SectionHeader>World Tags</SectionHeader>
       <div className="PlanetInfo-Section">
         {renderTags(planet.tags)}
@@ -70,6 +85,11 @@ export default function SectorInfo({ planet, location, routeParams }) {
 SectorInfo.propTypes = {
   planet: PropTypes.shape({
     name: PropTypes.string,
+    techLevel: PropTypes.string,
+    atmosphere: PropTypes.string,
+    temperature: PropTypes.string,
+    biosphere: PropTypes.string,
+    population: PropTypes.string,
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,

@@ -4,6 +4,55 @@ import { mapValues, zipObject } from 'lodash';
 import { generateSectorName, generateName } from 'utils/name-generator';
 import { isBetween, coordinateKey } from 'utils/common';
 import { worldTagKeys } from 'constants/world-tags';
+import Atmosphere from 'constants/atmosphere';
+import Temperature from 'constants/temperature';
+import Biosphere from 'constants/biosphere';
+import Population from 'constants/population';
+
+const generatePlanet = seededChance => () => ({
+  name: generateName(seededChance),
+  tags: seededChance.pickset(Object.keys(worldTagKeys), 2),
+  techLevel: `TL${seededChance.weighted(
+    ['0', '1', '2', '3', '4', '4+', '5'],
+    [1, 1, 2, 2, 3, 1, 1],
+  )}`,
+  atmosphere: seededChance.weighted(Object.keys(Atmosphere), [
+    1,
+    1,
+    1,
+    5,
+    1,
+    1,
+    1,
+  ]),
+  temperature: seededChance.weighted(Object.keys(Temperature), [
+    1,
+    1,
+    2,
+    3,
+    2,
+    1,
+    1,
+  ]),
+  biosphere: seededChance.weighted(Object.keys(Biosphere), [
+    1,
+    1,
+    2,
+    3,
+    2,
+    1,
+    1,
+  ]),
+  population: seededChance.weighted(Object.keys(Population), [
+    1,
+    1,
+    2,
+    3,
+    2,
+    1,
+    1,
+  ]),
+});
 
 class System {
   constructor(config, x, y) {
@@ -11,10 +60,7 @@ class System {
     this.name = generateName(this.config.seededChance);
     const planetArray = [
       ...Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2])),
-    ].map(() => ({
-      name: generateName(this.config.seededChance),
-      tags: this.config.seededChance.pickset(Object.keys(worldTagKeys), 2),
-    }));
+    ].map(generatePlanet(this.config.seededChance));
     this.planets = zipObject(
       planetArray.map(planet => planet.name.toLowerCase()),
       planetArray,
