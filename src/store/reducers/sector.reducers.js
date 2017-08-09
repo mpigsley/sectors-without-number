@@ -28,10 +28,15 @@ export default function sector(state = initialState, action) {
         [action.key]: action.value,
       };
     case LOCATION_CHANGE:
-      if (action.payload.pathname === '/') {
+      if (
+        action.payload.pathname === '/' ||
+        action.payload.pathname === '/configure'
+      ) {
         return {
           ...initialState,
           seed: new Chance().hash({ length: 15 }),
+          columns: defaultColumns,
+          rows: defaultRows,
         };
       } else if (action.payload.pathname.startsWith('/sector')) {
         const rows = Math.min(state.rows || 0, 20);

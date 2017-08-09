@@ -91,19 +91,19 @@ const printableBorder = 3;
 const getPrintableData = (hexes, { rows, columns }) => {
   const printableHexHeight = toHeight(printableHexWidth);
   const onlySector = hexes.filter(hex => hex.highlighted);
-  const { height, xOffset, yOffset, i, j } = hexes.find(
+  const { width, height, xOffset, yOffset, i, j } = hexes.find(
     hex => hex.systemKey === '0000',
   );
-  const newWidth =
+  const newTotalWidth =
     getTotalWidth(printableHexWidth, columns) +
     printablePadding * 2 +
     printableBorder * columns;
-  const newHeight =
+  const newTotalHeight =
     getTotalHeight(printableHexHeight, rows) +
     printablePadding * 2 +
     printableBorder * rows;
   return {
-    viewbox: `0 0 ${newWidth} ${newHeight}`,
+    viewbox: `0 0 ${newTotalWidth} ${newTotalHeight}`,
     hexes: onlySector.map(hex => ({
       ...hex,
       width: printableHexWidth,
@@ -111,13 +111,14 @@ const getPrintableData = (hexes, { rows, columns }) => {
       xOffset:
         hex.xOffset -
         xOffset +
-        (hex.j - j) * (printableHexWidth / 2 - printableBorder / 2) +
+        (hex.j - j) *
+          (printableHexWidth * 0.75 - width * 0.75 - printableBorder) +
         printableHexWidth / 2 +
         printablePadding,
       yOffset:
         hex.yOffset -
         yOffset +
-        (hex.i - i) * (printableHexHeight / 1.5 - printableBorder / 2) +
+        (hex.i - i) * (printableHexHeight - height - printableBorder) +
         ((hex.j - j) % 2 ? (printableHexHeight - height) / 2 : 0) +
         printableHexHeight / 2 +
         printablePadding,
