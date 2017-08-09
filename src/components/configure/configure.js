@@ -23,9 +23,9 @@ export default function Configure({ seed, columns, rows, updateSector }) {
   };
 
   const invalidText =
-    columns > 30 || rows > 30
+    columns > 20 || rows > 20
       ? <div className="Configure-Invalid">
-          Column and row count can not be greater than 30.
+          Column and row count can not be greater than 20.
         </div>
       : null;
 

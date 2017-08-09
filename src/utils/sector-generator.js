@@ -111,15 +111,12 @@ const randomNeighbor = (neighbors, existingLocs, seededChance) => {
   return filteredNeighbors.length && seededChance.pickone(filteredNeighbors);
 };
 
-// TODO
-// const smartGenerate = () => {
-//   const systems = {};
-//   return systems;
-// };
-
 const fullRandomGenerate = config => {
   const systems = {};
-  const systemNum = config.seededChance.d10() + 20;
+  const numHexes = config.rows * config.columns;
+  const systemNum =
+    config.seededChance.integer({ min: 0, max: Math.floor(numHexes / 8) }) +
+    Math.floor(numHexes / 4);
   let extra = systemNum;
 
   while (extra) {

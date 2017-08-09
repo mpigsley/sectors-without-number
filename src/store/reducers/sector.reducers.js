@@ -30,12 +30,12 @@ export default function sector(state = initialState, action) {
     case LOCATION_CHANGE:
       if (action.payload.pathname === '/') {
         return {
-          ...state,
+          ...initialState,
           seed: new Chance().hash({ length: 15 }),
         };
       } else if (action.payload.pathname.startsWith('/sector')) {
-        const rows = Math.min(state.rows || 0, 30);
-        const columns = Math.min(state.columns || 0, 30);
+        const rows = Math.min(state.rows || 0, 20);
+        const columns = Math.min(state.columns || 0, 20);
         let sectorGen = {};
         if (!state.systems) {
           sectorGen = sectorGenerator({ seed: state.seed, columns, rows });
