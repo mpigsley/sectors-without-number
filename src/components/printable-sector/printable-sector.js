@@ -24,58 +24,70 @@ const renderPlanets = planets =>
     .map(key => planets[key])
     .sort(stringSortByKey('name'))
     .map(planet =>
-      <FlexContainer
-        key={planet.name}
-        direction="column"
-        align="flexStart"
-        className="PrintableSector-Planet"
-      >
-        <Header
-          dark
-          type={HeaderType.header3}
-          className="PrintableSector-SystemTitle"
+      <div>
+        <FlexContainer
+          key={planet.name}
+          direction="column"
+          align="flexStart"
+          className="PrintableSector-Planet"
         >
-          {planet.name}
-        </Header>
-        {renderAttribute('Tech Level', planet.techLevel)}
-        {renderAttribute('Atmosphere', planet.atmosphere, Atmosphere)}
-        {renderAttribute('Temperature', planet.temperature, Temperature)}
-        {renderAttribute('Biosphere', planet.biosphere, Biosphere)}
-        {renderAttribute('Population', planet.population, Population)}
-        {renderAttribute(
-          'Tags',
-          planet.tags.map(tag => WorldTags[tag].name).map(toCommaArray),
-        )}
-      </FlexContainer>,
+          <Header
+            dark
+            type={HeaderType.header3}
+            className="PrintableSector-SystemTitle"
+          >
+            {planet.name}
+          </Header>
+          {renderAttribute('Tech Level', planet.techLevel)}
+          {renderAttribute('Atmosphere', planet.atmosphere, Atmosphere)}
+          {renderAttribute('Temperature', planet.temperature, Temperature)}
+          {renderAttribute('Biosphere', planet.biosphere, Biosphere)}
+          {renderAttribute('Population', planet.population, Population)}
+          {renderAttribute(
+            'Tags',
+            planet.tags.map(tag => WorldTags[tag].name).map(toCommaArray),
+          )}
+        </FlexContainer>
+      </div>,
     );
+
+const renderSystem = system =>
+  <div key={system.key} className="PrintableSector-System">
+    <FlexContainer
+      align="baseline"
+      justify="center"
+      className="PrintableSector-SystemHeader"
+    >
+      <Header
+        dark
+        type={HeaderType.header2}
+        className="PrintableSector-SystemTitle"
+      >
+        {system.name}
+      </Header>
+      <Header
+        type={HeaderType.header4}
+        className="PrintableSector-SystemKey PrintableSector-SystemTitle"
+      >
+        ({system.key})
+      </Header>
+    </FlexContainer>
+    {renderPlanets(system.planets)}
+  </div>;
 
 const renderSystems = systems =>
   Object.keys(systems)
     .map(key => systems[key])
     .sort(stringSortByKey('name'))
-    .map(system =>
-      <div key={system.key} className="PrintableSector-System">
-        <FlexContainer
-          align="baseline"
-          justify="center"
-          className="PrintableSector-SystemHeader"
-        >
-          <Header
-            dark
-            type={HeaderType.header2}
-            className="PrintableSector-SystemTitle"
-          >
-            {system.name}
-          </Header>
-          <Header
-            type={HeaderType.header4}
-            className="PrintableSector-SystemKey PrintableSector-SystemTitle"
-          >
-            ({system.key})
-          </Header>
-        </FlexContainer>
-        {renderPlanets(system.planets)}
-      </div>,
+    .map((system, i, arr) => (i % 3 === 0 ? arr.slice(i, i + 3) : null))
+    .filter(system => system)
+    .map(systemGroup =>
+      <FlexContainer
+        key={toCommaArray(systemGroup.map(system => system.name))}
+        className="PrintableSector-Systems"
+      >
+        {systemGroup.map(renderSystem)}
+      </FlexContainer>,
     );
 
 export default function PrintableSector({ printable, systems }) {
@@ -84,13 +96,9 @@ export default function PrintableSector({ printable, systems }) {
       <div className="PrintableSector-Container">
         <HexMap hexes={printable.hexes} viewbox={printable.viewbox} />
       </div>
-      <FlexContainer
-        wrap
-        justify="spaceEvenly"
-        className="PrintableSector-Systems"
-      >
+      <div className="PrintableSector-SystemsContainer">
         {renderSystems(systems)}
-      </FlexContainer>
+      </div>
     </div>
   );
 }
