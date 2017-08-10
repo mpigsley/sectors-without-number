@@ -53,6 +53,7 @@ FlexContainer.propTypes = {
     'center',
     'spaceBetween',
     'spaceAround',
+    'spaceEvenly',
     'initial',
     'inherit',
   ]),

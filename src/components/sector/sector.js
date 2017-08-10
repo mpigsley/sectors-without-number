@@ -6,8 +6,9 @@ import ReduxToastr from 'react-redux-toastr';
 import hexGenerator from 'utils/hex-generator';
 
 import SectorSidebar from 'components/sector-sidebar';
-import FlexContainer from 'primitives/containers/flex-container';
 import SystemTooltips from 'components/system-tooltips';
+import PrintableSector from 'components/printable-sector';
+import FlexContainer from 'primitives/containers/flex-container';
 import HexMap from 'components/hex-map';
 
 import './style.css';
@@ -82,9 +83,7 @@ export default class Sector extends Component {
             {this.props.children}
           </SectorSidebar>
         </FlexContainer>
-        <div className="Sector-Printable">
-          <HexMap hexes={printable.hexes} viewbox={printable.viewbox} />
-        </div>
+        <PrintableSector printable={printable} />
       </div>
     );
   }
