@@ -24,7 +24,7 @@ const renderPlanets = planets =>
     .map(key => planets[key])
     .sort(stringSortByKey('name'))
     .map(planet =>
-      <div>
+      <div key={planet.name}>
         <FlexContainer
           key={planet.name}
           direction="column"

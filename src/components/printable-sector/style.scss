@@ -7,6 +7,7 @@
 }
 
 .PrintableSector-SystemsContainer {
+  display: none;
   padding: 2rem 0;
 }
 
@@ -43,7 +44,8 @@
 }
 
 @media print {
-  .PrintableSector-Container {
-    display: block;
+  .PrintableSector-Container,
+  .PrintableSector-SystemsContainer {
+    display: inherit;
   }
 }
