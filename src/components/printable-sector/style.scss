@@ -1,0 +1,26 @@
+@import "styles/theme";
+
+.PrintableSector-Container {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+}
+
+.PrintableSector-System {
+  flex: 1 0 calc(33.3% - 4rem);
+  margin: 0 2rem;
+}
+
+.PrintableSector-SystemName {
+}
+
+.PrintableSector-SystemKey {
+  color: $dark1;
+  margin-left: 0.5rem;
+}
+
+@media print {
+  .PrintableSector-Container {
+    display: block;
+  }
+}

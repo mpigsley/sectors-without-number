@@ -43,6 +43,9 @@
 .FlexContainer-Justify--spaceAround {
   justify-content: space-around; }
 
+.FlexContainer-Justify--spaceEvenly {
+  justify-content: space-evenly; }
+
 .FlexContainer-Justify--initial {
   justify-content: initial; }
 
