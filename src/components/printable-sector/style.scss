@@ -6,17 +6,36 @@
   height: 100vh;
 }
 
-.PrintableSector-System {
-  flex: 1 0 calc(33.3% - 4rem);
-  margin: 0 2rem;
+.PrintableSector-Systems {
+  padding: 2rem 0;
 }
 
-.PrintableSector-SystemName {
+.PrintableSector-System {
+  flex: 1 0 25%;
+  margin: 0 1rem;
+}
+
+.PrintableSector-SystemHeader {
+  border-bottom: 1px solid $dark1;
+  margin-bottom: 0.5rem;
+}
+
+.PrintableSector-SystemTitle {
+  margin-bottom: 0.5rem;
 }
 
 .PrintableSector-SystemKey {
   color: $dark1;
   margin-left: 0.5rem;
+}
+
+.PrintableSector-Planet {
+  margin: 0 0.8rem 0.5rem;
+}
+
+.PrintableSector-PlanetAttribute {
+  color: $dark4;
+  margin: 0.1rem 0;
 }
 
 @media print {
