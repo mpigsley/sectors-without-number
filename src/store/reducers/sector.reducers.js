@@ -35,12 +35,10 @@ export default function sector(state = initialState, action) {
         saved: action.saved,
       };
     case LOCATION_CHANGE:
-      if (
-        action.payload.pathname === '/' ||
-        action.payload.pathname === '/configure'
-      ) {
+      if (['/', '/configure'].indexOf(action.payload.pathname) > 0) {
         return {
           ...initialState,
+          saved: state.saved,
           seed: new Chance().hash({ length: 15 }),
           columns: defaultColumns,
           rows: defaultRows,

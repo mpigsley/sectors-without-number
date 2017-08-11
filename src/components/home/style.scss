@@ -1,3 +1,5 @@
+@import "styles/theme";
+
 .Home-RowContainer {
   flex: 1;
 }
@@ -11,6 +13,57 @@
   &--left {
     background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
   }
+}
+
+.Home-Saved {
+  margin-top: 1rem;
+  margin-bottom: 1.8rem;
+}
+
+.Home-SavedTitleContainer {
+  padding-right: 1.5rem;
+}
+
+.Home-SavedTitle {
+  margin-bottom: 0.2rem;
+}
+
+.Home-SavedList {
+  border-left: solid 1px $light1;
+  list-style: none;
+  margin-bottom: 0;
+  margin-top: 0;
+  padding: 0;
+  padding-left: 1.5rem;
+}
+
+.Home-SavedItem {
+  border-bottom: solid 1px $light1;
+  cursor: pointer;
+  padding: 1rem;
+  text-align: left;
+
+  &:last-of-type {
+    border-bottom: 0;
+  }
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.Home-SavedName {
+  color: $light3;
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin: 0 0.5rem;
+}
+
+.Home-SavedSecondary {
+  color: $light1;
+  font-size: 0.9rem;
+  max-width: 10rem;
+  text-align: right;
 }
 
 @media (max-width: 768px) {
