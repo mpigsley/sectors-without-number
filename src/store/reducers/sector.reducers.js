@@ -4,6 +4,7 @@ import QueryString from 'query-string';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import sectorGenerator from 'utils/sector-generator';
 import {
+  SET_SAVED_SECTORS,
   UPDATE_SECTOR,
   SECTOR_HOVER_START,
   SECTOR_HOVER_END,
@@ -18,6 +19,7 @@ const initialState = {
   columns: query.c ? Number.parseInt(query.c, 10) : defaultColumns,
   rows: query.r ? Number.parseInt(query.r, 10) : defaultRows,
   hoverKey: null,
+  saved: {},
 };
 
 export default function sector(state = initialState, action) {
@@ -26,6 +28,11 @@ export default function sector(state = initialState, action) {
       return {
         ...state,
         [action.key]: action.value,
+      };
+    case SET_SAVED_SECTORS:
+      return {
+        ...state,
+        saved: action.saved,
       };
     case LOCATION_CHANGE:
       if (

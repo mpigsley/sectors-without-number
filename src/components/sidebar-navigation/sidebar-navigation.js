@@ -10,7 +10,6 @@ import {
   Sun,
   Globe,
   Map,
-  Home,
   AlertCircle,
   Save,
 } from 'react-feather';
@@ -47,15 +46,6 @@ export default function SidebarNavigation({
     window.print();
   };
 
-  let backBtn = back
-    ? <ChevronLeft className={linkCss} />
-    : <Home className={linkCss} size={20} />;
-  backBtn = (
-    <Link to={back || '/'} className="SidebarNavigation-Link">
-      {backBtn}
-    </Link>
-  );
-
   const iconSize = 18;
   let typeIcon = <Map className={nonLinkCss} hidden size={iconSize} />;
   if (type === SidebarType.sector) {
@@ -70,7 +60,9 @@ export default function SidebarNavigation({
     <FlexContainer className="SidebarNavigation-Info" direction="column">
       <div className="SidebarNavigation-Header">
         <FlexContainer align="center" shrink="0">
-          {backBtn}
+          <Link to={back || '/'} className="SidebarNavigation-Link">
+            <ChevronLeft className={linkCss} />
+          </Link>
           <FlexContainer flex="1" justify="center">
             <Header type={HeaderType.header2}>
               {name}

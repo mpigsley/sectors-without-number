@@ -1,6 +1,7 @@
 import localForage from 'localforage';
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 
+export const SET_SAVED_SECTORS = 'SET_SAVED_SECTORS';
 export const UPDATE_SECTOR = 'UPDATE_SECTOR_CONFIG';
 export const SECTOR_HOVER_START = 'SECTOR_HOVER_START';
 export const SECTOR_HOVER_END = 'SECTOR_HOVER_END';
@@ -10,6 +11,10 @@ const ConfigKeys = {
   columns: 'columns',
   rows: 'rows',
 };
+
+export function setSavedSectors(saved) {
+  return { type: SET_SAVED_SECTORS, saved };
+}
 
 export function saveSector() {
   return (dispatch, getState) => {
@@ -32,7 +37,7 @@ export function saveSector() {
             },
             position: 'bottom-left',
             title: 'Saved Sector',
-            message: 'Sector data is persisted in the browser.',
+            message: 'Sector is persisted in this browser.',
             type: 'success',
           }),
         );
