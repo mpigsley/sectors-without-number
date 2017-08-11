@@ -6,7 +6,7 @@ A seeded, random, revised edition compliant, [stars without number](http://www.s
 
 ## Feature Requests & Bugs
 
-Feel free to [open an issue](https://github.com/mpigsley/sectors-without-number/issues/new) if you there is a feature you'd like to or something is broken. Pull requests are always welcome.
+Feel free to [open an issue](https://github.com/mpigsley/sectors-without-number/issues/new) if there is a feature you'd like to see or something is broken. Pull requests are always welcome.
 
 ## Development
 
