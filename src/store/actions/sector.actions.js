@@ -2,6 +2,7 @@ import localForage from 'localforage';
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 
 export const SET_SAVED_SECTORS = 'SET_SAVED_SECTORS';
+export const ADD_SAVED_SECTOR = 'ADD_SAVED_SECTOR';
 export const UPDATE_SECTOR = 'UPDATE_SECTOR_CONFIG';
 export const SECTOR_HOVER_START = 'SECTOR_HOVER_START';
 export const SECTOR_HOVER_END = 'SECTOR_HOVER_END';
@@ -20,28 +21,28 @@ export function saveSector() {
   return (dispatch, getState) => {
     const { sector } = getState();
     const { seed, rows, columns, name, systems } = sector;
-    return localForage
-      .setItem(seed, {
-        seed,
-        rows,
-        columns,
-        name,
-        systems,
-      })
-      .then(() => {
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'Saved Sector',
-            message: 'Sector is persisted in this browser.',
-            type: 'success',
-          }),
-        );
-      });
+    const savedSector = {
+      seed,
+      rows,
+      columns,
+      name,
+      systems,
+    };
+    return localForage.setItem(seed, savedSector).then(() => {
+      dispatch({ type: ADD_SAVED_SECTOR, savedSector });
+      dispatch(
+        ReduxToastrActions.add({
+          options: {
+            removeOnHover: true,
+            showCloseButton: true,
+          },
+          position: 'bottom-left',
+          title: 'Saved Sector',
+          message: 'Sector is persisted in this browser.',
+          type: 'success',
+        }),
+      );
+    });
   };
 }
 

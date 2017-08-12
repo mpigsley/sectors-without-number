@@ -5,6 +5,7 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import sectorGenerator from 'utils/sector-generator';
 import {
   SET_SAVED_SECTORS,
+  ADD_SAVED_SECTOR,
   UPDATE_SECTOR,
   SECTOR_HOVER_START,
   SECTOR_HOVER_END,
@@ -33,6 +34,14 @@ export default function sector(state = initialState, action) {
       return {
         ...state,
         saved: action.saved,
+      };
+    case ADD_SAVED_SECTOR:
+      return {
+        ...state,
+        saved: {
+          ...state.saved,
+          [action.savedSector.seed]: action.savedSector,
+        },
       };
     case LOCATION_CHANGE:
       if (['/', '/configure'].indexOf(action.payload.pathname) > 0) {
