@@ -48,7 +48,12 @@
   }
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.03);
+  }
+
+  &--selected,
+  &--selected:hover {
+    background-color: rgba(255, 255, 255, 0.08);
   }
 }
 

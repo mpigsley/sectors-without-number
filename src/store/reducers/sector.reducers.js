@@ -43,7 +43,8 @@ export default function sector(state = initialState, action) {
           columns: defaultColumns,
           rows: defaultRows,
         };
-      } else if (action.payload.pathname.startsWith('/sector')) {
+      }
+      if (action.payload.pathname.startsWith('/sector')) {
         const rows = Math.min(state.rows || 0, 20);
         const columns = Math.min(state.columns || 0, 20);
         let sectorGen = {};
