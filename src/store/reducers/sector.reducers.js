@@ -5,7 +5,7 @@ import sectorGenerator from 'utils/sector-generator';
 import {
   SET_SAVED_SECTORS,
   ADD_SAVED_SECTOR,
-  UPDATE_SECTOR,
+  REMOVE_SAVED_SECTOR,
   SECTOR_HOVER_START,
   SECTOR_HOVER_END,
 } from '../actions/sector.actions';
@@ -21,11 +21,6 @@ const initialState = {
 
 export default function sector(state = initialState, action) {
   switch (action.type) {
-    case UPDATE_SECTOR:
-      return {
-        ...state,
-        [action.key]: action.value,
-      };
     case SET_SAVED_SECTORS:
       return {
         ...state,
@@ -38,6 +33,16 @@ export default function sector(state = initialState, action) {
           ...state.saved,
           [action.savedSector.seed]: action.savedSector,
         },
+      };
+    case REMOVE_SAVED_SECTOR:
+      return {
+        ...state,
+        saved: Object.keys(state.saved).reduce((result, key) => {
+          if (key !== action.key) {
+            return { ...result, [key]: state.saved[key] };
+          }
+          return result;
+        }, {}),
       };
     case LOCATION_CHANGE:
       if (['/', '/configure'].indexOf(action.payload.pathname) >= 0) {

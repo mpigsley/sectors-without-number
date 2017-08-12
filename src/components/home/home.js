@@ -18,6 +18,7 @@ import './style.css';
 export default class Home extends Component {
   static propTypes = {
     saved: PropTypes.shape().isRequired,
+    deleteSector: PropTypes.func.isRequired,
   };
 
   constructor(props) {
@@ -32,7 +33,12 @@ export default class Home extends Component {
     selected: null,
   };
 
-  onDelete() {}
+  onDelete() {
+    const toDelete = this.state.selected;
+    this.setState({ selected: null }, () => {
+      this.props.deleteSector(toDelete);
+    });
+  }
 
   onCancel() {
     this.setState({ selected: null });
