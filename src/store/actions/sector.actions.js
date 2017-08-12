@@ -17,19 +17,14 @@ export function setSavedSectors(saved) {
   return { type: SET_SAVED_SECTORS, saved };
 }
 
+export function deleteSector(key) {}
+
 export function saveSector() {
   return (dispatch, getState) => {
     const { sector } = getState();
-    const { seed, rows, columns, name, systems } = sector;
-    const savedSector = {
-      seed,
-      rows,
-      columns,
-      name,
-      systems,
-    };
-    return localForage.setItem(seed, savedSector).then(() => {
-      dispatch({ type: ADD_SAVED_SECTOR, savedSector });
+    const key = sector.generated.seed;
+    return localForage.setItem(key, sector.generated).then(() => {
+      dispatch({ type: ADD_SAVED_SECTOR, savedSector: sector.generated });
       dispatch(
         ReduxToastrActions.add({
           options: {
