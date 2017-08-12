@@ -1,5 +1,4 @@
 import Chance from 'chance';
-import QueryString from 'query-string';
 
 import { LOCATION_CHANGE } from 'react-router-redux';
 import sectorGenerator from 'utils/sector-generator';
@@ -13,13 +12,10 @@ import {
 
 const defaultColumns = 8;
 const defaultRows = 10;
-const query = QueryString.parse(window.location.search);
 const initialState = {
-  seed: query.s || new Chance().hash({ length: 15 }),
   renderSector: false,
-  columns: query.c ? Number.parseInt(query.c, 10) : defaultColumns,
-  rows: query.r ? Number.parseInt(query.r, 10) : defaultRows,
   hoverKey: null,
+  generated: null,
   saved: {},
 };
 
@@ -44,34 +40,30 @@ export default function sector(state = initialState, action) {
         },
       };
     case LOCATION_CHANGE:
-      if (['/', '/configure'].indexOf(action.payload.pathname) > 0) {
+      if (['/', '/configure'].indexOf(action.payload.pathname) >= 0) {
         return {
           ...initialState,
           saved: state.saved,
-          seed: new Chance().hash({ length: 15 }),
-          columns: defaultColumns,
-          rows: defaultRows,
         };
       }
       if (action.payload.pathname.startsWith('/sector')) {
-        const rows = Math.min(state.rows || 0, 20);
-        const columns = Math.min(state.columns || 0, 20);
-        let sectorGen = {};
-        if (!state.systems) {
-          sectorGen = sectorGenerator({ seed: state.seed, columns, rows });
+        const seed =
+          action.payload.query.s || new Chance().hash({ length: 15 });
+        const rows = Math.min(action.payload.query.r || defaultRows, 20);
+        const columns = Math.min(action.payload.query.c || defaultColumns, 20);
+        let generated = state.generated;
+        if (!state.generated) {
+          generated =
+            state.saved[seed] || sectorGenerator({ seed, columns, rows });
         }
         return {
           ...state,
           renderSector: true,
-          columns,
-          rows,
-          ...sectorGen,
+          generated,
         };
       }
       return {
         ...state,
-        columns: defaultColumns,
-        rows: defaultRows,
         renderSector: false,
       };
     case SECTOR_HOVER_START:

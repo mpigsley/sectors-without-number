@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import PlanetInfo from './planet-info';
 
 const mapStateToProps = ({ sector }, { routeParams }) => ({
-  planet: sector.systems
-    ? sector.systems[routeParams.system].planets[routeParams.planet] || {}
+  planet: sector.generated.systems
+    ? sector.generated.systems[routeParams.system].planets[
+        routeParams.planet
+      ] || {}
     : {},
 });
 

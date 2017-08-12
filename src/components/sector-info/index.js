@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import SectorInfo from './sector-info';
 
 const mapStateToProps = ({ sector }) => ({
-  name: sector.name,
-  systems: sector.systems ? Object.values(sector.systems) : [],
+  name: sector.generated.name,
+  systems: sector.generated.systems
+    ? Object.values(sector.generated.systems)
+    : [],
 });
 
 export default connect(mapStateToProps)(SectorInfo);

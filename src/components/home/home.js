@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Chance from 'chance';
 import { Settings, Zap, Download, Delete, X } from 'react-feather';
 
 import { stringSortByKey } from 'utils/common';
@@ -16,7 +17,6 @@ import './style.css';
 
 export default class Home extends Component {
   static propTypes = {
-    seed: PropTypes.string.isRequired,
     saved: PropTypes.shape().isRequired,
   };
 
@@ -126,7 +126,7 @@ export default class Home extends Component {
         <ButtonLink
           to={{
             pathname: '/sector',
-            query: { s: this.props.seed },
+            query: { s: new Chance().hash({ length: 15 }) },
           }}
         >
           <LinkIcon icon={Zap} size="20" />
