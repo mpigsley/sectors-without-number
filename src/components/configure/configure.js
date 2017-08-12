@@ -8,7 +8,7 @@ import SubContainer from 'primitives/containers/sub-container';
 import Input from 'primitives/other/input';
 import Label from 'primitives/other/label';
 import LinkIcon from 'primitives/other/link-icon';
-import Link from 'primitives/other/link';
+import ButtonLink from 'primitives/other/button-link';
 
 import './style.css';
 
@@ -83,8 +83,7 @@ export default function Configure({ seed, columns, rows, updateSector }) {
         justify="center"
         align="center"
       >
-        <Link
-          padded
+        <ButtonLink
           to={{
             pathname: '/sector',
             query: { s: seed, c: columns, r: rows },
@@ -92,7 +91,7 @@ export default function Configure({ seed, columns, rows, updateSector }) {
         >
           <LinkIcon icon={Zap} size="20" />
           Generate
-        </Link>
+        </ButtonLink>
       </SubContainer>
     </ContentContainer>
   );

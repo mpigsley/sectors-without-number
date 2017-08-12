@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Settings, Zap } from 'react-feather';
+import { Settings, Zap, Download, Delete, X } from 'react-feather';
 
 import { stringSortByKey } from 'utils/common';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -9,7 +9,8 @@ import ContentContainer from 'primitives/containers/content-container';
 import FlexContainer from 'primitives/containers/flex-container';
 import SubContainer from 'primitives/containers/sub-container';
 import LinkIcon from 'primitives/other/link-icon';
-import Link from 'primitives/other/link';
+import ButtonLink from 'primitives/other/button-link';
+import Button from 'primitives/other/button';
 
 import './style.css';
 
@@ -23,15 +24,25 @@ export default class Home extends Component {
     super(props);
 
     this.setSelected = this.setSelected.bind(this);
+    this.onCancel = this.onCancel.bind(this);
+    this.onDelete = this.onDelete.bind(this);
   }
 
   state = {
     selected: null,
   };
 
+  onDelete() {}
+
+  onCancel() {
+    this.setState({ selected: null });
+  }
+
   setSelected(selected) {
     return () => {
-      this.setState({ selected });
+      this.setState({
+        selected: selected === this.state.selected ? null : selected,
+      });
     };
   }
 
@@ -78,6 +89,53 @@ export default class Home extends Component {
     );
   }
 
+  renderActions() {
+    if (this.state.selected) {
+      return (
+        <SubContainer wrap justify="center" align="center">
+          <Button onClick={this.onCancel}>
+            <LinkIcon icon={X} size="20" />
+            Cancel
+          </Button>
+          <Button onClick={this.onDelete}>
+            <LinkIcon icon={Delete} size="20" />
+            Delete
+          </Button>
+          <ButtonLink
+            to={{
+              pathname: '/sector',
+              query: {
+                s: this.state.selected,
+                r: this.props.saved[this.state.selected].rows,
+                c: this.props.saved[this.state.selected].columns,
+              },
+            }}
+          >
+            <LinkIcon icon={Download} size="20" />
+            Load
+          </ButtonLink>
+        </SubContainer>
+      );
+    }
+    return (
+      <SubContainer wrap justify="center" align="center">
+        <ButtonLink to="/configure">
+          <LinkIcon icon={Settings} size="20" />
+          Configure
+        </ButtonLink>
+        <ButtonLink
+          to={{
+            pathname: '/sector',
+            query: { s: this.props.seed },
+          }}
+        >
+          <LinkIcon icon={Zap} size="20" />
+          Generate
+        </ButtonLink>
+      </SubContainer>
+    );
+  }
+
   render() {
     return (
       <ContentContainer direction="column" align="center" justify="center">
@@ -92,22 +150,7 @@ export default class Home extends Component {
           </div>
         </SubContainer>
         {this.renderSaved()}
-        <SubContainer wrap justify="center" align="center">
-          <Link padded to="/configure">
-            <LinkIcon icon={Settings} size="20" />
-            Configure
-          </Link>
-          <Link
-            padded
-            to={{
-              pathname: '/sector',
-              query: { s: this.props.seed },
-            }}
-          >
-            <LinkIcon icon={Zap} size="20" />
-            Generate
-          </Link>
-        </SubContainer>
+        {this.renderActions()}
       </ContentContainer>
     );
   }
