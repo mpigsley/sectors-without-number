@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
-import classNames from 'classnames';
 import {
   ChevronLeft,
   Share,
@@ -11,8 +10,8 @@ import {
   Sun,
   Globe,
   Map,
-  Home,
   AlertCircle,
+  Save,
 } from 'react-feather';
 
 import FlexContainer from 'primitives/containers/flex-container';
@@ -28,7 +27,13 @@ export const SidebarType = {
   planet: 'planet',
 };
 
-export default function SidebarNavigation({ name, children, back, type }) {
+export default function SidebarNavigation({
+  name,
+  children,
+  back,
+  type,
+  saveSector,
+}) {
   const onCopy = () => {
     copy(window.location.href);
     toastr.success(
@@ -40,21 +45,6 @@ export default function SidebarNavigation({ name, children, back, type }) {
   const onPrint = () => {
     window.print();
   };
-
-  let backBtn = (
-    <ChevronLeft
-      className={classNames(linkCss, {
-        'SidebarNavigation-Icon--hidden': !back,
-      })}
-    />
-  );
-  if (back) {
-    backBtn = (
-      <Link to={back}>
-        {backBtn}
-      </Link>
-    );
-  }
 
   const iconSize = 18;
   let typeIcon = <Map className={nonLinkCss} hidden size={iconSize} />;
@@ -70,7 +60,9 @@ export default function SidebarNavigation({ name, children, back, type }) {
     <FlexContainer className="SidebarNavigation-Info" direction="column">
       <div className="SidebarNavigation-Header">
         <FlexContainer align="center" shrink="0">
-          {backBtn}
+          <Link to={back || '/'} className="SidebarNavigation-Link">
+            <ChevronLeft className={linkCss} />
+          </Link>
           <FlexContainer flex="1" justify="center">
             <Header type={HeaderType.header2}>
               {name}
@@ -79,9 +71,7 @@ export default function SidebarNavigation({ name, children, back, type }) {
           {typeIcon}
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
-          <Link to="/">
-            <Home className={linkCss} size={18} />
-          </Link>
+          <Save className={linkCss} onClick={saveSector} size={18} />
           <Share className={linkCss} onClick={onCopy} size={18} />
           <Printer className={linkCss} onClick={onPrint} size={18} />
           <Link to="https://goo.gl/forms/eOanpGEuglCYYg7u2" target="_blank">
@@ -101,6 +91,7 @@ SidebarNavigation.propTypes = {
   name: PropTypes.string.isRequired,
   back: PropTypes.string,
   type: PropTypes.string,
+  saveSector: PropTypes.func.isRequired,
 };
 
 SidebarNavigation.defaultProps = {

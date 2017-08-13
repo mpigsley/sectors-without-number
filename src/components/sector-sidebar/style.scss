@@ -5,3 +5,9 @@
   display: flex;
   width: 350px;
 }
+
+@media (max-width: 700) {
+  .SectorSidebar {
+    display: none;
+  }
+}

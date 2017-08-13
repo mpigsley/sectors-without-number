@@ -10,14 +10,15 @@
   border-bottom: 1px solid $dark2;
 }
 
-.SidebarNavigation-Icon {
-  color: $light2;
+.SidebarNavigation-Link {
+  display: inherit;
+}
 
-  &--hidden {
-    visibility: hidden;
-  }
+.SidebarNavigation-Icon {
+  color: $light3;
 
   &--nonlink {
+    color: $light1;
     padding: 10px 11px;
   }
 
@@ -27,7 +28,7 @@
     padding: 7px 8px;
 
     &:hover {
-      color: $light1;
+      color: $light2;
     }
   }
 }

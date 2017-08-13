@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
-import ReduxToastr from 'react-redux-toastr';
 
 import hexGenerator from 'utils/hex-generator';
 
@@ -72,7 +71,6 @@ export default class Sector extends Component {
     return (
       <div>
         <FlexContainer className="Sector" direction="row">
-          <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
           {this.renderTooltips(hexes)}
           <HexMap
             width={this.state.width}

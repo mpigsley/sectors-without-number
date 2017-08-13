@@ -197,13 +197,11 @@ export default config => {
     index: 1,
     seededChance: new Chance(config.seed),
   };
-  const name = generateSectorName(newConfig.seededChance);
-
-  const sector = {
-    name,
+  return {
+    name: generateSectorName(newConfig.seededChance),
     seed: newConfig.seed,
+    rows: newConfig.rows,
+    columns: newConfig.columns,
     systems: fullRandomGenerate(newConfig),
   };
-
-  return sector;
 };

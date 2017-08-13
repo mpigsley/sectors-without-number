@@ -2,8 +2,8 @@ import { connect } from 'react-redux';
 
 import PrintableSector from './printable-sector';
 
-const mapStateToProps = state => ({
-  systems: state.sector.systems,
+const mapStateToProps = ({ sector }) => ({
+  systems: sector.generated.systems,
 });
 
 export default connect(mapStateToProps)(PrintableSector);

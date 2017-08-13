@@ -4,32 +4,26 @@ import { Link as RouterLink } from 'react-router';
 import isExternal from 'is-url-external';
 import classNames from 'classnames';
 
-import './style.css';
-
-export default function Link(props) {
-  const { padded, to, ...rest } = props;
-  const className = classNames('Link', {
-    'Link--padded': props.padded,
-  });
+export default function ButtonLink(props) {
+  const { className, to, ...rest } = props;
+  const linkClass = classNames('Button', className); // Uses Button CSS
   if (isExternal(to)) {
     return (
       <a // eslint-disable-line
         {...rest}
         href={to}
-        className={className}
+        className={linkClass}
       />
     );
   }
-  return <RouterLink {...rest} to={to} className={className} />;
+  return <RouterLink {...rest} to={to} className={linkClass} />;
 }
 
-Link.propTypes = {
+ButtonLink.propTypes = {
   to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   className: PropTypes.string,
-  padded: PropTypes.bool,
 };
 
-Link.defaultProps = {
+ButtonLink.defaultProps = {
   className: null,
-  padded: false,
 };

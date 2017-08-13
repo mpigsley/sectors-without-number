@@ -1,7 +1,7 @@
 {
   "name": "sectors-without-number",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "eslintConfig": {
     "extends": "airbnb"
   },
@@ -25,11 +25,11 @@
     "firebase-tools": "^3.9.1",
     "history": "^4.6.3",
     "is-url-external": "^1.0.3",
+    "localforage": "^1.5.0",
     "lodash": "^4.17.4",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
     "prop-types": "^15.5.10",
-    "query-string": "^5.0.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-feather": "^1.0.5",
