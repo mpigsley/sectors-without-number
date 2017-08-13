@@ -7,6 +7,7 @@ const mapStateToProps = ({ sector }) => ({
   rows: sector.generated.rows,
   columns: sector.generated.columns,
   systems: sector.generated.systems,
+  holdKey: sector.holdKey,
 });
 
 export default connect(mapStateToProps)(Sector);

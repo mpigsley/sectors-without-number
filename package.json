@@ -22,6 +22,7 @@
     "chance": "^1.0.10",
     "classnames": "^2.2.5",
     "copy-to-clipboard": "^3.0.7",
+    "fastclick": "^1.0.6",
     "firebase-tools": "^3.9.1",
     "history": "^4.6.3",
     "is-url-external": "^1.0.3",

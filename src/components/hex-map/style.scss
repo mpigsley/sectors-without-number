@@ -2,6 +2,10 @@
 
 .HexMap-SVG {
   display: flex;
+
+  &--drag {
+    cursor: move;
+  }
 }
 
 .HexMap-Container {

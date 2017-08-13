@@ -4,8 +4,10 @@ import { actions as ReduxToastrActions } from 'react-redux-toastr';
 export const SET_SAVED_SECTORS = 'SET_SAVED_SECTORS';
 export const ADD_SAVED_SECTOR = 'ADD_SAVED_SECTOR';
 export const REMOVE_SAVED_SECTOR = 'REMOVE_SAVED_SECTOR';
-export const SECTOR_HOVER_START = 'SECTOR_HOVER_START';
-export const SECTOR_HOVER_END = 'SECTOR_HOVER_END';
+export const SYSTEM_HOLD = 'SYSTEM_HOLD';
+export const SYSTEM_RELEASE = 'SYSTEM_RELEASE';
+export const SYSTEM_HOVER_START = 'SYSTEM_HOVER_START';
+export const SYSTEM_HOVER_END = 'SYSTEM_HOVER_END';
 
 export function setSavedSectors(saved) {
   return { type: SET_SAVED_SECTORS, saved };
@@ -52,10 +54,18 @@ export function saveSector() {
   };
 }
 
+export function systemHold(key) {
+  return { type: SYSTEM_HOLD, key };
+}
+
+export function systemRelease() {
+  return { type: SYSTEM_RELEASE };
+}
+
 export function sectorHoverStart(key) {
-  return { type: SECTOR_HOVER_START, key };
+  return { type: SYSTEM_HOVER_START, key };
 }
 
 export function sectorHoverEnd(key) {
-  return { type: SECTOR_HOVER_END, key };
+  return { type: SYSTEM_HOVER_END, key };
 }

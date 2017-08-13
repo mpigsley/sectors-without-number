@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import classNames from 'classnames';
+import { delay } from 'lodash';
 
 import './style.css';
+
+let isMousedDown = false;
 
 function System(props) {
   const points = 6;
@@ -25,12 +28,27 @@ function System(props) {
     return () => {};
   };
 
-  const onClick = () => {
+  const onMouseDown = () => {
+    isMousedDown = true;
+    console.log('onMouseDown', isMousedDown);
+    const systemHold = props.systemHold;
     if (data.system) {
       props.router.push(
         `/sector/system/${data.systemKey}${props.location.search}`,
       );
+      delay(() => {
+        console.log('isMousedDown', isMousedDown);
+        if (isMousedDown) {
+          systemHold(data.systemKey);
+        }
+      }, 100);
     }
+  };
+
+  const onMouseUp = () => {
+    isMousedDown = false;
+    console.log('onMouseUp', isMousedDown);
+    props.systemRelease();
   };
 
   let star = null;
@@ -89,10 +107,15 @@ function System(props) {
       className={classNames('System-Hex', {
         'System-Hex--hoverable': data.highlighted,
         'System-Hex--clickable': !!data.system,
+        'System-Hex--drag': !!props.holdKey,
+        'System-Hex--movable':
+          props.holdKey === data.systemKey ||
+          (!!props.holdKey && props.hoverKey === data.systemKey),
       })}
       onMouseEnter={isSystem(props.sectorHoverStart)}
       onMouseLeave={isSystem(props.sectorHoverEnd)}
-      onClick={onClick}
+      onMouseDown={onMouseDown}
+      onMouseUp={onMouseUp}
     >
       <polygon
         className={classNames('System-Polygon', {
@@ -124,12 +147,21 @@ System.propTypes = {
   }).isRequired,
   sectorHoverStart: PropTypes.func.isRequired,
   sectorHoverEnd: PropTypes.func.isRequired,
+  systemHold: PropTypes.func.isRequired,
+  systemRelease: PropTypes.func.isRequired,
+  holdKey: PropTypes.string,
+  hoverKey: PropTypes.string,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,
   }).isRequired,
   location: PropTypes.shape({
     search: PropTypes.string,
   }).isRequired,
+};
+
+System.defaultProps = {
+  holdKey: null,
+  hoverKey: null,
 };
 
 export default withRouter(System);

@@ -1,5 +1,7 @@
 .HexMap-SVG {
   display: flex; }
+  .HexMap-SVG--drag {
+    cursor: move; }
 
 .HexMap-Container {
   background-color: #283647; }

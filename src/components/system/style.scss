@@ -20,10 +20,25 @@
     cursor: pointer;
   }
 
+  &--drag {
+    cursor: move;
+  }
+
+  &--movable {
+    .System-Polygon {
+      fill: $dark1 !important;
+    }
+
+    .System-Text {
+      stroke: $dark3;
+    }
+  }
+
   &--hoverable {
     .System-Polygon {
       fill: $dark2;
     }
+
     &:hover .System-Polygon {
       fill: $primary;
     }
@@ -36,6 +51,7 @@
   stroke: $light1;
   text-anchor: middle;
   stroke-width: 0.6px;
+  user-select: none;
 }
 
 .System-Planets {

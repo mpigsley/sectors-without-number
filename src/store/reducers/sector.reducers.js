@@ -6,8 +6,10 @@ import {
   SET_SAVED_SECTORS,
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
-  SECTOR_HOVER_START,
-  SECTOR_HOVER_END,
+  SYSTEM_HOLD,
+  SYSTEM_RELEASE,
+  SYSTEM_HOVER_START,
+  SYSTEM_HOVER_END,
 } from '../actions/sector.actions';
 
 const defaultColumns = 8;
@@ -71,9 +73,13 @@ export default function sector(state = initialState, action) {
         ...state,
         renderSector: false,
       };
-    case SECTOR_HOVER_START:
+    case SYSTEM_HOLD:
+      return { ...state, holdKey: action.key };
+    case SYSTEM_RELEASE:
+      return { ...state, holdKey: null };
+    case SYSTEM_HOVER_START:
       return { ...state, hoverKey: action.key };
-    case SECTOR_HOVER_END:
+    case SYSTEM_HOVER_END:
       return { ...state, hoverKey: null };
     default:
       return state;
