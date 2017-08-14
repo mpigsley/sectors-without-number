@@ -16,6 +16,11 @@ export default class Sector extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
+    sector: PropTypes.shape({
+      rows: PropTypes.number.isRequired,
+      columns: PropTypes.number.isRequired,
+      systems: PropTypes.shape().isRequired,
+    }).isRequired,
   };
 
   constructor(props) {
@@ -64,8 +69,11 @@ export default class Sector extends Component {
   render() {
     const { hexes, printable } = hexGenerator({
       renderSector: true,
-      ...this.state,
-      ...this.props,
+      height: this.state.height,
+      width: this.state.width,
+      systems: this.props.sector.systems,
+      rows: this.props.sector.rows,
+      columns: this.props.sector.columns,
     });
 
     return (

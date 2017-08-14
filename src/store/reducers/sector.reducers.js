@@ -17,6 +17,7 @@ const defaultRows = 10;
 const initialState = {
   renderSector: false,
   hoverKey: null,
+  currentSector: null,
   generated: null,
   saved: {},
 };
@@ -58,15 +59,21 @@ export default function sector(state = initialState, action) {
           action.payload.query.s || new Chance().hash({ length: 15 });
         const rows = Math.min(action.payload.query.r || defaultRows, 20);
         const columns = Math.min(action.payload.query.c || defaultColumns, 20);
-        let generated = state.generated;
-        if (!state.generated) {
-          generated =
-            state.saved[seed] || sectorGenerator({ seed, columns, rows });
+
+        const update = { renderSector: true };
+        if (!state.currentSector) {
+          const saved = state.saved[seed];
+          if (saved) {
+            update.currentSector = seed;
+          } else if (!state.generated) {
+            update.currentSector = 'generated';
+            update.generated = sectorGenerator({ seed, columns, rows });
+          }
         }
         return {
           ...state,
           renderSector: true,
-          generated,
+          ...update,
         };
       }
       return {

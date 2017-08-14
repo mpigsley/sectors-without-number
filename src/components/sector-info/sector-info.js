@@ -9,35 +9,35 @@ import { stringSortByKey } from 'utils/common';
 
 import './style.css';
 
-export default function SectorInfo({ name, systems, location }) {
+export default function SectorInfo({ sector, location }) {
   return (
-    <SidebarNavigation name={name} type={SidebarType.sector}>
+    <SidebarNavigation name={sector.name} type={SidebarType.sector}>
       <SectionHeader>Systems</SectionHeader>
-      {systems.sort(stringSortByKey('key')).map(system =>
-        <SidebarLinkRow
-          key={system.key}
-          to={`/sector/system/${system.key}${location.search}`}
-        >
-          <Header type={HeaderType.header4} className="SectorInfo-Name">
-            {system.name}
-          </Header>
-          <div className="SectorInfo-Key">
-            ({system.key})
-          </div>
-        </SidebarLinkRow>,
-      )}
+      {Object.keys(sector.systems)
+        .map(key => sector.systems[key])
+        .sort(stringSortByKey('key'))
+        .map(system =>
+          <SidebarLinkRow
+            key={system.key}
+            to={`/sector/system/${system.key}${location.search}`}
+          >
+            <Header type={HeaderType.header4} className="SectorInfo-Name">
+              {system.name}
+            </Header>
+            <div className="SectorInfo-Key">
+              ({system.key})
+            </div>
+          </SidebarLinkRow>,
+        )}
     </SidebarNavigation>
   );
 }
 
 SectorInfo.propTypes = {
-  name: PropTypes.string.isRequired,
-  systems: PropTypes.arrayOf(
-    PropTypes.shape({
-      key: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  sector: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    systems: PropTypes.shape().isRequired,
+  }).isRequired,
   location: PropTypes.shape({
     search: PropTypes.string,
   }).isRequired,
