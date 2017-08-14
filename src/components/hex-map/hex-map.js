@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import System from 'components/system';
+import MovementVector, { MarkerDefs } from 'components/movement-vector';
 
 import './style.css';
 
@@ -18,7 +19,11 @@ export default function HexMap({ height, width, viewbox, holdKey, hexes }) {
         viewBox={viewbox}
         preserveAspectRatio="xMidYMid meet"
       >
+        <defs>
+          {MarkerDefs}
+        </defs>
         {hexes.map(hex => <System data={hex} key={hex.systemKey} />)}
+        <MovementVector hexes={hexes} />
       </svg>
     </div>
   );

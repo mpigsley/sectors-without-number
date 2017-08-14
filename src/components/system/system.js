@@ -30,14 +30,12 @@ function System(props) {
 
   const onMouseDown = () => {
     isMousedDown = true;
-    console.log('onMouseDown', isMousedDown);
     const systemHold = props.systemHold;
     if (data.system) {
       props.router.push(
         `/sector/system/${data.systemKey}${props.location.search}`,
       );
       delay(() => {
-        console.log('isMousedDown', isMousedDown);
         if (isMousedDown) {
           systemHold(data.systemKey);
         }
@@ -47,7 +45,6 @@ function System(props) {
 
   const onMouseUp = () => {
     isMousedDown = false;
-    console.log('onMouseUp', isMousedDown);
     props.systemRelease();
   };
 
