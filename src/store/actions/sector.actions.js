@@ -37,7 +37,7 @@ export function saveSector() {
     const { sector } = getState();
     const key = sector.generated.seed;
     return localForage.setItem(key, sector.generated).then(() => {
-      dispatch({ type: ADD_SAVED_SECTOR, savedSector: sector.generated });
+      dispatch({ type: ADD_SAVED_SECTOR });
       dispatch(
         ReduxToastrActions.add({
           options: {

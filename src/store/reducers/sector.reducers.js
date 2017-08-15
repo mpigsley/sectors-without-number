@@ -32,9 +32,11 @@ export default function sector(state = initialState, action) {
     case ADD_SAVED_SECTOR:
       return {
         ...state,
+        currentSector: state.generated.seed,
+        generated: null,
         saved: {
           ...state.saved,
-          [action.savedSector.seed]: action.savedSector,
+          [state.generated.seed]: state.generated,
         },
       };
     case REMOVE_SAVED_SECTOR:
