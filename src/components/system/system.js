@@ -51,7 +51,7 @@ function System(props) {
       props.router.push(
         `/sector/system/${data.systemKey}${props.location.search}`,
       );
-    } else if (props.holdKey === props.hoverKey) {
+    } else if (!data.highlighted || props.holdKey === props.hoverKey) {
       props.systemRelease();
     } else if (props.holdKey) {
       props.moveSystem();

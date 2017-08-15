@@ -19,6 +19,7 @@ const defaultRows = 10;
 const initialState = {
   renderSector: false,
   hoverKey: null,
+  holdKey: null,
   currentSector: null,
   generated: null,
   saved: {},

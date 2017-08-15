@@ -8,7 +8,7 @@ export default function SystemTooltips({ hoverKey, holdKey, systems }) {
   const renderTooltip = system =>
     <div
       className={classNames('SystemTooltips-Tooltip', {
-        'SystemTooltips-Tooltip--hovered': system.key === hoverKey && holdKey,
+        'SystemTooltips-Tooltip--hovered': system.key === hoverKey && !holdKey,
       })}
       key={system.key}
       style={{
