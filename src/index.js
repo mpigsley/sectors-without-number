@@ -4,6 +4,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import localForage from 'localforage';
+import Fastclick from 'fastclick';
 
 import store from 'store';
 
@@ -32,6 +33,8 @@ new Promise((resolve, reject) => {
 }).then(saved => {
   store.dispatch(setSavedSectors(saved));
 });
+
+Fastclick.attach(document.body);
 
 ReactDOM.render(
   <Provider store={store}>

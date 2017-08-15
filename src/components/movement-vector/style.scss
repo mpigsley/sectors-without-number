@@ -1,0 +1,10 @@
+@import "styles/theme";
+
+.MovementVector {
+  stroke: $light3;
+  stroke-width: 2px;
+}
+
+.MovementVector-Marker {
+  fill: $light3;
+}

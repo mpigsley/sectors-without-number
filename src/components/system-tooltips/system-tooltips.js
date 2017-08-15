@@ -4,11 +4,11 @@ import classNames from 'classnames';
 
 import './style.css';
 
-export default function SystemTooltips({ hoverKey, systems }) {
+export default function SystemTooltips({ hoverKey, holdKey, systems }) {
   const renderTooltip = system =>
     <div
       className={classNames('SystemTooltips-Tooltip', {
-        'SystemTooltips-Tooltip--hovered': system.key === hoverKey,
+        'SystemTooltips-Tooltip--hovered': system.key === hoverKey && !holdKey,
       })}
       key={system.key}
       style={{
@@ -35,6 +35,7 @@ export default function SystemTooltips({ hoverKey, systems }) {
 
 SystemTooltips.propTypes = {
   hoverKey: PropTypes.string,
+  holdKey: PropTypes.string,
   systems: PropTypes.arrayOf(
     PropTypes.shape({
       key: PropTypes.string.isRequired,
@@ -47,4 +48,5 @@ SystemTooltips.propTypes = {
 
 SystemTooltips.defaultProps = {
   hoverKey: null,
+  holdKey: null,
 };

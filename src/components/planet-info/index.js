@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 
+import { makeGetCurrentPlanet } from 'store/selectors/sector.selectors';
 import PlanetInfo from './planet-info';
 
-const mapStateToProps = ({ sector }, { routeParams }) => ({
-  planet: sector.generated.systems
-    ? sector.generated.systems[routeParams.system].planets[
-        routeParams.planet
-      ] || {}
-    : {},
-});
+const mapStateToProps = () => {
+  const getCurrentPlanet = makeGetCurrentPlanet();
+  return (state, props) => ({
+    planet: getCurrentPlanet(state, props),
+  });
+};
 
 export default connect(mapStateToProps)(PlanetInfo);

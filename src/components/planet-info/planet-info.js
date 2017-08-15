@@ -27,7 +27,7 @@ const renderList = (title, list) =>
     </ul>
   </div>;
 
-const renderTags = tags =>
+const renderTags = (tags = []) =>
   tags
     .map(tag => WorldTags[tag])
     .map(
@@ -58,7 +58,7 @@ const renderTags = tags =>
 
 const renderAttribute = (title, attribute, obj) =>
   <p className="PlanetInfo-Attribute">
-    <b>{title}:</b> {obj ? obj[attribute].name : attribute}
+    <b>{title}:</b> {obj ? (obj[attribute] || {}).name : attribute}
   </p>;
 
 export default function SectorInfo({ planet, location, routeParams }) {
@@ -84,12 +84,12 @@ export default function SectorInfo({ planet, location, routeParams }) {
 
 SectorInfo.propTypes = {
   planet: PropTypes.shape({
-    name: PropTypes.string,
-    techLevel: PropTypes.string,
-    atmosphere: PropTypes.string,
-    temperature: PropTypes.string,
-    biosphere: PropTypes.string,
-    population: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    techLevel: PropTypes.string.isRequired,
+    atmosphere: PropTypes.string.isRequired,
+    temperature: PropTypes.string.isRequired,
+    biosphere: PropTypes.string.isRequired,
+    population: PropTypes.string.isRequired,
   }).isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string,
