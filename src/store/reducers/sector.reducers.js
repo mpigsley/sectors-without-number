@@ -2,12 +2,14 @@ import Chance from 'chance';
 
 import { LOCATION_CHANGE } from 'react-router-redux';
 import sectorGenerator from 'utils/sector-generator';
+import { removeFromArrayByKey } from 'utils/common';
 import {
   SET_SAVED_SECTORS,
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
   SYSTEM_HOLD,
-  SYSTEM_RELEASE,
+  RELEASE_HOLD,
+  MOVE_SYSTEM,
   SYSTEM_HOVER_START,
   SYSTEM_HOVER_END,
 } from '../actions/sector.actions';
@@ -54,12 +56,7 @@ export default function sector(state = initialState, action) {
     case REMOVE_SAVED_SECTOR:
       return {
         ...state,
-        saved: Object.keys(state.saved).reduce((result, key) => {
-          if (key !== action.key) {
-            return { ...result, [key]: state.saved[key] };
-          }
-          return result;
-        }, {}),
+        saved: removeFromArrayByKey(state.saved, action.key),
       };
     case LOCATION_CHANGE:
       if (['/', '/configure'].indexOf(action.payload.pathname) >= 0) {
@@ -96,8 +93,24 @@ export default function sector(state = initialState, action) {
       };
     case SYSTEM_HOLD:
       return { ...state, holdKey: action.key };
-    case SYSTEM_RELEASE:
+    case RELEASE_HOLD:
       return { ...state, holdKey: null };
+    case MOVE_SYSTEM: {
+      const existingSector = state.generated || state.saved[action.key];
+      return {
+        ...state,
+        currentSector: action.key,
+        generated: null,
+        holdKey: null,
+        saved: {
+          ...state.saved,
+          [action.key]: {
+            ...existingSector,
+            systems: action.systems,
+          },
+        },
+      };
+    }
     case SYSTEM_HOVER_START:
       return { ...state, hoverKey: action.key };
     case SYSTEM_HOVER_END:

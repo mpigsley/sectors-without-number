@@ -21,8 +21,15 @@ function System(props) {
     hexagon.push(`${x + data.xOffset},${y + data.yOffset}`);
   }
 
-  const isSystem = func => {
+  const isInSector = func => {
     if (data.highlighted) {
+      return () => func(data.systemKey);
+    }
+    return () => {};
+  };
+
+  const isSystem = func => {
+    if (data.system) {
       return () => func(data.systemKey);
     }
     return () => {};
@@ -31,21 +38,23 @@ function System(props) {
   const onMouseDown = () => {
     isMousedDown = true;
     const systemHold = props.systemHold;
-    if (data.system) {
-      props.router.push(
-        `/sector/system/${data.systemKey}${props.location.search}`,
-      );
-      delay(() => {
-        if (isMousedDown) {
-          systemHold(data.systemKey);
-        }
-      }, 100);
-    }
+    props.router.push(
+      `/sector/system/${data.systemKey}${props.location.search}`,
+    );
+    delay(() => {
+      if (isMousedDown) {
+        systemHold(data.systemKey);
+      }
+    }, 100);
   };
 
   const onMouseUp = () => {
     isMousedDown = false;
-    props.systemRelease();
+    if (data.systemKey === props.hoverKey) {
+      props.systemRelease();
+    } else {
+      props.moveSystem();
+    }
   };
 
   let star = null;
@@ -109,10 +118,10 @@ function System(props) {
           props.holdKey === data.systemKey ||
           (!!props.holdKey && props.hoverKey === data.systemKey),
       })}
-      onMouseEnter={isSystem(props.sectorHoverStart)}
-      onMouseLeave={isSystem(props.sectorHoverEnd)}
-      onMouseDown={onMouseDown}
-      onMouseUp={onMouseUp}
+      onMouseEnter={isInSector(props.sectorHoverStart)}
+      onMouseLeave={isInSector(props.sectorHoverEnd)}
+      onMouseDown={isSystem(onMouseDown)}
+      onMouseUp={isSystem(onMouseUp)}
     >
       <polygon
         className={classNames('System-Polygon', {
@@ -146,6 +155,7 @@ System.propTypes = {
   sectorHoverEnd: PropTypes.func.isRequired,
   systemHold: PropTypes.func.isRequired,
   systemRelease: PropTypes.func.isRequired,
+  moveSystem: PropTypes.func.isRequired,
   holdKey: PropTypes.string,
   hoverKey: PropTypes.string,
   router: PropTypes.shape({

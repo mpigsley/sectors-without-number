@@ -5,6 +5,7 @@ import {
   sectorHoverEnd,
   systemHold,
   systemRelease,
+  moveSystem,
 } from 'store/actions/sector.actions';
 import System from './system';
 
@@ -25,6 +26,9 @@ const mapDispatchToProps = dispatch => ({
   },
   systemRelease: () => {
     dispatch(systemRelease());
+  },
+  moveSystem: () => {
+    dispatch(moveSystem());
   },
 });
 

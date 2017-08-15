@@ -25,3 +25,11 @@ export const toCommaArray = (element, i) => {
   string += element;
   return string;
 };
+
+export const removeFromArrayByKey = (array, key) =>
+  Object.keys(array).reduce((result, temp) => {
+    if (temp !== key) {
+      return { ...result, [temp]: array[temp] };
+    }
+    return result;
+  }, {});
