@@ -24,21 +24,33 @@ const initialState = {
 
 export default function sector(state = initialState, action) {
   switch (action.type) {
-    case SET_SAVED_SECTORS:
+    case SET_SAVED_SECTORS: {
+      let generated = state.generated;
+      let currentSector = state.currentSector;
+      if (!!state.generated && !!action.saved[state.generated.seed]) {
+        generated = null;
+        currentSector = state.generated.seed;
+      }
       return {
         ...state,
+        generated,
+        currentSector,
         saved: action.saved,
       };
-    case ADD_SAVED_SECTOR:
+    }
+    case ADD_SAVED_SECTOR: {
+      const key = state.generated ? state.generated.seed : state.currentSector;
+      const value = state.generated || state.saved[key];
       return {
         ...state,
-        currentSector: state.generated.seed,
+        currentSector: key,
         generated: null,
         saved: {
           ...state.saved,
-          [state.generated.seed]: state.generated,
+          [key]: value,
         },
       };
+    }
     case REMOVE_SAVED_SECTOR:
       return {
         ...state,
