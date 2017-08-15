@@ -2,7 +2,7 @@ import localForage from 'localforage';
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
 
-import { removeFromArrayByKey } from 'utils/common';
+import { removeByKey } from 'utils/common';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const SET_SAVED_SECTORS = 'SET_SAVED_SECTORS';
@@ -86,7 +86,7 @@ export function moveSystem() {
         [state.sector.holdKey]: destination,
       });
     } else {
-      systems = removeFromArrayByKey(systems, state.sector.holdKey);
+      systems = removeByKey(systems, state.sector.holdKey);
       systems = Object.assign(systems, {
         [state.sector.hoverKey]: source,
       });

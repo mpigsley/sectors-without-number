@@ -2,7 +2,7 @@ import Chance from 'chance';
 
 import { LOCATION_CHANGE } from 'react-router-redux';
 import sectorGenerator from 'utils/sector-generator';
-import { removeFromArrayByKey } from 'utils/common';
+import { removeByKey } from 'utils/common';
 import {
   SET_SAVED_SECTORS,
   ADD_SAVED_SECTOR,
@@ -57,7 +57,7 @@ export default function sector(state = initialState, action) {
     case REMOVE_SAVED_SECTOR:
       return {
         ...state,
-        saved: removeFromArrayByKey(state.saved, action.key),
+        saved: removeByKey(state.saved, action.key),
       };
     case LOCATION_CHANGE:
       if (['/', '/configure'].indexOf(action.payload.pathname) >= 0) {

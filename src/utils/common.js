@@ -26,7 +26,7 @@ export const toCommaArray = (element, i) => {
   return string;
 };
 
-export const removeFromArrayByKey = (array, key) =>
+export const removeByKey = (array, key) =>
   Object.keys(array).reduce((result, temp) => {
     if (temp !== key) {
       return { ...result, [temp]: array[temp] };
