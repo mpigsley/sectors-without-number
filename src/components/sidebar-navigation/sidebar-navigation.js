@@ -33,6 +33,7 @@ export default function SidebarNavigation({
   back,
   type,
   saveSector,
+  currentSector,
 }) {
   const onCopy = () => {
     copy(window.location.href);
@@ -45,6 +46,11 @@ export default function SidebarNavigation({
   const onPrint = () => {
     window.print();
   };
+
+  let shareIcon = null;
+  if (currentSector === 'generated') {
+    shareIcon = <Share className={linkCss} onClick={onCopy} size={18} />;
+  }
 
   const iconSize = 18;
   let typeIcon = <Map className={nonLinkCss} hidden size={iconSize} />;
@@ -72,7 +78,7 @@ export default function SidebarNavigation({
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
           <Save className={linkCss} onClick={saveSector} size={18} />
-          <Share className={linkCss} onClick={onCopy} size={18} />
+          {shareIcon}
           <Printer className={linkCss} onClick={onPrint} size={18} />
           <Link to="https://goo.gl/forms/eOanpGEuglCYYg7u2" target="_blank">
             <AlertCircle className={linkCss} size={18} />
@@ -92,9 +98,11 @@ SidebarNavigation.propTypes = {
   back: PropTypes.string,
   type: PropTypes.string,
   saveSector: PropTypes.func.isRequired,
+  currentSector: PropTypes.string,
 };
 
 SidebarNavigation.defaultProps = {
   type: SidebarType.sector,
   back: null,
+  currentSector: null,
 };
