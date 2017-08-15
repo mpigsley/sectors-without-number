@@ -38,9 +38,6 @@ function System(props) {
   const onMouseDown = () => {
     isMousedDown = true;
     const systemHold = props.systemHold;
-    props.router.push(
-      `/sector/system/${data.systemKey}${props.location.search}`,
-    );
     delay(() => {
       if (isMousedDown) {
         systemHold(data.systemKey);
@@ -50,9 +47,13 @@ function System(props) {
 
   const onMouseUp = () => {
     isMousedDown = false;
-    if (data.systemKey === props.hoverKey) {
+    if (data.system && !props.holdKey) {
+      props.router.push(
+        `/sector/system/${data.systemKey}${props.location.search}`,
+      );
+    } else if (props.holdKey === props.hoverKey) {
       props.systemRelease();
-    } else {
+    } else if (props.holdKey) {
       props.moveSystem();
     }
   };
@@ -121,7 +122,7 @@ function System(props) {
       onMouseEnter={isInSector(props.sectorHoverStart)}
       onMouseLeave={isInSector(props.sectorHoverEnd)}
       onMouseDown={isSystem(onMouseDown)}
-      onMouseUp={isSystem(onMouseUp)}
+      onMouseUp={onMouseUp}
     >
       <polygon
         className={classNames('System-Polygon', {

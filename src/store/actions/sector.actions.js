@@ -78,8 +78,8 @@ export function moveSystem() {
       ...systems[state.sector.holdKey],
       key: state.sector.hoverKey,
     };
-    const destination = { ...systems[state.sector.hoverKey] };
-    if (destination) {
+    if (systems[state.sector.hoverKey]) {
+      const destination = { ...systems[state.sector.hoverKey] };
       destination.key = state.sector.holdKey;
       systems = Object.assign(systems, {
         [state.sector.hoverKey]: source,
