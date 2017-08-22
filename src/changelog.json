@@ -1,0 +1,25 @@
+{
+  "1.2.0": {
+    "description": "Adds system movement. Click and hold any system in the grid, drag to a new location, and let go.",
+    "changes": [
+      "Any un-saved sector will be saved on system movement",
+      "Adds long click highlighting and direction vector for selected system and destination"
+    ]
+  },
+  "1.1.0": {
+    "description": "Ability to save a sector to the current browser. This is a local save rather than persistance to a backend.",
+    "changes": [
+      "Save any generated sector locally",
+      "Load previous saves on dashboard"
+    ]
+  },
+  "1.0.0": {
+    "description": "A scalable SVG viewport based on screen size with a random generator by seed.",
+    "changes": [
+      "Revised edition world tags",
+      "Print view with save as PDF option",
+      "Share URL",
+      "Seed, row number, and column number configuration"
+    ]
+  }
+}
