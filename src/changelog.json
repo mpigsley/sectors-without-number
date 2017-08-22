@@ -1,4 +1,7 @@
 {
+  "1.3.0": {
+    "description": "Adds changelog. Link in sidebar navigation."
+  },
   "1.2.0": {
     "description": "Adds system movement. Click and hold any system in the grid, drag to a new location, and let go.",
     "changes": [

@@ -32,15 +32,18 @@ export default function Changelog() {
               <span>
                 <b>Description:</b> {description}
               </span>
-              <p className="Changelog-Updates">
-                <b>Updates:</b>
-              </p>
+              {!changes || !changes.length
+                ? null
+                : <p className="Changelog-Updates">
+                    <b>Updates:</b>
+                  </p>}
               <ul>
-                {changes.map(change =>
-                  <li key={change}>
-                    {change}
-                  </li>,
-                )}
+                {changes &&
+                  changes.map(change =>
+                    <li key={change}>
+                      {change}
+                    </li>,
+                  )}
               </ul>
             </FlexContainer>,
           )}
