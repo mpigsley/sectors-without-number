@@ -13,6 +13,7 @@ import AppWrapper from 'components/app-wrapper';
 import HexBackground from 'components/hex-background';
 import Home from 'components/home';
 import Configure from 'components/configure';
+import Changelog from 'components/changelog';
 import Sector from 'components/sector';
 import SectorInfo from 'components/sector-info';
 import SystemInfo from 'components/system-info';
@@ -43,6 +44,7 @@ ReactDOM.render(
         <Route component={HexBackground}>
           <IndexRoute component={Home} />
           <Route path="/configure" component={Configure} />
+          <Route path="/changelog" component={Changelog} />
         </Route>
         <Route path="/sector" component={Sector}>
           <IndexRoute component={SectorInfo} />
