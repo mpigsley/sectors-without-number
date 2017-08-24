@@ -1,4 +1,7 @@
 {
+  "1.4.0": {
+    "description": "Adds link to Github repository in sidebar navigation."
+  },
   "1.3.0": {
     "description": "Adds changelog. Link in sidebar navigation."
   },
