@@ -13,6 +13,7 @@ import {
   AlertCircle,
   Save,
   Package,
+  Github,
 } from 'react-feather';
 
 import FlexContainer from 'primitives/containers/flex-container';
@@ -86,6 +87,12 @@ export default function SidebarNavigation({
           </Link>
           <Link to="/changelog">
             <Package className={linkCss} size={18} />
+          </Link>
+          <Link
+            to="https://github.com/mpigsley/sectors-without-number"
+            target="_blank"
+          >
+            <Github className={linkCss} size={18} />
           </Link>
         </FlexContainer>
       </div>
