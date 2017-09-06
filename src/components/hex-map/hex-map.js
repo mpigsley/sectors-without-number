@@ -19,9 +19,7 @@ export default function HexMap({ height, width, viewbox, holdKey, hexes }) {
         viewBox={viewbox}
         preserveAspectRatio="xMidYMid meet"
       >
-        <defs>
-          {MarkerDefs}
-        </defs>
+        <defs>{MarkerDefs}</defs>
         {hexes.map(hex => <System data={hex} key={hex.systemKey} />)}
         <MovementVector hexes={hexes} />
       </svg>

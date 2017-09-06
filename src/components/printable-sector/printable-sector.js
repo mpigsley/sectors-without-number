@@ -14,16 +14,17 @@ import Population from 'constants/population';
 
 import './style.css';
 
-const renderAttribute = (title, attribute, obj) =>
+const renderAttribute = (title, attribute, obj) => (
   <p className="PrintableSector-PlanetAttribute">
     <b>{title}:</b> {obj ? obj[attribute].name : attribute}
-  </p>;
+  </p>
+);
 
 const renderPlanets = planets =>
   Object.keys(planets)
     .map(key => planets[key])
     .sort(stringSortByKey('name'))
-    .map(planet =>
+    .map(planet => (
       <div key={planet.name}>
         <FlexContainer
           key={planet.name}
@@ -48,10 +49,10 @@ const renderPlanets = planets =>
             planet.tags.map(tag => WorldTags[tag].name).map(toCommaArray),
           )}
         </FlexContainer>
-      </div>,
-    );
+      </div>
+    ));
 
-const renderSystem = system =>
+const renderSystem = system => (
   <div key={system.key} className="PrintableSector-System">
     <FlexContainer
       align="baseline"
@@ -73,7 +74,8 @@ const renderSystem = system =>
       </Header>
     </FlexContainer>
     {renderPlanets(system.planets)}
-  </div>;
+  </div>
+);
 
 const renderSystems = systems =>
   Object.keys(systems)
@@ -81,14 +83,14 @@ const renderSystems = systems =>
     .sort(stringSortByKey('name'))
     .map((system, i, arr) => (i % 3 === 0 ? arr.slice(i, i + 3) : null))
     .filter(system => system)
-    .map(systemGroup =>
+    .map(systemGroup => (
       <FlexContainer
         key={toCommaArray(systemGroup.map(system => system.name))}
         className="PrintableSector-Systems"
       >
         {systemGroup.map(renderSystem)}
-      </FlexContainer>,
-    );
+      </FlexContainer>
+    ));
 
 export default function PrintableSector({ printable, systems }) {
   return (

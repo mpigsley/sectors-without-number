@@ -72,9 +72,7 @@ export default function SidebarNavigation({
             <ChevronLeft className={linkCss} />
           </Link>
           <FlexContainer flex="1" justify="center">
-            <Header type={HeaderType.header2}>
-              {name}
-            </Header>
+            <Header type={HeaderType.header2}>{name}</Header>
           </FlexContainer>
           {typeIcon}
         </FlexContainer>

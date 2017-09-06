@@ -74,7 +74,7 @@ export default class Home extends Component {
           {Object.keys(this.props.saved)
             .map(key => this.props.saved[key])
             .sort(stringSortByKey('name'))
-            .map(({ seed, name, rows, columns }) =>
+            .map(({ seed, name, rows, columns }) => (
               <li
                 key={seed}
                 onClick={this.setSelected(seed)}
@@ -82,14 +82,12 @@ export default class Home extends Component {
                   'Home-SavedItem--selected': seed === this.state.selected,
                 })}
               >
-                <span className="Home-SavedName">
-                  {name}
-                </span>
+                <span className="Home-SavedName">{name}</span>
                 <span className="Home-SavedSecondary">
                   ({columns}, {rows})
                 </span>
-              </li>,
-            )}
+              </li>
+            ))}
         </ul>
       </SubContainer>
     );

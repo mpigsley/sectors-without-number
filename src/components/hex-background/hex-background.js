@@ -52,9 +52,7 @@ export default class HexBackground extends Component {
           height={this.state.height}
           hexes={hexes}
         />
-        <AbsoluteContainer>
-          {this.props.children}
-        </AbsoluteContainer>
+        <AbsoluteContainer>{this.props.children}</AbsoluteContainer>
       </div>
     );
   }

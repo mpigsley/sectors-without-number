@@ -85,9 +85,7 @@ export default class Sector extends Component {
             height={this.state.height}
             hexes={hexes}
           />
-          <SectorSidebar>
-            {this.props.children}
-          </SectorSidebar>
+          <SectorSidebar>{this.props.children}</SectorSidebar>
         </FlexContainer>
         <PrintableSector printable={printable} />
       </div>

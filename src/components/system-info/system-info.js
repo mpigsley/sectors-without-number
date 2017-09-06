@@ -19,7 +19,7 @@ export default function SectorInfo({ system, location }) {
       type={SidebarType.system}
     >
       <SectionHeader>Planets</SectionHeader>
-      {map(system.planets, planet =>
+      {map(system.planets, planet => (
         <SidebarLinkRow
           key={planet.name}
           to={`${location.pathname}/planet/${planet.name.toLowerCase()}${location.search}`}
@@ -30,8 +30,8 @@ export default function SectorInfo({ system, location }) {
           <div className="SystemInfo-Tags">
             ({planet.tags.map(tag => WorldTags[tag].name).map(toCommaArray)})
           </div>
-        </SidebarLinkRow>,
-      )}
+        </SidebarLinkRow>
+      ))}
     </SidebarNavigation>
   );
 }
