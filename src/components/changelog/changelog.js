@@ -20,7 +20,7 @@ export default function Changelog() {
             ...changelog[version],
             version,
           }))
-          .map(({ version, description, changes }) =>
+          .map(({ version, description, changes }) => (
             <FlexContainer
               className="Changelog-Item"
               key={version}
@@ -32,21 +32,21 @@ export default function Changelog() {
               <span>
                 <b>Description:</b> {description}
               </span>
-              {!changes || !changes.length
-                ? null
-                : <p className="Changelog-Updates">
-                    <b>Updates:</b>
-                  </p>}
+              {!changes || !changes.length ? null : (
+                <p className="Changelog-Updates">
+                  <b>Updates:</b>
+                </p>
+              )}
               <ul>
                 {changes &&
-                  changes.map(change =>
-                    <li key={change}>
+                  changes.map(change => (
+                    <li className="Changelog-Change" key={change}>
                       {change}
-                    </li>,
-                  )}
+                    </li>
+                  ))}
               </ul>
-            </FlexContainer>,
-          )}
+            </FlexContainer>
+          ))}
       </FlexContainer>
     </ContentContainer>
   );

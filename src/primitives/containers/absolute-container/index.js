@@ -6,9 +6,7 @@ import './style.css';
 
 export default function AbsoluteContainer({ children, className }) {
   return (
-    <div className={classNames('AbsoluteContainer', className)}>
-      {children}
-    </div>
+    <div className={classNames('AbsoluteContainer', className)}>{children}</div>
   );
 }
 

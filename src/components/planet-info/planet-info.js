@@ -13,19 +13,16 @@ import Population from 'constants/population';
 
 import './style.css';
 
-const renderList = (title, list) =>
+const renderList = (title, list) => (
   <div className="PlanetInfo-Content">
-    <b>
-      {title}:
-    </b>
+    <b>{title}:</b>
     <ul className="PlanetInfo-ContentList">
-      {list.map(capitalizeFirstLetter).map(element =>
-        <li key={element}>
-          {element}
-        </li>,
-      )}
+      {list
+        .map(capitalizeFirstLetter)
+        .map(element => <li key={element}>{element}</li>)}
     </ul>
-  </div>;
+  </div>
+);
 
 const renderTags = (tags = []) =>
   tags
@@ -40,26 +37,24 @@ const renderTags = (tags = []) =>
         complications,
         things,
         places,
-      }) =>
+      }) => (
         <div key={key} className="PlanetInfo-Tag">
-          <Header type={HeaderType.header4}>
-            {name}
-          </Header>
-          <p className="PlanetInfo-Content">
-            {description}
-          </p>
+          <Header type={HeaderType.header4}>{name}</Header>
+          <p className="PlanetInfo-Content">{description}</p>
           {renderList('Enemies', enemies)}
           {renderList('Friends', friends)}
           {renderList('Complications', complications)}
           {renderList('Things', things)}
           {renderList('Places', places)}
-        </div>,
+        </div>
+      ),
     );
 
-const renderAttribute = (title, attribute, obj) =>
+const renderAttribute = (title, attribute, obj) => (
   <p className="PlanetInfo-Attribute">
     <b>{title}:</b> {obj ? (obj[attribute] || {}).name : attribute}
-  </p>;
+  </p>
+);
 
 export default function SectorInfo({ planet, location, routeParams }) {
   return (
@@ -75,9 +70,7 @@ export default function SectorInfo({ planet, location, routeParams }) {
       {renderAttribute('Biosphere', planet.biosphere, Biosphere)}
       {renderAttribute('Population', planet.population, Population)}
       <SectionHeader>World Tags</SectionHeader>
-      <div className="PlanetInfo-Section">
-        {renderTags(planet.tags)}
-      </div>
+      <div className="PlanetInfo-Section">{renderTags(planet.tags)}</div>
     </SidebarNavigation>
   );
 }

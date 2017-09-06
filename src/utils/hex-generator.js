@@ -4,7 +4,7 @@ import { coordinateKey } from 'utils/common';
 const defaultHexWidth = 50; // Hex width when not rendering sector
 const defaultRows = 10; // Align with SWN rules
 const defaultColumns = 8; // Align with SWN rules
-const hexPadding = 3; // Pixels between Hexes
+const hexPadding = 0; // Pixels between hexes
 const extraHexes = 1; // Extra hexes around canvas edges
 const pixelBuffer = 75; // Pixel buffer between the sector and window
 

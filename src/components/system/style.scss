@@ -6,6 +6,8 @@
 
 .System-Polygon {
   fill: $dark4;
+  stroke: $dark3;
+  stroke-width: 2px;
   transition: all 0.3s;
 
   &--highlighted {

@@ -36,11 +36,11 @@ export default class Configure extends Component {
 
   render() {
     const invalidText =
-      this.state.columns > 20 || this.state.rows > 20
-        ? <div className="Configure-Invalid">
-            Column and row count can not be greater than 20.
-          </div>
-        : null;
+      this.state.columns > 20 || this.state.rows > 20 ? (
+        <div className="Configure-Invalid">
+          Column and row count can not be greater than 20.
+        </div>
+      ) : null;
 
     return (
       <ContentContainer direction="column" align="center" justify="center">

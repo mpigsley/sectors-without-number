@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import './style.css';
 
 export default function SystemTooltips({ hoverKey, holdKey, systems }) {
-  const renderTooltip = system =>
+  const renderTooltip = system => (
     <div
       className={classNames('SystemTooltips-Tooltip', {
         'SystemTooltips-Tooltip--hovered': system.key === hoverKey && !holdKey,
@@ -17,20 +17,13 @@ export default function SystemTooltips({ hoverKey, holdKey, systems }) {
       }}
     >
       <div className="SystemTooltips-Text">
-        <div className="SystemTooltips-Name">
-          {system.name}
-        </div>
-        <div className="SystemTooltips-Key">
-          ({system.key})
-        </div>
+        <div className="SystemTooltips-Name">{system.name}</div>
+        <div className="SystemTooltips-Key">({system.key})</div>
       </div>
-    </div>;
-
-  return (
-    <div>
-      {systems.map(renderTooltip)}
     </div>
   );
+
+  return <div>{systems.map(renderTooltip)}</div>;
 }
 
 SystemTooltips.propTypes = {

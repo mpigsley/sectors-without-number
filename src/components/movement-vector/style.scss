@@ -1,6 +1,7 @@
-@import "styles/theme";
+@import 'styles/theme';
 
 .MovementVector {
+  pointer-events: none;
   stroke: $light3;
   stroke-width: 2px;
 }

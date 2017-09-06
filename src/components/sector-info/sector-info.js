@@ -16,7 +16,7 @@ export default function SectorInfo({ sector, location }) {
       {Object.keys(sector.systems)
         .map(key => sector.systems[key])
         .sort(stringSortByKey('key'))
-        .map(system =>
+        .map(system => (
           <SidebarLinkRow
             key={system.key}
             to={`/sector/system/${system.key}${location.search}`}
@@ -24,11 +24,9 @@ export default function SectorInfo({ sector, location }) {
             <Header type={HeaderType.header4} className="SectorInfo-Name">
               {system.name}
             </Header>
-            <div className="SectorInfo-Key">
-              ({system.key})
-            </div>
-          </SidebarLinkRow>,
-        )}
+            <div className="SectorInfo-Key">({system.key})</div>
+          </SidebarLinkRow>
+        ))}
     </SidebarNavigation>
   );
 }
