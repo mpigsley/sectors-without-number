@@ -1,6 +1,6 @@
 {
   "name": "Sectors Without Number",
-  "short_name": "SWN Generator",
+  "short_name": "Sector Gen",
   "start_url": "./index.html",
   "display": "standalone",
   "theme_color": "#303E4F",
