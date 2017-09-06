@@ -39,7 +39,11 @@ export default function Changelog() {
               )}
               <ul>
                 {changes &&
-                  changes.map(change => <li key={change}>{change}</li>)}
+                  changes.map(change => (
+                    <li className="Changelog-Change" key={change}>
+                      {change}
+                    </li>
+                  ))}
               </ul>
             </FlexContainer>
           ))}

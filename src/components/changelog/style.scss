@@ -1,4 +1,4 @@
-@import "styles/theme";
+@import 'styles/theme';
 
 .Changelog-Header {
   margin-top: 3rem;
@@ -11,4 +11,8 @@
 
 .Changelog-Updates {
   margin-bottom: 0;
+}
+
+.Changelog-Change {
+  margin-bottom: 0.3rem;
 }
