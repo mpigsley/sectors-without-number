@@ -12,8 +12,10 @@
     "start:js": "NODE_PATH=./src react-scripts start",
     "start:prod": "NODE_PATH=./src npm run build && firebase serve",
     "build": "npm run build:css && NODE_PATH=./src react-scripts build",
-    "build:css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch:css": "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "build:css":
+      "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch:css":
+      "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "test": "NODE_PATH=./src react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
@@ -57,8 +59,5 @@
     "eslint-plugin-react": "^7.3.0",
     "prettier": "^1.6.1",
     "react-scripts": "^1.0.13"
-  },
-  "eslintConfig": {
-    "extends": "airbnb"
   }
 }

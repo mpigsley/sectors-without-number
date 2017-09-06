@@ -7,6 +7,7 @@ import { delay } from 'lodash';
 import './style.css';
 
 let isMousedDown = false;
+const hexPadding = 2;
 
 function System(props) {
   const points = 6;
@@ -76,7 +77,7 @@ function System(props) {
       <text
         className="System-Text System-Planets"
         x={data.xOffset}
-        y={data.yOffset - data.height / 2}
+        y={data.yOffset - data.height / 2 + hexPadding}
       >
         {Object.keys(data.system.planets).length}
       </text>
@@ -102,7 +103,7 @@ function System(props) {
       <text
         className="System-Text System-Key"
         x={data.xOffset}
-        y={data.yOffset + data.height / 2}
+        y={data.yOffset + data.height / 2 - hexPadding}
       >
         {data.systemKey}
       </text>
