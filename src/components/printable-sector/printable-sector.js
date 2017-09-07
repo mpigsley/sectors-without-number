@@ -94,7 +94,7 @@ const renderSystems = systems =>
 
 export default function PrintableSector({ printable, systems }) {
   return (
-    <div>
+    <div className="PrintableSector">
       <div className="PrintableSector-Container">
         <HexMap hexes={printable.hexes} viewbox={printable.viewbox} />
       </div>

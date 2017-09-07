@@ -1,4 +1,7 @@
 {
+  "1.4.2": {
+    "description": "Fixes missing bold fonts in Chrome print view."
+  },
   "1.4.1": {
     "description": "Fixes buggy system movement.",
     "changes": [

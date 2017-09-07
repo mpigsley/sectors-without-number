@@ -1,4 +1,8 @@
-@import "styles/theme";
+@import 'styles/theme';
+
+.PrintableSector * {
+  font-family: 'Helvetica', sans-serif !important;
+}
 
 .PrintableSector-Container {
   display: none;
