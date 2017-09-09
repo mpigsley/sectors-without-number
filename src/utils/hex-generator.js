@@ -7,6 +7,7 @@ const defaultColumns = 8; // Align with SWN rules
 const hexPadding = 0; // Pixels between hexes
 const extraHexes = 1; // Extra hexes around canvas edges
 const pixelBuffer = 75; // Pixel buffer between the sector and window
+const maxHexes = 800; // Number of hexagons to render before this generator is short circuited
 
 // Size Conversion
 const sizeDiff = Math.sqrt(3) / 2;
@@ -90,10 +91,9 @@ const printablePadding = 40;
 const printableBorder = 3;
 const getPrintableData = (hexes, { rows, columns }) => {
   const printableHexHeight = toHeight(printableHexWidth);
-  const onlySector = hexes.filter(hex => hex.highlighted);
-  const { width, height, xOffset, yOffset, i, j } = hexes.find(
-    hex => hex.systemKey === '0000',
-  );
+  const onlySector = hexes.filter(hex => hex.highlighted) || [];
+  const { width, height, xOffset, yOffset, i, j } =
+    hexes.find(hex => hex.systemKey === '0000') || {};
   const newTotalWidth =
     getTotalWidth(printableHexWidth, columns) +
     printablePadding * 2 +
@@ -127,6 +127,10 @@ const getPrintableData = (hexes, { rows, columns }) => {
 };
 
 export default config => {
+  if (window.innerWidth < 200 || window.innerHeight < 200) {
+    return { hexes: [], printable: {} };
+  }
+
   const { renderSector, systems } = config;
   const newConfig = renderSector
     ? config
@@ -145,15 +149,16 @@ export default config => {
     scaledXOffset,
   } = getGridData(hexSize, newConfig);
 
-  const hexes = [];
+  let hexes = [];
   let isWithinHeight = true;
   let isWithinWidth = true;
+  let isLessThanMaximum = true;
   let i = 0;
   let j = 0;
 
-  while (isWithinHeight) {
+  while (isWithinHeight && isLessThanMaximum) {
     const minRowHeight = heightUnit * 2 * i + scaledYOffset;
-    while (isWithinWidth) {
+    while (isWithinWidth && isLessThanMaximum) {
       const xOffset = j * 3 * widthUnit + scaledXOffset;
       const systemKey = coordinateKey(
         j - paddedColumns + 1,
@@ -183,8 +188,10 @@ export default config => {
     i += 1;
     isWithinWidth = true;
     isWithinHeight = i < totalRows;
+    isLessThanMaximum = hexes.length <= maxHexes;
   }
 
+  hexes = isLessThanMaximum ? hexes : [];
   let printable = {};
   if (renderSector) {
     printable = getPrintableData(hexes, newConfig);

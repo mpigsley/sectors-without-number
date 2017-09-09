@@ -1,4 +1,11 @@
 {
+  "1.4.3": {
+    "description": "Browser doesn't hang if viewing site in a small viewport.",
+    "changes": [
+      "An error message will appear when viewport is too small rather than rendering all the hexagons",
+      "Will stop rendering hexagons if the total number reaches 800 or a viewport dimension is less than 200 pixels"
+    ]
+  },
   "1.4.2": {
     "description": "Fixes missing bold fonts in Chrome print view."
   },
