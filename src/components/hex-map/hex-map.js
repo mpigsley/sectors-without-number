@@ -4,12 +4,29 @@ import classNames from 'classnames';
 
 import System from 'components/system';
 import MovementVector, { MarkerDefs } from 'components/movement-vector';
+import AbsoluteContainer from 'primitives/containers/absolute-container';
+import ContentContainer from 'primitives/containers/content-container';
+import SubContainer from 'primitives/containers/sub-container';
 
 import './style.css';
 
 export default function HexMap({ height, width, viewbox, holdKey, hexes }) {
+  let emptyMessage = null;
+  if (hexes.length === 0) {
+    emptyMessage = (
+      <AbsoluteContainer>
+        <ContentContainer direction="column" align="center" justify="center">
+          <SubContainer className="HexMap-Message">
+            Your browser window is too small to render the sector. Please try on
+            a larger screen.
+          </SubContainer>
+        </ContentContainer>
+      </AbsoluteContainer>
+    );
+  }
   return (
     <div className="HexMap-Container">
+      {emptyMessage}
       <svg
         className={classNames('HexMap-SVG', {
           'HexMap-SVG--drag': !!holdKey,

@@ -1,4 +1,4 @@
-@import "styles/theme";
+@import 'styles/theme';
 
 .HexMap-SVG {
   display: flex;
@@ -10,6 +10,11 @@
 
 .HexMap-Container {
   background-color: $dark3;
+}
+
+.HexMap-Message {
+  color: $light3;
+  max-width: 200px;
 }
 
 @media print {
