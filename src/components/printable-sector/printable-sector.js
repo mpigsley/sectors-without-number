@@ -46,7 +46,10 @@ const renderPlanets = planets =>
           {renderAttribute('Population', planet.population, Population)}
           {renderAttribute(
             'Tags',
-            planet.tags.map(tag => WorldTags[tag].name).map(toCommaArray),
+            planet.tags
+              .map(tag => WorldTags[tag].name)
+              .map(toCommaArray)
+              .join(''),
           )}
         </FlexContainer>
       </div>
@@ -85,7 +88,10 @@ const renderSystems = systems =>
     .filter(system => system)
     .map(systemGroup => (
       <FlexContainer
-        key={toCommaArray(systemGroup.map(system => system.name))}
+        key={systemGroup
+          .map(system => system.name)
+          .map(toCommaArray)
+          .join('')}
         className="PrintableSector-Systems"
       >
         {systemGroup.map(renderSystem)}
