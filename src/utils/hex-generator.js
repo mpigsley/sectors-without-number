@@ -127,7 +127,7 @@ const getPrintableData = (hexes, { rows, columns }) => {
 };
 
 export default config => {
-  if (window.innerWidth < 200 || window.innerHeight < 200) {
+  if (config.width < 200 || config.height < 200) {
     return { hexes: [], printable: {} };
   }
 

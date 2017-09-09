@@ -28,7 +28,10 @@ export default function SectorInfo({ system, location }) {
             {planet.name}
           </Header>
           <div className="SystemInfo-Tags">
-            ({planet.tags.map(tag => WorldTags[tag].name).map(toCommaArray)})
+            ({planet.tags
+              .map(tag => WorldTags[tag].name)
+              .map(toCommaArray)
+              .join('')})
           </div>
         </SidebarLinkRow>
       ))}
