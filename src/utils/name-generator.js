@@ -1,6 +1,6 @@
 /* eslint-disable no-bitwise */
-const { StarDigraphs, GreekLetters } = require('../constants/language');
-const { capitalizeFirstLetter } = require('../utils/common');
+import { StarDigraphs, GreekLetters } from 'constants/language';
+import { capitalizeFirstLetter } from 'utils/common';
 
 const tweakSeeds = hexSeeds => {
   const newSeeds = hexSeeds.concat([
