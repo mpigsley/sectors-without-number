@@ -1,25 +1,25 @@
 import { connect } from 'react-redux';
 
 import {
-  sectorHoverStart,
-  sectorHoverEnd,
+  systemHoverStart,
+  systemHoverEnd,
   systemHold,
   systemRelease,
   moveSystem,
-} from 'store/actions/sector.actions';
+} from 'store/actions/system.actions';
 import System from './system';
 
-const mapStateToProps = ({ sector }) => ({
-  holdKey: sector.holdKey,
-  hoverKey: sector.hoverKey,
+const mapStateToProps = ({ system }) => ({
+  holdKey: system.holdKey,
+  hoverKey: system.hoverKey,
 });
 
 const mapDispatchToProps = dispatch => ({
-  sectorHoverStart: key => {
-    dispatch(sectorHoverStart(key));
+  systemHoverStart: key => {
+    dispatch(systemHoverStart(key));
   },
-  sectorHoverEnd: key => {
-    dispatch(sectorHoverEnd(key));
+  systemHoverEnd: key => {
+    dispatch(systemHoverEnd(key));
   },
   systemHold: key => {
     dispatch(systemHold(key));

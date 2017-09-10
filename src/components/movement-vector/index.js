@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 
 import MovementVector, { MarkerDefs } from './movement-vector';
 
-const mapStateToProps = ({ sector }) => ({
-  holdKey: sector.holdKey,
-  hoverKey: sector.hoverKey,
+const mapStateToProps = ({ system }) => ({
+  holdKey: system.holdKey,
+  hoverKey: system.hoverKey,
 });
 
 export { MarkerDefs };

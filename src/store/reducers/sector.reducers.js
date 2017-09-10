@@ -7,19 +7,13 @@ import {
   SET_SAVED_SECTORS,
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
-  SYSTEM_HOLD,
-  RELEASE_HOLD,
-  MOVE_SYSTEM,
-  SYSTEM_HOVER_START,
-  SYSTEM_HOVER_END,
-} from '../actions/sector.actions';
+} from 'store/actions/sector.actions';
+import { MOVE_SYSTEM } from 'store/actions/system.actions';
 
 const defaultColumns = 8;
 const defaultRows = 10;
 const initialState = {
   renderSector: false,
-  hoverKey: null,
-  holdKey: null,
   currentSector: null,
   generated: null,
   saved: {},
@@ -92,17 +86,12 @@ export default function sector(state = initialState, action) {
         ...state,
         renderSector: false,
       };
-    case SYSTEM_HOLD:
-      return { ...state, holdKey: action.key };
-    case RELEASE_HOLD:
-      return { ...state, holdKey: null };
     case MOVE_SYSTEM: {
       const existingSector = state.generated || state.saved[action.key];
       return {
         ...state,
         currentSector: action.key,
         generated: null,
-        holdKey: null,
         saved: {
           ...state.saved,
           [action.key]: {
@@ -112,10 +101,6 @@ export default function sector(state = initialState, action) {
         },
       };
     }
-    case SYSTEM_HOVER_START:
-      return { ...state, hoverKey: action.key };
-    case SYSTEM_HOVER_END:
-      return { ...state, hoverKey: null };
     default:
       return state;
   }

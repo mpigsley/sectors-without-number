@@ -120,8 +120,8 @@ function System(props) {
           props.holdKey === data.systemKey ||
           (!!props.holdKey && props.hoverKey === data.systemKey),
       })}
-      onMouseEnter={isInSector(props.sectorHoverStart)}
-      onMouseLeave={isInSector(props.sectorHoverEnd)}
+      onMouseEnter={isInSector(props.systemHoverStart)}
+      onMouseLeave={isInSector(props.systemHoverEnd)}
       onMouseDown={isSystem(onMouseDown)}
       onMouseUp={onMouseUp}
     >
@@ -153,8 +153,8 @@ System.propTypes = {
       key: PropTypes.string.isRequired,
     }),
   }).isRequired,
-  sectorHoverStart: PropTypes.func.isRequired,
-  sectorHoverEnd: PropTypes.func.isRequired,
+  systemHoverStart: PropTypes.func.isRequired,
+  systemHoverEnd: PropTypes.func.isRequired,
   systemHold: PropTypes.func.isRequired,
   systemRelease: PropTypes.func.isRequired,
   moveSystem: PropTypes.func.isRequired,
