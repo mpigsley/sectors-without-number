@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SectionHeader from 'primitives/text/section-header';
 import Header, { HeaderType } from 'primitives/text/header';
+import Modal from 'primitives/other/modal';
+import Button from 'primitives/other/button';
 import { capitalizeFirstLetter } from 'utils/common';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
@@ -56,40 +58,90 @@ const renderAttribute = (title, attribute, obj) => (
   </p>
 );
 
-export default function SectorInfo({ planet, location, routeParams }) {
-  return (
-    <SidebarNavigation
-      name={planet.name}
-      back={`/sector/system/${routeParams.system}${location.search}`}
-      type={SidebarType.planet}
-    >
-      <SectionHeader>Attributes</SectionHeader>
-      {renderAttribute('Tech Level', planet.techLevel)}
-      {renderAttribute('Atmosphere', planet.atmosphere, Atmosphere)}
-      {renderAttribute('Temperature', planet.temperature, Temperature)}
-      {renderAttribute('Biosphere', planet.biosphere, Biosphere)}
-      {renderAttribute('Population', planet.population, Population)}
-      <SectionHeader>World Tags</SectionHeader>
-      <div className="PlanetInfo-Section">{renderTags(planet.tags)}</div>
-    </SidebarNavigation>
-  );
-}
+export default class PlanetInfo extends Component {
+  static propTypes = {
+    planet: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      techLevel: PropTypes.string.isRequired,
+      atmosphere: PropTypes.string.isRequired,
+      temperature: PropTypes.string.isRequired,
+      biosphere: PropTypes.string.isRequired,
+      population: PropTypes.string.isRequired,
+      tags: PropTypes.arrayOf(PropTypes.string),
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string,
+      search: PropTypes.string,
+    }).isRequired,
+    routeParams: PropTypes.shape({
+      system: PropTypes.string.isRequired,
+      planet: PropTypes.string.isRequired,
+    }).isRequired,
+  };
 
-SectorInfo.propTypes = {
-  planet: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    techLevel: PropTypes.string.isRequired,
-    atmosphere: PropTypes.string.isRequired,
-    temperature: PropTypes.string.isRequired,
-    biosphere: PropTypes.string.isRequired,
-    population: PropTypes.string.isRequired,
-  }).isRequired,
-  location: PropTypes.shape({
-    pathname: PropTypes.string,
-    search: PropTypes.string,
-  }).isRequired,
-  routeParams: PropTypes.shape({
-    system: PropTypes.string.isRequired,
-    planet: PropTypes.string.isRequired,
-  }).isRequired,
-};
+  constructor(props) {
+    super(props);
+
+    this.onEdit = this.onEdit.bind(this);
+    this.onClose = this.onClose.bind(this);
+  }
+
+  state = {
+    isOpen: false,
+  };
+
+  onEdit() {
+    this.setState({ isOpen: true });
+  }
+
+  onClose() {
+    this.setState({ isOpen: false });
+  }
+
+  render() {
+    return (
+      <SidebarNavigation
+        name={this.props.planet.name}
+        back={`/sector/system/${this.props.routeParams.system}${this.props
+          .location.search}`}
+        type={SidebarType.planet}
+        onEdit={this.onEdit}
+      >
+        <SectionHeader>Attributes</SectionHeader>
+        {renderAttribute('Tech Level', this.props.planet.techLevel)}
+        {renderAttribute(
+          'Atmosphere',
+          this.props.planet.atmosphere,
+          Atmosphere,
+        )}
+        {renderAttribute(
+          'Temperature',
+          this.props.planet.temperature,
+          Temperature,
+        )}
+        {renderAttribute('Biosphere', this.props.planet.biosphere, Biosphere)}
+        {renderAttribute(
+          'Population',
+          this.props.planet.population,
+          Population,
+        )}
+        <SectionHeader>World Tags</SectionHeader>
+        <div className="PlanetInfo-Section">
+          {renderTags(this.props.planet.tags)}
+        </div>
+        <Modal
+          isOpen={this.state.isOpen}
+          onCancel={this.onClose}
+          title="Edit Planet"
+          actionButtons={[
+            <Button primary key="save">
+              Save Planet
+            </Button>,
+          ]}
+        >
+          <p>some input element... blah blah</p>
+        </Modal>
+      </SidebarNavigation>
+    );
+  }
+}

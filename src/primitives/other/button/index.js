@@ -5,13 +5,14 @@ import classNames from 'classnames';
 import './style.css';
 
 export default function Button(props) {
-  const { className, minimal, ...rest } = props;
+  const { className, minimal, primary, ...rest } = props;
   return (
     <button
       {...rest}
       className={classNames(className, {
         Button: !minimal,
         'Button-Minimal': minimal,
+        'Button-Primary': primary,
       })}
     />
   );
@@ -20,9 +21,11 @@ export default function Button(props) {
 Button.propTypes = {
   className: PropTypes.string,
   minimal: PropTypes.bool,
+  primary: PropTypes.bool,
 };
 
 Button.defaultProps = {
   className: null,
   minimal: false,
+  primary: false,
 };

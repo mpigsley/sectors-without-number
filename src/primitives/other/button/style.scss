@@ -29,6 +29,17 @@
   }
 }
 
+.Button-Primary {
+  background-color: $light4;
+  color: $dark4;
+
+  &:hover {
+    background-color: $light2;
+    border-color: $light2;
+    color: $dark4;
+  }
+}
+
 .Button-Minimal {
   background-color: transparent;
   border: none;
