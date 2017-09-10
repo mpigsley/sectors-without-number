@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import ReactModal from 'react-modal';
 import { X } from 'react-feather';
 
+import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/containers/flex-container';
 import Button from 'primitives/other/button';
 
@@ -32,7 +33,9 @@ export default function Modal(props) {
           justify="spaceBetween"
           className="Modal-Section Modal-Header"
         >
-          <h3 className="Modal-Title">{title}</h3>
+          <Header className="Modal-Title" type={HeaderType.header3}>
+            {title}
+          </Header>
           <X className="Modal-Close" onClick={onCancel} size={30} />
         </FlexContainer>
         <div className="Modal-Content">{children}</div>
