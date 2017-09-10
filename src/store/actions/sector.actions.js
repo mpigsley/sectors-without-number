@@ -1,9 +1,36 @@
 import localForage from 'localforage';
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 
+import { getCurrentSector } from 'store/selectors/sector.selectors';
+
 export const SET_SAVED_SECTORS = 'SET_SAVED_SECTORS';
 export const ADD_SAVED_SECTOR = 'ADD_SAVED_SECTOR';
 export const REMOVE_SAVED_SECTOR = 'REMOVE_SAVED_SECTOR';
+export const EDIT_SECTOR = 'EDIT_SECTOR';
+
+export function editSector(key, value) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const sector = { ...getCurrentSector(state) };
+    return localForage
+      .setItem(sector.seed, { ...sector, [key]: value })
+      .then(() => {
+        dispatch({ type: EDIT_SECTOR, key, value });
+        dispatch(
+          ReduxToastrActions.add({
+            options: {
+              removeOnHover: true,
+              showCloseButton: true,
+            },
+            position: 'bottom-left',
+            title: 'Sector Updated',
+            message: 'Your sector has been saved.',
+            type: 'success',
+          }),
+        );
+      });
+  };
+}
 
 export function setSavedSectors(saved) {
   return { type: SET_SAVED_SECTORS, saved };

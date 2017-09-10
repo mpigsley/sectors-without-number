@@ -27,14 +27,21 @@ export default class SectorInfo extends SidebarInfo {
     location: PropTypes.shape({
       search: PropTypes.string,
     }).isRequired,
+    editSectorName: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
 
+    this.onSaveSector = this.onSaveSector.bind(this);
     this.state = {
       name: this.props.sector.name,
     };
+  }
+
+  onSaveSector() {
+    this.props.editSectorName(this.state.name);
+    this.onClose();
   }
 
   render() {
@@ -64,7 +71,7 @@ export default class SectorInfo extends SidebarInfo {
           onCancel={this.onClose}
           title="Edit Sector"
           actionButtons={[
-            <Button primary key="save">
+            <Button primary key="save" onClick={this.onSaveSector}>
               Save Sector
             </Button>,
           ]}

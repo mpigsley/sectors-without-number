@@ -7,6 +7,7 @@ import {
   SET_SAVED_SECTORS,
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
+  EDIT_SECTOR,
 } from 'store/actions/sector.actions';
 import { MOVE_SYSTEM } from 'store/actions/system.actions';
 
@@ -53,6 +54,22 @@ export default function sector(state = initialState, action) {
         ...state,
         saved: removeByKey(state.saved, action.key),
       };
+    case EDIT_SECTOR: {
+      const existingSector =
+        state.generated || state.saved[state.currentSector];
+      return {
+        ...state,
+        currentSector: existingSector.seed,
+        generated: null,
+        saved: {
+          ...state.saved,
+          [existingSector.seed]: {
+            ...existingSector,
+            [action.key]: action.value,
+          },
+        },
+      };
+    }
     case LOCATION_CHANGE:
       if (['/', '/configure'].indexOf(action.payload.pathname) >= 0) {
         return {
