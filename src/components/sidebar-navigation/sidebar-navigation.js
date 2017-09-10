@@ -26,6 +26,7 @@ export default function SidebarNavigation({
   type,
   saveSector,
   currentSector,
+  onEdit,
 }) {
   const onCopy = () => {
     copy(window.location.href);
@@ -75,6 +76,10 @@ export default function SidebarNavigation({
             Save
           </Button>
           <span className="SidebarNavigation-Spacer" />
+          <Button minimal onClick={onEdit}>
+            Edit
+          </Button>
+          <span className="SidebarNavigation-Spacer" />
           {shareButton}
           {currentSector === 'generated' ? (
             <span className="SidebarNavigation-Spacer" />
@@ -121,10 +126,12 @@ SidebarNavigation.propTypes = {
   type: PropTypes.string,
   saveSector: PropTypes.func.isRequired,
   currentSector: PropTypes.string,
+  onEdit: PropTypes.func,
 };
 
 SidebarNavigation.defaultProps = {
   type: SidebarType.sector,
   back: null,
   currentSector: null,
+  onEdit: () => {},
 };
