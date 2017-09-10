@@ -6,6 +6,7 @@
   color: $light2;
   outline: none;
   overflow: auto;
+  width: 400px;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -44,7 +45,12 @@
 
 .Modal-Content {
   background-color: $dark2;
+  padding: 1.5rem 1rem;
 }
 
 .Modal-Footer {
+}
+
+.Model-FooterButton {
+  margin-right: 0;
 }

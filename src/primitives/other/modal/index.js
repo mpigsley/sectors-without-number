@@ -35,10 +35,19 @@ export default function Modal(props) {
           <h3 className="Modal-Title">{title}</h3>
           <X className="Modal-Close" onClick={onCancel} size={30} />
         </FlexContainer>
-        <div className="Modal-Section Modal-Content">{children}</div>
+        <div className="Modal-Content">{children}</div>
         <FlexContainer justify="flexEnd" className="Modal-Section Modal-Footer">
-          <Button onClick={onCancel}>Cancel</Button>
-          {actionButtons}
+          <Button className="Model-FooterButton" onClick={onCancel}>
+            Cancel
+          </Button>
+          {React.Children.map(actionButtons, button =>
+            React.cloneElement(button, {
+              className: classNames(
+                button.props.className,
+                'Model-FooterButton',
+              ),
+            }),
+          )}
         </FlexContainer>
       </FlexContainer>
     </ReactModal>

@@ -1,7 +1,8 @@
-@import "styles/theme";
+@import 'styles/theme';
 
 .Label {
   color: $light4;
+  display: block;
   margin-top: 1.2rem;
   margin-bottom: 0.3rem;
 

@@ -1,0 +1,25 @@
+@import 'styles/theme';
+
+.IconInput {
+  position: relative;
+}
+
+.IconInput-Input {
+  padding-right: 43px;
+}
+
+.IconInput-Icon {
+  color: $dark1;
+  position: absolute;
+  right: 10px;
+  top: 9px;
+  transition: all 0.3s;
+
+  &--clickable {
+    cursor: pointer;
+  }
+
+  &:hover {
+    color: $dark3;
+  }
+}

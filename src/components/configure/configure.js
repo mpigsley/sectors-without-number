@@ -5,8 +5,8 @@ import Chance from 'chance';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/containers/content-container';
 import SubContainer from 'primitives/containers/sub-container';
-import Input from 'primitives/other/input';
-import Label from 'primitives/other/label';
+import Input from 'primitives/form/input';
+import Label from 'primitives/form/label';
 import LinkIcon from 'primitives/other/link-icon';
 import ButtonLink from 'primitives/other/button-link';
 

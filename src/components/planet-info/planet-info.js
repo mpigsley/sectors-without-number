@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
+import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
+
 import SectionHeader from 'primitives/text/section-header';
 import Header, { HeaderType } from 'primitives/text/header';
 import Modal from 'primitives/other/modal';
 import Button from 'primitives/other/button';
+
 import { capitalizeFirstLetter } from 'utils/common';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
@@ -58,7 +61,7 @@ const renderAttribute = (title, attribute, obj) => (
   </p>
 );
 
-export default class PlanetInfo extends Component {
+export default class PlanetInfo extends SidebarInfo {
   static propTypes = {
     planet: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -78,25 +81,6 @@ export default class PlanetInfo extends Component {
       planet: PropTypes.string.isRequired,
     }).isRequired,
   };
-
-  constructor(props) {
-    super(props);
-
-    this.onEdit = this.onEdit.bind(this);
-    this.onClose = this.onClose.bind(this);
-  }
-
-  state = {
-    isOpen: false,
-  };
-
-  onEdit() {
-    this.setState({ isOpen: true });
-  }
-
-  onClose() {
-    this.setState({ isOpen: false });
-  }
 
   render() {
     return (

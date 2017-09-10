@@ -1,17 +1,24 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import { RefreshCw } from 'react-feather';
 
+import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
+
 import Header, { HeaderType } from 'primitives/text/header';
 import Modal from 'primitives/other/modal';
 import SectionHeader from 'primitives/text/section-header';
 import Button from 'primitives/other/button';
+import Label from 'primitives/form/label';
+import IconInput from 'primitives/form/icon-input';
+
 import { stringSortByKey } from 'utils/common';
+import { generateSectorName } from 'utils/name-generator';
 
 import './style.css';
 
-export default class SectorInfo extends Component {
+export default class SectorInfo extends SidebarInfo {
   static propTypes = {
     sector: PropTypes.shape({
       name: PropTypes.string.isRequired,
@@ -25,20 +32,9 @@ export default class SectorInfo extends Component {
   constructor(props) {
     super(props);
 
-    this.onEdit = this.onEdit.bind(this);
-    this.onClose = this.onClose.bind(this);
-  }
-
-  state = {
-    isOpen: false,
-  };
-
-  onEdit() {
-    this.setState({ isOpen: true });
-  }
-
-  onClose() {
-    this.setState({ isOpen: false });
+    this.state = {
+      name: this.props.sector.name,
+    };
   }
 
   render() {
@@ -73,7 +69,16 @@ export default class SectorInfo extends Component {
             </Button>,
           ]}
         >
-          <p>some input element... blah blah</p>
+          <Label noPadding htmlFor="name">
+            Sector Name
+          </Label>
+          <IconInput
+            id="name"
+            icon={RefreshCw}
+            value={this.state.name}
+            onChange={this.onEditName}
+            onIconClick={this.onRandomizeName(generateSectorName)}
+          />
         </Modal>
       </SidebarNavigation>
     );
