@@ -3,25 +3,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
-import {
-  ChevronLeft,
-  Share,
-  Printer,
-  Sun,
-  Globe,
-  Map,
-  AlertCircle,
-  Save,
-  Package,
-  Github,
-} from 'react-feather';
+import { ChevronLeft, Sun, Globe, Map } from 'react-feather';
 
 import FlexContainer from 'primitives/containers/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
+import Button from 'primitives/other/button';
+import ButtonLink from 'primitives/other/button-link';
 
 import './style.css';
 
-const linkCss = 'SidebarNavigation-Icon SidebarNavigation-Icon--link';
 const nonLinkCss = 'SidebarNavigation-Icon SidebarNavigation-Icon--nonlink';
 export const SidebarType = {
   sector: 'sector',
@@ -49,9 +39,13 @@ export default function SidebarNavigation({
     window.print();
   };
 
-  let shareIcon = null;
+  let shareButton = null;
   if (currentSector === 'generated') {
-    shareIcon = <Share className={linkCss} onClick={onCopy} size={18} />;
+    shareButton = (
+      <Button minimal onClick={onCopy}>
+        Share
+      </Button>
+    );
   }
 
   const iconSize = 18;
@@ -69,7 +63,7 @@ export default function SidebarNavigation({
       <div className="SidebarNavigation-Header">
         <FlexContainer align="center" shrink="0">
           <Link to={back || '/'} className="SidebarNavigation-Link">
-            <ChevronLeft className={linkCss} />
+            <ChevronLeft className="SidebarNavigation-Icon SidebarNavigation-Icon--link" />
           </Link>
           <FlexContainer flex="1" justify="center">
             <Header type={HeaderType.header2}>{name}</Header>
@@ -77,26 +71,45 @@ export default function SidebarNavigation({
           {typeIcon}
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
-          <Save className={linkCss} onClick={saveSector} size={18} />
-          {shareIcon}
-          <Printer className={linkCss} onClick={onPrint} size={18} />
-          <Link to="https://goo.gl/forms/eOanpGEuglCYYg7u2" target="_blank">
-            <AlertCircle className={linkCss} size={18} />
-          </Link>
-          <Link to="/changelog">
-            <Package className={linkCss} size={18} />
-          </Link>
-          <Link
-            to="https://github.com/mpigsley/sectors-without-number"
-            target="_blank"
-          >
-            <Github className={linkCss} size={18} />
-          </Link>
+          <Button minimal onClick={saveSector}>
+            Save
+          </Button>
+          <span className="SidebarNavigation-Spacer" />
+          {shareButton}
+          {currentSector === 'generated' ? (
+            <span className="SidebarNavigation-Spacer" />
+          ) : null}
+          <Button minimal onClick={onPrint}>
+            Print
+          </Button>
         </FlexContainer>
       </div>
       <FlexContainer direction="column" flex="1" scroll>
         {children}
       </FlexContainer>
+      <div className="SidebarNavigation-Footer">
+        <FlexContainer justify="center">
+          <ButtonLink
+            minimal
+            to="https://goo.gl/forms/eOanpGEuglCYYg7u2"
+            target="_blank"
+          >
+            Report Problem
+          </ButtonLink>
+          <span className="SidebarNavigation-Spacer" />
+          <ButtonLink minimal to="/changelog">
+            Changelog
+          </ButtonLink>
+          <span className="SidebarNavigation-Spacer" />
+          <ButtonLink
+            minimal
+            to="https://github.com/mpigsley/sectors-without-number"
+            target="_blank"
+          >
+            Github
+          </ButtonLink>
+        </FlexContainer>
+      </div>
     </FlexContainer>
   );
 }

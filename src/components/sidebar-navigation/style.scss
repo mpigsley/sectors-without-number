@@ -1,4 +1,4 @@
-@import "styles/theme";
+@import 'styles/theme';
 
 .SidebarNavigation-Info {
   height: 100vh;
@@ -8,6 +8,17 @@
 .SidebarNavigation-Header {
   padding-bottom: 0.6rem;
   border-bottom: 1px solid $dark2;
+}
+
+.SidebarNavigation-Footer {
+  padding: 0.6rem 0;
+  border-top: 1px solid $dark2;
+}
+
+.SidebarNavigation-Spacer {
+  background-color: $dark1;
+  width: 1px;
+  margin: 0.3rem;
 }
 
 .SidebarNavigation-Link {
