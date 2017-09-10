@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { RefreshCw } from 'react-feather';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
@@ -8,8 +9,11 @@ import SectionHeader from 'primitives/text/section-header';
 import Header, { HeaderType } from 'primitives/text/header';
 import Modal from 'primitives/other/modal';
 import Button from 'primitives/other/button';
+import Label from 'primitives/form/label';
+import IconInput from 'primitives/form/icon-input';
 
 import { capitalizeFirstLetter } from 'utils/common';
+import { generateName } from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
 import Temperature from 'constants/temperature';
@@ -82,6 +86,14 @@ export default class PlanetInfo extends SidebarInfo {
     }).isRequired,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: this.props.planet.name,
+    };
+  }
+
   render() {
     return (
       <SidebarNavigation
@@ -123,7 +135,16 @@ export default class PlanetInfo extends SidebarInfo {
             </Button>,
           ]}
         >
-          <p>some input element... blah blah</p>
+          <Label noPadding htmlFor="name">
+            Planet Name
+          </Label>
+          <IconInput
+            id="name"
+            icon={RefreshCw}
+            value={this.state.name}
+            onChange={this.onEditName}
+            onIconClick={this.onRandomizeName(generateName)}
+          />
         </Modal>
       </SidebarNavigation>
     );

@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { map } from 'lodash';
+import { RefreshCw } from 'react-feather';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
+import Label from 'primitives/form/label';
+import IconInput from 'primitives/form/icon-input';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import SectionHeader from 'primitives/text/section-header';
@@ -12,6 +15,7 @@ import Modal from 'primitives/other/modal';
 import Button from 'primitives/other/button';
 
 import { toCommaArray } from 'utils/common';
+import { generateName } from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
 
 import './style.css';
@@ -28,6 +32,14 @@ export default class SectorInfo extends SidebarInfo {
       search: PropTypes.string,
     }).isRequired,
   };
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      name: this.props.system.name,
+    };
+  }
 
   render() {
     return (
@@ -66,7 +78,16 @@ export default class SectorInfo extends SidebarInfo {
             </Button>,
           ]}
         >
-          <p>some input element... blah blah</p>
+          <Label noPadding htmlFor="name">
+            System Name
+          </Label>
+          <IconInput
+            id="name"
+            icon={RefreshCw}
+            value={this.state.name}
+            onChange={this.onEditName}
+            onIconClick={this.onRandomizeName(generateName)}
+          />
         </Modal>
       </SidebarNavigation>
     );
