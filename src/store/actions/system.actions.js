@@ -10,6 +10,38 @@ export const RELEASE_HOLD = 'RELEASE_HOLD';
 export const MOVE_SYSTEM = 'MOVE_SYSTEM';
 export const SYSTEM_HOVER_START = 'SYSTEM_HOVER_START';
 export const SYSTEM_HOVER_END = 'SYSTEM_HOVER_END';
+export const EDIT_SYSTEM = 'EDIT_SYSTEM';
+
+export function editSystem(system, key, value) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const sector = { ...getCurrentSector(state) };
+    const updateSystem = { ...sector.systems[system], [key]: value };
+    return localForage
+      .setItem(sector.seed, {
+        ...sector,
+        systems: {
+          ...sector.systems,
+          [system]: updateSystem,
+        },
+      })
+      .then(() => {
+        dispatch({ type: EDIT_SYSTEM, key: system, system: updateSystem });
+        dispatch(
+          ReduxToastrActions.add({
+            options: {
+              removeOnHover: true,
+              showCloseButton: true,
+            },
+            position: 'bottom-left',
+            title: 'System Updated',
+            message: 'Your sector has been saved.',
+            type: 'success',
+          }),
+        );
+      });
+  };
+}
 
 export function systemHold(key) {
   return { type: SYSTEM_HOLD, key };

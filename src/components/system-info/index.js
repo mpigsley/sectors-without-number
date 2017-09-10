@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import { makeGetCurrentSystem } from 'store/selectors/sector.selectors';
+import { editSystem } from 'store/actions/system.actions';
 import SystemInfo from './system-info';
 
 const mapStateToProps = () => {
@@ -10,4 +11,10 @@ const mapStateToProps = () => {
   });
 };
 
-export default connect(mapStateToProps)(SystemInfo);
+const mapDispatchToProps = dispatch => ({
+  editSystemName: (system, value) => {
+    dispatch(editSystem(system, 'name', value));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SystemInfo);

@@ -31,14 +31,21 @@ export default class SectorInfo extends SidebarInfo {
       pathname: PropTypes.string,
       search: PropTypes.string,
     }).isRequired,
+    editSystemName: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
 
+    this.onSaveSystem = this.onSaveSystem.bind(this);
     this.state = {
       name: this.props.system.name,
     };
+  }
+
+  onSaveSystem() {
+    this.props.editSystemName(this.props.system.key, this.state.name);
+    this.onClose();
   }
 
   render() {
@@ -73,7 +80,7 @@ export default class SectorInfo extends SidebarInfo {
           onCancel={this.onClose}
           title="Edit System"
           actionButtons={[
-            <Button primary key="save">
+            <Button primary key="save" onClick={this.onSaveSystem}>
               Save System
             </Button>,
           ]}
