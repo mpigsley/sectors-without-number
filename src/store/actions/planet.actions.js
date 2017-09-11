@@ -10,7 +10,8 @@ export const EDIT_PLANET = 'EDIT_PLANET';
 export function editPlanet(system, planet, key, value) {
   return (dispatch, getState) => {
     const state = getState();
-    const sector = { ...getCurrentSector(state) };
+    const sector = { ...getCurrentSector(state), updated: Date.now() };
+    sector.created = sector.created || Date.now();
     let newKey = planet;
     if (key === 'name') {
       newKey = encodeURIComponent(value.toLowerCase());

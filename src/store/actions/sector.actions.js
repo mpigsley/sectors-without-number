@@ -11,7 +11,8 @@ export const EDIT_SECTOR = 'EDIT_SECTOR';
 export function editSector(key, value) {
   return (dispatch, getState) => {
     const state = getState();
-    const sector = { ...getCurrentSector(state) };
+    const sector = { ...getCurrentSector(state), updated: Date.now() };
+    sector.created = sector.created || Date.now();
     return localForage
       .setItem(sector.seed, { ...sector, [key]: value })
       .then(() => {
@@ -60,7 +61,9 @@ export function saveSector() {
     const { sector } = getState();
     const key = sector.generated ? sector.generated.seed : sector.currentSector;
     const value = sector.generated || sector.saved[sector.currentSector];
-    return localForage.setItem(key, value).then(() => {
+    const update = { ...value, updated: Date.now() };
+    update.created = update.created || Date.now();
+    return localForage.setItem(key, update).then(() => {
       dispatch({ type: ADD_SAVED_SECTOR });
       dispatch(
         ReduxToastrActions.add({

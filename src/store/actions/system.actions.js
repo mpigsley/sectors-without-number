@@ -15,7 +15,8 @@ export const EDIT_SYSTEM = 'EDIT_SYSTEM';
 export function editSystem(system, key, value) {
   return (dispatch, getState) => {
     const state = getState();
-    const sector = { ...getCurrentSector(state) };
+    const sector = { ...getCurrentSector(state), updated: Date.now() };
+    sector.created = sector.created || Date.now();
     const updateSystem = { ...sector.systems[system], [key]: value };
     return localForage
       .setItem(sector.seed, {
@@ -54,7 +55,8 @@ export function systemRelease() {
 export function moveSystem() {
   return (dispatch, getState) => {
     const state = getState();
-    const sector = getCurrentSector(state);
+    const sector = { ...getCurrentSector(state), updated: Date.now() };
+    sector.created = sector.created || Date.now();
     let systems = { ...sector.systems };
     const source = {
       ...systems[state.system.holdKey],
