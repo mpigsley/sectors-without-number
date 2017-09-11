@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import { makeGetCurrentSystem } from 'store/selectors/sector.selectors';
+import { makeGetCurrentSystem } from 'store/selectors/system.selectors';
 import { editSystem } from 'store/actions/system.actions';
 import SystemInfo from './system-info';
 

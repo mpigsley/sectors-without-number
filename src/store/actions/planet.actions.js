@@ -12,7 +12,6 @@ export function editPlanet(system, planet, key, value) {
     const state = getState();
     const sector = { ...getCurrentSector(state) };
     let newKey = planet;
-    console.log(planet);
     if (key === 'name') {
       newKey = encodeURIComponent(value.toLowerCase());
     }

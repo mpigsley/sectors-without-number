@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw } from 'react-feather';
+import Chance from 'chance';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
@@ -76,6 +77,7 @@ export default class PlanetInfo extends SidebarInfo {
       population: PropTypes.string,
       tags: PropTypes.arrayOf(PropTypes.string),
     }),
+    planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string,
       search: PropTypes.string,
@@ -94,9 +96,12 @@ export default class PlanetInfo extends SidebarInfo {
   constructor(props) {
     super(props);
 
+    this.onRandomizeName = this.onRandomizeName.bind(this);
+    this.onEditName = this.onEditName.bind(this);
     this.onSavePlanet = this.onSavePlanet.bind(this);
     this.state = {
       name: this.props.planet.name,
+      isNotUnique: false,
     };
   }
 
@@ -109,15 +114,46 @@ export default class PlanetInfo extends SidebarInfo {
   }
 
   onSavePlanet() {
-    this.props.editPlanetName(
-      this.props.routeParams.system,
-      encodeURIComponent(this.props.routeParams.planet),
-      this.state.name,
-    );
-    this.onClose();
+    const nameKey = encodeURIComponent(this.state.name.toLowerCase());
+    if (this.props.planetKeys.indexOf(nameKey) >= 0) {
+      this.setState({
+        isNotUnique: true,
+      });
+    } else {
+      this.props.editPlanetName(
+        this.props.routeParams.system,
+        encodeURIComponent(this.props.routeParams.planet),
+        this.state.name,
+      );
+      this.onClose();
+    }
+  }
+
+  onRandomizeName() {
+    const chance = new Chance();
+    this.setState({
+      name: generateName(chance),
+      isNotUnique: false,
+    });
+  }
+
+  onEditName(e) {
+    this.setState({
+      name: e.target.value,
+      isNotUnique: false,
+    });
   }
 
   render() {
+    let errorText = null;
+    if (this.state.isNotUnique) {
+      errorText = (
+        <div className="PlanetInfo-Error">
+          Name must be unique in the sector.
+        </div>
+      );
+    }
+
     return (
       <SidebarNavigation
         name={this.props.planet.name || ''}
@@ -163,11 +199,13 @@ export default class PlanetInfo extends SidebarInfo {
           </Label>
           <IconInput
             id="name"
+            error={this.state.isNotUnique}
             icon={RefreshCw}
             value={this.state.name}
             onChange={this.onEditName}
-            onIconClick={this.onRandomizeName(generateName)}
+            onIconClick={this.onRandomizeName}
           />
+          {errorText}
         </Modal>
       </SidebarNavigation>
     );
