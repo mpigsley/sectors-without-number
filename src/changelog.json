@@ -1,4 +1,12 @@
 {
+  "1.6.0": {
+    "description": "The sector, system, and planet names are now editable.",
+    "changes": [
+      "New text links instead of the icon links in the information sidebar.",
+      "Rename to your own custom name or just get a new randomly generated name by selecting the refresh icon in the edit modal.",
+      "Once a sector, system, or planet is renamed the entire sector is saved so you don't loose your progress."
+    ]
+  },
   "1.5.0": {
     "description":
       "Add tests to the sector generator utilities so the core of the app doesn't break on subsequent changes."
