@@ -7,19 +7,15 @@ import {
   SET_SAVED_SECTORS,
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
-  SYSTEM_HOLD,
-  RELEASE_HOLD,
-  MOVE_SYSTEM,
-  SYSTEM_HOVER_START,
-  SYSTEM_HOVER_END,
-} from '../actions/sector.actions';
+  EDIT_SECTOR,
+} from 'store/actions/sector.actions';
+import { MOVE_SYSTEM, EDIT_SYSTEM } from 'store/actions/system.actions';
+import { EDIT_PLANET } from 'store/actions/planet.actions';
 
 const defaultColumns = 8;
 const defaultRows = 10;
 const initialState = {
   renderSector: false,
-  hoverKey: null,
-  holdKey: null,
   currentSector: null,
   generated: null,
   saved: {},
@@ -59,6 +55,22 @@ export default function sector(state = initialState, action) {
         ...state,
         saved: removeByKey(state.saved, action.key),
       };
+    case EDIT_SECTOR: {
+      const existingSector =
+        state.generated || state.saved[state.currentSector];
+      return {
+        ...state,
+        currentSector: existingSector.seed,
+        generated: null,
+        saved: {
+          ...state.saved,
+          [existingSector.seed]: {
+            ...existingSector,
+            [action.key]: action.value,
+          },
+        },
+      };
+    }
     case LOCATION_CHANGE:
       if (['/', '/configure'].indexOf(action.payload.pathname) >= 0) {
         return {
@@ -92,17 +104,12 @@ export default function sector(state = initialState, action) {
         ...state,
         renderSector: false,
       };
-    case SYSTEM_HOLD:
-      return { ...state, holdKey: action.key };
-    case RELEASE_HOLD:
-      return { ...state, holdKey: null };
     case MOVE_SYSTEM: {
       const existingSector = state.generated || state.saved[action.key];
       return {
         ...state,
         currentSector: action.key,
         generated: null,
-        holdKey: null,
         saved: {
           ...state.saved,
           [action.key]: {
@@ -112,10 +119,53 @@ export default function sector(state = initialState, action) {
         },
       };
     }
-    case SYSTEM_HOVER_START:
-      return { ...state, hoverKey: action.key };
-    case SYSTEM_HOVER_END:
-      return { ...state, hoverKey: null };
+    case EDIT_SYSTEM: {
+      const existingSector =
+        state.generated || state.saved[state.currentSector];
+      return {
+        ...state,
+        currentSector: existingSector.seed,
+        generated: null,
+        saved: {
+          ...state.saved,
+          [existingSector.seed]: {
+            ...existingSector,
+            systems: {
+              ...existingSector.systems,
+              [action.system]: action.update,
+            },
+          },
+        },
+      };
+    }
+    case EDIT_PLANET: {
+      const existingSector =
+        state.generated || state.saved[state.currentSector];
+      return {
+        ...state,
+        currentSector: existingSector.seed,
+        generated: null,
+        saved: {
+          ...state.saved,
+          [existingSector.seed]: {
+            ...existingSector,
+            systems: {
+              ...existingSector.systems,
+              [action.system]: {
+                ...existingSector.systems[action.system],
+                planets: {
+                  ...removeByKey(
+                    existingSector.systems[action.system].planets,
+                    action.planet,
+                  ),
+                  [action.newKey]: action.update,
+                },
+              },
+            },
+          },
+        },
+      };
+    }
     default:
       return state;
   }

@@ -9,50 +9,54 @@ import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
 import Population from 'constants/population';
 
-const generatePlanet = seededChance => () => ({
-  name: generateName(seededChance),
-  tags: seededChance.pickset(Object.keys(worldTagKeys), 2),
-  techLevel: `TL${seededChance.weighted(
-    ['0', '1', '2', '3', '4', '4+', '5'],
-    [1, 1, 2, 2, 3, 1, 1],
-  )}`,
-  atmosphere: seededChance.weighted(Object.keys(Atmosphere), [
-    1,
-    1,
-    1,
-    5,
-    1,
-    1,
-    1,
-  ]),
-  temperature: seededChance.weighted(Object.keys(Temperature), [
-    1,
-    1,
-    2,
-    3,
-    2,
-    1,
-    1,
-  ]),
-  biosphere: seededChance.weighted(Object.keys(Biosphere), [
-    1,
-    1,
-    2,
-    3,
-    2,
-    1,
-    1,
-  ]),
-  population: seededChance.weighted(Object.keys(Population), [
-    1,
-    1,
-    2,
-    3,
-    2,
-    1,
-    1,
-  ]),
-});
+const generatePlanet = seededChance => () => {
+  const name = generateName(seededChance);
+  return {
+    name,
+    key: encodeURIComponent(name.toLowerCase()),
+    tags: seededChance.pickset(Object.keys(worldTagKeys), 2),
+    techLevel: `TL${seededChance.weighted(
+      ['0', '1', '2', '3', '4', '4+', '5'],
+      [1, 1, 2, 2, 3, 1, 1],
+    )}`,
+    atmosphere: seededChance.weighted(Object.keys(Atmosphere), [
+      1,
+      1,
+      1,
+      5,
+      1,
+      1,
+      1,
+    ]),
+    temperature: seededChance.weighted(Object.keys(Temperature), [
+      1,
+      1,
+      2,
+      3,
+      2,
+      1,
+      1,
+    ]),
+    biosphere: seededChance.weighted(Object.keys(Biosphere), [
+      1,
+      1,
+      2,
+      3,
+      2,
+      1,
+      1,
+    ]),
+    population: seededChance.weighted(Object.keys(Population), [
+      1,
+      1,
+      2,
+      3,
+      2,
+      1,
+      1,
+    ]),
+  };
+};
 
 class System {
   constructor(config, x, y) {
@@ -62,7 +66,7 @@ class System {
       ...Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2])),
     ].map(generatePlanet(this.config.seededChance));
     this.planets = zipObject(
-      planetArray.map(planet => planet.name.toLowerCase()),
+      planetArray.map(planet => planet.key),
       planetArray,
     );
     this.x =

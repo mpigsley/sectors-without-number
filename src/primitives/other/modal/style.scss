@@ -1,0 +1,56 @@
+@import 'styles/theme';
+
+.Modal {
+  background: $dark3;
+  border-radius: 0.2rem;
+  color: $light2;
+  outline: none;
+  overflow: auto;
+  width: 400px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.Modal-Overlay {
+  align-items: center;
+  background-color: rgba(200, 200, 200, 0.3);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.Modal-Title {
+  margin: 0;
+}
+
+.Modal-Close {
+  cursor: pointer;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.Modal-Section {
+  padding: 1rem;
+}
+
+.Modal-Header {
+}
+
+.Modal-Content {
+  background-color: $dark2;
+  padding: 1.5rem 1rem;
+}
+
+.Modal-Footer {
+}
+
+.Model-FooterButton {
+  margin-right: 0;
+}

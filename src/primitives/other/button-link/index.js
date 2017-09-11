@@ -5,8 +5,11 @@ import isExternal from 'is-url-external';
 import classNames from 'classnames';
 
 export default function ButtonLink(props) {
-  const { className, to, ...rest } = props;
-  const linkClass = classNames('Button', className); // Uses Button CSS
+  const { className, minimal, to, ...rest } = props;
+  const linkClass = classNames(className, {
+    Button: !minimal, // Uses Button CSS
+    'Button-Minimal': minimal,
+  });
   if (isExternal(to)) {
     return (
       <a // eslint-disable-line
@@ -22,8 +25,10 @@ export default function ButtonLink(props) {
 ButtonLink.propTypes = {
   to: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
   className: PropTypes.string,
+  minimal: PropTypes.bool,
 };
 
 ButtonLink.defaultProps = {
   className: null,
+  minimal: false,
 };

@@ -32,7 +32,7 @@ export default class Sector extends Component {
   state = {
     height: window.innerHeight,
     width:
-      window.innerWidth > 700 ? window.innerWidth - 350 : window.innerWidth,
+      window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth,
   };
 
   componentDidMount() {
@@ -47,7 +47,7 @@ export default class Sector extends Component {
     this.setState({
       height: window.innerHeight,
       width:
-        window.innerWidth > 700 ? window.innerWidth - 350 : window.innerWidth,
+        window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth,
     });
   }, 100);
 

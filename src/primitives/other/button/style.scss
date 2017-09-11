@@ -1,4 +1,4 @@
-@import "styles/theme";
+@import 'styles/theme';
 
 .Button {
   background-color: transparent;
@@ -9,9 +9,8 @@
   cursor: pointer;
   display: inline-block;
   font-size: 11px;
-  font-weight: 600;
   height: 38px;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   outline: none;
   line-height: 38px;
   margin: 0.4rem 1rem;
@@ -27,5 +26,41 @@
     color: $light2;
     border-color: $light2;
     outline: 0;
+  }
+}
+
+.Button-Primary {
+  background-color: $light4;
+  color: $dark4;
+
+  &:hover {
+    background-color: $light2;
+    border-color: $light2;
+    color: $dark4;
+  }
+}
+
+.Button-Minimal {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: $light2;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 400;
+  height: 1.5rem;
+  letter-spacing: 0.1rem;
+  line-height: 1.5rem;
+  margin: 0.2rem;
+  outline: none;
+  padding: 0 0.2rem;
+  text-decoration: none;
+  transition: all 0.3s;
+  white-space: nowrap;
+
+  &:hover {
+    border-bottom: 1px solid $dark1;
+    color: $light3;
   }
 }
