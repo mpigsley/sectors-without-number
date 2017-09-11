@@ -24,7 +24,6 @@ export default function Changelog() {
             <FlexContainer
               className="Changelog-Item"
               key={version}
-              noMargin
               direction="column"
               align="flexStart"
             >
