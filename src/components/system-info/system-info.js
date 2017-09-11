@@ -57,11 +57,10 @@ export default class SectorInfo extends SidebarInfo {
         onEdit={this.onEdit}
       >
         <SectionHeader>Planets</SectionHeader>
-        {map(this.props.system.planets, planet => (
+        {map(this.props.system.planets, (planet, key) => (
           <SidebarLinkRow
             key={planet.name}
-            to={`${this.props.location
-              .pathname}/planet/${planet.name.toLowerCase()}${this.props
+            to={`${this.props.location.pathname}/planet/${key}${this.props
               .location.search}`}
           >
             <Header type={HeaderType.header4} className="SystemInfo-Name">

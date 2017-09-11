@@ -26,7 +26,7 @@ export function editSystem(system, key, value) {
         },
       })
       .then(() => {
-        dispatch({ type: EDIT_SYSTEM, key: system, system: updateSystem });
+        dispatch({ type: EDIT_SYSTEM, system, update: updateSystem });
         dispatch(
           ReduxToastrActions.add({
             options: {

@@ -5,7 +5,8 @@ const savedSelector = state => state.sector.saved;
 const currentSectorSelector = state => state.sector.currentSector;
 
 const systemRouteSelector = (state, props) => props.routeParams.system;
-const planetRouteSelector = (state, props) => props.routeParams.planet;
+const planetRouteSelector = (state, props) =>
+  encodeURIComponent(props.routeParams.planet);
 
 export const getCurrentSector = createSelector(
   [generatedSelector, savedSelector, currentSectorSelector],

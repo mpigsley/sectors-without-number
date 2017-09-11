@@ -10,6 +10,7 @@ import {
   EDIT_SECTOR,
 } from 'store/actions/sector.actions';
 import { MOVE_SYSTEM, EDIT_SYSTEM } from 'store/actions/system.actions';
+import { EDIT_PLANET } from 'store/actions/planet.actions';
 
 const defaultColumns = 8;
 const defaultRows = 10;
@@ -131,7 +132,35 @@ export default function sector(state = initialState, action) {
             ...existingSector,
             systems: {
               ...existingSector.systems,
-              [action.key]: action.system,
+              [action.system]: action.update,
+            },
+          },
+        },
+      };
+    }
+    case EDIT_PLANET: {
+      const existingSector =
+        state.generated || state.saved[state.currentSector];
+      return {
+        ...state,
+        currentSector: existingSector.seed,
+        generated: null,
+        saved: {
+          ...state.saved,
+          [existingSector.seed]: {
+            ...existingSector,
+            systems: {
+              ...existingSector.systems,
+              [action.system]: {
+                ...existingSector.systems[action.system],
+                planets: {
+                  ...removeByKey(
+                    existingSector.systems[action.system].planets,
+                    action.planet,
+                  ),
+                  [action.newKey]: action.update,
+                },
+              },
             },
           },
         },

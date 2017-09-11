@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 
 import { makeGetCurrentPlanet } from 'store/selectors/sector.selectors';
+import { editPlanet } from 'store/actions/planet.actions';
+
 import PlanetInfo from './planet-info';
 
 const mapStateToProps = () => {
@@ -10,4 +12,10 @@ const mapStateToProps = () => {
   });
 };
 
-export default connect(mapStateToProps)(PlanetInfo);
+const mapDispatchToProps = dispatch => ({
+  editPlanetName: (system, planet, value) => {
+    dispatch(editPlanet(system, planet, 'name', value));
+  },
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PlanetInfo);

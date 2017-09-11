@@ -68,14 +68,14 @@ const renderAttribute = (title, attribute, obj) => (
 export default class PlanetInfo extends SidebarInfo {
   static propTypes = {
     planet: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      techLevel: PropTypes.string.isRequired,
-      atmosphere: PropTypes.string.isRequired,
-      temperature: PropTypes.string.isRequired,
-      biosphere: PropTypes.string.isRequired,
-      population: PropTypes.string.isRequired,
+      name: PropTypes.string,
+      techLevel: PropTypes.string,
+      atmosphere: PropTypes.string,
+      temperature: PropTypes.string,
+      biosphere: PropTypes.string,
+      population: PropTypes.string,
       tags: PropTypes.arrayOf(PropTypes.string),
-    }).isRequired,
+    }),
     location: PropTypes.shape({
       pathname: PropTypes.string,
       search: PropTypes.string,
@@ -84,20 +84,43 @@ export default class PlanetInfo extends SidebarInfo {
       system: PropTypes.string.isRequired,
       planet: PropTypes.string.isRequired,
     }).isRequired,
+    editPlanetName: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    planet: {},
   };
 
   constructor(props) {
     super(props);
 
+    this.onSavePlanet = this.onSavePlanet.bind(this);
     this.state = {
       name: this.props.planet.name,
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.name && nextProps.planet.name) {
+      this.setState({
+        name: nextProps.planet.name,
+      });
+    }
+  }
+
+  onSavePlanet() {
+    this.props.editPlanetName(
+      this.props.routeParams.system,
+      encodeURIComponent(this.props.routeParams.planet),
+      this.state.name,
+    );
+    this.onClose();
+  }
+
   render() {
     return (
       <SidebarNavigation
-        name={this.props.planet.name}
+        name={this.props.planet.name || ''}
         back={`/sector/system/${this.props.routeParams.system}${this.props
           .location.search}`}
         type={SidebarType.planet}
@@ -130,7 +153,7 @@ export default class PlanetInfo extends SidebarInfo {
           onCancel={this.onClose}
           title="Edit Planet"
           actionButtons={[
-            <Button primary key="save">
+            <Button primary key="save" onClick={this.onSavePlanet}>
               Save Planet
             </Button>,
           ]}
