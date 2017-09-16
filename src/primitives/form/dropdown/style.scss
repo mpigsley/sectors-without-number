@@ -1,0 +1,39 @@
+@import 'styles/theme';
+@import 'react-select/dist/react-select';
+
+.Select.Dropdown-Select {
+  .Dropdown-Option {
+    font-size: 12px;
+  }
+
+  .Select-control {
+    background-color: $light4;
+    height: 38px;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .Select-placeholder {
+      color: $dark4;
+      font-size: 12px;
+    }
+
+    .Select-value {
+      color: $dark4;
+      line-height: 35px;
+    }
+
+    .Select-value-label {
+      font-size: 12px;
+    }
+
+    .Select-arrow {
+      border-color: $dark4 transparent transparent;
+    }
+
+    .Select-input > input {
+      color: $dark4;
+    }
+  }
+}
