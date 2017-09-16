@@ -29,6 +29,10 @@
     }
   }
 
+  &.is-open .Select-control .Select-arrow {
+    border-color: transparent transparent $dark1;
+  }
+
   .Select-control {
     background-color: $light4;
     height: 38px;
@@ -52,7 +56,7 @@
     }
 
     .Select-arrow {
-      border-color: $dark4 transparent transparent;
+      border-color: $dark1 transparent transparent;
     }
 
     .Select-input > input {

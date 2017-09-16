@@ -22,7 +22,7 @@ export default function IconInput(props) {
           'IconInput-Icon--clickable': onIconClick,
         })}
         onClick={onIconClick || defaultFunc}
-        size={20}
+        size={15}
       />
     </div>
   );
