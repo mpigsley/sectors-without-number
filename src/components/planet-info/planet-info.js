@@ -2,18 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw } from 'react-feather';
 import Chance from 'chance';
+import { map } from 'lodash';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 
+import FlexContainer from 'primitives/containers/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import Header, { HeaderType } from 'primitives/text/header';
 import Modal from 'primitives/other/modal';
 import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
+import Dropdown from 'primitives/form/dropdown';
 
-import { capitalizeFirstLetter } from 'utils/common';
+import { capitalizeFirstLetter, stringSortByKey } from 'utils/common';
 import { generateName } from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
@@ -86,7 +89,7 @@ export default class PlanetInfo extends SidebarInfo {
       system: PropTypes.string.isRequired,
       planet: PropTypes.string.isRequired,
     }).isRequired,
-    editPlanetName: PropTypes.func.isRequired,
+    editPlanet: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -98,9 +101,10 @@ export default class PlanetInfo extends SidebarInfo {
 
     this.onRandomizeName = this.onRandomizeName.bind(this);
     this.onEditName = this.onEditName.bind(this);
+    this.onEditDropdown = this.onEditDropdown.bind(this);
     this.onSavePlanet = this.onSavePlanet.bind(this);
     this.state = {
-      name: this.props.planet.name,
+      ...props.planet,
       isNotUnique: false,
     };
   }
@@ -108,22 +112,33 @@ export default class PlanetInfo extends SidebarInfo {
   componentWillReceiveProps(nextProps) {
     if (!this.state.name && nextProps.planet.name) {
       this.setState({
-        name: nextProps.planet.name,
+        ...nextProps.planet,
       });
     }
   }
 
   onSavePlanet() {
     const nameKey = encodeURIComponent(this.state.name.toLowerCase());
-    if (this.props.planetKeys.indexOf(nameKey) >= 0) {
+    if (
+      this.props.planetKeys.indexOf(nameKey) >= 0 &&
+      this.props.planet.key !== nameKey
+    ) {
       this.setState({
         isNotUnique: true,
       });
     } else {
-      this.props.editPlanetName(
+      this.props.editPlanet(
         this.props.routeParams.system,
         encodeURIComponent(this.props.routeParams.planet),
-        this.state.name,
+        {
+          name: this.state.name,
+          techLevel: this.state.techLevel,
+          atmosphere: this.state.atmosphere,
+          temperature: this.state.temperature,
+          biosphere: this.state.biosphere,
+          population: this.state.population,
+          tags: this.state.tags,
+        },
       );
       this.onClose();
     }
@@ -137,14 +152,56 @@ export default class PlanetInfo extends SidebarInfo {
     });
   }
 
-  onEditName(e) {
+  onEditAttribute(key, value) {
     this.setState({
-      name: e.target.value,
+      [key]: value,
       isNotUnique: false,
     });
   }
 
-  render() {
+  onEditName(e) {
+    this.onEditAttribute('name', e.target.value);
+  }
+
+  onEditDropdown(key) {
+    return changed => {
+      this.onEditAttribute(
+        key,
+        changed.value ||
+          changed.sort(stringSortByKey('label')).map(({ value }) => value),
+      );
+    };
+  }
+
+  renderEditableDropdown(dropdownName, stateKey, constants, noPadding, dropUp) {
+    return (
+      <FlexContainer direction="column" className="PlanetInfo-Editable">
+        <Label noPadding={noPadding} htmlFor={stateKey}>
+          {dropdownName}
+        </Label>
+        <Dropdown
+          id={stateKey}
+          name={stateKey}
+          value={this.state[stateKey]}
+          clearable={false}
+          onChange={this.onEditDropdown(stateKey)}
+          dropUp={dropUp}
+          options={
+            Array.isArray(constants) ? (
+              constants
+            ) : (
+              map(constants, ({ name }, key) => ({
+                value: key,
+                label: name,
+              }))
+            )
+          }
+        />
+      </FlexContainer>
+    );
+  }
+
+  renderEditModal() {
     let errorText = null;
     if (this.state.isNotUnique) {
       errorText = (
@@ -154,6 +211,89 @@ export default class PlanetInfo extends SidebarInfo {
       );
     }
 
+    return (
+      <Modal
+        isOpen={this.state.isOpen}
+        onCancel={this.onClose}
+        title="Edit Planet"
+        doubleSize
+        actionButtons={[
+          <Button primary key="save" onClick={this.onSavePlanet}>
+            Save Planet
+          </Button>,
+        ]}
+      >
+        <FlexContainer wrap justify="spaceBetween">
+          <FlexContainer direction="column" className="PlanetInfo-Editable">
+            <Label noPadding htmlFor="name">
+              Planet Name
+            </Label>
+            <IconInput
+              id="name"
+              name="name"
+              error={this.state.isNotUnique}
+              icon={RefreshCw}
+              value={this.state.name}
+              onChange={this.onEditName}
+              onIconClick={this.onRandomizeName}
+            />
+            {errorText}
+          </FlexContainer>
+          {this.renderEditableDropdown(
+            'Tech Level',
+            'techLevel',
+            [
+              { value: 'TL0', label: 'TL0' },
+              { value: 'TL1', label: 'TL1' },
+              { value: 'TL2', label: 'TL2' },
+              { value: 'TL3', label: 'TL3' },
+              { value: 'TL4', label: 'TL4' },
+              { value: 'TL4+', label: 'TL4+' },
+              { value: 'TL5', label: 'TL5' },
+            ],
+            true,
+          )}
+          {this.renderEditableDropdown('Atmosphere', 'atmosphere', Atmosphere)}
+          {this.renderEditableDropdown(
+            'Temperature',
+            'temperature',
+            Temperature,
+          )}
+          {this.renderEditableDropdown(
+            'Biosphere',
+            'biosphere',
+            Biosphere,
+            false,
+            true,
+          )}
+          {this.renderEditableDropdown(
+            'Population',
+            'population',
+            Population,
+            false,
+            true,
+          )}
+          <FlexContainer direction="column" className="PlanetInfo-EditableTags">
+            <Label htmlFor="tags">World Tags</Label>
+            <Dropdown
+              id="tags"
+              name="tags"
+              value={this.state.tags}
+              multi
+              dropUp
+              onChange={this.onEditDropdown('tags')}
+              options={map(WorldTags, ({ name }, key) => ({
+                value: key,
+                label: name,
+              }))}
+            />
+          </FlexContainer>
+        </FlexContainer>
+      </Modal>
+    );
+  }
+
+  render() {
     return (
       <SidebarNavigation
         name={this.props.planet.name || ''}
@@ -184,29 +324,7 @@ export default class PlanetInfo extends SidebarInfo {
         <div className="PlanetInfo-Section">
           {renderTags(this.props.planet.tags)}
         </div>
-        <Modal
-          isOpen={this.state.isOpen}
-          onCancel={this.onClose}
-          title="Edit Planet"
-          actionButtons={[
-            <Button primary key="save" onClick={this.onSavePlanet}>
-              Save Planet
-            </Button>,
-          ]}
-        >
-          <Label noPadding htmlFor="name">
-            Planet Name
-          </Label>
-          <IconInput
-            id="name"
-            error={this.state.isNotUnique}
-            icon={RefreshCw}
-            value={this.state.name}
-            onChange={this.onEditName}
-            onIconClick={this.onRandomizeName}
-          />
-          {errorText}
-        </Modal>
+        {this.renderEditModal()}
       </SidebarNavigation>
     );
   }

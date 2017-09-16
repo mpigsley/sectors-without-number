@@ -7,19 +7,19 @@ import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const EDIT_PLANET = 'EDIT_PLANET';
 
-export function editPlanet(system, planet, key, value) {
+export function editPlanet(system, planet, changes) {
   return (dispatch, getState) => {
     const state = getState();
     const sector = { ...getCurrentSector(state), updated: Date.now() };
     sector.created = sector.created || Date.now();
     let newKey = planet;
-    if (key === 'name') {
-      newKey = encodeURIComponent(value.toLowerCase());
+    if (changes.name) {
+      newKey = encodeURIComponent(changes.name.toLowerCase());
     }
     const update = {
       ...sector.systems[system].planets[planet],
+      ...changes,
       key: newKey,
-      [key]: value,
     };
     return localForage
       .setItem(sector.seed, {
@@ -42,7 +42,13 @@ export function editPlanet(system, planet, key, value) {
               .locationBeforeTransitions.search}`,
           ),
         );
-        dispatch({ type: EDIT_PLANET, system, planet, key, newKey, update });
+        dispatch({
+          type: EDIT_PLANET,
+          system,
+          planet,
+          newKey,
+          update,
+        });
         dispatch(
           ReduxToastrActions.add({
             options: {

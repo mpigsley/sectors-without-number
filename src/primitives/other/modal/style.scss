@@ -8,6 +8,10 @@
   overflow: auto;
   width: 400px;
   -webkit-overflow-scrolling: touch;
+
+  &--doubleSize {
+    width: 600px;
+  }
 }
 
 .Modal-Overlay {

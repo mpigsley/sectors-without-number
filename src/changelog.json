@@ -1,4 +1,11 @@
 {
+  "1.7.0": {
+    "description": "Planet information is now editable.",
+    "changes": [
+      "Tech Level, Atmosphere, Temperature, Biosphere, and Population you can edit with a dropdown.",
+      "You can add and remove world tags to your heart's content."
+    ]
+  },
   "1.6.0": {
     "description": "The sector, system, and planet names are now editable.",
     "changes": [
