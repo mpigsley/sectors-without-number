@@ -11,13 +11,22 @@ import Button from 'primitives/other/button';
 import './style.css';
 
 export default function Modal(props) {
-  const { title, children, onCancel, actionButtons, ...rest } = props;
+  const {
+    title,
+    children,
+    onCancel,
+    actionButtons,
+    doubleSize,
+    ...rest
+  } = props;
   return (
     <ReactModal
       contentLabel={title}
       {...rest}
       className={{
-        base: classNames('Modal', props.className),
+        base: classNames('Modal', props.className, {
+          'Modal--doubleSize': doubleSize,
+        }),
         afterOpen: 'Modal--open',
         beforeClose: 'Modal--closed',
       }}
@@ -64,10 +73,12 @@ Modal.propTypes = {
   title: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
   actionButtons: PropTypes.arrayOf(PropTypes.node),
+  doubleSize: PropTypes.bool,
 };
 
 Modal.defaultProps = {
   className: null,
   overlayClassName: null,
   actionButtons: null,
+  doubleSize: false,
 };
