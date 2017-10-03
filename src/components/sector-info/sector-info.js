@@ -81,9 +81,11 @@ export default class SectorInfo extends SidebarInfo {
           </Label>
           <IconInput
             id="name"
+            name="name"
+            data-key="name"
             icon={RefreshCw}
             value={this.state.name}
-            onChange={this.onEditName}
+            onChange={this.onEditText}
             onIconClick={this.onRandomizeName(generateSectorName)}
           />
         </Modal>

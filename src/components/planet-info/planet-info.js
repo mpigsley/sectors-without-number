@@ -16,7 +16,7 @@ import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 import Dropdown from 'primitives/form/dropdown';
 
-import { capitalizeFirstLetter, stringSortByKey } from 'utils/common';
+import { capitalizeFirstLetter } from 'utils/common';
 import { generateName } from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
@@ -100,8 +100,6 @@ export default class PlanetInfo extends SidebarInfo {
     super(props);
 
     this.onRandomizeName = this.onRandomizeName.bind(this);
-    this.onEditName = this.onEditName.bind(this);
-    this.onEditDropdown = this.onEditDropdown.bind(this);
     this.onSavePlanet = this.onSavePlanet.bind(this);
     this.state = {
       ...props.planet,
@@ -137,7 +135,7 @@ export default class PlanetInfo extends SidebarInfo {
           temperature: this.state.temperature,
           biosphere: this.state.biosphere,
           population: this.state.population,
-          tags: this.state.tags,
+          tags: this.state.tags.map(({ value }) => value),
         },
       );
       this.onClose();
@@ -150,27 +148,6 @@ export default class PlanetInfo extends SidebarInfo {
       name: generateName(chance),
       isNotUnique: false,
     });
-  }
-
-  onEditAttribute(key, value) {
-    this.setState({
-      [key]: value,
-      isNotUnique: false,
-    });
-  }
-
-  onEditName(e) {
-    this.onEditAttribute('name', e.target.value);
-  }
-
-  onEditDropdown(key) {
-    return changed => {
-      this.onEditAttribute(
-        key,
-        changed.value ||
-          changed.sort(stringSortByKey('label')).map(({ value }) => value),
-      );
-    };
   }
 
   renderEditableDropdown(dropdownName, stateKey, constants, noPadding, dropUp) {
@@ -231,10 +208,11 @@ export default class PlanetInfo extends SidebarInfo {
             <IconInput
               id="name"
               name="name"
+              data-key="name"
               error={this.state.isNotUnique}
               icon={RefreshCw}
               value={this.state.name}
-              onChange={this.onEditName}
+              onChange={this.onEditText({ isNotUnique: false })}
               onIconClick={this.onRandomizeName}
             />
             {errorText}
@@ -281,7 +259,7 @@ export default class PlanetInfo extends SidebarInfo {
               value={this.state.tags}
               multi
               dropUp
-              onChange={this.onEditDropdown('tags')}
+              onChange={this.onEditDropdown('tags', { isNotUnique: false })}
               options={map(WorldTags, ({ name }, key) => ({
                 value: key,
                 label: name,
