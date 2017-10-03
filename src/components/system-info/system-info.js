@@ -141,6 +141,7 @@ export default class SectorInfo extends SidebarInfo {
               allowCreate
               onChange={this.onEditDropdown('planets')}
               options={this.getPlanetNameOptions()}
+              promptTextCreator={label => `Generate new planet '${label}'`}
               newOptionCreator={({ label, labelKey, valueKey }) => ({
                 [labelKey]: label,
                 [valueKey]: encodeURIComponent(label.toLowerCase()),
