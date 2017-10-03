@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { map, union, difference, every } from 'lodash';
+import { map, unionBy, difference, every, zipObject } from 'lodash';
 import { RefreshCw } from 'react-feather';
+import Chance from 'chance';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
@@ -18,6 +19,7 @@ import Dropdown from 'primitives/form/dropdown';
 
 import { toCommaArray } from 'utils/common';
 import { generateName } from 'utils/name-generator';
+import { generatePlanet } from 'utils/sector-generator';
 import WorldTags from 'constants/world-tags';
 
 import './style.css';
@@ -26,6 +28,16 @@ const newOptionCreator = ({ label, labelKey, valueKey }) => ({
   [labelKey]: label,
   [valueKey]: encodeURIComponent(label.toLowerCase()),
 });
+
+const planetsToSave = (planets, planetOptions) => {
+  const chance = new Chance();
+  return zipObject(
+    planetOptions.map(({ value }) => value),
+    planetOptions.map(
+      ({ value, label }) => planets[value] || generatePlanet(chance, label)(),
+    ),
+  );
+};
 
 const renderPlanetLinks = (planets, { pathname, search }) =>
   map(planets, (planet, key) => (
@@ -66,7 +78,10 @@ export default class SectorInfo extends SidebarInfo {
     this.onSaveSystem = this.onSaveSystem.bind(this);
     this.state = {
       name: this.props.system.name,
-      planets: map(this.props.system.planets, ({ key }) => key),
+      planets: map(this.props.system.planets, ({ name, key }) => ({
+        label: name,
+        value: key,
+      })),
       isNotUnique: false,
     };
   }
@@ -75,7 +90,10 @@ export default class SectorInfo extends SidebarInfo {
     if (this.state.name !== nextProps.system.name) {
       this.setState({
         name: nextProps.system.name,
-        planets: map(nextProps.system.planets, ({ key }) => key),
+        planets: map(nextProps.system.planets, ({ name, key }) => ({
+          label: name,
+          value: key,
+        })),
       });
     }
   }
@@ -86,6 +104,7 @@ export default class SectorInfo extends SidebarInfo {
     } else {
       this.props.editSystem(this.props.system.key, {
         name: this.state.name,
+        planets: planetsToSave(this.props.system.planets, this.state.planets),
       });
       this.onClose();
     }
@@ -103,12 +122,13 @@ export default class SectorInfo extends SidebarInfo {
   }
 
   getPlanetNameOptions() {
-    return union(
+    return unionBy(
       map(this.props.system.planets, ({ name, key }) => ({
         value: key,
         label: name,
       })),
       this.state.planets,
+      'value',
     );
   }
 

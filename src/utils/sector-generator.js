@@ -9,8 +9,8 @@ import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
 import Population from 'constants/population';
 
-const generatePlanet = seededChance => () => {
-  const name = generateName(seededChance);
+export const generatePlanet = (seededChance, existingName) => () => {
+  const name = existingName || generateName(seededChance);
   return {
     name,
     key: encodeURIComponent(name.toLowerCase()),
