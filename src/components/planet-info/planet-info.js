@@ -108,7 +108,7 @@ export default class PlanetInfo extends SidebarInfo {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.name && nextProps.planet.name) {
+    if (this.state.name !== nextProps.planet.name) {
       this.setState({
         ...nextProps.planet,
       });
@@ -161,7 +161,7 @@ export default class PlanetInfo extends SidebarInfo {
           name={stateKey}
           value={this.state[stateKey]}
           clearable={false}
-          onChange={this.onEditDropdown(stateKey)}
+          onChange={this.onEditDropdown(stateKey, { isNotUnique: false })}
           dropUp={dropUp}
           options={
             Array.isArray(constants) ? (

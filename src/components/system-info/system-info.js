@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { map, unionBy, difference, every, zipObject } from 'lodash';
+import { map, unionBy, difference, every, zipObject, isEqual } from 'lodash';
 import { RefreshCw } from 'react-feather';
 import Chance from 'chance';
 
@@ -87,7 +87,10 @@ export default class SectorInfo extends SidebarInfo {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.name !== nextProps.system.name) {
+    if (
+      this.state.name !== nextProps.system.name ||
+      !isEqual(nextProps.system.planets, this.props.system.planets)
+    ) {
       this.setState({
         name: nextProps.system.name,
         planets: map(nextProps.system.planets, ({ name, key }) => ({
@@ -176,7 +179,7 @@ export default class SectorInfo extends SidebarInfo {
             multi
             dropUp
             allowCreate
-            onChange={this.onEditDropdown('planets')}
+            onChange={this.onEditDropdown('planets', { isNotUnique: false })}
             options={this.getPlanetNameOptions()}
             promptTextCreator={label => `Generate new planet '${label}'`}
             newOptionCreator={newOptionCreator}
