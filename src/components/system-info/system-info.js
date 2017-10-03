@@ -22,6 +22,11 @@ import WorldTags from 'constants/world-tags';
 
 import './style.css';
 
+const newOptionCreator = ({ label, labelKey, valueKey }) => ({
+  [labelKey]: label,
+  [valueKey]: encodeURIComponent(label.toLowerCase()),
+});
+
 export default class SectorInfo extends SidebarInfo {
   static propTypes = {
     system: PropTypes.shape({
@@ -36,7 +41,7 @@ export default class SectorInfo extends SidebarInfo {
       pathname: PropTypes.string,
       search: PropTypes.string,
     }).isRequired,
-    editSystemName: PropTypes.func.isRequired,
+    editSystem: PropTypes.func.isRequired,
     planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
@@ -65,7 +70,9 @@ export default class SectorInfo extends SidebarInfo {
     if (this.props.planetKeys.indexOf(nameKey) >= 0) {
       this.setState({ isNotUnique: true });
     } else {
-      this.props.editSystemName(this.props.system.key, this.state.name);
+      this.props.editSystem(this.props.system.key, {
+        name: this.state.name,
+      });
       this.onClose();
     }
   }
@@ -142,10 +149,7 @@ export default class SectorInfo extends SidebarInfo {
               onChange={this.onEditDropdown('planets')}
               options={this.getPlanetNameOptions()}
               promptTextCreator={label => `Generate new planet '${label}'`}
-              newOptionCreator={({ label, labelKey, valueKey }) => ({
-                [labelKey]: label,
-                [valueKey]: encodeURIComponent(label.toLowerCase()),
-              })}
+              newOptionCreator={newOptionCreator}
             />
           </FlexContainer>
         </Modal>

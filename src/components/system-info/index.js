@@ -14,8 +14,8 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  editSystemName: (system, value) => {
-    dispatch(editSystem(system, 'name', value));
+  editSystem: (system, changes) => {
+    dispatch(editSystem(system, changes));
   },
 });
 

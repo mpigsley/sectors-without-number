@@ -12,22 +12,22 @@ export const SYSTEM_HOVER_START = 'SYSTEM_HOVER_START';
 export const SYSTEM_HOVER_END = 'SYSTEM_HOVER_END';
 export const EDIT_SYSTEM = 'EDIT_SYSTEM';
 
-export function editSystem(system, key, value) {
+export function editSystem(system, changes) {
   return (dispatch, getState) => {
     const state = getState();
     const sector = { ...getCurrentSector(state), updated: Date.now() };
     sector.created = sector.created || Date.now();
-    const updateSystem = { ...sector.systems[system], [key]: value };
+    const update = { ...sector.systems[system], ...changes };
     return localForage
       .setItem(sector.seed, {
         ...sector,
         systems: {
           ...sector.systems,
-          [system]: updateSystem,
+          [system]: update,
         },
       })
       .then(() => {
-        dispatch({ type: EDIT_SYSTEM, system, update: updateSystem });
+        dispatch({ type: EDIT_SYSTEM, system, update });
         dispatch(
           ReduxToastrActions.add({
             options: {
