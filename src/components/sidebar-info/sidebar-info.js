@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import Chance from 'chance';
 
+import './style.css';
+
 export default class SidebarInfo extends Component {
   constructor(props) {
     super(props);

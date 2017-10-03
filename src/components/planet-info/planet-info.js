@@ -182,7 +182,7 @@ export default class PlanetInfo extends SidebarInfo {
     let errorText = null;
     if (this.state.isNotUnique) {
       errorText = (
-        <div className="PlanetInfo-Error">
+        <div className="SidebarInfo-Error">
           Name must be unique in the sector.
         </div>
       );

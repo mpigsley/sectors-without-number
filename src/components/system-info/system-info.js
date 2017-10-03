@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { map, union } from 'lodash';
+import { map, union, difference, every } from 'lodash';
 import { RefreshCw } from 'react-feather';
 
 import SidebarInfo from 'components/sidebar-info';
@@ -26,6 +26,21 @@ const newOptionCreator = ({ label, labelKey, valueKey }) => ({
   [labelKey]: label,
   [valueKey]: encodeURIComponent(label.toLowerCase()),
 });
+
+const renderPlanetLinks = (planets, { pathname, search }) =>
+  map(planets, (planet, key) => (
+    <SidebarLinkRow key={planet.name} to={`${pathname}/planet/${key}${search}`}>
+      <Header type={HeaderType.header4} className="SystemInfo-Name">
+        {planet.name}
+      </Header>
+      <div className="SystemInfo-Tags">
+        ({planet.tags
+          .map(tag => WorldTags[tag].name)
+          .map(toCommaArray)
+          .join('')})
+      </div>
+    </SidebarLinkRow>
+  ));
 
 export default class SectorInfo extends SidebarInfo {
   static propTypes = {
@@ -66,8 +81,7 @@ export default class SectorInfo extends SidebarInfo {
   }
 
   onSaveSystem() {
-    const nameKey = encodeURIComponent(this.state.name.toLowerCase());
-    if (this.props.planetKeys.indexOf(nameKey) >= 0) {
+    if (!this.planetNamesUnique()) {
       this.setState({ isNotUnique: true });
     } else {
       this.props.editSystem(this.props.system.key, {
@@ -75,6 +89,17 @@ export default class SectorInfo extends SidebarInfo {
       });
       this.onClose();
     }
+  }
+
+  planetNamesUnique() {
+    const otherPlanets = difference(
+      this.props.planetKeys,
+      map(this.props.system.planets, ({ key }) => key),
+    );
+    return every(
+      this.state.planets,
+      ({ value }) => otherPlanets.indexOf(value) < 0,
+    );
   }
 
   getPlanetNameOptions() {
@@ -87,6 +112,61 @@ export default class SectorInfo extends SidebarInfo {
     );
   }
 
+  renderEditModal() {
+    let errorText = null;
+    if (this.state.isNotUnique) {
+      errorText = (
+        <div className="SidebarInfo-Error">
+          Planet name must be unique in the sector.
+        </div>
+      );
+    }
+
+    return (
+      <Modal
+        isOpen={this.state.isOpen}
+        onCancel={this.onClose}
+        title="Edit System"
+        actionButtons={[
+          <Button primary key="save" onClick={this.onSaveSystem}>
+            Save System
+          </Button>,
+        ]}
+      >
+        <FlexContainer direction="column">
+          <Label noPadding htmlFor="name">
+            System Name
+          </Label>
+          <IconInput
+            id="name"
+            name="name"
+            data-key="name"
+            icon={RefreshCw}
+            value={this.state.name}
+            onChange={this.onEditText({ isNotUnique: false })}
+            onIconClick={this.onRandomizeName(generateName)}
+          />
+        </FlexContainer>
+        <FlexContainer direction="column">
+          <Label htmlFor="tags">Planets</Label>
+          <Dropdown
+            id="planets"
+            name="planets"
+            value={this.state.planets}
+            multi
+            dropUp
+            allowCreate
+            onChange={this.onEditDropdown('planets')}
+            options={this.getPlanetNameOptions()}
+            promptTextCreator={label => `Generate new planet '${label}'`}
+            newOptionCreator={newOptionCreator}
+          />
+          {errorText}
+        </FlexContainer>
+      </Modal>
+    );
+  }
+
   render() {
     return (
       <SidebarNavigation
@@ -96,63 +176,8 @@ export default class SectorInfo extends SidebarInfo {
         onEdit={this.onEdit}
       >
         <SectionHeader>Planets</SectionHeader>
-        {map(this.props.system.planets, (planet, key) => (
-          <SidebarLinkRow
-            key={planet.name}
-            to={`${this.props.location.pathname}/planet/${key}${this.props
-              .location.search}`}
-          >
-            <Header type={HeaderType.header4} className="SystemInfo-Name">
-              {planet.name}
-            </Header>
-            <div className="SystemInfo-Tags">
-              ({planet.tags
-                .map(tag => WorldTags[tag].name)
-                .map(toCommaArray)
-                .join('')})
-            </div>
-          </SidebarLinkRow>
-        ))}
-        <Modal
-          isOpen={this.state.isOpen}
-          onCancel={this.onClose}
-          title="Edit System"
-          actionButtons={[
-            <Button primary key="save" onClick={this.onSaveSystem}>
-              Save System
-            </Button>,
-          ]}
-        >
-          <FlexContainer direction="column">
-            <Label noPadding htmlFor="name">
-              System Name
-            </Label>
-            <IconInput
-              id="name"
-              name="name"
-              data-key="name"
-              icon={RefreshCw}
-              value={this.state.name}
-              onChange={this.onEditText({ isNotUnique: false })}
-              onIconClick={this.onRandomizeName(generateName)}
-            />
-          </FlexContainer>
-          <FlexContainer direction="column">
-            <Label htmlFor="tags">Planets</Label>
-            <Dropdown
-              id="planets"
-              name="planets"
-              value={this.state.planets}
-              multi
-              dropUp
-              allowCreate
-              onChange={this.onEditDropdown('planets')}
-              options={this.getPlanetNameOptions()}
-              promptTextCreator={label => `Generate new planet '${label}'`}
-              newOptionCreator={newOptionCreator}
-            />
-          </FlexContainer>
-        </Modal>
+        {renderPlanetLinks(this.props.system.planets, this.props.location)}
+        {this.renderEditModal()}
       </SidebarNavigation>
     );
   }
