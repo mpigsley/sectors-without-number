@@ -1,4 +1,7 @@
 {
+  "1.8.1": {
+    "description": "Fix sector title custom edit."
+  },
   "1.8.0": {
     "description": "Planet creation and deletion from system edit.",
     "changes": [
