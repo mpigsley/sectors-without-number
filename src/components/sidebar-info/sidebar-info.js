@@ -35,6 +35,7 @@ export default class SidebarInfo extends Component {
 
   onEditText(extraState) {
     return e => {
+      console.log(e.target.dataset.key, e.target.value);
       this.updateAttribute(e.target.dataset.key, e.target.value, extraState);
     };
   }
