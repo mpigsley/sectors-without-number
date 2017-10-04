@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw } from 'react-feather';
 import Chance from 'chance';
-import { map } from 'lodash';
+import { map, isEqual } from 'lodash';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
@@ -145,7 +145,7 @@ export default class PlanetInfo extends SidebarInfo {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (this.state.name !== nextProps.planet.name) {
+    if (!isEqual(nextProps.planet, this.props.planet)) {
       this.setState({
         ...planetStateFromProps(nextProps.planet),
       });
