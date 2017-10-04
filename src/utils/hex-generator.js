@@ -132,7 +132,6 @@ export default config => {
   }
 
   const isSmallWindow = config.width < 800 || config.height < 600;
-  console.log(isSmallWindow);
   const { renderSector, systems } = config;
   const newConfig = renderSector
     ? config

@@ -1,4 +1,8 @@
 {
+  "1.8.2": {
+    "description":
+      "In large viewports don't show the 'Browser window too small' message."
+  },
   "1.8.1": {
     "description": "Fix sector title custom edit."
   },
