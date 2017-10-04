@@ -131,6 +131,8 @@ export default config => {
     return { hexes: [], printable: {} };
   }
 
+  const isSmallWindow = config.width < 800 || config.height < 600;
+  console.log(isSmallWindow);
   const { renderSector, systems } = config;
   const newConfig = renderSector
     ? config
@@ -188,7 +190,7 @@ export default config => {
     i += 1;
     isWithinWidth = true;
     isWithinHeight = i < totalRows;
-    isLessThanMaximum = hexes.length <= maxHexes;
+    isLessThanMaximum = hexes.length <= maxHexes || !isSmallWindow;
   }
 
   hexes = isLessThanMaximum ? hexes : [];
