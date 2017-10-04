@@ -1,4 +1,12 @@
 {
+  "1.8.0": {
+    "description": "Planet creation and deletion from system edit.",
+    "changes": [
+      "In the system edit, there is a new planet multi-select.",
+      "To create a freshly generated planet, type planet name in multi-select, hit enter, and then save.",
+      "To delete planets, removing from the planet multi-select and hit save."
+    ]
+  },
   "1.7.0": {
     "description": "Planet information is now editable.",
     "changes": [

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw } from 'react-feather';
 import Chance from 'chance';
-import { map } from 'lodash';
+import { map, isEqual } from 'lodash';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
@@ -16,9 +16,10 @@ import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 import Dropdown from 'primitives/form/dropdown';
 
-import { capitalizeFirstLetter, stringSortByKey } from 'utils/common';
+import { capitalizeFirstLetter } from 'utils/common';
 import { generateName } from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
+import TechLevel from 'constants/tech-level';
 import Atmosphere from 'constants/atmosphere';
 import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
@@ -69,6 +70,42 @@ const renderAttribute = (title, attribute, obj) => (
   </p>
 );
 
+const planetStateFromProps = ({
+  name,
+  techLevel,
+  atmosphere,
+  temperature,
+  biosphere,
+  population,
+  tags,
+}) => ({
+  name,
+  techLevel: {
+    value: techLevel,
+    label: (TechLevel[techLevel] || {}).name,
+  },
+  atmosphere: {
+    value: atmosphere,
+    label: (Atmosphere[atmosphere] || {}).name,
+  },
+  temperature: {
+    value: temperature,
+    label: (Temperature[temperature] || {}).name,
+  },
+  biosphere: {
+    value: biosphere,
+    label: (Biosphere[biosphere] || {}).name,
+  },
+  population: {
+    value: population,
+    label: (Population[population] || {}).name,
+  },
+  tags: (tags || []).map(tag => ({
+    value: tag,
+    label: (WorldTags[tag] || {}).name,
+  })),
+});
+
 export default class PlanetInfo extends SidebarInfo {
   static propTypes = {
     planet: PropTypes.shape({
@@ -100,19 +137,17 @@ export default class PlanetInfo extends SidebarInfo {
     super(props);
 
     this.onRandomizeName = this.onRandomizeName.bind(this);
-    this.onEditName = this.onEditName.bind(this);
-    this.onEditDropdown = this.onEditDropdown.bind(this);
     this.onSavePlanet = this.onSavePlanet.bind(this);
     this.state = {
-      ...props.planet,
+      ...planetStateFromProps(props.planet),
       isNotUnique: false,
     };
   }
 
   componentWillReceiveProps(nextProps) {
-    if (!this.state.name && nextProps.planet.name) {
+    if (!isEqual(nextProps.planet, this.props.planet)) {
       this.setState({
-        ...nextProps.planet,
+        ...planetStateFromProps(nextProps.planet),
       });
     }
   }
@@ -132,12 +167,12 @@ export default class PlanetInfo extends SidebarInfo {
         encodeURIComponent(this.props.routeParams.planet),
         {
           name: this.state.name,
-          techLevel: this.state.techLevel,
-          atmosphere: this.state.atmosphere,
-          temperature: this.state.temperature,
-          biosphere: this.state.biosphere,
-          population: this.state.population,
-          tags: this.state.tags,
+          techLevel: this.state.techLevel.value,
+          atmosphere: this.state.atmosphere.value,
+          temperature: this.state.temperature.value,
+          biosphere: this.state.biosphere.value,
+          population: this.state.population.value,
+          tags: this.state.tags.map(({ value }) => value),
         },
       );
       this.onClose();
@@ -152,27 +187,6 @@ export default class PlanetInfo extends SidebarInfo {
     });
   }
 
-  onEditAttribute(key, value) {
-    this.setState({
-      [key]: value,
-      isNotUnique: false,
-    });
-  }
-
-  onEditName(e) {
-    this.onEditAttribute('name', e.target.value);
-  }
-
-  onEditDropdown(key) {
-    return changed => {
-      this.onEditAttribute(
-        key,
-        changed.value ||
-          changed.sort(stringSortByKey('label')).map(({ value }) => value),
-      );
-    };
-  }
-
   renderEditableDropdown(dropdownName, stateKey, constants, noPadding, dropUp) {
     return (
       <FlexContainer direction="column" className="PlanetInfo-Editable">
@@ -184,7 +198,7 @@ export default class PlanetInfo extends SidebarInfo {
           name={stateKey}
           value={this.state[stateKey]}
           clearable={false}
-          onChange={this.onEditDropdown(stateKey)}
+          onChange={this.onEditDropdown(stateKey, { isNotUnique: false })}
           dropUp={dropUp}
           options={
             Array.isArray(constants) ? (
@@ -205,7 +219,7 @@ export default class PlanetInfo extends SidebarInfo {
     let errorText = null;
     if (this.state.isNotUnique) {
       errorText = (
-        <div className="PlanetInfo-Error">
+        <div className="SidebarInfo-Error">
           Name must be unique in the sector.
         </div>
       );
@@ -231,10 +245,11 @@ export default class PlanetInfo extends SidebarInfo {
             <IconInput
               id="name"
               name="name"
+              data-key="name"
               error={this.state.isNotUnique}
               icon={RefreshCw}
               value={this.state.name}
-              onChange={this.onEditName}
+              onChange={this.onEditText({ isNotUnique: false })}
               onIconClick={this.onRandomizeName}
             />
             {errorText}
@@ -242,15 +257,7 @@ export default class PlanetInfo extends SidebarInfo {
           {this.renderEditableDropdown(
             'Tech Level',
             'techLevel',
-            [
-              { value: 'TL0', label: 'TL0' },
-              { value: 'TL1', label: 'TL1' },
-              { value: 'TL2', label: 'TL2' },
-              { value: 'TL3', label: 'TL3' },
-              { value: 'TL4', label: 'TL4' },
-              { value: 'TL4+', label: 'TL4+' },
-              { value: 'TL5', label: 'TL5' },
-            ],
+            TechLevel,
             true,
           )}
           {this.renderEditableDropdown('Atmosphere', 'atmosphere', Atmosphere)}
@@ -281,7 +288,7 @@ export default class PlanetInfo extends SidebarInfo {
               value={this.state.tags}
               multi
               dropUp
-              onChange={this.onEditDropdown('tags')}
+              onChange={this.onEditDropdown('tags', { isNotUnique: false })}
               options={map(WorldTags, ({ name }, key) => ({
                 value: key,
                 label: name,

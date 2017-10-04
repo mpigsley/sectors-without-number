@@ -1,14 +1,17 @@
 import { Component } from 'react';
 import Chance from 'chance';
 
+import './style.css';
+
 export default class SidebarInfo extends Component {
   constructor(props) {
     super(props);
 
     this.onEdit = this.onEdit.bind(this);
     this.onClose = this.onClose.bind(this);
-    this.onEditName = this.onEditName.bind(this);
-    this.onRandomizeName = this.onRandomizeName.bind(this);
+    this.onEditText = this.onEditText.bind(this);
+    this.onEditDropdown = this.onEditDropdown.bind(this);
+    this.updateAttribute = this.updateAttribute.bind(this);
   }
 
   state = {
@@ -24,8 +27,16 @@ export default class SidebarInfo extends Component {
     this.setState({ isOpen: false });
   }
 
-  onEditName(e) {
-    this.setState({ name: e.target.value });
+  onEditDropdown(key, extraState) {
+    return changed => {
+      this.updateAttribute(key, changed, extraState);
+    };
+  }
+
+  onEditText(extraState) {
+    return e => {
+      this.updateAttribute(e.target.dataset.key, e.target.value, extraState);
+    };
   }
 
   onRandomizeName(namingFunc) {
@@ -33,6 +44,13 @@ export default class SidebarInfo extends Component {
       const chance = new Chance();
       this.setState({ name: namingFunc(chance) });
     };
+  }
+
+  updateAttribute(key, value, extraState = {}) {
+    this.setState({
+      ...extraState,
+      [key]: value,
+    });
   }
 
   render() {

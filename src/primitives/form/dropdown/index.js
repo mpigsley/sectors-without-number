@@ -1,21 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Select from 'react-select';
+import Select, { Creatable } from 'react-select';
 
 import './style.css';
 
 export default function Dropdown(props) {
-  const { dropUp, ...rest } = props;
+  const { dropUp, allowCreate, ...rest } = props;
   const newProps = Object.assign(
     {
       promptTextCreator: label => label,
     },
     rest,
   );
+  const DropdownComponent = allowCreate ? Creatable : Select;
   return (
     <div className="Dropdown">
-      <Select
+      <DropdownComponent
         {...newProps}
         className={classNames('Dropdown-Select', newProps.className, {
           'Dropdoown-Up': dropUp,
@@ -29,9 +30,11 @@ export default function Dropdown(props) {
 Dropdown.propTypes = {
   ...Select.propTypes,
   dropUp: PropTypes.bool,
+  allowCreate: PropTypes.bool,
 };
 
 Dropdown.defaultProps = {
   options: [],
   dropUp: false,
+  allowCreate: false,
 };
