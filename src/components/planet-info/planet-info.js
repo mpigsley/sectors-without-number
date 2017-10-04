@@ -19,6 +19,7 @@ import Dropdown from 'primitives/form/dropdown';
 import { capitalizeFirstLetter } from 'utils/common';
 import { generateName } from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
+import TechLevel from 'constants/tech-level';
 import Atmosphere from 'constants/atmosphere';
 import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
@@ -69,6 +70,42 @@ const renderAttribute = (title, attribute, obj) => (
   </p>
 );
 
+const planetStateFromProps = ({
+  name,
+  techLevel,
+  atmosphere,
+  temperature,
+  biosphere,
+  population,
+  tags,
+}) => ({
+  name,
+  techLevel: {
+    value: techLevel,
+    label: (TechLevel[techLevel] || {}).name,
+  },
+  atmosphere: {
+    value: atmosphere,
+    label: (Atmosphere[atmosphere] || {}).name,
+  },
+  temperature: {
+    value: temperature,
+    label: (Temperature[temperature] || {}).name,
+  },
+  biosphere: {
+    value: biosphere,
+    label: (Biosphere[biosphere] || {}).name,
+  },
+  population: {
+    value: population,
+    label: (Population[population] || {}).name,
+  },
+  tags: (tags || []).map(tag => ({
+    value: tag,
+    label: (WorldTags[tag] || {}).name,
+  })),
+});
+
 export default class PlanetInfo extends SidebarInfo {
   static propTypes = {
     planet: PropTypes.shape({
@@ -102,7 +139,7 @@ export default class PlanetInfo extends SidebarInfo {
     this.onRandomizeName = this.onRandomizeName.bind(this);
     this.onSavePlanet = this.onSavePlanet.bind(this);
     this.state = {
-      ...props.planet,
+      ...planetStateFromProps(props.planet),
       isNotUnique: false,
     };
   }
@@ -110,7 +147,7 @@ export default class PlanetInfo extends SidebarInfo {
   componentWillReceiveProps(nextProps) {
     if (this.state.name !== nextProps.planet.name) {
       this.setState({
-        ...nextProps.planet,
+        ...planetStateFromProps(nextProps.planet),
       });
     }
   }
@@ -130,11 +167,11 @@ export default class PlanetInfo extends SidebarInfo {
         encodeURIComponent(this.props.routeParams.planet),
         {
           name: this.state.name,
-          techLevel: this.state.techLevel,
-          atmosphere: this.state.atmosphere,
-          temperature: this.state.temperature,
-          biosphere: this.state.biosphere,
-          population: this.state.population,
+          techLevel: this.state.techLevel.value,
+          atmosphere: this.state.atmosphere.value,
+          temperature: this.state.temperature.value,
+          biosphere: this.state.biosphere.value,
+          population: this.state.population.value,
           tags: this.state.tags.map(({ value }) => value),
         },
       );
@@ -220,15 +257,7 @@ export default class PlanetInfo extends SidebarInfo {
           {this.renderEditableDropdown(
             'Tech Level',
             'techLevel',
-            [
-              { value: 'TL0', label: 'TL0' },
-              { value: 'TL1', label: 'TL1' },
-              { value: 'TL2', label: 'TL2' },
-              { value: 'TL3', label: 'TL3' },
-              { value: 'TL4', label: 'TL4' },
-              { value: 'TL4+', label: 'TL4+' },
-              { value: 'TL5', label: 'TL5' },
-            ],
+            TechLevel,
             true,
           )}
           {this.renderEditableDropdown('Atmosphere', 'atmosphere', Atmosphere)}
