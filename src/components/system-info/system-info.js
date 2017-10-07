@@ -76,6 +76,7 @@ export default class SectorInfo extends SidebarInfo {
     super(props);
 
     this.onSaveSystem = this.onSaveSystem.bind(this);
+    this.onDeleteSystem = this.onDeleteSystem.bind(this);
     this.state = {
       name: this.props.system.name,
       planets: map(this.props.system.planets, ({ name, key }) => ({
@@ -83,6 +84,8 @@ export default class SectorInfo extends SidebarInfo {
         value: key,
       })),
       isNotUnique: false,
+      isOpen: false,
+      isConfirmDeleteOpen: false,
     };
   }
 
@@ -111,6 +114,13 @@ export default class SectorInfo extends SidebarInfo {
       });
       this.onClose();
     }
+  }
+
+  onDeleteSystem(system) {
+    return () => {
+      this.onCancelDelete();
+      this.props.deleteSystem(system);
+    };
   }
 
   planetNamesUnique() {
@@ -197,10 +207,15 @@ export default class SectorInfo extends SidebarInfo {
         back={`/sector${this.props.location.search}`}
         type={SidebarType.system}
         onEdit={this.onEdit}
+        onDelete={this.onConfirmDelete}
       >
         <SectionHeader>Planets</SectionHeader>
         {renderPlanetLinks(this.props.system.planets, this.props.location)}
         {this.renderEditModal()}
+        {this.renderConfirmModal(
+          this.onDeleteSystem(this.props.system.key),
+          'system',
+        )}
       </SidebarNavigation>
     );
   }

@@ -109,6 +109,7 @@ const planetStateFromProps = ({
 export default class PlanetInfo extends SidebarInfo {
   static propTypes = {
     planet: PropTypes.shape({
+      key: PropTypes.string,
       name: PropTypes.string,
       techLevel: PropTypes.string,
       atmosphere: PropTypes.string,
@@ -127,6 +128,7 @@ export default class PlanetInfo extends SidebarInfo {
       planet: PropTypes.string.isRequired,
     }).isRequired,
     editPlanet: PropTypes.func.isRequired,
+    deletePlanet: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -138,9 +140,12 @@ export default class PlanetInfo extends SidebarInfo {
 
     this.onRandomizeName = this.onRandomizeName.bind(this);
     this.onSavePlanet = this.onSavePlanet.bind(this);
+    this.onDeletePlanet = this.onDeletePlanet.bind(this);
     this.state = {
       ...planetStateFromProps(props.planet),
       isNotUnique: false,
+      isOpen: false,
+      isConfirmDeleteOpen: false,
     };
   }
 
@@ -177,6 +182,13 @@ export default class PlanetInfo extends SidebarInfo {
       );
       this.onClose();
     }
+  }
+
+  onDeletePlanet(system, planet) {
+    return () => {
+      this.onCancelDelete();
+      this.props.deletePlanet(system, planet);
+    };
   }
 
   onRandomizeName() {
@@ -308,6 +320,7 @@ export default class PlanetInfo extends SidebarInfo {
           .location.search}`}
         type={SidebarType.planet}
         onEdit={this.onEdit}
+        onDelete={this.onConfirmDelete}
       >
         <SectionHeader>Attributes</SectionHeader>
         {renderAttribute('Tech Level', this.props.planet.techLevel)}
@@ -332,6 +345,13 @@ export default class PlanetInfo extends SidebarInfo {
           {renderTags(this.props.planet.tags)}
         </div>
         {this.renderEditModal()}
+        {this.renderConfirmModal(
+          this.onDeletePlanet(
+            this.props.routeParams.system,
+            this.props.planet.key,
+          ),
+          'planet',
+        )}
       </SidebarNavigation>
     );
   }

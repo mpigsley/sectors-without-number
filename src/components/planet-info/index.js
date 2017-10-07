@@ -4,7 +4,7 @@ import {
   makeGetCurrentPlanet,
   getPlanetKeys,
 } from 'store/selectors/planet.selectors';
-import { editPlanet } from 'store/actions/planet.actions';
+import { editPlanet, deletePlanet } from 'store/actions/planet.actions';
 
 import PlanetInfo from './planet-info';
 
@@ -19,6 +19,9 @@ const mapStateToProps = () => {
 const mapDispatchToProps = dispatch => ({
   editPlanet: (system, planet, changes) => {
     dispatch(editPlanet(system, planet, changes));
+  },
+  deletePlanet: (system, planet) => {
+    dispatch(deletePlanet(system, planet));
   },
 });
 
