@@ -39,6 +39,14 @@ export default class SectorInfo extends SidebarInfo {
     };
   }
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.sector.name !== this.props.sector.name) {
+      this.setState({
+        name: nextProps.sector.name,
+      });
+    }
+  }
+
   onSaveSector() {
     this.props.editSectorName(this.state.name);
     this.onClose();
