@@ -1,4 +1,7 @@
 {
+  "1.8.3": {
+    "description": "Add windows build support."
+  },
   "1.8.2": {
     "description":
       "In large viewports don't show the 'Browser window too small' message."
