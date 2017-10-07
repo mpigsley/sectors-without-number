@@ -25,6 +25,7 @@ export default function SidebarNavigation({
   back,
   type,
   saveSector,
+  onDelete,
   currentSector,
   onEdit,
 }) {
@@ -45,6 +46,15 @@ export default function SidebarNavigation({
     shareButton = (
       <Button minimal onClick={onCopy}>
         Share
+      </Button>
+    );
+  }
+
+  let deleteButton = null;
+  if (onDelete) {
+    deleteButton = (
+      <Button minimal onClick={onDelete}>
+        Delete
       </Button>
     );
   }
@@ -79,6 +89,8 @@ export default function SidebarNavigation({
           <Button minimal onClick={onEdit}>
             Edit
           </Button>
+          {onDelete ? <span className="SidebarNavigation-Spacer" /> : null}
+          {deleteButton}
           <span className="SidebarNavigation-Spacer" />
           {shareButton}
           {currentSector === 'generated' ? (
@@ -127,6 +139,7 @@ SidebarNavigation.propTypes = {
   saveSector: PropTypes.func.isRequired,
   currentSector: PropTypes.string,
   onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
 };
 
 SidebarNavigation.defaultProps = {
@@ -134,4 +147,5 @@ SidebarNavigation.defaultProps = {
   back: null,
   currentSector: null,
   onEdit: () => {},
+  onDelete: null,
 };

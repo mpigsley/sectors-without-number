@@ -1,8 +1,8 @@
 import localForage from 'localforage';
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
+import { omit } from 'lodash';
 
-import { removeByKey } from 'utils/common';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const EDIT_PLANET = 'EDIT_PLANET';
@@ -29,7 +29,7 @@ export function editPlanet(system, planet, changes) {
           [system]: {
             ...sector.systems[system],
             planets: {
-              ...removeByKey(sector.systems[system].planets, planet),
+              ...omit(sector.systems[system].planets, planet),
               [newKey]: update,
             },
           },
@@ -62,5 +62,19 @@ export function editPlanet(system, planet, changes) {
           }),
         );
       });
+  };
+}
+
+export function deletePlanet(key) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const sector = { ...getCurrentSector(state), updated: Date.now() };
+    const systems = omit(sector.systems, key);
+    return localForage
+      .setItem(sector.seed, {
+        ...sector,
+        systems,
+      })
+      .then(() => {});
   };
 }

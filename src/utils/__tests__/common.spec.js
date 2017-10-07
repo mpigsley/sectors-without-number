@@ -4,7 +4,6 @@ import {
   coordinateKey,
   stringSortByKey,
   toCommaArray,
-  removeByKey,
 } from '../common';
 
 describe('capitalizeFirstLetter', () => {
@@ -90,39 +89,5 @@ describe('toCommaArray', () => {
     expect(['a', 'b', 'c', 'd'].map(toCommaArray).join('')).toEqual(
       'a, b, c, d',
     );
-  });
-});
-
-describe('removeByKey', () => {
-  let arr = null;
-  beforeEach(() => {
-    arr = { asdf: true, sdfg: true, dfgh: true, fghj: true };
-  });
-
-  it('should remove the specified value from the object', () => {
-    expect(removeByKey(arr, 'asdf')).toMatchObject({
-      sdfg: true,
-      dfgh: true,
-      fghj: true,
-    });
-    expect(removeByKey(arr, 'dfgh')).toMatchObject({
-      asdf: true,
-      sdfg: true,
-      fghj: true,
-    });
-  });
-
-  it('should return the exact object if key is not found', () => {
-    expect(removeByKey(arr, 'fdsa')).toMatchObject({
-      asdf: true,
-      sdfg: true,
-      dfgh: true,
-      fghj: true,
-    });
-  });
-
-  it('should return an empty array if obj is falsey', () => {
-    expect(removeByKey(undefined, 'asdf')).toEqual({});
-    expect(removeByKey()).toEqual({});
   });
 });

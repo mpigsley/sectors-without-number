@@ -18,11 +18,3 @@ export const stringSortByKey = key => (a, b) => {
 };
 
 export const toCommaArray = (element, i) => `${i !== 0 ? ', ' : ''}${element}`;
-
-export const removeByKey = (obj = {}, key = '') =>
-  Object.keys(obj).reduce((result, temp) => {
-    if (temp !== key) {
-      return { ...result, [temp]: obj[temp] };
-    }
-    return result;
-  }, {});

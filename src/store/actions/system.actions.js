@@ -1,8 +1,8 @@
 import localForage from 'localforage';
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
+import { omit } from 'lodash';
 
-import { removeByKey } from 'utils/common';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const SYSTEM_HOLD = 'SYSTEM_HOLD';
@@ -11,6 +11,7 @@ export const MOVE_SYSTEM = 'MOVE_SYSTEM';
 export const SYSTEM_HOVER_START = 'SYSTEM_HOVER_START';
 export const SYSTEM_HOVER_END = 'SYSTEM_HOVER_END';
 export const EDIT_SYSTEM = 'EDIT_SYSTEM';
+export const DELETE_SYSTEM = 'DELETE_SYSTEM';
 
 export function editSystem(system, changes) {
   return (dispatch, getState) => {
@@ -36,6 +37,37 @@ export function editSystem(system, changes) {
             },
             position: 'bottom-left',
             title: 'System Updated',
+            message: 'Your sector has been saved.',
+            type: 'success',
+          }),
+        );
+      });
+  };
+}
+
+export function deleteSystem(system) {
+  return (dispatch, getState) => {
+    const state = getState();
+    const sector = { ...getCurrentSector(state), updated: Date.now() };
+    const systems = omit(sector.systems, system);
+    return localForage
+      .setItem(sector.seed, {
+        ...sector,
+        systems,
+      })
+      .then(() => {
+        dispatch(
+          push(`/sector${state.routing.locationBeforeTransitions.search}`),
+        );
+        dispatch({ type: DELETE_SYSTEM, system });
+        dispatch(
+          ReduxToastrActions.add({
+            options: {
+              removeOnHover: true,
+              showCloseButton: true,
+            },
+            position: 'bottom-left',
+            title: 'System Deleted',
             message: 'Your sector has been saved.',
             type: 'success',
           }),
@@ -70,7 +102,7 @@ export function moveSystem() {
         [state.system.holdKey]: destination,
       });
     } else {
-      systems = removeByKey(systems, state.system.holdKey);
+      systems = omit(systems, state.system.holdKey);
       systems = Object.assign(systems, {
         [state.system.hoverKey]: source,
       });
