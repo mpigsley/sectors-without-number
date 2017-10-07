@@ -1,4 +1,11 @@
 {
+  "1.9.0": {
+    "description": "Delete systems and planets from the sidebar header.",
+    "changes": [
+      "Don't worry if you accidentally click the delete button because a confirmation modal will pop up.",
+      "Fixed an issue where the sector name, once changed, will always show the original name in the edit sector modal."
+    ]
+  },
   "1.8.3": {
     "description": "Add windows build support."
   },
