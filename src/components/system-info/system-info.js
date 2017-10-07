@@ -84,6 +84,8 @@ export default class SectorInfo extends SidebarInfo {
         value: key,
       })),
       isNotUnique: false,
+      isOpen: false,
+      isConfirmDeleteOpen: false,
     };
   }
 
@@ -116,6 +118,7 @@ export default class SectorInfo extends SidebarInfo {
 
   onDeleteSystem(system) {
     return () => {
+      this.onCancelDelete();
       this.props.deleteSystem(system);
     };
   }
@@ -204,11 +207,15 @@ export default class SectorInfo extends SidebarInfo {
         back={`/sector${this.props.location.search}`}
         type={SidebarType.system}
         onEdit={this.onEdit}
-        onDelete={this.onDeleteSystem(this.props.system.key)}
+        onDelete={this.onConfirmDelete}
       >
         <SectionHeader>Planets</SectionHeader>
         {renderPlanetLinks(this.props.system.planets, this.props.location)}
         {this.renderEditModal()}
+        {this.renderConfirmModal(
+          this.onDeleteSystem(this.props.system.key),
+          'system',
+        )}
       </SidebarNavigation>
     );
   }

@@ -10,7 +10,6 @@ import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import FlexContainer from 'primitives/containers/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import Header, { HeaderType } from 'primitives/text/header';
-import ConfirmModal from 'primitives/other/confirm-modal';
 import Modal from 'primitives/other/modal';
 import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
@@ -142,8 +141,6 @@ export default class PlanetInfo extends SidebarInfo {
     this.onRandomizeName = this.onRandomizeName.bind(this);
     this.onSavePlanet = this.onSavePlanet.bind(this);
     this.onDeletePlanet = this.onDeletePlanet.bind(this);
-    this.onConfirmDelete = this.onConfirmDelete.bind(this);
-    this.onCancelDelete = this.onCancelDelete.bind(this);
     this.state = {
       ...planetStateFromProps(props.planet),
       isNotUnique: false,
@@ -187,14 +184,6 @@ export default class PlanetInfo extends SidebarInfo {
     }
   }
 
-  onConfirmDelete() {
-    this.setState({ isConfirmDeleteOpen: true });
-  }
-
-  onCancelDelete() {
-    this.setState({ isConfirmDeleteOpen: false });
-  }
-
   onDeletePlanet(system, planet) {
     return () => {
       this.onCancelDelete();
@@ -235,21 +224,6 @@ export default class PlanetInfo extends SidebarInfo {
           }
         />
       </FlexContainer>
-    );
-  }
-
-  renderConfirmModal() {
-    return (
-      <ConfirmModal
-        isOpen={this.state.isConfirmDeleteOpen}
-        onConfirm={this.onDeletePlanet(
-          this.props.routeParams.system,
-          this.props.planet.key,
-        )}
-        onCancel={this.onCancelDelete}
-      >
-        Are you sure you want to delete this planet?
-      </ConfirmModal>
     );
   }
 
@@ -371,7 +345,13 @@ export default class PlanetInfo extends SidebarInfo {
           {renderTags(this.props.planet.tags)}
         </div>
         {this.renderEditModal()}
-        {this.renderConfirmModal()}
+        {this.renderConfirmModal(
+          this.onDeletePlanet(
+            this.props.routeParams.system,
+            this.props.planet.key,
+          ),
+          'planet',
+        )}
       </SidebarNavigation>
     );
   }
