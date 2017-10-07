@@ -14,7 +14,7 @@ import {
   EDIT_SYSTEM,
   DELETE_SYSTEM,
 } from 'store/actions/system.actions';
-import { EDIT_PLANET } from 'store/actions/planet.actions';
+import { EDIT_PLANET, DELETE_PLANET } from 'store/actions/planet.actions';
 
 const defaultColumns = 8;
 const defaultRows = 10;
@@ -180,6 +180,31 @@ export default function sector(state = initialState, action) {
                   ),
                   [action.newKey]: action.update,
                 },
+              },
+            },
+          },
+        },
+      };
+    }
+    case DELETE_PLANET: {
+      const existingSector =
+        state.generated || state.saved[state.currentSector];
+      return {
+        ...state,
+        currentSector: existingSector.seed,
+        generated: null,
+        saved: {
+          ...state.saved,
+          [existingSector.seed]: {
+            ...existingSector,
+            systems: {
+              ...existingSector.systems,
+              [action.system]: {
+                ...existingSector.systems[action.system],
+                planets: omit(
+                  existingSector.systems[action.system].planets,
+                  action.planet,
+                ),
               },
             },
           },

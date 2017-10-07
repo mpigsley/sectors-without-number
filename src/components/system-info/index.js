@@ -17,8 +17,8 @@ const mapDispatchToProps = dispatch => ({
   editSystem: (system, changes) => {
     dispatch(editSystem(system, changes));
   },
-  deleteSystem(systemId) {
-    dispatch(deleteSystem(systemId));
+  deleteSystem(system) {
+    dispatch(deleteSystem(system));
   },
 });
 

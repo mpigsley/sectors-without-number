@@ -114,9 +114,9 @@ export default class SectorInfo extends SidebarInfo {
     }
   }
 
-  onDeleteSystem(systemId) {
+  onDeleteSystem(system) {
     return () => {
-      this.props.deleteSystem(systemId);
+      this.props.deleteSystem(system);
     };
   }
 

@@ -6,6 +6,7 @@ import { omit } from 'lodash';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const EDIT_PLANET = 'EDIT_PLANET';
+export const DELETE_PLANET = 'DELETE_PLANET';
 
 export function editPlanet(system, planet, changes) {
   return (dispatch, getState) => {
@@ -65,16 +66,42 @@ export function editPlanet(system, planet, changes) {
   };
 }
 
-export function deletePlanet(key) {
+export function deletePlanet(system, planet) {
   return (dispatch, getState) => {
     const state = getState();
     const sector = { ...getCurrentSector(state), updated: Date.now() };
-    const systems = omit(sector.systems, key);
+    const planets = omit(sector.systems[system].planets, planet);
     return localForage
       .setItem(sector.seed, {
         ...sector,
-        systems,
+        systems: {
+          ...sector.systems,
+          [system]: {
+            ...sector.systems[system],
+            planets,
+          },
+        },
       })
-      .then(() => {});
+      .then(() => {
+        dispatch(
+          push(
+            `/sector/system/${system}${state.routing.locationBeforeTransitions
+              .search}`,
+          ),
+        );
+        dispatch({ type: DELETE_PLANET, system, planet });
+        dispatch(
+          ReduxToastrActions.add({
+            options: {
+              removeOnHover: true,
+              showCloseButton: true,
+            },
+            position: 'bottom-left',
+            title: 'Planet Deleted',
+            message: 'Your sector has been saved.',
+            type: 'success',
+          }),
+        );
+      });
   };
 }
