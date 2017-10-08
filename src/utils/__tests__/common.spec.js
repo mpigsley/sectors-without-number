@@ -2,6 +2,7 @@ import {
   capitalizeFirstLetter,
   isBetween,
   coordinateKey,
+  coordinatesFromKey,
   stringSortByKey,
   toCommaArray,
 } from '../common';
@@ -72,6 +73,19 @@ describe('coordinateKey', () => {
   it('returns negative values in string', () => {
     expect(coordinateKey(0, 0)).toEqual('0-10-1');
     expect(coordinateKey(-100, -100)).toEqual('0-1010-101');
+  });
+});
+
+describe('coordinatesFromKey', () => {
+  it('returns the correct coordinates from the key string `0000`', () => {
+    const { x, y } = coordinatesFromKey('0000');
+    expect(x).toEqual(1);
+    expect(y).toEqual(1);
+  });
+  it('returns the correct coordinates from the key string `9999`', () => {
+    const { x, y } = coordinatesFromKey('9999');
+    expect(x).toEqual(100);
+    expect(y).toEqual(100);
   });
 });
 
