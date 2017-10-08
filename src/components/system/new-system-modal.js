@@ -11,7 +11,7 @@ import Input from 'primitives/form/input';
 import FlexContainer from 'primitives/containers/flex-container';
 
 import { generateName } from 'utils/name-generator';
-import { generateSystem } from 'utils/sector-generator';
+import { System } from 'utils/sector-generator';
 
 export default class NewSystemModal extends Component {
   static propTypes = {
@@ -41,12 +41,13 @@ export default class NewSystemModal extends Component {
 
   onCreate() {
     this.props.onCreateSystem(
-      generateSystem({
-        name: this.state.name,
-        numPlanets: Number.parseInt(this.state.numPlanets, 10),
-        x: this.props.x,
-        y: this.props.y,
-      }),
+      new System(
+        { seededChance: new Chance() },
+        this.props.x,
+        this.props.y,
+        this.state.name,
+        Number.parseInt(this.state.numPlanets, 10),
+      ).toJSON(),
     );
   }
 

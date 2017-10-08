@@ -58,16 +58,15 @@ export const generatePlanet = (seededChance, existingName) => () => {
   };
 };
 
-class System {
-  constructor({ config, x, y, name, numPlanets }) {
+export class System {
+  constructor(config, x, y, name, numPlanets) {
     this.config = config;
     this.name = name || generateName(this.config.seededChance);
-    const planets =
-      numPlanets ||
-      Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2]));
-    const planetArray = [...Array(planets)].map(
-      generatePlanet(this.config.seededChance),
-    );
+    const planetArray = [
+      ...Array(
+        numPlanets || this.config.seededChance.weighted([1, 2, 3], [5, 3, 2]),
+      ),
+    ].map(generatePlanet(this.config.seededChance));
     this.planets = zipObject(
       planetArray.map(planet => planet.key),
       planetArray,
@@ -94,6 +93,10 @@ class System {
     name: this.name,
     planets: this.planets,
     key: this.key,
+    location: {
+      x: this.x,
+      y: this.y,
+    },
   });
 
   isRowValid(num) {
@@ -112,76 +115,46 @@ class System {
     const neighbors = [];
     if (this.x % 2) {
       if (this.isLocationValid(this.x + 1, this.y)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x + 1, y: this.y }),
-        );
+        neighbors.push(new System(this.config, this.x + 1, this.y));
       }
       if (this.isLocationValid(this.x + 1, this.y - 1)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x + 1, y: this.y - 1 }),
-        );
+        neighbors.push(new System(this.config, this.x + 1, this.y - 1));
       }
       if (this.isLocationValid(this.x, this.y - 1)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x, y: this.y - 1 }),
-        );
+        neighbors.push(new System(this.config, this.x, this.y - 1));
       }
       if (this.isLocationValid(this.x - 1, this.y - 1)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x - 1, y: this.y - 1 }),
-        );
+        neighbors.push(new System(this.config, this.x - 1, this.y - 1));
       }
       if (this.isLocationValid(this.x - 1, this.y)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x - 1, y: this.y }),
-        );
+        neighbors.push(new System(this.config, this.x - 1, this.y));
       }
       if (this.isLocationValid(this.x, this.y + 1)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x, y: this.y + 1 }),
-        );
+        neighbors.push(new System(this.config, this.x, this.y + 1));
       }
     } else {
       if (this.isLocationValid(this.x + 1, this.y + 1)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x + 1, y: this.y + 1 }),
-        );
+        neighbors.push(new System(this.config, this.x + 1, this.y + 1));
       }
       if (this.isLocationValid(this.x + 1, this.y)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x + 1, y: this.y }),
-        );
+        neighbors.push(new System(this.config, this.x + 1, this.y));
       }
       if (this.isLocationValid(this.x, this.y - 1)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x, y: this.y - 1 }),
-        );
+        neighbors.push(new System(this.config, this.x, this.y - 1));
       }
       if (this.isLocationValid(this.x - 1, this.y)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x - 1, y: this.y }),
-        );
+        neighbors.push(new System(this.config, this.x - 1, this.y));
       }
       if (this.isLocationValid(this.x - 1, this.y + 1)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x - 1, y: this.y + 1 }),
-        );
+        neighbors.push(new System(this.config, this.x - 1, this.y + 1));
       }
       if (this.isLocationValid(this.x, this.y + 1)) {
-        neighbors.push(
-          new System({ config: this.config, x: this.x, y: this.y + 1 }),
-        );
+        neighbors.push(new System(this.config, this.x, this.y + 1));
       }
     }
     return neighbors;
   }
 }
-
-export const generateSystem = init =>
-  new System({
-    ...init,
-    config: { seededChance: new Chance() },
-  }).toJSON();
 
 const randomNeighbor = (neighbors, existingLocs, seededChance) => {
   const filteredNeighbors = neighbors.filter(
@@ -201,7 +174,7 @@ const fullRandomGenerate = config => {
   while (extra) {
     let newExtra = 0;
     [...Array(extra)].forEach(() => {
-      const system = new System({ config });
+      const system = new System(config);
       if (systems[system.key]) {
         const neighbor = randomNeighbor(
           system.getNeighbors(),
