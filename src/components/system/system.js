@@ -31,6 +31,7 @@ class System extends Component {
     systemHold: PropTypes.func.isRequired,
     systemRelease: PropTypes.func.isRequired,
     moveSystem: PropTypes.func.isRequired,
+    editSystem: PropTypes.func.isRequired,
     holdKey: PropTypes.string,
     hoverKey: PropTypes.string,
     router: PropTypes.shape({
@@ -162,6 +163,7 @@ class System extends Component {
         isOpen={this.state.isAddingSystem}
         onCreateSystem={system => {
           this.setState({ isAddingSystem: false });
+          this.props.editSystem(system.key, system);
         }}
         onClose={() => {
           this.setState({ isAddingSystem: false });
