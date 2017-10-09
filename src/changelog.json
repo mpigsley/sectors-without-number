@@ -1,4 +1,8 @@
 {
+  "1.10.0": {
+    "description":
+      "Add a system by long-clicking on an empty hex in the sector view."
+  },
   "1.9.0": {
     "description": "Delete systems and planets from the sidebar header.",
     "changes": [
