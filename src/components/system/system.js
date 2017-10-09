@@ -70,7 +70,7 @@ class System extends Component {
           this.setState({ isAddingSystem: true });
         }
       }
-    }, 200);
+    }, 100);
   }
 
   onMouseUp() {
