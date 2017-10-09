@@ -58,12 +58,14 @@ export const generatePlanet = (seededChance, existingName) => () => {
   };
 };
 
-class System {
-  constructor(config, x, y) {
+export class System {
+  constructor(config, x, y, name, numPlanets) {
     this.config = config;
-    this.name = generateName(this.config.seededChance);
+    this.name = name || generateName(this.config.seededChance);
     const planetArray = [
-      ...Array(this.config.seededChance.weighted([1, 2, 3], [5, 3, 2])),
+      ...Array(
+        numPlanets || this.config.seededChance.weighted([1, 2, 3], [5, 3, 2]),
+      ),
     ].map(generatePlanet(this.config.seededChance));
     this.planets = zipObject(
       planetArray.map(planet => planet.key),

@@ -6,6 +6,7 @@ import {
   systemHold,
   systemRelease,
   moveSystem,
+  editSystem,
 } from 'store/actions/system.actions';
 import System from './system';
 
@@ -29,6 +30,9 @@ const mapDispatchToProps = dispatch => ({
   },
   moveSystem: () => {
     dispatch(moveSystem());
+  },
+  editSystem: (system, changes) => {
+    dispatch(editSystem(system, changes));
   },
 });
 
