@@ -1,4 +1,4 @@
-@import "styles/theme";
+@import 'styles/theme';
 
 .SectorInfo-Name {
   margin: 0;
@@ -8,4 +8,17 @@
   color: $light1;
   font-size: 0.8rem;
   margin-left: 0.5rem;
+}
+
+.SectorInfo-Welcome {
+  padding-top: 3rem;
+}
+
+.SectorInfo-WelcomeList {
+  color: $light1;
+  margin: 0 1rem 0 0.5rem;
+}
+
+.SectorInfo-WelcomeItem {
+  margin-top: 1rem;
 }

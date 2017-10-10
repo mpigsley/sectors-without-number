@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw } from 'react-feather';
+import { size } from 'lodash';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
 
+import FlexContainer from 'primitives/containers/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Modal from 'primitives/other/modal';
 import SectionHeader from 'primitives/text/section-header';
@@ -52,6 +54,61 @@ export default class SectorInfo extends SidebarInfo {
     this.onClose();
   }
 
+  renderEditModal() {
+    return (
+      <Modal
+        isOpen={this.state.isOpen}
+        onCancel={this.onClose}
+        title="Edit Sector"
+        actionButtons={[
+          <Button primary key="save" onClick={this.onSaveSector}>
+            Save Sector
+          </Button>,
+        ]}
+      >
+        <Label noPadding htmlFor="name">
+          Sector Name
+        </Label>
+        <IconInput
+          id="name"
+          name="name"
+          data-key="name"
+          icon={RefreshCw}
+          value={this.state.name}
+          onChange={this.onEditText()}
+          onIconClick={this.onRandomizeName(generateSectorName)}
+        />
+      </Modal>
+    );
+  }
+
+  renderEmptyText() {
+    if (size(this.props.sector.systems)) {
+      return <SectionHeader>Systems</SectionHeader>;
+    }
+    return (
+      <FlexContainer
+        className="SectorInfo-Welcome"
+        justify="center"
+        direction="column"
+        align="center"
+      >
+        <Header type={HeaderType.header3}>Welcome to the Sector Builder</Header>
+        <ol className="SectorInfo-WelcomeList">
+          <li className="SectorInfo-WelcomeItem">
+            To <b>create a system</b> click and hold a hex to the left.
+          </li>
+          <li className="SectorInfo-WelcomeItem">
+            To <b>move an existing system</b> click, hold, and drag.
+          </li>
+          <li className="SectorInfo-WelcomeItem">
+            <b>Create and edit planets</b> here from the sidebar.
+          </li>
+        </ol>
+      </FlexContainer>
+    );
+  }
+
   render() {
     return (
       <SidebarNavigation
@@ -59,7 +116,7 @@ export default class SectorInfo extends SidebarInfo {
         type={SidebarType.sector}
         onEdit={this.onEdit}
       >
-        <SectionHeader>Systems</SectionHeader>
+        {this.renderEmptyText()}
         {Object.keys(this.props.sector.systems)
           .map(key => this.props.sector.systems[key])
           .sort(stringSortByKey('key'))
@@ -74,29 +131,7 @@ export default class SectorInfo extends SidebarInfo {
               <div className="SectorInfo-Key">({system.key})</div>
             </SidebarLinkRow>
           ))}
-        <Modal
-          isOpen={this.state.isOpen}
-          onCancel={this.onClose}
-          title="Edit Sector"
-          actionButtons={[
-            <Button primary key="save" onClick={this.onSaveSector}>
-              Save Sector
-            </Button>,
-          ]}
-        >
-          <Label noPadding htmlFor="name">
-            Sector Name
-          </Label>
-          <IconInput
-            id="name"
-            name="name"
-            data-key="name"
-            icon={RefreshCw}
-            value={this.state.name}
-            onChange={this.onEditText()}
-            onIconClick={this.onRandomizeName(generateSectorName)}
-          />
-        </Modal>
+        {this.renderEditModal()}
       </SidebarNavigation>
     );
   }
