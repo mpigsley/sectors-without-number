@@ -8,6 +8,7 @@ describe('SectorGenerator', () => {
       columns: 8,
       rows: 10,
       seed: 'asdfghjkl',
+      isBuilder: false,
     };
   });
 
@@ -30,5 +31,10 @@ describe('SectorGenerator', () => {
   it('should generate a sector full of systems from a seed', () => {
     const { systems } = sectorGenerator(config);
     expect(systems).toMatchObject(testSystems);
+  });
+
+  it('should generate a sector with no systems if it is initialized in builder mode', () => {
+    const { systems } = sectorGenerator({ ...config, isBuilder: true });
+    expect(systems).toEqual({});
   });
 });
