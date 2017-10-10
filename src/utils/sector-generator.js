@@ -208,6 +208,6 @@ export default config => {
     seed: newConfig.seed,
     rows: newConfig.rows,
     columns: newConfig.columns,
-    systems: fullRandomGenerate(newConfig),
+    systems: newConfig.isBuilder ? {} : fullRandomGenerate(newConfig),
   };
 };

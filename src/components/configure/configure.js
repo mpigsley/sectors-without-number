@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Zap } from 'react-feather';
+import { Zap, Edit3 } from 'react-feather';
 import Chance from 'chance';
 
 import Header, { HeaderType } from 'primitives/text/header';
@@ -108,6 +108,20 @@ export default class Configure extends Component {
           >
             <LinkIcon icon={Zap} size="20" />
             Generate
+          </ButtonLink>
+          <ButtonLink
+            to={{
+              pathname: '/sector',
+              query: {
+                s: this.state.seed,
+                c: this.state.columns,
+                r: this.state.rows,
+                b: true,
+              },
+            }}
+          >
+            <LinkIcon icon={Edit3} size="20" />
+            Builder
           </ButtonLink>
         </SubContainer>
       </ContentContainer>
