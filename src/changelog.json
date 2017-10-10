@@ -1,4 +1,7 @@
 {
+  "1.11.0": {
+    "description": "Added a 'Builder' option to initialize a blank sector."
+  },
   "1.10.0": {
     "description":
       "Add a system by long-clicking on an empty hex in the sector view."
