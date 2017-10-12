@@ -36,7 +36,6 @@ export default class Configure extends Component {
   }
 
   render() {
-    console.log(this.props);
     const invalidText =
       this.state.columns > 20 || this.state.rows > 20 ? (
         <div className="Configure-Invalid">
