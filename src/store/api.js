@@ -5,6 +5,9 @@ export const doFacebookLogin = () => {
   return FirebaseAuth().signInWithPopup(provider);
 };
 
-export const doSignup = (email, password) => {};
-
-export const doLogin = (email, password) => {};
+export const getCurrentUser = () =>
+  new Promise(resolve => {
+    FirebaseAuth().onAuthStateChanged(user => {
+      resolve(user ? user.toJSON() : null);
+    });
+  });

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReduxToastr from 'react-redux-toastr';
 
-import LoginModal from 'primitives/modal/login-modal';
+import LoginModal from 'components/login-modal';
 
 export default function AppWrapper({ children }) {
   return (

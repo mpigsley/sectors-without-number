@@ -9,7 +9,7 @@ import {
 const initialState = {
   isModalOpen: false,
   isError: false,
-  user: null,
+  model: null,
   form: {
     email: '',
     password: '',
@@ -17,7 +17,8 @@ const initialState = {
   },
 };
 
-export default function sector(state = initialState, action) {
+export default function sector(incomingState, action) {
+  const state = { ...initialState, ...incomingState };
   switch (action.type) {
     case OPEN_LOGIN_MODAL:
       return { ...state, isModalOpen: true };
@@ -35,7 +36,7 @@ export default function sector(state = initialState, action) {
     case LOGGED_IN:
       return {
         ...state,
-        user: action.user,
+        model: action.user,
         isModalOpen: false,
       };
     case AUTH_FAILURE:

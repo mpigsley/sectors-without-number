@@ -25,7 +25,8 @@ const initialState = {
   saved: {},
 };
 
-export default function sector(state = initialState, action) {
+export default function sector(incomingState, action) {
+  const state = { ...initialState, ...incomingState };
   switch (action.type) {
     case SET_SAVED_SECTORS: {
       let generated = state.generated;

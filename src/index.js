@@ -3,13 +3,11 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import localForage from 'localforage';
-import Firebase from 'firebase';
-import Fastclick from 'react-fastclick';
 
 import store from 'store';
+import init from 'init';
 
-import { setSavedSectors } from 'store/actions/sector.actions';
+import Loading from 'primitives/other/loading';
 import AppWrapper from 'components/app-wrapper';
 import HexBackground from 'components/hex-background';
 import Home from 'components/home';
@@ -22,47 +20,35 @@ import PlanetInfo from 'components/planet-info';
 
 import 'styles/global.css';
 
-const history = syncHistoryWithStore(browserHistory, store);
+ReactDOM.render(<Loading />, document.getElementById('root'));
 
-new Promise((resolve, reject) => {
-  const savedSectors = {};
-  localForage
-    .iterate((value, key) => {
-      savedSectors[key] = value;
-    })
-    .then(() => resolve(savedSectors))
-    .catch(reject);
-}).then(saved => {
-  store.dispatch(setSavedSectors(saved));
-});
+init().then(([user, savedSectors]) => {
+  const initializedStore = store({
+    user: { model: user },
+    sector: { saved: savedSectors },
+  });
+  const history = syncHistoryWithStore(browserHistory, initializedStore);
 
-Fastclick();
-
-Firebase.initializeApp({
-  apiKey: 'AIzaSyDd9dgs7P1HA8EqW5yE8C2B7TLeYLTP6f4',
-  authDomain: 'sector-io-23cec.firebaseapp.com',
-  databaseURL: 'https://sector-io-23cec.firebaseio.com',
-  projectId: 'sector-io-23cec',
-  storageBucket: 'sector-io-23cec.appspot.com',
-  messagingSenderId: '189524790637',
-});
-
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={AppWrapper}>
-        <Route component={HexBackground}>
-          <IndexRoute component={Home} />
-          <Route path="/configure" component={Configure} />
-          <Route path="/changelog" component={Changelog} />
+  ReactDOM.render(
+    <Provider store={initializedStore}>
+      <Router history={history}>
+        <Route path="/" component={AppWrapper}>
+          <Route component={HexBackground}>
+            <IndexRoute component={Home} />
+            <Route path="/configure" component={Configure} />
+            <Route path="/changelog" component={Changelog} />
+          </Route>
+          <Route path="/sector" component={Sector}>
+            <IndexRoute component={SectorInfo} />
+            <Route path="system/:system" component={SystemInfo} />
+            <Route
+              path="system/:system/planet/:planet"
+              component={PlanetInfo}
+            />
+          </Route>
         </Route>
-        <Route path="/sector" component={Sector}>
-          <IndexRoute component={SectorInfo} />
-          <Route path="system/:system" component={SystemInfo} />
-          <Route path="system/:system/planet/:planet" component={PlanetInfo} />
-        </Route>
-      </Route>
-    </Router>
-  </Provider>,
-  document.getElementById('root'),
-);
+      </Router>
+    </Provider>,
+    document.getElementById('root'),
+  );
+});

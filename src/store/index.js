@@ -13,11 +13,13 @@ if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
 }
 
-export default createStore(
-  combineReducers({
-    ...reducers,
-    routing: routerReducer,
-    toastr: toastrReducer,
-  }),
-  applyMiddleware(...middleware),
-);
+export default initalState =>
+  createStore(
+    combineReducers({
+      ...reducers,
+      routing: routerReducer,
+      toastr: toastrReducer,
+    }),
+    initalState,
+    applyMiddleware(...middleware),
+  );
