@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import classNames from 'classnames';
+import { X } from 'react-feather';
 
 import Button from 'primitives/other/button';
 import FlexContainer from 'primitives/container/flex-container';
@@ -36,6 +37,11 @@ export default class ConfirmModal extends Component {
           base: 'LoginModal-Overlay',
         }}
       >
+        <X
+          className="LoginModal-Close"
+          onClick={this.props.onComplete}
+          size={30}
+        />
         <FlexContainer justify="center">
           <Button className="LoginModal-Facebook">Log In with Facebook</Button>
         </FlexContainer>

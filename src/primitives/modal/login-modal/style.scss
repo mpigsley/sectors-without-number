@@ -9,6 +9,19 @@
   padding: 1.5rem 0 0;
   width: 400px;
   -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+.LoginModal-Close {
+  cursor: pointer;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $light3;
+  }
 }
 
 .LoginModal-Overlay {
@@ -98,5 +111,5 @@
 .LoginModal-FormContainer {
   background-color: $dark2;
   border-top: 1px solid $light1;
-  padding-bottom: 1.5rem;
+  padding: 1.5rem;
 }
