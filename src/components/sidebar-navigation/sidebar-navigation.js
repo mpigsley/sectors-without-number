@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { toastr } from 'react-redux-toastr';
@@ -9,7 +9,6 @@ import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Button from 'primitives/other/button';
 import ButtonLink from 'primitives/other/button-link';
-import LoginModal from 'primitives/modal/login-modal';
 
 import './style.css';
 
@@ -20,149 +19,138 @@ export const SidebarType = {
   planet: 'planet',
 };
 
-export default class SidebarNavigation extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    name: PropTypes.string.isRequired,
-    back: PropTypes.string,
-    type: PropTypes.string,
-    saveSector: PropTypes.func.isRequired,
-    currentSector: PropTypes.string,
-    onEdit: PropTypes.func,
-    onDelete: PropTypes.func,
-  };
-
-  static defaultProps = {
-    type: SidebarType.sector,
-    back: null,
-    currentSector: null,
-    onEdit: () => {},
-    onDelete: null,
-  };
-
-  state = {
-    isLoginOpen: false,
-  };
-
-  onCopy = () => {
+export default function SidebarNavigation({
+  name,
+  children,
+  back,
+  type,
+  saveSector,
+  openLoginModal,
+  onDelete,
+  currentSector,
+  onEdit,
+}) {
+  const onCopy = () => {
     copy(window.location.href);
     toastr.success(
       'Copied to Clipboard',
-      `You have copied a link directly to this ${this.props.type}.`,
+      `You have copied a link directly to this ${type}.`,
     );
   };
 
-  onPrint = () => {
+  const onPrint = () => {
     window.print();
   };
 
-  render() {
-    let shareButton = null;
-    if (this.props.currentSector === 'generated') {
-      shareButton = (
-        <Button minimal onClick={this.onCopy}>
-          Share
-        </Button>
-      );
-    }
-
-    let deleteButton = null;
-    if (this.props.onDelete) {
-      deleteButton = (
-        <Button minimal onClick={this.props.onDelete}>
-          Delete
-        </Button>
-      );
-    }
-
-    const iconSize = 18;
-    let typeIcon = <Map className={nonLinkCss} hidden size={iconSize} />;
-    if (this.props.type === SidebarType.sector) {
-      typeIcon = <Map className={nonLinkCss} size={iconSize} />;
-    } else if (this.props.type === SidebarType.system) {
-      typeIcon = <Sun className={nonLinkCss} size={iconSize} />;
-    } else if (this.props.type === SidebarType.planet) {
-      typeIcon = <Globe className={nonLinkCss} size={iconSize} />;
-    }
-
-    return (
-      <FlexContainer className="SidebarNavigation-Info" direction="column">
-        <div className="SidebarNavigation-Header">
-          <FlexContainer align="center" shrink="0">
-            <Link
-              to={this.props.back || '/'}
-              className="SidebarNavigation-Link"
-            >
-              <ChevronLeft className="SidebarNavigation-Icon SidebarNavigation-Icon--link" />
-            </Link>
-            <FlexContainer flex="1" justify="center">
-              <Header type={HeaderType.header2}>{this.props.name}</Header>
-            </FlexContainer>
-            {typeIcon}
-          </FlexContainer>
-          <FlexContainer justify="center" shrink="0">
-            <Button minimal onClick={this.props.saveSector}>
-              Save
-            </Button>
-            <span className="SidebarNavigation-Spacer" />
-            <Button minimal onClick={this.props.onEdit}>
-              Edit
-            </Button>
-            {this.props.onDelete ? (
-              <span className="SidebarNavigation-Spacer" />
-            ) : null}
-            {deleteButton}
-            <span className="SidebarNavigation-Spacer" />
-            {shareButton}
-            {this.props.currentSector === 'generated' ? (
-              <span className="SidebarNavigation-Spacer" />
-            ) : null}
-            <Button minimal onClick={this.onPrint}>
-              Print
-            </Button>
-          </FlexContainer>
-        </div>
-        <FlexContainer direction="column" flex="1" scroll>
-          {this.props.children}
-        </FlexContainer>
-        <button
-          className="SidebarNavigation-Login"
-          onClick={() => {
-            this.setState({ isLoginOpen: true });
-          }}
-        >
-          Login to Sync Across Devices
-        </button>
-        <div className="SidebarNavigation-Footer">
-          <FlexContainer justify="center">
-            <ButtonLink
-              minimal
-              to="https://goo.gl/forms/eOanpGEuglCYYg7u2"
-              target="_blank"
-            >
-              Report Problem
-            </ButtonLink>
-            <span className="SidebarNavigation-Spacer" />
-            <ButtonLink minimal to="/changelog">
-              Changelog
-            </ButtonLink>
-            <span className="SidebarNavigation-Spacer" />
-            <ButtonLink
-              minimal
-              to="https://github.com/mpigsley/sectors-without-number"
-              target="_blank"
-            >
-              Github
-            </ButtonLink>
-          </FlexContainer>
-        </div>
-        <LoginModal
-          isOpen={this.state.isLoginOpen}
-          onComplete={() => {
-            this.setState({ isLoginOpen: false });
-          }}
-        />
-      </FlexContainer>
+  let shareButton = null;
+  if (currentSector === 'generated') {
+    shareButton = (
+      <Button minimal onClick={onCopy}>
+        Share
+      </Button>
     );
   }
+
+  let deleteButton = null;
+  if (onDelete) {
+    deleteButton = (
+      <Button minimal onClick={onDelete}>
+        Delete
+      </Button>
+    );
+  }
+
+  const iconSize = 18;
+  let typeIcon = <Map className={nonLinkCss} hidden size={iconSize} />;
+  if (type === SidebarType.sector) {
+    typeIcon = <Map className={nonLinkCss} size={iconSize} />;
+  } else if (type === SidebarType.system) {
+    typeIcon = <Sun className={nonLinkCss} size={iconSize} />;
+  } else if (type === SidebarType.planet) {
+    typeIcon = <Globe className={nonLinkCss} size={iconSize} />;
+  }
+
+  return (
+    <FlexContainer className="SidebarNavigation-Info" direction="column">
+      <div className="SidebarNavigation-Header">
+        <FlexContainer align="center" shrink="0">
+          <Link to={back || '/'} className="SidebarNavigation-Link">
+            <ChevronLeft className="SidebarNavigation-Icon SidebarNavigation-Icon--link" />
+          </Link>
+          <FlexContainer flex="1" justify="center">
+            <Header type={HeaderType.header2}>{name}</Header>
+          </FlexContainer>
+          {typeIcon}
+        </FlexContainer>
+        <FlexContainer justify="center" shrink="0">
+          <Button minimal onClick={saveSector}>
+            Save
+          </Button>
+          <span className="SidebarNavigation-Spacer" />
+          <Button minimal onClick={onEdit}>
+            Edit
+          </Button>
+          {onDelete ? <span className="SidebarNavigation-Spacer" /> : null}
+          {deleteButton}
+          <span className="SidebarNavigation-Spacer" />
+          {shareButton}
+          {currentSector === 'generated' ? (
+            <span className="SidebarNavigation-Spacer" />
+          ) : null}
+          <Button minimal onClick={onPrint}>
+            Print
+          </Button>
+        </FlexContainer>
+      </div>
+      <FlexContainer direction="column" flex="1" scroll>
+        {children}
+      </FlexContainer>
+      <button className="SidebarNavigation-Login" onClick={openLoginModal}>
+        Login to Sync Across Devices
+      </button>
+      <div className="SidebarNavigation-Footer">
+        <FlexContainer justify="center">
+          <ButtonLink
+            minimal
+            to="https://goo.gl/forms/eOanpGEuglCYYg7u2"
+            target="_blank"
+          >
+            Report Problem
+          </ButtonLink>
+          <span className="SidebarNavigation-Spacer" />
+          <ButtonLink minimal to="/changelog">
+            Changelog
+          </ButtonLink>
+          <span className="SidebarNavigation-Spacer" />
+          <ButtonLink
+            minimal
+            to="https://github.com/mpigsley/sectors-without-number"
+            target="_blank"
+          >
+            Github
+          </ButtonLink>
+        </FlexContainer>
+      </div>
+    </FlexContainer>
+  );
 }
+
+SidebarNavigation.propTypes = {
+  children: PropTypes.node.isRequired,
+  name: PropTypes.string.isRequired,
+  back: PropTypes.string,
+  type: PropTypes.string,
+  saveSector: PropTypes.func.isRequired,
+  openLoginModal: PropTypes.func.isRequired,
+  currentSector: PropTypes.string,
+  onEdit: PropTypes.func,
+  onDelete: PropTypes.func,
+};
+
+SidebarNavigation.defaultProps = {
+  type: SidebarType.sector,
+  back: null,
+  currentSector: null,
+  onEdit: () => {},
+  onDelete: null,
+};

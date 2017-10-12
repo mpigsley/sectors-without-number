@@ -4,7 +4,8 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import localForage from 'localforage';
-import Fastclick from 'fastclick';
+import Firebase from 'firebase';
+import Fastclick from 'react-fastclick';
 
 import store from 'store';
 
@@ -35,7 +36,16 @@ new Promise((resolve, reject) => {
   store.dispatch(setSavedSectors(saved));
 });
 
-Fastclick.attach(document.body);
+Fastclick();
+
+Firebase.initializeApp({
+  apiKey: 'AIzaSyDd9dgs7P1HA8EqW5yE8C2B7TLeYLTP6f4',
+  authDomain: 'sector-io-23cec.firebaseapp.com',
+  databaseURL: 'https://sector-io-23cec.firebaseio.com',
+  projectId: 'sector-io-23cec',
+  storageBucket: 'sector-io-23cec.appspot.com',
+  messagingSenderId: '189524790637',
+});
 
 ReactDOM.render(
   <Provider store={store}>
