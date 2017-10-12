@@ -1,0 +1,61 @@
+@import 'styles/theme';
+
+.LoginModal {
+  background: $dark2;
+  border-radius: 0.2rem;
+  color: $light2;
+  outline: none;
+  overflow: auto;
+  padding: 1.5rem 0;
+  width: 400px;
+  -webkit-overflow-scrolling: touch;
+}
+
+.LoginModal-Overlay {
+  align-items: center;
+  background-color: rgba(200, 200, 200, 0.3);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.LoginModal-Container {
+  padding-bottom: 1rem;
+}
+
+.LoginModal-Facebook {
+  background-color: $facebook;
+  color: $light3;
+  border: none;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.LoginModal-LineContainer {
+  height: 2rem;
+  position: relative;
+}
+
+.LoginModal-Line {
+  border-color: $light1;
+  border-top: none;
+  border-width: 1px;
+  margin: 0.5rem 10rem;
+}
+
+.LoginModal-Or {
+  background-color: $dark2;
+  color: $light1;
+  position: absolute;
+  text-align: center;
+  padding: 0.8rem;
+  left: 179px;
+  top: -72%;
+}
