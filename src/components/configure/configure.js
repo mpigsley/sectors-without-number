@@ -3,6 +3,7 @@ import { Zap, Edit3 } from 'react-feather';
 import Chance from 'chance';
 
 import Header, { HeaderType } from 'primitives/text/header';
+import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
 import Input from 'primitives/form/input';
@@ -35,6 +36,7 @@ export default class Configure extends Component {
   }
 
   render() {
+    console.log(this.props);
     const invalidText =
       this.state.columns > 20 || this.state.rows > 20 ? (
         <div className="Configure-Invalid">
@@ -43,88 +45,90 @@ export default class Configure extends Component {
       ) : null;
 
     return (
-      <ContentContainer direction="column" align="center" justify="center">
-        <Header type={HeaderType.header2}>Configure</Header>
-        <SubContainer noMargin direction="column" align="flexStart">
-          {invalidText}
-          <Label noPadding htmlFor="seed">
-            Seed
-          </Label>
-          <Input
-            data-key="seed"
-            onChange={this.updateInput}
-            name="seed"
-            type="text"
-            value={this.state.seed}
-          />
-          <SubContainer noMargin>
-            <SubContainer
-              className="Configure-ButtonContainer"
-              noMargin
-              direction="column"
-              align="flexStart"
-            >
-              <Label htmlFor="rows">Rows</Label>
-              <Input
-                data-key="rows"
-                onChange={this.updateInput}
-                name="rows"
-                type="number"
-                value={this.state.rows || ''}
-              />
-            </SubContainer>
-            <SubContainer
-              className="Configure-ButtonContainer"
-              noMargin
-              direction="column"
-              align="flexStart"
-            >
-              <Label htmlFor="columns">Columns</Label>
-              <Input
-                data-key="columns"
-                onChange={this.updateInput}
-                name="columns"
-                type="number"
-                value={this.state.columns || ''}
-              />
+      <AbsoluteContainer>
+        <ContentContainer direction="column" align="center" justify="center">
+          <Header type={HeaderType.header2}>Configure</Header>
+          <SubContainer noMargin direction="column" align="flexStart">
+            {invalidText}
+            <Label noPadding htmlFor="seed">
+              Seed
+            </Label>
+            <Input
+              data-key="seed"
+              onChange={this.updateInput}
+              name="seed"
+              type="text"
+              value={this.state.seed}
+            />
+            <SubContainer noMargin>
+              <SubContainer
+                className="Configure-ButtonContainer"
+                noMargin
+                direction="column"
+                align="flexStart"
+              >
+                <Label htmlFor="rows">Rows</Label>
+                <Input
+                  data-key="rows"
+                  onChange={this.updateInput}
+                  name="rows"
+                  type="number"
+                  value={this.state.rows || ''}
+                />
+              </SubContainer>
+              <SubContainer
+                className="Configure-ButtonContainer"
+                noMargin
+                direction="column"
+                align="flexStart"
+              >
+                <Label htmlFor="columns">Columns</Label>
+                <Input
+                  data-key="columns"
+                  onChange={this.updateInput}
+                  name="columns"
+                  type="number"
+                  value={this.state.columns || ''}
+                />
+              </SubContainer>
             </SubContainer>
           </SubContainer>
-        </SubContainer>
-        <SubContainer
-          className="Configure-PaddedButtons"
-          wrap
-          justify="center"
-          align="center"
-        >
-          <ButtonLink
-            to={{
-              pathname: '/sector',
-              query: {
-                s: this.state.seed,
-                c: this.state.columns,
-                r: this.state.rows,
-              },
-            }}
+          <SubContainer
+            className="Configure-PaddedButtons"
+            wrap
+            justify="center"
+            align="center"
           >
-            <LinkIcon icon={Zap} size="20" />
-            Generate
-          </ButtonLink>
-          <ButtonLink
-            to={{
-              pathname: '/sector',
-              query: {
-                s: this.state.seed,
-                c: this.state.columns,
-                r: this.state.rows,
-                b: true,
-              },
-            }}
-          >
-            <LinkIcon icon={Edit3} size="20" />
-            Builder
-          </ButtonLink>
-        </SubContainer>
-      </ContentContainer>
+            <ButtonLink
+              to={{
+                pathname: '/sector',
+                query: {
+                  s: this.state.seed,
+                  c: this.state.columns,
+                  r: this.state.rows,
+                },
+              }}
+            >
+              <LinkIcon icon={Zap} size="20" />
+              Generate
+            </ButtonLink>
+            <ButtonLink
+              to={{
+                pathname: '/sector',
+                query: {
+                  s: this.state.seed,
+                  c: this.state.columns,
+                  r: this.state.rows,
+                  b: true,
+                },
+              }}
+            >
+              <LinkIcon icon={Edit3} size="20" />
+              Builder
+            </ButtonLink>
+          </SubContainer>
+        </ContentContainer>
+      </AbsoluteContainer>
     );
   }
 }
