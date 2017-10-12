@@ -18,8 +18,26 @@ export default function Modal(props) {
     onCancel,
     actionButtons,
     doubleSize,
+    hideHeader,
     ...rest
   } = props;
+
+  let header = null;
+  if (!hideHeader) {
+    header = (
+      <FlexContainer
+        align="center"
+        justify="spaceBetween"
+        className="Modal-Section Modal-Header"
+      >
+        <Header className="Modal-Title" type={HeaderType.header3}>
+          {title}
+        </Header>
+        <X className="Modal-Close" onClick={onCancel} size={30} />
+      </FlexContainer>
+    );
+  }
+
   return (
     <ReactModal
       contentLabel={title}
@@ -38,16 +56,7 @@ export default function Modal(props) {
       }}
     >
       <FlexContainer direction="column">
-        <FlexContainer
-          align="center"
-          justify="spaceBetween"
-          className="Modal-Section Modal-Header"
-        >
-          <Header className="Modal-Title" type={HeaderType.header3}>
-            {title}
-          </Header>
-          <X className="Modal-Close" onClick={onCancel} size={30} />
-        </FlexContainer>
+        {header}
         <div className="Modal-Content">{children}</div>
         <FlexContainer justify="flexEnd" className="Modal-Section Modal-Footer">
           <Button className="Model-FooterButton" onClick={onCancel}>
@@ -76,6 +85,7 @@ Modal.propTypes = {
   onCancel: PropTypes.func.isRequired,
   actionButtons: PropTypes.arrayOf(PropTypes.node),
   doubleSize: PropTypes.bool,
+  hideHeader: PropTypes.bool,
 };
 
 Modal.defaultProps = {
@@ -84,4 +94,5 @@ Modal.defaultProps = {
   cancelText: 'Cancel',
   actionButtons: null,
   doubleSize: false,
+  hideHeader: false,
 };

@@ -10,6 +10,7 @@ import ContentContainer from 'primitives/container/content-container';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import FlexContainer from 'primitives/container/flex-container';
 import SubContainer from 'primitives/container/sub-container';
+import LoginModal from 'primitives/modal/login-modal';
 import LinkIcon from 'primitives/other/link-icon';
 import ButtonLink from 'primitives/other/button-link';
 import Button from 'primitives/other/button';
@@ -32,6 +33,7 @@ export default class Home extends Component {
 
   state = {
     selected: null,
+    isLoginOpen: false,
   };
 
   onDelete() {
@@ -51,6 +53,17 @@ export default class Home extends Component {
         selected: selected === this.state.selected ? null : selected,
       });
     };
+  }
+
+  renderLogin() {
+    return (
+      <LoginModal
+        isOpen={this.state.isLoginOpen}
+        onComplete={() => {
+          this.setState({ isLoginOpen: false });
+        }}
+      />
+    );
   }
 
   renderSaved() {
@@ -156,7 +169,14 @@ export default class Home extends Component {
   render() {
     return (
       <AbsoluteContainer>
-        <Button className="Home-Login">Log In</Button>
+        <Button
+          className="Home-Login"
+          onClick={() => {
+            this.setState({ isLoginOpen: true });
+          }}
+        >
+          Log In
+        </Button>
         <ContentContainer direction="column" align="center" justify="center">
           <Header type={HeaderType.header1}>Sectors Without Number</Header>
           <SubContainer fullWidth justify="center" align="center">
@@ -171,6 +191,7 @@ export default class Home extends Component {
           {this.renderSaved()}
           {this.renderActions()}
         </ContentContainer>
+        {this.renderLogin()}
       </AbsoluteContainer>
     );
   }
