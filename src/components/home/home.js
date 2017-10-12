@@ -6,9 +6,10 @@ import { Settings, Zap, Download, Delete, X, Edit3 } from 'react-feather';
 
 import { stringSortByKey } from 'utils/common';
 import Header, { HeaderType } from 'primitives/text/header';
-import ContentContainer from 'primitives/containers/content-container';
-import FlexContainer from 'primitives/containers/flex-container';
-import SubContainer from 'primitives/containers/sub-container';
+import ContentContainer from 'primitives/container/content-container';
+import AbsoluteContainer from 'primitives/container/absolute-container';
+import FlexContainer from 'primitives/container/flex-container';
+import SubContainer from 'primitives/container/sub-container';
 import LinkIcon from 'primitives/other/link-icon';
 import ButtonLink from 'primitives/other/button-link';
 import Button from 'primitives/other/button';
@@ -154,20 +155,23 @@ export default class Home extends Component {
 
   render() {
     return (
-      <ContentContainer direction="column" align="center" justify="center">
-        <Header type={HeaderType.header1}>Sectors Without Number</Header>
-        <SubContainer fullWidth justify="center" align="center">
-          <div className="Home-RowContainer">
-            <div className="Home-Row Home-Row--left" />
-          </div>
-          <Header type={HeaderType.header2}>Sector Generator</Header>
-          <div className="Home-RowContainer">
-            <div className="Home-Row" />
-          </div>
-        </SubContainer>
-        {this.renderSaved()}
-        {this.renderActions()}
-      </ContentContainer>
+      <AbsoluteContainer>
+        <Button className="Home-Login">Log In</Button>
+        <ContentContainer direction="column" align="center" justify="center">
+          <Header type={HeaderType.header1}>Sectors Without Number</Header>
+          <SubContainer fullWidth justify="center" align="center">
+            <div className="Home-RowContainer">
+              <div className="Home-Row Home-Row--left" />
+            </div>
+            <Header type={HeaderType.header2}>Sector Generator</Header>
+            <div className="Home-RowContainer">
+              <div className="Home-Row" />
+            </div>
+          </SubContainer>
+          {this.renderSaved()}
+          {this.renderActions()}
+        </ContentContainer>
+      </AbsoluteContainer>
     );
   }
 }

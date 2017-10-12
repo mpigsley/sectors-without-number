@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Modal from 'primitives/other/modal';
+import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 
 export default function ConfirmModal({

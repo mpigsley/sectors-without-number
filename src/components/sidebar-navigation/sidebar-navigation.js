@@ -5,7 +5,7 @@ import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
 import { ChevronLeft, Sun, Globe, Map } from 'react-feather';
 
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Button from 'primitives/other/button';
 import ButtonLink from 'primitives/other/button-link';

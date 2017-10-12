@@ -3,8 +3,8 @@ import { Zap, Edit3 } from 'react-feather';
 import Chance from 'chance';
 
 import Header, { HeaderType } from 'primitives/text/header';
-import ContentContainer from 'primitives/containers/content-container';
-import SubContainer from 'primitives/containers/sub-container';
+import ContentContainer from 'primitives/container/content-container';
+import SubContainer from 'primitives/container/sub-container';
 import Input from 'primitives/form/input';
 import Label from 'primitives/form/label';
 import LinkIcon from 'primitives/other/link-icon';

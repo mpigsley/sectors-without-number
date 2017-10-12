@@ -7,7 +7,7 @@ import hexGenerator from 'utils/hex-generator';
 import SectorSidebar from 'components/sector-sidebar';
 import SystemTooltips from 'components/system-tooltips';
 import PrintableSector from 'components/printable-sector';
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 import HexMap from 'components/hex-map';
 
 import './style.css';

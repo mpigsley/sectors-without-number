@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { RefreshCw } from 'react-feather';
 import Chance from 'chance';
 
-import Modal from 'primitives/other/modal';
+import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 
 import { generateName } from 'utils/name-generator';
 import { System } from 'utils/sector-generator';

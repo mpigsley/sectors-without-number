@@ -5,7 +5,7 @@ import ReactModal from 'react-modal';
 import { X } from 'react-feather';
 
 import Header, { HeaderType } from 'primitives/text/header';
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 import Button from 'primitives/other/button';
 
 import './style.css';

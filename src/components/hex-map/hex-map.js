@@ -4,9 +4,9 @@ import classNames from 'classnames';
 
 import System from 'components/system';
 import MovementVector, { MarkerDefs } from 'components/movement-vector';
-import AbsoluteContainer from 'primitives/containers/absolute-container';
-import ContentContainer from 'primitives/containers/content-container';
-import SubContainer from 'primitives/containers/sub-container';
+import AbsoluteContainer from 'primitives/container/absolute-container';
+import ContentContainer from 'primitives/container/content-container';
+import SubContainer from 'primitives/container/sub-container';
 
 import './style.css';
 

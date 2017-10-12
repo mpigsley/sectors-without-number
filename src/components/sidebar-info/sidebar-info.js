@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Chance from 'chance';
 
-import ConfirmModal from 'primitives/other/confirm-modal';
+import ConfirmModal from 'primitives/modal/confirm-modal';
 
 import './style.css';
 

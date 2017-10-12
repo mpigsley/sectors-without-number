@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import HexMap from 'components/hex-map';
 import Header, { HeaderType } from 'primitives/text/header';
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 
 import { stringSortByKey, toCommaArray } from 'utils/common';
 import WorldTags from 'constants/world-tags';

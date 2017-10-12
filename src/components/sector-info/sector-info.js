@@ -7,9 +7,9 @@ import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
 
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
-import Modal from 'primitives/other/modal';
+import Modal from 'primitives/modal/modal';
 import SectionHeader from 'primitives/text/section-header';
 import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
