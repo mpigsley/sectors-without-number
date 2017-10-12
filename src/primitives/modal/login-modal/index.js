@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
+import classNames from 'classnames';
 
 import Button from 'primitives/other/button';
 import FlexContainer from 'primitives/container/flex-container';
@@ -35,14 +36,32 @@ export default class ConfirmModal extends Component {
           base: 'LoginModal-Overlay',
         }}
       >
-        <FlexContainer className="LoginModal-Container" justify="center">
+        <FlexContainer justify="center">
           <Button className="LoginModal-Facebook">Log In with Facebook</Button>
         </FlexContainer>
         <div className="LoginModal-LineContainer">
           <hr className="LoginModal-Line" />
           <span className="LoginModal-Or">or </span>
         </div>
-        <FlexContainer justify="center">
+        <FlexContainer className="LoginModal-Switcher" justify="center">
+          <button
+            onClick={() => this.setState({ isLogin: true })}
+            className={classNames('LoginModal-SwitchButton', {
+              'LoginModal-SwitchButton--active': this.state.isLogin,
+            })}
+          >
+            Log In
+          </button>
+          <button
+            onClick={() => this.setState({ isLogin: false })}
+            className={classNames('LoginModal-SwitchButton', {
+              'LoginModal-SwitchButton--active': !this.state.isLogin,
+            })}
+          >
+            Sign Up
+          </button>
+        </FlexContainer>
+        <FlexContainer className="LoginModal-FormContainer" justify="center">
           <Button primary key="save" onClick={this.onConfirm}>
             {actionText}
           </Button>
