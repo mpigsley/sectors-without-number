@@ -10,6 +10,33 @@
   border-bottom: 1px solid $dark2;
 }
 
+.SidebarNavigation-Login {
+  background-color: $primary;
+  border-top: 1px solid $dark2;
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+  box-sizing: border-box;
+  color: $light4;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 0.1rem;
+  outline: none;
+  line-height: 38px;
+  padding: 0.4rem;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: all 0.3s;
+  font-weight: 400;
+
+  &:hover {
+    color: $light2;
+  }
+}
+
 .SidebarNavigation-Footer {
   padding: 0.6rem 0;
   border-top: 1px solid $dark2;
