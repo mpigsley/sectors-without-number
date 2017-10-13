@@ -17,10 +17,16 @@ export default class ConfirmModal extends Component {
     closeLoginModal: PropTypes.func.isRequired,
     updateLoginForm: PropTypes.func.isRequired,
     facebookLogin: PropTypes.func.isRequired,
+    signup: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     confirm: PropTypes.string.isRequired,
-    isError: PropTypes.bool.isRequired,
+    error: PropTypes.string,
+  };
+
+  static defaultProps = {
+    error: null,
   };
 
   state = {
@@ -28,7 +34,11 @@ export default class ConfirmModal extends Component {
   };
 
   onConfirm = () => {
-    this.props.closeLoginModal();
+    if (this.state.isLogin) {
+      this.props.login();
+    } else {
+      this.props.signup();
+    }
   };
 
   onEditText = ({ target }) => {
@@ -53,12 +63,12 @@ export default class ConfirmModal extends Component {
   }
 
   renderError() {
-    if (!this.props.isError) {
+    if (!this.props.error) {
       return null;
     }
     return (
       <FlexContainer className="LoginModal-Error" justify="center">
-        There has been an error. Please try again.
+        {this.props.error}
       </FlexContainer>
     );
   }

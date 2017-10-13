@@ -1,4 +1,4 @@
-import { doFacebookLogin } from 'store/api';
+import { doFacebookLogin, doSignup, doLogin } from 'store/api';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
 export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
@@ -25,4 +25,52 @@ export function facebookLogin() {
         dispatch({ type: AUTH_FAILURE });
         console.error(error);
       });
+}
+
+export function signup() {
+  return (dispatch, getState) => {
+    const { user } = getState();
+    const { email, password, confirm } = user.form;
+    if (!email || !password || !confirm) {
+      return dispatch({
+        type: AUTH_FAILURE,
+        error: 'Email and password are required.',
+      });
+    } else if (password !== confirm) {
+      return dispatch({
+        type: AUTH_FAILURE,
+        error: 'Passwords do not match.',
+      });
+    }
+    return doSignup(user.form.email, user.form.password)
+      .then(result => {
+        result.sendEmailVerification();
+        dispatch({ type: LOGGED_IN, user: result.toJSON() });
+      })
+      .catch(error => {
+        dispatch({ type: AUTH_FAILURE });
+        console.error(error);
+      });
+  };
+}
+
+export function login() {
+  return (dispatch, getState) => {
+    const { user } = getState();
+    const { email, password } = user.form;
+    if (!email || !password) {
+      return dispatch({
+        type: AUTH_FAILURE,
+        error: 'Email and password are required.',
+      });
+    }
+    return doLogin(user.form.email, user.form.password)
+      .then(result => {
+        dispatch({ type: LOGGED_IN, user: result.toJSON() });
+      })
+      .catch(error => {
+        dispatch({ type: AUTH_FAILURE, error: error.message });
+        console.error(error);
+      });
+  };
 }

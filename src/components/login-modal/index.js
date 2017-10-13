@@ -4,18 +4,26 @@ import {
   closeLoginModal,
   updateLoginForm,
   facebookLogin,
+  signup,
+  login,
 } from 'store/actions/user.actions';
 import LoginModal from './login-modal';
 
 const mapStateToProps = ({ user }) => ({
   ...user.form,
   isModalOpen: user.isModalOpen,
-  isError: user.isError,
+  error: user.error,
 });
 
 const mapDispatchToProps = dispatch => ({
   facebookLogin: () => {
     dispatch(facebookLogin());
+  },
+  signup: () => {
+    dispatch(signup());
+  },
+  login: () => {
+    dispatch(login());
   },
   closeLoginModal: () => {
     dispatch(closeLoginModal());

@@ -8,7 +8,7 @@ import {
 
 const initialState = {
   isModalOpen: false,
-  isError: false,
+  error: null,
   model: null,
   form: {
     email: '',
@@ -23,11 +23,11 @@ export default function sector(incomingState, action) {
     case OPEN_LOGIN_MODAL:
       return { ...state, isModalOpen: true };
     case CLOSE_LOGIN_MODAL:
-      return { ...state, isModalOpen: false, isError: false };
+      return { ...state, isModalOpen: false, error: null };
     case UPDATE_LOGIN_FORM:
       return {
         ...state,
-        isError: false,
+        error: null,
         form: {
           ...state.form,
           [action.key]: action.value,
@@ -42,7 +42,7 @@ export default function sector(incomingState, action) {
     case AUTH_FAILURE:
       return {
         ...state,
-        isError: true,
+        error: action.error || 'There has been an error. Please try again.',
       };
     default:
       return state;
