@@ -44,7 +44,18 @@
   margin-bottom: 1rem;
 
   &:hover {
-    color: $light3;
+    color: $light4;
+  }
+}
+
+.LoginModal-Google {
+  background-color: $google;
+  border: none;
+  color: $light3;
+  margin-bottom: 1rem;
+
+  &:hover {
+    color: $light4;
   }
 }
 

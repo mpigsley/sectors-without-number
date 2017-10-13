@@ -1,4 +1,4 @@
-import { doFacebookLogin, doSignup, doLogin } from 'store/api';
+import { doFacebookLogin, doGoogleLogin, doSignup, doLogin } from 'store/api';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
 export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
@@ -23,6 +23,18 @@ export function facebookLogin() {
       })
       .catch(error => {
         dispatch({ type: AUTH_FAILURE });
+        console.error(error);
+      });
+}
+
+export function googleLogin() {
+  return dispatch =>
+    doGoogleLogin()
+      .then(result => {
+        dispatch({ type: LOGGED_IN, user: result.user.toJSON() });
+      })
+      .catch(error => {
+        dispatch({ type: AUTH_FAILURE, error: error.message });
         console.error(error);
       });
 }

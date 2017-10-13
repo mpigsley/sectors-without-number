@@ -17,6 +17,7 @@ export default class ConfirmModal extends Component {
     closeLoginModal: PropTypes.func.isRequired,
     updateLoginForm: PropTypes.func.isRequired,
     facebookLogin: PropTypes.func.isRequired,
+    googleLogin: PropTypes.func.isRequired,
     signup: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired,
     email: PropTypes.string.isRequired,
@@ -90,12 +91,18 @@ export default class ConfirmModal extends Component {
           onClick={this.props.closeLoginModal}
           size={30}
         />
-        <FlexContainer justify="center">
+        <FlexContainer justify="center" wrap>
           <Button
             className="LoginModal-Facebook"
             onClick={this.props.facebookLogin}
           >
             Log In with Facebook
+          </Button>
+          <Button
+            className="LoginModal-Google"
+            onClick={this.props.googleLogin}
+          >
+            Log In with Google
           </Button>
         </FlexContainer>
         <div className="LoginModal-LineContainer">

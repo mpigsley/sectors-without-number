@@ -12,6 +12,11 @@ export const doFacebookLogin = () => {
   return FirebaseAuth().signInWithPopup(provider);
 };
 
+export const doGoogleLogin = () => {
+  const provider = new FirebaseAuth.GoogleAuthProvider();
+  return FirebaseAuth().signInWithPopup(provider);
+};
+
 export const doSignup = (email, password) =>
   FirebaseAuth().createUserWithEmailAndPassword(email, password);
 

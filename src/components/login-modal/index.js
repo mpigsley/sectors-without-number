@@ -4,6 +4,7 @@ import {
   closeLoginModal,
   updateLoginForm,
   facebookLogin,
+  googleLogin,
   signup,
   login,
 } from 'store/actions/user.actions';
@@ -18,6 +19,9 @@ const mapStateToProps = ({ user }) => ({
 const mapDispatchToProps = dispatch => ({
   facebookLogin: () => {
     dispatch(facebookLogin());
+  },
+  googleLogin: () => {
+    dispatch(googleLogin());
   },
   signup: () => {
     dispatch(signup());
