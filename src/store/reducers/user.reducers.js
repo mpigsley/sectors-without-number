@@ -3,6 +3,7 @@ import {
   CLOSE_LOGIN_MODAL,
   UPDATE_LOGIN_FORM,
   LOGGED_IN,
+  SET_AUTH_USER,
   AUTH_FAILURE,
 } from 'store/actions/user.actions';
 
@@ -34,6 +35,12 @@ export default function sector(incomingState, action) {
         },
       };
     case LOGGED_IN:
+      return {
+        ...state,
+        model: action.user,
+        isModalOpen: false,
+      };
+    case SET_AUTH_USER:
       return {
         ...state,
         model: action.user,

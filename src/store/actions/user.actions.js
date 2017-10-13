@@ -5,10 +5,12 @@ export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
 export const UPDATE_LOGIN_FORM = 'UPDATE_LOGIN_FORM';
 
 export const LOGGED_IN = 'LOGGED_IN';
+export const SET_AUTH_USER = 'SET_AUTH_USER';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
 
 export const openLoginModal = () => ({ type: OPEN_LOGIN_MODAL });
 export const closeLoginModal = () => ({ type: CLOSE_LOGIN_MODAL });
+export const setAuthUser = user => ({ type: SET_AUTH_USER, user });
 export const updateLoginForm = (key, value) => ({
   type: UPDATE_LOGIN_FORM,
   key,

@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import store from 'store';
 import init from 'init';
 
-import Loading from 'primitives/other/loading';
 import AppWrapper from 'components/app-wrapper';
 import HexBackground from 'components/hex-background';
 import Home from 'components/home';
@@ -20,35 +19,26 @@ import PlanetInfo from 'components/planet-info';
 
 import 'styles/global.css';
 
-ReactDOM.render(<Loading />, document.getElementById('root'));
+init(store);
 
-init().then(([user, savedSectors]) => {
-  const initializedStore = store({
-    user: { model: user },
-    sector: { saved: savedSectors },
-  });
-  const history = syncHistoryWithStore(browserHistory, initializedStore);
+const history = syncHistoryWithStore(browserHistory, store);
 
-  ReactDOM.render(
-    <Provider store={initializedStore}>
-      <Router history={history}>
-        <Route path="/" component={AppWrapper}>
-          <Route component={HexBackground}>
-            <IndexRoute component={Home} />
-            <Route path="/configure" component={Configure} />
-            <Route path="/changelog" component={Changelog} />
-          </Route>
-          <Route path="/sector" component={Sector}>
-            <IndexRoute component={SectorInfo} />
-            <Route path="system/:system" component={SystemInfo} />
-            <Route
-              path="system/:system/planet/:planet"
-              component={PlanetInfo}
-            />
-          </Route>
+ReactDOM.render(
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={AppWrapper}>
+        <Route component={HexBackground}>
+          <IndexRoute component={Home} />
+          <Route path="/configure" component={Configure} />
+          <Route path="/changelog" component={Changelog} />
         </Route>
-      </Router>
-    </Provider>,
-    document.getElementById('root'),
-  );
-});
+        <Route path="/sector" component={Sector}>
+          <IndexRoute component={SectorInfo} />
+          <Route path="system/:system" component={SystemInfo} />
+          <Route path="system/:system/planet/:planet" component={PlanetInfo} />
+        </Route>
+      </Route>
+    </Router>
+  </Provider>,
+  document.getElementById('root'),
+);
