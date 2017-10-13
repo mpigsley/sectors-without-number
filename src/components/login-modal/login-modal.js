@@ -11,6 +11,12 @@ import Input from 'primitives/form/input';
 
 import './style.css';
 
+const LOGIN_PAGE_TYPES = {
+  login: 'login',
+  signup: 'signup',
+  forget: 'forget',
+};
+
 export default class ConfirmModal extends Component {
   static propTypes = {
     isModalOpen: PropTypes.bool.isRequired,
@@ -20,6 +26,7 @@ export default class ConfirmModal extends Component {
     googleLogin: PropTypes.func.isRequired,
     signup: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired,
+    passwordReset: PropTypes.func.isRequired,
     email: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired,
     confirm: PropTypes.string.isRequired,
@@ -31,14 +38,16 @@ export default class ConfirmModal extends Component {
   };
 
   state = {
-    isLogin: true,
+    page: LOGIN_PAGE_TYPES.login,
   };
 
   onConfirm = () => {
-    if (this.state.isLogin) {
+    if (this.state.page === LOGIN_PAGE_TYPES.login) {
       this.props.login();
-    } else {
+    } else if (this.state.page === LOGIN_PAGE_TYPES.signup) {
       this.props.signup();
+    } else {
+      this.props.passwordReset();
     }
   };
 
@@ -46,7 +55,30 @@ export default class ConfirmModal extends Component {
     this.props.updateLoginForm(target.dataset.key, target.value);
   };
 
+  renderPassword() {
+    if (this.state.page === LOGIN_PAGE_TYPES.forget) {
+      return null;
+    }
+    return (
+      <div>
+        <Label htmlFor="password">Password</Label>
+        <Input
+          id="password"
+          name="password"
+          data-key="password"
+          type="password"
+          placeholder="Password"
+          value={this.props.password}
+          onChange={this.onEditText}
+        />
+      </div>
+    );
+  }
+
   renderPasswordConfirm() {
+    if (this.state.page !== LOGIN_PAGE_TYPES.signup) {
+      return null;
+    }
     return (
       <div>
         <Label htmlFor="confirm">Confirm Password</Label>
@@ -75,7 +107,13 @@ export default class ConfirmModal extends Component {
   }
 
   render() {
-    const actionText = this.state.isLogin ? 'Log in' : 'Sign up';
+    let actionText = 'Send Password Reset';
+    if (this.state.page === LOGIN_PAGE_TYPES.login) {
+      actionText = 'Log in';
+    } else if (this.state.page === LOGIN_PAGE_TYPES.signup) {
+      actionText = 'Sign up';
+    }
+
     return (
       <ReactModal
         contentLabel="Signup & Login"
@@ -91,7 +129,7 @@ export default class ConfirmModal extends Component {
           onClick={this.props.closeLoginModal}
           size={30}
         />
-        <FlexContainer justify="center" wrap>
+        <FlexContainer justify="center" align="center" direction="column">
           <Button
             className="LoginModal-Facebook"
             onClick={this.props.facebookLogin}
@@ -105,26 +143,42 @@ export default class ConfirmModal extends Component {
             Log In with Google
           </Button>
         </FlexContainer>
-        <div className="LoginModal-LineContainer">
-          <hr className="LoginModal-Line" />
-          <span className="LoginModal-Or">or </span>
-        </div>
+        <FlexContainer
+          className="LoginModal-LineContainer"
+          align="center"
+          justify="center"
+        >
+          <span className="LoginModal-Line" />
+          <span className="LoginModal-Or">or</span>
+          <span className="LoginModal-Line" />
+        </FlexContainer>
         <FlexContainer className="LoginModal-Switcher" justify="center">
           <button
-            onClick={() => this.setState({ isLogin: true })}
+            onClick={() => this.setState({ page: LOGIN_PAGE_TYPES.login })}
             className={classNames('LoginModal-SwitchButton', {
-              'LoginModal-SwitchButton--active': this.state.isLogin,
+              'LoginModal-SwitchButton--active':
+                this.state.page === LOGIN_PAGE_TYPES.login,
             })}
           >
             Log In
           </button>
           <button
-            onClick={() => this.setState({ isLogin: false })}
+            onClick={() => this.setState({ page: LOGIN_PAGE_TYPES.signup })}
             className={classNames('LoginModal-SwitchButton', {
-              'LoginModal-SwitchButton--active': !this.state.isLogin,
+              'LoginModal-SwitchButton--active':
+                this.state.page === LOGIN_PAGE_TYPES.signup,
             })}
           >
             Sign Up
+          </button>
+          <button
+            onClick={() => this.setState({ page: LOGIN_PAGE_TYPES.forget })}
+            className={classNames('LoginModal-SwitchButton', {
+              'LoginModal-SwitchButton--active':
+                this.state.page === LOGIN_PAGE_TYPES.forget,
+            })}
+          >
+            Forgot Password
           </button>
         </FlexContainer>
         <FlexContainer
@@ -143,17 +197,8 @@ export default class ConfirmModal extends Component {
             value={this.props.email}
             onChange={this.onEditText}
           />
-          <Label htmlFor="password">Password</Label>
-          <Input
-            id="password"
-            name="password"
-            data-key="password"
-            type="password"
-            placeholder="Password"
-            value={this.props.password}
-            onChange={this.onEditText}
-          />
-          {this.state.isLogin ? undefined : this.renderPasswordConfirm()}
+          {this.renderPassword()}
+          {this.renderPasswordConfirm()}
           {this.renderError()}
           <FlexContainer className="LoginModal-Submit" justify="center">
             <Button primary key="submit" onClick={this.onConfirm}>

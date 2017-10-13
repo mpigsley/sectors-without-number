@@ -24,3 +24,6 @@ export const doLogin = (email, password) =>
   FirebaseAuth().signInWithEmailAndPassword(email, password);
 
 export const doLogout = () => FirebaseAuth().signOut();
+
+export const doPasswordReset = email =>
+  FirebaseAuth().sendPasswordResetEmail(email);

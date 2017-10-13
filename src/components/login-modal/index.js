@@ -7,6 +7,7 @@ import {
   googleLogin,
   signup,
   login,
+  passwordReset,
 } from 'store/actions/user.actions';
 import LoginModal from './login-modal';
 
@@ -17,24 +18,13 @@ const mapStateToProps = ({ user }) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  facebookLogin: () => {
-    dispatch(facebookLogin());
-  },
-  googleLogin: () => {
-    dispatch(googleLogin());
-  },
-  signup: () => {
-    dispatch(signup());
-  },
-  login: () => {
-    dispatch(login());
-  },
-  closeLoginModal: () => {
-    dispatch(closeLoginModal());
-  },
-  updateLoginForm: (key, value) => {
-    dispatch(updateLoginForm(key, value));
-  },
+  facebookLogin: () => dispatch(facebookLogin()),
+  googleLogin: () => dispatch(googleLogin()),
+  signup: () => dispatch(signup()),
+  login: () => dispatch(login()),
+  closeLoginModal: () => dispatch(closeLoginModal()),
+  updateLoginForm: (key, value) => dispatch(updateLoginForm(key, value)),
+  passwordReset: () => dispatch(passwordReset()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);

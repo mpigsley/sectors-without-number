@@ -1,4 +1,11 @@
-import { doFacebookLogin, doGoogleLogin, doSignup, doLogin } from 'store/api';
+import { actions as ReduxToastrActions } from 'react-redux-toastr';
+import {
+  doFacebookLogin,
+  doGoogleLogin,
+  doSignup,
+  doLogin,
+  doPasswordReset,
+} from 'store/api';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
 export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
@@ -81,6 +88,32 @@ export function login() {
     return doLogin(user.form.email, user.form.password)
       .then(result => {
         dispatch({ type: LOGGED_IN, user: result.toJSON() });
+      })
+      .catch(error => {
+        dispatch({ type: AUTH_FAILURE, error: error.message });
+        console.error(error);
+      });
+  };
+}
+
+export function passwordReset() {
+  return (dispatch, getState) => {
+    const { user } = getState();
+    return doPasswordReset(user.form.email)
+      .then(() => {
+        dispatch(closeLoginModal());
+        dispatch(
+          ReduxToastrActions.add({
+            options: {
+              removeOnHover: true,
+              showCloseButton: true,
+            },
+            position: 'bottom-left',
+            title: 'Password Reset Sent',
+            message: 'You should be receiving an email soon.',
+            type: 'success',
+          }),
+        );
       })
       .catch(error => {
         dispatch({ type: AUTH_FAILURE, error: error.message });
