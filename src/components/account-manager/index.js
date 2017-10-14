@@ -6,6 +6,7 @@ import AccountManager from './account-manager';
 
 const mapStateToProps = state => ({
   user: state.user.model,
+  isFetching: state.user.isFetchingState,
 });
 
 const mapDispatchToProps = dispatch => ({

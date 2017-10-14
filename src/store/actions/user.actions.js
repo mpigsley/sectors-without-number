@@ -1,5 +1,6 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import {
+  getCurrentUser,
   doFacebookLogin,
   doGoogleLogin,
   doSignup,
@@ -13,6 +14,7 @@ export const UPDATE_LOGIN_FORM = 'UPDATE_LOGIN_FORM';
 
 export const LOGGED_IN = 'LOGGED_IN';
 export const SET_AUTH_USER = 'SET_AUTH_USER';
+export const USER_FETCH_COMPLETE = 'USER_FETCH_COMPLETE';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
 
 export const openLoginModal = () => ({ type: OPEN_LOGIN_MODAL });
@@ -23,6 +25,17 @@ export const updateLoginForm = (key, value) => ({
   key,
   value,
 });
+
+export function fetchUser() {
+  return dispatch =>
+    getCurrentUser().then(user => {
+      if (user) {
+        dispatch({ type: SET_AUTH_USER, user });
+      } else {
+        dispatch({ type: USER_FETCH_COMPLETE });
+      }
+    });
+}
 
 export function facebookLogin() {
   return dispatch =>

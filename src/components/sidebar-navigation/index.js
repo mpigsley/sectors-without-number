@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 
 import { saveSector } from 'store/actions/sector.actions';
-import { openLoginModal } from 'store/actions/user.actions';
 import SidebarNavigation, { SidebarType } from './sidebar-navigation';
 
 const mapStateToProps = ({ sector }) => ({
@@ -11,9 +10,6 @@ const mapStateToProps = ({ sector }) => ({
 const mapDispatchToProps = dispatch => ({
   saveSector() {
     dispatch(saveSector());
-  },
-  openLoginModal() {
-    dispatch(openLoginModal());
   },
 });
 

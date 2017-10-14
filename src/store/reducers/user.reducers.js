@@ -4,10 +4,12 @@ import {
   UPDATE_LOGIN_FORM,
   LOGGED_IN,
   SET_AUTH_USER,
+  USER_FETCH_COMPLETE,
   AUTH_FAILURE,
 } from 'store/actions/user.actions';
 
 const initialState = {
+  isFetchingState: true,
   isModalOpen: false,
   error: null,
   model: null,
@@ -45,7 +47,10 @@ export default function sector(incomingState, action) {
         ...state,
         model: action.user,
         isModalOpen: false,
+        isFetchingState: false,
       };
+    case USER_FETCH_COMPLETE:
+      return { ...state, isFetchingState: false };
     case AUTH_FAILURE:
       return {
         ...state,

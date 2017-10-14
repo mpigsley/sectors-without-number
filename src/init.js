@@ -2,9 +2,8 @@ import localForage from 'localforage';
 import Firebase from 'firebase';
 import Fastclick from 'react-fastclick';
 
-import { setAuthUser } from 'store/actions/user.actions';
+import { fetchUser } from 'store/actions/user.actions';
 import { setSavedSectors } from 'store/actions/sector.actions';
-import { getCurrentUser } from 'store/api';
 
 export default store => {
   new Promise((resolve, reject) => {
@@ -28,11 +27,7 @@ export default store => {
     messagingSenderId: '189524790637',
   });
 
-  getCurrentUser().then(user => {
-    if (user) {
-      store.dispatch(setAuthUser(user));
-    }
-  });
+  store.dispatch(fetchUser());
 
   Fastclick();
 };

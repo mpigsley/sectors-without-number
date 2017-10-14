@@ -5,11 +5,14 @@ import Button from 'primitives/other/button';
 
 import './style.css';
 
-export default function AccountManager({ openLoginModal, user }) {
+export default function AccountManager({ openLoginModal, isFetching, user }) {
+  if (isFetching) {
+    return null;
+  }
   if (user) {
     return (
       <Button className="AccountManager-Button" minimal>
-        Hello, {user.displayName || 'Traveller'}
+        {user.displayName || 'User Account'}
       </Button>
     );
   }
@@ -22,6 +25,7 @@ export default function AccountManager({ openLoginModal, user }) {
 
 AccountManager.propTypes = {
   openLoginModal: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
   user: PropTypes.shape({
     displayName: PropTypes.string,
   }),

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import System from 'components/system';
+import AccountManager from 'components/account-manager';
 import MovementVector, { MarkerDefs } from 'components/movement-vector';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
@@ -26,6 +27,7 @@ export default function HexMap({ height, width, viewbox, holdKey, hexes }) {
   }
   return (
     <div className="HexMap-Container">
+      <AccountManager />
       {emptyMessage}
       <svg
         className={classNames('HexMap-SVG', {

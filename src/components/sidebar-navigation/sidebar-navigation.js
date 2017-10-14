@@ -25,7 +25,6 @@ export default function SidebarNavigation({
   back,
   type,
   saveSector,
-  openLoginModal,
   onDelete,
   currentSector,
   onEdit,
@@ -105,9 +104,6 @@ export default function SidebarNavigation({
       <FlexContainer direction="column" flex="1" scroll>
         {children}
       </FlexContainer>
-      <button className="SidebarNavigation-Login" onClick={openLoginModal}>
-        Login to Sync Across Devices
-      </button>
       <div className="SidebarNavigation-Footer">
         <FlexContainer justify="center">
           <ButtonLink
@@ -141,7 +137,6 @@ SidebarNavigation.propTypes = {
   back: PropTypes.string,
   type: PropTypes.string,
   saveSector: PropTypes.func.isRequired,
-  openLoginModal: PropTypes.func.isRequired,
   currentSector: PropTypes.string,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
