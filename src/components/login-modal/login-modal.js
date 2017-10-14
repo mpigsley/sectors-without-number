@@ -75,6 +75,22 @@ export default class ConfirmModal extends Component {
     );
   }
 
+  renderForgotPassword() {
+    if (this.state.page !== LOGIN_PAGE_TYPES.login) {
+      return null;
+    }
+    return (
+      <div className="LoginModal-Forgot">
+        <Button
+          minimal
+          onClick={() => this.setState({ page: LOGIN_PAGE_TYPES.forget })}
+        >
+          Forgot Password?
+        </Button>
+      </div>
+    );
+  }
+
   renderPasswordConfirm() {
     if (this.state.page !== LOGIN_PAGE_TYPES.signup) {
       return null;
@@ -171,15 +187,6 @@ export default class ConfirmModal extends Component {
           >
             Sign Up
           </button>
-          <button
-            onClick={() => this.setState({ page: LOGIN_PAGE_TYPES.forget })}
-            className={classNames('LoginModal-SwitchButton', {
-              'LoginModal-SwitchButton--active':
-                this.state.page === LOGIN_PAGE_TYPES.forget,
-            })}
-          >
-            Forgot Password
-          </button>
         </FlexContainer>
         <FlexContainer
           className="LoginModal-FormContainer"
@@ -198,6 +205,7 @@ export default class ConfirmModal extends Component {
             onChange={this.onEditText}
           />
           {this.renderPassword()}
+          {this.renderForgotPassword()}
           {this.renderPasswordConfirm()}
           {this.renderError()}
           <FlexContainer className="LoginModal-Submit" justify="center">
