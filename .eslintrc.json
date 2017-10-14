@@ -15,6 +15,7 @@
       }
     ],
     "jsx-a11y/no-noninteractive-element-interactions": "off",
+    "jsx-a11y/no-static-element-interactions": "off",
     "react/jsx-filename-extension": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "off",

@@ -3,13 +3,16 @@ import {
   CLOSE_LOGIN_MODAL,
   UPDATE_LOGIN_FORM,
   LOGGED_IN,
+  LOGGED_OUT,
   SET_AUTH_USER,
   USER_FETCH_COMPLETE,
   AUTH_FAILURE,
+  TOGGLE_USER_DROPDOWN,
 } from 'store/actions/user.actions';
 
 const initialState = {
   isFetchingState: true,
+  isDropdownActive: false,
   isModalOpen: false,
   error: null,
   model: null,
@@ -42,6 +45,13 @@ export default function sector(incomingState, action) {
         model: action.user,
         isModalOpen: false,
       };
+    case LOGGED_OUT:
+      return {
+        ...state,
+        model: null,
+        isModalOpen: false,
+        isDropdownActive: false,
+      };
     case SET_AUTH_USER:
       return {
         ...state,
@@ -51,6 +61,8 @@ export default function sector(incomingState, action) {
       };
     case USER_FETCH_COMPLETE:
       return { ...state, isFetchingState: false };
+    case TOGGLE_USER_DROPDOWN:
+      return { ...state, isDropdownActive: !state.isDropdownActive };
     case AUTH_FAILURE:
       return {
         ...state,

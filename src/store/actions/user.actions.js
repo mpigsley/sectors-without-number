@@ -6,6 +6,7 @@ import {
   doSignup,
   doLogin,
   doPasswordReset,
+  doLogout,
 } from 'store/api';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
@@ -13,13 +14,16 @@ export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
 export const UPDATE_LOGIN_FORM = 'UPDATE_LOGIN_FORM';
 
 export const LOGGED_IN = 'LOGGED_IN';
+export const LOGGED_OUT = 'LOGGED_OUT';
 export const SET_AUTH_USER = 'SET_AUTH_USER';
 export const USER_FETCH_COMPLETE = 'USER_FETCH_COMPLETE';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
+export const TOGGLE_USER_DROPDOWN = 'TOGGLE_USER_DROPDOWN';
 
 export const openLoginModal = () => ({ type: OPEN_LOGIN_MODAL });
 export const closeLoginModal = () => ({ type: CLOSE_LOGIN_MODAL });
 export const setAuthUser = user => ({ type: SET_AUTH_USER, user });
+export const toggleDropdown = () => ({ type: TOGGLE_USER_DROPDOWN });
 export const updateLoginForm = (key, value) => ({
   type: UPDATE_LOGIN_FORM,
   key,
@@ -133,4 +137,11 @@ export function passwordReset() {
         console.error(error);
       });
   };
+}
+
+export function logout() {
+  return dispatch =>
+    doLogout().then(() => {
+      dispatch({ type: LOGGED_OUT });
+    });
 }
