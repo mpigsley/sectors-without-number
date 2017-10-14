@@ -7,7 +7,6 @@ import { Settings, Zap, Download, Delete, X, Edit3 } from 'react-feather';
 import { stringSortByKey } from 'utils/common';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
-import AbsoluteContainer from 'primitives/container/absolute-container';
 import FlexContainer from 'primitives/container/flex-container';
 import SubContainer from 'primitives/container/sub-container';
 import LinkIcon from 'primitives/other/link-icon';
@@ -20,7 +19,10 @@ export default class Home extends Component {
   static propTypes = {
     saved: PropTypes.shape().isRequired,
     deleteSector: PropTypes.func.isRequired,
-    openLoginModal: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    user: null,
   };
 
   constructor(props) {
@@ -156,25 +158,20 @@ export default class Home extends Component {
 
   render() {
     return (
-      <AbsoluteContainer>
-        <Button className="Home-Login" onClick={this.props.openLoginModal}>
-          Log In
-        </Button>
-        <ContentContainer direction="column" align="center" justify="center">
-          <Header type={HeaderType.header1}>Sectors Without Number</Header>
-          <SubContainer fullWidth justify="center" align="center">
-            <div className="Home-RowContainer">
-              <div className="Home-Row Home-Row--left" />
-            </div>
-            <Header type={HeaderType.header2}>Sector Generator</Header>
-            <div className="Home-RowContainer">
-              <div className="Home-Row" />
-            </div>
-          </SubContainer>
-          {this.renderSaved()}
-          {this.renderActions()}
-        </ContentContainer>
-      </AbsoluteContainer>
+      <ContentContainer direction="column" align="center" justify="center">
+        <Header type={HeaderType.header1}>Sectors Without Number</Header>
+        <SubContainer fullWidth justify="center" align="center">
+          <div className="Home-RowContainer">
+            <div className="Home-Row Home-Row--left" />
+          </div>
+          <Header type={HeaderType.header2}>Sector Generator</Header>
+          <div className="Home-RowContainer">
+            <div className="Home-Row" />
+          </div>
+        </SubContainer>
+        {this.renderSaved()}
+        {this.renderActions()}
+      </ContentContainer>
     );
   }
 }

@@ -80,6 +80,7 @@ export default class Sector extends Component {
       <div>
         <FlexContainer className="Sector" direction="row">
           {this.renderTooltips(hexes)}
+          {this.render}
           <HexMap
             width={this.state.width}
             height={this.state.height}

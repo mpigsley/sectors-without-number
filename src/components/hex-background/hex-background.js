@@ -5,6 +5,8 @@ import { throttle } from 'lodash';
 import hexGenerator from 'utils/hex-generator';
 
 import HexMap from 'components/hex-map';
+import AccountManager from 'components/account-manager';
+import AbsoluteContainer from 'primitives/container/absolute-container';
 
 export default class HexBackground extends Component {
   static propTypes = {
@@ -51,7 +53,10 @@ export default class HexBackground extends Component {
           height={this.state.height}
           hexes={hexes}
         />
-        {this.props.children}
+        <AbsoluteContainer>
+          <AccountManager />
+          {this.props.children}
+        </AbsoluteContainer>
       </div>
     );
   }

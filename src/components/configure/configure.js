@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { Zap, Edit3 } from 'react-feather';
+import { Zap, Edit3, ChevronLeft } from 'react-feather';
 import Chance from 'chance';
 
 import Header, { HeaderType } from 'primitives/text/header';
-import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
 import Input from 'primitives/form/input';
@@ -44,90 +43,92 @@ export default class Configure extends Component {
       ) : null;
 
     return (
-      <AbsoluteContainer>
-        <ContentContainer direction="column" align="center" justify="center">
-          <Header type={HeaderType.header2}>Configure</Header>
-          <SubContainer noMargin direction="column" align="flexStart">
-            {invalidText}
-            <Label noPadding htmlFor="seed">
-              Seed
-            </Label>
-            <Input
-              data-key="seed"
-              onChange={this.updateInput}
-              name="seed"
-              type="text"
-              value={this.state.seed}
-            />
-            <SubContainer noMargin>
-              <SubContainer
-                className="Configure-ButtonContainer"
-                noMargin
-                direction="column"
-                align="flexStart"
-              >
-                <Label htmlFor="rows">Rows</Label>
-                <Input
-                  data-key="rows"
-                  onChange={this.updateInput}
-                  name="rows"
-                  type="number"
-                  value={this.state.rows || ''}
-                />
-              </SubContainer>
-              <SubContainer
-                className="Configure-ButtonContainer"
-                noMargin
-                direction="column"
-                align="flexStart"
-              >
-                <Label htmlFor="columns">Columns</Label>
-                <Input
-                  data-key="columns"
-                  onChange={this.updateInput}
-                  name="columns"
-                  type="number"
-                  value={this.state.columns || ''}
-                />
-              </SubContainer>
+      <ContentContainer direction="column" align="center" justify="center">
+        <Header type={HeaderType.header2}>Configure</Header>
+        <SubContainer noMargin direction="column" align="flexStart">
+          {invalidText}
+          <Label noPadding htmlFor="seed">
+            Seed
+          </Label>
+          <Input
+            data-key="seed"
+            onChange={this.updateInput}
+            name="seed"
+            type="text"
+            value={this.state.seed}
+          />
+          <SubContainer noMargin>
+            <SubContainer
+              className="Configure-ButtonContainer"
+              noMargin
+              direction="column"
+              align="flexStart"
+            >
+              <Label htmlFor="rows">Rows</Label>
+              <Input
+                data-key="rows"
+                onChange={this.updateInput}
+                name="rows"
+                type="number"
+                value={this.state.rows || ''}
+              />
+            </SubContainer>
+            <SubContainer
+              className="Configure-ButtonContainer"
+              noMargin
+              direction="column"
+              align="flexStart"
+            >
+              <Label htmlFor="columns">Columns</Label>
+              <Input
+                data-key="columns"
+                onChange={this.updateInput}
+                name="columns"
+                type="number"
+                value={this.state.columns || ''}
+              />
             </SubContainer>
           </SubContainer>
-          <SubContainer
-            className="Configure-PaddedButtons"
-            wrap
-            justify="center"
-            align="center"
+        </SubContainer>
+        <SubContainer
+          className="Configure-PaddedButtons"
+          wrap
+          justify="center"
+          align="center"
+        >
+          <ButtonLink to="/">
+            <LinkIcon icon={ChevronLeft} size="20" />
+            Back
+          </ButtonLink>
+          <ButtonLink
+            to={{
+              pathname: '/sector',
+              query: {
+                s: this.state.seed,
+                c: this.state.columns,
+                r: this.state.rows,
+              },
+            }}
           >
-            <ButtonLink
-              to={{
-                pathname: '/sector',
-                query: {
-                  s: this.state.seed,
-                  c: this.state.columns,
-                  r: this.state.rows,
-                },
-              }}
-            >
-              <LinkIcon icon={Zap} size="20" />
-              Generate
-            </ButtonLink>
-            <ButtonLink
-              to={{
-                pathname: '/sector',
-                query: {
-                  s: this.state.seed,
-                  c: this.state.columns,
-                  r: this.state.rows,
-                  b: true,
-                },
-              }}
-            >
-              <LinkIcon icon={Edit3} size="20" />
-              Builder
-            </ButtonLink>
-          </SubContainer>
-        </ContentContainer>
-      </AbsoluteContainer>
+            <LinkIcon icon={Zap} size="20" />
+            Generate
+          </ButtonLink>
+          <ButtonLink
+            to={{
+              pathname: '/sector',
+              query: {
+                s: this.state.seed,
+                c: this.state.columns,
+                r: this.state.rows,
+                b: true,
+              },
+            }}
+          >
+            <LinkIcon icon={Edit3} size="20" />
+            Builder
+          </ButtonLink>
+        </SubContainer>
+      </ContentContainer>
     );
   }
 }
