@@ -28,8 +28,7 @@ const initialState = {
   },
 };
 
-export default function sector(incomingState, action) {
-  const state = { ...initialState, ...incomingState };
+export default function sector(state = initialState, action) {
   switch (action.type) {
     case OPEN_LOGIN_MODAL:
       return { ...state, isLoginModalOpen: true };
