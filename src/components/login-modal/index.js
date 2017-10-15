@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import {
   closeLoginModal,
-  updateLoginForm,
+  updateUserForm,
   facebookLogin,
   googleLogin,
   signup,
@@ -13,7 +13,7 @@ import LoginModal from './login-modal';
 
 const mapStateToProps = ({ user }) => ({
   ...user.form,
-  isModalOpen: user.isModalOpen,
+  isLoginModalOpen: user.isLoginModalOpen,
   error: user.error,
 });
 
@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
   signup: () => dispatch(signup()),
   login: () => dispatch(login()),
   closeLoginModal: () => dispatch(closeLoginModal()),
-  updateLoginForm: (key, value) => dispatch(updateLoginForm(key, value)),
+  updateUserForm: (key, value) => dispatch(updateUserForm(key, value)),
   passwordReset: () => dispatch(passwordReset()),
 });
 

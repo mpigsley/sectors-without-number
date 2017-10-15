@@ -7,6 +7,9 @@ export const getCurrentUser = () =>
     });
   });
 
+export const updateCurrentUser = ({ displayName }) =>
+  FirebaseAuth().currentUser.updateProfile({ displayName });
+
 export const doFacebookLogin = () => {
   const provider = new FirebaseAuth.FacebookAuthProvider();
   return FirebaseAuth().signInWithPopup(provider);

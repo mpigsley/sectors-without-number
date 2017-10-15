@@ -1,7 +1,10 @@
 import {
   OPEN_LOGIN_MODAL,
   CLOSE_LOGIN_MODAL,
-  UPDATE_LOGIN_FORM,
+  OPEN_EDIT_MODAL,
+  CLOSE_EDIT_MODAL,
+  UPDATE_USER_FORM,
+  UPDATE_USER,
   LOGGED_IN,
   LOGGED_OUT,
   SET_AUTH_USER,
@@ -13,13 +16,15 @@ import {
 const initialState = {
   isFetchingState: true,
   isDropdownActive: false,
-  isModalOpen: false,
+  isLoginModalOpen: false,
+  isEditModalOpen: false,
   error: null,
   model: null,
   form: {
     email: '',
     password: '',
     confirm: '',
+    displayName: '',
   },
 };
 
@@ -27,10 +32,14 @@ export default function sector(incomingState, action) {
   const state = { ...initialState, ...incomingState };
   switch (action.type) {
     case OPEN_LOGIN_MODAL:
-      return { ...state, isModalOpen: true };
+      return { ...state, isLoginModalOpen: true };
     case CLOSE_LOGIN_MODAL:
-      return { ...state, isModalOpen: false, error: null };
-    case UPDATE_LOGIN_FORM:
+      return { ...state, isLoginModalOpen: false, error: null };
+    case OPEN_EDIT_MODAL:
+      return { ...state, isEditModalOpen: true, isDropdownActive: false };
+    case CLOSE_EDIT_MODAL:
+      return { ...state, isEditModalOpen: false, error: null };
+    case UPDATE_USER_FORM:
       return {
         ...state,
         error: null,
@@ -39,25 +48,38 @@ export default function sector(incomingState, action) {
           [action.key]: action.value,
         },
       };
+    case UPDATE_USER:
+      return {
+        ...state,
+        isEditModalOpen: false,
+        model: {
+          ...state.model,
+          ...action.user,
+        },
+      };
     case LOGGED_IN:
       return {
         ...state,
         model: action.user,
-        isModalOpen: false,
+        isLoginModalOpen: false,
       };
     case LOGGED_OUT:
       return {
         ...state,
         model: null,
-        isModalOpen: false,
+        isLoginModalOpen: false,
         isDropdownActive: false,
       };
     case SET_AUTH_USER:
       return {
         ...state,
         model: action.user,
-        isModalOpen: false,
+        isLoginModalOpen: false,
         isFetchingState: false,
+        form: {
+          ...state.form,
+          displayName: action.user.displayName,
+        },
       };
     case USER_FETCH_COMPLETE:
       return { ...state, isFetchingState: false };

@@ -19,9 +19,9 @@ const LOGIN_PAGE_TYPES = {
 
 export default class ConfirmModal extends Component {
   static propTypes = {
-    isModalOpen: PropTypes.bool.isRequired,
+    isLoginModalOpen: PropTypes.bool.isRequired,
     closeLoginModal: PropTypes.func.isRequired,
-    updateLoginForm: PropTypes.func.isRequired,
+    updateUserForm: PropTypes.func.isRequired,
     facebookLogin: PropTypes.func.isRequired,
     googleLogin: PropTypes.func.isRequired,
     signup: PropTypes.func.isRequired,
@@ -52,7 +52,7 @@ export default class ConfirmModal extends Component {
   };
 
   onEditText = ({ target }) => {
-    this.props.updateLoginForm(target.dataset.key, target.value);
+    this.props.updateUserForm(target.dataset.key, target.value);
   };
 
   renderPassword() {
@@ -133,7 +133,7 @@ export default class ConfirmModal extends Component {
     return (
       <ReactModal
         contentLabel="Signup & Login"
-        isOpen={this.props.isModalOpen}
+        isOpen={this.props.isLoginModalOpen}
         onCancel={this.props.closeLoginModal}
         className="LoginModal"
         overlayClassName={{
