@@ -13,12 +13,6 @@ export default class HexBackground extends Component {
     children: PropTypes.node.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.onResize = this.onResize.bind(this);
-  }
-
   state = {
     height: window.innerHeight,
     width: window.innerWidth,

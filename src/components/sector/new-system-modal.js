@@ -18,8 +18,13 @@ export default class NewSystemModal extends Component {
     isOpen: PropTypes.bool.isRequired,
     onCreateSystem: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
+    x: PropTypes.number,
+    y: PropTypes.number,
+  };
+
+  static defaultProps = {
+    x: 0,
+    y: 0,
   };
 
   constructor(props) {
@@ -34,6 +39,14 @@ export default class NewSystemModal extends Component {
     name: generateName(new Chance()),
     numPlanets: new Chance().weighted([1, 2, 3], [5, 3, 2]),
   };
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isOpen && !this.props.isOpen) {
+      this.setState({
+        name: generateName(new Chance()),
+      });
+    }
+  }
 
   onRandomizeName() {
     this.setState({ name: generateName(new Chance()) });

@@ -13,6 +13,12 @@ export const SYSTEM_HOVER_END = 'SYSTEM_HOVER_END';
 export const EDIT_SYSTEM = 'EDIT_SYSTEM';
 export const DELETE_SYSTEM = 'DELETE_SYSTEM';
 
+export const OPEN_SYSTEM_CREATE = 'OPEN_SYSTEM_CREATE';
+export const CLOSE_SYSTEM_CREATE = 'CLOSE_SYSTEM_CREATE';
+
+export const openSystemCreate = key => ({ type: OPEN_SYSTEM_CREATE, key });
+export const closeSystemCreate = () => ({ type: CLOSE_SYSTEM_CREATE });
+
 export function editSystem(system, changes) {
   return (dispatch, getState) => {
     const state = getState();

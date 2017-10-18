@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { throttle } from 'lodash';
 
-import hexGenerator from 'utils/hex-generator';
-
+import FlexContainer from 'primitives/container/flex-container';
 import SectorSidebar from 'components/sector-sidebar';
 import SystemTooltips from 'components/system-tooltips';
 import PrintableSector from 'components/printable-sector';
-import FlexContainer from 'primitives/container/flex-container';
 import HexMap from 'components/hex-map';
+
+import hexGenerator from 'utils/hex-generator';
+import { coordinatesFromKey } from 'utils/common';
+import NewSystemModal from './new-system-modal';
 
 import './style.css';
 
@@ -21,6 +23,13 @@ export default class Sector extends Component {
       columns: PropTypes.number.isRequired,
       systems: PropTypes.shape().isRequired,
     }).isRequired,
+    createSystemKey: PropTypes.string,
+    editSystem: PropTypes.func.isRequired,
+    closeSystemCreate: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    createSystemKey: null,
   };
 
   constructor(props) {
@@ -88,6 +97,14 @@ export default class Sector extends Component {
           <SectorSidebar>{this.props.children}</SectorSidebar>
         </FlexContainer>
         <PrintableSector printable={printable} />
+        <NewSystemModal
+          {...coordinatesFromKey(this.props.createSystemKey)}
+          isOpen={!!this.props.createSystemKey}
+          onClose={this.props.closeSystemCreate}
+          onCreateSystem={system => {
+            this.props.editSystem(system.key, system);
+          }}
+        />
       </div>
     );
   }
