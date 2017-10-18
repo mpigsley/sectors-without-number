@@ -1,10 +1,11 @@
-@import "styles/theme";
+@import 'styles/theme';
 
 .SystemTooltips-Tooltip {
   pointer-events: none;
   position: fixed;
   opacity: 0;
   transition: opacity 0.5s;
+  z-index: 1;
 
   &--hovered {
     opacity: 1;
@@ -19,7 +20,7 @@
   z-index: 1;
 
   &:after {
-    content: " ";
+    content: ' ';
     position: absolute;
     top: 100%;
     left: 50%;
