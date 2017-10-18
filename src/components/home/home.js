@@ -25,36 +25,28 @@ export default class Home extends Component {
     user: null,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.setSelected = this.setSelected.bind(this);
-    this.onCancel = this.onCancel.bind(this);
-    this.onDelete = this.onDelete.bind(this);
-  }
-
   state = {
     selected: null,
   };
 
-  onDelete() {
+  onDelete = e => {
+    e.stopPropagation();
     const toDelete = this.state.selected;
     this.setState({ selected: null }, () => {
       this.props.deleteSector(toDelete);
     });
-  }
+  };
 
-  onCancel() {
+  onCancel = () => {
     this.setState({ selected: null });
-  }
+  };
 
-  setSelected(selected) {
-    return () => {
-      this.setState({
-        selected: selected === this.state.selected ? null : selected,
-      });
-    };
-  }
+  setSelected = selected => e => {
+    e.stopPropagation();
+    this.setState({
+      selected: selected === this.state.selected ? null : selected,
+    });
+  };
 
   renderSaved() {
     if (Object.keys(this.props.saved).length === 0) {
@@ -158,7 +150,12 @@ export default class Home extends Component {
 
   render() {
     return (
-      <ContentContainer direction="column" align="center" justify="center">
+      <ContentContainer
+        direction="column"
+        align="center"
+        justify="center"
+        onClick={this.onCancel}
+      >
         <Header type={HeaderType.header1}>Sectors Without Number</Header>
         <SubContainer fullWidth justify="center" align="center">
           <div className="Home-RowContainer">
