@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
-import { ChevronLeft, Sun, Globe, Map } from 'react-feather';
+import { ChevronLeft, Sun, Globe, Map, Home } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -69,12 +69,24 @@ export default function SidebarNavigation({
     typeIcon = <Globe className={nonLinkCss} size={iconSize} />;
   }
 
+  let backIcon = (
+    <ChevronLeft className="SidebarNavigation-Icon SidebarNavigation-Icon--link" />
+  );
+  if (type === SidebarType.sector) {
+    backIcon = (
+      <Home
+        size={20}
+        className="SidebarNavigation-Icon SidebarNavigation-Icon--link"
+      />
+    );
+  }
+
   return (
     <FlexContainer className="SidebarNavigation-Info" direction="column">
       <div className="SidebarNavigation-Header">
         <FlexContainer align="center" shrink="0">
           <Link to={back || '/'} className="SidebarNavigation-Link">
-            <ChevronLeft className="SidebarNavigation-Icon SidebarNavigation-Icon--link" />
+            {backIcon}
           </Link>
           <FlexContainer flex="1" justify="center">
             <Header type={HeaderType.header2}>{name}</Header>
