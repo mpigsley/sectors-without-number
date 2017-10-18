@@ -11,6 +11,8 @@ import AbsoluteContainer from 'primitives/container/absolute-container';
 export default class HexBackground extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
+    closeUserDropdown: PropTypes.func.isRequired,
+    isDropdownActive: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -41,7 +43,9 @@ export default class HexBackground extends Component {
     });
 
     return (
-      <div>
+      <div
+        onClick={this.props.isDropdownActive && this.props.closeUserDropdown}
+      >
         <HexMap
           width={this.state.width}
           height={this.state.height}

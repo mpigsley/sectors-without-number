@@ -10,7 +10,8 @@ import {
   SET_AUTH_USER,
   USER_FETCH_COMPLETE,
   AUTH_FAILURE,
-  TOGGLE_USER_DROPDOWN,
+  OPEN_USER_DROPDOWN,
+  CLOSE_USER_DROPDOWN,
 } from 'store/actions/user.actions';
 
 const initialState = {
@@ -82,8 +83,10 @@ export default function sector(state = initialState, action) {
       };
     case USER_FETCH_COMPLETE:
       return { ...state, isFetchingState: false };
-    case TOGGLE_USER_DROPDOWN:
-      return { ...state, isDropdownActive: !state.isDropdownActive };
+    case OPEN_USER_DROPDOWN:
+      return { ...state, isDropdownActive: true };
+    case CLOSE_USER_DROPDOWN:
+      return { ...state, isDropdownActive: false };
     case AUTH_FAILURE:
       return {
         ...state,

@@ -6,7 +6,8 @@ import {
   openEditModal,
   closeEditModal,
   openLoginModal,
-  toggleDropdown,
+  openUserDropdown,
+  closeUserDropdown,
   logout,
 } from 'store/actions/user.actions';
 
@@ -14,7 +15,7 @@ import AccountManager from './account-manager';
 
 const mapStateToProps = state => ({
   user: state.user.model,
-  isActive: state.user.isDropdownActive,
+  isDropdownActive: state.user.isDropdownActive,
   isFetching: state.user.isFetchingState,
   displayName: state.user.form.displayName,
   isEditModalOpen: state.user.isEditModalOpen,
@@ -26,7 +27,8 @@ const mapDispatchToProps = dispatch => ({
   openEditModal: () => dispatch(openEditModal()),
   closeEditModal: () => dispatch(closeEditModal()),
   openLoginModal: () => dispatch(openLoginModal()),
-  toggleDropdown: () => dispatch(toggleDropdown()),
+  openUserDropdown: () => dispatch(openUserDropdown()),
+  closeUserDropdown: () => dispatch(closeUserDropdown()),
   logout: () => dispatch(logout()),
 });
 

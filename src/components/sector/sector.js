@@ -26,6 +26,8 @@ export default class Sector extends Component {
     createSystemKey: PropTypes.string,
     editSystem: PropTypes.func.isRequired,
     closeSystemCreate: PropTypes.func.isRequired,
+    closeUserDropdown: PropTypes.func.isRequired,
+    isDropdownActive: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -86,7 +88,9 @@ export default class Sector extends Component {
     });
 
     return (
-      <div>
+      <div
+        onClick={this.props.isDropdownActive && this.props.closeUserDropdown}
+      >
         <FlexContainer className="Sector" direction="row">
           {this.renderTooltips(hexes)}
           <HexMap

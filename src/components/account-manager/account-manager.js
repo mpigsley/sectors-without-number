@@ -13,13 +13,14 @@ export default function AccountManager({
   openEditModal,
   closeEditModal,
   openLoginModal,
-  toggleDropdown,
+  openUserDropdown,
+  closeUserDropdown,
   updateUserForm,
   updateUser,
   logout,
   isEditModalOpen,
   isFetching,
-  isActive,
+  isDropdownActive,
   displayName,
   user,
 }) {
@@ -39,12 +40,16 @@ export default function AccountManager({
     func();
   };
 
+  const toggleDropdown = isDropdownActive
+    ? closeUserDropdown
+    : openUserDropdown;
+
   return (
     <div className="AccountManager-Button">
       <Button
-        onClick={toggleDropdown}
+        onClick={onActionClick(toggleDropdown)}
         className={classNames('AccountManager-Dropdown', {
-          'AccountManager-Dropdown--active': isActive,
+          'AccountManager-Dropdown--active': isDropdownActive,
         })}
         minimal
       >
@@ -90,13 +95,14 @@ AccountManager.propTypes = {
   openEditModal: PropTypes.func.isRequired,
   closeEditModal: PropTypes.func.isRequired,
   openLoginModal: PropTypes.func.isRequired,
-  toggleDropdown: PropTypes.func.isRequired,
+  openUserDropdown: PropTypes.func.isRequired,
+  closeUserDropdown: PropTypes.func.isRequired,
   updateUserForm: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   isEditModalOpen: PropTypes.bool.isRequired,
   isFetching: PropTypes.bool.isRequired,
-  isActive: PropTypes.bool.isRequired,
+  isDropdownActive: PropTypes.bool.isRequired,
   displayName: PropTypes.string,
   user: PropTypes.shape({
     displayName: PropTypes.string,
