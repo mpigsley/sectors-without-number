@@ -1,5 +1,6 @@
 import Firebase from 'firebase';
 import Fastclick from 'react-fastclick';
+import 'firebase/firestore';
 
 import { getSectors } from 'store/api/local';
 import { fetchUser } from 'store/actions/user.actions';

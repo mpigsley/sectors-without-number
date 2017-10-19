@@ -93,10 +93,6 @@ export class System {
     name: this.name,
     planets: this.planets,
     key: this.key,
-    location: {
-      x: this.x,
-      y: this.y,
-    },
   });
 
   isRowValid(num) {

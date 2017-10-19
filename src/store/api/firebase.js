@@ -1,4 +1,4 @@
-import { auth as FirebaseAuth } from 'firebase';
+import { auth as FirebaseAuth, firestore as Firestore } from 'firebase';
 
 export const getCurrentUser = () =>
   new Promise(resolve => {
@@ -30,3 +30,11 @@ export const doLogout = () => FirebaseAuth().signOut();
 
 export const doPasswordReset = email =>
   FirebaseAuth().sendPasswordResetEmail(email);
+
+export const uploadSector = sector => {
+  const db = Firestore();
+  return db
+    .collection('sectors')
+    .add(sector)
+    .then(docRef => ({ id: docRef.id, sector }));
+};

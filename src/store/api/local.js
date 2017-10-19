@@ -15,3 +15,5 @@ export const createOrUpdateSector = (key, sector) =>
   localForage.setItem(key, sector);
 
 export const removeSector = key => localForage.removeItem(key);
+
+export const clearLocalDatabase = () => localForage.clear();
