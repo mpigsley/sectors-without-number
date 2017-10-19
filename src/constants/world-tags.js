@@ -1821,7 +1821,7 @@ export default {
       'the alien ruin defense systems are waking up',
       'atmospheric disturbances trap the group inside the outpost for a month',
       'pirates raid the outpost',
-      'the crew have become cnverts to a strange set of beliefs',
+      'the crew have become converts to a strange set of beliefs',
     ],
     things: [
       'alien relics',
