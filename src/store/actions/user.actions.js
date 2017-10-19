@@ -8,7 +8,7 @@ import {
   doLogin,
   doPasswordReset,
   doLogout,
-} from 'store/api';
+} from 'store/api/firebase';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
 export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
@@ -38,135 +38,119 @@ export const updateUserForm = (key, value) => ({
   value,
 });
 
-export function fetchUser() {
-  return dispatch =>
-    getCurrentUser().then(user => {
-      if (user) {
-        dispatch({ type: SET_AUTH_USER, user });
-      } else {
-        dispatch({ type: USER_FETCH_COMPLETE });
-      }
-    });
-}
-
-export function updateUser() {
-  return (dispatch, getState) => {
-    const state = getState();
-    return updateCurrentUser({ displayName: state.user.form.displayName })
-      .then(() => {
-        dispatch({
-          type: UPDATE_USER,
-          user: { displayName: state.user.form.displayName },
-        });
-      })
-      .catch(error => {
-        dispatch({ type: AUTH_FAILURE });
-        console.error(error);
-      });
-  };
-}
-
-export function facebookLogin() {
-  return dispatch =>
-    doFacebookLogin()
-      .then(result => {
-        dispatch({ type: LOGGED_IN, user: result.user.toJSON() });
-      })
-      .catch(error => {
-        dispatch({ type: AUTH_FAILURE });
-        console.error(error);
-      });
-}
-
-export function googleLogin() {
-  return dispatch =>
-    doGoogleLogin()
-      .then(result => {
-        dispatch({ type: LOGGED_IN, user: result.user.toJSON() });
-      })
-      .catch(error => {
-        dispatch({ type: AUTH_FAILURE, error: error.message });
-        console.error(error);
-      });
-}
-
-export function signup() {
-  return (dispatch, getState) => {
-    const { user } = getState();
-    const { email, password, confirm } = user.form;
-    if (!email || !password || !confirm) {
-      return dispatch({
-        type: AUTH_FAILURE,
-        error: 'Email and password are required.',
-      });
-    } else if (password !== confirm) {
-      return dispatch({
-        type: AUTH_FAILURE,
-        error: 'Passwords do not match.',
-      });
+export const fetchUser = () => dispatch =>
+  getCurrentUser().then(user => {
+    if (user) {
+      dispatch({ type: SET_AUTH_USER, user });
+    } else {
+      dispatch({ type: USER_FETCH_COMPLETE });
     }
-    return doSignup(user.form.email, user.form.password)
-      .then(result => {
-        result.sendEmailVerification();
-        dispatch({ type: LOGGED_IN, user: result.toJSON() });
-      })
-      .catch(error => {
-        dispatch({ type: AUTH_FAILURE });
-        console.error(error);
-      });
-  };
-}
+  });
 
-export function login() {
-  return (dispatch, getState) => {
-    const { user } = getState();
-    const { email, password } = user.form;
-    if (!email || !password) {
-      return dispatch({
-        type: AUTH_FAILURE,
-        error: 'Email and password are required.',
+export const updateUser = () => (dispatch, getState) => {
+  const state = getState();
+  return updateCurrentUser({ displayName: state.user.form.displayName })
+    .then(() => {
+      dispatch({
+        type: UPDATE_USER,
+        user: { displayName: state.user.form.displayName },
       });
-    }
-    return doLogin(user.form.email, user.form.password)
-      .then(result => {
-        dispatch({ type: LOGGED_IN, user: result.toJSON() });
-      })
-      .catch(error => {
-        dispatch({ type: AUTH_FAILURE, error: error.message });
-        console.error(error);
-      });
-  };
-}
-
-export function passwordReset() {
-  return (dispatch, getState) => {
-    const { user } = getState();
-    return doPasswordReset(user.form.email)
-      .then(() => {
-        dispatch(closeLoginModal());
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'Password Reset Sent',
-            message: 'You should be receiving an email soon.',
-            type: 'success',
-          }),
-        );
-      })
-      .catch(error => {
-        dispatch({ type: AUTH_FAILURE, error: error.message });
-        console.error(error);
-      });
-  };
-}
-
-export function logout() {
-  return dispatch =>
-    doLogout().then(() => {
-      dispatch({ type: LOGGED_OUT });
+    })
+    .catch(error => {
+      dispatch({ type: AUTH_FAILURE });
+      console.error(error);
     });
-}
+};
+
+export const facebookLogin = () => dispatch =>
+  doFacebookLogin()
+    .then(result => {
+      dispatch({ type: LOGGED_IN, user: result.user.toJSON() });
+    })
+    .catch(error => {
+      dispatch({ type: AUTH_FAILURE });
+      console.error(error);
+    });
+
+export const googleLogin = () => dispatch =>
+  doGoogleLogin()
+    .then(result => {
+      dispatch({ type: LOGGED_IN, user: result.user.toJSON() });
+    })
+    .catch(error => {
+      dispatch({ type: AUTH_FAILURE, error: error.message });
+      console.error(error);
+    });
+
+export const signup = () => (dispatch, getState) => {
+  const { user } = getState();
+  const { email, password, confirm } = user.form;
+  if (!email || !password || !confirm) {
+    return dispatch({
+      type: AUTH_FAILURE,
+      error: 'Email and password are required.',
+    });
+  } else if (password !== confirm) {
+    return dispatch({
+      type: AUTH_FAILURE,
+      error: 'Passwords do not match.',
+    });
+  }
+  return doSignup(user.form.email, user.form.password)
+    .then(result => {
+      result.sendEmailVerification();
+      dispatch({ type: LOGGED_IN, user: result.toJSON() });
+    })
+    .catch(error => {
+      dispatch({ type: AUTH_FAILURE });
+      console.error(error);
+    });
+};
+
+export const login = () => (dispatch, getState) => {
+  const { user } = getState();
+  const { email, password } = user.form;
+  if (!email || !password) {
+    return dispatch({
+      type: AUTH_FAILURE,
+      error: 'Email and password are required.',
+    });
+  }
+  return doLogin(user.form.email, user.form.password)
+    .then(result => {
+      dispatch({ type: LOGGED_IN, user: result.toJSON() });
+    })
+    .catch(error => {
+      dispatch({ type: AUTH_FAILURE, error: error.message });
+      console.error(error);
+    });
+};
+
+export const passwordReset = () => (dispatch, getState) => {
+  const { user } = getState();
+  return doPasswordReset(user.form.email)
+    .then(() => {
+      dispatch(closeLoginModal());
+      dispatch(
+        ReduxToastrActions.add({
+          options: {
+            removeOnHover: true,
+            showCloseButton: true,
+          },
+          position: 'bottom-left',
+          title: 'Password Reset Sent',
+          message: 'You should be receiving an email soon.',
+          type: 'success',
+        }),
+      );
+    })
+    .catch(error => {
+      dispatch({ type: AUTH_FAILURE, error: error.message });
+      console.error(error);
+    });
+};
+
+export const logout = () => dispatch =>
+  doLogout().then(() => {
+    dispatch({ type: LOGGED_OUT });
+  });

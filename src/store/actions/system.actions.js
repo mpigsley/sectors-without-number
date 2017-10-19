@@ -1,8 +1,8 @@
-import localForage from 'localforage';
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
 import { omit } from 'lodash';
 
+import { createOrUpdateSector } from 'store/api/local';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const SYSTEM_HOLD = 'SYSTEM_HOLD';
@@ -25,29 +25,27 @@ export function editSystem(system, changes) {
     const sector = { ...getCurrentSector(state), updated: Date.now() };
     sector.created = sector.created || Date.now();
     const update = { ...sector.systems[system], ...changes };
-    return localForage
-      .setItem(sector.seed, {
-        ...sector,
-        systems: {
-          ...sector.systems,
-          [system]: update,
-        },
-      })
-      .then(() => {
-        dispatch({ type: EDIT_SYSTEM, system, update });
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'System Updated',
-            message: 'Your sector has been saved.',
-            type: 'success',
-          }),
-        );
-      });
+    return createOrUpdateSector(sector.seed, {
+      ...sector,
+      systems: {
+        ...sector.systems,
+        [system]: update,
+      },
+    }).then(() => {
+      dispatch({ type: EDIT_SYSTEM, system, update });
+      dispatch(
+        ReduxToastrActions.add({
+          options: {
+            removeOnHover: true,
+            showCloseButton: true,
+          },
+          position: 'bottom-left',
+          title: 'System Updated',
+          message: 'Your sector has been saved.',
+          type: 'success',
+        }),
+      );
+    });
   };
 }
 
@@ -56,29 +54,27 @@ export function deleteSystem(system) {
     const state = getState();
     const sector = { ...getCurrentSector(state), updated: Date.now() };
     const systems = omit(sector.systems, system);
-    return localForage
-      .setItem(sector.seed, {
-        ...sector,
-        systems,
-      })
-      .then(() => {
-        dispatch(
-          push(`/sector${state.routing.locationBeforeTransitions.search}`),
-        );
-        dispatch({ type: DELETE_SYSTEM, system });
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'System Deleted',
-            message: 'Your sector has been saved.',
-            type: 'success',
-          }),
-        );
-      });
+    return createOrUpdateSector(sector.seed, {
+      ...sector,
+      systems,
+    }).then(() => {
+      dispatch(
+        push(`/sector${state.routing.locationBeforeTransitions.search}`),
+      );
+      dispatch({ type: DELETE_SYSTEM, system });
+      dispatch(
+        ReduxToastrActions.add({
+          options: {
+            removeOnHover: true,
+            showCloseButton: true,
+          },
+          position: 'bottom-left',
+          title: 'System Deleted',
+          message: 'Your sector has been saved.',
+          type: 'success',
+        }),
+      );
+    });
   };
 }
 
@@ -113,7 +109,10 @@ export function moveSystem() {
         [state.system.hoverKey]: source,
       });
     }
-    return localForage.setItem(sector.seed, { ...sector, systems }).then(() => {
+    return createOrUpdateSector(sector.seed, {
+      ...sector,
+      systems,
+    }).then(() => {
       dispatch(
         push(`/sector${state.routing.locationBeforeTransitions.search}`),
       );

@@ -1,20 +1,12 @@
-import localForage from 'localforage';
 import Firebase from 'firebase';
 import Fastclick from 'react-fastclick';
 
+import { getSectors } from 'store/api/local';
 import { fetchUser } from 'store/actions/user.actions';
 import { setSavedSectors } from 'store/actions/sector.actions';
 
 export default store => {
-  new Promise((resolve, reject) => {
-    const savedSectors = {};
-    localForage
-      .iterate((value, key) => {
-        savedSectors[key] = value;
-      })
-      .then(() => resolve(savedSectors))
-      .catch(reject);
-  }).then(saved => {
+  getSectors().then(saved => {
     store.dispatch(setSavedSectors(saved));
   });
 

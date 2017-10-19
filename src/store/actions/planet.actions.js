@@ -1,8 +1,8 @@
-import localForage from 'localforage';
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
 import { omit } from 'lodash';
 
+import { createOrUpdateSector } from 'store/api/local';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const EDIT_PLANET = 'EDIT_PLANET';
@@ -22,47 +22,45 @@ export function editPlanet(system, planet, changes) {
       ...changes,
       key: newKey,
     };
-    return localForage
-      .setItem(sector.seed, {
-        ...sector,
-        systems: {
-          ...sector.systems,
-          [system]: {
-            ...sector.systems[system],
-            planets: {
-              ...omit(sector.systems[system].planets, planet),
-              [newKey]: update,
-            },
+    return createOrUpdateSector(sector.seed, {
+      ...sector,
+      systems: {
+        ...sector.systems,
+        [system]: {
+          ...sector.systems[system],
+          planets: {
+            ...omit(sector.systems[system].planets, planet),
+            [newKey]: update,
           },
         },
-      })
-      .then(() => {
-        dispatch(
-          push(
-            `/sector/system/${system}/planet/${newKey}${state.routing
-              .locationBeforeTransitions.search}`,
-          ),
-        );
-        dispatch({
-          type: EDIT_PLANET,
-          system,
-          planet,
-          newKey,
-          update,
-        });
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'Planet Updated',
-            message: 'Your sector has been saved.',
-            type: 'success',
-          }),
-        );
+      },
+    }).then(() => {
+      dispatch(
+        push(
+          `/sector/system/${system}/planet/${newKey}${state.routing
+            .locationBeforeTransitions.search}`,
+        ),
+      );
+      dispatch({
+        type: EDIT_PLANET,
+        system,
+        planet,
+        newKey,
+        update,
       });
+      dispatch(
+        ReduxToastrActions.add({
+          options: {
+            removeOnHover: true,
+            showCloseButton: true,
+          },
+          position: 'bottom-left',
+          title: 'Planet Updated',
+          message: 'Your sector has been saved.',
+          type: 'success',
+        }),
+      );
+    });
   };
 }
 
@@ -71,37 +69,35 @@ export function deletePlanet(system, planet) {
     const state = getState();
     const sector = { ...getCurrentSector(state), updated: Date.now() };
     const planets = omit(sector.systems[system].planets, planet);
-    return localForage
-      .setItem(sector.seed, {
-        ...sector,
-        systems: {
-          ...sector.systems,
-          [system]: {
-            ...sector.systems[system],
-            planets,
-          },
+    return createOrUpdateSector(sector.seed, {
+      ...sector,
+      systems: {
+        ...sector.systems,
+        [system]: {
+          ...sector.systems[system],
+          planets,
         },
-      })
-      .then(() => {
-        dispatch(
-          push(
-            `/sector/system/${system}${state.routing.locationBeforeTransitions
-              .search}`,
-          ),
-        );
-        dispatch({ type: DELETE_PLANET, system, planet });
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'Planet Deleted',
-            message: 'Your sector has been saved.',
-            type: 'success',
-          }),
-        );
-      });
+      },
+    }).then(() => {
+      dispatch(
+        push(
+          `/sector/system/${system}${state.routing.locationBeforeTransitions
+            .search}`,
+        ),
+      );
+      dispatch({ type: DELETE_PLANET, system, planet });
+      dispatch(
+        ReduxToastrActions.add({
+          options: {
+            removeOnHover: true,
+            showCloseButton: true,
+          },
+          position: 'bottom-left',
+          title: 'Planet Deleted',
+          message: 'Your sector has been saved.',
+          type: 'success',
+        }),
+      );
+    });
   };
 }

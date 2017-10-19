@@ -1,6 +1,6 @@
-import localForage from 'localforage';
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 
+import { createOrUpdateSector, removeSector } from 'store/api/local';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const SET_SAVED_SECTORS = 'SET_SAVED_SECTORS';
@@ -13,23 +13,24 @@ export function editSector(key, value) {
     const state = getState();
     const sector = { ...getCurrentSector(state), updated: Date.now() };
     sector.created = sector.created || Date.now();
-    return localForage
-      .setItem(sector.seed, { ...sector, [key]: value })
-      .then(() => {
-        dispatch({ type: EDIT_SECTOR, key, value });
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'Sector Updated',
-            message: 'Your sector has been saved.',
-            type: 'success',
-          }),
-        );
-      });
+    return createOrUpdateSector(sector.seed, {
+      ...sector,
+      [key]: value,
+    }).then(() => {
+      dispatch({ type: EDIT_SECTOR, key, value });
+      dispatch(
+        ReduxToastrActions.add({
+          options: {
+            removeOnHover: true,
+            showCloseButton: true,
+          },
+          position: 'bottom-left',
+          title: 'Sector Updated',
+          message: 'Your sector has been saved.',
+          type: 'success',
+        }),
+      );
+    });
   };
 }
 
@@ -39,7 +40,7 @@ export function setSavedSectors(saved) {
 
 export function deleteSector(key) {
   return dispatch =>
-    localForage.removeItem(key).then(() => {
+    removeSector(key).then(() => {
       dispatch({ type: REMOVE_SAVED_SECTOR, key });
       dispatch(
         ReduxToastrActions.add({
@@ -63,7 +64,7 @@ export function saveSector() {
     const value = sector.generated || sector.saved[sector.currentSector];
     const update = { ...value, updated: Date.now() };
     update.created = update.created || Date.now();
-    return localForage.setItem(key, update).then(() => {
+    return createOrUpdateSector(key, update).then(() => {
       dispatch({ type: ADD_SAVED_SECTOR });
       dispatch(
         ReduxToastrActions.add({
