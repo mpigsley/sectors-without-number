@@ -9,6 +9,10 @@ import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
 import Population from 'constants/population';
 
+const INDEX = 1;
+const DEFAULT_ROWS = 10;
+const DEFAULT_COLUMNS = 8;
+
 export const generatePlanet = (seededChance, existingName) => () => {
   const name = existingName || generateName(seededChance);
   return {
@@ -74,13 +78,13 @@ export class System {
     this.x =
       x ||
       this.config.seededChance.integer({
-        min: this.config.index,
+        min: INDEX,
         max: this.config.columns,
       });
     this.y =
       y ||
       this.config.seededChance.integer({
-        min: this.config.index,
+        min: INDEX,
         max: this.config.rows,
       });
   }
@@ -96,11 +100,11 @@ export class System {
   });
 
   isRowValid(num) {
-    return isBetween(num, this.config.index, this.config.rows);
+    return isBetween(num, INDEX, this.config.rows);
   }
 
   isColumnValid(num) {
-    return isBetween(num, this.config.index, this.config.columns);
+    return isBetween(num, INDEX, this.config.columns);
   }
 
   isLocationValid(x, y) {
@@ -193,17 +197,19 @@ const fullRandomGenerate = config => {
   return mapValues(systems, s => s.toJSON());
 };
 
-export default config => {
-  const newConfig = {
-    ...config,
-    index: 1,
-    seededChance: new Chance(config.seed),
-  };
+export default ({
+  key,
+  rows = DEFAULT_ROWS,
+  columns = DEFAULT_COLUMNS,
+  isBuilder,
+}) => {
+  const seededChance = new Chance(key);
   return {
-    name: generateSectorName(newConfig.seededChance),
-    seed: newConfig.seed,
-    rows: newConfig.rows,
-    columns: newConfig.columns,
-    systems: newConfig.isBuilder ? {} : fullRandomGenerate(newConfig),
+    rows,
+    columns,
+    name: generateSectorName(seededChance),
+    systems: isBuilder
+      ? {}
+      : fullRandomGenerate({ seededChance, rows, columns }),
   };
 };

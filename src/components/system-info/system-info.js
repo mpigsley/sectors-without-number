@@ -39,9 +39,9 @@ const planetsToSave = (planets, planetOptions) => {
   );
 };
 
-const renderPlanetLinks = (planets, { pathname, search }) =>
+const renderPlanetLinks = (planets, { pathname }) =>
   map(planets, (planet, key) => (
-    <SidebarLinkRow key={planet.name} to={`${pathname}/planet/${key}${search}`}>
+    <SidebarLinkRow key={planet.name} to={`${pathname}/planet/${key}`}>
       <Header type={HeaderType.header4} className="SystemInfo-Name">
         {planet.name}
       </Header>
@@ -66,7 +66,11 @@ export default class SectorInfo extends SidebarInfo {
     }).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string,
-      search: PropTypes.string,
+    }).isRequired,
+    router: PropTypes.shape({
+      params: PropTypes.shape({
+        sector: PropTypes.string.isRequired,
+      }),
     }).isRequired,
     editSystem: PropTypes.func.isRequired,
     planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
@@ -204,7 +208,7 @@ export default class SectorInfo extends SidebarInfo {
     return (
       <SidebarNavigation
         name={this.props.system.name}
-        back={`/sector${this.props.location.search}`}
+        back={`/sector/${this.props.router.params.sector}`}
         type={SidebarType.system}
         onEdit={this.onEdit}
         onDelete={this.onConfirmDelete}

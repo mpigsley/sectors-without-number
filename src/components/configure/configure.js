@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Zap, Edit3, ChevronLeft } from 'react-feather';
+import { Zap } from 'react-feather';
 import Chance from 'chance';
 
 import Header, { HeaderType } from 'primitives/text/header';
@@ -20,7 +20,6 @@ export default class Configure extends Component {
   }
 
   state = {
-    seed: new Chance().hash({ length: 15 }),
     columns: 8,
     rows: 10,
   };
@@ -47,16 +46,6 @@ export default class Configure extends Component {
         <Header type={HeaderType.header2}>Configure</Header>
         <SubContainer noMargin direction="column" align="flexStart">
           {invalidText}
-          <Label noPadding htmlFor="seed">
-            Seed
-          </Label>
-          <Input
-            data-key="seed"
-            onChange={this.updateInput}
-            name="seed"
-            type="text"
-            value={this.state.seed}
-          />
           <SubContainer noMargin>
             <SubContainer
               className="Configure-ButtonContainer"
@@ -96,36 +85,9 @@ export default class Configure extends Component {
           justify="center"
           align="center"
         >
-          <ButtonLink to="/">
-            <LinkIcon icon={ChevronLeft} size="20" />
-            Back
-          </ButtonLink>
-          <ButtonLink
-            to={{
-              pathname: '/sector',
-              query: {
-                s: this.state.seed,
-                c: this.state.columns,
-                r: this.state.rows,
-              },
-            }}
-          >
+          <ButtonLink to={`/sector/${new Chance().hash({ length: 20 })}`}>
             <LinkIcon icon={Zap} size="20" />
             Generate
-          </ButtonLink>
-          <ButtonLink
-            to={{
-              pathname: '/sector',
-              query: {
-                s: this.state.seed,
-                c: this.state.columns,
-                r: this.state.rows,
-                b: true,
-              },
-            }}
-          >
-            <LinkIcon icon={Edit3} size="20" />
-            Builder
           </ButtonLink>
         </SubContainer>
       </ContentContainer>

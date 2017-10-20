@@ -35,9 +35,12 @@ export function editPlanet(system, planet, changes) {
         },
       },
     }).then(() => {
+      const baseSector = state.routing.locationBeforeTransitions.pathname.split(
+        '/system',
+      )[0];
       dispatch(
         push(
-          `/sector/system/${system}/planet/${newKey}${state.routing
+          `${baseSector}/system/${system}/planet/${newKey}${state.routing
             .locationBeforeTransitions.search}`,
         ),
       );
@@ -79,10 +82,13 @@ export function deletePlanet(system, planet) {
         },
       },
     }).then(() => {
+      const baseSector = state.routing.locationBeforeTransitions.pathname.split(
+        '/system',
+      )[0];
       dispatch(
         push(
-          `/sector/system/${system}${state.routing.locationBeforeTransitions
-            .search}`,
+          `${baseSector}/system/${system}${state.routing
+            .locationBeforeTransitions.search}`,
         ),
       );
       dispatch({ type: DELETE_PLANET, system, planet });

@@ -30,7 +30,8 @@ function System(props) {
     isMousedDown = false;
     if (props.data.system && !props.holdKey) {
       props.router.push(
-        `/sector/system/${props.data.systemKey}${props.location.search}`,
+        `/sector/${props.router.params.sector}/system/${props.data
+          .systemKey}${props.location.search}`,
       );
     } else if (!props.data.highlighted || props.holdKey === props.hoverKey) {
       props.systemRelease();
@@ -171,6 +172,9 @@ System.propTypes = {
   hoverKey: PropTypes.string,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,
+    params: PropTypes.shape({
+      sector: PropTypes.string,
+    }),
   }).isRequired,
   location: PropTypes.shape({
     search: PropTypes.string,

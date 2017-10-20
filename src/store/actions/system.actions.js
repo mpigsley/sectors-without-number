@@ -59,7 +59,9 @@ export function deleteSystem(system) {
       systems,
     }).then(() => {
       dispatch(
-        push(`/sector${state.routing.locationBeforeTransitions.search}`),
+        push(
+          state.routing.locationBeforeTransitions.pathname.split('/system')[0],
+        ),
       );
       dispatch({ type: DELETE_SYSTEM, system });
       dispatch(
@@ -114,7 +116,9 @@ export function moveSystem() {
       systems,
     }).then(() => {
       dispatch(
-        push(`/sector${state.routing.locationBeforeTransitions.search}`),
+        push(
+          state.routing.locationBeforeTransitions.pathname.split('/system')[0],
+        ),
       );
       dispatch({ type: RELEASE_HOLD });
       dispatch({ type: MOVE_SYSTEM, key: sector.seed, systems });

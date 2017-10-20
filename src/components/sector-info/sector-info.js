@@ -27,7 +27,7 @@ export default class SectorInfo extends SidebarInfo {
       systems: PropTypes.shape().isRequired,
     }).isRequired,
     location: PropTypes.shape({
-      search: PropTypes.string,
+      pathname: PropTypes.string,
     }).isRequired,
     editSectorName: PropTypes.func.isRequired,
   };
@@ -123,7 +123,7 @@ export default class SectorInfo extends SidebarInfo {
           .map(system => (
             <SidebarLinkRow
               key={system.key}
-              to={`/sector/system/${system.key}${this.props.location.search}`}
+              to={`${this.props.location.pathname}/system/${system.key}`}
             >
               <Header type={HeaderType.header4} className="SectorInfo-Name">
                 {system.name}

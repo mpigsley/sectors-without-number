@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Chance from 'chance';
-import { Settings, Zap, Download, Delete, X, Edit3 } from 'react-feather';
+import { Settings, Zap, Download, Delete, X } from 'react-feather';
 
 import { stringSortByKey } from 'utils/common';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -101,16 +101,7 @@ export default class Home extends Component {
             <LinkIcon icon={Delete} size="20" />
             Delete
           </Button>
-          <ButtonLink
-            to={{
-              pathname: '/sector',
-              query: {
-                s: this.state.selected,
-                r: this.props.saved[this.state.selected].rows,
-                c: this.props.saved[this.state.selected].columns,
-              },
-            }}
-          >
+          <ButtonLink to={`/sector/${this.state.selected}`}>
             <LinkIcon icon={Download} size="20" />
             Load
           </ButtonLink>
@@ -123,26 +114,9 @@ export default class Home extends Component {
           <LinkIcon icon={Settings} size="20" />
           Configure
         </ButtonLink>
-        <ButtonLink
-          to={{
-            pathname: '/sector',
-            query: { s: new Chance().hash({ length: 15 }) },
-          }}
-        >
+        <ButtonLink to={`/sector/${new Chance().hash({ length: 20 })}`}>
           <LinkIcon icon={Zap} size="20" />
           Generate
-        </ButtonLink>
-        <ButtonLink
-          to={{
-            pathname: '/sector',
-            query: {
-              s: new Chance().hash({ length: 15 }),
-              b: true,
-            },
-          }}
-        >
-          <LinkIcon icon={Edit3} size="20" />
-          Builder
         </ButtonLink>
       </SubContainer>
     );

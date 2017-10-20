@@ -16,8 +16,6 @@ import {
 import { EDIT_PLANET, DELETE_PLANET } from 'store/actions/planet.actions';
 import { INITIALIZE, LOGGED_IN } from 'store/actions/user.actions';
 
-const defaultColumns = 8;
-const defaultRows = 10;
 const initialState = {
   renderSector: false,
   currentSector: null,
@@ -76,33 +74,26 @@ export default function sector(state = initialState, action) {
         },
       };
     }
-    case LOCATION_CHANGE:
-      if (['/', '/configure'].indexOf(action.payload.pathname) >= 0) {
+    case LOCATION_CHANGE: {
+      const { pathname } = action.payload;
+      if (['/', '/configure'].indexOf(pathname) >= 0) {
         return {
           ...initialState,
           saved: state.saved,
         };
       }
-      if (action.payload.pathname.startsWith('/sector')) {
-        const seed =
-          action.payload.query.s || new Chance().hash({ length: 15 });
-        const rows = Math.min(action.payload.query.r || defaultRows, 20);
-        const columns = Math.min(action.payload.query.c || defaultColumns, 20);
-        const isBuilder = !!action.payload.query.b;
+      if (pathname.startsWith('/sector/')) {
+        const pathArray = pathname.split('/');
+        const key = pathArray[2] || new Chance().hash({ length: 20 });
 
         const update = { renderSector: true };
         if (!state.currentSector) {
-          const saved = state.saved[seed];
+          const saved = state.saved[key];
           if (saved) {
-            update.currentSector = seed;
+            update.currentSector = key;
           } else if (!state.generated) {
             update.currentSector = 'generated';
-            update.generated = sectorGenerator({
-              seed,
-              columns,
-              rows,
-              isBuilder,
-            });
+            update.generated = sectorGenerator({ key });
           }
         }
         return {
@@ -115,6 +106,7 @@ export default function sector(state = initialState, action) {
         ...state,
         renderSector: false,
       };
+    }
     case MOVE_SYSTEM: {
       const existingSector = state.generated || state.saved[action.key];
       return {

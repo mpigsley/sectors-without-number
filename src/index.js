@@ -32,7 +32,7 @@ ReactDOM.render(
           <Route path="/configure" component={Configure} />
           <Route path="/changelog" component={Changelog} />
         </Route>
-        <Route path="/sector" component={Sector}>
+        <Route path="/sector/:sector" component={Sector}>
           <IndexRoute component={SectorInfo} />
           <Route path="system/:system" component={SystemInfo} />
           <Route path="system/:system/planet/:planet" component={PlanetInfo} />
