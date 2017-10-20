@@ -1,8 +1,7 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { values, keys } from 'lodash';
+import { values, size } from 'lodash';
 
 import {
-  getCurrentUser,
   updateCurrentUser,
   doFacebookLogin,
   doGoogleLogin,
@@ -11,6 +10,7 @@ import {
   doPasswordReset,
   doLogout,
   uploadSector,
+  getSyncedSectors,
 } from 'store/api/firebase';
 import { clearLocalDatabase } from 'store/api/local';
 
@@ -25,15 +25,13 @@ export const UPDATE_USER_FORM = 'UPDATE_USER_FORM';
 export const UPDATE_USER = 'UPDATE_USER';
 export const LOGGED_IN = 'LOGGED_IN';
 export const LOGGED_OUT = 'LOGGED_OUT';
-export const SET_AUTH_USER = 'SET_AUTH_USER';
-export const USER_FETCH_COMPLETE = 'USER_FETCH_COMPLETE';
+export const INITIALIZE = 'INITIALIZE';
 export const AUTH_FAILURE = 'AUTH_FAILURE';
 
 export const openEditModal = () => ({ type: OPEN_EDIT_MODAL });
 export const closeEditModal = () => ({ type: CLOSE_EDIT_MODAL });
 export const openLoginModal = () => ({ type: OPEN_LOGIN_MODAL });
 export const closeLoginModal = () => ({ type: CLOSE_LOGIN_MODAL });
-export const setAuthUser = user => ({ type: SET_AUTH_USER, user });
 export const openUserDropdown = () => ({ type: OPEN_USER_DROPDOWN });
 export const closeUserDropdown = () => ({ type: CLOSE_USER_DROPDOWN });
 export const updateUserForm = (key, value) => ({
@@ -42,67 +40,62 @@ export const updateUserForm = (key, value) => ({
   value,
 });
 
-export const syncLocalSectors = () => (dispatch, getState) => {
-  const { sector } = getState();
-  return Promise.all([
-    ...values(sector.saved).map(uploadSector),
+const syncLocalSectors = (sectors, creator) =>
+  Promise.all([
+    ...values(sectors).map(sector => uploadSector({ ...sector, creator })),
     clearLocalDatabase(),
   ]).then(uploaded => {
-    uploaded.splice(-1, 1);
-    // TODO: Dispatch action
-    console.log({
-      remove: keys(sector.saved),
-      add: uploaded,
-    });
-  });
-};
-
-export const fetchUser = () => dispatch =>
-  getCurrentUser().then(user => {
-    if (user) {
-      dispatch({ type: SET_AUTH_USER, user });
-    } else {
-      dispatch({ type: USER_FETCH_COMPLETE });
-    }
+    uploaded.splice(-1, 1); // Remove `clearLocalDatabase`
+    return Object.assign(...uploaded); // Map { newUID: sector }
   });
 
-export const updateUser = () => (dispatch, getState) => {
-  const state = getState();
-  return updateCurrentUser({ displayName: state.user.form.displayName })
-    .then(() => {
+const onLogin = (dispatch, local) => result =>
+  getSyncedSectors(result.user ? result.user.uid : result.uid)
+    .then(synced => {
+      if (!size(local)) {
+        return synced;
+      }
+      return syncLocalSectors(
+        local,
+        result.user ? result.user.uid : result.uid,
+      ).then(uploaded => ({
+        ...synced,
+        ...uploaded,
+      }));
+    })
+    .then(sectors => {
       dispatch({
-        type: UPDATE_USER,
-        user: { displayName: state.user.form.displayName },
+        type: LOGGED_IN,
+        user: result.user ? result.user.toJSON() : result.toJSON(),
+        sectors,
       });
+      return result;
     })
     .catch(error => {
       dispatch({ type: AUTH_FAILURE });
       console.error(error);
     });
+
+export const initialize = ({ local, user, synced = {} }) => dispatch => {
+  let promise = Promise.resolve(user ? synced : local);
+  if (user && size(local)) {
+    promise = syncLocalSectors(local, user.uid).then(uploaded => ({
+      ...synced,
+      ...uploaded,
+    }));
+  }
+  return promise.then(sectors => dispatch({ type: INITIALIZE, user, sectors }));
 };
 
-export const facebookLogin = () => dispatch => {
-  doFacebookLogin()
-    .then(result => dispatch(syncLocalSectors()).then(() => result.user))
-    .then(user => dispatch({ type: LOGGED_IN, user: user.toJSON() }))
-    .catch(error => {
-      dispatch({ type: AUTH_FAILURE });
-      console.error(error);
-    });
-};
+export const facebookLogin = () => (dispatch, getState) =>
+  doFacebookLogin().then(onLogin(dispatch, getState().sector.saved));
 
-export const googleLogin = () => dispatch =>
-  doGoogleLogin()
-    .then(result => dispatch(syncLocalSectors()).then(() => result.user))
-    .then(user => dispatch({ type: LOGGED_IN, user: user.toJSON() }))
-    .catch(error => {
-      dispatch({ type: AUTH_FAILURE, error: error.message });
-      console.error(error);
-    });
+export const googleLogin = () => (dispatch, getState) =>
+  doGoogleLogin().then(onLogin(dispatch, getState().sector.saved));
 
 export const signup = () => (dispatch, getState) => {
-  const { user } = getState();
-  const { email, password, confirm } = user.form;
+  const state = getState();
+  const { email, password, confirm } = state.user.form;
   if (!email || !password || !confirm) {
     return dispatch({
       type: AUTH_FAILURE,
@@ -114,34 +107,23 @@ export const signup = () => (dispatch, getState) => {
       error: 'Passwords do not match.',
     });
   }
-  return doSignup(user.form.email, user.form.password)
-    .then(result => dispatch(syncLocalSectors()).then(() => result))
-    .then(result => {
-      result.sendEmailVerification();
-      dispatch({ type: LOGGED_IN, user: result.toJSON() });
-    })
-    .catch(error => {
-      dispatch({ type: AUTH_FAILURE });
-      console.error(error);
-    });
+  return doSignup(state.user.form.email, state.user.form.password)
+    .then(onLogin(dispatch, state.sector.saved))
+    .then(result => result.sendEmailVerification());
 };
 
 export const login = () => (dispatch, getState) => {
-  const { user } = getState();
-  const { email, password } = user.form;
+  const state = getState();
+  const { email, password } = state.user.form;
   if (!email || !password) {
     return dispatch({
       type: AUTH_FAILURE,
       error: 'Email and password are required.',
     });
   }
-  return doLogin(user.form.email, user.form.password)
-    .then(result => dispatch(syncLocalSectors()).then(() => result))
-    .then(result => dispatch({ type: LOGGED_IN, user: result.toJSON() }))
-    .catch(error => {
-      dispatch({ type: AUTH_FAILURE, error: error.message });
-      console.error(error);
-    });
+  return doLogin(state.user.form.email, state.user.form.password).then(
+    onLogin(dispatch, state.sector.saved),
+  );
 };
 
 export const passwordReset = () => (dispatch, getState) => {
@@ -164,6 +146,21 @@ export const passwordReset = () => (dispatch, getState) => {
     })
     .catch(error => {
       dispatch({ type: AUTH_FAILURE, error: error.message });
+      console.error(error);
+    });
+};
+
+export const updateUser = () => (dispatch, getState) => {
+  const state = getState();
+  return updateCurrentUser({ displayName: state.user.form.displayName })
+    .then(() => {
+      dispatch({
+        type: UPDATE_USER,
+        user: { displayName: state.user.form.displayName },
+      });
+    })
+    .catch(error => {
+      dispatch({ type: AUTH_FAILURE });
       console.error(error);
     });
 };

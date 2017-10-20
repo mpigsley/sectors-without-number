@@ -1,6 +1,6 @@
 import localForage from 'localforage';
 
-export const getSectors = () =>
+export const getLocalSectors = () =>
   new Promise((resolve, reject) => {
     const savedSectors = {};
     localForage

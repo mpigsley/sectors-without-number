@@ -68,14 +68,14 @@ export default class Home extends Component {
         </FlexContainer>
         <ul className="Home-SavedList">
           {Object.keys(this.props.saved)
-            .map(key => this.props.saved[key])
+            .map(key => ({ key, ...this.props.saved[key] }))
             .sort(stringSortByKey('name'))
-            .map(({ seed, name, rows, columns }) => (
+            .map(({ key, name, rows, columns }) => (
               <li
-                key={seed}
-                onClick={this.setSelected(seed)}
+                key={key}
+                onClick={this.setSelected(key)}
                 className={classNames('Home-SavedItem', {
-                  'Home-SavedItem--selected': seed === this.state.selected,
+                  'Home-SavedItem--selected': key === this.state.selected,
                 })}
               >
                 <span className="Home-SavedName">{name}</span>

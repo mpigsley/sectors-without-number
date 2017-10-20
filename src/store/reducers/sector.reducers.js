@@ -4,7 +4,6 @@ import { omit } from 'lodash';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import sectorGenerator from 'utils/sector-generator';
 import {
-  SET_SAVED_SECTORS,
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
   EDIT_SECTOR,
@@ -15,6 +14,7 @@ import {
   DELETE_SYSTEM,
 } from 'store/actions/system.actions';
 import { EDIT_PLANET, DELETE_PLANET } from 'store/actions/planet.actions';
+import { INITIALIZE, LOGGED_IN } from 'store/actions/user.actions';
 
 const defaultColumns = 8;
 const defaultRows = 10;
@@ -27,10 +27,11 @@ const initialState = {
 
 export default function sector(state = initialState, action) {
   switch (action.type) {
-    case SET_SAVED_SECTORS: {
+    case LOGGED_IN:
+    case INITIALIZE: {
       let generated = state.generated;
       let currentSector = state.currentSector;
-      if (!!state.generated && !!action.saved[state.generated.seed]) {
+      if (!!state.generated && !!action.sectors[state.generated.seed]) {
         generated = null;
         currentSector = state.generated.seed;
       }
@@ -38,7 +39,7 @@ export default function sector(state = initialState, action) {
         ...state,
         generated,
         currentSector,
-        saved: action.saved,
+        saved: action.sectors,
       };
     }
     case ADD_SAVED_SECTOR: {

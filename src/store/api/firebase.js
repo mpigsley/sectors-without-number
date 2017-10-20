@@ -36,5 +36,20 @@ export const uploadSector = sector => {
   return db
     .collection('sectors')
     .add(sector)
-    .then(docRef => ({ id: docRef.id, sector }));
+    .then(docRef => ({ [docRef.id]: sector }));
+};
+
+export const getSyncedSectors = userId => {
+  const db = Firestore();
+  return db
+    .collection('sectors')
+    .where('creator', '==', userId)
+    .get()
+    .then(snapshot => {
+      const synced = {};
+      snapshot.forEach(doc => {
+        synced[doc.id] = doc.data();
+      });
+      return synced;
+    });
 };

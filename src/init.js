@@ -2,15 +2,11 @@ import Firebase from 'firebase';
 import Fastclick from 'react-fastclick';
 import 'firebase/firestore';
 
-import { getSectors } from 'store/api/local';
-import { fetchUser } from 'store/actions/user.actions';
-import { setSavedSectors } from 'store/actions/sector.actions';
+import { getLocalSectors } from 'store/api/local';
+import { getCurrentUser, getSyncedSectors } from 'store/api/firebase';
+import { initialize } from 'store/actions/user.actions';
 
 export default store => {
-  getSectors().then(saved => {
-    store.dispatch(setSavedSectors(saved));
-  });
-
   Firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,
@@ -20,7 +16,12 @@ export default store => {
     messagingSenderId: process.env.REACT_APP_SENDER_ID,
   });
 
-  store.dispatch(fetchUser());
+  Promise.all([getCurrentUser(), getLocalSectors()]).then(([user, local]) => {
+    const promise = user ? getSyncedSectors(user.uid) : Promise.resolve();
+    return promise.then(synced =>
+      store.dispatch(initialize({ local, user, synced })),
+    );
+  });
 
   Fastclick();
 };

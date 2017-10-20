@@ -7,8 +7,7 @@ import {
   UPDATE_USER,
   LOGGED_IN,
   LOGGED_OUT,
-  SET_AUTH_USER,
-  USER_FETCH_COMPLETE,
+  INITIALIZE,
   AUTH_FAILURE,
   OPEN_USER_DROPDOWN,
   CLOSE_USER_DROPDOWN,
@@ -29,8 +28,19 @@ const initialState = {
   },
 };
 
-export default function sector(state = initialState, action) {
+export default function user(state = initialState, action) {
   switch (action.type) {
+    case INITIALIZE:
+      return {
+        ...state,
+        model: action.user,
+        isLoginModalOpen: false,
+        isFetchingState: false,
+        form: {
+          ...state.form,
+          displayName: (action.user || {}).displayName,
+        },
+      };
     case OPEN_LOGIN_MODAL:
       return { ...state, isLoginModalOpen: true };
     case CLOSE_LOGIN_MODAL:
@@ -70,19 +80,6 @@ export default function sector(state = initialState, action) {
         isLoginModalOpen: false,
         isDropdownActive: false,
       };
-    case SET_AUTH_USER:
-      return {
-        ...state,
-        model: action.user,
-        isLoginModalOpen: false,
-        isFetchingState: false,
-        form: {
-          ...state.form,
-          displayName: action.user.displayName,
-        },
-      };
-    case USER_FETCH_COMPLETE:
-      return { ...state, isFetchingState: false };
     case OPEN_USER_DROPDOWN:
       return { ...state, isDropdownActive: true };
     case CLOSE_USER_DROPDOWN:

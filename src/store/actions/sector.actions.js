@@ -34,7 +34,7 @@ export function editSector(key, value) {
   };
 }
 
-export function setSavedSectors(saved) {
+export function setLocalSectors(saved) {
   return { type: SET_SAVED_SECTORS, saved };
 }
 
