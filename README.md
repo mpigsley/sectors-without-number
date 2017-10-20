@@ -10,8 +10,11 @@ Feel free to [open an issue](https://github.com/mpigsley/sectors-without-number/
 
 ## Development
 
-This project is purely a front-end application written in React + Redux.
+This project is a front-end application written in React + Redux with a [Firebase](https://firebase.google.com/) backend. For more information see [create-react-app](https://github.com/facebookincubator/create-react-app).
 
-To get started just install modules with `npm install` and run the application with `npm start`.
+### Getting Started
 
-For more information see [create-react-app](https://github.com/facebookincubator/create-react-app).
+1. `npm i` and `cd functions && npm i`
+2. `cp .env.example .env`
+3. Create a [firebase project](https://console.firebase.google.com/) and fill out `.env`
+4. `npm start`
