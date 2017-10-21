@@ -1,5 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { values, size } from 'lodash';
+import { values, size, zipObject } from 'lodash';
 import { push } from 'react-router-redux';
 
 import {
@@ -47,7 +47,7 @@ const syncLocalSectors = (sectors, creator) =>
     clearLocalDatabase(),
   ]).then(uploaded => {
     uploaded.splice(-1, 1); // Remove `clearLocalDatabase`
-    return Object.assign(...uploaded); // Map { newUID: sector }
+    return zipObject(uploaded.map(sector => sector.key), uploaded);
   });
 
 const onLogin = (dispatch, local) => result =>
@@ -65,6 +65,7 @@ const onLogin = (dispatch, local) => result =>
       }));
     })
     .then(sectors => {
+      dispatch(push('/'));
       dispatch({
         type: LOGGED_IN,
         user: result.user ? result.user.toJSON() : result.toJSON(),

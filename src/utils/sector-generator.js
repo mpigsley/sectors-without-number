@@ -205,7 +205,6 @@ export default ({
   isBuilder,
 }) => {
   const seededChance = new Chance(key);
-  console.log(isBuilder);
   return {
     key,
     rows,

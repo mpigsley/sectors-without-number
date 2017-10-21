@@ -1,6 +1,7 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 
 import { createOrUpdateSector, removeSector } from 'store/api/local';
+import { uploadSector, updateSyncedSector } from 'store/api/firebase';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const GENERATE_SECTOR = 'GENERATE_SECTOR';
@@ -17,13 +18,24 @@ export const updateConfiguration = (key, value) => ({
 
 export const editSector = (key, value) => (dispatch, getState) => {
   const state = getState();
-  const sector = { ...getCurrentSector(state), updated: Date.now() };
-  sector.created = sector.created || Date.now();
-  return createOrUpdateSector(sector.key, {
-    ...sector,
-    [key]: value,
-  }).then(() => {
-    dispatch({ type: EDIT_SECTOR, key, value });
+  let sector = { ...getCurrentSector(state), [key]: value };
+  let promise;
+  if (state.user.model) {
+    if (state.sector.generated) {
+      promise = uploadSector(sector);
+    } else {
+      promise = updateSyncedSector(sector.key, key, value);
+    }
+  } else {
+    sector = { ...sector, updated: Date.now() };
+    sector.created = sector.created || Date.now();
+    promise = createOrUpdateSector(sector.key, {
+      ...sector,
+      [key]: value,
+    });
+  }
+  return promise.then(uploadedSector => {
+    dispatch({ type: EDIT_SECTOR, sector: uploadedSector || sector });
     dispatch(
       ReduxToastrActions.add({
         options: {
@@ -57,13 +69,16 @@ export const deleteSector = key => dispatch =>
   });
 
 export const saveSector = () => (dispatch, getState) => {
-  const { sector } = getState();
-  const key = sector.generated ? sector.generated.key : sector.currentSector;
-  const value = sector.generated || sector.saved[sector.currentSector];
-  const update = { ...value, updated: Date.now() };
-  update.created = update.created || Date.now();
-  return createOrUpdateSector(key, update).then(() => {
-    dispatch({ type: ADD_SAVED_SECTOR });
+  const state = getState();
+  const key = state.sector.generated
+    ? state.sector.generated.key
+    : state.sector.currentSector;
+  const value =
+    state.sector.generated || state.sector.saved[state.sector.currentSector];
+  const sector = { ...value, updated: Date.now() };
+  sector.created = sector.created || Date.now();
+  return createOrUpdateSector(key, sector).then(() => {
+    dispatch({ type: ADD_SAVED_SECTOR, sector });
     dispatch(
       ReduxToastrActions.add({
         options: {

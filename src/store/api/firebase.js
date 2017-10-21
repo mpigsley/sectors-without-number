@@ -40,7 +40,8 @@ export const uploadSector = sector => {
       created: Firestore.FieldValue.serverTimestamp(),
       updated: Firestore.FieldValue.serverTimestamp(),
     })
-    .then(docRef => ({ [docRef.id]: sector }));
+    .then(docRef => docRef.update({ key: docRef.id }).then(() => docRef))
+    .then(docRef => ({ ...sector, key: docRef.id }));
 };
 
 export const getSyncedSectors = userId => {
@@ -62,7 +63,7 @@ export const updateSyncedSector = (sectorId, key, value) => {
   const db = Firestore();
   return db
     .collection('sectors')
-    .doc(key)
+    .doc(sectorId)
     .update({
       updated: Firestore.FieldValue.serverTimestamp(),
       [key]: value,

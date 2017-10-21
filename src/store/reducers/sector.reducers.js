@@ -37,9 +37,9 @@ export default function sector(state = initialState, action) {
     case INITIALIZE: {
       let generated = state.generated;
       let currentSector = state.currentSector;
-      if (!!state.generated && !!action.sectors[state.generated.seed]) {
+      if (!!state.generated && !!action.sectors[state.generated.key]) {
         generated = null;
-        currentSector = state.generated.seed;
+        currentSector = state.generated.key;
       }
       return {
         ...state,
@@ -62,15 +62,13 @@ export default function sector(state = initialState, action) {
         },
       };
     case ADD_SAVED_SECTOR: {
-      const key = state.generated ? state.generated.seed : state.currentSector;
-      const value = state.generated || state.saved[key];
       return {
         ...state,
-        currentSector: key,
+        currentSector: action.sector.key,
         generated: null,
         saved: {
           ...state.saved,
-          [key]: value,
+          [action.sector.key]: action.sector,
         },
       };
     }
@@ -80,18 +78,13 @@ export default function sector(state = initialState, action) {
         saved: omit(state.saved, action.key),
       };
     case EDIT_SECTOR: {
-      const existingSector =
-        state.generated || state.saved[state.currentSector];
       return {
         ...state,
-        currentSector: existingSector.seed,
+        currentSector: action.sector.key,
         generated: null,
         saved: {
           ...state.saved,
-          [existingSector.seed]: {
-            ...existingSector,
-            [action.key]: action.value,
-          },
+          [action.sector.key]: action.sector,
         },
       };
     }
@@ -151,11 +144,11 @@ export default function sector(state = initialState, action) {
         state.generated || state.saved[state.currentSector];
       return {
         ...state,
-        currentSector: existingSector.seed,
+        currentSector: existingSector.key,
         generated: null,
         saved: {
           ...state.saved,
-          [existingSector.seed]: {
+          [existingSector.key]: {
             ...existingSector,
             systems: {
               ...existingSector.systems,
@@ -170,11 +163,11 @@ export default function sector(state = initialState, action) {
         state.generated || state.saved[state.currentSector];
       return {
         ...state,
-        currentSector: existingSector.seed,
+        currentSector: existingSector.key,
         generated: null,
         saved: {
           ...state.saved,
-          [existingSector.seed]: {
+          [existingSector.key]: {
             ...existingSector,
             systems: omit(existingSector.systems, action.system),
           },
@@ -186,11 +179,11 @@ export default function sector(state = initialState, action) {
         state.generated || state.saved[state.currentSector];
       return {
         ...state,
-        currentSector: existingSector.seed,
+        currentSector: existingSector.key,
         generated: null,
         saved: {
           ...state.saved,
-          [existingSector.seed]: {
+          [existingSector.key]: {
             ...existingSector,
             systems: {
               ...existingSector.systems,

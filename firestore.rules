@@ -1,9 +1,9 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /sectors/{anyDocument} {
+    match /sectors/{sector=**} {
       allow create: if request.auth != null;
-      allow update: if request.resource.data.creator == request.auth.uid;
-      allow read: if true;
+      allow update: if resource.data.creator == request.auth.uid;
+      allow read;
     }
     match /{document=**} {
       allow read, write: if false;
