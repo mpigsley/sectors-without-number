@@ -10,7 +10,6 @@ import {
   EDIT_SECTOR,
   UPDATE_CONFIGURATION,
 } from 'store/actions/sector.actions';
-import { EDIT_PLANET, DELETE_PLANET } from 'store/actions/planet.actions';
 import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
 const initialState = {
@@ -117,59 +116,6 @@ export default function sector(state = initialState, action) {
       return {
         ...state,
         renderSector: false,
-      };
-    }
-    case EDIT_PLANET: {
-      const existingSector =
-        state.generated || state.saved[state.currentSector];
-      return {
-        ...state,
-        currentSector: existingSector.key,
-        generated: null,
-        saved: {
-          ...state.saved,
-          [existingSector.key]: {
-            ...existingSector,
-            systems: {
-              ...existingSector.systems,
-              [action.system]: {
-                ...existingSector.systems[action.system],
-                planets: {
-                  ...omit(
-                    existingSector.systems[action.system].planets,
-                    action.planet,
-                  ),
-                  [action.newKey]: action.update,
-                },
-              },
-            },
-          },
-        },
-      };
-    }
-    case DELETE_PLANET: {
-      const existingSector =
-        state.generated || state.saved[state.currentSector];
-      return {
-        ...state,
-        currentSector: existingSector.seed,
-        generated: null,
-        saved: {
-          ...state.saved,
-          [existingSector.seed]: {
-            ...existingSector,
-            systems: {
-              ...existingSector.systems,
-              [action.system]: {
-                ...existingSector.systems[action.system],
-                planets: omit(
-                  existingSector.systems[action.system].planets,
-                  action.planet,
-                ),
-              },
-            },
-          },
-        },
       };
     }
     default:

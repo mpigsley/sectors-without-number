@@ -1,89 +1,72 @@
-import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
 import { omit } from 'lodash';
 
-import { setSector } from 'store/api/local';
+import { EDIT_SECTOR } from 'store/actions/sector.actions';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
-
-export const EDIT_PLANET = 'EDIT_PLANET';
-export const DELETE_PLANET = 'DELETE_PLANET';
+import { SuccessToast, ErrorToast, creatorOrUpdateSector } from 'store/utils';
 
 export const editPlanet = (system, planet, changes) => (dispatch, getState) => {
   const state = getState();
-  const sector = { ...getCurrentSector(state), updated: Date.now() };
-  sector.created = sector.created || Date.now();
-  let newKey = planet;
-  if (changes.name) {
-    newKey = encodeURIComponent(changes.name.toLowerCase());
-  }
-  const update = {
-    ...sector.systems[system].planets[planet],
-    ...changes,
-    key: newKey,
-  };
-  return setSector(sector.key, {
-    ...sector,
+  const currentSector = getCurrentSector(state);
+  const newKey = changes.name
+    ? encodeURIComponent(changes.name.toLowerCase())
+    : planet;
+  return creatorOrUpdateSector(state, {
+    ...currentSector,
     systems: {
-      ...sector.systems,
+      ...currentSector.systems,
       [system]: {
-        ...sector.systems[system],
+        ...currentSector.systems[system],
         planets: {
-          ...omit(sector.systems[system].planets, planet),
-          [newKey]: update,
+          ...omit(currentSector.systems[system].planets, planet),
+          [newKey]: {
+            ...currentSector.systems[system].planets[planet],
+            ...changes,
+            key: newKey,
+          },
         },
       },
     },
-  }).then(() => {
-    dispatch(push(`/sector/${sector.key}/system/${system}/planet/${newKey}`));
-    dispatch({
-      type: EDIT_PLANET,
-      system,
-      planet,
-      newKey,
-      update,
+  })
+    .then(sector => {
+      dispatch(push(`/sector/${sector.key}/system/${system}/planet/${newKey}`));
+      dispatch({ type: EDIT_SECTOR, sector });
+      dispatch(
+        SuccessToast({
+          title: 'Planet Updated',
+        }),
+      );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
     });
-    dispatch(
-      ReduxToastrActions.add({
-        options: {
-          removeOnHover: true,
-          showCloseButton: true,
-        },
-        position: 'bottom-left',
-        title: 'Planet Updated',
-        message: 'Your sector has been saved.',
-        type: 'success',
-      }),
-    );
-  });
 };
 
 export const deletePlanet = (system, planet) => (dispatch, getState) => {
   const state = getState();
-  const sector = { ...getCurrentSector(state), updated: Date.now() };
-  const planets = omit(sector.systems[system].planets, planet);
-  return setSector(sector.key, {
-    ...sector,
+  const currentSector = getCurrentSector(state);
+  return creatorOrUpdateSector(state, {
+    ...currentSector,
     systems: {
-      ...sector.systems,
+      ...currentSector.systems,
       [system]: {
-        ...sector.systems[system],
-        planets,
+        ...currentSector.systems[system],
+        planets: omit(currentSector.systems[system].planets, planet),
       },
     },
-  }).then(() => {
-    dispatch(push(`/sector/${sector.key}/system/${system}`));
-    dispatch({ type: DELETE_PLANET, system, planet });
-    dispatch(
-      ReduxToastrActions.add({
-        options: {
-          removeOnHover: true,
-          showCloseButton: true,
-        },
-        position: 'bottom-left',
-        title: 'Planet Deleted',
-        message: 'Your sector has been saved.',
-        type: 'success',
-      }),
-    );
-  });
+  })
+    .then(sector => {
+      dispatch(push(`/sector/${sector.key}/system/${system}`));
+      dispatch({ type: EDIT_SECTOR, sector });
+      dispatch(
+        SuccessToast({
+          title: 'Planet Deleted',
+        }),
+      );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
+    });
 };

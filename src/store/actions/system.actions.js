@@ -33,10 +33,8 @@ export const editSystem = (system, changes) => (dispatch, getState) => {
     },
   })
     .then(sector => {
-      const url = state.routing.locationBeforeTransitions.pathname.split('/');
-      url[2] = sector.key;
       dispatch({ type: EDIT_SECTOR, sector });
-      dispatch(push(url.join('/')));
+      dispatch(push(`/sector/${sector.key}/system/${system}`));
       dispatch(
         SuccessToast({
           title: 'System Updated',
