@@ -20,6 +20,10 @@
   outline: none;
   width: 100%;
 
+  &[type='checkbox'] {
+    width: auto;
+  }
+
   &--error {
     border-color: red;
   }

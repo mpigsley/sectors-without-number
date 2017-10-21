@@ -25,9 +25,9 @@ const initialState = {
   saved: {},
   configuration: {
     name: generateSectorName(new Chance()),
+    isBuilder: false,
     columns: 8,
     rows: 10,
-    isBuilder: false,
   },
 };
 
@@ -110,9 +110,7 @@ export default function sector(state = initialState, action) {
           } else if (!state.generated) {
             update.currentSector = 'generated';
             update.generated = sectorGenerator({
-              columns: state.configuration.columns,
-              rows: state.configuration.rows,
-              name: state.configuration.name,
+              ...state.configuration,
               key,
             });
           }

@@ -1,20 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Zap } from 'react-feather';
+import { Zap, RefreshCw } from 'react-feather';
 import Chance from 'chance';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
+import FlexContainer from 'primitives/container/flex-container';
+import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
 import Label from 'primitives/form/label';
 import LinkIcon from 'primitives/other/link-icon';
 import ButtonLink from 'primitives/other/button-link';
 
+import { generateSectorName } from 'utils/name-generator';
+
 import './style.css';
 
 export default function Configure({
   updateConfiguration,
+  isBuilder,
   columns,
   rows,
   name,
@@ -24,8 +29,15 @@ export default function Configure({
     let value = e.target.value;
     if (e.target.type === 'number') {
       value = value ? Number.parseInt(value, 10) : null;
+    } else if (e.target.type === 'checkbox') {
+      value = e.target.checked;
     }
     updateConfiguration(key, value);
+  };
+
+  const regenerateName = genFunc => () => {
+    const chance = new Chance();
+    updateConfiguration('name', genFunc(chance));
   };
 
   const invalidText =
@@ -43,11 +55,13 @@ export default function Configure({
         <Label noPadding htmlFor="name">
           Sector Name
         </Label>
-        <Input
-          data-key="name"
-          onChange={updateInput}
+        <IconInput
           name="name"
+          data-key="name"
+          icon={RefreshCw}
           value={name}
+          onChange={updateInput}
+          onIconClick={regenerateName(generateSectorName)}
         />
         <SubContainer noMargin>
           <SubContainer
@@ -81,6 +95,18 @@ export default function Configure({
             />
           </SubContainer>
         </SubContainer>
+        <FlexContainer align="center" className="Configure-Checkbox">
+          <Input
+            data-key="isBuilder"
+            onChange={updateInput}
+            name="isBuilder"
+            value={isBuilder}
+            type="checkbox"
+          />
+          <Label noPadding htmlFor="isBuilder">
+            Initialize Empty Sector
+          </Label>
+        </FlexContainer>
       </SubContainer>
       <SubContainer
         className="Configure-PaddedButtons"
@@ -99,6 +125,7 @@ export default function Configure({
 
 Configure.propTypes = {
   updateConfiguration: PropTypes.func.isRequired,
+  isBuilder: PropTypes.bool.isRequired,
   columns: PropTypes.number,
   rows: PropTypes.number,
   name: PropTypes.string,
