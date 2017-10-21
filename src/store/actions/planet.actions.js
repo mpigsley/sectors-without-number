@@ -35,15 +35,7 @@ export function editPlanet(system, planet, changes) {
         },
       },
     }).then(() => {
-      const baseSector = state.routing.locationBeforeTransitions.pathname.split(
-        '/system',
-      )[0];
-      dispatch(
-        push(
-          `${baseSector}/system/${system}/planet/${newKey}${state.routing
-            .locationBeforeTransitions.search}`,
-        ),
-      );
+      dispatch(push(`/sector/${sector.key}/system/${system}/planet/${newKey}`));
       dispatch({
         type: EDIT_PLANET,
         system,
@@ -82,15 +74,7 @@ export function deletePlanet(system, planet) {
         },
       },
     }).then(() => {
-      const baseSector = state.routing.locationBeforeTransitions.pathname.split(
-        '/system',
-      )[0];
-      dispatch(
-        push(
-          `${baseSector}/system/${system}${state.routing
-            .locationBeforeTransitions.search}`,
-        ),
-      );
+      dispatch(push(`/sector/${sector.key}/system/${system}`));
       dispatch({ type: DELETE_PLANET, system, planet });
       dispatch(
         ReduxToastrActions.add({

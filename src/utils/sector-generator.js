@@ -205,6 +205,7 @@ export default ({
 }) => {
   const seededChance = new Chance(key);
   return {
+    key,
     rows,
     columns,
     name: generateSectorName(seededChance),

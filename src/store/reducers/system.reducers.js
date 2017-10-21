@@ -4,6 +4,7 @@ import {
   SYSTEM_HOVER_START,
   SYSTEM_HOVER_END,
   EDIT_SYSTEM,
+  MOVE_SYSTEM,
   OPEN_SYSTEM_CREATE,
   CLOSE_SYSTEM_CREATE,
 } from 'store/actions/system.actions';
@@ -18,6 +19,7 @@ export default function sector(state = initialState, action) {
   switch (action.type) {
     case SYSTEM_HOLD:
       return { ...state, holdKey: action.key };
+    case MOVE_SYSTEM:
     case RELEASE_HOLD:
       return { ...state, holdKey: null };
     case SYSTEM_HOVER_START:
