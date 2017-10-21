@@ -3,7 +3,11 @@ import Fastclick from 'react-fastclick';
 import 'firebase/firestore';
 
 import { getLocalSectors } from 'store/api/local';
-import { getCurrentUser, getSyncedSectors } from 'store/api/firebase';
+import {
+  getCurrentUser,
+  getCurrentSector,
+  getSyncedSectors,
+} from 'store/api/firebase';
 import { initialize } from 'store/actions/user.actions';
 
 export default store => {
@@ -16,11 +20,24 @@ export default store => {
     messagingSenderId: process.env.REACT_APP_SENDER_ID,
   });
 
-  Promise.all([getCurrentUser(), getLocalSectors()]).then(([user, local]) => {
-    const promise = user ? getSyncedSectors(user.uid) : Promise.resolve();
-    return promise.then(synced =>
-      store.dispatch(initialize({ local, user, synced })),
-    );
+  const unsubscribe = store.subscribe(() => {
+    const location = store.getState().routing.locationBeforeTransitions;
+    if (location) {
+      unsubscribe();
+      const currentSectorPromise = location.pathname.startsWith('/sector')
+        ? getCurrentSector(location.pathname.split('/')[2])
+        : Promise.resolve();
+      Promise.all([
+        getCurrentUser(),
+        getLocalSectors(),
+        currentSectorPromise,
+      ]).then(([user, local, currentSector]) => {
+        const promise = user ? getSyncedSectors(user.uid) : Promise.resolve();
+        return promise.then(synced =>
+          store.dispatch(initialize({ local, user, synced, currentSector })),
+        );
+      });
+    }
   });
 
   Fastclick();

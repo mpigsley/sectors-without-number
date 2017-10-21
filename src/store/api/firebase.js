@@ -56,16 +56,21 @@ export const getSyncedSectors = userId =>
       return synced;
     });
 
-export const updateSyncedSector = (sectorId, sector) => {
-  const db = Firestore();
-  return db
+export const getCurrentSector = sectorId =>
+  Firestore()
+    .collection('sectors')
+    .doc(sectorId)
+    .get()
+    .then(doc => (doc.exists ? doc.data() : undefined));
+
+export const updateSyncedSector = (sectorId, sector) =>
+  Firestore()
     .collection('sectors')
     .doc(sectorId)
     .update({
       ...sector,
       updated: Firestore.FieldValue.serverTimestamp(),
     });
-};
 
 export const removeSyncedSector = sectorId =>
   Firestore()

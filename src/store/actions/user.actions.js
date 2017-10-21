@@ -78,7 +78,12 @@ const onLogin = (dispatch, local) => result =>
       console.error(error);
     });
 
-export const initialize = ({ local, user, synced = {} }) => dispatch => {
+export const initialize = ({
+  local,
+  user,
+  synced = {},
+  currentSector,
+}) => dispatch => {
   let promise = Promise.resolve(user ? synced : local);
   if (user && size(local)) {
     promise = syncLocalSectors(local, user.uid).then(uploaded => ({
@@ -86,7 +91,12 @@ export const initialize = ({ local, user, synced = {} }) => dispatch => {
       ...uploaded,
     }));
   }
-  return promise.then(sectors => dispatch({ type: INITIALIZE, user, sectors }));
+  return promise.then(combinedSectors => {
+    const sectors = currentSector
+      ? { ...combinedSectors, [currentSector.key]: currentSector }
+      : combinedSectors;
+    dispatch({ type: INITIALIZE, user, sectors });
+  });
 };
 
 export const facebookLogin = () => (dispatch, getState) =>
