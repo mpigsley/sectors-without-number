@@ -1,5 +1,6 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { values, size } from 'lodash';
+import { push } from 'react-router-redux';
 
 import {
   updateCurrentUser,
@@ -167,5 +168,6 @@ export const updateUser = () => (dispatch, getState) => {
 
 export const logout = () => dispatch =>
   doLogout().then(() => {
+    dispatch(push('/'));
     dispatch({ type: LOGGED_OUT });
   });

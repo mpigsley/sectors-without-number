@@ -16,7 +16,7 @@ import {
   DELETE_SYSTEM,
 } from 'store/actions/system.actions';
 import { EDIT_PLANET, DELETE_PLANET } from 'store/actions/planet.actions';
-import { INITIALIZE, LOGGED_IN } from 'store/actions/user.actions';
+import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
 const initialState = {
   renderSector: false,
@@ -48,6 +48,11 @@ export default function sector(state = initialState, action) {
         saved: action.sectors,
       };
     }
+    case LOGGED_OUT:
+      return {
+        ...state,
+        ...initialState,
+      };
     case UPDATE_CONFIGURATION:
       return {
         ...state,

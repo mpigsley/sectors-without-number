@@ -35,7 +35,11 @@ export const uploadSector = sector => {
   const db = Firestore();
   return db
     .collection('sectors')
-    .add(sector)
+    .add({
+      ...sector,
+      created: Firestore.FieldValue.serverTimestamp(),
+      updated: Firestore.FieldValue.serverTimestamp(),
+    })
     .then(docRef => ({ [docRef.id]: sector }));
 };
 
@@ -51,5 +55,16 @@ export const getSyncedSectors = userId => {
         synced[doc.id] = doc.data();
       });
       return synced;
+    });
+};
+
+export const updateSyncedSector = (sectorId, key, value) => {
+  const db = Firestore();
+  return db
+    .collection('sectors')
+    .doc(key)
+    .update({
+      updated: Firestore.FieldValue.serverTimestamp(),
+      [key]: value,
     });
 };

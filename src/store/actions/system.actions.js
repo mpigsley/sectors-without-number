@@ -27,7 +27,7 @@ export const editSystem = (system, changes) => (dispatch, getState) => {
   const sector = { ...getCurrentSector(state), updated: Date.now() };
   sector.created = sector.created || Date.now();
   const update = { ...sector.systems[system], ...changes };
-  return createOrUpdateSector(sector.seed, {
+  return createOrUpdateSector(sector.key, {
     ...sector,
     systems: {
       ...sector.systems,
@@ -54,7 +54,7 @@ export const deleteSystem = system => (dispatch, getState) => {
   const state = getState();
   const sector = { ...getCurrentSector(state), updated: Date.now() };
   const systems = omit(sector.systems, system);
-  return createOrUpdateSector(sector.seed, {
+  return createOrUpdateSector(sector.key, {
     ...sector,
     systems,
   }).then(() => {
@@ -97,12 +97,12 @@ export const moveSystem = () => (dispatch, getState) => {
       [state.system.hoverKey]: source,
     });
   }
-  return createOrUpdateSector(sector.seed, {
+  return createOrUpdateSector(sector.key, {
     ...sector,
     systems,
   }).then(() => {
     dispatch(push(`/sector/${sector.key}`));
-    dispatch({ type: MOVE_SYSTEM, key: sector.seed, systems });
+    dispatch({ type: MOVE_SYSTEM, key: sector.key, systems });
     dispatch(
       ReduxToastrActions.add({
         options: {

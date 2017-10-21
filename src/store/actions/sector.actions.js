@@ -19,7 +19,7 @@ export const editSector = (key, value) => (dispatch, getState) => {
   const state = getState();
   const sector = { ...getCurrentSector(state), updated: Date.now() };
   sector.created = sector.created || Date.now();
-  return createOrUpdateSector(sector.seed, {
+  return createOrUpdateSector(sector.key, {
     ...sector,
     [key]: value,
   }).then(() => {
@@ -58,7 +58,7 @@ export const deleteSector = key => dispatch =>
 
 export const saveSector = () => (dispatch, getState) => {
   const { sector } = getState();
-  const key = sector.generated ? sector.generated.seed : sector.currentSector;
+  const key = sector.generated ? sector.generated.key : sector.currentSector;
   const value = sector.generated || sector.saved[sector.currentSector];
   const update = { ...value, updated: Date.now() };
   update.created = update.created || Date.now();
