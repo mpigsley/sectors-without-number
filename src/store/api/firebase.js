@@ -31,22 +31,20 @@ export const doLogout = () => FirebaseAuth().signOut();
 export const doPasswordReset = email =>
   FirebaseAuth().sendPasswordResetEmail(email);
 
-export const uploadSector = sector => {
-  const db = Firestore();
-  return db
+export const uploadSector = (sector, uid) =>
+  Firestore()
     .collection('sectors')
     .add({
       ...sector,
+      creator: uid,
       created: Firestore.FieldValue.serverTimestamp(),
       updated: Firestore.FieldValue.serverTimestamp(),
     })
     .then(docRef => docRef.update({ key: docRef.id }).then(() => docRef))
     .then(docRef => ({ ...sector, key: docRef.id }));
-};
 
-export const getSyncedSectors = userId => {
-  const db = Firestore();
-  return db
+export const getSyncedSectors = userId =>
+  Firestore()
     .collection('sectors')
     .where('creator', '==', userId)
     .get()
@@ -57,7 +55,6 @@ export const getSyncedSectors = userId => {
       });
       return synced;
     });
-};
 
 export const updateSyncedSector = (sectorId, key, value) => {
   const db = Firestore();
@@ -69,3 +66,9 @@ export const updateSyncedSector = (sectorId, key, value) => {
       [key]: value,
     });
 };
+
+export const removeSyncedSector = sectorId =>
+  Firestore()
+    .collection('sectors')
+    .doc(sectorId)
+    .delete();

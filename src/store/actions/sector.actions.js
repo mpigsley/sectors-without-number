@@ -1,7 +1,11 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 
 import { createOrUpdateSector, removeSector } from 'store/api/local';
-import { uploadSector, updateSyncedSector } from 'store/api/firebase';
+import {
+  uploadSector,
+  removeSyncedSector,
+  updateSyncedSector,
+} from 'store/api/firebase';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const GENERATE_SECTOR = 'GENERATE_SECTOR';
@@ -22,7 +26,7 @@ export const editSector = (key, value) => (dispatch, getState) => {
   let promise;
   if (state.user.model) {
     if (state.sector.generated) {
-      promise = uploadSector(sector);
+      promise = uploadSector(sector, state.user.model.uid);
     } else {
       promise = updateSyncedSector(sector.key, key, value);
     }
@@ -51,8 +55,17 @@ export const editSector = (key, value) => (dispatch, getState) => {
   });
 };
 
-export const deleteSector = key => dispatch =>
-  removeSector(key).then(() => {
+export const deleteSector = key => (dispatch, getState) => {
+  const state = getState();
+  let promise = Promise.resolve();
+  if (!state.sector.generated) {
+    if (state.user.model) {
+      promise = removeSyncedSector(key);
+    } else {
+      promise = removeSector(key);
+    }
+  }
+  return promise.then(() => {
     dispatch({ type: REMOVE_SAVED_SECTOR, key });
     dispatch(
       ReduxToastrActions.add({
@@ -62,22 +75,29 @@ export const deleteSector = key => dispatch =>
         },
         position: 'bottom-left',
         title: 'Deleted Sector',
-        message: 'Sector has been deleted in this browser.',
+        message: state.user.model
+          ? 'Sector has been deleted from your account.'
+          : 'Sector has been deleted in this browser.',
         type: 'success',
       }),
     );
   });
+};
 
 export const saveSector = () => (dispatch, getState) => {
   const state = getState();
-  const key = state.sector.generated
-    ? state.sector.generated.key
-    : state.sector.currentSector;
-  const value =
-    state.sector.generated || state.sector.saved[state.sector.currentSector];
-  const sector = { ...value, updated: Date.now() };
-  sector.created = sector.created || Date.now();
-  return createOrUpdateSector(key, sector).then(() => {
+  let sector = getCurrentSector(state);
+  let promise = Promise.resolve();
+  if (state.sector.generated) {
+    if (state.user.model) {
+      promise = uploadSector(sector, state.user.model.uid);
+    } else {
+      sector = { ...sector, updated: Date.now() };
+      sector.created = sector.created || Date.now();
+      promise = createOrUpdateSector(sector.key, sector);
+    }
+  }
+  return promise.then(() => {
     dispatch({ type: ADD_SAVED_SECTOR, sector });
     dispatch(
       ReduxToastrActions.add({
@@ -87,7 +107,9 @@ export const saveSector = () => (dispatch, getState) => {
         },
         position: 'bottom-left',
         title: 'Saved Sector',
-        message: 'Sector is persisted in this browser.',
+        message: state.user.model
+          ? 'Sector has been synced.'
+          : 'Sector is persisted in this browser.',
         type: 'success',
       }),
     );

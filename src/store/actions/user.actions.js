@@ -43,7 +43,7 @@ export const updateUserForm = (key, value) => ({
 
 const syncLocalSectors = (sectors, creator) =>
   Promise.all([
-    ...values(sectors).map(sector => uploadSector({ ...sector, creator })),
+    ...values(sectors).map(sector => uploadSector(sector, creator)),
     clearLocalDatabase(),
   ]).then(uploaded => {
     uploaded.splice(-1, 1); // Remove `clearLocalDatabase`

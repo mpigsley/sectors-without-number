@@ -26,7 +26,8 @@ export default function SidebarNavigation({
   type,
   saveSector,
   onDelete,
-  currentSector,
+  isSaved,
+  isSynced,
   onEdit,
 }) {
   const onCopy = () => {
@@ -41,8 +42,17 @@ export default function SidebarNavigation({
     window.print();
   };
 
+  let saveButton = null;
+  if (!isSaved) {
+    saveButton = (
+      <Button minimal onClick={saveSector}>
+        Save
+      </Button>
+    );
+  }
+
   let shareButton = null;
-  if (currentSector === 'generated') {
+  if (isSynced && isSaved) {
     shareButton = (
       <Button minimal onClick={onCopy}>
         Share
@@ -94,10 +104,8 @@ export default function SidebarNavigation({
           {typeIcon}
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
-          <Button minimal onClick={saveSector}>
-            Save
-          </Button>
-          <span className="SidebarNavigation-Spacer" />
+          {saveButton}
+          {saveButton ? <span className="SidebarNavigation-Spacer" /> : null}
           <Button minimal onClick={onEdit}>
             Edit
           </Button>
@@ -105,9 +113,7 @@ export default function SidebarNavigation({
           {deleteButton}
           <span className="SidebarNavigation-Spacer" />
           {shareButton}
-          {currentSector === 'generated' ? (
-            <span className="SidebarNavigation-Spacer" />
-          ) : null}
+          {shareButton ? <span className="SidebarNavigation-Spacer" /> : null}
           <Button minimal onClick={onPrint}>
             Print
           </Button>
@@ -149,7 +155,8 @@ SidebarNavigation.propTypes = {
   back: PropTypes.string,
   type: PropTypes.string,
   saveSector: PropTypes.func.isRequired,
-  currentSector: PropTypes.string,
+  isSaved: PropTypes.bool.isRequired,
+  isSynced: PropTypes.bool.isRequired,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
 };
@@ -157,7 +164,6 @@ SidebarNavigation.propTypes = {
 SidebarNavigation.defaultProps = {
   type: SidebarType.sector,
   back: null,
-  currentSector: null,
   onEdit: () => {},
   onDelete: null,
 };
