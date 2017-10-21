@@ -68,3 +68,9 @@
     color: $light4;
   }
 }
+
+@media print {
+  .AccountManager-Button {
+    display: none;
+  }
+}
