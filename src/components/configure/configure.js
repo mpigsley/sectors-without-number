@@ -13,7 +13,12 @@ import ButtonLink from 'primitives/other/button-link';
 
 import './style.css';
 
-export default function Configure({ updateConfiguration, columns, rows }) {
+export default function Configure({
+  updateConfiguration,
+  columns,
+  rows,
+  name,
+}) {
   const updateInput = e => {
     const key = e.target.getAttribute('data-key');
     let value = e.target.value;
@@ -35,6 +40,15 @@ export default function Configure({ updateConfiguration, columns, rows }) {
       <Header type={HeaderType.header2}>Configure</Header>
       <SubContainer noMargin direction="column" align="flexStart">
         {invalidText}
+        <Label noPadding htmlFor="name">
+          Sector Name
+        </Label>
+        <Input
+          data-key="name"
+          onChange={updateInput}
+          name="name"
+          value={name}
+        />
         <SubContainer noMargin>
           <SubContainer
             className="Configure-ButtonContainer"
@@ -87,9 +101,11 @@ Configure.propTypes = {
   updateConfiguration: PropTypes.func.isRequired,
   columns: PropTypes.number,
   rows: PropTypes.number,
+  name: PropTypes.string,
 };
 
 Configure.defaultProps = {
   columns: '',
   rows: '',
+  name: '',
 };

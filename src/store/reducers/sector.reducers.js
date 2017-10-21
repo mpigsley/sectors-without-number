@@ -1,7 +1,9 @@
+import Chance from 'chance';
 import { omit } from 'lodash';
 
 import { LOCATION_CHANGE } from 'react-router-redux';
 import sectorGenerator from 'utils/sector-generator';
+import { generateSectorName } from 'utils/name-generator';
 import {
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
@@ -22,8 +24,10 @@ const initialState = {
   generated: null,
   saved: {},
   configuration: {
-    rows: 10,
+    name: generateSectorName(new Chance()),
     columns: 8,
+    rows: 10,
+    isBuilder: false,
   },
 };
 
@@ -108,6 +112,7 @@ export default function sector(state = initialState, action) {
             update.generated = sectorGenerator({
               columns: state.configuration.columns,
               rows: state.configuration.rows,
+              name: state.configuration.name,
               key,
             });
           }

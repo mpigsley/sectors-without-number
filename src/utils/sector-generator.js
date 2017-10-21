@@ -199,6 +199,7 @@ const fullRandomGenerate = config => {
 
 export default ({
   key,
+  name,
   rows = DEFAULT_ROWS,
   columns = DEFAULT_COLUMNS,
   isBuilder,
@@ -208,7 +209,7 @@ export default ({
     key,
     rows,
     columns,
-    name: generateSectorName(seededChance),
+    name: name || generateSectorName(seededChance),
     systems: isBuilder
       ? {}
       : fullRandomGenerate({ seededChance, rows, columns }),
