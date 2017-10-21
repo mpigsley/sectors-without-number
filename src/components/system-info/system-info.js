@@ -73,14 +73,13 @@ export default class SectorInfo extends SidebarInfo {
       }),
     }).isRequired,
     editSystem: PropTypes.func.isRequired,
+    deleteSystem: PropTypes.func.isRequired,
     planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    this.onSaveSystem = this.onSaveSystem.bind(this);
-    this.onDeleteSystem = this.onDeleteSystem.bind(this);
     this.state = {
       name: this.props.system.name,
       planets: map(this.props.system.planets, ({ name, key }) => ({
@@ -108,7 +107,7 @@ export default class SectorInfo extends SidebarInfo {
     }
   }
 
-  onSaveSystem() {
+  onSaveSystem = () => {
     if (!this.planetNamesUnique()) {
       this.setState({ isNotUnique: true });
     } else {
@@ -118,14 +117,14 @@ export default class SectorInfo extends SidebarInfo {
       });
       this.onClose();
     }
-  }
+  };
 
-  onDeleteSystem(system) {
+  onDeleteSystem = system => {
     return () => {
       this.onCancelDelete();
       this.props.deleteSystem(system);
     };
-  }
+  };
 
   planetNamesUnique() {
     const otherPlanets = difference(

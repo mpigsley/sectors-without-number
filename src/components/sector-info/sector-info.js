@@ -23,6 +23,7 @@ import './style.css';
 export default class SectorInfo extends SidebarInfo {
   static propTypes = {
     sector: PropTypes.shape({
+      key: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       systems: PropTypes.shape().isRequired,
     }).isRequired,
@@ -30,14 +31,15 @@ export default class SectorInfo extends SidebarInfo {
       pathname: PropTypes.string,
     }).isRequired,
     editSectorName: PropTypes.func.isRequired,
+    deleteSector: PropTypes.func.isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    this.onSaveSector = this.onSaveSector.bind(this);
     this.state = {
       name: this.props.sector.name,
+      isConfirmDeleteOpen: false,
     };
   }
 
@@ -49,10 +51,15 @@ export default class SectorInfo extends SidebarInfo {
     }
   }
 
-  onSaveSector() {
+  onSaveSector = () => {
     this.props.editSectorName(this.state.name);
     this.onClose();
-  }
+  };
+
+  onDeleteSector = key => () => {
+    this.onCancelDelete();
+    this.props.deleteSector(key);
+  };
 
   renderEditModal() {
     return (
@@ -115,6 +122,7 @@ export default class SectorInfo extends SidebarInfo {
         name={this.props.sector.name}
         type={SidebarType.sector}
         onEdit={this.onEdit}
+        onDelete={this.onConfirmDelete}
       >
         {this.renderEmptyText()}
         {Object.keys(this.props.sector.systems)
@@ -132,6 +140,10 @@ export default class SectorInfo extends SidebarInfo {
             </SidebarLinkRow>
           ))}
         {this.renderEditModal()}
+        {this.renderConfirmModal(
+          this.onDeleteSector(this.props.sector.key),
+          'sector',
+        )}
       </SidebarNavigation>
     );
   }

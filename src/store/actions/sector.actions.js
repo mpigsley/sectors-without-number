@@ -1,4 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
+import { push } from 'react-router-redux';
 
 import { createOrUpdateSector, removeSector } from 'store/api/local';
 import {
@@ -66,6 +67,7 @@ export const deleteSector = key => (dispatch, getState) => {
     }
   }
   return promise.then(() => {
+    dispatch(push('/'));
     dispatch({ type: REMOVE_SAVED_SECTOR, key });
     dispatch(
       ReduxToastrActions.add({
