@@ -7,6 +7,13 @@ export const GENERATE_SECTOR = 'GENERATE_SECTOR';
 export const EDIT_SECTOR = 'EDIT_SECTOR';
 export const REMOVE_SAVED_SECTOR = 'REMOVE_SAVED_SECTOR';
 export const ADD_SAVED_SECTOR = 'ADD_SAVED_SECTOR';
+export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
+
+export const updateConfiguration = (key, value) => ({
+  type: UPDATE_CONFIGURATION,
+  key,
+  value,
+});
 
 export const editSector = (key, value) => (dispatch, getState) => {
   const state = getState();

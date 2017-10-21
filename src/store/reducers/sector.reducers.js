@@ -1,4 +1,3 @@
-import Chance from 'chance';
 import { omit } from 'lodash';
 
 import { LOCATION_CHANGE } from 'react-router-redux';
@@ -7,6 +6,7 @@ import {
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
   EDIT_SECTOR,
+  UPDATE_CONFIGURATION,
 } from 'store/actions/sector.actions';
 import {
   MOVE_SYSTEM,
@@ -21,6 +21,10 @@ const initialState = {
   currentSector: null,
   generated: null,
   saved: {},
+  configuration: {
+    rows: 10,
+    columns: 8,
+  },
 };
 
 export default function sector(state = initialState, action) {
@@ -40,6 +44,14 @@ export default function sector(state = initialState, action) {
         saved: action.sectors,
       };
     }
+    case UPDATE_CONFIGURATION:
+      return {
+        ...state,
+        configuration: {
+          ...state.configuration,
+          [action.key]: action.value,
+        },
+      };
     case ADD_SAVED_SECTOR: {
       const key = state.generated ? state.generated.seed : state.currentSector;
       const value = state.generated || state.saved[key];
@@ -84,7 +96,7 @@ export default function sector(state = initialState, action) {
       }
       if (pathname.startsWith('/sector/')) {
         const pathArray = pathname.split('/');
-        const key = pathArray[2] || new Chance().hash({ length: 20 });
+        const key = pathArray[2];
 
         const update = { renderSector: true };
         if (!state.currentSector) {
@@ -93,7 +105,11 @@ export default function sector(state = initialState, action) {
             update.currentSector = key;
           } else if (!state.generated) {
             update.currentSector = 'generated';
-            update.generated = sectorGenerator({ key });
+            update.generated = sectorGenerator({
+              columns: state.configuration.columns,
+              rows: state.configuration.rows,
+              key,
+            });
           }
         }
         return {
