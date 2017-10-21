@@ -10,11 +10,6 @@ import {
   EDIT_SECTOR,
   UPDATE_CONFIGURATION,
 } from 'store/actions/sector.actions';
-import {
-  MOVE_SYSTEM,
-  EDIT_SYSTEM,
-  DELETE_SYSTEM,
-} from 'store/actions/system.actions';
 import { EDIT_PLANET, DELETE_PLANET } from 'store/actions/planet.actions';
 import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
@@ -122,56 +117,6 @@ export default function sector(state = initialState, action) {
       return {
         ...state,
         renderSector: false,
-      };
-    }
-    case MOVE_SYSTEM: {
-      const existingSector = state.generated || state.saved[action.key];
-      return {
-        ...state,
-        currentSector: action.key,
-        generated: null,
-        saved: {
-          ...state.saved,
-          [action.key]: {
-            ...existingSector,
-            systems: action.systems,
-          },
-        },
-      };
-    }
-    case EDIT_SYSTEM: {
-      const existingSector =
-        state.generated || state.saved[state.currentSector];
-      return {
-        ...state,
-        currentSector: existingSector.key,
-        generated: null,
-        saved: {
-          ...state.saved,
-          [existingSector.key]: {
-            ...existingSector,
-            systems: {
-              ...existingSector.systems,
-              [action.system]: action.update,
-            },
-          },
-        },
-      };
-    }
-    case DELETE_SYSTEM: {
-      const existingSector =
-        state.generated || state.saved[state.currentSector];
-      return {
-        ...state,
-        currentSector: existingSector.key,
-        generated: null,
-        saved: {
-          ...state.saved,
-          [existingSector.key]: {
-            ...existingSector,
-            systems: omit(existingSector.systems, action.system),
-          },
-        },
       };
     }
     case EDIT_PLANET: {

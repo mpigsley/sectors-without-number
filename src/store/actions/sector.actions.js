@@ -29,7 +29,7 @@ export const editSector = (key, value) => (dispatch, getState) => {
     if (state.sector.generated) {
       promise = uploadSector(sector, state.user.model.uid);
     } else {
-      promise = updateSyncedSector(sector.key, key, value);
+      promise = updateSyncedSector(sector.key, sector);
     }
   } else {
     sector = { ...sector, updated: Date.now() };

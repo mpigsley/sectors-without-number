@@ -32,6 +32,7 @@ export default class SectorInfo extends SidebarInfo {
     }).isRequired,
     editSectorName: PropTypes.func.isRequired,
     deleteSector: PropTypes.func.isRequired,
+    isSaved: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -122,7 +123,7 @@ export default class SectorInfo extends SidebarInfo {
         name={this.props.sector.name}
         type={SidebarType.sector}
         onEdit={this.onEdit}
-        onDelete={this.onConfirmDelete}
+        onDelete={this.props.isSaved ? this.onConfirmDelete : undefined}
       >
         {this.renderEmptyText()}
         {Object.keys(this.props.sector.systems)

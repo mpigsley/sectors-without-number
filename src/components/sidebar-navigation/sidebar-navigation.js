@@ -109,7 +109,7 @@ export default function SidebarNavigation({
           <Button minimal onClick={onEdit}>
             Edit
           </Button>
-          {onDelete ? <span className="SidebarNavigation-Spacer" /> : null}
+          {deleteButton ? <span className="SidebarNavigation-Spacer" /> : null}
           {deleteButton}
           <span className="SidebarNavigation-Spacer" />
           {shareButton}

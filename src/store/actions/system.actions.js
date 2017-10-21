@@ -2,16 +2,15 @@ import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
 import { omit } from 'lodash';
 
+import { EDIT_SECTOR } from 'store/actions/sector.actions';
 import { createOrUpdateSector } from 'store/api/local';
+import { uploadSector, updateSyncedSector } from 'store/api/firebase';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const SYSTEM_HOLD = 'SYSTEM_HOLD';
 export const RELEASE_HOLD = 'RELEASE_HOLD';
-export const MOVE_SYSTEM = 'MOVE_SYSTEM';
 export const SYSTEM_HOVER_START = 'SYSTEM_HOVER_START';
 export const SYSTEM_HOVER_END = 'SYSTEM_HOVER_END';
-export const EDIT_SYSTEM = 'EDIT_SYSTEM';
-export const DELETE_SYSTEM = 'DELETE_SYSTEM';
 export const OPEN_SYSTEM_CREATE = 'OPEN_SYSTEM_CREATE';
 export const CLOSE_SYSTEM_CREATE = 'CLOSE_SYSTEM_CREATE';
 
@@ -24,17 +23,34 @@ export const systemHoverEnd = key => ({ type: SYSTEM_HOVER_END, key });
 
 export const editSystem = (system, changes) => (dispatch, getState) => {
   const state = getState();
-  const sector = { ...getCurrentSector(state), updated: Date.now() };
-  sector.created = sector.created || Date.now();
-  const update = { ...sector.systems[system], ...changes };
-  return createOrUpdateSector(sector.key, {
+  let sector = getCurrentSector(state);
+  sector = {
     ...sector,
     systems: {
       ...sector.systems,
-      [system]: update,
+      [system]: {
+        ...sector.systems[system],
+        ...changes,
+      },
     },
-  }).then(() => {
-    dispatch({ type: EDIT_SYSTEM, system, update });
+  };
+  let promise;
+  if (state.user.model) {
+    if (state.sector.generated) {
+      promise = uploadSector(sector, state.user.model.uid);
+    } else {
+      promise = updateSyncedSector(sector.key, sector);
+    }
+  } else {
+    sector.updated = Date.now();
+    sector.created = sector.created || Date.now();
+    promise = createOrUpdateSector(sector.key, sector);
+  }
+  return promise.then((uploadedSector = sector) => {
+    const url = state.routing.locationBeforeTransitions.pathname.split('/');
+    url[2] = uploadedSector.key;
+    dispatch({ type: EDIT_SECTOR, sector: uploadedSector });
+    dispatch(push(url.join('/')));
     dispatch(
       ReduxToastrActions.add({
         options: {
@@ -52,14 +68,26 @@ export const editSystem = (system, changes) => (dispatch, getState) => {
 
 export const deleteSystem = system => (dispatch, getState) => {
   const state = getState();
-  const sector = { ...getCurrentSector(state), updated: Date.now() };
-  const systems = omit(sector.systems, system);
-  return createOrUpdateSector(sector.key, {
+  let sector = getCurrentSector(state);
+  sector = {
     ...sector,
-    systems,
-  }).then(() => {
-    dispatch(push(`/sector/${sector.key}`));
-    dispatch({ type: DELETE_SYSTEM, system });
+    systems: omit(sector.systems, system),
+  };
+  let promise;
+  if (state.user.model) {
+    if (state.sector.generated) {
+      promise = uploadSector(sector, state.user.model.uid);
+    } else {
+      promise = updateSyncedSector(sector.key, sector);
+    }
+  } else {
+    sector.updated = Date.now();
+    sector.created = sector.created || Date.now();
+    promise = createOrUpdateSector(sector.key, sector);
+  }
+  return promise.then((uploadedSector = sector) => {
+    dispatch(push(`/sector/${uploadedSector.key}`));
+    dispatch({ type: EDIT_SECTOR, sector: uploadedSector });
     dispatch(
       ReduxToastrActions.add({
         options: {
@@ -77,32 +105,40 @@ export const deleteSystem = system => (dispatch, getState) => {
 
 export const moveSystem = () => (dispatch, getState) => {
   const state = getState();
-  const sector = { ...getCurrentSector(state), updated: Date.now() };
-  sector.created = sector.created || Date.now();
-  let systems = { ...sector.systems };
+  let sector = getCurrentSector(state);
+  sector = { ...sector };
   const source = {
-    ...systems[state.system.holdKey],
+    ...sector.systems[state.system.holdKey],
     key: state.system.hoverKey,
   };
-  if (systems[state.system.hoverKey]) {
-    const destination = { ...systems[state.system.hoverKey] };
+  if (sector.systems[state.system.hoverKey]) {
+    const destination = { ...sector.systems[state.system.hoverKey] };
     destination.key = state.system.holdKey;
-    systems = Object.assign(systems, {
+    sector.systems = Object.assign(sector.systems, {
       [state.system.hoverKey]: source,
       [state.system.holdKey]: destination,
     });
   } else {
-    systems = omit(systems, state.system.holdKey);
-    systems = Object.assign(systems, {
+    sector.systems = omit(sector.systems, state.system.holdKey);
+    sector.systems = Object.assign(sector.systems, {
       [state.system.hoverKey]: source,
     });
   }
-  return createOrUpdateSector(sector.key, {
-    ...sector,
-    systems,
-  }).then(() => {
-    dispatch(push(`/sector/${sector.key}`));
-    dispatch({ type: MOVE_SYSTEM, key: sector.key, systems });
+  let promise;
+  if (state.user.model) {
+    if (state.sector.generated) {
+      promise = uploadSector(sector, state.user.model.uid);
+    } else {
+      promise = updateSyncedSector(sector.key, sector);
+    }
+  } else {
+    sector.updated = Date.now();
+    sector.created = sector.created || Date.now();
+    promise = createOrUpdateSector(sector.key, sector);
+  }
+  return promise.then((uploadedSector = sector) => {
+    dispatch(push(`/sector/${uploadedSector.key}`));
+    dispatch({ type: EDIT_SECTOR, sector: uploadedSector });
     dispatch(
       ReduxToastrActions.add({
         options: {

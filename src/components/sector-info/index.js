@@ -6,6 +6,7 @@ import SectorInfo from './sector-info';
 
 const mapStateToProps = state => ({
   sector: getCurrentSector(state),
+  isSaved: !state.sector.generated,
 });
 
 const mapDispatchToProps = dispatch => ({

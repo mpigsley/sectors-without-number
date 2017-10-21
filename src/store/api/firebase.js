@@ -56,14 +56,14 @@ export const getSyncedSectors = userId =>
       return synced;
     });
 
-export const updateSyncedSector = (sectorId, key, value) => {
+export const updateSyncedSector = (sectorId, sector) => {
   const db = Firestore();
   return db
     .collection('sectors')
     .doc(sectorId)
     .update({
+      ...sector,
       updated: Firestore.FieldValue.serverTimestamp(),
-      [key]: value,
     });
 };
 
