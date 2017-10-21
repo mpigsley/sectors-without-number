@@ -1,11 +1,9 @@
-import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
 import { omit } from 'lodash';
 
 import { EDIT_SECTOR } from 'store/actions/sector.actions';
-import { createOrUpdateSector } from 'store/api/local';
-import { uploadSector, updateSyncedSector } from 'store/api/firebase';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
+import { SuccessToast, ErrorToast, creatorOrUpdateSector } from 'store/utils';
 
 export const SYSTEM_HOLD = 'SYSTEM_HOLD';
 export const RELEASE_HOLD = 'RELEASE_HOLD';
@@ -23,133 +21,88 @@ export const systemHoverEnd = key => ({ type: SYSTEM_HOVER_END, key });
 
 export const editSystem = (system, changes) => (dispatch, getState) => {
   const state = getState();
-  let sector = getCurrentSector(state);
-  sector = {
-    ...sector,
+  const currentSector = getCurrentSector(state);
+  return creatorOrUpdateSector(state, {
+    ...currentSector,
     systems: {
-      ...sector.systems,
+      ...currentSector.systems,
       [system]: {
-        ...sector.systems[system],
+        ...currentSector.systems[system],
         ...changes,
       },
     },
-  };
-  let promise;
-  if (state.user.model) {
-    if (state.sector.generated) {
-      promise = uploadSector(sector, state.user.model.uid);
-    } else {
-      promise = updateSyncedSector(sector.key, sector);
-    }
-  } else {
-    sector.updated = Date.now();
-    sector.created = sector.created || Date.now();
-    promise = createOrUpdateSector(sector.key, sector);
-  }
-  return promise.then((uploadedSector = sector) => {
-    const url = state.routing.locationBeforeTransitions.pathname.split('/');
-    url[2] = uploadedSector.key;
-    dispatch({ type: EDIT_SECTOR, sector: uploadedSector });
-    dispatch(push(url.join('/')));
-    dispatch(
-      ReduxToastrActions.add({
-        options: {
-          removeOnHover: true,
-          showCloseButton: true,
-        },
-        position: 'bottom-left',
-        title: 'System Updated',
-        message: 'Your sector has been saved.',
-        type: 'success',
-      }),
-    );
-  });
+  })
+    .then(sector => {
+      const url = state.routing.locationBeforeTransitions.pathname.split('/');
+      url[2] = sector.key;
+      dispatch({ type: EDIT_SECTOR, sector });
+      dispatch(push(url.join('/')));
+      dispatch(
+        SuccessToast({
+          title: 'System Updated',
+        }),
+      );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
+    });
 };
 
 export const deleteSystem = system => (dispatch, getState) => {
   const state = getState();
-  let sector = getCurrentSector(state);
-  sector = {
-    ...sector,
-    systems: omit(sector.systems, system),
-  };
-  let promise;
-  if (state.user.model) {
-    if (state.sector.generated) {
-      promise = uploadSector(sector, state.user.model.uid);
-    } else {
-      promise = updateSyncedSector(sector.key, sector);
-    }
-  } else {
-    sector.updated = Date.now();
-    sector.created = sector.created || Date.now();
-    promise = createOrUpdateSector(sector.key, sector);
-  }
-  return promise.then((uploadedSector = sector) => {
-    dispatch(push(`/sector/${uploadedSector.key}`));
-    dispatch({ type: EDIT_SECTOR, sector: uploadedSector });
-    dispatch(
-      ReduxToastrActions.add({
-        options: {
-          removeOnHover: true,
-          showCloseButton: true,
-        },
-        position: 'bottom-left',
-        title: 'System Deleted',
-        message: 'Your sector has been saved.',
-        type: 'success',
-      }),
-    );
-  });
+  const currentSector = getCurrentSector(state);
+  return creatorOrUpdateSector(state, {
+    ...currentSector,
+    systems: omit(currentSector.systems, system),
+  })
+    .then(sector => {
+      dispatch(push(`/sector/${sector.key}`));
+      dispatch({ type: EDIT_SECTOR, sector });
+      dispatch(
+        SuccessToast({
+          title: 'System Deleted',
+        }),
+      );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
+    });
 };
 
 export const moveSystem = () => (dispatch, getState) => {
   const state = getState();
-  let sector = getCurrentSector(state);
-  sector = { ...sector };
+  const currentSector = { ...getCurrentSector(state) };
   const source = {
-    ...sector.systems[state.system.holdKey],
+    ...currentSector.systems[state.system.holdKey],
     key: state.system.hoverKey,
   };
-  if (sector.systems[state.system.hoverKey]) {
-    const destination = { ...sector.systems[state.system.hoverKey] };
+  if (currentSector.systems[state.system.hoverKey]) {
+    const destination = { ...currentSector.systems[state.system.hoverKey] };
     destination.key = state.system.holdKey;
-    sector.systems = Object.assign(sector.systems, {
+    currentSector.systems = Object.assign(currentSector.systems, {
       [state.system.hoverKey]: source,
       [state.system.holdKey]: destination,
     });
   } else {
-    sector.systems = omit(sector.systems, state.system.holdKey);
-    sector.systems = Object.assign(sector.systems, {
+    currentSector.systems = omit(currentSector.systems, state.system.holdKey);
+    currentSector.systems = Object.assign(currentSector.systems, {
       [state.system.hoverKey]: source,
     });
   }
-  let promise;
-  if (state.user.model) {
-    if (state.sector.generated) {
-      promise = uploadSector(sector, state.user.model.uid);
-    } else {
-      promise = updateSyncedSector(sector.key, sector);
-    }
-  } else {
-    sector.updated = Date.now();
-    sector.created = sector.created || Date.now();
-    promise = createOrUpdateSector(sector.key, sector);
-  }
-  return promise.then((uploadedSector = sector) => {
-    dispatch(push(`/sector/${uploadedSector.key}`));
-    dispatch({ type: EDIT_SECTOR, sector: uploadedSector });
-    dispatch(
-      ReduxToastrActions.add({
-        options: {
-          removeOnHover: true,
-          showCloseButton: true,
-        },
-        position: 'bottom-left',
-        title: 'System Moved',
-        message: 'Your sector has been saved.',
-        type: 'success',
-      }),
-    );
-  });
+  return creatorOrUpdateSector(state, currentSector)
+    .then(sector => {
+      dispatch(push(`/sector/${sector.key}`));
+      dispatch({ type: EDIT_SECTOR, sector });
+      dispatch(
+        SuccessToast({
+          title: 'System Moved',
+        }),
+      );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
+    });
 };

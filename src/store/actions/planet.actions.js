@@ -2,7 +2,7 @@ import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
 import { omit } from 'lodash';
 
-import { createOrUpdateSector } from 'store/api/local';
+import { setSector } from 'store/api/local';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 
 export const EDIT_PLANET = 'EDIT_PLANET';
@@ -21,7 +21,7 @@ export const editPlanet = (system, planet, changes) => (dispatch, getState) => {
     ...changes,
     key: newKey,
   };
-  return createOrUpdateSector(sector.key, {
+  return setSector(sector.key, {
     ...sector,
     systems: {
       ...sector.systems,
@@ -61,7 +61,7 @@ export const deletePlanet = (system, planet) => (dispatch, getState) => {
   const state = getState();
   const sector = { ...getCurrentSector(state), updated: Date.now() };
   const planets = omit(sector.systems[system].planets, planet);
-  return createOrUpdateSector(sector.key, {
+  return setSector(sector.key, {
     ...sector,
     systems: {
       ...sector.systems,
