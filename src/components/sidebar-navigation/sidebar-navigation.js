@@ -28,6 +28,7 @@ export default function SidebarNavigation({
   onDelete,
   isSaved,
   isSynced,
+  isCloudSave,
   onEdit,
 }) {
   const onCopy = () => {
@@ -43,7 +44,7 @@ export default function SidebarNavigation({
   };
 
   let saveButton = null;
-  if (!isSaved) {
+  if (!isSaved && !isCloudSave) {
     saveButton = (
       <Button minimal onClick={saveSector}>
         Save
@@ -51,8 +52,17 @@ export default function SidebarNavigation({
     );
   }
 
+  let editButton = null;
+  if (onEdit && !isCloudSave) {
+    editButton = (
+      <Button minimal onClick={onEdit}>
+        Edit
+      </Button>
+    );
+  }
+
   let shareButton = null;
-  if (isSynced && isSaved) {
+  if ((isSynced || isCloudSave) && isSaved) {
     shareButton = (
       <Button minimal onClick={onCopy}>
         Share
@@ -61,7 +71,7 @@ export default function SidebarNavigation({
   }
 
   let deleteButton = null;
-  if (onDelete) {
+  if (onDelete && !isCloudSave) {
     deleteButton = (
       <Button minimal onClick={onDelete}>
         Delete
@@ -106,12 +116,10 @@ export default function SidebarNavigation({
         <FlexContainer justify="center" shrink="0">
           {saveButton}
           {saveButton ? <span className="SidebarNavigation-Spacer" /> : null}
-          <Button minimal onClick={onEdit}>
-            Edit
-          </Button>
-          {deleteButton ? <span className="SidebarNavigation-Spacer" /> : null}
+          {editButton}
+          {editButton ? <span className="SidebarNavigation-Spacer" /> : null}
           {deleteButton}
-          <span className="SidebarNavigation-Spacer" />
+          {deleteButton ? <span className="SidebarNavigation-Spacer" /> : null}
           {shareButton}
           {shareButton ? <span className="SidebarNavigation-Spacer" /> : null}
           <Button minimal onClick={onPrint}>
@@ -157,6 +165,7 @@ SidebarNavigation.propTypes = {
   saveSector: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSynced: PropTypes.bool.isRequired,
+  isCloudSave: PropTypes.bool.isRequired,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
 };
@@ -164,6 +173,6 @@ SidebarNavigation.propTypes = {
 SidebarNavigation.defaultProps = {
   type: SidebarType.sector,
   back: null,
-  onEdit: () => {},
+  onEdit: null,
   onDelete: null,
 };

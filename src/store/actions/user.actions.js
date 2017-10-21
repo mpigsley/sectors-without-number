@@ -92,9 +92,13 @@ export const initialize = ({
     }));
   }
   return promise.then(combinedSectors => {
-    const sectors = currentSector
-      ? { ...combinedSectors, [currentSector.key]: currentSector }
-      : combinedSectors;
+    let sectors = combinedSectors;
+    if (currentSector) {
+      sectors = {
+        [currentSector.key]: { ...currentSector, isCloudSave: true },
+        ...combinedSectors,
+      };
+    }
     dispatch({ type: INITIALIZE, user, sectors });
   });
 };
