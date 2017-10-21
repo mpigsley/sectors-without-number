@@ -39,8 +39,9 @@ export const editSector = (key, value) => (dispatch, getState) => {
       [key]: value,
     });
   }
-  return promise.then(uploadedSector => {
-    dispatch({ type: EDIT_SECTOR, sector: uploadedSector || sector });
+  return promise.then((uploadedSector = sector) => {
+    dispatch({ type: EDIT_SECTOR, sector: uploadedSector });
+    dispatch(push(`/sector/${uploadedSector.key}`));
     dispatch(
       ReduxToastrActions.add({
         options: {
@@ -99,8 +100,11 @@ export const saveSector = () => (dispatch, getState) => {
       promise = createOrUpdateSector(sector.key, sector);
     }
   }
-  return promise.then(() => {
-    dispatch({ type: ADD_SAVED_SECTOR, sector });
+  return promise.then((uploadedSector = sector) => {
+    const url = state.routing.locationBeforeTransitions.pathname.split('/');
+    url[2] = uploadedSector.key;
+    dispatch({ type: ADD_SAVED_SECTOR, sector: uploadedSector });
+    dispatch(push(url.join('/')));
     dispatch(
       ReduxToastrActions.add({
         options: {
