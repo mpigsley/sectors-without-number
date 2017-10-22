@@ -15,7 +15,7 @@ function System(props) {
   const onMouseDown = () => {
     isMousedDown = true;
     delay(() => {
-      if (isMousedDown) {
+      if (isMousedDown && !props.isCloudSave) {
         if (props.data.system) {
           systemHold(props.data.systemKey);
         } else {
@@ -32,10 +32,12 @@ function System(props) {
         `/sector/${props.router.params.sector}/system/${props.data
           .systemKey}${props.location.search}`,
       );
-    } else if (!props.data.highlighted || props.holdKey === props.hoverKey) {
-      props.systemRelease();
-    } else if (props.holdKey) {
-      props.moveSystem();
+    } else if (!props.isCloudSave) {
+      if (!props.data.highlighted || props.holdKey === props.hoverKey) {
+        props.systemRelease();
+      } else if (!props.isCloudSave && props.holdKey) {
+        props.moveSystem();
+      }
     }
   };
 
@@ -169,6 +171,7 @@ System.propTypes = {
   openSystemCreate: PropTypes.func.isRequired,
   holdKey: PropTypes.string,
   hoverKey: PropTypes.string,
+  isCloudSave: PropTypes.bool.isRequired,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,
     params: PropTypes.shape({
