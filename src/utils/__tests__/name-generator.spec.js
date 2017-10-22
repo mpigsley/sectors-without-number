@@ -4,49 +4,41 @@ import { GreekLetters } from 'constants/language';
 import { generateName, generateSectorName } from '../name-generator';
 
 describe('generateName', () => {
-  let seededChance;
+  let chance;
   beforeEach(() => {
-    seededChance = new Chance('asdfghjkl');
+    chance = new Chance();
   });
 
   it('uppercases the first letter of the name', () => {
-    const firstLetter = generateName(seededChance)[0];
+    const firstLetter = generateName(chance)[0];
     expect(firstLetter).toEqual(firstLetter.toUpperCase());
   });
 
-  it('generates the correct name given a specific seed', () => {
-    expect(generateName(seededChance)).toEqual('Matixeceon');
-  });
-
   it("doesn't generate the same name twice", () => {
-    const name = generateName(seededChance);
-    expect(generateName(seededChance)).not.toEqual(name);
+    const name = generateName(chance);
+    expect(generateName(chance)).not.toEqual(name);
   });
 });
 
 describe('generateSectorName', () => {
-  let seededChance;
+  let chance;
   beforeEach(() => {
-    seededChance = new Chance('asdfghjkl');
+    chance = new Chance();
   });
 
   it('contains a greek letter', () => {
-    const name = generateSectorName(seededChance);
+    const name = generateSectorName(chance);
     expect(GreekLetters.filter(letter => name.includes(letter))).toHaveLength(
       1,
     );
   });
 
   it('is two words', () => {
-    expect(generateSectorName(seededChance).split(' ')).toHaveLength(2);
-  });
-
-  it('generates the correct name given a specific seed', () => {
-    expect(generateSectorName(seededChance)).toEqual('Edena Omega');
+    expect(generateSectorName(chance).split(' ')).toHaveLength(2);
   });
 
   it("doesn't generate the same name twice", () => {
-    const name = generateSectorName(seededChance);
-    expect(generateSectorName(seededChance)).not.toEqual(name);
+    const name = generateSectorName(chance);
+    expect(generateSectorName(chance)).not.toEqual(name);
   });
 });
