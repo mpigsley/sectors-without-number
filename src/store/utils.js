@@ -1,4 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
+import { omit } from 'lodash';
 
 import { setSector } from 'store/api/local';
 import { uploadSector, updateSyncedSector } from 'store/api/firebase';
@@ -39,11 +40,17 @@ export const creatorOrUpdateSector = (state, sector) => {
       promise = updateSyncedSector(sector.key, sector);
     }
   } else {
-    promise = setSector(sector.key, {
-      ...sector,
-      updated: Date.now(),
-      created: sector.created || Date.now(),
-    });
+    promise = setSector(
+      sector.key,
+      omit(
+        {
+          ...sector,
+          updated: Date.now(),
+          created: sector.created || Date.now(),
+        },
+        'isCloudSave',
+      ),
+    );
   }
   return promise.then((uploadedSector = sector) => uploadedSector);
 };
