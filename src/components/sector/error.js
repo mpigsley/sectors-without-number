@@ -1,8 +1,13 @@
 import React from 'react';
+import { Home, Zap } from 'react-feather';
+
+import SubContainer from 'primitives/container/sub-container';
 import ContentContainer from 'primitives/container/content-container';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import Header, { HeaderType } from 'primitives/text/header';
-import Spinner from 'primitives/other/spinner';
+import Button from 'primitives/other/button';
+import ButtonLink from 'primitives/other/button-link';
+import LinkIcon from 'primitives/other/link-icon';
 import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex-generator';
@@ -23,8 +28,17 @@ export default function Loading() {
       />
       <AbsoluteContainer>
         <ContentContainer direction="column" align="center" justify="center">
-          <Spinner size={100} />
-          <Header type={HeaderType.header2}>Loading Sector</Header>
+          <Header type={HeaderType.header2}>Sector Does Not Exist</Header>
+          <SubContainer wrap justify="center" align="center">
+            <ButtonLink to="/">
+              <LinkIcon icon={Home} size="20" />
+              Dashboard
+            </ButtonLink>
+            <Button>
+              <LinkIcon icon={Zap} size="20" />
+              Generate
+            </Button>
+          </SubContainer>
         </ContentContainer>
       </AbsoluteContainer>
     </div>

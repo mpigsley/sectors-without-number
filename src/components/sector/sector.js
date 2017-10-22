@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { throttle } from 'lodash';
+import { throttle, isEmpty } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectorSidebar from 'components/sector-sidebar';
@@ -12,6 +12,7 @@ import hexGenerator from 'utils/hex-generator';
 import { coordinatesFromKey } from 'utils/common';
 import NewSystemModal from './new-system-modal';
 import Loading from './loading';
+import Error from './error';
 
 import './style.css';
 
@@ -24,10 +25,10 @@ export default class Sector extends Component {
     renderSector: PropTypes.bool.isRequired,
     isInitialized: PropTypes.bool.isRequired,
     sector: PropTypes.shape({
-      rows: PropTypes.number.isRequired,
-      columns: PropTypes.number.isRequired,
-      systems: PropTypes.shape().isRequired,
-    }).isRequired,
+      rows: PropTypes.number,
+      columns: PropTypes.number,
+      systems: PropTypes.shape(),
+    }),
     createSystemKey: PropTypes.string,
     editSystem: PropTypes.func.isRequired,
     closeSystemCreate: PropTypes.func.isRequired,
@@ -37,6 +38,7 @@ export default class Sector extends Component {
 
   static defaultProps = {
     createSystemKey: null,
+    sector: {},
   };
 
   state = {
@@ -77,6 +79,8 @@ export default class Sector extends Component {
   render() {
     if (!this.props.isInitialized) {
       return <Loading />;
+    } else if (isEmpty(this.props.sector)) {
+      return <Error />;
     }
 
     const { hexes, printable } = hexGenerator({

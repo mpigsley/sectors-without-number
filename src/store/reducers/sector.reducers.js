@@ -2,7 +2,6 @@ import Chance from 'chance';
 import { omit } from 'lodash';
 
 import { LOCATION_CHANGE } from 'react-router-redux';
-import sectorGenerator from 'utils/sector-generator';
 import { generateSectorName } from 'utils/name-generator';
 import {
   ADD_SAVED_SECTOR,
@@ -30,7 +29,7 @@ export default function sector(state = initialState, action) {
     case LOGGED_IN:
     case INITIALIZE: {
       let { generated, currentSector } = state;
-      if (!!state.generated && !!action.sectors[state.generated.key]) {
+      if (generated && action.sectors[state.generated.key]) {
         generated = null;
         currentSector = state.generated.key;
       }
@@ -87,29 +86,19 @@ export default function sector(state = initialState, action) {
         return {
           ...initialState,
           saved: state.saved,
+          configuration: {
+            ...initialState.configuration,
+            name: generateSectorName(new Chance()),
+          },
         };
       }
       if (pathname.startsWith('/sector/')) {
-        const pathArray = pathname.split('/');
-        const key = pathArray[2];
-
-        const update = { renderSector: true };
-        if (!state.currentSector) {
-          const saved = state.saved[key];
-          if (saved) {
-            update.currentSector = key;
-          } else if (!state.generated) {
-            update.currentSector = 'generated';
-            update.generated = sectorGenerator({
-              ...state.configuration,
-              key,
-            });
-          }
-        }
         return {
           ...state,
           renderSector: true,
-          ...update,
+          currentSector: !state.currentSector
+            ? pathname.split('/')[2]
+            : state.currentSector,
         };
       }
       return {
