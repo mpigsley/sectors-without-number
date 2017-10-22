@@ -55,7 +55,7 @@ export default class NewSystemModal extends Component {
   onCreate() {
     this.props.onCreateSystem(
       new System(
-        { seededChance: new Chance() },
+        { chance: new Chance() },
         this.props.x,
         this.props.y,
         this.state.name,

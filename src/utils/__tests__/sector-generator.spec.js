@@ -7,7 +7,6 @@ describe('SectorGenerator', () => {
     config = {
       columns: 8,
       rows: 10,
-      seed: 'asdfghjkl',
       isBuilder: false,
     };
   });

@@ -12,7 +12,6 @@ describe('HexGenerator', () => {
     const { systems, rows, columns } = sectorGenerator({
       columns: 8,
       rows: 10,
-      seed: 'asdfghjkl',
     });
     config = {
       renderSector: true,

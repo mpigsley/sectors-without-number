@@ -1,6 +1,6 @@
 # Sectors Without Number
 
-A seeded, random, revised edition compliant, [stars without number](http://www.sinenomine-pub.com/?page_id=395) sector generator.
+Revised edition compliant [Stars Without Number](http://www.sinenomine-pub.com/?page_id=395) sector generator.
 
 [![Build Status](https://travis-ci.org/mpigsley/sectors-without-number.svg?branch=master)](https://travis-ci.org/mpigsley/sectors-without-number)
 

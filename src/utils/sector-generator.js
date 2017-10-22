@@ -13,26 +13,18 @@ const INDEX = 1;
 const DEFAULT_ROWS = 10;
 const DEFAULT_COLUMNS = 8;
 
-export const generatePlanet = (seededChance, existingName) => () => {
-  const name = existingName || generateName(seededChance);
+export const generatePlanet = (chance, existingName) => () => {
+  const name = existingName || generateName(chance);
   return {
     name,
     key: encodeURIComponent(name.toLowerCase()),
-    tags: seededChance.pickset(Object.keys(worldTagKeys), 2),
-    techLevel: `TL${seededChance.weighted(
+    tags: chance.pickset(Object.keys(worldTagKeys), 2),
+    techLevel: `TL${chance.weighted(
       ['0', '1', '2', '3', '4', '4+', '5'],
       [1, 1, 2, 2, 3, 1, 1],
     )}`,
-    atmosphere: seededChance.weighted(Object.keys(Atmosphere), [
-      1,
-      1,
-      1,
-      5,
-      1,
-      1,
-      1,
-    ]),
-    temperature: seededChance.weighted(Object.keys(Temperature), [
+    atmosphere: chance.weighted(Object.keys(Atmosphere), [1, 1, 1, 5, 1, 1, 1]),
+    temperature: chance.weighted(Object.keys(Temperature), [
       1,
       1,
       2,
@@ -41,49 +33,31 @@ export const generatePlanet = (seededChance, existingName) => () => {
       1,
       1,
     ]),
-    biosphere: seededChance.weighted(Object.keys(Biosphere), [
-      1,
-      1,
-      2,
-      3,
-      2,
-      1,
-      1,
-    ]),
-    population: seededChance.weighted(Object.keys(Population), [
-      1,
-      1,
-      2,
-      3,
-      2,
-      1,
-      1,
-    ]),
+    biosphere: chance.weighted(Object.keys(Biosphere), [1, 1, 2, 3, 2, 1, 1]),
+    population: chance.weighted(Object.keys(Population), [1, 1, 2, 3, 2, 1, 1]),
   };
 };
 
 export class System {
   constructor(config, x, y, name, numPlanets) {
     this.config = config;
-    this.name = name || generateName(this.config.seededChance);
+    this.name = name || generateName(this.config.chance);
     const planetArray = [
-      ...Array(
-        numPlanets || this.config.seededChance.weighted([1, 2, 3], [5, 3, 2]),
-      ),
-    ].map(generatePlanet(this.config.seededChance));
+      ...Array(numPlanets || this.config.chance.weighted([1, 2, 3], [5, 3, 2])),
+    ].map(generatePlanet(this.config.chance));
     this.planets = zipObject(
       planetArray.map(planet => planet.key),
       planetArray,
     );
     this.x =
       x ||
-      this.config.seededChance.integer({
+      this.config.chance.integer({
         min: INDEX,
         max: this.config.columns,
       });
     this.y =
       y ||
-      this.config.seededChance.integer({
+      this.config.chance.integer({
         min: INDEX,
         max: this.config.rows,
       });
@@ -156,18 +130,18 @@ export class System {
   }
 }
 
-const randomNeighbor = (neighbors, existingLocs, seededChance) => {
+const randomNeighbor = (neighbors, existingLocs, chance) => {
   const filteredNeighbors = neighbors.filter(
     system => !existingLocs.includes(system.key),
   );
-  return filteredNeighbors.length && seededChance.pickone(filteredNeighbors);
+  return filteredNeighbors.length && chance.pickone(filteredNeighbors);
 };
 
 const fullRandomGenerate = config => {
   const systems = {};
   const numHexes = config.rows * config.columns;
   const systemNum =
-    config.seededChance.integer({ min: 0, max: Math.floor(numHexes / 8) }) +
+    config.chance.integer({ min: 0, max: Math.floor(numHexes / 8) }) +
     Math.floor(numHexes / 4);
   let extra = systemNum;
 
@@ -179,7 +153,7 @@ const fullRandomGenerate = config => {
         const neighbor = randomNeighbor(
           system.getNeighbors(),
           Object.keys(systems),
-          config.seededChance,
+          config.chance,
         );
 
         if (neighbor) {
@@ -211,7 +185,7 @@ export default ({
   systems: isBuilder
     ? {}
     : fullRandomGenerate({
-        seededChance: new Chance(),
+        chance: new Chance(),
         rows,
         columns,
       }),
