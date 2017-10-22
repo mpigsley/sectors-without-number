@@ -3,6 +3,7 @@ import { every } from 'lodash';
 
 import sectorGenerator, { generatePlanet } from '../sector-generator';
 import { worldTagKeys } from '../../constants/world-tags';
+import TechLevel from '../../constants/tech-level';
 import Atmosphere from '../../constants/atmosphere';
 import Temperature from '../../constants/temperature';
 import Biosphere from '../../constants/biosphere';
@@ -76,6 +77,11 @@ describe('SectorGenerator', () => {
       expect(
         every(tags, tag => Object.keys(worldTagKeys).includes(tag)),
       ).toBeTruthy();
+    });
+
+    it('should include tech level from list', () => {
+      const { techLevel } = generatePlanet(new Chance())();
+      expect(Object.keys(TechLevel).includes(techLevel)).toBeTruthy();
     });
 
     it('should include atmosphere from list', () => {
