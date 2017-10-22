@@ -43,7 +43,7 @@ export const updateUserForm = (key, value) => ({
 
 const syncLocalSectors = (sectors, creator) =>
   Promise.all([
-    ...values(sectors).map(sector => uploadSector(sector, creator)),
+    ...sectors.map(sector => uploadSector(sector, creator)),
     clearLocalDatabase(),
   ]).then(uploaded => {
     uploaded.splice(-1, 1); // Remove `clearLocalDatabase`
@@ -53,11 +53,14 @@ const syncLocalSectors = (sectors, creator) =>
 const onLogin = (dispatch, local) => result =>
   getSyncedSectors(result.user ? result.user.uid : result.uid)
     .then(synced => {
-      if (!size(local)) {
+      const filteredLocal = values(local).filter(
+        ({ isCloudSave }) => !isCloudSave,
+      );
+      if (!filteredLocal.length) {
         return synced;
       }
       return syncLocalSectors(
-        local,
+        filteredLocal,
         result.user ? result.user.uid : result.uid,
       ).then(uploaded => ({
         ...synced,
@@ -86,7 +89,7 @@ export const initialize = ({
 }) => dispatch => {
   let promise = Promise.resolve(user ? synced : local);
   if (user && size(local)) {
-    promise = syncLocalSectors(local, user.uid).then(uploaded => ({
+    promise = syncLocalSectors(values(local), user.uid).then(uploaded => ({
       ...synced,
       ...uploaded,
     }));
