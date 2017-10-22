@@ -203,15 +203,16 @@ export default ({
   rows = DEFAULT_ROWS,
   columns = DEFAULT_COLUMNS,
   isBuilder,
-}) => {
-  const seededChance = new Chance(key);
-  return {
-    key,
-    rows,
-    columns,
-    name: name || generateSectorName(seededChance),
-    systems: isBuilder
-      ? {}
-      : fullRandomGenerate({ seededChance, rows, columns }),
-  };
-};
+}) => ({
+  key,
+  rows,
+  columns,
+  name: name || generateSectorName(new Chance()),
+  systems: isBuilder
+    ? {}
+    : fullRandomGenerate({
+        seededChance: new Chance(),
+        rows,
+        columns,
+      }),
+});
