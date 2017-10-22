@@ -4,6 +4,7 @@ import { omit } from 'lodash';
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { generateSectorName } from 'utils/name-generator';
 import {
+  GENERATE_SECTOR,
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
   EDIT_SECTOR,
@@ -44,6 +45,12 @@ export default function sector(state = initialState, action) {
       return {
         ...state,
         ...initialState,
+      };
+    case GENERATE_SECTOR:
+      return {
+        ...state,
+        currentSector: 'generated',
+        generated: action.generated,
       };
     case UPDATE_CONFIGURATION:
       return {

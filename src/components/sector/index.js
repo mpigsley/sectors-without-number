@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { generateSector } from 'store/actions/sector.actions';
 import { editSystem, closeSystemCreate } from 'store/actions/system.actions';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 import { closeUserDropdown } from 'store/actions/user.actions';
@@ -17,6 +18,7 @@ const mapDispatchToProps = dispatch => ({
   editSystem: (system, changes) => dispatch(editSystem(system, changes)),
   closeSystemCreate: () => dispatch(closeSystemCreate()),
   closeUserDropdown: () => dispatch(closeUserDropdown()),
+  generateSector: () => dispatch(generateSector()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sector);

@@ -33,6 +33,7 @@ export default class Sector extends Component {
     editSystem: PropTypes.func.isRequired,
     closeSystemCreate: PropTypes.func.isRequired,
     closeUserDropdown: PropTypes.func.isRequired,
+    generateSector: PropTypes.func.isRequired,
     isDropdownActive: PropTypes.bool.isRequired,
   };
 
@@ -80,7 +81,7 @@ export default class Sector extends Component {
     if (!this.props.isInitialized) {
       return <Loading />;
     } else if (isEmpty(this.props.sector)) {
-      return <Error />;
+      return <Error generateSector={this.props.generateSector} />;
     }
 
     const { hexes, printable } = hexGenerator({

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Home, Zap } from 'react-feather';
 
 import SubContainer from 'primitives/container/sub-container';
@@ -12,7 +13,7 @@ import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex-generator';
 
-export default function Loading() {
+export default function Error({ generateSector }) {
   const { hexes } = hexGenerator({
     renderSector: false,
     height: window.innerHeight,
@@ -34,7 +35,7 @@ export default function Loading() {
               <LinkIcon icon={Home} size="20" />
               Dashboard
             </ButtonLink>
-            <Button>
+            <Button onClick={generateSector}>
               <LinkIcon icon={Zap} size="20" />
               Generate
             </Button>
@@ -44,3 +45,7 @@ export default function Loading() {
     </div>
   );
 }
+
+Error.propTypes = {
+  generateSector: PropTypes.func.isRequired,
+};

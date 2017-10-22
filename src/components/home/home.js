@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Chance from 'chance';
 import { Settings, Zap } from 'react-feather';
 
 import { stringSortByKey } from 'utils/common';
@@ -11,10 +10,11 @@ import FlexContainer from 'primitives/container/flex-container';
 import SubContainer from 'primitives/container/sub-container';
 import LinkIcon from 'primitives/other/link-icon';
 import ButtonLink from 'primitives/other/button-link';
+import Button from 'primitives/other/button';
 
 import './style.css';
 
-export default function Home({ saved }) {
+export default function Home({ saved, generateSector }) {
   const renderSaved = () => {
     if (Object.keys(saved).length === 0) {
       return null;
@@ -29,9 +29,7 @@ export default function Home({ saved }) {
           <Header type={HeaderType.header3} className="Home-SavedTitle">
             Saved Sectors
           </Header>
-          <div className="Home-SavedSecondary">
-            Select a saved sector to begin.
-          </div>
+          <div className="Home-SavedSecondary">Select a sector to begin.</div>
         </FlexContainer>
         <FlexContainer direction="column" className="Home-SavedList">
           {Object.keys(saved)
@@ -68,10 +66,10 @@ export default function Home({ saved }) {
           <LinkIcon icon={Settings} size="20" />
           Configure
         </ButtonLink>
-        <ButtonLink to={`/sector/${new Chance().hash({ length: 20 })}`}>
+        <Button onClick={generateSector}>
           <LinkIcon icon={Zap} size="20" />
           Generate
-        </ButtonLink>
+        </Button>
       </SubContainer>
     </ContentContainer>
   );
@@ -79,4 +77,5 @@ export default function Home({ saved }) {
 
 Home.propTypes = {
   saved: PropTypes.shape().isRequired,
+  generateSector: PropTypes.func.isRequired,
 };

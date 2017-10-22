@@ -198,7 +198,7 @@ const fullRandomGenerate = config => {
 };
 
 export default ({
-  key,
+  key = new Chance().hash({ length: 20 }),
   name,
   rows = DEFAULT_ROWS,
   columns = DEFAULT_COLUMNS,

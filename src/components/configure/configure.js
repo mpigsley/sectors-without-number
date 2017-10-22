@@ -11,7 +11,7 @@ import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
 import Label from 'primitives/form/label';
 import LinkIcon from 'primitives/other/link-icon';
-import ButtonLink from 'primitives/other/button-link';
+import Button from 'primitives/other/button';
 
 import { generateSectorName } from 'utils/name-generator';
 
@@ -19,6 +19,7 @@ import './style.css';
 
 export default function Configure({
   updateConfiguration,
+  generateSector,
   isBuilder,
   columns,
   rows,
@@ -114,10 +115,10 @@ export default function Configure({
         justify="center"
         align="center"
       >
-        <ButtonLink to={`/sector/${new Chance().hash({ length: 20 })}`}>
+        <Button onClick={generateSector}>
           <LinkIcon icon={Zap} size="20" />
           Generate
-        </ButtonLink>
+        </Button>
       </SubContainer>
     </ContentContainer>
   );
@@ -125,6 +126,7 @@ export default function Configure({
 
 Configure.propTypes = {
   updateConfiguration: PropTypes.func.isRequired,
+  generateSector: PropTypes.func.isRequired,
   isBuilder: PropTypes.bool.isRequired,
   columns: PropTypes.number,
   rows: PropTypes.number,
