@@ -42,6 +42,22 @@ describe('SectorGenerator', () => {
     expect(systems).toEqual({});
   });
 
+  it('should have a minimum system count of at least row * columns / 4', () => {
+    const { systems } = sectorGenerator(config);
+    expect(
+      Object.keys(systems).length >= config.rows * config.columns / 4,
+    ).toBeTruthy();
+  });
+
+  it('should generate between one and three planets per system', () => {
+    const { systems } = sectorGenerator(config);
+    Object.values(systems).forEach(system => {
+      const numPlanets = Object.keys(system.planets).length;
+      expect(numPlanets >= 1).toBeTruthy();
+      expect(numPlanets <= 3).toBeTruthy();
+    });
+  });
+
   describe('generatePlanet', () => {
     it('should include a random name', () => {
       const { name } = generatePlanet(new Chance())();
