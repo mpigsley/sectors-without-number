@@ -19,10 +19,12 @@ export default class SidebarInfo extends Component {
   }
 
   onEdit() {
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ isOpen: true });
   }
 
   onClose() {
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ isOpen: false });
   }
 
@@ -49,6 +51,7 @@ export default class SidebarInfo extends Component {
   onRandomizeName(namingFunc) {
     return () => {
       const chance = new Chance();
+      // eslint-disable-next-line react/no-unused-state
       this.setState({ name: namingFunc(chance) });
     };
   }

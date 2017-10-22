@@ -24,13 +24,13 @@ export default function Configure({
   rows,
   name,
 }) {
-  const updateInput = e => {
-    const key = e.target.getAttribute('data-key');
-    let value = e.target.value;
-    if (e.target.type === 'number') {
+  const updateInput = ({ target }) => {
+    const key = target.getAttribute('data-key');
+    let { value } = target;
+    if (target.type === 'number') {
       value = value ? Number.parseInt(value, 10) : null;
-    } else if (e.target.type === 'checkbox') {
-      value = e.target.checked;
+    } else if (target.type === 'checkbox') {
+      value = target.checked;
     }
     updateConfiguration(key, value);
   };

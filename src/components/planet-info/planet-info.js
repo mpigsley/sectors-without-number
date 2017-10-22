@@ -216,14 +216,12 @@ export default class PlanetInfo extends SidebarInfo {
           onChange={this.onEditDropdown(stateKey, { isNotUnique: false })}
           dropUp={dropUp}
           options={
-            Array.isArray(constants) ? (
-              constants
-            ) : (
-              map(constants, ({ name }, key) => ({
-                value: key,
-                label: name,
-              }))
-            )
+            Array.isArray(constants)
+              ? constants
+              : map(constants, ({ name }, key) => ({
+                  value: key,
+                  label: name,
+                }))
           }
         />
       </FlexContainer>

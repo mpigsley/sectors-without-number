@@ -87,10 +87,13 @@ export default class Sector extends Component {
       columns: this.props.sector.columns,
     });
 
+    let { closeUserDropdown } = this.props;
+    if (!this.props.isDropdownActive) {
+      closeUserDropdown = null;
+    }
+
     return (
-      <div
-        onClick={this.props.isDropdownActive && this.props.closeUserDropdown}
-      >
+      <div onClick={closeUserDropdown}>
         <FlexContainer className="Sector" direction="row">
           {this.renderTooltips(hexes)}
           <HexMap

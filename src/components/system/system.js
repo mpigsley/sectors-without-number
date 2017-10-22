@@ -10,8 +10,7 @@ let isMousedDown = false;
 const hexPadding = 2;
 
 function System(props) {
-  const systemHold = props.systemHold;
-  const openSystemCreate = props.openSystemCreate;
+  const { systemHold, openSystemCreate } = props;
 
   const onMouseDown = () => {
     isMousedDown = true;

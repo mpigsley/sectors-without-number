@@ -29,8 +29,7 @@ export default function sector(state = initialState, action) {
   switch (action.type) {
     case LOGGED_IN:
     case INITIALIZE: {
-      let generated = state.generated;
-      let currentSector = state.currentSector;
+      let { generated, currentSector } = state;
       if (!!state.generated && !!action.sectors[state.generated.key]) {
         generated = null;
         currentSector = state.generated.key;

@@ -4,11 +4,9 @@ import classNames from 'classnames';
 
 import './style.css';
 
-export default function LinkIcon(props) {
-  const Icon = props.icon;
-  return (
-    <Icon {...props} className={classNames('LinkIcon', props.className)} />
-  );
+export default function LinkIcon({ icon, className, ...rest }) {
+  const Icon = icon;
+  return <Icon {...rest} className={classNames('LinkIcon', className)} />;
 }
 
 LinkIcon.propTypes = {

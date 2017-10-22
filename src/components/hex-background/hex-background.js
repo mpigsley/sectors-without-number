@@ -42,10 +42,13 @@ export default class HexBackground extends Component {
       ...this.props,
     });
 
+    let { closeUserDropdown } = this.props;
+    if (!this.props.isDropdownActive) {
+      closeUserDropdown = null;
+    }
+
     return (
-      <div
-        onClick={this.props.isDropdownActive && this.props.closeUserDropdown}
-      >
+      <div onClick={closeUserDropdown}>
         <HexMap
           width={this.state.width}
           height={this.state.height}

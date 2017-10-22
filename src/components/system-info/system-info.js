@@ -119,11 +119,9 @@ export default class SectorInfo extends SidebarInfo {
     }
   };
 
-  onDeleteSystem = system => {
-    return () => {
-      this.onCancelDelete();
-      this.props.deleteSystem(system);
-    };
+  onDeleteSystem = system => () => {
+    this.onCancelDelete();
+    this.props.deleteSystem(system);
   };
 
   planetNamesUnique() {

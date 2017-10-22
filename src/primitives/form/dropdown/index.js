@@ -34,7 +34,6 @@ Dropdown.propTypes = {
 };
 
 Dropdown.defaultProps = {
-  options: [],
   dropUp: false,
   allowCreate: false,
 };

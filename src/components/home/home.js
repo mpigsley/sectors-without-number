@@ -80,7 +80,3 @@ export default function Home({ saved }) {
 Home.propTypes = {
   saved: PropTypes.shape().isRequired,
 };
-
-Home.defaultProps = {
-  user: null,
-};
