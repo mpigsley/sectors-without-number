@@ -12,8 +12,10 @@
     "start:js": "react-scripts start",
     "start:prod": "npm run build && firebase serve",
     "build": "npm run build:css && react-scripts build",
-    "build:css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
-    "watch:css": "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
+    "build:css":
+      "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
+    "watch:css":
+      "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "test": "react-scripts test --env=jsdom --coverage",
     "test:watch": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
@@ -51,6 +53,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
+    "enzyme": "^3.1.0",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -60,6 +63,14 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.4.0",
     "prettier": "^1.7.4",
-    "react-scripts": "^1.0.14"
+    "react-scripts": "^1.0.14",
+    "react-test-renderer": "^16.0.0"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!node_modules",
+      "!src/components/**/index.js"
+    ]
   }
 }
