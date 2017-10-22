@@ -4,10 +4,9 @@ import { omit } from 'lodash';
 import { setSector } from 'store/api/local';
 import { uploadSector, updateSyncedSector } from 'store/api/firebase';
 
-export const SuccessToast = ({
-  title = 'Sector Saved',
-  message = 'Your sector has been saved.',
-}) =>
+export const SuccessToast = (
+  { title = 'Sector Saved', message = 'Your sector has been saved.' } = {},
+) =>
   ReduxToastrActions.add({
     options: {
       removeOnHover: true,
