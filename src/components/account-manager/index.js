@@ -16,7 +16,7 @@ import AccountManager from './account-manager';
 const mapStateToProps = state => ({
   user: state.user.model,
   isDropdownActive: state.user.isDropdownActive,
-  isFetching: state.user.isFetchingState,
+  isInitialized: state.user.isInitialized,
   displayName: state.user.form.displayName,
   isEditModalOpen: state.user.isEditModalOpen,
 });

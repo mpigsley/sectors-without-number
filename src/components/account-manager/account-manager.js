@@ -19,12 +19,12 @@ export default function AccountManager({
   updateUser,
   logout,
   isEditModalOpen,
-  isFetching,
+  isInitialized,
   isDropdownActive,
   displayName,
   user,
 }) {
-  if (isFetching) {
+  if (!isInitialized) {
     return null;
   }
   if (!user) {
@@ -101,7 +101,7 @@ AccountManager.propTypes = {
   updateUser: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
   isEditModalOpen: PropTypes.bool.isRequired,
-  isFetching: PropTypes.bool.isRequired,
+  isInitialized: PropTypes.bool.isRequired,
   isDropdownActive: PropTypes.bool.isRequired,
   displayName: PropTypes.string,
   user: PropTypes.shape({

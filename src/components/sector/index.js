@@ -10,6 +10,7 @@ const mapStateToProps = state => ({
   sector: getCurrentSector(state),
   createSystemKey: state.system.createSystemKey,
   isDropdownActive: state.user.isDropdownActive,
+  isInitialized: state.user.isInitialized,
 });
 
 const mapDispatchToProps = dispatch => ({

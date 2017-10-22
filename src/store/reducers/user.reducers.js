@@ -14,7 +14,7 @@ import {
 } from 'store/actions/user.actions';
 
 const initialState = {
-  isFetchingState: true,
+  isInitialized: false,
   isDropdownActive: false,
   isLoginModalOpen: false,
   isEditModalOpen: false,
@@ -35,7 +35,7 @@ export default function user(state = initialState, action) {
         ...state,
         model: action.user,
         isLoginModalOpen: false,
-        isFetchingState: false,
+        isInitialized: true,
         form: {
           ...state.form,
           displayName: (action.user || {}).displayName,

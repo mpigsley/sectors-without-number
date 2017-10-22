@@ -11,13 +11,18 @@ import HexMap from 'components/hex-map';
 import hexGenerator from 'utils/hex-generator';
 import { coordinatesFromKey } from 'utils/common';
 import NewSystemModal from './new-system-modal';
+import Loading from './loading';
 
 import './style.css';
+
+const calcWidth = () =>
+  window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth;
 
 export default class Sector extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
+    isInitialized: PropTypes.bool.isRequired,
     sector: PropTypes.shape({
       rows: PropTypes.number.isRequired,
       columns: PropTypes.number.isRequired,
@@ -34,16 +39,9 @@ export default class Sector extends Component {
     createSystemKey: null,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.onResize = this.onResize.bind(this);
-  }
-
   state = {
     height: window.innerHeight,
-    width:
-      window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth,
+    width: calcWidth(),
   };
 
   componentDidMount() {
@@ -57,8 +55,7 @@ export default class Sector extends Component {
   onResize = throttle(() => {
     this.setState({
       height: window.innerHeight,
-      width:
-        window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth,
+      width: calcWidth(),
     });
   }, 100);
 
@@ -78,6 +75,10 @@ export default class Sector extends Component {
   }
 
   render() {
+    if (!this.props.isInitialized) {
+      return <Loading />;
+    }
+
     const { hexes, printable } = hexGenerator({
       renderSector: true,
       height: this.state.height,

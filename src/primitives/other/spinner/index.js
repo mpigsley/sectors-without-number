@@ -4,12 +4,12 @@ import classNames from 'classnames';
 
 import './style.css';
 
-export default function Spinner({ className, isLight, size }) {
+export default function Spinner({ className, isDark, size }) {
   return (
     <div
       style={{ width: size, height: size }}
       className={classNames('Spinner', className, {
-        'Spinner--light': isLight,
+        'Spinner--dark': isDark,
       })}
     >
       <div className="Spinner-Circle1 Spinner-Child" />
@@ -30,12 +30,12 @@ export default function Spinner({ className, isLight, size }) {
 
 Spinner.propTypes = {
   className: PropTypes.string,
-  isLight: PropTypes.bool,
+  isDark: PropTypes.bool,
   size: PropTypes.number,
 };
 
 Spinner.defaultProps = {
   className: null,
-  isLight: false,
+  isDark: false,
   size: 30,
 };

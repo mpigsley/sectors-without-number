@@ -14,8 +14,8 @@
 .Spinner {
   position: relative;
 
-  &--light .Spinner-Child:before {
-    background-color: $light2;
+  &--dark .Spinner-Child:before {
+    background-color: $dark4;
   }
 }
 
@@ -32,7 +32,7 @@
     margin: 0 auto;
     width: 15%;
     height: 15%;
-    background-color: $dark4;
+    background-color: $light2;
     border-radius: 100%;
     animation: circleBounceDelay 1.2s infinite ease-in-out both;
   }
