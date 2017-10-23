@@ -13,7 +13,7 @@ import {
   getSyncedSectors,
   uploadSector,
   updateCurrentUser,
-  doSignup,
+  doLogout,
 } from '../../api/firebase';
 
 const UID = 'uid';
@@ -55,6 +55,7 @@ describe('User Actions', () => {
     dispatch = jest.fn(actionData => dispatchedActions.push(actionData));
     getSyncedSectors.mockClear();
     uploadSector.mockClear();
+    console.error = jest.fn();
   });
 
   const formTests = func => {
@@ -294,6 +295,30 @@ describe('User Actions', () => {
         expect(dispatchedActions[0].user.displayName).toEqual(testName);
       });
     });
+
+    test('should dispatch error toast when a service failure occurs', () => {
+      expect.assertions(2);
+      updateCurrentUser.mockImplementation(() => Promise.reject());
+      const getState = () => ({
+        user: { form: { displayName: '' } },
+      });
+      return updateUser()(dispatch, getState).then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatchedActions[0]).toMatchObject({
+          payload: {
+            message: 'Report a problem if it persists.',
+            options: { removeOnHover: true, showCloseButton: true },
+            position: 'bottom-left',
+            title: 'There has been an error',
+            type: 'error',
+          },
+          type: '@ReduxToastr/toastr/ADD',
+        });
+        updateCurrentUser.mockImplementation(
+          jest.fn((data = {}) => Promise.resolve(data)),
+        );
+      });
+    });
   });
 
   describe('logout', () => {
@@ -313,6 +338,27 @@ describe('User Actions', () => {
       return logout()(dispatch).then(() => {
         expect(dispatch).toHaveBeenCalledTimes(2);
         expect(dispatchedActions[1].type).toEqual(LOGGED_OUT);
+      });
+    });
+
+    test('should dispatch error toast when a service failure occurs', () => {
+      expect.assertions(2);
+      doLogout.mockImplementation(() => Promise.reject());
+      return logout()(dispatch).then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatchedActions[0]).toMatchObject({
+          payload: {
+            message: 'Report a problem if it persists.',
+            options: { removeOnHover: true, showCloseButton: true },
+            position: 'bottom-left',
+            title: 'There has been an error',
+            type: 'error',
+          },
+          type: '@ReduxToastr/toastr/ADD',
+        });
+        doLogout.mockImplementation(
+          jest.fn((data = {}) => Promise.resolve(data)),
+        );
       });
     });
   });
