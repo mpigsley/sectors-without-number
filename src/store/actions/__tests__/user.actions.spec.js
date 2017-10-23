@@ -298,7 +298,7 @@ describe('User Actions', () => {
 
     test('should dispatch error toast when a service failure occurs', () => {
       expect.assertions(2);
-      updateCurrentUser.mockImplementation(() => Promise.reject());
+      updateCurrentUser.mockImplementationOnce(() => Promise.reject());
       const getState = () => ({
         user: { form: { displayName: '' } },
       });
@@ -314,9 +314,6 @@ describe('User Actions', () => {
           },
           type: '@ReduxToastr/toastr/ADD',
         });
-        updateCurrentUser.mockImplementation(
-          jest.fn((data = {}) => Promise.resolve(data)),
-        );
       });
     });
   });
@@ -343,7 +340,7 @@ describe('User Actions', () => {
 
     test('should dispatch error toast when a service failure occurs', () => {
       expect.assertions(2);
-      doLogout.mockImplementation(() => Promise.reject());
+      doLogout.mockImplementationOnce(() => Promise.reject());
       return logout()(dispatch).then(() => {
         expect(dispatch).toHaveBeenCalledTimes(1);
         expect(dispatchedActions[0]).toMatchObject({
@@ -356,9 +353,6 @@ describe('User Actions', () => {
           },
           type: '@ReduxToastr/toastr/ADD',
         });
-        doLogout.mockImplementation(
-          jest.fn((data = {}) => Promise.resolve(data)),
-        );
       });
     });
   });
