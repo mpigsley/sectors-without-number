@@ -179,6 +179,29 @@ describe('User Actions', () => {
     });
   };
 
+  const errorToastTest = (func, mockFunc) => {
+    test('should dispatch error toast when a service failure occurs', () => {
+      expect.assertions(2);
+      mockFunc.mockImplementationOnce(() => Promise.reject());
+      const getState = () => ({
+        user: { form: { displayName: '' } },
+      });
+      return func()(dispatch, getState).then(() => {
+        expect(dispatch).toHaveBeenCalledTimes(1);
+        expect(dispatchedActions[0]).toMatchObject({
+          payload: {
+            message: 'Report a problem if it persists.',
+            options: { removeOnHover: true, showCloseButton: true },
+            position: 'bottom-left',
+            title: 'There has been an error',
+            type: 'error',
+          },
+          type: '@ReduxToastr/toastr/ADD',
+        });
+      });
+    });
+  };
+
   describe('initialize', () => {
     test('should dispatch local sectors if user is not logged in', () => {
       expect.assertions(3);
@@ -296,26 +319,7 @@ describe('User Actions', () => {
       });
     });
 
-    test('should dispatch error toast when a service failure occurs', () => {
-      expect.assertions(2);
-      updateCurrentUser.mockImplementationOnce(() => Promise.reject());
-      const getState = () => ({
-        user: { form: { displayName: '' } },
-      });
-      return updateUser()(dispatch, getState).then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatchedActions[0]).toMatchObject({
-          payload: {
-            message: 'Report a problem if it persists.',
-            options: { removeOnHover: true, showCloseButton: true },
-            position: 'bottom-left',
-            title: 'There has been an error',
-            type: 'error',
-          },
-          type: '@ReduxToastr/toastr/ADD',
-        });
-      });
-    });
+    errorToastTest(updateUser, updateCurrentUser);
   });
 
   describe('logout', () => {
@@ -338,22 +342,6 @@ describe('User Actions', () => {
       });
     });
 
-    test('should dispatch error toast when a service failure occurs', () => {
-      expect.assertions(2);
-      doLogout.mockImplementationOnce(() => Promise.reject());
-      return logout()(dispatch).then(() => {
-        expect(dispatch).toHaveBeenCalledTimes(1);
-        expect(dispatchedActions[0]).toMatchObject({
-          payload: {
-            message: 'Report a problem if it persists.',
-            options: { removeOnHover: true, showCloseButton: true },
-            position: 'bottom-left',
-            title: 'There has been an error',
-            type: 'error',
-          },
-          type: '@ReduxToastr/toastr/ADD',
-        });
-      });
-    });
+    errorToastTest(logout, doLogout);
   });
 });
