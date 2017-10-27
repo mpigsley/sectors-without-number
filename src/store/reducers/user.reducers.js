@@ -13,7 +13,7 @@ import {
   CLOSE_USER_DROPDOWN,
 } from 'store/actions/user.actions';
 
-const initialState = {
+export const initialState = {
   isInitialized: false,
   isDropdownActive: false,
   isLoginModalOpen: false,
