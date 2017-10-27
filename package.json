@@ -14,7 +14,7 @@
     "build": "npm run build:css && react-scripts build",
     "build:css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch:css": "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "test": "react-scripts test --env=jsdom --coverage",
+    "test": "NODE_PATH=./src react-scripts test --env=jsdom --coverage",
     "test:watch": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
@@ -51,7 +51,6 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
-    "babel-plugin-module-resolver": "^2.7.1",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
