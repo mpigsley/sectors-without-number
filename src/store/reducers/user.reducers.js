@@ -38,7 +38,7 @@ export default function user(state = initialState, action) {
         isInitialized: true,
         form: {
           ...state.form,
-          displayName: (action.user || {}).displayName,
+          displayName: (action.user || {}).displayName || '',
         },
       };
     case OPEN_LOGIN_MODAL:

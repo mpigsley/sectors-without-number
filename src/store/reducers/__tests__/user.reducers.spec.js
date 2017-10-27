@@ -67,7 +67,7 @@ describe('User Reducers', () => {
       const state = UserReducers(undefined, {
         type: INITIALIZE,
       });
-      expect(state.form.displayName).toEqual(undefined);
+      expect(state.form.displayName).toEqual('');
     });
   });
 
