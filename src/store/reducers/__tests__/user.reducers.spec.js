@@ -62,6 +62,13 @@ describe('User Reducers', () => {
       expect(state.model.displayName).toEqual(testName);
       expect(state.form.displayName).toEqual(testName);
     });
+
+    test('should set displayName in form to an empty string even if user is not defined on action', () => {
+      const state = UserReducers(undefined, {
+        type: INITIALIZE,
+      });
+      expect(state.form.displayName).toEqual(undefined);
+    });
   });
 
   describe('OPEN_LOGIN_MODAL', () => {
