@@ -3,6 +3,7 @@ cache:
   directories:
     - node_modules
 script:
+  - cp .env.example .env
   - npm run build
   - npm test
   - npm run lint
