@@ -40,7 +40,7 @@
     "react-dom": "^16.0.0",
     "react-fastclick": "^3.0.2",
     "react-feather": "^1.0.7",
-    "react-modal": "^3.0.4",
+    "react-modal": "^3.1.0",
     "react-redux": "^5.0.6",
     "react-redux-toastr": "^7.1.5",
     "react-router": "^3.0.2",
@@ -53,6 +53,8 @@
   },
   "devDependencies": {
     "babel-eslint": "^8.0.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
     "eslint": "^4.9.0",
     "eslint-config-airbnb": "^16.1.0",
     "eslint-config-airbnb-base": "^12.1.0",
@@ -62,7 +64,8 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.4.0",
     "prettier": "^1.7.4",
-    "react-scripts": "^1.0.14"
+    "react-scripts": "^1.0.14",
+    "react-test-renderer": "^16.0.0"
   },
   "jest": {
     "collectCoverageFrom": [
