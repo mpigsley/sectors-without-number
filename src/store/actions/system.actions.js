@@ -89,10 +89,10 @@ export const moveSystem = () => (dispatch, getState) => {
       [state.system.hoverKey]: source,
     });
   }
+  dispatch(push(`/sector/${currentSector.key}`));
+  dispatch({ type: EDIT_SECTOR, sector: currentSector });
   return creatorOrUpdateSector(state, currentSector)
-    .then(sector => {
-      dispatch(push(`/sector/${sector.key}`));
-      dispatch({ type: EDIT_SECTOR, sector });
+    .then(() => {
       dispatch(
         SuccessToast({
           title: 'System Moved',
