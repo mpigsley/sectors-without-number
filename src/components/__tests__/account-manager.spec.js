@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import Modal from 'primitives/modal/modal';
-import AccountManager from '../account-manager';
+import AccountManager from '../account-manager/account-manager';
 
 describe('AccountManager', () => {
   it("should render nothing if it's not initialized", () => {

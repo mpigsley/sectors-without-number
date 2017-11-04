@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Spinner from '..';
+import Spinner from '../other/spinner';
 
 describe('Spinner', () => {
   it('should render the 12 spinning dots', () => {
