@@ -22,6 +22,7 @@ export const OPEN_EDIT_MODAL = 'OPEN_EDIT_MODAL';
 export const CLOSE_EDIT_MODAL = 'CLOSE_EDIT_MODAL';
 export const OPEN_USER_DROPDOWN = 'OPEN_USER_DROPDOWN';
 export const CLOSE_USER_DROPDOWN = 'CLOSE_USER_DROPDOWN';
+export const CLOSE_SYNC_MODAL = 'CLOSE_SYNC_MODAL';
 
 export const UPDATE_USER_FORM = 'UPDATE_USER_FORM';
 export const UPDATE_USER = 'UPDATE_USER';
@@ -36,6 +37,7 @@ export const openLoginModal = () => ({ type: OPEN_LOGIN_MODAL });
 export const closeLoginModal = () => ({ type: CLOSE_LOGIN_MODAL });
 export const openUserDropdown = () => ({ type: OPEN_USER_DROPDOWN });
 export const closeUserDropdown = () => ({ type: CLOSE_USER_DROPDOWN });
+export const closeSyncModal = () => ({ type: CLOSE_SYNC_MODAL });
 export const updateUserForm = (key, value) => ({
   type: UPDATE_USER_FORM,
   key,
@@ -58,21 +60,25 @@ const onLogin = (dispatch, local) => result =>
         ({ isCloudSave }) => !isCloudSave,
       );
       if (!filteredLocal.length) {
-        return synced;
+        return { sectors: synced, didSyncLocal: false };
       }
       return syncLocalSectors(
         filteredLocal,
         result.user ? result.user.uid : result.uid,
       ).then(uploaded => ({
-        ...synced,
-        ...uploaded,
+        didSyncLocal: true,
+        sectors: {
+          ...synced,
+          ...uploaded,
+        },
       }));
     })
-    .then(sectors => {
+    .then(({ sectors, didSyncLocal }) => {
       dispatch(push('/'));
       dispatch({
         type: LOGGED_IN,
         user: result.user ? result.user.toJSON() : result.toJSON(),
+        didSyncLocal,
         sectors,
       });
       return result;

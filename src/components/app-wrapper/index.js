@@ -1,3 +1,15 @@
+import { connect } from 'react-redux';
+
+import { closeSyncModal } from 'store/actions/user.actions';
+
 import AppWrapper from './app-wrapper';
 
-export default AppWrapper;
+const mapStateToProps = ({ user }) => ({
+  isSyncModalOpen: user.isSyncModalOpen,
+});
+
+const mapDispatchToProps = dispatch => ({
+  closeSyncModal: () => dispatch(closeSyncModal()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper);

@@ -11,12 +11,14 @@ import {
   AUTH_FAILURE,
   OPEN_USER_DROPDOWN,
   CLOSE_USER_DROPDOWN,
+  CLOSE_SYNC_MODAL,
 } from 'store/actions/user.actions';
 
 export const initialState = {
   isInitialized: false,
   isDropdownActive: false,
   isLoginModalOpen: false,
+  isSyncModalOpen: false,
   isEditModalOpen: false,
   error: null,
   model: null,
@@ -72,6 +74,7 @@ export default function user(state = initialState, action) {
         ...state,
         model: action.user,
         isLoginModalOpen: false,
+        isSyncModalOpen: action.didSyncLocal,
       };
     case LOGGED_OUT:
       return {
@@ -80,6 +83,8 @@ export default function user(state = initialState, action) {
         isLoginModalOpen: false,
         isDropdownActive: false,
       };
+    case CLOSE_SYNC_MODAL:
+      return { ...state, isSyncModalOpen: false };
     case OPEN_USER_DROPDOWN:
       return { ...state, isDropdownActive: true };
     case CLOSE_USER_DROPDOWN:
