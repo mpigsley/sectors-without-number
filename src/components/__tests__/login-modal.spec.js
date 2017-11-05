@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Modal from 'primitives/modal/modal';
 import LoginModal from '../login-modal/login-modal';
 
 const defaultProps = {
