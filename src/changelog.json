@@ -1,4 +1,14 @@
 {
+  "2.0.0": {
+    "description": "User Accounts & Sharing",
+    "changes": [
+      "You can now signup via Facebook, Google, or standard email/password.",
+      "All locally saved sectors will be automatically synced upon successful signup.",
+      "Once synced, sharing will now be enabled across all your sectors. Anyone can see your sectors with the correct URL you share out.",
+      "Builder option has been moved to the configuration options.",
+      "Click directly into a saved sector from the home page. You'll still be able to delete sectors via the sidebar."
+    ]
+  },
   "1.11.0": {
     "description": "Added a 'Builder' option to initialize a blank sector."
   },
