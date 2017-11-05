@@ -1,38 +1,50 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { throttle } from 'lodash';
+import { throttle, isEmpty } from 'lodash';
 
-import hexGenerator from 'utils/hex-generator';
-
+import FlexContainer from 'primitives/container/flex-container';
 import SectorSidebar from 'components/sector-sidebar';
 import SystemTooltips from 'components/system-tooltips';
 import PrintableSector from 'components/printable-sector';
-import FlexContainer from 'primitives/containers/flex-container';
 import HexMap from 'components/hex-map';
 
+import hexGenerator from 'utils/hex-generator';
+import { coordinatesFromKey } from 'utils/common';
+import NewSystemModal from './new-system-modal';
+import Loading from './loading';
+import Error from './error';
+
 import './style.css';
+
+const calcWidth = () =>
+  window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth;
 
 export default class Sector extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
+    isInitialized: PropTypes.bool.isRequired,
     sector: PropTypes.shape({
-      rows: PropTypes.number.isRequired,
-      columns: PropTypes.number.isRequired,
-      systems: PropTypes.shape().isRequired,
-    }).isRequired,
+      rows: PropTypes.number,
+      columns: PropTypes.number,
+      systems: PropTypes.shape(),
+    }),
+    createSystemKey: PropTypes.string,
+    editSystem: PropTypes.func.isRequired,
+    closeSystemCreate: PropTypes.func.isRequired,
+    closeUserDropdown: PropTypes.func.isRequired,
+    generateSector: PropTypes.func.isRequired,
+    isDropdownActive: PropTypes.bool.isRequired,
   };
 
-  constructor(props) {
-    super(props);
-
-    this.onResize = this.onResize.bind(this);
-  }
+  static defaultProps = {
+    createSystemKey: null,
+    sector: {},
+  };
 
   state = {
     height: window.innerHeight,
-    width:
-      window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth,
+    width: calcWidth(),
   };
 
   componentDidMount() {
@@ -46,8 +58,7 @@ export default class Sector extends Component {
   onResize = throttle(() => {
     this.setState({
       height: window.innerHeight,
-      width:
-        window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth,
+      width: calcWidth(),
     });
   }, 100);
 
@@ -67,6 +78,12 @@ export default class Sector extends Component {
   }
 
   render() {
+    if (!this.props.isInitialized) {
+      return <Loading />;
+    } else if (isEmpty(this.props.sector)) {
+      return <Error generateSector={this.props.generateSector} />;
+    }
+
     const { hexes, printable } = hexGenerator({
       renderSector: true,
       height: this.state.height,
@@ -76,8 +93,13 @@ export default class Sector extends Component {
       columns: this.props.sector.columns,
     });
 
+    let { closeUserDropdown } = this.props;
+    if (!this.props.isDropdownActive) {
+      closeUserDropdown = null;
+    }
+
     return (
-      <div>
+      <div onClick={closeUserDropdown}>
         <FlexContainer className="Sector" direction="row">
           {this.renderTooltips(hexes)}
           <HexMap
@@ -88,6 +110,14 @@ export default class Sector extends Component {
           <SectorSidebar>{this.props.children}</SectorSidebar>
         </FlexContainer>
         <PrintableSector printable={printable} />
+        <NewSystemModal
+          {...coordinatesFromKey(this.props.createSystemKey)}
+          isOpen={!!this.props.createSystemKey}
+          onClose={this.props.closeSystemCreate}
+          onCreateSystem={system => {
+            this.props.editSystem(system.key, system);
+          }}
+        />
       </div>
     );
   }

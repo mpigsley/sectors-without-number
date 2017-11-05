@@ -3,12 +3,10 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import localForage from 'localforage';
-import Fastclick from 'fastclick';
 
 import store from 'store';
+import init from 'init';
 
-import { setSavedSectors } from 'store/actions/sector.actions';
 import AppWrapper from 'components/app-wrapper';
 import HexBackground from 'components/hex-background';
 import Home from 'components/home';
@@ -21,21 +19,9 @@ import PlanetInfo from 'components/planet-info';
 
 import 'styles/global.css';
 
+init(store);
+
 const history = syncHistoryWithStore(browserHistory, store);
-
-new Promise((resolve, reject) => {
-  const savedSectors = {};
-  localForage
-    .iterate((value, key) => {
-      savedSectors[key] = value;
-    })
-    .then(() => resolve(savedSectors))
-    .catch(reject);
-}).then(saved => {
-  store.dispatch(setSavedSectors(saved));
-});
-
-Fastclick.attach(document.body);
 
 ReactDOM.render(
   <Provider store={store}>
@@ -46,7 +32,7 @@ ReactDOM.render(
           <Route path="/configure" component={Configure} />
           <Route path="/changelog" component={Changelog} />
         </Route>
-        <Route path="/sector" component={Sector}>
+        <Route path="/sector/:sector" component={Sector}>
           <IndexRoute component={SectorInfo} />
           <Route path="system/:system" component={SystemInfo} />
           <Route path="system/:system/planet/:planet" component={PlanetInfo} />

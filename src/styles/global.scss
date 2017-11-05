@@ -1,8 +1,10 @@
 @import 'react-redux-toastr/src/styles/index';
+@import 'styles/theme';
 
 body {
   margin: 0;
   padding: 0;
+  background-color: $dark4;
 }
 
 * {

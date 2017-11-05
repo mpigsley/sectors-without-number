@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
-import { ChevronLeft, Sun, Globe, Map } from 'react-feather';
+import { ChevronLeft, Sun, Globe, Map, Home } from 'react-feather';
 
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Button from 'primitives/other/button';
 import ButtonLink from 'primitives/other/button-link';
@@ -26,7 +26,9 @@ export default function SidebarNavigation({
   type,
   saveSector,
   onDelete,
-  currentSector,
+  isSaved,
+  isSynced,
+  isCloudSave,
   onEdit,
 }) {
   const onCopy = () => {
@@ -41,8 +43,26 @@ export default function SidebarNavigation({
     window.print();
   };
 
+  let saveButton = null;
+  if (!isSaved && !isCloudSave) {
+    saveButton = (
+      <Button minimal onClick={saveSector}>
+        Save
+      </Button>
+    );
+  }
+
+  let editButton = null;
+  if (onEdit && !isCloudSave) {
+    editButton = (
+      <Button minimal onClick={onEdit}>
+        Edit
+      </Button>
+    );
+  }
+
   let shareButton = null;
-  if (currentSector === 'generated') {
+  if ((isSynced || isCloudSave) && isSaved) {
     shareButton = (
       <Button minimal onClick={onCopy}>
         Share
@@ -51,7 +71,7 @@ export default function SidebarNavigation({
   }
 
   let deleteButton = null;
-  if (onDelete) {
+  if (onDelete && !isCloudSave) {
     deleteButton = (
       <Button minimal onClick={onDelete}>
         Delete
@@ -69,12 +89,24 @@ export default function SidebarNavigation({
     typeIcon = <Globe className={nonLinkCss} size={iconSize} />;
   }
 
+  let backIcon = (
+    <ChevronLeft className="SidebarNavigation-Icon SidebarNavigation-Icon--link" />
+  );
+  if (type === SidebarType.sector) {
+    backIcon = (
+      <Home
+        size={20}
+        className="SidebarNavigation-Icon SidebarNavigation-Icon--link"
+      />
+    );
+  }
+
   return (
     <FlexContainer className="SidebarNavigation-Info" direction="column">
       <div className="SidebarNavigation-Header">
         <FlexContainer align="center" shrink="0">
           <Link to={back || '/'} className="SidebarNavigation-Link">
-            <ChevronLeft className="SidebarNavigation-Icon SidebarNavigation-Icon--link" />
+            {backIcon}
           </Link>
           <FlexContainer flex="1" justify="center">
             <Header type={HeaderType.header2}>{name}</Header>
@@ -82,20 +114,14 @@ export default function SidebarNavigation({
           {typeIcon}
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
-          <Button minimal onClick={saveSector}>
-            Save
-          </Button>
-          <span className="SidebarNavigation-Spacer" />
-          <Button minimal onClick={onEdit}>
-            Edit
-          </Button>
-          {onDelete ? <span className="SidebarNavigation-Spacer" /> : null}
+          {saveButton}
+          {saveButton ? <span className="SidebarNavigation-Spacer" /> : null}
+          {editButton}
+          {editButton ? <span className="SidebarNavigation-Spacer" /> : null}
           {deleteButton}
-          <span className="SidebarNavigation-Spacer" />
+          {deleteButton ? <span className="SidebarNavigation-Spacer" /> : null}
           {shareButton}
-          {currentSector === 'generated' ? (
-            <span className="SidebarNavigation-Spacer" />
-          ) : null}
+          {shareButton ? <span className="SidebarNavigation-Spacer" /> : null}
           <Button minimal onClick={onPrint}>
             Print
           </Button>
@@ -137,7 +163,9 @@ SidebarNavigation.propTypes = {
   back: PropTypes.string,
   type: PropTypes.string,
   saveSector: PropTypes.func.isRequired,
-  currentSector: PropTypes.string,
+  isSaved: PropTypes.bool.isRequired,
+  isSynced: PropTypes.bool.isRequired,
+  isCloudSave: PropTypes.bool.isRequired,
   onEdit: PropTypes.func,
   onDelete: PropTypes.func,
 };
@@ -145,7 +173,6 @@ SidebarNavigation.propTypes = {
 SidebarNavigation.defaultProps = {
   type: SidebarType.sector,
   back: null,
-  currentSector: null,
-  onEdit: () => {},
+  onEdit: null,
   onDelete: null,
 };

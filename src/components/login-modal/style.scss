@@ -1,0 +1,130 @@
+@import 'styles/theme';
+
+.LoginModal {
+  background: $dark3;
+  border-radius: 0.2rem;
+  color: $light2;
+  outline: none;
+  overflow: auto;
+  padding: 1.5rem 0 0;
+  width: 400px;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+
+.LoginModal-Close {
+  cursor: pointer;
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.LoginModal-Overlay {
+  align-items: center;
+  background-color: rgba(200, 200, 200, 0.3);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 1000;
+}
+
+.LoginModal-Facebook {
+  background-color: $facebook;
+  border: none;
+  color: $light3;
+  margin-bottom: 1rem;
+
+  &:hover {
+    color: $light4;
+  }
+}
+
+.LoginModal-Google {
+  background-color: $google;
+  border: none;
+  color: $light3;
+  margin-bottom: 1rem;
+
+  &:hover {
+    color: $light4;
+  }
+}
+
+.LoginModal-LineContainer {
+  margin-bottom: 1rem;
+}
+
+.LoginModal-Line {
+  border-top: 1px solid $light1;
+  margin-top: 0.1rem;
+  width: 25px;
+}
+
+.LoginModal-Or {
+  color: $light1;
+  text-align: center;
+  padding: 0.8rem;
+}
+
+.LoginModal-Switcher {
+  margin-bottom: -1px;
+}
+
+.LoginModal-SwitchButton {
+  background-color: $dark4;
+  border: 1px solid $light2;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-sizing: border-box;
+  color: $light4;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 11px;
+  height: 38px;
+  letter-spacing: 0.1rem;
+  outline: none;
+  line-height: 38px;
+  margin: 0 0.5rem;
+  padding: 0 30px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  white-space: nowrap;
+  font-weight: 400;
+
+  &--active {
+    background-color: $dark2;
+    border-bottom: none;
+  }
+
+  &:hover {
+    color: $light2;
+    border-color: $light2;
+    outline: 0;
+  }
+}
+
+.LoginModal-FormContainer {
+  background-color: $dark2;
+  border-top: 1px solid $light1;
+  padding: 1.5rem;
+}
+
+.LoginModal-Submit {
+  margin-top: 1.5rem;
+}
+
+.LoginModal-Error {
+  color: $error;
+  margin-top: 1rem;
+  text-align: center;
+}

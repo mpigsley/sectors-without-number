@@ -10,8 +10,8 @@ const tweakSeeds = hexSeeds => {
   return newSeeds;
 };
 
-export const generateName = seededChance => {
-  const hash = seededChance.hash({ length: 12 });
+export const generateName = chance => {
+  const hash = chance.hash({ length: 12 });
   let name = '';
   let hexSeeds = [
     parseInt(hash.substr(0, 4), 16),
@@ -29,7 +29,7 @@ export const generateName = seededChance => {
   return capitalizeFirstLetter(name.split('.').join(''));
 };
 
-export const generateSectorName = seededChance => {
-  const greek = seededChance.pickone(GreekLetters);
-  return `${generateName(seededChance)} ${greek}`;
+export const generateSectorName = chance => {
+  const greek = chance.pickone(GreekLetters);
+  return `${generateName(chance)} ${greek}`;
 };

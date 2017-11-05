@@ -7,10 +7,10 @@ import { map, isEqual } from 'lodash';
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import Header, { HeaderType } from 'primitives/text/header';
-import Modal from 'primitives/other/modal';
+import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
@@ -123,9 +123,12 @@ export default class PlanetInfo extends SidebarInfo {
       pathname: PropTypes.string,
       search: PropTypes.string,
     }).isRequired,
-    routeParams: PropTypes.shape({
-      system: PropTypes.string.isRequired,
-      planet: PropTypes.string.isRequired,
+    router: PropTypes.shape({
+      params: PropTypes.shape({
+        sector: PropTypes.string.isRequired,
+        system: PropTypes.string.isRequired,
+        planet: PropTypes.string.isRequired,
+      }),
     }).isRequired,
     editPlanet: PropTypes.func.isRequired,
     deletePlanet: PropTypes.func.isRequired,
@@ -168,8 +171,8 @@ export default class PlanetInfo extends SidebarInfo {
       });
     } else {
       this.props.editPlanet(
-        this.props.routeParams.system,
-        encodeURIComponent(this.props.routeParams.planet),
+        this.props.router.params.system,
+        encodeURIComponent(this.props.router.params.planet),
         {
           name: this.state.name,
           techLevel: this.state.techLevel.value,
@@ -213,14 +216,12 @@ export default class PlanetInfo extends SidebarInfo {
           onChange={this.onEditDropdown(stateKey, { isNotUnique: false })}
           dropUp={dropUp}
           options={
-            Array.isArray(constants) ? (
-              constants
-            ) : (
-              map(constants, ({ name }, key) => ({
-                value: key,
-                label: name,
-              }))
-            )
+            Array.isArray(constants)
+              ? constants
+              : map(constants, ({ name }, key) => ({
+                  value: key,
+                  label: name,
+                }))
           }
         />
       </FlexContainer>
@@ -316,8 +317,8 @@ export default class PlanetInfo extends SidebarInfo {
     return (
       <SidebarNavigation
         name={this.props.planet.name || ''}
-        back={`/sector/system/${this.props.routeParams.system}${this.props
-          .location.search}`}
+        back={`/sector/${this.props.router.params.sector}/system/${this.props
+          .router.params.system}`}
         type={SidebarType.planet}
         onEdit={this.onEdit}
         onDelete={this.onConfirmDelete}
@@ -347,7 +348,7 @@ export default class PlanetInfo extends SidebarInfo {
         {this.renderEditModal()}
         {this.renderConfirmModal(
           this.onDeletePlanet(
-            this.props.routeParams.system,
+            this.props.router.params.system,
             this.props.planet.key,
           ),
           'planet',

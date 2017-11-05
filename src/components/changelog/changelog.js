@@ -1,8 +1,8 @@
 import React from 'react';
 
 import Header, { HeaderType } from 'primitives/text/header';
-import ContentContainer from 'primitives/containers/content-container';
-import FlexContainer from 'primitives/containers/flex-container';
+import ContentContainer from 'primitives/container/content-container';
+import FlexContainer from 'primitives/container/flex-container';
 
 import changelog from 'changelog.json';
 

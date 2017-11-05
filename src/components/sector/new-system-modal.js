@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import { RefreshCw } from 'react-feather';
 import Chance from 'chance';
 
-import Modal from 'primitives/other/modal';
+import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 
 import { generateName } from 'utils/name-generator';
 import { System } from 'utils/sector-generator';
@@ -18,8 +18,13 @@ export default class NewSystemModal extends Component {
     isOpen: PropTypes.bool.isRequired,
     onCreateSystem: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    x: PropTypes.number.isRequired,
-    y: PropTypes.number.isRequired,
+    x: PropTypes.number,
+    y: PropTypes.number,
+  };
+
+  static defaultProps = {
+    x: 0,
+    y: 0,
   };
 
   constructor(props) {
@@ -35,6 +40,14 @@ export default class NewSystemModal extends Component {
     numPlanets: new Chance().weighted([1, 2, 3], [5, 3, 2]),
   };
 
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.isOpen && !this.props.isOpen) {
+      this.setState({
+        name: generateName(new Chance()),
+      });
+    }
+  }
+
   onRandomizeName() {
     this.setState({ name: generateName(new Chance()) });
   }
@@ -42,7 +55,7 @@ export default class NewSystemModal extends Component {
   onCreate() {
     this.props.onCreateSystem(
       new System(
-        { seededChance: new Chance() },
+        { chance: new Chance() },
         this.props.x,
         this.props.y,
         this.state.name,

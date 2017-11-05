@@ -1,138 +1,106 @@
-import localForage from 'localforage';
-import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { push } from 'react-router-redux';
 import { omit } from 'lodash';
 
+import { EDIT_SECTOR } from 'store/actions/sector.actions';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
+import { SuccessToast, ErrorToast, creatorOrUpdateSector } from 'store/utils';
 
 export const SYSTEM_HOLD = 'SYSTEM_HOLD';
 export const RELEASE_HOLD = 'RELEASE_HOLD';
-export const MOVE_SYSTEM = 'MOVE_SYSTEM';
 export const SYSTEM_HOVER_START = 'SYSTEM_HOVER_START';
 export const SYSTEM_HOVER_END = 'SYSTEM_HOVER_END';
-export const EDIT_SYSTEM = 'EDIT_SYSTEM';
-export const DELETE_SYSTEM = 'DELETE_SYSTEM';
+export const OPEN_SYSTEM_CREATE = 'OPEN_SYSTEM_CREATE';
+export const CLOSE_SYSTEM_CREATE = 'CLOSE_SYSTEM_CREATE';
 
-export function editSystem(system, changes) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const sector = { ...getCurrentSector(state), updated: Date.now() };
-    sector.created = sector.created || Date.now();
-    const update = { ...sector.systems[system], ...changes };
-    return localForage
-      .setItem(sector.seed, {
-        ...sector,
-        systems: {
-          ...sector.systems,
-          [system]: update,
-        },
-      })
-      .then(() => {
-        dispatch({ type: EDIT_SYSTEM, system, update });
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'System Updated',
-            message: 'Your sector has been saved.',
-            type: 'success',
-          }),
-        );
-      });
-  };
-}
+export const openSystemCreate = key => ({ type: OPEN_SYSTEM_CREATE, key });
+export const closeSystemCreate = () => ({ type: CLOSE_SYSTEM_CREATE });
+export const systemHold = key => ({ type: SYSTEM_HOLD, key });
+export const systemRelease = () => ({ type: RELEASE_HOLD });
+export const systemHoverStart = key => ({ type: SYSTEM_HOVER_START, key });
+export const systemHoverEnd = key => ({ type: SYSTEM_HOVER_END, key });
 
-export function deleteSystem(system) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const sector = { ...getCurrentSector(state), updated: Date.now() };
-    const systems = omit(sector.systems, system);
-    return localForage
-      .setItem(sector.seed, {
-        ...sector,
-        systems,
-      })
-      .then(() => {
-        dispatch(
-          push(`/sector${state.routing.locationBeforeTransitions.search}`),
-        );
-        dispatch({ type: DELETE_SYSTEM, system });
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'System Deleted',
-            message: 'Your sector has been saved.',
-            type: 'success',
-          }),
-        );
-      });
-  };
-}
-
-export function systemHold(key) {
-  return { type: SYSTEM_HOLD, key };
-}
-
-export function systemRelease() {
-  return { type: RELEASE_HOLD };
-}
-
-export function moveSystem() {
-  return (dispatch, getState) => {
-    const state = getState();
-    const sector = { ...getCurrentSector(state), updated: Date.now() };
-    sector.created = sector.created || Date.now();
-    let systems = { ...sector.systems };
-    const source = {
-      ...systems[state.system.holdKey],
-      key: state.system.hoverKey,
-    };
-    if (systems[state.system.hoverKey]) {
-      const destination = { ...systems[state.system.hoverKey] };
-      destination.key = state.system.holdKey;
-      systems = Object.assign(systems, {
-        [state.system.hoverKey]: source,
-        [state.system.holdKey]: destination,
-      });
-    } else {
-      systems = omit(systems, state.system.holdKey);
-      systems = Object.assign(systems, {
-        [state.system.hoverKey]: source,
-      });
-    }
-    return localForage.setItem(sector.seed, { ...sector, systems }).then(() => {
+export const editSystem = (system, changes) => (dispatch, getState) => {
+  const state = getState();
+  const currentSector = getCurrentSector(state);
+  return creatorOrUpdateSector(state, {
+    ...currentSector,
+    systems: {
+      ...currentSector.systems,
+      [system]: {
+        ...currentSector.systems[system],
+        ...changes,
+      },
+    },
+  })
+    .then(sector => {
+      dispatch({ type: EDIT_SECTOR, sector });
+      dispatch(push(`/sector/${sector.key}/system/${system}`));
       dispatch(
-        push(`/sector${state.routing.locationBeforeTransitions.search}`),
-      );
-      dispatch({ type: RELEASE_HOLD });
-      dispatch({ type: MOVE_SYSTEM, key: sector.seed, systems });
-      dispatch(
-        ReduxToastrActions.add({
-          options: {
-            removeOnHover: true,
-            showCloseButton: true,
-          },
-          position: 'bottom-left',
-          title: 'System Moved',
-          message: 'Your sector has been saved.',
-          type: 'success',
+        SuccessToast({
+          title: 'System Updated',
         }),
       );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
     });
+};
+
+export const deleteSystem = system => (dispatch, getState) => {
+  const state = getState();
+  const currentSector = getCurrentSector(state);
+  return creatorOrUpdateSector(state, {
+    ...currentSector,
+    systems: omit(currentSector.systems, system),
+  })
+    .then(sector => {
+      dispatch(push(`/sector/${sector.key}`));
+      dispatch({ type: EDIT_SECTOR, sector });
+      dispatch(
+        SuccessToast({
+          title: 'System Deleted',
+        }),
+      );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
+    });
+};
+
+export const moveSystem = () => (dispatch, getState) => {
+  const state = getState();
+  const currentSector = { ...getCurrentSector(state) };
+  const source = {
+    ...currentSector.systems[state.system.holdKey],
+    key: state.system.hoverKey,
   };
-}
-
-export function systemHoverStart(key) {
-  return { type: SYSTEM_HOVER_START, key };
-}
-
-export function systemHoverEnd(key) {
-  return { type: SYSTEM_HOVER_END, key };
-}
+  if (currentSector.systems[state.system.hoverKey]) {
+    const destination = { ...currentSector.systems[state.system.hoverKey] };
+    destination.key = state.system.holdKey;
+    currentSector.systems = Object.assign(currentSector.systems, {
+      [state.system.hoverKey]: source,
+      [state.system.holdKey]: destination,
+    });
+  } else {
+    currentSector.systems = omit(currentSector.systems, state.system.holdKey);
+    currentSector.systems = Object.assign(currentSector.systems, {
+      [state.system.hoverKey]: source,
+    });
+  }
+  dispatch(push(`/sector/${currentSector.key}`));
+  dispatch({ type: EDIT_SECTOR, sector: currentSector });
+  return creatorOrUpdateSector(state, currentSector)
+    .then(() => {
+      dispatch(
+        SuccessToast({
+          title: 'System Moved',
+        }),
+      );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
+    });
+};

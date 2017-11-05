@@ -1,6 +1,6 @@
 # Sectors Without Number
 
-A seeded, random, revised edition compliant, [stars without number](http://www.sinenomine-pub.com/?page_id=395) sector generator.
+Revised edition compliant [Stars Without Number](http://www.sinenomine-pub.com/?page_id=395) sector generator.
 
 [![Build Status](https://travis-ci.org/mpigsley/sectors-without-number.svg?branch=master)](https://travis-ci.org/mpigsley/sectors-without-number)
 
@@ -10,8 +10,17 @@ Feel free to [open an issue](https://github.com/mpigsley/sectors-without-number/
 
 ## Development
 
-This project is purely a front-end application written in React + Redux.
+This project is a front-end application written in React + Redux with a [Firebase](https://firebase.google.com/) backend. For more information see [create-react-app](https://github.com/facebookincubator/create-react-app).
 
-To get started just install modules with `npm install` and run the application with `npm start`.
+### Getting Started
 
-For more information see [create-react-app](https://github.com/facebookincubator/create-react-app).
+1. `npm i` and `cd functions && npm i`
+2. `cp .env.example .env`
+3. Create a [firebase project](https://console.firebase.google.com/) and fill out `.env`.
+4. `$(npm bin)/firebase login` or use your global firebase instance if you installed it globally.
+5. `$(npm bin)/firebase use --add` and select the project you configured in the firebase console.
+6. `npm start`
+
+### Deploying to Firebase
+
+After you've logged into firebase and selected the project from the CLI, you can deploy by simply running `npm run deploy`.

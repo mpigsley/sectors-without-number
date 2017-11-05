@@ -8,12 +8,12 @@ import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
 
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 import Header, { HeaderType } from 'primitives/text/header';
 import SectionHeader from 'primitives/text/section-header';
-import Modal from 'primitives/other/modal';
+import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 import Dropdown from 'primitives/form/dropdown';
 
@@ -39,9 +39,9 @@ const planetsToSave = (planets, planetOptions) => {
   );
 };
 
-const renderPlanetLinks = (planets, { pathname, search }) =>
+const renderPlanetLinks = (planets, { pathname }) =>
   map(planets, (planet, key) => (
-    <SidebarLinkRow key={planet.name} to={`${pathname}/planet/${key}${search}`}>
+    <SidebarLinkRow key={planet.name} to={`${pathname}/planet/${key}`}>
       <Header type={HeaderType.header4} className="SystemInfo-Name">
         {planet.name}
       </Header>
@@ -66,17 +66,20 @@ export default class SectorInfo extends SidebarInfo {
     }).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string,
-      search: PropTypes.string,
+    }).isRequired,
+    router: PropTypes.shape({
+      params: PropTypes.shape({
+        sector: PropTypes.string.isRequired,
+      }),
     }).isRequired,
     editSystem: PropTypes.func.isRequired,
+    deleteSystem: PropTypes.func.isRequired,
     planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    this.onSaveSystem = this.onSaveSystem.bind(this);
-    this.onDeleteSystem = this.onDeleteSystem.bind(this);
     this.state = {
       name: this.props.system.name,
       planets: map(this.props.system.planets, ({ name, key }) => ({
@@ -104,7 +107,7 @@ export default class SectorInfo extends SidebarInfo {
     }
   }
 
-  onSaveSystem() {
+  onSaveSystem = () => {
     if (!this.planetNamesUnique()) {
       this.setState({ isNotUnique: true });
     } else {
@@ -114,14 +117,12 @@ export default class SectorInfo extends SidebarInfo {
       });
       this.onClose();
     }
-  }
+  };
 
-  onDeleteSystem(system) {
-    return () => {
-      this.onCancelDelete();
-      this.props.deleteSystem(system);
-    };
-  }
+  onDeleteSystem = system => () => {
+    this.onCancelDelete();
+    this.props.deleteSystem(system);
+  };
 
   planetNamesUnique() {
     const otherPlanets = difference(
@@ -204,7 +205,7 @@ export default class SectorInfo extends SidebarInfo {
     return (
       <SidebarNavigation
         name={this.props.system.name}
-        back={`/sector${this.props.location.search}`}
+        back={`/sector/${this.props.router.params.sector}`}
         type={SidebarType.system}
         onEdit={this.onEdit}
         onDelete={this.onConfirmDelete}

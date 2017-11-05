@@ -7,9 +7,9 @@ import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
 
-import FlexContainer from 'primitives/containers/flex-container';
+import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
-import Modal from 'primitives/other/modal';
+import Modal from 'primitives/modal/modal';
 import SectionHeader from 'primitives/text/section-header';
 import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
@@ -23,21 +23,24 @@ import './style.css';
 export default class SectorInfo extends SidebarInfo {
   static propTypes = {
     sector: PropTypes.shape({
+      key: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       systems: PropTypes.shape().isRequired,
     }).isRequired,
     location: PropTypes.shape({
-      search: PropTypes.string,
+      pathname: PropTypes.string,
     }).isRequired,
     editSectorName: PropTypes.func.isRequired,
+    deleteSector: PropTypes.func.isRequired,
+    isSaved: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
     super(props);
 
-    this.onSaveSector = this.onSaveSector.bind(this);
     this.state = {
       name: this.props.sector.name,
+      isConfirmDeleteOpen: false,
     };
   }
 
@@ -49,10 +52,15 @@ export default class SectorInfo extends SidebarInfo {
     }
   }
 
-  onSaveSector() {
+  onSaveSector = () => {
     this.props.editSectorName(this.state.name);
     this.onClose();
-  }
+  };
+
+  onDeleteSector = key => () => {
+    this.onCancelDelete();
+    this.props.deleteSector(key);
+  };
 
   renderEditModal() {
     return (
@@ -115,6 +123,7 @@ export default class SectorInfo extends SidebarInfo {
         name={this.props.sector.name}
         type={SidebarType.sector}
         onEdit={this.onEdit}
+        onDelete={this.props.isSaved ? this.onConfirmDelete : undefined}
       >
         {this.renderEmptyText()}
         {Object.keys(this.props.sector.systems)
@@ -123,7 +132,7 @@ export default class SectorInfo extends SidebarInfo {
           .map(system => (
             <SidebarLinkRow
               key={system.key}
-              to={`/sector/system/${system.key}${this.props.location.search}`}
+              to={`${this.props.location.pathname}/system/${system.key}`}
             >
               <Header type={HeaderType.header4} className="SectorInfo-Name">
                 {system.name}
@@ -132,6 +141,10 @@ export default class SectorInfo extends SidebarInfo {
             </SidebarLinkRow>
           ))}
         {this.renderEditModal()}
+        {this.renderConfirmModal(
+          this.onDeleteSector(this.props.sector.key),
+          'sector',
+        )}
       </SidebarNavigation>
     );
   }

@@ -1,82 +1,100 @@
-import localForage from 'localforage';
-import { actions as ReduxToastrActions } from 'react-redux-toastr';
+import { push } from 'react-router-redux';
 
+import { removeSector } from 'store/api/local';
+import { removeSyncedSector } from 'store/api/firebase';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
+import { SuccessToast, ErrorToast, creatorOrUpdateSector } from 'store/utils';
+import sectorGenerator from 'utils/sector-generator';
 
-export const SET_SAVED_SECTORS = 'SET_SAVED_SECTORS';
-export const ADD_SAVED_SECTOR = 'ADD_SAVED_SECTOR';
-export const REMOVE_SAVED_SECTOR = 'REMOVE_SAVED_SECTOR';
+export const GENERATE_SECTOR = 'GENERATE_SECTOR';
 export const EDIT_SECTOR = 'EDIT_SECTOR';
+export const REMOVE_SAVED_SECTOR = 'REMOVE_SAVED_SECTOR';
+export const ADD_SAVED_SECTOR = 'ADD_SAVED_SECTOR';
+export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
 
-export function editSector(key, value) {
-  return (dispatch, getState) => {
-    const state = getState();
-    const sector = { ...getCurrentSector(state), updated: Date.now() };
-    sector.created = sector.created || Date.now();
-    return localForage
-      .setItem(sector.seed, { ...sector, [key]: value })
-      .then(() => {
-        dispatch({ type: EDIT_SECTOR, key, value });
-        dispatch(
-          ReduxToastrActions.add({
-            options: {
-              removeOnHover: true,
-              showCloseButton: true,
-            },
-            position: 'bottom-left',
-            title: 'Sector Updated',
-            message: 'Your sector has been saved.',
-            type: 'success',
-          }),
-        );
-      });
-  };
-}
+export const generateSector = () => (dispatch, getState) => {
+  const { columns, rows, isBuilder, name } = getState().sector.configuration;
+  const generated = sectorGenerator({ columns, rows, isBuilder, name });
+  dispatch({ type: GENERATE_SECTOR, generated });
+  dispatch(push(`/sector/${generated.key}`));
+};
 
-export function setSavedSectors(saved) {
-  return { type: SET_SAVED_SECTORS, saved };
-}
+export const updateConfiguration = (key, value) => ({
+  type: UPDATE_CONFIGURATION,
+  key,
+  value,
+});
 
-export function deleteSector(key) {
-  return dispatch =>
-    localForage.removeItem(key).then(() => {
+export const editSector = (key, value) => (dispatch, getState) => {
+  const state = getState();
+  const currentSector = getCurrentSector(state);
+  return creatorOrUpdateSector(state, {
+    ...currentSector,
+    [key]: value,
+  })
+    .then(sector => {
+      dispatch({ type: EDIT_SECTOR, sector });
+      dispatch(push(`/sector/${sector.key}`));
+      dispatch(
+        SuccessToast({
+          title: 'Sector Updated',
+        }),
+      );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
+    });
+};
+
+export const deleteSector = key => (dispatch, getState) => {
+  const state = getState();
+  let promise = Promise.resolve();
+  if (!state.sector.generated) {
+    if (state.user.model) {
+      promise = removeSyncedSector(key);
+    } else {
+      promise = removeSector(key);
+    }
+  }
+  return promise
+    .then(() => {
+      dispatch(push('/'));
       dispatch({ type: REMOVE_SAVED_SECTOR, key });
       dispatch(
-        ReduxToastrActions.add({
-          options: {
-            removeOnHover: true,
-            showCloseButton: true,
-          },
-          position: 'bottom-left',
+        SuccessToast({
           title: 'Deleted Sector',
-          message: 'Sector has been deleted in this browser.',
-          type: 'success',
+          message: state.user.model
+            ? 'Sector has been deleted from your account.'
+            : 'Sector has been deleted in this browser.',
         }),
       );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
     });
-}
+};
 
-export function saveSector() {
-  return (dispatch, getState) => {
-    const { sector } = getState();
-    const key = sector.generated ? sector.generated.seed : sector.currentSector;
-    const value = sector.generated || sector.saved[sector.currentSector];
-    const update = { ...value, updated: Date.now() };
-    update.created = update.created || Date.now();
-    return localForage.setItem(key, update).then(() => {
-      dispatch({ type: ADD_SAVED_SECTOR });
+export const saveSector = () => (dispatch, getState) => {
+  const state = getState();
+  const currentSector = getCurrentSector(state);
+  return creatorOrUpdateSector(state, currentSector)
+    .then(sector => {
+      const url = state.routing.locationBeforeTransitions.pathname.split('/');
+      url[2] = sector.key;
+      dispatch({ type: ADD_SAVED_SECTOR, sector });
+      dispatch(push(url.join('/')));
       dispatch(
-        ReduxToastrActions.add({
-          options: {
-            removeOnHover: true,
-            showCloseButton: true,
-          },
-          position: 'bottom-left',
-          title: 'Saved Sector',
-          message: 'Sector is persisted in this browser.',
-          type: 'success',
+        SuccessToast({
+          message: state.user.model
+            ? 'Sector has been synced.'
+            : 'Sector is persisted in this browser.',
         }),
       );
+    })
+    .catch(err => {
+      dispatch(ErrorToast());
+      console.error(err);
     });
-  };
-}
+};

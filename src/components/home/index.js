@@ -1,16 +1,15 @@
 import { connect } from 'react-redux';
 
-import { deleteSector } from 'store/actions/sector.actions';
+import { generateSector } from 'store/actions/sector.actions';
+import { getUserSectors } from 'store/selectors/sector.selectors';
 import Home from './home';
 
 const mapStateToProps = state => ({
-  saved: state.sector.saved,
+  saved: getUserSectors(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  deleteSector: key => {
-    dispatch(deleteSector(key));
-  },
+  generateSector: () => dispatch(generateSector()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

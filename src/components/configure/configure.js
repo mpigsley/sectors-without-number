@@ -1,130 +1,140 @@
-import React, { Component } from 'react';
-import { Zap, Edit3 } from 'react-feather';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Zap, RefreshCw } from 'react-feather';
 import Chance from 'chance';
 
 import Header, { HeaderType } from 'primitives/text/header';
-import ContentContainer from 'primitives/containers/content-container';
-import SubContainer from 'primitives/containers/sub-container';
+import ContentContainer from 'primitives/container/content-container';
+import SubContainer from 'primitives/container/sub-container';
+import FlexContainer from 'primitives/container/flex-container';
+import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
 import Label from 'primitives/form/label';
 import LinkIcon from 'primitives/other/link-icon';
-import ButtonLink from 'primitives/other/button-link';
+import Button from 'primitives/other/button';
+
+import { generateSectorName } from 'utils/name-generator';
 
 import './style.css';
 
-export default class Configure extends Component {
-  constructor(props) {
-    super(props);
-
-    this.updateInput = this.updateInput.bind(this);
-  }
-
-  state = {
-    seed: new Chance().hash({ length: 15 }),
-    columns: 8,
-    rows: 10,
+export default function Configure({
+  updateConfiguration,
+  generateSector,
+  isBuilder,
+  columns,
+  rows,
+  name,
+}) {
+  const updateInput = ({ target }) => {
+    const key = target.getAttribute('data-key');
+    let { value } = target;
+    if (target.type === 'number') {
+      value = value ? Number.parseInt(value, 10) : null;
+    } else if (target.type === 'checkbox') {
+      value = target.checked;
+    }
+    updateConfiguration(key, value);
   };
 
-  updateInput(e) {
-    const key = e.target.getAttribute('data-key');
-    let value = e.target.value;
-    if (e.target.type === 'number') {
-      value = value ? Number.parseInt(value, 10) : null;
-    }
-    this.setState({ [key]: value });
-  }
+  const regenerateName = genFunc => () => {
+    const chance = new Chance();
+    updateConfiguration('name', genFunc(chance));
+  };
 
-  render() {
-    const invalidText =
-      this.state.columns > 20 || this.state.rows > 20 ? (
-        <div className="Configure-Invalid">
-          Column and row count can not be greater than 20.
-        </div>
-      ) : null;
+  const invalidText =
+    columns > 20 || rows > 20 ? (
+      <div className="Configure-Invalid">
+        Column and row count can not be greater than 20.
+      </div>
+    ) : null;
 
-    return (
-      <ContentContainer direction="column" align="center" justify="center">
-        <Header type={HeaderType.header2}>Configure</Header>
-        <SubContainer noMargin direction="column" align="flexStart">
-          {invalidText}
-          <Label noPadding htmlFor="seed">
-            Seed
-          </Label>
-          <Input
-            data-key="seed"
-            onChange={this.updateInput}
-            name="seed"
-            type="text"
-            value={this.state.seed}
-          />
-          <SubContainer noMargin>
-            <SubContainer
-              className="Configure-ButtonContainer"
-              noMargin
-              direction="column"
-              align="flexStart"
-            >
-              <Label htmlFor="rows">Rows</Label>
-              <Input
-                data-key="rows"
-                onChange={this.updateInput}
-                name="rows"
-                type="number"
-                value={this.state.rows || ''}
-              />
-            </SubContainer>
-            <SubContainer
-              className="Configure-ButtonContainer"
-              noMargin
-              direction="column"
-              align="flexStart"
-            >
-              <Label htmlFor="columns">Columns</Label>
-              <Input
-                data-key="columns"
-                onChange={this.updateInput}
-                name="columns"
-                type="number"
-                value={this.state.columns || ''}
-              />
-            </SubContainer>
+  return (
+    <ContentContainer direction="column" align="center" justify="center">
+      <Header type={HeaderType.header2}>Configure</Header>
+      <SubContainer noMargin direction="column" align="flexStart">
+        {invalidText}
+        <Label noPadding htmlFor="name">
+          Sector Name
+        </Label>
+        <IconInput
+          name="name"
+          data-key="name"
+          icon={RefreshCw}
+          value={name}
+          onChange={updateInput}
+          onIconClick={regenerateName(generateSectorName)}
+        />
+        <SubContainer noMargin>
+          <SubContainer
+            className="Configure-ButtonContainer"
+            noMargin
+            direction="column"
+            align="flexStart"
+          >
+            <Label htmlFor="rows">Rows</Label>
+            <Input
+              data-key="rows"
+              onChange={updateInput}
+              name="rows"
+              type="number"
+              value={rows}
+            />
+          </SubContainer>
+          <SubContainer
+            className="Configure-ButtonContainer"
+            noMargin
+            direction="column"
+            align="flexStart"
+          >
+            <Label htmlFor="columns">Columns</Label>
+            <Input
+              data-key="columns"
+              onChange={updateInput}
+              name="columns"
+              type="number"
+              value={columns}
+            />
           </SubContainer>
         </SubContainer>
-        <SubContainer
-          className="Configure-PaddedButtons"
-          wrap
-          justify="center"
-          align="center"
-        >
-          <ButtonLink
-            to={{
-              pathname: '/sector',
-              query: {
-                s: this.state.seed,
-                c: this.state.columns,
-                r: this.state.rows,
-              },
-            }}
-          >
-            <LinkIcon icon={Zap} size="20" />
-            Generate
-          </ButtonLink>
-          <ButtonLink
-            to={{
-              pathname: '/sector',
-              query: {
-                s: this.state.seed,
-                c: this.state.columns,
-                r: this.state.rows,
-                b: true,
-              },
-            }}
-          >
-            <LinkIcon icon={Edit3} size="20" />
-            Builder
-          </ButtonLink>
-        </SubContainer>
-      </ContentContainer>
-    );
-  }
+        <FlexContainer align="center" className="Configure-Checkbox">
+          <Input
+            data-key="isBuilder"
+            onChange={updateInput}
+            name="isBuilder"
+            value={isBuilder}
+            type="checkbox"
+          />
+          <Label noPadding htmlFor="isBuilder">
+            Initialize Empty Sector
+          </Label>
+        </FlexContainer>
+      </SubContainer>
+      <SubContainer
+        className="Configure-PaddedButtons"
+        wrap
+        justify="center"
+        align="center"
+      >
+        <Button onClick={generateSector}>
+          <LinkIcon icon={Zap} size="20" />
+          Generate
+        </Button>
+      </SubContainer>
+    </ContentContainer>
+  );
 }
+
+Configure.propTypes = {
+  updateConfiguration: PropTypes.func.isRequired,
+  generateSector: PropTypes.func.isRequired,
+  isBuilder: PropTypes.bool.isRequired,
+  columns: PropTypes.number,
+  rows: PropTypes.number,
+  name: PropTypes.string,
+};
+
+Configure.defaultProps = {
+  columns: '',
+  rows: '',
+  name: '',
+};

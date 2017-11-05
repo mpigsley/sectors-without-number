@@ -5,18 +5,15 @@ import { throttle } from 'lodash';
 import hexGenerator from 'utils/hex-generator';
 
 import HexMap from 'components/hex-map';
-import AbsoluteContainer from 'primitives/containers/absolute-container';
+import AccountManager from 'components/account-manager';
+import AbsoluteContainer from 'primitives/container/absolute-container';
 
 export default class HexBackground extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
+    closeUserDropdown: PropTypes.func.isRequired,
+    isDropdownActive: PropTypes.bool.isRequired,
   };
-
-  constructor(props) {
-    super(props);
-
-    this.onResize = this.onResize.bind(this);
-  }
 
   state = {
     height: window.innerHeight,
@@ -45,14 +42,22 @@ export default class HexBackground extends Component {
       ...this.props,
     });
 
+    let { closeUserDropdown } = this.props;
+    if (!this.props.isDropdownActive) {
+      closeUserDropdown = null;
+    }
+
     return (
-      <div>
+      <div onClick={closeUserDropdown}>
         <HexMap
           width={this.state.width}
           height={this.state.height}
           hexes={hexes}
         />
-        <AbsoluteContainer>{this.props.children}</AbsoluteContainer>
+        <AbsoluteContainer>
+          <AccountManager />
+          {this.props.children}
+        </AbsoluteContainer>
       </div>
     );
   }
