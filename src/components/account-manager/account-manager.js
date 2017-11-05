@@ -92,17 +92,17 @@ export default function AccountManager({
 }
 
 AccountManager.propTypes = {
-  openEditModal: PropTypes.func,
-  closeEditModal: PropTypes.func,
-  openLoginModal: PropTypes.func,
-  openUserDropdown: PropTypes.func,
-  closeUserDropdown: PropTypes.func,
-  updateUserForm: PropTypes.func,
-  updateUser: PropTypes.func,
-  logout: PropTypes.func,
-  isEditModalOpen: PropTypes.bool,
-  isInitialized: PropTypes.bool,
-  isDropdownActive: PropTypes.bool,
+  openEditModal: PropTypes.func.isRequired,
+  closeEditModal: PropTypes.func.isRequired,
+  openLoginModal: PropTypes.func.isRequired,
+  openUserDropdown: PropTypes.func.isRequired,
+  closeUserDropdown: PropTypes.func.isRequired,
+  updateUserForm: PropTypes.func.isRequired,
+  updateUser: PropTypes.func.isRequired,
+  logout: PropTypes.func.isRequired,
+  isEditModalOpen: PropTypes.bool.isRequired,
+  isInitialized: PropTypes.bool.isRequired,
+  isDropdownActive: PropTypes.bool.isRequired,
   displayName: PropTypes.string,
   user: PropTypes.shape({
     displayName: PropTypes.string,
@@ -110,17 +110,6 @@ AccountManager.propTypes = {
 };
 
 AccountManager.defaultProps = {
-  openEditModal: () => {},
-  closeEditModal: () => {},
-  openLoginModal: () => {},
-  openUserDropdown: () => {},
-  closeUserDropdown: () => {},
-  updateUserForm: () => {},
-  updateUser: () => {},
-  logout: () => {},
-  isEditModalOpen: false,
-  isInitialized: false,
-  isDropdownActive: false,
   user: null,
   displayName: '',
 };

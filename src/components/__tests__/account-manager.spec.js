@@ -4,28 +4,50 @@ import { shallow } from 'enzyme';
 import Modal from 'primitives/modal/modal';
 import AccountManager from '../account-manager/account-manager';
 
+const defaultProps = {
+  openEditModal: () => {},
+  closeEditModal: () => {},
+  openLoginModal: () => {},
+  openUserDropdown: () => {},
+  closeUserDropdown: () => {},
+  updateUserForm: () => {},
+  updateUser: () => {},
+  logout: () => {},
+  isEditModalOpen: false,
+  isInitialized: false,
+  isDropdownActive: false,
+};
+
 describe('AccountManager', () => {
   it("should render nothing if it's not initialized", () => {
-    const accountManager = shallow(<AccountManager />);
+    const accountManager = shallow(<AccountManager {...defaultProps} />);
     expect(accountManager.html()).toEqual(null);
   });
 
   it('should render the login button if user is undefined', () => {
-    const accountManager = shallow(<AccountManager isInitialized />);
+    const accountManager = shallow(
+      <AccountManager {...defaultProps} isInitialized />,
+    );
     expect(accountManager.hasClass('AccountManager-Button')).toBeTruthy();
   });
 
   it('should open login modal if login button is clicked', () => {
     const openLoginModal = jest.fn();
     const accountManager = shallow(
-      <AccountManager isInitialized openLoginModal={openLoginModal} />,
+      <AccountManager
+        {...defaultProps}
+        isInitialized
+        openLoginModal={openLoginModal}
+      />,
     );
     accountManager.simulate('click');
     expect(openLoginModal).toHaveBeenCalledTimes(1);
   });
 
   it('should render with a modal and a dropdown if user exists', () => {
-    const accountManager = shallow(<AccountManager isInitialized user={{}} />);
+    const accountManager = shallow(
+      <AccountManager {...defaultProps} isInitialized user={{}} />,
+    );
     expect(
       accountManager.find('.AccountManager-Dropdown').exists(),
     ).toBeTruthy();
@@ -33,7 +55,9 @@ describe('AccountManager', () => {
   });
 
   it('should render account manager button with default user name if user exists', () => {
-    const accountManager = shallow(<AccountManager isInitialized user={{}} />);
+    const accountManager = shallow(
+      <AccountManager {...defaultProps} isInitialized user={{}} />,
+    );
     expect(accountManager.hasClass('AccountManager-Button')).toBeTruthy();
     expect(
       accountManager
@@ -47,7 +71,11 @@ describe('AccountManager', () => {
   it('should render account manager button with user name if user exists', () => {
     const testName = 'testName';
     const accountManager = shallow(
-      <AccountManager isInitialized user={{ displayName: testName }} />,
+      <AccountManager
+        {...defaultProps}
+        isInitialized
+        user={{ displayName: testName }}
+      />,
     );
     expect(accountManager.hasClass('AccountManager-Button')).toBeTruthy();
     expect(
@@ -60,7 +88,9 @@ describe('AccountManager', () => {
   });
 
   it('should not render an open dropdown if the dropdown is not active', () => {
-    const accountManager = shallow(<AccountManager isInitialized user={{}} />);
+    const accountManager = shallow(
+      <AccountManager {...defaultProps} isInitialized user={{}} />,
+    );
     expect(
       accountManager
         .find('.AccountManager-Dropdown')
@@ -70,7 +100,12 @@ describe('AccountManager', () => {
 
   it('should render an open dropdown if the dropdown is active', () => {
     const accountManager = shallow(
-      <AccountManager isInitialized user={{}} isDropdownActive />,
+      <AccountManager
+        {...defaultProps}
+        isInitialized
+        user={{}}
+        isDropdownActive
+      />,
     );
     expect(
       accountManager
@@ -83,6 +118,7 @@ describe('AccountManager', () => {
     const openUserDropdown = jest.fn();
     const accountManager = shallow(
       <AccountManager
+        {...defaultProps}
         isInitialized
         user={{}}
         openUserDropdown={openUserDropdown}
@@ -96,6 +132,7 @@ describe('AccountManager', () => {
     const closeUserDropdown = jest.fn();
     const accountManager = shallow(
       <AccountManager
+        {...defaultProps}
         isInitialized
         isDropdownActive
         user={{}}
@@ -110,6 +147,7 @@ describe('AccountManager', () => {
     const openEditModal = jest.fn();
     const accountManager = shallow(
       <AccountManager
+        {...defaultProps}
         isInitialized
         isDropdownActive
         user={{}}
@@ -127,6 +165,7 @@ describe('AccountManager', () => {
     const logout = jest.fn();
     const accountManager = shallow(
       <AccountManager
+        {...defaultProps}
         isInitialized
         isDropdownActive
         user={{}}
