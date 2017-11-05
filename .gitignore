@@ -19,4 +19,4 @@ src/**/*.css
 
 # firebase
 .firebaserc
-.env
+.env*
