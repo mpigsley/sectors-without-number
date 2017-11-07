@@ -9,6 +9,7 @@ import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
+import Checkbox from 'primitives/form/checkbox';
 import FlexContainer from 'primitives/container/flex-container';
 
 import { generateName } from 'utils/name-generator';
@@ -38,6 +39,7 @@ export default class NewSystemModal extends Component {
   state = {
     name: generateName(new Chance()),
     planets: generatePlanetNames(),
+    initializeBlankPlanets: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -45,6 +47,7 @@ export default class NewSystemModal extends Component {
       this.setState({
         name: generateName(new Chance()),
         planets: generatePlanetNames(),
+        initializeBlankPlanets: false,
       });
     }
   }
@@ -79,6 +82,10 @@ export default class NewSystemModal extends Component {
     const planets = [...this.state.planets];
     planets.push(generateName(new Chance()));
     this.setState({ planets });
+  };
+
+  onUpdateBlankPlanet = ({ target }) => {
+    this.setState({ initializeBlankPlanets: target.checked });
   };
 
   onCreate = () => {
@@ -119,6 +126,11 @@ export default class NewSystemModal extends Component {
             onIconClick={this.onNewSystemName}
           />
         </FlexContainer>
+        <Checkbox
+          label="Initialize Blank Planets"
+          value={this.state.initializeBlankPlanets}
+          onChange={this.onUpdateBlankPlanet}
+        />
         <FlexContainer direction="column">
           <Label>Planets</Label>
           <FlexContainer direction="column">
