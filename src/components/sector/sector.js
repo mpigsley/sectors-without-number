@@ -6,11 +6,11 @@ import FlexContainer from 'primitives/container/flex-container';
 import SectorSidebar from 'components/sector-sidebar';
 import SystemTooltips from 'components/system-tooltips';
 import PrintableSector from 'components/printable-sector';
+import NewSystemModal from 'components/new-system-modal';
 import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex-generator';
 import { coordinatesFromKey } from 'utils/common';
-import NewSystemModal from './new-system-modal';
 import Loading from './loading';
 import Error from './error';
 

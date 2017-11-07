@@ -22,7 +22,7 @@ export const systemHoverEnd = key => ({ type: SYSTEM_HOVER_END, key });
 export const editSystem = (system, changes) => (dispatch, getState) => {
   const state = getState();
   const currentSector = getCurrentSector(state);
-  return creatorOrUpdateSector(state, {
+  const sector = {
     ...currentSector,
     systems: {
       ...currentSector.systems,
@@ -31,10 +31,11 @@ export const editSystem = (system, changes) => (dispatch, getState) => {
         ...changes,
       },
     },
-  })
-    .then(sector => {
-      dispatch({ type: EDIT_SECTOR, sector });
-      dispatch(push(`/sector/${sector.key}/system/${system}`));
+  };
+  dispatch({ type: EDIT_SECTOR, sector });
+  dispatch(push(`/sector/${sector.key}/system/${system}`));
+  return creatorOrUpdateSector(state, sector)
+    .then(() => {
       dispatch(
         SuccessToast({
           title: 'System Updated',
@@ -50,13 +51,14 @@ export const editSystem = (system, changes) => (dispatch, getState) => {
 export const deleteSystem = system => (dispatch, getState) => {
   const state = getState();
   const currentSector = getCurrentSector(state);
-  return creatorOrUpdateSector(state, {
+  const sector = {
     ...currentSector,
     systems: omit(currentSector.systems, system),
-  })
-    .then(sector => {
-      dispatch(push(`/sector/${sector.key}`));
-      dispatch({ type: EDIT_SECTOR, sector });
+  };
+  dispatch(push(`/sector/${sector.key}`));
+  dispatch({ type: EDIT_SECTOR, sector });
+  return creatorOrUpdateSector(state, sector)
+    .then(() => {
       dispatch(
         SuccessToast({
           title: 'System Deleted',

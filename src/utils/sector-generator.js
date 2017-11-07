@@ -39,16 +39,24 @@ export const generatePlanet = (chance, existingName) => () => {
 };
 
 export class System {
-  constructor(config, x, y, name, numPlanets) {
+  constructor(config, x, y, name, planetNames) {
     this.config = config;
     this.name = name || generateName(this.config.chance);
-    const planetArray = [
-      ...Array(numPlanets || this.config.chance.weighted([1, 2, 3], [5, 3, 2])),
+
+    let planetArray = [
+      ...Array(this.config.chance.weighted([1, 2, 3], [5, 3, 2])),
     ].map(generatePlanet(this.config.chance));
+    if (planetNames) {
+      planetArray = planetNames.map(planetName =>
+        generatePlanet(this.config.chance, planetName)(),
+      );
+    }
+
     this.planets = zipObject(
       planetArray.map(planet => planet.key),
       planetArray,
     );
+
     this.x =
       x ||
       this.config.chance.integer({

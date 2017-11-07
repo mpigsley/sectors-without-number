@@ -1,0 +1,29 @@
+@import 'styles/theme';
+
+.NewSystemModal-Planet {
+  margin-bottom: 0.3rem;
+}
+
+.NewSystemModal-Delete {
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.NewSystemModal-Add {
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.NewSystemModal-Plus {
+  margin-right: 0.6rem;
+}
