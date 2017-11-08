@@ -4,6 +4,10 @@
   margin-bottom: 0.3rem;
 }
 
+.NewSystemModal-Help {
+  margin-bottom: 0.1rem;
+}
+
 .NewSystemModal-Delete {
   cursor: pointer;
   margin-right: 0.5rem;
@@ -18,10 +22,16 @@
   cursor: pointer;
   margin-top: 0.5rem;
   transition: all 0.3s;
+  font-size: 0.9rem;
 
   &:hover {
     color: $light3;
   }
+}
+
+.NewSystemModal-Generate {
+  margin-left: 0.5rem;
+  margin-right: 0;
 }
 
 .NewSystemModal-Plus {

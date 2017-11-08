@@ -18,6 +18,7 @@ import SystemInfo from 'components/system-info';
 import PlanetInfo from 'components/planet-info';
 
 import 'styles/global.css';
+import 'react-hint/css/index.css';
 
 init(store);
 
