@@ -1,4 +1,3 @@
-import Chance from 'chance';
 import { every } from 'lodash';
 
 import sectorGenerator, { generatePlanet } from '../sector-generator';
@@ -61,46 +60,46 @@ describe('SectorGenerator', () => {
 
   describe('generatePlanet', () => {
     it('should include a random name', () => {
-      const { name } = generatePlanet(new Chance())();
+      const { name } = generatePlanet();
       expect(name).toBeDefined();
       expect(name.split(' ')).toHaveLength(1);
     });
 
     it('should include an encoded key', () => {
       const testName = 'VJLAE FLIAE%=';
-      const { key } = generatePlanet(new Chance(), testName)();
+      const { key } = generatePlanet({ name: testName });
       expect(key).toEqual(encodeURIComponent(testName.toLowerCase()));
     });
 
     it('should include world tags from list', () => {
-      const { tags } = generatePlanet(new Chance())();
+      const { tags } = generatePlanet();
       expect(
         every(tags, tag => Object.keys(worldTagKeys).includes(tag)),
       ).toBeTruthy();
     });
 
     it('should include tech level from list', () => {
-      const { techLevel } = generatePlanet(new Chance())();
+      const { techLevel } = generatePlanet();
       expect(Object.keys(TechLevel).includes(techLevel)).toBeTruthy();
     });
 
     it('should include atmosphere from list', () => {
-      const { atmosphere } = generatePlanet(new Chance())();
+      const { atmosphere } = generatePlanet();
       expect(Object.keys(Atmosphere).includes(atmosphere)).toBeTruthy();
     });
 
     it('should include temperature from list', () => {
-      const { temperature } = generatePlanet(new Chance())();
+      const { temperature } = generatePlanet();
       expect(Object.keys(Temperature).includes(temperature)).toBeTruthy();
     });
 
     it('should include biosphere from list', () => {
-      const { biosphere } = generatePlanet(new Chance())();
+      const { biosphere } = generatePlanet();
       expect(Object.keys(Biosphere).includes(biosphere)).toBeTruthy();
     });
 
     it('should include population from list', () => {
-      const { population } = generatePlanet(new Chance())();
+      const { population } = generatePlanet();
       expect(Object.keys(Population).includes(population)).toBeTruthy();
     });
   });

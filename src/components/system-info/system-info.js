@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { map, unionBy, difference, every, zipObject, isEqual } from 'lodash';
 import { RefreshCw } from 'react-feather';
-import Chance from 'chance';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
@@ -29,15 +28,13 @@ const newOptionCreator = ({ label, labelKey, valueKey }) => ({
   [valueKey]: encodeURIComponent(label.toLowerCase()),
 });
 
-const planetsToSave = (planets, planetOptions) => {
-  const chance = new Chance();
-  return zipObject(
+const planetsToSave = (planets, planetOptions) =>
+  zipObject(
     planetOptions.map(({ value }) => value),
     planetOptions.map(
-      ({ value, label }) => planets[value] || generatePlanet(chance, label)(),
+      ({ value, label }) => planets[value] || generatePlanet({ name: label }),
     ),
   );
-};
 
 const renderPlanetLinks = (planets, { pathname }) =>
   map(planets, (planet, key) => (
@@ -45,12 +42,14 @@ const renderPlanetLinks = (planets, { pathname }) =>
       <Header type={HeaderType.header4} className="SystemInfo-Name">
         {planet.name}
       </Header>
-      <div className="SystemInfo-Tags">
-        ({planet.tags
-          .map(tag => WorldTags[tag].name)
-          .map(toCommaArray)
-          .join('')})
-      </div>
+      {!planet.tags.length ? null : (
+        <div className="SystemInfo-Tags">
+          ({planet.tags
+            .map(tag => WorldTags[tag].name)
+            .map(toCommaArray)
+            .join('')})
+        </div>
+      )}
     </SidebarLinkRow>
   ));
 

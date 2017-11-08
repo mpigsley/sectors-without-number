@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw, X, Plus } from 'react-feather';
 import Chance from 'chance';
-import { map, zipObject, omit } from 'lodash';
+import { map, zipObject, omit, values } from 'lodash';
 import ReactHintFactory from 'react-hint';
 
 import Modal from 'primitives/modal/modal';
@@ -14,7 +14,7 @@ import FlexContainer from 'primitives/container/flex-container';
 import Dice from 'primitives/icons/dice';
 
 import { generateName } from 'utils/name-generator';
-import { System } from 'utils/sector-generator';
+import { System, generatePlanet } from 'utils/sector-generator';
 
 import './style.css';
 
@@ -126,7 +126,7 @@ export default class NewSystemModal extends Component {
         this.props.x,
         this.props.y,
         this.state.name,
-        this.state.planets,
+        values(this.state.planets).map(generatePlanet),
       ).toJSON(),
     );
   };
