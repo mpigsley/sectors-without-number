@@ -6,11 +6,10 @@ import FlexContainer from 'primitives/container/flex-container';
 import SectorSidebar from 'components/sector-sidebar';
 import SystemTooltips from 'components/system-tooltips';
 import PrintableSector from 'components/printable-sector';
+import SystemEditModal from 'components/system-edit-modal';
 import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex-generator';
-import { coordinatesFromKey } from 'utils/common';
-import NewSystemModal from './new-system-modal';
 import Loading from './loading';
 import Error from './error';
 
@@ -110,13 +109,11 @@ export default class Sector extends Component {
           <SectorSidebar>{this.props.children}</SectorSidebar>
         </FlexContainer>
         <PrintableSector printable={printable} />
-        <NewSystemModal
-          {...coordinatesFromKey(this.props.createSystemKey)}
+        <SystemEditModal
+          systemKey={this.props.createSystemKey}
           isOpen={!!this.props.createSystemKey}
           onClose={this.props.closeSystemCreate}
-          onCreateSystem={system => {
-            this.props.editSystem(system.key, system);
-          }}
+          onSubmit={system => this.props.editSystem(system.key, system)}
         />
       </div>
     );

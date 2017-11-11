@@ -64,11 +64,12 @@ const renderTags = (tags = []) =>
       ),
     );
 
-const renderAttribute = (title, attribute, obj) => (
-  <p className="PlanetInfo-Attribute">
-    <b>{title}:</b> {obj ? (obj[attribute] || {}).name : attribute}
-  </p>
-);
+const renderAttribute = (title, attribute, obj) =>
+  (!obj && !attribute) || (obj && !obj[attribute]) ? null : (
+    <p className="PlanetInfo-Attribute">
+      <b>{title}:</b> {obj ? obj[attribute].name : attribute}
+    </p>
+  );
 
 const planetStateFromProps = ({
   name,
@@ -175,11 +176,11 @@ export default class PlanetInfo extends SidebarInfo {
         encodeURIComponent(this.props.router.params.planet),
         {
           name: this.state.name,
-          techLevel: this.state.techLevel.value,
-          atmosphere: this.state.atmosphere.value,
-          temperature: this.state.temperature.value,
-          biosphere: this.state.biosphere.value,
-          population: this.state.population.value,
+          techLevel: (this.state.techLevel || {}).value || '',
+          atmosphere: (this.state.atmosphere || {}).value || '',
+          temperature: (this.state.temperature || {}).value || '',
+          biosphere: (this.state.biosphere || {}).value || '',
+          population: (this.state.population || {}).value || '',
           tags: this.state.tags.map(({ value }) => value),
         },
       );
@@ -211,8 +212,11 @@ export default class PlanetInfo extends SidebarInfo {
         <Dropdown
           id={stateKey}
           name={stateKey}
-          value={this.state[stateKey]}
-          clearable={false}
+          value={
+            (this.state[stateKey] || {}).value
+              ? this.state[stateKey]
+              : undefined
+          }
           onChange={this.onEditDropdown(stateKey, { isNotUnique: false })}
           dropUp={dropUp}
           options={

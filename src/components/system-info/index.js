@@ -14,12 +14,8 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  editSystem: (system, changes) => {
-    dispatch(editSystem(system, changes));
-  },
-  deleteSystem(system) {
-    dispatch(deleteSystem(system));
-  },
+  editSystem: (system, changes) => dispatch(editSystem(system, changes)),
+  deleteSystem: system => dispatch(deleteSystem(system)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SystemInfo);

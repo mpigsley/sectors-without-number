@@ -13,42 +13,52 @@ const INDEX = 1;
 const DEFAULT_ROWS = 10;
 const DEFAULT_COLUMNS = 8;
 
-export const generatePlanet = (chance, existingName) => () => {
-  const name = existingName || generateName(chance);
-  return {
-    name,
-    key: encodeURIComponent(name.toLowerCase()),
-    tags: chance.pickset(Object.keys(worldTagKeys), 2),
-    techLevel: `TL${chance.weighted(
-      ['0', '1', '2', '3', '4', '4+', '5'],
-      [1, 1, 2, 2, 3, 1, 1],
-    )}`,
-    atmosphere: chance.weighted(Object.keys(Atmosphere), [1, 1, 1, 5, 1, 1, 1]),
-    temperature: chance.weighted(Object.keys(Temperature), [
-      1,
-      1,
-      2,
-      3,
-      2,
-      1,
-      1,
-    ]),
-    biosphere: chance.weighted(Object.keys(Biosphere), [1, 1, 2, 3, 2, 1, 1]),
-    population: chance.weighted(Object.keys(Population), [1, 1, 2, 3, 2, 1, 1]),
-  };
-};
+export const generatePlanet = (
+  {
+    chance = new Chance(),
+    name = generateName(new Chance()),
+    generate = true,
+  } = {},
+) => ({
+  name,
+  key: encodeURIComponent(name.toLowerCase()),
+  tags: !generate ? [] : chance.pickset(Object.keys(worldTagKeys), 2),
+  techLevel: !generate
+    ? ''
+    : `TL${chance.weighted(
+        ['0', '1', '2', '3', '4', '4+', '5'],
+        [1, 1, 2, 2, 3, 1, 1],
+      )}`,
+  atmosphere: !generate
+    ? ''
+    : chance.weighted(Object.keys(Atmosphere), [1, 1, 1, 5, 1, 1, 1]),
+  temperature: !generate
+    ? ''
+    : chance.weighted(Object.keys(Temperature), [1, 1, 2, 3, 2, 1, 1]),
+  biosphere: !generate
+    ? ''
+    : chance.weighted(Object.keys(Biosphere), [1, 1, 2, 3, 2, 1, 1]),
+  population: !generate
+    ? ''
+    : chance.weighted(Object.keys(Population), [1, 1, 2, 3, 2, 1, 1]),
+});
 
 export class System {
-  constructor(config, x, y, name, numPlanets) {
+  constructor(config, x, y, name, planets) {
     this.config = config;
     this.name = name || generateName(this.config.chance);
-    const planetArray = [
-      ...Array(numPlanets || this.config.chance.weighted([1, 2, 3], [5, 3, 2])),
-    ].map(generatePlanet(this.config.chance));
+
+    const planetArray =
+      planets ||
+      [...Array(this.config.chance.weighted([1, 2, 3], [5, 3, 2]))].map(
+        generatePlanet,
+      );
+
     this.planets = zipObject(
       planetArray.map(planet => planet.key),
       planetArray,
     );
+
     this.x =
       x ||
       this.config.chance.integer({

@@ -14,11 +14,12 @@ import Population from 'constants/population';
 
 import './style.css';
 
-const renderAttribute = (title, attribute, obj) => (
-  <p className="PrintableSector-PlanetAttribute">
-    <b>{title}:</b> {obj ? obj[attribute].name : attribute}
-  </p>
-);
+const renderAttribute = (title, attribute, obj) =>
+  (!obj && !attribute) || (obj && !obj[attribute]) ? null : (
+    <p className="PrintableSector-PlanetAttribute">
+      <b>{title}:</b> {obj ? obj[attribute].name : attribute}
+    </p>
+  );
 
 const renderPlanets = planets =>
   Object.keys(planets)

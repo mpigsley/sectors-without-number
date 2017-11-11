@@ -6,8 +6,8 @@ import Chance from 'chance';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
-import FlexContainer from 'primitives/container/flex-container';
 import IconInput from 'primitives/form/icon-input';
+import Checkbox from 'primitives/form/checkbox';
 import Input from 'primitives/form/input';
 import Label from 'primitives/form/label';
 import LinkIcon from 'primitives/other/link-icon';
@@ -96,18 +96,11 @@ export default function Configure({
             />
           </SubContainer>
         </SubContainer>
-        <FlexContainer align="center" className="Configure-Checkbox">
-          <Input
-            data-key="isBuilder"
-            onChange={updateInput}
-            name="isBuilder"
-            value={isBuilder}
-            type="checkbox"
-          />
-          <Label noPadding htmlFor="isBuilder">
-            Initialize Empty Sector
-          </Label>
-        </FlexContainer>
+        <Checkbox
+          value={isBuilder}
+          onChange={updateInput}
+          label="Initialize Empty Sector"
+        />
       </SubContainer>
       <SubContainer
         className="Configure-PaddedButtons"

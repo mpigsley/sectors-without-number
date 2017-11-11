@@ -38,6 +38,14 @@
     border-color: $light2;
     color: $dark4;
   }
+
+  &:disabled,
+  &:disabled:hover {
+    color: $dark4;
+    cursor: default;
+    background-color: $dark1;
+    border-color: $dark1;
+  }
 }
 
 .Button-Minimal {
