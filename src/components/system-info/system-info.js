@@ -89,7 +89,7 @@ export default class SectorInfo extends SidebarInfo {
           systemKey={this.props.system.key}
           isOpen={this.state.isOpen}
           onClose={this.onClose}
-          onSubmit={system => this.props.onSaveSystem(system.key, system)}
+          onSubmit={this.onSaveSystem}
         />
       </SidebarNavigation>
     );

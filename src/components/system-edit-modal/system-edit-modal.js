@@ -24,7 +24,8 @@ const ReactHint = ReactHintFactory(React);
 const generatePlanetNames = system => {
   let planetsList;
   if (system) {
-    planetsList = map(system.planets, ({ name }) => ({
+    planetsList = map(system.planets, ({ key, name }) => ({
+      originalKey: key,
       generate: true,
       isSaved: true,
       name,
@@ -136,15 +137,40 @@ export default class SystemEditModal extends Component {
 
   onCreate = () => {
     const { x, y } = coordinatesFromKey(this.props.systemKey);
-    this.props.onSubmit(
-      new System(
+
+    const existingPlanets = values(this.state.planets)
+      .filter(planet => planet.isSaved)
+      .map(({ originalKey, name }) => ({
+        ...this.props.system.planets[originalKey],
+        key: encodeURIComponent(name.toLowerCase()),
+        name,
+      }));
+    const newPlanets = values(this.state.planets)
+      .filter(planet => !planet.isSaved)
+      .map(generatePlanet);
+    const combinedPlanets = existingPlanets.concat(newPlanets);
+
+    let system;
+    if (this.props.system) {
+      system = {
+        ...this.props.system,
+        name: this.state.name,
+        planets: zipObject(
+          combinedPlanets.map(({ key }) => key),
+          combinedPlanets,
+        ),
+      };
+    } else {
+      system = new System(
         { chance: new Chance() },
         x,
         y,
         this.state.name,
-        values(this.state.planets).map(generatePlanet),
-      ).toJSON(),
-    );
+        newPlanets,
+      ).toJSON();
+    }
+
+    this.props.onSubmit(system);
   };
 
   get isAllSaved() {
