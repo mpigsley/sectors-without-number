@@ -7,8 +7,10 @@ import SystemEditModal from './system-edit-modal';
 
 const mapStateToProps = (state, props) => {
   const sector = getCurrentSector(state);
-  const system = sector.systems[props.systemKey];
-  return { planetKeys: getPlanetKeys(state, props), system };
+  return {
+    planetKeys: getPlanetKeys(state, props),
+    system: sector.systems[props.systemKey],
+  };
 };
 
 export default connect(mapStateToProps)(SystemEditModal);

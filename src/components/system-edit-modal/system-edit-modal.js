@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw, X, Plus } from 'react-feather';
 import Chance from 'chance';
-import { map, zipObject, omit, values, every } from 'lodash';
+import {
+  map,
+  zipObject,
+  omit,
+  values,
+  every,
+  includes,
+  uniq,
+  filter,
+} from 'lodash';
 import ReactHintFactory from 'react-hint';
 
 import Modal from 'primitives/modal/modal';
@@ -47,6 +56,7 @@ export default class SystemEditModal extends Component {
     onSubmit: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
     systemKey: PropTypes.string,
+    planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
     system: PropTypes.shape({
       key: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -177,6 +187,34 @@ export default class SystemEditModal extends Component {
     return every(this.state.planets, ({ isSaved }) => isSaved);
   }
 
+  get areAllUnique() {
+    const planetsWithNewNames = filter(
+      this.state.planets,
+      ({ isSaved, name, originalKey }) =>
+        !isSaved || encodeURIComponent(name.toLowerCase()) !== originalKey,
+    );
+
+    const newPlanetsUnique =
+      planetsWithNewNames.length ===
+      uniq(
+        planetsWithNewNames.map(({ name }) =>
+          encodeURIComponent(name.toLowerCase()),
+        ),
+      ).length;
+
+    const uniqueToSector = every(
+      planetsWithNewNames,
+      ({ name }) =>
+        name &&
+        !includes(
+          this.props.planetKeys,
+          encodeURIComponent(name.toLowerCase()),
+        ),
+    );
+
+    return newPlanetsUnique && uniqueToSector;
+  }
+
   renderEditRow = ({ name, generate, isSaved }, key) => (
     <FlexContainer className="SystemEditModal-Planet" key={key} align="center">
       <X
@@ -204,15 +242,32 @@ export default class SystemEditModal extends Component {
     </FlexContainer>
   );
 
+  renderUniqueError = () => {
+    if (this.areAllUnique) {
+      return null;
+    }
+    return (
+      <div className="SystemEditModal-Error">
+        All planet names must be unique throughout the sector.
+      </div>
+    );
+  };
+
   render() {
+    const action = this.props.system ? 'Edit' : 'Create';
     return (
       <Modal
         isOpen={this.props.isOpen}
         onCancel={this.props.onClose}
-        title="Create System"
+        title={`${action} System`}
         actionButtons={[
-          <Button primary key="create" onClick={this.onCreate}>
-            Create
+          <Button
+            primary
+            key="create"
+            onClick={this.onCreate}
+            disabled={!this.areAllUnique}
+          >
+            {action}
           </Button>,
         ]}
       >
@@ -250,6 +305,7 @@ export default class SystemEditModal extends Component {
             </FlexContainer>
           </FlexContainer>
         </FlexContainer>
+        {this.renderUniqueError()}
       </Modal>
     );
   }
