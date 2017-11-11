@@ -1,4 +1,12 @@
 {
+  "2.1.0": {
+    "descrition": "Create new ungenerated planets.",
+    "changes": [
+      "A new and improved planet list is shown in the system edit/create modal.",
+      "The checkboxes next to the planets in the system edit/create modal toggles planet generation.",
+      "You can now remove planet attributes by unsetting them in the planet edit modal."
+    ]
+  },
   "2.0.0": {
     "description": "User Accounts & Sharing",
     "changes": [
