@@ -6,7 +6,7 @@ import FlexContainer from 'primitives/container/flex-container';
 import SectorSidebar from 'components/sector-sidebar';
 import SystemTooltips from 'components/system-tooltips';
 import PrintableSector from 'components/printable-sector';
-import NewSystemModal from 'components/new-system-modal';
+import SystemEditModal from 'components/system-edit-modal';
 import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex-generator';
@@ -110,7 +110,7 @@ export default class Sector extends Component {
           <SectorSidebar>{this.props.children}</SectorSidebar>
         </FlexContainer>
         <PrintableSector printable={printable} />
-        <NewSystemModal
+        <SystemEditModal
           {...coordinatesFromKey(this.props.createSystemKey)}
           isOpen={!!this.props.createSystemKey}
           onClose={this.props.closeSystemCreate}

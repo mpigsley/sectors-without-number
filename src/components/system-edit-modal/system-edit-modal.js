@@ -31,7 +31,7 @@ const generatePlanetNames = () => {
   );
 };
 
-export default class NewSystemModal extends Component {
+export default class SystemEditModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     onCreateSystem: PropTypes.func.isRequired,
@@ -166,12 +166,12 @@ export default class NewSystemModal extends Component {
           <FlexContainer direction="column">
             {map(this.state.planets, ({ name, generate }, key) => (
               <FlexContainer
-                className="NewSystemModal-Planet"
+                className="SystemEditModal-Planet"
                 key={key}
                 align="center"
               >
                 <X
-                  className="NewSystemModal-Delete"
+                  className="SystemEditModal-Delete"
                   size={25}
                   onClick={() => this.onDeletePlanet(key)}
                 />
@@ -184,7 +184,7 @@ export default class NewSystemModal extends Component {
                   onIconClick={() => this.onNewPlanetName(key)}
                 />
                 <Input
-                  className="NewSystemModal-Generate"
+                  className="SystemEditModal-Generate"
                   data-key={key}
                   onChange={this.onChangeGenerate}
                   checked={generate}
@@ -194,11 +194,11 @@ export default class NewSystemModal extends Component {
               </FlexContainer>
             ))}
             <FlexContainer
-              className="NewSystemModal-Add"
+              className="SystemEditModal-Add"
               align="center"
               onClick={this.onAddPlanet}
             >
-              <Plus className="NewSystemModal-Plus" size={20} />
+              <Plus className="SystemEditModal-Plus" size={20} />
               Add Planet
             </FlexContainer>
           </FlexContainer>
