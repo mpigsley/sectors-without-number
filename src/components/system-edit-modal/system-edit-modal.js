@@ -55,7 +55,7 @@ export default class SystemEditModal extends Component {
     isOpen: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    systemKey: PropTypes.string,
+    systemKey: PropTypes.string.isRequired,
     planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
     system: PropTypes.shape({
       key: PropTypes.string.isRequired,
@@ -65,7 +65,6 @@ export default class SystemEditModal extends Component {
   };
 
   static defaultProps = {
-    systemKey: null,
     system: null,
   };
 
