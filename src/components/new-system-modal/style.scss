@@ -1,14 +1,14 @@
 @import 'styles/theme';
 
-.EditableMultiSelect-Planet {
+.NewSystemModal-Planet {
   margin-bottom: 0.3rem;
 }
 
-.EditableMultiSelect-Help {
+.NewSystemModal-Help {
   margin-bottom: 0.1rem;
 }
 
-.EditableMultiSelect-Delete {
+.NewSystemModal-Delete {
   cursor: pointer;
   margin-right: 0.5rem;
   transition: all 0.3s;
@@ -18,7 +18,7 @@
   }
 }
 
-.EditableMultiSelect-Add {
+.NewSystemModal-Add {
   cursor: pointer;
   margin-top: 0.5rem;
   transition: all 0.3s;
@@ -29,11 +29,11 @@
   }
 }
 
-.EditableMultiSelect-Generate {
+.NewSystemModal-Generate {
   margin-left: 0.5rem;
   margin-right: 0;
 }
 
-.EditableMultiSelect-Plus {
+.NewSystemModal-Plus {
   margin-right: 0.6rem;
 }
