@@ -10,7 +10,6 @@ import SystemEditModal from 'components/system-edit-modal';
 import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex-generator';
-import { coordinatesFromKey } from 'utils/common';
 import Loading from './loading';
 import Error from './error';
 
@@ -111,12 +110,10 @@ export default class Sector extends Component {
         </FlexContainer>
         <PrintableSector printable={printable} />
         <SystemEditModal
-          {...coordinatesFromKey(this.props.createSystemKey)}
+          systemKey={this.props.createSystemKey}
           isOpen={!!this.props.createSystemKey}
           onClose={this.props.closeSystemCreate}
-          onCreateSystem={system => {
-            this.props.editSystem(system.key, system);
-          }}
+          onSubmit={system => this.props.editSystem(system.key, system)}
         />
       </div>
     );

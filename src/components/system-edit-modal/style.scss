@@ -37,3 +37,11 @@
 .SystemEditModal-Plus {
   margin-right: 0.6rem;
 }
+
+.SystemEditModal-Input {
+  flex: 1;
+
+  &--padded {
+    margin-right: 28px;
+  }
+}

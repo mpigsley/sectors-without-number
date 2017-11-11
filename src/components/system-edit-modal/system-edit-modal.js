@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw, X, Plus } from 'react-feather';
 import Chance from 'chance';
-import { map, zipObject, omit, values } from 'lodash';
+import { map, zipObject, omit, values, every } from 'lodash';
 import ReactHintFactory from 'react-hint';
 
 import Modal from 'primitives/modal/modal';
@@ -15,46 +15,61 @@ import Dice from 'primitives/icons/dice';
 
 import { generateName } from 'utils/name-generator';
 import { System, generatePlanet } from 'utils/sector-generator';
+import { coordinatesFromKey } from 'utils/common';
 
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
 
-const generatePlanetNames = () => {
-  const list = [...Array(new Chance().weighted([1, 2, 3], [5, 3, 2]))];
-  return zipObject(
-    Array.from(list, () => new Chance().hash()),
-    Array.from(list, () => ({
+const generatePlanetNames = system => {
+  let planetsList;
+  if (system) {
+    planetsList = map(system.planets, ({ name }) => ({
+      generate: true,
+      isSaved: true,
+      name,
+    }));
+  } else {
+    const numPlanetArray = Array(new Chance().weighted([1, 2, 3], [5, 3, 2]));
+    planetsList = Array.from([...numPlanetArray], () => ({
       name: generateName(new Chance()),
       generate: true,
-    })),
-  );
+      isSaved: false,
+    }));
+  }
+  return zipObject(planetsList.map(() => new Chance().hash()), planetsList);
 };
 
 export default class SystemEditModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    onCreateSystem: PropTypes.func.isRequired,
+    onSubmit: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    x: PropTypes.number,
-    y: PropTypes.number,
+    systemKey: PropTypes.string,
+    system: PropTypes.shape({
+      key: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      planets: PropTypes.shape().isRequired,
+    }),
   };
 
   static defaultProps = {
-    x: 0,
-    y: 0,
+    systemKey: null,
+    system: null,
   };
 
   state = {
     name: generateName(new Chance()),
-    planets: generatePlanetNames(),
+    planets: generatePlanetNames(this.props.system),
   };
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.isOpen && !this.props.isOpen) {
       this.setState({
-        name: generateName(new Chance()),
-        planets: generatePlanetNames(),
+        name: nextProps.system
+          ? nextProps.system.name
+          : generateName(new Chance()),
+        planets: generatePlanetNames(nextProps.system),
       });
     }
   }
@@ -120,16 +135,48 @@ export default class SystemEditModal extends Component {
   };
 
   onCreate = () => {
-    this.props.onCreateSystem(
+    const { x, y } = coordinatesFromKey(this.props.systemKey);
+    this.props.onSubmit(
       new System(
         { chance: new Chance() },
-        this.props.x,
-        this.props.y,
+        x,
+        y,
         this.state.name,
         values(this.state.planets).map(generatePlanet),
       ).toJSON(),
     );
   };
+
+  get isAllSaved() {
+    return every(this.state.planets, ({ isSaved }) => isSaved);
+  }
+
+  renderEditRow = ({ name, generate, isSaved }, key) => (
+    <FlexContainer className="SystemEditModal-Planet" key={key} align="center">
+      <X
+        className="SystemEditModal-Delete"
+        size={25}
+        onClick={() => this.onDeletePlanet(key)}
+      />
+      <IconInput
+        name="name"
+        data-key={key}
+        icon={RefreshCw}
+        value={name}
+        onChange={this.onEditPlanet}
+        onIconClick={() => this.onNewPlanetName(key)}
+      />
+      <Input
+        disabled={isSaved}
+        className="SystemEditModal-Generate"
+        data-key={key}
+        onChange={this.onChangeGenerate}
+        checked={generate}
+        name="checkbox"
+        type="checkbox"
+      />
+    </FlexContainer>
+  );
 
   render() {
     return (
@@ -164,35 +211,9 @@ export default class SystemEditModal extends Component {
             <Dice data-rh="Select to generate planet data." size={22} />
           </FlexContainer>
           <FlexContainer direction="column">
-            {map(this.state.planets, ({ name, generate }, key) => (
-              <FlexContainer
-                className="SystemEditModal-Planet"
-                key={key}
-                align="center"
-              >
-                <X
-                  className="SystemEditModal-Delete"
-                  size={25}
-                  onClick={() => this.onDeletePlanet(key)}
-                />
-                <IconInput
-                  name="name"
-                  data-key={key}
-                  icon={RefreshCw}
-                  value={name}
-                  onChange={this.onEditPlanet}
-                  onIconClick={() => this.onNewPlanetName(key)}
-                />
-                <Input
-                  className="SystemEditModal-Generate"
-                  data-key={key}
-                  onChange={this.onChangeGenerate}
-                  checked={generate}
-                  name="checkbox"
-                  type="checkbox"
-                />
-              </FlexContainer>
-            ))}
+            {map(this.state.planets, (planet, key) =>
+              this.renderEditRow(planet, key),
+            )}
             <FlexContainer
               className="SystemEditModal-Add"
               align="center"
