@@ -7,7 +7,7 @@ import Label from 'primitives/form/label';
 
 import './style.css';
 
-export default function Checkbox({ label, value, onChange }) {
+export default function Checkbox({ label, value, onChange, ...rest }) {
   return (
     <FlexContainer align="center" className="Checkbox">
       <Input
@@ -15,6 +15,7 @@ export default function Checkbox({ label, value, onChange }) {
         value={value}
         name="checkbox"
         type="checkbox"
+        {...rest}
       />
       <Label noPadding htmlFor="checkbox">
         {label}
