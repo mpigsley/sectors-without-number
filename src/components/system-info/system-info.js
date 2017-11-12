@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { map } from 'lodash';
+import { Plus } from 'react-feather';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
 import SystemEditModal from 'components/system-edit-modal';
+import PlanetEditModal from 'components/planet-edit-modal';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import SectionHeader from 'primitives/text/section-header';
+import FlexContainer from 'primitives/container/flex-container';
+import Button from 'primitives/other/button';
+import LinkIcon from 'primitives/other/link-icon';
 
 import { toCommaArray } from 'utils/common';
 import WorldTags from 'constants/world-tags';
@@ -52,12 +57,14 @@ export default class SectorInfo extends SidebarInfo {
     }).isRequired,
     editSystem: PropTypes.func.isRequired,
     deleteSystem: PropTypes.func.isRequired,
+    editPlanet: PropTypes.func.isRequired,
     planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
   };
 
   state = {
     isOpen: false,
     isConfirmDeleteOpen: false,
+    isAddPlanetOpen: false,
   };
 
   onSaveSystem = system => {
@@ -70,6 +77,11 @@ export default class SectorInfo extends SidebarInfo {
     this.props.deleteSystem(system);
   };
 
+  onCreatePlanet = planet => {
+    this.props.editPlanet(this.props.system.key, planet);
+    this.setState({ isAddPlanetOpen: false });
+  };
+
   render() {
     return (
       <SidebarNavigation
@@ -79,7 +91,19 @@ export default class SectorInfo extends SidebarInfo {
         onEdit={this.onEdit}
         onDelete={this.onConfirmDelete}
       >
-        <SectionHeader>Planets</SectionHeader>
+        <SectionHeader>
+          <FlexContainer justify="spaceBetween" align="flexEnd">
+            Systems
+            <Button
+              minimal
+              className="SectorInfo-AddButton"
+              onClick={() => this.setState({ isAddPlanetOpen: true })}
+            >
+              <LinkIcon size={15} icon={Plus} />
+              Add Planet
+            </Button>
+          </FlexContainer>
+        </SectionHeader>
         {renderPlanetLinks(this.props.system.planets, this.props.location)}
         {this.renderConfirmModal(
           this.onDeleteSystem(this.props.system.key),
@@ -90,6 +114,12 @@ export default class SectorInfo extends SidebarInfo {
           isOpen={this.state.isOpen}
           onClose={this.onClose}
           onSubmit={this.onSaveSystem}
+        />
+        <PlanetEditModal
+          systemKey={this.props.system.key}
+          isOpen={this.state.isAddPlanetOpen}
+          onClose={() => this.setState({ isAddPlanetOpen: false })}
+          onSubmit={this.onCreatePlanet}
         />
       </SidebarNavigation>
     );

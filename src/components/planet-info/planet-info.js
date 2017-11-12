@@ -94,11 +94,7 @@ export default class PlanetInfo extends SidebarInfo {
   };
 
   onSavePlanet = planet => {
-    this.props.editPlanet(
-      this.props.router.params.system,
-      encodeURIComponent(this.props.router.params.planet),
-      planet,
-    );
+    this.props.editPlanet(this.props.router.params.system, planet);
     this.onClose();
   };
 

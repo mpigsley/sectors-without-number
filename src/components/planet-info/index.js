@@ -17,8 +17,8 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  editPlanet: (system, planet, changes) =>
-    dispatch(editPlanet(system, planet, changes)),
+  editPlanet: (system, planet) =>
+    dispatch(editPlanet(system, planet.key, planet)),
   deletePlanet: (system, planet) => dispatch(deletePlanet(system, planet)),
 });
 
