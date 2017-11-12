@@ -3,6 +3,7 @@ import {
   isBetween,
   coordinateKey,
   coordinatesFromKey,
+  allSectorKeys,
   stringSortByKey,
   toCommaArray,
 } from '../common';
@@ -86,6 +87,27 @@ describe('coordinatesFromKey', () => {
     const { x, y } = coordinatesFromKey('9999');
     expect(x).toEqual(100);
     expect(y).toEqual(100);
+  });
+});
+
+describe('allSectorKeys', () => {
+  it('should return an empty array if no parameters are given', () => {
+    expect(allSectorKeys()).toHaveLength(0);
+  });
+
+  it('should give all keys in a 2x2 grid', () => {
+    const keys = allSectorKeys(2, 2);
+    expect(keys).toContain('0000');
+    expect(keys).toContain('0001');
+    expect(keys).toContain('0100');
+    expect(keys).toContain('0101');
+    expect(keys).toHaveLength(4);
+  });
+
+  it('should give all keys in a very large grid', () => {
+    const width = 123;
+    const height = 1234;
+    expect(allSectorKeys(width, height)).toHaveLength(width * height);
   });
 });
 
