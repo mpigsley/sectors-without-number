@@ -11,7 +11,7 @@ export const makeGetCurrentPlanet = () => {
   const getCurrentSystem = makeGetCurrentSystem();
   return createSelector(
     [getCurrentSystem, planetRouteSelector],
-    (system, planet) => ({ ...(system.planets || {})[planet] } || {}),
+    (system, planet) => (system.planets || {})[planet] || {},
   );
 };
 

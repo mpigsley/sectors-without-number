@@ -9,9 +9,9 @@ export const getCurrentSector = createSelector(
   [generatedSelector, savedSelector, currentSectorSelector],
   (generated, saved, currentSector) => {
     if (currentSector === 'generated') {
-      return { ...generated } || {};
+      return generated || {};
     }
-    return { ...saved[currentSector] } || {};
+    return saved[currentSector] || {};
   },
 );
 
