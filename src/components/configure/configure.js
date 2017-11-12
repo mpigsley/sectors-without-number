@@ -97,6 +97,7 @@ export default function Configure({
           </SubContainer>
         </SubContainer>
         <Checkbox
+          data-key="isBuilder"
           value={isBuilder}
           onChange={updateInput}
           label="Initialize Empty Sector"
