@@ -20,7 +20,7 @@ export const coordinatesFromKey = key => {
   };
 };
 
-export const allSectorKeys = (width, height) => {
+export const allSectorKeys = (width = 0, height = 0) => {
   const keys = [];
   for (let x = 1; x <= width; x += 1) {
     for (let y = 1; y <= height; y += 1) {
