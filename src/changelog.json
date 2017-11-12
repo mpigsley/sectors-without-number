@@ -1,4 +1,7 @@
 {
+  "2.1.1": {
+    "descrition": "Fix issue where the sector builder wasn't being initialized."
+  },
   "2.1.0": {
     "descrition": "Create new ungenerated planets.",
     "changes": [
