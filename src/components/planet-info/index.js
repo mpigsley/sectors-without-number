@@ -17,12 +17,9 @@ const mapStateToProps = () => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  editPlanet: (system, planet, changes) => {
-    dispatch(editPlanet(system, planet, changes));
-  },
-  deletePlanet: (system, planet) => {
-    dispatch(deletePlanet(system, planet));
-  },
+  editPlanet: (system, planet, changes) =>
+    dispatch(editPlanet(system, planet, changes)),
+  deletePlanet: (system, planet) => dispatch(deletePlanet(system, planet)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlanetInfo);

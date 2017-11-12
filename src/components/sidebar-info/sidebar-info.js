@@ -3,8 +3,6 @@ import Chance from 'chance';
 
 import ConfirmModal from 'primitives/modal/confirm-modal';
 
-import './style.css';
-
 export default class SidebarInfo extends Component {
   constructor(props) {
     super(props);
@@ -12,7 +10,6 @@ export default class SidebarInfo extends Component {
     this.onEdit = this.onEdit.bind(this);
     this.onClose = this.onClose.bind(this);
     this.onEditText = this.onEditText.bind(this);
-    this.onEditDropdown = this.onEditDropdown.bind(this);
     this.updateAttribute = this.updateAttribute.bind(this);
     this.onConfirmDelete = this.onConfirmDelete.bind(this);
     this.onCancelDelete = this.onCancelDelete.bind(this);
@@ -34,12 +31,6 @@ export default class SidebarInfo extends Component {
 
   onCancelDelete() {
     this.setState({ isConfirmDeleteOpen: false });
-  }
-
-  onEditDropdown(key, extraState) {
-    return changed => {
-      this.updateAttribute(key, changed, extraState);
-    };
   }
 
   onEditText(extraState) {

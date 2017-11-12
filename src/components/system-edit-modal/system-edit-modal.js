@@ -149,7 +149,7 @@ export default class SystemEditModal extends Component {
     });
   };
 
-  onCreate = () => {
+  onSubmit = () => {
     let system;
     const newPlanets = values(this.state.planets)
       .filter(planet => !planet.isSaved)
@@ -298,7 +298,7 @@ export default class SystemEditModal extends Component {
           <Button
             primary
             key="create"
-            onClick={this.onCreate}
+            onClick={this.onSubmit}
             disabled={!this.isValidForm}
           >
             {action}

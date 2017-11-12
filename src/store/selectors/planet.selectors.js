@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect';
-import { map } from 'lodash';
+import { map, flatten } from 'lodash';
 
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 import { makeGetCurrentSystem } from 'store/selectors/system.selectors';
@@ -11,14 +11,14 @@ export const makeGetCurrentPlanet = () => {
   const getCurrentSystem = makeGetCurrentSystem();
   return createSelector(
     [getCurrentSystem, planetRouteSelector],
-    (system, planet) => (system.planets || {})[planet] || {},
+    (system, planet) => ({ ...(system.planets || {})[planet] } || {}),
   );
 };
 
 export const getPlanetKeys = createSelector([getCurrentSector], sector =>
-  [].concat(
-    ...map(sector.systems, system =>
-      [].concat(...map(system.planets, (planet, planetKey) => planetKey)),
+  flatten(
+    map(sector.systems, system =>
+      map(system.planets, (planet, planetKey) => planetKey),
     ),
   ),
 );

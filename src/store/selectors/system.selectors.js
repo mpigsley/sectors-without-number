@@ -10,7 +10,7 @@ const systemRouteSelector = (state, props) => props.routeParams.system;
 export const makeGetCurrentSystem = () =>
   createSelector(
     [getCurrentSector, systemRouteSelector],
-    (sector, system) => (sector.systems || {})[system] || {},
+    (sector, system) => ({ ...(sector.systems || {})[system] } || {}),
   );
 
 export const getEmptySystemKeys = createSelector(
