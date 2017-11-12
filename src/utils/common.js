@@ -20,6 +20,16 @@ export const coordinatesFromKey = key => {
   };
 };
 
+export const allSectorKeys = (width = 0, height = 0) => {
+  const keys = [];
+  for (let x = 1; x <= width; x += 1) {
+    for (let y = 1; y <= height; y += 1) {
+      keys.push(coordinateKey(x, y));
+    }
+  }
+  return keys.sort();
+};
+
 export const stringSortByKey = key => (a, b) => {
   const keyA = (a[key] || '').toUpperCase();
   const keyB = (b[key] || '').toUpperCase();

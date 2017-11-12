@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  editSystem: (system, changes) => dispatch(editSystem(system, changes)),
+  editSystem: system => dispatch(editSystem(system.key, system)),
   closeSystemCreate: () => dispatch(closeSystemCreate()),
   closeUserDropdown: () => dispatch(closeUserDropdown()),
   generateSector: () => dispatch(generateSector()),

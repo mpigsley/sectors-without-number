@@ -1,17 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RefreshCw } from 'react-feather';
+import { RefreshCw, Plus } from 'react-feather';
 import { size } from 'lodash';
 
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
+import SystemEditModal from 'components/system-edit-modal';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Modal from 'primitives/modal/modal';
 import SectionHeader from 'primitives/text/section-header';
 import Button from 'primitives/other/button';
+import LinkIcon from 'primitives/other/link-icon';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 
@@ -32,7 +34,9 @@ export default class SectorInfo extends SidebarInfo {
     }).isRequired,
     editSectorName: PropTypes.func.isRequired,
     deleteSector: PropTypes.func.isRequired,
+    editSystem: PropTypes.func.isRequired,
     isSaved: PropTypes.bool.isRequired,
+    isCloudSave: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -41,6 +45,7 @@ export default class SectorInfo extends SidebarInfo {
     this.state = {
       name: this.props.sector.name,
       isConfirmDeleteOpen: false,
+      isAddSystemOpen: false,
     };
   }
 
@@ -60,6 +65,11 @@ export default class SectorInfo extends SidebarInfo {
   onDeleteSector = key => () => {
     this.onCancelDelete();
     this.props.deleteSector(key);
+  };
+
+  onCreateSystem = system => {
+    this.props.editSystem(system);
+    this.setState({ isAddSystemOpen: false });
   };
 
   renderEditModal() {
@@ -92,7 +102,24 @@ export default class SectorInfo extends SidebarInfo {
 
   renderEmptyText() {
     if (size(this.props.sector.systems)) {
-      return <SectionHeader>Systems</SectionHeader>;
+      if (this.props.isCloudSave) {
+        return <SectionHeader>Systems</SectionHeader>;
+      }
+      return (
+        <SectionHeader>
+          <FlexContainer justify="spaceBetween" align="flexEnd">
+            Systems
+            <Button
+              minimal
+              className="SectorInfo-AddButton"
+              onClick={() => this.setState({ isAddSystemOpen: true })}
+            >
+              <LinkIcon size={15} icon={Plus} />
+              Add System
+            </Button>
+          </FlexContainer>
+        </SectionHeader>
+      );
     }
     return (
       <FlexContainer
@@ -145,6 +172,11 @@ export default class SectorInfo extends SidebarInfo {
           this.onDeleteSector(this.props.sector.key),
           'sector',
         )}
+        <SystemEditModal
+          isOpen={this.state.isAddSystemOpen}
+          onClose={() => this.setState({ isAddSystemOpen: false })}
+          onSubmit={this.onCreateSystem}
+        />
       </SidebarNavigation>
     );
   }
