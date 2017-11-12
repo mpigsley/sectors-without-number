@@ -1,4 +1,7 @@
 {
+  "2.2.0": {
+    "descrition": "Quick add buttons in system and planet lists."
+  },
   "2.1.1": {
     "descrition": "Fix issue where the sector builder wasn't being initialized."
   },
