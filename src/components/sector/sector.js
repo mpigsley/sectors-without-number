@@ -113,7 +113,7 @@ export default class Sector extends Component {
           systemKey={this.props.createSystemKey}
           isOpen={!!this.props.createSystemKey}
           onClose={this.props.closeSystemCreate}
-          onSubmit={system => this.props.editSystem(system.key, system)}
+          onSubmit={system => this.props.editSystem(system)}
         />
       </div>
     );

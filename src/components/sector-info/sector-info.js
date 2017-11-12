@@ -6,6 +6,7 @@ import { size } from 'lodash';
 import SidebarInfo from 'components/sidebar-info';
 import SidebarNavigation, { SidebarType } from 'components/sidebar-navigation';
 import SidebarLinkRow from 'components/sidebar-link-row';
+import SystemEditModal from 'components/system-edit-modal';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -33,6 +34,7 @@ export default class SectorInfo extends SidebarInfo {
     }).isRequired,
     editSectorName: PropTypes.func.isRequired,
     deleteSector: PropTypes.func.isRequired,
+    editSystem: PropTypes.func.isRequired,
     isSaved: PropTypes.bool.isRequired,
   };
 
@@ -42,6 +44,7 @@ export default class SectorInfo extends SidebarInfo {
     this.state = {
       name: this.props.sector.name,
       isConfirmDeleteOpen: false,
+      isAddSystemOpen: false,
     };
   }
 
@@ -61,6 +64,11 @@ export default class SectorInfo extends SidebarInfo {
   onDeleteSector = key => () => {
     this.onCancelDelete();
     this.props.deleteSector(key);
+  };
+
+  onCreateSystem = system => {
+    this.props.editSystem(system);
+    this.setState({ isAddSystemOpen: false });
   };
 
   renderEditModal() {
@@ -97,7 +105,11 @@ export default class SectorInfo extends SidebarInfo {
         <SectionHeader>
           <FlexContainer justify="spaceBetween" align="flexEnd">
             Systems
-            <Button minimal className="SectorInfo-AddButton">
+            <Button
+              minimal
+              className="SectorInfo-AddButton"
+              onClick={() => this.setState({ isAddSystemOpen: true })}
+            >
               <LinkIcon size={15} icon={Plus} />
               Add System
             </Button>
@@ -156,6 +168,11 @@ export default class SectorInfo extends SidebarInfo {
           this.onDeleteSector(this.props.sector.key),
           'sector',
         )}
+        <SystemEditModal
+          isOpen={this.state.isAddSystemOpen}
+          onClose={() => this.setState({ isAddSystemOpen: false })}
+          onSubmit={this.onCreateSystem}
+        />
       </SidebarNavigation>
     );
   }

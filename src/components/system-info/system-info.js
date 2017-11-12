@@ -61,7 +61,7 @@ export default class SectorInfo extends SidebarInfo {
   };
 
   onSaveSystem = system => {
-    this.props.editSystem(system.key, system);
+    this.props.editSystem(system);
     this.onClose();
   };
 

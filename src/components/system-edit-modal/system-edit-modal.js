@@ -19,6 +19,7 @@ import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
+import Dropdown from 'primitives/form/dropdown';
 import FlexContainer from 'primitives/container/flex-container';
 import Dice from 'primitives/icons/dice';
 
@@ -57,6 +58,7 @@ export default class SystemEditModal extends Component {
     onClose: PropTypes.func.isRequired,
     systemKey: PropTypes.string,
     planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
+    emptySystemKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
     system: PropTypes.shape({
       key: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
@@ -72,6 +74,7 @@ export default class SystemEditModal extends Component {
   state = {
     name: generateName(new Chance()),
     planets: generatePlanetNames(this.props.system),
+    systemSelect: this.props.emptySystemKeys[0],
   };
 
   componentWillReceiveProps(nextProps) {
@@ -81,6 +84,7 @@ export default class SystemEditModal extends Component {
           ? nextProps.system.name
           : generateName(new Chance()),
         planets: generatePlanetNames(nextProps.system),
+        systemSelect: this.props.emptySystemKeys[0],
       });
     }
   }
@@ -146,22 +150,21 @@ export default class SystemEditModal extends Component {
   };
 
   onCreate = () => {
-    const { x, y } = coordinatesFromKey(this.props.systemKey);
-
-    const existingPlanets = values(this.state.planets)
-      .filter(planet => planet.isSaved)
-      .map(({ originalKey, name }) => ({
-        ...this.props.system.planets[originalKey],
-        key: encodeURIComponent(name.toLowerCase()),
-        name,
-      }));
+    let system;
     const newPlanets = values(this.state.planets)
       .filter(planet => !planet.isSaved)
       .map(generatePlanet);
-    const combinedPlanets = existingPlanets.concat(newPlanets);
 
-    let system;
     if (this.props.system) {
+      const existingPlanets = values(this.state.planets)
+        .filter(planet => planet.isSaved)
+        .map(({ originalKey, name }) => ({
+          ...this.props.system.planets[originalKey],
+          key: encodeURIComponent(name.toLowerCase()),
+          name,
+        }));
+      const combinedPlanets = existingPlanets.concat(newPlanets);
+
       system = {
         ...this.props.system,
         name: this.state.name,
@@ -171,6 +174,9 @@ export default class SystemEditModal extends Component {
         ),
       };
     } else {
+      const { x, y } = coordinatesFromKey(
+        this.props.systemKey || this.state.systemSelect,
+      );
       system = new System(
         { chance: new Chance() },
         x,
@@ -214,6 +220,34 @@ export default class SystemEditModal extends Component {
 
     return newPlanetsUnique && uniqueToSector;
   }
+
+  get isValidForm() {
+    return (
+      this.areAllUnique && (this.props.systemKey || this.state.systemSelect)
+    );
+  }
+
+  renderLocationSelect = () => {
+    if (this.props.systemKey) {
+      return null;
+    }
+    return (
+      <FlexContainer direction="column">
+        <Label htmlFor="location">Location</Label>
+        <Dropdown
+          id="location"
+          name="location"
+          value={this.state.systemSelect}
+          clearable={false}
+          onChange={({ value }) => this.setState({ systemSelect: value })}
+          options={this.props.emptySystemKeys.map(key => ({
+            value: key,
+            label: key,
+          }))}
+        />
+      </FlexContainer>
+    );
+  };
 
   renderEditRow = ({ name, generate, isSaved }, key) => (
     <FlexContainer className="SystemEditModal-Planet" key={key} align="center">
@@ -265,7 +299,7 @@ export default class SystemEditModal extends Component {
             primary
             key="create"
             onClick={this.onCreate}
-            disabled={!this.areAllUnique}
+            disabled={!this.isValidForm}
           >
             {action}
           </Button>,
@@ -286,6 +320,7 @@ export default class SystemEditModal extends Component {
             onIconClick={this.onNewSystemName}
           />
         </FlexContainer>
+        {this.renderLocationSelect()}
         <FlexContainer direction="column">
           <FlexContainer justify="spaceBetween" align="flexEnd">
             <Label>Planets</Label>
