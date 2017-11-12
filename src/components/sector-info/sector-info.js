@@ -36,6 +36,7 @@ export default class SectorInfo extends SidebarInfo {
     deleteSector: PropTypes.func.isRequired,
     editSystem: PropTypes.func.isRequired,
     isSaved: PropTypes.bool.isRequired,
+    isCloudSave: PropTypes.bool.isRequired,
   };
 
   constructor(props) {
@@ -101,6 +102,9 @@ export default class SectorInfo extends SidebarInfo {
 
   renderEmptyText() {
     if (size(this.props.sector.systems)) {
+      if (this.props.isCloudSave) {
+        return <SectionHeader>Systems</SectionHeader>;
+      }
       return (
         <SectionHeader>
           <FlexContainer justify="spaceBetween" align="flexEnd">

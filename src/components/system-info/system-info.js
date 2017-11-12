@@ -59,6 +59,7 @@ export default class SectorInfo extends SidebarInfo {
     deleteSystem: PropTypes.func.isRequired,
     editPlanet: PropTypes.func.isRequired,
     planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
+    isCloudSave: PropTypes.bool.isRequired,
   };
 
   state = {
@@ -82,6 +83,27 @@ export default class SectorInfo extends SidebarInfo {
     this.setState({ isAddPlanetOpen: false });
   };
 
+  renderPlanetsHeader = () => {
+    if (this.props.isCloudSave) {
+      return <SectionHeader>Planets</SectionHeader>;
+    }
+    return (
+      <SectionHeader>
+        <FlexContainer justify="spaceBetween" align="flexEnd">
+          Planets
+          <Button
+            minimal
+            className="SectorInfo-AddButton"
+            onClick={() => this.setState({ isAddPlanetOpen: true })}
+          >
+            <LinkIcon size={15} icon={Plus} />
+            Add Planet
+          </Button>
+        </FlexContainer>
+      </SectionHeader>
+    );
+  };
+
   render() {
     return (
       <SidebarNavigation
@@ -91,19 +113,7 @@ export default class SectorInfo extends SidebarInfo {
         onEdit={this.onEdit}
         onDelete={this.onConfirmDelete}
       >
-        <SectionHeader>
-          <FlexContainer justify="spaceBetween" align="flexEnd">
-            Systems
-            <Button
-              minimal
-              className="SectorInfo-AddButton"
-              onClick={() => this.setState({ isAddPlanetOpen: true })}
-            >
-              <LinkIcon size={15} icon={Plus} />
-              Add Planet
-            </Button>
-          </FlexContainer>
-        </SectionHeader>
+        {this.renderPlanetsHeader()}
         {renderPlanetLinks(this.props.system.planets, this.props.location)}
         {this.renderConfirmModal(
           this.onDeleteSystem(this.props.system.key),

@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 
+import { getCurrentSector } from 'store/selectors/sector.selectors';
 import { getPlanetKeys } from 'store/selectors/planet.selectors';
 import { makeGetCurrentSystem } from 'store/selectors/system.selectors';
 import { editSystem, deleteSystem } from 'store/actions/system.actions';
@@ -12,6 +13,7 @@ const mapStateToProps = () => {
   return (state, props) => ({
     system: getCurrentSystem(state, props),
     planetKeys: getPlanetKeys(state, props),
+    isCloudSave: !!getCurrentSector(state).isCloudSave,
   });
 };
 
