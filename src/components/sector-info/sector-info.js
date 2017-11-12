@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { RefreshCw } from 'react-feather';
+import { RefreshCw, Plus } from 'react-feather';
 import { size } from 'lodash';
 
 import SidebarInfo from 'components/sidebar-info';
@@ -12,6 +12,7 @@ import Header, { HeaderType } from 'primitives/text/header';
 import Modal from 'primitives/modal/modal';
 import SectionHeader from 'primitives/text/section-header';
 import Button from 'primitives/other/button';
+import LinkIcon from 'primitives/other/link-icon';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 
@@ -92,7 +93,17 @@ export default class SectorInfo extends SidebarInfo {
 
   renderEmptyText() {
     if (size(this.props.sector.systems)) {
-      return <SectionHeader>Systems</SectionHeader>;
+      return (
+        <SectionHeader>
+          <FlexContainer justify="spaceBetween" align="flexEnd">
+            Systems
+            <Button minimal className="SectorInfo-AddButton">
+              <LinkIcon size={15} icon={Plus} />
+              Add System
+            </Button>
+          </FlexContainer>
+        </SectionHeader>
+      );
     }
     return (
       <FlexContainer
