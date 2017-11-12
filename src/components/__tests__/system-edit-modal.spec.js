@@ -9,6 +9,7 @@ const defaultProps = {
   onClose: () => {},
   systemKey: '',
   planetKeys: [],
+  emptySystemKeys: [],
 };
 
 describe('System Edit Modal', () => {
