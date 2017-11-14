@@ -1,4 +1,8 @@
 {
+  "2.2.1": {
+    "descrition":
+      "Fix issue where planets in name would open a creation modal instead of an edit modal."
+  },
   "2.2.0": {
     "descrition": "Quick add buttons in system and planet lists."
   },
