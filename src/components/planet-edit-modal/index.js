@@ -8,7 +8,7 @@ import PlanetEditModal from './planet-edit-modal';
 const mapStateToProps = (state, props) => ({
   planetKeys: getPlanetKeys(state),
   planet: getCurrentSector(state).systems[props.systemKey].planets[
-    props.planetKey
+    encodeURIComponent(props.planetKey)
   ],
 });
 
