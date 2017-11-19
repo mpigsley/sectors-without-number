@@ -4,20 +4,12 @@ import { removeSector } from 'store/api/local';
 import { removeSyncedSector } from 'store/api/firebase';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 import { SuccessToast, ErrorToast, creatorOrUpdateSector } from 'store/utils';
-import sectorGenerator from 'utils/sector-generator';
 
 export const GENERATE_SECTOR = 'GENERATE_SECTOR';
 export const EDIT_SECTOR = 'EDIT_SECTOR';
 export const REMOVE_SAVED_SECTOR = 'REMOVE_SAVED_SECTOR';
 export const ADD_SAVED_SECTOR = 'ADD_SAVED_SECTOR';
 export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
-
-export const generateSector = () => (dispatch, getState) => {
-  const { columns, rows, isBuilder, name } = getState().sector.configuration;
-  const generated = sectorGenerator({ columns, rows, isBuilder, name });
-  dispatch({ type: GENERATE_SECTOR, generated });
-  dispatch(push(`/sector/${generated.key}`));
-};
 
 export const updateConfiguration = (key, value) => ({
   type: UPDATE_CONFIGURATION,

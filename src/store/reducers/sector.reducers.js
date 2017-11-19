@@ -1,8 +1,8 @@
-import Chance from 'chance';
 import { omit } from 'lodash';
 
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { generateSectorName } from 'utils/name-generator';
+import { ROWS, COLUMNS } from 'constants/defaults';
 import {
   GENERATE_SECTOR,
   ADD_SAVED_SECTOR,
@@ -18,10 +18,10 @@ const initialState = {
   generated: null,
   saved: {},
   configuration: {
-    name: generateSectorName(new Chance()),
+    sectorName: generateSectorName(),
     isBuilder: false,
-    columns: 8,
-    rows: 10,
+    columns: COLUMNS,
+    rows: ROWS,
   },
 };
 
@@ -95,7 +95,7 @@ export default function sector(state = initialState, action) {
           saved: state.saved,
           configuration: {
             ...initialState.configuration,
-            name: generateSectorName(new Chance()),
+            name: generateSectorName(),
           },
         };
       }

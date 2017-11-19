@@ -12,7 +12,7 @@ import IconInput from 'primitives/form/icon-input';
 import Dropdown from 'primitives/form/dropdown';
 
 import { generateName } from 'utils/name-generator';
-import { generatePlanet } from 'utils/sector-generator';
+// import { generatePlanet } from 'utils/sector-generator';
 import WorldTags from 'constants/world-tags';
 import TechLevel from 'constants/tech-level';
 import Atmosphere from 'constants/atmosphere';
@@ -83,13 +83,13 @@ export default class PlanetInfo extends Component {
   };
 
   state = {
-    ...planetStateFromProps(this.props.planet || generatePlanet()),
+    ...planetStateFromProps(this.props.planet || {}),
   };
 
   componentWillReceiveProps(nextProps) {
     if (!isEqual(nextProps.planet, this.props.planet)) {
       this.setState({
-        ...planetStateFromProps(nextProps.planet || generatePlanet()),
+        ...planetStateFromProps(nextProps.planet || {}),
       });
     }
   }

@@ -1,9 +1,8 @@
 import { coordinateKey } from 'utils/common';
+import { ROWS, COLUMNS } from 'constants/defaults';
 
 // Constants
 const defaultHexWidth = 50; // Hex width when not rendering sector
-const defaultRows = 10; // Align with SWN rules
-const defaultColumns = 8; // Align with SWN rules
 const hexPadding = 0; // Pixels between hexes
 const extraHexes = 1; // Extra hexes around canvas edges
 const pixelBuffer = 75; // Pixel buffer between the sector and window
@@ -136,8 +135,8 @@ export default config => {
   const newConfig = renderSector
     ? config
     : Object.assign(config, {
-        rows: defaultRows,
-        columns: defaultColumns,
+        rows: ROWS,
+        columns: COLUMNS,
       });
   const hexSize = getHexSize(newConfig);
   const { widthUnit, scaledWidth, scaledHeight, heightUnit } = hexSize;

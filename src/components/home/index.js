@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
-import { generateSector } from 'store/actions/sector.actions';
+import Entities from 'constants/entities';
+import { generateEntity } from 'store/actions/entity.actions';
 import { getUserSectors } from 'store/selectors/sector.selectors';
 import Home from './home';
 
@@ -9,7 +10,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  generateSector: () => dispatch(generateSector()),
+  generateSector: () => dispatch(generateEntity(Entities.sector.key)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

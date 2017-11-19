@@ -24,7 +24,7 @@ import FlexContainer from 'primitives/container/flex-container';
 import Dice from 'primitives/icons/dice';
 
 import { generateName } from 'utils/name-generator';
-import { System, generatePlanet } from 'utils/sector-generator';
+// import { System, generatePlanet } from 'utils/sector-generator';
 import { coordinatesFromKey } from 'utils/common';
 
 import './style.css';
@@ -151,9 +151,9 @@ export default class SystemEditModal extends Component {
 
   onSubmit = () => {
     let system;
-    const newPlanets = values(this.state.planets)
-      .filter(planet => !planet.isSaved)
-      .map(generatePlanet);
+    const newPlanets = values(this.state.planets).filter(
+      planet => !planet.isSaved,
+    );
 
     if (this.props.system) {
       const existingPlanets = values(this.state.planets)
