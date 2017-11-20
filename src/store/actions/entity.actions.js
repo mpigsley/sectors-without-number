@@ -1,4 +1,5 @@
 import { zipObject } from 'lodash';
+import { push } from 'react-router-redux';
 
 import EntityGenerators from 'utils/entity-generators';
 import { createId } from 'utils/common';
@@ -6,7 +7,7 @@ import Entities from 'constants/entities';
 
 export const ADD_ENTITIES = 'ADD_ENTITIES';
 
-const generateAndSave = ({ entity, state, parameters }) => {
+const recursivelyGenerateEntities = ({ entity, state, parameters }) => {
   const entityId = createId();
   const sector =
     entity === Entities.sector.key ? entityId : state.sector.currentSector;
@@ -43,8 +44,20 @@ const generateAndSave = ({ entity, state, parameters }) => {
   };
 };
 
-export const generateEntity = (entity, parameters) => (dispatch, getState) =>
+export const generateEntity = (entity, parameters) => (dispatch, getState) => {
+  const state = getState();
+  const entities = recursivelyGenerateEntities({ entity, state, parameters });
   dispatch({
     type: ADD_ENTITIES,
-    ...generateAndSave({ entity, state: getState(), parameters }),
+    entities,
   });
+
+  const existingSector = state.entity.sector[state.sector.currentSector];
+  const newSectorKeys = Object.keys(entities.sector || {});
+  if (
+    (!state.sector.currentSector || !existingSector) &&
+    newSectorKeys.length
+  ) {
+    dispatch(push(`/sector/${newSectorKeys[0]}`));
+  }
+};

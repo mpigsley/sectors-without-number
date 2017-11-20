@@ -36,7 +36,7 @@ ReactDOM.render(
         <Route path="/sector/:sector" component={Sector}>
           <IndexRoute component={SectorInfo} />
           <Route path="system/:system" component={SystemInfo} />
-          <Route path="system/:system/planet/:planet" component={PlanetInfo} />
+          <Route path="planet/:planet" component={PlanetInfo} />
         </Route>
       </Route>
     </Router>

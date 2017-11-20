@@ -14,7 +14,7 @@ import System from './system';
 const mapStateToProps = state => ({
   holdKey: state.system.holdKey,
   hoverKey: state.system.hoverKey,
-  isCloudSave: !!getCurrentSector(state).isCloudSave,
+  isCloudSave: !!(getCurrentSector(state) || {}).isCloudSave,
 });
 
 const mapDispatchToProps = dispatch => ({

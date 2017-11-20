@@ -5,7 +5,6 @@ import { removeSyncedSector } from 'store/api/firebase';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 import { SuccessToast, ErrorToast, creatorOrUpdateSector } from 'store/utils';
 
-export const GENERATE_SECTOR = 'GENERATE_SECTOR';
 export const EDIT_SECTOR = 'EDIT_SECTOR';
 export const REMOVE_SAVED_SECTOR = 'REMOVE_SAVED_SECTOR';
 export const ADD_SAVED_SECTOR = 'ADD_SAVED_SECTOR';

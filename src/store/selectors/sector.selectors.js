@@ -1,18 +1,13 @@
 import { filter, zipObject } from 'lodash';
 import { createSelector } from 'reselect';
 
-const generatedSelector = state => state.sector.generated;
 const savedSelector = state => state.sector.saved;
 const currentSectorSelector = state => state.sector.currentSector;
+const sectorEntitySelector = state => state.entity.sector;
 
 export const getCurrentSector = createSelector(
-  [generatedSelector, savedSelector, currentSectorSelector],
-  (generated, saved, currentSector) => {
-    if (currentSector === 'generated') {
-      return generated || {};
-    }
-    return saved[currentSector] || {};
-  },
+  [currentSectorSelector, sectorEntitySelector],
+  (currentSector, sectorEntity) => sectorEntity[currentSector],
 );
 
 export const getUserSectors = createSelector([savedSelector], saved => {

@@ -4,7 +4,6 @@ import { LOCATION_CHANGE } from 'react-router-redux';
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
 import {
-  GENERATE_SECTOR,
   ADD_SAVED_SECTOR,
   REMOVE_SAVED_SECTOR,
   EDIT_SECTOR,
@@ -15,8 +14,7 @@ import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 const initialState = {
   renderSector: false,
   currentSector: null,
-  generated: null,
-  saved: {},
+  currentEntity: null,
   configuration: {
     sectorName: generateSectorName(),
     isBuilder: false,
@@ -45,12 +43,6 @@ export default function sector(state = initialState, action) {
       return {
         ...state,
         ...initialState,
-      };
-    case GENERATE_SECTOR:
-      return {
-        ...state,
-        currentSector: 'generated',
-        generated: action.generated,
       };
     case UPDATE_CONFIGURATION:
       return {
@@ -106,6 +98,9 @@ export default function sector(state = initialState, action) {
           currentSector: !state.currentSector
             ? pathname.split('/')[2]
             : state.currentSector,
+          currentEntity: !state.currentEntity
+            ? pathname.split('/')[4] || state.currentEntity
+            : state.currentEntity,
         };
       }
       return {
