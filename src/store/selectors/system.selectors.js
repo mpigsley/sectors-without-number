@@ -1,20 +1,30 @@
 import { createSelector } from 'reselect';
-import { difference } from 'lodash';
+import { difference, pickBy, values } from 'lodash';
 
-import { allSectorKeys } from 'utils/common';
-import { getCurrentSector } from 'store/selectors/sector.selectors';
+import { allSectorKeys, coordinateKey } from 'utils/common';
+import {
+  getCurrentSector,
+  currentSectorSelector,
+} from 'store/selectors/sector.selectors';
 
-const systemRouteSelector = (state, props) => props.routeParams.system;
+export const systemEntitySelector = state => state.entity.system;
 
-// eslint-disable-next-line import/prefer-default-export
-export const makeGetCurrentSystem = () =>
-  createSelector(
-    [getCurrentSector, systemRouteSelector],
-    (sector, system) => (sector.systems || {})[system] || {},
-  );
+export const getCurrentSystems = createSelector(
+  [systemEntitySelector, currentSectorSelector],
+  (systems, currentSector) =>
+    pickBy(systems, system => system.sector === currentSector),
+);
+
+export const getCurrentSystem = createSelector(
+  [getCurrentSystems, currentSectorSelector],
+  (systems, entity) => systems[entity] || {},
+);
 
 export const getEmptySystemKeys = createSelector(
-  [getCurrentSector],
-  ({ systems, rows, columns }) =>
-    difference(allSectorKeys(columns, rows), Object.keys(systems)),
+  [getCurrentSector, getCurrentSystems],
+  ({ rows, columns }, systems) =>
+    difference(
+      allSectorKeys(columns, rows),
+      values(systems).map(({ x, y }) => coordinateKey(x, y)),
+    ),
 );

@@ -1,20 +1,14 @@
 import { connect } from 'react-redux';
 
-import {
-  makeGetCurrentPlanet,
-  getPlanetKeys,
-} from 'store/selectors/planet.selectors';
+import { getCurrentPlanet } from 'store/selectors/planet.selectors';
 import { editPlanet, deletePlanet } from 'store/actions/planet.actions';
 
 import PlanetInfo from './planet-info';
 
-const mapStateToProps = () => {
-  const getCurrentPlanet = makeGetCurrentPlanet();
-  return (state, props) => ({
-    planet: getCurrentPlanet(state, props),
-    planetKeys: getPlanetKeys(state, props),
-  });
-};
+const mapStateToProps = (state, props) => ({
+  planet: getCurrentPlanet(state, props),
+  planetKeys: [],
+});
 
 const mapDispatchToProps = dispatch => ({
   editPlanet: (system, planet) =>

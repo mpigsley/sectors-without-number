@@ -17,17 +17,16 @@ import LinkIcon from 'primitives/other/link-icon';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 
-import { stringSortByKey } from 'utils/common';
+import { stringSortByKey, coordinateKey } from 'utils/common';
 import { generateSectorName } from 'utils/name-generator';
 
 import './style.css';
 
 export default class SectorInfo extends SidebarInfo {
   static propTypes = {
+    systems: PropTypes.shape().isRequired,
     sector: PropTypes.shape({
-      key: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      systems: PropTypes.shape().isRequired,
     }).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string,
@@ -101,7 +100,7 @@ export default class SectorInfo extends SidebarInfo {
   }
 
   renderEmptyText() {
-    if (size(this.props.sector.systems)) {
+    if (size(this.props.systems)) {
       if (this.props.isCloudSave) {
         return <SectionHeader>Systems</SectionHeader>;
       }
@@ -153,8 +152,14 @@ export default class SectorInfo extends SidebarInfo {
         onDelete={this.props.isSaved ? this.onConfirmDelete : undefined}
       >
         {this.renderEmptyText()}
-        {Object.keys(this.props.sector.systems)
-          .map(key => this.props.sector.systems[key])
+        {Object.keys(this.props.systems)
+          .map(key => ({
+            ...this.props.systems[key],
+            key: coordinateKey(
+              this.props.systems[key].x,
+              this.props.systems[key].y,
+            ),
+          }))
           .sort(stringSortByKey('key'))
           .map(system => (
             <SidebarLinkRow

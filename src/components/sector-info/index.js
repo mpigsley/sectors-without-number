@@ -1,6 +1,7 @@
 import { connect } from 'react-redux';
 
 import { getCurrentSector } from 'store/selectors/sector.selectors';
+import { getCurrentSystems } from 'store/selectors/system.selectors';
 import { editSector, deleteSector } from 'store/actions/sector.actions';
 import { editSystem } from 'store/actions/system.actions';
 import SectorInfo from './sector-info';
@@ -10,6 +11,7 @@ const mapStateToProps = state => {
   return {
     isCloudSave: !!sector.isCloudSave,
     isSaved: !state.sector.generated,
+    systems: getCurrentSystems(state),
     sector,
   };
 };

@@ -1,10 +1,12 @@
 import { connect } from 'react-redux';
 
-import { getCurrentSector } from 'store/selectors/sector.selectors';
+import { getCurrentSystems } from 'store/selectors/system.selectors';
+import { getCurrentPlanets } from 'store/selectors/planet.selectors';
 import PrintableSector from './printable-sector';
 
 const mapStateToProps = state => ({
-  systems: getCurrentSector(state).systems,
+  systems: getCurrentSystems(state),
+  planets: getCurrentPlanets(state),
 });
 
 export default connect(mapStateToProps)(PrintableSector);
