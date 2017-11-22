@@ -10,7 +10,7 @@ import SystemEditModal from './system-edit-modal';
 
 const mapStateToProps = (state, props) => ({
   planetKeys: getPlanetKeys(state, props),
-  system: getCurrentSystems(state)[props.systemKey],
+  system: getCurrentSystems(state)[props.hexKey],
   emptySystemKeys: getEmptySystemKeys(state),
 });
 

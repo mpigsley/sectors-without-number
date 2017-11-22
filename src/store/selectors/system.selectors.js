@@ -2,11 +2,11 @@ import { createSelector } from 'reselect';
 import { difference, pickBy, values } from 'lodash';
 
 import { allSectorKeys, coordinateKey } from 'utils/common';
+import { getCurrentSector } from 'store/selectors/sector.selectors';
 import {
-  getCurrentSector,
+  systemSelector,
   currentSectorSelector,
-} from 'store/selectors/sector.selectors';
-import { systemSelector } from 'store/selectors/entity.selectors';
+} from 'store/selectors/base.selectors';
 
 export const getCurrentSystems = createSelector(
   [systemSelector, currentSectorSelector],

@@ -4,7 +4,7 @@ import { throttle, isEmpty } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectorSidebar from 'components/sector-sidebar';
-import SystemTooltips from 'components/system-tooltips';
+import EntityTooltips from 'components/entity-tooltips';
 import PrintableSector from 'components/printable-sector';
 import SystemEditModal from 'components/system-edit-modal';
 import HexMap from 'components/hex-map';
@@ -26,7 +26,6 @@ export default class Sector extends Component {
     sector: PropTypes.shape({
       rows: PropTypes.number,
       columns: PropTypes.number,
-      systems: PropTypes.shape(),
     }),
     createSystemKey: PropTypes.string,
     editSystem: PropTypes.func.isRequired,
@@ -65,15 +64,15 @@ export default class Sector extends Component {
     if (!this.props.renderSector) {
       return null;
     }
-    const systems = hexData
+    const entities = hexData
       .filter(data => data.system)
-      .map(({ system, height, xOffset, yOffset }) => ({
-        ...system,
+      .map(({ entity, height, xOffset, yOffset }) => ({
+        ...entity,
         height,
         xOffset,
         yOffset,
       }));
-    return <SystemTooltips systems={systems} />;
+    return <EntityTooltips entities={entities} />;
   }
 
   render() {
@@ -87,7 +86,6 @@ export default class Sector extends Component {
       renderSector: true,
       height: this.state.height,
       width: this.state.width,
-      systems: this.props.sector.systems,
       rows: this.props.sector.rows,
       columns: this.props.sector.columns,
     });
@@ -110,7 +108,7 @@ export default class Sector extends Component {
         </FlexContainer>
         <PrintableSector printable={printable} />
         <SystemEditModal
-          systemKey={this.props.createSystemKey}
+          hexKey={this.props.createSystemKey}
           isOpen={!!this.props.createSystemKey}
           onClose={this.props.closeSystemCreate}
           onSubmit={system => this.props.editSystem(system)}

@@ -92,7 +92,7 @@ const getPrintableData = (hexes, { rows, columns }) => {
   const printableHexHeight = toHeight(printableHexWidth);
   const onlySector = hexes.filter(hex => hex.highlighted) || [];
   const { width, height, xOffset, yOffset, i, j } =
-    hexes.find(hex => hex.systemKey === '0000') || {};
+    hexes.find(hex => hex.hexKey === '0000') || {};
   const newTotalWidth =
     getTotalWidth(printableHexWidth, columns) +
     printablePadding * 2 +
@@ -131,8 +131,7 @@ export default config => {
   }
 
   const isSmallWindow = config.width < 800 || config.height < 600;
-  const { renderSector, systems } = config;
-  const newConfig = renderSector
+  const newConfig = config.renderSector
     ? config
     : Object.assign(config, {
         rows: ROWS,
@@ -160,22 +159,18 @@ export default config => {
     const minRowHeight = heightUnit * 2 * i + scaledYOffset;
     while (isWithinWidth && isLessThanMaximum) {
       const xOffset = j * 3 * widthUnit + scaledXOffset;
-      const systemKey = coordinateKey(
-        j - paddedColumns + 1,
-        i - paddedRows + 1,
-      );
-      const system = systems && systems[systemKey];
+      const hexKey = coordinateKey(j - paddedColumns + 1, i - paddedRows + 1);
+
       hexes.push({
         i,
         j,
-        systemKey,
-        system: renderSector && system ? system : undefined,
+        hexKey,
         width: scaledWidth - hexPadding,
         height: scaledHeight - hexPadding,
         xOffset,
         yOffset: j % 2 ? minRowHeight + heightUnit : minRowHeight,
         highlighted:
-          renderSector &&
+          config.renderSector &&
           i > paddedRows - 1 &&
           i < totalRows - paddedRows &&
           j > paddedColumns - 1 &&
@@ -193,7 +188,7 @@ export default config => {
 
   hexes = isLessThanMaximum ? hexes : [];
   let printable = {};
-  if (renderSector) {
+  if (config.renderSector) {
     printable = getPrintableData(hexes, newConfig);
   }
 

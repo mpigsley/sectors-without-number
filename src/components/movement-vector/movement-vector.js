@@ -39,8 +39,8 @@ const offsetForSystem = 16;
 const offsetForCenter = 10;
 
 export default function MovementVector({ hoverKey, holdKey, hexes }) {
-  const hovered = hexes.filter(hex => hex.systemKey === hoverKey)[0];
-  const held = hexes.filter(hex => hex.systemKey === holdKey)[0];
+  const hovered = hexes.filter(hex => hex.hexKey === hoverKey)[0];
+  const held = hexes.filter(hex => hex.hexKey === holdKey)[0];
   if (!hovered || !held || hoverKey === holdKey) {
     return null;
   }
@@ -80,7 +80,7 @@ MovementVector.propTypes = {
   holdKey: PropTypes.string,
   hexes: PropTypes.arrayOf(
     PropTypes.shape({
-      systemKey: PropTypes.string.isRequired,
+      hexKey: PropTypes.string.isRequired,
     }),
   ),
 };

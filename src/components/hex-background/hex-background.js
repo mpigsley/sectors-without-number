@@ -38,8 +38,8 @@ export default class HexBackground extends Component {
   render() {
     const { hexes } = hexGenerator({
       renderSector: false,
-      ...this.state,
-      ...this.props,
+      width: this.state.width,
+      height: this.state.height,
     });
 
     let { closeUserDropdown } = this.props;

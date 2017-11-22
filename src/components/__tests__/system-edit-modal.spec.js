@@ -7,7 +7,7 @@ const defaultProps = {
   isOpen: false,
   onSubmit: () => {},
   onClose: () => {},
-  systemKey: '',
+  hexKey: '',
   planetKeys: [],
   emptySystemKeys: [],
 };

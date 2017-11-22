@@ -1,10 +1,10 @@
 import { omitBy } from 'lodash';
 import { createSelector } from 'reselect';
 
-import { sectorSelector } from 'store/selectors/entity.selectors';
-
-export const currentSectorSelector = state => state.sector.currentSector;
-export const currentEntitySelector = state => state.sector.currentEntity;
+import {
+  currentSectorSelector,
+  sectorSelector,
+} from 'store/selectors/base.selectors';
 
 export const getCurrentSector = createSelector(
   [currentSectorSelector, sectorSelector],

@@ -1,10 +1,10 @@
-@import "styles/theme";
+@import 'styles/theme';
 
-.System-Circle {
+.Hex-Circle {
   fill: $light3;
 }
 
-.System-Polygon {
+.Hex-Polygon {
   fill: $dark4;
   stroke: $dark3;
   stroke-width: 2px;
@@ -15,7 +15,7 @@
   }
 }
 
-.System-Hex {
+.Hex {
   cursor: default;
 
   &--clickable {
@@ -27,27 +27,27 @@
   }
 
   &--movable {
-    .System-Polygon {
+    .Hex-Polygon {
       fill: $dark1 !important;
     }
 
-    .System-Text {
+    .Hex-Text {
       stroke: $dark3;
     }
   }
 
   &--hoverable {
-    .System-Polygon {
+    .Hex-Polygon {
       fill: $dark2;
     }
 
-    &:hover .System-Polygon {
+    &:hover .Hex-Polygon {
       fill: $primary;
     }
   }
 }
 
-.System-Text {
+.Hex-Text {
   font-size: 9px;
   font-weight: 100;
   stroke: $light1;
@@ -56,41 +56,41 @@
   user-select: none;
 }
 
-.System-Planets {
+.Hex-Planets {
   transform: translateY(7px);
 }
 
-.System-Key {
+.Hex-Key {
   transform: translateY(-3px);
 }
 
-.System-Name {
+.Hex-Name {
   display: none;
   transform: translateY(-24px);
 }
 
 @media print {
-  .System-Circle,
-  .System-Text {
+  .Hex-Circle,
+  .Hex-Text {
     fill: $dark4;
     stroke: $dark4;
     font-size: 25px;
   }
 
-  .System-Name {
+  .Hex-Name {
     display: block;
   }
 
-  .System-Planets {
+  .Hex-Planets {
     transform: translateY(21px);
   }
 
-  .System-Key {
+  .Hex-Key {
     transform: translateY(-8px);
   }
 
-  .System-Polygon,
-  .System-Hex--hoverable .System-Polygon {
+  .Hex-Polygon,
+  .Hex--hoverable .Hex-Polygon {
     fill: white;
     stroke-width: 3px;
     stroke: $dark4;

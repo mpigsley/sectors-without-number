@@ -56,7 +56,7 @@ export default class SystemEditModal extends Component {
     isOpen: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    systemKey: PropTypes.string,
+    hexKey: PropTypes.string,
     planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
     emptySystemKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
     system: PropTypes.shape({
@@ -67,7 +67,7 @@ export default class SystemEditModal extends Component {
   };
 
   static defaultProps = {
-    systemKey: null,
+    hexKey: null,
     system: null,
   };
 
@@ -175,7 +175,7 @@ export default class SystemEditModal extends Component {
       };
     } else {
       const { x, y } = coordinatesFromKey(
-        this.props.systemKey || this.state.systemSelect,
+        this.props.hexKey || this.state.systemSelect,
       );
       system = new System(
         { chance: new Chance() },
@@ -222,13 +222,11 @@ export default class SystemEditModal extends Component {
   }
 
   get isValidForm() {
-    return (
-      this.areAllUnique && (this.props.systemKey || this.state.systemSelect)
-    );
+    return this.areAllUnique && (this.props.hexKey || this.state.systemSelect);
   }
 
   renderLocationSelect = () => {
-    if (this.props.systemKey) {
+    if (this.props.hexKey) {
       return null;
     }
     return (

@@ -9,9 +9,12 @@ import {
   openSystemCreate,
 } from 'store/actions/system.actions';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
-import System from './system';
+import { getCurrentTopLevelEntities } from 'store/selectors/entity.selectors';
+
+import Hex from './hex';
 
 const mapStateToProps = state => ({
+  topLevelEntities: getCurrentTopLevelEntities(state),
   holdKey: state.system.holdKey,
   hoverKey: state.system.hoverKey,
   isCloudSave: !!(getCurrentSector(state) || {}).isCloudSave,
@@ -26,4 +29,4 @@ const mapDispatchToProps = dispatch => ({
   openSystemCreate: key => dispatch(openSystemCreate(key)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(System);
+export default connect(mapStateToProps, mapDispatchToProps)(Hex);

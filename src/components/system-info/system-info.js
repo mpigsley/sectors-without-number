@@ -120,13 +120,13 @@ export default class SectorInfo extends SidebarInfo {
           'system',
         )}
         <SystemEditModal
-          systemKey={this.props.system.key}
+          hexKey={this.props.system.key}
           isOpen={this.state.isOpen}
           onClose={this.onClose}
           onSubmit={this.onSaveSystem}
         />
         <PlanetEditModal
-          systemKey={this.props.system.key}
+          hexKey={this.props.system.key}
           isOpen={this.state.isAddPlanetOpen}
           onClose={() => this.setState({ isAddPlanetOpen: false })}
           onSubmit={this.onCreatePlanet}

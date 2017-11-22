@@ -107,8 +107,9 @@ export default class PlanetInfo extends SidebarInfo {
     return (
       <SidebarNavigation
         name={this.props.planet.name || ''}
-        back={`/sector/${this.props.router.params.sector}/system/${this.props
-          .router.params.system}`}
+        back={`/sector/${this.props.router.params.sector}/system/${
+          this.props.router.params.system
+        }`}
         type={SidebarType.planet}
         onEdit={this.onEdit}
         onDelete={this.onConfirmDelete}
@@ -136,7 +137,7 @@ export default class PlanetInfo extends SidebarInfo {
           {renderTags(this.props.planet.tags)}
         </div>
         <PlanetEditModal
-          systemKey={this.props.router.params.system}
+          hexKey={this.props.router.params.system}
           planetKey={this.props.router.params.planet}
           isOpen={this.state.isOpen}
           onClose={this.onClose}

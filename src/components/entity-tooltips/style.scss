@@ -1,6 +1,6 @@
 @import 'styles/theme';
 
-.SystemTooltips-Tooltip {
+.EntityTooltips-Tooltip {
   pointer-events: none;
   position: fixed;
   opacity: 0;
@@ -12,7 +12,7 @@
   }
 }
 
-.SystemTooltips-Text {
+.EntityTooltips-Text {
   background-color: $light4;
   padding: 1rem;
   border-radius: 6px;
@@ -32,14 +32,14 @@
   }
 }
 
-.SystemTooltips-Name {
+.EntityTooltips-Name {
   color: $dark4;
   display: inline-block;
   font-size: 1.1rem;
   margin: 0;
 }
 
-.SystemTooltips-Key {
+.EntityTooltips-Key {
   color: $light1;
   display: inline-block;
   font-size: 0.8rem;

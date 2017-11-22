@@ -4,8 +4,8 @@ import { pickBy } from 'lodash';
 import {
   currentSectorSelector,
   currentEntitySelector,
-} from 'store/selectors/sector.selectors';
-import { planetSelector } from 'store/selectors/entity.selectors';
+  planetSelector,
+} from 'store/selectors/base.selectors';
 
 export const getCurrentPlanets = createSelector(
   [planetSelector, currentSectorSelector],
