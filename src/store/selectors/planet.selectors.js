@@ -5,11 +5,10 @@ import {
   currentSectorSelector,
   currentEntitySelector,
 } from 'store/selectors/sector.selectors';
-
-export const planetEntitySelector = state => state.entity.planet;
+import { planetSelector } from 'store/selectors/entity.selectors';
 
 export const getCurrentPlanets = createSelector(
-  [planetEntitySelector, currentSectorSelector],
+  [planetSelector, currentSectorSelector],
   (planets, currentSector) =>
     pickBy(planets, planet => planet.sector === currentSector),
 );

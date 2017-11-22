@@ -1,15 +1,16 @@
 import { omitBy } from 'lodash';
 import { createSelector } from 'reselect';
 
+import { sectorSelector } from 'store/selectors/entity.selectors';
+
 export const currentSectorSelector = state => state.sector.currentSector;
 export const currentEntitySelector = state => state.sector.currentEntity;
-export const sectorEntitySelector = state => state.entity.sector;
 
 export const getCurrentSector = createSelector(
-  [currentSectorSelector, sectorEntitySelector],
+  [currentSectorSelector, sectorSelector],
   (currentSector, sectorEntity) => sectorEntity[currentSector],
 );
 
-export const getUserSectors = createSelector([sectorEntitySelector], sectors =>
+export const getUserSectors = createSelector([sectorSelector], sectors =>
   omitBy(sectors, sector => sector.isCloudSave),
 );

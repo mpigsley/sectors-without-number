@@ -6,11 +6,10 @@ import {
   getCurrentSector,
   currentSectorSelector,
 } from 'store/selectors/sector.selectors';
-
-export const systemEntitySelector = state => state.entity.system;
+import { systemSelector } from 'store/selectors/entity.selectors';
 
 export const getCurrentSystems = createSelector(
-  [systemEntitySelector, currentSectorSelector],
+  [systemSelector, currentSectorSelector],
   (systems, currentSector) =>
     pickBy(systems, system => system.sector === currentSector),
 );
