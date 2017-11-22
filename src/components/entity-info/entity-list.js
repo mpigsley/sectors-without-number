@@ -35,7 +35,7 @@ export default function EntityList({
       <SectionHeader>
         <FlexContainer justify="spaceBetween" align="flexEnd">
           {Pluralize(Entities[entityType].name)}
-          <Button minimal className="SectorInfo-AddButton" onClick={onClickAdd}>
+          <Button minimal className="EntityInfo-AddButton" onClick={onClickAdd}>
             <LinkIcon size={15} icon={Plus} />
             Add {Entities[entityType].name}
           </Button>
@@ -63,11 +63,11 @@ export default function EntityList({
             key={entity.entityId}
             to={`/sector/${currentSector}/${entityType}/${entity.entityId}`}
           >
-            <Header type={HeaderType.header4} className="SectorInfo-Name">
+            <Header type={HeaderType.header4} className="EntityInfo-Name">
               {entity.name}
             </Header>
             {entity.additional && (
-              <div className="SectorInfo-Additional">({entity.additional})</div>
+              <div className="EntityInfo-Additional">({entity.additional})</div>
             )}
           </SidebarLinkRow>
         ))}

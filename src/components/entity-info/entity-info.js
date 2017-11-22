@@ -30,9 +30,8 @@ export default class EntityInfo extends Component {
     entity: PropTypes.shape({
       name: PropTypes.string.isRequired,
     }).isRequired,
-    editSectorName: PropTypes.func.isRequired,
-    deleteSector: PropTypes.func.isRequired,
-    editSystem: PropTypes.func.isRequired,
+    updateEntity: PropTypes.func.isRequired,
+    deleteEntity: PropTypes.func.isRequired,
     isSaved: PropTypes.bool.isRequired,
   };
 
@@ -42,7 +41,7 @@ export default class EntityInfo extends Component {
   };
 
   state = {
-    name: this.props.entity.name,
+    entity: { ...this.props.entity },
     isConfirmDeleteOpen: false,
     isCreateEntityOpen: false,
     isEditOpen: false,
@@ -50,24 +49,25 @@ export default class EntityInfo extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.entity.name !== this.props.entity.name) {
-      this.setState({
-        name: nextProps.entity.name,
-      });
+      this.setState({ entity: nextProps.entity });
     }
   }
 
-  onSaveEntity = () => {
-    this.props.editSectorName(this.state.name);
+  onUpdateEntity = () => {
+    this.props.updateEntity(
+      this.props.entityType,
+      this.props.entityId,
+      this.state.entity,
+    );
     this.onCloseEdit();
   };
 
-  onDeleteEntity = key => () => {
+  onDeleteEntity = () => {
     this.onCancelDelete();
-    this.props.deleteSector(key);
+    this.props.deleteEntity(this.props.entityType, this.props.entityId);
   };
 
-  onCreateChildEntity = entity => {
-    this.props.editSystem(entity);
+  onCreateChildEntity = () => {
     this.setState({ isCreateEntityOpen: false });
   };
 
@@ -82,7 +82,8 @@ export default class EntityInfo extends Component {
   onEditText = extraState => e =>
     this.updateAttribute(e.target.dataset.key, e.target.value, extraState);
 
-  onRandomizeName = namingFunc => () => this.setState({ name: namingFunc() });
+  onRandomizeName = namingFunc => () =>
+    this.setState({ entity: { ...this.state.entity, name: namingFunc() } });
 
   updateAttribute = (key, value, extraState = {}) =>
     this.setState({
@@ -93,11 +94,11 @@ export default class EntityInfo extends Component {
   renderEditModal() {
     return (
       <Modal
-        isEditOpen={this.state.isEditOpen}
+        isOpen={this.state.isEditOpen}
         onCancel={this.onCloseEdit}
         title="Edit Sector"
         actionButtons={[
-          <Button primary key="save" onClick={this.onSaveEntity}>
+          <Button primary key="save" onClick={this.onUpdateEntity}>
             Save {Entities[this.props.entityType].name}
           </Button>,
         ]}
@@ -110,7 +111,7 @@ export default class EntityInfo extends Component {
           name="name"
           data-key="name"
           icon={RefreshCw}
-          value={this.state.name}
+          value={this.state.entity.name}
           onChange={this.onEditText()}
           onIconClick={this.onRandomizeName(generateSectorName)}
         />
@@ -132,7 +133,7 @@ export default class EntityInfo extends Component {
     return (
       <ConfirmModal
         isOpen={this.state.isConfirmDeleteOpen}
-        onConfirm={this.onDeleteEntity(this.props.entityId)}
+        onConfirm={this.onDeleteEntity}
         onCancel={this.onCancelDelete}
       >
         Are you sure you want to delete this{' '}

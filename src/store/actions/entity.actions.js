@@ -5,7 +5,8 @@ import EntityGenerators from 'utils/entity-generators';
 import { createId } from 'utils/common';
 import Entities from 'constants/entities';
 
-export const ADD_ENTITIES = 'ADD_ENTITIES';
+export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
+export const UPDATE_ENTITY = 'UPDATE_ENTITY';
 
 const recursivelyGenerateEntities = ({ entity, state, parameters }) => {
   const entityId = createId();
@@ -48,7 +49,7 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   const state = getState();
   const entities = recursivelyGenerateEntities({ entity, state, parameters });
   dispatch({
-    type: ADD_ENTITIES,
+    type: UPDATE_ENTITIES,
     entities,
   });
 
@@ -61,3 +62,13 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
     dispatch(push(`/sector/${newSectorKeys[0]}`));
   }
 };
+
+export const updateEntity = (entityType, entityId, update) => dispatch =>
+  dispatch({
+    type: UPDATE_ENTITY,
+    entityType,
+    entityId,
+    update,
+  });
+
+export const deleteEntity = () => {};
