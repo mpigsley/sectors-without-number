@@ -4,13 +4,14 @@ import classNames from 'classnames';
 
 import './style.css';
 
-export default function EntityTooltips({ hoverKey, holdKey, entities }) {
+export default function EntityTooltips({ hoverKey, holdKey, hexes }) {
   const renderTooltip = system => (
     <div
       className={classNames('EntityTooltips-Tooltip', {
-        'EntityTooltips-Tooltip--hovered': system.key === hoverKey && !holdKey,
+        'EntityTooltips-Tooltip--hovered':
+          system.hexKey === hoverKey && !holdKey,
       })}
-      key={system.key}
+      key={system.hexKey}
       style={{
         top: system.yOffset - system.height / 2 - 10,
         left: system.xOffset,
@@ -18,23 +19,24 @@ export default function EntityTooltips({ hoverKey, holdKey, entities }) {
     >
       <div className="EntityTooltips-Text">
         <div className="EntityTooltips-Name">{system.name}</div>
-        <div className="EntityTooltips-Key">({system.key})</div>
+        <div className="EntityTooltips-Key">({system.hexKey})</div>
       </div>
     </div>
   );
 
-  return <div>{entities.map(renderTooltip)}</div>;
+  return <div>{hexes.map(renderTooltip)}</div>;
 }
 
 EntityTooltips.propTypes = {
   hoverKey: PropTypes.string,
   holdKey: PropTypes.string,
-  entities: PropTypes.arrayOf(
+  hexes: PropTypes.arrayOf(
     PropTypes.shape({
-      key: PropTypes.string.isRequired,
+      hexKey: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
       xOffset: PropTypes.number.isRequired,
       yOffset: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
     }),
   ).isRequired,
 };

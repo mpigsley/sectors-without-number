@@ -29,7 +29,7 @@ function Hex({
     topLevelEntities,
     ({ x, y }) => coordinateKey(x, y) === data.hexKey,
   );
-  const hexEntity = topLevelEntities[entityId];
+  const entity = topLevelEntities[entityId];
 
   const onMouseDown = () => {
     isMousedDown = true;
@@ -46,10 +46,8 @@ function Hex({
 
   const onMouseUp = () => {
     isMousedDown = false;
-    if (hexEntity && !holdKey) {
-      router.push(
-        `/sector/${router.params.sector}/${hexEntity.type}/${entityId}`,
-      );
+    if (entity && !holdKey) {
+      router.push(`/sector/${router.params.sector}/${entity.type}/${entityId}`);
     } else if (!isCloudSave) {
       if (!data.highlighted || holdKey === hoverKey) {
         systemRelease();
@@ -67,7 +65,7 @@ function Hex({
   };
 
   const renderPlanetNum = () => {
-    if (!hexEntity || data.width <= 45) {
+    if (!entity || data.width <= 45) {
       return null;
     }
     return (
@@ -76,13 +74,13 @@ function Hex({
         x={data.xOffset}
         y={data.yOffset - data.height / 2 + hexPadding}
       >
-        {hexEntity.numChildren}
+        {entity.numChildren}
       </text>
     );
   };
 
   const renderStarCircle = () => {
-    if (!hexEntity) {
+    if (!entity) {
       return null;
     }
     return (
@@ -96,12 +94,12 @@ function Hex({
   };
 
   const renderSystemName = () => {
-    if (!hexEntity || data.width <= 45) {
+    if (!entity || data.width <= 45) {
       return null;
     }
     return (
       <text className="Hex-Text Hex-Name" x={data.xOffset} y={data.yOffset}>
-        {hexEntity.name}
+        {entity.name}
       </text>
     );
   };
@@ -136,7 +134,7 @@ function Hex({
     <g
       className={classNames('Hex', {
         'Hex--hoverable': data.highlighted,
-        'Hex--clickable': !!hexEntity,
+        'Hex--clickable': !!entity,
         'Hex--drag': !!holdKey,
         'Hex--movable':
           holdKey === data.hexKey || (!!holdKey && hoverKey === data.hexKey),

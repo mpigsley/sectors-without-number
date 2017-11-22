@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { throttle, isEmpty } from 'lodash';
+import { throttle, isEmpty, map } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectorSidebar from 'components/sector-sidebar';
@@ -10,6 +10,7 @@ import SystemEditModal from 'components/system-edit-modal';
 import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex-generator';
+import { coordinateKey } from 'utils/common';
 import Loading from './loading';
 import Error from './error';
 
@@ -23,6 +24,7 @@ export default class Sector extends Component {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
     isInitialized: PropTypes.bool.isRequired,
+    topLevelEntities: PropTypes.shape().isRequired,
     sector: PropTypes.shape({
       rows: PropTypes.number,
       columns: PropTypes.number,
@@ -64,15 +66,16 @@ export default class Sector extends Component {
     if (!this.props.renderSector) {
       return null;
     }
-    const entities = hexData
-      .filter(data => data.system)
-      .map(({ entity, height, xOffset, yOffset }) => ({
-        ...entity,
-        height,
-        xOffset,
-        yOffset,
-      }));
-    return <EntityTooltips entities={entities} />;
+    return (
+      <EntityTooltips
+        hexes={map(this.props.topLevelEntities, entity => ({
+          ...entity,
+          ...hexData.find(
+            ({ hexKey }) => coordinateKey(entity.x, entity.y) === hexKey,
+          ),
+        }))}
+      />
+    );
   }
 
   render() {
