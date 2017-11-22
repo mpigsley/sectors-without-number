@@ -13,7 +13,7 @@ import Home from 'components/home';
 import Configure from 'components/configure';
 import Changelog from 'components/changelog';
 import Sector from 'components/sector';
-import SectorInfo from 'components/sector-info';
+import EntityInfo from 'components/entity-info';
 import SystemInfo from 'components/system-info';
 import PlanetInfo from 'components/planet-info';
 
@@ -34,7 +34,7 @@ ReactDOM.render(
           <Route path="/changelog" component={Changelog} />
         </Route>
         <Route path="/sector/:sector" component={Sector}>
-          <IndexRoute component={SectorInfo} />
+          <IndexRoute component={EntityInfo} />
           <Route path="system/:system" component={SystemInfo} />
           <Route path="planet/:planet" component={PlanetInfo} />
         </Route>

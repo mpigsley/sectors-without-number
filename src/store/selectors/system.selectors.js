@@ -6,6 +6,7 @@ import { getCurrentSector } from 'store/selectors/sector.selectors';
 import {
   systemSelector,
   currentSectorSelector,
+  currentEntitySelector,
 } from 'store/selectors/base.selectors';
 
 export const getCurrentSystems = createSelector(
@@ -15,7 +16,7 @@ export const getCurrentSystems = createSelector(
 );
 
 export const getCurrentSystem = createSelector(
-  [getCurrentSystems, currentSectorSelector],
+  [getCurrentSystems, currentEntitySelector],
   (systems, entity) => systems[entity] || {},
 );
 

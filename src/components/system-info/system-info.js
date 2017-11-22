@@ -105,6 +105,7 @@ export default class SectorInfo extends SidebarInfo {
   };
 
   render() {
+    console.log(this.props);
     return (
       <SidebarNavigation
         name={this.props.system.name}

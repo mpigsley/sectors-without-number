@@ -1,28 +1,28 @@
 @import 'styles/theme';
 
-.SectorInfo-Name {
+.EntityInfo-Name {
   margin: 0;
 }
 
-.SectorInfo-Key {
+.EntityInfo-Additional {
   color: $light1;
   font-size: 0.8rem;
   margin-left: 0.5rem;
 }
 
-.SectorInfo-Welcome {
+.EntityInfo-Welcome {
   padding-top: 3rem;
 }
 
-.SectorInfo-WelcomeList {
+.EntityInfo-WelcomeList {
   color: $light1;
   margin: 0 1rem 0 0.5rem;
 }
 
-.SectorInfo-WelcomeItem {
+.EntityInfo-WelcomeItem {
   margin-top: 1rem;
 }
 
-.SectorInfo-AddButton {
+.EntityInfo-AddButton {
   margin: 0;
 }

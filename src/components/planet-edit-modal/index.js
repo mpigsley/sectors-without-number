@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 
-import { getPlanetKeys } from 'store/selectors/planet.selectors';
-import { getCurrentSector } from 'store/selectors/sector.selectors';
+import {
+  getPlanetKeys,
+  getCurrentPlanets,
+} from 'store/selectors/planet.selectors';
 
 import PlanetEditModal from './planet-edit-modal';
 
 const mapStateToProps = (state, props) => ({
   planetKeys: getPlanetKeys(state),
-  planet: getCurrentSector(state).systems[props.hexKey].planets[
-    encodeURIComponent(props.planetKey)
-  ],
+  planet: getCurrentPlanets(state)[props.planetKey],
 });
 
 export default connect(mapStateToProps)(PlanetEditModal);

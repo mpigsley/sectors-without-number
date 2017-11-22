@@ -17,4 +17,6 @@ export const systemSelector = state => state.entity.system;
 
 /* Sector */
 export const currentSectorSelector = state => state.sector.currentSector;
+export const currentEntityTypeSelector = state =>
+  state.sector.currentEntityType;
 export const currentEntitySelector = state => state.sector.currentEntity;

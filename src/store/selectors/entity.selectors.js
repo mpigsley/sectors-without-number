@@ -1,8 +1,10 @@
 import { createSelector } from 'reselect';
-import { filter, pickBy, mapValues } from 'lodash';
+import { filter, pickBy, mapValues, zipObject } from 'lodash';
 
 import {
   currentSectorSelector,
+  currentEntityTypeSelector,
+  currentEntitySelector,
   entitySelector,
 } from 'store/selectors/base.selectors';
 import Entities from 'constants/entities';
@@ -30,4 +32,38 @@ export const getCurrentTopLevelEntities = createSelector(
     ),
 );
 
-export default getCurrentTopLevelEntities;
+export const getCurrentEntity = createSelector(
+  [
+    currentSectorSelector,
+    currentEntityTypeSelector,
+    currentEntitySelector,
+    entitySelector,
+  ],
+  (currentSector, currentEntityType, currentEntity, entities) =>
+    !currentEntity
+      ? entities[Entities.sector.key][currentSector]
+      : entities[currentEntityType][currentEntity],
+);
+
+export const getCurrentEntityType = createSelector(
+  [currentEntityTypeSelector],
+  currentEntityType => currentEntityType || Entities.sector.key,
+);
+
+export const getCurrentEntityId = createSelector(
+  [currentSectorSelector, currentEntitySelector],
+  (currentSector, currentEntity) => currentEntity || currentSector,
+);
+
+export const getCurrentEntityChildren = createSelector(
+  [getCurrentEntityId, getCurrentEntityType, entitySelector],
+  (entityId, currentEntityType, entities) => {
+    const entityChildren = Entities[currentEntityType].children;
+    return zipObject(
+      entityChildren,
+      entityChildren.map(entityType =>
+        pickBy(entities[entityType], ({ parent }) => parent === entityId),
+      ),
+    );
+  },
+);

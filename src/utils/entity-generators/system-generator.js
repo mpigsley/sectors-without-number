@@ -5,7 +5,7 @@ import { generateName } from 'utils/name-generator';
 
 export const generateSystem = (
   config,
-  { sector, coordinate, name = generateName() } = {},
+  { sector, coordinate, name = generateName(), parent, parentEntity } = {},
 ) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate a system');
@@ -14,10 +14,10 @@ export const generateSystem = (
     throw new Error('Sector coordinate must be provided to generate a system');
   }
 
-  return { ...coordinate, name, sector };
+  return { ...coordinate, name, sector, parent, parentEntity };
 };
 
-export const generateSystems = (config, { sector }) => {
+export const generateSystems = (config, { sector, parent, parentEntity }) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate systems');
   }
@@ -30,5 +30,7 @@ export const generateSystems = (config, { sector }) => {
 
   return chance
     .pickset(allSectorCoordinates(config.columns, config.rows), systemNum)
-    .map(coordinate => generateSystem(config, { sector, coordinate }));
+    .map(coordinate =>
+      generateSystem(config, { sector, coordinate, parent, parentEntity }),
+    );
 };

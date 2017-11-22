@@ -14,6 +14,7 @@ import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 const initialState = {
   renderSector: false,
   currentSector: null,
+  currentEntityType: null,
   currentEntity: null,
   configuration: {
     sectorName: generateSectorName(),
@@ -96,6 +97,7 @@ export default function sector(state = initialState, action) {
           ...state,
           renderSector: true,
           currentSector: pathname.split('/')[2] || state.currentSector,
+          currentEntityType: pathname.split('/')[3] || state.currentEntityType,
           currentEntity: pathname.split('/')[4] || state.currentEntity,
         };
       }

@@ -9,15 +9,11 @@ import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Button from 'primitives/other/button';
 import ButtonLink from 'primitives/other/button-link';
+import Entities from 'constants/entities';
 
 import './style.css';
 
 const nonLinkCss = 'SidebarNavigation-Icon SidebarNavigation-Icon--nonlink';
-export const SidebarType = {
-  sector: 'sector',
-  system: 'system',
-  planet: 'planet',
-};
 
 export default function SidebarNavigation({
   name,
@@ -81,18 +77,18 @@ export default function SidebarNavigation({
 
   const iconSize = 18;
   let typeIcon = <Map className={nonLinkCss} hidden size={iconSize} />;
-  if (type === SidebarType.sector) {
+  if (type === Entities.sector.key) {
     typeIcon = <Map className={nonLinkCss} size={iconSize} />;
-  } else if (type === SidebarType.system) {
+  } else if (type === Entities.system.key) {
     typeIcon = <Sun className={nonLinkCss} size={iconSize} />;
-  } else if (type === SidebarType.planet) {
+  } else if (type === Entities.planet.key) {
     typeIcon = <Globe className={nonLinkCss} size={iconSize} />;
   }
 
   let backIcon = (
     <ChevronLeft className="SidebarNavigation-Icon SidebarNavigation-Icon--link" />
   );
-  if (type === SidebarType.sector) {
+  if (type === Entities.sector.key) {
     backIcon = (
       <Home
         size={20}
@@ -171,7 +167,7 @@ SidebarNavigation.propTypes = {
 };
 
 SidebarNavigation.defaultProps = {
-  type: SidebarType.sector,
+  type: Entities.sector.key,
   back: null,
   onEdit: null,
   onDelete: null,
