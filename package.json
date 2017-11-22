@@ -18,7 +18,7 @@
     "test:watch": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
-    "deploy:stage": "sh -ac '. .env.stage; npm run deploy'",
+    "deploy:prod": "sh -ac '. .env; npm run deploy'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
@@ -64,7 +64,7 @@
     "eslint-plugin-prettier": "^2.3.1",
     "eslint-plugin-react": "^7.4.0",
     "prettier": "^1.7.4",
-    "react-scripts": "^1.0.14",
+    "react-scripts": "^1.0.1",
     "react-test-renderer": "^16.0.0"
   },
   "jest": {
