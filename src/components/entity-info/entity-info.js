@@ -64,7 +64,7 @@ export default class EntityInfo extends Component {
 
   onDeleteEntity = () => {
     this.onCancelDelete();
-    this.props.deleteEntity(this.props.entityType, this.props.entityId);
+    this.props.deleteEntity();
   };
 
   onCreateChildEntity = () => {

@@ -20,3 +20,4 @@ export const currentSectorSelector = state => state.sector.currentSector;
 export const currentEntityTypeSelector = state =>
   state.sector.currentEntityType;
 export const currentEntitySelector = state => state.sector.currentEntity;
+export const configurationSelector = state => state.sector.configuration;
