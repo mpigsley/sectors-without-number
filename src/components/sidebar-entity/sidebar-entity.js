@@ -15,6 +15,7 @@ import { generateSectorName } from 'utils/name-generator';
 import Entities from 'constants/entities';
 
 import SectorBuilderInfo from './sector-builder-info';
+import EntityAttributes from './entity-attributes';
 import EntityList from './entity-list';
 import Navigation from './navigation';
 
@@ -30,6 +31,7 @@ export default class EntityInfo extends Component {
       name: PropTypes.string.isRequired,
       parent: PropTypes.string,
       parentEntity: PropTypes.string,
+      attributes: PropTypes.shape(),
     }).isRequired,
     updateEntity: PropTypes.func.isRequired,
     deleteEntity: PropTypes.func.isRequired,
@@ -143,7 +145,7 @@ export default class EntityInfo extends Component {
         onEdit={this.onEdit}
         onDelete={this.props.isSaved ? this.onConfirmDelete : undefined}
       >
-        {this.renderSectorBuilderText()}
+        <EntityAttributes attributes={this.props.entity.attributes} />
         {map(this.props.entityChildren, (entities, entityType) => (
           <EntityList
             key={entityType}
@@ -154,6 +156,7 @@ export default class EntityInfo extends Component {
             onClickAdd={() => this.setState({ isCreateEntityOpen: true })}
           />
         ))}
+        {this.renderSectorBuilderText()}
         {this.renderEditModal()}
         {this.renderConfirmDeleteModal()}
         <SystemEditModal

@@ -1,0 +1,27 @@
+@import 'styles/theme';
+
+.EntityAttributes-Section {
+  margin-bottom: 1rem;
+}
+
+.EntityAttributes-Tag {
+  margin: 0 1rem 2rem 1rem;
+  text-align: left;
+}
+
+.EntityAttributes-Content {
+  font-size: 0.9rem;
+  font-weight: 200;
+  color: $light2;
+}
+
+.EntityAttributes-ContentList {
+  margin-top: 0.1rem;
+}
+
+.EntityAttributes-Attribute {
+  font-size: 0.9rem;
+  font-weight: 200;
+  color: $light2;
+  margin: 0.2rem 1rem;
+}
