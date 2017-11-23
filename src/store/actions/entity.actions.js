@@ -16,6 +16,7 @@ import {
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const UPDATE_ENTITY = 'UPDATE_ENTITY';
+export const DELETE_ENTITIES = 'DELETE_ENTITIES';
 
 export const generateEntity = (entityType, parameters) => (
   dispatch,
@@ -56,7 +57,7 @@ export const updateEntity = update => (dispatch, getState) => {
 export const deleteEntity = () => (dispatch, getState) => {
   const state = getState();
   dispatch({
-    type: UPDATE_ENTITIES,
+    type: DELETE_ENTITIES,
     entities: deleteEntityUtil({
       entityType: getCurrentEntityType(state),
       entity: getCurrentEntityId(state),

@@ -1,4 +1,10 @@
-import { UPDATE_ENTITIES, UPDATE_ENTITY } from 'store/actions/entity.actions';
+import { mapValues, omit } from 'lodash';
+
+import {
+  UPDATE_ENTITIES,
+  UPDATE_ENTITY,
+  DELETE_ENTITIES,
+} from 'store/actions/entity.actions';
 
 const initialState = {
   asteroidBase: {},
@@ -31,6 +37,13 @@ export default function entity(state = initialState, action) {
           ...state[action.entityType],
           [action.entityId]: action.update,
         },
+      };
+    case DELETE_ENTITIES:
+      return {
+        ...state,
+        ...mapValues(action.entities, (entityIds, entityType) =>
+          omit(state[entityType], entityIds),
+        ),
       };
     default:
       return state;
