@@ -14,8 +14,6 @@ import Configure from 'components/configure';
 import Changelog from 'components/changelog';
 import Sector from 'components/sector';
 import EntityInfo from 'components/entity-info';
-import SystemInfo from 'components/system-info';
-import PlanetInfo from 'components/planet-info';
 
 import 'styles/global.css';
 import 'react-hint/css/index.css';
@@ -35,8 +33,7 @@ ReactDOM.render(
         </Route>
         <Route path="/sector/:sector" component={Sector}>
           <IndexRoute component={EntityInfo} />
-          <Route path="system/:system" component={SystemInfo} />
-          <Route path="planet/:planet" component={PlanetInfo} />
+          <Route path=":entityType/:entity" component={EntityInfo} />
         </Route>
       </Route>
     </Router>

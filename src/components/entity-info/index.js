@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { currentSectorSelector } from 'store/selectors/base.selectors';
 import {
   getCurrentEntity,
-  getCurrentEntityId,
   getCurrentEntityType,
   getCurrentEntityChildren,
 } from 'store/selectors/entity.selectors';
@@ -17,7 +16,6 @@ const mapStateToProps = state => ({
   isSaved: false,
   currentSector: currentSectorSelector(state),
   entity: getCurrentEntity(state),
-  entityId: getCurrentEntityId(state),
   entityType: getCurrentEntityType(state),
   entityChildren: getCurrentEntityChildren(state),
 });

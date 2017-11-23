@@ -1,20 +1,22 @@
 import { connect } from 'react-redux';
 
-import { getCurrentSector } from 'store/selectors/sector.selectors';
+import { currentSectorSelector } from 'store/selectors/base.selectors';
+import {
+  getCurrentEntity,
+  getCurrentEntityType,
+} from 'store/selectors/entity.selectors';
+
 import { saveSector } from 'store/actions/sector.actions';
 import SidebarNavigation, { SidebarType } from './sidebar-navigation';
 
 const mapStateToProps = state => ({
-  isSaved: !state.sector.generated,
+  isSaved: false,
   isSynced: !!state.user.model,
-  isCloudSave: !!getCurrentSector(state).isCloudSave,
-});
-
-const mapDispatchToProps = dispatch => ({
-  saveSector() {
-    dispatch(saveSector());
-  },
+  isCloudSave: false,
+  currentSector: currentSectorSelector(state),
+  entity: getCurrentEntity(state),
+  entityType: getCurrentEntityType(state),
 });
 
 export { SidebarType };
-export default connect(mapStateToProps, mapDispatchToProps)(SidebarNavigation);
+export default connect(mapStateToProps, { saveSector })(SidebarNavigation);

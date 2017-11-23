@@ -26,9 +26,10 @@ export default class EntityInfo extends Component {
     isCloudSave: PropTypes.bool.isRequired,
     entityChildren: PropTypes.shape().isRequired,
     entityType: PropTypes.string,
-    entityId: PropTypes.string,
     entity: PropTypes.shape({
       name: PropTypes.string.isRequired,
+      parent: PropTypes.string,
+      parentEntity: PropTypes.string,
     }).isRequired,
     updateEntity: PropTypes.func.isRequired,
     deleteEntity: PropTypes.func.isRequired,
@@ -37,7 +38,6 @@ export default class EntityInfo extends Component {
 
   static defaultProps = {
     entityType: undefined,
-    entityId: undefined,
   };
 
   state = {
@@ -54,12 +54,8 @@ export default class EntityInfo extends Component {
   }
 
   onUpdateEntity = () => {
-    this.props.updateEntity(
-      this.props.entityType,
-      this.props.entityId,
-      this.state.entity,
-    );
     this.onCloseEdit();
+    this.props.updateEntity(this.state.entity);
   };
 
   onDeleteEntity = () => {
@@ -67,9 +63,7 @@ export default class EntityInfo extends Component {
     this.props.deleteEntity();
   };
 
-  onCreateChildEntity = () => {
-    this.setState({ isCreateEntityOpen: false });
-  };
+  onCreateChildEntity = () => this.setState({ isCreateEntityOpen: false });
 
   onEdit = () => this.setState({ isEditOpen: true });
 
@@ -119,7 +113,7 @@ export default class EntityInfo extends Component {
     );
   }
 
-  renderEmptyText() {
+  renderSectorBuilderText() {
     if (
       some(this.props.entityChildren, size) ||
       this.props.entityType !== Entities.sector.key
@@ -146,11 +140,10 @@ export default class EntityInfo extends Component {
     return (
       <SidebarNavigation
         name={this.props.entity.name}
-        type={Entities.sector.key}
         onEdit={this.onEdit}
         onDelete={this.props.isSaved ? this.onConfirmDelete : undefined}
       >
-        {this.renderEmptyText()}
+        {this.renderSectorBuilderText()}
         {map(this.props.entityChildren, (entities, entityType) => (
           <EntityList
             key={entityType}

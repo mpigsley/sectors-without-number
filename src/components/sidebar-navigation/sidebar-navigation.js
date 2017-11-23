@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
-import { ChevronLeft, Sun, Globe, Map, Home } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -13,13 +11,12 @@ import Entities from 'constants/entities';
 
 import './style.css';
 
-const nonLinkCss = 'SidebarNavigation-Icon SidebarNavigation-Icon--nonlink';
-
 export default function SidebarNavigation({
   name,
   children,
-  back,
-  type,
+  currentSector,
+  entity,
+  entityType,
   saveSector,
   onDelete,
   isSaved,
@@ -31,7 +28,7 @@ export default function SidebarNavigation({
     copy(window.location.href);
     toastr.success(
       'Copied to Clipboard',
-      `You have copied a link directly to this ${type}.`,
+      `You have copied a link directly to this ${Entities[entityType].name}.`,
     );
   };
 
@@ -49,7 +46,7 @@ export default function SidebarNavigation({
   }
 
   let editButton = null;
-  if (onEdit && !isCloudSave) {
+  if (!isCloudSave) {
     editButton = (
       <Button minimal onClick={onEdit}>
         Edit
@@ -67,7 +64,7 @@ export default function SidebarNavigation({
   }
 
   let deleteButton = null;
-  if (onDelete && !isCloudSave) {
+  if (isSaved && !isCloudSave) {
     deleteButton = (
       <Button minimal onClick={onDelete}>
         Delete
@@ -75,41 +72,33 @@ export default function SidebarNavigation({
     );
   }
 
-  const iconSize = 18;
-  let typeIcon = <Map className={nonLinkCss} hidden size={iconSize} />;
-  if (type === Entities.sector.key) {
-    typeIcon = <Map className={nonLinkCss} size={iconSize} />;
-  } else if (type === Entities.system.key) {
-    typeIcon = <Sun className={nonLinkCss} size={iconSize} />;
-  } else if (type === Entities.planet.key) {
-    typeIcon = <Globe className={nonLinkCss} size={iconSize} />;
-  }
-
-  let backIcon = (
-    <ChevronLeft className="SidebarNavigation-Icon SidebarNavigation-Icon--link" />
-  );
-  if (type === Entities.sector.key) {
-    backIcon = (
-      <Home
-        size={20}
-        className="SidebarNavigation-Icon SidebarNavigation-Icon--link"
-      />
-    );
+  let backUrl = '/';
+  if (entity.parent) {
+    backUrl = `${backUrl}sector/${currentSector}`;
+    if (entity.parentEntity !== Entities.sector.key) {
+      backUrl = `${backUrl}/${entity.parentEntity}/${entity.parent}`;
+    }
   }
 
   return (
     <FlexContainer className="SidebarNavigation-Info" direction="column">
       <div className="SidebarNavigation-Header">
         <FlexContainer align="center" shrink="0">
-          <Link to={back || '/'} className="SidebarNavigation-Link">
-            {backIcon}
-          </Link>
-          <FlexContainer flex="1" justify="center">
+          <FlexContainer flex="1" justify="center" align="flexEnd">
             <Header type={HeaderType.header2}>{name}</Header>
+            <Header
+              type={HeaderType.header3}
+              className="SidebarNavigation-TypeHeader"
+            >
+              ({Entities[entityType].name})
+            </Header>
           </FlexContainer>
-          {typeIcon}
         </FlexContainer>
         <FlexContainer justify="center" shrink="0">
+          <ButtonLink minimal to={backUrl}>
+            Back
+          </ButtonLink>
+          <span className="SidebarNavigation-Spacer" />
           {saveButton}
           {saveButton ? <span className="SidebarNavigation-Spacer" /> : null}
           {editButton}
@@ -154,10 +143,15 @@ export default function SidebarNavigation({
 }
 
 SidebarNavigation.propTypes = {
+  currentSector: PropTypes.string.isRequired,
+  entity: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    parent: PropTypes.string,
+    parentEntity: PropTypes.string,
+  }).isRequired,
+  entityType: PropTypes.string,
   children: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
-  back: PropTypes.string,
-  type: PropTypes.string,
   saveSector: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSynced: PropTypes.bool.isRequired,
@@ -167,8 +161,7 @@ SidebarNavigation.propTypes = {
 };
 
 SidebarNavigation.defaultProps = {
-  type: Entities.sector.key,
-  back: null,
-  onEdit: null,
-  onDelete: null,
+  entityType: undefined,
+  onEdit: () => {},
+  onDelete: () => {},
 };

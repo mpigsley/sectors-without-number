@@ -96,9 +96,9 @@ export default function sector(state = initialState, action) {
         return {
           ...state,
           renderSector: true,
-          currentSector: pathname.split('/')[2] || state.currentSector,
-          currentEntityType: pathname.split('/')[3] || state.currentEntityType,
-          currentEntity: pathname.split('/')[4] || state.currentEntity,
+          currentSector: pathname.split('/')[2],
+          currentEntityType: pathname.split('/')[3],
+          currentEntity: pathname.split('/')[4],
         };
       }
       return {
