@@ -9,7 +9,7 @@ import {
 
 import { updateEntity, deleteEntity } from 'store/actions/entity.actions';
 
-import EntityInfo from './entity-info';
+import SidebarEntity from './sidebar-entity';
 
 const mapStateToProps = state => ({
   isCloudSave: false,
@@ -23,4 +23,4 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   updateEntity,
   deleteEntity,
-})(EntityInfo);
+})(SidebarEntity);

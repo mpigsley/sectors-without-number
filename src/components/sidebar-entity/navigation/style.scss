@@ -1,26 +1,26 @@
 @import 'styles/theme';
 
-.SidebarNavigation-Info {
+.Navigation-Info {
   height: 100vh;
   width: 100%;
 }
 
-.SidebarNavigation-Header {
+.Navigation-Header {
   padding-bottom: 0.6rem;
   border-bottom: 1px solid $dark2;
 }
 
-.SidebarNavigation-TypeHeader {
+.Navigation-TypeHeader {
   color: $light1;
   margin-left: 0.8rem;
 }
 
-.SidebarNavigation-Footer {
+.Navigation-Footer {
   padding: 0.6rem 0;
   border-top: 1px solid $dark2;
 }
 
-.SidebarNavigation-Spacer {
+.Navigation-Spacer {
   background-color: $dark1;
   width: 1px;
   margin: 0.3rem;

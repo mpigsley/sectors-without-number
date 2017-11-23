@@ -7,20 +7,20 @@ import FlexContainer from 'primitives/container/flex-container';
 
 import './style.css';
 
-export default function SidebarLinkRow({ children, to }) {
+export default function EntityLinkRow({ children, to }) {
   return (
-    <Link className="SidebarLinkRow" to={to}>
+    <Link className="EntityLinkRow" to={to}>
       <FlexContainer>
         <FlexContainer flex="1" align="baseline">
           {children}
         </FlexContainer>
-        <ChevronRight className="SidebarLinkRow-RightArrow" />
+        <ChevronRight className="EntityLinkRow-RightArrow" />
       </FlexContainer>
     </Link>
   );
 }
 
-SidebarLinkRow.propTypes = {
+EntityLinkRow.propTypes = {
   children: PropTypes.node.isRequired,
   to: PropTypes.string.isRequired,
 };

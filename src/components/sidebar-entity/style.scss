@@ -1,15 +1,5 @@
 @import 'styles/theme';
 
-.EntityInfo-Name {
-  margin: 0;
-}
-
-.EntityInfo-Additional {
-  color: $light1;
-  font-size: 0.8rem;
-  margin-left: 0.5rem;
-}
-
 .EntityInfo-Welcome {
   padding-top: 3rem;
 }
@@ -21,8 +11,4 @@
 
 .EntityInfo-WelcomeItem {
   margin-top: 1rem;
-}
-
-.EntityInfo-AddButton {
-  margin: 0;
 }

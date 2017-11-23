@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { RefreshCw } from 'react-feather';
 import { some, size, map } from 'lodash';
 
-import SidebarNavigation from 'components/sidebar-navigation';
 import SystemEditModal from 'components/system-edit-modal';
 
 import Modal from 'primitives/modal/modal';
@@ -17,6 +16,7 @@ import Entities from 'constants/entities';
 
 import SectorBuilderInfo from './sector-builder-info';
 import EntityList from './entity-list';
+import Navigation from './navigation';
 
 import './style.css';
 
@@ -138,7 +138,7 @@ export default class EntityInfo extends Component {
 
   render() {
     return (
-      <SidebarNavigation
+      <Navigation
         name={this.props.entity.name}
         onEdit={this.onEdit}
         onDelete={this.props.isSaved ? this.onConfirmDelete : undefined}
@@ -161,7 +161,7 @@ export default class EntityInfo extends Component {
           onClose={() => this.setState({ isCreateEntityOpen: false })}
           onSubmit={this.onCreateChildEntity}
         />
-      </SidebarNavigation>
+      </Navigation>
     );
   }
 }

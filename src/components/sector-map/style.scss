@@ -1,13 +1,19 @@
 @import 'styles/theme';
 
-.SectorSidebar {
+.SectorMap-Sidebar {
   background-color: $dark3;
   display: flex;
   width: 400px;
 }
 
 @media (max-width: 700) {
-  .SectorSidebar {
+  .SectorMap-Sidebar {
+    display: none;
+  }
+}
+
+@media print {
+  .SectorMap {
     display: none;
   }
 }

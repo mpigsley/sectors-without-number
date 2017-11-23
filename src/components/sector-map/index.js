@@ -6,7 +6,8 @@ import { editSystem, closeSystemCreate } from 'store/actions/system.actions';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 import { getCurrentTopLevelEntities } from 'store/selectors/entity.selectors';
 import { closeUserDropdown } from 'store/actions/user.actions';
-import Sector from './sector';
+
+import SectorMap from './sector-map';
 
 const mapStateToProps = state => ({
   renderSector: state.sector.renderSector,
@@ -24,4 +25,4 @@ const mapDispatchToProps = dispatch => ({
   generateSector: () => dispatch(generateEntity(Entities.sector.key)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Sector);
+export default connect(mapStateToProps, mapDispatchToProps)(SectorMap);

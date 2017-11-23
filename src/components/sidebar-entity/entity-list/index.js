@@ -4,7 +4,6 @@ import Pluralize from 'pluralize';
 import { map, size } from 'lodash';
 import { Plus } from 'react-feather';
 
-import SidebarLinkRow from 'components/sidebar-link-row';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import SectionHeader from 'primitives/text/section-header';
@@ -13,6 +12,9 @@ import LinkIcon from 'primitives/other/link-icon';
 
 import { stringSortByKey, coordinateKey } from 'utils/common';
 import Entities from 'constants/entities';
+
+import EntityLinkRow from '../entity-link-row';
+import './style.css';
 
 export default function EntityList({
   currentSector,
@@ -35,7 +37,7 @@ export default function EntityList({
       <SectionHeader>
         <FlexContainer justify="spaceBetween" align="flexEnd">
           {Pluralize(Entities[entityType].name)}
-          <Button minimal className="EntityInfo-AddButton" onClick={onClickAdd}>
+          <Button minimal className="EntityList-AddButton" onClick={onClickAdd}>
             <LinkIcon size={15} icon={Plus} />
             Add {Entities[entityType].name}
           </Button>
@@ -59,17 +61,17 @@ export default function EntityList({
       }))
         .sort(stringSortByKey('sort'))
         .map(entity => (
-          <SidebarLinkRow
+          <EntityLinkRow
             key={entity.entityId}
             to={`/sector/${currentSector}/${entityType}/${entity.entityId}`}
           >
-            <Header type={HeaderType.header4} className="EntityInfo-Name">
+            <Header type={HeaderType.header4} className="EntityList-Name">
               {entity.name}
             </Header>
             {entity.additional && (
-              <div className="EntityInfo-Additional">({entity.additional})</div>
+              <div className="EntityList-Additional">({entity.additional})</div>
             )}
-          </SidebarLinkRow>
+          </EntityLinkRow>
         ))}
     </FlexContainer>
   );

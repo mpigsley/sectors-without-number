@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { throttle, isEmpty, map } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
-import SectorSidebar from 'components/sector-sidebar';
 import EntityTooltips from 'components/entity-tooltips';
 import PrintableSector from 'components/printable-sector';
 import SystemEditModal from 'components/system-edit-modal';
@@ -19,7 +18,7 @@ import './style.css';
 const calcWidth = () =>
   window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth;
 
-export default class Sector extends Component {
+export default class SectorMap extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
@@ -100,14 +99,14 @@ export default class Sector extends Component {
 
     return (
       <div onClick={closeUserDropdown}>
-        <FlexContainer className="Sector" direction="row">
+        <FlexContainer className="SectorMap" direction="row">
           {this.renderTooltips(hexes)}
           <HexMap
             width={this.state.width}
             height={this.state.height}
             hexes={hexes}
           />
-          <SectorSidebar>{this.props.children}</SectorSidebar>
+          <div className="SectorMap-Sidebar">{this.props.children}</div>
         </FlexContainer>
         <PrintableSector printable={printable} />
         <SystemEditModal

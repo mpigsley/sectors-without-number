@@ -11,7 +11,7 @@ import Entities from 'constants/entities';
 
 import './style.css';
 
-export default function SidebarNavigation({
+export default function Navigation({
   name,
   children,
   currentSector,
@@ -81,15 +81,12 @@ export default function SidebarNavigation({
   }
 
   return (
-    <FlexContainer className="SidebarNavigation-Info" direction="column">
-      <div className="SidebarNavigation-Header">
+    <FlexContainer className="Navigation-Info" direction="column">
+      <div className="Navigation-Header">
         <FlexContainer align="center" shrink="0">
           <FlexContainer flex="1" justify="center" align="flexEnd">
             <Header type={HeaderType.header2}>{name}</Header>
-            <Header
-              type={HeaderType.header3}
-              className="SidebarNavigation-TypeHeader"
-            >
+            <Header type={HeaderType.header3} className="Navigation-TypeHeader">
               ({Entities[entityType].name})
             </Header>
           </FlexContainer>
@@ -98,15 +95,15 @@ export default function SidebarNavigation({
           <ButtonLink minimal to={backUrl}>
             Back
           </ButtonLink>
-          <span className="SidebarNavigation-Spacer" />
+          <span className="Navigation-Spacer" />
           {saveButton}
-          {saveButton ? <span className="SidebarNavigation-Spacer" /> : null}
+          {saveButton ? <span className="Navigation-Spacer" /> : null}
           {editButton}
-          {editButton ? <span className="SidebarNavigation-Spacer" /> : null}
+          {editButton ? <span className="Navigation-Spacer" /> : null}
           {deleteButton}
-          {deleteButton ? <span className="SidebarNavigation-Spacer" /> : null}
+          {deleteButton ? <span className="Navigation-Spacer" /> : null}
           {shareButton}
-          {shareButton ? <span className="SidebarNavigation-Spacer" /> : null}
+          {shareButton ? <span className="Navigation-Spacer" /> : null}
           <Button minimal onClick={onPrint}>
             Print
           </Button>
@@ -115,7 +112,7 @@ export default function SidebarNavigation({
       <FlexContainer direction="column" flex="1" scroll>
         {children}
       </FlexContainer>
-      <div className="SidebarNavigation-Footer">
+      <div className="Navigation-Footer">
         <FlexContainer justify="center">
           <ButtonLink
             minimal
@@ -124,11 +121,11 @@ export default function SidebarNavigation({
           >
             Report Problem
           </ButtonLink>
-          <span className="SidebarNavigation-Spacer" />
+          <span className="Navigation-Spacer" />
           <ButtonLink minimal to="/changelog">
             Changelog
           </ButtonLink>
-          <span className="SidebarNavigation-Spacer" />
+          <span className="Navigation-Spacer" />
           <ButtonLink
             minimal
             to="https://github.com/mpigsley/sectors-without-number"
@@ -142,7 +139,7 @@ export default function SidebarNavigation({
   );
 }
 
-SidebarNavigation.propTypes = {
+Navigation.propTypes = {
   currentSector: PropTypes.string.isRequired,
   entity: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -160,7 +157,7 @@ SidebarNavigation.propTypes = {
   onDelete: PropTypes.func,
 };
 
-SidebarNavigation.defaultProps = {
+Navigation.defaultProps = {
   entityType: undefined,
   onEdit: () => {},
   onDelete: () => {},

@@ -1,11 +1,11 @@
-@import "styles/theme";
+@import 'styles/theme';
 
-.SidebarLinkRow-RightArrow {
+.EntityLinkRow-RightArrow {
   color: $dark3;
   transition: color 0.5s;
 }
 
-.SidebarLinkRow {
+.EntityLinkRow {
   color: $dark3;
   padding: 0.8rem 1.5rem;
   text-decoration: none;
@@ -14,7 +14,7 @@
   &:hover {
     background-color: $primary;
 
-    .SidebarLinkRow-RightArrow {
+    .EntityLinkRow-RightArrow {
       color: $light4;
     }
   }
