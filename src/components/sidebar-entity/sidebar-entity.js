@@ -145,7 +145,10 @@ export default class EntityInfo extends Component {
         onEdit={this.onEdit}
         onDelete={this.props.isSaved ? this.onConfirmDelete : undefined}
       >
-        <EntityAttributes attributes={this.props.entity.attributes} />
+        <EntityAttributes
+          attributes={this.props.entity.attributes}
+          entityType={this.props.entityType}
+        />
         {map(this.props.entityChildren, (entities, entityType) => (
           <EntityList
             key={entityType}

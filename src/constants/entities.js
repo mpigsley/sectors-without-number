@@ -1,3 +1,10 @@
+import WorldTags from 'constants/world-tags';
+import Atmosphere from 'constants/atmosphere';
+import Temperature from 'constants/temperature';
+import Biosphere from 'constants/biosphere';
+import Population from 'constants/population';
+import TechLevel from 'constants/tech-level';
+
 const researchBase = {
   key: 'researchBase',
   name: 'Research Base',
@@ -63,6 +70,8 @@ const planet = {
   key: 'planet',
   name: 'Planet',
   topLevel: false,
+  tags: WorldTags,
+  attributes: [Atmosphere, Temperature, Biosphere, Population, TechLevel],
   children: [moon.key, orbitalRuin.key, researchBase.key, refuelingStation.key],
 };
 

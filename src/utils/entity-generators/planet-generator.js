@@ -1,5 +1,4 @@
 import Chance from 'chance';
-import { keys } from 'lodash';
 
 import { generateName } from 'utils/name-generator';
 import { worldTagKeys } from 'constants/world-tags';
@@ -25,15 +24,47 @@ export const generatePlanet = (
     planet = {
       ...planet,
       attributes: {
-        tags: chance.pickset(keys(worldTagKeys), 2),
+        tags: chance.pickset(Object.keys(worldTagKeys), 2),
         techLevel: `TL${chance.weighted(
           ['0', '1', '2', '3', '4', '4+', '5'],
           [1, 1, 2, 2, 3, 1, 1],
         )}`,
-        atmosphere: chance.weighted(keys(Atmosphere), [1, 1, 1, 5, 1, 1, 1]),
-        temperature: chance.weighted(keys(Temperature), [1, 1, 2, 3, 2, 1, 1]),
-        biosphere: chance.weighted(keys(Biosphere), [1, 1, 2, 3, 2, 1, 1]),
-        population: chance.weighted(keys(Population), [1, 1, 2, 3, 2, 1, 1]),
+        atmosphere: chance.weighted(Object.keys(Atmosphere.attributes), [
+          1,
+          1,
+          1,
+          5,
+          1,
+          1,
+          1,
+        ]),
+        temperature: chance.weighted(Object.keys(Temperature.attributes), [
+          1,
+          1,
+          2,
+          3,
+          2,
+          1,
+          1,
+        ]),
+        biosphere: chance.weighted(Object.keys(Biosphere.attributes), [
+          1,
+          1,
+          2,
+          3,
+          2,
+          1,
+          1,
+        ]),
+        population: chance.weighted(Object.keys(Population.attributes), [
+          1,
+          1,
+          2,
+          3,
+          2,
+          1,
+          1,
+        ]),
       },
     };
   }

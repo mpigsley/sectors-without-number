@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { omit } from 'lodash';
 
 import SectionHeader from 'primitives/text/section-header';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 
 import { capitalizeFirstLetter } from 'utils/common';
-import WorldTags from 'constants/world-tags';
-import Atmosphere from 'constants/atmosphere';
-import Temperature from 'constants/temperature';
-import Biosphere from 'constants/biosphere';
-import Population from 'constants/population';
+import Entities from 'constants/entities';
 
 import './style.css';
 
@@ -25,9 +22,9 @@ const renderList = (title, list) => (
   </div>
 );
 
-const renderTags = (tags = []) =>
+const renderTags = (definitions, tags = []) =>
   tags
-    .map(tag => WorldTags[tag])
+    .map(tag => definitions[tag])
     .map(
       ({
         key,
@@ -51,35 +48,61 @@ const renderTags = (tags = []) =>
       ),
     );
 
-const renderAttribute = (title, attribute, obj) =>
-  (!obj && !attribute) || (obj && !obj[attribute]) ? null : (
-    <p className="EntityAttributes-Attribute">
-      <b>{title}:</b> {obj ? obj[attribute].name : attribute}
-    </p>
-  );
-
-export default function EntityAttributes({ attributes }) {
-  if (!attributes) {
+const renderAttribute = ({ key, name, attributes }, attribute) => {
+  if ((!attributes && !attribute) || (attributes && !attributes[attribute])) {
     return null;
   }
+  console.log(name, attributes[attribute].name);
   return (
-    <FlexContainer direction="column">
-      <SectionHeader>Attributes</SectionHeader>
-      {renderAttribute('Tech Level', attributes.techLevel)}
-      {renderAttribute('Atmosphere', attributes.atmosphere, Atmosphere)}
-      {renderAttribute('Temperature', attributes.temperature, Temperature)}
-      {renderAttribute('Biosphere', attributes.biosphere, Biosphere)}
-      {renderAttribute('Population', attributes.population, Population)}
-      <SectionHeader>World Tags</SectionHeader>
-      <div className="EntityAttributes-Section">
-        {renderTags(attributes.tags)}
-      </div>
-    </FlexContainer>
+    <p key={key} className="EntityAttributes-Attribute">
+      <b>{name}:</b> {attributes[attribute].name}
+    </p>
+  );
+};
+
+export default function EntityAttributes({ attributes, entityType }) {
+  console.log(attributes);
+  if (!attributes || !Object.keys(attributes).length) {
+    return null;
+  }
+
+  let attributesSection = null;
+  if (
+    Entities[entityType].attributes &&
+    Object.keys(omit({ ...attributes }, 'tags')).length
+  ) {
+    attributesSection = (
+      <FlexContainer direction="column">
+        <SectionHeader>Attributes</SectionHeader>
+        {Entities[entityType].attributes.map(attribute =>
+          renderAttribute(attribute, attributes[attribute.key]),
+        )}
+      </FlexContainer>
+    );
+  }
+
+  let tagsSection = null;
+  if (Entities[entityType].tags && attributes.tags && attributes.tags.length) {
+    tagsSection = (
+      <FlexContainer direction="column">
+        <SectionHeader>{Entities[entityType].name} Tags</SectionHeader>
+        <div className="EntityAttributes-Section">
+          {renderTags(Entities[entityType].tags, attributes.tags)}
+        </div>
+      </FlexContainer>
+    );
+  }
+  return (
+    <div>
+      {attributesSection}
+      {tagsSection}
+    </div>
   );
 }
 
 EntityAttributes.propTypes = {
   attributes: PropTypes.shape(),
+  entityType: PropTypes.string.isRequired,
 };
 
 EntityAttributes.defaultProps = {
