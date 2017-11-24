@@ -4,6 +4,7 @@ import { RefreshCw } from 'react-feather';
 import { some, size, map } from 'lodash';
 
 import SystemEditModal from 'components/system-edit-modal';
+import PlanetEditModal from 'components/planet-edit-modal';
 
 import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
@@ -87,31 +88,51 @@ export default class EntityInfo extends Component {
       [key]: value,
     });
 
+  // TODO: Refactor into sidebar edit mode instead of specific modals
   renderEditModal() {
-    return (
-      <Modal
-        isOpen={this.state.isEditOpen}
-        onCancel={this.onCloseEdit}
-        title="Edit Sector"
-        actionButtons={[
-          <Button primary key="save" onClick={this.onUpdateEntity}>
-            Save {Entities[this.props.entityType].name}
-          </Button>,
-        ]}
-      >
-        <Label noPadding htmlFor="name">
-          Sector Name
-        </Label>
-        <IconInput
-          id="name"
-          name="name"
-          data-key="name"
-          icon={RefreshCw}
-          value={this.state.entity.name}
-          onChange={this.onEditText()}
-          onIconClick={this.onRandomizeName(generateSectorName)}
+    if (this.props.entityType === Entities.sector.key) {
+      return (
+        <Modal
+          isOpen={this.state.isEditOpen}
+          onCancel={this.onCloseEdit}
+          title="Edit Sector"
+          actionButtons={[
+            <Button primary key="save" onClick={this.onUpdateEntity}>
+              Save {Entities[this.props.entityType].name}
+            </Button>,
+          ]}
+        >
+          <Label noPadding htmlFor="name">
+            Sector Name
+          </Label>
+          <IconInput
+            id="name"
+            name="name"
+            data-key="name"
+            icon={RefreshCw}
+            value={this.state.entity.name}
+            onChange={this.onEditText()}
+            onIconClick={this.onRandomizeName(generateSectorName)}
+          />
+        </Modal>
+      );
+    } else if (this.props.entityType === Entities.system.key) {
+      return (
+        <SystemEditModal
+          isOpen={this.state.isEditOpen}
+          onClose={this.onCloseEdit}
+          onSubmit={this.onUpdateEntity}
+          system={this.state.entity}
         />
-      </Modal>
+      );
+    }
+    return (
+      <PlanetEditModal
+        isOpen={this.state.isEditOpen}
+        onClose={this.onCloseEdit}
+        onSubmit={this.onUpdateEntity}
+        planet={this.props.entity}
+      />
     );
   }
 

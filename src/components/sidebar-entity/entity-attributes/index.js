@@ -52,7 +52,6 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
   if ((!attributes && !attribute) || (attributes && !attributes[attribute])) {
     return null;
   }
-  console.log(name, attributes[attribute].name);
   return (
     <p key={key} className="EntityAttributes-Attribute">
       <b>{name}:</b> {attributes[attribute].name}

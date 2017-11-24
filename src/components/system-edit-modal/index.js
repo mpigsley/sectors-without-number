@@ -1,16 +1,24 @@
 import { connect } from 'react-redux';
 
-import { getPlanetKeys } from 'store/selectors/planet.selectors';
 import {
-  getCurrentSystems,
-  getEmptySystemKeys,
-} from 'store/selectors/system.selectors';
+  getCurrentEntity,
+  getCurrentEntityType,
+  getCurrentEntityChildren,
+} from 'store/selectors/entity.selectors';
+import { getEmptySystemKeys } from 'store/selectors/system.selectors';
+import Entities from 'constants/entities';
 
 import SystemEditModal from './system-edit-modal';
 
-const mapStateToProps = (state, props) => ({
-  planetKeys: getPlanetKeys(state, props),
-  system: getCurrentSystems(state)[props.hexKey],
+const mapStateToProps = state => ({
+  system:
+    getCurrentEntityType(state) === Entities.system.key
+      ? getCurrentEntity(state)
+      : undefined,
+  planets:
+    getCurrentEntityType(state) === Entities.system.key
+      ? getCurrentEntityChildren(state).planet
+      : undefined,
   emptySystemKeys: getEmptySystemKeys(state),
 });
 

@@ -2,16 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw, X, Plus } from 'react-feather';
 import Chance from 'chance';
-import {
-  map,
-  zipObject,
-  omit,
-  values,
-  every,
-  includes,
-  uniq,
-  filter,
-} from 'lodash';
+import { map, zipObject, omit, values, every } from 'lodash';
 import ReactHintFactory from 'react-hint';
 
 import Modal from 'primitives/modal/modal';
@@ -31,10 +22,10 @@ import './style.css';
 
 const ReactHint = ReactHintFactory(React);
 
-const generatePlanetNames = system => {
+const generatePlanetNames = planets => {
   let planetsList;
-  if (system) {
-    planetsList = map(system.planets, ({ key, name }) => ({
+  if (planets) {
+    planetsList = map(planets, ({ key, name }) => ({
       originalKey: key,
       generate: true,
       isSaved: true,
@@ -56,24 +47,21 @@ export default class SystemEditModal extends Component {
     isOpen: PropTypes.bool.isRequired,
     onSubmit: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    hexKey: PropTypes.string,
-    planetKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
     emptySystemKeys: PropTypes.arrayOf(PropTypes.string).isRequired,
     system: PropTypes.shape({
-      key: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      planets: PropTypes.shape().isRequired,
     }),
+    planets: PropTypes.shape(),
   };
 
   static defaultProps = {
-    hexKey: null,
     system: null,
+    planets: null,
   };
 
   state = {
     name: generateName(new Chance()),
-    planets: generatePlanetNames(this.props.system),
+    planets: generatePlanetNames(this.props.planets),
     systemSelect: this.props.emptySystemKeys[0],
   };
 
@@ -83,7 +71,7 @@ export default class SystemEditModal extends Component {
         name: nextProps.system
           ? nextProps.system.name
           : generateName(new Chance()),
-        planets: generatePlanetNames(nextProps.system),
+        planets: generatePlanetNames(nextProps.planets),
         systemSelect: this.props.emptySystemKeys[0],
       });
     }
@@ -159,7 +147,7 @@ export default class SystemEditModal extends Component {
       const existingPlanets = values(this.state.planets)
         .filter(planet => planet.isSaved)
         .map(({ originalKey, name }) => ({
-          ...this.props.system.planets[originalKey],
+          ...this.props.planets[originalKey],
           key: encodeURIComponent(name.toLowerCase()),
           name,
         }));
@@ -174,9 +162,8 @@ export default class SystemEditModal extends Component {
         ),
       };
     } else {
-      const { x, y } = coordinatesFromKey(
-        this.props.hexKey || this.state.systemSelect,
-      );
+      const { x, y } =
+        this.props.system || coordinatesFromKey(this.state.systemSelect);
       system = new System(
         { chance: new Chance() },
         x,
@@ -193,40 +180,12 @@ export default class SystemEditModal extends Component {
     return every(this.state.planets, ({ isSaved }) => isSaved);
   }
 
-  get areAllUnique() {
-    const planetsWithNewNames = filter(
-      this.state.planets,
-      ({ isSaved, name, originalKey }) =>
-        !isSaved || encodeURIComponent(name.toLowerCase()) !== originalKey,
-    );
-
-    const newPlanetsUnique =
-      planetsWithNewNames.length ===
-      uniq(
-        planetsWithNewNames.map(({ name }) =>
-          encodeURIComponent(name.toLowerCase()),
-        ),
-      ).length;
-
-    const uniqueToSector = every(
-      planetsWithNewNames,
-      ({ name }) =>
-        name &&
-        !includes(
-          this.props.planetKeys,
-          encodeURIComponent(name.toLowerCase()),
-        ),
-    );
-
-    return newPlanetsUnique && uniqueToSector;
-  }
-
   get isValidForm() {
-    return this.areAllUnique && (this.props.hexKey || this.state.systemSelect);
+    return this.props.system || this.state.systemSelect;
   }
 
   renderLocationSelect = () => {
-    if (this.props.hexKey) {
+    if (this.props.system) {
       return null;
     }
     return (
@@ -273,17 +232,6 @@ export default class SystemEditModal extends Component {
       />
     </FlexContainer>
   );
-
-  renderUniqueError = () => {
-    if (this.areAllUnique) {
-      return null;
-    }
-    return (
-      <div className="SystemEditModal-Error">
-        All planet names must be unique throughout the sector.
-      </div>
-    );
-  };
 
   render() {
     const action = this.props.system ? 'Edit' : 'Create';
@@ -338,7 +286,6 @@ export default class SystemEditModal extends Component {
             </FlexContainer>
           </FlexContainer>
         </FlexContainer>
-        {this.renderUniqueError()}
       </Modal>
     );
   }
