@@ -19,7 +19,6 @@ function Hex({
   systemHold,
   systemRelease,
   moveSystem,
-  openSystemCreate,
   holdKey,
   hoverKey,
   isCloudSave,
@@ -38,7 +37,7 @@ function Hex({
         if (data.entity) {
           systemHold(data.hexKey);
         } else {
-          openSystemCreate(data.hexKey);
+          // open system create
         }
       }
     }, 100);
@@ -175,7 +174,6 @@ Hex.propTypes = {
   systemHold: PropTypes.func.isRequired,
   systemRelease: PropTypes.func.isRequired,
   moveSystem: PropTypes.func.isRequired,
-  openSystemCreate: PropTypes.func.isRequired,
   holdKey: PropTypes.string,
   hoverKey: PropTypes.string,
   isCloudSave: PropTypes.bool.isRequired,

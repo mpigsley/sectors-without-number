@@ -7,7 +7,7 @@ import {
 } from 'store/selectors/entity.selectors';
 
 import { saveSector } from 'store/actions/sector.actions';
-import SidebarNavigation, { SidebarType } from './sidebar-navigation';
+import EntityNavigation from './entity-navigation';
 
 const mapStateToProps = state => ({
   isSaved: false,
@@ -18,5 +18,4 @@ const mapStateToProps = state => ({
   entityType: getCurrentEntityType(state),
 });
 
-export { SidebarType };
-export default connect(mapStateToProps, { saveSector })(SidebarNavigation);
+export default connect(mapStateToProps, { saveSector })(EntityNavigation);

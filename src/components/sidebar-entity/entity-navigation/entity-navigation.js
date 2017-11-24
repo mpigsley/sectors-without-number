@@ -11,7 +11,7 @@ import Entities from 'constants/entities';
 
 import './style.css';
 
-export default function Navigation({
+export default function EntityNavigation({
   name,
   children,
   currentSector,
@@ -81,12 +81,15 @@ export default function Navigation({
   }
 
   return (
-    <FlexContainer className="Navigation-Info" direction="column">
-      <div className="Navigation-Header">
+    <FlexContainer className="EntityNavigation-Info" direction="column">
+      <div className="EntityNavigation-Header">
         <FlexContainer align="center" shrink="0">
           <FlexContainer flex="1" justify="center" align="flexEnd">
             <Header type={HeaderType.header2}>{name}</Header>
-            <Header type={HeaderType.header3} className="Navigation-TypeHeader">
+            <Header
+              type={HeaderType.header3}
+              className="EntityNavigation-TypeHeader"
+            >
               ({Entities[entityType].name})
             </Header>
           </FlexContainer>
@@ -95,15 +98,15 @@ export default function Navigation({
           <ButtonLink minimal to={backUrl}>
             Back
           </ButtonLink>
-          <span className="Navigation-Spacer" />
+          <span className="EntityNavigation-Spacer" />
           {saveButton}
-          {saveButton ? <span className="Navigation-Spacer" /> : null}
+          {saveButton ? <span className="EntityNavigation-Spacer" /> : null}
           {editButton}
-          {editButton ? <span className="Navigation-Spacer" /> : null}
+          {editButton ? <span className="EntityNavigation-Spacer" /> : null}
           {deleteButton}
-          {deleteButton ? <span className="Navigation-Spacer" /> : null}
+          {deleteButton ? <span className="EntityNavigation-Spacer" /> : null}
           {shareButton}
-          {shareButton ? <span className="Navigation-Spacer" /> : null}
+          {shareButton ? <span className="EntityNavigation-Spacer" /> : null}
           <Button minimal onClick={onPrint}>
             Print
           </Button>
@@ -112,7 +115,7 @@ export default function Navigation({
       <FlexContainer direction="column" flex="1" scroll>
         {children}
       </FlexContainer>
-      <div className="Navigation-Footer">
+      <div className="EntityNavigation-Footer">
         <FlexContainer justify="center">
           <ButtonLink
             minimal
@@ -121,11 +124,11 @@ export default function Navigation({
           >
             Report Problem
           </ButtonLink>
-          <span className="Navigation-Spacer" />
+          <span className="EntityNavigation-Spacer" />
           <ButtonLink minimal to="/changelog">
             Changelog
           </ButtonLink>
-          <span className="Navigation-Spacer" />
+          <span className="EntityNavigation-Spacer" />
           <ButtonLink
             minimal
             to="https://github.com/mpigsley/sectors-without-number"
@@ -139,7 +142,7 @@ export default function Navigation({
   );
 }
 
-Navigation.propTypes = {
+EntityNavigation.propTypes = {
   currentSector: PropTypes.string.isRequired,
   entity: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -157,7 +160,7 @@ Navigation.propTypes = {
   onDelete: PropTypes.func,
 };
 
-Navigation.defaultProps = {
+EntityNavigation.defaultProps = {
   entityType: undefined,
   onEdit: () => {},
   onDelete: () => {},

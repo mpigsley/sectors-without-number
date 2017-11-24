@@ -5,7 +5,6 @@ import { throttle, isEmpty, map } from 'lodash';
 import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';
 import PrintableSector from 'components/printable-sector';
-import SystemEditModal from 'components/system-edit-modal';
 import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex-generator';
@@ -28,16 +27,12 @@ export default class SectorMap extends Component {
       rows: PropTypes.number,
       columns: PropTypes.number,
     }),
-    createSystemKey: PropTypes.string,
-    editSystem: PropTypes.func.isRequired,
-    closeSystemCreate: PropTypes.func.isRequired,
     closeUserDropdown: PropTypes.func.isRequired,
     generateSector: PropTypes.func.isRequired,
     isDropdownActive: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
-    createSystemKey: null,
     sector: {},
   };
 
@@ -109,12 +104,6 @@ export default class SectorMap extends Component {
           <div className="SectorMap-Sidebar">{this.props.children}</div>
         </FlexContainer>
         <PrintableSector printable={printable} />
-        <SystemEditModal
-          hexKey={this.props.createSystemKey}
-          isOpen={!!this.props.createSystemKey}
-          onClose={this.props.closeSystemCreate}
-          onSubmit={system => this.props.editSystem(system)}
-        />
       </div>
     );
   }

@@ -60,7 +60,6 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
 };
 
 export default function EntityAttributes({ attributes, entityType }) {
-  console.log(attributes);
   if (!attributes || !Object.keys(attributes).length) {
     return null;
   }
