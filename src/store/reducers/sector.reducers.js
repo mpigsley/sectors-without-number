@@ -72,6 +72,7 @@ export default function sector(state = initialState, action) {
       return {
         ...state,
         isSidebarEditActive: false,
+        sidebarEdit: initialState.sidebarEdit,
       };
     case UPDATE_CONFIGURATION:
       return {

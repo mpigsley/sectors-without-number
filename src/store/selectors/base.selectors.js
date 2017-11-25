@@ -21,3 +21,6 @@ export const currentEntityTypeSelector = state =>
   state.sector.currentEntityType;
 export const currentEntitySelector = state => state.sector.currentEntity;
 export const configurationSelector = state => state.sector.configuration;
+export const isSidebarEditActiveSelector = state =>
+  state.sector.isSidebarEditActive;
+export const sidebarEditSelector = state => state.sector.sidebarEdit;

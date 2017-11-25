@@ -34,7 +34,12 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
     entity: { ...entity.attributes, name: entity.name },
     children: pickBy(
       mapValues(childrenByType, childType =>
-        map(childType, (child, key) => ({ ...child, key })),
+        map(childType, (child, savedId) => ({
+          name: child.name,
+          x: child.x,
+          y: child.y,
+          savedId,
+        })),
       ),
       size,
     ),

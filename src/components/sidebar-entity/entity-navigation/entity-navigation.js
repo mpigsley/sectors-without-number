@@ -19,9 +19,11 @@ export default function EntityNavigation(props) {
     entity,
     entityType,
     activateSidebarEdit,
+    deactivateSidebarEdit,
     isSaved,
     isSynced,
     isCloudSave,
+    isSidebarEditActive,
   } = props;
   const onCopy = () => {
     copy(window.location.href);
@@ -41,7 +43,7 @@ export default function EntityNavigation(props) {
   }
 
   let editButton = null;
-  if (!isCloudSave) {
+  if (!isCloudSave && !isSidebarEditActive) {
     editButton = (
       <Button minimal onClick={activateSidebarEdit}>
         Edit
@@ -69,6 +71,50 @@ export default function EntityNavigation(props) {
     if (entity.parentEntity !== Entities.sector.key) {
       backUrl = `${backUrl}/${entity.parentEntity}/${entity.parent}`;
     }
+  }
+
+  let footer = (
+    <div className="EntityNavigation-Footer">
+      <FlexContainer justify="center">
+        <ButtonLink
+          minimal
+          to="https://goo.gl/forms/eOanpGEuglCYYg7u2"
+          target="_blank"
+        >
+          Report Problem
+        </ButtonLink>
+        <span className="EntityNavigation-Spacer" />
+        <ButtonLink minimal to="/changelog">
+          Changelog
+        </ButtonLink>
+        <span className="EntityNavigation-Spacer" />
+        <ButtonLink
+          minimal
+          to="https://github.com/mpigsley/sectors-without-number"
+          target="_blank"
+        >
+          Github
+        </ButtonLink>
+      </FlexContainer>
+    </div>
+  );
+  if (isSidebarEditActive) {
+    footer = (
+      <FlexContainer>
+        <button
+          className="EntityNavigation-FooterButton EntityNavigation-Cancel"
+          onClick={deactivateSidebarEdit}
+        >
+          Cancel
+        </button>
+        <button
+          className="EntityNavigation-FooterButton EntityNavigation-Save"
+          onClick={deactivateSidebarEdit}
+        >
+          Save
+        </button>
+      </FlexContainer>
+    );
   }
 
   return (
@@ -106,29 +152,7 @@ export default function EntityNavigation(props) {
       <FlexContainer direction="column" flex="1" scroll>
         {children}
       </FlexContainer>
-      <div className="EntityNavigation-Footer">
-        <FlexContainer justify="center">
-          <ButtonLink
-            minimal
-            to="https://goo.gl/forms/eOanpGEuglCYYg7u2"
-            target="_blank"
-          >
-            Report Problem
-          </ButtonLink>
-          <span className="EntityNavigation-Spacer" />
-          <ButtonLink minimal to="/changelog">
-            Changelog
-          </ButtonLink>
-          <span className="EntityNavigation-Spacer" />
-          <ButtonLink
-            minimal
-            to="https://github.com/mpigsley/sectors-without-number"
-            target="_blank"
-          >
-            Github
-          </ButtonLink>
-        </FlexContainer>
-      </div>
+      {footer}
     </FlexContainer>
   );
 }
@@ -144,9 +168,11 @@ EntityNavigation.propTypes = {
   children: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
   activateSidebarEdit: PropTypes.func.isRequired,
+  deactivateSidebarEdit: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSynced: PropTypes.bool.isRequired,
   isCloudSave: PropTypes.bool.isRequired,
+  isSidebarEditActive: PropTypes.bool.isRequired,
 };
 
 EntityNavigation.defaultProps = {
