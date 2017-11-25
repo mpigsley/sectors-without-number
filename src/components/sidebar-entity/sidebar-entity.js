@@ -96,11 +96,7 @@ export default class EntityInfo extends Component {
 
   render() {
     return (
-      <EntityNavigation
-        name={this.props.entity.name}
-        onEdit={this.onEdit}
-        onDelete={this.props.isSaved ? this.onConfirmDelete : undefined}
-      >
+      <EntityNavigation name={this.props.entity.name}>
         <EntityAttributes
           attributes={this.props.entity.attributes}
           entityType={this.props.entityType}

@@ -11,19 +11,18 @@ import Entities from 'constants/entities';
 
 import './style.css';
 
-export default function EntityNavigation({
-  name,
-  children,
-  currentSector,
-  entity,
-  entityType,
-  saveSector,
-  onDelete,
-  isSaved,
-  isSynced,
-  isCloudSave,
-  onEdit,
-}) {
+export default function EntityNavigation(props) {
+  const {
+    name,
+    children,
+    currentSector,
+    entity,
+    entityType,
+    activateSidebarEdit,
+    isSaved,
+    isSynced,
+    isCloudSave,
+  } = props;
   const onCopy = () => {
     copy(window.location.href);
     toastr.success(
@@ -38,17 +37,13 @@ export default function EntityNavigation({
 
   let saveButton = null;
   if (!isSaved && !isCloudSave) {
-    saveButton = (
-      <Button minimal onClick={saveSector}>
-        Save
-      </Button>
-    );
+    saveButton = <Button minimal>Save</Button>;
   }
 
   let editButton = null;
   if (!isCloudSave) {
     editButton = (
-      <Button minimal onClick={onEdit}>
+      <Button minimal onClick={activateSidebarEdit}>
         Edit
       </Button>
     );
@@ -65,11 +60,7 @@ export default function EntityNavigation({
 
   let deleteButton = null;
   if (isSaved && !isCloudSave) {
-    deleteButton = (
-      <Button minimal onClick={onDelete}>
-        Delete
-      </Button>
-    );
+    deleteButton = <Button minimal>Delete</Button>;
   }
 
   let backUrl = '/';
@@ -152,16 +143,12 @@ EntityNavigation.propTypes = {
   entityType: PropTypes.string,
   children: PropTypes.node.isRequired,
   name: PropTypes.string.isRequired,
-  saveSector: PropTypes.func.isRequired,
+  activateSidebarEdit: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSynced: PropTypes.bool.isRequired,
   isCloudSave: PropTypes.bool.isRequired,
-  onEdit: PropTypes.func,
-  onDelete: PropTypes.func,
 };
 
 EntityNavigation.defaultProps = {
   entityType: undefined,
-  onEdit: () => {},
-  onDelete: () => {},
 };

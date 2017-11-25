@@ -6,7 +6,7 @@ import {
   getCurrentEntityType,
 } from 'store/selectors/entity.selectors';
 
-import { saveSector } from 'store/actions/sector.actions';
+import { activateSidebarEdit } from 'store/actions/sector.actions';
 import EntityNavigation from './entity-navigation';
 
 const mapStateToProps = state => ({
@@ -18,4 +18,6 @@ const mapStateToProps = state => ({
   entityType: getCurrentEntityType(state),
 });
 
-export default connect(mapStateToProps, { saveSector })(EntityNavigation);
+export default connect(mapStateToProps, { activateSidebarEdit })(
+  EntityNavigation,
+);

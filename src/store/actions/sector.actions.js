@@ -1,20 +1,45 @@
 import { push } from 'react-router-redux';
+import { map, mapValues, pickBy, size } from 'lodash';
 
 import { removeSector } from 'store/api/local';
 import { removeSyncedSector } from 'store/api/firebase';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
+import {
+  getCurrentEntity,
+  getCurrentEntityChildren,
+} from 'store/selectors/entity.selectors';
 import { SuccessToast, ErrorToast, creatorOrUpdateSector } from 'store/utils';
+
+export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
+export const ACTIVATE_SIDEBAR_EDIT = 'ACTIVATE_SIDEBAR_EDIT';
+export const DEACTIVATE_SIDEBAR_EDIT = 'DEACTIVATE_SIDEBAR_EDIT';
 
 export const EDIT_SECTOR = 'EDIT_SECTOR';
 export const REMOVE_SAVED_SECTOR = 'REMOVE_SAVED_SECTOR';
 export const ADD_SAVED_SECTOR = 'ADD_SAVED_SECTOR';
-export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
 
 export const updateConfiguration = (key, value) => ({
   type: UPDATE_CONFIGURATION,
   key,
   value,
 });
+
+export const deactivateSidebarEdit = () => ({ type: DEACTIVATE_SIDEBAR_EDIT });
+export const activateSidebarEdit = () => (dispatch, getState) => {
+  const state = getState();
+  const entity = getCurrentEntity(state);
+  const childrenByType = getCurrentEntityChildren(state);
+  return dispatch({
+    type: ACTIVATE_SIDEBAR_EDIT,
+    entity: { ...entity.attributes, name: entity.name },
+    children: pickBy(
+      mapValues(childrenByType, childType =>
+        map(childType, (child, key) => ({ ...child, key })),
+      ),
+      size,
+    ),
+  });
+};
 
 export const editSector = (key, value) => (dispatch, getState) => {
   const state = getState();
