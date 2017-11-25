@@ -1,12 +1,8 @@
 @import 'styles/theme';
 
-.EntityLinkRow-RightArrow {
-  color: $dark3;
-  transition: color 0.5s;
-}
-
 .EntityLinkRow {
   color: $dark3;
+  display: flex;
   padding: 0.8rem 1.5rem;
   text-decoration: none;
   transition: background-color 0.5s;
@@ -18,4 +14,19 @@
       color: $light4;
     }
   }
+}
+
+.EntityLinkRow-Name {
+  margin: 0;
+}
+
+.EntityLinkRow-RightArrow {
+  color: $dark3;
+  transition: color 0.5s;
+}
+
+.EntityLinkRow-Additional {
+  color: $light1;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
 }

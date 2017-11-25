@@ -24,3 +24,7 @@ export const configurationSelector = state => state.sector.configuration;
 export const isSidebarEditActiveSelector = state =>
   state.sector.isSidebarEditActive;
 export const sidebarEditSelector = state => state.sector.sidebarEdit;
+export const sidebarEditEntitySelector = state =>
+  state.sector.sidebarEdit.entity;
+export const sidebarEditChildrenSelector = state =>
+  state.sector.sidebarEdit.children;

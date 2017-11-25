@@ -15,8 +15,6 @@ import './style.css';
 
 export default class EntityInfo extends Component {
   static propTypes = {
-    currentSector: PropTypes.string.isRequired,
-    isCloudSave: PropTypes.bool.isRequired,
     entityChildren: PropTypes.shape().isRequired,
     entityType: PropTypes.string,
     entity: PropTypes.shape({
@@ -27,7 +25,6 @@ export default class EntityInfo extends Component {
     }).isRequired,
     updateEntity: PropTypes.func.isRequired,
     deleteEntity: PropTypes.func.isRequired,
-    isSaved: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -106,8 +103,6 @@ export default class EntityInfo extends Component {
             key={entityType}
             entities={entities}
             entityType={entityType}
-            currentSector={this.props.currentSector}
-            isCloudSave={this.props.isCloudSave}
           />
         ))}
         {this.renderSectorBuilderText()}

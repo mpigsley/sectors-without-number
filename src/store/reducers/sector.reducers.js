@@ -35,9 +35,14 @@ export default function sector(state = initialState, action) {
   switch (action.type) {
     case LOCATION_CHANGE: {
       const { pathname } = action.payload;
+      const commonState = {
+        isSidebarEditActive: false,
+        sidebarEdit: initialState.sidebarEdit,
+      };
       if (['/', '/configure'].indexOf(pathname) >= 0) {
         return {
           ...initialState,
+          ...commonState,
           saved: state.saved,
           configuration: {
             ...initialState.configuration,
@@ -48,6 +53,7 @@ export default function sector(state = initialState, action) {
       if (pathname.startsWith('/sector/')) {
         return {
           ...state,
+          ...commonState,
           renderSector: true,
           currentSector: pathname.split('/')[2],
           currentEntityType: pathname.split('/')[3],
@@ -56,6 +62,7 @@ export default function sector(state = initialState, action) {
       }
       return {
         ...state,
+        ...commonState,
         renderSector: false,
       };
     }

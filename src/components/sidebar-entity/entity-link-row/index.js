@@ -1,26 +1,11 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { ChevronRight } from 'react-feather';
+import { connect } from 'react-redux';
 
-import FlexContainer from 'primitives/container/flex-container';
+import { currentSectorSelector } from 'store/selectors/base.selectors';
 
-import './style.css';
+import EntityLinkRow from './entity-link-row';
 
-export default function EntityLinkRow({ children, to }) {
-  return (
-    <Link className="EntityLinkRow" to={to}>
-      <FlexContainer>
-        <FlexContainer flex="1" align="baseline">
-          {children}
-        </FlexContainer>
-        <ChevronRight className="EntityLinkRow-RightArrow" />
-      </FlexContainer>
-    </Link>
-  );
-}
+const mapStateToProps = state => ({
+  currentSector: currentSectorSelector(state),
+});
 
-EntityLinkRow.propTypes = {
-  children: PropTypes.node.isRequired,
-  to: PropTypes.string.isRequired,
-};
+export default connect(mapStateToProps)(EntityLinkRow);
