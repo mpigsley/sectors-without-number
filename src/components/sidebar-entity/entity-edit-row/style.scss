@@ -1,20 +1,21 @@
 @import 'styles/theme';
 
 .EntityEditRow {
-  margin: 1rem;
-}
-
-.EntityEditRow-Name {
-  flex: 1;
-  margin: 0 0.5rem 0 0;
-  text-align: left;
+  margin: 0 1rem 1rem;
 }
 
 .EntityEditRow-Delete {
-  color: $error;
+  color: $light2;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.3s;
 
   &:hover {
-    color: $error;
-    border-color: $error;
+    color: $light3;
   }
+}
+
+.EntityEditRow-Generate {
+  margin-left: 0.5rem;
+  margin-right: 0;
 }
