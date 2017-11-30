@@ -6,7 +6,7 @@ import {
   getCurrentEntityChildren,
 } from 'store/selectors/entity.selectors';
 
-import { updateEntity, deleteEntity } from 'store/actions/entity.actions';
+import { deleteEntity } from 'store/actions/entity.actions';
 
 import SidebarEntity from './sidebar-entity';
 
@@ -17,6 +17,5 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, {
-  updateEntity,
   deleteEntity,
 })(SidebarEntity);

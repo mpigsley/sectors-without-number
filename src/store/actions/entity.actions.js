@@ -49,7 +49,7 @@ export const updateEntity = update => (dispatch, getState) => {
   dispatch({
     type: UPDATE_ENTITY,
     entityType: getCurrentEntityType(state),
-    entity: getCurrentEntityId(state),
+    entityId: getCurrentEntityId(state),
     update,
   });
 };
@@ -60,7 +60,7 @@ export const deleteEntity = () => (dispatch, getState) => {
     type: DELETE_ENTITIES,
     entities: deleteEntityUtil({
       entityType: getCurrentEntityType(state),
-      entity: getCurrentEntityId(state),
+      entityId: getCurrentEntityId(state),
       entities: entitySelector(state),
     }),
   });
