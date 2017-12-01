@@ -5,7 +5,6 @@ import {
   systemHoverEnd,
   systemHold,
   systemRelease,
-  moveSystem,
 } from 'store/actions/system.actions';
 import { getCurrentSector } from 'store/selectors/sector.selectors';
 import { getCurrentTopLevelEntities } from 'store/selectors/entity.selectors';
@@ -24,7 +23,6 @@ const mapDispatchToProps = dispatch => ({
   systemHoverEnd: key => dispatch(systemHoverEnd(key)),
   systemHold: key => dispatch(systemHold(key)),
   systemRelease: () => dispatch(systemRelease()),
-  moveSystem: () => dispatch(moveSystem()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Hex);

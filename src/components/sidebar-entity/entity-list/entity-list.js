@@ -94,7 +94,7 @@ export default function EntityList({
       {renderEntitySubHeader()}
       {map(rowEntities, (entity, key) => ({
         ...entity,
-        entityId: key || entity.savedId || entity.tempId,
+        entityId: key,
         additional: Entities[entityType].topLevel
           ? coordinateKey(entity.x, entity.y)
           : undefined,
@@ -102,6 +102,7 @@ export default function EntityList({
           ? coordinateKey(entity.x, entity.y)
           : entity.name,
       }))
+        .filter(({ isDeleted }) => !isDeleted)
         .sort(stringSortByKey('sort'))
         .map(renderEntity)}
       <ReactHint events position="left" />
@@ -113,14 +114,7 @@ EntityList.propTypes = {
   entities: PropTypes.shape().isRequired,
   entityType: PropTypes.string,
   isSidebarEditActive: PropTypes.bool.isRequired,
-  editableEntities: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string,
-      savedId: PropTypes.string,
-      x: PropTypes.number,
-      y: PropTypes.number,
-    }),
-  ),
+  editableEntities: PropTypes.shape(),
 };
 
 EntityList.defaultProps = {

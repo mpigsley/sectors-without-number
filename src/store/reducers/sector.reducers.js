@@ -1,5 +1,3 @@
-import { omit } from 'lodash';
-
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
@@ -7,9 +5,7 @@ import {
   UPDATE_CONFIGURATION,
   ACTIVATE_SIDEBAR_EDIT,
   DEACTIVATE_SIDEBAR_EDIT,
-  ADD_SAVED_SECTOR,
-  REMOVE_SAVED_SECTOR,
-  EDIT_SECTOR,
+  DELETE_ENTITY_IN_EDIT,
 } from 'store/actions/sector.actions';
 import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
@@ -66,6 +62,14 @@ export default function sector(state = initialState, action) {
         renderSector: false,
       };
     }
+    case UPDATE_CONFIGURATION:
+      return {
+        ...state,
+        configuration: {
+          ...state.configuration,
+          [action.key]: action.value,
+        },
+      };
     case ACTIVATE_SIDEBAR_EDIT:
       return {
         ...state,
@@ -81,12 +85,23 @@ export default function sector(state = initialState, action) {
         isSidebarEditActive: false,
         sidebarEdit: initialState.sidebarEdit,
       };
-    case UPDATE_CONFIGURATION:
+    case DELETE_ENTITY_IN_EDIT:
       return {
         ...state,
-        configuration: {
-          ...state.configuration,
-          [action.key]: action.value,
+        sidebarEdit: {
+          ...state.sidebarEdit,
+          children: {
+            ...state.sidebarEdit.children,
+            [action.entityType]: {
+              ...state.sidebarEdit.children[action.entityType],
+              [action.entityId]: {
+                ...state.sidebarEdit.children[action.entityType][
+                  action.entityId
+                ],
+                isDeleted: true,
+              },
+            },
+          },
         },
       };
 
@@ -109,33 +124,6 @@ export default function sector(state = initialState, action) {
         ...state,
         ...initialState,
       };
-    case ADD_SAVED_SECTOR: {
-      return {
-        ...state,
-        currentSector: action.sector.key,
-        generated: null,
-        saved: {
-          ...state.saved,
-          [action.sector.key]: action.sector,
-        },
-      };
-    }
-    case REMOVE_SAVED_SECTOR:
-      return {
-        ...state,
-        saved: omit(state.saved, action.key),
-      };
-    case EDIT_SECTOR: {
-      return {
-        ...state,
-        currentSector: action.sector.key,
-        generated: null,
-        saved: {
-          ...state.saved,
-          [action.sector.key]: action.sector,
-        },
-      };
-    }
     default:
       return state;
   }

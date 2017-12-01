@@ -9,7 +9,11 @@ import Entities from 'constants/entities';
 
 import './style.css';
 
-export default function EntityEditRow({ entity, entityType }) {
+export default function EntityEditRow({
+  entity,
+  entityType,
+  deleteEntityInEdit,
+}) {
   let input = <Input value={entity.name} />;
   if (Entities[entityType].nameGenerator) {
     input = (
@@ -23,9 +27,14 @@ export default function EntityEditRow({ entity, entityType }) {
       />
     );
   }
+
   return (
     <FlexContainer align="center" className="EntityEditRow">
-      <X className="EntityEditRow-Delete" size={25} />
+      <X
+        className="EntityEditRow-Delete"
+        size={25}
+        onClick={() => deleteEntityInEdit(entityType, entity.entityId)}
+      />
       {input}
       <Input
         className="EntityEditRow-Generate"
@@ -41,5 +50,7 @@ EntityEditRow.propTypes = {
   entityType: PropTypes.string.isRequired,
   entity: PropTypes.shape({
     name: PropTypes.string,
+    entityId: PropTypes.string,
   }).isRequired,
+  deleteEntityInEdit: PropTypes.func.isRequired,
 };

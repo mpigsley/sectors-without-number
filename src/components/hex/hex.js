@@ -18,7 +18,6 @@ function Hex({
   systemHoverEnd,
   systemHold,
   systemRelease,
-  moveSystem,
   holdKey,
   hoverKey,
   isCloudSave,
@@ -51,7 +50,7 @@ function Hex({
       if (!data.highlighted || holdKey === hoverKey) {
         systemRelease();
       } else if (!isCloudSave && holdKey) {
-        moveSystem();
+        // moveSystem();
       }
     }
   };
@@ -173,7 +172,6 @@ Hex.propTypes = {
   systemHoverEnd: PropTypes.func.isRequired,
   systemHold: PropTypes.func.isRequired,
   systemRelease: PropTypes.func.isRequired,
-  moveSystem: PropTypes.func.isRequired,
   holdKey: PropTypes.string,
   hoverKey: PropTypes.string,
   isCloudSave: PropTypes.bool.isRequired,

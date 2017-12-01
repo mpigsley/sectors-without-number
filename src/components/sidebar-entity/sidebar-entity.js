@@ -23,7 +23,6 @@ export default class EntityInfo extends Component {
       parentEntity: PropTypes.string,
       attributes: PropTypes.shape(),
     }).isRequired,
-    updateEntity: PropTypes.func.isRequired,
     deleteEntity: PropTypes.func.isRequired,
   };
 
@@ -41,11 +40,6 @@ export default class EntityInfo extends Component {
       this.setState({ entity: nextProps.entity });
     }
   }
-
-  onUpdateEntity = () => {
-    this.onCloseEdit();
-    this.props.updateEntity(this.state.entity);
-  };
 
   onDeleteEntity = () => {
     this.onCancelDelete();
