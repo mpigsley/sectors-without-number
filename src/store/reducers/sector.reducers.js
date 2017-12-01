@@ -6,6 +6,7 @@ import {
   ACTIVATE_SIDEBAR_EDIT,
   DEACTIVATE_SIDEBAR_EDIT,
   DELETE_ENTITY_IN_EDIT,
+  UNDO_DELETE_ENTITY_IN_EDIT,
 } from 'store/actions/sector.actions';
 import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
@@ -99,6 +100,25 @@ export default function sector(state = initialState, action) {
                   action.entityId
                 ],
                 isDeleted: true,
+              },
+            },
+          },
+        },
+      };
+    case UNDO_DELETE_ENTITY_IN_EDIT:
+      return {
+        ...state,
+        sidebarEdit: {
+          ...state.sidebarEdit,
+          children: {
+            ...state.sidebarEdit.children,
+            [action.entityType]: {
+              ...state.sidebarEdit.children[action.entityType],
+              [action.entityId]: {
+                ...state.sidebarEdit.children[action.entityType][
+                  action.entityId
+                ],
+                isDeleted: false,
               },
             },
           },

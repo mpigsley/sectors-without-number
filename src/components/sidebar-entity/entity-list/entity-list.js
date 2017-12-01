@@ -102,7 +102,6 @@ export default function EntityList({
           ? coordinateKey(entity.x, entity.y)
           : entity.name,
       }))
-        .filter(({ isDeleted }) => !isDeleted)
         .sort(stringSortByKey('sort'))
         .map(renderEntity)}
       <ReactHint events position="left" />
