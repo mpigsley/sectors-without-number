@@ -10,6 +10,7 @@ export const ACTIVATE_SIDEBAR_EDIT = 'ACTIVATE_SIDEBAR_EDIT';
 export const DEACTIVATE_SIDEBAR_EDIT = 'DEACTIVATE_SIDEBAR_EDIT';
 export const DELETE_ENTITY_IN_EDIT = 'DELETE_ENTITY_IN_EDIT';
 export const UNDO_DELETE_ENTITY_IN_EDIT = 'UNDO_DELETE_ENTITY_IN_EDIT';
+export const UPDATE_ENTITY_IN_EDIT = 'UPDATE_ENTITY_IN_EDIT';
 
 export const updateConfiguration = (key, value) => ({
   type: UPDATE_CONFIGURATION,
@@ -48,4 +49,11 @@ export const undoDeleteEntityInEdit = (entityType, entityId) => ({
   type: UNDO_DELETE_ENTITY_IN_EDIT,
   entityType,
   entityId,
+});
+
+export const updateEntityInEdit = (entityType, entityId, updates) => ({
+  type: UPDATE_ENTITY_IN_EDIT,
+  entityType,
+  entityId,
+  updates,
 });

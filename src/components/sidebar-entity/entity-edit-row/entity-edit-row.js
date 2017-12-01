@@ -14,17 +14,25 @@ export default function EntityEditRow({
   entityType,
   deleteEntityInEdit,
   undoDeleteEntityInEdit,
+  updateEntityInEdit,
 }) {
-  let input = <Input value={entity.name} />;
+  let input = (
+    <Input
+      name="name"
+      value={entity.name}
+      onChange={e => updateEntityInEdit({ name: e.target.value })}
+    />
+  );
   if (Entities[entityType].nameGenerator) {
     input = (
       <IconInput
         name="name"
         icon={RefreshCw}
         value={entity.name}
-        onIconClick={() => {
-          // Entities[entityType].nameGenerator
-        }}
+        onChange={e => updateEntityInEdit({ name: e.target.value })}
+        onIconClick={() =>
+          updateEntityInEdit({ name: Entities[entityType].nameGenerator() })
+        }
       />
     );
   }
@@ -33,7 +41,7 @@ export default function EntityEditRow({
     <X
       className="EntityEditRow-Action"
       size={25}
-      onClick={() => deleteEntityInEdit(entityType, entity.entityId)}
+      onClick={deleteEntityInEdit}
     />
   );
   if (entity.isDeleted) {
@@ -41,7 +49,7 @@ export default function EntityEditRow({
       <RotateCcw
         className="EntityEditRow-Action"
         size={25}
-        onClick={() => undoDeleteEntityInEdit(entityType, entity.entityId)}
+        onClick={undoDeleteEntityInEdit}
       />
     );
   }
@@ -52,7 +60,8 @@ export default function EntityEditRow({
       {input}
       <Input
         className="EntityEditRow-Generate"
-        checked={false}
+        disabled={!entity.isCreated}
+        checked={!entity.isCreated || entity.generate}
         name="checkbox"
         type="checkbox"
       />
@@ -66,7 +75,10 @@ EntityEditRow.propTypes = {
     name: PropTypes.string,
     entityId: PropTypes.string,
     isDeleted: PropTypes.bool,
+    isCreated: PropTypes.bool,
+    generate: PropTypes.bool,
   }).isRequired,
   deleteEntityInEdit: PropTypes.func.isRequired,
   undoDeleteEntityInEdit: PropTypes.func.isRequired,
+  updateEntityInEdit: PropTypes.func.isRequired,
 };
