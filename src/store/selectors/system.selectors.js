@@ -1,8 +1,6 @@
 import { createSelector } from 'reselect';
-import { difference, pickBy, values } from 'lodash';
+import { pickBy } from 'lodash';
 
-import { allSectorKeys, coordinateKey } from 'utils/common';
-import { getCurrentSector } from 'store/selectors/sector.selectors';
 import {
   systemSelector,
   currentSectorSelector,
@@ -18,13 +16,4 @@ export const getCurrentSystems = createSelector(
 export const getCurrentSystem = createSelector(
   [getCurrentSystems, currentEntitySelector],
   (systems, entity) => systems[entity] || {},
-);
-
-export const getEmptySystemKeys = createSelector(
-  [getCurrentSector, getCurrentSystems],
-  ({ rows, columns }, systems) =>
-    difference(
-      allSectorKeys(columns, rows),
-      values(systems).map(({ x, y }) => coordinateKey(x, y)),
-    ),
 );

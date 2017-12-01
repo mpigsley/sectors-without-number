@@ -5,9 +5,12 @@ import {
   undoDeleteEntityInEdit,
   updateEntityInEdit,
 } from 'store/actions/sector.actions';
+import { getEmptyHexKeys } from 'store/selectors/sector.selectors';
 import EntityEditRow from './entity-edit-row';
 
-const mapStateToProps = () => ({});
+const mapStateToProps = state => ({
+  emptyHexKeys: getEmptyHexKeys(state),
+});
 
 const mapDispatchToProps = (dispatch, props) => ({
   deleteEntityInEdit: () =>
