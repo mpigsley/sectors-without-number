@@ -19,9 +19,27 @@
   margin-top: 0.1rem;
 }
 
+.EntityAttributes-Attributes {
+  display: table;
+  margin: 1rem;
+  width: calc(100% - 2rem);
+}
+
 .EntityAttributes-Attribute {
+  display: table-row;
   font-size: 0.9rem;
   font-weight: 200;
   color: $light2;
-  margin: 0.2rem 1rem;
+  padding: 0.2rem 0;
+}
+
+.EntityAttributes-Header {
+  display: table-cell;
+  padding: 0.2rem 0.5rem 0.2rem 0;
+}
+
+.EntityAttributes-Item {
+  display: table-cell;
+  padding: 0.2rem 0;
+  width: 100%;
 }

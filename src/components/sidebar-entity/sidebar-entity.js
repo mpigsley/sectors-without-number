@@ -88,10 +88,7 @@ export default class EntityInfo extends Component {
   render() {
     return (
       <EntityNavigation name={this.props.entity.name}>
-        <EntityAttributes
-          attributes={this.props.entity.attributes}
-          entityType={this.props.entityType}
-        />
+        <EntityAttributes />
         {map(this.props.entityChildren, (entities, entityType) => (
           <EntityList
             key={entityType}
