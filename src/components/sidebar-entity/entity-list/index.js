@@ -4,6 +4,7 @@ import {
   isSidebarEditActiveSelector,
   sidebarEditChildrenSelector,
 } from 'store/selectors/base.selectors';
+import { createChildInEdit } from 'store/actions/sector.actions';
 
 import EntityList from './entity-list';
 
@@ -12,4 +13,8 @@ const mapStateToProps = (state, props) => ({
   editableEntities: sidebarEditChildrenSelector(state)[props.entityType],
 });
 
-export default connect(mapStateToProps)(EntityList);
+const mapDispatchToProps = (dispatch, props) => ({
+  createChildInEdit: () => dispatch(createChildInEdit(props.entityType)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EntityList);

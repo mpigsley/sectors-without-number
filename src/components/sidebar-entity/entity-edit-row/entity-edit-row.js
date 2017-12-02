@@ -16,9 +16,9 @@ export default function EntityEditRow({
   entity,
   entityType,
   emptyHexKeys,
-  deleteEntityInEdit,
-  undoDeleteEntityInEdit,
-  updateEntityInEdit,
+  deleteChildInEdit,
+  undoDeleteChildInEdit,
+  updateChildInEdit,
 }) {
   const entityConfig = Entities[entityType];
 
@@ -26,7 +26,7 @@ export default function EntityEditRow({
     <Input
       name="name"
       value={entity.name}
-      onChange={e => updateEntityInEdit({ name: e.target.value })}
+      onChange={e => updateChildInEdit({ name: e.target.value })}
     />
   );
   if (entityConfig.nameGenerator) {
@@ -35,9 +35,9 @@ export default function EntityEditRow({
         name="name"
         icon={RefreshCw}
         value={entity.name}
-        onChange={e => updateEntityInEdit({ name: e.target.value })}
+        onChange={e => updateChildInEdit({ name: e.target.value })}
         onIconClick={() =>
-          updateEntityInEdit({ name: entityConfig.nameGenerator() })
+          updateChildInEdit({ name: entityConfig.nameGenerator() })
         }
       />
     );
@@ -50,7 +50,7 @@ export default function EntityEditRow({
         className="EntityEditRow-Dropdown"
         value={coordinateKey(entity.x, entity.y)}
         clearable={false}
-        onChange={({ value }) => updateEntityInEdit(coordinatesFromKey(value))}
+        onChange={({ value }) => updateChildInEdit(coordinatesFromKey(value))}
         options={[...emptyHexKeys, coordinateKey(entity.x, entity.y)].map(
           key => ({
             value: key,
@@ -62,18 +62,14 @@ export default function EntityEditRow({
   }
 
   let iconAction = (
-    <X
-      className="EntityEditRow-Action"
-      size={25}
-      onClick={deleteEntityInEdit}
-    />
+    <X className="EntityEditRow-Action" size={25} onClick={deleteChildInEdit} />
   );
   if (entity.isDeleted) {
     iconAction = (
       <RotateCcw
         className="EntityEditRow-Action"
         size={25}
-        onClick={undoDeleteEntityInEdit}
+        onClick={undoDeleteChildInEdit}
       />
     );
   }
@@ -87,6 +83,9 @@ export default function EntityEditRow({
         className="EntityEditRow-Generate"
         disabled={!entity.isCreated}
         checked={!entity.isCreated || entity.generate}
+        onChange={({ target }) =>
+          updateChildInEdit({ generate: target.checked })
+        }
         name="checkbox"
         type="checkbox"
       />
@@ -106,9 +105,9 @@ EntityEditRow.propTypes = {
     generate: PropTypes.bool,
   }).isRequired,
   emptyHexKeys: PropTypes.arrayOf(PropTypes.string),
-  deleteEntityInEdit: PropTypes.func.isRequired,
-  undoDeleteEntityInEdit: PropTypes.func.isRequired,
-  updateEntityInEdit: PropTypes.func.isRequired,
+  deleteChildInEdit: PropTypes.func.isRequired,
+  undoDeleteChildInEdit: PropTypes.func.isRequired,
+  updateChildInEdit: PropTypes.func.isRequired,
 };
 
 EntityEditRow.defaultProps = {

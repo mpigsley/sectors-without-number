@@ -26,6 +26,7 @@ export default function EntityList({
   entityType,
   isSidebarEditActive,
   editableEntities,
+  createChildInEdit,
 }) {
   if (!size(entities)) {
     return null;
@@ -41,7 +42,11 @@ export default function EntityList({
       <SectionHeader>
         <FlexContainer justify="spaceBetween" align="flexEnd">
           {Pluralize(Entities[entityType].name)}
-          <Button minimal className="EntityList-AddButton">
+          <Button
+            minimal
+            className="EntityList-AddButton"
+            onClick={createChildInEdit}
+          >
             <LinkIcon size={15} icon={Plus} />
             Add {Entities[entityType].name}
           </Button>
@@ -114,6 +119,7 @@ EntityList.propTypes = {
   entityType: PropTypes.string,
   isSidebarEditActive: PropTypes.bool.isRequired,
   editableEntities: PropTypes.shape(),
+  createChildInEdit: PropTypes.func.isRequired,
 };
 
 EntityList.defaultProps = {

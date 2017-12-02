@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
 
 import {
-  deleteEntityInEdit,
-  undoDeleteEntityInEdit,
-  updateEntityInEdit,
+  deleteChildInEdit,
+  undoDeleteChildInEdit,
+  updateChildInEdit,
 } from 'store/actions/sector.actions';
 import { getEmptyHexKeys } from 'store/selectors/sector.selectors';
 import EntityEditRow from './entity-edit-row';
@@ -13,13 +13,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  deleteEntityInEdit: () =>
-    dispatch(deleteEntityInEdit(props.entityType, props.entity.entityId)),
-  undoDeleteEntityInEdit: () =>
-    dispatch(undoDeleteEntityInEdit(props.entityType, props.entity.entityId)),
-  updateEntityInEdit: updates =>
+  deleteChildInEdit: () =>
+    dispatch(deleteChildInEdit(props.entityType, props.entity.entityId)),
+  undoDeleteChildInEdit: () =>
+    dispatch(undoDeleteChildInEdit(props.entityType, props.entity.entityId)),
+  updateChildInEdit: updates =>
     dispatch(
-      updateEntityInEdit(props.entityType, props.entity.entityId, updates),
+      updateChildInEdit(props.entityType, props.entity.entityId, updates),
     ),
 });
 

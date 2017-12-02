@@ -5,9 +5,10 @@ import {
   UPDATE_CONFIGURATION,
   ACTIVATE_SIDEBAR_EDIT,
   DEACTIVATE_SIDEBAR_EDIT,
-  DELETE_ENTITY_IN_EDIT,
-  UNDO_DELETE_ENTITY_IN_EDIT,
-  UPDATE_ENTITY_IN_EDIT,
+  DELETE_CHILD_IN_EDIT,
+  UNDO_DELETE_CHILD_IN_EDIT,
+  UPDATE_CHILD_IN_EDIT,
+  CREATE_CHILD_IN_EDIT,
 } from 'store/actions/sector.actions';
 import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
@@ -87,7 +88,7 @@ export default function sector(state = initialState, action) {
         isSidebarEditActive: false,
         sidebarEdit: initialState.sidebarEdit,
       };
-    case DELETE_ENTITY_IN_EDIT:
+    case DELETE_CHILD_IN_EDIT:
       return {
         ...state,
         sidebarEdit: {
@@ -106,7 +107,7 @@ export default function sector(state = initialState, action) {
           },
         },
       };
-    case UNDO_DELETE_ENTITY_IN_EDIT:
+    case UNDO_DELETE_CHILD_IN_EDIT:
       return {
         ...state,
         sidebarEdit: {
@@ -125,7 +126,7 @@ export default function sector(state = initialState, action) {
           },
         },
       };
-    case UPDATE_ENTITY_IN_EDIT:
+    case UPDATE_CHILD_IN_EDIT:
       return {
         ...state,
         sidebarEdit: {
@@ -140,6 +141,23 @@ export default function sector(state = initialState, action) {
                 ],
                 ...action.updates,
                 isUpdated: true,
+              },
+            },
+          },
+        },
+      };
+    case CREATE_CHILD_IN_EDIT:
+      return {
+        ...state,
+        sidebarEdit: {
+          ...state.sidebarEdit,
+          children: {
+            ...state.sidebarEdit.children,
+            [action.entityType]: {
+              ...state.sidebarEdit.children[action.entityType],
+              [action.entityId]: {
+                ...action.entity,
+                isCreated: true,
               },
             },
           },
