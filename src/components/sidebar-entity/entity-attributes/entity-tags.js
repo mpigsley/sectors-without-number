@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { X } from 'react-feather';
+import { X, Plus } from 'react-feather';
 import { filter, includes } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import Header, { HeaderType } from 'primitives/text/header';
 import Dropdown from 'primitives/form/dropdown';
+import Button from 'primitives/other/button';
+import LinkIcon from 'primitives/other/link-icon';
 
 import { capitalizeFirstLetter } from 'utils/common';
 import Entities from 'constants/entities';
@@ -42,6 +44,7 @@ export default function EntityTags({
         <Dropdown
           wrapperClassName="EntityTag-Dropdown"
           value={tag}
+          dropUp
           clearable={false}
           options={filter(
             Entities[entityType].tags,
@@ -80,9 +83,24 @@ export default function EntityTags({
       );
   }
 
+  let header = <SectionHeader>{Entities[entityType].name} Tags</SectionHeader>;
+  if (isSidebarEditActive) {
+    header = (
+      <SectionHeader>
+        <FlexContainer justify="spaceBetween" align="flexEnd">
+          {Entities[entityType].name} Tags
+          <Button minimal className="EntityTags-AddButton">
+            <LinkIcon size={15} icon={Plus} />
+            Add {Entities[entityType].name} Tag
+          </Button>
+        </FlexContainer>
+      </SectionHeader>
+    );
+  }
+
   return (
     <div>
-      <SectionHeader>{Entities[entityType].name} Tags</SectionHeader>
+      {header}
       <div className="EntityAttributes-Section">{tags}</div>
     </div>
   );
