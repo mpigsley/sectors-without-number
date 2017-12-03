@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { X, Plus } from 'react-feather';
-import { filter, includes } from 'lodash';
+import { filter, includes, map } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -13,9 +13,9 @@ import LinkIcon from 'primitives/other/link-icon';
 import { capitalizeFirstLetter } from 'utils/common';
 import Entities from 'constants/entities';
 
-const renderList = (title, list) => (
-  <div className="EntityAttributes-Content">
-    <b>{title}:</b>
+const renderList = (list, listKey) => (
+  <div key={listKey} className="EntityAttributes-Content">
+    <b>{capitalizeFirstLetter(listKey)}:</b>
     <ul className="EntityAttributes-ContentList">
       {list
         .map(capitalizeFirstLetter)
@@ -59,28 +59,13 @@ export default function EntityTags({
   } else {
     tags = entity.attributes.tags
       .map(tag => Entities[entityType].tags[tag])
-      .map(
-        ({
-          key,
-          name,
-          description,
-          enemies,
-          friends,
-          complications,
-          things,
-          places,
-        }) => (
-          <div key={key} className="EntityAttributes-Tag">
-            <Header type={HeaderType.header4}>{name}</Header>
-            <p className="EntityAttributes-Content">{description}</p>
-            {renderList('Enemies', enemies)}
-            {renderList('Friends', friends)}
-            {renderList('Complications', complications)}
-            {renderList('Things', things)}
-            {renderList('Places', places)}
-          </div>
-        ),
-      );
+      .map(({ key, name, description, ...lists }) => (
+        <div key={key} className="EntityAttributes-Tag">
+          <Header type={HeaderType.header4}>{name}</Header>
+          <p className="EntityAttributes-Content">{description}</p>
+          {map(lists, renderList)}
+        </div>
+      ));
   }
 
   let header = <SectionHeader>{Entities[entityType].name} Tags</SectionHeader>;
