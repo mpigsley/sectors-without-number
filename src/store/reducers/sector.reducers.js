@@ -5,6 +5,7 @@ import {
   UPDATE_CONFIGURATION,
   ACTIVATE_SIDEBAR_EDIT,
   DEACTIVATE_SIDEBAR_EDIT,
+  UPDATE_ENTITY_IN_EDIT,
   DELETE_CHILD_IN_EDIT,
   UNDO_DELETE_CHILD_IN_EDIT,
   UPDATE_CHILD_IN_EDIT,
@@ -87,6 +88,21 @@ export default function sector(state = initialState, action) {
         ...state,
         isSidebarEditActive: false,
         sidebarEdit: initialState.sidebarEdit,
+      };
+    case UPDATE_ENTITY_IN_EDIT:
+      return {
+        ...state,
+        sidebarEdit: {
+          ...state.sidebarEdit,
+          entity: {
+            ...state.sidebarEdit.entity,
+            ...action.updates,
+            attributes: {
+              ...state.sidebarEdit.entity.attributes,
+              ...action.updates.attributes,
+            },
+          },
+        },
       };
     case DELETE_CHILD_IN_EDIT:
       return {

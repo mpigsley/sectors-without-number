@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { X, Plus } from 'react-feather';
-import { filter, includes, map } from 'lodash';
+import { filter, includes, map, pull } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -28,6 +28,7 @@ export default function EntityTags({
   entityType,
   entity,
   isSidebarEditActive,
+  updateEntityInEdit,
 }) {
   if (
     !Entities[entityType].tags ||
@@ -38,14 +39,29 @@ export default function EntityTags({
 
   let tags;
   if (isSidebarEditActive) {
-    tags = entity.attributes.tags.map(tag => (
+    tags = entity.attributes.tags.sort().map(tag => (
       <FlexContainer key={tag} align="center" className="EntityTag--edit">
-        <X className="EntityTag-Action" size={25} />
+        <X
+          className="EntityTag-Action"
+          size={25}
+          onClick={() =>
+            updateEntityInEdit({
+              attributes: { tags: pull(entity.attributes.tags, tag) },
+            })
+          }
+        />
         <Dropdown
           wrapperClassName="EntityTag-Dropdown"
           value={tag}
           dropUp
           clearable={false}
+          onChange={({ value }) =>
+            updateEntityInEdit({
+              attributes: {
+                tags: pull(entity.attributes.tags, tag).concat([value]),
+              },
+            })
+          }
           options={filter(
             Entities[entityType].tags,
             ({ key }) => !includes(entity.attributes.tags, key) || key === tag,
@@ -74,7 +90,20 @@ export default function EntityTags({
       <SectionHeader>
         <FlexContainer justify="spaceBetween" align="flexEnd">
           {Entities[entityType].name} Tags
-          <Button minimal className="EntityTags-AddButton">
+          <Button
+            minimal
+            className="EntityTags-AddButton"
+            onClick={() => {
+              if (includes(entity.attributes.tags, '')) {
+                return;
+              }
+              updateEntityInEdit({
+                attributes: {
+                  tags: entity.attributes.tags.concat(['']),
+                },
+              });
+            }}
+          >
             <LinkIcon size={15} icon={Plus} />
             Add {Entities[entityType].name} Tag
           </Button>
@@ -97,4 +126,5 @@ EntityTags.propTypes = {
     attributes: PropTypes.shape(),
   }).isRequired,
   entityType: PropTypes.string.isRequired,
+  updateEntityInEdit: PropTypes.func.isRequired,
 };

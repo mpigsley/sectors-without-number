@@ -28,25 +28,11 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
   );
 };
 
-// eslint-disable-next-line react/prop-types
-const renderAttributeEdit = ({ key, name, attributes }, attribute) => (
-  <div key={key} className="EntityAttributes-Attribute">
-    <b className="EntityAttributes-Header">{name}:</b>
-    <Dropdown
-      wrapperClassName="EntityAttributes-Item"
-      value={attribute}
-      options={map(attributes, attr => ({
-        value: attr.key,
-        label: attr.name,
-      }))}
-    />
-  </div>
-);
-
 export default function EntityAttributes({
   isSidebarEditActive,
   entity,
   entityType,
+  updateEntityInEdit,
 }) {
   const noAttributes =
     !entity.attributes || !Object.keys(entity.attributes).length;
@@ -68,11 +54,35 @@ export default function EntityAttributes({
           <IconInput
             className="EntityAttributes-Item"
             value={entity.name}
+            onChange={({ target }) =>
+              updateEntityInEdit({ name: target.value })
+            }
+            onIconClick={() =>
+              updateEntityInEdit({ name: Entities[entityType].nameGenerator() })
+            }
             icon={RefreshCw}
           />
         </div>
       );
     }
+
+    // eslint-disable-next-line react/prop-types
+    const renderAttributeEdit = ({ key, name, attributes }, attribute) => (
+      <div key={key} className="EntityAttributes-Attribute">
+        <b className="EntityAttributes-Header">{name}:</b>
+        <Dropdown
+          wrapperClassName="EntityAttributes-Item"
+          value={attribute}
+          onChange={item =>
+            updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
+          }
+          options={map(attributes, attr => ({
+            value: attr.key,
+            label: attr.name,
+          }))}
+        />
+      </div>
+    );
 
     attributesSection = (
       <div key="attributes">
@@ -97,6 +107,7 @@ export default function EntityAttributes({
       isSidebarEditActive={isSidebarEditActive}
       entity={entity}
       entityType={entityType}
+      updateEntityInEdit={updateEntityInEdit}
     />,
   ];
 }
@@ -107,6 +118,7 @@ EntityAttributes.propTypes = {
     attributes: PropTypes.shape(),
   }).isRequired,
   entityType: PropTypes.string.isRequired,
+  updateEntityInEdit: PropTypes.func.isRequired,
 };
 
 EntityAttributes.defaultProps = {

@@ -6,6 +6,8 @@ import {
   currentEntityTypeSelector,
   currentEntitySelector,
   entitySelector,
+  isSidebarEditActiveSelector,
+  sidebarEditEntitySelector,
 } from 'store/selectors/base.selectors';
 import Entities from 'constants/entities';
 
@@ -38,11 +40,24 @@ export const getCurrentEntity = createSelector(
     currentEntityTypeSelector,
     currentEntitySelector,
     entitySelector,
+    isSidebarEditActiveSelector,
+    sidebarEditEntitySelector,
   ],
-  (currentSector, currentEntityType, currentEntity, entities) =>
-    !currentEntity
+  (
+    currentSector,
+    currentEntityType,
+    currentEntity,
+    entities,
+    isSidebarEditActive,
+    sidebarEditEntity,
+  ) => {
+    if (isSidebarEditActive) {
+      return sidebarEditEntity;
+    }
+    return !currentEntity
       ? entities[Entities.sector.key][currentSector]
-      : entities[currentEntityType][currentEntity],
+      : entities[currentEntityType][currentEntity];
+  },
 );
 
 export const getCurrentEntityType = createSelector(

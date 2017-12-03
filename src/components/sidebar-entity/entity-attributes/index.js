@@ -6,6 +6,7 @@ import {
   getCurrentEntityType,
 } from 'store/selectors/entity.selectors';
 import { isSidebarEditActiveSelector } from 'store/selectors/base.selectors';
+import { updateEntityInEdit } from 'store/actions/sector.actions';
 
 import EntityAttributes from './entity-attributes';
 
@@ -16,4 +17,6 @@ const mapStateToProps = state => ({
   isSidebarEditActive: isSidebarEditActiveSelector(state),
 });
 
-export default connect(mapStateToProps)(EntityAttributes);
+export default connect(mapStateToProps, { updateEntityInEdit })(
+  EntityAttributes,
+);
