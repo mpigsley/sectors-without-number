@@ -4,52 +4,13 @@ import { omit, map } from 'lodash';
 import { RefreshCw } from 'react-feather';
 
 import SectionHeader from 'primitives/text/section-header';
-import FlexContainer from 'primitives/container/flex-container';
-import Header, { HeaderType } from 'primitives/text/header';
 import Dropdown from 'primitives/form/dropdown';
 import IconInput from 'primitives/form/icon-input';
 
-import { capitalizeFirstLetter } from 'utils/common';
 import Entities from 'constants/entities';
 
+import EntityTags from './entity-tags';
 import './style.css';
-
-const renderList = (title, list) => (
-  <div className="EntityAttributes-Content">
-    <b>{title}:</b>
-    <ul className="EntityAttributes-ContentList">
-      {list
-        .map(capitalizeFirstLetter)
-        .map(element => <li key={element}>{element}</li>)}
-    </ul>
-  </div>
-);
-
-const renderTags = (definitions, tags = []) =>
-  tags
-    .map(tag => definitions[tag])
-    .map(
-      ({
-        key,
-        name,
-        description,
-        enemies,
-        friends,
-        complications,
-        things,
-        places,
-      }) => (
-        <div key={key} className="EntityAttributes-Tag">
-          <Header type={HeaderType.header4}>{name}</Header>
-          <p className="EntityAttributes-Content">{description}</p>
-          {renderList('Enemies', enemies)}
-          {renderList('Friends', friends)}
-          {renderList('Complications', complications)}
-          {renderList('Things', things)}
-          {renderList('Places', places)}
-        </div>
-      ),
-    );
 
 // eslint-disable-next-line react/prop-types
 const renderAttribute = ({ key, name, attributes }, attribute) => {
@@ -114,7 +75,7 @@ export default function EntityAttributes({
     }
 
     attributesSection = (
-      <FlexContainer direction="column">
+      <div key="attributes">
         <SectionHeader>Attributes</SectionHeader>
         <div className="EntityAttributes-Attributes">
           {nameAttribute}
@@ -125,31 +86,19 @@ export default function EntityAttributes({
             ),
           )}
         </div>
-      </FlexContainer>
+      </div>
     );
   }
 
-  let tagsSection = null;
-  if (
-    Entities[entityType].tags &&
-    entity.attributes.tags &&
-    entity.attributes.tags.length
-  ) {
-    tagsSection = (
-      <FlexContainer direction="column">
-        <SectionHeader>{Entities[entityType].name} Tags</SectionHeader>
-        <div className="EntityAttributes-Section">
-          {renderTags(Entities[entityType].tags, entity.attributes.tags)}
-        </div>
-      </FlexContainer>
-    );
-  }
-  return (
-    <div>
-      {attributesSection}
-      {tagsSection}
-    </div>
-  );
+  return [
+    attributesSection,
+    <EntityTags
+      key="tags"
+      isSidebarEditActive={isSidebarEditActive}
+      entity={entity}
+      entityType={entityType}
+    />,
+  ];
 }
 
 EntityAttributes.propTypes = {

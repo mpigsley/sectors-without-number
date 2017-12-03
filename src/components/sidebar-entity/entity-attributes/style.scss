@@ -20,7 +20,7 @@
 }
 
 .EntityAttributes-Attributes {
-  border-spacing: 0.2rem;
+  border-spacing: 0.5rem;
   display: table;
   margin: 0 1rem 1rem 1rem;
   width: calc(100% - 2rem);
@@ -41,4 +41,23 @@
 .EntityAttributes-Item {
   display: table-cell;
   width: 100%;
+}
+
+.EntityTag--edit {
+  margin: 0 1rem 0.5rem;
+}
+
+.EntityTag-Action {
+  color: $light2;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.EntityTag-Dropdown {
+  flex: 1;
 }
