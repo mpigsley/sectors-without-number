@@ -1,11 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { omit, map } from 'lodash';
+import { RefreshCw } from 'react-feather';
 
 import SectionHeader from 'primitives/text/section-header';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Dropdown from 'primitives/form/dropdown';
+import IconInput from 'primitives/form/icon-input';
 
 import { capitalizeFirstLetter } from 'utils/common';
 import Entities from 'constants/entities';
@@ -58,7 +60,9 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
   return (
     <p key={key} className="EntityAttributes-Attribute">
       <b className="EntityAttributes-Header">{name}:</b>
-      <div className="EntityAttributes-Item">{attributes[attribute].name}</div>
+      <span className="EntityAttributes-Item">
+        {attributes[attribute].name}
+      </span>
     </p>
   );
 };
@@ -70,7 +74,6 @@ const renderAttributeEdit = ({ key, name, attributes }, attribute) => (
     <Dropdown
       wrapperClassName="EntityAttributes-Item"
       value={attribute}
-      clearable={false}
       options={map(attributes, attr => ({
         value: attr.key,
         label: attr.name,
@@ -84,23 +87,37 @@ export default function EntityAttributes({
   entity,
   entityType,
 }) {
-  if (
-    !isSidebarEditActive &&
-    (!entity.attributes || !Object.keys(entity.attributes).length)
-  ) {
+  const noAttributes =
+    !entity.attributes || !Object.keys(entity.attributes).length;
+  if (!isSidebarEditActive && noAttributes) {
     return null;
   }
 
   let attributesSection = null;
-  if (
-    isSidebarEditActive ||
-    (Entities[entityType].attributes &&
-      Object.keys(omit({ ...entity.attributes }, 'tags')).length)
-  ) {
+  const hasNonTagAttributes =
+    Entities[entityType].attributes &&
+    Object.keys(omit({ ...entity.attributes }, 'tags')).length;
+
+  if (isSidebarEditActive || hasNonTagAttributes) {
+    let nameAttribute = null;
+    if (isSidebarEditActive) {
+      nameAttribute = (
+        <div className="EntityAttributes-Attribute">
+          <b className="EntityAttributes-Header">Name:</b>
+          <IconInput
+            className="EntityAttributes-Item"
+            value={entity.name}
+            icon={RefreshCw}
+          />
+        </div>
+      );
+    }
+
     attributesSection = (
       <FlexContainer direction="column">
         <SectionHeader>Attributes</SectionHeader>
         <div className="EntityAttributes-Attributes">
+          {nameAttribute}
           {(Entities[entityType].attributes || []).map(attribute =>
             (isSidebarEditActive ? renderAttributeEdit : renderAttribute)(
               attribute,

@@ -20,26 +20,25 @@
 }
 
 .EntityAttributes-Attributes {
+  border-spacing: 0.2rem;
   display: table;
-  margin: 1rem;
+  margin: 0 1rem 1rem 1rem;
   width: calc(100% - 2rem);
 }
 
 .EntityAttributes-Attribute {
+  color: $light2;
   display: table-row;
   font-size: 0.9rem;
-  font-weight: 200;
-  color: $light2;
   padding: 0.2rem 0;
 }
 
 .EntityAttributes-Header {
   display: table-cell;
-  padding: 0.2rem 0.5rem 0.2rem 0;
+  padding-right: 0.5rem;
 }
 
 .EntityAttributes-Item {
   display: table-cell;
-  padding: 0.2rem 0;
   width: 100%;
 }
