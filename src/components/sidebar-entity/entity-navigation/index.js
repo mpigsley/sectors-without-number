@@ -12,7 +12,7 @@ import {
 import {
   activateSidebarEdit,
   deactivateSidebarEdit,
-} from 'store/actions/sector.actions';
+} from 'store/actions/sidebar-edit.actions';
 import EntityNavigation from './entity-navigation';
 
 const mapStateToProps = state => ({

@@ -1,16 +1,7 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
-import {
-  UPDATE_CONFIGURATION,
-  ACTIVATE_SIDEBAR_EDIT,
-  DEACTIVATE_SIDEBAR_EDIT,
-  UPDATE_ENTITY_IN_EDIT,
-  DELETE_CHILD_IN_EDIT,
-  UNDO_DELETE_CHILD_IN_EDIT,
-  UPDATE_CHILD_IN_EDIT,
-  CREATE_CHILD_IN_EDIT,
-} from 'store/actions/sector.actions';
+import { UPDATE_CONFIGURATION } from 'store/actions/sector.actions';
 import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
 const initialState = {
@@ -18,11 +9,6 @@ const initialState = {
   currentSector: null,
   currentEntityType: null,
   currentEntity: null,
-  isSidebarEditActive: false,
-  sidebarEdit: {
-    entity: {},
-    children: {},
-  },
   configuration: {
     sectorName: generateSectorName(),
     isBuilder: false,
@@ -72,111 +58,6 @@ export default function sector(state = initialState, action) {
         configuration: {
           ...state.configuration,
           [action.key]: action.value,
-        },
-      };
-    case ACTIVATE_SIDEBAR_EDIT:
-      return {
-        ...state,
-        isSidebarEditActive: true,
-        sidebarEdit: {
-          entity: action.entity,
-          children: action.children,
-        },
-      };
-    case DEACTIVATE_SIDEBAR_EDIT:
-      return {
-        ...state,
-        isSidebarEditActive: false,
-        sidebarEdit: initialState.sidebarEdit,
-      };
-    case UPDATE_ENTITY_IN_EDIT:
-      return {
-        ...state,
-        sidebarEdit: {
-          ...state.sidebarEdit,
-          entity: {
-            ...state.sidebarEdit.entity,
-            ...action.updates,
-            attributes: {
-              ...state.sidebarEdit.entity.attributes,
-              ...action.updates.attributes,
-            },
-          },
-        },
-      };
-    case DELETE_CHILD_IN_EDIT:
-      return {
-        ...state,
-        sidebarEdit: {
-          ...state.sidebarEdit,
-          children: {
-            ...state.sidebarEdit.children,
-            [action.entityType]: {
-              ...state.sidebarEdit.children[action.entityType],
-              [action.entityId]: {
-                ...state.sidebarEdit.children[action.entityType][
-                  action.entityId
-                ],
-                isDeleted: true,
-              },
-            },
-          },
-        },
-      };
-    case UNDO_DELETE_CHILD_IN_EDIT:
-      return {
-        ...state,
-        sidebarEdit: {
-          ...state.sidebarEdit,
-          children: {
-            ...state.sidebarEdit.children,
-            [action.entityType]: {
-              ...state.sidebarEdit.children[action.entityType],
-              [action.entityId]: {
-                ...state.sidebarEdit.children[action.entityType][
-                  action.entityId
-                ],
-                isDeleted: false,
-              },
-            },
-          },
-        },
-      };
-    case UPDATE_CHILD_IN_EDIT:
-      return {
-        ...state,
-        sidebarEdit: {
-          ...state.sidebarEdit,
-          children: {
-            ...state.sidebarEdit.children,
-            [action.entityType]: {
-              ...state.sidebarEdit.children[action.entityType],
-              [action.entityId]: {
-                ...state.sidebarEdit.children[action.entityType][
-                  action.entityId
-                ],
-                ...action.updates,
-                isUpdated: true,
-              },
-            },
-          },
-        },
-      };
-    case CREATE_CHILD_IN_EDIT:
-      return {
-        ...state,
-        sidebarEdit: {
-          ...state.sidebarEdit,
-          children: {
-            ...state.sidebarEdit.children,
-            [action.entityType]: {
-              ...state.sidebarEdit.children[action.entityType],
-              [action.entityId]: {
-                ...action.entity,
-                isCreated: true,
-              },
-            },
-          },
         },
       };
 

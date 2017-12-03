@@ -4,7 +4,7 @@ import {
   deleteChildInEdit,
   undoDeleteChildInEdit,
   updateChildInEdit,
-} from 'store/actions/sector.actions';
+} from 'store/actions/sidebar-edit.actions';
 import { getEmptyHexKeys } from 'store/selectors/sector.selectors';
 import EntityEditRow from './entity-edit-row';
 

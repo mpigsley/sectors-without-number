@@ -6,7 +6,7 @@ import {
   getCurrentEntityType,
 } from 'store/selectors/entity.selectors';
 import { isSidebarEditActiveSelector } from 'store/selectors/base.selectors';
-import { updateEntityInEdit } from 'store/actions/sector.actions';
+import { updateEntityInEdit } from 'store/actions/sidebar-edit.actions';
 
 import EntityAttributes from './entity-attributes';
 
