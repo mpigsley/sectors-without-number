@@ -9,6 +9,7 @@ import {
   getCurrentEntityType,
 } from 'store/selectors/entity.selectors';
 
+import { saveEntityEdit } from 'store/actions/entity.actions';
 import {
   activateSidebarEdit,
   deactivateSidebarEdit,
@@ -28,4 +29,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   activateSidebarEdit,
   deactivateSidebarEdit,
+  saveEntityEdit,
 })(EntityNavigation);

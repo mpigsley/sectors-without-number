@@ -1,4 +1,4 @@
-import { mapValues, omit } from 'lodash';
+import { mapValues, omit, omitBy, isNil, isObject, size } from 'lodash';
 
 import {
   UPDATE_ENTITIES,
@@ -28,7 +28,28 @@ export default function entity(state = initialState, action) {
     case UPDATE_ENTITIES:
       return {
         ...state,
-        ...action.entities,
+        ...mapValues(action.entities, (entities, entityType) => ({
+          ...state[entityType],
+          ...mapValues(entities, (thisEntity, entityId) =>
+            omitBy(
+              {
+                ...state[entityType][entityId],
+                ...thisEntity,
+                attributes: omitBy(
+                  {
+                    ...thisEntity.attributes,
+                    tags:
+                      thisEntity.attributes && thisEntity.attributes.tags
+                        ? thisEntity.attributes.tags.filter(tag => tag)
+                        : null,
+                  },
+                  isNil,
+                ),
+              },
+              obj => isNil(obj) || (isObject(obj) && !size(obj)),
+            ),
+          ),
+        })),
       };
     case UPDATE_ENTITY:
       return {

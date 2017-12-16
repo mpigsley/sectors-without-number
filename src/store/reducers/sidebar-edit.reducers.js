@@ -7,6 +7,7 @@ import {
   UPDATE_CHILD_IN_EDIT,
   CREATE_CHILD_IN_EDIT,
 } from 'store/actions/sidebar-edit.actions';
+import { UPDATE_ENTITIES } from 'store/actions/entity.actions';
 
 const initialState = {
   isSidebarEditActive: false,
@@ -23,6 +24,7 @@ export default function sidebarEdit(state = initialState, action) {
         entity: action.entity,
         children: action.children,
       };
+    case UPDATE_ENTITIES:
     case DEACTIVATE_SIDEBAR_EDIT:
       return initialState;
     case UPDATE_ENTITY_IN_EDIT:

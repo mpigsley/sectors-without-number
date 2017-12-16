@@ -20,6 +20,7 @@ export default function EntityNavigation(props) {
     entityType,
     activateSidebarEdit,
     deactivateSidebarEdit,
+    saveEntityEdit,
     isSaved,
     isSynced,
     isCloudSave,
@@ -109,7 +110,7 @@ export default function EntityNavigation(props) {
         </button>
         <button
           className="EntityNavigation-FooterButton EntityNavigation-Save"
-          onClick={deactivateSidebarEdit}
+          onClick={saveEntityEdit}
         >
           Save
         </button>
@@ -169,6 +170,7 @@ EntityNavigation.propTypes = {
   name: PropTypes.string.isRequired,
   activateSidebarEdit: PropTypes.func.isRequired,
   deactivateSidebarEdit: PropTypes.func.isRequired,
+  saveEntityEdit: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSynced: PropTypes.bool.isRequired,
   isCloudSave: PropTypes.bool.isRequired,

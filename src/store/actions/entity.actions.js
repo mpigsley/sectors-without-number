@@ -4,6 +4,7 @@ import {
   configurationSelector,
   currentSectorSelector,
   entitySelector,
+  sidebarEditSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentEntityType,
@@ -63,5 +64,16 @@ export const deleteEntity = () => (dispatch, getState) => {
       entityId: getCurrentEntityId(state),
       entities: entitySelector(state),
     }),
+  });
+};
+
+export const saveEntityEdit = () => (dispatch, getState) => {
+  const state = getState();
+  const entityType = getCurrentEntityType(state);
+  const entityId = getCurrentEntityId(state);
+  const { entity, children } = sidebarEditSelector(state);
+  dispatch({
+    type: UPDATE_ENTITIES,
+    entities: { [entityType]: { [entityId]: entity } },
   });
 };
