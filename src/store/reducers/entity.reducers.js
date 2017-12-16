@@ -28,28 +28,36 @@ export default function entity(state = initialState, action) {
     case UPDATE_ENTITIES:
       return {
         ...state,
-        ...mapValues(action.entities, (entities, entityType) => ({
-          ...state[entityType],
-          ...mapValues(entities, (thisEntity, entityId) =>
-            omitBy(
-              {
-                ...state[entityType][entityId],
-                ...thisEntity,
-                attributes: omitBy(
+        ...mapValues(action.entities, (entities, entityType) =>
+          omitBy(
+            {
+              ...state[entityType],
+              ...mapValues(entities, (thisEntity, entityId) => {
+                if (!thisEntity) {
+                  return null;
+                }
+                return omitBy(
                   {
-                    ...thisEntity.attributes,
-                    tags:
-                      thisEntity.attributes && thisEntity.attributes.tags
-                        ? thisEntity.attributes.tags.filter(tag => tag)
-                        : null,
+                    ...state[entityType][entityId],
+                    ...omit(thisEntity, 'sort'),
+                    attributes: omitBy(
+                      {
+                        ...thisEntity.attributes,
+                        tags:
+                          thisEntity.attributes && thisEntity.attributes.tags
+                            ? thisEntity.attributes.tags.filter(tag => tag)
+                            : null,
+                      },
+                      isNil,
+                    ),
                   },
-                  isNil,
-                ),
-              },
-              obj => isNil(obj) || (isObject(obj) && !size(obj)),
-            ),
+                  obj => isNil(obj) || (isObject(obj) && !size(obj)),
+                );
+              }),
+            },
+            isNil,
           ),
-        })),
+        ),
       };
     case UPDATE_ENTITY:
       return {

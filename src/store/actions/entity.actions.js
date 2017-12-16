@@ -1,4 +1,5 @@
 import { push } from 'react-router-redux';
+import { mapValues } from 'lodash';
 
 import {
   configurationSelector,
@@ -72,8 +73,20 @@ export const saveEntityEdit = () => (dispatch, getState) => {
   const entityType = getCurrentEntityType(state);
   const entityId = getCurrentEntityId(state);
   const { entity, children } = sidebarEditSelector(state);
+  const childrenEntities = mapValues(children, entities =>
+    mapValues(
+      entities,
+      thisEntity => (thisEntity.isDeleted ? undefined : thisEntity),
+    ),
+  );
+
+  childrenEntities[entityType] = {
+    ...(childrenEntities[entityType] || {}),
+    [entityId]: entity,
+  };
+
   dispatch({
     type: UPDATE_ENTITIES,
-    entities: { [entityType]: { [entityId]: entity } },
+    entities: childrenEntities,
   });
 };
