@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import { mapValues } from 'lodash';
+import { mapValues, merge } from 'lodash';
 
 import {
   configurationSelector,
@@ -70,23 +70,41 @@ export const deleteEntity = () => (dispatch, getState) => {
 
 export const saveEntityEdit = () => (dispatch, getState) => {
   const state = getState();
-  const entityType = getCurrentEntityType(state);
+  const currentEntityType = getCurrentEntityType(state);
   const entityId = getCurrentEntityId(state);
   const { entity, children } = sidebarEditSelector(state);
-  const childrenEntities = mapValues(children, entities =>
-    mapValues(
-      entities,
-      thisEntity => (thisEntity.isDeleted ? undefined : thisEntity),
-    ),
+
+  let createdEntities = {};
+  let updatedEntities = mapValues(children, (entities, entityType) =>
+    mapValues(entities, thisEntity => {
+      if (thisEntity.isCreated) {
+        createdEntities = merge(
+          createdEntities,
+          generateEntityUtil({
+            entityType,
+            currentSector: currentSectorSelector(state),
+            configuration: configurationSelector(state),
+            parameters: {
+              ...thisEntity,
+              parentEntity: currentEntityType,
+              parent: entityId,
+            },
+          }),
+        );
+      }
+      return thisEntity.isDeleted || thisEntity.isCreated
+        ? undefined
+        : thisEntity;
+    }),
   );
 
-  childrenEntities[entityType] = {
-    ...(childrenEntities[entityType] || {}),
-    [entityId]: entity,
-  };
+  updatedEntities = merge(updatedEntities, createdEntities);
+  updatedEntities = merge(updatedEntities, {
+    [currentEntityType]: { [entityId]: entity },
+  });
 
   dispatch({
     type: UPDATE_ENTITIES,
-    entities: childrenEntities,
+    entities: updatedEntities,
   });
 };

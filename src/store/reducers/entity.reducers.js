@@ -37,19 +37,21 @@ export default function entity(state = initialState, action) {
                 if (!thisEntity) {
                   return null;
                 }
+                const existingEntity = state[entityType][entityId] || {};
+                const mergedEntity = {
+                  ...existingEntity,
+                  ...omit(thisEntity, blacklistedAttributes),
+                };
                 const tags =
-                  thisEntity.attributes && thisEntity.attributes.tags
-                    ? thisEntity.attributes.tags.filter(tag => tag)
+                  mergedEntity.attributes && mergedEntity.attributes.tags
+                    ? mergedEntity.attributes.tags.filter(tag => tag)
                     : null;
+                const attributes = omitBy(
+                  { ...mergedEntity.attributes, tags },
+                  isNil,
+                );
                 return omitBy(
-                  {
-                    ...(state[entityType][entityId] || {}),
-                    ...omit(thisEntity, blacklistedAttributes),
-                    attributes: omitBy(
-                      { ...thisEntity.attributes, tags },
-                      isNil,
-                    ),
-                  },
+                  { ...mergedEntity, attributes },
                   obj => isNil(obj) || (isObject(obj) && !size(obj)),
                 );
               }),

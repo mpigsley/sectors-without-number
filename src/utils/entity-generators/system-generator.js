@@ -3,34 +3,44 @@ import Chance from 'chance';
 import { allSectorCoordinates } from 'utils/common';
 import { generateName } from 'utils/name-generator';
 
-export const generateSystem = (
-  config,
-  { sector, coordinate, name = generateName(), parent, parentEntity } = {},
-) => {
+export const generateSystem = ({
+  sector,
+  x,
+  y,
+  name = generateName(),
+  parent,
+  parentEntity,
+} = {}) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate a system');
   }
-  if (!coordinate) {
+  if (!x || !y) {
     throw new Error('Sector coordinate must be provided to generate a system');
   }
 
-  return { ...coordinate, name, sector, parent, parentEntity };
+  return { x, y, name, sector, parent, parentEntity };
 };
 
-export const generateSystems = (config, { sector, parent, parentEntity }) => {
+export const generateSystems = ({
+  sector,
+  parent,
+  parentEntity,
+  rows,
+  columns,
+}) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate systems');
   }
 
   const chance = new Chance();
-  const numHexes = config.rows * config.columns;
+  const numHexes = rows * columns;
   const systemNum =
     chance.integer({ min: 0, max: Math.floor(numHexes / 8) }) +
     Math.floor(numHexes / 4);
 
   return chance
-    .pickset(allSectorCoordinates(config.columns, config.rows), systemNum)
+    .pickset(allSectorCoordinates(columns, rows), systemNum)
     .map(coordinate =>
-      generateSystem(config, { sector, coordinate, parent, parentEntity }),
+      generateSystem({ sector, ...coordinate, parent, parentEntity }),
     );
 };

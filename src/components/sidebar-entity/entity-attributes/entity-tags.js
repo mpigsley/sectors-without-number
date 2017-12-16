@@ -38,15 +38,16 @@ export default function EntityTags({
   }
 
   let tags;
+  const entityTags = (entity.attributes || {}).tags || [];
   if (isSidebarEditActive) {
-    tags = entity.attributes.tags.sort().map(tag => (
+    tags = entityTags.sort().map(tag => (
       <FlexContainer key={tag} align="center" className="EntityTag--edit">
         <X
           className="EntityTag-Action"
           size={25}
           onClick={() =>
             updateEntityInEdit({
-              attributes: { tags: pull(entity.attributes.tags, tag) },
+              attributes: { tags: pull(entityTags, tag) },
             })
           }
         />
@@ -58,7 +59,7 @@ export default function EntityTags({
           onChange={({ value }) =>
             updateEntityInEdit({
               attributes: {
-                tags: pull(entity.attributes.tags, tag).concat([value]),
+                tags: pull(entityTags, tag).concat([value]),
               },
             })
           }
@@ -73,7 +74,7 @@ export default function EntityTags({
       </FlexContainer>
     ));
   } else {
-    tags = entity.attributes.tags
+    tags = entityTags
       .map(tag => Entities[entityType].tags[tag])
       .map(({ key, name, description, ...lists }) => (
         <div key={key} className="EntityAttributes-Tag">

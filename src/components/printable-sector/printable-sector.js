@@ -25,7 +25,7 @@ const renderAttribute = (title, attribute, obj) =>
 const renderPlanets = planets =>
   map(planets, (planet, key) => ({ ...planet, key }))
     .sort(sortByKey('name'))
-    .map(({ key, name, attributes }) => (
+    .map(({ key, name, attributes = {} }) => (
       <div key={key}>
         <FlexContainer
           key={name}
@@ -47,7 +47,7 @@ const renderPlanets = planets =>
           {renderAttribute('Population', attributes.population, Population)}
           {renderAttribute(
             'Tags',
-            attributes.tags
+            (attributes.tags || [])
               .map(tag => WorldTags[tag].name)
               .map(toCommaArray)
               .join(''),

@@ -12,15 +12,15 @@ export const generateEntity = ({
 }) => {
   const entityId = createId();
   const sector = entityType === Entities.sector.key ? entityId : currentSector;
-  const config = configuration;
 
   let childrenEntities = {};
   const generateChildren = (parent, parentEntity) =>
     Entities[parentEntity].children.forEach(childEntity => {
-      const children = EntityGenerators[childEntity].generateAll(config, {
+      const children = EntityGenerators[childEntity].generateAll({
         sector,
         parent,
         parentEntity,
+        ...configuration,
       });
       const childrenObj = zipObject(children.map(() => createId()), children);
       childrenEntities = {
@@ -35,11 +35,21 @@ export const generateEntity = ({
       );
     });
 
-  generateChildren(entityId, entityType);
+  if (
+    entityType === Entities.sector.key
+      ? !configuration.isBuilder
+      : parameters.generate
+  ) {
+    generateChildren(entityId, entityType);
+  }
 
   return {
     [entityType]: {
-      [entityId]: EntityGenerators[entityType].generateOne(config, parameters),
+      [entityId]: EntityGenerators[entityType].generateOne({
+        sector,
+        ...configuration,
+        ...parameters,
+      }),
     },
     ...pickBy(childrenEntities, size),
   };

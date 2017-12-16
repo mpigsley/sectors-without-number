@@ -7,10 +7,14 @@ import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
 import Population from 'constants/population';
 
-export const generatePlanet = (
-  config,
-  { sector, parent, parentEntity, name = generateName(), generate = true } = {},
-) => {
+export const generatePlanet = ({
+  sector,
+  parent,
+  parentEntity,
+  name = generateName(),
+  generate = true,
+} = {}) => {
+  console.log(sector, parent, parentEntity, name, generate);
   if (!sector) {
     throw new Error('Sector must be defined to generate a planet');
   }
@@ -72,12 +76,12 @@ export const generatePlanet = (
   return planet;
 };
 
-export const generatePlanets = (config, { sector, parent, parentEntity }) => {
+export const generatePlanets = ({ sector, parent, parentEntity }) => {
   const chance = new Chance();
   const numPlanets = chance.weighted([1, 2, 3], [5, 3, 2]);
 
   return [...Array(numPlanets)].map(() =>
-    generatePlanet(config, {
+    generatePlanet({
       sector,
       parent,
       parentEntity,

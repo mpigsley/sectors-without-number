@@ -84,6 +84,7 @@ export default function EntityAttributes({
       </div>
     );
 
+    console.log(Entities, entityType);
     attributesSection = (
       <div key="attributes">
         <SectionHeader>Attributes</SectionHeader>
@@ -92,7 +93,7 @@ export default function EntityAttributes({
           {(Entities[entityType].attributes || []).map(attribute =>
             (isSidebarEditActive ? renderAttributeEdit : renderAttribute)(
               attribute,
-              entity.attributes[attribute.key],
+              (entity.attributes || {})[attribute.key],
             ),
           )}
         </div>
