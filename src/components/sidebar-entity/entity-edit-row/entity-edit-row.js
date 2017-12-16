@@ -51,12 +51,12 @@ export default function EntityEditRow({
         value={coordinateKey(entity.x, entity.y)}
         clearable={false}
         onChange={({ value }) => updateChildInEdit(coordinatesFromKey(value))}
-        options={[...emptyHexKeys, coordinateKey(entity.x, entity.y)].map(
-          key => ({
+        options={[...emptyHexKeys, coordinateKey(entity.x, entity.y)]
+          .sort()
+          .map(key => ({
             value: key,
             label: key,
-          }),
-        )}
+          }))}
       />
     );
   }
