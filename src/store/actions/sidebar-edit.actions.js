@@ -1,4 +1,13 @@
-import { mapValues, pickBy, size } from 'lodash';
+import {
+  mapValues,
+  sortBy,
+  pickBy,
+  size,
+  omitBy,
+  isNil,
+  zipObject,
+  isNumber,
+} from 'lodash';
 
 import {
   getCurrentEntity,
@@ -6,9 +15,10 @@ import {
   getCurrentEntityType,
   getCurrentEntityChildren,
 } from 'store/selectors/entity.selectors';
+import { sidebarEditChildrenSelector } from 'store/selectors/base.selectors';
 import { getEmptyHexKeys } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
-import { createId, coordinatesFromKey } from 'utils/common';
+import { createId, coordinatesFromKey, coordinateKey } from 'utils/common';
 
 export const ACTIVATE_SIDEBAR_EDIT = 'ACTIVATE_SIDEBAR_EDIT';
 export const DEACTIVATE_SIDEBAR_EDIT = 'DEACTIVATE_SIDEBAR_EDIT';
@@ -26,15 +36,35 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
   const childrenByType = getCurrentEntityChildren(state);
   return dispatch({
     type: ACTIVATE_SIDEBAR_EDIT,
-    entity: { name: entity.name, attributes: entity.attributes },
+    entity: omitBy({ name: entity.name, attributes: entity.attributes }, isNil),
     children: pickBy(
-      mapValues(childrenByType, childType =>
-        mapValues(childType, child => ({
-          name: child.name,
-          x: child.x,
-          y: child.y,
-        })),
-      ),
+      mapValues(childrenByType, childType => {
+        const sortedChildren = sortBy(
+          mapValues(childType, (child, key) => ({
+            key,
+            name: child.name,
+            x: child.x,
+            y: child.y,
+          })),
+          ({ x, y, name }) =>
+            isNumber(x) && isNumber(y) ? coordinateKey(x, y) : name,
+        );
+
+        return zipObject(
+          sortedChildren.map(({ key }) => key),
+          sortedChildren.map(({ x, y, name }, index) =>
+            omitBy(
+              {
+                x,
+                y,
+                name,
+                sort: sortedChildren.length - index - 1,
+              },
+              isNil,
+            ),
+          ),
+        );
+      }),
       size,
     ),
   });
@@ -71,14 +101,18 @@ export const updateChildInEdit = (entityType, entityId, updates) => ({
   updates,
 });
 
-export const createChildInEdit = entityType => (dispatch, getState) =>
-  dispatch({
+export const createChildInEdit = entityType => (dispatch, getState) => {
+  const state = getState();
+  const entityChildren = sidebarEditChildrenSelector(state)[entityType];
+  return dispatch({
     type: CREATE_CHILD_IN_EDIT,
     entityType,
     entityId: createId(),
     entity: {
       name: Entities[entityType].nameGenerator(),
-      ...coordinatesFromKey(getEmptyHexKeys(getState())[0]),
+      ...coordinatesFromKey(getEmptyHexKeys(state)[0]),
       generate: true,
+      sort: size(entityChildren),
     },
   });
+};

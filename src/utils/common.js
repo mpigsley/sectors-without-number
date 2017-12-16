@@ -1,4 +1,5 @@
 import Chance from 'chance';
+import { isNumber } from 'lodash';
 
 export const capitalizeFirstLetter = str =>
   (str || '').charAt(0).toUpperCase() + (str || '').slice(1).toLowerCase();
@@ -37,9 +38,9 @@ export const allSectorKeys = (width = 0, height = 0) =>
     .map(({ x, y }) => coordinateKey(x, y))
     .sort();
 
-export const stringSortByKey = key => (a, b) => {
-  const keyA = (a[key] || '').toUpperCase();
-  const keyB = (b[key] || '').toUpperCase();
+export const sortByKey = key => (a, b) => {
+  const keyA = isNumber(a[key]) ? a[key] : (a[key] || '').toUpperCase();
+  const keyB = isNumber(b[key]) ? b[key] : (b[key] || '').toUpperCase();
   if (keyA < keyB) return -1;
   if (keyA > keyB) return 1;
   return 0;

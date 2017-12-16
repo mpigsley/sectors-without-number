@@ -4,7 +4,7 @@ import {
   coordinateKey,
   coordinatesFromKey,
   allSectorKeys,
-  stringSortByKey,
+  sortByKey,
   toCommaArray,
 } from '../common';
 
@@ -35,7 +35,7 @@ describe('isBetween', () => {
   });
 });
 
-describe('stringSortByKey', () => {
+describe('sortByKey', () => {
   let objectArr = null;
   beforeEach(() => {
     objectArr = [
@@ -47,7 +47,7 @@ describe('stringSortByKey', () => {
   });
 
   it('should sort an array of objects by a specified key', () => {
-    expect(objectArr.sort(stringSortByKey('name'))).toMatchObject([
+    expect(objectArr.sort(sortByKey('name'))).toMatchObject([
       { name: 'asdf' },
       { name: 'dfgh' },
       { name: 'fghj' },
@@ -56,7 +56,7 @@ describe('stringSortByKey', () => {
   });
 
   it('should just return the array if key is not found in objects', () => {
-    expect(objectArr.sort(stringSortByKey('notInObject'))).toMatchObject([
+    expect(objectArr.sort(sortByKey('notInObject'))).toMatchObject([
       { name: 'asdf' },
       { name: 'sdfg' },
       { name: 'dfgh' },

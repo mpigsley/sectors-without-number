@@ -6,7 +6,7 @@ import HexMap from 'components/hex-map';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 
-import { stringSortByKey, toCommaArray, coordinateKey } from 'utils/common';
+import { sortByKey, toCommaArray, coordinateKey } from 'utils/common';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
 import Temperature from 'constants/temperature';
@@ -24,7 +24,7 @@ const renderAttribute = (title, attribute, obj) =>
 
 const renderPlanets = planets =>
   map(planets, (planet, key) => ({ ...planet, key }))
-    .sort(stringSortByKey('name'))
+    .sort(sortByKey('name'))
     .map(({ key, name, attributes }) => (
       <div key={key}>
         <FlexContainer
@@ -83,7 +83,7 @@ const renderSystem = (system, planets) => (
 
 const renderSystems = (systems, planets) =>
   map(systems, (system, key) => ({ ...system, key }))
-    .sort(stringSortByKey('name'))
+    .sort(sortByKey('name'))
     .map((system, i, arr) => (i % 3 === 0 ? arr.slice(i, i + 3) : null))
     .filter(system => system)
     .map(systemGroup => (

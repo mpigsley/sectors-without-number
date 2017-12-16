@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Pluralize from 'pluralize';
-import { map, size } from 'lodash';
+import { map, size, isNumber } from 'lodash';
 import { Plus } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 
@@ -11,7 +11,7 @@ import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 import Dice from 'primitives/icons/dice';
 
-import { stringSortByKey, coordinateKey } from 'utils/common';
+import { sortByKey, coordinateKey } from 'utils/common';
 import Entities from 'constants/entities';
 
 import EntityLinkRow from '../entity-link-row';
@@ -103,11 +103,13 @@ export default function EntityList({
         additional: Entities[entityType].topLevel
           ? coordinateKey(entity.x, entity.y)
           : undefined,
-        sort: Entities[entityType].topLevel
-          ? coordinateKey(entity.x, entity.y)
-          : entity.name,
+        sort: isNumber(entity.sort)
+          ? -entity.sort
+          : Entities[entityType].topLevel
+            ? coordinateKey(entity.x, entity.y)
+            : entity.name,
       }))
-        .sort(stringSortByKey('sort'))
+        .sort(sortByKey('sort'))
         .map(renderEntity)}
       <ReactHint events position="left" />
     </div>
