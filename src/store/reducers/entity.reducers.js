@@ -23,6 +23,7 @@ const initialState = {
   system: {},
 };
 
+const blacklistedAttributes = ['sort', 'generate', 'isUpdated', 'isCreated'];
 export default function entity(state = initialState, action) {
   switch (action.type) {
     case UPDATE_ENTITIES:
@@ -36,18 +37,16 @@ export default function entity(state = initialState, action) {
                 if (!thisEntity) {
                   return null;
                 }
+                const tags =
+                  thisEntity.attributes && thisEntity.attributes.tags
+                    ? thisEntity.attributes.tags.filter(tag => tag)
+                    : null;
                 return omitBy(
                   {
-                    ...state[entityType][entityId],
-                    ...omit(thisEntity, 'sort'),
+                    ...(state[entityType][entityId] || {}),
+                    ...omit(thisEntity, blacklistedAttributes),
                     attributes: omitBy(
-                      {
-                        ...thisEntity.attributes,
-                        tags:
-                          thisEntity.attributes && thisEntity.attributes.tags
-                            ? thisEntity.attributes.tags.filter(tag => tag)
-                            : null,
-                      },
+                      { ...thisEntity.attributes, tags },
                       isNil,
                     ),
                   },
