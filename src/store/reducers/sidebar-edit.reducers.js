@@ -1,3 +1,5 @@
+import { omit } from 'lodash';
+
 import {
   ACTIVATE_SIDEBAR_EDIT,
   DEACTIVATE_SIDEBAR_EDIT,
@@ -39,20 +41,32 @@ export default function sidebarEdit(state = initialState, action) {
           },
         },
       };
-    case DELETE_CHILD_IN_EDIT:
+    case DELETE_CHILD_IN_EDIT: {
+      let entityTypeList;
+      const doDelete =
+        state.children[action.entityType][action.entityId].isCreated;
+      if (doDelete) {
+        entityTypeList = omit(
+          state.children[action.entityType],
+          action.entityId,
+        );
+      } else {
+        entityTypeList = {
+          ...state.children[action.entityType],
+          [action.entityId]: {
+            ...state.children[action.entityType][action.entityId],
+            isDeleted: true,
+          },
+        };
+      }
       return {
         ...state,
         children: {
           ...state.children,
-          [action.entityType]: {
-            ...state.children[action.entityType],
-            [action.entityId]: {
-              ...state.children[action.entityType][action.entityId],
-              isDeleted: true,
-            },
-          },
+          [action.entityType]: entityTypeList,
         },
       };
+    }
     case UNDO_DELETE_CHILD_IN_EDIT:
       return {
         ...state,
