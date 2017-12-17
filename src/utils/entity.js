@@ -1,4 +1,4 @@
-import { zipObject, pickBy, size } from 'lodash';
+import { zipObject, pickBy, size, merge } from 'lodash';
 
 import EntityGenerators from 'utils/entity-generators';
 import { createId } from 'utils/common';
@@ -55,7 +55,7 @@ export const generateEntity = ({
   };
 };
 
-export const deleteEntity = ({ entityType, entity, entities }) => {
+export const deleteEntity = ({ entityType, entityId, entities }) => {
   let childrenEntities = {};
   const deleteChildren = (parent, parentType) =>
     Entities[parentType].children.forEach(childType => {
@@ -74,10 +74,9 @@ export const deleteEntity = ({ entityType, entity, entities }) => {
       childrenToDelete.forEach(childId => deleteChildren(childId, childType));
     });
 
-  deleteChildren(entity, entityType);
+  deleteChildren(entityId, entityType);
 
-  return {
-    [entityType]: [entity],
-    ...pickBy(childrenEntities, size),
-  };
+  return merge(pickBy(childrenEntities, size), {
+    [entityType]: [entityId],
+  });
 };

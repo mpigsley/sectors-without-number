@@ -39,6 +39,7 @@ export default function sidebarEdit(state = initialState, action) {
             ...state.entity.attributes,
             ...action.updates.attributes,
           },
+          isUpdated: true,
         },
       };
     case DELETE_CHILD_IN_EDIT: {

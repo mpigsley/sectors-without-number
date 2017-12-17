@@ -1,5 +1,14 @@
 import { push } from 'react-router-redux';
-import { mapValues, merge } from 'lodash';
+import {
+  mapValues,
+  merge,
+  omitBy,
+  isNil,
+  forEach,
+  zipObject,
+  pickBy,
+  size,
+} from 'lodash';
 
 import {
   configurationSelector,
@@ -15,9 +24,9 @@ import {
   generateEntity as generateEntityUtil,
   deleteEntity as deleteEntityUtil,
 } from 'utils/entity';
+import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
-export const UPDATE_ENTITY = 'UPDATE_ENTITY';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
 
 export const generateEntity = (entityType, parameters) => (
@@ -46,16 +55,6 @@ export const generateEntity = (entityType, parameters) => (
   }
 };
 
-export const updateEntity = update => (dispatch, getState) => {
-  const state = getState();
-  dispatch({
-    type: UPDATE_ENTITY,
-    entityType: getCurrentEntityType(state),
-    entityId: getCurrentEntityId(state),
-    update,
-  });
-};
-
 export const deleteEntity = () => (dispatch, getState) => {
   const state = getState();
   dispatch({
@@ -75,36 +74,68 @@ export const saveEntityEdit = () => (dispatch, getState) => {
   const { entity, children } = sidebarEditSelector(state);
 
   let createdEntities = {};
-  let updatedEntities = mapValues(children, (entities, entityType) =>
-    mapValues(entities, thisEntity => {
-      if (thisEntity.isCreated) {
-        createdEntities = merge(
-          createdEntities,
-          generateEntityUtil({
-            entityType,
-            currentSector: currentSectorSelector(state),
-            configuration: configurationSelector(state),
-            parameters: {
-              ...thisEntity,
-              parentEntity: currentEntityType,
-              parent: entityId,
-            },
-          }),
-        );
-      }
-      return thisEntity.isDeleted || thisEntity.isCreated
-        ? undefined
-        : thisEntity;
-    }),
+  const deletedEntities = {};
+  let updatedEntities = mapValues(children, (entities, thisEntityType) =>
+    omitBy(
+      mapValues(
+        entities,
+        ({ isCreated, isDeleted, isUpdated, ...thisEntity }, thisEntityId) => {
+          if (isCreated) {
+            createdEntities = merge(
+              createdEntities,
+              generateEntityUtil({
+                entityType: thisEntityType,
+                currentSector: currentSectorSelector(state),
+                configuration: configurationSelector(state),
+                parameters: {
+                  ...thisEntity,
+                  parentEntity: currentEntityType,
+                  parent: entityId,
+                },
+              }),
+            );
+          } else if (isDeleted) {
+            forEach(
+              deleteEntityUtil({
+                entityType: thisEntityType,
+                entityId: thisEntityId,
+                entities: entitySelector(state),
+              }),
+              (entityIdArray, deletedType) => {
+                deletedEntities[deletedType] = [
+                  ...(deletedEntities[deletedType] || []),
+                  ...entityIdArray,
+                ];
+              },
+            );
+          }
+          return isDeleted || isCreated || !isUpdated ? undefined : thisEntity;
+        },
+      ),
+      isNil,
+    ),
   );
 
   updatedEntities = merge(updatedEntities, createdEntities);
-  updatedEntities = merge(updatedEntities, {
-    [currentEntityType]: { [entityId]: entity },
-  });
+  updatedEntities = merge(
+    updatedEntities,
+    mapValues(deletedEntities, deletedIds =>
+      zipObject(deletedIds, deletedIds.map(() => null)),
+    ),
+  );
+  if (entity.isUpdated) {
+    updatedEntities = merge(updatedEntities, {
+      [currentEntityType]: { [entityId]: entity },
+    });
+  }
 
-  dispatch({
-    type: UPDATE_ENTITIES,
-    entities: updatedEntities,
-  });
+  const filteredUpdatedEntities = pickBy(updatedEntities, size);
+  if (size(filteredUpdatedEntities)) {
+    dispatch({
+      type: UPDATE_ENTITIES,
+      entities: filteredUpdatedEntities,
+    });
+  } else {
+    dispatch({ type: DEACTIVATE_SIDEBAR_EDIT });
+  }
 };

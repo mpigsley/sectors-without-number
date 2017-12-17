@@ -84,7 +84,6 @@ export default function EntityAttributes({
       </div>
     );
 
-    console.log(Entities, entityType);
     attributesSection = (
       <div key="attributes">
         <SectionHeader>Attributes</SectionHeader>

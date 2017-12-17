@@ -14,7 +14,6 @@ export const generatePlanet = ({
   name = generateName(),
   generate = true,
 } = {}) => {
-  console.log(sector, parent, parentEntity, name, generate);
   if (!sector) {
     throw new Error('Sector must be defined to generate a planet');
   }

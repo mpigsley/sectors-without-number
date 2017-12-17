@@ -1,27 +1,9 @@
 import { mapValues, omit, omitBy, isNil, isObject, size } from 'lodash';
 
-import {
-  UPDATE_ENTITIES,
-  UPDATE_ENTITY,
-  DELETE_ENTITIES,
-} from 'store/actions/entity.actions';
+import Entities from 'constants/entities';
+import { UPDATE_ENTITIES, DELETE_ENTITIES } from 'store/actions/entity.actions';
 
-const initialState = {
-  asteroidBase: {},
-  asteroidBelt: {},
-  blackHole: {},
-  deepSpaceStation: {},
-  gasGiantMine: {},
-  moon: {},
-  moonBase: {},
-  orbitalRuin: {},
-  planet: {},
-  refuelingStation: {},
-  researchBase: {},
-  sector: {},
-  spaceStation: {},
-  system: {},
-};
+const initialState = mapValues(Entities, () => ({}));
 
 const blacklistedAttributes = ['sort', 'generate', 'isUpdated', 'isCreated'];
 export default function entity(state = initialState, action) {
@@ -59,14 +41,6 @@ export default function entity(state = initialState, action) {
             isNil,
           ),
         ),
-      };
-    case UPDATE_ENTITY:
-      return {
-        ...state,
-        [action.entityType]: {
-          ...state[action.entityType],
-          [action.entityId]: action.update,
-        },
       };
     case DELETE_ENTITIES:
       return {
