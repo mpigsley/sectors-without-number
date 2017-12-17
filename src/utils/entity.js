@@ -1,4 +1,14 @@
-import { zipObject, pickBy, size, merge } from 'lodash';
+import {
+  zipObject,
+  pickBy,
+  size,
+  merge,
+  mapValues,
+  omitBy,
+  isNil,
+  omit,
+  isObject,
+} from 'lodash';
 
 import EntityGenerators from 'utils/entity-generators';
 import { createId } from 'utils/common';
@@ -80,3 +90,43 @@ export const deleteEntity = ({ entityType, entityId, entities }) => {
     [entityType]: [entityId],
   });
 };
+
+export const blacklistedAttributes = [
+  'sort',
+  'generate',
+  'isUpdated',
+  'isCreated',
+];
+export const mergeEntityUpdates = (state, updates) => ({
+  ...state,
+  ...mapValues(updates, (entities, entityType) =>
+    omitBy(
+      {
+        ...state[entityType],
+        ...mapValues(entities, (thisEntity, entityId) => {
+          if (!thisEntity) {
+            return null;
+          }
+          const existingEntity = state[entityType][entityId] || {};
+          const mergedEntity = {
+            ...existingEntity,
+            ...omit(thisEntity, blacklistedAttributes),
+          };
+          const tags =
+            mergedEntity.attributes && mergedEntity.attributes.tags
+              ? mergedEntity.attributes.tags.filter(tag => tag)
+              : null;
+          const attributes = omitBy(
+            { ...mergedEntity.attributes, tags },
+            isNil,
+          );
+          return omitBy(
+            { ...mergedEntity, attributes },
+            obj => isNil(obj) || (isObject(obj) && !size(obj)),
+          );
+        }),
+      },
+      isNil,
+    ),
+  ),
+});
