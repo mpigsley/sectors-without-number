@@ -11,8 +11,23 @@
 
 .Changelog-Updates {
   margin-bottom: 0;
+  margin-top: 0.3rem;
+}
+
+.Changelog-List {
+  margin-top: 0.3rem;
 }
 
 .Changelog-Change {
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.2rem;
+}
+
+.Changelog-Date {
+  color: $light1;
+  font-size: 1rem;
+  margin-left: 0.6rem;
+}
+
+.Changelog-Version {
+  margin-bottom: 0.5rem;
 }

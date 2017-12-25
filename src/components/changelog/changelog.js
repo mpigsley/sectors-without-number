@@ -1,4 +1,5 @@
 import React from 'react';
+import Moment from 'moment';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
@@ -20,14 +21,19 @@ export default function Changelog() {
             ...changelog[version],
             version,
           }))
-          .map(({ version, description, changes }) => (
+          .map(({ version, date, description, changes }) => (
             <FlexContainer
               className="Changelog-Item"
               key={version}
               direction="column"
               align="flexStart"
             >
-              <Header type={HeaderType.header3}>{`v${version}`}</Header>
+              <Header type={HeaderType.header3} className="Changelog-Version">
+                {`v${version}`}
+                <span className="Changelog-Date">
+                  ({Moment(date, 'MM-DD-YYYY').format('MMMM Do YYYY')})
+                </span>
+              </Header>
               <span>
                 <b>Description:</b> {description}
               </span>
@@ -36,7 +42,7 @@ export default function Changelog() {
                   <b>Updates:</b>
                 </p>
               )}
-              <ul>
+              <ul className="Changelog-List">
                 {changes &&
                   changes.map(change => (
                     <li className="Changelog-Change" key={change}>
