@@ -25,6 +25,7 @@ import {
   deleteEntity as deleteEntityUtil,
 } from 'utils/entity';
 import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
+import { creatorOrUpdateSector } from 'store/utils';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
@@ -70,7 +71,7 @@ export const deleteEntity = () => (dispatch, getState) => {
 export const saveEntityEdit = () => (dispatch, getState) => {
   const state = getState();
   const currentEntityType = getCurrentEntityType(state);
-  const entityId = getCurrentEntityId(state);
+  const currentEntityId = getCurrentEntityId(state);
   const { entity, children } = sidebarEditSelector(state);
 
   let createdEntities = {};
@@ -90,7 +91,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
                 parameters: {
                   ...thisEntity,
                   parentEntity: currentEntityType,
-                  parent: entityId,
+                  parent: currentEntityId,
                 },
               }),
             );
@@ -125,7 +126,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
   );
   if (entity.isUpdated) {
     updatedEntities = merge(updatedEntities, {
-      [currentEntityType]: { [entityId]: entity },
+      [currentEntityType]: { [currentEntityId]: entity },
     });
   }
 
@@ -135,7 +136,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
       type: UPDATE_ENTITIES,
       entities: filteredUpdatedEntities,
     });
-  } else {
-    dispatch({ type: DEACTIVATE_SIDEBAR_EDIT });
+    return creatorOrUpdateSector(state, filteredUpdatedEntities).then(dispatch);
   }
+  return dispatch({ type: DEACTIVATE_SIDEBAR_EDIT });
 };

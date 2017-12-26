@@ -1,12 +1,19 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { omit } from 'lodash';
+import { flatten, map, mapKeys } from 'lodash';
 
-import { setSector } from 'store/api/local';
-import { uploadSector, updateSyncedSector } from 'store/api/firebase';
+import { userModelSelector } from 'store/selectors/base.selectors';
+import {
+  getCurrentSector,
+  getCurrentEntities,
+} from 'store/selectors/entity.selectors';
+import { mergeEntityUpdates } from 'utils/entity';
 
-export const SuccessToast = (
-  { title = 'Sector Saved', message = 'Your sector has been saved.' } = {},
-) =>
+import { setEntity } from 'store/api/local';
+
+export const SuccessToast = ({
+  title = 'Sector Saved',
+  message = 'Your sector has been saved.',
+} = {}) =>
   ReduxToastrActions.add({
     options: {
       removeOnHover: true,
@@ -30,26 +37,36 @@ export const ErrorToast = () =>
     message: 'Report a problem if it persists.',
   });
 
-export const creatorOrUpdateSector = (state, sector) => {
+export const creatorOrUpdateSector = (state, entities) => {
+  const isLoggedIn = !!userModelSelector(state);
+  const { isSaved } = getCurrentSector(state);
   let promise;
-  if (state.user.model) {
-    if (state.sector.generated) {
-      promise = uploadSector(sector, state.user.model.uid);
+  if (isSaved) {
+    if (isLoggedIn) {
+      // sync updates, deletions, and creations
+      promise = Promise.resolve();
     } else {
-      promise = updateSyncedSector(sector.key, sector);
+      // persist updates, deletions, and creations
+      promise = Promise.resolve();
     }
   } else {
-    promise = setSector(
-      sector.key,
-      omit(
-        {
-          ...sector,
-          updated: Date.now(),
-          created: sector.created || Date.now(),
-        },
-        'isCloudSave',
-      ),
-    );
+    const updates = mergeEntityUpdates(getCurrentEntities(state), entities);
+    if (isLoggedIn) {
+      // sync full sector
+      promise = Promise.resolve();
+    } else {
+      const persisted = Object.assign(
+        ...flatten(
+          map(updates, (entityList, entityType) =>
+            mapKeys(
+              entityList,
+              (entity, entityId) => `${entityType}.${entityId}`,
+            ),
+          ),
+        ),
+      );
+      promise = Promise.all(map(persisted, setEntity));
+    }
   }
-  return promise.then((uploadedSector = sector) => uploadedSector);
+  return promise.then(() => SuccessToast()).catch(() => ErrorToast());
 };

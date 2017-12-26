@@ -1,6 +1,6 @@
 import localForage from 'localforage';
 
-export const setSector = (key, sector) => localForage.setItem(key, sector);
+export const setEntity = (entity, key) => localForage.setItem(key, entity);
 export const removeSector = key => localForage.removeItem(key);
 export const clearLocalDatabase = () => localForage.clear();
 export const getLocalSectors = () =>

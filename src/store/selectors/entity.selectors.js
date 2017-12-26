@@ -34,6 +34,23 @@ export const getCurrentTopLevelEntities = createSelector(
     ),
 );
 
+export const getCurrentEntities = createSelector(
+  [currentSectorSelector, entitySelector],
+  (currentSector, entities) =>
+    mapValues(entities, entityList =>
+      pickBy(
+        entityList,
+        (entity, entityId) =>
+          entity.sector === currentSector || entityId === currentSector,
+      ),
+    ),
+);
+
+export const getCurrentSector = createSelector(
+  [currentSectorSelector, entitySelector],
+  (currentSector, entities) => entities[Entities.sector.key][currentSector],
+);
+
 export const getCurrentEntity = createSelector(
   [
     currentSectorSelector,

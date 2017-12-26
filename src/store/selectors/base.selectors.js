@@ -1,3 +1,6 @@
+/* User */
+export const userModelSelector = state => state.user.model;
+
 /* Entity */
 export const entitySelector = state => state.entity;
 export const asteroidBaseSelector = state => state.entity.asteroidBase;
