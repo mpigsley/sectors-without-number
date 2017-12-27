@@ -118,17 +118,19 @@ export const saveEntityEdit = () => (dispatch, getState) => {
   );
 
   updatedEntities = merge(updatedEntities, createdEntities);
+  if (entity.isUpdated) {
+    updatedEntities = merge(updatedEntities, {
+      [currentEntityType]: { [currentEntityId]: entity },
+    });
+  }
+
+  const onlyUpdated = { ...updatedEntities };
   updatedEntities = merge(
     updatedEntities,
     mapValues(deletedEntities, deletedIds =>
       zipObject(deletedIds, deletedIds.map(() => null)),
     ),
   );
-  if (entity.isUpdated) {
-    updatedEntities = merge(updatedEntities, {
-      [currentEntityType]: { [currentEntityId]: entity },
-    });
-  }
 
   const filteredUpdatedEntities = pickBy(updatedEntities, size);
   if (size(filteredUpdatedEntities)) {
@@ -136,7 +138,12 @@ export const saveEntityEdit = () => (dispatch, getState) => {
       type: UPDATE_ENTITIES,
       entities: filteredUpdatedEntities,
     });
-    return saveEntities(state, filteredUpdatedEntities).then(dispatch);
+    return saveEntities({
+      state,
+      entities: filteredUpdatedEntities,
+      updated: onlyUpdated,
+      deleted: deletedEntities,
+    }).then(dispatch);
   }
   return dispatch({ type: DEACTIVATE_SIDEBAR_EDIT });
 };

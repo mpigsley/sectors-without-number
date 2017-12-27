@@ -29,5 +29,11 @@ export const getEntities = () =>
       })
       .catch(reject);
   });
-export const removeSector = key => localForage.removeItem(key);
+export const deleteEntity = key => localForage.removeItem(key);
+export const deleteEntities = entities =>
+  Promise.all(
+    flatten(map(entities, (list, type) => list.map(id => `${type}.${id}`))).map(
+      deleteEntity,
+    ),
+  );
 export const clearLocalDatabase = () => localForage.clear();

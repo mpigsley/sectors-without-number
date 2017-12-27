@@ -9,7 +9,7 @@ import {
 import { getCurrentEntities } from 'store/selectors/entity.selectors';
 import { mergeEntityUpdates } from 'utils/entity';
 
-import { setEntities } from 'store/api/local';
+import { setEntities, deleteEntities } from 'store/api/local';
 
 export const SuccessToast = ({
   title = 'Sector Saved',
@@ -38,7 +38,7 @@ export const ErrorToast = () =>
     message: 'Report a problem if it persists.',
   });
 
-export const saveEntities = (state, entities) => {
+export const saveEntities = ({ state, updated, deleted, entities }) => {
   const isLoggedIn = !!userModelSelector(state);
   const isSaved = includes(
     savedSectorSelector(state),
@@ -51,7 +51,7 @@ export const saveEntities = (state, entities) => {
       promise = Promise.resolve();
     } else {
       // persist updates, deletions, and creations
-      promise = setEntities(entities);
+      promise = Promise.all([setEntities(updated), deleteEntities(deleted)]);
     }
   } else {
     const updates = mergeEntityUpdates(getCurrentEntities(state), entities);
