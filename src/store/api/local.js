@@ -1,15 +1,33 @@
 import localForage from 'localforage';
+import { flatten, map, mapKeys } from 'lodash';
 
 export const setEntity = (entity, key) => localForage.setItem(key, entity);
-export const removeSector = key => localForage.removeItem(key);
-export const clearLocalDatabase = () => localForage.clear();
-export const getLocalSectors = () =>
+export const setEntities = entities =>
+  Promise.all(
+    map(
+      Object.assign(
+        ...flatten(
+          map(entities, (list, type) =>
+            mapKeys(list, (_, id) => `${type}.${id}`),
+          ),
+        ),
+      ),
+      setEntity,
+    ),
+  );
+export const getEntities = () =>
   new Promise((resolve, reject) => {
-    const savedSectors = {};
+    const entities = {};
     localForage
-      .iterate((value, key) => {
-        savedSectors[key] = value;
+      .iterate((entity, key) => {
+        const [entityType, entityId] = key.split('.');
+        entities[entityType] = entities[entityType] || {};
+        entities[entityType][entityId] = entity;
       })
-      .then(() => resolve(savedSectors))
+      .then(() => {
+        resolve(entities);
+      })
       .catch(reject);
   });
+export const removeSector = key => localForage.removeItem(key);
+export const clearLocalDatabase = () => localForage.clear();

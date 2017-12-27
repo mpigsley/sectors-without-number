@@ -1,6 +1,6 @@
 @import 'styles/theme';
 
-.EntityLinkRow {
+.LinkRow {
   color: $dark3;
   display: flex;
   padding: 0.8rem 1.5rem;
@@ -10,22 +10,22 @@
   &:hover {
     background-color: $primary;
 
-    .EntityLinkRow-RightArrow {
+    .LinkRow-RightArrow {
       color: $light4;
     }
   }
 }
 
-.EntityLinkRow-Name {
+.LinkRow-Name {
   margin: 0;
 }
 
-.EntityLinkRow-RightArrow {
+.LinkRow-RightArrow {
   color: $dark3;
   transition: color 0.5s;
 }
 
-.EntityLinkRow-Additional {
+.LinkRow-Additional {
   color: $light1;
   font-size: 0.8rem;
   margin-left: 0.5rem;

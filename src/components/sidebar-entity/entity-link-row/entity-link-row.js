@@ -1,33 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import { ChevronRight } from 'react-feather';
 
-import FlexContainer from 'primitives/container/flex-container';
-import Header, { HeaderType } from 'primitives/text/header';
-
-import './style.css';
+import LinkRow from 'primitives/other/link-row';
 
 export default function EntityLinkRow({ entity, entityType, currentSector }) {
   return (
-    <Link
-      className="EntityLinkRow"
+    <LinkRow
       to={`/sector/${currentSector}/${entityType}/${entity.entityId}`}
-    >
-      <FlexContainer justify="spaceBetween" flex="1">
-        <FlexContainer flex="1" align="baseline">
-          <Header type={HeaderType.header4} className="EntityLinkRow-Name">
-            {entity.name}
-          </Header>
-          {entity.additional && (
-            <div className="EntityLinkRow-Additional">
-              ({entity.additional})
-            </div>
-          )}
-        </FlexContainer>
-        <ChevronRight className="EntityLinkRow-RightArrow" />
-      </FlexContainer>
-    </Link>
+      title={entity.name}
+      additional={entity.additional}
+    />
   );
 }
 
@@ -35,7 +17,7 @@ EntityLinkRow.propTypes = {
   entity: PropTypes.shape({
     entityId: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    addition: PropTypes.string,
+    additional: PropTypes.string,
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   currentSector: PropTypes.string.isRequired,

@@ -1,5 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { values, size, zipObject } from 'lodash';
+import { values, zipObject } from 'lodash';
 import { push } from 'react-router-redux';
 
 import {
@@ -91,31 +91,13 @@ const onLogin = (dispatch, local) => result =>
 export const initialize = ({
   local,
   user,
-  synced = {},
-  currentSector,
+  // synced = {},
+  // currentSector,
 }) => dispatch => {
-  let promise = Promise.resolve(user ? synced : local);
-  if (user && size(local)) {
-    promise = syncLocalSectors(values(local), user.uid).then(uploaded => ({
-      ...synced,
-      ...uploaded,
-    }));
-  }
-  return promise
-    .then(combinedSectors => {
-      let sectors = combinedSectors;
-      if (currentSector) {
-        sectors = {
-          [currentSector.key]: { ...currentSector, isCloudSave: true },
-          ...combinedSectors,
-        };
-      }
-      dispatch({ type: INITIALIZE, user, sectors });
-    })
-    .catch(err => {
-      dispatch(ErrorToast());
-      console.error(err);
-    });
+  // Sync local sectors if user exists
+  // Combine local and saved entities
+  // Set current sector if viewing another user's sector
+  dispatch({ type: INITIALIZE, user, entities: local });
 };
 
 export const facebookLogin = () => (dispatch, getState) =>

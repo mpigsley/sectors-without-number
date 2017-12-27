@@ -1,5 +1,4 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { flatten, map, mapKeys } from 'lodash';
 
 import { userModelSelector } from 'store/selectors/base.selectors';
 import {
@@ -8,7 +7,7 @@ import {
 } from 'store/selectors/entity.selectors';
 import { mergeEntityUpdates } from 'utils/entity';
 
-import { setEntity } from 'store/api/local';
+import { setEntities } from 'store/api/local';
 
 export const SuccessToast = ({
   title = 'Sector Saved',
@@ -55,17 +54,7 @@ export const creatorOrUpdateSector = (state, entities) => {
       // sync full sector
       promise = Promise.resolve();
     } else {
-      const persisted = Object.assign(
-        ...flatten(
-          map(updates, (entityList, entityType) =>
-            mapKeys(
-              entityList,
-              (entity, entityId) => `${entityType}.${entityId}`,
-            ),
-          ),
-        ),
-      );
-      promise = Promise.all(map(persisted, setEntity));
+      promise = setEntities(updates);
     }
   }
   return promise.then(() => SuccessToast()).catch(() => ErrorToast());

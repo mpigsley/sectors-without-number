@@ -2,7 +2,7 @@ import Firebase from 'firebase';
 import Fastclick from 'react-fastclick';
 import 'firebase/firestore';
 
-import { getLocalSectors } from 'store/api/local';
+import { getEntities } from 'store/api/local';
 import {
   getCurrentUser,
   getCurrentSector,
@@ -27,16 +27,14 @@ export default store => {
       const currentSectorPromise = location.pathname.startsWith('/sector')
         ? getCurrentSector(location.pathname.split('/')[2])
         : Promise.resolve();
-      Promise.all([
-        getCurrentUser(),
-        getLocalSectors(),
-        currentSectorPromise,
-      ]).then(([user, local, currentSector]) => {
-        const promise = user ? getSyncedSectors(user.uid) : Promise.resolve();
-        return promise.then(synced =>
-          store.dispatch(initialize({ local, user, synced, currentSector })),
-        );
-      });
+      Promise.all([getCurrentUser(), getEntities(), currentSectorPromise]).then(
+        ([user, local, currentSector]) => {
+          const promise = user ? getSyncedSectors(user.uid) : Promise.resolve();
+          return promise.then(synced =>
+            store.dispatch(initialize({ local, user, synced, currentSector })),
+          );
+        },
+      );
     }
   });
 

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Settings, Zap } from 'react-feather';
 
 import { sortByKey } from 'utils/common';
-import EntityLinkRow from 'components/sidebar-entity/entity-link-row';
+import LinkRow from 'primitives/other/link-row';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
 import FlexContainer from 'primitives/container/flex-container';
@@ -36,12 +36,12 @@ export default function Home({ saved, generateSector }) {
             .map(key => ({ key, ...saved[key] }))
             .sort(sortByKey('name'))
             .map(({ key, name, rows, columns }) => (
-              <EntityLinkRow key={key} to={`/sector/${key}`}>
-                <span className="Home-SavedName">{name}</span>
-                <span className="Home-SavedSecondary">
-                  ({columns}, {rows})
-                </span>
-              </EntityLinkRow>
+              <LinkRow
+                key={key}
+                to={`/sector/${key}`}
+                title={name}
+                additional={`${columns}, ${rows}`}
+              />
             ))}
         </FlexContainer>
       </SubContainer>
