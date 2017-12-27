@@ -25,7 +25,7 @@ import {
   deleteEntity as deleteEntityUtil,
 } from 'utils/entity';
 import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
-import { creatorOrUpdateSector } from 'store/utils';
+import { saveEntities } from 'store/utils';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
@@ -136,7 +136,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
       type: UPDATE_ENTITIES,
       entities: filteredUpdatedEntities,
     });
-    return creatorOrUpdateSector(state, filteredUpdatedEntities).then(dispatch);
+    return saveEntities(state, filteredUpdatedEntities).then(dispatch);
   }
   return dispatch({ type: DEACTIVATE_SIDEBAR_EDIT });
 };

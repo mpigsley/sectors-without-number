@@ -1,5 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { values, zipObject } from 'lodash';
+import { keys, values, zipObject } from 'lodash';
 import { push } from 'react-router-redux';
 
 import {
@@ -14,6 +14,7 @@ import {
   getSyncedSectors,
 } from 'store/api/firebase';
 import { clearLocalDatabase } from 'store/api/local';
+import Entities from 'constants/entities';
 import { ErrorToast } from 'store/utils';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
@@ -91,13 +92,21 @@ const onLogin = (dispatch, local) => result =>
 export const initialize = ({
   local,
   user,
-  // synced = {},
+  synced = {},
   // currentSector,
 }) => dispatch => {
   // Sync local sectors if user exists
   // Combine local and saved entities
   // Set current sector if viewing another user's sector
-  dispatch({ type: INITIALIZE, user, entities: local });
+  dispatch({
+    type: INITIALIZE,
+    user,
+    entities: local,
+    saved: [
+      ...keys(synced[Entities.sector.key]),
+      ...keys(local[Entities.sector.key]),
+    ],
+  });
 };
 
 export const facebookLogin = () => (dispatch, getState) =>

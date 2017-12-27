@@ -1,10 +1,12 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
+import { includes } from 'lodash';
 
-import { userModelSelector } from 'store/selectors/base.selectors';
 import {
-  getCurrentSector,
-  getCurrentEntities,
-} from 'store/selectors/entity.selectors';
+  userModelSelector,
+  currentSectorSelector,
+  savedSectorSelector,
+} from 'store/selectors/base.selectors';
+import { getCurrentEntities } from 'store/selectors/entity.selectors';
 import { mergeEntityUpdates } from 'utils/entity';
 
 import { setEntities } from 'store/api/local';
@@ -36,9 +38,12 @@ export const ErrorToast = () =>
     message: 'Report a problem if it persists.',
   });
 
-export const creatorOrUpdateSector = (state, entities) => {
+export const saveEntities = (state, entities) => {
   const isLoggedIn = !!userModelSelector(state);
-  const { isSaved } = getCurrentSector(state);
+  const isSaved = includes(
+    savedSectorSelector(state),
+    currentSectorSelector(state),
+  );
   let promise;
   if (isSaved) {
     if (isLoggedIn) {
@@ -46,7 +51,7 @@ export const creatorOrUpdateSector = (state, entities) => {
       promise = Promise.resolve();
     } else {
       // persist updates, deletions, and creations
-      promise = Promise.resolve();
+      promise = setEntities(entities);
     }
   } else {
     const updates = mergeEntityUpdates(getCurrentEntities(state), entities);

@@ -2,7 +2,7 @@ import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { uploadSector, updateSyncedSector } from '../api/firebase';
 import { setSector } from '../api/local';
 
-import { SuccessToast, ErrorToast, creatorOrUpdateSector } from '../utils';
+import { SuccessToast, ErrorToast } from '../utils';
 
 jest.mock('react-redux-toastr', () => ({
   actions: {
@@ -98,53 +98,6 @@ describe('Store Utils', () => {
       const { title, message } = ErrorToast();
       expect(title).toEqual('There has been an error');
       expect(message).toEqual('Report a problem if it persists.');
-    });
-  });
-
-  describe('creatorOrUpdateSector', () => {
-    beforeEach(() => {
-      setSector.mockClear();
-      uploadSector.mockClear();
-      updateSyncedSector.mockClear();
-    });
-
-    test('should set local sector if user model does not exist', () => {
-      expect.assertions(1);
-      return creatorOrUpdateSector({ user: {} }, {}).then(() => {
-        expect(setSector).toHaveBeenCalledTimes(1);
-      });
-    });
-
-    test('should upload sector if the sector is currently generated', () => {
-      expect.assertions(1);
-      return creatorOrUpdateSector(
-        { user: { model: {} }, sector: { generated: {} } },
-        {},
-      ).then(() => {
-        expect(uploadSector).toHaveBeenCalledTimes(1);
-      });
-    });
-
-    test('should update sector if the sector is not generated', () => {
-      expect.assertions(1);
-      return creatorOrUpdateSector(
-        { user: { model: {} }, sector: {} },
-        {},
-      ).then(() => {
-        expect(updateSyncedSector).toHaveBeenCalledTimes(1);
-      });
-    });
-
-    test('should return sector', () => {
-      expect.assertions(1);
-      const testKey = 'key';
-      const testValue = 'value';
-      return creatorOrUpdateSector(
-        { user: {} },
-        { [testKey]: testValue },
-      ).then(sector => {
-        expect(sector[testKey]).toEqual(testValue);
-      });
     });
   });
 });
