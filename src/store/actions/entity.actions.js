@@ -19,13 +19,14 @@ import {
 import {
   getCurrentEntityType,
   getCurrentEntityId,
+  getCurrentEntity,
 } from 'store/selectors/entity.selectors';
 import {
   generateEntity as generateEntityUtil,
   deleteEntity as deleteEntityUtil,
 } from 'utils/entity';
 import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
-import { saveEntities } from 'store/utils';
+import { saveEntities, deleteEntities } from 'store/utils';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
@@ -58,14 +59,27 @@ export const generateEntity = (entityType, parameters) => (
 
 export const deleteEntity = () => (dispatch, getState) => {
   const state = getState();
+  const entity = getCurrentEntity(state);
+  const currentSector = currentSectorSelector(state);
+  if (!entity.parent) {
+    dispatch(push('/'));
+  } else if (entity.parent === currentSector) {
+    dispatch(push(`/sector/${entity.parent}`));
+  } else {
+    dispatch(
+      push(`/sector/${currentSector}/${entity.parentEntity}/${entity.parent}`),
+    );
+  }
+  const deleted = deleteEntityUtil({
+    entityType: getCurrentEntityType(state),
+    entityId: getCurrentEntityId(state),
+    entities: entitySelector(state),
+  });
   dispatch({
     type: DELETE_ENTITIES,
-    entities: deleteEntityUtil({
-      entityType: getCurrentEntityType(state),
-      entityId: getCurrentEntityId(state),
-      entities: entitySelector(state),
-    }),
+    entities: deleted,
   });
+  return deleteEntities({ state, deleted }).then(dispatch);
 };
 
 export const saveEntityEdit = () => (dispatch, getState) => {

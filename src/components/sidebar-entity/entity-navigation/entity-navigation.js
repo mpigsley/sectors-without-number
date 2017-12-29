@@ -21,6 +21,7 @@ export default function EntityNavigation(props) {
     activateSidebarEdit,
     deactivateSidebarEdit,
     saveEntityEdit,
+    deleteEntity,
     isSaved,
     isSynced,
     isCloudSave,
@@ -63,7 +64,11 @@ export default function EntityNavigation(props) {
 
   let deleteButton = null;
   if (isSaved && !isCloudSave) {
-    deleteButton = <Button minimal>Delete</Button>;
+    deleteButton = (
+      <Button minimal onClick={deleteEntity}>
+        Delete
+      </Button>
+    );
   }
 
   let backUrl = '/';
@@ -171,6 +176,7 @@ EntityNavigation.propTypes = {
   activateSidebarEdit: PropTypes.func.isRequired,
   deactivateSidebarEdit: PropTypes.func.isRequired,
   saveEntityEdit: PropTypes.func.isRequired,
+  deleteEntity: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSynced: PropTypes.bool.isRequired,
   isCloudSave: PropTypes.bool.isRequired,

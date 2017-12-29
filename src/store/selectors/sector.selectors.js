@@ -1,4 +1,4 @@
-import { omitBy, difference, values } from 'lodash';
+import { omitBy, difference, values, includes } from 'lodash';
 import { createSelector } from 'reselect';
 
 import { allSectorKeys, coordinateKey } from 'utils/common';
@@ -6,6 +6,7 @@ import {
   currentSectorSelector,
   sectorSelector,
   sidebarEditChildrenSelector,
+  savedSectorSelector,
 } from 'store/selectors/base.selectors';
 
 export const getCurrentSector = createSelector(
@@ -15,6 +16,11 @@ export const getCurrentSector = createSelector(
 
 export const getUserSectors = createSelector([sectorSelector], sectors =>
   omitBy(sectors, sector => sector.isCloudSave),
+);
+
+export const isCurrentSectorSaved = createSelector(
+  [currentSectorSelector, savedSectorSelector],
+  (currentSector, saved) => includes(saved, currentSector),
 );
 
 export const getEmptyHexKeys = createSelector(

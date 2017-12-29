@@ -1,15 +1,17 @@
 import { connect } from 'react-redux';
 
 import {
+  userModelSelector,
   currentSectorSelector,
   isSidebarEditActiveSelector,
 } from 'store/selectors/base.selectors';
+import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 import {
   getCurrentEntity,
   getCurrentEntityType,
 } from 'store/selectors/entity.selectors';
 
-import { saveEntityEdit } from 'store/actions/entity.actions';
+import { saveEntityEdit, deleteEntity } from 'store/actions/entity.actions';
 import {
   activateSidebarEdit,
   deactivateSidebarEdit,
@@ -17,8 +19,8 @@ import {
 import EntityNavigation from './entity-navigation';
 
 const mapStateToProps = state => ({
-  isSaved: false,
-  isSynced: !!state.user.model,
+  isSaved: isCurrentSectorSaved(state),
+  isSynced: !!userModelSelector(state),
   isCloudSave: false,
   currentSector: currentSectorSelector(state),
   entity: getCurrentEntity(state),
@@ -30,4 +32,5 @@ export default connect(mapStateToProps, {
   activateSidebarEdit,
   deactivateSidebarEdit,
   saveEntityEdit,
+  deleteEntity,
 })(EntityNavigation);
