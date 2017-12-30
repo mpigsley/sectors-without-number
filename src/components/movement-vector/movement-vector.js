@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { findKey } from 'lodash';
+
+import { coordinateKey } from 'utils/common';
 
 import './style.css';
 
@@ -38,14 +41,23 @@ export const MarkerDefs = [
 const offsetForSystem = 16;
 const offsetForCenter = 10;
 
-export default function MovementVector({ hoverKey, holdKey, hexes }) {
+export default function MovementVector({
+  hoverKey,
+  holdKey,
+  hexes,
+  topLevelEntities,
+}) {
   const hovered = hexes.filter(hex => hex.hexKey === hoverKey)[0];
   const held = hexes.filter(hex => hex.hexKey === holdKey)[0];
   if (!hovered || !held || hoverKey === holdKey) {
     return null;
   }
 
-  const isSwitch = !!hovered.system;
+  const entityId = findKey(
+    topLevelEntities,
+    ({ x, y }) => coordinateKey(x, y) === hovered.hexKey,
+  );
+  const isSwitch = !!topLevelEntities[entityId];
   const distanceBetween = Math.sqrt(
     (hovered.xOffset - held.xOffset) ** 2 +
       (hovered.yOffset - held.yOffset) ** 2,
@@ -78,6 +90,7 @@ export default function MovementVector({ hoverKey, holdKey, hexes }) {
 MovementVector.propTypes = {
   hoverKey: PropTypes.string,
   holdKey: PropTypes.string,
+  topLevelEntities: PropTypes.shape().isRequired,
   hexes: PropTypes.arrayOf(
     PropTypes.shape({
       hexKey: PropTypes.string.isRequired,

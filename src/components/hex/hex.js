@@ -33,7 +33,7 @@ function Hex({
     isMousedDown = true;
     delay(() => {
       if (isMousedDown && !isCloudSave) {
-        if (data.entity) {
+        if (entity) {
           entityHold(data.hexKey);
         } else {
           // open system create
