@@ -19,6 +19,7 @@ function Hex({
   entityHold,
   entityRelease,
   moveTopLevelEntity,
+  topLevelEntityCreate,
   holdKey,
   hoverKey,
   isCloudSave,
@@ -33,6 +34,7 @@ function Hex({
         if (entity) {
           entityHold(data.hexKey);
         } else {
+          topLevelEntityCreate(data.hexKey);
           // open system create
         }
       }
@@ -170,6 +172,7 @@ Hex.propTypes = {
   entityHold: PropTypes.func.isRequired,
   entityRelease: PropTypes.func.isRequired,
   moveTopLevelEntity: PropTypes.func.isRequired,
+  topLevelEntityCreate: PropTypes.func.isRequired,
   holdKey: PropTypes.string,
   hoverKey: PropTypes.string,
   isCloudSave: PropTypes.bool.isRequired,

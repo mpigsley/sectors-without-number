@@ -30,6 +30,7 @@ export const savedSectorSelector = state => state.sector.saved;
 export const holdKeySelector = state => state.sector.holdKey;
 export const hoverKeySelector = state => state.sector.hoverKey;
 export const renderSectorSelector = state => state.sector.renderSector;
+export const topLevelKeySelector = state => state.sector.topLevelKey;
 
 /* Sidebar Edit */
 export const sidebarEditSelector = state => state.sidebarEdit;

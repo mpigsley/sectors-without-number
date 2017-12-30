@@ -5,6 +5,7 @@ import {
   entityHoverEnd,
   entityHold,
   entityRelease,
+  topLevelEntityCreate,
 } from 'store/actions/sector.actions';
 import { moveTopLevelEntity } from 'store/actions/entity.actions';
 import {
@@ -28,4 +29,5 @@ export default connect(mapStateToProps, {
   entityHold,
   entityRelease,
   moveTopLevelEntity,
+  topLevelEntityCreate,
 })(Hex);

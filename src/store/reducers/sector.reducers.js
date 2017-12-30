@@ -7,12 +7,14 @@ import {
   RELEASE_HOLD,
   ENTITY_HOVER_START,
   ENTITY_HOVER_END,
+  TOP_LEVEL_ENTITY_CREATE,
 } from 'store/actions/sector.actions';
 import { INITIALIZE } from 'store/actions/user.actions';
 import { SAVE_SECTOR, UPDATE_ENTITIES } from 'store/actions/entity.actions';
 
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
+import { CANCEL_TOP_LEVEL_ENTITY_CREATE } from '../actions/sector.actions';
 
 const initialState = {
   renderSector: false,
@@ -22,6 +24,7 @@ const initialState = {
   saved: [],
   holdKey: null,
   hoverKey: null,
+  topLevelKey: null,
   configuration: {
     sectorName: generateSectorName(),
     isBuilder: false,
@@ -87,6 +90,10 @@ export default function sector(state = initialState, action) {
       return { ...state, hoverKey: action.key };
     case ENTITY_HOVER_END:
       return { ...state, hoverKey: null };
+    case TOP_LEVEL_ENTITY_CREATE:
+      return { ...state, topLevelKey: action.key };
+    case CANCEL_TOP_LEVEL_ENTITY_CREATE:
+      return { ...state, topLevelKey: null };
     default:
       return state;
   }
