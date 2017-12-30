@@ -14,8 +14,13 @@ export const getCurrentSector = createSelector(
   (currentSector, sectorEntity) => sectorEntity[currentSector],
 );
 
-export const getUserSectors = createSelector([sectorSelector], sectors =>
-  omitBy(sectors, sector => sector.isCloudSave),
+export const getUserSectors = createSelector(
+  [sectorSelector, savedSectorSelector],
+  (sectors, saved) =>
+    omitBy(
+      sectors,
+      (sector, key) => sector.isCloudSave || !includes(saved, key),
+    ),
 );
 
 export const isCurrentSectorSaved = createSelector(
