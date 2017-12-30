@@ -1,9 +1,15 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { uniq } from 'lodash';
 
-import { UPDATE_CONFIGURATION } from 'store/actions/sector.actions';
+import {
+  UPDATE_CONFIGURATION,
+  ENTITY_HOLD,
+  RELEASE_HOLD,
+  ENTITY_HOVER_START,
+  ENTITY_HOVER_END,
+} from 'store/actions/sector.actions';
 import { INITIALIZE } from 'store/actions/user.actions';
-import { UPDATE_ENTITIES } from 'store/actions/entity.actions';
+import { SAVE_SECTOR, UPDATE_ENTITIES } from 'store/actions/entity.actions';
 
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
@@ -14,6 +20,8 @@ const initialState = {
   currentEntityType: null,
   currentEntity: null,
   saved: [],
+  holdKey: null,
+  hoverKey: null,
   configuration: {
     sectorName: generateSectorName(),
     isBuilder: false,
@@ -50,6 +58,7 @@ export default function sector(state = initialState, action) {
         renderSector: false,
       };
     }
+    case SAVE_SECTOR:
     case UPDATE_ENTITIES:
       return {
         ...state,
@@ -68,6 +77,14 @@ export default function sector(state = initialState, action) {
           [action.key]: action.value,
         },
       };
+    case ENTITY_HOLD:
+      return { ...state, holdKey: action.key };
+    case RELEASE_HOLD:
+      return { ...state, holdKey: null };
+    case ENTITY_HOVER_START:
+      return { ...state, hoverKey: action.key };
+    case ENTITY_HOVER_END:
+      return { ...state, hoverKey: null };
     default:
       return state;
   }

@@ -14,10 +14,10 @@ const hexPadding = 2;
 function Hex({
   topLevelEntities,
   data,
-  systemHoverStart,
-  systemHoverEnd,
-  systemHold,
-  systemRelease,
+  entityHoverStart,
+  entityHoverEnd,
+  entityHold,
+  entityRelease,
   holdKey,
   hoverKey,
   isCloudSave,
@@ -34,7 +34,7 @@ function Hex({
     delay(() => {
       if (isMousedDown && !isCloudSave) {
         if (data.entity) {
-          systemHold(data.hexKey);
+          entityHold(data.hexKey);
         } else {
           // open system create
         }
@@ -48,7 +48,7 @@ function Hex({
       router.push(`/sector/${router.params.sector}/${entity.type}/${entityId}`);
     } else if (!isCloudSave) {
       if (!data.highlighted || holdKey === hoverKey) {
-        systemRelease();
+        entityRelease();
       } else if (!isCloudSave && holdKey) {
         // moveSystem();
       }
@@ -91,7 +91,7 @@ function Hex({
     );
   };
 
-  const renderSystemName = () => {
+  const renderEntityName = () => {
     if (!entity || data.width <= 45) {
       return null;
     }
@@ -102,7 +102,7 @@ function Hex({
     );
   };
 
-  const renderSystemKey = () => {
+  const renderEntityKey = () => {
     if (!data.highlighted || data.width <= 45) {
       return null;
     }
@@ -137,8 +137,8 @@ function Hex({
         'Hex--movable':
           holdKey === data.hexKey || (!!holdKey && hoverKey === data.hexKey),
       })}
-      onMouseEnter={isInSector(systemHoverStart)}
-      onMouseLeave={isInSector(systemHoverEnd)}
+      onMouseEnter={isInSector(entityHoverStart)}
+      onMouseLeave={isInSector(entityHoverEnd)}
       onMouseDown={isInSector(onMouseDown)}
       onMouseUp={onMouseUp}
     >
@@ -152,8 +152,8 @@ function Hex({
       />
       {renderPlanetNum()}
       {renderStarCircle()}
-      {renderSystemName()}
-      {renderSystemKey()}
+      {renderEntityName()}
+      {renderEntityKey()}
     </g>
   );
 }
@@ -168,10 +168,10 @@ Hex.propTypes = {
     xOffset: PropTypes.number,
     yOffset: PropTypes.number,
   }).isRequired,
-  systemHoverStart: PropTypes.func.isRequired,
-  systemHoverEnd: PropTypes.func.isRequired,
-  systemHold: PropTypes.func.isRequired,
-  systemRelease: PropTypes.func.isRequired,
+  entityHoverStart: PropTypes.func.isRequired,
+  entityHoverEnd: PropTypes.func.isRequired,
+  entityHold: PropTypes.func.isRequired,
+  entityRelease: PropTypes.func.isRequired,
   holdKey: PropTypes.string,
   hoverKey: PropTypes.string,
   isCloudSave: PropTypes.bool.isRequired,

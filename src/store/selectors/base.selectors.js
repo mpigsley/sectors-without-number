@@ -1,5 +1,7 @@
 /* User */
 export const userModelSelector = state => state.user.model;
+export const isDropdownActiveSelector = state => state.user.isDropdownActive;
+export const isInitializedSelector = state => state.user.isInitialized;
 
 /* Entity */
 export const entitySelector = state => state.entity;
@@ -25,6 +27,9 @@ export const currentEntityTypeSelector = state =>
 export const currentEntitySelector = state => state.sector.currentEntity;
 export const configurationSelector = state => state.sector.configuration;
 export const savedSectorSelector = state => state.sector.saved;
+export const holdKeySelector = state => state.sector.holdKey;
+export const hoverKeySelector = state => state.sector.hoverKey;
+export const renderSectorSelector = state => state.sector.renderSector;
 
 /* Sidebar Edit */
 export const sidebarEditSelector = state => state.sidebarEdit;

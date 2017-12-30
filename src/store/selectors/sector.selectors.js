@@ -8,11 +8,7 @@ import {
   sidebarEditChildrenSelector,
   savedSectorSelector,
 } from 'store/selectors/base.selectors';
-
-export const getCurrentSector = createSelector(
-  [currentSectorSelector, sectorSelector],
-  (currentSector, sectorEntity) => sectorEntity[currentSector],
-);
+import { getCurrentSector } from 'store/selectors/entity.selectors';
 
 export const getUserSectors = createSelector(
   [sectorSelector, savedSectorSelector],

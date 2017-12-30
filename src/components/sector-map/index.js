@@ -2,17 +2,24 @@ import { connect } from 'react-redux';
 
 import Entities from 'constants/entities';
 import { generateEntity } from 'store/actions/entity.actions';
-import { getCurrentSector } from 'store/selectors/sector.selectors';
-import { getCurrentTopLevelEntities } from 'store/selectors/entity.selectors';
+import {
+  getCurrentTopLevelEntities,
+  getCurrentSector,
+} from 'store/selectors/entity.selectors';
+import {
+  renderSectorSelector,
+  isDropdownActiveSelector,
+  isInitializedSelector,
+} from 'store/selectors/base.selectors';
 import { closeUserDropdown } from 'store/actions/user.actions';
 
 import SectorMap from './sector-map';
 
 const mapStateToProps = state => ({
-  renderSector: state.sector.renderSector,
+  renderSector: renderSectorSelector(state),
   sector: getCurrentSector(state),
-  isDropdownActive: state.user.isDropdownActive,
-  isInitialized: state.user.isInitialized,
+  isDropdownActive: isDropdownActiveSelector(state),
+  isInitialized: isInitializedSelector(state),
   topLevelEntities: getCurrentTopLevelEntities(state),
 });
 
