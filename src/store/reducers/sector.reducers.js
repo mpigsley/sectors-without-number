@@ -1,9 +1,12 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
+import { uniq } from 'lodash';
+
+import { UPDATE_CONFIGURATION } from 'store/actions/sector.actions';
+import { INITIALIZE } from 'store/actions/user.actions';
+import { UPDATE_ENTITIES } from 'store/actions/entity.actions';
 
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
-import { UPDATE_CONFIGURATION } from 'store/actions/sector.actions';
-import { INITIALIZE } from 'store/actions/user.actions';
 
 const initialState = {
   renderSector: false,
@@ -47,6 +50,11 @@ export default function sector(state = initialState, action) {
         renderSector: false,
       };
     }
+    case UPDATE_ENTITIES:
+      return {
+        ...state,
+        saved: uniq([...state.saved, state.currentSector]),
+      };
     case INITIALIZE:
       return {
         ...state,
