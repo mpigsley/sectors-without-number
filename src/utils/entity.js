@@ -8,10 +8,11 @@ import {
   isNil,
   omit,
   isObject,
+  findKey,
 } from 'lodash';
 
 import EntityGenerators from 'utils/entity-generators';
-import { createId } from 'utils/common';
+import { createId, coordinateKey } from 'utils/common';
 import Entities from 'constants/entities';
 
 export const generateEntity = ({
@@ -130,3 +131,12 @@ export const mergeEntityUpdates = (state, updates) => ({
     ),
   ),
 });
+
+export const getTopLevelEntity = (topLevelEntities, key) => {
+  const entityId = findKey(
+    topLevelEntities,
+    ({ x, y }) => coordinateKey(x, y) === key,
+  );
+  const entity = topLevelEntities[entityId];
+  return { entity, entityId, entityType: (entity || {}).type };
+};

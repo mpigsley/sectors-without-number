@@ -15,8 +15,11 @@ import {
   currentSectorSelector,
   entitySelector,
   sidebarEditSelector,
+  holdKeySelector,
+  hoverKeySelector,
 } from 'store/selectors/base.selectors';
 import {
+  getCurrentTopLevelEntities,
   getCurrentEntityType,
   getCurrentEntityId,
   getCurrentEntity,
@@ -24,9 +27,11 @@ import {
 import {
   generateEntity as generateEntityUtil,
   deleteEntity as deleteEntityUtil,
+  getTopLevelEntity,
 } from 'utils/entity';
+import { coordinatesFromKey } from 'utils/common';
 import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
-import { saveEntities, deleteEntities } from 'store/utils';
+import { saveEntity, saveEntities, deleteEntities } from 'store/utils';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
@@ -56,6 +61,53 @@ export const generateEntity = (entityType, parameters) => (
   ) {
     dispatch(push(`/sector/${newSectorKeys[0]}`));
   }
+};
+
+export const moveTopLevelEntity = () => (dispatch, getState) => {
+  const state = getState();
+  const topLevelEntities = getCurrentTopLevelEntities(state);
+  const holdEntity = getTopLevelEntity(
+    topLevelEntities,
+    holdKeySelector(state),
+  );
+  const hoverKey = hoverKeySelector(state);
+  const hoverEntity = getTopLevelEntity(topLevelEntities, hoverKey);
+  const holdUpdate = { ...holdEntity.entity, ...coordinatesFromKey(hoverKey) };
+  let entities = {
+    [holdEntity.entityType]: { [holdEntity.entityId]: holdUpdate },
+  };
+  const promises = [
+    saveEntity({
+      state,
+      entityId: holdEntity.entityId,
+      entityType: holdEntity.entityType,
+      update: holdUpdate,
+    }),
+  ];
+  if (hoverEntity.entity) {
+    const hoverUpdate = {
+      ...hoverEntity.entity,
+      x: holdEntity.entity.x,
+      y: holdEntity.entity.y,
+    };
+    entities = {
+      ...entities,
+      [hoverEntity.entityType]: {
+        ...(entities[hoverEntity.entityType] || {}),
+        [hoverEntity.entityId]: hoverUpdate,
+      },
+    };
+    promises.push(
+      saveEntity({
+        state,
+        entityId: hoverEntity.entityId,
+        entityType: hoverEntity.entityType,
+        update: hoverUpdate,
+      }),
+    );
+  }
+  dispatch({ type: UPDATE_ENTITIES, entities });
+  return Promise.all(promises).then(([action]) => dispatch(action));
 };
 
 export const deleteEntity = () => (dispatch, getState) => {

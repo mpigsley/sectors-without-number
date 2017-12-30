@@ -63,6 +63,8 @@ export default function sector(state = initialState, action) {
       return {
         ...state,
         saved: uniq([...state.saved, state.currentSector]),
+        holdKey: null,
+        hoverKey: null,
       };
     case INITIALIZE:
       return {

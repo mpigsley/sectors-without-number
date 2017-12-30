@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router';
 import classNames from 'classnames';
-import { delay, findKey } from 'lodash';
+import { delay } from 'lodash';
 
-import { coordinateKey } from 'utils/common';
+import { getTopLevelEntity } from 'utils/entity';
 
 import './style.css';
 
@@ -18,16 +18,13 @@ function Hex({
   entityHoverEnd,
   entityHold,
   entityRelease,
+  moveTopLevelEntity,
   holdKey,
   hoverKey,
   isCloudSave,
   router,
 }) {
-  const entityId = findKey(
-    topLevelEntities,
-    ({ x, y }) => coordinateKey(x, y) === data.hexKey,
-  );
-  const entity = topLevelEntities[entityId];
+  const { entity, entityId } = getTopLevelEntity(topLevelEntities, data.hexKey);
 
   const onMouseDown = () => {
     isMousedDown = true;
@@ -49,8 +46,8 @@ function Hex({
     } else if (!isCloudSave) {
       if (!data.highlighted || holdKey === hoverKey) {
         entityRelease();
-      } else if (!isCloudSave && holdKey) {
-        // moveSystem();
+      } else if (holdKey) {
+        moveTopLevelEntity();
       }
     }
   };
@@ -172,6 +169,7 @@ Hex.propTypes = {
   entityHoverEnd: PropTypes.func.isRequired,
   entityHold: PropTypes.func.isRequired,
   entityRelease: PropTypes.func.isRequired,
+  moveTopLevelEntity: PropTypes.func.isRequired,
   holdKey: PropTypes.string,
   hoverKey: PropTypes.string,
   isCloudSave: PropTypes.bool.isRequired,

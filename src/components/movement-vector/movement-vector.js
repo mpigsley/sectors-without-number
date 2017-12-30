@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { findKey } from 'lodash';
 
-import { coordinateKey } from 'utils/common';
+import { getTopLevelEntity } from 'utils/entity';
 
 import './style.css';
 
@@ -53,11 +52,8 @@ export default function MovementVector({
     return null;
   }
 
-  const entityId = findKey(
-    topLevelEntities,
-    ({ x, y }) => coordinateKey(x, y) === hovered.hexKey,
-  );
-  const isSwitch = !!topLevelEntities[entityId];
+  const { entity } = getTopLevelEntity(topLevelEntities, hovered.hexKey);
+  const isSwitch = !!entity;
   const distanceBetween = Math.sqrt(
     (hovered.xOffset - held.xOffset) ** 2 +
       (hovered.yOffset - held.yOffset) ** 2,

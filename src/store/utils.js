@@ -9,6 +9,7 @@ import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 import { mergeEntityUpdates } from 'utils/entity';
 
 import {
+  setEntity,
   setEntities,
   deleteEntities as localDeleteEntities,
 } from 'store/api/local';
@@ -40,6 +41,24 @@ export const ErrorToast = () =>
     title: 'There has been an error',
     message: 'Report a problem if it persists.',
   });
+
+export const saveEntity = ({ state, entityType, entityId, update }) => {
+  const isLoggedIn = !!userModelSelector(state);
+  let promise;
+  if (isLoggedIn) {
+    promise = Promise.resolve();
+  } else {
+    promise = setEntity(update, `${entityType}.${entityId}`);
+  }
+  const entityName = Entities[entityType || Entities.sector.key].name;
+  return promise
+    .then(() =>
+      SuccessToast({
+        title: `${entityName} Updated`,
+      }),
+    )
+    .catch(() => ErrorToast());
+};
 
 export const deleteEntities = ({ state, deleted }) => {
   const isLoggedIn = !!userModelSelector(state);

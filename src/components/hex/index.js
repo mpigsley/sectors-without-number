@@ -6,6 +6,7 @@ import {
   entityHold,
   entityRelease,
 } from 'store/actions/sector.actions';
+import { moveTopLevelEntity } from 'store/actions/entity.actions';
 import {
   holdKeySelector,
   hoverKeySelector,
@@ -26,4 +27,5 @@ export default connect(mapStateToProps, {
   entityHoverEnd,
   entityHold,
   entityRelease,
+  moveTopLevelEntity,
 })(Hex);
