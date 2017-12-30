@@ -30,6 +30,7 @@ import { saveEntities, deleteEntities } from 'store/utils';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
+export const SAVE_SECTOR = 'SAVE_SECTOR';
 
 export const generateEntity = (entityType, parameters) => (
   dispatch,
@@ -80,6 +81,12 @@ export const deleteEntity = () => (dispatch, getState) => {
     entities: deleted,
   });
   return deleteEntities({ state, deleted }).then(dispatch);
+};
+
+export const saveSector = () => (dispatch, getState) => {
+  const state = getState();
+  dispatch({ type: SAVE_SECTOR });
+  return saveEntities({ state }).then(dispatch);
 };
 
 export const saveEntityEdit = () => (dispatch, getState) => {

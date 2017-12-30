@@ -11,22 +11,22 @@ import Entities from 'constants/entities';
 
 import './style.css';
 
-export default function EntityNavigation(props) {
-  const {
-    name,
-    children,
-    currentSector,
-    entity,
-    entityType,
-    activateSidebarEdit,
-    deactivateSidebarEdit,
-    saveEntityEdit,
-    deleteEntity,
-    isSaved,
-    isSynced,
-    isCloudSave,
-    isSidebarEditActive,
-  } = props;
+export default function EntityNavigation({
+  name,
+  children,
+  currentSector,
+  entity,
+  entityType,
+  activateSidebarEdit,
+  deactivateSidebarEdit,
+  saveEntityEdit,
+  deleteEntity,
+  saveSector,
+  isSaved,
+  isSynced,
+  isCloudSave,
+  isSidebarEditActive,
+}) {
   const onCopy = () => {
     copy(window.location.href);
     toastr.success(
@@ -41,7 +41,11 @@ export default function EntityNavigation(props) {
 
   let saveButton = null;
   if (!isSaved && !isCloudSave) {
-    saveButton = <Button minimal>Save</Button>;
+    saveButton = (
+      <Button minimal onClick={saveSector}>
+        Save
+      </Button>
+    );
   }
 
   let editButton = null;
@@ -177,6 +181,7 @@ EntityNavigation.propTypes = {
   deactivateSidebarEdit: PropTypes.func.isRequired,
   saveEntityEdit: PropTypes.func.isRequired,
   deleteEntity: PropTypes.func.isRequired,
+  saveSector: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSynced: PropTypes.bool.isRequired,
   isCloudSave: PropTypes.bool.isRequired,
