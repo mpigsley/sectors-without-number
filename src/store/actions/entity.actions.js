@@ -146,7 +146,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
             createdEntities = merge(
               createdEntities,
               generateEntityUtil({
-                entityType: thisEntityType,
+                entity: { entityType: thisEntityType },
                 currentSector: currentSectorSelector(state),
                 configuration: configurationSelector(state),
                 parameters: {

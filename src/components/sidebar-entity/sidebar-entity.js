@@ -87,7 +87,10 @@ export default class EntityInfo extends Component {
 
   render() {
     return (
-      <EntityNavigation name={this.props.entity.name}>
+      <EntityNavigation
+        name={this.props.entity.name}
+        onDeleteEntity={this.onConfirmDelete}
+      >
         <EntityAttributes />
         {map(this.props.entityChildren, (entities, entityType) => (
           <EntityList

@@ -11,11 +11,7 @@ import {
   getCurrentEntityType,
 } from 'store/selectors/entity.selectors';
 
-import {
-  saveEntityEdit,
-  deleteEntity,
-  saveSector,
-} from 'store/actions/entity.actions';
+import { saveEntityEdit, saveSector } from 'store/actions/entity.actions';
 import {
   activateSidebarEdit,
   deactivateSidebarEdit,
@@ -36,6 +32,5 @@ export default connect(mapStateToProps, {
   activateSidebarEdit,
   deactivateSidebarEdit,
   saveEntityEdit,
-  deleteEntity,
   saveSector,
 })(EntityNavigation);

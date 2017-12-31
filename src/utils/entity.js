@@ -56,16 +56,6 @@ export const generateEntity = ({
     generateChildren(entityId, entityType);
   }
 
-  console.log(
-    {
-      sector,
-      ...configuration,
-      name: name || configuration.name,
-      ...parameters,
-    },
-    configuration,
-  );
-
   return {
     [entityType]: {
       [entityId]: EntityGenerators[entityType].generateOne({

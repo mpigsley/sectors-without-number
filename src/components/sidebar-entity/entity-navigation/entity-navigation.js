@@ -20,7 +20,7 @@ export default function EntityNavigation({
   activateSidebarEdit,
   deactivateSidebarEdit,
   saveEntityEdit,
-  deleteEntity,
+  onDeleteEntity,
   saveSector,
   isSaved,
   isSynced,
@@ -69,7 +69,7 @@ export default function EntityNavigation({
   let deleteButton = null;
   if (isSaved && !isCloudSave) {
     deleteButton = (
-      <Button minimal onClick={deleteEntity}>
+      <Button minimal onClick={onDeleteEntity}>
         Delete
       </Button>
     );
@@ -180,7 +180,7 @@ EntityNavigation.propTypes = {
   activateSidebarEdit: PropTypes.func.isRequired,
   deactivateSidebarEdit: PropTypes.func.isRequired,
   saveEntityEdit: PropTypes.func.isRequired,
-  deleteEntity: PropTypes.func.isRequired,
+  onDeleteEntity: PropTypes.func.isRequired,
   saveSector: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSynced: PropTypes.bool.isRequired,
