@@ -31,7 +31,7 @@ import {
 } from 'utils/entity';
 import { coordinatesFromKey } from 'utils/common';
 import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
-import { saveEntity, saveEntities, deleteEntities } from 'store/utils';
+import { saveEntities, deleteEntities } from 'store/utils';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
@@ -73,14 +73,6 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
   let entities = {
     [holdEntity.entityType]: { [holdEntity.entityId]: holdUpdate },
   };
-  const promises = [
-    saveEntity({
-      state,
-      entityId: holdEntity.entityId,
-      entityType: holdEntity.entityType,
-      update: holdUpdate,
-    }),
-  ];
   if (hoverEntity.entity) {
     const hoverUpdate = {
       ...hoverEntity.entity,
@@ -94,17 +86,10 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
         [hoverEntity.entityId]: hoverUpdate,
       },
     };
-    promises.push(
-      saveEntity({
-        state,
-        entityId: hoverEntity.entityId,
-        entityType: hoverEntity.entityType,
-        update: hoverUpdate,
-      }),
-    );
   }
+  console.log(entities);
   dispatch({ type: UPDATE_ENTITIES, entities });
-  return Promise.all(promises).then(([action]) => dispatch(action));
+  return saveEntities({ state, entities }).then(dispatch);
 };
 
 export const deleteEntity = () => (dispatch, getState) => {

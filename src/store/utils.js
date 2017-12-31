@@ -98,7 +98,7 @@ export const saveEntities = ({ state, updated, deleted, entities }) => {
     } else {
       // persist updates, deletions, and creations
       promise = Promise.all([
-        setEntities(updated),
+        setEntities(updated || entities),
         localDeleteEntities(deleted),
       ]);
     }
