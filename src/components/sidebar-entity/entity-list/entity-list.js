@@ -11,7 +11,7 @@ import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 import Dice from 'primitives/icons/dice';
 
-import { sortByKey, coordinateKey } from 'utils/common';
+import { sortByKey, coordinateKey, toCommaArray } from 'utils/common';
 import Entities from 'constants/entities';
 
 import EntityLinkRow from '../entity-link-row';
@@ -105,7 +105,10 @@ export default function EntityList({
         entityId: key,
         additional: Entities[entityType].topLevel
           ? coordinateKey(entity.x, entity.y)
-          : undefined,
+          : ((entity.attributes || {}).tags || [])
+              .map(tag => Entities[entityType].tags[tag].name)
+              .map(toCommaArray)
+              .join(''),
         sort: isNumber(entity.sort)
           ? -entity.sort
           : Entities[entityType].topLevel
