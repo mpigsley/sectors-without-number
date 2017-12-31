@@ -10,6 +10,7 @@ import {
   size,
 } from 'lodash';
 
+import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
 import {
   configurationSelector,
   currentSectorSelector,
@@ -24,14 +25,15 @@ import {
   getCurrentEntityId,
   getCurrentEntity,
 } from 'store/selectors/entity.selectors';
+
 import {
   generateEntity as generateEntityUtil,
   deleteEntity as deleteEntityUtil,
   getTopLevelEntity,
 } from 'utils/entity';
 import { coordinatesFromKey } from 'utils/common';
-import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
 import { saveEntities, deleteEntities } from 'store/utils';
+import Entities from 'constants/entities';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
@@ -58,6 +60,11 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   ) {
     dispatch(push(`/sector/${newSectorKeys[0]}`));
   }
+
+  if (entity.entityType !== Entities.sector.key) {
+    return saveEntities({ state, entities }).then(dispatch);
+  }
+  return Promise.resolve();
 };
 
 export const moveTopLevelEntity = () => (dispatch, getState) => {
@@ -87,7 +94,6 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
       },
     };
   }
-  console.log(entities);
   dispatch({ type: UPDATE_ENTITIES, entities });
   return saveEntities({ state, entities }).then(dispatch);
 };
