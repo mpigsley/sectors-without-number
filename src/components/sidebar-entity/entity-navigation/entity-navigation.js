@@ -49,7 +49,7 @@ export default function EntityNavigation({
   }
 
   let editButton = null;
-  if (!isCloudSave && !isSidebarEditActive) {
+  if (!isCloudSave) {
     editButton = (
       <Button minimal onClick={activateSidebarEdit}>
         Edit
@@ -108,7 +108,33 @@ export default function EntityNavigation({
       </FlexContainer>
     </div>
   );
-  if (isSidebarEditActive) {
+
+  let subHeader = null;
+  if (!isSidebarEditActive) {
+    subHeader = (
+      <FlexContainer
+        justify="center"
+        shrink="0"
+        className="EntityNavigation-SubHeader"
+      >
+        <ButtonLink minimal to={backUrl}>
+          Back
+        </ButtonLink>
+        <span className="EntityNavigation-Spacer" />
+        {saveButton}
+        {saveButton ? <span className="EntityNavigation-Spacer" /> : null}
+        {editButton}
+        {editButton ? <span className="EntityNavigation-Spacer" /> : null}
+        {deleteButton}
+        {deleteButton ? <span className="EntityNavigation-Spacer" /> : null}
+        {shareButton}
+        {shareButton ? <span className="EntityNavigation-Spacer" /> : null}
+        <Button minimal onClick={onPrint}>
+          Print
+        </Button>
+      </FlexContainer>
+    );
+  } else {
     footer = (
       <FlexContainer>
         <button
@@ -141,23 +167,7 @@ export default function EntityNavigation({
             </Header>
           </FlexContainer>
         </FlexContainer>
-        <FlexContainer justify="center" shrink="0">
-          <ButtonLink minimal to={backUrl}>
-            Back
-          </ButtonLink>
-          <span className="EntityNavigation-Spacer" />
-          {saveButton}
-          {saveButton ? <span className="EntityNavigation-Spacer" /> : null}
-          {editButton}
-          {editButton ? <span className="EntityNavigation-Spacer" /> : null}
-          {deleteButton}
-          {deleteButton ? <span className="EntityNavigation-Spacer" /> : null}
-          {shareButton}
-          {shareButton ? <span className="EntityNavigation-Spacer" /> : null}
-          <Button minimal onClick={onPrint}>
-            Print
-          </Button>
-        </FlexContainer>
+        {subHeader}
       </div>
       <FlexContainer direction="column" flex="1" scroll>
         {children}

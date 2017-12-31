@@ -95,12 +95,13 @@ export default function EntityTags({
             minimal
             className="EntityTags-AddButton"
             onClick={() => {
-              if (includes(entity.attributes.tags, '')) {
+              const attributeTags = (entity.attributes || {}).tags || [];
+              if (includes(attributeTags, '')) {
                 return;
               }
               updateEntityInEdit({
                 attributes: {
-                  tags: entity.attributes.tags.concat(['']),
+                  tags: attributeTags.concat(['']),
                 },
               });
             }}
