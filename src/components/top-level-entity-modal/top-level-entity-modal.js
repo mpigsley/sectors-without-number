@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw, X, Plus } from 'react-feather';
 import Chance from 'chance';
-import { map, zipObject, omit } from 'lodash';
+import { map, zipObject, omit, values } from 'lodash';
 import ReactHintFactory from 'react-hint';
 
 import Modal from 'primitives/modal/modal';
@@ -14,7 +14,7 @@ import FlexContainer from 'primitives/container/flex-container';
 import Dice from 'primitives/icons/dice';
 
 import Entities from 'constants/entities';
-import { createId } from 'utils/common';
+import { createId, coordinatesFromKey } from 'utils/common';
 
 import './style.css';
 
@@ -32,7 +32,13 @@ const generatePlanetNames = () => {
 export default class TopLevelEntityModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
+    topLevelKey: PropTypes.string,
     cancelTopLevelEntityCreate: PropTypes.func.isRequired,
+    generateEntity: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    topLevelKey: '',
   };
 
   state = {
@@ -110,9 +116,18 @@ export default class TopLevelEntityModal extends Component {
     });
   };
 
-  onSubmit = () => {
-    // figure this out
-  };
+  onSubmit = () =>
+    this.props.generateEntity(
+      {
+        name: this.state.name,
+        entityType: this.state.entityType,
+      },
+      {
+        generate: true,
+        children: { [Entities.planet.key]: values(this.state.children) },
+        ...coordinatesFromKey(this.props.topLevelKey),
+      },
+    );
 
   renderEditRow = ({ name, generate }, key) => (
     <FlexContainer

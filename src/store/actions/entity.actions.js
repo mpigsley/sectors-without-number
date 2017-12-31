@@ -37,13 +37,10 @@ export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
 export const SAVE_SECTOR = 'SAVE_SECTOR';
 
-export const generateEntity = (entityType, parameters) => (
-  dispatch,
-  getState,
-) => {
+export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   const state = getState();
   const entities = generateEntityUtil({
-    entityType,
+    entity,
     currentSector: currentSectorSelector(state),
     configuration: configurationSelector(state),
     parameters,

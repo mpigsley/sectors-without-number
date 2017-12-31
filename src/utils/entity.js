@@ -16,11 +16,12 @@ import { createId, coordinateKey } from 'utils/common';
 import Entities from 'constants/entities';
 
 export const generateEntity = ({
-  entityType,
+  entity,
   currentSector,
   configuration,
-  parameters,
+  parameters = {},
 }) => {
+  const { entityType, name } = entity;
   const entityId = createId();
   const sector = entityType === Entities.sector.key ? entityId : currentSector;
 
@@ -31,6 +32,7 @@ export const generateEntity = ({
         sector,
         parent,
         parentEntity,
+        children: (parameters.children || {})[childEntity],
         ...configuration,
       });
       const childrenObj = zipObject(children.map(() => createId()), children);
@@ -58,6 +60,7 @@ export const generateEntity = ({
     [entityType]: {
       [entityId]: EntityGenerators[entityType].generateOne({
         sector,
+        name,
         ...configuration,
         ...parameters,
       }),

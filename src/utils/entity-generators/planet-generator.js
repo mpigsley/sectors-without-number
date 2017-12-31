@@ -75,15 +75,20 @@ export const generatePlanet = ({
   return planet;
 };
 
-export const generatePlanets = ({ sector, parent, parentEntity }) => {
-  const chance = new Chance();
-  const numPlanets = chance.weighted([1, 2, 3], [5, 3, 2]);
-
-  return [...Array(numPlanets)].map(() =>
+export const generatePlanets = ({
+  sector,
+  parent,
+  parentEntity,
+  children = [...Array(new Chance().weighted([1, 2, 3], [5, 3, 2]))],
+}) => {
+  console.log(children);
+  return children.map(({ name, generate } = {}) =>
     generatePlanet({
       sector,
       parent,
       parentEntity,
+      name,
+      generate,
     }),
   );
 };

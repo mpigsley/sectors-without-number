@@ -12,7 +12,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateConfiguration: (key, value) =>
     dispatch(updateConfiguration(key, value)),
-  generateSector: () => dispatch(generateEntity(Entities.sector.key)),
+  generateSector: () =>
+    dispatch(generateEntity({ entityType: Entities.sector.key })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Configure);
