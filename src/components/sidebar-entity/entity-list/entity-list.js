@@ -28,7 +28,10 @@ export default function EntityList({
   editableEntities,
   createChildInEdit,
 }) {
-  if (!size(entities)) {
+  if (
+    (!size(entities) && !isSidebarEditActive) ||
+    !Entities[entityType].isAvailable
+  ) {
     return null;
   }
 
@@ -56,7 +59,7 @@ export default function EntityList({
   };
 
   const renderEntitySubHeader = () => {
-    if (!isSidebarEditActive) {
+    if (!isSidebarEditActive || !size(entities)) {
       return null;
     }
     return (

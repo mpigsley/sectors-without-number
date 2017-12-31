@@ -26,7 +26,6 @@ const generatePlanetNames = () => {
     name: Entities.planet.nameGenerator(),
     generate: true,
   }));
-  console.log(numPlanetArray, planetsList);
   return zipObject(planetsList.map(() => createId()), planetsList);
 };
 

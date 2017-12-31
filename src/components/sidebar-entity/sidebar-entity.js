@@ -11,8 +11,6 @@ import EntityAttributes from './entity-attributes';
 import EntityList from './entity-list';
 import EntityNavigation from './entity-navigation';
 
-import './style.css';
-
 export default class EntityInfo extends Component {
   static propTypes = {
     entityChildren: PropTypes.shape().isRequired,
@@ -24,6 +22,7 @@ export default class EntityInfo extends Component {
       attributes: PropTypes.shape(),
     }).isRequired,
     deleteEntity: PropTypes.func.isRequired,
+    isSidebarEditActive: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -65,7 +64,8 @@ export default class EntityInfo extends Component {
   renderSectorBuilderText() {
     if (
       some(this.props.entityChildren, size) ||
-      this.props.entityType !== Entities.sector.key
+      this.props.entityType !== Entities.sector.key ||
+      this.props.isSidebarEditActive
     ) {
       return null;
     }

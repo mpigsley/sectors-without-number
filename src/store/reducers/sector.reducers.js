@@ -26,7 +26,7 @@ const initialState = {
   hoverKey: null,
   topLevelKey: null,
   configuration: {
-    sectorName: generateSectorName(),
+    name: generateSectorName(),
     isBuilder: false,
     columns: COLUMNS,
     rows: ROWS,
@@ -41,6 +41,7 @@ export default function sector(state = initialState, action) {
         return {
           ...initialState,
           renderSector: false,
+          saved: state.saved,
           configuration: {
             ...initialState.configuration,
             name: generateSectorName(),

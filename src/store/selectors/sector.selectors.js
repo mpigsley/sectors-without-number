@@ -26,11 +26,13 @@ export const isCurrentSectorSaved = createSelector(
 
 export const getEmptyHexKeys = createSelector(
   [getCurrentSector, sidebarEditChildrenSelector],
-  ({ rows, columns }, children) =>
-    difference(
+  ({ rows, columns }, children = {}) => {
+    console.log(Object.assign({}, ...values(children)));
+    return difference(
       allSectorKeys(columns, rows),
-      values(Object.assign(...values(children))).map(({ x, y }) =>
+      values(Object.assign({}, ...values(children))).map(({ x, y }) =>
         coordinateKey(x, y),
       ),
-    ),
+    );
+  },
 );

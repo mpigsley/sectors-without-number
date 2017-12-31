@@ -72,6 +72,7 @@ const planet = {
   name: 'Planet',
   topLevel: false,
   tags: WorldTags,
+  isAvailable: true,
   nameGenerator: generateName,
   attributes: [Atmosphere, Temperature, Biosphere, Population, TechLevel],
   children: [moon.key, orbitalRuin.key, researchBase.key, refuelingStation.key],
@@ -107,6 +108,7 @@ const system = {
   key: 'system',
   name: 'System',
   topLevel: true,
+  isAvailable: true,
   nameGenerator: generateName,
   children: [
     planet.key,
@@ -120,6 +122,7 @@ const sector = {
   key: 'sector',
   name: 'Sector',
   topLevel: false,
+  isAvailable: true,
   nameGenerator: generateSectorName,
   children: [system.key, deepSpaceStation.key, asteroidBelt.key, blackHole.key],
 };
