@@ -66,7 +66,7 @@ export default function sector(state = initialState, action) {
     case UPDATE_ENTITIES:
       return {
         ...state,
-        saved: uniq([...state.saved, state.currentSector]),
+        saved: uniq([...state.saved, state.currentSector]).filter(s => s),
         holdKey: null,
         hoverKey: null,
         topLevelKey: null,

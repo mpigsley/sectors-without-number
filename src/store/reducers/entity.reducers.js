@@ -1,7 +1,11 @@
-import { mapValues, omit } from 'lodash';
+import { mapValues, mapKeys, omit } from 'lodash';
 
 import Entities from 'constants/entities';
-import { UPDATE_ENTITIES, DELETE_ENTITIES } from 'store/actions/entity.actions';
+import {
+  UPDATE_ENTITIES,
+  DELETE_ENTITIES,
+  UPDATE_ID_MAPPING,
+} from 'store/actions/entity.actions';
 import { INITIALIZE } from 'store/actions/user.actions';
 import { mergeEntityUpdates } from 'utils/entity';
 
@@ -12,6 +16,26 @@ export default function entity(state = initialState, action) {
     case INITIALIZE:
     case UPDATE_ENTITIES:
       return mergeEntityUpdates(state, action.entities);
+    case UPDATE_ID_MAPPING:
+      return {
+        ...state,
+        ...mapValues(state, entities =>
+          mapValues(
+            mapKeys(entities, (_, key) => action.mapping[key] || key),
+            entityObj => {
+              const update = {
+                ...entityObj,
+                sector: action.mapping[entityObj.sector] || entityObj.sector,
+              };
+              if (entityObj.parent) {
+                update.parent =
+                  action.mapping[entityObj.parent] || entityObj.parent;
+              }
+              return update;
+            },
+          ),
+        ),
+      };
     case DELETE_ENTITIES:
       return {
         ...state,

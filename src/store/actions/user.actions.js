@@ -1,5 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { keys, values, zipObject } from 'lodash';
+import { keys, values } from 'lodash';
 import { push } from 'react-router-redux';
 
 import {
@@ -10,10 +10,9 @@ import {
   doLogin,
   doPasswordReset,
   doLogout,
-  uploadSector,
   getSyncedSectors,
 } from 'store/api/firebase';
-import { clearLocalDatabase } from 'store/api/local';
+// import { clearLocalDatabase } from 'store/api/local';
 import Entities from 'constants/entities';
 import { ErrorToast } from 'store/utils';
 import { mergeEntityUpdates } from 'utils/entity';
@@ -46,14 +45,15 @@ export const updateUserForm = (key, value) => ({
   value,
 });
 
-const syncLocalSectors = (sectors, creator) =>
-  Promise.all([
-    ...sectors.map(sector => uploadSector(sector, creator)),
-    clearLocalDatabase(),
-  ]).then(uploaded => {
-    uploaded.splice(-1, 1); // Remove `clearLocalDatabase`
-    return zipObject(uploaded.map(sector => sector.key), uploaded);
-  });
+const syncLocalSectors = () => Promise.resolve();
+// const syncLocalSectors = (sectors, creator) =>
+//   Promise.all([
+//     ...sectors.map(sector => uploadSector(sector, creator)),
+//     clearLocalDatabase(),
+//   ]).then(uploaded => {
+//     uploaded.splice(-1, 1); // Remove `clearLocalDatabase`
+//     return zipObject(uploaded.map(sector => sector.key), uploaded);
+//   });
 
 const onLogin = (dispatch, local) => result =>
   getSyncedSectors(result.user ? result.user.uid : result.uid)

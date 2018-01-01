@@ -14,6 +14,8 @@ import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
 import {
   configurationSelector,
   currentSectorSelector,
+  currentEntitySelector,
+  currentEntityTypeSelector,
   entitySelector,
   sidebarEditSelector,
   holdKeySelector,
@@ -38,6 +40,26 @@ import Entities from 'constants/entities';
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
 export const SAVE_SECTOR = 'SAVE_SECTOR';
+export const UPDATE_ID_MAPPING = 'UPDATE_ID_MAPPING';
+
+const updateHandler = (state, dispatch) => ({ action, mapping }) => {
+  if (!mapping) {
+    return dispatch(action);
+  }
+  const currentEntity = currentEntitySelector(state);
+  const currentEntityType = currentEntityTypeSelector(state);
+  const entityUrl = currentEntity
+    ? `/${currentEntityType}/${mapping[currentEntity]}`
+    : '';
+  return Promise.all([
+    dispatch({ type: UPDATE_ID_MAPPING, mapping }),
+    dispatch(action),
+  ]).then(() =>
+    dispatch(
+      push(`/sector/${mapping[currentSectorSelector(state)]}${entityUrl}`),
+    ),
+  );
+};
 
 export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   const state = getState();
@@ -62,7 +84,9 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   }
 
   if (entity.entityType !== Entities.sector.key) {
-    return saveEntities({ state, entities }).then(dispatch);
+    return saveEntities({ state, entities }).then(
+      updateHandler(state, dispatch),
+    );
   }
   return Promise.resolve();
 };
@@ -95,7 +119,7 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
     };
   }
   dispatch({ type: UPDATE_ENTITIES, entities });
-  return saveEntities({ state, entities }).then(dispatch);
+  return saveEntities({ state, entities }).then(updateHandler(state, dispatch));
 };
 
 export const deleteEntity = () => (dispatch, getState) => {
@@ -120,13 +144,15 @@ export const deleteEntity = () => (dispatch, getState) => {
     type: DELETE_ENTITIES,
     entities: deleted,
   });
-  return deleteEntities({ state, deleted }).then(dispatch);
+  return deleteEntities({ state, deleted }).then(
+    updateHandler(state, dispatch),
+  );
 };
 
 export const saveSector = () => (dispatch, getState) => {
   const state = getState();
   dispatch({ type: SAVE_SECTOR });
-  return saveEntities({ state }).then(dispatch);
+  return saveEntities({ state }).then(updateHandler(state, dispatch));
 };
 
 export const saveEntityEdit = () => (dispatch, getState) => {
@@ -204,7 +230,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
       entities: filteredUpdatedEntities,
       updated: onlyUpdated,
       deleted: deletedEntities,
-    }).then(dispatch);
+    }).then(updateHandler(state, dispatch));
   }
   return dispatch({ type: DEACTIVATE_SIDEBAR_EDIT });
 };

@@ -85,20 +85,8 @@ export const uploadEntities = (entities, uid, sectorId) => {
       ),
     );
 
-  return saveEntityTree();
+  return saveEntityTree().then(() => keyMapping);
 };
-
-export const uploadSector = (sector, uid) =>
-  Firestore()
-    .collection('sectors')
-    .add({
-      ...sector,
-      creator: uid,
-      created: Firestore.FieldValue.serverTimestamp(),
-      updated: Firestore.FieldValue.serverTimestamp(),
-    })
-    .then(docRef => docRef.update({ key: docRef.id }).then(() => docRef))
-    .then(docRef => ({ ...sector, key: docRef.id }));
 
 export const getSyncedSectors = uid => {
   let entities = {};
