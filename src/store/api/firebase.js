@@ -1,4 +1,7 @@
 import { auth as FirebaseAuth, firestore as Firestore } from 'firebase';
+import { size, values, map, flatten, includes } from 'lodash';
+
+import Entities from 'constants/entities';
 
 export const getCurrentUser = () =>
   new Promise(resolve => {
@@ -31,6 +34,60 @@ export const doLogout = () => FirebaseAuth().signOut();
 export const doPasswordReset = email =>
   FirebaseAuth().sendPasswordResetEmail(email);
 
+export const uploadEntities = (entities, uid, sectorId) => {
+  if (!sectorId && !size(entities[Entities.sector.key])) {
+    throw new Error(
+      'To save entities a new sector must exist or an existing sector should be given',
+    );
+  }
+
+  let savableSectorId = sectorId;
+  const allKeys = flatten(values(map(entities, Object.keys)));
+  const keyMapping = {};
+  const saveEntityTree = (parentId, newParentId) =>
+    Promise.all(
+      map(entities, (entityTypes, entityType) =>
+        Promise.all(
+          map(entityTypes, (entity, oldId) => {
+            if (
+              parentId !== entity.parent &&
+              (parentId || includes(allKeys, entity.parent))
+            ) {
+              return Promise.resolve();
+            }
+
+            const timestamp = Firestore.FieldValue.serverTimestamp();
+            const savableEntity = {
+              ...entity,
+              created: timestamp,
+              updated: timestamp,
+            };
+            if (entityType === Entities.sector.key) {
+              savableEntity.creator = uid;
+            } else if (newParentId) {
+              savableEntity.parent = newParentId;
+              savableEntity.sector = savableSectorId;
+            }
+            return Firestore()
+              .collection('entities')
+              .doc(entityType)
+              .collection('entity')
+              .add(savableEntity)
+              .then(docRef => {
+                keyMapping[oldId] = docRef.id;
+                if (entityType === Entities.sector.key) {
+                  savableSectorId = docRef.id;
+                }
+                return saveEntityTree(oldId, docRef.id);
+              });
+          }),
+        ),
+      ),
+    );
+
+  return saveEntityTree();
+};
+
 export const uploadSector = (sector, uid) =>
   Firestore()
     .collection('sectors')
@@ -43,18 +100,51 @@ export const uploadSector = (sector, uid) =>
     .then(docRef => docRef.update({ key: docRef.id }).then(() => docRef))
     .then(docRef => ({ ...sector, key: docRef.id }));
 
-export const getSyncedSectors = userId =>
-  Firestore()
-    .collection('sectors')
-    .where('creator', '==', userId)
+export const getSyncedSectors = uid => {
+  let entities = {};
+  return Firestore()
+    .collection('entities')
+    .doc(Entities.sector.key)
+    .collection('entity')
+    .where('creator', '==', uid)
     .get()
     .then(snapshot => {
-      const synced = {};
+      const promises = [];
       snapshot.forEach(doc => {
-        synced[doc.id] = doc.data();
+        entities = {
+          ...entities,
+          [Entities.sector.key]: {
+            ...entities[Entities.sector.key],
+            [doc.id]: doc.data(),
+          },
+        };
+        promises.push(
+          Promise.all(
+            map(Entities, ({ key }) =>
+              Firestore()
+                .collection('entities')
+                .doc(key)
+                .collection('entity')
+                .where('sector', '==', doc.id)
+                .get()
+                .then(typeSnapshot => {
+                  typeSnapshot.forEach(typeDoc => {
+                    entities = {
+                      ...entities,
+                      [key]: {
+                        ...entities[key],
+                        [typeDoc.id]: typeDoc.data(),
+                      },
+                    };
+                  });
+                }),
+            ),
+          ),
+        );
       });
-      return synced;
+      return Promise.all(promises).then(() => entities);
     });
+};
 
 export const getCurrentSector = sectorId =>
   Firestore()

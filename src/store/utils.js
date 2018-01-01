@@ -1,7 +1,9 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
+import { pickBy, size } from 'lodash';
 
 import {
   userModelSelector,
+  userUidSelector,
   currentEntityTypeSelector,
 } from 'store/selectors/base.selectors';
 import { getCurrentEntities } from 'store/selectors/entity.selectors';
@@ -13,6 +15,7 @@ import {
   setEntities,
   deleteEntities as localDeleteEntities,
 } from 'store/api/local';
+import { uploadEntities } from 'store/api/firebase';
 import Entities from 'constants/entities';
 
 export const SuccessToast = ({
@@ -81,18 +84,15 @@ export const deleteEntities = ({ state, deleted }) => {
         message: `Your ${entityName} has been successfully removed.`,
       }),
     )
-    .catch(err => {
-      console.log(err);
-      ErrorToast();
-    });
+    .catch(() => ErrorToast());
 };
 
 export const saveEntities = ({ state, updated, deleted, entities }) => {
-  const isLoggedIn = !!userModelSelector(state);
+  const uid = userUidSelector(state);
   const isSaved = isCurrentSectorSaved(state);
   let promise;
   if (isSaved) {
-    if (isLoggedIn) {
+    if (uid) {
       // sync updates, deletions, and creations
       promise = Promise.resolve();
     } else {
@@ -103,10 +103,12 @@ export const saveEntities = ({ state, updated, deleted, entities }) => {
       ]);
     }
   } else {
-    const updates = mergeEntityUpdates(getCurrentEntities(state), entities);
-    if (isLoggedIn) {
-      // sync full sector
-      promise = Promise.resolve();
+    const updates = pickBy(
+      mergeEntityUpdates(getCurrentEntities(state), entities),
+      size,
+    );
+    if (uid) {
+      promise = uploadEntities(updates, uid);
     } else {
       promise = setEntities(updates);
     }

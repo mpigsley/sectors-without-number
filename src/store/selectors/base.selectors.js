@@ -2,6 +2,7 @@
 export const userModelSelector = state => state.user.model;
 export const isDropdownActiveSelector = state => state.user.isDropdownActive;
 export const isInitializedSelector = state => state.user.isInitialized;
+export const userUidSelector = state => (state.user.model || {}).uid;
 
 /* Entity */
 export const entitySelector = state => state.entity;

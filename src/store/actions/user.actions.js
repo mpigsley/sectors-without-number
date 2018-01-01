@@ -16,6 +16,7 @@ import {
 import { clearLocalDatabase } from 'store/api/local';
 import Entities from 'constants/entities';
 import { ErrorToast } from 'store/utils';
+import { mergeEntityUpdates } from 'utils/entity';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
 export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
@@ -96,12 +97,11 @@ export const initialize = ({
   // currentSector,
 }) => dispatch => {
   // Sync local sectors if user exists
-  // Combine local and saved entities
   // Set current sector if viewing another user's sector
   dispatch({
     type: INITIALIZE,
     user,
-    entities: local,
+    entities: mergeEntityUpdates(local, synced),
     saved: [
       ...keys(synced[Entities.sector.key]),
       ...keys(local[Entities.sector.key]),

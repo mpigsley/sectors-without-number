@@ -111,7 +111,7 @@ export const mergeEntityUpdates = (state, updates) => ({
           if (!thisEntity) {
             return null;
           }
-          const existingEntity = state[entityType][entityId] || {};
+          const existingEntity = (state[entityType] || {})[entityId] || {};
           const mergedEntity = {
             ...existingEntity,
             ...omit(thisEntity, blacklistedAttributes),
