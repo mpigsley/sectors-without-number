@@ -41,6 +41,7 @@ export default function Modal(props) {
   return (
     <ReactModal
       contentLabel={title}
+      ariaHideApp={false}
       {...rest}
       className={{
         base: classNames('Modal', props.className, {

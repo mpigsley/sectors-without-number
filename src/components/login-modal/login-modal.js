@@ -137,6 +137,7 @@ export default class ConfirmModal extends Component {
         onCancel={this.props.closeLoginModal}
         className="LoginModal"
         overlayClassName="LoginModal-Overlay"
+        ariaHideApp={false}
       >
         <X
           className="LoginModal-Close"

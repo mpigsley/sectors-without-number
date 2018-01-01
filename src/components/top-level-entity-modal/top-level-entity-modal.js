@@ -33,6 +33,7 @@ export default class TopLevelEntityModal extends Component {
   static propTypes = {
     isOpen: PropTypes.bool.isRequired,
     topLevelKey: PropTypes.string,
+    currentSector: PropTypes.string.isRequired,
     cancelTopLevelEntityCreate: PropTypes.func.isRequired,
     generateEntity: PropTypes.func.isRequired,
   };
@@ -126,6 +127,8 @@ export default class TopLevelEntityModal extends Component {
         generate: true,
         children: { [Entities.planet.key]: values(this.state.children) },
         ...coordinatesFromKey(this.props.topLevelKey),
+        parent: this.props.currentSector,
+        parentEntity: Entities.sector.key,
       },
     );
 
