@@ -1,6 +1,5 @@
 import {
   capitalizeFirstLetter,
-  isBetween,
   coordinateKey,
   coordinatesFromKey,
   allSectorKeys,
@@ -19,19 +18,6 @@ describe('capitalizeFirstLetter', () => {
     expect(capitalizeFirstLetter(undefined)).toEqual('');
     expect(capitalizeFirstLetter('')).toEqual('');
     expect(capitalizeFirstLetter()).toEqual('');
-  });
-});
-
-describe('isBetween', () => {
-  it('returns true if between', () => {
-    expect(isBetween(4, 4, 6)).toEqual(true);
-    expect(isBetween(5, 4, 6)).toEqual(true);
-    expect(isBetween(6, 4, 6)).toEqual(true);
-  });
-
-  it('returns false if not between', () => {
-    expect(isBetween(3, 4, 6)).toEqual(false);
-    expect(isBetween(7, 4, 6)).toEqual(false);
   });
 });
 
