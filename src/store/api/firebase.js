@@ -85,7 +85,7 @@ export const uploadEntities = (entities, uid, sectorId) => {
       ),
     );
 
-  return saveEntityTree().then(() => keyMapping);
+  return saveEntityTree().then(() => ({ mapping: keyMapping }));
 };
 
 export const getSyncedSectors = uid => {

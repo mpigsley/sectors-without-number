@@ -95,7 +95,7 @@ export const saveEntities = ({ state, updated, deleted, entities }) => {
     }
   }
   return promise
-    .then(mapping => ({
+    .then(({ mapping }) => ({
       action: SuccessToast(),
       mapping,
     }))
