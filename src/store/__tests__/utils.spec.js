@@ -1,6 +1,4 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { uploadSector, updateSyncedSector } from '../api/firebase';
-import { setSector } from '../api/local';
 
 import { SuccessToast, ErrorToast } from '../utils';
 

@@ -1,12 +1,15 @@
 import { connect } from 'react-redux';
 
-import { getCurrentSystems } from 'store/selectors/system.selectors';
-import { getCurrentPlanets } from 'store/selectors/planet.selectors';
+import { getCurrentEntities } from 'store/selectors/entity.selectors';
+import Entities from 'constants/entities';
 import PrintableSector from './printable-sector';
 
-const mapStateToProps = state => ({
-  systems: getCurrentSystems(state),
-  planets: getCurrentPlanets(state),
-});
+const mapStateToProps = state => {
+  const entities = getCurrentEntities(state);
+  return {
+    systems: entities[Entities.system.key],
+    planets: entities[Entities.planet.key],
+  };
+};
 
 export default connect(mapStateToProps)(PrintableSector);

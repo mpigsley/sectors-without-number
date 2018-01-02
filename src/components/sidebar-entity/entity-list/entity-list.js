@@ -21,13 +21,13 @@ import './style.css';
 
 const ReactHint = ReactHintFactory(React);
 
-export default function EntityList({
+const EntityList = ({
   entities,
   entityType,
   isSidebarEditActive,
   editableEntities,
   createChildInEdit,
-}) {
+}) => {
   if (
     (!size(entities) && !isSidebarEditActive) ||
     !Entities[entityType].isAvailable
@@ -100,27 +100,31 @@ export default function EntityList({
     <div>
       {renderEntityHeader(entityType)}
       {renderEntitySubHeader()}
-      {map(rowEntities, (entity, key) => ({
-        ...entity,
-        entityId: key,
-        additional: Entities[entityType].topLevel
-          ? coordinateKey(entity.x, entity.y)
-          : ((entity.attributes || {}).tags || [])
-              .map(tag => Entities[entityType].tags[tag].name)
-              .map(toCommaArray)
-              .join(''),
-        sort: isNumber(entity.sort)
-          ? -entity.sort
-          : Entities[entityType].topLevel
+      {map(rowEntities, (entity, key) => {
+        let sort = -entity.sort;
+        if (!isNumber(entity.sort)) {
+          sort = Entities[entityType].topLevel
             ? coordinateKey(entity.x, entity.y)
-            : entity.name,
-      }))
+            : entity.name;
+        }
+        return {
+          ...entity,
+          sort,
+          entityId: key,
+          additional: Entities[entityType].topLevel
+            ? coordinateKey(entity.x, entity.y)
+            : ((entity.attributes || {}).tags || [])
+                .map(tag => Entities[entityType].tags[tag].name)
+                .map(toCommaArray)
+                .join(''),
+        };
+      })
         .sort(sortByKey('sort'))
         .map(renderEntity)}
       <ReactHint events position="left" />
     </div>
   );
-}
+};
 
 EntityList.propTypes = {
   entities: PropTypes.shape().isRequired,
@@ -134,3 +138,5 @@ EntityList.defaultProps = {
   entityType: undefined,
   editableEntities: undefined,
 };
+
+export default EntityList;
