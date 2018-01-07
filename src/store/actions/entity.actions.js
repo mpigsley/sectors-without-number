@@ -53,16 +53,17 @@ const updateHandler = (state, dispatch) => ({ action, mapping }) => {
   const currentEntity = currentEntitySelector(state);
   const currentEntityType = currentEntityTypeSelector(state);
   const entityUrl = currentEntity
-    ? `/${currentEntityType}/${mapping[currentEntity]}`
+    ? `/${currentEntityType}/${mapping[currentEntity] || currentEntity}`
     : '';
   return Promise.all([
     dispatch({ type: UPDATE_ID_MAPPING, mapping }),
     dispatch(action),
-  ]).then(() =>
-    dispatch(
-      push(`/sector/${mapping[currentSectorSelector(state)]}${entityUrl}`),
-    ),
-  );
+  ]).then(() => {
+    const currentSector = currentSectorSelector(state);
+    return dispatch(
+      push(`/sector/${mapping[currentSector] || currentSector}${entityUrl}`),
+    );
+  });
 };
 
 export const generateEntity = (entity, parameters) => (dispatch, getState) => {
@@ -88,7 +89,7 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   }
 
   if (entity.entityType !== Entities.sector.key) {
-    return saveEntities({ state, entities }).then(
+    return saveEntities({ state, created: entities, entities }).then(
       updateHandler(state, dispatch),
     );
   }
@@ -125,7 +126,7 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
     };
   }
   dispatch({ type: UPDATE_ENTITIES, entities });
-  return saveEntities({ state, updated: entities }).then(
+  return saveEntities({ state, updated: entities, entities }).then(
     updateHandler(state, dispatch),
   );
 };
@@ -218,17 +219,21 @@ export const saveEntityEdit = () => (dispatch, getState) => {
     });
   }
 
-  const onlyUpdated = { ...updatedEntities };
-  updatedEntities = merge(updatedEntities, createdEntities);
-
-  updatedEntities = merge(
-    updatedEntities,
+  let allEntities = {
+    ...updatedEntities,
+    ...mapValues(createdEntities, (entityList, entityType) => ({
+      ...entityList,
+      ...(updatedEntities[entityType] || {}),
+    })),
+  };
+  allEntities = merge(
+    allEntities,
     mapValues(deletedEntities, deletedIds =>
       zipObject(deletedIds, deletedIds.map(() => null)),
     ),
   );
 
-  const filteredUpdatedEntities = pickBy(updatedEntities, size);
+  const filteredUpdatedEntities = pickBy(allEntities, size);
   if (size(filteredUpdatedEntities)) {
     dispatch({
       type: UPDATE_ENTITIES,
@@ -237,7 +242,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
     return saveEntities({
       state,
       entities: filteredUpdatedEntities,
-      updated: onlyUpdated,
+      updated: updatedEntities,
       created: createdEntities,
       deleted: deletedEntities,
     }).then(updateHandler(state, dispatch));

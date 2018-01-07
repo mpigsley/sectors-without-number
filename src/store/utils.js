@@ -4,6 +4,7 @@ import { pickBy, size, merge } from 'lodash';
 import {
   userModelSelector,
   userUidSelector,
+  currentSectorSelector,
   currentEntityTypeSelector,
 } from 'store/selectors/base.selectors';
 import { getCurrentEntities } from 'store/selectors/entity.selectors';
@@ -57,7 +58,6 @@ export const deleteEntities = ({ state, deleted }) => {
   }
   let promise;
   if (isLoggedIn) {
-    console.log(deleted);
     promise = syncDeleteEntities(deleted);
   } else {
     promise = localDeleteEntities(deleted);
@@ -70,7 +70,10 @@ export const deleteEntities = ({ state, deleted }) => {
         message: `Your ${entityName} has been successfully removed.`,
       }),
     }))
-    .catch(() => ErrorToast());
+    .catch(err => {
+      console.error(err);
+      return { action: ErrorToast() };
+    });
 };
 
 export const saveEntities = ({
@@ -86,10 +89,12 @@ export const saveEntities = ({
   if (isSaved) {
     if (uid) {
       // sync updates, deletions, and creations
+      console.log(created, deleted, updated);
       promise = Promise.all([
+        uploadEntities(created, uid, currentSectorSelector(state)),
         syncDeleteEntities(deleted),
         syncUpdateEntities(updated),
-      ]);
+      ]).then(([uploaded]) => ({ mapping: uploaded.mapping }));
     } else {
       promise = Promise.all([
         setEntities(merge(updated, created) || entities),
@@ -112,5 +117,8 @@ export const saveEntities = ({
       action: SuccessToast(),
       mapping,
     }))
-    .catch(() => ({ action: ErrorToast() }));
+    .catch(err => {
+      console.error(err);
+      return { action: ErrorToast() };
+    });
 };
