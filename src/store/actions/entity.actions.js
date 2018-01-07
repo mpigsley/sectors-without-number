@@ -2,6 +2,7 @@ import { push } from 'react-router-redux';
 import {
   mapValues,
   merge,
+  omit,
   omitBy,
   isNil,
   forEach,
@@ -105,11 +106,13 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
   const hoverEntity = getTopLevelEntity(topLevelEntities, hoverKey);
   const holdUpdate = { ...holdEntity.entity, ...coordinatesFromKey(hoverKey) };
   let entities = {
-    [holdEntity.entityType]: { [holdEntity.entityId]: holdUpdate },
+    [holdEntity.entityType]: {
+      [holdEntity.entityId]: omit(holdUpdate, ['numChildren', 'type']),
+    },
   };
   if (hoverEntity.entity) {
     const hoverUpdate = {
-      ...hoverEntity.entity,
+      ...omit(hoverEntity.entity, ['numChildren', 'type']),
       x: holdEntity.entity.x,
       y: holdEntity.entity.y,
     };
@@ -122,7 +125,9 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
     };
   }
   dispatch({ type: UPDATE_ENTITIES, entities });
-  return saveEntities({ state, entities }).then(updateHandler(state, dispatch));
+  return saveEntities({ state, updated: entities }).then(
+    updateHandler(state, dispatch),
+  );
 };
 
 export const deleteEntity = () => (dispatch, getState) => {
@@ -207,7 +212,6 @@ export const saveEntityEdit = () => (dispatch, getState) => {
     ),
   );
 
-  updatedEntities = merge(updatedEntities, createdEntities);
   if (entity.isUpdated) {
     updatedEntities = merge(updatedEntities, {
       [currentEntityType]: { [currentEntityId]: entity },
@@ -215,6 +219,8 @@ export const saveEntityEdit = () => (dispatch, getState) => {
   }
 
   const onlyUpdated = { ...updatedEntities };
+  updatedEntities = merge(updatedEntities, createdEntities);
+
   updatedEntities = merge(
     updatedEntities,
     mapValues(deletedEntities, deletedIds =>
@@ -232,6 +238,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
       state,
       entities: filteredUpdatedEntities,
       updated: onlyUpdated,
+      created: createdEntities,
       deleted: deletedEntities,
     }).then(updateHandler(state, dispatch));
   }

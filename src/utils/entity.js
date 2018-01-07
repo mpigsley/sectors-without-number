@@ -97,9 +97,11 @@ export const deleteEntity = ({ entityType, entityId, entities }) => {
 
 export const blacklistedAttributes = [
   'sort',
+  'numChildren',
   'generate',
   'isUpdated',
   'isCreated',
+  'type',
 ];
 export const mergeEntityUpdates = (state, updates) => ({
   ...state,

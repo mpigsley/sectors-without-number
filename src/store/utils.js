@@ -1,5 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { pickBy, size } from 'lodash';
+import { pickBy, size, merge } from 'lodash';
 
 import {
   userModelSelector,
@@ -17,6 +17,7 @@ import {
 import {
   uploadEntities,
   deleteEntities as syncDeleteEntities,
+  updateEntities as syncUpdateEntities,
 } from 'store/api/firebase';
 import Entities from 'constants/entities';
 
@@ -72,18 +73,26 @@ export const deleteEntities = ({ state, deleted }) => {
     .catch(() => ErrorToast());
 };
 
-export const saveEntities = ({ state, updated, deleted, entities }) => {
+export const saveEntities = ({
+  state,
+  updated,
+  created,
+  deleted,
+  entities,
+}) => {
   const uid = userUidSelector(state);
   const isSaved = isCurrentSectorSaved(state);
   let promise;
   if (isSaved) {
     if (uid) {
       // sync updates, deletions, and creations
-      promise = Promise.resolve();
-    } else {
-      // persist updates, deletions, and creations
       promise = Promise.all([
-        setEntities(updated || entities),
+        syncDeleteEntities(deleted),
+        syncUpdateEntities(updated),
+      ]);
+    } else {
+      promise = Promise.all([
+        setEntities(merge(updated, created) || entities),
         localDeleteEntities(deleted),
       ]);
     }

@@ -113,6 +113,25 @@ export const getSyncedSectors = uid => {
   ).then(() => entities);
 };
 
+export const updateEntities = entities =>
+  Promise.all(
+    map(entities, (entityUpdates, entityType) =>
+      Promise.all(
+        map(entityUpdates, (update, entityId) =>
+          Firestore()
+            .collection('entities')
+            .doc(entityType)
+            .collection('entity')
+            .doc(entityId)
+            .update({
+              ...update,
+              updated: Firestore.FieldValue.serverTimestamp(),
+            }),
+        ),
+      ),
+    ),
+  );
+
 export const deleteEntities = entities =>
   Promise.all(
     map(entities, (entityIds, entityType) =>
