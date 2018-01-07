@@ -8,6 +8,7 @@ import FlexContainer from 'primitives/container/flex-container';
 
 import { sortByKey, toCommaArray, coordinateKey } from 'utils/common';
 import WorldTags from 'constants/world-tags';
+import TechLevel from 'constants/tech-level';
 import Atmosphere from 'constants/atmosphere';
 import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
@@ -16,9 +17,9 @@ import Population from 'constants/population';
 import './style.css';
 
 const renderAttribute = (title, attribute, obj) =>
-  (!obj && !attribute) || (obj && !obj[attribute]) ? null : (
+  (!obj && !attribute) || (obj && !obj.attributes[attribute]) ? null : (
     <p className="PrintableSector-PlanetAttribute">
-      <b>{title}:</b> {obj ? obj[attribute].name : attribute}
+      <b>{title}:</b> {obj ? obj.attributes[attribute].name : attribute}
     </p>
   );
 
@@ -40,7 +41,7 @@ const renderPlanets = planets =>
           >
             {name}
           </Header>
-          {renderAttribute('Tech Level', attributes.techLevel)}
+          {renderAttribute('Tech Level', attributes.techLevel, TechLevel)}
           {renderAttribute('Atmosphere', attributes.atmosphere, Atmosphere)}
           {renderAttribute('Temperature', attributes.temperature, Temperature)}
           {renderAttribute('Biosphere', attributes.biosphere, Biosphere)}
