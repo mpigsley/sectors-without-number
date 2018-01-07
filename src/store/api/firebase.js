@@ -59,12 +59,11 @@ export const uploadEntities = (entities, uid, sectorId) => {
             const timestamp = Firestore.FieldValue.serverTimestamp();
             const savableEntity = {
               ...entity,
+              creator: uid,
               created: timestamp,
               updated: timestamp,
             };
-            if (entityType === Entities.sector.key) {
-              savableEntity.creator = uid;
-            } else if (newParentId) {
+            if (newParentId) {
               savableEntity.parent = newParentId;
               savableEntity.sector = savableSectorId;
             }
@@ -90,68 +89,42 @@ export const uploadEntities = (entities, uid, sectorId) => {
 
 export const getSyncedSectors = uid => {
   let entities = {};
-  return Firestore()
-    .collection('entities')
-    .doc(Entities.sector.key)
-    .collection('entity')
-    .where('creator', '==', uid)
-    .get()
-    .then(snapshot => {
-      const promises = [];
-      snapshot.forEach(doc => {
-        entities = {
-          ...entities,
-          [Entities.sector.key]: {
-            ...entities[Entities.sector.key],
-            [doc.id]: doc.data(),
-          },
-        };
-        promises.push(
-          Promise.all(
-            map(Entities, ({ key }) =>
-              Firestore()
-                .collection('entities')
-                .doc(key)
-                .collection('entity')
-                .where('sector', '==', doc.id)
-                .get()
-                .then(typeSnapshot => {
-                  typeSnapshot.forEach(typeDoc => {
-                    entities = {
-                      ...entities,
-                      [key]: {
-                        ...entities[key],
-                        [typeDoc.id]: typeDoc.data(),
-                      },
-                    };
-                  });
-                }),
-            ),
-          ),
-        );
-      });
-      return Promise.all(promises).then(() => entities);
-    });
+  return Promise.all(
+    map(Entities, ({ key }) =>
+      Firestore()
+        .collection('entities')
+        .doc(key)
+        .collection('entity')
+        .where('creator', '==', uid)
+        .get()
+        .then(typeSnapshot => {
+          typeSnapshot.forEach(doc => {
+            entities = {
+              ...entities,
+              [key]: {
+                ...entities[key],
+                [doc.id]: doc.data(),
+              },
+            };
+          });
+          return entities;
+        }),
+    ),
+  ).then(() => entities);
 };
 
-export const getCurrentSector = sectorId =>
-  Firestore()
-    .collection('sectors')
-    .doc(sectorId)
-    .get()
-    .then(doc => (doc.exists ? doc.data() : undefined));
-
-export const updateSyncedSector = (sectorId, sector) =>
-  Firestore()
-    .collection('sectors')
-    .doc(sectorId)
-    .update({
-      ...sector,
-      updated: Firestore.FieldValue.serverTimestamp(),
-    });
-
-export const removeSyncedSector = sectorId =>
-  Firestore()
-    .collection('sectors')
-    .doc(sectorId)
-    .delete();
+export const deleteEntities = entities =>
+  Promise.all(
+    map(entities, (entityIds, entityType) =>
+      Promise.all(
+        entityIds.map(entityId =>
+          Firestore()
+            .collection('entities')
+            .doc(entityType)
+            .collection('entity')
+            .doc(entityId)
+            .delete(),
+        ),
+      ),
+    ),
+  );

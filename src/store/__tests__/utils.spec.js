@@ -14,7 +14,6 @@ jest.mock('../api/local', () => ({
 
 jest.mock('../api/firebase', () => ({
   uploadSector: jest.fn(() => Promise.resolve()),
-  updateSyncedSector: jest.fn(() => Promise.resolve()),
 }));
 
 describe('Store Utils', () => {

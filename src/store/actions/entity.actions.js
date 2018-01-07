@@ -44,7 +44,10 @@ export const UPDATE_ID_MAPPING = 'UPDATE_ID_MAPPING';
 
 const updateHandler = (state, dispatch) => ({ action, mapping }) => {
   if (!mapping) {
-    return dispatch(action);
+    if (action) {
+      return dispatch(action);
+    }
+    return Promise.resolve();
   }
   const currentEntity = currentEntitySelector(state);
   const currentEntityType = currentEntityTypeSelector(state);

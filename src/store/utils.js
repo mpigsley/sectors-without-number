@@ -14,7 +14,10 @@ import {
   setEntities,
   deleteEntities as localDeleteEntities,
 } from 'store/api/local';
-import { uploadEntities } from 'store/api/firebase';
+import {
+  uploadEntities,
+  deleteEntities as syncDeleteEntities,
+} from 'store/api/firebase';
 import Entities from 'constants/entities';
 
 export const SuccessToast = ({
@@ -53,7 +56,8 @@ export const deleteEntities = ({ state, deleted }) => {
   }
   let promise;
   if (isLoggedIn) {
-    promise = Promise.resolve();
+    console.log(deleted);
+    promise = syncDeleteEntities(deleted);
   } else {
     promise = localDeleteEntities(deleted);
   }
