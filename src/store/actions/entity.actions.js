@@ -22,6 +22,7 @@ import {
   sidebarEditSelector,
   holdKeySelector,
   hoverKeySelector,
+  syncLockSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -36,7 +37,7 @@ import {
   getTopLevelEntity,
 } from 'utils/entity';
 import { coordinatesFromKey } from 'utils/common';
-import { saveEntities, deleteEntities } from 'store/utils';
+import { saveEntities, deleteEntities } from 'store/api/shared';
 import Entities from 'constants/entities';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
@@ -70,6 +71,9 @@ const updateHandler = (state, dispatch) => ({ action, mapping }) => {
 
 export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   const state = getState();
+  if (syncLockSelector(state)) {
+    return Promise.resolve();
+  }
   const entities = generateEntityUtil({
     entity,
     currentSector: currentSectorSelector(state),
@@ -90,16 +94,20 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
     dispatch(push(`/sector/${newSectorKeys[0]}`));
   }
 
+  console.log('here');
   if (entity.entityType !== Entities.sector.key) {
     return saveEntities({ state, created: entities, entities }).then(
       updateHandler(state, dispatch),
     );
   }
-  return Promise.resolve();
+  return dispatch(releaseSyncLock());
 };
 
 export const moveTopLevelEntity = () => (dispatch, getState) => {
   const state = getState();
+  if (syncLockSelector(state)) {
+    return Promise.resolve();
+  }
   const topLevelEntities = getCurrentTopLevelEntities(state);
   const holdEntity = getTopLevelEntity(
     topLevelEntities,
@@ -135,6 +143,9 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
 
 export const deleteEntity = () => (dispatch, getState) => {
   const state = getState();
+  if (syncLockSelector(state)) {
+    return Promise.resolve();
+  }
   const entity = getCurrentEntity(state);
   const currentSector = currentSectorSelector(state);
   if (!entity.parent) {
@@ -162,12 +173,18 @@ export const deleteEntity = () => (dispatch, getState) => {
 
 export const saveSector = () => (dispatch, getState) => {
   const state = getState();
+  if (syncLockSelector(state)) {
+    return Promise.resolve();
+  }
   dispatch({ type: SAVE_SECTOR });
   return saveEntities({ state }).then(updateHandler(state, dispatch));
 };
 
 export const saveEntityEdit = () => (dispatch, getState) => {
   const state = getState();
+  if (syncLockSelector(state)) {
+    return Promise.resolve();
+  }
   const currentEntityType = getCurrentEntityType(state);
   const currentEntityId = getCurrentEntityId(state);
   const { entity, children } = sidebarEditSelector(state);
