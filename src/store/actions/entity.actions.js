@@ -12,6 +12,7 @@ import {
 } from 'lodash';
 
 import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
+import { releaseSyncLock } from 'store/actions/sector.actions';
 import {
   configurationSelector,
   currentSectorSelector,
@@ -44,11 +45,12 @@ export const SAVE_SECTOR = 'SAVE_SECTOR';
 export const UPDATE_ID_MAPPING = 'UPDATE_ID_MAPPING';
 
 const updateHandler = (state, dispatch) => ({ action, mapping }) => {
+  const dispatches = [dispatch(releaseSyncLock())];
+  if (action) {
+    dispatches.push(dispatch(action));
+  }
   if (!mapping) {
-    if (action) {
-      return dispatch(action);
-    }
-    return Promise.resolve();
+    return Promise.all(dispatches);
   }
   const currentEntity = currentEntitySelector(state);
   const currentEntityType = currentEntityTypeSelector(state);
@@ -56,8 +58,8 @@ const updateHandler = (state, dispatch) => ({ action, mapping }) => {
     ? `/${currentEntityType}/${mapping[currentEntity] || currentEntity}`
     : '';
   return Promise.all([
+    ...dispatches,
     dispatch({ type: UPDATE_ID_MAPPING, mapping }),
-    dispatch(action),
   ]).then(() => {
     const currentSector = currentSectorSelector(state);
     return dispatch(
@@ -247,5 +249,8 @@ export const saveEntityEdit = () => (dispatch, getState) => {
       deleted: deletedEntities,
     }).then(updateHandler(state, dispatch));
   }
-  return dispatch({ type: DEACTIVATE_SIDEBAR_EDIT });
+  return Promise.all([
+    dispatch({ type: DEACTIVATE_SIDEBAR_EDIT }),
+    dispatch(releaseSyncLock()),
+  ]);
 };

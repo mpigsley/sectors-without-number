@@ -88,8 +88,6 @@ export const saveEntities = ({
   let promise;
   if (isSaved) {
     if (uid) {
-      // sync updates, deletions, and creations
-      console.log(created, deleted, updated);
       promise = Promise.all([
         uploadEntities(created, uid, currentSectorSelector(state)),
         syncDeleteEntities(deleted),

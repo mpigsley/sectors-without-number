@@ -7,10 +7,15 @@ import {
   RELEASE_HOLD,
   ENTITY_HOVER_START,
   ENTITY_HOVER_END,
+  RELEASE_SYNC_LOCK,
   TOP_LEVEL_ENTITY_CREATE,
 } from 'store/actions/sector.actions';
+import {
+  SAVE_SECTOR,
+  UPDATE_ENTITIES,
+  DELETE_ENTITIES,
+} from 'store/actions/entity.actions';
 import { INITIALIZE } from 'store/actions/user.actions';
-import { SAVE_SECTOR, UPDATE_ENTITIES } from 'store/actions/entity.actions';
 
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
@@ -25,6 +30,7 @@ const initialState = {
   holdKey: null,
   hoverKey: null,
   topLevelKey: null,
+  syncLock: false,
   configuration: {
     name: generateSectorName(),
     isBuilder: false,
@@ -64,17 +70,14 @@ export default function sector(state = initialState, action) {
     }
     case SAVE_SECTOR:
     case UPDATE_ENTITIES:
+    case DELETE_ENTITIES:
       return {
         ...state,
         saved: uniq([...state.saved, state.currentSector]).filter(s => s),
         holdKey: null,
         hoverKey: null,
         topLevelKey: null,
-      };
-    case INITIALIZE:
-      return {
-        ...state,
-        saved: action.saved,
+        syncLock: true,
       };
     case UPDATE_CONFIGURATION:
       return {
@@ -92,6 +95,10 @@ export default function sector(state = initialState, action) {
       return { ...state, hoverKey: action.key };
     case ENTITY_HOVER_END:
       return { ...state, hoverKey: null };
+    case RELEASE_SYNC_LOCK:
+      return { ...state, syncLock: false };
+    case INITIALIZE:
+      return { ...state, saved: action.saved };
     case TOP_LEVEL_ENTITY_CREATE:
       return { ...state, topLevelKey: action.key };
     case CANCEL_TOP_LEVEL_ENTITY_CREATE:
