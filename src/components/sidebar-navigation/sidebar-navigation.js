@@ -141,7 +141,7 @@ export default function SidebarNavigation({
           </ButtonLink>
           <span className="SidebarNavigation-Spacer" />
           <ButtonLink minimal to="/changelog">
-            Changlog
+            Changelog
           </ButtonLink>
           <span className="SidebarNavigation-Spacer" />
           <ButtonLink
