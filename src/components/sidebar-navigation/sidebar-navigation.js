@@ -151,6 +151,14 @@ export default function SidebarNavigation({
           >
             Github
           </ButtonLink>
+          <span className="SidebarNavigation-Spacer" />
+          <ButtonLink
+            minimal
+            to="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=H3JGPZYSSK66W&lc=US&item_name=Sectors%20Without%20Number&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"
+            target="_blank"
+          >
+            Donate
+          </ButtonLink>
         </FlexContainer>
       </div>
     </FlexContainer>
