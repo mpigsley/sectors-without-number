@@ -1,5 +1,5 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { uniq } from 'lodash';
+import { uniq, keys } from 'lodash';
 
 import {
   UPDATE_CONFIGURATION,
@@ -9,6 +9,7 @@ import {
   ENTITY_HOVER_END,
   RELEASE_SYNC_LOCK,
   TOP_LEVEL_ENTITY_CREATE,
+  CANCEL_TOP_LEVEL_ENTITY_CREATE,
 } from 'store/actions/sector.actions';
 import {
   SAVE_SECTOR,
@@ -16,12 +17,11 @@ import {
   DELETE_ENTITIES,
   UPDATE_ID_MAPPING,
 } from 'store/actions/entity.actions';
-import { INITIALIZE, LOGGED_OUT } from 'store/actions/user.actions';
+import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
 import Entities from 'constants/entities';
-import { CANCEL_TOP_LEVEL_ENTITY_CREATE } from '../actions/sector.actions';
 
 const initialState = {
   renderSector: false,
@@ -93,6 +93,11 @@ export default function sector(state = initialState, action) {
         syncLock: true,
       };
     }
+    case LOGGED_IN:
+      return {
+        ...state,
+        saved: keys(action.entities[Entities.sector.key] || {}),
+      };
     case LOGGED_OUT:
       return {
         ...state,

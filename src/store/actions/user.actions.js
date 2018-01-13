@@ -1,5 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { keys, values } from 'lodash';
+import { keys } from 'lodash';
 import { push } from 'react-router-redux';
 
 import {
@@ -45,7 +45,6 @@ export const updateUserForm = (key, value) => ({
   value,
 });
 
-const syncLocalSectors = () => Promise.resolve();
 // const syncLocalSectors = (sectors, creator) =>
 //   Promise.all([
 //     ...sectors.map(sector => uploadSector(sector, creator)),
@@ -58,30 +57,18 @@ const syncLocalSectors = () => Promise.resolve();
 const onLogin = (dispatch, local) => result =>
   getSyncedSectors(result.user ? result.user.uid : result.uid)
     .then(synced => {
-      const filteredLocal = values(local).filter(
-        ({ isCloudSave }) => !isCloudSave,
-      );
-      if (!filteredLocal.length) {
-        return { sectors: synced, didSyncLocal: false };
-      }
-      return syncLocalSectors(
-        filteredLocal,
-        result.user ? result.user.uid : result.uid,
-      ).then(uploaded => ({
-        didSyncLocal: true,
-        sectors: {
-          ...synced,
-          ...uploaded,
-        },
-      }));
+      // Filter out cloud saves
+      // Check if any local sectors or return early with synced sectors
+      // syncLocalSectors
+      return { entities: synced, didSyncLocal: false };
     })
-    .then(({ sectors, didSyncLocal }) => {
+    .then(({ entities, didSyncLocal }) => {
       dispatch(push('/'));
       dispatch({
         type: LOGGED_IN,
         user: result.user ? result.user.toJSON() : result.toJSON(),
         didSyncLocal,
-        sectors,
+        entities,
       });
       return result;
     })

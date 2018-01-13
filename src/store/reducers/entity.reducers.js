@@ -6,7 +6,7 @@ import {
   DELETE_ENTITIES,
   UPDATE_ID_MAPPING,
 } from 'store/actions/entity.actions';
-import { INITIALIZE, LOGGED_OUT } from 'store/actions/user.actions';
+import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 import { mergeEntityUpdates } from 'utils/entity';
 
 const initialState = mapValues(Entities, () => ({}));
@@ -16,6 +16,8 @@ export default function entity(state = initialState, action) {
     case INITIALIZE:
     case UPDATE_ENTITIES:
       return mergeEntityUpdates(state, action.entities);
+    case LOGGED_IN:
+      return mergeEntityUpdates(initialState, action.entities);
     case UPDATE_ID_MAPPING:
       return {
         ...state,
