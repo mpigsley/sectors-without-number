@@ -41,10 +41,9 @@ export const uploadEntities = (entities, uid, sectorId) => {
     );
   }
 
-  let savableSectorId = sectorId;
   const allKeys = flatten(values(map(entities, Object.keys)));
   const keyMapping = {};
-  const saveEntityTree = (parentId, newParentId) => {
+  const saveEntityTree = (parentId, newParentId, thisSectorId) => {
     const batch = Firestore().batch();
     forEach(entities, (entityTypes, entityType) =>
       forEach(entityTypes, (entity, oldId) => {
@@ -64,7 +63,7 @@ export const uploadEntities = (entities, uid, sectorId) => {
         };
         if (newParentId) {
           savableEntity.parent = newParentId;
-          savableEntity.sector = savableSectorId;
+          savableEntity.sector = thisSectorId;
         }
         const newRef = Firestore()
           .collection('entities')
@@ -73,10 +72,11 @@ export const uploadEntities = (entities, uid, sectorId) => {
           .doc();
         batch.set(newRef, savableEntity);
         keyMapping[oldId] = newRef.id;
+        let savableSectorId = thisSectorId || sectorId;
         if (entityType === Entities.sector.key) {
           savableSectorId = newRef.id;
         }
-        return saveEntityTree(oldId, newRef.id);
+        return saveEntityTree(oldId, newRef.id, savableSectorId);
       }),
     );
     return batch.commit();
@@ -110,42 +110,46 @@ export const getSyncedSectors = uid => {
   ).then(() => entities);
 };
 
-export const getSyncedSectorsById = sectorId => {
+export const getCurrentSector = (sectorId, uid) => {
   let entities = {};
-  return Promise.all([
-    Firestore()
-      .collection('entities')
-      .doc(Entities.sector.key)
-      .collection('entity')
-      .doc(sectorId)
-      .get()
-      .then(doc => {
-        entities[Entities.sector.key] = {
-          [doc.id]: doc.data(),
-        };
-      }),
-    Promise.all(
-      map(Entities, ({ key }) =>
-        Firestore()
-          .collection('entities')
-          .doc(key)
-          .collection('entity')
-          .where('sector', '==', sectorId)
-          .get()
-          .then(typeSnapshot => {
-            typeSnapshot.forEach(doc => {
-              entities = {
-                ...entities,
-                [key]: {
-                  ...entities[key],
-                  [doc.id]: doc.data(),
-                },
-              };
-            });
-          }),
-      ),
-    ),
-  ]).then(() => entities);
+  return Firestore()
+    .collection('entities')
+    .doc(Entities.sector.key)
+    .collection('entity')
+    .doc(sectorId)
+    .get()
+    .then(doc => {
+      if (doc.exists) {
+        const data = doc.data();
+        if (data.creator !== uid) {
+          entities[Entities.sector.key] = {
+            [doc.id]: data,
+          };
+          return Promise.all(
+            map(Entities, ({ key }) =>
+              Firestore()
+                .collection('entities')
+                .doc(key)
+                .collection('entity')
+                .where('sector', '==', sectorId)
+                .get()
+                .then(typeSnapshot => {
+                  typeSnapshot.forEach(doc => {
+                    entities = {
+                      ...entities,
+                      [key]: {
+                        ...entities[key],
+                        [doc.id]: doc.data(),
+                      },
+                    };
+                  });
+                }),
+            ),
+          ).then(() => entities);
+        }
+      }
+      return entities;
+    });
 };
 
 export const updateEntities = entities => {

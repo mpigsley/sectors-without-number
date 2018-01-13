@@ -6,7 +6,7 @@ import { getEntities } from 'store/api/local';
 import {
   getCurrentUser,
   getSyncedSectors,
-  getSyncedSectorsById,
+  getCurrentSector,
 } from 'store/api/firebase';
 import { initialize } from 'store/actions/user.actions';
 
@@ -24,17 +24,20 @@ export default store => {
     const location = store.getState().routing.locationBeforeTransitions;
     if (location) {
       unsubscribe();
-      const currentSectorPromise = location.pathname.startsWith('/sector')
-        ? getSyncedSectorsById(location.pathname.split('/')[2])
-        : Promise.resolve();
-      Promise.all([getCurrentUser(), getEntities(), currentSectorPromise]).then(
-        ([user, local, currentSector]) => {
-          const promise = user ? getSyncedSectors(user.uid) : Promise.resolve();
-          return promise.then(synced =>
-            store.dispatch(initialize({ local, user, synced, currentSector })),
-          );
-        },
-      );
+      Promise.all([getCurrentUser(), getEntities()]).then(([user, local]) => {
+        let promises = [];
+        if (user) {
+          promises = [
+            getSyncedSectors(user.uid),
+            location.pathname.startsWith('/sector')
+              ? getCurrentSector(location.pathname.split('/')[2], user.uid)
+              : Promise.resolve(),
+          ];
+        }
+        return Promise.all(promises).then(([synced, currentSector]) =>
+          store.dispatch(initialize({ local, user, synced, currentSector })),
+        );
+      });
     }
   });
 

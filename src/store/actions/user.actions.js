@@ -1,5 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { keys } from 'lodash';
+import { keys, pull } from 'lodash';
 import { push } from 'react-router-redux';
 
 import {
@@ -11,8 +11,14 @@ import {
   doPasswordReset,
   doLogout,
   getSyncedSectors,
+  uploadEntities,
 } from 'store/api/firebase';
-// import { getSyncedSectorsById } from 'store/api/firebase';
+import { clearLocalDatabase } from 'store/api/local';
+import {
+  entitySelector,
+  sectorSelector,
+  sharedSectorSelector,
+} from 'store/selectors/base.selectors';
 import Entities from 'constants/entities';
 import { ErrorToast } from 'store/utils';
 import { mergeEntityUpdates } from 'utils/entity';
@@ -54,20 +60,26 @@ export const updateUserForm = (key, value) => ({
 //     return zipObject(uploaded.map(sector => sector.key), uploaded);
 //   });
 
-const onLogin = (dispatch, local) => result =>
-  getSyncedSectors(result.user ? result.user.uid : result.uid)
-    .then(synced => {
-      // Filter out cloud saves
-      // Check if any local sectors or return early with synced sectors
-      // syncLocalSectors
-      return { entities: synced, didSyncLocal: false };
-    })
-    .then(({ entities, didSyncLocal }) => {
+const onLogin = (dispatch, state) => result => {
+  const sectors = keys(sectorSelector(state));
+  const shared = sharedSectorSelector(state);
+  const localSync = !!pull(sectors, ...shared).length;
+  const uid = result.user ? result.user.uid : result.uid;
+  let promise = Promise.resolve();
+  if (localSync) {
+    promise = Promise.all([
+      uploadEntities(entitySelector(state), uid),
+      clearLocalDatabase(),
+    ]);
+  }
+  return promise
+    .then(() => getSyncedSectors(uid))
+    .then(entities => {
       dispatch(push('/'));
       dispatch({
         type: LOGGED_IN,
         user: result.user ? result.user.toJSON() : result.toJSON(),
-        didSyncLocal,
+        didSyncLocal: localSync,
         entities,
       });
       return result;
@@ -76,6 +88,7 @@ const onLogin = (dispatch, local) => result =>
       dispatch({ type: AUTH_FAILURE });
       console.error(error);
     });
+};
 
 export const initialize = ({
   local,
@@ -98,7 +111,7 @@ export const initialize = ({
 
 export const facebookLogin = () => (dispatch, getState) =>
   doFacebookLogin()
-    .then(onLogin(dispatch, getState().sector.saved))
+    .then(onLogin(dispatch, getState()))
     .catch(error => {
       dispatch({ type: AUTH_FAILURE });
       console.error(error);
@@ -106,7 +119,7 @@ export const facebookLogin = () => (dispatch, getState) =>
 
 export const googleLogin = () => (dispatch, getState) =>
   doGoogleLogin()
-    .then(onLogin(dispatch, getState().sector.saved))
+    .then(onLogin(dispatch, getState()))
     .catch(error => {
       dispatch({ type: AUTH_FAILURE });
       console.error(error);
@@ -127,7 +140,7 @@ export const signup = () => (dispatch, getState) => {
     });
   }
   return doSignup(state.user.form.email, state.user.form.password)
-    .then(onLogin(dispatch, state.sector.saved))
+    .then(onLogin(dispatch, state))
     .then(result => result.sendEmailVerification())
     .catch(error => {
       dispatch({ type: AUTH_FAILURE });
@@ -145,7 +158,7 @@ export const login = () => (dispatch, getState) => {
     });
   }
   return doLogin(state.user.form.email, state.user.form.password)
-    .then(onLogin(dispatch, state.sector.saved))
+    .then(onLogin(dispatch, state))
     .catch(error => {
       dispatch({ type: AUTH_FAILURE });
       console.error(error);
