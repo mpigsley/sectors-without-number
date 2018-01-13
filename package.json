@@ -8,9 +8,9 @@
     "url": "https://github.com/mpigsley/sectors-without-number"
   },
   "scripts": {
-    "start": "sh -ac '. .env.test; npm-run-all -p watch:css start:js'",
+    "start": "npm-run-all -p watch:css start:js",
     "start:js": "react-scripts start",
-    "start:prod": "npm run build && firebase serve",
+    "start:prod": "sh -ac '. .env.prod; npm start'",
     "build": "npm run build:css && react-scripts build",
     "build:css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch:css": "npm run build:css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
@@ -18,7 +18,7 @@
     "test:watch": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
-    "deploy:prod": "sh -ac '. .env; npm run deploy'",
+    "deploy:prod": "sh -ac '. .env.prod; npm run deploy'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix ."
   },
