@@ -111,24 +111,25 @@ export const getSyncedSectors = uid => {
   ).then(() => entities);
 };
 
-export const updateEntities = entities =>
-  Promise.all(
-    map(entities, (entityUpdates, entityType) =>
-      Promise.all(
-        map(entityUpdates, (update, entityId) =>
-          Firestore()
-            .collection('entities')
-            .doc(entityType)
-            .collection('entity')
-            .doc(entityId)
-            .update({
-              ...update,
-              updated: Firestore.FieldValue.serverTimestamp(),
-            }),
-        ),
+export const updateEntities = entities => {
+  const batch = Firestore().batch();
+  forEach(entities, (entityUpdates, entityType) =>
+    forEach(entityUpdates, (update, entityId) =>
+      batch.update(
+        Firestore()
+          .collection('entities')
+          .doc(entityType)
+          .collection('entity')
+          .doc(entityId),
+        {
+          ...update,
+          updated: Firestore.FieldValue.serverTimestamp(),
+        },
       ),
     ),
   );
+  return batch.commit();
+};
 
 export const deleteEntities = entities => {
   const batch = Firestore().batch();
