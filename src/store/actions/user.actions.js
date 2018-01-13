@@ -51,15 +51,6 @@ export const updateUserForm = (key, value) => ({
   value,
 });
 
-// const syncLocalSectors = (sectors, creator) =>
-//   Promise.all([
-//     ...sectors.map(sector => uploadSector(sector, creator)),
-//     clearLocalDatabase(),
-//   ]).then(uploaded => {
-//     uploaded.splice(-1, 1); // Remove `clearLocalDatabase`
-//     return zipObject(uploaded.map(sector => sector.key), uploaded);
-//   });
-
 const onLogin = (dispatch, state) => result => {
   const sectors = keys(sectorSelector(state));
   const shared = sharedSectorSelector(state);
