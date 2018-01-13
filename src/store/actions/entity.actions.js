@@ -94,7 +94,6 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
     dispatch(push(`/sector/${newSectorKeys[0]}`));
   }
 
-  console.log('here');
   if (entity.entityType !== Entities.sector.key) {
     return saveEntities({ state, created: entities, entities }).then(
       updateHandler(state, dispatch),

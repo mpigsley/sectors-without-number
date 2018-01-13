@@ -44,45 +44,43 @@ export const uploadEntities = (entities, uid, sectorId) => {
   let savableSectorId = sectorId;
   const allKeys = flatten(values(map(entities, Object.keys)));
   const keyMapping = {};
-  const saveEntityTree = (parentId, newParentId) =>
-    Promise.all(
-      map(entities, (entityTypes, entityType) =>
-        Promise.all(
-          map(entityTypes, (entity, oldId) => {
-            if (
-              parentId !== entity.parent &&
-              (parentId || includes(allKeys, entity.parent))
-            ) {
-              return Promise.resolve();
-            }
+  const saveEntityTree = (parentId, newParentId) => {
+    const batch = Firestore().batch();
+    forEach(entities, (entityTypes, entityType) =>
+      forEach(entityTypes, (entity, oldId) => {
+        if (
+          parentId !== entity.parent &&
+          (parentId || includes(allKeys, entity.parent))
+        ) {
+          return Promise.resolve();
+        }
 
-            const timestamp = Firestore.FieldValue.serverTimestamp();
-            const savableEntity = {
-              ...entity,
-              creator: uid,
-              created: timestamp,
-              updated: timestamp,
-            };
-            if (newParentId) {
-              savableEntity.parent = newParentId;
-              savableEntity.sector = savableSectorId;
-            }
-            return Firestore()
-              .collection('entities')
-              .doc(entityType)
-              .collection('entity')
-              .add(savableEntity)
-              .then(docRef => {
-                keyMapping[oldId] = docRef.id;
-                if (entityType === Entities.sector.key) {
-                  savableSectorId = docRef.id;
-                }
-                return saveEntityTree(oldId, docRef.id);
-              });
-          }),
-        ),
-      ),
+        const timestamp = Firestore.FieldValue.serverTimestamp();
+        const savableEntity = {
+          ...entity,
+          creator: uid,
+          created: timestamp,
+          updated: timestamp,
+        };
+        if (newParentId) {
+          savableEntity.parent = newParentId;
+          savableEntity.sector = savableSectorId;
+        }
+        const newRef = Firestore()
+          .collection('entities')
+          .doc(entityType)
+          .collection('entity')
+          .doc();
+        batch.set(newRef, savableEntity);
+        keyMapping[oldId] = newRef.id;
+        if (entityType === Entities.sector.key) {
+          savableSectorId = newRef.id;
+        }
+        return saveEntityTree(oldId, newRef.id);
+      }),
     );
+    return batch.commit();
+  };
 
   return saveEntityTree().then(() => ({ mapping: keyMapping }));
 };
