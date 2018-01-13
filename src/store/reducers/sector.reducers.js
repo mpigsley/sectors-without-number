@@ -16,7 +16,7 @@ import {
   DELETE_ENTITIES,
   UPDATE_ID_MAPPING,
 } from 'store/actions/entity.actions';
-import { INITIALIZE } from 'store/actions/user.actions';
+import { INITIALIZE, LOGGED_OUT } from 'store/actions/user.actions';
 
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
@@ -93,6 +93,11 @@ export default function sector(state = initialState, action) {
         syncLock: true,
       };
     }
+    case LOGGED_OUT:
+      return {
+        ...state,
+        saved: [],
+      };
     case UPDATE_ID_MAPPING:
       return {
         ...state,
