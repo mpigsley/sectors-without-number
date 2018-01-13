@@ -1,5 +1,5 @@
 import { auth as FirebaseAuth, firestore as Firestore } from 'firebase';
-import { size, values, map, flatten, includes } from 'lodash';
+import { size, values, map, forEach, flatten, includes } from 'lodash';
 
 import Entities from 'constants/entities';
 
@@ -132,18 +132,18 @@ export const updateEntities = entities =>
     ),
   );
 
-export const deleteEntities = entities =>
-  Promise.all(
-    map(entities, (entityIds, entityType) =>
-      Promise.all(
-        entityIds.map(entityId =>
-          Firestore()
-            .collection('entities')
-            .doc(entityType)
-            .collection('entity')
-            .doc(entityId)
-            .delete(),
-        ),
+export const deleteEntities = entities => {
+  const batch = Firestore().batch();
+  forEach(entities, (entityIds, entityType) =>
+    entityIds.forEach(entityId =>
+      batch.delete(
+        Firestore()
+          .collection('entities')
+          .doc(entityType)
+          .collection('entity')
+          .doc(entityId),
       ),
     ),
   );
+  return batch.commit();
+};
