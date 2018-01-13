@@ -14,11 +14,13 @@ import {
   SAVE_SECTOR,
   UPDATE_ENTITIES,
   DELETE_ENTITIES,
+  UPDATE_ID_MAPPING,
 } from 'store/actions/entity.actions';
 import { INITIALIZE } from 'store/actions/user.actions';
 
 import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
+import Entities from 'constants/entities';
 import { CANCEL_TOP_LEVEL_ENTITY_CREATE } from '../actions/sector.actions';
 
 const initialState = {
@@ -70,7 +72,6 @@ export default function sector(state = initialState, action) {
     }
     case SAVE_SECTOR:
     case UPDATE_ENTITIES:
-    case DELETE_ENTITIES:
       return {
         ...state,
         saved: uniq([...state.saved, state.currentSector]).filter(s => s),
@@ -78,6 +79,24 @@ export default function sector(state = initialState, action) {
         hoverKey: null,
         topLevelKey: null,
         syncLock: true,
+      };
+    case DELETE_ENTITIES: {
+      const deletedSectorIds = action.entities[Entities.sector.key] || [];
+      return {
+        ...state,
+        saved: state.saved.filter(
+          saveId => deletedSectorIds.indexOf(saveId) < 0,
+        ),
+        holdKey: null,
+        hoverKey: null,
+        topLevelKey: null,
+        syncLock: true,
+      };
+    }
+    case UPDATE_ID_MAPPING:
+      return {
+        ...state,
+        saved: state.saved.map(saveId => action.mapping[saveId] || saveId),
       };
     case UPDATE_CONFIGURATION:
       return {
