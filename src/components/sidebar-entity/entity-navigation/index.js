@@ -5,7 +5,10 @@ import {
   currentSectorSelector,
   isSidebarEditActiveSelector,
 } from 'store/selectors/base.selectors';
-import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
+import {
+  isCurrentSectorSaved,
+  isViewingSharedSector,
+} from 'store/selectors/sector.selectors';
 import {
   getCurrentEntity,
   getCurrentEntityType,
@@ -21,7 +24,7 @@ import EntityNavigation from './entity-navigation';
 const mapStateToProps = state => ({
   isSaved: isCurrentSectorSaved(state),
   isSynced: !!userModelSelector(state),
-  isCloudSave: false,
+  isShared: isViewingSharedSector(state),
   currentSector: currentSectorSelector(state),
   entity: getCurrentEntity(state),
   entityType: getCurrentEntityType(state),

@@ -24,7 +24,7 @@ export default function EntityNavigation({
   saveSector,
   isSaved,
   isSynced,
-  isCloudSave,
+  isShared,
   isSidebarEditActive,
 }) {
   const onCopy = () => {
@@ -40,7 +40,7 @@ export default function EntityNavigation({
   };
 
   let saveButton = null;
-  if (!isSaved && !isCloudSave) {
+  if (!isSaved && !isShared) {
     saveButton = (
       <Button minimal onClick={saveSector}>
         Save
@@ -49,7 +49,7 @@ export default function EntityNavigation({
   }
 
   let editButton = null;
-  if (!isCloudSave) {
+  if (!isShared) {
     editButton = (
       <Button minimal onClick={activateSidebarEdit}>
         Edit
@@ -58,7 +58,7 @@ export default function EntityNavigation({
   }
 
   let shareButton = null;
-  if ((isSynced || isCloudSave) && isSaved) {
+  if ((isSynced || isShared) && isSaved) {
     shareButton = (
       <Button minimal onClick={onCopy}>
         Share
@@ -67,7 +67,7 @@ export default function EntityNavigation({
   }
 
   let deleteButton = null;
-  if (isSaved && !isCloudSave) {
+  if (isSaved && !isShared) {
     deleteButton = (
       <Button minimal onClick={onDeleteEntity}>
         Delete
@@ -202,7 +202,7 @@ EntityNavigation.propTypes = {
   saveSector: PropTypes.func.isRequired,
   isSaved: PropTypes.bool.isRequired,
   isSynced: PropTypes.bool.isRequired,
-  isCloudSave: PropTypes.bool.isRequired,
+  isShared: PropTypes.bool.isRequired,
   isSidebarEditActive: PropTypes.bool.isRequired,
 };
 

@@ -3,7 +3,11 @@ import Fastclick from 'react-fastclick';
 import 'firebase/firestore';
 
 import { getEntities } from 'store/api/local';
-import { getCurrentUser, getSyncedSectors } from 'store/api/firebase';
+import {
+  getCurrentUser,
+  getSyncedSectors,
+  getSyncedSectorsById,
+} from 'store/api/firebase';
 import { initialize } from 'store/actions/user.actions';
 
 export default store => {
@@ -21,7 +25,7 @@ export default store => {
     if (location) {
       unsubscribe();
       const currentSectorPromise = location.pathname.startsWith('/sector')
-        ? Promise.resolve() // TODO
+        ? getSyncedSectorsById(location.pathname.split('/')[2])
         : Promise.resolve();
       Promise.all([getCurrentUser(), getEntities(), currentSectorPromise]).then(
         ([user, local, currentSector]) => {

@@ -12,7 +12,7 @@ import {
   doLogout,
   getSyncedSectors,
 } from 'store/api/firebase';
-// import { clearLocalDatabase } from 'store/api/local';
+// import { getSyncedSectorsById } from 'store/api/firebase';
 import Entities from 'constants/entities';
 import { ErrorToast } from 'store/utils';
 import { mergeEntityUpdates } from 'utils/entity';
@@ -81,20 +81,20 @@ export const initialize = ({
   local,
   user,
   synced = {},
-  // currentSector,
-}) => dispatch => {
-  // Sync local sectors if user exists
-  // Set current sector if viewing another user's sector
-  dispatch({
-    type: INITIALIZE,
-    user,
-    entities: mergeEntityUpdates(local, synced),
-    saved: [
-      ...keys(synced[Entities.sector.key]),
-      ...keys(local[Entities.sector.key]),
-    ],
-  });
-};
+  currentSector = {},
+}) => ({
+  type: INITIALIZE,
+  user,
+  entities: mergeEntityUpdates(
+    mergeEntityUpdates(local, synced),
+    currentSector,
+  ),
+  shared: keys(currentSector[Entities.sector.key] || {}),
+  saved: [
+    ...keys(synced[Entities.sector.key]),
+    ...keys(local[Entities.sector.key]),
+  ],
+});
 
 export const facebookLogin = () => (dispatch, getState) =>
   doFacebookLogin()

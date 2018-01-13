@@ -29,6 +29,7 @@ const initialState = {
   currentEntityType: null,
   currentEntity: null,
   saved: [],
+  shared: [],
   holdKey: null,
   hoverKey: null,
   topLevelKey: null,
@@ -50,6 +51,7 @@ export default function sector(state = initialState, action) {
           ...initialState,
           renderSector: false,
           saved: state.saved,
+          shared: state.shared,
           configuration: {
             ...initialState.configuration,
             name: generateSectorName(),
@@ -127,7 +129,7 @@ export default function sector(state = initialState, action) {
     case RELEASE_SYNC_LOCK:
       return { ...state, syncLock: false };
     case INITIALIZE:
-      return { ...state, saved: action.saved };
+      return { ...state, saved: action.saved, shared: action.shared };
     case TOP_LEVEL_ENTITY_CREATE:
       return { ...state, topLevelKey: action.key };
     case CANCEL_TOP_LEVEL_ENTITY_CREATE:

@@ -105,10 +105,47 @@ export const getSyncedSectors = uid => {
               },
             };
           });
-          return entities;
         }),
     ),
   ).then(() => entities);
+};
+
+export const getSyncedSectorsById = sectorId => {
+  let entities = {};
+  return Promise.all([
+    Firestore()
+      .collection('entities')
+      .doc(Entities.sector.key)
+      .collection('entity')
+      .doc(sectorId)
+      .get()
+      .then(doc => {
+        entities[Entities.sector.key] = {
+          [doc.id]: doc.data(),
+        };
+      }),
+    Promise.all(
+      map(Entities, ({ key }) =>
+        Firestore()
+          .collection('entities')
+          .doc(key)
+          .collection('entity')
+          .where('sector', '==', sectorId)
+          .get()
+          .then(typeSnapshot => {
+            typeSnapshot.forEach(doc => {
+              entities = {
+                ...entities,
+                [key]: {
+                  ...entities[key],
+                  [doc.id]: doc.data(),
+                },
+              };
+            });
+          }),
+      ),
+    ),
+  ]).then(() => entities);
 };
 
 export const updateEntities = entities => {

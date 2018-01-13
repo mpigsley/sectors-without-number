@@ -15,6 +15,7 @@ export const currentEntityTypeSelector = state =>
 export const currentEntitySelector = state => state.sector.currentEntity;
 export const configurationSelector = state => state.sector.configuration;
 export const savedSectorSelector = state => state.sector.saved;
+export const sharedSectorSelector = state => state.sector.shared;
 export const holdKeySelector = state => state.sector.holdKey;
 export const hoverKeySelector = state => state.sector.hoverKey;
 export const renderSectorSelector = state => state.sector.renderSector;

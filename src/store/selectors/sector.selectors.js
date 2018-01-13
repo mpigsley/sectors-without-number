@@ -7,6 +7,7 @@ import {
   sectorSelector,
   sidebarEditChildrenSelector,
   savedSectorSelector,
+  sharedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { getCurrentSector } from 'store/selectors/entity.selectors';
 
@@ -22,6 +23,11 @@ export const getUserSectors = createSelector(
 export const isCurrentSectorSaved = createSelector(
   [currentSectorSelector, savedSectorSelector],
   (currentSector, saved) => includes(saved, currentSector),
+);
+
+export const isViewingSharedSector = createSelector(
+  [currentSectorSelector, sharedSectorSelector],
+  (currentSector, shared) => includes(shared, currentSector),
 );
 
 export const getEmptyHexKeys = createSelector(
