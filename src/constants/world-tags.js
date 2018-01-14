@@ -354,7 +354,7 @@ export default {
     key: worldTagKeys.beastmasters,
     name: 'Beastmasters',
     description:
-      'The natives have extremely close bonds with the local fauna, possibly having special means of communication and control through tech or gengineering. Local animal life plays a major role in their society, indusutry, or warfare, and new kinds of beasts may be bred to suit their purposes.',
+      'The natives have extremely close bonds with the local fauna, possibly having special means of communication and control through tech or gengineering. Local animal life plays a major role in their society, industry, or warfare, and new kinds of beasts may be bred to suit their purposes.',
     enemies: [
       'half-feral warlord of a beast swarm',
       'coldly inhuman scientist',
