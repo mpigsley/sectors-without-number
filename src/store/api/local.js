@@ -98,14 +98,15 @@ export const getEntities = () =>
         }
         return clearLocalDatabase()
           .then(() => convertOldSectors(oldSectors))
-          .then(() => {
-            localForage.iterate((entity, key) => {
-              const [entityType, entityId] = key.split('.');
-              entities[entityType] = entities[entityType] || {};
-              entities[entityType][entityId] = entity;
-            });
-            return resolve(entities);
-          });
+          .then(() =>
+            localForage
+              .iterate((entity, key) => {
+                const [entityType, entityId] = key.split('.');
+                entities[entityType] = entities[entityType] || {};
+                entities[entityType][entityId] = entity;
+              })
+              .then(() => resolve(entities)),
+          );
       })
       .catch(reject);
   });
