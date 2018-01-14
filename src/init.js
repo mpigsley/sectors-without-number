@@ -25,16 +25,17 @@ export default store => {
     if (location) {
       unsubscribe();
       Promise.all([getCurrentUser(), getEntities()]).then(([user, local]) => {
-        let promises = [];
-        if (user) {
-          promises = [
-            getSyncedSectors(user.uid),
-            location.pathname.startsWith('/sector')
-              ? getCurrentSector(location.pathname.split('/')[2], user.uid)
-              : Promise.resolve(),
-          ];
+        const { uid } = user || {};
+        const sectorId = location.pathname.split('/')[2];
+        const promises = [
+          location.pathname.startsWith('/sector')
+            ? getCurrentSector(sectorId, uid)
+            : Promise.resolve(),
+        ];
+        if (uid) {
+          promises.push(getSyncedSectors(uid));
         }
-        return Promise.all(promises).then(([synced, currentSector]) =>
+        return Promise.all(promises).then(([currentSector, synced]) =>
           store.dispatch(initialize({ local, user, synced, currentSector })),
         );
       });
