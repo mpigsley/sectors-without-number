@@ -187,3 +187,18 @@ export const deleteEntities = entities => {
   );
   return batch.commit();
 };
+
+export const convertOldSectors = uid =>
+  Firestore()
+    .collection('sectors')
+    .where('creator', '==', uid)
+    .where('synced', '!=', true)
+    .get()
+    .then(snapshot => {
+      const synced = {};
+      snapshot.forEach(doc => {
+        synced[doc.id] = doc.data();
+      });
+      console.log(synced);
+      return synced;
+    });

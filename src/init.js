@@ -7,6 +7,7 @@ import {
   getCurrentUser,
   getSyncedSectors,
   getCurrentSector,
+  convertOldSectors,
 } from 'store/api/firebase';
 import { initialize } from 'store/actions/user.actions';
 
@@ -34,6 +35,7 @@ export default store => {
         ];
         if (uid) {
           promises.push(getSyncedSectors(uid));
+          promises.push(convertOldSectors(uid));
         }
         return Promise.all(promises).then(([currentSector, synced]) =>
           store.dispatch(initialize({ local, user, synced, currentSector })),
