@@ -175,13 +175,24 @@ export const updateEntities = entities => {
 
 export const deleteEntities = entities => {
   const batch = Firestore().batch();
+  const promises = [];
   forEach(entities, (entityIds, entityType) =>
     entityIds.forEach(entityId => {
       if (entityType === Entities.sector.key) {
-        batch.delete(
+        promises.push(
           Firestore()
             .collection('sectors')
-            .doc(entityId),
+            .doc(entityId)
+            .get()
+            .then(doc => {
+              if (doc.exists) {
+                batch.delete(
+                  Firestore()
+                    .collection('sectors')
+                    .doc(entityId),
+                );
+              }
+            }),
         );
       }
       batch.delete(
@@ -193,7 +204,7 @@ export const deleteEntities = entities => {
       );
     }),
   );
-  return batch.commit();
+  return Promise.resolve(promises).then(() => batch.commit());
 };
 
 export const convertOldSectors = uid =>
