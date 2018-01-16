@@ -49,7 +49,7 @@ export default class SectorMap extends Component {
 
   componentWillMount() {
     const splitPath = this.props.location.pathname.split('/');
-    if (splitPath.length > 5 || (splitPath[5] || '').length !== 20) {
+    if (splitPath.length > 5 || (splitPath[4] || '').length !== 20) {
       this.props.toSafeRoute(this.props.routeParams.sector);
     }
   }
