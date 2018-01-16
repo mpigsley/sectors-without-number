@@ -206,7 +206,7 @@ export const deleteEntities = entities => {
       );
     }),
   );
-  return Promise.resolve(promises).then(() => batch.commit());
+  return Promise.all(promises).then(() => batch.commit());
 };
 
 export const convertOldSectors = uid =>
