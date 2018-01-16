@@ -28,7 +28,12 @@ export default function EntityNavigation({
   isSidebarEditActive,
 }) {
   const onCopy = () => {
-    copy(window.location.href);
+    let url = window.location.href;
+    const split = url.split('/');
+    if (split.length === 7) {
+      url = split.slice(0, 5).join('/');
+    }
+    copy(url);
     toastr.success(
       'Copied to Clipboard',
       `You have copied a link directly to this ${Entities[entityType].name}.`,
