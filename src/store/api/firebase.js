@@ -2,6 +2,7 @@ import { auth as FirebaseAuth, firestore as Firestore } from 'firebase';
 import { size, values, map, forEach, flatten, includes } from 'lodash';
 
 import Entities from 'constants/entities';
+import { coordinatesFromKey } from 'utils/common';
 
 export const getCurrentUser = () =>
   new Promise(resolve => {
@@ -134,12 +135,12 @@ export const getCurrentSector = (sectorId, uid) => {
                 .where('sector', '==', sectorId)
                 .get()
                 .then(typeSnapshot => {
-                  typeSnapshot.forEach(doc => {
+                  typeSnapshot.forEach(typeDoc => {
                     entities = {
                       ...entities,
                       [key]: {
                         ...entities[key],
-                        [doc.id]: doc.data(),
+                        [typeDoc.id]: typeDoc.data(),
                       },
                     };
                   });
@@ -175,30 +176,125 @@ export const updateEntities = entities => {
 export const deleteEntities = entities => {
   const batch = Firestore().batch();
   forEach(entities, (entityIds, entityType) =>
-    entityIds.forEach(entityId =>
+    entityIds.forEach(entityId => {
+      if (entityType === Entities.sector.key) {
+        batch.delete(
+          Firestore()
+            .collection('sectors')
+            .doc(entityId),
+        );
+      }
       batch.delete(
         Firestore()
           .collection('entities')
           .doc(entityType)
           .collection('entity')
           .doc(entityId),
-      ),
-    ),
+      );
+    }),
   );
   return batch.commit();
 };
 
 export const convertOldSectors = uid =>
-  Firestore()
-    .collection('sectors')
-    .where('creator', '==', uid)
-    .where('synced', '!=', true)
-    .get()
-    .then(snapshot => {
-      const synced = {};
-      snapshot.forEach(doc => {
-        synced[doc.id] = doc.data();
+  Promise.all([
+    Firestore()
+      .collection('sectors')
+      .where('creator', '==', uid)
+      .get(),
+    Firestore()
+      .collection('entities')
+      .doc(Entities.sector.key)
+      .collection('entity')
+      .where('creator', '==', uid)
+      .get(),
+  ]).then(([snapshot, entitySnapshot]) => {
+    const promises = [];
+    const timestamp = Firestore.FieldValue.serverTimestamp();
+    const common = { updated: timestamp, created: timestamp, creator: uid };
+    const entities = {};
+    const syncedEntities = [];
+
+    entitySnapshot.forEach(doc => syncedEntities.push(doc.id));
+
+    snapshot.forEach(doc => {
+      const sector = doc.data();
+      const batch = Firestore().batch();
+
+      if (includes(syncedEntities, doc.id)) {
+        return;
+      }
+
+      // Systems & Planets
+      forEach(sector.systems, system => {
+        const systemRef = Firestore()
+          .collection('entities')
+          .doc(Entities.system.key)
+          .collection('entity')
+          .doc();
+        const systemObj = {
+          ...common,
+          sector: doc.id,
+          name: system.name,
+          parent: doc.id,
+          parentEntity: Entities.sector.key,
+          ...coordinatesFromKey(system.key),
+        };
+        batch.set(systemRef, systemObj);
+        entities[Entities.system.key] = {
+          ...(entities[Entities.system.key] || {}),
+          [systemRef.id]: systemObj,
+        };
+
+        forEach(system.planets, planet => {
+          const planetRef = Firestore()
+            .collection('entities')
+            .doc(Entities.planet.key)
+            .collection('entity')
+            .doc();
+          const planetObj = {
+            ...common,
+            sector: doc.id,
+            name: planet.name,
+            parent: systemRef.id,
+            parentEntity: Entities.system.key,
+            attributes: {
+              atmosphere: planet.atmosphere,
+              biosphere: planet.biosphere,
+              population: planet.population,
+              tags: planet.tags,
+              techLevel: planet.techLevel,
+              temperature: planet.temperature,
+            },
+          };
+          batch.set(planetRef, planetObj);
+          entities[Entities.planet.key] = {
+            ...(entities[Entities.planet.key] || {}),
+            [planetRef.id]: planetObj,
+          };
+        });
       });
-      console.log(synced);
-      return synced;
+
+      // Sector
+      const sectorRef = Firestore()
+        .collection('entities')
+        .doc(Entities.sector.key)
+        .collection('entity')
+        .doc(doc.id);
+      const sectorObj = {
+        ...common,
+        rows: sector.rows,
+        columns: sector.columns,
+        name: sector.name,
+        sector: doc.id,
+      };
+      batch.set(sectorRef, sectorObj);
+      entities[Entities.sector.key] = {
+        ...(entities[Entities.sector.key] || {}),
+        [doc.id]: sectorObj,
+      };
+
+      promises.push(batch.commit());
     });
+    return Promise.all(promises).then(() => entities);
+  });

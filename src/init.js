@@ -1,6 +1,7 @@
 import Firebase from 'firebase';
 import Fastclick from 'react-fastclick';
 import 'firebase/firestore';
+import { size } from 'lodash';
 
 import { getEntities } from 'store/api/local';
 import {
@@ -37,8 +38,11 @@ export default store => {
           promises.push(getSyncedSectors(uid));
           promises.push(convertOldSectors(uid));
         }
-        return Promise.all(promises).then(([currentSector, synced]) =>
-          store.dispatch(initialize({ local, user, synced, currentSector })),
+        return Promise.all(promises).then(
+          ([currentSector, onlySynced, converted]) => {
+            const synced = size(onlySynced) ? onlySynced : converted;
+            store.dispatch(initialize({ local, user, synced, currentSector }));
+          },
         );
       });
     }
