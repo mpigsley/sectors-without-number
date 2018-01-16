@@ -44,8 +44,9 @@ export const uploadEntities = (entities, uid, sectorId) => {
 
   const allKeys = flatten(values(map(entities, Object.keys)));
   const keyMapping = {};
+  const batch = Firestore().batch();
+
   const saveEntityTree = (parentId, newParentId, thisSectorId) => {
-    const batch = Firestore().batch();
     forEach(entities, (entityTypes, entityType) =>
       forEach(entityTypes, (entity, oldId) => {
         if (
@@ -80,10 +81,11 @@ export const uploadEntities = (entities, uid, sectorId) => {
         return saveEntityTree(oldId, newRef.id, savableSectorId);
       }),
     );
-    return batch.commit();
   };
 
-  return saveEntityTree().then(() => ({ mapping: keyMapping }));
+  saveEntityTree();
+
+  return batch.commit().then(() => ({ mapping: keyMapping }));
 };
 
 export const getSyncedSectors = uid => {
