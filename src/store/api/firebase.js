@@ -249,6 +249,7 @@ export const convertOldSectors = uid =>
           ...common,
           sector: doc.id,
           name: system.name,
+          created: system.created,
           parent: doc.id,
           parentEntity: Entities.sector.key,
           ...coordinatesFromKey(system.key),
@@ -269,6 +270,7 @@ export const convertOldSectors = uid =>
             ...common,
             sector: doc.id,
             name: planet.name,
+            created: planet.created,
             parent: systemRef.id,
             parentEntity: Entities.system.key,
             attributes: {
@@ -299,6 +301,7 @@ export const convertOldSectors = uid =>
         rows: sector.rows,
         columns: sector.columns,
         name: sector.name,
+        created: sector.created,
         sector: doc.id,
       };
       batch.set(sectorRef, sectorObj);
