@@ -239,7 +239,7 @@ export const convertOldSectors = uid =>
       }
 
       // Systems & Planets
-      forEach(sector.systems, system => {
+      forEach(sector.systems || {}, system => {
         const systemRef = Firestore()
           .collection('entities')
           .doc(Entities.system.key)
@@ -249,7 +249,6 @@ export const convertOldSectors = uid =>
           ...common,
           sector: doc.id,
           name: system.name,
-          created: system.created,
           parent: doc.id,
           parentEntity: Entities.sector.key,
           ...coordinatesFromKey(system.key),
@@ -260,7 +259,7 @@ export const convertOldSectors = uid =>
           [systemRef.id]: systemObj,
         };
 
-        forEach(system.planets, planet => {
+        forEach(system.planets || {}, planet => {
           const planetRef = Firestore()
             .collection('entities')
             .doc(Entities.planet.key)
@@ -270,7 +269,6 @@ export const convertOldSectors = uid =>
             ...common,
             sector: doc.id,
             name: planet.name,
-            created: planet.created,
             parent: systemRef.id,
             parentEntity: Entities.system.key,
             attributes: {
@@ -301,7 +299,7 @@ export const convertOldSectors = uid =>
         rows: sector.rows,
         columns: sector.columns,
         name: sector.name,
-        created: sector.created,
+        created: sector.created || timestamp,
         sector: doc.id,
       };
       batch.set(sectorRef, sectorObj);
