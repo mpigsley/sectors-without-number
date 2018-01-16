@@ -232,8 +232,14 @@ export const saveEntityEdit = () => (dispatch, getState) => {
   );
 
   if (entity.isUpdated) {
+    const entities = entitySelector(state);
     updatedEntities = merge(updatedEntities, {
-      [currentEntityType]: { [currentEntityId]: entity },
+      [currentEntityType]: {
+        [currentEntityId]: {
+          ...entities[currentEntityType][currentEntityId],
+          ...entity,
+        },
+      },
     });
   }
 
