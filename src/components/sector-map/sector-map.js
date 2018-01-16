@@ -30,7 +30,12 @@ export default class SectorMap extends Component {
     }),
     closeUserDropdown: PropTypes.func.isRequired,
     generateSector: PropTypes.func.isRequired,
+    toSafeRoute: PropTypes.func.isRequired,
     isDropdownActive: PropTypes.bool.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+    routeParams: PropTypes.shape().isRequired,
   };
 
   static defaultProps = {
@@ -41,6 +46,13 @@ export default class SectorMap extends Component {
     height: window.innerHeight,
     width: calcWidth(),
   };
+
+  componentWillMount() {
+    const splitPath = this.props.location.pathname.split('/');
+    if (splitPath.length > 5 || (splitPath[5] || '').length !== 20) {
+      this.props.toSafeRoute(this.props.routeParams.sector);
+    }
+  }
 
   componentDidMount() {
     window.addEventListener('resize', this.onResize);

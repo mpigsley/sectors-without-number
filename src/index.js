@@ -34,6 +34,7 @@ ReactDOM.render(
         <Route path="/sector/:sector" component={SectorMap}>
           <IndexRoute component={SidebarEntity} />
           <Route path=":entityType/:entity" component={SidebarEntity} />
+          <Route path="**" component={SidebarEntity} />
         </Route>
       </Route>
     </Router>

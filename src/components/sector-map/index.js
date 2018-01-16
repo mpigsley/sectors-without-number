@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
 
 import Entities from 'constants/entities';
 import { generateEntity } from 'store/actions/entity.actions';
@@ -25,6 +26,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   closeUserDropdown: () => dispatch(closeUserDropdown()),
+  toSafeRoute: sector => dispatch(push(sector ? `/sector/${sector}` : '/')),
   generateSector: () =>
     dispatch(generateEntity({ entityType: Entities.sector.key })),
 });
