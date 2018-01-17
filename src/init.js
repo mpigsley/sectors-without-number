@@ -11,6 +11,7 @@ import {
   convertOldSectors,
 } from 'store/api/firebase';
 import { initialize } from 'store/actions/user.actions';
+import { InfoToast, removeToastById } from 'store/utils';
 
 export default store => {
   Firebase.initializeApp({
@@ -36,7 +37,26 @@ export default store => {
         ];
         if (uid) {
           promises.push(getSyncedSectors(uid));
-          promises.push(convertOldSectors(uid));
+          promises.push(
+            convertOldSectors({
+              uid,
+              onComplete: () => store.dispatch(removeToastById('sync-toastr')),
+              onConvert: () =>
+                store.dispatch(
+                  InfoToast({
+                    title: 'Syncing Sectors',
+                    message: 'Do not exit out of this web page.',
+                    config: {
+                      id: 'sync-toastr',
+                      options: {
+                        removeOnHover: false,
+                        showCloseButton: false,
+                      },
+                    },
+                  }),
+                ),
+            }),
+          );
         }
         return Promise.all(promises).then(
           ([currentSector, onlySynced, converted]) => {

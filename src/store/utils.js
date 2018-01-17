@@ -17,6 +17,19 @@ export const SuccessToast = ({
     title,
   });
 
+export const InfoToast = ({ title = '', message = '', config } = {}) =>
+  ReduxToastrActions.add({
+    options: {
+      removeOnHover: true,
+      showCloseButton: true,
+    },
+    position: 'bottom-left',
+    type: 'info',
+    ...config,
+    message,
+    title,
+  });
+
 export const ErrorToast = () =>
   ReduxToastrActions.add({
     options: {
@@ -28,6 +41,8 @@ export const ErrorToast = () =>
     title: 'There has been an error',
     message: 'Report a problem if it persists.',
   });
+
+export const removeToastById = ReduxToastrActions.remove;
 
 export const syncLock = (action, parameters = {}) => (dispatch, getState) => {
   if (syncLockSelector(getState())) {

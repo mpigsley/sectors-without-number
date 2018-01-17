@@ -209,7 +209,7 @@ export const deleteEntities = entities => {
   return Promise.all(promises).then(() => batch.commit());
 };
 
-export const convertOldSectors = uid =>
+export const convertOldSectors = ({ uid, onConvert, onComplete }) =>
   Promise.all([
     Firestore()
       .collection('sectors')
@@ -230,12 +230,19 @@ export const convertOldSectors = uid =>
 
     entitySnapshot.forEach(doc => syncedEntities.push(doc.id));
 
+    let hasStarted = false;
+
     snapshot.forEach(doc => {
       const sector = doc.data();
       const batch = Firestore().batch();
 
       if (includes(syncedEntities, doc.id)) {
         return;
+      }
+
+      if (!hasStarted) {
+        onConvert();
+        hasStarted = true;
       }
 
       // Systems & Planets
@@ -310,5 +317,9 @@ export const convertOldSectors = uid =>
 
       promises.push(batch.commit());
     });
-    return Promise.all(promises).then(() => entities);
+
+    return Promise.all(promises).then(() => {
+      onComplete();
+      return entities;
+    });
   });
