@@ -46,7 +46,7 @@ export default function sector(state = initialState, action) {
   switch (action.type) {
     case LOCATION_CHANGE: {
       const { pathname } = action.payload;
-      if (['/', '/configure'].indexOf(pathname) >= 0) {
+      if (['/', '/configure', '/changelog'].indexOf(pathname) >= 0) {
         return {
           ...initialState,
           renderSector: false,
