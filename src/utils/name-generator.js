@@ -1,4 +1,6 @@
 /* eslint-disable no-bitwise */
+import Chance from 'chance';
+
 import { StarDigraphs, GreekLetters } from 'constants/language';
 import { capitalizeFirstLetter } from 'utils/common';
 
@@ -10,7 +12,7 @@ const tweakSeeds = hexSeeds => {
   return newSeeds;
 };
 
-export const generateName = chance => {
+export const generateName = (chance = new Chance()) => {
   const hash = chance.hash({ length: 12 });
   let name = '';
   let hexSeeds = [
@@ -29,7 +31,7 @@ export const generateName = chance => {
   return capitalizeFirstLetter(name.split('.').join(''));
 };
 
-export const generateSectorName = chance => {
+export const generateSectorName = (chance = new Chance()) => {
   const greek = chance.pickone(GreekLetters);
   return `${generateName(chance)} ${greek}`;
 };

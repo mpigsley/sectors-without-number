@@ -1,0 +1,19 @@
+@import 'styles/theme';
+
+.SectorMap-Sidebar {
+  background-color: $dark3;
+  display: flex;
+  width: 400px;
+}
+
+@media (max-width: 700) {
+  .SectorMap-Sidebar {
+    display: none;
+  }
+}
+
+@media print {
+  .SectorMap {
+    display: none;
+  }
+}

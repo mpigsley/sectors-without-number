@@ -1,0 +1,26 @@
+@import 'styles/theme';
+
+.EntityEditRow {
+  margin: 0 1rem 0.5rem;
+}
+
+.EntityEditRow-Action {
+  color: $light2;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.EntityEditRow-Generate {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+.EntityEditRow-Dropdown {
+  width: 68px;
+  margin-right: 0.5rem;
+}

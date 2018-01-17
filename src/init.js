@@ -1,14 +1,17 @@
 import Firebase from 'firebase';
 import Fastclick from 'react-fastclick';
 import 'firebase/firestore';
+import { size } from 'lodash';
 
-import { getLocalSectors } from 'store/api/local';
+import { getEntities } from 'store/api/local';
 import {
   getCurrentUser,
-  getCurrentSector,
   getSyncedSectors,
+  getCurrentSector,
+  convertOldSectors,
 } from 'store/api/firebase';
 import { initialize } from 'store/actions/user.actions';
+import { InfoToast, removeToastById } from 'store/utils';
 
 export default store => {
   Firebase.initializeApp({
@@ -24,17 +27,43 @@ export default store => {
     const location = store.getState().routing.locationBeforeTransitions;
     if (location) {
       unsubscribe();
-      const currentSectorPromise = location.pathname.startsWith('/sector')
-        ? getCurrentSector(location.pathname.split('/')[2])
-        : Promise.resolve();
-      Promise.all([
-        getCurrentUser(),
-        getLocalSectors(),
-        currentSectorPromise,
-      ]).then(([user, local, currentSector]) => {
-        const promise = user ? getSyncedSectors(user.uid) : Promise.resolve();
-        return promise.then(synced =>
-          store.dispatch(initialize({ local, user, synced, currentSector })),
+      Promise.all([getCurrentUser(), getEntities()]).then(([user, local]) => {
+        const { uid } = user || {};
+        const sectorId = location.pathname.split('/')[2];
+        const promises = [
+          location.pathname.startsWith('/sector')
+            ? getCurrentSector(sectorId, uid)
+            : Promise.resolve(),
+        ];
+        if (uid) {
+          promises.push(getSyncedSectors(uid));
+          promises.push(
+            convertOldSectors({
+              uid,
+              onComplete: () => store.dispatch(removeToastById('sync-toastr')),
+              onConvert: () =>
+                store.dispatch(
+                  InfoToast({
+                    title: 'Syncing Sectors',
+                    message: 'Do not exit out of this web page.',
+                    config: {
+                      id: 'sync-toastr',
+                      options: {
+                        removeOnHover: false,
+                        showCloseButton: false,
+                        progressBar: false,
+                      },
+                    },
+                  }),
+                ),
+            }),
+          );
+        }
+        return Promise.all(promises).then(
+          ([currentSector, onlySynced, converted]) => {
+            const synced = size(onlySynced) ? onlySynced : converted;
+            store.dispatch(initialize({ local, user, synced, currentSector }));
+          },
         );
       });
     }

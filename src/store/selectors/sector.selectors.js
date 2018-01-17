@@ -1,21 +1,42 @@
-import { filter, zipObject } from 'lodash';
+import { omitBy, difference, values, includes } from 'lodash';
 import { createSelector } from 'reselect';
 
-const generatedSelector = state => state.sector.generated;
-const savedSelector = state => state.sector.saved;
-const currentSectorSelector = state => state.sector.currentSector;
+import { allSectorKeys, coordinateKey } from 'utils/common';
+import {
+  currentSectorSelector,
+  sectorSelector,
+  sidebarEditChildrenSelector,
+  savedSectorSelector,
+  sharedSectorSelector,
+} from 'store/selectors/base.selectors';
+import { getCurrentSector } from 'store/selectors/entity.selectors';
 
-export const getCurrentSector = createSelector(
-  [generatedSelector, savedSelector, currentSectorSelector],
-  (generated, saved, currentSector) => {
-    if (currentSector === 'generated') {
-      return generated || {};
-    }
-    return saved[currentSector] || {};
-  },
+export const getUserSectors = createSelector(
+  [sectorSelector, savedSectorSelector],
+  (sectors, saved) =>
+    omitBy(
+      sectors,
+      (sector, key) => sector.isCloudSave || !includes(saved, key),
+    ),
 );
 
-export const getUserSectors = createSelector([savedSelector], saved => {
-  const filtered = filter(saved, save => !save.isCloudSave);
-  return zipObject(filtered.map(save => save.key), filtered);
-});
+export const isCurrentSectorSaved = createSelector(
+  [currentSectorSelector, savedSectorSelector],
+  (currentSector, saved) => includes(saved, currentSector),
+);
+
+export const isViewingSharedSector = createSelector(
+  [currentSectorSelector, sharedSectorSelector],
+  (currentSector, shared) => includes(shared, currentSector),
+);
+
+export const getEmptyHexKeys = createSelector(
+  [getCurrentSector, sidebarEditChildrenSelector],
+  ({ rows, columns }, children = {}) =>
+    difference(
+      allSectorKeys(columns, rows),
+      values(Object.assign({}, ...values(children))).map(({ x, y }) =>
+        coordinateKey(x, y),
+      ),
+    ),
+);

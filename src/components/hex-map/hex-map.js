@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import System from 'components/system';
+import Hex from 'components/hex';
 import AccountManager from 'components/account-manager';
 import MovementVector, { MarkerDefs } from 'components/movement-vector';
 import AbsoluteContainer from 'primitives/container/absolute-container';
@@ -39,7 +39,7 @@ export default function HexMap({ height, width, viewbox, holdKey, hexes }) {
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>{MarkerDefs}</defs>
-        {hexes.map(hex => <System data={hex} key={hex.systemKey} />)}
+        {hexes.map(hex => <Hex data={hex} key={hex.hexKey} />)}
         <MovementVector hexes={hexes} />
       </svg>
     </div>
@@ -53,7 +53,7 @@ HexMap.propTypes = {
   holdKey: PropTypes.string,
   hexes: PropTypes.arrayOf(
     PropTypes.shape({
-      systemKey: PropTypes.string.isRequired,
+      hexKey: PropTypes.string.isRequired,
     }),
   ),
 };

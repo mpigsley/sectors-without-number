@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { getTopLevelEntity } from 'utils/entity';
+
 import './style.css';
 
 const triangleEnd = 'triangle-end';
@@ -38,14 +40,20 @@ export const MarkerDefs = [
 const offsetForSystem = 16;
 const offsetForCenter = 10;
 
-export default function MovementVector({ hoverKey, holdKey, hexes }) {
-  const hovered = hexes.filter(hex => hex.systemKey === hoverKey)[0];
-  const held = hexes.filter(hex => hex.systemKey === holdKey)[0];
+export default function MovementVector({
+  hoverKey,
+  holdKey,
+  hexes,
+  topLevelEntities,
+}) {
+  const hovered = hexes.filter(hex => hex.hexKey === hoverKey)[0];
+  const held = hexes.filter(hex => hex.hexKey === holdKey)[0];
   if (!hovered || !held || hoverKey === holdKey) {
     return null;
   }
 
-  const isSwitch = !!hovered.system;
+  const { entity } = getTopLevelEntity(topLevelEntities, hovered.hexKey);
+  const isSwitch = !!entity;
   const distanceBetween = Math.sqrt(
     (hovered.xOffset - held.xOffset) ** 2 +
       (hovered.yOffset - held.yOffset) ** 2,
@@ -78,9 +86,10 @@ export default function MovementVector({ hoverKey, holdKey, hexes }) {
 MovementVector.propTypes = {
   hoverKey: PropTypes.string,
   holdKey: PropTypes.string,
+  topLevelEntities: PropTypes.shape().isRequired,
   hexes: PropTypes.arrayOf(
     PropTypes.shape({
-      systemKey: PropTypes.string.isRequired,
+      hexKey: PropTypes.string.isRequired,
     }),
   ),
 };

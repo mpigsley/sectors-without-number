@@ -1,0 +1,32 @@
+@import 'styles/theme';
+
+.LinkRow {
+  color: $dark3;
+  display: flex;
+  padding: 0.8rem 1.5rem;
+  text-decoration: none;
+  transition: background-color 0.5s;
+
+  &:hover {
+    background-color: $primary;
+
+    .LinkRow-RightArrow {
+      color: $light4;
+    }
+  }
+}
+
+.LinkRow-Name {
+  margin: 0;
+}
+
+.LinkRow-RightArrow {
+  color: $dark3;
+  transition: color 0.5s;
+}
+
+.LinkRow-Additional {
+  color: $light1;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}

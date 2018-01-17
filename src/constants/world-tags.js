@@ -354,7 +354,7 @@ export default {
     key: worldTagKeys.beastmasters,
     name: 'Beastmasters',
     description:
-      'The natives have extremely close bonds with the local fauna, possibly having special means of communication and control through tech or gengineering. Local animal life plays a major role in their society, indusutry, or warfare, and new kinds of beasts may be bred to suit their purposes.',
+      'The natives have extremely close bonds with the local fauna, possibly having special means of communication and control through tech or gengineering. Local animal life plays a major role in their society, industry, or warfare, and new kinds of beasts may be bred to suit their purposes.',
     enemies: [
       'half-feral warlord of a beast swarm',
       'coldly inhuman scientist',
@@ -543,7 +543,7 @@ export default {
     key: worldTagKeys.culturalPower,
     name: 'Cultural Power',
     description:
-      'The world is a considerable cultural power in the sector, producing music, art, philosophy, or some similar intangible that their neighbors find irresistably attractive. Other worlds might have a profound degree of cultural cachet as the inheritor of some venerable artistic tradition.',
+      'The world is a considerable cultural power in the sector, producing music, art, philosophy, or some similar intangible that their neighbors find irresistibly attractive. Other worlds might have a profound degree of cultural cachet as the inheritor of some venerable artistic tradition.',
     enemies: [
       'murderously eccentric artist',
       'crazed fan',

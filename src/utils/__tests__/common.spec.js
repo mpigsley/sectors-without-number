@@ -1,10 +1,9 @@
 import {
   capitalizeFirstLetter,
-  isBetween,
   coordinateKey,
   coordinatesFromKey,
   allSectorKeys,
-  stringSortByKey,
+  sortByKey,
   toCommaArray,
 } from '../common';
 
@@ -22,20 +21,7 @@ describe('capitalizeFirstLetter', () => {
   });
 });
 
-describe('isBetween', () => {
-  it('returns true if between', () => {
-    expect(isBetween(4, 4, 6)).toEqual(true);
-    expect(isBetween(5, 4, 6)).toEqual(true);
-    expect(isBetween(6, 4, 6)).toEqual(true);
-  });
-
-  it('returns false if not between', () => {
-    expect(isBetween(3, 4, 6)).toEqual(false);
-    expect(isBetween(7, 4, 6)).toEqual(false);
-  });
-});
-
-describe('stringSortByKey', () => {
+describe('sortByKey', () => {
   let objectArr = null;
   beforeEach(() => {
     objectArr = [
@@ -47,7 +33,7 @@ describe('stringSortByKey', () => {
   });
 
   it('should sort an array of objects by a specified key', () => {
-    expect(objectArr.sort(stringSortByKey('name'))).toMatchObject([
+    expect(objectArr.sort(sortByKey('name'))).toMatchObject([
       { name: 'asdf' },
       { name: 'dfgh' },
       { name: 'fghj' },
@@ -56,7 +42,7 @@ describe('stringSortByKey', () => {
   });
 
   it('should just return the array if key is not found in objects', () => {
-    expect(objectArr.sort(stringSortByKey('notInObject'))).toMatchObject([
+    expect(objectArr.sort(sortByKey('notInObject'))).toMatchObject([
       { name: 'asdf' },
       { name: 'sdfg' },
       { name: 'dfgh' },

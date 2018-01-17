@@ -1,0 +1,54 @@
+@import 'styles/theme';
+
+.TopLevelEntityModal-Planet {
+  margin-bottom: 0.3rem;
+}
+
+.TopLevelEntityModal-Help {
+  margin-bottom: 0.1rem;
+}
+
+.TopLevelEntityModal-Delete {
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.3s;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.TopLevelEntityModal-Add {
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: all 0.3s;
+  font-size: 0.9rem;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.TopLevelEntityModal-Generate {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+.TopLevelEntityModal-Plus {
+  margin-right: 0.6rem;
+}
+
+.TopLevelEntityModal-Input {
+  flex: 1;
+
+  &--padded {
+    margin-right: 28px;
+  }
+}
+
+.TopLevelEntityModal-Error {
+  color: $error;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
