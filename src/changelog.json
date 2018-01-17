@@ -1,4 +1,9 @@
 {
+  "3.0.1": {
+    "description":
+      "Fix minor issue where the last viewed sector overlays the changelog page.",
+    "date": "1-16-2018"
+  },
   "3.0.0": {
     "description": "Rewrite how sector data is stored and handled.",
     "date": "1-16-2018",
