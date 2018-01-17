@@ -51,6 +51,7 @@ export default store => {
                       options: {
                         removeOnHover: false,
                         showCloseButton: false,
+                        progressBar: false,
                       },
                     },
                   }),
