@@ -1,4 +1,13 @@
 {
+  "3.0.0": {
+    "description": "Rewrite how sector data is stored and handled.",
+    "date": "1-16-2018",
+    "changes": [
+      "When editing an entity in the sidebar, the sidebar will be converted into an editable view.",
+      "When adding children entities in the sidebar, an option to generate the entity data is given.",
+      "Saving sectors, moving systems, and editing entities in general should be a lot faster."
+    ]
+  },
   "2.3.0": {
     "description": "Add a donations button in the sidebar footer.",
     "date": "1-10-2018"
