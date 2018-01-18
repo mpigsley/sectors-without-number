@@ -1,4 +1,8 @@
-import { generateName, generateSectorName } from 'utils/name-generator';
+import {
+  generateName,
+  generateSectorName,
+  generateBlackHoleName,
+} from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
 import Temperature from 'constants/temperature';
@@ -72,7 +76,6 @@ const planet = {
   name: 'Planet',
   topLevel: false,
   tags: WorldTags,
-  isAvailable: true,
   nameGenerator: generateName,
   attributes: [Atmosphere, Temperature, Biosphere, Population, TechLevel],
   children: [moon.key, orbitalRuin.key, researchBase.key, refuelingStation.key],
@@ -82,6 +85,7 @@ const blackHole = {
   key: 'blackHole',
   name: 'Black Hole',
   topLevel: true,
+  nameGenerator: generateBlackHoleName,
   children: [
     spaceStation.key,
     refuelingStation.key,
@@ -108,7 +112,6 @@ const system = {
   key: 'system',
   name: 'System',
   topLevel: true,
-  isAvailable: true,
   nameGenerator: generateName,
   children: [
     planet.key,
@@ -122,7 +125,6 @@ const sector = {
   key: 'sector',
   name: 'Sector',
   topLevel: false,
-  isAvailable: true,
   nameGenerator: generateSectorName,
   children: [system.key, deepSpaceStation.key, asteroidBelt.key, blackHole.key],
 };

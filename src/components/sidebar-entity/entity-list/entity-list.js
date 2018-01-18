@@ -28,10 +28,7 @@ const EntityList = ({
   editableEntities,
   createChildInEdit,
 }) => {
-  if (
-    (!size(entities) && !isSidebarEditActive) ||
-    !Entities[entityType].isAvailable
-  ) {
+  if (!size(entities) && !isSidebarEditActive) {
     return null;
   }
 
