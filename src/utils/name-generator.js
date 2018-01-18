@@ -1,8 +1,8 @@
 /* eslint-disable no-bitwise */
 import Chance from 'chance';
+import { capitalize, toUpper } from 'lodash';
 
 import { StarDigraphs, GreekLetters } from 'constants/language';
-import { capitalizeFirstLetter } from 'utils/common';
 
 const tweakSeeds = hexSeeds => {
   const newSeeds = hexSeeds.concat([
@@ -28,10 +28,31 @@ export const generateName = (chance = new Chance()) => {
       name += StarDigraphs.substr(d, 2);
     }
   }
-  return capitalizeFirstLetter(name.split('.').join(''));
+  return capitalize(name.split('.').join(''));
 };
 
 export const generateSectorName = (chance = new Chance()) => {
   const greek = chance.pickone(GreekLetters);
   return `${generateName(chance)} ${greek}`;
+};
+
+export const generateBlackHoleName = (chance = new Chance()) => {
+  const numCharacters = chance.weighted([1, 2, 3, 4], [1, 5, 8, 5]);
+  const numNumbers = chance.weighted([3, 4, 5, 6], [1, 1, 2, 3]);
+
+  const space = chance.pickone([true, false]) ? ' ' : '';
+  let string = chance.string({
+    length: numCharacters,
+    pool: 'abcdefghijklmnopqrstuvwxyz',
+  });
+  string = chance.pickone([true, false]) ? toUpper(string) : capitalize(string);
+  let number = chance.string({ length: numNumbers, pool: '0123456789' });
+  if (chance.pickone([true, false])) {
+    const randomIndex = chance.integer({ min: 1, max: numNumbers - 2 });
+    number = `${number.substring(0, randomIndex)}-${number.substring(
+      randomIndex,
+      numNumbers - 1,
+    )}`;
+  }
+  return `${string}${space}${number}`;
 };

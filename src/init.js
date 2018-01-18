@@ -12,8 +12,10 @@ import {
 } from 'store/api/firebase';
 import { initialize } from 'store/actions/user.actions';
 import { InfoToast, removeToastById } from 'store/utils';
+import { generateBlackHoleName } from 'utils/name-generator';
 
 export default store => {
+  console.log(generateBlackHoleName());
   Firebase.initializeApp({
     apiKey: process.env.REACT_APP_API_KEY,
     authDomain: process.env.REACT_APP_AUTH_DOMAIN,

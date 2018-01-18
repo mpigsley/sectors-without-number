@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { X, Plus } from 'react-feather';
-import { filter, includes, map, pull } from 'lodash';
+import { filter, includes, map, pull, capitalize } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -10,16 +10,13 @@ import Dropdown from 'primitives/form/dropdown';
 import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 
-import { capitalizeFirstLetter } from 'utils/common';
 import Entities from 'constants/entities';
 
 const renderList = (list, listKey) => (
   <div key={listKey} className="EntityAttributes-Content">
-    <b>{capitalizeFirstLetter(listKey)}:</b>
+    <b>{capitalize(listKey)}:</b>
     <ul className="EntityAttributes-ContentList">
-      {list
-        .map(capitalizeFirstLetter)
-        .map(element => <li key={element}>{element}</li>)}
+      {list.map(capitalize).map(element => <li key={element}>{element}</li>)}
     </ul>
   </div>
 );

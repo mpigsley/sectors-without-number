@@ -1,25 +1,10 @@
 import {
-  capitalizeFirstLetter,
   coordinateKey,
   coordinatesFromKey,
   allSectorKeys,
   sortByKey,
   toCommaArray,
 } from '../common';
-
-describe('capitalizeFirstLetter', () => {
-  it('capitalizes first letter', () => {
-    expect(capitalizeFirstLetter('test')).toEqual('Test');
-    expect(capitalizeFirstLetter('a')).toEqual('A');
-  });
-
-  it('returns empty string if string is falsey', () => {
-    expect(capitalizeFirstLetter(null)).toEqual('');
-    expect(capitalizeFirstLetter(undefined)).toEqual('');
-    expect(capitalizeFirstLetter('')).toEqual('');
-    expect(capitalizeFirstLetter()).toEqual('');
-  });
-});
 
 describe('sortByKey', () => {
   let objectArr = null;
