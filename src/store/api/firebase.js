@@ -319,7 +319,9 @@ export const convertOldSectors = ({ uid, onConvert, onComplete }) =>
     });
 
     return Promise.all(promises).then(() => {
-      onComplete();
+      if (promises.length) {
+        onComplete();
+      }
       return entities;
     });
   });

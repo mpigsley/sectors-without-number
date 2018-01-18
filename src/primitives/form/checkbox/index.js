@@ -12,7 +12,7 @@ export default function Checkbox({ label, value, onChange, ...rest }) {
     <FlexContainer align="center" className="Checkbox">
       <Input
         onChange={onChange}
-        value={value}
+        checked={value}
         name="checkbox"
         type="checkbox"
         {...rest}

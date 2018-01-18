@@ -18,6 +18,7 @@ import { generateSectorName } from 'utils/name-generator';
 import './style.css';
 
 export default function Configure({
+  additionalPointsOfInterest,
   updateConfiguration,
   generateSector,
   isBuilder,
@@ -102,6 +103,12 @@ export default function Configure({
           onChange={updateInput}
           label="Initialize Empty Sector"
         />
+        <Checkbox
+          data-key="additionalPointsOfInterest"
+          value={additionalPointsOfInterest}
+          onChange={updateInput}
+          label="Use Additional Points of Interest"
+        />
       </SubContainer>
       <SubContainer
         className="Configure-PaddedButtons"
@@ -119,6 +126,7 @@ export default function Configure({
 }
 
 Configure.propTypes = {
+  additionalPointsOfInterest: PropTypes.bool.isRequired,
   updateConfiguration: PropTypes.func.isRequired,
   generateSector: PropTypes.func.isRequired,
   isBuilder: PropTypes.bool.isRequired,

@@ -19,7 +19,6 @@ import {
 } from 'store/actions/entity.actions';
 import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
-import { generateSectorName } from 'utils/name-generator';
 import { ROWS, COLUMNS } from 'constants/defaults';
 import Entities from 'constants/entities';
 
@@ -35,8 +34,9 @@ const initialState = {
   topLevelKey: null,
   syncLock: false,
   configuration: {
-    name: generateSectorName(),
+    name: Entities.sector.nameGenerator(),
     isBuilder: false,
+    additionalPointsOfInterest: true,
     columns: COLUMNS,
     rows: ROWS,
   },
@@ -54,7 +54,7 @@ export default function sector(state = initialState, action) {
           shared: state.shared,
           configuration: {
             ...initialState.configuration,
-            name: generateSectorName(),
+            name: Entities.sector.nameGenerator(),
           },
         };
       }
