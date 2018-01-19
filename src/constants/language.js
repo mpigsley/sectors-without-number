@@ -480,7 +480,7 @@ export const MarsCraters = [
   'Jojutla',
   'Joly',
   'Jones',
-  'Jörn',
+  'Jorn',
   'Jumla',
   'Kachug',
   'Kagoshima',

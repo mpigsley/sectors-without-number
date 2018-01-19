@@ -4,6 +4,7 @@ import {
   generateBlackHoleName,
   generateAsteroidBeltName,
   generateStationName,
+  generateMineName,
 } from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
@@ -58,7 +59,7 @@ const gasGiantMine = {
   shortName: 'Mine',
   topLevel: false,
   isAdditional: true,
-  nameGenerator: generateName,
+  nameGenerator: generateMineName,
   children: [],
 };
 

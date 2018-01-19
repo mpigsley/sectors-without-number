@@ -1,12 +1,12 @@
 import Chance from 'chance';
 
-import { generateName } from 'utils/name-generator';
+import { generateMineName } from 'utils/name-generator';
 
 export const generateGasGiantMine = ({
   sector,
   parent,
   parentEntity,
-  name = generateName(),
+  name = generateMineName(),
   generate = true,
 } = {}) => {
   if (!sector) {

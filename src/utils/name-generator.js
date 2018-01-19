@@ -71,3 +71,8 @@ export const generateStationName = (chance = new Chance()) =>
     length: 1,
     pool: ' 123456789',
   })}`.trim();
+
+export const generateMineName = (chance = new Chance()) =>
+  `${chance.pickone(MarsCraters)}${
+    chance.pickone([true, false]) ? ' Mine' : ''
+  }${chance.pickone([true, false]) ? ' Project' : ''}`;
