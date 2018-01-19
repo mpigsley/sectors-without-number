@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { some, size, map } from 'lodash';
+import { some, size, map, mapValues } from 'lodash';
 
 import ConfirmModal from 'primitives/modal/confirm-modal';
 
@@ -32,12 +32,22 @@ export default class EntityInfo extends Component {
   state = {
     entity: { ...this.props.entity },
     isConfirmDeleteOpen: false,
+    openLists: mapValues(this.props.entityChildren, () => true),
   };
 
   componentWillReceiveProps(nextProps) {
+    let update = {};
     if (nextProps.entity.name !== this.props.entity.name) {
-      this.setState({ entity: nextProps.entity });
+      update = { entity: nextProps.entity };
     }
+    console.log(nextProps.entityType, this.props.entityType);
+    if (nextProps.entityType !== this.props.entityType) {
+      update = {
+        ...update,
+        openLists: mapValues(nextProps.entityChildren, () => true),
+      };
+    }
+    this.setState(update);
   }
 
   onDeleteEntity = () => {
@@ -59,6 +69,14 @@ export default class EntityInfo extends Component {
     this.setState({
       ...extraState,
       [key]: value,
+    });
+
+  toggleListOpen = entityType => () =>
+    this.setState({
+      openLists: {
+        ...this.state.openLists,
+        [entityType]: !this.state.openLists[entityType],
+      },
     });
 
   renderSectorBuilderText() {
@@ -97,6 +115,8 @@ export default class EntityInfo extends Component {
             key={entityType}
             entities={entities}
             entityType={entityType}
+            isOpen={this.state.openLists[entityType]}
+            toggleListOpen={this.toggleListOpen(entityType)}
           />
         ))}
         {this.renderSectorBuilderText()}

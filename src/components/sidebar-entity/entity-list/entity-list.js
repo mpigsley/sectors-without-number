@@ -27,6 +27,8 @@ const EntityList = ({
   isSidebarEditActive,
   editableEntities,
   createChildInEdit,
+  isOpen,
+  toggleListOpen,
 }) => {
   if (!size(entities) && !isSidebarEditActive) {
     return null;
@@ -35,7 +37,9 @@ const EntityList = ({
   const renderEntityHeader = () => {
     if (!isSidebarEditActive) {
       return (
-        <SectionHeader>{Pluralize(Entities[entityType].name)}</SectionHeader>
+        <SectionHeader isOpen={isOpen} onClick={toggleListOpen}>
+          {Pluralize(Entities[entityType].name)}
+        </SectionHeader>
       );
     }
     return (
@@ -92,32 +96,39 @@ const EntityList = ({
     );
   };
 
+  const renderEntities = rowEntities => {
+    if (!isOpen) {
+      return null;
+    }
+    return map(rowEntities, (entity, key) => {
+      let sort = -entity.sort;
+      if (!isNumber(entity.sort)) {
+        sort = Entities[entityType].topLevel
+          ? coordinateKey(entity.x, entity.y)
+          : entity.name;
+      }
+      return {
+        ...entity,
+        sort,
+        entityId: key,
+        additional: Entities[entityType].topLevel
+          ? coordinateKey(entity.x, entity.y)
+          : ((entity.attributes || {}).tags || [])
+              .map(tag => Entities[entityType].tags[tag].name)
+              .map(toCommaArray)
+              .join(''),
+      };
+    })
+      .sort(sortByKey('sort'))
+      .map(renderEntity);
+  };
+
   const rowEntities = !isSidebarEditActive ? entities : editableEntities;
   return (
     <div>
       {renderEntityHeader(entityType)}
       {renderEntitySubHeader()}
-      {map(rowEntities, (entity, key) => {
-        let sort = -entity.sort;
-        if (!isNumber(entity.sort)) {
-          sort = Entities[entityType].topLevel
-            ? coordinateKey(entity.x, entity.y)
-            : entity.name;
-        }
-        return {
-          ...entity,
-          sort,
-          entityId: key,
-          additional: Entities[entityType].topLevel
-            ? coordinateKey(entity.x, entity.y)
-            : ((entity.attributes || {}).tags || [])
-                .map(tag => Entities[entityType].tags[tag].name)
-                .map(toCommaArray)
-                .join(''),
-        };
-      })
-        .sort(sortByKey('sort'))
-        .map(renderEntity)}
+      {renderEntities(rowEntities)}
       <ReactHint events position="left" />
     </div>
   );
@@ -129,6 +140,8 @@ EntityList.propTypes = {
   isSidebarEditActive: PropTypes.bool.isRequired,
   editableEntities: PropTypes.shape(),
   createChildInEdit: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleListOpen: PropTypes.func.isRequired,
 };
 
 EntityList.defaultProps = {
