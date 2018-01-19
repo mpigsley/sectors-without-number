@@ -30,20 +30,28 @@ const EntityList = ({
   isOpen,
   toggleListOpen,
 }) => {
-  if (!size(entities) && !isSidebarEditActive) {
+  const numEntities = size(entities);
+  if (!numEntities && !isSidebarEditActive) {
     return null;
   }
 
   const renderEntityHeader = () => {
+    let children = null;
     if (!isSidebarEditActive) {
-      return (
-        <SectionHeader isOpen={isOpen} onClick={toggleListOpen}>
-          {Pluralize(Entities[entityType].name)}
-        </SectionHeader>
+      children = (
+        <FlexContainer justify="spaceBetween" align="flexEnd">
+          <span>{Pluralize(Entities[entityType].name)}</span>
+          <span className="EntityList-Size">
+            {`${numEntities} ${
+              numEntities > 1
+                ? Pluralize(Entities[entityType].shortName)
+                : Entities[entityType].shortName
+            }`}
+          </span>
+        </FlexContainer>
       );
-    }
-    return (
-      <SectionHeader>
+    } else {
+      children = (
         <FlexContainer justify="spaceBetween" align="flexEnd">
           <span>{Pluralize(Entities[entityType].name)}</span>
           <Button
@@ -52,9 +60,14 @@ const EntityList = ({
             onClick={createChildInEdit}
           >
             <LinkIcon size={15} icon={Plus} />
-            Add {Entities[entityType].name}
+            Add {Entities[entityType].shortName}
           </Button>
         </FlexContainer>
+      );
+    }
+    return (
+      <SectionHeader isOpen={isOpen} onClick={toggleListOpen}>
+        {children}
       </SectionHeader>
     );
   };

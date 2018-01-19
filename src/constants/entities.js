@@ -15,6 +15,7 @@ import TechLevel from 'constants/tech-level';
 const researchBase = {
   key: 'researchBase',
   name: 'Research Base',
+  shortName: 'Base',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateName,
@@ -24,6 +25,7 @@ const researchBase = {
 const refuelingStation = {
   key: 'refuelingStation',
   name: 'Refueling Station',
+  shortName: 'Station',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateName,
@@ -33,6 +35,7 @@ const refuelingStation = {
 const moonBase = {
   key: 'moonBase',
   name: 'Moon Base',
+  shortName: 'Base',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateName,
@@ -42,6 +45,7 @@ const moonBase = {
 const orbitalRuin = {
   key: 'orbitalRuin',
   name: 'Orbital Ruin',
+  shortName: 'Ruin',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateName,
@@ -51,6 +55,7 @@ const orbitalRuin = {
 const gasGiantMine = {
   key: 'gasGiantMine',
   name: 'Gas Giant Mine',
+  shortName: 'Mine',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateName,
@@ -60,6 +65,7 @@ const gasGiantMine = {
 const spaceStation = {
   key: 'spaceStation',
   name: 'Space Station',
+  shortName: 'Station',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateName,
@@ -69,6 +75,7 @@ const spaceStation = {
 const asteroidBase = {
   key: 'asteroidBase',
   name: 'Asteroid Base',
+  shortName: 'Base',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateName,
@@ -78,6 +85,7 @@ const asteroidBase = {
 const moon = {
   key: 'moon',
   name: 'Moon',
+  shortName: 'Moon',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateName,
@@ -92,6 +100,7 @@ const moon = {
 const planet = {
   key: 'planet',
   name: 'Planet',
+  shortName: 'Planet',
   topLevel: false,
   isAdditional: false,
   tags: WorldTags,
@@ -109,6 +118,7 @@ const planet = {
 const blackHole = {
   key: 'blackHole',
   name: 'Black Hole',
+  shortName: 'Black Hole',
   topLevel: true,
   isAdditional: true,
   nameGenerator: generateBlackHoleName,
@@ -123,6 +133,7 @@ const blackHole = {
 const asteroidBelt = {
   key: 'asteroidBelt',
   name: 'Asteroid Belt',
+  shortName: 'Belt',
   topLevel: true,
   isAdditional: true,
   nameGenerator: generateAsteroidBeltName,
@@ -132,6 +143,7 @@ const asteroidBelt = {
 const deepSpaceStation = {
   key: 'deepSpaceStation',
   name: 'Deep-Space Station',
+  shortName: 'Station',
   topLevel: true,
   isAdditional: true,
   nameGenerator: generateDeepSpaceStationName,
@@ -141,6 +153,7 @@ const deepSpaceStation = {
 const system = {
   key: 'system',
   name: 'System',
+  shortName: 'System',
   topLevel: true,
   isAdditional: false,
   nameGenerator: generateName,
@@ -155,6 +168,7 @@ const system = {
 const sector = {
   key: 'sector',
   name: 'Sector',
+  shortName: 'Sector',
   topLevel: false,
   isAdditional: false,
   nameGenerator: generateSectorName,
