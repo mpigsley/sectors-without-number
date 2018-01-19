@@ -4,6 +4,10 @@ import generateSector from './sector-generator';
 import { generateSystems, generateSystem } from './system-generator';
 import { generatePlanets, generatePlanet } from './planet-generator';
 import { generateBlackHoles, generateBlackHole } from './black-hole-generator';
+import {
+  generateAsteroidBelts,
+  generateAsteroidBelt,
+} from './asteroid-belt-generator';
 
 export default {
   [Entities.asteroidBase.key]: {
@@ -11,8 +15,8 @@ export default {
     generateAll: () => ({ children: [] }),
   },
   [Entities.asteroidBelt.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateAsteroidBelt,
+    generateAll: generateAsteroidBelts,
   },
   [Entities.blackHole.key]: {
     generateOne: generateBlackHole,

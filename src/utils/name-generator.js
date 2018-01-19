@@ -2,7 +2,7 @@
 import Chance from 'chance';
 import { capitalize, toUpper } from 'lodash';
 
-import { StarDigraphs, GreekLetters } from 'constants/language';
+import { StarDigraphs, GreekLetters, MarsCraters } from 'constants/language';
 
 const tweakSeeds = hexSeeds => {
   const newSeeds = hexSeeds.concat([
@@ -55,4 +55,13 @@ export const generateBlackHoleName = (chance = new Chance()) => {
     )}`;
   }
   return `${string}${space}${number}`;
+};
+
+export const generateAsteroidBeltName = (chance = new Chance()) => {
+  const numNumbers = chance.weighted([1, 2, 3, 4, 5], [1, 3, 4, 2, 1]);
+  let number = chance.string({ length: numNumbers, pool: '0123456789' });
+  if (chance.pickone([true, false])) {
+    number = `(${number}) `;
+  }
+  return `${number} ${chance.pickone(MarsCraters)}`;
 };

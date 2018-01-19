@@ -1,5 +1,5 @@
 import Chance from 'chance';
-import { includes } from 'lodash';
+import { xor } from 'lodash';
 
 import { generateName } from 'utils/name-generator';
 
@@ -28,6 +28,7 @@ export const generateSystems = ({
   rows,
   columns,
   coordinates,
+  additionalPointsOfInterest,
 }) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate systems');
@@ -35,15 +36,14 @@ export const generateSystems = ({
 
   const chance = new Chance();
   const numHexes = rows * columns;
+  const apoiModifier = additionalPointsOfInterest ? 10 : 4;
   const systemNum =
-    chance.integer({ min: 0, max: Math.floor(numHexes / 8) }) +
+    chance.integer({ min: 0, max: Math.floor(numHexes / apoiModifier) }) +
     Math.floor(numHexes / 5);
   const chosenCoordinates = chance.pickset(coordinates, systemNum);
 
   return {
-    coordinates: coordinates.filter(
-      coord => !includes(chosenCoordinates, coord),
-    ),
+    coordinates: xor(coordinates, chosenCoordinates),
     children: chosenCoordinates.map(coordinate =>
       generateSystem({ sector, ...coordinate, parent, parentEntity }),
     ),
