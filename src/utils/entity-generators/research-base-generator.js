@@ -32,7 +32,7 @@ export const generateResearchBases = ({
   }
 
   const chance = new Chance();
-  const numResearchBases = chance.weighted([1, 2, 3], [5, 3, 2]);
+  const numResearchBases = chance.weighted([0, 1], [3, 1]);
   return {
     children: [...Array(numResearchBases)].map(() =>
       generateResearchBase({

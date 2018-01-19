@@ -32,7 +32,7 @@ export const generateMoonBases = ({
   }
 
   const chance = new Chance();
-  const numMoonBases = chance.weighted([1, 2, 3], [5, 3, 2]);
+  const numMoonBases = chance.weighted([0, 1], [3, 2]);
   return {
     children: [...Array(numMoonBases)].map(() =>
       generateMoonBase({

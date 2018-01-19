@@ -36,7 +36,7 @@ export const generateRefuelingStations = ({
   }
 
   const chance = new Chance();
-  const numRefuelingStations = chance.weighted([1, 2, 3], [5, 3, 2]);
+  const numRefuelingStations = chance.weighted([0, 1], [3, 1]);
   return {
     children: [...Array(numRefuelingStations)].map(() =>
       generateRefuelingStation({

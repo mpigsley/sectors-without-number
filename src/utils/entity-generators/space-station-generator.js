@@ -32,7 +32,7 @@ export const generateSpaceStations = ({
   }
 
   const chance = new Chance();
-  const numSpaceStations = chance.weighted([1, 2, 3], [5, 3, 2]);
+  const numSpaceStations = chance.weighted([0, 1, 2], [3, 1, 1]);
   return {
     children: [...Array(numSpaceStations)].map(() =>
       generateSpaceStation({
