@@ -45,7 +45,7 @@ const EntityList = ({
     return (
       <SectionHeader>
         <FlexContainer justify="spaceBetween" align="flexEnd">
-          {Pluralize(Entities[entityType].name)}
+          <span>{Pluralize(Entities[entityType].name)}</span>
           <Button
             minimal
             className="EntityList-AddButton"
