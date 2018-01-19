@@ -8,6 +8,10 @@ import {
   generateAsteroidBelts,
   generateAsteroidBelt,
 } from './asteroid-belt-generator';
+import {
+  generateDeepSpaceStations,
+  generateDeepSpaceStation,
+} from './deep-space-station-generator';
 
 export default {
   [Entities.asteroidBase.key]: {
@@ -23,8 +27,8 @@ export default {
     generateAll: generateBlackHoles,
   },
   [Entities.deepSpaceStation.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateDeepSpaceStation,
+    generateAll: generateDeepSpaceStations,
   },
   [Entities.gasGiantMine.key]: {
     generateOne: () => ({}),

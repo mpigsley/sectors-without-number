@@ -2,6 +2,8 @@ import {
   generateName,
   generateSectorName,
   generateBlackHoleName,
+  generateAsteroidBeltName,
+  generateDeepSpaceStationName,
 } from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
@@ -109,6 +111,7 @@ const asteroidBelt = {
   name: 'Asteroid Belt',
   topLevel: true,
   isAdditional: true,
+  nameGenerator: generateAsteroidBeltName,
   children: [asteroidBase.key, refuelingStation.key, researchBase.key],
 };
 
@@ -117,6 +120,7 @@ const deepSpaceStation = {
   name: 'Deep-Space Station',
   topLevel: true,
   isAdditional: true,
+  nameGenerator: generateDeepSpaceStationName,
   children: [],
 };
 
