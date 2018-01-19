@@ -66,7 +66,7 @@ export const generateAsteroidBeltName = (chance = new Chance()) => {
   return `${number} ${chance.pickone(MarsCraters)}`;
 };
 
-export const generateDeepSpaceStationName = (chance = new Chance()) =>
+export const generateStationName = (chance = new Chance()) =>
   `${chance.pickone(MarsCraters)} ${chance.string({
     length: 1,
     pool: ' 123456789',

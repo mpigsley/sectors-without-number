@@ -3,7 +3,7 @@ import {
   generateSectorName,
   generateBlackHoleName,
   generateAsteroidBeltName,
-  generateDeepSpaceStationName,
+  generateStationName,
 } from 'utils/name-generator';
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
@@ -18,7 +18,7 @@ const researchBase = {
   shortName: 'Base',
   topLevel: false,
   isAdditional: true,
-  nameGenerator: generateName,
+  nameGenerator: generateStationName,
   children: [],
 };
 
@@ -28,7 +28,7 @@ const refuelingStation = {
   shortName: 'Station',
   topLevel: false,
   isAdditional: true,
-  nameGenerator: generateName,
+  nameGenerator: generateStationName,
   children: [],
 };
 
@@ -38,7 +38,7 @@ const moonBase = {
   shortName: 'Base',
   topLevel: false,
   isAdditional: true,
-  nameGenerator: generateName,
+  nameGenerator: generateStationName,
   children: [],
 };
 
@@ -48,7 +48,7 @@ const orbitalRuin = {
   shortName: 'Ruin',
   topLevel: false,
   isAdditional: true,
-  nameGenerator: generateName,
+  nameGenerator: generateStationName,
   children: [],
 };
 
@@ -68,7 +68,7 @@ const spaceStation = {
   shortName: 'Station',
   topLevel: false,
   isAdditional: true,
-  nameGenerator: generateName,
+  nameGenerator: generateStationName,
   children: [],
 };
 
@@ -78,7 +78,7 @@ const asteroidBase = {
   shortName: 'Base',
   topLevel: false,
   isAdditional: true,
-  nameGenerator: generateName,
+  nameGenerator: generateStationName,
   children: [],
 };
 
@@ -146,7 +146,7 @@ const deepSpaceStation = {
   shortName: 'Station',
   topLevel: true,
   isAdditional: true,
-  nameGenerator: generateDeepSpaceStationName,
+  nameGenerator: generateStationName,
   children: [],
 };
 

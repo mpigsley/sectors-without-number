@@ -1,13 +1,13 @@
 import Chance from 'chance';
 import { xor } from 'lodash';
 
-import { generateDeepSpaceStationName } from 'utils/name-generator';
+import { generateStationName } from 'utils/name-generator';
 
 export const generateDeepSpaceStation = ({
   sector,
   x,
   y,
-  name = generateDeepSpaceStationName(),
+  name = generateStationName(),
   parent,
   parentEntity,
 } = {}) => {

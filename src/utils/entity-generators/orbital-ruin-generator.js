@@ -1,12 +1,12 @@
 import Chance from 'chance';
 
-import { generateName } from 'utils/name-generator';
+import { generateStationName } from 'utils/name-generator';
 
 export const generateOrbitalRuin = ({
   sector,
   parent,
   parentEntity,
-  name = generateName(),
+  name = generateStationName(),
   generate = true,
 } = {}) => {
   if (!sector) {

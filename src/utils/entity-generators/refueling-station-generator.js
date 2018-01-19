@@ -1,6 +1,6 @@
 import Chance from 'chance';
 
-import { generateName } from 'utils/name-generator';
+import { generateStationName } from 'utils/name-generator';
 
 export const generateRefuelingStation = ({
   sector,
@@ -16,7 +16,7 @@ export const generateRefuelingStation = ({
     );
   }
 
-  return { name: generateName(), parent, parentEntity, sector };
+  return { name: generateStationName(), parent, parentEntity, sector };
 };
 
 export const generateRefuelingStations = ({

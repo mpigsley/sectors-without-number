@@ -1,6 +1,6 @@
 import Chance from 'chance';
 
-import { generateName } from 'utils/name-generator';
+import { generateStationName } from 'utils/name-generator';
 
 export const generateResearchBase = ({ sector, parent, parentEntity } = {}) => {
   if (!sector) {
@@ -12,7 +12,7 @@ export const generateResearchBase = ({ sector, parent, parentEntity } = {}) => {
     );
   }
 
-  return { name: generateName(), parent, parentEntity, sector };
+  return { name: generateStationName(), parent, parentEntity, sector };
 };
 
 export const generateResearchBases = ({
