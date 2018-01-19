@@ -58,6 +58,48 @@ export default function EntityIcon({ xOffset, yOffset, width, entityType }) {
       </g>
     );
   }
+  if (entityType === Entities.deepSpaceStation.key) {
+    const wingWidth = width / 40;
+    return (
+      <g>
+        <rect
+          className="Hex-System"
+          x={xOffset - width / 5 - wingWidth / 2}
+          y={yOffset - width / 25}
+          width={width / 15}
+          height={width / 12}
+        />
+        <rect
+          className="Hex-System"
+          x={xOffset - width / 10 - wingWidth / 2}
+          y={yOffset - width / 25}
+          width={width / 15}
+          height={width / 12}
+        />
+        <rect
+          className="Hex-System"
+          x={xOffset}
+          y={yOffset - width / 12}
+          width={width / 22}
+          height={width / 6}
+        />
+        <rect
+          className="Hex-System"
+          x={xOffset + width / 10 - wingWidth / 2}
+          y={yOffset - width / 25}
+          width={width / 15}
+          height={width / 12}
+        />
+        <rect
+          className="Hex-System"
+          x={xOffset + width / 5 - wingWidth / 2}
+          y={yOffset - width / 25}
+          width={width / 15}
+          height={width / 12}
+        />
+      </g>
+    );
+  }
   return (
     <circle
       className={
