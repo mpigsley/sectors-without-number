@@ -12,7 +12,7 @@ import {
 } from 'lodash';
 
 import EntityGenerators from 'utils/entity-generators';
-import { createId, coordinateKey } from 'utils/common';
+import { createId, coordinateKey, allSectorCoordinates } from 'utils/common';
 import Entities from 'constants/entities';
 
 export const generateEntity = ({
@@ -24,17 +24,25 @@ export const generateEntity = ({
   const { entityType, name } = entity;
   const entityId = createId();
   const sector = entityType === Entities.sector.key ? entityId : currentSector;
+  let filteredCoordinates = allSectorCoordinates(
+    configuration.columns,
+    configuration.rows,
+  );
 
   let childrenEntities = {};
   const generateChildren = (parent, parentEntity) =>
     Entities[parentEntity].children.forEach(childEntity => {
-      const children = EntityGenerators[childEntity].generateAll({
+      const { children, coordinates } = EntityGenerators[
+        childEntity
+      ].generateAll({
         sector,
         parent,
         parentEntity,
         children: (parameters.children || {})[childEntity],
+        coordinates: filteredCoordinates,
         ...configuration,
       });
+      filteredCoordinates = coordinates || filteredCoordinates;
       const childrenObj = zipObject(children.map(() => createId()), children);
       childrenEntities = {
         ...childrenEntities,

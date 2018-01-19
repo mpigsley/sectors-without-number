@@ -3,39 +3,40 @@ import Entities from 'constants/entities';
 import generateSector from './sector-generator';
 import { generateSystems, generateSystem } from './system-generator';
 import { generatePlanets, generatePlanet } from './planet-generator';
+import { generateBlackHoles, generateBlackHole } from './black-hole-generator';
 
 export default {
   [Entities.asteroidBase.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.asteroidBelt.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.blackHole.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateBlackHole,
+    generateAll: generateBlackHoles,
   },
   [Entities.deepSpaceStation.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.gasGiantMine.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.moon.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.moonBase.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.orbitalRuin.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.planet.key]: {
     generateOne: generatePlanet,
@@ -43,19 +44,19 @@ export default {
   },
   [Entities.refuelingStation.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.researchBase.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.sector.key]: {
     generateOne: generateSector,
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.spaceStation.key]: {
     generateOne: () => ({}),
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.system.key]: {
     generateOne: generateSystem,

@@ -1,7 +1,11 @@
 @import 'styles/theme';
 
-.Hex-Circle {
+.Hex-System {
   fill: $light3;
+}
+
+.Hex-BlackHole {
+  fill: black;
 }
 
 .Hex-Polygon {
@@ -56,7 +60,7 @@
   user-select: none;
 }
 
-.Hex-Planets {
+.Hex-Children {
   transform: translateY(7px);
 }
 
@@ -70,7 +74,7 @@
 }
 
 @media print {
-  .Hex-Circle,
+  .Hex-System,
   .Hex-Text {
     fill: $dark4;
     stroke: $dark4;
@@ -81,7 +85,7 @@
     display: block;
   }
 
-  .Hex-Planets {
+  .Hex-Childrens {
     transform: translateY(21px);
   }
 
