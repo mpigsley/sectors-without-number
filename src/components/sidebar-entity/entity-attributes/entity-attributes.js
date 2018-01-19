@@ -33,6 +33,10 @@ export default function EntityAttributes({
   entity,
   entityType,
   updateEntityInEdit,
+  isAttributesOpen,
+  isTagsOpen,
+  toggleAttributesOpen,
+  toggleTagsOpen,
 }) {
   const noAttributes =
     !entity.attributes || !Object.keys(entity.attributes).length;
@@ -84,9 +88,9 @@ export default function EntityAttributes({
       </div>
     );
 
-    attributesSection = (
-      <div key="attributes">
-        <SectionHeader>Attributes</SectionHeader>
+    let attributes = null;
+    if (isAttributesOpen) {
+      attributes = (
         <div className="EntityAttributes-Attributes">
           {nameAttribute}
           {(Entities[entityType].attributes || []).map(attribute =>
@@ -96,6 +100,15 @@ export default function EntityAttributes({
             ),
           )}
         </div>
+      );
+    }
+
+    attributesSection = (
+      <div key="attributes">
+        <SectionHeader isOpen={isAttributesOpen} onClick={toggleAttributesOpen}>
+          Attributes
+        </SectionHeader>
+        {attributes}
       </div>
     );
   }
@@ -108,6 +121,8 @@ export default function EntityAttributes({
       entity={entity}
       entityType={entityType}
       updateEntityInEdit={updateEntityInEdit}
+      isOpen={isTagsOpen}
+      toggleOpen={toggleTagsOpen}
     />,
   ];
 }
@@ -119,6 +134,10 @@ EntityAttributes.propTypes = {
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   updateEntityInEdit: PropTypes.func.isRequired,
+  isAttributesOpen: PropTypes.bool.isRequired,
+  isTagsOpen: PropTypes.bool.isRequired,
+  toggleAttributesOpen: PropTypes.func.isRequired,
+  toggleTagsOpen: PropTypes.func.isRequired,
 };
 
 EntityAttributes.defaultProps = {

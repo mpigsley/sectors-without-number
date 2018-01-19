@@ -32,7 +32,11 @@ export default class EntityInfo extends Component {
   state = {
     entity: { ...this.props.entity },
     isConfirmDeleteOpen: false,
-    openLists: mapValues(this.props.entityChildren, () => true),
+    openLists: {
+      ...mapValues(this.props.entityChildren, () => true),
+      attributes: true,
+      tags: true,
+    },
   };
 
   componentWillReceiveProps(nextProps) {
@@ -40,11 +44,14 @@ export default class EntityInfo extends Component {
     if (nextProps.entity.name !== this.props.entity.name) {
       update = { entity: nextProps.entity };
     }
-    console.log(nextProps.entityType, this.props.entityType);
     if (nextProps.entityType !== this.props.entityType) {
       update = {
         ...update,
-        openLists: mapValues(nextProps.entityChildren, () => true),
+        openLists: {
+          ...mapValues(nextProps.entityChildren, () => true),
+          attributes: true,
+          tags: true,
+        },
       };
     }
     this.setState(update);
@@ -109,7 +116,12 @@ export default class EntityInfo extends Component {
         name={this.props.entity.name}
         onDeleteEntity={this.onConfirmDelete}
       >
-        <EntityAttributes />
+        <EntityAttributes
+          isAttributesOpen={this.state.openLists.attributes}
+          isTagsOpen={this.state.openLists.tags}
+          toggleAttributesOpen={this.toggleListOpen('attributes')}
+          toggleTagsOpen={this.toggleListOpen('tags')}
+        />
         {map(this.props.entityChildren, (entities, entityType) => (
           <EntityList
             key={entityType}

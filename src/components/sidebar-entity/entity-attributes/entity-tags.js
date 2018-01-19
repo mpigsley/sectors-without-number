@@ -26,6 +26,8 @@ export default function EntityTags({
   entity,
   isSidebarEditActive,
   updateEntityInEdit,
+  isOpen,
+  toggleOpen,
 }) {
   if (
     !Entities[entityType].tags ||
@@ -82,10 +84,14 @@ export default function EntityTags({
       ));
   }
 
-  let header = <SectionHeader>{Entities[entityType].name} Tags</SectionHeader>;
+  let header = (
+    <SectionHeader isOpen={isOpen} onClick={toggleOpen}>
+      {Entities[entityType].name} Tags
+    </SectionHeader>
+  );
   if (isSidebarEditActive) {
     header = (
-      <SectionHeader>
+      <SectionHeader isOpen={isOpen} onClick={toggleOpen}>
         <FlexContainer justify="spaceBetween" align="flexEnd">
           {Entities[entityType].name} Tags
           <Button
@@ -111,10 +117,15 @@ export default function EntityTags({
     );
   }
 
+  let tagsSection = null;
+  if (isOpen) {
+    tagsSection = <div className="EntityAttributes-Section">{tags}</div>;
+  }
+
   return (
     <div>
       {header}
-      <div className="EntityAttributes-Section">{tags}</div>
+      {tagsSection}
     </div>
   );
 }
@@ -126,4 +137,6 @@ EntityTags.propTypes = {
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   updateEntityInEdit: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleOpen: PropTypes.func.isRequired,
 };
