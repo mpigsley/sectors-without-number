@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import { delay } from 'lodash';
 
 import { getTopLevelEntity } from 'utils/entity';
-import Entities from 'constants/entities';
+import EntityIcon from './entity-icon';
 
 import './style.css';
 
@@ -84,22 +84,12 @@ function Hex({
     if (!entity) {
       return null;
     }
-    if (entityType === Entities.blackHole.key) {
-      return (
-        <circle
-          className="Hex-BlackHole"
-          cx={data.xOffset}
-          cy={data.yOffset}
-          r={data.width / 13}
-        />
-      );
-    }
     return (
-      <circle
-        className="Hex-System"
-        cx={data.xOffset}
-        cy={data.yOffset}
-        r={data.width / 13}
+      <EntityIcon
+        xOffset={data.xOffset}
+        yOffset={data.yOffset}
+        width={data.width}
+        entityType={entityType}
       />
     );
   };
