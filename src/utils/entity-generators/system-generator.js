@@ -17,6 +17,9 @@ export const generateSystem = ({
   if (!x || !y) {
     throw new Error('Sector coordinate must be provided to generate a system');
   }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate system');
+  }
 
   return { x, y, name, sector, parent, parentEntity };
 };
@@ -32,6 +35,9 @@ export const generateSystems = ({
 }) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate systems');
+  }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate systems');
   }
 
   const chance = new Chance();

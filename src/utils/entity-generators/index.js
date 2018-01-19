@@ -12,11 +12,37 @@ import {
   generateDeepSpaceStations,
   generateDeepSpaceStation,
 } from './deep-space-station-generator';
+import {
+  generateOrbitalRuins,
+  generateOrbitalRuin,
+} from './orbital-ruin-generator';
+import {
+  generateAsteroidBases,
+  generateAsteroidBase,
+} from './asteroid-base-generator';
+import {
+  generateGasGiantMines,
+  generateGasGiantMine,
+} from './gas-giant-mine-generator';
+import { generateMoons, generateMoon } from './moon-generator';
+import { generateMoonBases, generateMoonBase } from './moon-base-generator';
+import {
+  generateRefuelingStations,
+  generateRefuelingStation,
+} from './refueling-station-generator';
+import {
+  generateResearchBases,
+  generateResearchBase,
+} from './research-base-generator';
+import {
+  generateSpaceStations,
+  generateSpaceStation,
+} from './space-station-generator';
 
 export default {
   [Entities.asteroidBase.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateAsteroidBase,
+    generateAll: generateAsteroidBases,
   },
   [Entities.asteroidBelt.key]: {
     generateOne: generateAsteroidBelt,
@@ -31,40 +57,40 @@ export default {
     generateAll: generateDeepSpaceStations,
   },
   [Entities.gasGiantMine.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateGasGiantMine,
+    generateAll: generateGasGiantMines,
   },
   [Entities.moon.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateMoon,
+    generateAll: generateMoons,
   },
   [Entities.moonBase.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateMoonBase,
+    generateAll: generateMoonBases,
   },
   [Entities.orbitalRuin.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateOrbitalRuin,
+    generateAll: generateOrbitalRuins,
   },
   [Entities.planet.key]: {
     generateOne: generatePlanet,
     generateAll: generatePlanets,
   },
   [Entities.refuelingStation.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateRefuelingStation,
+    generateAll: generateRefuelingStations,
   },
   [Entities.researchBase.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateResearchBase,
+    generateAll: generateResearchBases,
   },
   [Entities.sector.key]: {
     generateOne: generateSector,
     generateAll: () => ({ children: [] }),
   },
   [Entities.spaceStation.key]: {
-    generateOne: () => ({}),
-    generateAll: () => ({ children: [] }),
+    generateOne: generateSpaceStation,
+    generateAll: generateSpaceStations,
   },
   [Entities.system.key]: {
     generateOne: generateSystem,

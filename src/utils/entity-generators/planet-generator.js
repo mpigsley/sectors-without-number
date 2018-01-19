@@ -80,14 +80,23 @@ export const generatePlanets = ({
   parent,
   parentEntity,
   children = [...Array(new Chance().weighted([1, 2, 3], [5, 3, 2]))],
-}) => ({
-  children: children.map(({ name, generate } = {}) =>
-    generatePlanet({
-      sector,
-      parent,
-      parentEntity,
-      name,
-      generate,
-    }),
-  ),
-});
+}) => {
+  if (!sector) {
+    throw new Error('Sector id must be defined to generate planets');
+  }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate planets');
+  }
+
+  return {
+    children: children.map(({ name, generate } = {}) =>
+      generatePlanet({
+        sector,
+        parent,
+        parentEntity,
+        name,
+        generate,
+      }),
+    ),
+  };
+};

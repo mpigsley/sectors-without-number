@@ -21,6 +21,9 @@ export const generateDeepSpaceStation = ({
       'Sector coordinate must be provided to generate a deep space station',
     );
   }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate a deep space station');
+  }
 
   return { x, y, name, sector, parent, parentEntity };
 };
@@ -35,12 +38,15 @@ export const generateDeepSpaceStations = ({
   additionalPointsOfInterest,
 }) => {
   if (!additionalPointsOfInterest) {
-    return [];
+    return { children: [] };
   }
   if (!sector) {
     throw new Error(
       'Sector id must be defined to generate deep space stations',
     );
+  }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate deep space stations');
   }
 
   const chance = new Chance();

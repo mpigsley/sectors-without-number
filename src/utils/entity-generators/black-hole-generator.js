@@ -19,6 +19,9 @@ export const generateBlackHole = ({
       'Sector coordinate must be provided to generate a black hole',
     );
   }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate a black hole');
+  }
 
   return { x, y, name, sector, parent, parentEntity };
 };
@@ -33,10 +36,13 @@ export const generateBlackHoles = ({
   additionalPointsOfInterest,
 }) => {
   if (!additionalPointsOfInterest) {
-    return [];
+    return { children: [] };
   }
   if (!sector) {
     throw new Error('Sector id must be defined to generate black holes');
+  }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate black holes');
   }
 
   const chance = new Chance();

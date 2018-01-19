@@ -17,6 +17,7 @@ const researchBase = {
   name: 'Research Base',
   topLevel: false,
   isAdditional: true,
+  nameGenerator: generateName,
   children: [],
 };
 
@@ -25,6 +26,7 @@ const refuelingStation = {
   name: 'Refueling Station',
   topLevel: false,
   isAdditional: true,
+  nameGenerator: generateName,
   children: [],
 };
 
@@ -33,6 +35,7 @@ const moonBase = {
   name: 'Moon Base',
   topLevel: false,
   isAdditional: true,
+  nameGenerator: generateName,
   children: [],
 };
 
@@ -41,6 +44,7 @@ const orbitalRuin = {
   name: 'Orbital Ruin',
   topLevel: false,
   isAdditional: true,
+  nameGenerator: generateName,
   children: [],
 };
 
@@ -49,6 +53,7 @@ const gasGiantMine = {
   name: 'Gas Giant Mine',
   topLevel: false,
   isAdditional: true,
+  nameGenerator: generateName,
   children: [],
 };
 
@@ -57,6 +62,7 @@ const spaceStation = {
   name: 'Space Station',
   topLevel: false,
   isAdditional: true,
+  nameGenerator: generateName,
   children: [],
 };
 
@@ -65,6 +71,7 @@ const asteroidBase = {
   name: 'Asteroid Base',
   topLevel: false,
   isAdditional: true,
+  nameGenerator: generateName,
   children: [],
 };
 
@@ -73,6 +80,7 @@ const moon = {
   name: 'Moon',
   topLevel: false,
   isAdditional: true,
+  nameGenerator: generateName,
   children: [
     moonBase.key,
     researchBase.key,
@@ -89,7 +97,13 @@ const planet = {
   tags: WorldTags,
   nameGenerator: generateName,
   attributes: [Atmosphere, Temperature, Biosphere, Population, TechLevel],
-  children: [moon.key, orbitalRuin.key, researchBase.key, refuelingStation.key],
+  children: [
+    gasGiantMine.key,
+    moon.key,
+    orbitalRuin.key,
+    researchBase.key,
+    refuelingStation.key,
+  ],
 };
 
 const blackHole = {

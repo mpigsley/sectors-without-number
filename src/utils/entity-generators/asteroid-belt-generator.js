@@ -12,12 +12,15 @@ export const generateAsteroidBelt = ({
   parentEntity,
 } = {}) => {
   if (!sector) {
-    throw new Error('Sector id must be defined to generate an astroid belt');
+    throw new Error('Sector id must be defined to generate an asteroid belt');
   }
   if (!x || !y) {
     throw new Error(
-      'Sector coordinate must be provided to generate an astroid belt',
+      'Sector coordinate must be provided to generate an asteroid belt',
     );
+  }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate an asteroid belt');
   }
 
   return { x, y, name, sector, parent, parentEntity };
@@ -33,10 +36,13 @@ export const generateAsteroidBelts = ({
   additionalPointsOfInterest,
 }) => {
   if (!additionalPointsOfInterest) {
-    return [];
+    return { children: [] };
   }
   if (!sector) {
     throw new Error('Sector id must be defined to generate asteroid belts');
+  }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate asteroid belts');
   }
 
   const chance = new Chance();

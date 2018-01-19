@@ -24,6 +24,10 @@ export const generateEntity = ({
   const { entityType, name } = entity;
   const entityId = createId();
   const sector = entityType === Entities.sector.key ? entityId : currentSector;
+  const config =
+    entityType === Entities.sector.key
+      ? configuration
+      : { ...configuration, additionalPointsOfInterest: false };
   let filteredCoordinates = allSectorCoordinates(
     configuration.columns,
     configuration.rows,
@@ -40,7 +44,7 @@ export const generateEntity = ({
         parentEntity,
         children: (parameters.children || {})[childEntity],
         coordinates: filteredCoordinates,
-        ...configuration,
+        ...config,
       });
       filteredCoordinates = coordinates || filteredCoordinates;
       const childrenObj = zipObject(children.map(() => createId()), children);
