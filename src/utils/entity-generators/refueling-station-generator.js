@@ -1,11 +1,15 @@
 import Chance from 'chance';
 
 import { generateStationName } from 'utils/name-generator';
+import Occupation from 'constants/refueling-station/occupation';
+import Situation from 'constants/refueling-station/situation';
 
 export const generateRefuelingStation = ({
   sector,
   parent,
   parentEntity,
+  name = generateStationName(),
+  generate = true,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a refueling station');
@@ -16,7 +20,18 @@ export const generateRefuelingStation = ({
     );
   }
 
-  return { name: generateStationName(), parent, parentEntity, sector };
+  const chance = new Chance();
+  let refuelingStation = { name, parent, parentEntity, sector };
+  if (generate) {
+    refuelingStation = {
+      ...refuelingStation,
+      attributes: {
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
+      },
+    };
+  }
+  return refuelingStation;
 };
 
 export const generateRefuelingStations = ({

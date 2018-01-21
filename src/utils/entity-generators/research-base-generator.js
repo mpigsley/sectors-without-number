@@ -1,8 +1,16 @@
 import Chance from 'chance';
 
 import { generateStationName } from 'utils/name-generator';
+import Occupation from 'constants/research-base/occupation';
+import Situation from 'constants/research-base/situation';
 
-export const generateResearchBase = ({ sector, parent, parentEntity } = {}) => {
+export const generateResearchBase = ({
+  sector,
+  parent,
+  parentEntity,
+  name = generateStationName(),
+  generate = true,
+} = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a research base');
   }
@@ -12,7 +20,18 @@ export const generateResearchBase = ({ sector, parent, parentEntity } = {}) => {
     );
   }
 
-  return { name: generateStationName(), parent, parentEntity, sector };
+  const chance = new Chance();
+  let researchBase = { name, parent, parentEntity, sector };
+  if (generate) {
+    researchBase = {
+      ...researchBase,
+      attributes: {
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
+      },
+    };
+  }
+  return researchBase;
 };
 
 export const generateResearchBases = ({

@@ -1,8 +1,16 @@
 import Chance from 'chance';
 
 import { generateStationName } from 'utils/name-generator';
+import Occupation from 'constants/moon-base/occupation';
+import Situation from 'constants/moon-base/situation';
 
-export const generateMoonBase = ({ sector, parent, parentEntity } = {}) => {
+export const generateMoonBase = ({
+  sector,
+  parent,
+  parentEntity,
+  name = generateStationName(),
+  generate = true,
+} = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a moon base');
   }
@@ -12,7 +20,18 @@ export const generateMoonBase = ({ sector, parent, parentEntity } = {}) => {
     );
   }
 
-  return { name: generateStationName(), parent, parentEntity, sector };
+  const chance = new Chance();
+  let asteroidBase = { name, parent, parentEntity, sector };
+  if (generate) {
+    asteroidBase = {
+      ...asteroidBase,
+      attributes: {
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
+      },
+    };
+  }
+  return asteroidBase;
 };
 
 export const generateMoonBases = ({

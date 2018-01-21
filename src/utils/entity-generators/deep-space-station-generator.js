@@ -2,6 +2,8 @@ import Chance from 'chance';
 import { xor } from 'lodash';
 
 import { generateStationName } from 'utils/name-generator';
+import Occupation from 'constants/deep-space-station/occupation';
+import Situation from 'constants/deep-space-station/situation';
 
 export const generateDeepSpaceStation = ({
   sector,
@@ -10,6 +12,7 @@ export const generateDeepSpaceStation = ({
   name = generateStationName(),
   parent,
   parentEntity,
+  generate = true,
 } = {}) => {
   if (!sector) {
     throw new Error(
@@ -25,7 +28,18 @@ export const generateDeepSpaceStation = ({
     throw new Error('Parent must be defined to generate a deep space station');
   }
 
-  return { x, y, name, sector, parent, parentEntity };
+  const chance = new Chance();
+  let station = { x, y, name, sector, parent, parentEntity };
+  if (generate) {
+    station = {
+      ...station,
+      attributes: {
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
+      },
+    };
+  }
+  return station;
 };
 
 export const generateDeepSpaceStations = ({

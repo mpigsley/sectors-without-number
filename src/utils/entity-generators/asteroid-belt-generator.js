@@ -2,6 +2,8 @@ import Chance from 'chance';
 import { xor } from 'lodash';
 
 import { generateAsteroidBeltName } from 'utils/name-generator';
+import Occupation from 'constants/asteroid-belt/occupation';
+import Situation from 'constants/asteroid-belt/situation';
 
 export const generateAsteroidBelt = ({
   sector,
@@ -10,6 +12,7 @@ export const generateAsteroidBelt = ({
   name = generateAsteroidBeltName(),
   parent,
   parentEntity,
+  generate = true,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate an asteroid belt');
@@ -23,7 +26,18 @@ export const generateAsteroidBelt = ({
     throw new Error('Parent must be defined to generate an asteroid belt');
   }
 
-  return { x, y, name, sector, parent, parentEntity };
+  const chance = new Chance();
+  let asteroidBelt = { x, y, name, sector, parent, parentEntity };
+  if (generate) {
+    asteroidBelt = {
+      ...asteroidBelt,
+      attributes: {
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
+      },
+    };
+  }
+  return asteroidBelt;
 };
 
 export const generateAsteroidBelts = ({

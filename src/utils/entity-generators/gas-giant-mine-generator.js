@@ -1,6 +1,8 @@
 import Chance from 'chance';
 
 import { generateMineName } from 'utils/name-generator';
+import Occupation from 'constants/gas-giant-mine/occupation';
+import Situation from 'constants/gas-giant-mine/situation';
 
 export const generateGasGiantMine = ({
   sector,
@@ -18,11 +20,17 @@ export const generateGasGiantMine = ({
     );
   }
 
-  const gasGiantMine = { name, parent, parentEntity, sector };
+  const chance = new Chance();
+  let gasGiantMine = { name, parent, parentEntity, sector };
   if (generate) {
-    // TODO
+    gasGiantMine = {
+      ...gasGiantMine,
+      attributes: {
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
+      },
+    };
   }
-
   return gasGiantMine;
 };
 

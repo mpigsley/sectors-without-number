@@ -12,6 +12,22 @@ import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
 import Population from 'constants/population';
 import TechLevel from 'constants/tech-level';
+import AsteroidBaseOccupation from 'constants/asteroid-base/occupation';
+import AsteroidBaseSituation from 'constants/asteroid-base/situation';
+import AsteroidBeltOccupation from 'constants/asteroid-belt/occupation';
+import AsteroidBeltSituation from 'constants/asteroid-belt/situation';
+import DeepSpaceStationOccupation from 'constants/deep-space-station/occupation';
+import DeepSpaceStationSituation from 'constants/deep-space-station/situation';
+import GasGiantMineOccupation from 'constants/gas-giant-mine/occupation';
+import GasGiantMineSituation from 'constants/gas-giant-mine/situation';
+import MoonBaseOccupation from 'constants/moon-base/occupation';
+import MoonBaseSituation from 'constants/moon-base/situation';
+import OrbitalRuinOccupation from 'constants/orbital-ruin/occupation';
+import OrbitalRuinSituation from 'constants/orbital-ruin/situation';
+import RefuelingStationOccupation from 'constants/refueling-station/occupation';
+import RefuelingStationSituation from 'constants/refueling-station/situation';
+import ResearchBaseOccupation from 'constants/research-base/occupation';
+import ResearchBaseSituation from 'constants/research-base/situation';
 
 const researchBase = {
   key: 'researchBase',
@@ -20,6 +36,7 @@ const researchBase = {
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
+  attributes: [ResearchBaseOccupation, ResearchBaseSituation],
   children: [],
 };
 
@@ -30,6 +47,7 @@ const refuelingStation = {
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
+  attributes: [RefuelingStationOccupation, RefuelingStationSituation],
   children: [],
 };
 
@@ -40,6 +58,7 @@ const moonBase = {
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
+  attributes: [MoonBaseOccupation, MoonBaseSituation],
   children: [],
 };
 
@@ -50,6 +69,7 @@ const orbitalRuin = {
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
+  attributes: [OrbitalRuinOccupation, OrbitalRuinSituation],
   children: [],
 };
 
@@ -60,6 +80,7 @@ const gasGiantMine = {
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateMineName,
+  attributes: [GasGiantMineOccupation, GasGiantMineSituation],
   children: [],
 };
 
@@ -80,6 +101,7 @@ const asteroidBase = {
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
+  attributes: [AsteroidBaseOccupation, AsteroidBaseSituation],
   children: [],
 };
 
@@ -138,6 +160,7 @@ const asteroidBelt = {
   topLevel: true,
   isAdditional: true,
   nameGenerator: generateAsteroidBeltName,
+  attributes: [AsteroidBeltOccupation, AsteroidBeltSituation],
   children: [asteroidBase.key, refuelingStation.key, researchBase.key],
 };
 
@@ -148,6 +171,7 @@ const deepSpaceStation = {
   topLevel: true,
   isAdditional: true,
   nameGenerator: generateStationName,
+  attributes: [DeepSpaceStationOccupation, DeepSpaceStationSituation],
   children: [],
 };
 
