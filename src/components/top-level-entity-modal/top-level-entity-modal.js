@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw, X, Plus } from 'react-feather';
 import Chance from 'chance';
-import { map, zipObject, omit, values } from 'lodash';
+import { filter, map, zipObject, omit, values } from 'lodash';
 import ReactHintFactory from 'react-hint';
 
 import Modal from 'primitives/modal/modal';
@@ -10,6 +10,7 @@ import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';
 import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
+import Dropdown from 'primitives/form/dropdown';
 import FlexContainer from 'primitives/container/flex-container';
 import Dice from 'primitives/icons/dice';
 
@@ -165,9 +166,10 @@ export default class TopLevelEntityModal extends Component {
   render() {
     return (
       <Modal
+        doubleSize
         isOpen={this.props.isOpen}
         onCancel={this.props.cancelTopLevelEntityCreate}
-        title="Create System"
+        title="Create Sector Entity"
         actionButtons={[
           <Button primary key="create" onClick={this.onSubmit}>
             Create
@@ -175,28 +177,53 @@ export default class TopLevelEntityModal extends Component {
         ]}
       >
         <ReactHint events position="left" />
-        <FlexContainer direction="column">
-          <Label noPadding htmlFor="name">
-            System Name
-          </Label>
-          <IconInput
-            id="name"
-            name="name"
-            data-key="name"
-            icon={RefreshCw}
-            value={this.state.name}
-            onChange={this.onEditSystem}
-            onIconClick={this.onNewEntityName}
-          />
+        <FlexContainer>
+          <FlexContainer
+            direction="column"
+            className="TopLevelEntityModal-Type"
+          >
+            <Label noPadding htmlFor="name">
+              Entity Type
+            </Label>
+            <Dropdown
+              value={this.state.entityType}
+              onChange={item =>
+                this.setState({ entityType: (item || {}).value })
+              }
+              options={filter(Entities, entity => entity.topLevel).map(
+                attr => ({
+                  value: attr.key,
+                  label: attr.name,
+                }),
+              )}
+            />
+          </FlexContainer>
+          <FlexContainer
+            direction="column"
+            className="TopLevelEntityModal-Name"
+          >
+            <Label noPadding htmlFor="name">
+              {Entities[this.state.entityType].name} Name
+            </Label>
+            <IconInput
+              id="name"
+              name="name"
+              data-key="name"
+              icon={RefreshCw}
+              value={this.state.name}
+              onChange={this.onEditSystem}
+              onIconClick={this.onNewEntityName}
+            />
+          </FlexContainer>
         </FlexContainer>
         <FlexContainer direction="column">
           <FlexContainer justify="spaceBetween" align="flexEnd">
-            <Label>Planets</Label>
-            <Dice data-rh="Select to generate planet data." size={22} />
+            <Label>Children</Label>
+            <Dice data-rh="Select to generate entity data." size={22} />
           </FlexContainer>
           <FlexContainer direction="column">
-            {map(this.state.children, (planet, key) =>
-              this.renderEditRow(planet, key),
+            {map(this.state.children, (child, key) =>
+              this.renderEditRow(child, key),
             )}
             <FlexContainer
               className="TopLevelEntityModal-Add"
@@ -204,7 +231,7 @@ export default class TopLevelEntityModal extends Component {
               onClick={this.onAddChild}
             >
               <Plus className="TopLevelEntityModal-Plus" size={20} />
-              Add Planet
+              Add Child
             </FlexContainer>
           </FlexContainer>
         </FlexContainer>
