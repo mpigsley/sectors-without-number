@@ -20,6 +20,7 @@ import { createId, coordinatesFromKey } from 'utils/common';
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
+const TopLevelLeveEntities = filter(Entities, entity => entity.topLevel);
 
 const generatePlanetNames = () => {
   const numPlanetArray = Array(new Chance().weighted([1, 2, 3], [5, 3, 2]));
@@ -27,7 +28,12 @@ const generatePlanetNames = () => {
     name: Entities.planet.nameGenerator(),
     generate: true,
   }));
-  return zipObject(planetsList.map(() => createId()), planetsList);
+  return {
+    [Entities.planet.key]: zipObject(
+      planetsList.map(() => createId()),
+      planetsList,
+    ),
+  };
 };
 
 export default class TopLevelEntityModal extends Component {
@@ -133,7 +139,7 @@ export default class TopLevelEntityModal extends Component {
       },
     );
 
-  renderEditRow = ({ name, generate }, key) => (
+  renderEditRow = (entityType, { name, generate }, key) => (
     <FlexContainer
       className="TopLevelEntityModal-Planet"
       key={key}
@@ -144,7 +150,17 @@ export default class TopLevelEntityModal extends Component {
         size={25}
         onClick={() => this.onDeleteChild(key)}
       />
+      <Dropdown
+        wrapperClassName="TopLevelEntityModal-Type"
+        value={entityType}
+        onChange={item => this.setState({ entityType: (item || {}).value })}
+        options={Entities[this.state.entityType].children.map(child => ({
+          value: child,
+          label: Entities[child].name,
+        }))}
+      />
       <IconInput
+        className="TopLevelEntityModal-Name"
         name="name"
         data-key={key}
         icon={RefreshCw}
@@ -190,12 +206,10 @@ export default class TopLevelEntityModal extends Component {
               onChange={item =>
                 this.setState({ entityType: (item || {}).value })
               }
-              options={filter(Entities, entity => entity.topLevel).map(
-                attr => ({
-                  value: attr.key,
-                  label: attr.name,
-                }),
-              )}
+              options={TopLevelLeveEntities.map(attr => ({
+                value: attr.key,
+                label: attr.name,
+              }))}
             />
           </FlexContainer>
           <FlexContainer
@@ -222,8 +236,10 @@ export default class TopLevelEntityModal extends Component {
             <Dice data-rh="Select to generate entity data." size={22} />
           </FlexContainer>
           <FlexContainer direction="column">
-            {map(this.state.children, (child, key) =>
-              this.renderEditRow(child, key),
+            {map(this.state.children, (entities, entityType) =>
+              map(entities, (child, key) =>
+                this.renderEditRow(entityType, child, key),
+              ),
             )}
             <FlexContainer
               className="TopLevelEntityModal-Add"
