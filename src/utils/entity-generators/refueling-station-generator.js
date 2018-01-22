@@ -39,6 +39,7 @@ export const generateRefuelingStations = ({
   parent,
   parentEntity,
   additionalPointsOfInterest,
+  children = [...Array(new Chance().weighted([0, 1], [3, 1]))],
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -50,11 +51,11 @@ export const generateRefuelingStations = ({
     throw new Error('Parent must be defined to generate refueling stations');
   }
 
-  const chance = new Chance();
-  const numRefuelingStations = chance.weighted([0, 1], [3, 1]);
   return {
-    children: [...Array(numRefuelingStations)].map(() =>
+    children: children.map(({ name, generate } = {}) =>
       generateRefuelingStation({
+        name,
+        generate,
         sector,
         parent,
         parentEntity,

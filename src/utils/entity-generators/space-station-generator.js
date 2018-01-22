@@ -20,6 +20,7 @@ export const generateSpaceStations = ({
   parent,
   parentEntity,
   additionalPointsOfInterest,
+  children = [...Array(new Chance().weighted([0, 1, 2], [3, 1, 1]))],
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -31,11 +32,11 @@ export const generateSpaceStations = ({
     throw new Error('Parent must be defined to generate space stations');
   }
 
-  const chance = new Chance();
-  const numSpaceStations = chance.weighted([0, 1, 2], [3, 1, 1]);
   return {
-    children: [...Array(numSpaceStations)].map(() =>
+    children: children.map(({ name, generate } = {}) =>
       generateSpaceStation({
+        name,
+        generate,
         sector,
         parent,
         parentEntity,

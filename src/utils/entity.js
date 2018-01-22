@@ -27,7 +27,7 @@ export const generateEntity = ({
   const config =
     entityType === Entities.sector.key
       ? configuration
-      : { ...configuration, additionalPointsOfInterest: false };
+      : { ...configuration, additionalPointsOfInterest: true };
   let filteredCoordinates = allSectorCoordinates(
     configuration.columns,
     configuration.rows,

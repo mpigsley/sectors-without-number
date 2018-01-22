@@ -39,6 +39,7 @@ export const generateResearchBases = ({
   parent,
   parentEntity,
   additionalPointsOfInterest,
+  children = [...Array(new Chance().weighted([0, 1], [3, 1]))],
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -50,11 +51,11 @@ export const generateResearchBases = ({
     throw new Error('Parent must be defined to generate research bases');
   }
 
-  const chance = new Chance();
-  const numResearchBases = chance.weighted([0, 1], [3, 1]);
   return {
-    children: [...Array(numResearchBases)].map(() =>
+    children: children.map(({ name, generate } = {}) =>
       generateResearchBase({
+        name,
+        generate,
         sector,
         parent,
         parentEntity,

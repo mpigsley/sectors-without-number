@@ -2,8 +2,17 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw, X, Plus } from 'react-feather';
 import Chance from 'chance';
-import { filter, map, zipObject, omit, values } from 'lodash';
 import ReactHintFactory from 'react-hint';
+import {
+  filter,
+  map,
+  mapValues,
+  zipObject,
+  omit,
+  values,
+  size,
+  pickBy,
+} from 'lodash';
 
 import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
@@ -68,57 +77,96 @@ export default class TopLevelEntityModal extends Component {
     this.setState({ name: Entities[this.state.entityType].nameGenerator() });
   };
 
-  onEditSystem = ({ target }) => {
+  onEditEntity = ({ target }) => {
     this.setState({ [target.dataset.key]: target.value });
   };
 
-  onEditChild = ({ target }) => {
+  onChangeChildType = (entityType, entityId) => item => {
+    if (entityType !== item.value) {
+      const oldEntity = this.state.children[entityType][entityId];
+      this.setState({
+        children: {
+          ...this.state.children,
+          [entityType]: omit(this.state.children[entityType], entityId),
+          [item.value]: {
+            ...this.state.children[item.value],
+            [entityId]: {
+              ...oldEntity,
+              name: Entities[item.value].nameGenerator(),
+            },
+          },
+        },
+      });
+    }
+  };
+
+  onEditChild = (entityType, entityId) => ({ target }) => {
     this.setState({
       children: {
         ...this.state.children,
-        [target.dataset.key]: {
-          ...this.state.children[target.dataset.key],
-          name: target.value,
+        [entityType]: {
+          ...this.state.children[entityType],
+          [entityId]: {
+            ...this.state.children[entityType][entityId],
+            name: target.value,
+          },
         },
       },
     });
   };
 
-  onChangeGenerate = ({ target }) => {
+  onChangeGenerate = (entityType, entityId) => ({ target }) => {
     this.setState({
       children: {
         ...this.state.children,
-        [target.dataset.key]: {
-          ...this.state.children[target.dataset.key],
-          generate: target.checked,
+        [entityType]: {
+          ...this.state.children[entityType],
+          [entityId]: {
+            ...this.state.children[entityType][entityId],
+            generate: target.checked,
+          },
         },
       },
     });
   };
 
-  onNewChildName = key => {
+  onNewChildName = (entityType, entityId) => {
     this.setState({
       children: {
         ...this.state.children,
-        [key]: {
-          ...this.state.children[key],
-          name: Entities.planet.nameGenerator(),
+        [entityType]: {
+          ...this.state.children[entityType],
+          [entityId]: {
+            ...this.state.children[entityType][entityId],
+            name: Entities[entityType].nameGenerator(),
+          },
         },
       },
     });
   };
 
-  onDeleteChild = key => {
-    this.setState({ children: omit(this.state.children, key) });
+  onDeleteChild = (entityType, entityId) => {
+    this.setState({
+      children: pickBy(
+        {
+          ...this.state.children,
+          [entityType]: omit(this.state.children[entityType], entityId),
+        },
+        size,
+      ),
+    });
   };
 
   onAddChild = () => {
     this.setState({
       children: {
         ...this.state.children,
-        [createId()]: {
-          name: Entities.planet.nameGenerator(),
-          generate: true,
+        [Entities.planet.key]: {
+          ...this.state.children[Entities.planet.key],
+          [createId()]: {
+            name: Entities.planet.nameGenerator(),
+            generate: true,
+          },
         },
       },
     });
@@ -132,7 +180,7 @@ export default class TopLevelEntityModal extends Component {
       },
       {
         generate: true,
-        children: { [Entities.planet.key]: values(this.state.children) },
+        children: mapValues(this.state.children, child => values(child)),
         ...coordinatesFromKey(this.props.topLevelKey),
         parent: this.props.currentSector,
         parentEntity: Entities.sector.key,
@@ -148,12 +196,12 @@ export default class TopLevelEntityModal extends Component {
       <X
         className="TopLevelEntityModal-Delete"
         size={25}
-        onClick={() => this.onDeleteChild(key)}
+        onClick={() => this.onDeleteChild(entityType, key)}
       />
       <Dropdown
         wrapperClassName="TopLevelEntityModal-Type"
         value={entityType}
-        onChange={item => this.setState({ entityType: (item || {}).value })}
+        onChange={this.onChangeChildType(entityType, key)}
         options={Entities[this.state.entityType].children.map(child => ({
           value: child,
           label: Entities[child].name,
@@ -162,16 +210,14 @@ export default class TopLevelEntityModal extends Component {
       <IconInput
         className="TopLevelEntityModal-Name"
         name="name"
-        data-key={key}
         icon={RefreshCw}
         value={name}
-        onChange={this.onEditChild}
-        onIconClick={() => this.onNewChildName(key)}
+        onChange={this.onEditChild(entityType, key)}
+        onIconClick={() => this.onNewChildName(entityType, key)}
       />
       <Input
         className="TopLevelEntityModal-Generate"
-        data-key={key}
-        onChange={this.onChangeGenerate}
+        onChange={this.onChangeGenerate(entityType, key)}
         checked={generate}
         name="checkbox"
         type="checkbox"
@@ -225,7 +271,7 @@ export default class TopLevelEntityModal extends Component {
               data-key="name"
               icon={RefreshCw}
               value={this.state.name}
-              onChange={this.onEditSystem}
+              onChange={this.onEditEntity}
               onIconClick={this.onNewEntityName}
             />
           </FlexContainer>
