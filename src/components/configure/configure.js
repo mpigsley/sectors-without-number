@@ -17,6 +17,8 @@ import { generateSectorName } from 'utils/name-generator';
 
 import './style.css';
 
+const MAX_DIMENSION = 15;
+
 export default function Configure({
   additionalPointsOfInterest,
   updateConfiguration,
@@ -26,11 +28,20 @@ export default function Configure({
   rows,
   name,
 }) {
+  const limitDimensions = func => e => {
+    if (Number.parseInt(e.target.value, 10) > MAX_DIMENSION) {
+      e.target.value = `${MAX_DIMENSION}`;
+    } else if (Number.parseInt(e.target.value, 10) < 1) {
+      e.target.value = '1';
+    }
+    func(e);
+  };
+
   const updateInput = ({ target }) => {
     const key = target.getAttribute('data-key');
     let { value } = target;
     if (target.type === 'number') {
-      value = value ? Number.parseInt(value, 10) : null;
+      value = value ? Number.parseInt(value, 10) : undefined;
     } else if (target.type === 'checkbox') {
       value = target.checked;
     }
@@ -43,9 +54,9 @@ export default function Configure({
   };
 
   const invalidText =
-    columns > 20 || rows > 20 ? (
+    columns > MAX_DIMENSION || rows > MAX_DIMENSION ? (
       <div className="Configure-Invalid">
-        Column and row count can not be greater than 20.
+        Column and row count can not be greater than {MAX_DIMENSION}.
       </div>
     ) : null;
 
@@ -75,10 +86,10 @@ export default function Configure({
             <Label htmlFor="rows">Rows</Label>
             <Input
               data-key="rows"
-              onChange={updateInput}
+              onChange={limitDimensions(updateInput)}
               name="rows"
               type="number"
-              value={rows}
+              value={rows || ''}
             />
           </SubContainer>
           <SubContainer
@@ -90,10 +101,10 @@ export default function Configure({
             <Label htmlFor="columns">Columns</Label>
             <Input
               data-key="columns"
-              onChange={updateInput}
+              onChange={limitDimensions(updateInput)}
               name="columns"
               type="number"
-              value={columns}
+              value={columns || ''}
             />
           </SubContainer>
         </SubContainer>
@@ -136,7 +147,7 @@ Configure.propTypes = {
 };
 
 Configure.defaultProps = {
-  columns: '',
-  rows: '',
+  columns: undefined,
+  rows: undefined,
   name: '',
 };
