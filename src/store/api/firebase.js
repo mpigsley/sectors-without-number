@@ -44,7 +44,9 @@ export const uploadEntities = (entities, uid, sectorId) => {
 
   const allKeys = flatten(values(map(entities, Object.keys)));
   const keyMapping = {};
-  const batch = Firestore().batch();
+  const batches = [Firestore().batch()];
+  let batchCount = 0;
+  let batchIndex = 0;
 
   const saveEntityTree = (parentId, newParentId, thisSectorId) => {
     forEach(entities, (entityTypes, entityType) =>
@@ -72,7 +74,13 @@ export const uploadEntities = (entities, uid, sectorId) => {
           .doc(entityType)
           .collection('entity')
           .doc();
-        batch.set(newRef, savableEntity);
+        batches[batchIndex].set(newRef, savableEntity);
+        batchCount += 1;
+        if (batchCount === 500) {
+          batches.push(Firestore().batch());
+          batchIndex += 1;
+          batchCount = 0;
+        }
         keyMapping[oldId] = newRef.id;
         let savableSectorId = thisSectorId || sectorId;
         if (entityType === Entities.sector.key) {
@@ -85,7 +93,9 @@ export const uploadEntities = (entities, uid, sectorId) => {
 
   saveEntityTree();
 
-  return batch.commit().then(() => ({ mapping: keyMapping }));
+  return Promise.all(batches.map(batch => batch.commit())).then(() => ({
+    mapping: keyMapping,
+  }));
 };
 
 export const getSyncedSectors = uid => {
@@ -209,8 +219,7 @@ export const deleteEntities = entities => {
       );
       batchCount += 1;
       if (batchCount === 500) {
-        console.log('REACHED BATCH LIMIT');
-        oldSectorBatch.push(Firestore().batch());
+        batches.push(Firestore().batch());
         batchIndex += 1;
         batchCount = 0;
       }
