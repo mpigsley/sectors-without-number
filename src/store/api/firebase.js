@@ -176,7 +176,10 @@ export const updateEntities = entities => {
 };
 
 export const deleteEntities = entities => {
-  const batch = Firestore().batch();
+  const oldSectorBatch = Firestore().batch();
+  const batches = [Firestore().batch()];
+  let batchCount = 0;
+  let batchIndex = 0;
   const promises = [];
   forEach(entities, (entityIds, entityType) =>
     entityIds.forEach(entityId => {
@@ -188,7 +191,7 @@ export const deleteEntities = entities => {
             .get()
             .then(doc => {
               if (doc.exists) {
-                batch.delete(
+                oldSectorBatch.delete(
                   Firestore()
                     .collection('sectors')
                     .doc(entityId),
@@ -197,16 +200,28 @@ export const deleteEntities = entities => {
             }),
         );
       }
-      batch.delete(
+      batches[batchIndex].delete(
         Firestore()
           .collection('entities')
           .doc(entityType)
           .collection('entity')
           .doc(entityId),
       );
+      batchCount += 1;
+      if (batchCount === 500) {
+        console.log('REACHED BATCH LIMIT');
+        oldSectorBatch.push(Firestore().batch());
+        batchIndex += 1;
+        batchCount = 0;
+      }
     }),
   );
-  return Promise.all(promises).then(() => batch.commit());
+  return Promise.all(promises).then(() =>
+    Promise.all([
+      ...batches.map(batch => batch.commit()),
+      oldSectorBatch.commit(),
+    ]),
+  );
 };
 
 export const convertOldSectors = ({ uid, onConvert, onComplete }) =>
