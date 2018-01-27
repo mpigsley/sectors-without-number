@@ -53,18 +53,10 @@ export default function Configure({
     updateConfiguration('name', genFunc(chance));
   };
 
-  const invalidText =
-    columns > MAX_DIMENSION || rows > MAX_DIMENSION ? (
-      <div className="Configure-Invalid">
-        Column and row count can not be greater than {MAX_DIMENSION}.
-      </div>
-    ) : null;
-
   return (
     <ContentContainer direction="column" align="center" justify="center">
       <Header type={HeaderType.header2}>Configure</Header>
       <SubContainer noMargin direction="column" align="flexStart">
-        {invalidText}
         <Label noPadding htmlFor="name">
           Sector Name
         </Label>
