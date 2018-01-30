@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw, X, Plus } from 'react-feather';
-import Chance from 'chance';
 import ReactHintFactory from 'react-hint';
 import {
   filter,
@@ -22,28 +21,16 @@ import Input from 'primitives/form/input';
 import Dropdown from 'primitives/form/dropdown';
 import FlexContainer from 'primitives/container/flex-container';
 import Dice from 'primitives/icons/dice';
+import Header, { HeaderType } from 'primitives/text/header';
 
 import Entities from 'constants/entities';
 import { createId, coordinatesFromKey } from 'utils/common';
+import EntityGenerators from 'utils/entity-generators';
 
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
 const TopLevelLeveEntities = filter(Entities, entity => entity.topLevel);
-
-const generatePlanetNames = () => {
-  const numPlanetArray = Array(new Chance().weighted([1, 2, 3], [5, 3, 2]));
-  const planetsList = Array.from([...numPlanetArray], () => ({
-    name: Entities.planet.nameGenerator(),
-    generate: true,
-  }));
-  return {
-    [Entities.planet.key]: zipObject(
-      planetsList.map(() => createId()),
-      planetsList,
-    ),
-  };
-};
 
 export default class TopLevelEntityModal extends Component {
   static propTypes = {
@@ -60,7 +47,7 @@ export default class TopLevelEntityModal extends Component {
 
   state = {
     name: Entities.system.nameGenerator(),
-    children: generatePlanetNames(),
+    children: this.generateChildrenNames(Entities.system.key),
     entityType: Entities.system.key,
   };
 
@@ -68,7 +55,7 @@ export default class TopLevelEntityModal extends Component {
     if (nextProps.isOpen && !this.props.isOpen) {
       this.setState({
         name: Entities[this.state.entityType].nameGenerator(),
-        children: generatePlanetNames(),
+        children: this.generateChildrenNames(this.state.entityType),
       });
     }
   }
@@ -187,6 +174,26 @@ export default class TopLevelEntityModal extends Component {
       },
     );
 
+  generateChildrenNames(parentEntity) {
+    let names = {};
+    Entities[parentEntity].children.forEach(child => {
+      const { children } = EntityGenerators[child].generateAll({
+        additionalPointsOfInterest: true,
+        sector: this.props.currentSector,
+        parentEntity,
+        parent: createId(),
+      });
+      names = {
+        ...names,
+        [child]: zipObject(
+          children.map(createId),
+          children.map(({ name }) => ({ name, generate: true })),
+        ),
+      };
+    });
+    return names;
+  }
+
   renderEditRow = (entityType, { name, generate }, key) => (
     <FlexContainer
       className="TopLevelEntityModal-Planet"
@@ -225,6 +232,44 @@ export default class TopLevelEntityModal extends Component {
     </FlexContainer>
   );
 
+  renderChildren() {
+    if (Entities[this.state.entityType].children.length) {
+      return (
+        <FlexContainer direction="column">
+          <FlexContainer justify="spaceBetween" align="flexEnd">
+            <Label>Children</Label>
+            <Dice data-rh="Select to generate entity data." size={22} />
+          </FlexContainer>
+          <FlexContainer direction="column">
+            {map(this.state.children, (entities, entityType) =>
+              map(entities, (child, key) =>
+                this.renderEditRow(entityType, child, key),
+              ),
+            )}
+            <FlexContainer
+              className="TopLevelEntityModal-Add"
+              align="center"
+              onClick={this.onAddChild}
+            >
+              <Plus className="TopLevelEntityModal-Plus" size={20} />
+              Add Child
+            </FlexContainer>
+          </FlexContainer>
+        </FlexContainer>
+      );
+    }
+    return (
+      <FlexContainer justify="center">
+        <Header
+          type={HeaderType.header4}
+          className="TopLevelEntityModal-EmptyText"
+        >
+          Selected entity has no associated children.
+        </Header>
+      </FlexContainer>
+    );
+  }
+
   render() {
     return (
       <Modal
@@ -249,9 +294,13 @@ export default class TopLevelEntityModal extends Component {
             </Label>
             <Dropdown
               value={this.state.entityType}
-              onChange={item =>
-                this.setState({ entityType: (item || {}).value })
-              }
+              onChange={item => {
+                const entityType = (item || {}).value;
+                this.setState({
+                  entityType,
+                  children: this.generateChildrenNames(entityType),
+                });
+              }}
               options={TopLevelLeveEntities.map(attr => ({
                 value: attr.key,
                 label: attr.name,
@@ -276,27 +325,7 @@ export default class TopLevelEntityModal extends Component {
             />
           </FlexContainer>
         </FlexContainer>
-        <FlexContainer direction="column">
-          <FlexContainer justify="spaceBetween" align="flexEnd">
-            <Label>Children</Label>
-            <Dice data-rh="Select to generate entity data." size={22} />
-          </FlexContainer>
-          <FlexContainer direction="column">
-            {map(this.state.children, (entities, entityType) =>
-              map(entities, (child, key) =>
-                this.renderEditRow(entityType, child, key),
-              ),
-            )}
-            <FlexContainer
-              className="TopLevelEntityModal-Add"
-              align="center"
-              onClick={this.onAddChild}
-            >
-              <Plus className="TopLevelEntityModal-Plus" size={20} />
-              Add Child
-            </FlexContainer>
-          </FlexContainer>
-        </FlexContainer>
+        {this.renderChildren()}
       </Modal>
     );
   }
