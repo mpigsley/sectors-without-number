@@ -38,7 +38,7 @@ export const generateAsteroidBases = ({
   sector,
   parent,
   parentEntity,
-  children = [...Array(new Chance().weighted([1, 2, 3], [5, 3, 2]))],
+  children = [...Array(new Chance().weighted([0, 1, 2], [1, 3, 2]))],
   additionalPointsOfInterest,
 }) => {
   if (!additionalPointsOfInterest) {

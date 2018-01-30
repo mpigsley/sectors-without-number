@@ -33,39 +33,48 @@ export const generateEntity = ({
     configuration.rows,
   );
 
+  console.log(entity, parameters);
+
   let childrenEntities = {};
-  const generateChildren = (parent, parentEntity) =>
-    Entities[parentEntity].children.forEach(childEntity => {
-      const { children, coordinates } = EntityGenerators[
-        childEntity
-      ].generateAll({
-        sector,
-        parent,
-        parentEntity,
-        children: (parameters.children || {})[childEntity],
-        coordinates: filteredCoordinates,
-        ...config,
+  const generateChildren = (parent, parentEntity, isFirstLevel = false) =>
+    Entities[parentEntity].children
+      .filter(
+        childEntity =>
+          !isFirstLevel || (parameters.children || {})[childEntity],
+      )
+      .forEach(childEntity => {
+        const { children, coordinates } = EntityGenerators[
+          childEntity
+        ].generateAll({
+          sector,
+          parent,
+          parentEntity,
+          children: isFirstLevel
+            ? (parameters.children || {})[childEntity]
+            : undefined,
+          coordinates: filteredCoordinates,
+          ...config,
+        });
+        filteredCoordinates = coordinates || filteredCoordinates;
+        const childrenObj = zipObject(children.map(() => createId()), children);
+        childrenEntities = {
+          ...childrenEntities,
+          [childEntity]: {
+            ...(childrenEntities[childEntity] || {}),
+            ...childrenObj,
+          },
+        };
+        Object.keys(childrenObj).map(newKey =>
+          generateChildren(newKey, childEntity),
+        );
       });
-      filteredCoordinates = coordinates || filteredCoordinates;
-      const childrenObj = zipObject(children.map(() => createId()), children);
-      childrenEntities = {
-        ...childrenEntities,
-        [childEntity]: {
-          ...(childrenEntities[childEntity] || {}),
-          ...childrenObj,
-        },
-      };
-      Object.keys(childrenObj).map(newKey =>
-        generateChildren(newKey, childEntity),
-      );
-    });
 
   if (
     entityType === Entities.sector.key
       ? !configuration.isBuilder
       : parameters.generate
   ) {
-    generateChildren(entityId, entityType);
+    generateChildren(entityId, entityType, true);
   }
 
   return {
