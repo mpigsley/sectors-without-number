@@ -106,7 +106,7 @@ export default function EntityAttributes({
     attributesSection = (
       <div key="attributes">
         <SectionHeader isOpen={isAttributesOpen} onClick={toggleAttributesOpen}>
-          Attributes
+          <span className="EntityAttributes-Name">Attributes</span>
         </SectionHeader>
         {attributes}
       </div>

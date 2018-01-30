@@ -86,14 +86,16 @@ export default function EntityTags({
 
   let header = (
     <SectionHeader isOpen={isOpen} onClick={toggleOpen}>
-      {Entities[entityType].name} Tags
+      <span className="EntityTags-Name">{Entities[entityType].name} Tags</span>
     </SectionHeader>
   );
   if (isSidebarEditActive) {
     header = (
-      <SectionHeader isOpen={isOpen} onClick={toggleOpen}>
+      <SectionHeader isOpen={isOpen} onIconClick={toggleOpen}>
         <FlexContainer justify="spaceBetween" align="flexEnd">
-          {Entities[entityType].name} Tags
+          <span className="EntityTags-Name" onClick={toggleOpen}>
+            {Entities[entityType].name} Tags
+          </span>
           <Button
             minimal
             className="EntityTags-AddButton"
