@@ -33,14 +33,14 @@ export const generateEntity = ({
     configuration.rows,
   );
 
-  console.log(entity, parameters);
-
   let childrenEntities = {};
   const generateChildren = (parent, parentEntity, isFirstLevel = false) =>
     Entities[parentEntity].children
       .filter(
         childEntity =>
-          !isFirstLevel || (parameters.children || {})[childEntity],
+          !isFirstLevel ||
+          !parameters.children ||
+          (parameters.children || {})[childEntity],
       )
       .forEach(childEntity => {
         const { children, coordinates } = EntityGenerators[
