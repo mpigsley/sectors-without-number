@@ -11,6 +11,7 @@ import {
   values,
   size,
   pickBy,
+  flatten,
 } from 'lodash';
 
 import Modal from 'primitives/modal/modal';
@@ -44,6 +45,12 @@ export default class TopLevelEntityModal extends Component {
   static defaultProps = {
     topLevelKey: '',
   };
+
+  constructor(props) {
+    super(props);
+
+    this.currentSort = 0;
+  }
 
   state = {
     name: Entities.system.nameGenerator(),
@@ -145,6 +152,7 @@ export default class TopLevelEntityModal extends Component {
   };
 
   onAddChild = () => {
+    this.currentSort += 1;
     this.setState({
       children: {
         ...this.state.children,
@@ -153,6 +161,7 @@ export default class TopLevelEntityModal extends Component {
           [createId()]: {
             name: Entities.planet.nameGenerator(),
             generate: true,
+            sort: this.currentSort,
           },
         },
       },
@@ -176,6 +185,7 @@ export default class TopLevelEntityModal extends Component {
 
   generateChildrenNames(parentEntity) {
     let names = {};
+    this.currentSort = 0;
     Entities[parentEntity].children.forEach(child => {
       const { children } = EntityGenerators[child].generateAll({
         additionalPointsOfInterest: true,
@@ -187,7 +197,14 @@ export default class TopLevelEntityModal extends Component {
         ...names,
         [child]: zipObject(
           children.map(createId),
-          children.map(({ name }) => ({ name, generate: true })),
+          children.map(({ name }) => {
+            this.currentSort += 1;
+            return {
+              name,
+              generate: true,
+              sort: this.currentSort,
+            };
+          }),
         ),
       };
     });
@@ -241,11 +258,15 @@ export default class TopLevelEntityModal extends Component {
             <Dice data-rh="Select to generate entity data." size={22} />
           </FlexContainer>
           <FlexContainer direction="column">
-            {map(this.state.children, (entities, entityType) =>
-              map(entities, (child, key) =>
-                this.renderEditRow(entityType, child, key),
+            {flatten(
+              map(this.state.children, (entities, entityType) =>
+                map(entities, (child, key) => ({ entityType, child, key })),
               ),
-            )}
+            )
+              .sort((a, b) => a.child.sort - b.child.sort)
+              .map(({ entityType, child, key }) =>
+                this.renderEditRow(entityType, child, key),
+              )}
             <FlexContainer
               className="TopLevelEntityModal-Add"
               align="center"
