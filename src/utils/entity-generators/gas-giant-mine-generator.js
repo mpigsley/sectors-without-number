@@ -38,7 +38,7 @@ export const generateGasGiantMines = ({
   sector,
   parent,
   parentEntity,
-  children = [...Array(new Chance().weighted([0, 1, 2], [5, 2, 1]))],
+  children = [...Array(new Chance().weighted([0, 1, 2], [8, 3, 1]))],
   additionalPointsOfInterest,
 }) => {
   if (!additionalPointsOfInterest) {

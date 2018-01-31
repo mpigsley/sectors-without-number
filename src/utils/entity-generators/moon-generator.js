@@ -30,7 +30,7 @@ export const generateMoons = ({
   }
 
   const chance = new Chance();
-  const numMoons = chance.weighted([0, 1, 2, 3], [5, 3, 2, 1]);
+  const numMoons = chance.weighted([0, 1, 2, 3], [10, 5, 2, 1]);
   return {
     children: [...Array(numMoons)].map(() =>
       generateMoon({

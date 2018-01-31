@@ -9,6 +9,7 @@ import {
   omit,
   isObject,
   findKey,
+  find,
 } from 'lodash';
 
 import EntityGenerators from 'utils/entity-generators';
@@ -43,15 +44,14 @@ export const generateEntity = ({
           (parameters.children || {})[childEntity],
       )
       .forEach(childEntity => {
+        const entityChildren = (parameters.children || {})[childEntity];
         const { children, coordinates } = EntityGenerators[
           childEntity
         ].generateAll({
           sector,
           parent,
           parentEntity,
-          children: isFirstLevel
-            ? (parameters.children || {})[childEntity]
-            : undefined,
+          children: isFirstLevel ? entityChildren : undefined,
           coordinates: filteredCoordinates,
           ...config,
         });
@@ -64,9 +64,17 @@ export const generateEntity = ({
             ...childrenObj,
           },
         };
-        Object.keys(childrenObj).map(newKey =>
-          generateChildren(newKey, childEntity),
-        );
+        Object.keys(
+          pickBy(childrenObj, childObj => {
+            const childGenerate = (
+              find(
+                entityChildren || [],
+                child => child.name === childObj.name,
+              ) || {}
+            ).generate;
+            return !isFirstLevel || childGenerate !== false;
+          }),
+        ).map(newKey => generateChildren(newKey, childEntity));
       });
 
   if (
