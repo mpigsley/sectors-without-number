@@ -1,4 +1,8 @@
 {
+  "3.1.1": {
+    "description": "Fix bug where an old sector couldn't be deleted.",
+    "date": "2-1-2018"
+  },
   "3.1.0": {
     "description": "Additional Points of Interest.",
     "date": "2-1-2018",
