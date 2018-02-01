@@ -17,7 +17,10 @@ import { generateSectorName } from 'utils/name-generator';
 
 import './style.css';
 
+const MAX_DIMENSION = 15;
+
 export default function Configure({
+  additionalPointsOfInterest,
   updateConfiguration,
   generateSector,
   isBuilder,
@@ -25,11 +28,20 @@ export default function Configure({
   rows,
   name,
 }) {
+  const limitDimensions = func => e => {
+    if (Number.parseInt(e.target.value, 10) > MAX_DIMENSION) {
+      e.target.value = `${MAX_DIMENSION}`;
+    } else if (Number.parseInt(e.target.value, 10) < 1) {
+      e.target.value = '1';
+    }
+    func(e);
+  };
+
   const updateInput = ({ target }) => {
     const key = target.getAttribute('data-key');
     let { value } = target;
     if (target.type === 'number') {
-      value = value ? Number.parseInt(value, 10) : null;
+      value = value ? Number.parseInt(value, 10) : undefined;
     } else if (target.type === 'checkbox') {
       value = target.checked;
     }
@@ -41,18 +53,10 @@ export default function Configure({
     updateConfiguration('name', genFunc(chance));
   };
 
-  const invalidText =
-    columns > 20 || rows > 20 ? (
-      <div className="Configure-Invalid">
-        Column and row count can not be greater than 20.
-      </div>
-    ) : null;
-
   return (
     <ContentContainer direction="column" align="center" justify="center">
       <Header type={HeaderType.header2}>Configure</Header>
       <SubContainer noMargin direction="column" align="flexStart">
-        {invalidText}
         <Label noPadding htmlFor="name">
           Sector Name
         </Label>
@@ -74,10 +78,10 @@ export default function Configure({
             <Label htmlFor="rows">Rows</Label>
             <Input
               data-key="rows"
-              onChange={updateInput}
+              onChange={limitDimensions(updateInput)}
               name="rows"
               type="number"
-              value={rows}
+              value={rows || ''}
             />
           </SubContainer>
           <SubContainer
@@ -89,10 +93,10 @@ export default function Configure({
             <Label htmlFor="columns">Columns</Label>
             <Input
               data-key="columns"
-              onChange={updateInput}
+              onChange={limitDimensions(updateInput)}
               name="columns"
               type="number"
-              value={columns}
+              value={columns || ''}
             />
           </SubContainer>
         </SubContainer>
@@ -101,6 +105,12 @@ export default function Configure({
           value={isBuilder}
           onChange={updateInput}
           label="Initialize Empty Sector"
+        />
+        <Checkbox
+          data-key="additionalPointsOfInterest"
+          value={additionalPointsOfInterest}
+          onChange={updateInput}
+          label="Use Additional Points of Interest"
         />
       </SubContainer>
       <SubContainer
@@ -119,6 +129,7 @@ export default function Configure({
 }
 
 Configure.propTypes = {
+  additionalPointsOfInterest: PropTypes.bool.isRequired,
   updateConfiguration: PropTypes.func.isRequired,
   generateSector: PropTypes.func.isRequired,
   isBuilder: PropTypes.bool.isRequired,
@@ -128,7 +139,7 @@ Configure.propTypes = {
 };
 
 Configure.defaultProps = {
-  columns: '',
-  rows: '',
+  columns: undefined,
+  rows: undefined,
   name: '',
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { X, Plus } from 'react-feather';
-import { filter, includes, map, pull } from 'lodash';
+import { filter, includes, map, pull, capitalize } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -10,16 +10,13 @@ import Dropdown from 'primitives/form/dropdown';
 import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 
-import { capitalizeFirstLetter } from 'utils/common';
 import Entities from 'constants/entities';
 
 const renderList = (list, listKey) => (
   <div key={listKey} className="EntityAttributes-Content">
-    <b>{capitalizeFirstLetter(listKey)}:</b>
+    <b>{capitalize(listKey)}:</b>
     <ul className="EntityAttributes-ContentList">
-      {list
-        .map(capitalizeFirstLetter)
-        .map(element => <li key={element}>{element}</li>)}
+      {list.map(capitalize).map(element => <li key={element}>{element}</li>)}
     </ul>
   </div>
 );
@@ -29,6 +26,8 @@ export default function EntityTags({
   entity,
   isSidebarEditActive,
   updateEntityInEdit,
+  isOpen,
+  toggleOpen,
 }) {
   if (
     !Entities[entityType].tags ||
@@ -85,12 +84,18 @@ export default function EntityTags({
       ));
   }
 
-  let header = <SectionHeader>{Entities[entityType].name} Tags</SectionHeader>;
+  let header = (
+    <SectionHeader isOpen={isOpen} onClick={toggleOpen}>
+      <span className="EntityTags-Name">{Entities[entityType].name} Tags</span>
+    </SectionHeader>
+  );
   if (isSidebarEditActive) {
     header = (
-      <SectionHeader>
+      <SectionHeader isOpen={isOpen} onIconClick={toggleOpen}>
         <FlexContainer justify="spaceBetween" align="flexEnd">
-          {Entities[entityType].name} Tags
+          <span className="EntityTags-Name" onClick={toggleOpen}>
+            {Entities[entityType].name} Tags
+          </span>
           <Button
             minimal
             className="EntityTags-AddButton"
@@ -114,10 +119,15 @@ export default function EntityTags({
     );
   }
 
+  let tagsSection = null;
+  if (isOpen) {
+    tagsSection = <div className="EntityAttributes-Section">{tags}</div>;
+  }
+
   return (
     <div>
       {header}
-      <div className="EntityAttributes-Section">{tags}</div>
+      {tagsSection}
     </div>
   );
 }
@@ -129,4 +139,6 @@ EntityTags.propTypes = {
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   updateEntityInEdit: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleOpen: PropTypes.func.isRequired,
 };

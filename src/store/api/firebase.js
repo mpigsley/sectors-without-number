@@ -44,7 +44,9 @@ export const uploadEntities = (entities, uid, sectorId) => {
 
   const allKeys = flatten(values(map(entities, Object.keys)));
   const keyMapping = {};
-  const batch = Firestore().batch();
+  const batches = [Firestore().batch()];
+  let batchCount = 0;
+  let batchIndex = 0;
 
   const saveEntityTree = (parentId, newParentId, thisSectorId) => {
     forEach(entities, (entityTypes, entityType) =>
@@ -72,7 +74,13 @@ export const uploadEntities = (entities, uid, sectorId) => {
           .doc(entityType)
           .collection('entity')
           .doc();
-        batch.set(newRef, savableEntity);
+        batches[batchIndex].set(newRef, savableEntity);
+        batchCount += 1;
+        if (batchCount === 500) {
+          batches.push(Firestore().batch());
+          batchIndex += 1;
+          batchCount = 0;
+        }
         keyMapping[oldId] = newRef.id;
         let savableSectorId = thisSectorId || sectorId;
         if (entityType === Entities.sector.key) {
@@ -85,7 +93,9 @@ export const uploadEntities = (entities, uid, sectorId) => {
 
   saveEntityTree();
 
-  return batch.commit().then(() => ({ mapping: keyMapping }));
+  return Promise.all(batches.map(batch => batch.commit())).then(() => ({
+    mapping: keyMapping,
+  }));
 };
 
 export const getSyncedSectors = uid => {
@@ -176,7 +186,10 @@ export const updateEntities = entities => {
 };
 
 export const deleteEntities = entities => {
-  const batch = Firestore().batch();
+  const oldSectorBatch = Firestore().batch();
+  const batches = [Firestore().batch()];
+  let batchCount = 0;
+  let batchIndex = 0;
   const promises = [];
   forEach(entities, (entityIds, entityType) =>
     entityIds.forEach(entityId => {
@@ -188,7 +201,7 @@ export const deleteEntities = entities => {
             .get()
             .then(doc => {
               if (doc.exists) {
-                batch.delete(
+                oldSectorBatch.delete(
                   Firestore()
                     .collection('sectors')
                     .doc(entityId),
@@ -197,16 +210,27 @@ export const deleteEntities = entities => {
             }),
         );
       }
-      batch.delete(
+      batches[batchIndex].delete(
         Firestore()
           .collection('entities')
           .doc(entityType)
           .collection('entity')
           .doc(entityId),
       );
+      batchCount += 1;
+      if (batchCount === 500) {
+        batches.push(Firestore().batch());
+        batchIndex += 1;
+        batchCount = 0;
+      }
     }),
   );
-  return Promise.all(promises).then(() => batch.commit());
+  return Promise.all(promises).then(() =>
+    Promise.all([
+      ...batches.map(batch => batch.commit()),
+      oldSectorBatch.commit(),
+    ]),
+  );
 };
 
 export const convertOldSectors = ({ uid, onConvert, onComplete }) =>
@@ -319,7 +343,9 @@ export const convertOldSectors = ({ uid, onConvert, onComplete }) =>
     });
 
     return Promise.all(promises).then(() => {
-      onComplete();
+      if (promises.length) {
+        onComplete();
+      }
       return entities;
     });
   });

@@ -1,5 +1,15 @@
 @import 'styles/theme';
 
+.TopLevelEntityModal-Type {
+  flex: 1;
+  margin-right: 0.25rem;
+}
+
+.TopLevelEntityModal-Name {
+  flex: 1;
+  margin-left: 0.25rem;
+}
+
 .TopLevelEntityModal-Planet {
   margin-bottom: 0.3rem;
 }
@@ -50,5 +60,9 @@
   color: $error;
   margin-top: 1rem;
   font-size: 0.9rem;
+  text-align: center;
+}
+
+.TopLevelEntityModal-EmptyText {
   text-align: center;
 }

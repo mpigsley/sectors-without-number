@@ -3,59 +3,94 @@ import Entities from 'constants/entities';
 import generateSector from './sector-generator';
 import { generateSystems, generateSystem } from './system-generator';
 import { generatePlanets, generatePlanet } from './planet-generator';
+import { generateBlackHoles, generateBlackHole } from './black-hole-generator';
+import {
+  generateAsteroidBelts,
+  generateAsteroidBelt,
+} from './asteroid-belt-generator';
+import {
+  generateDeepSpaceStations,
+  generateDeepSpaceStation,
+} from './deep-space-station-generator';
+import {
+  generateOrbitalRuins,
+  generateOrbitalRuin,
+} from './orbital-ruin-generator';
+import {
+  generateAsteroidBases,
+  generateAsteroidBase,
+} from './asteroid-base-generator';
+import {
+  generateGasGiantMines,
+  generateGasGiantMine,
+} from './gas-giant-mine-generator';
+import { generateMoons, generateMoon } from './moon-generator';
+import { generateMoonBases, generateMoonBase } from './moon-base-generator';
+import {
+  generateRefuelingStations,
+  generateRefuelingStation,
+} from './refueling-station-generator';
+import {
+  generateResearchBases,
+  generateResearchBase,
+} from './research-base-generator';
+import {
+  generateSpaceStations,
+  generateSpaceStation,
+} from './space-station-generator';
 
 export default {
   [Entities.asteroidBase.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateAsteroidBase,
+    generateAll: generateAsteroidBases,
   },
   [Entities.asteroidBelt.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateAsteroidBelt,
+    generateAll: generateAsteroidBelts,
   },
   [Entities.blackHole.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateBlackHole,
+    generateAll: generateBlackHoles,
   },
   [Entities.deepSpaceStation.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateDeepSpaceStation,
+    generateAll: generateDeepSpaceStations,
   },
   [Entities.gasGiantMine.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateGasGiantMine,
+    generateAll: generateGasGiantMines,
   },
   [Entities.moon.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateMoon,
+    generateAll: generateMoons,
   },
   [Entities.moonBase.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateMoonBase,
+    generateAll: generateMoonBases,
   },
   [Entities.orbitalRuin.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateOrbitalRuin,
+    generateAll: generateOrbitalRuins,
   },
   [Entities.planet.key]: {
     generateOne: generatePlanet,
     generateAll: generatePlanets,
   },
   [Entities.refuelingStation.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateRefuelingStation,
+    generateAll: generateRefuelingStations,
   },
   [Entities.researchBase.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateResearchBase,
+    generateAll: generateResearchBases,
   },
   [Entities.sector.key]: {
     generateOne: generateSector,
-    generateAll: () => [],
+    generateAll: () => ({ children: [] }),
   },
   [Entities.spaceStation.key]: {
-    generateOne: () => ({}),
-    generateAll: () => [],
+    generateOne: generateSpaceStation,
+    generateAll: generateSpaceStations,
   },
   [Entities.system.key]: {
     generateOne: generateSystem,

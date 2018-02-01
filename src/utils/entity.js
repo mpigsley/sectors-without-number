@@ -9,10 +9,11 @@ import {
   omit,
   isObject,
   findKey,
+  find,
 } from 'lodash';
 
 import EntityGenerators from 'utils/entity-generators';
-import { createId, coordinateKey } from 'utils/common';
+import { createId, coordinateKey, allSectorCoordinates } from 'utils/common';
 import Entities from 'constants/entities';
 
 export const generateEntity = ({
@@ -24,36 +25,64 @@ export const generateEntity = ({
   const { entityType, name } = entity;
   const entityId = createId();
   const sector = entityType === Entities.sector.key ? entityId : currentSector;
+  const config =
+    entityType === Entities.sector.key
+      ? configuration
+      : { ...configuration, additionalPointsOfInterest: true };
+  let filteredCoordinates = allSectorCoordinates(
+    configuration.columns,
+    configuration.rows,
+  );
 
   let childrenEntities = {};
-  const generateChildren = (parent, parentEntity) =>
-    Entities[parentEntity].children.forEach(childEntity => {
-      const children = EntityGenerators[childEntity].generateAll({
-        sector,
-        parent,
-        parentEntity,
-        children: (parameters.children || {})[childEntity],
-        ...configuration,
+  const generateChildren = (parent, parentEntity, isFirstLevel = false) =>
+    Entities[parentEntity].children
+      .filter(
+        childEntity =>
+          !isFirstLevel ||
+          !parameters.children ||
+          (parameters.children || {})[childEntity],
+      )
+      .forEach(childEntity => {
+        const entityChildren = (parameters.children || {})[childEntity];
+        const { children, coordinates } = EntityGenerators[
+          childEntity
+        ].generateAll({
+          sector,
+          parent,
+          parentEntity,
+          children: isFirstLevel ? entityChildren : undefined,
+          coordinates: filteredCoordinates,
+          ...config,
+        });
+        filteredCoordinates = coordinates || filteredCoordinates;
+        const childrenObj = zipObject(children.map(() => createId()), children);
+        childrenEntities = {
+          ...childrenEntities,
+          [childEntity]: {
+            ...(childrenEntities[childEntity] || {}),
+            ...childrenObj,
+          },
+        };
+        Object.keys(
+          pickBy(childrenObj, childObj => {
+            const childGenerate = (
+              find(
+                entityChildren || [],
+                child => child.name === childObj.name,
+              ) || {}
+            ).generate;
+            return !isFirstLevel || childGenerate !== false;
+          }),
+        ).map(newKey => generateChildren(newKey, childEntity));
       });
-      const childrenObj = zipObject(children.map(() => createId()), children);
-      childrenEntities = {
-        ...childrenEntities,
-        [childEntity]: {
-          ...(childrenEntities[childEntity] || {}),
-          ...childrenObj,
-        },
-      };
-      Object.keys(childrenObj).map(newKey =>
-        generateChildren(newKey, childEntity),
-      );
-    });
 
   if (
     entityType === Entities.sector.key
       ? !configuration.isBuilder
       : parameters.generate
   ) {
-    generateChildren(entityId, entityType);
+    generateChildren(entityId, entityType, true);
   }
 
   return {

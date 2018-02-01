@@ -1,6 +1,6 @@
 import Chance from 'chance';
+import { xor } from 'lodash';
 
-import { allSectorCoordinates } from 'utils/common';
 import { generateName } from 'utils/name-generator';
 
 export const generateSystem = ({
@@ -17,6 +17,9 @@ export const generateSystem = ({
   if (!x || !y) {
     throw new Error('Sector coordinate must be provided to generate a system');
   }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate system');
+  }
 
   return { x, y, name, sector, parent, parentEntity };
 };
@@ -27,20 +30,28 @@ export const generateSystems = ({
   parentEntity,
   rows,
   columns,
+  coordinates,
+  additionalPointsOfInterest,
 }) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate systems');
   }
+  if (!parent || !parentEntity) {
+    throw new Error('Parent must be defined to generate systems');
+  }
 
   const chance = new Chance();
   const numHexes = rows * columns;
+  const apoiModifier = additionalPointsOfInterest ? 10 : 4;
   const systemNum =
-    chance.integer({ min: 0, max: Math.floor(numHexes / 8) }) +
-    Math.floor(numHexes / 4);
+    chance.integer({ min: 0, max: Math.floor(numHexes / apoiModifier) }) +
+    Math.floor(numHexes / 5);
+  const chosenCoordinates = chance.pickset(coordinates, systemNum);
 
-  return chance
-    .pickset(allSectorCoordinates(columns, rows), systemNum)
-    .map(coordinate =>
+  return {
+    coordinates: xor(coordinates, chosenCoordinates),
+    children: chosenCoordinates.map(coordinate =>
       generateSystem({ sector, ...coordinate, parent, parentEntity }),
-    );
+    ),
+  };
 };

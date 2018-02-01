@@ -27,31 +27,48 @@ const EntityList = ({
   isSidebarEditActive,
   editableEntities,
   createChildInEdit,
+  isOpen,
+  toggleListOpen,
 }) => {
-  if (
-    (!size(entities) && !isSidebarEditActive) ||
-    !Entities[entityType].isAvailable
-  ) {
+  const numEntities = size(entities);
+  if (!numEntities && !isSidebarEditActive) {
     return null;
   }
 
   const renderEntityHeader = () => {
     if (!isSidebarEditActive) {
       return (
-        <SectionHeader>{Pluralize(Entities[entityType].name)}</SectionHeader>
+        <SectionHeader
+          className="EntityList-Name"
+          isOpen={isOpen}
+          onClick={toggleListOpen}
+        >
+          <FlexContainer justify="spaceBetween" align="flexEnd">
+            <span>{Pluralize(Entities[entityType].name)}</span>
+            <span className="EntityList-Size">
+              {`${numEntities} ${
+                numEntities > 1
+                  ? Pluralize(Entities[entityType].shortName)
+                  : Entities[entityType].shortName
+              }`}
+            </span>
+          </FlexContainer>
+        </SectionHeader>
       );
     }
     return (
-      <SectionHeader>
+      <SectionHeader isOpen={isOpen} onIconClick={toggleListOpen}>
         <FlexContainer justify="spaceBetween" align="flexEnd">
-          {Pluralize(Entities[entityType].name)}
+          <span className="EntityList-Name">
+            {Pluralize(Entities[entityType].name)}
+          </span>
           <Button
             minimal
             className="EntityList-AddButton"
             onClick={createChildInEdit}
           >
             <LinkIcon size={15} icon={Plus} />
-            Add {Entities[entityType].name}
+            Add {Entities[entityType].shortName}
           </Button>
         </FlexContainer>
       </SectionHeader>
@@ -95,32 +112,39 @@ const EntityList = ({
     );
   };
 
+  const renderEntities = rowEntities => {
+    if (!isOpen) {
+      return null;
+    }
+    return map(rowEntities, (entity, key) => {
+      let sort = -entity.sort;
+      if (!isNumber(entity.sort)) {
+        sort = Entities[entityType].topLevel
+          ? coordinateKey(entity.x, entity.y)
+          : entity.name;
+      }
+      return {
+        ...entity,
+        sort,
+        entityId: key,
+        additional: Entities[entityType].topLevel
+          ? coordinateKey(entity.x, entity.y)
+          : ((entity.attributes || {}).tags || [])
+              .map(tag => Entities[entityType].tags[tag].name)
+              .map(toCommaArray)
+              .join(''),
+      };
+    })
+      .sort(sortByKey('sort'))
+      .map(renderEntity);
+  };
+
   const rowEntities = !isSidebarEditActive ? entities : editableEntities;
   return (
     <div>
       {renderEntityHeader(entityType)}
       {renderEntitySubHeader()}
-      {map(rowEntities, (entity, key) => {
-        let sort = -entity.sort;
-        if (!isNumber(entity.sort)) {
-          sort = Entities[entityType].topLevel
-            ? coordinateKey(entity.x, entity.y)
-            : entity.name;
-        }
-        return {
-          ...entity,
-          sort,
-          entityId: key,
-          additional: Entities[entityType].topLevel
-            ? coordinateKey(entity.x, entity.y)
-            : ((entity.attributes || {}).tags || [])
-                .map(tag => Entities[entityType].tags[tag].name)
-                .map(toCommaArray)
-                .join(''),
-        };
-      })
-        .sort(sortByKey('sort'))
-        .map(renderEntity)}
+      {renderEntities(rowEntities)}
       <ReactHint events position="left" />
     </div>
   );
@@ -132,6 +156,8 @@ EntityList.propTypes = {
   isSidebarEditActive: PropTypes.bool.isRequired,
   editableEntities: PropTypes.shape(),
   createChildInEdit: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleListOpen: PropTypes.func.isRequired,
 };
 
 EntityList.defaultProps = {

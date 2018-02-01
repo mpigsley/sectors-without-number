@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { delay } from 'lodash';
 
 import { getTopLevelEntity } from 'utils/entity';
+import EntityIcon from './entity-icon';
 
 import './style.css';
 
@@ -25,7 +26,10 @@ function Hex({
   isCloudSave,
   router,
 }) {
-  const { entity, entityId } = getTopLevelEntity(topLevelEntities, data.hexKey);
+  const { entity, entityId, entityType } = getTopLevelEntity(
+    topLevelEntities,
+    data.hexKey,
+  );
 
   const onMouseDown = () => {
     isMousedDown = true;
@@ -61,13 +65,13 @@ function Hex({
     return () => {};
   };
 
-  const renderPlanetNum = () => {
+  const renderChildNum = () => {
     if (!entity || data.width <= 45) {
       return null;
     }
     return (
       <text
-        className="Hex-Text Hex-Planets"
+        className="Hex-Text Hex-Children"
         x={data.xOffset}
         y={data.yOffset - data.height / 2 + hexPadding}
       >
@@ -76,16 +80,16 @@ function Hex({
     );
   };
 
-  const renderStarCircle = () => {
+  const renderEntityIcon = () => {
     if (!entity) {
       return null;
     }
     return (
-      <circle
-        className="Hex-Circle"
-        cx={data.xOffset}
-        cy={data.yOffset}
-        r={data.width / 13}
+      <EntityIcon
+        xOffset={data.xOffset}
+        yOffset={data.yOffset}
+        width={data.width}
+        entityType={entityType}
       />
     );
   };
@@ -149,8 +153,8 @@ function Hex({
         width={data.width}
         points={hexagon.join(' ')}
       />
-      {renderPlanetNum()}
-      {renderStarCircle()}
+      {renderChildNum()}
+      {renderEntityIcon()}
       {renderEntityName()}
       {renderEntityKey()}
     </g>

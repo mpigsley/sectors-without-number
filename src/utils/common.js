@@ -1,9 +1,6 @@
 import Chance from 'chance';
 import { isNumber } from 'lodash';
 
-export const capitalizeFirstLetter = str =>
-  (str || '').charAt(0).toUpperCase() + (str || '').slice(1).toLowerCase();
-
 export const createId = () => new Chance().hash({ length: 20 });
 
 export const coordinateKey = (x, y) => {
