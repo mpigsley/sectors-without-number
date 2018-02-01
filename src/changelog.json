@@ -1,4 +1,14 @@
 {
+  "3.1.0": {
+    "description": "Additional Points of Interest.",
+    "date": "2-1-2018",
+    "changes": [
+      "The additional points of interest are added into the generator.",
+      "You can toggle off additional points of interest in the generator by going into configure.",
+      "New entity creation modal when long-clicking on a hexagon since new icons/entities have been introduced.",
+      "Entity lists in the sidebar are now collapsible in edit mode and normal mode."
+    ]
+  },
   "3.0.1": {
     "description":
       "Fix minor issue where the last viewed sector overlays the changelog page.",
