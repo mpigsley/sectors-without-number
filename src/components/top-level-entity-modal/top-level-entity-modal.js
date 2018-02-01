@@ -225,6 +225,7 @@ export default class TopLevelEntityModal extends Component {
       <Dropdown
         wrapperClassName="TopLevelEntityModal-Type"
         value={entityType}
+        clearable={false}
         onChange={this.onChangeChildType(entityType, key)}
         options={Entities[this.state.entityType].children.map(child => ({
           value: child,
@@ -315,6 +316,7 @@ export default class TopLevelEntityModal extends Component {
             </Label>
             <Dropdown
               value={this.state.entityType}
+              clearable={false}
               onChange={item => {
                 const entityType = (item || {}).value;
                 this.setState({
