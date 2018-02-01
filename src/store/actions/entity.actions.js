@@ -23,6 +23,7 @@ import {
   holdKeySelector,
   hoverKeySelector,
   syncLockSelector,
+  sectorSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -30,6 +31,7 @@ import {
   getCurrentEntityId,
   getCurrentEntity,
 } from 'store/selectors/entity.selectors';
+import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 
 import {
   generateEntity as generateEntityUtil,
@@ -38,6 +40,7 @@ import {
 } from 'utils/entity';
 import { coordinatesFromKey } from 'utils/common';
 import { saveEntities, deleteEntities } from 'store/api/shared';
+import { InfoToast, removeToastById } from 'store/utils';
 import Entities from 'constants/entities';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
@@ -45,8 +48,38 @@ export const DELETE_ENTITIES = 'DELETE_ENTITIES';
 export const SAVE_SECTOR = 'SAVE_SECTOR';
 export const UPDATE_ID_MAPPING = 'UPDATE_ID_MAPPING';
 
-const updateHandler = (state, dispatch) => ({ action, mapping }) => {
+const SYNC_TOAST_ID = 'initial-sync';
+const initialSyncToast = (state, dispatch) => {
+  if (!isCurrentSectorSaved(state)) {
+    return new Promise(resolve => {
+      dispatch(
+        InfoToast({
+          title: 'Syncing Sector',
+          message: 'Do not exit out of this web page.',
+          config: {
+            id: SYNC_TOAST_ID,
+            options: {
+              timeOut: 0,
+              removeOnHover: false,
+              showCloseButton: false,
+              progressBar: false,
+            },
+          },
+        }),
+      );
+      setTimeout(() => {
+        resolve(true);
+      }, 500);
+    });
+  }
+  return Promise.resolve();
+};
+
+const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
   const dispatches = [dispatch(releaseSyncLock())];
+  if (isSynced) {
+    dispatches.push(dispatch(removeToastById(SYNC_TOAST_ID)));
+  }
   if (action) {
     dispatches.push(dispatch(action));
   }
@@ -85,18 +118,18 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
     entities,
   });
 
-  const existingSector = state.entity.sector[state.sector.currentSector];
+  const currentSector = currentSectorSelector(state);
+  const existingSector = sectorSelector(state)[currentSector];
   const newSectorKeys = Object.keys(entities.sector || {});
-  if (
-    (!state.sector.currentSector || !existingSector) &&
-    newSectorKeys.length
-  ) {
+  if ((!currentSector || !existingSector) && newSectorKeys.length) {
     dispatch(push(`/sector/${newSectorKeys[0]}`));
   }
 
   if (entity.entityType !== Entities.sector.key) {
-    return saveEntities({ state, created: entities, entities }).then(
-      updateHandler(state, dispatch),
+    return initialSyncToast(state, dispatch).then(isInitialSync =>
+      saveEntities({ state, created: entities, entities }).then(results =>
+        updateHandler(state, dispatch, results, isInitialSync),
+      ),
     );
   }
   return dispatch(releaseSyncLock());
@@ -134,9 +167,13 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
       },
     };
   }
-  dispatch({ type: UPDATE_ENTITIES, entities });
-  return saveEntities({ state, updated: entities, entities }).then(
-    updateHandler(state, dispatch),
+  return Promise.all([
+    initialSyncToast(state, dispatch),
+    dispatch({ type: UPDATE_ENTITIES, entities }),
+  ]).then(([isInitialSync]) =>
+    saveEntities({ state, updated: entities, entities }).then(results =>
+      updateHandler(state, dispatch, results, isInitialSync),
+    ),
   );
 };
 
@@ -165,8 +202,8 @@ export const deleteEntity = () => (dispatch, getState) => {
     type: DELETE_ENTITIES,
     entities: deleted,
   });
-  return deleteEntities({ state, deleted }).then(
-    updateHandler(state, dispatch),
+  return deleteEntities({ state, deleted }).then(results =>
+    updateHandler(state, dispatch, results),
   );
 };
 
@@ -175,8 +212,14 @@ export const saveSector = () => (dispatch, getState) => {
   if (syncLockSelector(state)) {
     return Promise.resolve();
   }
-  dispatch({ type: SAVE_SECTOR });
-  return saveEntities({ state }).then(updateHandler(state, dispatch));
+  return Promise.all([
+    initialSyncToast(state, dispatch),
+    dispatch({ type: SAVE_SECTOR }),
+  ]).then(([isInitialSync]) =>
+    saveEntities({ state }).then(results =>
+      updateHandler(state, dispatch, results, isInitialSync),
+    ),
+  );
 };
 
 export const saveEntityEdit = () => (dispatch, getState) => {
@@ -259,17 +302,23 @@ export const saveEntityEdit = () => (dispatch, getState) => {
 
   const filteredUpdatedEntities = pickBy(allEntities, size);
   if (size(filteredUpdatedEntities)) {
-    dispatch({
-      type: UPDATE_ENTITIES,
-      entities: filteredUpdatedEntities,
-    });
-    return saveEntities({
-      state,
-      entities: filteredUpdatedEntities,
-      updated: updatedEntities,
-      created: createdEntities,
-      deleted: deletedEntities,
-    }).then(updateHandler(state, dispatch));
+    return Promise.all([
+      initialSyncToast(state, dispatch),
+      dispatch({
+        type: UPDATE_ENTITIES,
+        entities: filteredUpdatedEntities,
+      }),
+    ]).then(([isInitialSync]) =>
+      saveEntities({
+        state,
+        entities: filteredUpdatedEntities,
+        updated: updatedEntities,
+        created: createdEntities,
+        deleted: deletedEntities,
+      }).then(results =>
+        updateHandler(state, dispatch, results, isInitialSync),
+      ),
+    );
   }
   return Promise.all([
     dispatch({ type: DEACTIVATE_SIDEBAR_EDIT }),
