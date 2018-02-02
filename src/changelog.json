@@ -1,4 +1,14 @@
 {
+  "3.2.0": {
+    "description":
+      "Remove asteroid belts and deep space stations from sector (spike drill can't make it there).",
+    "date": "2-1-2018",
+    "changes": [
+      "Reconfigured asteroid belts to be apart of a system",
+      "Reconfigured deep space stations to be apart of a system",
+      "Deactivate sidebar edit when clicking on the sector view"
+    ]
+  },
   "3.1.2": {
     "description": "Fix typos in the doomed world tag.",
     "date": "2-1-2018"
