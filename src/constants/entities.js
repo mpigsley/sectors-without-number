@@ -135,7 +135,35 @@ const planet = {
     orbitalRuin.key,
     researchBase.key,
     refuelingStation.key,
+    spaceStation.key,
   ],
+};
+
+const asteroidBelt = {
+  key: 'asteroidBelt',
+  name: 'Asteroid Belt',
+  shortName: 'Belt',
+  topLevel: false,
+  isAdditional: true,
+  nameGenerator: generateAsteroidBeltName,
+  attributes: [AsteroidBeltOccupation, AsteroidBeltSituation],
+  children: [
+    asteroidBase.key,
+    refuelingStation.key,
+    researchBase.key,
+    spaceStation.key,
+  ],
+};
+
+const deepSpaceStation = {
+  key: 'deepSpaceStation',
+  name: 'Deep-Space Station',
+  shortName: 'Station',
+  topLevel: false,
+  isAdditional: true,
+  nameGenerator: generateStationName,
+  attributes: [DeepSpaceStationOccupation, DeepSpaceStationSituation],
+  children: [],
 };
 
 const blackHole = {
@@ -146,33 +174,11 @@ const blackHole = {
   isAdditional: true,
   nameGenerator: generateBlackHoleName,
   children: [
-    spaceStation.key,
+    deepSpaceStation.key,
     refuelingStation.key,
     researchBase.key,
     orbitalRuin.key,
   ],
-};
-
-const asteroidBelt = {
-  key: 'asteroidBelt',
-  name: 'Asteroid Belt',
-  shortName: 'Belt',
-  topLevel: true,
-  isAdditional: true,
-  nameGenerator: generateAsteroidBeltName,
-  attributes: [AsteroidBeltOccupation, AsteroidBeltSituation],
-  children: [asteroidBase.key, refuelingStation.key, researchBase.key],
-};
-
-const deepSpaceStation = {
-  key: 'deepSpaceStation',
-  name: 'Deep-Space Station',
-  shortName: 'Station',
-  topLevel: true,
-  isAdditional: true,
-  nameGenerator: generateStationName,
-  attributes: [DeepSpaceStationOccupation, DeepSpaceStationSituation],
-  children: [],
 };
 
 const system = {
@@ -183,9 +189,10 @@ const system = {
   isAdditional: false,
   nameGenerator: generateName,
   children: [
+    asteroidBelt.key,
+    deepSpaceStation.key,
     planet.key,
     refuelingStation.key,
-    spaceStation.key,
     researchBase.key,
   ],
 };
@@ -197,7 +204,7 @@ const sector = {
   topLevel: false,
   isAdditional: false,
   nameGenerator: generateSectorName,
-  children: [system.key, deepSpaceStation.key, asteroidBelt.key, blackHole.key],
+  children: [system.key, blackHole.key],
 };
 
 export default {

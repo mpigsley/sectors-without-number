@@ -1,5 +1,4 @@
 import Chance from 'chance';
-import { xor } from 'lodash';
 
 import { generateStationName } from 'utils/name-generator';
 import Occupation from 'constants/deep-space-station/occupation';
@@ -7,8 +6,6 @@ import Situation from 'constants/deep-space-station/situation';
 
 export const generateDeepSpaceStation = ({
   sector,
-  x,
-  y,
   name = generateStationName(),
   parent,
   parentEntity,
@@ -19,17 +16,12 @@ export const generateDeepSpaceStation = ({
       'Sector id must be defined to generate a deep space station',
     );
   }
-  if (!x || !y) {
-    throw new Error(
-      'Sector coordinate must be provided to generate a deep space station',
-    );
-  }
   if (!parent || !parentEntity) {
     throw new Error('Parent must be defined to generate a deep space station');
   }
 
   const chance = new Chance();
-  let station = { x, y, name, sector, parent, parentEntity };
+  let station = { name, sector, parent, parentEntity };
   if (generate) {
     station = {
       ...station,
@@ -46,9 +38,7 @@ export const generateDeepSpaceStations = ({
   sector,
   parent,
   parentEntity,
-  rows,
-  columns,
-  coordinates,
+  children = [...Array(new Chance().weighted([0, 1], [3, 1]))],
   additionalPointsOfInterest,
 }) => {
   if (!additionalPointsOfInterest) {
@@ -63,17 +53,15 @@ export const generateDeepSpaceStations = ({
     throw new Error('Parent must be defined to generate deep space stations');
   }
 
-  const chance = new Chance();
-  const numHexes = rows * columns;
-  const deepSpaceStationNum =
-    chance.integer({ min: 0, max: Math.floor(numHexes / 60) }) +
-    Math.floor(numHexes / 45);
-  const chosenCoordinates = chance.pickset(coordinates, deepSpaceStationNum);
-
   return {
-    coordinates: xor(coordinates, chosenCoordinates),
-    children: chosenCoordinates.map(coordinate =>
-      generateDeepSpaceStation({ sector, ...coordinate, parent, parentEntity }),
+    children: children.map(({ name, generate } = {}) =>
+      generateDeepSpaceStation({
+        sector,
+        parent,
+        parentEntity,
+        name,
+        generate,
+      }),
     ),
   };
 };
