@@ -703,8 +703,8 @@ export default {
       'The world is doomed, and the locals may or may not know it. Some cosmic catastrophe looms before them, and the locals have no realistic way to get everyone to safety. To the extent that the public is aware, society is disintegrating into a combination of religious fervor, abject hedonism, and savage violence.',
     enemies: [
       'crazed prophet of false salvation',
-      'ruthless leader seking ot flee with their treasures',
-      'cynical ship captain selling a one-way trip into hard vacuum as espace ot another world',
+      'ruthless leader seeking to flee with their treasures',
+      'cynical ship captain selling a one-way trip into hard vacuum as escape to another world',
     ],
     friends: [
       'appealing waif or family head seeking escape',
