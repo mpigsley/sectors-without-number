@@ -48,7 +48,7 @@ export const generateBlackHoles = ({
   const chance = new Chance();
   const numHexes = rows * columns;
   const blackHoleNum =
-    chance.integer({ min: 0, max: Math.floor(numHexes / 60) }) +
+    chance.integer({ min: 1, max: Math.floor(numHexes / 40) }) +
     Math.floor(numHexes / 45);
   const chosenCoordinates = chance.pickset(coordinates, blackHoleNum);
 
