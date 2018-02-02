@@ -21,6 +21,7 @@ function Hex({
   entityRelease,
   moveTopLevelEntity,
   topLevelEntityCreate,
+  deactivateSidebarEdit,
   holdKey,
   hoverKey,
   isCloudSave,
@@ -35,11 +36,11 @@ function Hex({
     isMousedDown = true;
     delay(() => {
       if (isMousedDown && !isCloudSave) {
+        deactivateSidebarEdit();
         if (entity) {
           entityHold(data.hexKey);
         } else {
           topLevelEntityCreate(data.hexKey);
-          // open system create
         }
       }
     }, 100);
@@ -48,6 +49,7 @@ function Hex({
   const onMouseUp = () => {
     isMousedDown = false;
     if (entity && !holdKey) {
+      deactivateSidebarEdit();
       router.push(`/sector/${router.params.sector}/${entity.type}/${entityId}`);
     } else if (!isCloudSave) {
       if (!data.highlighted || holdKey === hoverKey) {
@@ -179,6 +181,7 @@ Hex.propTypes = {
   entityRelease: PropTypes.func.isRequired,
   moveTopLevelEntity: PropTypes.func.isRequired,
   topLevelEntityCreate: PropTypes.func.isRequired,
+  deactivateSidebarEdit: PropTypes.func.isRequired,
   holdKey: PropTypes.string,
   hoverKey: PropTypes.string,
   isCloudSave: PropTypes.bool.isRequired,
