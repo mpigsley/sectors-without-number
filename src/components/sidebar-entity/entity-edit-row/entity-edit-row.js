@@ -80,13 +80,20 @@ export default function EntityEditRow({
       {dropdown}
       {input}
       <Input
-        className="EntityEditRow-Generate"
+        className="EntityEditRow-Checkbox"
         disabled={!entity.isCreated}
         checked={!entity.isCreated || entity.generate}
         onChange={({ target }) =>
           updateChildInEdit({ generate: target.checked })
         }
-        name="checkbox"
+        type="checkbox"
+      />
+      <Input
+        className="EntityEditRow-Checkbox"
+        checked={entity.isHidden || false}
+        onChange={({ target }) =>
+          updateChildInEdit({ isHidden: target.checked })
+        }
         type="checkbox"
       />
     </FlexContainer>

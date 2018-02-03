@@ -5,6 +5,7 @@
 }
 
 .EntityList-SubHeader {
+  color: $light2;
   margin: 0 1rem;
 }
 
@@ -15,4 +16,8 @@
 
 .EntityList-Name {
   cursor: pointer;
+}
+
+.EntityList-SubHeaderHidden {
+  margin: 0rem 0.1rem 0 0.5rem;
 }

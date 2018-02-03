@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Pluralize from 'pluralize';
 import { map, size, isNumber } from 'lodash';
-import { Plus } from 'react-feather';
+import { Plus, EyeOff } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -82,12 +82,18 @@ const EntityList = ({
     return (
       <FlexContainer
         justify="flexEnd"
-        align="flexEnd"
+        align="center"
         className="EntityList-SubHeader"
       >
         <Dice
           data-rh={`Select to generate ${Entities[entityType].name} data.`}
           size={22}
+        />
+        <LinkIcon
+          data-rh="Select to keep hidden from your players."
+          className="EntityList-SubHeaderHidden"
+          icon={EyeOff}
+          size={18}
         />
       </FlexContainer>
     );
