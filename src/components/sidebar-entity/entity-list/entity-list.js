@@ -86,7 +86,9 @@ const EntityList = ({
         className="EntityList-SubHeader"
       >
         <Dice
-          data-rh={`Select to generate ${Entities[entityType].name} data.`}
+          data-rh={`Select to generate ${(
+            Entities[entityType].shortName || ''
+          ).toLowerCase()} data.`}
           size={22}
         />
         <LinkIcon

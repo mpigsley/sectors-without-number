@@ -110,6 +110,7 @@ EntityEditRow.propTypes = {
     isDeleted: PropTypes.bool,
     isCreated: PropTypes.bool,
     generate: PropTypes.bool,
+    isHidden: PropTypes.bool,
   }).isRequired,
   emptyHexKeys: PropTypes.arrayOf(PropTypes.string),
   deleteChildInEdit: PropTypes.func.isRequired,

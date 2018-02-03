@@ -36,6 +36,7 @@ import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 import {
   generateEntity as generateEntityUtil,
   deleteEntity as deleteEntityUtil,
+  blacklistedAttributes,
   getTopLevelEntity,
 } from 'utils/entity';
 import { coordinatesFromKey } from 'utils/common';
@@ -238,6 +239,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
       mapValues(
         entities,
         ({ isCreated, isDeleted, isUpdated, ...thisEntity }, thisEntityId) => {
+          const filteredEntity = omit(thisEntity, blacklistedAttributes);
           if (isCreated) {
             createdEntities = merge(
               createdEntities,
@@ -246,7 +248,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
                 currentSector: currentSectorSelector(state),
                 configuration: configurationSelector(state),
                 parameters: {
-                  ...thisEntity,
+                  ...filteredEntity,
                   parentEntity: currentEntityType,
                   parent: currentEntityId,
                 },
@@ -267,7 +269,9 @@ export const saveEntityEdit = () => (dispatch, getState) => {
               },
             );
           }
-          return isDeleted || isCreated || !isUpdated ? undefined : thisEntity;
+          return isDeleted || isCreated || !isUpdated
+            ? undefined
+            : filteredEntity;
         },
       ),
       isNil,

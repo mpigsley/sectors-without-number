@@ -47,11 +47,12 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
     children: pickBy(
       mapValues(childrenByType, childType => {
         const sortedChildren = sortBy(
-          mapValues(childType, (child, key) => ({
+          mapValues(childType, ({ name, x, y, isHidden }, key) => ({
             key,
-            name: child.name,
-            x: child.x,
-            y: child.y,
+            name,
+            x,
+            y,
+            isHidden,
           })),
           ({ x, y, name }) =>
             isNumber(x) && isNumber(y) ? coordinateKey(x, y) : name,
@@ -59,12 +60,10 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
 
         return zipObject(
           sortedChildren.map(({ key }) => key),
-          sortedChildren.map(({ x, y, name }, index) =>
+          sortedChildren.map((child, index) =>
             omitBy(
               {
-                x,
-                y,
-                name,
+                ...child,
                 sort: sortedChildren.length - index - 1,
               },
               isNil,
