@@ -76,7 +76,7 @@ const EntityList = ({
   };
 
   const renderEntitySubHeader = () => {
-    if (!isSidebarEditActive || !size(entities)) {
+    if (!isSidebarEditActive || !size(entities) || !isOpen) {
       return null;
     }
     return (
