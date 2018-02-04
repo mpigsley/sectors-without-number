@@ -30,6 +30,19 @@ export const InfoToast = ({ title = '', message = '', config } = {}) =>
     title,
   });
 
+export const WarningToast = ({ title = '', message = '', config } = {}) =>
+  ReduxToastrActions.add({
+    options: {
+      removeOnHover: true,
+      showCloseButton: true,
+    },
+    position: 'bottom-left',
+    type: 'warning',
+    ...config,
+    message,
+    title,
+  });
+
 export const ErrorToast = () =>
   ReduxToastrActions.add({
     options: {
