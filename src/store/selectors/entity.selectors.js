@@ -22,12 +22,16 @@ import Entities from 'constants/entities';
 import { allSectorKeys, coordinateKey } from 'utils/common';
 
 export const getCurrentTopLevelEntities = createSelector(
-  [currentSectorSelector, entitySelector],
-  (currentSector, entities) =>
+  [currentSectorSelector, entitySelector, isViewingSharedSector],
+  (currentSector, entities, isShared) =>
     Object.assign(
       ...filter(Entities, ({ topLevel }) => topLevel).map(({ key }) =>
         mapValues(
-          pickBy(entities[key], ({ sector }) => sector === currentSector),
+          pickBy(
+            entities[key],
+            ({ sector, isHidden }) =>
+              sector === currentSector && (!isShared || !isHidden),
+          ),
           (entity, entityId) => ({
             ...entity,
             type: key,
