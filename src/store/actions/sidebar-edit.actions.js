@@ -10,6 +10,7 @@ import {
 } from 'lodash';
 
 import {
+  getEmptyHexKeys,
   getCurrentEntity,
   getCurrentEntityId,
   getCurrentEntityType,
@@ -19,7 +20,6 @@ import {
   sidebarEditChildrenSelector,
   syncLockSelector,
 } from 'store/selectors/base.selectors';
-import { getEmptyHexKeys } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
 import { createId, coordinatesFromKey, coordinateKey } from 'utils/common';
 import { syncLock } from 'store/utils';
