@@ -1,4 +1,9 @@
 {
+  "3.4.0": {
+    "description":
+      "Persisting sector updates locally is no longer possible. You'll need to sign up to sync them.",
+    "date": "2-4-2018"
+  },
   "3.3.0": {
     "description":
       "Allow entities to be hidden from anyone who is not the sector's creator (a.k.a. your players).",
