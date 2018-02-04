@@ -1,41 +1,47 @@
-import { pickBy, size, merge } from 'lodash';
+import { pickBy, size } from 'lodash';
 
 import {
   userModelSelector,
   userUidSelector,
   currentSectorSelector,
-  currentEntityTypeSelector,
 } from 'store/selectors/base.selectors';
-import { getCurrentEntities } from 'store/selectors/entity.selectors';
+import {
+  getCurrentEntities,
+  getCurrentEntityType,
+} from 'store/selectors/entity.selectors';
 import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 import { mergeEntityUpdates } from 'utils/entity';
 
-import {
-  setEntities,
-  deleteEntities as localDeleteEntities,
-} from 'store/api/local';
+import { deleteEntities as localDeleteEntities } from 'store/api/local';
 import {
   uploadEntities,
   deleteEntities as syncDeleteEntities,
   updateEntities as syncUpdateEntities,
 } from 'store/api/firebase';
-import { SuccessToast, ErrorToast } from 'store/utils';
+import { SuccessToast, ErrorToast, WarningToast } from 'store/utils';
 import Entities from 'constants/entities';
 
 export const deleteEntities = ({ state, deleted }) => {
   const isLoggedIn = !!userModelSelector(state);
   const isSaved = isCurrentSectorSaved(state);
-  const currentEntityType = currentEntityTypeSelector(state);
+  const currentEntityType = getCurrentEntityType(state);
   if (!isSaved) {
     return Promise.resolve();
   }
   let promise;
+  const entityName = Entities[currentEntityType].name;
   if (isLoggedIn) {
     promise = syncDeleteEntities(deleted);
-  } else {
+  } else if (currentEntityType === Entities.sector.key) {
     promise = localDeleteEntities(deleted);
+  } else {
+    return Promise.resolve({
+      action: WarningToast({
+        title: `Sign in to delete ${entityName.toLowerCase()}`,
+        message: `Your current sector(s) will be synced automatically.`,
+      }),
+    });
   }
-  const entityName = Entities[currentEntityType || Entities.sector.key].name;
   return promise
     .then(() => ({
       action: SuccessToast({
@@ -67,10 +73,12 @@ export const saveEntities = ({
         syncUpdateEntities(updated),
       ]).then(([uploaded]) => ({ mapping: uploaded.mapping }));
     } else {
-      promise = Promise.all([
-        setEntities(merge(updated, created) || entities),
-        localDeleteEntities(deleted),
-      ]);
+      return Promise.resolve({
+        action: WarningToast({
+          title: `Sign in to update sector`,
+          message: `Your current sector(s) will be synced automatically.`,
+        }),
+      });
     }
   } else {
     const updates = pickBy(
@@ -80,7 +88,12 @@ export const saveEntities = ({
     if (uid) {
       promise = uploadEntities(updates, uid);
     } else {
-      promise = setEntities(updates);
+      return Promise.resolve({
+        action: WarningToast({
+          title: `Sign in to save sector`,
+          message: `Any current sector(s) will be synced automatically.`,
+        }),
+      });
     }
   }
   return promise

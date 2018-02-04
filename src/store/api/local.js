@@ -1,57 +1,36 @@
 import localForage from 'localforage';
-import { flatten, map, mapKeys, size } from 'lodash';
+import { flatten, map, size } from 'lodash';
 
 import Entities from 'constants/entities';
 import { createId, coordinatesFromKey } from 'utils/common';
 
 export const clearLocalDatabase = () => localForage.clear();
 
-export const setEntity = (entity, key) => localForage.setItem(key, entity);
-
-export const setEntities = entities =>
-  Promise.all(
-    map(
-      Object.assign(
-        ...flatten(
-          map(entities, (list, type) =>
-            mapKeys(list, (_, id) => `${type}.${id}`),
-          ),
-        ),
-      ),
-      setEntity,
-    ),
-  );
-
 export const convertOldSectors = oldSectors =>
   Promise.all(
     map(oldSectors, (sector, sectorId) =>
       Promise.all([
-        setEntity(
-          {
-            name: sector.name,
-            columns: sector.columns,
-            rows: sector.rows,
-          },
-          `${Entities.sector.key}.${sectorId}`,
-        ),
+        localForage.setItem(`${Entities.sector.key}.${sectorId}`, {
+          name: sector.name,
+          columns: sector.columns,
+          rows: sector.rows,
+        }),
         Promise.all(
           map(sector.systems, (system, systemKey) => {
             const systemId = createId();
             return Promise.all([
-              setEntity(
-                {
-                  name: system.name,
-                  parent: sectorId,
-                  parentEntity: Entities.sector.key,
-                  sector: sectorId,
-                  ...coordinatesFromKey(systemKey),
-                },
-                `${Entities.system.key}.${systemId}`,
-              ),
+              localForage.setItem(`${Entities.system.key}.${systemId}`, {
+                name: system.name,
+                parent: sectorId,
+                parentEntity: Entities.sector.key,
+                sector: sectorId,
+                ...coordinatesFromKey(systemKey),
+              }),
               Promise.all(
                 map(system.planets, planet =>
                   Promise.all([
-                    setEntity(
+                    localForage.setItem(
+                      `${Entities.planet.key}.${createId()}`,
                       {
                         name: planet.name,
                         parent: systemId,
@@ -66,7 +45,6 @@ export const convertOldSectors = oldSectors =>
                           temperature: planet.temperature,
                         },
                       },
-                      `${Entities.planet.key}.${createId()}`,
                     ),
                   ]),
                 ),
@@ -111,11 +89,9 @@ export const getEntities = () =>
       .catch(reject);
   });
 
-export const deleteEntity = key => localForage.removeItem(key);
-
 export const deleteEntities = entities =>
   Promise.all(
     flatten(map(entities, (list, type) => list.map(id => `${type}.${id}`))).map(
-      deleteEntity,
+      localForage.removeItem,
     ),
   );
