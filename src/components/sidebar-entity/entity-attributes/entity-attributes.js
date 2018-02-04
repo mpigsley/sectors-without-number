@@ -81,7 +81,7 @@ export default function EntityAttributes({
               checked={!!entity.isHidden || isAncestorHidden}
               disabled={isAncestorHidden}
               onChange={({ target }) =>
-                updateEntityInEdit({ name: target.checked })
+                updateEntityInEdit({ isHidden: target.checked })
               }
             />
           </div>
