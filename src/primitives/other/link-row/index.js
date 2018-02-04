@@ -53,7 +53,7 @@ LinkRow.propTypes = {
   to: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   additional: PropTypes.string,
-  additionalIcon: PropTypes.node,
+  additionalIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
 };
 
 LinkRow.defaultProps = {

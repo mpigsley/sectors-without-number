@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { X, RefreshCw, RotateCcw } from 'react-feather';
+import ReactHintFactory from 'react-hint';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Input from 'primitives/form/input';
@@ -12,6 +13,8 @@ import { coordinateKey, coordinatesFromKey } from 'utils/common';
 
 import './style.css';
 
+const ReactHint = ReactHintFactory(React);
+
 export default function EntityEditRow({
   entity,
   entityType,
@@ -19,6 +22,7 @@ export default function EntityEditRow({
   deleteChildInEdit,
   undoDeleteChildInEdit,
   updateChildInEdit,
+  isCurrentOrAncestorHidden,
 }) {
   const entityConfig = Entities[entityType];
 
@@ -88,14 +92,24 @@ export default function EntityEditRow({
         }
         type="checkbox"
       />
-      <Input
-        className="EntityEditRow-Checkbox"
-        checked={entity.isHidden || false}
-        onChange={({ target }) =>
-          updateChildInEdit({ isHidden: target.checked })
+      <span
+        data-rh={
+          isCurrentOrAncestorHidden
+            ? `A parent entity is hiding this ${entityConfig.shortName.toLowerCase()}.`
+            : null
         }
-        type="checkbox"
-      />
+      >
+        <Input
+          className="EntityEditRow-Checkbox"
+          disabled={isCurrentOrAncestorHidden}
+          checked={entity.isHidden || isCurrentOrAncestorHidden || false}
+          onChange={({ target }) =>
+            updateChildInEdit({ isHidden: target.checked })
+          }
+          type="checkbox"
+        />
+      </span>
+      <ReactHint events position="left" />
     </FlexContainer>
   );
 }
@@ -116,6 +130,7 @@ EntityEditRow.propTypes = {
   deleteChildInEdit: PropTypes.func.isRequired,
   undoDeleteChildInEdit: PropTypes.func.isRequired,
   updateChildInEdit: PropTypes.func.isRequired,
+  isCurrentOrAncestorHidden: PropTypes.bool.isRequired,
 };
 
 EntityEditRow.defaultProps = {

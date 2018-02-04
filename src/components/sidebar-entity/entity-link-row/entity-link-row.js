@@ -4,13 +4,20 @@ import { EyeOff } from 'react-feather';
 
 import LinkRow from 'primitives/other/link-row';
 
-export default function EntityLinkRow({ entity, entityType, currentSector }) {
+export default function EntityLinkRow({
+  entity,
+  entityType,
+  currentSector,
+  isCurrentOrAncestorHidden,
+}) {
   return (
     <LinkRow
       to={`/sector/${currentSector}/${entityType}/${entity.entityId}`}
       title={entity.name}
       additional={entity.additional}
-      additionalIcon={entity.isHidden ? EyeOff : null}
+      additionalIcon={
+        entity.isHidden || isCurrentOrAncestorHidden ? EyeOff : null
+      }
     />
   );
 }
@@ -24,4 +31,5 @@ EntityLinkRow.propTypes = {
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   currentSector: PropTypes.string.isRequired,
+  isCurrentOrAncestorHidden: PropTypes.bool.isRequired,
 };

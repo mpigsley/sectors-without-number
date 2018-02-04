@@ -99,3 +99,25 @@ export const getCurrentEntityChildren = createSelector(
     );
   },
 );
+
+export const isCurrentOrAncestorHidden = createSelector(
+  [getCurrentEntityId, getCurrentEntityType, entitySelector],
+  (currentEntityId, currentEntityType, entities) => {
+    if (currentEntityType === Entities.sector.key) {
+      return false;
+    }
+    let thisEntity = {
+      ...entities[currentEntityType][currentEntityId],
+    };
+    let thisEntityType = currentEntityType;
+    let isHidden = !!thisEntity.isHidden;
+    while (thisEntityType !== Entities.sector.key && !isHidden) {
+      isHidden = !!thisEntity.isHidden;
+      thisEntityType = thisEntity.parentEntity;
+      thisEntity = {
+        ...entities[thisEntityType][thisEntity.parent],
+      };
+    }
+    return isHidden;
+  },
+);
