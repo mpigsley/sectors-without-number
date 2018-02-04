@@ -91,7 +91,9 @@ export const getEntities = () =>
 
 export const deleteEntities = entities =>
   Promise.all(
-    flatten(map(entities, (list, type) => list.map(id => `${type}.${id}`))).map(
-      localForage.removeItem,
+    flatten(
+      map(entities, (list, type) =>
+        list.map(id => localForage.removeItem(`${type}.${id}`)),
+      ),
     ),
   );

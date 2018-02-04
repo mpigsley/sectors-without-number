@@ -29,7 +29,6 @@ export const deleteEntities = ({ state, deleted }) => {
     return Promise.resolve();
   }
   let promise;
-  const entityName = Entities[currentEntityType].name;
   if (isLoggedIn) {
     promise = syncDeleteEntities(deleted);
   } else if (currentEntityType === Entities.sector.key) {
@@ -37,11 +36,12 @@ export const deleteEntities = ({ state, deleted }) => {
   } else {
     return Promise.resolve({
       action: WarningToast({
-        title: `Sign in to delete ${entityName.toLowerCase()}`,
+        title: `Sign up to persist delete`,
         message: `Your current sector(s) will be synced automatically.`,
       }),
     });
   }
+  const entityName = Entities[currentEntityType].name;
   return promise
     .then(() => ({
       action: SuccessToast({
@@ -75,7 +75,7 @@ export const saveEntities = ({
     } else {
       return Promise.resolve({
         action: WarningToast({
-          title: `Sign in to update sector`,
+          title: `Sign up to persist sector`,
           message: `Your current sector(s) will be synced automatically.`,
         }),
       });
@@ -90,7 +90,7 @@ export const saveEntities = ({
     } else {
       return Promise.resolve({
         action: WarningToast({
-          title: `Sign in to save sector`,
+          title: `Sign up to persist sector`,
           message: `Any current sector(s) will be synced automatically.`,
         }),
       });
