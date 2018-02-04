@@ -38,8 +38,11 @@ export const getCurrentTopLevelEntities = createSelector(
             numChildren: Entities[key].children.reduce(
               (total, childKey) =>
                 total +
-                filter(entities[childKey], ({ parent }) => parent === entityId)
-                  .length,
+                filter(
+                  entities[childKey],
+                  ({ parent, isHidden }) =>
+                    parent === entityId && (!isShared || !isHidden),
+                ).length,
               0,
             ),
           }),
