@@ -49,13 +49,14 @@ export const getCurrentTopLevelEntities = createSelector(
 );
 
 export const getCurrentEntities = createSelector(
-  [currentSectorSelector, entitySelector],
-  (currentSector, entities) =>
+  [currentSectorSelector, entitySelector, isViewingSharedSector],
+  (currentSector, entities, isShared) =>
     mapValues(entities, entityList =>
       pickBy(
         entityList,
-        (entity, entityId) =>
-          entity.sector === currentSector || entityId === currentSector,
+        ({ sector, isHidden }, entityId) =>
+          (sector === currentSector || entityId === currentSector) &&
+          (!isShared || !isHidden),
       ),
     ),
 );
