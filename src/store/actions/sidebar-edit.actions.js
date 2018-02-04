@@ -43,7 +43,14 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
   const childrenByType = getCurrentEntityChildren(state);
   return dispatch({
     type: ACTIVATE_SIDEBAR_EDIT,
-    entity: omitBy({ name: entity.name, attributes: entity.attributes }, isNil),
+    entity: omitBy(
+      {
+        name: entity.name,
+        attributes: entity.attributes,
+        isHidden: entity.isHidden,
+      },
+      isNil,
+    ),
     children: pickBy(
       mapValues(childrenByType, childType => {
         const sortedChildren = sortBy(

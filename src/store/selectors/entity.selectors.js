@@ -130,16 +130,17 @@ export const getEmptyHexKeys = createSelector(
     ),
 );
 
-export const isCurrentOrAncestorHidden = createSelector(
+export const isAncestorHidden = createSelector(
   [getCurrentEntityId, getCurrentEntityType, entitySelector],
   (currentEntityId, currentEntityType, entities) => {
     if (currentEntityType === Entities.sector.key) {
       return false;
     }
+    const currentEntity = entities[currentEntityType][currentEntityId];
     let thisEntity = {
-      ...entities[currentEntityType][currentEntityId],
+      ...entities[currentEntity.parentEntity][currentEntity.parent],
     };
-    let thisEntityType = currentEntityType;
+    let thisEntityType = currentEntity.parentEntity;
     let isHidden = !!thisEntity.isHidden;
     while (thisEntityType !== Entities.sector.key && !isHidden) {
       isHidden = !!thisEntity.isHidden;
@@ -150,4 +151,11 @@ export const isCurrentOrAncestorHidden = createSelector(
     }
     return isHidden;
   },
+);
+
+export const isCurrentOrAncestorHidden = createSelector(
+  [isAncestorHidden, getCurrentEntityId, getCurrentEntityType, entitySelector],
+  (ancestorHidden, currentEntityId, currentEntityType, entities) =>
+    currentEntityType !== Entities.sector.key &&
+    (ancestorHidden || !!entities[currentEntityType][currentEntityId].isHidden),
 );

@@ -6,6 +6,7 @@ import { RefreshCw } from 'react-feather';
 import SectionHeader from 'primitives/text/section-header';
 import Dropdown from 'primitives/form/dropdown';
 import IconInput from 'primitives/form/icon-input';
+import Input from 'primitives/form/input';
 
 import Entities from 'constants/entities';
 
@@ -37,6 +38,7 @@ export default function EntityAttributes({
   isTagsOpen,
   toggleAttributesOpen,
   toggleTagsOpen,
+  isAncestorHidden,
 }) {
   const noAttributes =
     !entity.attributes || !Object.keys(entity.attributes).length;
@@ -51,6 +53,7 @@ export default function EntityAttributes({
 
   if (isSidebarEditActive || hasNonTagAttributes) {
     let nameAttribute = null;
+    let hiddenAttribute = null;
     if (isSidebarEditActive) {
       nameAttribute = (
         <div className="EntityAttributes-Attribute">
@@ -68,6 +71,22 @@ export default function EntityAttributes({
           />
         </div>
       );
+      if (entityType !== Entities.sector.key) {
+        hiddenAttribute = (
+          <div className="EntityAttributes-Attribute">
+            <b className="EntityAttributes-Header">Is Hidden:</b>
+            <Input
+              className="EntityAttributes-Item"
+              type="checkbox"
+              checked={!!entity.isHidden || isAncestorHidden}
+              disabled={isAncestorHidden}
+              onChange={({ target }) =>
+                updateEntityInEdit({ name: target.checked })
+              }
+            />
+          </div>
+        );
+      }
     }
 
     // eslint-disable-next-line react/prop-types
@@ -99,6 +118,7 @@ export default function EntityAttributes({
               (entity.attributes || {})[attribute.key],
             ),
           )}
+          {hiddenAttribute}
         </div>
       );
     }
@@ -138,6 +158,7 @@ EntityAttributes.propTypes = {
   isTagsOpen: PropTypes.bool.isRequired,
   toggleAttributesOpen: PropTypes.func.isRequired,
   toggleTagsOpen: PropTypes.func.isRequired,
+  isAncestorHidden: PropTypes.bool.isRequired,
 };
 
 EntityAttributes.defaultProps = {
