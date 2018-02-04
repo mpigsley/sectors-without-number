@@ -1,5 +1,12 @@
 import { createSelector } from 'reselect';
-import { filter, pickBy, mapValues, zipObject } from 'lodash';
+import {
+  filter,
+  pickBy,
+  mapValues,
+  zipObject,
+  difference,
+  values,
+} from 'lodash';
 
 import {
   currentSectorSelector,
@@ -8,24 +15,34 @@ import {
   entitySelector,
   isSidebarEditActiveSelector,
   sidebarEditEntitySelector,
+  sidebarEditChildrenSelector,
 } from 'store/selectors/base.selectors';
+import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
+import { allSectorKeys, coordinateKey } from 'utils/common';
 
 export const getCurrentTopLevelEntities = createSelector(
-  [currentSectorSelector, entitySelector],
-  (currentSector, entities) =>
+  [currentSectorSelector, entitySelector, isViewingSharedSector],
+  (currentSector, entities, isShared) =>
     Object.assign(
       ...filter(Entities, ({ topLevel }) => topLevel).map(({ key }) =>
         mapValues(
-          pickBy(entities[key], ({ sector }) => sector === currentSector),
+          pickBy(
+            entities[key],
+            ({ sector, isHidden }) =>
+              sector === currentSector && (!isShared || !isHidden),
+          ),
           (entity, entityId) => ({
             ...entity,
             type: key,
             numChildren: Entities[key].children.reduce(
               (total, childKey) =>
                 total +
-                filter(entities[childKey], ({ parent }) => parent === entityId)
-                  .length,
+                filter(
+                  entities[childKey],
+                  ({ parent, isHidden }) =>
+                    parent === entityId && (!isShared || !isHidden),
+                ).length,
               0,
             ),
           }),
@@ -35,13 +52,14 @@ export const getCurrentTopLevelEntities = createSelector(
 );
 
 export const getCurrentEntities = createSelector(
-  [currentSectorSelector, entitySelector],
-  (currentSector, entities) =>
+  [currentSectorSelector, entitySelector, isViewingSharedSector],
+  (currentSector, entities, isShared) =>
     mapValues(entities, entityList =>
       pickBy(
         entityList,
-        (entity, entityId) =>
-          entity.sector === currentSector || entityId === currentSector,
+        ({ sector, isHidden }, entityId) =>
+          (sector === currentSector || entityId === currentSector) &&
+          (!isShared || !isHidden),
       ),
     ),
 );
@@ -88,14 +106,64 @@ export const getCurrentEntityId = createSelector(
 );
 
 export const getCurrentEntityChildren = createSelector(
-  [getCurrentEntityId, getCurrentEntityType, entitySelector],
-  (entityId, currentEntityType, entities) => {
+  [
+    getCurrentEntityId,
+    getCurrentEntityType,
+    entitySelector,
+    isViewingSharedSector,
+  ],
+  (entityId, currentEntityType, entities, isShared) => {
     const entityChildren = Entities[currentEntityType].children;
     return zipObject(
       entityChildren,
       entityChildren.map(entityType =>
-        pickBy(entities[entityType], ({ parent }) => parent === entityId),
+        pickBy(
+          entities[entityType],
+          ({ parent, isHidden }) =>
+            parent === entityId && (!isShared || !isHidden),
+        ),
       ),
     );
   },
+);
+
+export const getEmptyHexKeys = createSelector(
+  [getCurrentSector, sidebarEditChildrenSelector],
+  ({ rows, columns }, children = {}) =>
+    difference(
+      allSectorKeys(columns, rows),
+      values(Object.assign({}, ...values(children))).map(({ x, y }) =>
+        coordinateKey(x, y),
+      ),
+    ),
+);
+
+export const isAncestorHidden = createSelector(
+  [getCurrentEntityId, getCurrentEntityType, entitySelector],
+  (currentEntityId, currentEntityType, entities) => {
+    if (currentEntityType === Entities.sector.key) {
+      return false;
+    }
+    const currentEntity = entities[currentEntityType][currentEntityId];
+    let thisEntity = {
+      ...entities[currentEntity.parentEntity][currentEntity.parent],
+    };
+    let thisEntityType = currentEntity.parentEntity;
+    let isHidden = !!thisEntity.isHidden;
+    while (thisEntityType !== Entities.sector.key && !isHidden) {
+      isHidden = !!thisEntity.isHidden;
+      thisEntityType = thisEntity.parentEntity;
+      thisEntity = {
+        ...entities[thisEntityType][thisEntity.parent],
+      };
+    }
+    return isHidden;
+  },
+);
+
+export const isCurrentOrAncestorHidden = createSelector(
+  [isAncestorHidden, getCurrentEntityId, getCurrentEntityType, entitySelector],
+  (ancestorHidden, currentEntityId, currentEntityType, entities) =>
+    currentEntityType !== Entities.sector.key &&
+    (ancestorHidden || !!entities[currentEntityType][currentEntityId].isHidden),
 );

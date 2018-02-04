@@ -10,6 +10,7 @@ import {
 } from 'lodash';
 
 import {
+  getEmptyHexKeys,
   getCurrentEntity,
   getCurrentEntityId,
   getCurrentEntityType,
@@ -19,7 +20,6 @@ import {
   sidebarEditChildrenSelector,
   syncLockSelector,
 } from 'store/selectors/base.selectors';
-import { getEmptyHexKeys } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
 import { createId, coordinatesFromKey, coordinateKey } from 'utils/common';
 import { syncLock } from 'store/utils';
@@ -43,15 +43,23 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
   const childrenByType = getCurrentEntityChildren(state);
   return dispatch({
     type: ACTIVATE_SIDEBAR_EDIT,
-    entity: omitBy({ name: entity.name, attributes: entity.attributes }, isNil),
+    entity: omitBy(
+      {
+        name: entity.name,
+        attributes: entity.attributes,
+        isHidden: entity.isHidden,
+      },
+      isNil,
+    ),
     children: pickBy(
       mapValues(childrenByType, childType => {
         const sortedChildren = sortBy(
-          mapValues(childType, (child, key) => ({
+          mapValues(childType, ({ name, x, y, isHidden }, key) => ({
             key,
-            name: child.name,
-            x: child.x,
-            y: child.y,
+            name,
+            x,
+            y,
+            isHidden,
           })),
           ({ x, y, name }) =>
             isNumber(x) && isNumber(y) ? coordinateKey(x, y) : name,
@@ -59,12 +67,10 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
 
         return zipObject(
           sortedChildren.map(({ key }) => key),
-          sortedChildren.map(({ x, y, name }, index) =>
+          sortedChildren.map((child, index) =>
             omitBy(
               {
-                x,
-                y,
-                name,
+                ...child,
                 sort: sortedChildren.length - index - 1,
               },
               isNil,

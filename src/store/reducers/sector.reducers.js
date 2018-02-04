@@ -99,6 +99,7 @@ export default function sector(state = initialState, action) {
       return {
         ...state,
         saved: keys(action.entities[Entities.sector.key] || {}),
+        shared: [],
       };
     case LOGGED_OUT:
       return {

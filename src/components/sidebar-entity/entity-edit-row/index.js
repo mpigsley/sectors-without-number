@@ -5,11 +5,15 @@ import {
   undoDeleteChildInEdit,
   updateChildInEdit,
 } from 'store/actions/sidebar-edit.actions';
-import { getEmptyHexKeys } from 'store/selectors/sector.selectors';
+import {
+  isCurrentOrAncestorHidden,
+  getEmptyHexKeys,
+} from 'store/selectors/entity.selectors';
 import EntityEditRow from './entity-edit-row';
 
 const mapStateToProps = state => ({
   emptyHexKeys: getEmptyHexKeys(state),
+  isCurrentOrAncestorHidden: isCurrentOrAncestorHidden(state),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
