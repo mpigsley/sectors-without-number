@@ -1,8 +1,16 @@
 import Chance from 'chance';
 
 import { generateStationName } from 'utils/name-generator';
+import Occupation from 'constants/space-station/occupation';
+import Situation from 'constants/space-station/situation';
 
-export const generateSpaceStation = ({ sector, parent, parentEntity } = {}) => {
+export const generateSpaceStation = ({
+  name = generateStationName(),
+  sector,
+  parent,
+  parentEntity,
+  generate = true,
+} = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a space station');
   }
@@ -12,7 +20,18 @@ export const generateSpaceStation = ({ sector, parent, parentEntity } = {}) => {
     );
   }
 
-  return { name: generateStationName(), parent, parentEntity, sector };
+  const chance = new Chance();
+  let station = { name, sector, parent, parentEntity };
+  if (generate) {
+    station = {
+      ...station,
+      attributes: {
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
+      },
+    };
+  }
+  return station;
 };
 
 export const generateSpaceStations = ({

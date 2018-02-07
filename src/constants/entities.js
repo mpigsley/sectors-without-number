@@ -16,8 +16,8 @@ import AsteroidBaseOccupation from 'constants/asteroid-base/occupation';
 import AsteroidBaseSituation from 'constants/asteroid-base/situation';
 import AsteroidBeltOccupation from 'constants/asteroid-belt/occupation';
 import AsteroidBeltSituation from 'constants/asteroid-belt/situation';
-import DeepSpaceStationOccupation from 'constants/deep-space-station/occupation';
-import DeepSpaceStationSituation from 'constants/deep-space-station/situation';
+import SpaceStationOccupation from 'constants/space-station/occupation';
+import SpaceStationSituation from 'constants/space-station/situation';
 import GasGiantMineOccupation from 'constants/gas-giant-mine/occupation';
 import GasGiantMineSituation from 'constants/gas-giant-mine/situation';
 import MoonBaseOccupation from 'constants/moon-base/occupation';
@@ -91,6 +91,7 @@ const spaceStation = {
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
+  attributes: [SpaceStationOccupation, SpaceStationSituation],
   children: [],
 };
 
@@ -162,7 +163,7 @@ const deepSpaceStation = {
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
-  attributes: [DeepSpaceStationOccupation, DeepSpaceStationSituation],
+  attributes: [SpaceStationOccupation, SpaceStationSituation],
   children: [],
 };
 

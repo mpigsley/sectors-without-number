@@ -1,8 +1,8 @@
 import Chance from 'chance';
 
 import { generateStationName } from 'utils/name-generator';
-import Occupation from 'constants/deep-space-station/occupation';
-import Situation from 'constants/deep-space-station/situation';
+import Occupation from 'constants/space-station/occupation';
+import Situation from 'constants/space-station/situation';
 
 export const generateDeepSpaceStation = ({
   sector,
