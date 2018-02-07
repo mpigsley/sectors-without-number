@@ -1,4 +1,9 @@
 {
+  "3.5.0": {
+    "description":
+      "Use deep space station attributes for space station as well.",
+    "date": "2-7-2018"
+  },
   "3.4.0": {
     "description":
       "Persisting sector updates locally is no longer possible. You'll need to sign up to sync them.",
