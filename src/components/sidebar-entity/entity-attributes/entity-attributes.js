@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { omit, map } from 'lodash';
+import { omit, map, values } from 'lodash';
 import { RefreshCw } from 'react-feather';
 
+import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import Dropdown from 'primitives/form/dropdown';
 import IconInput from 'primitives/form/icon-input';
@@ -20,12 +21,12 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
   }
 
   return (
-    <p key={key} className="EntityAttributes-Attribute">
+    <FlexContainer key={key} className="EntityAttributes-Attribute">
       <b className="EntityAttributes-Header">{name}:</b>
       <span className="EntityAttributes-Item">
         {attributes[attribute].name}
       </span>
-    </p>
+    </FlexContainer>
   );
 };
 
@@ -47,19 +48,20 @@ export default function EntityAttributes({
   }
 
   let attributesSection = null;
-  const hasNonTagAttributes =
-    Entities[entityType].attributes &&
-    Object.keys(omit({ ...entity.attributes }, 'tags')).length;
+  const hasNonTagAttributes = values(
+    omit({ ...entity.attributes }, 'tags'),
+  ).filter(v => v).length;
 
   if (isSidebarEditActive || hasNonTagAttributes) {
     let nameAttribute = null;
     let hiddenAttribute = null;
+    let descriptionAttribute = null;
     if (isSidebarEditActive) {
       nameAttribute = (
-        <div className="EntityAttributes-Attribute">
+        <FlexContainer align="center" className="EntityAttributes-Attribute">
           <b className="EntityAttributes-Header">Name:</b>
           <IconInput
-            className="EntityAttributes-Item"
+            wrapperClassName="EntityAttributes-Item"
             value={entity.name}
             onChange={({ target }) =>
               updateEntityInEdit({ name: target.value })
@@ -69,48 +71,80 @@ export default function EntityAttributes({
             }
             icon={RefreshCw}
           />
-        </div>
+        </FlexContainer>
+      );
+      descriptionAttribute = (
+        <FlexContainer align="center" className="EntityAttributes-Attribute">
+          <Input
+            rows="5"
+            type="textarea"
+            placeholder="Description"
+            value={(entity.attributes || {}).description || ''}
+            onChange={({ target } = {}) =>
+              updateEntityInEdit({ attributes: { description: target.value } })
+            }
+          />
+        </FlexContainer>
       );
       if (entityType !== Entities.sector.key) {
         hiddenAttribute = (
-          <div className="EntityAttributes-Attribute">
+          <FlexContainer align="center" className="EntityAttributes-Attribute">
             <b className="EntityAttributes-Header">Is Hidden:</b>
             <Input
               className="EntityAttributes-Item"
               type="checkbox"
               checked={!!entity.isHidden || isAncestorHidden}
               disabled={isAncestorHidden}
-              onChange={({ target }) =>
+              onChange={({ target } = {}) =>
                 updateEntityInEdit({ isHidden: target.checked })
               }
             />
-          </div>
+          </FlexContainer>
         );
       }
+    } else if ((entity.attributes || {}).description) {
+      descriptionAttribute = (
+        <FlexContainer
+          direction="column"
+          className="EntityAttributes-Attribute"
+        >
+          <b className="EntityAttributes-Header">Description:</b>
+          <span className="EntityAttributes-Item EntityAttributes-Item--multiline">
+            {(entity.attributes || {}).description}
+          </span>
+        </FlexContainer>
+      );
     }
 
     // eslint-disable-next-line react/prop-types
     const renderAttributeEdit = ({ key, name, attributes }, attribute) => (
-      <div key={key} className="EntityAttributes-Attribute">
+      <FlexContainer
+        key={key}
+        align="center"
+        className="EntityAttributes-Attribute"
+      >
         <b className="EntityAttributes-Header">{name}:</b>
         <Dropdown
           wrapperClassName="EntityAttributes-Item"
           value={attribute}
-          onChange={item =>
-            updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
+          onChange={({ value } = {}) =>
+            updateEntityInEdit({ attributes: { [key]: value } })
           }
           options={map(attributes, attr => ({
             value: attr.key,
             label: attr.name,
           }))}
         />
-      </div>
+      </FlexContainer>
     );
 
     let attributes = null;
     if (isAttributesOpen) {
       attributes = (
-        <div className="EntityAttributes-Attributes">
+        <FlexContainer
+          direction="column"
+          className="EntityAttributes-Attributes"
+        >
           {nameAttribute}
           {(Entities[entityType].attributes || []).map(attribute =>
             (isSidebarEditActive ? renderAttributeEdit : renderAttribute)(
@@ -119,7 +153,8 @@ export default function EntityAttributes({
             ),
           )}
           {hiddenAttribute}
-        </div>
+          {descriptionAttribute}
+        </FlexContainer>
       );
     }
 

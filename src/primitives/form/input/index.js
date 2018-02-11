@@ -5,14 +5,26 @@ import classNames from 'classnames';
 import './style.css';
 
 export default function Input(props) {
-  const { className, width, error, ...rest } = props;
+  const { className, width, error, type, ...rest } = props;
   let style = {};
   if (props.width) {
     style = { width };
   }
+  if (type === 'textarea') {
+    return (
+      <textarea
+        {...rest}
+        style={style}
+        className={classNames('Input-Textarea', className, {
+          'Input--error': error,
+        })}
+      />
+    );
+  }
   return (
     <input
       {...rest}
+      type={type}
       className={classNames('Input', className, {
         'Input--error': error,
       })}
@@ -23,12 +35,14 @@ export default function Input(props) {
 
 Input.propTypes = {
   className: PropTypes.string,
+  type: PropTypes.string,
   width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   error: PropTypes.bool,
 };
 
 Input.defaultProps = {
   className: null,
+  type: 'text',
   width: null,
   error: false,
 };
