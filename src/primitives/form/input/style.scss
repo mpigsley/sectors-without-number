@@ -1,5 +1,29 @@
 @import 'styles/theme';
 
+.Input-Textarea {
+  display: inline-block;
+  border: solid 1px transparent;
+  padding: 10px;
+  color: $dark4;
+  background-color: $light4;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1rem;
+  letter-spacing: 0.1rem;
+  text-decoration: none;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-weight: 400;
+  resize: vertical;
+  transition: border-color 0.3s;
+  outline: none;
+  width: 100%;
+
+  &--error {
+    border-color: red;
+  }
+}
+
 .Input {
   display: inline-block;
   border: solid 1px transparent;

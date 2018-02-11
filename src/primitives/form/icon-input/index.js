@@ -9,10 +9,10 @@ import './style.css';
 const defaultFunc = () => {};
 
 export default function IconInput(props) {
-  const { icon, onIconClick, ...rest } = props;
+  const { icon, onIconClick, wrapperClassName, ...rest } = props;
   const Icon = icon;
   return (
-    <div className="IconInput">
+    <div className={classNames('IconInput', wrapperClassName)}>
       <Input
         {...rest}
         className={classNames('IconInput-Input', props.className)}
@@ -30,11 +30,13 @@ export default function IconInput(props) {
 
 IconInput.propTypes = {
   className: PropTypes.string,
+  wrapperClassName: PropTypes.string,
   icon: PropTypes.func.isRequired,
   onIconClick: PropTypes.func,
 };
 
 IconInput.defaultProps = {
   className: null,
+  wrapperClassName: null,
   onIconClick: null,
 };

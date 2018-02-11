@@ -20,27 +20,22 @@
 }
 
 .EntityAttributes-Attributes {
-  border-spacing: 0.5rem;
-  display: table;
   margin: 0 1rem 1rem 1rem;
   width: calc(100% - 2rem);
 }
 
 .EntityAttributes-Attribute {
   color: $light2;
-  display: table-row;
   font-size: 0.9rem;
   padding: 0.2rem 0;
 }
 
 .EntityAttributes-Header {
-  display: table-cell;
   padding-right: 0.5rem;
-  vertical-align: middle;
 }
 
 .EntityAttributes-Item {
-  display: table-cell;
+  flex: 1;
   width: 100%;
 }
 
