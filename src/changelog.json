@@ -1,4 +1,8 @@
 {
+  "3.6.0": {
+    "description": "Add a short description to any entity when in edit mode.",
+    "date": "2-11-2018"
+  },
   "3.5.0": {
     "description":
       "Use deep space station attributes for space station as well.",
