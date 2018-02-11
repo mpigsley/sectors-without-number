@@ -25,13 +25,16 @@ export default function entity(state = initialState, action) {
           mapValues(
             mapKeys(entities, (_, key) => action.mapping[key] || key),
             entityObj => {
-              const update = {
-                ...entityObj,
-                sector: action.mapping[entityObj.sector] || entityObj.sector,
-              };
-              if (entityObj.parent) {
-                update.parent =
-                  action.mapping[entityObj.parent] || entityObj.parent;
+              const sector =
+                action.mapping[entityObj.sector] || entityObj.sector;
+              let update = { ...entityObj };
+              if (sector) {
+                update = { ...update, sector };
+              }
+              const parent =
+                action.mapping[entityObj.parent] || entityObj.parent;
+              if (parent) {
+                update = { ...update, parent };
               }
               return update;
             },

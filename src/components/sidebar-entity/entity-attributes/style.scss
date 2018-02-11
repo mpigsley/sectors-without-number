@@ -32,11 +32,16 @@
 
 .EntityAttributes-Header {
   padding-right: 0.5rem;
+  width: 7rem;
 }
 
 .EntityAttributes-Item {
   flex: 1;
   width: 100%;
+
+  &--multiline {
+    white-space: pre-line;
+  }
 }
 
 .EntityTag--edit {

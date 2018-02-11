@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { omit, map } from 'lodash';
+import { omit, map, values } from 'lodash';
 import { RefreshCw } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -21,12 +21,12 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
   }
 
   return (
-    <p key={key} className="EntityAttributes-Attribute">
+    <FlexContainer key={key} className="EntityAttributes-Attribute">
       <b className="EntityAttributes-Header">{name}:</b>
       <span className="EntityAttributes-Item">
         {attributes[attribute].name}
       </span>
-    </p>
+    </FlexContainer>
   );
 };
 
@@ -48,9 +48,9 @@ export default function EntityAttributes({
   }
 
   let attributesSection = null;
-  const hasNonTagAttributes =
-    Entities[entityType].attributes &&
-    Object.keys(omit({ ...entity.attributes }, 'tags')).length;
+  const hasNonTagAttributes = values(
+    omit({ ...entity.attributes }, 'tags'),
+  ).filter(v => v).length;
 
   if (isSidebarEditActive || hasNonTagAttributes) {
     let nameAttribute = null;
@@ -76,8 +76,8 @@ export default function EntityAttributes({
       descriptionAttribute = (
         <FlexContainer align="center" className="EntityAttributes-Attribute">
           <Input
+            rows="5"
             type="textarea"
-            width="100%"
             placeholder="Description"
             value={(entity.attributes || {}).description || ''}
             onChange={({ target } = {}) =>
@@ -102,6 +102,18 @@ export default function EntityAttributes({
           </FlexContainer>
         );
       }
+    } else if ((entity.attributes || {}).description) {
+      descriptionAttribute = (
+        <FlexContainer
+          direction="column"
+          className="EntityAttributes-Attribute"
+        >
+          <b className="EntityAttributes-Header">Description:</b>
+          <span className="EntityAttributes-Item EntityAttributes-Item--multiline">
+            {(entity.attributes || {}).description}
+          </span>
+        </FlexContainer>
+      );
     }
 
     // eslint-disable-next-line react/prop-types
