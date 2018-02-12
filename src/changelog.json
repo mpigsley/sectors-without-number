@@ -1,4 +1,9 @@
 {
+  "3.6.1": {
+    "description": "Fix child num offset in print dialog.",
+    "date": "2-12-2018",
+    "changes": ["Render systems & black holes differently in print view."]
+  },
   "3.6.0": {
     "description": "Add a short description to any entity when in edit mode.",
     "date": "2-11-2018"
