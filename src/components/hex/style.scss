@@ -74,19 +74,26 @@
 }
 
 @media print {
-  .Hex-System,
+  .Hex-BlackHole,
   .Hex-Text {
     fill: $dark4;
     stroke: $dark4;
     font-size: 25px;
   }
 
+  .Hex-System {
+    stroke: $dark4;
+    fill: white;
+    font-size: 25px;
+    stroke-width: 6px;
+  }
+
   .Hex-Name {
     display: block;
   }
 
-  .Hex-Childrens {
-    transform: translateY(21px);
+  .Hex-Children {
+    transform: translateY(25px);
   }
 
   .Hex-Key {
