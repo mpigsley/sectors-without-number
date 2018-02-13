@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect';
+import { createSelectorCreator, defaultMemoize } from 'reselect';
 import {
   filter,
   pickBy,
@@ -7,6 +7,7 @@ import {
   difference,
   values,
   includes,
+  isEqual,
 } from 'lodash';
 
 import {
@@ -23,7 +24,9 @@ import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
 import { allSectorKeys, coordinateKey } from 'utils/common';
 
-export const getSavedEntities = createSelector(
+const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
+
+export const getSavedEntities = createDeepEqualSelector(
   [entitySelector, savedSectorSelector],
   (entities, savedSectors) =>
     mapValues(entities, entityList =>
@@ -31,7 +34,7 @@ export const getSavedEntities = createSelector(
     ),
 );
 
-export const getCurrentTopLevelEntities = createSelector(
+export const getCurrentTopLevelEntities = createDeepEqualSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
   (currentSector, entities, isShared) =>
     Object.assign(
@@ -61,7 +64,7 @@ export const getCurrentTopLevelEntities = createSelector(
     ),
 );
 
-export const getCurrentEntities = createSelector(
+export const getCurrentEntities = createDeepEqualSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
   (currentSector, entities, isShared) =>
     mapValues(entities, entityList =>
@@ -74,12 +77,12 @@ export const getCurrentEntities = createSelector(
     ),
 );
 
-export const getCurrentSector = createSelector(
+export const getCurrentSector = createDeepEqualSelector(
   [currentSectorSelector, entitySelector],
   (currentSector, entities) => entities[Entities.sector.key][currentSector],
 );
 
-export const getCurrentEntity = createSelector(
+export const getCurrentEntity = createDeepEqualSelector(
   [
     currentSectorSelector,
     currentEntityTypeSelector,
@@ -105,17 +108,30 @@ export const getCurrentEntity = createSelector(
   },
 );
 
-export const getCurrentEntityType = createSelector(
+export const getActiveEntityKey = createDeepEqualSelector(
+  [entitySelector, getCurrentEntity],
+  (entities, currentEntity = {}) => {
+    let entity = currentEntity;
+    let isEntityTopLevel = entity.x;
+    while (!isEntityTopLevel && entity) {
+      entity = (entities[entity.parentEntity] || {})[entity.parent];
+      isEntityTopLevel = (entity || {}).x;
+    }
+    return isEntityTopLevel ? coordinateKey(entity.x, entity.y) : undefined;
+  },
+);
+
+export const getCurrentEntityType = createDeepEqualSelector(
   [currentEntityTypeSelector],
   currentEntityType => currentEntityType || Entities.sector.key,
 );
 
-export const getCurrentEntityId = createSelector(
+export const getCurrentEntityId = createDeepEqualSelector(
   [currentSectorSelector, currentEntitySelector],
   (currentSector, currentEntity) => currentEntity || currentSector,
 );
 
-export const getCurrentEntityChildren = createSelector(
+export const getCurrentEntityChildren = createDeepEqualSelector(
   [
     getCurrentEntityId,
     getCurrentEntityType,
@@ -137,7 +153,7 @@ export const getCurrentEntityChildren = createSelector(
   },
 );
 
-export const getEmptyHexKeys = createSelector(
+export const getEmptyHexKeys = createDeepEqualSelector(
   [getCurrentSector, sidebarEditChildrenSelector],
   ({ rows, columns }, children = {}) =>
     difference(
@@ -148,7 +164,7 @@ export const getEmptyHexKeys = createSelector(
     ),
 );
 
-export const isAncestorHidden = createSelector(
+export const isAncestorHidden = createDeepEqualSelector(
   [getCurrentEntityId, getCurrentEntityType, entitySelector],
   (currentEntityId, currentEntityType, entities) => {
     if (currentEntityType === Entities.sector.key) {
@@ -171,7 +187,7 @@ export const isAncestorHidden = createSelector(
   },
 );
 
-export const isCurrentOrAncestorHidden = createSelector(
+export const isCurrentOrAncestorHidden = createDeepEqualSelector(
   [isAncestorHidden, getCurrentEntityId, getCurrentEntityType, entitySelector],
   (ancestorHidden, currentEntityId, currentEntityType, entities) =>
     currentEntityType !== Entities.sector.key &&

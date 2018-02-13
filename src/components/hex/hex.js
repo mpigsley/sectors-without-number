@@ -25,6 +25,7 @@ function Hex({
   holdKey,
   hoverKey,
   isCloudSave,
+  active,
   router,
 }) {
   const { entity, entityId, entityType } = getTopLevelEntity(
@@ -143,6 +144,7 @@ function Hex({
         'Hex--drag': !!holdKey,
         'Hex--movable':
           holdKey === data.hexKey || (!!holdKey && hoverKey === data.hexKey),
+        'Hex--active': active,
       })}
       onMouseEnter={isInSector(entityHoverStart)}
       onMouseLeave={isInSector(entityHoverEnd)}
@@ -185,6 +187,7 @@ Hex.propTypes = {
   holdKey: PropTypes.string,
   hoverKey: PropTypes.string,
   isCloudSave: PropTypes.bool.isRequired,
+  active: PropTypes.bool.isRequired,
   router: PropTypes.shape({
     push: PropTypes.func.isRequired,
     params: PropTypes.shape({

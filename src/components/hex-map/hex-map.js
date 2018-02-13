@@ -11,7 +11,14 @@ import SubContainer from 'primitives/container/sub-container';
 
 import './style.css';
 
-export default function HexMap({ height, width, viewbox, holdKey, hexes }) {
+export default function HexMap({
+  height,
+  width,
+  viewbox,
+  holdKey,
+  activeKey,
+  hexes,
+}) {
   let emptyMessage = null;
   if (hexes.length === 0) {
     emptyMessage = (
@@ -39,7 +46,9 @@ export default function HexMap({ height, width, viewbox, holdKey, hexes }) {
         preserveAspectRatio="xMidYMid meet"
       >
         <defs>{MarkerDefs}</defs>
-        {hexes.map(hex => <Hex data={hex} key={hex.hexKey} />)}
+        {hexes.map(hex => (
+          <Hex data={hex} key={hex.hexKey} active={hex.hexKey === activeKey} />
+        ))}
         <MovementVector hexes={hexes} />
       </svg>
     </div>
@@ -51,6 +60,7 @@ HexMap.propTypes = {
   width: PropTypes.number,
   viewbox: PropTypes.string,
   holdKey: PropTypes.string,
+  activeKey: PropTypes.string,
   hexes: PropTypes.arrayOf(
     PropTypes.shape({
       hexKey: PropTypes.string.isRequired,
@@ -63,5 +73,6 @@ HexMap.defaultProps = {
   width: null,
   viewbox: null,
   holdKey: null,
+  activeKey: null,
   hexes: [],
 };

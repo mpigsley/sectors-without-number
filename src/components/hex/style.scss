@@ -49,6 +49,12 @@
       fill: $primary;
     }
   }
+
+  &--active {
+    .Hex-Polygon {
+      fill: $primary-alt;
+    }
+  }
 }
 
 .Hex-Text {
