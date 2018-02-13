@@ -1,4 +1,4 @@
-import { syncLock } from 'store/utils';
+import { syncLock } from 'utils/entity';
 
 export const ENTITY_HOLD = 'ENTITY_HOLD';
 export const RELEASE_HOLD = 'RELEASE_HOLD';

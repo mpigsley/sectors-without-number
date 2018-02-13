@@ -22,7 +22,7 @@ import {
 } from 'store/selectors/base.selectors';
 import Entities from 'constants/entities';
 import { createId, coordinatesFromKey, coordinateKey } from 'utils/common';
-import { syncLock } from 'store/utils';
+import { syncLock } from 'utils/entity';
 
 export const ACTIVATE_SIDEBAR_EDIT = 'ACTIVATE_SIDEBAR_EDIT';
 export const DEACTIVATE_SIDEBAR_EDIT = 'DEACTIVATE_SIDEBAR_EDIT';

@@ -1,6 +1,6 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 
-import { SuccessToast, ErrorToast } from '../utils';
+import { SuccessToast, ErrorToast } from '../toasts';
 
 jest.mock('react-redux-toastr', () => ({
   actions: {
@@ -8,11 +8,11 @@ jest.mock('react-redux-toastr', () => ({
   },
 }));
 
-jest.mock('../api/local', () => ({
+jest.mock('../../store/api/local', () => ({
   setSector: jest.fn(() => Promise.resolve()),
 }));
 
-jest.mock('../api/firebase', () => ({
+jest.mock('../../store/api/firebase', () => ({
   uploadSector: jest.fn(() => Promise.resolve()),
 }));
 

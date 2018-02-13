@@ -6,6 +6,7 @@ import {
   zipObject,
   difference,
   values,
+  includes,
 } from 'lodash';
 
 import {
@@ -16,10 +17,19 @@ import {
   isSidebarEditActiveSelector,
   sidebarEditEntitySelector,
   sidebarEditChildrenSelector,
+  savedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
 import { allSectorKeys, coordinateKey } from 'utils/common';
+
+export const getSavedEntities = createSelector(
+  [entitySelector, savedSectorSelector],
+  (entities, savedSectors) =>
+    mapValues(entities, entityList =>
+      pickBy(entityList, ({ sector }) => includes(savedSectors, sector)),
+    ),
+);
 
 export const getCurrentTopLevelEntities = createSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],

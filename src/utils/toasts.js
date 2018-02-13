@@ -1,7 +1,5 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 
-import { syncLockSelector } from 'store/selectors/base.selectors';
-
 export const SuccessToast = ({
   title = 'Sector Saved',
   message = 'Your sector has been saved.',
@@ -56,10 +54,3 @@ export const ErrorToast = () =>
   });
 
 export const removeToastById = ReduxToastrActions.remove;
-
-export const syncLock = (action, parameters = {}) => (dispatch, getState) => {
-  if (syncLockSelector(getState())) {
-    return Promise.resolve();
-  }
-  return dispatch({ type: action, ...parameters });
-};

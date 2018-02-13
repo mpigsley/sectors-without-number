@@ -11,8 +11,8 @@ import {
   size,
 } from 'lodash';
 
-import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
-import { releaseSyncLock } from 'store/actions/sector.actions';
+import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
+import { releaseSyncLock, entityRelease } from 'store/actions/sector.actions';
 import {
   configurationSelector,
   currentSectorSelector,
@@ -22,7 +22,6 @@ import {
   sidebarEditSelector,
   holdKeySelector,
   hoverKeySelector,
-  syncLockSelector,
   sectorSelector,
 } from 'store/selectors/base.selectors';
 import {
@@ -31,50 +30,25 @@ import {
   getCurrentEntityId,
   getCurrentEntity,
 } from 'store/selectors/entity.selectors';
-import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 
 import {
   generateEntity as generateEntityUtil,
   deleteEntity as deleteEntityUtil,
   blacklistedAttributes,
   getTopLevelEntity,
+  initialSyncToast,
+  preventSync,
+  SYNC_TOAST_ID,
 } from 'utils/entity';
 import { coordinatesFromKey } from 'utils/common';
+import { removeToastById } from 'utils/toasts';
 import { saveEntities, deleteEntities } from 'store/api/shared';
-import { InfoToast, removeToastById } from 'store/utils';
 import Entities from 'constants/entities';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
 export const SAVE_SECTOR = 'SAVE_SECTOR';
 export const UPDATE_ID_MAPPING = 'UPDATE_ID_MAPPING';
-
-const SYNC_TOAST_ID = 'initial-sync';
-const initialSyncToast = (state, dispatch) => {
-  if (!isCurrentSectorSaved(state)) {
-    return new Promise(resolve => {
-      dispatch(
-        InfoToast({
-          title: 'Syncing Sector',
-          message: 'Do not exit out of this web page.',
-          config: {
-            id: SYNC_TOAST_ID,
-            options: {
-              timeOut: 0,
-              removeOnHover: false,
-              showCloseButton: false,
-              progressBar: false,
-            },
-          },
-        }),
-      );
-      setTimeout(() => {
-        resolve(true);
-      }, 500);
-    });
-  }
-  return Promise.resolve();
-};
 
 const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
   const dispatches = [dispatch(releaseSyncLock())];
@@ -105,7 +79,7 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
 
 export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   const state = getState();
-  if (syncLockSelector(state)) {
+  if (preventSync(state, dispatch, true)) {
     return Promise.resolve();
   }
   const entities = generateEntityUtil({
@@ -138,8 +112,8 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
 
 export const moveTopLevelEntity = () => (dispatch, getState) => {
   const state = getState();
-  if (syncLockSelector(state)) {
-    return Promise.resolve();
+  if (preventSync(state, dispatch)) {
+    return dispatch(entityRelease());
   }
   const topLevelEntities = getCurrentTopLevelEntities(state);
   const holdEntity = getTopLevelEntity(
@@ -180,7 +154,7 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
 
 export const deleteEntity = () => (dispatch, getState) => {
   const state = getState();
-  if (syncLockSelector(state)) {
+  if (preventSync(state, dispatch)) {
     return Promise.resolve();
   }
   const entity = getCurrentEntity(state);
@@ -210,7 +184,7 @@ export const deleteEntity = () => (dispatch, getState) => {
 
 export const saveSector = () => (dispatch, getState) => {
   const state = getState();
-  if (syncLockSelector(state)) {
+  if (preventSync(state, dispatch)) {
     return Promise.resolve();
   }
   return Promise.all([
@@ -225,8 +199,8 @@ export const saveSector = () => (dispatch, getState) => {
 
 export const saveEntityEdit = () => (dispatch, getState) => {
   const state = getState();
-  if (syncLockSelector(state)) {
-    return Promise.resolve();
+  if (preventSync(state, dispatch)) {
+    return dispatch(deactivateSidebarEdit());
   }
   const currentEntityType = getCurrentEntityType(state);
   const currentEntityId = getCurrentEntityId(state);
@@ -325,7 +299,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
     );
   }
   return Promise.all([
-    dispatch({ type: DEACTIVATE_SIDEBAR_EDIT }),
+    dispatch(deactivateSidebarEdit()),
     dispatch(releaseSyncLock()),
   ]);
 };
