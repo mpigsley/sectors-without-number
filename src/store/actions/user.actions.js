@@ -1,6 +1,9 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { keys, pull } from 'lodash';
+import { keys } from 'lodash';
 import { push } from 'react-router-redux';
+
+import { savedSectorSelector } from 'store/selectors/base.selectors';
+import { getSavedEntities } from 'store/selectors/entity.selectors';
 
 import {
   updateCurrentUser,
@@ -14,11 +17,6 @@ import {
   uploadEntities,
 } from 'store/api/firebase';
 import { clearLocalDatabase } from 'store/api/local';
-import {
-  entitySelector,
-  sectorSelector,
-  sharedSectorSelector,
-} from 'store/selectors/base.selectors';
 import Entities from 'constants/entities';
 import { ErrorToast } from 'utils/toasts';
 import { mergeEntityUpdates } from 'utils/entity';
@@ -52,14 +50,12 @@ export const updateUserForm = (key, value) => ({
 });
 
 const onLogin = (dispatch, state) => result => {
-  const sectors = keys(sectorSelector(state));
-  const shared = sharedSectorSelector(state);
-  const localSync = !!pull(sectors, ...shared).length;
+  const localSync = !!savedSectorSelector(state).length;
   const uid = result.user ? result.user.uid : result.uid;
   let promise = Promise.resolve();
   if (localSync) {
     promise = Promise.all([
-      uploadEntities(entitySelector(state), uid),
+      uploadEntities(getSavedEntities(state), uid),
       clearLocalDatabase(),
     ]);
   }
