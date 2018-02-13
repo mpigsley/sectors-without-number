@@ -18,7 +18,7 @@ import {
   deleteEntities as syncDeleteEntities,
   updateEntities as syncUpdateEntities,
 } from 'store/api/firebase';
-import { SuccessToast, ErrorToast, WarningToast } from 'utils/toasts';
+import { SuccessToast, ErrorToast } from 'utils/toasts';
 import Entities from 'constants/entities';
 
 export const deleteEntities = ({ state, deleted }) => {
@@ -34,12 +34,7 @@ export const deleteEntities = ({ state, deleted }) => {
   } else if (currentEntityType === Entities.sector.key) {
     promise = localDeleteEntities(deleted);
   } else {
-    return Promise.resolve({
-      action: WarningToast({
-        title: `Sign up to persist delete`,
-        message: `Your current sector(s) will be synced automatically.`,
-      }),
-    });
+    return Promise.resolve();
   }
   const entityName = Entities[currentEntityType].name;
   return promise
@@ -73,12 +68,7 @@ export const saveEntities = ({
         syncUpdateEntities(updated),
       ]).then(([uploaded]) => ({ mapping: uploaded.mapping }));
     } else {
-      return Promise.resolve({
-        action: WarningToast({
-          title: `Sign up to persist sector`,
-          message: `Your current sector(s) will be synced automatically.`,
-        }),
-      });
+      return Promise.resolve();
     }
   } else {
     const updates = pickBy(
@@ -88,12 +78,7 @@ export const saveEntities = ({
     if (uid) {
       promise = uploadEntities(updates, uid);
     } else {
-      return Promise.resolve({
-        action: WarningToast({
-          title: `Sign up to persist sector`,
-          message: `Any current sector(s) will be synced automatically.`,
-        }),
-      });
+      return Promise.resolve();
     }
   }
   return promise

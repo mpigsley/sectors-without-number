@@ -15,12 +15,13 @@ import {
 import {
   syncLockSelector,
   savedSectorSelector,
+  userModelSelector,
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 
 import EntityGenerators from 'utils/entity-generators';
 import { createId, coordinateKey, allSectorCoordinates } from 'utils/common';
-import { InfoToast } from 'utils/toasts';
+import { InfoToast, WarningToast } from 'utils/toasts';
 
 import Entities from 'constants/entities';
 import { SECTOR_LIMIT } from 'constants/defaults';
@@ -32,10 +33,18 @@ export const syncLock = (action, parameters = {}) => (dispatch, getState) => {
   return dispatch({ type: action, ...parameters });
 };
 
-export const preventSync = (state, dispatch) => {
+export const preventSync = (state, dispatch, isGenerating) => {
   const isSyncing = !isCurrentSectorSaved(state);
+  const isLoggedIn = !!userModelSelector(state);
   const reachedSectorLimit = savedSectorSelector(state).length >= SECTOR_LIMIT;
-  if (reachedSectorLimit && isSyncing) {
+  if (!isLoggedIn && !isGenerating) {
+    dispatch(
+      WarningToast({
+        title: `Sign up to persist sector`,
+        message: `Your current sector(s) will be synced automatically.`,
+      }),
+    );
+  } else if (reachedSectorLimit && isSyncing) {
     dispatch(
       InfoToast({
         title: 'Reached Sector Limit',
@@ -43,7 +52,10 @@ export const preventSync = (state, dispatch) => {
       }),
     );
   }
-  return isSyncing && (syncLockSelector(state) || reachedSectorLimit);
+  return (
+    (!isLoggedIn && !isGenerating) ||
+    (isSyncing && (syncLockSelector(state) || reachedSectorLimit))
+  );
 };
 
 export const SYNC_TOAST_ID = 'initial-sync';

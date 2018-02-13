@@ -11,8 +11,8 @@ import {
   size,
 } from 'lodash';
 
-import { DEACTIVATE_SIDEBAR_EDIT } from 'store/actions/sidebar-edit.actions';
-import { releaseSyncLock } from 'store/actions/sector.actions';
+import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
+import { releaseSyncLock, entityRelease } from 'store/actions/sector.actions';
 import {
   configurationSelector,
   currentSectorSelector,
@@ -79,7 +79,7 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
 
 export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   const state = getState();
-  if (preventSync(state, dispatch)) {
+  if (preventSync(state, dispatch, true)) {
     return Promise.resolve();
   }
   const entities = generateEntityUtil({
@@ -113,7 +113,7 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
 export const moveTopLevelEntity = () => (dispatch, getState) => {
   const state = getState();
   if (preventSync(state, dispatch)) {
-    return Promise.resolve();
+    return dispatch(entityRelease());
   }
   const topLevelEntities = getCurrentTopLevelEntities(state);
   const holdEntity = getTopLevelEntity(
@@ -200,7 +200,7 @@ export const saveSector = () => (dispatch, getState) => {
 export const saveEntityEdit = () => (dispatch, getState) => {
   const state = getState();
   if (preventSync(state, dispatch)) {
-    return Promise.resolve();
+    return dispatch(deactivateSidebarEdit());
   }
   const currentEntityType = getCurrentEntityType(state);
   const currentEntityId = getCurrentEntityId(state);
@@ -299,7 +299,7 @@ export const saveEntityEdit = () => (dispatch, getState) => {
     );
   }
   return Promise.all([
-    dispatch({ type: DEACTIVATE_SIDEBAR_EDIT }),
+    dispatch(deactivateSidebarEdit()),
     dispatch(releaseSyncLock()),
   ]);
 };
