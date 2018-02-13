@@ -1,4 +1,8 @@
 {
+  "3.7.0": {
+    "description": "Limit synced sectors to a maximum of 5.",
+    "date": "2-13-2018"
+  },
   "3.6.1": {
     "description": "Fix child num offset in print dialog.",
     "date": "2-12-2018",
