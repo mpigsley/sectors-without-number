@@ -1,4 +1,8 @@
 {
+  "3.8.0": {
+    "description": "Show active hex in sector map.",
+    "date": "2-13-2018"
+  },
   "3.7.0": {
     "description": "Limit synced sectors to a maximum of 5.",
     "date": "2-13-2018"
