@@ -18,7 +18,7 @@ import {
   deleteEntities as syncDeleteEntities,
   updateEntities as syncUpdateEntities,
 } from 'store/api/firebase';
-import { SuccessToast, ErrorToast, WarningToast } from 'store/utils';
+import { SuccessToast, ErrorToast, WarningToast } from 'utils/toasts';
 import Entities from 'constants/entities';
 
 export const deleteEntities = ({ state, deleted }) => {

@@ -20,7 +20,7 @@ import {
   sharedSectorSelector,
 } from 'store/selectors/base.selectors';
 import Entities from 'constants/entities';
-import { ErrorToast } from 'store/utils';
+import { ErrorToast } from 'utils/toasts';
 import { mergeEntityUpdates } from 'utils/entity';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';

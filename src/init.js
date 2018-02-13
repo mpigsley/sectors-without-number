@@ -11,7 +11,7 @@ import {
   convertOldSectors,
 } from 'store/api/firebase';
 import { initialize } from 'store/actions/user.actions';
-import { InfoToast, removeToastById } from 'store/utils';
+import { InfoToast, removeToastById } from 'utils/toasts';
 
 export default store => {
   Firebase.initializeApp({

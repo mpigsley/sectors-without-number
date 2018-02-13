@@ -12,9 +12,66 @@ import {
   find,
 } from 'lodash';
 
+import {
+  syncLockSelector,
+  savedSectorSelector,
+} from 'store/selectors/base.selectors';
+import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
+
 import EntityGenerators from 'utils/entity-generators';
 import { createId, coordinateKey, allSectorCoordinates } from 'utils/common';
+import { InfoToast } from 'utils/toasts';
+
 import Entities from 'constants/entities';
+import { SECTOR_LIMIT } from 'constants/defaults';
+
+export const syncLock = (action, parameters = {}) => (dispatch, getState) => {
+  if (syncLockSelector(getState())) {
+    return Promise.resolve();
+  }
+  return dispatch({ type: action, ...parameters });
+};
+
+export const preventSync = (state, dispatch) => {
+  const isSyncing = !isCurrentSectorSaved(state);
+  const reachedSectorLimit = savedSectorSelector(state).length >= SECTOR_LIMIT;
+  if (reachedSectorLimit && isSyncing) {
+    dispatch(
+      InfoToast({
+        title: 'Reached Sector Limit',
+        message: `You already have at least ${SECTOR_LIMIT} sectors.`,
+      }),
+    );
+  }
+  return isSyncing && (syncLockSelector(state) || reachedSectorLimit);
+};
+
+export const SYNC_TOAST_ID = 'initial-sync';
+export const initialSyncToast = (state, dispatch) => {
+  if (!isCurrentSectorSaved(state)) {
+    return new Promise(resolve => {
+      dispatch(
+        InfoToast({
+          title: 'Syncing Sector',
+          message: 'Do not exit out of this web page.',
+          config: {
+            id: SYNC_TOAST_ID,
+            options: {
+              timeOut: 0,
+              removeOnHover: false,
+              showCloseButton: false,
+              progressBar: false,
+            },
+          },
+        }),
+      );
+      setTimeout(() => {
+        resolve(true);
+      }, 500);
+    });
+  }
+  return Promise.resolve();
+};
 
 export const generateEntity = ({
   entity,
