@@ -12,16 +12,17 @@ import Entities from 'constants/entities';
 
 import './style.css';
 
-const getColumnsFromType = entityType =>
-  Entities[entityType].topLevel
-    ? [
-        { accessor: 'name', Header: 'Name' },
-        { accessor: 'children', Header: 'Children' },
-      ]
-    : [
-        { accessor: 'name', Header: 'Name' },
-        { accessor: 'children', Header: 'Children' },
-      ];
+const getColumnsFromType = entityType => {
+  const common = [{ accessor: 'name', Header: 'Name' }];
+  if (Entities[entityType].topLevel) {
+    return [...common, { accessor: 'children', Header: 'Children' }];
+  }
+  const columns = [...common, { accessor: 'parent', Header: 'Parent' }];
+  if (Entities[entityType].children.length) {
+    columns.splice(2, 0, { accessor: 'children', Header: 'Children' });
+  }
+  return columns;
+};
 
 const renderEntityType = (
   { entityType, ...entities }, // eslint-disable-line

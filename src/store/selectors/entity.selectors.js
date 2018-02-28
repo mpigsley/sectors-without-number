@@ -218,6 +218,9 @@ export const getPrintableEntities = createDeepEqualSelector(
         key: entityId,
         name: entity.name,
         children: entityChildren[entityId] || 0,
+        parent: `${currentEntities[entity.parentEntity][entity.parent].name} (${
+          Entities[entity.parentEntity].name
+        })`,
       })),
     ),
 );
