@@ -14,10 +14,13 @@ import './style.css';
 
 const getColumnsFromType = entityType =>
   Entities[entityType].topLevel
-    ? [{ accessor: 'name', Header: 'Name' }]
+    ? [
+        { accessor: 'name', Header: 'Name' },
+        { accessor: 'children', Header: 'Children' },
+      ]
     : [
         { accessor: 'name', Header: 'Name' },
-        { accessor: 'parent', Header: 'Parent' },
+        { accessor: 'children', Header: 'Children' },
       ];
 
 const renderEntityType = (
@@ -37,9 +40,9 @@ const renderEntityType = (
       {Entities[entityType].name}
     </Header>
     <Table
-      dataIdAccessor="name"
+      dataIdAccessor="key"
       columns={getColumnsFromType(entityType)}
-      data={values(entities)}
+      data={values(entities).sort(sortByKey('name'))}
     />
   </FlexContainer>
 );

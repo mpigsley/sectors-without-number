@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 
-import { getCurrentEntities } from 'store/selectors/entity.selectors';
+import { getPrintableEntities } from 'store/selectors/entity.selectors';
 import CondensedPrintable from './condensed-printable';
 
 const mapStateToProps = state => ({
-  entities: getCurrentEntities(state),
+  entities: getPrintableEntities(state),
 });
 
 export default connect(mapStateToProps)(CondensedPrintable);

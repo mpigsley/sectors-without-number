@@ -1,5 +1,6 @@
 import { createSelectorCreator, defaultMemoize } from 'reselect';
 import {
+  omit,
   filter,
   pickBy,
   mapValues,
@@ -8,6 +9,7 @@ import {
   values,
   includes,
   isEqual,
+  flatten,
 } from 'lodash';
 
 import {
@@ -153,6 +155,20 @@ export const getCurrentEntityChildren = createDeepEqualSelector(
   },
 );
 
+export const getEntityChildren = createDeepEqualSelector(
+  [getCurrentEntities],
+  currentEntities =>
+    flatten(
+      values(omit(currentEntities, Entities.sector.key)).map(values),
+    ).reduce(
+      (mapping, entity, entityId) => ({
+        ...mapping,
+        [entity.parent]: (mapping[entity.parent] || 0) + 1,
+      }),
+      {},
+    ),
+);
+
 export const getEmptyHexKeys = createDeepEqualSelector(
   [getCurrentSector, sidebarEditChildrenSelector],
   ({ rows, columns }, children = {}) =>
@@ -192,4 +208,16 @@ export const isCurrentOrAncestorHidden = createDeepEqualSelector(
   (ancestorHidden, currentEntityId, currentEntityType, entities) =>
     currentEntityType !== Entities.sector.key &&
     (ancestorHidden || !!entities[currentEntityType][currentEntityId].isHidden),
+);
+
+export const getPrintableEntities = createDeepEqualSelector(
+  [getCurrentEntities, getEntityChildren],
+  (currentEntities, entityChildren) =>
+    mapValues(omit(currentEntities, Entities.sector.key), entities =>
+      mapValues(entities, (entity, entityId) => ({
+        key: entityId,
+        name: entity.name,
+        children: entityChildren[entityId] || 0,
+      })),
+    ),
 );
