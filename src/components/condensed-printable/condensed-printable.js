@@ -15,7 +15,11 @@ import './style.css';
 const getColumnsFromType = entityType => {
   const common = [{ accessor: 'name', Header: 'Name' }];
   if (Entities[entityType].topLevel) {
-    return [...common, { accessor: 'children', Header: 'Children' }];
+    return [
+      ...common,
+      { accessor: 'location', Header: 'Location' },
+      { accessor: 'children', Header: 'Children' },
+    ];
   }
   const columns = [...common, { accessor: 'parent', Header: 'Parent' }];
   if (Entities[entityType].children.length) {

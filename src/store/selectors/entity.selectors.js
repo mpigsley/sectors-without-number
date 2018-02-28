@@ -213,14 +213,19 @@ export const isCurrentOrAncestorHidden = createDeepEqualSelector(
 export const getPrintableEntities = createDeepEqualSelector(
   [getCurrentEntities, getEntityChildren],
   (currentEntities, entityChildren) =>
-    mapValues(omit(currentEntities, Entities.sector.key), entities =>
-      mapValues(entities, (entity, entityId) => ({
-        key: entityId,
-        name: entity.name,
-        children: entityChildren[entityId] || 0,
-        parent: `${currentEntities[entity.parentEntity][entity.parent].name} (${
-          Entities[entity.parentEntity].name
-        })`,
-      })),
+    mapValues(
+      omit(currentEntities, Entities.sector.key),
+      (entities, entityType) =>
+        mapValues(entities, (entity, entityId) => ({
+          key: entityId,
+          name: entity.name,
+          location: Entities[entityType].topLevel
+            ? coordinateKey(entity.x, entity.y)
+            : undefined,
+          children: entityChildren[entityId] || 0,
+          parent: `${
+            currentEntities[entity.parentEntity][entity.parent].name
+          } (${Entities[entity.parentEntity].name})`,
+        })),
     ),
 );
