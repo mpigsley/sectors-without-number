@@ -4,7 +4,7 @@ import { throttle, isEmpty, map } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';
-import PrintableSector from 'components/printable-sector';
+import CondensedPrintable from 'components/condensed-printable';
 import TopLevelEntityModal from 'components/top-level-entity-modal';
 import HexMap from 'components/hex-map';
 
@@ -116,7 +116,7 @@ export default class SectorMap extends Component {
           />
           <div className="SectorMap-Sidebar">{this.props.children}</div>
         </FlexContainer>
-        <PrintableSector printable={printable} />
+        <CondensedPrintable printable={printable} />
         <TopLevelEntityModal />
       </div>
     );

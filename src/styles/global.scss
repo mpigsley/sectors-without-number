@@ -14,3 +14,9 @@ body {
 .DefaultIcon g {
   fill: $light2;
 }
+
+@media print {
+  body {
+    background-color: white;
+  }
+}

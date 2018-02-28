@@ -1,0 +1,30 @@
+@import 'styles/theme';
+
+.CondensedPrintable * {
+  font-family: 'Helvetica', sans-serif !important;
+}
+
+.CondensedPrintable-Container {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+}
+
+.CondensedPrintable-EntityContainer {
+  display: none;
+}
+
+.CondensedPrintable-Entity {
+  page-break-after: always;
+}
+
+.CondensedPrintable-EntityTitle {
+  margin-bottom: 1rem;
+}
+
+@media print {
+  .CondensedPrintable-Container,
+  .CondensedPrintable-EntityContainer {
+    display: inherit;
+  }
+}
