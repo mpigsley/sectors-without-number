@@ -10,6 +10,7 @@ import {
   includes,
   isEqual,
   flatten,
+  map,
 } from 'lodash';
 
 import {
@@ -25,6 +26,7 @@ import {
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
 import { allSectorKeys, coordinateKey } from 'utils/common';
+import { areNeighbors } from 'utils/hex-generator';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
 
@@ -155,20 +157,6 @@ export const getCurrentEntityChildren = createDeepEqualSelector(
   },
 );
 
-export const getEntityChildren = createDeepEqualSelector(
-  [getCurrentEntities],
-  currentEntities =>
-    flatten(
-      values(omit(currentEntities, Entities.sector.key)).map(values),
-    ).reduce(
-      (mapping, entity, entityId) => ({
-        ...mapping,
-        [entity.parent]: (mapping[entity.parent] || 0) + 1,
-      }),
-      {},
-    ),
-);
-
 export const getEmptyHexKeys = createDeepEqualSelector(
   [getCurrentSector, sidebarEditChildrenSelector],
   ({ rows, columns }, children = {}) =>
@@ -210,9 +198,49 @@ export const isCurrentOrAncestorHidden = createDeepEqualSelector(
     (ancestorHidden || !!entities[currentEntityType][currentEntityId].isHidden),
 );
 
+export const getEntityChildren = createDeepEqualSelector(
+  [getCurrentEntities],
+  currentEntities =>
+    flatten(
+      values(omit(currentEntities, Entities.sector.key)).map(values),
+    ).reduce(
+      (mapping, entity) => ({
+        ...mapping,
+        [entity.parent]: (mapping[entity.parent] || 0) + 1,
+      }),
+      {},
+    ),
+);
+
+export const getEntityNeighbors = createDeepEqualSelector(
+  [getCurrentEntities],
+  currentEntities =>
+    map(
+      Object.assign(
+        ...values(
+          pickBy(
+            currentEntities,
+            (entities, entityType) => Entities[entityType].topLevel,
+          ),
+        ),
+      ),
+      (entity, entityId) => ({ ...entity, entityId }),
+    ).reduce(
+      (mapping, entity, i, entities) => ({
+        ...mapping,
+        [entity.entityId]: entities
+          .filter(
+            b => areNeighbors(entity, b) && b.entityId !== entity.entityId,
+          )
+          .map(({ entityId, ...rest }) => rest),
+      }),
+      {},
+    ),
+);
+
 export const getPrintableEntities = createDeepEqualSelector(
-  [getCurrentEntities, getEntityChildren],
-  (currentEntities, entityChildren) =>
+  [getCurrentEntities, getEntityChildren, getEntityNeighbors],
+  (currentEntities, entityChildren, entityNeighbors) =>
     mapValues(
       omit(currentEntities, Entities.sector.key),
       (entities, entityType) =>
@@ -226,6 +254,9 @@ export const getPrintableEntities = createDeepEqualSelector(
           parent: `${
             currentEntities[entity.parentEntity][entity.parent].name
           } (${Entities[entity.parentEntity].name})`,
+          neighbors: Entities[entityType].topLevel
+            ? entityNeighbors[entityId].map(({ name }) => name).join(', ')
+            : undefined,
         })),
     ),
 );

@@ -19,6 +19,7 @@ const getColumnsFromType = entityType => {
       ...common,
       { accessor: 'location', Header: 'Location' },
       { accessor: 'children', Header: 'Children' },
+      { accessor: 'neighbors', Header: 'Neighbors' },
     ];
   }
   const columns = [...common, { accessor: 'parent', Header: 'Parent' }];
