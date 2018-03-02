@@ -256,6 +256,7 @@ export const getPrintableEntities = createDeepEqualSelector(
           tags: ((entity.attributes || {}).tags || [])
             .map(tag => Entities[entityType].tags[tag].name)
             .join(', '),
+          description: (entity.attributes || {}).description,
           key: entityId,
           name: entity.name,
           location: Entities[entityType].topLevel

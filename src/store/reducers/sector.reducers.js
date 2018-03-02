@@ -35,7 +35,7 @@ const initialState = {
   hoverKey: null,
   topLevelKey: null,
   syncLock: false,
-  exportType: ExportTypes.expanded.key,
+  exportType: ExportTypes.condensed.key,
   configuration: {
     name: Entities.sector.nameGenerator(),
     isBuilder: false,
