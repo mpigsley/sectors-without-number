@@ -250,7 +250,8 @@ export const getPrintableEntities = createDeepEqualSelector(
           ...zipObject(
             (Entities[entityType].attributes || []).map(({ key }) => key),
             (Entities[entityType].attributes || []).map(
-              ({ key, attributes }) => attributes[entity.attributes[key]].name,
+              ({ key, attributes }) =>
+                (attributes[(entity.attributes || {})[key]] || {}).name,
             ),
           ),
           tags: ((entity.attributes || {}).tags || [])
