@@ -26,6 +26,7 @@ export default function EntityNavigation({
   isSynced,
   isShared,
   isSidebarEditActive,
+  openExportModal,
 }) {
   const onCopy = () => {
     let url = window.location.href;
@@ -38,10 +39,6 @@ export default function EntityNavigation({
       'Copied to Clipboard',
       `You have copied a link directly to this ${Entities[entityType].name}.`,
     );
-  };
-
-  const onPrint = () => {
-    window.print();
   };
 
   let saveButton = null;
@@ -142,7 +139,7 @@ export default function EntityNavigation({
         {deleteButton ? <span className="EntityNavigation-Spacer" /> : null}
         {shareButton}
         {shareButton ? <span className="EntityNavigation-Spacer" /> : null}
-        <Button minimal onClick={onPrint}>
+        <Button minimal onClick={openExportModal}>
           Print
         </Button>
       </FlexContainer>
@@ -209,6 +206,7 @@ EntityNavigation.propTypes = {
   isSynced: PropTypes.bool.isRequired,
   isShared: PropTypes.bool.isRequired,
   isSidebarEditActive: PropTypes.bool.isRequired,
+  openExportModal: PropTypes.func.isRequired,
 };
 
 EntityNavigation.defaultProps = {

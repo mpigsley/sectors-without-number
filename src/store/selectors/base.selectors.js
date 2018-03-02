@@ -21,6 +21,7 @@ export const hoverKeySelector = state => state.sector.hoverKey;
 export const renderSectorSelector = state => state.sector.renderSector;
 export const topLevelKeySelector = state => state.sector.topLevelKey;
 export const syncLockSelector = state => state.sector.syncLock;
+export const exportTypeSelector = state => state.sector.exportType;
 
 /* Sidebar Edit */
 export const sidebarEditSelector = state => state.sidebarEdit;

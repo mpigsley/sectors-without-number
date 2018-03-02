@@ -8,6 +8,7 @@ export const UPDATE_CONFIGURATION = 'UPDATE_CONFIGURATION';
 export const RELEASE_SYNC_LOCK = 'RELEASE_SYNC_LOCK';
 export const TOP_LEVEL_ENTITY_CREATE = 'TOP_LEVEL_ENTITY_CREATE';
 export const CANCEL_TOP_LEVEL_ENTITY_CREATE = 'CANCEL_TOP_LEVEL_ENTITY_CREATE';
+export const SET_EXPORT_TYPE = 'SET_EXPORT_TYPE';
 
 export const entityHold = key => syncLock(ENTITY_HOLD, { key });
 export const entityRelease = () => syncLock(RELEASE_HOLD);
@@ -20,3 +21,5 @@ export const cancelTopLevelEntityCreate = () =>
   syncLock(CANCEL_TOP_LEVEL_ENTITY_CREATE);
 export const updateConfiguration = (key, value) =>
   syncLock(UPDATE_CONFIGURATION, { key, value });
+export const setEntityExport = exportType =>
+  syncLock(SET_EXPORT_TYPE, { exportType });

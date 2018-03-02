@@ -10,6 +10,7 @@ import SectorBuilderInfo from './sector-builder-info';
 import EntityAttributes from './entity-attributes';
 import EntityList from './entity-list';
 import EntityNavigation from './entity-navigation';
+import ExportModal from './export-modal';
 
 export default class EntityInfo extends Component {
   static propTypes = {
@@ -32,6 +33,7 @@ export default class EntityInfo extends Component {
   state = {
     entity: { ...this.props.entity },
     isConfirmDeleteOpen: false,
+    isExportOpen: false,
     openLists: {
       ...mapValues(this.props.entityChildren, () => true),
       attributes: true,
@@ -71,6 +73,10 @@ export default class EntityInfo extends Component {
 
   onRandomizeName = namingFunc => () =>
     this.setState({ entity: { ...this.state.entity, name: namingFunc() } });
+
+  openExportModal = () => this.setState({ isExportOpen: true });
+
+  closeExportModal = () => this.setState({ isExportOpen: false });
 
   updateAttribute = (key, value, extraState = {}) =>
     this.setState({
@@ -115,6 +121,7 @@ export default class EntityInfo extends Component {
       <EntityNavigation
         name={this.props.entity.name}
         onDeleteEntity={this.onConfirmDelete}
+        openExportModal={this.openExportModal}
       >
         <EntityAttributes
           isAttributesOpen={this.state.openLists.attributes}
@@ -133,6 +140,10 @@ export default class EntityInfo extends Component {
         ))}
         {this.renderSectorBuilderText()}
         {this.renderConfirmDeleteModal()}
+        <ExportModal
+          isOpen={this.state.isExportOpen}
+          onCancel={this.closeExportModal}
+        />
       </EntityNavigation>
     );
   }
