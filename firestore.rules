@@ -9,12 +9,12 @@ service cloud.firestore {
       match /{entityType}/entity/{entityId} {
         allow create: if request.auth != null &&
           entityType in ["asteroidBase", "asteroidBelt", "blackHole", "deepSpaceStation",
-            "gasGiantMine", "moon", "moonBase", "note", "orbitalRuin", "planet",
-            "refuelingStation", "researchBase", "sector", "spaceStation", "system"];
+            "gasGiantMine", "moon", "moonBase", "orbitalRuin", "planet", "refuelingStation",
+            "researchBase", "sector", "spaceStation", "system"];
         allow update, delete: if resource.data.creator == request.auth.uid &&
           entityType in ["asteroidBase", "asteroidBelt", "blackHole", "deepSpaceStation",
-            "gasGiantMine", "moon", "moonBase", "note", "orbitalRuin", "planet", 
-            "refuelingStation", "researchBase", "sector", "spaceStation", "system"];
+            "gasGiantMine", "moon", "moonBase", "orbitalRuin", "planet", "refuelingStation",
+            "researchBase", "sector", "spaceStation", "system"];
         allow read;
       }
     }

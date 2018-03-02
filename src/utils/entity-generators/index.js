@@ -26,7 +26,6 @@ import {
 } from './gas-giant-mine-generator';
 import { generateMoons, generateMoon } from './moon-generator';
 import { generateMoonBases, generateMoonBase } from './moon-base-generator';
-import { generateNote } from './note-generator';
 import {
   generateRefuelingStations,
   generateRefuelingStation,
@@ -68,10 +67,6 @@ export default {
   [Entities.moonBase.key]: {
     generateOne: generateMoonBase,
     generateAll: generateMoonBases,
-  },
-  [Entities.note.key]: {
-    generateOne: generateNote,
-    generateAll: () => ({ children: [] }),
   },
   [Entities.orbitalRuin.key]: {
     generateOne: generateOrbitalRuin,

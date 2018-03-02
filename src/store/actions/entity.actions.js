@@ -256,13 +256,10 @@ export const saveEntityEdit = () => (dispatch, getState) => {
     const entities = entitySelector(state);
     updatedEntities = merge(updatedEntities, {
       [currentEntityType]: {
-        [currentEntityId]: omit(
-          {
-            ...entities[currentEntityType][currentEntityId],
-            ...entity,
-          },
-          blacklistedAttributes,
-        ),
+        [currentEntityId]: {
+          ...entities[currentEntityType][currentEntityId],
+          ...entity,
+        },
       },
     });
   }
