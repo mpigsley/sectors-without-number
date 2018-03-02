@@ -71,16 +71,15 @@ export const getCurrentTopLevelEntities = createDeepEqualSelector(
 
 export const getCurrentEntities = createDeepEqualSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
-  (currentSector, entities, isShared) => {
-    return mapValues(entities, entityList =>
+  (currentSector, entities, isShared) =>
+    mapValues(entities, entityList =>
       pickBy(
         entityList,
         ({ sector, isHidden }, entityId) =>
           (sector === currentSector || entityId === currentSector) &&
           (!isShared || !isHidden),
       ),
-    );
-  },
+    ),
 );
 
 export const getCurrentSector = createDeepEqualSelector(
