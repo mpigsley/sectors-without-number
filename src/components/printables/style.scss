@@ -1,5 +1,6 @@
 .Printable * {
   font-family: 'Helvetica', sans-serif !important;
+  -webkit-print-color-adjust: exact;
 }
 
 .Printable-Container {
