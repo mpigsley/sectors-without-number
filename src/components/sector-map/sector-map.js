@@ -5,9 +5,11 @@ import { throttle, isEmpty, map } from 'lodash';
 import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';
 import CondensedPrintable from 'components/printables/condensed-printable';
+import ExpandedPrintable from 'components/printables/expanded-printable';
 import TopLevelEntityModal from 'components/top-level-entity-modal';
 import HexMap from 'components/hex-map';
 
+import ExportTypes from 'constants/export-types';
 import hexGenerator from 'utils/hex-generator';
 import { coordinateKey } from 'utils/common';
 import Loading from './loading';
@@ -36,6 +38,7 @@ export default class SectorMap extends Component {
       pathname: PropTypes.string.isRequired,
     }).isRequired,
     routeParams: PropTypes.shape().isRequired,
+    exportType: PropTypes.string.isRequired,
   };
 
   static defaultProps = {
@@ -85,6 +88,13 @@ export default class SectorMap extends Component {
     );
   }
 
+  renderPrintable(printable) {
+    if (this.props.exportType === ExportTypes.expanded.key) {
+      return <ExpandedPrintable printable={printable} />;
+    }
+    return <CondensedPrintable printable={printable} />;
+  }
+
   render() {
     if (!this.props.isInitialized) {
       return <Loading />;
@@ -116,7 +126,7 @@ export default class SectorMap extends Component {
           />
           <div className="SectorMap-Sidebar">{this.props.children}</div>
         </FlexContainer>
-        <CondensedPrintable printable={printable} />
+        {this.renderPrintable(printable)}
         <TopLevelEntityModal />
       </div>
     );

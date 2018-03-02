@@ -11,6 +11,7 @@ import { sortByKey } from 'utils/common';
 import Entities from 'constants/entities';
 
 import './style.css';
+import '../style.css';
 
 const getColumnsFromType = entityType => {
   const common = [{ accessor: 'name', Header: 'Name' }];
@@ -73,11 +74,11 @@ const renderEntities = entities =>
 
 export default function CondensedPrintable({ printable, entities }) {
   return (
-    <div className="CondensedPrintable">
-      <div className="CondensedPrintable-Container">
+    <div className="Printable">
+      <div className="Printable-Container">
         <HexMap hexes={printable.hexes} viewbox={printable.viewbox} />
       </div>
-      <div className="CondensedPrintable-EntityContainer">
+      <div className="Printable-EntityContainer">
         {renderEntities(entities)}
       </div>
     </div>

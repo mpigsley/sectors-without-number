@@ -1,0 +1,20 @@
+.Printable * {
+  font-family: 'Helvetica', sans-serif !important;
+}
+
+.Printable-Container {
+  display: none;
+  width: 100vw;
+  height: 100vh;
+}
+
+.Printable-EntityContainer {
+  display: none;
+}
+
+@media print {
+  .Printable-Container,
+  .Printable-EntityContainer {
+    display: inherit;
+  }
+}
