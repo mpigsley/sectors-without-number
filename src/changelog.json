@@ -1,4 +1,14 @@
 {
+  "3.9.0": {
+    "description": "Multiple print options.",
+    "date": "3-2-2018",
+    "changes": [
+      "Additional points of interest print support.",
+      "Expanded print option with one entity per page for note taking.",
+      "Condensed print option with one entity type per table to easily get an overview.",
+      "Fixed a small issue where moon and moon base names didn't get saved correctly."
+    ]
+  },
   "3.8.0": {
     "description": "Show active hex in sector map.",
     "date": "2-13-2018"
