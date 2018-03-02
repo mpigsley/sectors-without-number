@@ -1,5 +1,6 @@
 import { createSelectorCreator, defaultMemoize } from 'reselect';
 import {
+  omit,
   filter,
   pickBy,
   mapValues,
@@ -8,6 +9,9 @@ import {
   values,
   includes,
   isEqual,
+  flatten,
+  map,
+  size,
 } from 'lodash';
 
 import {
@@ -23,6 +27,7 @@ import {
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
 import { allSectorKeys, coordinateKey } from 'utils/common';
+import { areNeighbors } from 'utils/hex-generator';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
 
@@ -192,4 +197,78 @@ export const isCurrentOrAncestorHidden = createDeepEqualSelector(
   (ancestorHidden, currentEntityId, currentEntityType, entities) =>
     currentEntityType !== Entities.sector.key &&
     (ancestorHidden || !!entities[currentEntityType][currentEntityId].isHidden),
+);
+
+export const getEntityChildren = createDeepEqualSelector(
+  [getCurrentEntities],
+  currentEntities =>
+    flatten(
+      values(omit(currentEntities, Entities.sector.key)).map(values),
+    ).reduce(
+      (mapping, entity) => ({
+        ...mapping,
+        [entity.parent]: (mapping[entity.parent] || 0) + 1,
+      }),
+      {},
+    ),
+);
+
+export const getEntityNeighbors = createDeepEqualSelector(
+  [getCurrentEntities],
+  currentEntities =>
+    map(
+      Object.assign(
+        {},
+        ...values(
+          pickBy(
+            currentEntities,
+            (entities, entityType) => Entities[entityType].topLevel,
+          ),
+        ),
+      ),
+      (entity, entityId) => ({ ...entity, entityId }),
+    ).reduce(
+      (mapping, entity, i, entities) => ({
+        ...mapping,
+        [entity.entityId]: entities
+          .filter(
+            b => areNeighbors(entity, b) && b.entityId !== entity.entityId,
+          )
+          .map(({ entityId, ...rest }) => rest),
+      }),
+      {},
+    ),
+);
+
+export const getPrintableEntities = createDeepEqualSelector(
+  [getCurrentEntities, getEntityChildren, getEntityNeighbors],
+  (currentEntities, entityChildren, entityNeighbors) =>
+    mapValues(
+      pickBy(omit(currentEntities, Entities.sector.key), size),
+      (entities, entityType) =>
+        mapValues(entities, (entity, entityId) => ({
+          ...zipObject(
+            (Entities[entityType].attributes || []).map(({ key }) => key),
+            (Entities[entityType].attributes || []).map(
+              ({ key, attributes }) => attributes[entity.attributes[key]].name,
+            ),
+          ),
+          tags: ((entity.attributes || {}).tags || [])
+            .map(tag => Entities[entityType].tags[tag].name)
+            .join(', '),
+          description: (entity.attributes || {}).description,
+          key: entityId,
+          name: entity.name,
+          location: Entities[entityType].topLevel
+            ? coordinateKey(entity.x, entity.y)
+            : undefined,
+          children: entityChildren[entityId] || 0,
+          parent: `${
+            currentEntities[entity.parentEntity][entity.parent].name
+          } (${Entities[entity.parentEntity].name})`,
+          neighbors: Entities[entityType].topLevel
+            ? entityNeighbors[entityId].map(({ name }) => name).join(', ')
+            : undefined,
+        })),
+    ),
 );

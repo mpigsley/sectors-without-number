@@ -1,0 +1,28 @@
+@import 'styles/theme';
+
+.ExpandedPrintable-Entity {
+  page-break-after: always;
+}
+
+.ExpandedPrintable-Header {
+  border-bottom: 1px solid $light3;
+  flex: 1;
+
+  * {
+    margin-bottom: 0.5rem;
+    margin-left: 0.4rem;
+  }
+}
+
+.ExpandedPrintable-Type {
+  color: $light1;
+  margin-left: 1rem;
+}
+
+.ExpandedPrintable-Block {
+  background-color: $light4;
+  color: $dark4;
+  margin-top: 1rem;
+  max-width: 350px;
+  padding: 1rem;
+}

@@ -10,6 +10,7 @@ import {
   RELEASE_SYNC_LOCK,
   TOP_LEVEL_ENTITY_CREATE,
   CANCEL_TOP_LEVEL_ENTITY_CREATE,
+  SET_EXPORT_TYPE,
 } from 'store/actions/sector.actions';
 import {
   SAVE_SECTOR,
@@ -21,6 +22,7 @@ import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
 import { ROWS, COLUMNS } from 'constants/defaults';
 import Entities from 'constants/entities';
+import ExportTypes from 'constants/export-types';
 
 const initialState = {
   renderSector: false,
@@ -33,6 +35,7 @@ const initialState = {
   hoverKey: null,
   topLevelKey: null,
   syncLock: false,
+  exportType: ExportTypes.condensed.key,
   configuration: {
     name: Entities.sector.nameGenerator(),
     isBuilder: false,
@@ -135,6 +138,8 @@ export default function sector(state = initialState, action) {
       return { ...state, topLevelKey: action.key };
     case CANCEL_TOP_LEVEL_ENTITY_CREATE:
       return { ...state, topLevelKey: null };
+    case SET_EXPORT_TYPE:
+      return { ...state, exportType: action.exportType };
     default:
       return state;
   }

@@ -25,6 +25,20 @@ const getHexWidth = (totalWidth, columns) => 4 * totalWidth / (3 * columns + 1);
 const getColumns = (totalWidth, hexWidth) =>
   4 * totalWidth / (3 * hexWidth) - 1 / 3;
 
+// Helpers
+export const areNeighbors = (a, b) => {
+  if (a.x % 2 === 1) {
+    return (
+      (Math.abs(a.x - b.x) <= 1 && [0, 1].indexOf(a.y - b.y) >= 0) ||
+      (a.x === b.x && a.y === b.y - 1)
+    );
+  }
+  return (
+    (Math.abs(a.x - b.x) <= 1 && [0, 1].indexOf(b.y - a.y) >= 0) ||
+    (a.x === b.x && a.y === b.y + 1)
+  );
+};
+
 const getHexSize = ({ width, height, columns, rows, renderSector }) => {
   const bufferedHeight = height - 2 * pixelBuffer;
   const bufferedWidth = width - 2 * pixelBuffer;

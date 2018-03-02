@@ -79,7 +79,8 @@ export const generatePlanets = ({
   sector,
   parent,
   parentEntity,
-  children = [...Array(new Chance().weighted([1, 2, 3], [5, 3, 2]))],
+  additionalPointsOfInterest,
+  children,
 }) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate planets');
@@ -88,8 +89,18 @@ export const generatePlanets = ({
     throw new Error('Parent must be defined to generate planets');
   }
 
+  let numChildren = children;
+  if (!numChildren) {
+    const chance = new Chance();
+    if (additionalPointsOfInterest) {
+      numChildren = [...Array(chance.weighted([0, 1, 2, 3], [2, 5, 3, 2]))];
+    } else {
+      numChildren = [...Array(chance.weighted([1, 2, 3], [5, 3, 2]))];
+    }
+  }
+
   return {
-    children: children.map(({ name, generate } = {}) =>
+    children: numChildren.map(({ name, generate } = {}) =>
       generatePlanet({
         sector,
         parent,

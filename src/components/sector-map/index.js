@@ -11,6 +11,7 @@ import {
   renderSectorSelector,
   isDropdownActiveSelector,
   isInitializedSelector,
+  exportTypeSelector,
 } from 'store/selectors/base.selectors';
 import { closeUserDropdown } from 'store/actions/user.actions';
 
@@ -22,6 +23,7 @@ const mapStateToProps = state => ({
   isDropdownActive: isDropdownActiveSelector(state),
   isInitialized: isInitializedSelector(state),
   topLevelEntities: getCurrentTopLevelEntities(state),
+  exportType: exportTypeSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
