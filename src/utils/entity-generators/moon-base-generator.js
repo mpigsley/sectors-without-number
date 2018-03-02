@@ -39,6 +39,7 @@ export const generateMoonBases = ({
   parent,
   parentEntity,
   additionalPointsOfInterest,
+  children = [...Array(new Chance().weighted([0, 1], [5, 2]))],
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -50,10 +51,8 @@ export const generateMoonBases = ({
     throw new Error('Parent must be defined to generate moon bases');
   }
 
-  const chance = new Chance();
-  const numMoonBases = chance.weighted([0, 1], [3, 2]);
   return {
-    children: [...Array(numMoonBases)].map(() =>
+    children: children.map(() =>
       generateMoonBase({
         sector,
         parent,
