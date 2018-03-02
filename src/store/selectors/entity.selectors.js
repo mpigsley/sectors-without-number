@@ -243,12 +243,20 @@ export const getEntityNeighbors = createDeepEqualSelector(
 
 export const getPrintableEntities = createDeepEqualSelector(
   [getCurrentEntities, getEntityChildren, getEntityNeighbors],
-  (currentEntities, entityChildren, entityNeighbors) => {
-    console.log(currentEntities);
-    return mapValues(
+  (currentEntities, entityChildren, entityNeighbors) =>
+    mapValues(
       pickBy(omit(currentEntities, Entities.sector.key), size),
       (entities, entityType) =>
         mapValues(entities, (entity, entityId) => ({
+          ...zipObject(
+            (Entities[entityType].attributes || []).map(({ key }) => key),
+            (Entities[entityType].attributes || []).map(
+              ({ key, attributes }) => attributes[entity.attributes[key]].name,
+            ),
+          ),
+          tags: ((entity.attributes || {}).tags || [])
+            .map(tag => Entities[entityType].tags[tag].name)
+            .join(', '),
           key: entityId,
           name: entity.name,
           location: Entities[entityType].topLevel
@@ -262,6 +270,5 @@ export const getPrintableEntities = createDeepEqualSelector(
             ? entityNeighbors[entityId].map(({ name }) => name).join(', ')
             : undefined,
         })),
-    );
-  },
+    ),
 );

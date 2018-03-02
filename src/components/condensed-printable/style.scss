@@ -22,6 +22,10 @@
   margin-bottom: 1rem;
 }
 
+.CondensedPrintable-Table {
+  font-size: 0.8rem;
+}
+
 @media print {
   .CondensedPrintable-Container,
   .CondensedPrintable-EntityContainer {

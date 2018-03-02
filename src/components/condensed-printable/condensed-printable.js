@@ -17,14 +17,26 @@ const getColumnsFromType = entityType => {
   if (Entities[entityType].topLevel) {
     return [
       ...common,
-      { accessor: 'location', Header: 'Location' },
-      { accessor: 'children', Header: 'Children' },
+      { accessor: 'location', Header: 'Location', centered: true },
+      { accessor: 'children', Header: 'Children', centered: true },
       { accessor: 'neighbors', Header: 'Neighbors' },
     ];
   }
   const columns = [...common, { accessor: 'parent', Header: 'Parent' }];
   if (Entities[entityType].children.length) {
-    columns.splice(2, 0, { accessor: 'children', Header: 'Children' });
+    columns.splice(2, 0, {
+      accessor: 'children',
+      Header: 'Children',
+      centered: true,
+    });
+  }
+  if ((Entities[entityType].attributes || []).length) {
+    Entities[entityType].attributes.forEach(({ key, name }) => {
+      columns.push({ accessor: key, Header: name });
+    });
+  }
+  if (Entities[entityType].tags) {
+    columns.push({ accessor: 'tags', Header: 'Tags' });
   }
   return columns;
 };
@@ -46,6 +58,7 @@ const renderEntityType = (
       {Entities[entityType].name}
     </Header>
     <Table
+      className="CondensedPrintable-Table"
       dataIdAccessor="key"
       columns={getColumnsFromType(entityType)}
       data={values(entities).sort(sortByKey('name'))}
@@ -59,10 +72,6 @@ const renderEntities = entities =>
     .map(renderEntityType);
 
 export default function CondensedPrintable({ printable, entities }) {
-  console.log(
-    entities,
-    map(entities, (entity, entityType) => ({ ...entity, entityType })),
-  );
   return (
     <div className="CondensedPrintable">
       <div className="CondensedPrintable-Container">
