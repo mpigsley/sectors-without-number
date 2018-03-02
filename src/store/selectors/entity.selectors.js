@@ -11,6 +11,7 @@ import {
   isEqual,
   flatten,
   map,
+  size,
 } from 'lodash';
 
 import {
@@ -70,15 +71,16 @@ export const getCurrentTopLevelEntities = createDeepEqualSelector(
 
 export const getCurrentEntities = createDeepEqualSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
-  (currentSector, entities, isShared) =>
-    mapValues(entities, entityList =>
+  (currentSector, entities, isShared) => {
+    return mapValues(entities, entityList =>
       pickBy(
         entityList,
         ({ sector, isHidden }, entityId) =>
           (sector === currentSector || entityId === currentSector) &&
           (!isShared || !isHidden),
       ),
-    ),
+    );
+  },
 );
 
 export const getCurrentSector = createDeepEqualSelector(
@@ -217,6 +219,7 @@ export const getEntityNeighbors = createDeepEqualSelector(
   currentEntities =>
     map(
       Object.assign(
+        {},
         ...values(
           pickBy(
             currentEntities,
@@ -240,9 +243,10 @@ export const getEntityNeighbors = createDeepEqualSelector(
 
 export const getPrintableEntities = createDeepEqualSelector(
   [getCurrentEntities, getEntityChildren, getEntityNeighbors],
-  (currentEntities, entityChildren, entityNeighbors) =>
-    mapValues(
-      omit(currentEntities, Entities.sector.key),
+  (currentEntities, entityChildren, entityNeighbors) => {
+    console.log(currentEntities);
+    return mapValues(
+      pickBy(omit(currentEntities, Entities.sector.key), size),
       (entities, entityType) =>
         mapValues(entities, (entity, entityId) => ({
           key: entityId,
@@ -258,5 +262,6 @@ export const getPrintableEntities = createDeepEqualSelector(
             ? entityNeighbors[entityId].map(({ name }) => name).join(', ')
             : undefined,
         })),
-    ),
+    );
+  },
 );

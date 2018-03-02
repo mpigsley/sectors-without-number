@@ -56,10 +56,13 @@ const renderEntityType = (
 const renderEntities = entities =>
   map(entities, (entity, entityType) => ({ ...entity, entityType }))
     .sort(sortByKey('entityType'))
-    .filter(entity => entity)
     .map(renderEntityType);
 
 export default function CondensedPrintable({ printable, entities }) {
+  console.log(
+    entities,
+    map(entities, (entity, entityType) => ({ ...entity, entityType })),
+  );
   return (
     <div className="CondensedPrintable">
       <div className="CondensedPrintable-Container">
