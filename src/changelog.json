@@ -1,4 +1,9 @@
 {
+  "3.9.1": {
+    "description":
+      "Fix error that renders a blank page when compiling printable information.",
+    "date": "3-2-2018"
+  },
   "3.9.0": {
     "description": "Multiple print options.",
     "date": "3-2-2018",
