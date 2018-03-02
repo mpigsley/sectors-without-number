@@ -4,7 +4,7 @@ import { throttle, isEmpty, map } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';
-import CondensedPrintable from 'components/condensed-printable';
+import CondensedPrintable from 'components/printables/condensed-printable';
 import TopLevelEntityModal from 'components/top-level-entity-modal';
 import HexMap from 'components/hex-map';
 
