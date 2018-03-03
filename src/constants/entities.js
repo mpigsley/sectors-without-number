@@ -31,6 +31,7 @@ import ResearchBaseOccupation from 'constants/research-base/occupation';
 import ResearchBaseSituation from 'constants/research-base/situation';
 
 import DefaultSidebar from 'components/sidebar-entities/default-sidebar';
+import NoteSidebar from 'components/sidebar-entities/note-sidebar';
 
 const note = {
   key: 'note',
@@ -41,7 +42,7 @@ const note = {
   nameGenerator: () => {},
   attributes: [],
   children: [],
-  Sidebar: DefaultSidebar,
+  Sidebar: NoteSidebar,
 };
 
 const researchBase = {
