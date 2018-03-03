@@ -13,6 +13,7 @@ export const generatePlanet = ({
   parentEntity,
   name = generateName(),
   generate = true,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a planet');
@@ -22,7 +23,7 @@ export const generatePlanet = ({
   }
 
   const chance = new Chance();
-  let planet = { name, parent, parentEntity, sector };
+  let planet = { isHidden, name, parent, parentEntity, sector };
   if (generate) {
     planet = {
       ...planet,

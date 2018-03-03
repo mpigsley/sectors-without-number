@@ -10,6 +10,7 @@ export const generateBlackHole = ({
   name = generateBlackHoleName(),
   parent,
   parentEntity,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate a black hole');
@@ -23,7 +24,7 @@ export const generateBlackHole = ({
     throw new Error('Parent must be defined to generate a black hole');
   }
 
-  return { x, y, name, sector, parent, parentEntity };
+  return { isHidden, x, y, name, sector, parent, parentEntity };
 };
 
 export const generateBlackHoles = ({

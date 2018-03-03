@@ -10,6 +10,7 @@ export const generateAsteroidBelt = ({
   parent,
   parentEntity,
   generate = true,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate an asteroid belt');
@@ -19,7 +20,7 @@ export const generateAsteroidBelt = ({
   }
 
   const chance = new Chance();
-  let asteroidBelt = { name, sector, parent, parentEntity };
+  let asteroidBelt = { isHidden, name, sector, parent, parentEntity };
   if (generate) {
     asteroidBelt = {
       ...asteroidBelt,

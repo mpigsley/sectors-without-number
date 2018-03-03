@@ -41,6 +41,7 @@
     "react-fastclick": "^3.0.2",
     "react-feather": "^1.0.7",
     "react-hint": "^3.0.0",
+    "react-markdown": "^3.2.2",
     "react-modal": "^3.1.6",
     "react-redux": "^5.0.6",
     "react-redux-toastr": "^7.1.5",

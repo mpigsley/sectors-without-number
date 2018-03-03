@@ -246,30 +246,36 @@ export const getPrintableEntities = createDeepEqualSelector(
     mapValues(
       pickBy(omit(currentEntities, Entities.sector.key), size),
       (entities, entityType) =>
-        mapValues(entities, (entity, entityId) => ({
-          ...zipObject(
-            (Entities[entityType].attributes || []).map(({ key }) => key),
-            (Entities[entityType].attributes || []).map(
-              ({ key, attributes }) =>
-                (attributes[(entity.attributes || {})[key]] || {}).name,
-            ),
+        mapValues(
+          pickBy(
+            entities,
+            entity => currentEntities[entity.parentEntity][entity.parent],
           ),
-          tags: ((entity.attributes || {}).tags || [])
-            .map(tag => Entities[entityType].tags[tag].name)
-            .join(', '),
-          description: (entity.attributes || {}).description,
-          key: entityId,
-          name: entity.name,
-          location: Entities[entityType].topLevel
-            ? coordinateKey(entity.x, entity.y)
-            : undefined,
-          children: entityChildren[entityId] || 0,
-          parent: `${
-            (currentEntities[entity.parentEntity][entity.parent] || {}).name
-          } (${Entities[entity.parentEntity].name})`,
-          neighbors: Entities[entityType].topLevel
-            ? entityNeighbors[entityId].map(({ name }) => name).join(', ')
-            : undefined,
-        })),
+          (entity, entityId) => ({
+            ...zipObject(
+              (Entities[entityType].attributes || []).map(({ key }) => key),
+              (Entities[entityType].attributes || []).map(
+                ({ key, attributes }) =>
+                  (attributes[(entity.attributes || {})[key]] || {}).name,
+              ),
+            ),
+            tags: ((entity.attributes || {}).tags || [])
+              .map(tag => Entities[entityType].tags[tag].name)
+              .join(', '),
+            description: (entity.attributes || {}).description,
+            key: entityId,
+            name: entity.name,
+            location: Entities[entityType].topLevel
+              ? coordinateKey(entity.x, entity.y)
+              : undefined,
+            children: entityChildren[entityId] || 0,
+            parent: `${
+              currentEntities[entity.parentEntity][entity.parent].name
+            } (${Entities[entity.parentEntity].name})`,
+            neighbors: Entities[entityType].topLevel
+              ? entityNeighbors[entityId].map(({ name }) => name).join(', ')
+              : undefined,
+          }),
+        ),
     ),
 );

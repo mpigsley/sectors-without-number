@@ -10,6 +10,7 @@ export const generateSpaceStation = ({
   parent,
   parentEntity,
   generate = true,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a space station');
@@ -21,7 +22,7 @@ export const generateSpaceStation = ({
   }
 
   const chance = new Chance();
-  let station = { name, sector, parent, parentEntity };
+  let station = { isHidden, name, sector, parent, parentEntity };
   if (generate) {
     station = {
       ...station,

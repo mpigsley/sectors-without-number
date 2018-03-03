@@ -9,7 +9,7 @@ import { isSidebarEditActiveSelector } from 'store/selectors/base.selectors';
 
 import { deleteEntity } from 'store/actions/entity.actions';
 
-import SidebarEntity from './sidebar-entity';
+import Sidebar from './sidebar';
 
 const mapStateToProps = state => ({
   entity: getCurrentEntity(state),
@@ -20,4 +20,4 @@ const mapStateToProps = state => ({
 
 export default connect(mapStateToProps, {
   deleteEntity,
-})(SidebarEntity);
+})(Sidebar);
