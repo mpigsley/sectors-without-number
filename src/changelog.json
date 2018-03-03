@@ -1,4 +1,8 @@
 {
+  "3.10.1": {
+    "description": "Minor fix for entity generation in the sidebar.",
+    "date": "3-3-2018"
+  },
   "3.10.0": {
     "description": "Markdown notes for any entity.",
     "date": "3-3-2018"

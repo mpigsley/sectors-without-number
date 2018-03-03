@@ -22,7 +22,10 @@ export const generateResearchBase = ({
   }
 
   const chance = new Chance();
-  let researchBase = { isHidden, name, parent, parentEntity, sector };
+  let researchBase = { name, parent, parentEntity, sector };
+  if (isHidden !== undefined) {
+    researchBase = { ...researchBase, isHidden };
+  }
   if (generate) {
     researchBase = {
       ...researchBase,

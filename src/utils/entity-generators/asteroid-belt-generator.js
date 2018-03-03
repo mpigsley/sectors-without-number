@@ -20,7 +20,10 @@ export const generateAsteroidBelt = ({
   }
 
   const chance = new Chance();
-  let asteroidBelt = { isHidden, name, sector, parent, parentEntity };
+  let asteroidBelt = { name, sector, parent, parentEntity };
+  if (isHidden !== undefined) {
+    asteroidBelt = { ...asteroidBelt, isHidden };
+  }
   if (generate) {
     asteroidBelt = {
       ...asteroidBelt,

@@ -22,7 +22,10 @@ export const generateOrbitalRuin = ({
   }
 
   const chance = new Chance();
-  let orbitalRuin = { isHidden, name, parent, parentEntity, sector };
+  let orbitalRuin = { name, parent, parentEntity, sector };
+  if (isHidden !== undefined) {
+    orbitalRuin = { ...orbitalRuin, isHidden };
+  }
   if (generate) {
     orbitalRuin = {
       ...orbitalRuin,

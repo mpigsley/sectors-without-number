@@ -3,6 +3,7 @@ export const generateNote = ({
   sector,
   parent,
   parentEntity,
+  name = '',
   isHidden,
 } = {}) => {
   if (!sector) {
@@ -11,5 +12,9 @@ export const generateNote = ({
   if (!parent || !parentEntity) {
     throw new Error('Parent id and type must be defined to generate a moon');
   }
-  return { isHidden, parent, parentEntity, sector };
+  let note = { name, parent, parentEntity, sector };
+  if (isHidden !== undefined) {
+    note = { ...note, isHidden };
+  }
+  return note;
 };

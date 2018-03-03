@@ -15,7 +15,11 @@ export const generateMoon = ({
   if (!parent || !parentEntity) {
     throw new Error('Parent id and type must be defined to generate a moon');
   }
-  return { isHidden, name, parent, parentEntity, sector };
+  let moon = { name, parent, parentEntity, sector };
+  if (isHidden !== undefined) {
+    moon = { ...moon, isHidden };
+  }
+  return moon;
 };
 
 export const generateMoons = ({

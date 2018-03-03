@@ -22,7 +22,10 @@ export const generateRefuelingStation = ({
   }
 
   const chance = new Chance();
-  let refuelingStation = { isHidden, name, parent, parentEntity, sector };
+  let refuelingStation = { name, parent, parentEntity, sector };
+  if (isHidden !== undefined) {
+    refuelingStation = { ...refuelingStation, isHidden };
+  }
   if (generate) {
     refuelingStation = {
       ...refuelingStation,

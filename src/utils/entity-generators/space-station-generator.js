@@ -22,7 +22,10 @@ export const generateSpaceStation = ({
   }
 
   const chance = new Chance();
-  let station = { isHidden, name, sector, parent, parentEntity };
+  let station = { name, sector, parent, parentEntity };
+  if (isHidden !== undefined) {
+    station = { ...station, isHidden };
+  }
   if (generate) {
     station = {
       ...station,

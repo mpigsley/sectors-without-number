@@ -22,7 +22,10 @@ export const generateGasGiantMine = ({
   }
 
   const chance = new Chance();
-  let gasGiantMine = { isHidden, name, parent, parentEntity, sector };
+  let gasGiantMine = { name, parent, parentEntity, sector };
+  if (isHidden !== undefined) {
+    gasGiantMine = { ...gasGiantMine, isHidden };
+  }
   if (generate) {
     gasGiantMine = {
       ...gasGiantMine,

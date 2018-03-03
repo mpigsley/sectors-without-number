@@ -24,7 +24,11 @@ export const generateBlackHole = ({
     throw new Error('Parent must be defined to generate a black hole');
   }
 
-  return { isHidden, x, y, name, sector, parent, parentEntity };
+  let blackHole = { x, y, name, sector, parent, parentEntity };
+  if (isHidden !== undefined) {
+    blackHole = { ...blackHole, isHidden };
+  }
+  return blackHole;
 };
 
 export const generateBlackHoles = ({

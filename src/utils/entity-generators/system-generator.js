@@ -22,7 +22,11 @@ export const generateSystem = ({
     throw new Error('Parent must be defined to generate system');
   }
 
-  return { isHidden, x, y, name, sector, parent, parentEntity };
+  let system = { x, y, name, sector, parent, parentEntity };
+  if (isHidden !== undefined) {
+    system = { ...system, isHidden };
+  }
+  return system;
 };
 
 export const generateSystems = ({

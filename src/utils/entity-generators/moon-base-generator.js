@@ -22,7 +22,10 @@ export const generateMoonBase = ({
   }
 
   const chance = new Chance();
-  let asteroidBase = { isHidden, name, parent, parentEntity, sector };
+  let asteroidBase = { name, parent, parentEntity, sector };
+  if (isHidden !== undefined) {
+    asteroidBase = { ...asteroidBase, isHidden };
+  }
   if (generate) {
     asteroidBase = {
       ...asteroidBase,

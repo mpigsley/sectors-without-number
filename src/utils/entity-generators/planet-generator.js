@@ -23,7 +23,10 @@ export const generatePlanet = ({
   }
 
   const chance = new Chance();
-  let planet = { isHidden, name, parent, parentEntity, sector };
+  let planet = { name, parent, parentEntity, sector };
+  if (isHidden !== undefined) {
+    planet = { ...planet, isHidden };
+  }
   if (generate) {
     planet = {
       ...planet,
