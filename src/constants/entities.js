@@ -126,10 +126,10 @@ const moon = {
   nameGenerator: generateName,
   children: [
     moonBase.key,
-    researchBase.key,
-    refuelingStation.key,
-    orbitalRuin.key,
     note.key,
+    orbitalRuin.key,
+    refuelingStation.key,
+    researchBase.key,
   ],
 };
 
@@ -145,11 +145,11 @@ const planet = {
   children: [
     gasGiantMine.key,
     moon.key,
-    orbitalRuin.key,
-    researchBase.key,
-    refuelingStation.key,
-    spaceStation.key,
     note.key,
+    orbitalRuin.key,
+    refuelingStation.key,
+    researchBase.key,
+    spaceStation.key,
   ],
 };
 
@@ -163,10 +163,10 @@ const asteroidBelt = {
   attributes: [AsteroidBeltOccupation, AsteroidBeltSituation],
   children: [
     asteroidBase.key,
+    note.key,
     refuelingStation.key,
     researchBase.key,
     spaceStation.key,
-    note.key,
   ],
 };
 
@@ -190,10 +190,10 @@ const blackHole = {
   nameGenerator: generateBlackHoleName,
   children: [
     deepSpaceStation.key,
+    note.key,
+    orbitalRuin.key,
     refuelingStation.key,
     researchBase.key,
-    orbitalRuin.key,
-    note.key,
   ],
 };
 
@@ -207,10 +207,10 @@ const system = {
   children: [
     asteroidBelt.key,
     deepSpaceStation.key,
+    note.key,
     planet.key,
     refuelingStation.key,
     researchBase.key,
-    note.key,
   ],
 };
 
@@ -221,7 +221,7 @@ const sector = {
   topLevel: false,
   isAdditional: false,
   nameGenerator: generateSectorName,
-  children: [system.key, blackHole.key, note.key],
+  children: [blackHole.key, note.key, system.key],
 };
 
 export default {
