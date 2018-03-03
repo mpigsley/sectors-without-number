@@ -14,7 +14,22 @@
   }
 
   img {
-    width: 100%;
+    max-width: 100%;
+  }
+
+  code {
+    background: $dark1;
+  }
+
+  table {
+    max-width: 100%;
+  }
+
+  blockquote {
+    border-left: 3px solid $light1;
+    color: $light1;
+    margin-left: 1rem;
+    padding-left: 1rem;
   }
 }
 
