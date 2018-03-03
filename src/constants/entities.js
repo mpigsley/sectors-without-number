@@ -6,6 +6,7 @@ import {
   generateStationName,
   generateMineName,
 } from 'utils/name-generator';
+
 import WorldTags from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';
 import Temperature from 'constants/temperature';
@@ -29,6 +30,8 @@ import RefuelingStationSituation from 'constants/refueling-station/situation';
 import ResearchBaseOccupation from 'constants/research-base/occupation';
 import ResearchBaseSituation from 'constants/research-base/situation';
 
+import DefaultSidebar from 'components/sidebar-entities/default-sidebar';
+
 const note = {
   key: 'note',
   name: 'Note',
@@ -38,6 +41,7 @@ const note = {
   nameGenerator: () => {},
   attributes: [],
   children: [],
+  Sidebar: DefaultSidebar,
 };
 
 const researchBase = {
@@ -49,6 +53,7 @@ const researchBase = {
   nameGenerator: generateStationName,
   attributes: [ResearchBaseOccupation, ResearchBaseSituation],
   children: [note.key],
+  Sidebar: DefaultSidebar,
 };
 
 const refuelingStation = {
@@ -60,6 +65,7 @@ const refuelingStation = {
   nameGenerator: generateStationName,
   attributes: [RefuelingStationOccupation, RefuelingStationSituation],
   children: [note.key],
+  Sidebar: DefaultSidebar,
 };
 
 const moonBase = {
@@ -71,6 +77,7 @@ const moonBase = {
   nameGenerator: generateStationName,
   attributes: [MoonBaseOccupation, MoonBaseSituation],
   children: [note.key],
+  Sidebar: DefaultSidebar,
 };
 
 const orbitalRuin = {
@@ -82,6 +89,7 @@ const orbitalRuin = {
   nameGenerator: generateStationName,
   attributes: [OrbitalRuinOccupation, OrbitalRuinSituation],
   children: [note.key],
+  Sidebar: DefaultSidebar,
 };
 
 const gasGiantMine = {
@@ -93,6 +101,7 @@ const gasGiantMine = {
   nameGenerator: generateMineName,
   attributes: [GasGiantMineOccupation, GasGiantMineSituation],
   children: [note.key],
+  Sidebar: DefaultSidebar,
 };
 
 const spaceStation = {
@@ -104,6 +113,7 @@ const spaceStation = {
   nameGenerator: generateStationName,
   attributes: [SpaceStationOccupation, SpaceStationSituation],
   children: [note.key],
+  Sidebar: DefaultSidebar,
 };
 
 const asteroidBase = {
@@ -115,6 +125,7 @@ const asteroidBase = {
   nameGenerator: generateStationName,
   attributes: [AsteroidBaseOccupation, AsteroidBaseSituation],
   children: [note.key],
+  Sidebar: DefaultSidebar,
 };
 
 const moon = {
@@ -131,6 +142,7 @@ const moon = {
     refuelingStation.key,
     researchBase.key,
   ],
+  Sidebar: DefaultSidebar,
 };
 
 const planet = {
@@ -151,6 +163,7 @@ const planet = {
     researchBase.key,
     spaceStation.key,
   ],
+  Sidebar: DefaultSidebar,
 };
 
 const asteroidBelt = {
@@ -168,6 +181,7 @@ const asteroidBelt = {
     researchBase.key,
     spaceStation.key,
   ],
+  Sidebar: DefaultSidebar,
 };
 
 const deepSpaceStation = {
@@ -179,6 +193,7 @@ const deepSpaceStation = {
   nameGenerator: generateStationName,
   attributes: [SpaceStationOccupation, SpaceStationSituation],
   children: [note.key],
+  Sidebar: DefaultSidebar,
 };
 
 const blackHole = {
@@ -195,6 +210,7 @@ const blackHole = {
     refuelingStation.key,
     researchBase.key,
   ],
+  Sidebar: DefaultSidebar,
 };
 
 const system = {
@@ -212,6 +228,7 @@ const system = {
     refuelingStation.key,
     researchBase.key,
   ],
+  Sidebar: DefaultSidebar,
 };
 
 const sector = {
@@ -222,6 +239,7 @@ const sector = {
   isAdditional: false,
   nameGenerator: generateSectorName,
   children: [blackHole.key, note.key, system.key],
+  Sidebar: DefaultSidebar,
 };
 
 export default {

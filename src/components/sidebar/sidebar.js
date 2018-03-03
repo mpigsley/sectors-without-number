@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { some, size, map, mapValues } from 'lodash';
+import { some, size } from 'lodash';
 
 import ConfirmModal from 'primitives/modal/confirm-modal';
-
 import Entities from 'constants/entities';
 
 import SectorBuilderInfo from './sector-builder-info';
-import EntityAttributes from './entity-attributes';
-import EntityList from './entity-list';
 import EntityNavigation from './entity-navigation';
 import ExportModal from './export-modal';
 
-export default class EntityInfo extends Component {
+export default class Sidebar extends Component {
   static propTypes = {
     entityChildren: PropTypes.shape().isRequired,
     entityType: PropTypes.string,
@@ -34,29 +31,12 @@ export default class EntityInfo extends Component {
     entity: { ...this.props.entity },
     isConfirmDeleteOpen: false,
     isExportOpen: false,
-    openLists: {
-      ...mapValues(this.props.entityChildren, () => true),
-      attributes: true,
-      tags: true,
-    },
   };
 
   componentWillReceiveProps(nextProps) {
-    let update = {};
     if (nextProps.entity.name !== this.props.entity.name) {
-      update = { entity: nextProps.entity };
+      this.setState({ entity: nextProps.entity });
     }
-    if (nextProps.entityType !== this.props.entityType) {
-      update = {
-        ...update,
-        openLists: {
-          ...mapValues(nextProps.entityChildren, () => true),
-          attributes: true,
-          tags: true,
-        },
-      };
-    }
-    this.setState(update);
   }
 
   onDeleteEntity = () => {
@@ -84,14 +64,6 @@ export default class EntityInfo extends Component {
       [key]: value,
     });
 
-  toggleListOpen = entityType => () =>
-    this.setState({
-      openLists: {
-        ...this.state.openLists,
-        [entityType]: !this.state.openLists[entityType],
-      },
-    });
-
   renderSectorBuilderText() {
     if (
       some(this.props.entityChildren, size) ||
@@ -117,27 +89,14 @@ export default class EntityInfo extends Component {
   }
 
   render() {
+    const EntitySidebar = Entities[this.props.entityType].Sidebar;
     return (
       <EntityNavigation
         name={this.props.entity.name}
         onDeleteEntity={this.onConfirmDelete}
         openExportModal={this.openExportModal}
       >
-        <EntityAttributes
-          isAttributesOpen={this.state.openLists.attributes}
-          isTagsOpen={this.state.openLists.tags}
-          toggleAttributesOpen={this.toggleListOpen('attributes')}
-          toggleTagsOpen={this.toggleListOpen('tags')}
-        />
-        {map(this.props.entityChildren, (entities, entityType) => (
-          <EntityList
-            key={entityType}
-            entities={entities}
-            entityType={entityType}
-            isOpen={this.state.openLists[entityType]}
-            toggleListOpen={this.toggleListOpen(entityType)}
-          />
-        ))}
+        <EntitySidebar />
         {this.renderSectorBuilderText()}
         {this.renderConfirmDeleteModal()}
         <ExportModal

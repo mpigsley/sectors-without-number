@@ -13,7 +13,7 @@ import Home from 'components/home';
 import Configure from 'components/configure';
 import Changelog from 'components/changelog';
 import SectorMap from 'components/sector-map';
-import SidebarEntity from 'components/sidebar-entity';
+import Sidebar from 'components/sidebar';
 
 import 'styles/global.css';
 import 'react-hint/css/index.css';
@@ -32,9 +32,9 @@ ReactDOM.render(
           <Route path="/changelog" component={Changelog} />
         </Route>
         <Route path="/sector/:sector" component={SectorMap}>
-          <IndexRoute component={SidebarEntity} />
-          <Route path=":entityType/:entity" component={SidebarEntity} />
-          <Route path="**" component={SidebarEntity} />
+          <IndexRoute component={Sidebar} />
+          <Route path=":entityType/:entity" component={Sidebar} />
+          <Route path="**" component={Sidebar} />
         </Route>
       </Route>
     </Router>
