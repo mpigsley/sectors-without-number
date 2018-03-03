@@ -75,8 +75,8 @@ const EntityList = ({
     );
   };
 
-  const renderEntitySubHeader = () => {
-    if (!isSidebarEditActive || !size(entities) || !isOpen) {
+  const renderEntitySubHeader = rowEntities => {
+    if (!isSidebarEditActive || !size(rowEntities) || !isOpen) {
       return null;
     }
     return (
@@ -151,7 +151,7 @@ const EntityList = ({
   return (
     <div>
       {renderEntityHeader(entityType)}
-      {renderEntitySubHeader()}
+      {renderEntitySubHeader(rowEntities)}
       {renderEntities(rowEntities)}
       <ReactHint events position="left" />
     </div>
