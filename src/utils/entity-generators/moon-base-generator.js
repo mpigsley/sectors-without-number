@@ -10,6 +10,7 @@ export const generateMoonBase = ({
   parentEntity,
   name = generateStationName(),
   generate = true,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a moon base');
@@ -21,7 +22,7 @@ export const generateMoonBase = ({
   }
 
   const chance = new Chance();
-  let asteroidBase = { name, parent, parentEntity, sector };
+  let asteroidBase = { isHidden, name, parent, parentEntity, sector };
   if (generate) {
     asteroidBase = {
       ...asteroidBase,

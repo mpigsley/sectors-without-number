@@ -7,6 +7,7 @@ export const generateMoon = ({
   parent,
   parentEntity,
   name = generateName(),
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a moon');
@@ -14,7 +15,7 @@ export const generateMoon = ({
   if (!parent || !parentEntity) {
     throw new Error('Parent id and type must be defined to generate a moon');
   }
-  return { name, parent, parentEntity, sector };
+  return { isHidden, name, parent, parentEntity, sector };
 };
 
 export const generateMoons = ({

@@ -10,6 +10,7 @@ export const generateOrbitalRuin = ({
   parentEntity,
   name = generateStationName(),
   generate = true,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a orbital ruin');
@@ -21,7 +22,7 @@ export const generateOrbitalRuin = ({
   }
 
   const chance = new Chance();
-  let orbitalRuin = { name, parent, parentEntity, sector };
+  let orbitalRuin = { isHidden, name, parent, parentEntity, sector };
   if (generate) {
     orbitalRuin = {
       ...orbitalRuin,

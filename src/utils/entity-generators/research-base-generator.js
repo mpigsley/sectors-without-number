@@ -10,6 +10,7 @@ export const generateResearchBase = ({
   parentEntity,
   name = generateStationName(),
   generate = true,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a research base');
@@ -21,7 +22,7 @@ export const generateResearchBase = ({
   }
 
   const chance = new Chance();
-  let researchBase = { name, parent, parentEntity, sector };
+  let researchBase = { isHidden, name, parent, parentEntity, sector };
   if (generate) {
     researchBase = {
       ...researchBase,

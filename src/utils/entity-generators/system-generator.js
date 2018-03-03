@@ -10,6 +10,7 @@ export const generateSystem = ({
   name = generateName(),
   parent,
   parentEntity,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate a system');
@@ -21,7 +22,7 @@ export const generateSystem = ({
     throw new Error('Parent must be defined to generate system');
   }
 
-  return { x, y, name, sector, parent, parentEntity };
+  return { isHidden, x, y, name, sector, parent, parentEntity };
 };
 
 export const generateSystems = ({

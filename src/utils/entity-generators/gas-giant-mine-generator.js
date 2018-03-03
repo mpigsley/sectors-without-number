@@ -10,6 +10,7 @@ export const generateGasGiantMine = ({
   parentEntity,
   name = generateMineName(),
   generate = true,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a gas giant mine');
@@ -21,7 +22,7 @@ export const generateGasGiantMine = ({
   }
 
   const chance = new Chance();
-  let gasGiantMine = { name, parent, parentEntity, sector };
+  let gasGiantMine = { isHidden, name, parent, parentEntity, sector };
   if (generate) {
     gasGiantMine = {
       ...gasGiantMine,

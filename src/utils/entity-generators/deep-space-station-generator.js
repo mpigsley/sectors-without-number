@@ -10,6 +10,7 @@ export const generateDeepSpaceStation = ({
   parent,
   parentEntity,
   generate = true,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error(
@@ -21,7 +22,7 @@ export const generateDeepSpaceStation = ({
   }
 
   const chance = new Chance();
-  let station = { name, sector, parent, parentEntity };
+  let station = { isHidden, name, sector, parent, parentEntity };
   if (generate) {
     station = {
       ...station,

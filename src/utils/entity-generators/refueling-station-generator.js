@@ -10,6 +10,7 @@ export const generateRefuelingStation = ({
   parentEntity,
   name = generateStationName(),
   generate = true,
+  isHidden,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a refueling station');
@@ -21,7 +22,7 @@ export const generateRefuelingStation = ({
   }
 
   const chance = new Chance();
-  let refuelingStation = { name, parent, parentEntity, sector };
+  let refuelingStation = { isHidden, name, parent, parentEntity, sector };
   if (generate) {
     refuelingStation = {
       ...refuelingStation,
