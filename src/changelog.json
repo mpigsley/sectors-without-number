@@ -1,4 +1,8 @@
 {
+  "3.10.0": {
+    "description": "Markdown notes for any entity.",
+    "date": "3-3-2018"
+  },
   "3.9.2": {
     "description": "Protect against entities that don't have a parent anymore.",
     "date": "3-2-2018"
