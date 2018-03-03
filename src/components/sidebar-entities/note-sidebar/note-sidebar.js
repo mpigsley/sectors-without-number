@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactMarkdown from 'react-markdown';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Input from 'primitives/form/input';
@@ -13,7 +14,12 @@ export default function NoteSidebar({
   note,
 }) {
   if (!isSidebarEditActive) {
-    return <div>{(note.attributes || {}).content}</div>;
+    return (
+      <ReactMarkdown
+        source={(note.attributes || {}).content || ''}
+        className="NoteSidebar-Display"
+      />
+    );
   }
   return (
     <FlexContainer

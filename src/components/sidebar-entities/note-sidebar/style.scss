@@ -1,5 +1,23 @@
 @import 'styles/theme';
 
+.NoteSidebar-Display {
+  color: $light2;
+  padding: 1rem;
+
+  a {
+    color: $light1;
+    transition: linear color 0.2s;
+
+    &:hover {
+      color: $light4;
+    }
+  }
+
+  img {
+    width: 100%;
+  }
+}
+
 .NoteSidebar-Attributes {
   margin: 1rem;
   width: calc(100% - 2rem);
