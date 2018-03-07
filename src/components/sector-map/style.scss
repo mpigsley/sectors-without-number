@@ -6,9 +6,15 @@
   width: 450px;
 }
 
-@media (max-width: 700) {
+@media (max-width: 700px) {
   .SectorMap-Sidebar {
     display: none;
+  }
+}
+
+@media (max-width: 1200px) {
+  .SectorMap-Sidebar {
+    width: 374px;
   }
 }
 

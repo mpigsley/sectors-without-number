@@ -17,8 +17,14 @@ import Error from './error';
 
 import './style.css';
 
-const calcWidth = () =>
-  window.innerWidth > 700 ? window.innerWidth - 400 : window.innerWidth;
+const calcWidth = () => {
+  if (window.innerWidth > 1200) {
+    return window.innerWidth - 450;
+  } else if (window.innerWidth > 700) {
+    return window.innerWidth - 375;
+  }
+  return window.innerWidth;
+};
 
 export default class SectorMap extends Component {
   static propTypes = {
