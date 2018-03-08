@@ -8,6 +8,7 @@ import CondensedPrintable from 'components/printables/condensed-printable';
 import ExpandedPrintable from 'components/printables/expanded-printable';
 import TopLevelEntityModal from 'components/top-level-entity-modal';
 import HexMap from 'components/hex-map';
+import Navigation from 'components/navigation';
 
 import ExportTypes from 'constants/export-types';
 import hexGenerator from 'utils/hex-generator';
@@ -18,12 +19,13 @@ import Error from './error';
 import './style.css';
 
 const calcWidth = () => {
+  let width = window.innerWidth - 75;
   if (window.innerWidth > 1200) {
-    return window.innerWidth - 450;
+    width -= 450;
   } else if (window.innerWidth > 700) {
-    return window.innerWidth - 375;
+    width -= 375;
   }
-  return window.innerWidth;
+  return width;
 };
 
 export default class SectorMap extends Component {
@@ -125,6 +127,7 @@ export default class SectorMap extends Component {
       <div onClick={closeUserDropdown}>
         <FlexContainer className="SectorMap" direction="row">
           {this.renderTooltips(hexes)}
+          <Navigation />
           <HexMap
             width={this.state.width}
             height={this.state.height}

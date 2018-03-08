@@ -1,0 +1,34 @@
+@import 'styles/theme';
+
+.Navigation {
+  background-color: $dark2;
+  width: 75px;
+}
+
+.Navigation-LinkContainer {
+  width: 100%;
+}
+
+.Navigation-Link {
+  color: $light3;
+  cursor: pointer;
+  background-color: $dark3;
+  padding: 1.1rem 0;
+  text-align: center;
+  width: 100%;
+  transition: color, background-color linear 0.2s;
+
+  &:hover,
+  &--active {
+    background-color: $dark4;
+    color: $light4;
+  }
+
+  &.Navigation-Login {
+    background-color: $primary;
+
+    &:hover {
+      background-color: $primary-alt;
+    }
+  }
+}
