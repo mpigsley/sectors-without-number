@@ -7,6 +7,7 @@ import EntityTooltips from 'components/entity-tooltips';
 import CondensedPrintable from 'components/printables/condensed-printable';
 import ExpandedPrintable from 'components/printables/expanded-printable';
 import TopLevelEntityModal from 'components/top-level-entity-modal';
+import ProfileModal from 'components/profile-modal';
 import HexMap from 'components/hex-map';
 import Navigation from 'components/navigation';
 
@@ -137,6 +138,7 @@ export default class SectorMap extends Component {
         </FlexContainer>
         {this.renderPrintable(printable)}
         <TopLevelEntityModal />
+        <ProfileModal />
       </div>
     );
   }

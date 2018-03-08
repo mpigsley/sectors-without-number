@@ -5,12 +5,16 @@ import {
   openEditModal,
   logout,
 } from 'store/actions/user.actions';
-import { userUidSelector } from 'store/selectors/base.selectors';
+import {
+  userUidSelector,
+  currentSectorSelector,
+} from 'store/selectors/base.selectors';
 
 import Navigation from './navigation';
 
 const mapStateToProps = state => ({
   isLoggedIn: !!userUidSelector(state),
+  currentSector: currentSectorSelector(state),
 });
 
 export default connect(mapStateToProps, {

@@ -2,26 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import ProfileModal from 'components/profile-modal';
 import Button from 'primitives/other/button';
-import Modal from 'primitives/modal/modal';
-import Label from 'primitives/form/label';
-import Input from 'primitives/form/input';
 
 import './style.css';
 
 export default function AccountManager({
   openEditModal,
-  closeEditModal,
   openLoginModal,
   openUserDropdown,
   closeUserDropdown,
-  updateUserForm,
-  updateUser,
   logout,
-  isEditModalOpen,
   isInitialized,
   isDropdownActive,
-  displayName,
   user,
 }) {
   if (!isInitialized) {
@@ -66,44 +59,19 @@ export default function AccountManager({
           </div>
         </div>
       </Button>
-      <Modal
-        isOpen={isEditModalOpen}
-        onCancel={closeEditModal}
-        title="Edit Profile"
-        actionButtons={[
-          <Button primary key="save" onClick={updateUser}>
-            Save User
-          </Button>,
-        ]}
-      >
-        <Label noPadding htmlFor="username">
-          Username
-        </Label>
-        <Input
-          id="username"
-          name="username"
-          data-key="username"
-          value={displayName}
-          onChange={({ target }) => updateUserForm('displayName', target.value)}
-        />
-      </Modal>
+      <ProfileModal />
     </div>
   );
 }
 
 AccountManager.propTypes = {
   openEditModal: PropTypes.func.isRequired,
-  closeEditModal: PropTypes.func.isRequired,
   openLoginModal: PropTypes.func.isRequired,
   openUserDropdown: PropTypes.func.isRequired,
   closeUserDropdown: PropTypes.func.isRequired,
-  updateUserForm: PropTypes.func.isRequired,
-  updateUser: PropTypes.func.isRequired,
   logout: PropTypes.func.isRequired,
-  isEditModalOpen: PropTypes.bool.isRequired,
   isInitialized: PropTypes.bool.isRequired,
   isDropdownActive: PropTypes.bool.isRequired,
-  displayName: PropTypes.string,
   user: PropTypes.shape({
     displayName: PropTypes.string,
   }),
@@ -111,5 +79,4 @@ AccountManager.propTypes = {
 
 AccountManager.defaultProps = {
   user: null,
-  displayName: '',
 };

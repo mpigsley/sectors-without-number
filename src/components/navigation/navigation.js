@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-import { User, Home, LogIn, LogOut } from 'react-feather';
+import { User, Home, Map, Grid, LogIn, LogOut } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
 
@@ -13,6 +13,7 @@ export default function Navigation({
   openEditModal,
   openLoginModal,
   isLoggedIn,
+  currentSector,
 }) {
   let userButton;
   let logoutButton = null;
@@ -53,6 +54,12 @@ export default function Navigation({
         <Link className="Navigation-Link" to="/">
           <Home size="25" />
         </Link>
+        <Link className="Navigation-Link" to={`/sector/${currentSector}`}>
+          <Map size="25" />
+        </Link>
+        <Link className="Navigation-Link" to={`/summary/${currentSector}`}>
+          <Grid size="25" />
+        </Link>
       </FlexContainer>
       {logoutButton}
     </FlexContainer>
@@ -64,4 +71,5 @@ Navigation.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   openEditModal: PropTypes.func.isRequired,
   openLoginModal: PropTypes.func.isRequired,
+  currentSector: PropTypes.string.isRequired,
 };
