@@ -1,12 +1,26 @@
 @import 'styles/theme';
 
+$margin: 1.55rem;
+
 .Navigation {
   background-color: $dark2;
-  width: 75px;
+  min-width: 188px;
 }
 
 .Navigation-LinkContainer {
   width: 100%;
+}
+
+.Navigation-Icon {
+  display: inline-block;
+  margin: 0 $margin;
+}
+
+.Navigation-Title {
+  display: inline-block;
+  font-size: 17px;
+  margin: 0 $margin 0 0;
+  white-space: nowrap;
 }
 
 .Navigation-Link {
@@ -15,8 +29,9 @@
   background-color: $dark3;
   padding: 1.1rem 0;
   text-align: center;
-  width: 100%;
+  text-decoration: none;
   transition: color, background-color linear 0.2s;
+  width: 100%;
 
   &:hover,
   &--active {
@@ -30,5 +45,19 @@
     &:hover {
       background-color: $primary-alt;
     }
+  }
+}
+
+@media (max-width: 1500px) {
+  .Navigation {
+    min-width: 75px;
+  }
+
+  .Navigation-Icon {
+    margin: auto;
+  }
+
+  .Navigation-Title {
+    display: none;
   }
 }

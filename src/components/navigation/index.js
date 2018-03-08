@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 
 import {
   openLoginModal,
@@ -17,8 +18,10 @@ const mapStateToProps = state => ({
   currentSector: currentSectorSelector(state),
 });
 
-export default connect(mapStateToProps, {
-  openLoginModal,
-  openEditModal,
-  logout,
-})(Navigation);
+export default withRouter(
+  connect(mapStateToProps, {
+    openLoginModal,
+    openEditModal,
+    logout,
+  })(Navigation),
+);

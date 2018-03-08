@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { User, Home, Map, Grid, LogIn, LogOut } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
+import Header, { HeaderType } from 'primitives/text/header';
 
 import './style.css';
 
@@ -14,18 +15,29 @@ export default function Navigation({
   openLoginModal,
   isLoggedIn,
   currentSector,
+  location,
 }) {
   let userButton;
   let logoutButton = null;
   if (isLoggedIn) {
     userButton = (
       <span className="Navigation-Link" onClick={openEditModal}>
-        <User size="25" />
+        <FlexContainer align="center">
+          <User size="25" className="Navigation-Icon" />
+          <Header type={HeaderType.header4} className="Navigation-Title">
+            User Profile
+          </Header>
+        </FlexContainer>
       </span>
     );
     logoutButton = (
       <span className="Navigation-Link" onClick={logout}>
-        <LogOut size="25" />
+        <FlexContainer align="center">
+          <LogOut size="25" className="Navigation-Icon" />
+          <Header type={HeaderType.header4} className="Navigation-Title">
+            Log Out
+          </Header>
+        </FlexContainer>
       </span>
     );
   } else {
@@ -34,10 +46,16 @@ export default function Navigation({
         className={classNames('Navigation-Link', 'Navigation-Login')}
         onClick={openLoginModal}
       >
-        <LogIn size="25" />
+        <FlexContainer align="center">
+          <LogIn size="25" className="Navigation-Icon" />
+          <Header type={HeaderType.header4} className="Navigation-Title">
+            Sign Up
+          </Header>
+        </FlexContainer>
       </span>
     );
   }
+  const route = location.pathname.split('/')[1];
   return (
     <FlexContainer
       className="Navigation"
@@ -52,13 +70,38 @@ export default function Navigation({
       >
         {userButton}
         <Link className="Navigation-Link" to="/">
-          <Home size="25" />
+          <FlexContainer align="center">
+            <Home size="25" className="Navigation-Icon" />
+            <Header type={HeaderType.header4} className="Navigation-Title">
+              Home
+            </Header>
+          </FlexContainer>
         </Link>
-        <Link className="Navigation-Link" to={`/sector/${currentSector}`}>
-          <Map size="25" />
+        <Link
+          className={classNames('Navigation-Link', {
+            'Navigation-Link--active': route === 'sector',
+          })}
+          to={`/sector/${currentSector}`}
+        >
+          <FlexContainer align="center">
+            <Map size="25" className="Navigation-Icon" />
+            <Header type={HeaderType.header4} className="Navigation-Title">
+              Sector
+            </Header>
+          </FlexContainer>
         </Link>
-        <Link className="Navigation-Link" to={`/summary/${currentSector}`}>
-          <Grid size="25" />
+        <Link
+          className={classNames('Navigation-Link', {
+            'Navigation-Link--active': route === 'overview',
+          })}
+          to={`/overview/${currentSector}`}
+        >
+          <FlexContainer align="center">
+            <Grid size="25" className="Navigation-Icon" />
+            <Header type={HeaderType.header4} className="Navigation-Title">
+              Overview
+            </Header>
+          </FlexContainer>
         </Link>
       </FlexContainer>
       {logoutButton}
@@ -72,4 +115,7 @@ Navigation.propTypes = {
   openEditModal: PropTypes.func.isRequired,
   openLoginModal: PropTypes.func.isRequired,
   currentSector: PropTypes.string.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
 };
