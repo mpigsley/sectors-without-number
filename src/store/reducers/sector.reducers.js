@@ -60,11 +60,17 @@ export default function sector(state = initialState, action) {
             name: Entities.sector.nameGenerator(),
           },
         };
-      }
-      if (pathname.startsWith('/sector/')) {
+      } else if (pathname.startsWith('/sector/')) {
         return {
           ...state,
           renderSector: true,
+          currentSector: pathname.split('/')[2],
+          currentEntityType: pathname.split('/')[3],
+          currentEntity: pathname.split('/')[4],
+        };
+      } else if (pathname.startsWith('/overview/')) {
+        return {
+          ...state,
           currentSector: pathname.split('/')[2],
           currentEntityType: pathname.split('/')[3],
           currentEntity: pathname.split('/')[4],

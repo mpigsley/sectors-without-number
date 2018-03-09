@@ -14,6 +14,9 @@ import Configure from 'components/configure';
 import Changelog from 'components/changelog';
 import SectorMap from 'components/sector-map';
 import Sidebar from 'components/sidebar';
+import OverviewList from 'components/overview-list';
+import OverviewTable from 'components/overview-table';
+import EmptyOverview from 'components/empty-overview';
 
 import 'styles/global.css';
 import 'react-hint/css/index.css';
@@ -35,6 +38,10 @@ ReactDOM.render(
           <IndexRoute component={Sidebar} />
           <Route path=":entityType/:entity" component={Sidebar} />
           <Route path="**" component={Sidebar} />
+        </Route>
+        <Route path="/overview/:sector" component={OverviewList}>
+          <IndexRoute component={EmptyOverview} />
+          <Route path=":entityType" component={OverviewTable} />
         </Route>
       </Route>
     </Router>

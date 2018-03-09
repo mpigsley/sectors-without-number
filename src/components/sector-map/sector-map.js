@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { throttle, isEmpty, map } from 'lodash';
 
@@ -39,10 +39,8 @@ export default class SectorMap extends Component {
       rows: PropTypes.number,
       columns: PropTypes.number,
     }),
-    closeUserDropdown: PropTypes.func.isRequired,
     generateSector: PropTypes.func.isRequired,
     toSafeRoute: PropTypes.func.isRequired,
-    isDropdownActive: PropTypes.bool.isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
@@ -119,13 +117,8 @@ export default class SectorMap extends Component {
       columns: this.props.sector.columns,
     });
 
-    let { closeUserDropdown } = this.props;
-    if (!this.props.isDropdownActive) {
-      closeUserDropdown = null;
-    }
-
     return (
-      <div onClick={closeUserDropdown}>
+      <Fragment>
         <FlexContainer className="SectorMap" direction="row">
           {this.renderTooltips(hexes)}
           <Navigation />
@@ -139,7 +132,7 @@ export default class SectorMap extends Component {
         {this.renderPrintable(printable)}
         <TopLevelEntityModal />
         <ProfileModal />
-      </div>
+      </Fragment>
     );
   }
 }

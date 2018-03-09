@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-import { User, Home, Map, Grid, LogIn, LogOut } from 'react-feather';
+import { User, Home, List, Grid, LogIn, LogOut } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -84,7 +84,7 @@ export default function Navigation({
           to={`/sector/${currentSector}`}
         >
           <FlexContainer align="center">
-            <Map size="25" className="Navigation-Icon" />
+            <Grid size="25" className="Navigation-Icon" />
             <Header type={HeaderType.header4} className="Navigation-Title">
               Sector
             </Header>
@@ -97,7 +97,7 @@ export default function Navigation({
           to={`/overview/${currentSector}`}
         >
           <FlexContainer align="center">
-            <Grid size="25" className="Navigation-Icon" />
+            <List size="25" className="Navigation-Icon" />
             <Header type={HeaderType.header4} className="Navigation-Title">
               Overview
             </Header>

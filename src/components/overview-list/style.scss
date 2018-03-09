@@ -1,0 +1,17 @@
+@import 'styles/theme';
+
+.OverviewList {
+  flex: 1;
+  max-height: 100vh;
+  max-width: 400px;
+  min-width: 300px;
+  overflow: auto;
+}
+
+.OverviewList-List {
+  width: 100%;
+}
+
+.OverviewList-Arrow {
+  color: $dark4;
+}

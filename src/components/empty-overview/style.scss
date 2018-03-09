@@ -1,0 +1,15 @@
+@import 'styles/theme';
+
+.EmptyOverview {
+  background-color: $dark3;
+}
+
+.EmptyOverview-Header1 {
+  color: $light1;
+  font-size: 2.5rem;
+  margin-bottom: 0;
+}
+
+.EmptyOverview-Header2 {
+  color: $light1;
+}
