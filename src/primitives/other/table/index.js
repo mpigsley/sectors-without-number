@@ -4,7 +4,13 @@ import classNames from 'classnames';
 
 import './style.css';
 
-export default function Table({ className, dataIdAccessor, data, columns }) {
+export default function Table({
+  className,
+  dataIdAccessor,
+  data,
+  light,
+  columns,
+}) {
   return (
     <table className={classNames('Table', className)}>
       <thead>
@@ -12,6 +18,7 @@ export default function Table({ className, dataIdAccessor, data, columns }) {
           {columns.map(({ Header, accessor, columnClass, centered }) => (
             <th
               className={classNames('Table-Header', columnClass, {
+                'Table-Header--light': light,
                 'Table--centered': centered,
               })}
               key={accessor}
@@ -27,6 +34,7 @@ export default function Table({ className, dataIdAccessor, data, columns }) {
             {columns.map(({ accessor, Cell, columnClass, centered }) => (
               <td
                 className={classNames('Table-Element', columnClass, {
+                  'Table-Element--light': light,
                   'Table--centered': centered,
                 })}
                 key={accessor}
@@ -45,6 +53,7 @@ Table.propTypes = {
   className: PropTypes.string,
   dataIdAccessor: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  light: PropTypes.bool,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       accessor: PropTypes.string.isRequired,
@@ -58,5 +67,6 @@ Table.propTypes = {
 };
 
 Table.defaultProps = {
+  light: false,
   className: undefined,
 };

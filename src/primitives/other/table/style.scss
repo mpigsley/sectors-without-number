@@ -13,16 +13,24 @@
 }
 
 .Table-Header {
-  border-bottom: 2px solid $light3;
+  border-bottom: 2px solid $dark1;
   border-collapse: collapse;
   font-weight: 700;
   padding: 0px 4px 4px;
   text-align: left;
   vertical-align: bottom;
+
+  &--light {
+    border-bottom-color: $light3;
+  }
 }
 
 .Table-Element {
   font-weight: 400;
   padding: 3px 5px;
-  border-bottom: 1px solid $light3;
+  border-bottom: 1px solid $dark1;
+
+  &--light {
+    border-bottom-color: $light3;
+  }
 }

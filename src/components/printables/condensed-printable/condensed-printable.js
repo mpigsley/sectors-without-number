@@ -59,6 +59,7 @@ const renderEntityType = (
       {Entities[entityType].name}
     </Header>
     <Table
+      light
       className="CondensedPrintable-Table"
       dataIdAccessor="key"
       columns={getColumnsFromType(entityType)}
