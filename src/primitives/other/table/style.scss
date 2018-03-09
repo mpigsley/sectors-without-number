@@ -12,9 +12,14 @@
   }
 }
 
+.Table-Row:last-of-type .Table-Element {
+  border: none;
+}
+
 .Table-Header {
   border-bottom: 2px solid $dark1;
   border-collapse: collapse;
+  color: $light4;
   font-weight: 700;
   padding: 0px 4px 4px;
   text-align: left;
@@ -22,15 +27,18 @@
 
   &--light {
     border-bottom-color: $light3;
+    color: $dark4;
   }
 }
 
 .Table-Element {
-  font-weight: 400;
+  color: $light4;
+  font-weight: 200;
   padding: 3px 5px;
   border-bottom: 1px solid $dark1;
 
   &--light {
     border-bottom-color: $light3;
+    color: $dark4;
   }
 }
