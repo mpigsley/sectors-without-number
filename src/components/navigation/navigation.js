@@ -114,8 +114,12 @@ Navigation.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   openEditModal: PropTypes.func.isRequired,
   openLoginModal: PropTypes.func.isRequired,
-  currentSector: PropTypes.string.isRequired,
+  currentSector: PropTypes.string,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
+};
+
+Navigation.defaultProps = {
+  currentSector: '',
 };

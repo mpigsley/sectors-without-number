@@ -79,15 +79,12 @@ export default function OverviewTable({ entities, routeParams }) {
       align="flexStart"
       className="OverviewTable"
     >
-      <Header
-        type={HeaderType.header3}
-        className="CondensedPrintable-EntityTitle"
-      >
+      <Header type={HeaderType.header3}>
         {Entities[routeParams.entityType].name}
       </Header>
       <Table
         sortable
-        className="CondensedPrintable-Table"
+        className="OverviewTable-Table"
         dataIdAccessor="key"
         columns={getColumnsFromType(routeParams.entityType)}
         data={values(entities[routeParams.entityType]).sort(sortByKey('name'))}

@@ -12,7 +12,17 @@ import Entities from 'constants/entities';
 
 import './style.css';
 
-export default function OverviewList({ children, currentSector, entities }) {
+export default function OverviewList({
+  toHome,
+  children,
+  currentSector,
+  entities,
+  isInitialized,
+}) {
+  if (!entities[Entities.sector.key][currentSector] && isInitialized) {
+    toHome();
+  }
+
   return (
     <FlexContainer>
       <Navigation />
@@ -31,7 +41,7 @@ export default function OverviewList({ children, currentSector, entities }) {
                   key={entityType}
                   to={`/overview/${currentSector}/${entityType}`}
                   title={Entities[entityType].name}
-                  additional={`${size(entityList)}`}
+                  additional={isInitialized ? `${size(entityList)}` : undefined}
                   arrowClassName="OverviewList-Arrow"
                 />
               ),
@@ -46,7 +56,9 @@ export default function OverviewList({ children, currentSector, entities }) {
 }
 
 OverviewList.propTypes = {
+  toHome: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
   currentSector: PropTypes.string.isRequired,
   entities: PropTypes.shape().isRequired,
+  isInitialized: PropTypes.bool.isRequired,
 };

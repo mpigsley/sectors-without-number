@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
+import Spinner from 'primitives/other/spinner';
 
 import './style.css';
 
-export default function EmptyOverview({ children }) {
+export default function EmptyOverview({ children, isInitialized }) {
+  let body = <Spinner size={100} />;
+  if (isInitialized) {
+    body = (
+      <Fragment>
+        <Header type={HeaderType.header2} className="EmptyOverview-Header1">
+          Entity Overview
+        </Header>
+        <Header type={HeaderType.header3} className="EmptyOverview-Header2">
+          {children || 'Select an entity on the left to begin'}
+        </Header>
+      </Fragment>
+    );
+  }
   return (
     <FlexContainer
       flex="3"
@@ -15,20 +29,16 @@ export default function EmptyOverview({ children }) {
       justify="center"
       className="EmptyOverview"
     >
-      <Header type={HeaderType.header2} className="EmptyOverview-Header1">
-        Entity Overview
-      </Header>
-      <Header type={HeaderType.header3} className="EmptyOverview-Header2">
-        {children}
-      </Header>
+      {body}
     </FlexContainer>
   );
 }
 
 EmptyOverview.propTypes = {
   children: PropTypes.node,
+  isInitialized: PropTypes.bool.isRequired,
 };
 
 EmptyOverview.defaultProps = {
-  children: 'Select an entity on the left to begin',
+  children: undefined,
 };

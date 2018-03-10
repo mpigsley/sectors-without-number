@@ -40,7 +40,7 @@ export const generateAsteroidBelts = ({
   sector,
   parent,
   parentEntity,
-  children = [...Array(new Chance().weighted([0, 1], [5, 1]))],
+  children = [...Array(new Chance().weighted([0, 1], [4, 1]))],
   additionalPointsOfInterest,
 }) => {
   if (!additionalPointsOfInterest) {

@@ -69,7 +69,6 @@ export default class Table extends Component {
 
   get sortedData() {
     if (!this.props.sortable || !this.state.sortDirection) {
-      console.log(this.props.data);
       return this.props.data;
     }
     return [...this.props.data].sort((a, b) => {
