@@ -60,6 +60,7 @@ const renderEntityType = (
     </Header>
     <Table
       light
+      condensed
       className="CondensedPrintable-Table"
       dataIdAccessor="key"
       columns={getColumnsFromType(entityType)}

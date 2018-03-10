@@ -9,6 +9,7 @@ export default function Table({
   dataIdAccessor,
   data,
   light,
+  condensed,
   columns,
 }) {
   return (
@@ -19,6 +20,7 @@ export default function Table({
             <th
               className={classNames('Table-Header', columnClass, {
                 'Table-Header--light': light,
+                'Table-Header--condensed': condensed,
                 'Table--centered': centered,
               })}
               key={accessor}
@@ -35,6 +37,7 @@ export default function Table({
               <td
                 className={classNames('Table-Element', columnClass, {
                   'Table-Element--light': light,
+                  'Table-Header--condensed': condensed,
                   'Table--centered': centered,
                 })}
                 key={accessor}
@@ -54,6 +57,7 @@ Table.propTypes = {
   dataIdAccessor: PropTypes.string.isRequired,
   data: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   light: PropTypes.bool,
+  condensed: PropTypes.bool,
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       accessor: PropTypes.string.isRequired,

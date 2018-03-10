@@ -21,7 +21,7 @@
   border-collapse: collapse;
   color: $light4;
   font-weight: 700;
-  padding: 0px 4px 4px;
+  padding: 6px;
   text-align: left;
   vertical-align: bottom;
 
@@ -29,16 +29,24 @@
     border-bottom-color: $light3;
     color: $dark4;
   }
+
+  &--condensed {
+    padding: 0px 4px 4px;
+  }
 }
 
 .Table-Element {
   color: $light4;
   font-weight: 200;
-  padding: 3px 5px;
+  padding: 6px;
   border-bottom: 1px solid $dark1;
 
   &--light {
     border-bottom-color: $light3;
     color: $dark4;
+  }
+
+  &--condensed {
+    padding: 0px 4px 4px;
   }
 }
