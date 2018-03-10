@@ -20,6 +20,7 @@ export default class LinkRow extends Component {
       title,
       additional,
       additionalIcon,
+      className,
       arrowClassName,
     } = this.props;
     const Icon = this.state.hovered
@@ -27,8 +28,8 @@ export default class LinkRow extends Component {
       : additionalIcon || ChevronRight;
     return (
       <Link
-        className="LinkRow"
         to={to}
+        className={classNames('LinkRow', className)}
         onMouseOver={() => this.setState({ hovered: true })}
         onFocus={() => this.setState({ hovered: true })}
         onMouseOut={() => this.setState({ hovered: false })}
@@ -60,11 +61,13 @@ LinkRow.propTypes = {
   title: PropTypes.string.isRequired,
   additional: PropTypes.string,
   additionalIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  className: PropTypes.string,
   arrowClassName: PropTypes.string,
 };
 
 LinkRow.defaultProps = {
   additional: null,
   additionalIcon: null,
+  className: null,
   arrowClassName: null,
 };

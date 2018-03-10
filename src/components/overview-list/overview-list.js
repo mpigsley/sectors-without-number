@@ -18,6 +18,7 @@ export default function OverviewList({
   currentSector,
   entities,
   isInitialized,
+  params,
 }) {
   if (!entities[Entities.sector.key][currentSector] && isInitialized) {
     toHome();
@@ -43,6 +44,11 @@ export default function OverviewList({
                   title={Entities[entityType].name}
                   additional={isInitialized ? `${size(entityList)}` : undefined}
                   arrowClassName="OverviewList-Arrow"
+                  className={
+                    params.entityType === entityType
+                      ? 'OverviewList-Item--selected'
+                      : ''
+                  }
                 />
               ),
             )}
@@ -61,4 +67,7 @@ OverviewList.propTypes = {
   currentSector: PropTypes.string.isRequired,
   entities: PropTypes.shape().isRequired,
   isInitialized: PropTypes.bool.isRequired,
+  params: PropTypes.shape({
+    entityType: PropTypes.string,
+  }).isRequired,
 };

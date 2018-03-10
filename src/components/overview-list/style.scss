@@ -12,6 +12,10 @@
   width: 100%;
 }
 
+.OverviewList-Item--selected {
+  background-color: $dark3;
+}
+
 .OverviewList-Arrow {
   color: $dark4;
 }

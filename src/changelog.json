@@ -1,4 +1,8 @@
 {
+  "3.11.1": {
+    "description": "Add a selected state to the overview list.",
+    "date": "3-10-2018"
+  },
   "3.11.0": {
     "description": "Sector summary view.",
     "date": "3-10-2018",
