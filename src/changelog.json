@@ -1,4 +1,14 @@
 {
+  "3.11.0": {
+    "description": "Sector summary view.",
+    "date": "3-10-2018",
+    "changes": [
+      "View all entity types in your sector in a convenient table.",
+      "Entities link back to sector map when clicked in the table.",
+      "Summary table columns are sortable by selecting the column headers.",
+      "Navigation bar to easily switch between sector map and overview."
+    ]
+  },
   "3.10.1": {
     "description": "Minor fix for entity generation in the sidebar.",
     "date": "3-3-2018"
