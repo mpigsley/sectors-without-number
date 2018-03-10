@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import { values } from 'lodash';
 
 import Header, { HeaderType } from 'primitives/text/header';
@@ -11,7 +12,17 @@ import { sortByKey } from 'utils/common';
 import './style.css';
 
 const getColumnsFromType = entityType => {
-  const common = [{ accessor: 'name', Header: 'Name' }];
+  const common = [
+    {
+      accessor: 'name',
+      Header: 'Name',
+      Cell: (name, { link }) => (
+        <Link className="OverviewTable-Link" to={link}>
+          {name}
+        </Link>
+      ),
+    },
+  ];
   if (Entities[entityType].topLevel) {
     return [
       ...common,
@@ -20,7 +31,18 @@ const getColumnsFromType = entityType => {
       { accessor: 'neighbors', Header: 'Neighbors' },
     ];
   }
-  const columns = [...common, { accessor: 'parent', Header: 'Parent' }];
+  const columns = [
+    ...common,
+    {
+      accessor: 'parent',
+      Header: 'Parent',
+      Cell: (parent, { parentLink }) => (
+        <Link className="OverviewTable-Link" to={parentLink}>
+          {parent}
+        </Link>
+      ),
+    },
+  ];
   if (Entities[entityType].children.length) {
     columns.splice(2, 0, {
       accessor: 'children',

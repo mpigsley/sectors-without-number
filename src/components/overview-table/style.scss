@@ -6,3 +6,12 @@
   overflow: auto;
   padding: 0.3rem 1.5rem 1.5rem;
 }
+
+.OverviewTable-Link {
+  color: $light2;
+  transition: color linear 0.2s;
+
+  &:hover {
+    color: $light1;
+  }
+}

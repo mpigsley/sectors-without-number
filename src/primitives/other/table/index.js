@@ -42,7 +42,7 @@ export default function Table({
                 })}
                 key={accessor}
               >
-                {Cell ? Cell(row[accessor]) : row[accessor]}
+                {Cell ? Cell(row[accessor], row) : row[accessor]}
               </td>
             ))}
           </tr>
@@ -72,5 +72,6 @@ Table.propTypes = {
 
 Table.defaultProps = {
   light: false,
+  condensed: false,
   className: undefined,
 };
