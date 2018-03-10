@@ -33,6 +33,10 @@
   &--condensed {
     padding: 0px 4px 4px;
   }
+
+  &--sortable {
+    cursor: pointer;
+  }
 }
 
 .Table-Element {
@@ -49,4 +53,8 @@
   &--condensed {
     padding: 0px 4px 4px;
   }
+}
+
+.Table-SortIcon {
+  margin-left: 0.2rem;
 }

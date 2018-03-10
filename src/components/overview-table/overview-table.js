@@ -86,6 +86,7 @@ export default function OverviewTable({ entities, routeParams }) {
         {Entities[routeParams.entityType].name}
       </Header>
       <Table
+        sortable
         className="CondensedPrintable-Table"
         dataIdAccessor="key"
         columns={getColumnsFromType(routeParams.entityType)}

@@ -26,7 +26,7 @@ export default function EmptyOverview({ children }) {
 }
 
 EmptyOverview.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
 };
 
 EmptyOverview.defaultProps = {
