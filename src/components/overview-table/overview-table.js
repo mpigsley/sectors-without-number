@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { values } from 'lodash';
+import { values, size } from 'lodash';
+import Pluralize from 'pluralize';
 
+import EmptyOverview from 'components/empty-overview';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import Table from 'primitives/other/table';
@@ -62,6 +64,14 @@ const getColumnsFromType = entityType => {
 };
 
 export default function OverviewTable({ entities, routeParams }) {
+  if (!size(entities[routeParams.entityType])) {
+    return (
+      <EmptyOverview>
+        You do not have any {Pluralize(Entities[routeParams.entityType].name)}{' '}
+        in this sector
+      </EmptyOverview>
+    );
+  }
   return (
     <FlexContainer
       flex="3"

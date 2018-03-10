@@ -1,11 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 
 import './style.css';
 
-export default function EmptyOverview() {
+export default function EmptyOverview({ children }) {
   return (
     <FlexContainer
       flex="3"
@@ -18,8 +19,16 @@ export default function EmptyOverview() {
         Entity Overview
       </Header>
       <Header type={HeaderType.header3} className="EmptyOverview-Header2">
-        Select an entity on the left to begin
+        {children}
       </Header>
     </FlexContainer>
   );
 }
+
+EmptyOverview.propTypes = {
+  children: PropTypes.string,
+};
+
+EmptyOverview.defaultProps = {
+  children: 'Select an entity on the left to begin',
+};
