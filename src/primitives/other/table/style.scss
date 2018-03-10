@@ -12,17 +12,49 @@
   }
 }
 
+.Table-Row:last-of-type .Table-Element {
+  border: none;
+}
+
 .Table-Header {
-  border-bottom: 2px solid $light3;
+  border-bottom: 2px solid $dark1;
   border-collapse: collapse;
+  color: $light4;
   font-weight: 700;
-  padding: 0px 4px 4px;
+  padding: 6px;
   text-align: left;
   vertical-align: bottom;
+
+  &--light {
+    border-bottom-color: $light3;
+    color: $dark4;
+  }
+
+  &--condensed {
+    padding: 0px 4px 4px;
+  }
+
+  &--sortable {
+    cursor: pointer;
+  }
 }
 
 .Table-Element {
-  font-weight: 400;
-  padding: 3px 5px;
-  border-bottom: 1px solid $light3;
+  color: $light2;
+  font-weight: 200;
+  padding: 6px;
+  border-bottom: 1px solid $dark1;
+
+  &--light {
+    border-bottom-color: $light2;
+    color: $dark4;
+  }
+
+  &--condensed {
+    padding: 0px 4px 4px;
+  }
+}
+
+.Table-SortIcon {
+  margin-left: 0.2rem;
 }

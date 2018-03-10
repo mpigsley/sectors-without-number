@@ -1,0 +1,21 @@
+@import 'styles/theme';
+
+.OverviewTable {
+  background-color: $dark3;
+  max-height: calc(100vh - 1.8rem);
+  overflow: auto;
+  padding: 0.3rem 1.5rem 1.5rem;
+}
+
+.OverviewTable-Link {
+  color: $light2;
+  transition: color linear 0.2s;
+
+  &:hover {
+    color: $light1;
+  }
+}
+
+.OverviewTable-Table {
+  font-size: 0.75rem;
+}

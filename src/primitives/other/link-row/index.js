@@ -15,7 +15,13 @@ export default class LinkRow extends Component {
   };
 
   render() {
-    const { to, title, additional, additionalIcon } = this.props;
+    const {
+      to,
+      title,
+      additional,
+      additionalIcon,
+      arrowClassName,
+    } = this.props;
     const Icon = this.state.hovered
       ? ChevronRight
       : additionalIcon || ChevronRight;
@@ -39,7 +45,7 @@ export default class LinkRow extends Component {
           </FlexContainer>
           <Icon
             size={additionalIcon && !this.state.hovered ? 16 : 20}
-            className={classNames('LinkRow-RightArrow', {
+            className={classNames('LinkRow-RightArrow', arrowClassName, {
               'LinkRow-AdditionalIcon': additionalIcon,
             })}
           />
@@ -54,9 +60,11 @@ LinkRow.propTypes = {
   title: PropTypes.string.isRequired,
   additional: PropTypes.string,
   additionalIcon: PropTypes.oneOfType([PropTypes.func, PropTypes.node]),
+  arrowClassName: PropTypes.string,
 };
 
 LinkRow.defaultProps = {
   additional: null,
   additionalIcon: null,
+  arrowClassName: null,
 };

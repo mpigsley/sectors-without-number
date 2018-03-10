@@ -17,14 +17,17 @@ export default function FlexContainer(props) {
     shrink,
     ...rest
   } = props;
+
+  const style = flex !== null ? { flex } : {};
+
   return (
     <div
       {...rest}
+      style={style}
       className={classNames('FlexContainer', className, {
         [`FlexContainer-Align--${props.align}`]: align,
         [`FlexContainer-Justify--${justify}`]: justify,
         [`FlexContainer-Direction--${direction}`]: direction,
-        [`FlexContainer-Flex--${flex}`]: flex,
         [`FlexContainer-Shrink--${shrink}`]: shrink,
         'FlexContainer-Wrap': wrap,
         'FlexContainer-Scroll': scroll,
@@ -60,7 +63,7 @@ FlexContainer.propTypes = {
   direction: PropTypes.oneOf(['row', 'column']),
   wrap: PropTypes.bool,
   scroll: PropTypes.bool,
-  flex: PropTypes.oneOf(['0', '1']),
+  flex: PropTypes.string,
   shrink: PropTypes.oneOf(['0', '1']),
 };
 
