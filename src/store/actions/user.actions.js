@@ -1,12 +1,17 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { keys } from 'lodash';
+import { keys, pick } from 'lodash';
 import { push } from 'react-router-redux';
 
-import { savedSectorSelector } from 'store/selectors/base.selectors';
+import {
+  savedSectorSelector,
+  userFormSelector,
+  userUidSelector,
+} from 'store/selectors/base.selectors';
 import { getSavedEntities } from 'store/selectors/entity.selectors';
 
 import {
   updateCurrentUser,
+  getUserData,
   doFacebookLogin,
   doGoogleLogin,
   doSignup,
@@ -60,12 +65,15 @@ const onLogin = (dispatch, state) => result => {
     ]);
   }
   return promise
-    .then(() => getSyncedSectors(uid))
-    .then(entities => {
+    .then(() => Promise.all([getSyncedSectors(uid), getUserData(uid)]))
+    .then(([entities, userData]) => {
       dispatch(push('/'));
       dispatch({
         type: LOGGED_IN,
-        user: result.user ? result.user.toJSON() : result.toJSON(),
+        user: {
+          ...(result.user ? result.user.toJSON() : result.toJSON()),
+          ...userData,
+        },
         didSyncLocal: localSync,
         entities,
       });
@@ -178,11 +186,13 @@ export const passwordReset = () => (dispatch, getState) => {
 
 export const updateUser = () => (dispatch, getState) => {
   const state = getState();
-  return updateCurrentUser({ displayName: state.user.form.displayName })
+  const uid = userUidSelector(state);
+  const filteredForm = pick(userFormSelector(state), 'displayName', 'locale');
+  return updateCurrentUser(uid, { ...filteredForm })
     .then(() => {
       dispatch({
         type: UPDATE_USER,
-        user: { displayName: state.user.form.displayName },
+        user: filteredForm,
       });
     })
     .catch(err => {

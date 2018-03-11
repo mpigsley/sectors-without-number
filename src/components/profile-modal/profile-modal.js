@@ -5,13 +5,19 @@ import Button from 'primitives/other/button';
 import Modal from 'primitives/modal/modal';
 import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
+import Dropdown from 'primitives/form/dropdown';
+
+const AVAILABLE_LANGUAGES = [
+  { value: 'en', label: 'English' },
+  { value: 'fr', label: 'French' },
+];
 
 export default function ProfileModal({
   closeEditModal,
   updateUserForm,
   updateUser,
   isEditModalOpen,
-  displayName,
+  form,
 }) {
   return (
     <Fragment>
@@ -31,9 +37,17 @@ export default function ProfileModal({
         <Input
           id="username"
           name="username"
-          data-key="username"
-          value={displayName}
+          value={form.displayName || ''}
           onChange={({ target }) => updateUserForm('displayName', target.value)}
+        />
+        <Label htmlFor="language">Language</Label>
+        <Dropdown
+          id="language"
+          name="language"
+          clearable={false}
+          value={form.locale}
+          onChange={({ value }) => updateUserForm('locale', value)}
+          options={AVAILABLE_LANGUAGES}
         />
       </Modal>
     </Fragment>
@@ -45,9 +59,10 @@ ProfileModal.propTypes = {
   updateUserForm: PropTypes.func.isRequired,
   updateUser: PropTypes.func.isRequired,
   isEditModalOpen: PropTypes.bool.isRequired,
-  displayName: PropTypes.string,
+  form: PropTypes.shape({
+    displayName: PropTypes.string,
+    locale: PropTypes.string,
+  }).isRequired,
 };
 
-ProfileModal.defaultProps = {
-  displayName: '',
-};
+ProfileModal.defaultProps = {};

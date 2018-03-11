@@ -14,6 +14,13 @@ import {
   CLOSE_SYNC_MODAL,
 } from 'store/actions/user.actions';
 
+const initialForm = () => ({
+  email: '',
+  password: '',
+  confirm: '',
+  displayName: '',
+  locale: '',
+});
 export const initialState = {
   isInitialized: false,
   isDropdownActive: false,
@@ -22,12 +29,7 @@ export const initialState = {
   isEditModalOpen: false,
   error: null,
   model: null,
-  form: {
-    email: '',
-    password: '',
-    confirm: '',
-    displayName: '',
-  },
+  form: initialForm(),
 };
 
 export default function user(state = initialState, action) {
@@ -41,6 +43,7 @@ export default function user(state = initialState, action) {
         form: {
           ...state.form,
           displayName: (action.user || {}).displayName || '',
+          locale: (action.user || {}).locale || 'en',
         },
       };
     case OPEN_LOGIN_MODAL:
@@ -75,11 +78,17 @@ export default function user(state = initialState, action) {
         model: action.user,
         isLoginModalOpen: false,
         isSyncModalOpen: action.didSyncLocal,
+        form: {
+          ...state.form,
+          displayName: (action.user || {}).displayName || '',
+          locale: (action.user || {}).locale || 'en',
+        },
       };
     case LOGGED_OUT:
       return {
         ...state,
         model: null,
+        form: initialForm(),
         isLoginModalOpen: false,
         isDropdownActive: false,
       };

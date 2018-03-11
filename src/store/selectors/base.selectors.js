@@ -4,7 +4,7 @@ export const isDropdownActiveSelector = state => state.user.isDropdownActive;
 export const isUserEditModalOpen = state => state.user.isEditModalOpen;
 export const isInitializedSelector = state => state.user.isInitialized;
 export const userUidSelector = state => (state.user.model || {}).uid;
-export const displayNameSelector = state => state.user.form.displayName;
+export const userFormSelector = state => state.user.form;
 
 /* Entity */
 export const entitySelector = state => state.entity;
