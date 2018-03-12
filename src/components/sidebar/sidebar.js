@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { some, size } from 'lodash';
 
+import SectorMap from 'components/sector-map';
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import Entities from 'constants/entities';
 
@@ -89,21 +90,24 @@ export default class Sidebar extends Component {
   }
 
   render() {
+    console.log('here');
     const EntitySidebar = Entities[this.props.entityType].Sidebar;
     return (
-      <EntityNavigation
-        name={this.props.entity.name}
-        onDeleteEntity={this.onConfirmDelete}
-        openExportModal={this.openExportModal}
-      >
-        <EntitySidebar />
-        {this.renderSectorBuilderText()}
-        {this.renderConfirmDeleteModal()}
-        <ExportModal
-          isOpen={this.state.isExportOpen}
-          onCancel={this.closeExportModal}
-        />
-      </EntityNavigation>
+      <SectorMap>
+        <EntityNavigation
+          name={this.props.entity.name}
+          onDeleteEntity={this.onConfirmDelete}
+          openExportModal={this.openExportModal}
+        >
+          <EntitySidebar />
+          {this.renderSectorBuilderText()}
+          {this.renderConfirmDeleteModal()}
+          <ExportModal
+            isOpen={this.state.isExportOpen}
+            onCancel={this.closeExportModal}
+          />
+        </EntityNavigation>
+      </SectorMap>
     );
   }
 }

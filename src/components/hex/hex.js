@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import classNames from 'classnames';
 import { delay } from 'lodash';
 
@@ -26,7 +26,8 @@ function Hex({
   hoverKey,
   isCloudSave,
   active,
-  router,
+  toRoute,
+  match,
 }) {
   const { entity, entityId, entityType } = getTopLevelEntity(
     topLevelEntities,
@@ -51,7 +52,7 @@ function Hex({
     isMousedDown = false;
     if (entity && !holdKey) {
       deactivateSidebarEdit();
-      router.push(`/sector/${router.params.sector}/${entity.type}/${entityId}`);
+      toRoute(`/sector/${match.params.sector}/${entity.type}/${entityId}`);
     } else if (!isCloudSave) {
       if (!data.highlighted || holdKey === hoverKey) {
         entityRelease();
@@ -188,11 +189,11 @@ Hex.propTypes = {
   hoverKey: PropTypes.string,
   isCloudSave: PropTypes.bool.isRequired,
   active: PropTypes.bool.isRequired,
-  router: PropTypes.shape({
-    push: PropTypes.func.isRequired,
+  toRoute: PropTypes.func.isRequired,
+  match: PropTypes.shape({
     params: PropTypes.shape({
       sector: PropTypes.string,
-    }),
+    }).isRequired,
   }).isRequired,
 };
 

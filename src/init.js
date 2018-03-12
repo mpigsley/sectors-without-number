@@ -24,14 +24,14 @@ export default store => {
   });
 
   const unsubscribe = store.subscribe(() => {
-    const location = store.getState().routing.locationBeforeTransitions;
-    if (location) {
+    const path = store.getState().router.location.pathname;
+    if (path) {
       unsubscribe();
       Promise.all([getCurrentUser(), getEntities()]).then(([user, local]) => {
         const { uid } = user || {};
-        const sectorId = location.pathname.split('/')[2];
+        const sectorId = path.split('/')[2];
         const promises = [
-          location.pathname.startsWith('/sector')
+          path.startsWith('/sector')
             ? getCurrentSector(sectorId, uid)
             : Promise.resolve(),
         ];

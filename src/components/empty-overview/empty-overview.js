@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
+import OverviewList from 'components/overview-list';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import Spinner from 'primitives/other/spinner';
@@ -22,15 +23,17 @@ export default function EmptyOverview({ children, isInitialized }) {
     );
   }
   return (
-    <FlexContainer
-      flex="3"
-      direction="column"
-      align="center"
-      justify="center"
-      className="EmptyOverview"
-    >
-      {body}
-    </FlexContainer>
+    <OverviewList>
+      <FlexContainer
+        flex="3"
+        direction="column"
+        align="center"
+        justify="center"
+        className="EmptyOverview"
+      >
+        {body}
+      </FlexContainer>
+    </OverviewList>
   );
 }
 
