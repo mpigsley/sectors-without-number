@@ -6,7 +6,6 @@ import { coordinatesFromKey } from 'utils/common';
 
 export const getCurrentUser = () =>
   new Promise(resolve => {
-    console.log('here');
     FirebaseAuth().onAuthStateChanged(user => {
       if (!(user || {}).uid) {
         return resolve(null);

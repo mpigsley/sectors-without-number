@@ -22,6 +22,7 @@ export default class Sidebar extends Component {
     }).isRequired,
     deleteEntity: PropTypes.func.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
+    match: PropTypes.shape().isRequired,
   };
 
   static defaultProps = {
@@ -90,10 +91,9 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    console.log('here');
     const EntitySidebar = Entities[this.props.entityType].Sidebar;
     return (
-      <SectorMap>
+      <SectorMap match={this.props.match}>
         <EntityNavigation
           name={this.props.entity.name}
           onDeleteEntity={this.onConfirmDelete}
