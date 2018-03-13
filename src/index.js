@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { ConnectedRouter } from 'react-router-redux';
-import { Route } from 'react-router-dom';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
+import { IntlProvider } from 'react-intl';
 
-import store, { history } from 'store';
+import store from 'store';
 import init from 'init';
 
 import AppWrapper from 'components/app-wrapper';
+import HexBackground from 'components/hex-background';
 import Home from 'components/home';
 import Configure from 'components/configure';
 import Changelog from 'components/changelog';
+import SectorMap from 'components/sector-map';
 import Sidebar from 'components/sidebar';
+import OverviewList from 'components/overview-list';
 import OverviewTable from 'components/overview-table';
 import EmptyOverview from 'components/empty-overview';
 
@@ -20,27 +24,30 @@ import 'react-hint/css/index.css';
 
 init(store);
 
+const history = syncHistoryWithStore(browserHistory, store);
+
 ReactDOM.render(
-  <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <AppWrapper>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/configure" component={Configure} />
-        <Route exact path="/changelog" component={Changelog} />
-        <Route exact path="/overview/:sector" component={EmptyOverview} />
-        <Route
-          exact
-          path="/overview/:sector/:entityType"
-          component={OverviewTable}
-        />
-        <Route exact path="/sector/:sector" component={Sidebar} />
-        <Route
-          exact
-          path="/sector/:sector/:entityType/:entity"
-          component={Sidebar}
-        />
-      </AppWrapper>
-    </ConnectedRouter>
-  </Provider>,
+  <IntlProvider locale="en">
+    <Provider store={store}>
+      <Router history={history}>
+        <Route path="/" component={AppWrapper}>
+          <Route component={HexBackground}>
+            <IndexRoute component={Home} />
+            <Route path="/configure" component={Configure} />
+            <Route path="/changelog" component={Changelog} />
+          </Route>
+          <Route path="/sector/:sector" component={SectorMap}>
+            <IndexRoute component={Sidebar} />
+            <Route path=":entityType/:entity" component={Sidebar} />
+            <Route path="**" component={Sidebar} />
+          </Route>
+          <Route path="/overview/:sector" component={OverviewList}>
+            <IndexRoute component={EmptyOverview} />
+            <Route path=":entityType" component={OverviewTable} />
+          </Route>
+        </Route>
+      </Router>
+    </Provider>
+  </IntlProvider>,
   document.getElementById('root'),
 );

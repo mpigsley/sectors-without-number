@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 
 import {
   entityHoverStart,
@@ -25,15 +24,12 @@ const mapStateToProps = state => ({
   isCloudSave: false,
 });
 
-const mapDispatchToProps = dispatch => ({
-  toRoute: route => dispatch(push(route)),
-  entityHoverStart: hexKey => dispatch(entityHoverStart(hexKey)),
-  entityHoverEnd: hexKey => dispatch(entityHoverEnd(hexKey)),
-  entityHold: hexKey => dispatch(entityHold(hexKey)),
-  entityRelease: () => dispatch(entityRelease()),
-  moveTopLevelEntity: () => dispatch(moveTopLevelEntity()),
-  topLevelEntityCreate: hexKey => dispatch(topLevelEntityCreate(hexKey)),
-  deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Hex);
+export default connect(mapStateToProps, {
+  entityHoverStart,
+  entityHoverEnd,
+  entityHold,
+  entityRelease,
+  moveTopLevelEntity,
+  topLevelEntityCreate,
+  deactivateSidebarEdit,
+})(Hex);

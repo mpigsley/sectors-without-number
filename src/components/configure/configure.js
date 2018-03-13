@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Zap, RefreshCw } from 'react-feather';
 import Chance from 'chance';
 
-import HexBackground from 'components/hex-background';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
@@ -55,79 +54,77 @@ export default function Configure({
   };
 
   return (
-    <HexBackground>
-      <ContentContainer direction="column" align="center" justify="center">
-        <Header type={HeaderType.header2}>Configure</Header>
-        <SubContainer noMargin direction="column" align="flexStart">
-          <Label noPadding htmlFor="name">
-            Sector Name
-          </Label>
-          <IconInput
-            name="name"
-            data-key="name"
-            icon={RefreshCw}
-            value={name}
-            onChange={updateInput}
-            onIconClick={regenerateName(generateSectorName)}
-          />
-          <SubContainer noMargin>
-            <SubContainer
-              className="Configure-ButtonContainer"
-              noMargin
-              direction="column"
-              align="flexStart"
-            >
-              <Label htmlFor="rows">Rows</Label>
-              <Input
-                data-key="rows"
-                onChange={limitDimensions(updateInput)}
-                name="rows"
-                type="number"
-                value={rows || ''}
-              />
-            </SubContainer>
-            <SubContainer
-              className="Configure-ButtonContainer"
-              noMargin
-              direction="column"
-              align="flexStart"
-            >
-              <Label htmlFor="columns">Columns</Label>
-              <Input
-                data-key="columns"
-                onChange={limitDimensions(updateInput)}
-                name="columns"
-                type="number"
-                value={columns || ''}
-              />
-            </SubContainer>
+    <ContentContainer direction="column" align="center" justify="center">
+      <Header type={HeaderType.header2}>Configure</Header>
+      <SubContainer noMargin direction="column" align="flexStart">
+        <Label noPadding htmlFor="name">
+          Sector Name
+        </Label>
+        <IconInput
+          name="name"
+          data-key="name"
+          icon={RefreshCw}
+          value={name}
+          onChange={updateInput}
+          onIconClick={regenerateName(generateSectorName)}
+        />
+        <SubContainer noMargin>
+          <SubContainer
+            className="Configure-ButtonContainer"
+            noMargin
+            direction="column"
+            align="flexStart"
+          >
+            <Label htmlFor="rows">Rows</Label>
+            <Input
+              data-key="rows"
+              onChange={limitDimensions(updateInput)}
+              name="rows"
+              type="number"
+              value={rows || ''}
+            />
           </SubContainer>
-          <Checkbox
-            data-key="isBuilder"
-            value={isBuilder}
-            onChange={updateInput}
-            label="Initialize Empty Sector"
-          />
-          <Checkbox
-            data-key="additionalPointsOfInterest"
-            value={additionalPointsOfInterest}
-            onChange={updateInput}
-            label="Use Additional Points of Interest"
-          />
+          <SubContainer
+            className="Configure-ButtonContainer"
+            noMargin
+            direction="column"
+            align="flexStart"
+          >
+            <Label htmlFor="columns">Columns</Label>
+            <Input
+              data-key="columns"
+              onChange={limitDimensions(updateInput)}
+              name="columns"
+              type="number"
+              value={columns || ''}
+            />
+          </SubContainer>
         </SubContainer>
-        <SubContainer
-          className="Configure-PaddedButtons"
-          wrap
-          justify="center"
-          align="center"
-        >
-          <Button onClick={generateSector}>
-            <LinkIcon icon={Zap} size="20" />
-            Generate
-          </Button>
-        </SubContainer>
-      </ContentContainer>
-    </HexBackground>
+        <Checkbox
+          data-key="isBuilder"
+          value={isBuilder}
+          onChange={updateInput}
+          label="Initialize Empty Sector"
+        />
+        <Checkbox
+          data-key="additionalPointsOfInterest"
+          value={additionalPointsOfInterest}
+          onChange={updateInput}
+          label="Use Additional Points of Interest"
+        />
+      </SubContainer>
+      <SubContainer
+        className="Configure-PaddedButtons"
+        wrap
+        justify="center"
+        align="center"
+      >
+        <Button onClick={generateSector}>
+          <LinkIcon icon={Zap} size="20" />
+          Generate
+        </Button>
+      </SubContainer>
+    </ContentContainer>
   );
 }
 

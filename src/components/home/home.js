@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Settings, Zap } from 'react-feather';
 
-import HexBackground from 'components/hex-background';
+import { sortByKey } from 'utils/common';
 import LinkRow from 'primitives/other/link-row';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
@@ -11,8 +11,6 @@ import SubContainer from 'primitives/container/sub-container';
 import LinkIcon from 'primitives/other/link-icon';
 import ButtonLink from 'primitives/other/button-link';
 import Button from 'primitives/other/button';
-
-import { sortByKey } from 'utils/common';
 
 import './style.css';
 
@@ -51,31 +49,29 @@ export default function Home({ saved, generateSector }) {
   };
 
   return (
-    <HexBackground>
-      <ContentContainer direction="column" align="center" justify="center">
-        <Header type={HeaderType.header1}>Sectors Without Number</Header>
-        <SubContainer fullWidth justify="center" align="center">
-          <div className="Home-RowContainer">
-            <div className="Home-Row Home-Row--left" />
-          </div>
-          <Header type={HeaderType.header2}>Sector Generator</Header>
-          <div className="Home-RowContainer">
-            <div className="Home-Row" />
-          </div>
-        </SubContainer>
-        {renderSaved()}
-        <SubContainer wrap justify="center" align="center">
-          <ButtonLink to="/configure">
-            <LinkIcon icon={Settings} size="20" />
-            Configure
-          </ButtonLink>
-          <Button onClick={generateSector}>
-            <LinkIcon icon={Zap} size="20" />
-            Generate
-          </Button>
-        </SubContainer>
-      </ContentContainer>
-    </HexBackground>
+    <ContentContainer direction="column" align="center" justify="center">
+      <Header type={HeaderType.header1}>Sectors Without Number</Header>
+      <SubContainer fullWidth justify="center" align="center">
+        <div className="Home-RowContainer">
+          <div className="Home-Row Home-Row--left" />
+        </div>
+        <Header type={HeaderType.header2}>Sector Generator</Header>
+        <div className="Home-RowContainer">
+          <div className="Home-Row" />
+        </div>
+      </SubContainer>
+      {renderSaved()}
+      <SubContainer wrap justify="center" align="center">
+        <ButtonLink to="/configure">
+          <LinkIcon icon={Settings} size="20" />
+          Configure
+        </ButtonLink>
+        <Button onClick={generateSector}>
+          <LinkIcon icon={Zap} size="20" />
+          Generate
+        </Button>
+      </SubContainer>
+    </ContentContainer>
   );
 }
 
