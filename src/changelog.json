@@ -1,4 +1,8 @@
 {
+  "3.11.2": {
+    "description": "Fix misaligned system tooltips in the sector map.",
+    "date": "3-13-2018"
+  },
   "3.11.1": {
     "description": "Add a selected state to the overview list.",
     "date": "3-10-2018"
