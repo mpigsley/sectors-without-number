@@ -19,6 +19,7 @@ import Error from './error';
 
 import './style.css';
 
+const calcNavWidth = () => (window.innerWidth > 1500 ? 188 : 75);
 const calcWidth = () => {
   let width = window.innerWidth - 75;
   if (window.innerWidth > 1200) {
@@ -85,6 +86,7 @@ export default class SectorMap extends Component {
     }
     return (
       <EntityTooltips
+        leftOffset={calcNavWidth()}
         hexes={map(this.props.topLevelEntities, entity => ({
           ...entity,
           ...hexData.find(
