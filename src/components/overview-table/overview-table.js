@@ -8,9 +8,11 @@ import EmptyOverview from 'components/empty-overview';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import Table from 'primitives/other/table';
+import Button from 'primitives/other/button';
 import Entities from 'constants/entities';
-import { sortByKey } from 'utils/common';
 
+import { generateCSV, createCSVDownload } from 'utils/export';
+import { sortByKey } from 'utils/common';
 import './style.css';
 
 const getColumnsFromType = entityType => {
@@ -63,15 +65,35 @@ const getColumnsFromType = entityType => {
   return columns;
 };
 
-export default function OverviewTable({ entities, routeParams }) {
+export default function OverviewTable({
+  entities,
+  currentSector,
+  routeParams,
+}) {
+  const pluralName = Pluralize(Entities[routeParams.entityType].name);
   if (!size(entities[routeParams.entityType])) {
     return (
       <EmptyOverview>
-        You do not have any {Pluralize(Entities[routeParams.entityType].name)}{' '}
-        in this sector
+        You do not have any {pluralName} in this sector
       </EmptyOverview>
     );
   }
+
+  const columns = getColumnsFromType(routeParams.entityType);
+  const tableData = values(entities[routeParams.entityType]).sort(
+    sortByKey('name'),
+  );
+
+  const exportTable = () => {
+    const table = [columns.map(col => col.Header)].concat(
+      tableData.map(data => columns.map(col => data[col.accessor])),
+    );
+    return createCSVDownload(
+      generateCSV(table),
+      `${currentSector.name} - ${pluralName}`,
+    );
+  };
+
   return (
     <FlexContainer
       flex="3"
@@ -79,15 +101,22 @@ export default function OverviewTable({ entities, routeParams }) {
       align="flexStart"
       className="OverviewTable"
     >
-      <Header type={HeaderType.header3}>
-        {Entities[routeParams.entityType].name}
-      </Header>
+      <div className="OverviewTable-FlexWrap">
+        <FlexContainer justify="spaceBetween" align="baseline">
+          <Header type={HeaderType.header3}>
+            {Entities[routeParams.entityType].name}
+          </Header>
+          <Button minimal onClick={exportTable}>
+            Export {pluralName}
+          </Button>
+        </FlexContainer>
+      </div>
       <Table
         sortable
         className="OverviewTable-Table"
         dataIdAccessor="key"
-        columns={getColumnsFromType(routeParams.entityType)}
-        data={values(entities[routeParams.entityType]).sort(sortByKey('name'))}
+        columns={columns}
+        data={tableData}
       />
     </FlexContainer>
   );
@@ -95,7 +124,14 @@ export default function OverviewTable({ entities, routeParams }) {
 
 OverviewTable.propTypes = {
   entities: PropTypes.shape().isRequired,
+  currentSector: PropTypes.shape({
+    name: PropTypes.string,
+  }),
   routeParams: PropTypes.shape({
     entityType: PropTypes.string.isRequired,
   }).isRequired,
+};
+
+OverviewTable.defaultProps = {
+  currentSector: {},
 };
