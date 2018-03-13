@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { omit, map, size } from 'lodash';
-import { Route } from 'react-router-dom';
 
-import OverviewTable from 'components/overview-table';
 import ProfileModal from 'components/profile-modal';
 import Navigation from 'components/navigation';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -16,11 +14,11 @@ import './style.css';
 
 export default function OverviewList({
   toHome,
+  children,
   currentSector,
   entities,
   isInitialized,
   params,
-  match,
 }) {
   if (!entities[Entities.sector.key][currentSector] && isInitialized) {
     toHome();
@@ -56,10 +54,7 @@ export default function OverviewList({
             )}
           </div>
         </FlexContainer>
-        <Route
-          path={`${match.url}/:sector/:entityType`}
-          component={OverviewTable}
-        />
+        {children}
       </FlexContainer>
       <ProfileModal />
     </FlexContainer>
@@ -68,13 +63,11 @@ export default function OverviewList({
 
 OverviewList.propTypes = {
   toHome: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
   currentSector: PropTypes.string.isRequired,
   entities: PropTypes.shape().isRequired,
   isInitialized: PropTypes.bool.isRequired,
   params: PropTypes.shape({
     entityType: PropTypes.string,
-  }).isRequired,
-  match: PropTypes.shape({
-    url: PropTypes.string,
   }).isRequired,
 };

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { throttle, map } from 'lodash';
+import { throttle, isEmpty, map } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';
@@ -14,6 +14,8 @@ import Navigation from 'components/navigation';
 import ExportTypes from 'constants/export-types';
 import hexGenerator from 'utils/hex-generator';
 import { coordinateKey } from 'utils/common';
+import Loading from './loading';
+import Error from './error';
 
 import './style.css';
 
@@ -31,18 +33,18 @@ export default class SectorMap extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
+    isInitialized: PropTypes.bool.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     sector: PropTypes.shape({
       rows: PropTypes.number,
       columns: PropTypes.number,
     }),
+    generateSector: PropTypes.func.isRequired,
     toSafeRoute: PropTypes.func.isRequired,
-    match: PropTypes.shape({
-      url: PropTypes.string.isRequired,
-      params: PropTypes.shape({
-        sector: PropTypes.string.isRequired,
-      }),
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
     }).isRequired,
+    routeParams: PropTypes.shape().isRequired,
     exportType: PropTypes.string.isRequired,
   };
 
@@ -56,12 +58,9 @@ export default class SectorMap extends Component {
   };
 
   componentWillMount() {
-    const splitPath = this.props.match.url.split('/');
-    if (
-      splitPath.length > 5 ||
-      (splitPath.length > 3 && (splitPath[4] || '').length !== 20)
-    ) {
-      this.props.toSafeRoute(this.props.match.params.sector);
+    const splitPath = this.props.location.pathname.split('/');
+    if (splitPath.length > 5 || (splitPath[4] || '').length !== 20) {
+      this.props.toSafeRoute(this.props.routeParams.sector);
     }
   }
 
@@ -104,6 +103,12 @@ export default class SectorMap extends Component {
   }
 
   render() {
+    if (!this.props.isInitialized) {
+      return <Loading />;
+    } else if (isEmpty(this.props.sector)) {
+      return <Error generateSector={this.props.generateSector} />;
+    }
+
     const { hexes, printable } = hexGenerator({
       renderSector: true,
       height: this.state.height,

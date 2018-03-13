@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { values, size } from 'lodash';
 import Pluralize from 'pluralize';
 
+import OverviewList from 'components/overview-list';
 import EmptyOverview from 'components/empty-overview';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
@@ -73,23 +74,27 @@ export default function OverviewTable({ entities, routeParams }) {
     );
   }
   return (
-    <FlexContainer
-      flex="3"
-      direction="column"
-      align="flexStart"
-      className="OverviewTable"
-    >
-      <Header type={HeaderType.header3}>
-        {Entities[routeParams.entityType].name}
-      </Header>
-      <Table
-        sortable
-        className="OverviewTable-Table"
-        dataIdAccessor="key"
-        columns={getColumnsFromType(routeParams.entityType)}
-        data={values(entities[routeParams.entityType]).sort(sortByKey('name'))}
-      />
-    </FlexContainer>
+    <OverviewList>
+      <FlexContainer
+        flex="3"
+        direction="column"
+        align="flexStart"
+        className="OverviewTable"
+      >
+        <Header type={HeaderType.header3}>
+          {Entities[routeParams.entityType].name}
+        </Header>
+        <Table
+          sortable
+          className="OverviewTable-Table"
+          dataIdAccessor="key"
+          columns={getColumnsFromType(routeParams.entityType)}
+          data={values(entities[routeParams.entityType]).sort(
+            sortByKey('name'),
+          )}
+        />
+      </FlexContainer>
+    </OverviewList>
   );
 }
 
