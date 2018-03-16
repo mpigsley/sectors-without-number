@@ -1,34 +1,34 @@
 export default {
-  name: 'Biosphere',
+  name: 'biosphere',
   key: 'biosphere',
   attributes: {
     remnant: {
       key: 'remnant',
-      name: 'Biosphere remnants',
+      name: 'biosphere.remnant',
     },
     microbial: {
       key: 'microbial',
-      name: 'Microbial',
+      name: 'biosphere.microbial',
     },
     none: {
       key: 'none',
-      name: 'None',
+      name: 'biosphere.none',
     },
     humanMiscible: {
       key: 'humanMiscible',
-      name: 'Human-miscible',
+      name: 'biosphere.humanMiscible',
     },
     immiscible: {
       key: 'immiscible',
-      name: 'Immiscible',
+      name: 'biosphere.immiscible',
     },
     hybrid: {
       key: 'hybrid',
-      name: 'Hybrid',
+      name: 'biosphere.hybrid',
     },
     engineered: {
       key: 'engineered',
-      name: 'Engineered',
+      name: 'biosphere.engineered',
     },
   },
 };

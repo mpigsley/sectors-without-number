@@ -1,34 +1,34 @@
 export default {
-  name: 'Temperature',
+  name: 'temperature',
   key: 'temperature',
   attributes: {
     frozen: {
       key: 'frozen',
-      name: 'Frozen',
+      name: 'temperature.frozen',
     },
     cold: {
       key: 'cold',
-      name: 'Cold',
+      name: 'temperature.cold',
     },
     variableCold: {
       key: 'variableCold',
-      name: 'Variable Cold',
+      name: 'temperature.variableCold',
     },
     temperate: {
       key: 'temperate',
-      name: 'Temperate',
+      name: 'temperature.temperate',
     },
     variableWarm: {
       key: 'variableWarm',
-      name: 'Variable Warm',
+      name: 'temperature.variableWarm',
     },
     warm: {
       key: 'warm',
-      name: 'Warm',
+      name: 'temperature.warm',
     },
     burning: {
       key: 'burning',
-      name: 'Burning',
+      name: 'temperature.burning',
     },
   },
 };
