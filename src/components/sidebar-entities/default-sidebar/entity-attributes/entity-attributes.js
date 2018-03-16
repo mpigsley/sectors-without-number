@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { omit, map, values } from 'lodash';
 import { RefreshCw } from 'react-feather';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -27,7 +27,7 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
         <FormattedMessage id={name} />:
       </b>
       <span className="EntityAttributes-Item">
-        {attributes[attribute].name}
+        <FormattedMessage id={attributes[attribute].name} />
       </span>
     </FlexContainer>
   );
@@ -43,6 +43,7 @@ export default function EntityAttributes({
   toggleAttributesOpen,
   toggleTagsOpen,
   isAncestorHidden,
+  intl,
 }) {
   const noAttributes =
     !entity.attributes || !Object.keys(entity.attributes).length;
@@ -126,7 +127,9 @@ export default function EntityAttributes({
         align="center"
         className="EntityAttributes-Attribute"
       >
-        <b className="EntityAttributes-Header">{name}:</b>
+        <b className="EntityAttributes-Header">
+          <FormattedMessage id={name} />:
+        </b>
         <Dropdown
           wrapperClassName="EntityAttributes-Item"
           value={attribute}
@@ -135,7 +138,7 @@ export default function EntityAttributes({
           }
           options={map(attributes, attr => ({
             value: attr.key,
-            label: attr.name,
+            label: intl.formatMessage({ id: attr.name }),
           }))}
         />
       </FlexContainer>
@@ -197,6 +200,7 @@ EntityAttributes.propTypes = {
   toggleAttributesOpen: PropTypes.func.isRequired,
   toggleTagsOpen: PropTypes.func.isRequired,
   isAncestorHidden: PropTypes.bool.isRequired,
+  intl: intlShape.isRequired,
 };
 
 EntityAttributes.defaultProps = {

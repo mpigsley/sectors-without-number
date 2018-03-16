@@ -1,3 +1,10 @@
 {
-  "atmosphere": "Atmosphäre"
+  "atmosphere": "Atmosphäre",
+  "atmosphere.corrosive": "Korrosiv",
+  "atmosphere.inert": "Inertgas",
+  "atmosphere.airlessThin": "Luftfreie oder dünne Atmosphäre",
+  "atmosphere.breathable": "Atembare Mischung",
+  "atmosphere.thick": "Dichte Atmosphäre, atembar mit Druckmaske",
+  "atmosphere.invasive": "Invasive, toxische Atmosphäre",
+  "atmosphere.corrosiveInvasive": "Korrosive und invasive Atmosphäre"
 }

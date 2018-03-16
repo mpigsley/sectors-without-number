@@ -4,7 +4,7 @@ export default {
   attributes: {
     remnant: {
       key: 'remnant',
-      name: 'Remnant',
+      name: 'Biosphere remnants',
     },
     microbial: {
       key: 'microbial',
