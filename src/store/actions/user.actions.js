@@ -99,7 +99,7 @@ export const initialize = location => dispatch =>
     const promises = [
       location.pathname.startsWith('/sector')
         ? getCurrentSector(sectorId, uid)
-        : Promise.resolve(),
+        : Promise.resolve({}),
     ];
     if (uid) {
       promises.push(getSyncedSectors(uid));
@@ -235,18 +235,16 @@ export const updateUser = () => (dispatch, getState) => {
   if (!Locale[filteredForm.local || 'en']) {
     filteredForm = { ...filteredForm, locale: 'en' };
   }
-  const promises = [updateCurrentUser(uid, { ...filteredForm })];
-  if (userLocaleSelector(state) !== (filteredForm.locale || 'en')) {
-    promises.push(
-      Locale[filteredForm.locale].localeFetch().then(addLocaleData),
-    );
-  }
-  return Promise.all(promises)
+  return updateCurrentUser(uid, { ...filteredForm })
     .then(() => {
-      dispatch({
-        type: UPDATE_USER,
-        user: filteredForm,
-      });
+      if (userLocaleSelector(state) !== (filteredForm.locale || 'en')) {
+        window.location.reload();
+      } else {
+        dispatch({
+          type: UPDATE_USER,
+          user: filteredForm,
+        });
+      }
     })
     .catch(err => {
       dispatch(ErrorToast());
