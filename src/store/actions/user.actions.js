@@ -1,6 +1,7 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { keys, pick } from 'lodash';
+import { size, keys, pick } from 'lodash';
 import { push } from 'react-router-redux';
+import { addLocaleData } from 'react-intl';
 
 import {
   savedSectorSelector,
@@ -20,10 +21,15 @@ import {
   doLogout,
   getSyncedSectors,
   uploadEntities,
+  getCurrentUser,
+  getCurrentSector,
+  convertOldSectors,
 } from 'store/api/firebase';
-import { clearLocalDatabase } from 'store/api/local';
+import { clearLocalDatabase, getEntities } from 'store/api/local';
+
+import Locale from 'constants/locale';
 import Entities from 'constants/entities';
-import { ErrorToast } from 'utils/toasts';
+import { ErrorToast, InfoToast, removeToastById } from 'utils/toasts';
 import { mergeEntityUpdates } from 'utils/entity';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
@@ -85,24 +91,61 @@ const onLogin = (dispatch, state) => result => {
     });
 };
 
-export const initialize = ({
-  local,
-  user,
-  synced = {},
-  currentSector = {},
-}) => ({
-  type: INITIALIZE,
-  user,
-  entities: mergeEntityUpdates(
-    mergeEntityUpdates(local, synced),
-    currentSector,
-  ),
-  shared: keys(currentSector[Entities.sector.key] || {}),
-  saved: [
-    ...keys(synced[Entities.sector.key]),
-    ...keys(local[Entities.sector.key]),
-  ],
-});
+export const initialize = location => dispatch =>
+  Promise.all([getCurrentUser(), getEntities()]).then(([user, local]) => {
+    const { uid, locale } = user || {};
+    const sectorId = location.pathname.split('/')[2];
+    const promises = [
+      location.pathname.startsWith('/sector')
+        ? getCurrentSector(sectorId, uid)
+        : Promise.resolve(),
+    ];
+    if (uid) {
+      promises.push(getSyncedSectors(uid));
+      promises.push(
+        convertOldSectors({
+          uid,
+          onComplete: () => dispatch(removeToastById('sync-toastr')),
+          onConvert: () =>
+            dispatch(
+              InfoToast({
+                title: 'Syncing Sectors',
+                message: 'Do not exit out of this web page.',
+                config: {
+                  id: 'sync-toastr',
+                  options: {
+                    removeOnHover: false,
+                    showCloseButton: false,
+                    progressBar: false,
+                  },
+                },
+              }),
+            ),
+        }),
+      );
+    }
+    if (locale && locale !== 'en' && Locale[locale]) {
+      promises.push(Locale[locale].localeFetch().then(addLocaleData));
+    }
+    return Promise.all(promises).then(
+      ([currentSector, onlySynced, converted]) => {
+        const synced = size(onlySynced) ? onlySynced : converted;
+        dispatch({
+          type: INITIALIZE,
+          user,
+          entities: mergeEntityUpdates(
+            mergeEntityUpdates(local, synced),
+            currentSector,
+          ),
+          shared: keys(currentSector[Entities.sector.key] || {}),
+          saved: [
+            ...keys(synced[Entities.sector.key]),
+            ...keys(local[Entities.sector.key]),
+          ],
+        });
+      },
+    );
+  });
 
 export const facebookLogin = () => (dispatch, getState) =>
   doFacebookLogin()

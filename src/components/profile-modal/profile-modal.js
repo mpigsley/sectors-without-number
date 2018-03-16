@@ -1,16 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { map } from 'lodash';
 
 import Button from 'primitives/other/button';
 import Modal from 'primitives/modal/modal';
 import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
 import Dropdown from 'primitives/form/dropdown';
-
-const AVAILABLE_LANGUAGES = [
-  { value: 'en', label: 'English' },
-  { value: 'fr', label: 'French' },
-];
+import LOCALES from 'constants/locale';
 
 export default function ProfileModal({
   closeEditModal,
@@ -46,8 +43,8 @@ export default function ProfileModal({
           name="language"
           clearable={false}
           value={form.locale}
+          options={map(LOCALES, ({ value, name }) => ({ value, label: name }))}
           onChange={({ value }) => updateUserForm('locale', value)}
-          options={AVAILABLE_LANGUAGES}
         />
       </Modal>
     </Fragment>
