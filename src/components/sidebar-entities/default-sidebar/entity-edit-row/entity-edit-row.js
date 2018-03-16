@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { X, RefreshCw, RotateCcw } from 'react-feather';
 import ReactHintFactory from 'react-hint';
-import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Input from 'primitives/form/input';
