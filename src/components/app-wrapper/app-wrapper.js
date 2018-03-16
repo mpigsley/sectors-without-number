@@ -14,7 +14,10 @@ export default function AppWrapper({
   userLocale,
 }) {
   return (
-    <IntlProvider locale={userLocale} messages={Lang[userLocale]}>
+    <IntlProvider
+      locale={userLocale}
+      messages={{ ...Lang.en, ...Lang[userLocale] }}
+    >
       <div>
         <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
         <LoginModal />
