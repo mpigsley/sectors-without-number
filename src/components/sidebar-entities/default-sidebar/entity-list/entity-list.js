@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Pluralize from 'pluralize';
 import { map, size, isNumber } from 'lodash';
 import { Plus, EyeOff } from 'react-feather';
 import ReactHintFactory from 'react-hint';
+import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -44,13 +44,10 @@ const EntityList = ({
           onClick={toggleListOpen}
         >
           <FlexContainer justify="spaceBetween" align="flexEnd">
-            <span>{Pluralize(Entities[entityType].name)}</span>
+            <FormattedMessage id={Entities[entityType].name} />
             <span className="EntityList-Size">
-              {`${numEntities} ${
-                numEntities > 1
-                  ? Pluralize(Entities[entityType].shortName)
-                  : Entities[entityType].shortName
-              }`}
+              {numEntities}{' '}
+              <FormattedMessage id={Entities[entityType].shortName} />
             </span>
           </FlexContainer>
         </SectionHeader>
@@ -60,7 +57,7 @@ const EntityList = ({
       <SectionHeader isOpen={isOpen} onIconClick={toggleListOpen}>
         <FlexContainer justify="spaceBetween" align="flexEnd">
           <span className="EntityList-Name">
-            {Pluralize(Entities[entityType].name)}
+            <FormattedMessage id={Entities[entityType].name} />
           </span>
           <Button
             minimal
@@ -68,7 +65,7 @@ const EntityList = ({
             onClick={createChildInEdit}
           >
             <LinkIcon size={15} icon={Plus} />
-            Add {Entities[entityType].shortName}
+            Add <FormattedMessage id={Entities[entityType].shortName} />
           </Button>
         </FlexContainer>
       </SectionHeader>

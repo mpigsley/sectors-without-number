@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { X, Plus } from 'react-feather';
 import { filter, includes, map, pull, capitalize } from 'lodash';
+import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -86,7 +87,9 @@ export default function EntityTags({
 
   let header = (
     <SectionHeader isOpen={isOpen} onClick={toggleOpen}>
-      <span className="EntityTags-Name">{Entities[entityType].name} Tags</span>
+      <span className="EntityTags-Name">
+        <FormattedMessage id={Entities[entityType].name} /> Tags
+      </span>
     </SectionHeader>
   );
   if (isSidebarEditActive) {
@@ -94,7 +97,7 @@ export default function EntityTags({
       <SectionHeader isOpen={isOpen} onIconClick={toggleOpen}>
         <FlexContainer justify="spaceBetween" align="flexEnd">
           <span className="EntityTags-Name" onClick={toggleOpen}>
-            {Entities[entityType].name} Tags
+            <FormattedMessage id={Entities[entityType].name} /> Tags
           </span>
           <Button
             minimal
@@ -112,7 +115,7 @@ export default function EntityTags({
             }}
           >
             <LinkIcon size={15} icon={Plus} />
-            Add {Entities[entityType].name} Tag
+            Add <FormattedMessage id={Entities[entityType].name} /> Tags
           </Button>
         </FlexContainer>
       </SectionHeader>

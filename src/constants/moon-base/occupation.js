@@ -1,26 +1,26 @@
 export default {
-  name: 'Occupation',
+  name: 'misc.occupation',
   key: 'occupation',
   attributes: {
     researchers: {
       key: 'researchers',
-      name: 'Unlucky corporate researchers',
+      name: 'entity.moonBase.occupation.researchers',
     },
     genius: {
       key: 'genius',
-      name: 'Reclusive hermit genius',
+      name: 'entity.moonBase.occupation.genius',
     },
     colony: {
       key: 'colony',
-      name: 'Remnants of a failed colony',
+      name: 'entity.moonBase.occupation.colony',
     },
     military: {
       key: 'military',
-      name: 'Military listening post',
+      name: 'entity.moonBase.occupation.military',
     },
     miners: {
       key: 'miners',
-      name: 'Lonely overseers and robot miners',
+      name: 'entity.moonBase.occupation.miners',
     },
   },
 };

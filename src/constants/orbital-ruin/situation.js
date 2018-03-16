@@ -1,26 +1,26 @@
 export default {
-  name: 'Situation',
+  name: 'misc.situation',
   key: 'situation',
   attributes: {
     awakening: {
       key: 'awakening',
-      name: 'Trying to stop it awakening',
+      name: 'entity.orbitalRuin.situation.awakening',
     },
     tech: {
       key: 'tech',
-      name: 'Meddling with strange tech',
+      name: 'entity.orbitalRuin.situation.tech',
     },
     calamity: {
       key: 'calamity',
-      name: 'Impending tech calamity',
+      name: 'entity.orbitalRuin.situation.calamity',
     },
     secret: {
       key: 'secret',
-      name: 'A terrible secret is unearthed',
+      name: 'entity.orbitalRuin.situation.secret',
     },
     interlopers: {
       key: 'interlopers',
-      name: 'Fighting outside interlopers',
+      name: 'entity.orbitalRuin.situation.interlopers',
     },
   },
 };

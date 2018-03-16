@@ -1,5 +1,5 @@
 export default {
-  name: 'Occupation',
+  name: 'misc.occupation',
   key: 'occupation',
   attributes: {
     experminents: {

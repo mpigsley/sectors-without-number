@@ -1,26 +1,26 @@
 export default {
-  name: 'Occupation',
+  name: 'misc.occupation',
   key: 'occupation',
   attributes: {
     sectarians: {
       key: 'sectarians',
-      name: 'Zealous religious sectarians',
+      name: 'entity.asteroidBase.occupation.sectarians',
     },
     rebels: {
       key: 'rebels',
-      name: 'Failed rebels from another world',
+      name: 'entity.asteroidBase.occupation.rebels',
     },
     miners: {
       key: 'miners',
-      name: 'Wage-slave corporate miners',
+      name: 'entity.asteroidBase.occupation.miners',
     },
     prospectors: {
       key: 'prospectors',
-      name: 'Independent asteroid prospectors',
+      name: 'entity.asteroidBase.occupation.prospectors',
     },
     pirates: {
       key: 'pirates',
-      name: 'Pirates masquerading as otherwise',
+      name: 'entity.asteroidBase.occupation.pirates',
     },
   },
 };

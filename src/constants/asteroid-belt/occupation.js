@@ -1,26 +1,26 @@
 export default {
-  name: 'Occupation',
+  name: 'misc.occupation',
   key: 'occupation',
   attributes: {
     mine: {
       key: 'mine',
-      name: 'Grizzled belter mine laborers',
+      name: 'entity.asteroidBelt.occupation.mine',
     },
     drones: {
       key: 'drones',
-      name: 'Ancient automated guardian drones',
+      name: 'entity.asteroidBelt.occupation.drones',
     },
     base: {
       key: 'base',
-      name: 'Survivors of destroyed asteroid base',
+      name: 'entity.asteroidBelt.occupation.base',
     },
     pirates: {
       key: 'pirates',
-      name: 'Pirates hiding out among the rocks',
+      name: 'entity.asteroidBelt.occupation.pirates',
     },
     patrol: {
       key: 'patrol',
-      name: 'Lonely military patrol base staff',
+      name: 'entity.asteroidBelt.occupation.patrol',
     },
   },
 };

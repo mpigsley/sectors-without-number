@@ -35,8 +35,8 @@ import NoteSidebar from 'components/sidebar-entities/note-sidebar';
 
 const note = {
   key: 'note',
-  name: 'Note',
-  shortName: 'Note',
+  name: 'entity.note',
+  shortName: 'entity.note',
   topLevel: false,
   isAdditional: false,
   nameGenerator: () => {},
@@ -47,8 +47,8 @@ const note = {
 
 const researchBase = {
   key: 'researchBase',
-  name: 'Research Base',
-  shortName: 'Base',
+  name: 'entity.researchBase',
+  shortName: 'entity.base',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
@@ -59,8 +59,8 @@ const researchBase = {
 
 const refuelingStation = {
   key: 'refuelingStation',
-  name: 'Refueling Station',
-  shortName: 'Station',
+  name: 'entity.refuelingStation',
+  shortName: 'entity.station',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
@@ -71,8 +71,8 @@ const refuelingStation = {
 
 const moonBase = {
   key: 'moonBase',
-  name: 'Moon Base',
-  shortName: 'Base',
+  name: 'entity.moonBase',
+  shortName: 'entity.base',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
@@ -83,8 +83,8 @@ const moonBase = {
 
 const orbitalRuin = {
   key: 'orbitalRuin',
-  name: 'Orbital Ruin',
-  shortName: 'Ruin',
+  name: 'entity.orbitalRuin',
+  shortName: 'entity.ruin',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
@@ -95,8 +95,8 @@ const orbitalRuin = {
 
 const gasGiantMine = {
   key: 'gasGiantMine',
-  name: 'Gas Giant Mine',
-  shortName: 'Mine',
+  name: 'entity.gasGiantMine',
+  shortName: 'entity.mine',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateMineName,
@@ -107,8 +107,8 @@ const gasGiantMine = {
 
 const spaceStation = {
   key: 'spaceStation',
-  name: 'Space Station',
-  shortName: 'Station',
+  name: 'entity.spaceStation',
+  shortName: 'entity.station',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
@@ -119,8 +119,8 @@ const spaceStation = {
 
 const asteroidBase = {
   key: 'asteroidBase',
-  name: 'Asteroid Base',
-  shortName: 'Base',
+  name: 'entity.asteroidBase',
+  shortName: 'entity.base',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
@@ -131,8 +131,8 @@ const asteroidBase = {
 
 const moon = {
   key: 'moon',
-  name: 'Moon',
-  shortName: 'Moon',
+  name: 'entity.moon',
+  shortName: 'entity.moon',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateName,
@@ -148,8 +148,8 @@ const moon = {
 
 const planet = {
   key: 'planet',
-  name: 'Planet',
-  shortName: 'Planet',
+  name: 'entity.planet',
+  shortName: 'entity.planet',
   topLevel: false,
   isAdditional: false,
   tags: WorldTags,
@@ -169,8 +169,8 @@ const planet = {
 
 const asteroidBelt = {
   key: 'asteroidBelt',
-  name: 'Asteroid Belt',
-  shortName: 'Belt',
+  name: 'entity.asteroidBelt',
+  shortName: 'entity.belt',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateAsteroidBeltName,
@@ -187,8 +187,8 @@ const asteroidBelt = {
 
 const deepSpaceStation = {
   key: 'deepSpaceStation',
-  name: 'Deep-Space Station',
-  shortName: 'Station',
+  name: 'entity.deepSpaceStation',
+  shortName: 'entity.station',
   topLevel: false,
   isAdditional: true,
   nameGenerator: generateStationName,
@@ -199,8 +199,8 @@ const deepSpaceStation = {
 
 const blackHole = {
   key: 'blackHole',
-  name: 'Black Hole',
-  shortName: 'Black Hole',
+  name: 'entity.blackHole',
+  shortName: 'entity.blackHole',
   topLevel: true,
   isAdditional: true,
   nameGenerator: generateBlackHoleName,
@@ -216,8 +216,8 @@ const blackHole = {
 
 const system = {
   key: 'system',
-  name: 'System',
-  shortName: 'System',
+  name: 'entity.system',
+  shortName: 'entity.system',
   topLevel: true,
   isAdditional: false,
   nameGenerator: generateName,
@@ -234,8 +234,8 @@ const system = {
 
 const sector = {
   key: 'sector',
-  name: 'Sector',
-  shortName: 'Sector',
+  name: 'entity.sector',
+  shortName: 'entity.sector',
   topLevel: false,
   isAdditional: false,
   nameGenerator: generateSectorName,

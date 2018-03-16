@@ -1,26 +1,26 @@
 export default {
-  name: 'Situation',
+  name: 'misc.situation',
   key: 'situation',
   attributes: {
     systems: {
       key: 'systems',
-      name: 'Systems breaking down',
+      name: 'entity.spaceStation.situation.systems',
     },
     sabotage: {
       key: 'sabotage',
-      name: 'Foreign sabotage attempt',
+      name: 'entity.spaceStation.situation.sabotage',
     },
     market: {
       key: 'market',
-      name: 'Black market for the elite',
+      name: 'entity.spaceStation.situation.market',
     },
     pretech: {
       key: 'pretech',
-      name: 'Vault for dangerous pretech',
+      name: 'entity.spaceStation.situation.pretech',
     },
     pirates: {
       key: 'pirates',
-      name: 'Supply base for pirates',
+      name: 'entity.spaceStation.situation.pirates',
     },
   },
 };

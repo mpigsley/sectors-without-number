@@ -1,26 +1,26 @@
 export default {
-  name: 'Occupation',
+  name: 'misc.occupation',
   key: 'occupation',
   attributes: {
     hermit: {
       key: 'hermit',
-      name: 'Half-crazed hermit caretaker',
+      name: 'entity.refuelingStation.occupation.hermit',
     },
     fun: {
       key: 'fun',
-      name: 'Sordid purveyors of decadent fun',
+      name: 'entity.refuelingStation.occupation.fun',
     },
     minions: {
       key: 'minions',
-      name: 'Extortionate corporate minions',
+      name: 'entity.refuelingStation.occupation.minions',
     },
     religious: {
       key: 'religious',
-      name: 'Religious missionaries to travelers',
+      name: 'entity.refuelingStation.occupation.religious',
     },
     vendors: {
       key: 'vendors',
-      name: 'Brainless automated vendors',
+      name: 'entity.refuelingStation.occupation.vendors',
     },
   },
 };

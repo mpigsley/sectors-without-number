@@ -1,26 +1,26 @@
 export default {
-  name: 'Situation',
+  name: 'misc.situation',
   key: 'situation',
   attributes: {
     things: {
       key: 'things',
-      name: 'Things are emerging below',
+      name: 'entity.gasGiantMine.situation.things',
     },
     supplies: {
       key: 'supplies',
-      name: 'They need vital supplies',
+      name: 'entity.gasGiantMine.situation.supplies',
     },
     revolt: {
       key: 'revolt',
-      name: 'The workers are in revolt',
+      name: 'entity.gasGiantMine.situation.revolt',
     },
     pirates: {
       key: 'pirates',
-      name: 'Pirates secretly fuel there',
+      name: 'entity.gasGiantMine.situation.pirates',
     },
     remnants: {
       key: 'remnants',
-      name: 'Alien remnants were found',
+      name: 'entity.gasGiantMine.situation.remnants',
     },
   },
 };

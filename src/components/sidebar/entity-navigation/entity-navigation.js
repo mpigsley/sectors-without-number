@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
+import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -173,7 +174,7 @@ export default function EntityNavigation({
               type={HeaderType.header3}
               className="EntityNavigation-TypeHeader"
             >
-              ({Entities[entityType].name})
+              (<FormattedMessage id={Entities[entityType].name} />)
             </Header>
           </FlexContainer>
         </FlexContainer>

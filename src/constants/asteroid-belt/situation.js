@@ -1,26 +1,26 @@
 export default {
-  name: 'Situation',
+  name: 'misc.situation',
   key: 'situation',
   attributes: {
     rock: {
       key: 'rock',
-      name: 'Ruptured rock released a peril',
+      name: 'entity.asteroidBelt.situation.rock',
     },
     spy: {
       key: 'spy',
-      name: 'Foreign spy ships hide there',
+      name: 'entity.asteroidBelt.situation.spy',
     },
     minerals: {
       key: 'minerals',
-      name: 'Gold rush for new minerals',
+      name: 'entity.asteroidBelt.situation.minerals',
     },
     ruins: {
       key: 'ruins',
-      name: 'Ancient ruins dot the rocks',
+      name: 'entity.asteroidBelt.situation.ruins',
     },
     war: {
       key: 'war',
-      name: 'War between rival rocks',
+      name: 'entity.asteroidBelt.situation.war',
     },
   },
 };

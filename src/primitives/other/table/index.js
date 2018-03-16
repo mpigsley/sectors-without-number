@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { injectIntl, intlShape } from 'react-intl';
 import { ChevronDown, ChevronUp } from 'react-feather';
 
 import './style.css';
@@ -14,7 +15,7 @@ const nextDirection = direction => {
   return 1;
 };
 
-export default class Table extends Component {
+class Table extends Component {
   static propTypes = {
     className: PropTypes.string,
     dataIdAccessor: PropTypes.string.isRequired,
@@ -30,8 +31,10 @@ export default class Table extends Component {
         Cell: PropTypes.func,
         columnClass: PropTypes.string,
         centered: PropTypes.bool,
+        translateItems: PropTypes.bool,
       }),
     ).isRequired,
+    intl: intlShape.isRequired,
   };
 
   static defaultProps = {
@@ -94,6 +97,13 @@ export default class Table extends Component {
     return <ChevronDown size={12} className="Table-SortIcon" />;
   }
 
+  renderRowItem(row, { Cell, accessor, translateItem }) {
+    const item = translateItem
+      ? this.props.intl.formatMessage({ id: row[accessor] })
+      : row[accessor];
+    return Cell ? Cell(item, row) : item;
+  }
+
   render() {
     return (
       <table className={classNames('Table', this.props.className)}>
@@ -111,7 +121,11 @@ export default class Table extends Component {
                   })}
                   key={accessor}
                 >
-                  {typeof Header === 'string' ? Header : <Header />}
+                  {typeof Header === 'string' ? (
+                    this.props.intl.formatMessage({ id: Header })
+                  ) : (
+                    <Header />
+                  )}
                   {this.renderSortIcon(accessor)}
                 </th>
               ),
@@ -121,20 +135,18 @@ export default class Table extends Component {
         <tbody>
           {this.sortedData.map(row => (
             <tr className="Table-Row" key={row[this.props.dataIdAccessor]}>
-              {this.props.columns.map(
-                ({ accessor, Cell, columnClass, centered }) => (
-                  <td
-                    className={classNames('Table-Element', columnClass, {
-                      'Table-Element--light': this.props.light,
-                      'Table-Header--condensed': this.props.condensed,
-                      'Table--centered': centered,
-                    })}
-                    key={accessor}
-                  >
-                    {Cell ? Cell(row[accessor], row) : row[accessor]}
-                  </td>
-                ),
-              )}
+              {this.props.columns.map(column => (
+                <td
+                  className={classNames('Table-Element', column.columnClass, {
+                    'Table-Element--light': this.props.light,
+                    'Table-Header--condensed': this.props.condensed,
+                    'Table--centered': column.centered,
+                  })}
+                  key={column.accessor}
+                >
+                  {this.renderRowItem(row, column)}
+                </td>
+              ))}
             </tr>
           ))}
         </tbody>
@@ -142,3 +154,5 @@ export default class Table extends Component {
     );
   }
 }
+
+export default injectIntl(Table);
