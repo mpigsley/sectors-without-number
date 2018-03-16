@@ -9,12 +9,12 @@ import {
 import ProfileModal from './profile-modal';
 import {
   userFormSelector,
-  isUserEditModalOpen,
+  isUserEditModalOpenSelector,
 } from '../../store/selectors/base.selectors';
 
 const mapStateToProps = state => ({
   form: userFormSelector(state),
-  isEditModalOpen: isUserEditModalOpen(state),
+  isEditModalOpen: isUserEditModalOpenSelector(state),
 });
 
 export default connect(mapStateToProps, {

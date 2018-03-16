@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import { IntlProvider } from 'react-intl';
 
 import store from 'store';
 import init from 'init';
@@ -27,27 +26,25 @@ init(store);
 const history = syncHistoryWithStore(browserHistory, store);
 
 ReactDOM.render(
-  <IntlProvider locale="en">
-    <Provider store={store}>
-      <Router history={history}>
-        <Route path="/" component={AppWrapper}>
-          <Route component={HexBackground}>
-            <IndexRoute component={Home} />
-            <Route path="/configure" component={Configure} />
-            <Route path="/changelog" component={Changelog} />
-          </Route>
-          <Route path="/sector/:sector" component={SectorMap}>
-            <IndexRoute component={Sidebar} />
-            <Route path=":entityType/:entity" component={Sidebar} />
-            <Route path="**" component={Sidebar} />
-          </Route>
-          <Route path="/overview/:sector" component={OverviewList}>
-            <IndexRoute component={EmptyOverview} />
-            <Route path=":entityType" component={OverviewTable} />
-          </Route>
+  <Provider store={store}>
+    <Router history={history}>
+      <Route path="/" component={AppWrapper}>
+        <Route component={HexBackground}>
+          <IndexRoute component={Home} />
+          <Route path="/configure" component={Configure} />
+          <Route path="/changelog" component={Changelog} />
         </Route>
-      </Router>
-    </Provider>
-  </IntlProvider>,
+        <Route path="/sector/:sector" component={SectorMap}>
+          <IndexRoute component={Sidebar} />
+          <Route path=":entityType/:entity" component={Sidebar} />
+          <Route path="**" component={Sidebar} />
+        </Route>
+        <Route path="/overview/:sector" component={OverviewList}>
+          <IndexRoute component={EmptyOverview} />
+          <Route path=":entityType" component={OverviewTable} />
+        </Route>
+      </Route>
+    </Router>
+  </Provider>,
   document.getElementById('root'),
 );

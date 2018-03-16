@@ -1,7 +1,10 @@
 /* User */
 export const userModelSelector = state => state.user.model;
+export const userLocaleSelector = state =>
+  (state.user.model || {}).locale || 'en';
 export const isDropdownActiveSelector = state => state.user.isDropdownActive;
-export const isUserEditModalOpen = state => state.user.isEditModalOpen;
+export const isUserEditModalOpenSelector = state => state.user.isEditModalOpen;
+export const isSyncModalOpenSelector = state => state.user.isSyncModalOpen;
 export const isInitializedSelector = state => state.user.isInitialized;
 export const userUidSelector = state => (state.user.model || {}).uid;
 export const userFormSelector = state => state.user.form;
