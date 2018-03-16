@@ -1,5 +1,5 @@
 export default {
-  name: 'Atmosphere',
+  name: 'atmosphere',
   key: 'atmosphere',
   attributes: {
     corrosive: {

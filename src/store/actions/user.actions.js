@@ -7,6 +7,7 @@ import {
   savedSectorSelector,
   userFormSelector,
   userUidSelector,
+  userLocaleSelector,
 } from 'store/selectors/base.selectors';
 import { getSavedEntities } from 'store/selectors/entity.selectors';
 
@@ -230,8 +231,17 @@ export const passwordReset = () => (dispatch, getState) => {
 export const updateUser = () => (dispatch, getState) => {
   const state = getState();
   const uid = userUidSelector(state);
-  const filteredForm = pick(userFormSelector(state), 'displayName', 'locale');
-  return updateCurrentUser(uid, { ...filteredForm })
+  let filteredForm = pick(userFormSelector(state), 'displayName', 'locale');
+  if (!Locale[filteredForm.local || 'en']) {
+    filteredForm = { ...filteredForm, locale: 'en' };
+  }
+  const promises = [updateCurrentUser(uid, { ...filteredForm })];
+  if (userLocaleSelector(state) !== (filteredForm.locale || 'en')) {
+    promises.push(
+      Locale[filteredForm.locale].localeFetch().then(addLocaleData),
+    );
+  }
+  return Promise.all(promises)
     .then(() => {
       dispatch({
         type: UPDATE_USER,

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { omit, map, values } from 'lodash';
 import { RefreshCw } from 'react-feather';
+import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -22,7 +23,9 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
 
   return (
     <FlexContainer key={key} className="EntityAttributes-Attribute">
-      <b className="EntityAttributes-Header">{name}:</b>
+      <b className="EntityAttributes-Header">
+        <FormattedMessage id={name} />:
+      </b>
       <span className="EntityAttributes-Item">
         {attributes[attribute].name}
       </span>

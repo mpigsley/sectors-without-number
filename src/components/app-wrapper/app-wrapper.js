@@ -5,6 +5,7 @@ import { IntlProvider } from 'react-intl';
 
 import LoginModal from 'components/login-modal';
 import Modal from 'primitives/modal/modal';
+import Lang from 'lang';
 
 export default function AppWrapper({
   children,
@@ -13,7 +14,7 @@ export default function AppWrapper({
   userLocale,
 }) {
   return (
-    <IntlProvider locale={userLocale}>
+    <IntlProvider locale={userLocale} messages={Lang[userLocale]}>
       <div>
         <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
         <LoginModal />
