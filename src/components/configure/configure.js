@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Zap, RefreshCw } from 'react-feather';
 import Chance from 'chance';
+import { intlShape, FormattedMessage } from 'react-intl';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
@@ -27,6 +28,7 @@ export default function Configure({
   columns,
   rows,
   name,
+  intl,
 }) {
   const limitDimensions = func => e => {
     if (Number.parseInt(e.target.value, 10) > MAX_DIMENSION) {
@@ -55,10 +57,12 @@ export default function Configure({
 
   return (
     <ContentContainer direction="column" align="center" justify="center">
-      <Header type={HeaderType.header2}>Configure</Header>
+      <Header type={HeaderType.header2}>
+        <FormattedMessage id="misc.configure" />
+      </Header>
       <SubContainer noMargin direction="column" align="flexStart">
         <Label noPadding htmlFor="name">
-          Sector Name
+          <FormattedMessage id="misc.sectorName" />
         </Label>
         <IconInput
           name="name"
@@ -75,7 +79,9 @@ export default function Configure({
             direction="column"
             align="flexStart"
           >
-            <Label htmlFor="rows">Rows</Label>
+            <Label htmlFor="rows">
+              <FormattedMessage id="misc.rows" />
+            </Label>
             <Input
               data-key="rows"
               onChange={limitDimensions(updateInput)}
@@ -90,7 +96,9 @@ export default function Configure({
             direction="column"
             align="flexStart"
           >
-            <Label htmlFor="columns">Columns</Label>
+            <Label htmlFor="columns">
+              <FormattedMessage id="misc.columns" />
+            </Label>
             <Input
               data-key="columns"
               onChange={limitDimensions(updateInput)}
@@ -104,13 +112,13 @@ export default function Configure({
           data-key="isBuilder"
           value={isBuilder}
           onChange={updateInput}
-          label="Initialize Empty Sector"
+          label={intl.formatMessage({ id: 'misc.initializeEmpty' })}
         />
         <Checkbox
           data-key="additionalPointsOfInterest"
           value={additionalPointsOfInterest}
           onChange={updateInput}
-          label="Use Additional Points of Interest"
+          label={intl.formatMessage({ id: 'misc.useAPOI' })}
         />
       </SubContainer>
       <SubContainer
@@ -121,7 +129,7 @@ export default function Configure({
       >
         <Button onClick={generateSector}>
           <LinkIcon icon={Zap} size="20" />
-          Generate
+          <FormattedMessage id="misc.generate" />
         </Button>
       </SubContainer>
     </ContentContainer>
@@ -136,6 +144,7 @@ Configure.propTypes = {
   columns: PropTypes.number,
   rows: PropTypes.number,
   name: PropTypes.string,
+  intl: intlShape.isRequired,
 };
 
 Configure.defaultProps = {

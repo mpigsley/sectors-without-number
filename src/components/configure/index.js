@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import Entities from 'constants/entities';
 import { generateEntity } from 'store/actions/entity.actions';
@@ -16,4 +17,6 @@ const mapDispatchToProps = dispatch => ({
     dispatch(generateEntity({ entityType: Entities.sector.key })),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Configure);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(Configure),
+);
