@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { intlShape } from 'react-intl';
+import { intlShape, FormattedMessage } from 'react-intl';
 import { values, size } from 'lodash';
 import Pluralize from 'pluralize';
 
@@ -68,8 +68,14 @@ export default function OverviewTable({ entities, routeParams, intl }) {
   if (!size(entities[routeParams.entityType])) {
     return (
       <EmptyOverview>
-        You do not have any {Pluralize(Entities[routeParams.entityType].name)}{' '}
-        in this sector
+        <FormattedMessage
+          id="misc.noEntities"
+          values={{
+            entities: intl.formatMessage({
+              id: Pluralize(Entities[routeParams.entityType].name),
+            }),
+          }}
+        />
       </EmptyOverview>
     );
   }
