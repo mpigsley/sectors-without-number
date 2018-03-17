@@ -272,7 +272,7 @@
   "misc.copiedLinkTo": "You have copied a link directly to this {entity}.",
   "misc.receiveEmail": "You should be receiving an email soon.",
   "misc.sectorsSynced":
-    "You're sector(s) have been synced. You can now share them with your friends",
+    "Your sector(s) have been synced. You can now share them with your friends",
   "misc.windowTooSmall":
     "Your browser window is too small to render the sector. Please try on a larger screen.",
   "misc.syncedAutomatically":
