@@ -140,8 +140,8 @@ export const initialize = location => dispatch =>
           ),
           shared: keys(currentSector[Entities.sector.key] || {}),
           saved: [
-            ...keys(synced[Entities.sector.key]),
-            ...keys(local[Entities.sector.key]),
+            ...keys((synced || {})[Entities.sector.key]),
+            ...keys((local || {})[Entities.sector.key]),
           ],
         });
       },

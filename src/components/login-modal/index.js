@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   closeLoginModal,
@@ -27,4 +28,6 @@ const mapDispatchToProps = dispatch => ({
   passwordReset: () => dispatch(passwordReset()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(LoginModal),
+);

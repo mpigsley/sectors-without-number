@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import classNames from 'classnames';
 import { X } from 'react-feather';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import Button from 'primitives/other/button';
 import FlexContainer from 'primitives/container/flex-container';
@@ -31,6 +32,7 @@ export default class ConfirmModal extends Component {
     password: PropTypes.string.isRequired,
     confirm: PropTypes.string.isRequired,
     error: PropTypes.string,
+    intl: intlShape.isRequired,
   };
 
   static defaultProps = {
@@ -61,13 +63,15 @@ export default class ConfirmModal extends Component {
     }
     return (
       <div>
-        <Label htmlFor="password">Password</Label>
+        <Label htmlFor="password">
+          <FormattedMessage id="misc.password" />
+        </Label>
         <Input
           id="password"
           name="password"
           data-key="password"
           type="password"
-          placeholder="Password"
+          placeholder={this.props.intl.formatMessage({ id: 'misc.password' })}
           value={this.props.password}
           onChange={this.onEditText}
         />
@@ -85,7 +89,7 @@ export default class ConfirmModal extends Component {
           minimal
           onClick={() => this.setState({ page: LOGIN_PAGE_TYPES.forget })}
         >
-          Forgot Password?
+          <FormattedMessage id="misc.forgotPassword" />
         </Button>
       </div>
     );
@@ -97,13 +101,15 @@ export default class ConfirmModal extends Component {
     }
     return (
       <div>
-        <Label htmlFor="confirm">Confirm Password</Label>
+        <Label htmlFor="confirm">
+          <FormattedMessage id="misc.confirmPassword" />
+        </Label>
         <Input
           id="confirm"
           name="confirm"
           data-key="confirm"
           type="password"
-          placeholder="Confirm"
+          placeholder={this.props.intl.formatMessage({ id: 'misc.confirm' })}
           value={this.props.confirm}
           onChange={this.onEditText}
         />
@@ -123,11 +129,11 @@ export default class ConfirmModal extends Component {
   }
 
   render() {
-    let actionText = 'Send Password Reset';
+    let actionText = <FormattedMessage id="misc.sendReset" />;
     if (this.state.page === LOGIN_PAGE_TYPES.login) {
-      actionText = 'Log in';
+      actionText = <FormattedMessage id="misc.logIn" />;
     } else if (this.state.page === LOGIN_PAGE_TYPES.signup) {
-      actionText = 'Sign up';
+      actionText = <FormattedMessage id="misc.signUp" />;
     }
 
     return (
@@ -149,13 +155,13 @@ export default class ConfirmModal extends Component {
             className="LoginModal-Facebook"
             onClick={this.props.facebookLogin}
           >
-            Log In with Facebook
+            <FormattedMessage id="misc.facebook" />
           </Button>
           <Button
             className="LoginModal-Google"
             onClick={this.props.googleLogin}
           >
-            Log In with Google
+            <FormattedMessage id="misc.google" />
           </Button>
         </FlexContainer>
         <FlexContainer
@@ -164,7 +170,9 @@ export default class ConfirmModal extends Component {
           justify="center"
         >
           <span className="LoginModal-Line" />
-          <span className="LoginModal-Or">or</span>
+          <span className="LoginModal-Or">
+            <FormattedMessage id="misc.or" />
+          </span>
           <span className="LoginModal-Line" />
         </FlexContainer>
         <FlexContainer className="LoginModal-Switcher" justify="center">
@@ -175,7 +183,7 @@ export default class ConfirmModal extends Component {
                 this.state.page === LOGIN_PAGE_TYPES.login,
             })}
           >
-            Log In
+            <FormattedMessage id="misc.logIn" />
           </button>
           <button
             onClick={() => this.setState({ page: LOGIN_PAGE_TYPES.signup })}
@@ -184,7 +192,7 @@ export default class ConfirmModal extends Component {
                 this.state.page === LOGIN_PAGE_TYPES.signup,
             })}
           >
-            Sign Up
+            <FormattedMessage id="misc.signUp" />
           </button>
         </FlexContainer>
         <FlexContainer
@@ -193,13 +201,13 @@ export default class ConfirmModal extends Component {
           direction="column"
         >
           <Label noPadding htmlFor="email">
-            Email
+            <FormattedMessage id="misc.email" />
           </Label>
           <Input
             id="email"
             name="email"
             data-key="email"
-            placeholder="Email"
+            placeholder={this.props.intl.formatMessage({ id: 'misc.email' })}
             value={this.props.email}
             onChange={this.onEditText}
           />
