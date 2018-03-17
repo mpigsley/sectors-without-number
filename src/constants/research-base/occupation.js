@@ -4,23 +4,23 @@ export default {
   attributes: {
     experminents: {
       key: 'experminents',
-      name: 'Experiments that have gotten loose',
+      name: 'entity.researchBase.occupation.experminents',
     },
     scientists: {
       key: 'scientists',
-      name: 'Scientists from a major local corp',
+      name: 'entity.researchBase.occupation.scientists',
     },
     researchers: {
       key: 'researchers',
-      name: 'Black-ops governmental researchers',
+      name: 'entity.researchBase.occupation.researchers',
     },
     secret: {
       key: 'secret',
-      name: 'Secret employees of a foreign power',
+      name: 'entity.researchBase.occupation.secret',
     },
     alien: {
       key: 'alien',
-      name: 'Alien studying the human locals',
+      name: 'entity.researchBase.occupation.alien',
     },
   },
 };
