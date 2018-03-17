@@ -204,6 +204,7 @@
   "misc.oneEntity":
     "One entity per page with a lot of whitespace. Perfect for taking notes.",
   "misc.or": "or",
+  "misc.overview": "Overview",
   "misc.parent": "Parent",
   "misc.password": "Password",
   "misc.passwordResetSent": "Password Reset Sent",
