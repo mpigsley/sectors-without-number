@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { map } from 'lodash';
+import { intlShape, FormattedMessage } from 'react-intl';
 
 import Button from 'primitives/other/button';
 import Modal from 'primitives/modal/modal';
@@ -15,21 +16,22 @@ export default function ProfileModal({
   updateUser,
   isEditModalOpen,
   form,
+  intl,
 }) {
   return (
     <Fragment>
       <Modal
         isOpen={isEditModalOpen}
         onCancel={closeEditModal}
-        title="Edit Profile"
+        title={intl.formatMessage({ id: 'misc.editProfile' })}
         actionButtons={[
           <Button primary key="save" onClick={updateUser}>
-            Save User
+            <FormattedMessage id="misc.saveUser" />
           </Button>,
         ]}
       >
         <Label noPadding htmlFor="username">
-          Username
+          <FormattedMessage id="misc.username" />
         </Label>
         <Input
           id="username"
@@ -37,7 +39,9 @@ export default function ProfileModal({
           value={form.displayName || ''}
           onChange={({ target }) => updateUserForm('displayName', target.value)}
         />
-        <Label htmlFor="language">Language</Label>
+        <Label htmlFor="language">
+          <FormattedMessage id="misc.language" />
+        </Label>
         <Dropdown
           id="language"
           name="language"
@@ -60,6 +64,7 @@ ProfileModal.propTypes = {
     displayName: PropTypes.string,
     locale: PropTypes.string,
   }).isRequired,
+  intl: intlShape.isRequired,
 };
 
 ProfileModal.defaultProps = {};

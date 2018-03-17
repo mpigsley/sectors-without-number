@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   openEditModal,
@@ -24,4 +25,6 @@ const mapDispatchToProps = dispatch => ({
   logout: () => dispatch(logout()),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountManager);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(AccountManager),
+);

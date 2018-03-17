@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   updateUserForm,
@@ -17,8 +18,10 @@ const mapStateToProps = state => ({
   isEditModalOpen: isUserEditModalOpenSelector(state),
 });
 
-export default connect(mapStateToProps, {
-  updateUserForm,
-  updateUser,
-  closeEditModal,
-})(ProfileModal);
+export default injectIntl(
+  connect(mapStateToProps, {
+    updateUserForm,
+    updateUser,
+    closeEditModal,
+  })(ProfileModal),
+);
