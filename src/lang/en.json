@@ -177,6 +177,7 @@
   "misc.toContinue": "Are you sure you want to continue?",
   "misc.toDeleteEntity": "Are you sure you want to delete this {entity}?",
   "misc.attributes": "Attributes",
+  "misc.back": "Back",
   "misc.cancel": "Cancel",
   "misc.changelog": "Changelog",
   "misc.children": "Children",
@@ -229,6 +230,7 @@
   "misc.password": "Password",
   "misc.passwordResetSent": "Password Reset Sent",
   "misc.noPasswordMatch": "Passwords do not match.",
+  "misc.print": "Print",
   "misc.printOptions": "Print Options",
   "misc.printEntitiesTable":
     "Print your entities in a table format to easily get an overview of your sector.",

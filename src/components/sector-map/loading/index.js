@@ -1,4 +1,6 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
+
 import ContentContainer from 'primitives/container/content-container';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -24,7 +26,9 @@ export default function Loading() {
       <AbsoluteContainer>
         <ContentContainer direction="column" align="center" justify="center">
           <Spinner size={100} />
-          <Header type={HeaderType.header2}>Loading Sector</Header>
+          <Header type={HeaderType.header2}>
+            <FormattedMessage id="misc.loadingSector" />
+          </Header>
         </ContentContainer>
       </AbsoluteContainer>
     </div>

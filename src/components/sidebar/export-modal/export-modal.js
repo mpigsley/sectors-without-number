@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Modal from 'primitives/modal/modal';
@@ -28,7 +29,7 @@ export default function ExportModal({
       title="Print Options"
       actionButtons={[
         <Button primary key="continue" onClick={onPrint}>
-          Continue
+          <FormattedMessage id="misc.continue" />
         </Button>,
       ]}
     >
@@ -38,17 +39,17 @@ export default function ExportModal({
           primary={exportType === ExportTypes.condensed.key}
           onClick={() => setEntityExport(ExportTypes.condensed.key)}
         >
-          Condensed
+          <FormattedMessage id="misc.condensed" />
         </Button>
         <Button
           className="ExportModal-Button"
           primary={exportType === ExportTypes.expanded.key}
           onClick={() => setEntityExport(ExportTypes.expanded.key)}
         >
-          Expanded
+          <FormattedMessage id="misc.expanded" />
         </Button>
       </FlexContainer>
-      {ExportTypes[exportType].description}
+      <FormattedMessage id={ExportTypes[exportType].description} />
     </Modal>
   );
 }

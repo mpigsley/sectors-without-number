@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { toastr } from 'react-redux-toastr';
 import copy from 'copy-to-clipboard';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -28,6 +28,7 @@ export default function EntityNavigation({
   isShared,
   isSidebarEditActive,
   openExportModal,
+  intl,
 }) {
   const onCopy = () => {
     let url = window.location.href;
@@ -37,8 +38,11 @@ export default function EntityNavigation({
     }
     copy(url);
     toastr.success(
-      'Copied to Clipboard',
-      `You have copied a link directly to this ${Entities[entityType].name}.`,
+      intl.formatMessage({ id: 'misc.clipboardCopy' }),
+      intl.formatMessage(
+        { id: 'misc.copiedLinkTo' },
+        { entity: intl.formatMessage({ id: Entities[entityType].name }) },
+      ),
     );
   };
 
@@ -46,7 +50,7 @@ export default function EntityNavigation({
   if (!isSaved && !isShared) {
     saveButton = (
       <Button minimal onClick={saveSector}>
-        Save
+        <FormattedMessage id="misc.save" />
       </Button>
     );
   }
@@ -55,7 +59,7 @@ export default function EntityNavigation({
   if (!isShared) {
     editButton = (
       <Button minimal onClick={activateSidebarEdit}>
-        Edit
+        <FormattedMessage id="misc.edit" />
       </Button>
     );
   }
@@ -64,7 +68,7 @@ export default function EntityNavigation({
   if ((isSynced || isShared) && isSaved) {
     shareButton = (
       <Button minimal onClick={onCopy}>
-        Share
+        <FormattedMessage id="misc.share" />
       </Button>
     );
   }
@@ -73,7 +77,7 @@ export default function EntityNavigation({
   if (isSaved && !isShared) {
     deleteButton = (
       <Button minimal onClick={onDeleteEntity}>
-        Delete
+        <FormattedMessage id="misc.delete" />
       </Button>
     );
   }
@@ -98,7 +102,7 @@ export default function EntityNavigation({
         </ButtonLink>
         <span className="EntityNavigation-Spacer" />
         <ButtonLink minimal to="/changelog">
-          Changelog
+          <FormattedMessage id="misc.changelog" />
         </ButtonLink>
         <span className="EntityNavigation-Spacer" />
         <ButtonLink
@@ -114,7 +118,7 @@ export default function EntityNavigation({
           to="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=H3JGPZYSSK66W&lc=US&item_name=Sectors%20Without%20Number&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"
           target="_blank"
         >
-          Donate
+          <FormattedMessage id="misc.donate" />
         </ButtonLink>
       </FlexContainer>
     </div>
@@ -129,7 +133,7 @@ export default function EntityNavigation({
         className="EntityNavigation-SubHeader"
       >
         <ButtonLink minimal to={backUrl}>
-          Back
+          <FormattedMessage id="misc.back" />
         </ButtonLink>
         <span className="EntityNavigation-Spacer" />
         {saveButton}
@@ -141,7 +145,7 @@ export default function EntityNavigation({
         {shareButton}
         {shareButton ? <span className="EntityNavigation-Spacer" /> : null}
         <Button minimal onClick={openExportModal}>
-          Print
+          <FormattedMessage id="misc.print" />
         </Button>
       </FlexContainer>
     );
@@ -152,13 +156,13 @@ export default function EntityNavigation({
           className="EntityNavigation-FooterButton EntityNavigation-Cancel"
           onClick={deactivateSidebarEdit}
         >
-          Cancel
+          <FormattedMessage id="misc.cancel" />
         </button>
         <button
           className="EntityNavigation-FooterButton EntityNavigation-Save"
           onClick={saveEntityEdit}
         >
-          Save
+          <FormattedMessage id="misc.save" />
         </button>
       </FlexContainer>
     );
@@ -208,6 +212,7 @@ EntityNavigation.propTypes = {
   isShared: PropTypes.bool.isRequired,
   isSidebarEditActive: PropTypes.bool.isRequired,
   openExportModal: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
 };
 
 EntityNavigation.defaultProps = {
