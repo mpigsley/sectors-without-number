@@ -4,7 +4,12 @@ import classNames from 'classnames';
 
 import './style.css';
 
-export default function EntityTooltips({ hoverKey, holdKey, hexes }) {
+export default function EntityTooltips({
+  hoverKey,
+  holdKey,
+  hexes,
+  leftOffset,
+}) {
   const renderTooltip = system => (
     <div
       className={classNames('EntityTooltips-Tooltip', {
@@ -14,7 +19,7 @@ export default function EntityTooltips({ hoverKey, holdKey, hexes }) {
       key={system.hexKey}
       style={{
         top: system.yOffset - system.height / 2 - 10,
-        left: system.xOffset,
+        left: system.xOffset + leftOffset,
       }}
     >
       <div className="EntityTooltips-Text">
@@ -30,6 +35,7 @@ export default function EntityTooltips({ hoverKey, holdKey, hexes }) {
 EntityTooltips.propTypes = {
   hoverKey: PropTypes.string,
   holdKey: PropTypes.string,
+  leftOffset: PropTypes.number,
   hexes: PropTypes.arrayOf(
     PropTypes.shape({
       hexKey: PropTypes.string.isRequired,
@@ -44,4 +50,5 @@ EntityTooltips.propTypes = {
 EntityTooltips.defaultProps = {
   hoverKey: null,
   holdKey: null,
+  leftOffset: 0,
 };

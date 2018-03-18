@@ -9,12 +9,23 @@ import EmptyOverview from 'components/empty-overview';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import Table from 'primitives/other/table';
+import Button from 'primitives/other/button';
 import Entities from 'constants/entities';
-import { sortByKey } from 'utils/common';
 
+import { generateCSV, createCSVDownload } from 'utils/export';
+import { sortByKey } from 'utils/common';
 import './style.css';
 
-export default function OverviewTable({ entities, routeParams, intl }) {
+export default function OverviewTable({
+  entities,
+  routeParams,
+  currentSector,
+  intl,
+}) {
+  const pluralName = intl.formatMessage({
+    id: Pluralize(Entities[routeParams.entityType].name),
+  });
+
   const getColumnsFromType = entityType => {
     const common = [
       {
@@ -71,14 +82,37 @@ export default function OverviewTable({ entities, routeParams, intl }) {
         <FormattedMessage
           id="misc.noEntities"
           values={{
-            entities: intl.formatMessage({
-              id: Pluralize(Entities[routeParams.entityType].name),
-            }),
+            entities: pluralName,
           }}
         />
       </EmptyOverview>
     );
   }
+
+  const columns = getColumnsFromType(routeParams.entityType);
+  const tableData = values(entities[routeParams.entityType]).sort(
+    sortByKey('name'),
+  );
+
+  const exportTable = () => {
+    const table = [
+      columns.map(col => intl.formatMessage({ id: col.Header })),
+    ].concat(
+      tableData.map(data =>
+        columns.map(
+          ({ accessor, translateItem }) =>
+            translateItem
+              ? intl.formatMessage({ id: data[accessor] })
+              : data[accessor],
+        ),
+      ),
+    );
+    return createCSVDownload(
+      generateCSV(table),
+      `${currentSector.name} - ${pluralName}`,
+    );
+  };
+
   return (
     <FlexContainer
       flex="3"
@@ -86,15 +120,27 @@ export default function OverviewTable({ entities, routeParams, intl }) {
       align="flexStart"
       className="OverviewTable"
     >
-      <Header type={HeaderType.header3}>
-        {intl.formatMessage({ id: Entities[routeParams.entityType].name })}
-      </Header>
+      <div className="OverviewTable-FlexWrap">
+        <FlexContainer justify="spaceBetween" align="baseline">
+          <Header type={HeaderType.header3}>
+            {intl.formatMessage({ id: Entities[routeParams.entityType].name })}
+          </Header>
+          <Button minimal onClick={exportTable}>
+            <FormattedMessage
+              id="misc.exportEntity"
+              values={{
+                entity: pluralName,
+              }}
+            />
+          </Button>
+        </FlexContainer>
+      </div>
       <Table
         sortable
         className="OverviewTable-Table"
         dataIdAccessor="key"
-        columns={getColumnsFromType(routeParams.entityType)}
-        data={values(entities[routeParams.entityType]).sort(sortByKey('name'))}
+        columns={columns}
+        data={tableData}
       />
     </FlexContainer>
   );
@@ -102,8 +148,15 @@ export default function OverviewTable({ entities, routeParams, intl }) {
 
 OverviewTable.propTypes = {
   entities: PropTypes.shape().isRequired,
+  currentSector: PropTypes.shape({
+    name: PropTypes.string,
+  }),
   routeParams: PropTypes.shape({
     entityType: PropTypes.string.isRequired,
   }).isRequired,
   intl: intlShape.isRequired,
+};
+
+OverviewTable.defaultProps = {
+  currentSector: {},
 };
