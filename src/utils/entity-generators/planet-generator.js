@@ -97,7 +97,7 @@ export const generatePlanets = ({
   if (!numChildren) {
     const chance = new Chance();
     if (additionalPointsOfInterest) {
-      numChildren = [...Array(chance.weighted([0, 1, 2, 3], [2, 5, 3, 2]))];
+      numChildren = [...Array(chance.weighted([1, 2, 3], [10, 5, 2]))];
     } else {
       numChildren = [...Array(chance.weighted([1, 2, 3], [5, 3, 2]))];
     }
