@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Modal from 'primitives/modal/modal';
@@ -14,6 +14,7 @@ export default function ExportModal({
   exportType,
   onCancel,
   setEntityExport,
+  intl,
 }) {
   const onPrint = () => {
     onCancel();
@@ -26,7 +27,7 @@ export default function ExportModal({
     <Modal
       isOpen={isOpen}
       onCancel={onCancel}
-      title="Print Options"
+      title={intl.formatMessage({ id: 'misc.printOptions' })}
       actionButtons={[
         <Button primary key="continue" onClick={onPrint}>
           <FormattedMessage id="misc.continue" />
@@ -59,4 +60,5 @@ ExportModal.propTypes = {
   exportType: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
   setEntityExport: PropTypes.func.isRequired,
+  intl: intlShape.isRequried,
 };

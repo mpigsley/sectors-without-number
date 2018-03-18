@@ -38,5 +38,295 @@
   "techLevel.3": "T3",
   "techLevel.4": "T4",
   "techLevel.4+": "T4+",
-  "techLevel.5": "T5"
+  "techLevel.5": "T5",
+  "entity.asteroidBase": "Base d'astéroïde",
+  "entity.asteroidBases": "Bases d'astéroïde",
+  "entity.asteroidBase.occupation.sectarians": "Fanatique religieux intolérant",
+  "entity.asteroidBase.occupation.rebels":
+    "Membre d'une rébellion ratée d'un autre monde",
+  "entity.asteroidBase.occupation.miners":
+    "Esclaves salariés d'une corporation minière",
+  "entity.asteroidBase.occupation.prospectors":
+    "Prospecteur indépendant d'astéroïde",
+  "entity.asteroidBase.occupation.pirates":
+    "Pirates se faisant passer pour autre chose",
+  "entity.asteroidBase.situation.life": "Les systèmes vitaux sont menacés",
+  "entity.asteroidBase.situation.asteroid":
+    "La base a besoin d'un nouvel astéroïde",
+  "entity.asteroidBase.situation.nasty":
+    "Découverte de quelque chose de dangereux",
+  "entity.asteroidBase.situation.fighting": "Combattre un autre astéroïde",
+  "entity.asteroidBase.situation.priceless":
+    "Découverte d'une veine de minerai inestimable",
+  "entity.asteroidBelt": "Ceinture d'astéroïdes",
+  "entity.asteroidBelts": "Ceintures d'astéroïdes",
+  "entity.asteroidBelt.occupation.mine": "Mineurs d'astéroïdes âgés",
+  "entity.asteroidBelt.occupation.drones": "Antique drone gardien automatisé",
+  "entity.asteroidBelt.occupation.base":
+    "Survivant d'une base d'astéroïde détruite",
+  "entity.asteroidBelt.occupation.pirates":
+    "Pirates se cachant parmis les roches",
+  "entity.asteroidBelt.occupation.patrol":
+    "Patrouilleur solitaire d'une base militaire",
+  "entity.asteroidBelt.situation.rock":
+    "Un péril s'échappe d'une roche fracturée",
+  "entity.asteroidBelt.situation.spy":
+    "Un astronef espion étranger se cache ici",
+  "entity.asteroidBelt.situation.minerals": "Ruée vers un nouveau matériau",
+  "entity.asteroidBelt.situation.ruins":
+    "La roche est parsemée de ruines anciennes",
+  "entity.asteroidBelt.situation.war": "Guerre entre roches rivales",
+  "entity.blackHole": "Trou noire",
+  "entity.blackHoles": "Trous noirs",
+  "entity.deepSpaceStation": "Station spatiale éloignée",
+  "entity.deepSpaceStations": "Stations spatiales éloignées",
+  "entity.gasGiantMine": "Mine d'une géante gaseuse",
+  "entity.gasGiantMines": "Mines d'une géante gaseuse",
+  "entity.gasGiantMine.occupation.serfs": "Esclaves ou serfs minant du gaz",
+  "entity.gasGiantMine.occupation.robots":
+    "Robots étranges et leurs superviseurs",
+  "entity.gasGiantMine.occupation.alien":
+    "Scientifiques étudiant la vie indigène",
+  "entity.gasGiantMine.occupation.mine":
+    "Ferrailleurs dans les ruines de la vieille mine",
+  "entity.gasGiantMine.occupation.group": "Groupe séparatiste appauvri",
+  "entity.gasGiantMine.situation.things": "Des choses émergent sous la surface",
+  "entity.gasGiantMine.situation.supplies":
+    "Ils ont besoin de ressources vitales",
+  "entity.gasGiantMine.situation.revolt": "Les travailleurs se révoltent",
+  "entity.gasGiantMine.situation.pirates":
+    "Des pirates s'approvisionnent secrètement en carburant ici",
+  "entity.gasGiantMine.situation.remnants":
+    "Des vestiges xénosapiens ont été découverts",
+  "entity.moon": "Lune",
+  "entity.moons": "Lunes",
+  "entity.moonBase": "Base lunaire",
+  "entity.moonBases": "Bases lunaires",
+  "entity.moonBase.occupation.researchers":
+    "Chercheur malchanceux employé par une corporation",
+  "entity.moonBase.occupation.genius": "Génie vivant en ermite",
+  "entity.moonBase.occupation.colony": "Survivants d'une colonie avortée",
+  "entity.moonBase.occupation.military": "Poste d'écoute militaire",
+  "entity.moonBase.occupation.miners":
+    "Superviseur solitaire avec ses robots mineurs",
+  "entity.moonBase.situation.dark": "Une chose lugubre s'est éveillée",
+  "entity.moonBase.situation.criminals":
+    "Des criminels tentent de prendre le contrôle",
+  "entity.moonBase.situation.plague": "Éclosion d'une maladie lunaire",
+  "entity.moonBase.situation.supplies":
+    "Désespérément besoin de ressources vitales",
+  "entity.moonBase.situation.rich": "Riche mais mal protégé",
+  "entity.note": "Note",
+  "entity.notes": "Notes",
+  "entity.orbitalRuin": "Ruine orbitale",
+  "entity.orbitalRuins": "Ruines orbitales",
+  "entity.orbitalRuin.occupation.robots": "Robots à l'intelligence douteuse",
+  "entity.orbitalRuin.occupation.scavengers":
+    "Ferrailleurs à la gâchette facile",
+  "entity.orbitalRuin.occupation.researchers": "Chercheurs gouvernementaux",
+  "entity.orbitalRuin.occupation.military": "Agents de quarantaine militaire",
+  "entity.orbitalRuin.occupation.heirs": "Héritiers des premiers bâtisseurs ",
+  "entity.orbitalRuin.situation.awakening": "Tenter d'éviter de la réactiver",
+  "entity.orbitalRuin.situation.tech":
+    "Bricoler avec des technologies étranges",
+  "entity.orbitalRuin.situation.calamity": "Calamité technologique imminente",
+  "entity.orbitalRuin.situation.secret": "Un terrible secret est découvert",
+  "entity.orbitalRuin.situation.interlopers": "Combattre des intrus étrangers",
+  "entity.planet": "Planète",
+  "entity.planets": "Planètes",
+  "entity.refuelingStation": "Station d'approvisonnement",
+  "entity.refuelingStations": "Stations d'approvisonnement",
+  "entity.refuelingStation.occupation.hermit":
+    "Responsable solitaire à moitié fou",
+  "entity.refuelingStation.occupation.fun":
+    "Fournisseurs sordides de plaisirs décadents",
+  "entity.refuelingStation.occupation.minions":
+    "Sbires faisant de l'extortion employés par une corporation",
+  "entity.refuelingStation.occupation.religious":
+    "Missionnaires religieux ciblant les voyageurs",
+  "entity.refuelingStation.occupation.vendors":
+    "Vendeurs automatisés sans intelligence",
+  "entity.refuelingStation.situation.distress":
+    "Un astronef en grande détresse",
+  "entity.refuelingStation.situation.pirates":
+    "Des pirates ont pris le contrôle",
+  "entity.refuelingStation.situation.agents":
+    "A des agents de douanes corrompus",
+  "entity.refuelingStation.situation.saboteurs":
+    "Des saboteurs étrangers sont actifs",
+  "entity.refuelingStation.situation.alien":
+    "Signal provenant de l'espace éloigné",
+  "entity.researchBase": "Base de recherche",
+  "entity.researchBases": "Bases de recherche",
+  "entity.researchBase.occupation.experminents":
+    "Expériences qui se sont échappées",
+  "entity.researchBase.occupation.scientists":
+    "Scientifiques employés par une grosse corporation locale",
+  "entity.researchBase.occupation.researchers":
+    "Chercheurs d'une agence gouvernementale vouée aux opérations secrètes",
+  "entity.researchBase.occupation.secret":
+    "Personnes secrètements employées par une puissance étrangère",
+  "entity.researchBase.occupation.alien":
+    "Xénosapien étudiant les humains locaux",
+  "entity.researchBase.situation.research": "Recherche périlleuse en cours",
+  "entity.researchBase.situation.immoral": "Recherche hideuse et immorale",
+  "entity.researchBase.situation.outsiders": "Tenu en otage par des étrangers",
+  "entity.researchBase.situation.monsters":
+    "Monstres de la science sont en liberté",
+  "entity.researchBase.situation.tech":
+    "Vendre des technologie réservée au marché noir",
+  "entity.sector": "Secteur",
+  "entity.sectors": "Secteurs",
+  "entity.spaceStation": "Station spatiale",
+  "entity.spaceStations": "Stations spatiales",
+  "entity.spaceStation.occupation.odd": "Humaines dangereusement étranges",
+  "entity.spaceStation.occupation.corpses": "Freeze-dried ancient corpses",
+  "entity.spaceStation.occupation.observers":
+    "Observateurs militaires mystérieux",
+  "entity.spaceStation.occupation.minions": "Eccentric oligarch and minions",
+  "entity.spaceStation.occupation.scientist":
+    "Deranged but brilliant scientist",
+  "entity.spaceStation.situation.systems": "Systèmes tombent en panne",
+  "entity.spaceStation.situation.sabotage":
+    "Tentative de sabotage par un agent étranger",
+  "entity.spaceStation.situation.market": "Marché noir réservé à l'élite",
+  "entity.spaceStation.situation.pretech":
+    "Chambre forte pour prétech dangereuse",
+  "entity.spaceStation.situation.pirates":
+    "Base d'approvisionnemement pour pirates",
+  "entity.system": "Système",
+  "entity.systems": "Systèmes",
+  "entity.base": "Base",
+  "entity.bases": "Bases",
+  "entity.belt": "Ceinture",
+  "entity.belts": "Ceintures",
+  "entity.station": "Station",
+  "entity.stations": "Stations",
+  "entity.mine": "Mine",
+  "entity.mines": "Mines",
+  "entity.ruin": "Ruine",
+  "entity.ruins": "Ruines",
+  "misc.entityName": "{entity} Nom",
+  "misc.entityTags": "{entity} Marqueurs",
+  "misc.hiddenParrent": "Une entité parent masque ce {entity}.",
+  "misc.addEntity": "Ajouter {entity}",
+  "misc.addEntityTag": "Ajouter {entity} Marqueur",
+  "misc.addChild": "Ajouter un enfant",
+  "misc.toContinue": "Voulez-vous continuer?",
+  "misc.toDeleteEntity": "Voulez-vous supprimer ce {entity}?",
+  "misc.attributes": "Attribut",
+  "misc.back": "Retour",
+  "misc.cancel": "Annuler",
+  "misc.changelog": "Journal des modifications",
+  "misc.children": "Enfant",
+  "misc.columns": "Colonnes",
+  "misc.complications": "Complications",
+  "misc.condensed": "Condensé",
+  "misc.configure": "Configurer",
+  "misc.continue": "Continuer",
+  "misc.confirm": "Confirmer",
+  "misc.confirmPassword": "Confirmer le mot de passe",
+  "misc.clipboardCopy": "Copié dans le presse-papier",
+  "misc.create": "Créer",
+  "misc.createEditPlanets":
+    "Créer et modifier des planètes ici à partir du menu latéral",
+  "misc.createEntity": "Créer une entité du secteur",
+  "misc.dashboard": "Tableau de bord",
+  "misc.delete": "Supprimer",
+  "misc.description": "Description",
+  "misc.noExit": "Ne quittez pas cette page web",
+  "misc.donate": "Donner",
+  "misc.edit": "Modifier",
+  "misc.editProfile": "Modifier le profil",
+  "misc.email": "Courriel",
+  "misc.emailPassword": "Courriel et mot de passe requis",
+  "misc.enemies": "Ennemis",
+  "misc.entities": "Entités",
+  "misc.entityOverview": "Survol des entités",
+  "misc.entityType": "Type d'entités",
+  "misc.expanded": "Étendue",
+  "misc.exportEntity": "Exporter {entity}",
+  "misc.forgotPassword": "Mot de passe oublié?",
+  "misc.friends": "Amis",
+  "misc.generate": "Générer",
+  "misc.home": "Accueil",
+  "misc.initializeEmpty": "Initialiser un secteur vide",
+  "misc.isHidden": "Est caché",
+  "misc.language": "Langue",
+  "misc.loadingSector": "Chargement du secteur",
+  "misc.location": "Endroit",
+  "misc.logIn": "Connexion",
+  "misc.facebook": "Connexion avec Facebook",
+  "misc.google": "Connexion avec Google",
+  "misc.logOut": "Déconnexion",
+  "misc.name": "Nom",
+  "misc.neighbors": "Voisins",
+  "misc.no": "Non",
+  "misc.noteContent": "Contenu de la note",
+  "misc.occupation": "Occupation",
+  "misc.oneEntity":
+    "Une entité par page, avec beaucoup d'espace libre. Parfait pour prendre des notes.",
+  "misc.or": "ou",
+  "misc.overview": "Survol",
+  "misc.parent": "Parent",
+  "misc.password": "Mot de passe",
+  "misc.passwordResetSent": "Réinitialisation du mot de passé envoyée",
+  "misc.noPasswordMatch": "Mot de passe incorrect",
+  "misc.places": "Endroits",
+  "misc.print": "Imprimer",
+  "misc.printOptions": "Options d'impression",
+  "misc.printEntitiesTable":
+    "Imprimer vos entités dans un tableau, afin de facilement survoler votre secteur.",
+  "misc.reachedLimit": "Limite du secteur atteinte",
+  "misc.reportProblem": "Indiquer un problème",
+  "misc.reportProblemPersists": "Indiquer un problème s'il persiste.",
+  "misc.rows": "Rangées",
+  "misc.save": "Sauvegarder",
+  "misc.saveUser": "Savegarder l'utilisateur",
+  "misc.savedSectors": "Secteurs sauvegardés",
+  "misc.sector": "Secteur",
+  "misc.noSector": "Le secteur n'existe pas",
+  "misc.sectorGenerator": "Générateur de secteur",
+  "misc.sectorName": "Nom du secteur",
+  "misc.sectorSaved": "Secteur sauvegardé",
+  "misc.sectorsWithoutNumber": "Sectors Without Number",
+  "misc.selectSector": "Sélectionner un secteur pour commencer",
+  "misc.selectEntity": "Sélectionner une entité à gauche pour commencer",
+  "misc.selectGenerateData":
+    "Sélectionner pour générer les données de {entity}.",
+  "misc.selectGenerateEntity":
+    "Sélectionner pour générer les données de l'entité.",
+  "misc.selectHidden": "Sélectionner pour rendre invisible aux joueurs",
+  "misc.selectedNoChilden": "L'entité sélectionnée n'a pas d'enfant associé",
+  "misc.sendReset": "Envoyer une réinitialisation du mot de passe",
+  "misc.share": "Partager",
+  "misc.signUp": "S'inscrire",
+  "misc.signUpPersist": "S'inscrire pour sauvegarder le secteur",
+  "misc.situation": "Situation",
+  "misc.syncingSector": "Synchronisation du secteur",
+  "misc.syncingSectors": "Synchronisation des secteurs",
+  "misc.tags": "Marqueurs",
+  "misc.error": "Une erreur s'est produite",
+  "misc.things": "Objets",
+  "misc.createASystem":
+    "Pour créer un système, cliquer et maintenir le bouton enfoncé dans le menu de gauche",
+  "misc.moveSystem":
+    "Pour déplacer un système existant, cliquer, maintenir, et déplacer.",
+  "misc.useAPOI": "Utiliser des lieux d'intérêts additionnels",
+  "misc.userAccount": "Compte de l'utilisateur",
+  "misc.userProfile": "Profil de l'utilisateur",
+  "misc.username": "Nom d'utilisateur",
+  "misc.welcomeBuilder": "Bienvenue au créateur de secteur",
+  "misc.yes": "Oui",
+  "misc.noEntities": "Vous n'avez aucun {entities} dans ce secteur.",
+  "misc.haveNumSectors": "Vous avez au moins {num} secteurs.",
+  "misc.copiedLinkTo": "Vous avez copié un lien direct vers {entity}.",
+  "misc.receiveEmail": "Vous devriez recevoir un courriel bientôt.",
+  "misc.sectorsSynced":
+    "Vos secteurs ont été synchronisés. Vous pouvez maintenant les partager avec vos amis.",
+  "misc.windowTooSmall":
+    "La fenêtre de votre fureteur est trop petite pour générer le secteur. S'il vous plait, essayez sur un écran plus grand.",
+  "misc.syncedAutomatically":
+    "Vos secteurs actuels seront synchronisés automatiquement. ",
+  "misc.yourSectorSaved": "Votre secteur a été sauvegardé."
 }
