@@ -256,7 +256,7 @@ export default {
     ],
     'misc.places': [
       'shrine to a feral deity',
-      'nature preserve suited to an animal type',
+      'nature reserve suited to an animal type',
       'living site built to take advantage of animal traits',
     ],
   },
@@ -332,10 +332,10 @@ export default {
     'misc.friends': [
       'native desperately seeking protection',
       'pragmatic military officer',
-      'happless war orphan',
+      'hapless war orphan',
     ],
     'misc.complications': [
-      'the war just endded as both sides are leaving',
+      'the war just ended as both sides are leaving',
       'the natives somehow brought this on themselves',
       'a small group of natives profit tremendously from the fighting',
     ],
