@@ -1,4 +1,8 @@
 {
+  "3.13.0": {
+    "description": "Add new cosmic (Sector, system, planet) names.",
+    "date": "3-18-2018"
+  },
   "3.12.0": {
     "description": "Add way to export entity tables from the overview header.",
     "date": "3-13-2018"
