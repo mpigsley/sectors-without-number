@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { X, Plus } from 'react-feather';
 import { filter, includes, map, pull, capitalize } from 'lodash';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -15,7 +15,9 @@ import Entities from 'constants/entities';
 
 const renderList = (list, listKey) => (
   <div key={listKey} className="EntityAttributes-Content">
-    <b>{capitalize(listKey)}:</b>
+    <b>
+      <FormattedMessage id={listKey} />:
+    </b>
     <ul className="EntityAttributes-ContentList">
       {list.map(capitalize).map(element => <li key={element}>{element}</li>)}
     </ul>
@@ -29,6 +31,7 @@ export default function EntityTags({
   updateEntityInEdit,
   isOpen,
   toggleOpen,
+  intl,
 }) {
   if (
     !Entities[entityType].tags ||
@@ -88,7 +91,12 @@ export default function EntityTags({
   let header = (
     <SectionHeader isOpen={isOpen} onClick={toggleOpen}>
       <span className="EntityTags-Name">
-        <FormattedMessage id={Entities[entityType].name} /> Tags
+        <FormattedMessage
+          id="misc.entityTags"
+          values={{
+            entity: intl.formatMessage({ id: Entities[entityType].name }),
+          }}
+        />
       </span>
     </SectionHeader>
   );
@@ -97,7 +105,12 @@ export default function EntityTags({
       <SectionHeader isOpen={isOpen} onIconClick={toggleOpen}>
         <FlexContainer justify="spaceBetween" align="flexEnd">
           <span className="EntityTags-Name" onClick={toggleOpen}>
-            <FormattedMessage id={Entities[entityType].name} /> Tags
+            <FormattedMessage
+              id="misc.entityTags"
+              values={{
+                entity: intl.formatMessage({ id: Entities[entityType].name }),
+              }}
+            />
           </span>
           <Button
             minimal
@@ -115,7 +128,12 @@ export default function EntityTags({
             }}
           >
             <LinkIcon size={15} icon={Plus} />
-            Add <FormattedMessage id={Entities[entityType].name} /> Tags
+            <FormattedMessage
+              id="misc.addEntityTag"
+              values={{
+                entity: intl.formatMessage({ id: Entities[entityType].name }),
+              }}
+            />
           </Button>
         </FlexContainer>
       </SectionHeader>
@@ -144,4 +162,5 @@ EntityTags.propTypes = {
   updateEntityInEdit: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   toggleOpen: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
 };

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   getCurrentEntity,
@@ -18,6 +19,8 @@ const mapStateToProps = state => ({
   isSidebarEditActive: isSidebarEditActiveSelector(state),
 });
 
-export default connect(mapStateToProps, {
-  deleteEntity,
-})(Sidebar);
+export default injectIntl(
+  connect(mapStateToProps, {
+    deleteEntity,
+  })(Sidebar),
+);

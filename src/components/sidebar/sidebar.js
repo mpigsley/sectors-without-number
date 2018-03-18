@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { some, size } from 'lodash';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import Entities from 'constants/entities';
@@ -21,6 +22,7 @@ export default class Sidebar extends Component {
     }).isRequired,
     deleteEntity: PropTypes.func.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
+    intl: intlShape.isRequired,
   };
 
   static defaultProps = {
@@ -76,14 +78,20 @@ export default class Sidebar extends Component {
   }
 
   renderConfirmDeleteModal() {
-    const entityName = Entities[this.props.entityType].name;
     return (
       <ConfirmModal
         isOpen={this.state.isConfirmDeleteOpen}
         onConfirm={this.onDeleteEntity}
         onCancel={this.onCancelDelete}
       >
-        Are you sure you want to delete this {entityName}?
+        <FormattedMessage
+          id="misc.toDeleteEntity"
+          values={{
+            entity: this.props.intl.formatMessage({
+              id: Entities[this.props.entityType].name,
+            }),
+          }}
+        />
       </ConfirmModal>
     );
   }

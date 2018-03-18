@@ -63,7 +63,9 @@ export default function EntityAttributes({
     if (isSidebarEditActive) {
       nameAttribute = (
         <FlexContainer align="center" className="EntityAttributes-Attribute">
-          <b className="EntityAttributes-Header">Name:</b>
+          <b className="EntityAttributes-Header">
+            <FormattedMessage id="misc.name" />:
+          </b>
           <IconInput
             wrapperClassName="EntityAttributes-Item"
             value={entity.name}
@@ -93,7 +95,9 @@ export default function EntityAttributes({
       if (entityType !== Entities.sector.key) {
         hiddenAttribute = (
           <FlexContainer align="center" className="EntityAttributes-Attribute">
-            <b className="EntityAttributes-Header">Is Hidden:</b>
+            <b className="EntityAttributes-Header">
+              <FormattedMessage id="misc.isHidden" />:
+            </b>
             <Input
               className="EntityAttributes-Item"
               type="checkbox"
@@ -112,7 +116,9 @@ export default function EntityAttributes({
           direction="column"
           className="EntityAttributes-Attribute"
         >
-          <b className="EntityAttributes-Header">Description:</b>
+          <b className="EntityAttributes-Header">
+            <FormattedMessage id="misc.description" />:
+          </b>
           <span className="EntityAttributes-Item EntityAttributes-Item--multiline">
             {(entity.attributes || {}).description}
           </span>
@@ -167,7 +173,9 @@ export default function EntityAttributes({
     attributesSection = (
       <div key="attributes">
         <SectionHeader isOpen={isAttributesOpen} onClick={toggleAttributesOpen}>
-          <span className="EntityAttributes-Name">Attributes</span>
+          <span className="EntityAttributes-Name">
+            <FormattedMessage id="misc.attributes" />
+          </span>
         </SectionHeader>
         {attributes}
       </div>
@@ -184,6 +192,7 @@ export default function EntityAttributes({
       updateEntityInEdit={updateEntityInEdit}
       isOpen={isTagsOpen}
       toggleOpen={toggleTagsOpen}
+      intl={intl}
     />,
   ];
 }
