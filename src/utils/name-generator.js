@@ -1,8 +1,10 @@
 /* eslint-disable no-bitwise */
 import Chance from 'chance';
-import { capitalize, toUpper } from 'lodash';
+import { forEach, capitalize, toUpper } from 'lodash';
 
-import { StarDigraphs, GreekLetters, MarsCraters } from 'constants/language';
+import CosmicNames from 'constants/language/cosmic-names';
+import GreekLetters from 'constants/language/greek-letters';
+import MarsCraters from 'constants/language/mars-craters';
 
 const tweakSeeds = hexSeeds => {
   const newSeeds = hexSeeds.concat([
@@ -12,7 +14,7 @@ const tweakSeeds = hexSeeds => {
   return newSeeds;
 };
 
-export const generateName = (chance = new Chance()) => {
+const generateFullRandomName = (chance = new Chance()) => {
   const hash = chance.hash({ length: 12 });
   let name = '';
   let hexSeeds = [
@@ -25,10 +27,53 @@ export const generateName = (chance = new Chance()) => {
     const d = ((hexSeeds[2] >> 8) & 0x1f) << 1;
     hexSeeds = tweakSeeds(hexSeeds);
     if (n < 3 || longNameFlag) {
-      name += StarDigraphs.substr(d, 2);
+      name += '..lexegezacebisousesarmaindirea.eratenberalavetiedorquanteisrion'.substr(
+        d,
+        2,
+      );
     }
   }
   return capitalize(name.split('.').join(''));
+};
+
+const romanize = num => {
+  const lookup = {
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1,
+  };
+  let numToRomanize = num;
+  let roman = '';
+  forEach(lookup, (divisor, letter) => {
+    while (numToRomanize >= divisor) {
+      roman += letter;
+      numToRomanize -= divisor;
+    }
+  });
+  return roman;
+};
+
+export const generateName = (chance = new Chance()) => {
+  let name;
+  if (chance.weighted([true, false], [30, 1])) {
+    name = chance.pickone(CosmicNames);
+  } else {
+    name = generateFullRandomName(chance);
+  }
+  if (chance.weighted([true, false], [1, 40])) {
+    name += ` ${romanize(chance.integer({ min: 1, max: 25 }))}`;
+  }
+  return name;
 };
 
 export const generateSectorName = (chance = new Chance()) => {

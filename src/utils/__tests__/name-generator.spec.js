@@ -1,6 +1,6 @@
 import Chance from 'chance';
 
-import { GreekLetters } from 'constants/language';
+import GreekLetters from 'constants/language/greek-letters';
 import { generateName, generateSectorName } from '../name-generator';
 
 describe('generateName', () => {
