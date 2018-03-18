@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { map, size, isNumber } from 'lodash';
 import { Plus, EyeOff } from 'react-feather';
 import ReactHintFactory from 'react-hint';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -29,6 +29,7 @@ const EntityList = ({
   createChildInEdit,
   isOpen,
   toggleListOpen,
+  intl,
 }) => {
   const numEntities = size(entities);
   if (!numEntities && !isSidebarEditActive) {
@@ -65,7 +66,14 @@ const EntityList = ({
             onClick={createChildInEdit}
           >
             <LinkIcon size={15} icon={Plus} />
-            Add <FormattedMessage id={Entities[entityType].shortName} />
+            <FormattedMessage
+              id="misc.addEntity"
+              values={{
+                entity: intl.formatMessage({
+                  id: Entities[entityType].shortName,
+                }),
+              }}
+            />
           </Button>
         </FlexContainer>
       </SectionHeader>
@@ -83,13 +91,18 @@ const EntityList = ({
         className="EntityList-SubHeader"
       >
         <Dice
-          data-rh={`Select to generate ${(
-            Entities[entityType].shortName || ''
-          ).toLowerCase()} data.`}
+          data-rh={intl.formatMessage(
+            { id: 'misc.selectGenerateData' },
+            {
+              entity: intl.formatMessage({
+                id: Entities[entityType].shortName,
+              }),
+            },
+          )}
           size={22}
         />
         <LinkIcon
-          data-rh="Select to keep hidden from your players."
+          data-rh={intl.formatMessage({ id: 'misc.selectHidden' })}
           className="EntityList-SubHeaderHidden"
           icon={EyeOff}
           size={18}
@@ -163,6 +176,7 @@ EntityList.propTypes = {
   createChildInEdit: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   toggleListOpen: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
 };
 
 EntityList.defaultProps = {

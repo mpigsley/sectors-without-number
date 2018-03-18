@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import { cancelTopLevelEntityCreate } from 'store/actions/sector.actions';
 import { generateEntity } from 'store/actions/entity.actions';
@@ -22,7 +23,9 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {
-  cancelTopLevelEntityCreate,
-  generateEntity,
-})(TopLevelEntityModal);
+export default injectIntl(
+  connect(mapStateToProps, {
+    cancelTopLevelEntityCreate,
+    generateEntity,
+  })(TopLevelEntityModal),
+);

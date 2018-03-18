@@ -253,7 +253,7 @@
   "misc.sectorsWithoutNumber": "Sectors Without Number",
   "misc.selectSector": "Select a sector to begin",
   "misc.selectEntity": "Select an entity on the left to begin",
-  "misc.selectGenerateData": "Select to generate {enitity} data.",
+  "misc.selectGenerateData": "Select to generate {entity} data.",
   "misc.selectGenerateEntity": "Select to generate entity data.",
   "misc.selectHidden": "Select to keep hidden from your players.",
   "misc.selectedNoChilden": "Selected entity has no associated children.",
