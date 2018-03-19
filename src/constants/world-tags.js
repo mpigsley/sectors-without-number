@@ -182,7 +182,7 @@ export default {
       'anthropological researcher',
     ],
     'misc.complications': [
-      'alteratin is contageious',
+      'alteration is contagious',
       'alteration is necessary for long-term survival',
       'locals fear and mistrust non-local humans',
     ],
@@ -619,7 +619,7 @@ export default {
       'cybered-up gang boss',
     ],
     'misc.friends': [
-      'charity-woring implant physician',
+      'charity-working implant physician',
       'idealistic young cyber researcher',
       'avant-garde activist',
     ],
@@ -652,13 +652,13 @@ export default {
     ],
     'misc.friends': [
       'harried official working to prepare',
-      'offworlder studying the cylcles',
+      'offworlder studying the cycles',
       "local threatened by perils of the cycle's initial stages",
     ],
     'misc.complications': [
       'the cycles really are a myth of the authorities',
       'the cycles are controlled by alien constructs',
-      'an outside power is interfering wiht preparation',
+      'an outside power is interfering with preparation',
     ],
     'misc.things': [
       'a lost cache of ancien treasures',
@@ -733,7 +733,7 @@ export default {
     'misc.places': [
       'open square beneath a sky angry with a foretaste of the impending doom',
       'orgiastic celebration involving sex and murder in equal parts',
-      'holy site full of desperate petitioners to the diving',
+      'holy site full of desperate petitioners to the divine',
     ],
   },
   [worldTagKeys.dyingRace]: {
@@ -754,7 +754,7 @@ export default {
     'misc.complications': [
       "the dying culture's values were monstrous",
       "the race's death is somehow necessary to prevent some grand catastrophe",
-      'the race is somehow convined they deserve this fate',
+      'the race is somehow convinced they deserve this fate',
     ],
     'misc.things': [
       'extremely valuable reproductive tech',
@@ -764,7 +764,7 @@ export default {
     'misc.places': [
       'city streets devoid of pedestrians',
       'mighty edifice now crumbling with disrepair',
-      'small dwelling full of people ina town now othewise empty',
+      'small dwelling full of people in a town now othewise empty',
     ],
   },
   [worldTagKeys.eugenicCult]: {

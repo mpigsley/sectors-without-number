@@ -47,7 +47,7 @@
   "entity.asteroidBase.occupation.miners":
     "Esclaves salariés d'une corporation minière",
   "entity.asteroidBase.occupation.prospectors":
-    "Prospecteur indépendant d'astéroïde",
+    "Prospecteurs indépendants d'astéroïde",
   "entity.asteroidBase.occupation.pirates":
     "Pirates se faisant passer pour autre chose",
   "entity.asteroidBase.situation.life": "Les systèmes vitaux sont menacés",
@@ -76,7 +76,7 @@
   "entity.asteroidBelt.situation.ruins":
     "La roche est parsemée de ruines anciennes",
   "entity.asteroidBelt.situation.war": "Guerre entre roches rivales",
-  "entity.blackHole": "Trou noire",
+  "entity.blackHole": "Trou noir",
   "entity.blackHoles": "Trous noirs",
   "entity.deepSpaceStation": "Station spatiale éloignée",
   "entity.deepSpaceStations": "Stations spatiales éloignées",
@@ -179,7 +179,7 @@
   "entity.sectors": "Secteurs",
   "entity.spaceStation": "Station spatiale",
   "entity.spaceStations": "Stations spatiales",
-  "entity.spaceStation.occupation.odd": "Humaines dangereusement étranges",
+  "entity.spaceStation.occupation.odd": "Humains dangereusement étranges",
   "entity.spaceStation.occupation.corpses": "Freeze-dried ancient corpses",
   "entity.spaceStation.occupation.observers":
     "Observateurs militaires mystérieux",
@@ -214,7 +214,7 @@
   "misc.addChild": "Ajouter un enfant",
   "misc.toContinue": "Voulez-vous continuer?",
   "misc.toDeleteEntity": "Voulez-vous supprimer ce {entity}?",
-  "misc.attributes": "Attribut",
+  "misc.attributes": "Caractéristiques",
   "misc.back": "Retour",
   "misc.cancel": "Annuler",
   "misc.changelog": "Journal des modifications",
@@ -263,7 +263,7 @@
   "misc.neighbors": "Voisins",
   "misc.no": "Non",
   "misc.noteContent": "Contenu de la note",
-  "misc.occupation": "Occupation",
+  "misc.occupation": "Habité par",
   "misc.oneEntity":
     "Une entité par page, avec beaucoup d'espace libre. Parfait pour prendre des notes.",
   "misc.or": "ou",
@@ -278,7 +278,7 @@
   "misc.printEntitiesTable":
     "Imprimer vos entités dans un tableau, afin de facilement survoler votre secteur.",
   "misc.reachedLimit": "Limite du secteur atteinte",
-  "misc.reportProblem": "Indiquer un problème",
+  "misc.reportProblem": "Signaler un problème",
   "misc.reportProblemPersists": "Indiquer un problème s'il persiste.",
   "misc.rows": "Rangées",
   "misc.save": "Sauvegarder",
@@ -302,7 +302,7 @@
   "misc.share": "Partager",
   "misc.signUp": "S'inscrire",
   "misc.signUpPersist": "S'inscrire pour sauvegarder le secteur",
-  "misc.situation": "Situation",
+  "misc.situation": "Problème",
   "misc.syncingSector": "Synchronisation du secteur",
   "misc.syncingSectors": "Synchronisation des secteurs",
   "misc.tags": "Marqueurs",
