@@ -23,9 +23,12 @@ const mapStateToProps = state => {
   };
 };
 
+const mapDispatchToProps = (dispatch, props) => ({
+  cancelTopLevelEntityCreate: () => dispatch(cancelTopLevelEntityCreate()),
+  generateEntity: (entity, parameters) =>
+    dispatch(generateEntity(entity, parameters, props.intl)),
+});
+
 export default injectIntl(
-  connect(mapStateToProps, {
-    cancelTopLevelEntityCreate,
-    generateEntity,
-  })(TopLevelEntityModal),
+  connect(mapStateToProps, mapDispatchToProps)(TopLevelEntityModal),
 );

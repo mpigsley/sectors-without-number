@@ -1,4 +1,3 @@
-import { actions as ReduxToastrActions } from 'react-redux-toastr';
 import { size, keys, pick } from 'lodash';
 import { push } from 'react-router-redux';
 import { addLocaleData } from 'react-intl';
@@ -30,7 +29,12 @@ import { clearLocalDatabase, getEntities } from 'store/api/local';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
-import { ErrorToast, InfoToast, removeToastById } from 'utils/toasts';
+import {
+  SuccessToast,
+  ErrorToast,
+  InfoToast,
+  removeToastById,
+} from 'utils/toasts';
 import { mergeEntityUpdates } from 'utils/entity';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
@@ -92,7 +96,7 @@ const onLogin = (dispatch, state) => result => {
     });
 };
 
-export const initialize = location => dispatch =>
+export const initialize = (location, intl) => dispatch =>
   Promise.all([getCurrentUser(), getEntities()]).then(([user, local]) => {
     const { uid, locale } = user || {};
     const sectorId = location.pathname.split('/')[2];
@@ -110,8 +114,8 @@ export const initialize = location => dispatch =>
           onConvert: () =>
             dispatch(
               InfoToast({
-                title: 'Syncing Sectors',
-                message: 'Do not exit out of this web page.',
+                title: intl.formatMessage({ id: 'misc.syncingSectors' }),
+                message: intl.formatMessage({ id: 'misc.noExit' }),
                 config: {
                   id: 'sync-toastr',
                   options: {
@@ -164,18 +168,18 @@ export const googleLogin = () => (dispatch, getState) =>
       console.error(error);
     });
 
-export const signup = () => (dispatch, getState) => {
+export const signup = intl => (dispatch, getState) => {
   const state = getState();
   const { email, password, confirm } = state.user.form;
   if (!email || !password || !confirm) {
     return dispatch({
       type: AUTH_FAILURE,
-      error: 'Email and password are required.',
+      error: intl.formatMessage({ id: 'misc.emailPassword' }),
     });
   } else if (password !== confirm) {
     return dispatch({
       type: AUTH_FAILURE,
-      error: 'Passwords do not match.',
+      error: intl.formatMessage({ id: 'misc.noPasswordMatch' }),
     });
   }
   return doSignup(state.user.form.email, state.user.form.password)
@@ -187,13 +191,13 @@ export const signup = () => (dispatch, getState) => {
     });
 };
 
-export const login = () => (dispatch, getState) => {
+export const login = intl => (dispatch, getState) => {
   const state = getState();
   const { email, password } = state.user.form;
   if (!email || !password) {
     return dispatch({
       type: AUTH_FAILURE,
-      error: 'Email and password are required.',
+      error: intl.formatMessage({ id: 'misc.emailPassword' }),
     });
   }
   return doLogin(state.user.form.email, state.user.form.password)
@@ -204,21 +208,15 @@ export const login = () => (dispatch, getState) => {
     });
 };
 
-export const passwordReset = () => (dispatch, getState) => {
+export const passwordReset = intl => (dispatch, getState) => {
   const { user } = getState();
   return doPasswordReset(user.form.email)
     .then(() => {
       dispatch(closeLoginModal());
       dispatch(
-        ReduxToastrActions.add({
-          options: {
-            removeOnHover: true,
-            showCloseButton: true,
-          },
-          position: 'bottom-left',
-          title: 'Password Reset Sent',
-          message: 'You should be receiving an email soon.',
-          type: 'success',
+        SuccessToast({
+          title: intl.formatMessage({ id: 'misc.passwordResetSent' }),
+          message: intl.formatMessage({ id: 'misc.receiveEmail' }),
         }),
       );
     })
@@ -228,7 +226,7 @@ export const passwordReset = () => (dispatch, getState) => {
     });
 };
 
-export const updateUser = () => (dispatch, getState) => {
+export const updateUser = intl => (dispatch, getState) => {
   const state = getState();
   const uid = userUidSelector(state);
   let filteredForm = pick(userFormSelector(state), 'displayName', 'locale');
@@ -247,18 +245,28 @@ export const updateUser = () => (dispatch, getState) => {
       }
     })
     .catch(err => {
-      dispatch(ErrorToast());
+      dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
       console.error(err);
     });
 };
 
-export const logout = () => dispatch =>
+export const logout = intl => dispatch =>
   doLogout()
     .then(() => {
       dispatch(push('/'));
       dispatch({ type: LOGGED_OUT });
     })
     .catch(err => {
-      dispatch(ErrorToast());
+      dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
       console.error(err);
     });

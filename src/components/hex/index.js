@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   entityHoverStart,
@@ -24,12 +25,14 @@ const mapStateToProps = state => ({
   isCloudSave: false,
 });
 
-export default connect(mapStateToProps, {
-  entityHoverStart,
-  entityHoverEnd,
-  entityHold,
-  entityRelease,
-  moveTopLevelEntity,
-  topLevelEntityCreate,
-  deactivateSidebarEdit,
-})(Hex);
+const mapDispatchToProps = (dispatch, props) => ({
+  entityHoverStart: key => dispatch(entityHoverStart(key)),
+  entityHoverEnd: key => dispatch(entityHoverEnd(key)),
+  entityHold: key => dispatch(entityHold(key)),
+  entityRelease: () => dispatch(entityRelease()),
+  moveTopLevelEntity: () => dispatch(moveTopLevelEntity(props.intl)),
+  topLevelEntityCreate: key => dispatch(topLevelEntityCreate(key)),
+  deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
+});
+
+export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(Hex));

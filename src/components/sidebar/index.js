@@ -19,8 +19,10 @@ const mapStateToProps = state => ({
   isSidebarEditActive: isSidebarEditActiveSelector(state),
 });
 
+const mapDispatchToProps = (dispatch, props) => ({
+  deleteEntity: () => dispatch(deleteEntity(props.intl)),
+});
+
 export default injectIntl(
-  connect(mapStateToProps, {
-    deleteEntity,
-  })(Sidebar),
+  connect(mapStateToProps, mapDispatchToProps)(Sidebar),
 );

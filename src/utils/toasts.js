@@ -1,9 +1,6 @@
 import { actions as ReduxToastrActions } from 'react-redux-toastr';
 
-export const SuccessToast = ({
-  title = 'Sector Saved',
-  message = 'Your sector has been saved.',
-} = {}) =>
+export const SuccessToast = ({ title = '', message = '', config } = {}) =>
   ReduxToastrActions.add({
     options: {
       removeOnHover: true,
@@ -11,6 +8,7 @@ export const SuccessToast = ({
     },
     position: 'bottom-left',
     type: 'success',
+    ...(config || {}),
     message,
     title,
   });
@@ -23,7 +21,7 @@ export const InfoToast = ({ title = '', message = '', config } = {}) =>
     },
     position: 'bottom-left',
     type: 'info',
-    ...config,
+    ...(config || {}),
     message,
     title,
   });
@@ -36,12 +34,12 @@ export const WarningToast = ({ title = '', message = '', config } = {}) =>
     },
     position: 'bottom-left',
     type: 'warning',
-    ...config,
+    ...(config || {}),
     message,
     title,
   });
 
-export const ErrorToast = () =>
+export const ErrorToast = ({ title = '', message = '', config } = {}) =>
   ReduxToastrActions.add({
     options: {
       removeOnHover: true,
@@ -49,8 +47,9 @@ export const ErrorToast = () =>
     },
     position: 'bottom-left',
     type: 'error',
-    title: 'There has been an error',
-    message: 'Report a problem if it persists.',
+    ...(config || {}),
+    title,
+    message,
   });
 
 export const removeToastById = ReduxToastrActions.remove;

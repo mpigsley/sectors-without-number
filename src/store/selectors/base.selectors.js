@@ -34,3 +34,7 @@ export const isSidebarEditActiveSelector = state =>
   state.sidebarEdit.isSidebarEditActive;
 export const sidebarEditEntitySelector = state => state.sidebarEdit.entity;
 export const sidebarEditChildrenSelector = state => state.sidebarEdit.children;
+
+/* Router */
+export const routerLocationSelector = state =>
+  state.routing.locationBeforeTransitions;

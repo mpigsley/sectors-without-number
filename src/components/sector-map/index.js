@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { injectIntl } from 'react-intl';
 
 import Entities from 'constants/entities';
 import { generateEntity } from 'store/actions/entity.actions';
@@ -23,10 +24,12 @@ const mapStateToProps = state => ({
   exportType: exportTypeSelector(state),
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   toSafeRoute: sector => dispatch(push(sector ? `/sector/${sector}` : '/')),
   generateSector: () =>
-    dispatch(generateEntity({ entityType: Entities.sector.key })),
+    dispatch(generateEntity({ entityType: Entities.sector.key }, props.intl)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SectorMap);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(SectorMap),
+);

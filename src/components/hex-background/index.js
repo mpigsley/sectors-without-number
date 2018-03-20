@@ -8,8 +8,4 @@ const mapStateToProps = state => ({
   isDropdownActive: state.user.isDropdownActive,
 });
 
-const mapDispatchToProps = dispatch => ({
-  closeUserDropdown: () => dispatch(closeUserDropdown()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(HexBackground);
+export default connect(mapStateToProps, { closeUserDropdown })(HexBackground);

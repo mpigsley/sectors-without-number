@@ -32,11 +32,13 @@ const mapStateToProps = state => ({
   isSidebarEditActive: isSidebarEditActiveSelector(state),
 });
 
+const mapDispatchToProps = (dispatch, props) => ({
+  activateSidebarEdit: () => dispatch(activateSidebarEdit()),
+  deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
+  saveEntityEdit: () => dispatch(saveEntityEdit(props.intl)),
+  saveSector: () => dispatch(saveSector(props.intl)),
+});
+
 export default injectIntl(
-  connect(mapStateToProps, {
-    activateSidebarEdit,
-    deactivateSidebarEdit,
-    saveEntityEdit,
-    saveSector,
-  })(EntityNavigation),
+  connect(mapStateToProps, mapDispatchToProps)(EntityNavigation),
 );

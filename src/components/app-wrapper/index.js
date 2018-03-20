@@ -13,8 +13,4 @@ const mapStateToProps = state => ({
   userLocale: userLocaleSelector(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  closeSyncModal: () => dispatch(closeSyncModal()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppWrapper);
+export default connect(mapStateToProps, { closeSyncModal })(AppWrapper);

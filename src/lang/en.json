@@ -168,6 +168,7 @@
   "entity.mines": "Mines",
   "entity.ruin": "Ruin",
   "entity.ruins": "Ruins",
+  "misc.entityDeleted": "{entity} Deleted",
   "misc.entityName": "{entity} Name",
   "misc.entityTags": "{entity} Tags",
   "misc.hiddenParrent": "A parent entity is hiding this {entity}.",
@@ -279,6 +280,7 @@
   "misc.haveNumSectors": "You have at least {num} sectors.",
   "misc.copiedLinkTo": "You have copied a link directly to this {entity}.",
   "misc.receiveEmail": "You should be receiving an email soon.",
+  "misc.successfullyRemoved": "Your {entity} has been successfully removed.",
   "misc.sectorsSynced":
     "Your sector(s) have been synced. You can now share them with your friends",
   "misc.windowTooSmall":

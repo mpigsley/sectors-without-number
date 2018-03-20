@@ -18,10 +18,12 @@ const mapStateToProps = state => ({
   isEditModalOpen: isUserEditModalOpenSelector(state),
 });
 
+const mapDispatchToProps = (dispatch, props) => ({
+  updateUserForm: (key, value) => dispatch(updateUserForm(key, value)),
+  updateUser: () => dispatch(updateUser(props.intl)),
+  closeEditModal: () => dispatch(closeEditModal()),
+});
+
 export default injectIntl(
-  connect(mapStateToProps, {
-    updateUserForm,
-    updateUser,
-    closeEditModal,
-  })(ProfileModal),
+  connect(mapStateToProps, mapDispatchToProps)(ProfileModal),
 );

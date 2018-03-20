@@ -21,7 +21,7 @@ import {
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import Entities from 'constants/entities';
 
-export const deleteEntities = ({ state, deleted }) => {
+export const deleteEntities = ({ state, deleted }, intl) => {
   const isLoggedIn = !!userModelSelector(state);
   const isSaved = isCurrentSectorSaved(state);
   const currentEntityType = getCurrentEntityType(state);
@@ -36,27 +36,37 @@ export const deleteEntities = ({ state, deleted }) => {
   } else {
     return Promise.resolve();
   }
-  const entityName = Entities[currentEntityType].name;
+  const entityName = intl.formatMessage({
+    id: Entities[currentEntityType].name,
+  });
   return promise
     .then(() => ({
       action: SuccessToast({
-        title: `${entityName} Deleted`,
-        message: `Your ${entityName} has been successfully removed.`,
+        title: intl.formatMessage(
+          { id: 'misc.entityDeleted' },
+          { entity: entityName },
+        ),
+        message: intl.formatMessage(
+          { id: 'misc.successfullyRemoved' },
+          { entity: entityName },
+        ),
       }),
     }))
     .catch(err => {
       console.error(err);
-      return { action: ErrorToast() };
+      return {
+        action: ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      };
     });
 };
 
-export const saveEntities = ({
-  state,
-  updated,
-  created,
-  deleted,
-  entities,
-}) => {
+export const saveEntities = (
+  { state, updated, created, deleted, entities },
+  intl,
+) => {
   const uid = userUidSelector(state);
   const isSaved = isCurrentSectorSaved(state);
   let promise;
@@ -83,11 +93,19 @@ export const saveEntities = ({
   }
   return promise
     .then(({ mapping }) => ({
-      action: SuccessToast(),
+      action: SuccessToast({
+        title: intl.formatMessage({ id: 'misc.sectorSaved' }),
+        message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
+      }),
       mapping,
     }))
     .catch(err => {
       console.error(err);
-      return { action: ErrorToast() };
+      return {
+        action: ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      };
     });
 };

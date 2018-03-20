@@ -1299,7 +1299,7 @@ export default {
       'local fauna',
       'nature cultist',
       'native aliens',
-      'calous labor overseer',
+      'callous labor overseer',
     ],
     'misc.friends': [
       'xenobiologist',

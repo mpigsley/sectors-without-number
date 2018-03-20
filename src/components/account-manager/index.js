@@ -17,12 +17,12 @@ const mapStateToProps = state => ({
   isInitialized: state.user.isInitialized,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   openEditModal: () => dispatch(openEditModal()),
   openLoginModal: () => dispatch(openLoginModal()),
   openUserDropdown: () => dispatch(openUserDropdown()),
   closeUserDropdown: () => dispatch(closeUserDropdown()),
-  logout: () => dispatch(logout()),
+  logout: () => dispatch(logout(props.intl)),
 });
 
 export default injectIntl(
