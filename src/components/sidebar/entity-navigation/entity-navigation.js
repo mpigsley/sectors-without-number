@@ -98,7 +98,7 @@ export default function EntityNavigation({
           to="https://goo.gl/forms/eOanpGEuglCYYg7u2"
           target="_blank"
         >
-          Report Problem
+          <FormattedMessage id="misc.reportProblem" />
         </ButtonLink>
         <span className="EntityNavigation-Spacer" />
         <ButtonLink minimal to="/changelog">
