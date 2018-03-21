@@ -6,6 +6,7 @@ import Atmosphere from 'constants/atmosphere';
 import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
 import Population from 'constants/population';
+import Entities from 'constants/entities';
 
 export const generatePlanet = ({
   sector,
@@ -97,7 +98,11 @@ export const generatePlanets = ({
   if (!numChildren) {
     const chance = new Chance();
     if (additionalPointsOfInterest) {
-      numChildren = [...Array(chance.weighted([1, 2, 3], [10, 5, 2]))];
+      if (parentEntity === Entities.blackHole.key) {
+        numChildren = [...Array(chance.weighted([0, 1], [10, 1]))];
+      } else {
+        numChildren = [...Array(chance.weighted([1, 2, 3], [10, 5, 2]))];
+      }
     } else {
       numChildren = [...Array(chance.weighted([1, 2, 3], [5, 3, 2]))];
     }

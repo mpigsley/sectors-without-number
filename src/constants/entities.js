@@ -208,6 +208,7 @@ const blackHole = {
     deepSpaceStation.key,
     note.key,
     orbitalRuin.key,
+    planet.key,
     refuelingStation.key,
     researchBase.key,
   ],

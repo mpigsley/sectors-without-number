@@ -1,4 +1,8 @@
 {
+  "3.14.1": {
+    "description": "Allow planets to be children of black holes.",
+    "date": "3-21-2018"
+  },
   "3.14.0": {
     "description": "Internationalization.",
     "date": "3-21-2018",
