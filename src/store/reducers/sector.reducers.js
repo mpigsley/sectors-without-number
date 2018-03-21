@@ -1,5 +1,4 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { uniq, keys } from 'lodash';
 
 import {
   UPDATE_CONFIGURATION,
@@ -16,9 +15,7 @@ import {
   SAVE_SECTOR,
   UPDATE_ENTITIES,
   DELETE_ENTITIES,
-  UPDATE_ID_MAPPING,
 } from 'store/actions/entity.actions';
-import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
 import { ROWS, COLUMNS } from 'constants/defaults';
 import Entities from 'constants/entities';
@@ -26,11 +23,6 @@ import ExportTypes from 'constants/export-types';
 
 const initialState = {
   renderSector: false,
-  currentSector: null,
-  currentEntityType: null,
-  currentEntity: null,
-  saved: [],
-  shared: [],
   holdKey: null,
   hoverKey: null,
   topLevelKey: null,
@@ -53,72 +45,25 @@ export default function sector(state = initialState, action) {
         return {
           ...initialState,
           renderSector: false,
-          saved: state.saved,
-          shared: state.shared,
           configuration: {
             ...initialState.configuration,
             name: Entities.sector.nameGenerator(),
           },
         };
       } else if (pathname.startsWith('/sector/')) {
-        return {
-          ...state,
-          renderSector: true,
-          currentSector: pathname.split('/')[2],
-          currentEntityType: pathname.split('/')[3],
-          currentEntity: pathname.split('/')[4],
-        };
-      } else if (pathname.startsWith('/overview/')) {
-        return {
-          ...state,
-          currentSector: pathname.split('/')[2],
-          currentEntityType: pathname.split('/')[3],
-          currentEntity: pathname.split('/')[4],
-        };
+        return { ...state, renderSector: true };
       }
-      return {
-        ...state,
-        renderSector: false,
-      };
+      return { ...state, renderSector: false };
     }
     case SAVE_SECTOR:
     case UPDATE_ENTITIES:
+    case DELETE_ENTITIES:
       return {
         ...state,
-        saved: uniq([...state.saved, state.currentSector]).filter(s => s),
         holdKey: null,
         hoverKey: null,
         topLevelKey: null,
         syncLock: true,
-      };
-    case DELETE_ENTITIES: {
-      const deletedSectorIds = action.entities[Entities.sector.key] || [];
-      return {
-        ...state,
-        saved: state.saved.filter(
-          saveId => deletedSectorIds.indexOf(saveId) < 0,
-        ),
-        holdKey: null,
-        hoverKey: null,
-        topLevelKey: null,
-        syncLock: true,
-      };
-    }
-    case LOGGED_IN:
-      return {
-        ...state,
-        saved: keys(action.entities[Entities.sector.key] || {}),
-        shared: [],
-      };
-    case LOGGED_OUT:
-      return {
-        ...state,
-        saved: [],
-      };
-    case UPDATE_ID_MAPPING:
-      return {
-        ...state,
-        saved: state.saved.map(saveId => action.mapping[saveId] || saveId),
       };
     case UPDATE_CONFIGURATION:
       return {
@@ -138,8 +83,6 @@ export default function sector(state = initialState, action) {
       return { ...state, hoverKey: null };
     case RELEASE_SYNC_LOCK:
       return { ...state, syncLock: false };
-    case INITIALIZE:
-      return { ...state, saved: action.saved, shared: action.shared };
     case TOP_LEVEL_ENTITY_CREATE:
       return { ...state, topLevelKey: action.key };
     case CANCEL_TOP_LEVEL_ENTITY_CREATE:

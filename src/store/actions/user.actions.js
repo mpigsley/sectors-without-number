@@ -95,7 +95,7 @@ export const initialize = location => dispatch =>
     const promises = [
       location.pathname.startsWith('/sector')
         ? getCurrentSector(sectorId, uid)
-        : Promise.resolve({}),
+        : Promise.resolve(),
     ];
     if (uid) {
       promises.push(getSyncedSectors(uid));
@@ -108,7 +108,8 @@ export const initialize = location => dispatch =>
         type: INITIALIZE,
         user,
         entities: mergeEntityUpdates(synced, currentSector),
-        shared: keys(currentSector[Entities.sector.key] || {}),
+        shared: keys((currentSector || {})[Entities.sector.key] || {}),
+        share: currentSector ? sectorId : undefined,
         saved: keys((synced || {})[Entities.sector.key] || {}),
       }),
     );

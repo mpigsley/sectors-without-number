@@ -10,17 +10,17 @@ export const userUidSelector = state => (state.user.model || {}).uid;
 export const userFormSelector = state => state.user.form;
 
 /* Entity */
-export const entitySelector = state => state.entity;
-export const sectorSelector = state => state.entity.sector;
+export const entitySelector = state => state.entity.models;
+export const sectorSelector = state => state.entity.models.sector;
+export const currentSectorSelector = state => state.entity.currentSector;
+export const currentEntityTypeSelector = state =>
+  state.entity.currentEntityType;
+export const currentEntitySelector = state => state.entity.currentEntity;
+export const savedSectorSelector = state => state.entity.saved;
+export const shareSectorSelector = state => state.entity.share;
 
 /* Sector */
-export const currentSectorSelector = state => state.sector.currentSector;
-export const currentEntityTypeSelector = state =>
-  state.sector.currentEntityType;
-export const currentEntitySelector = state => state.sector.currentEntity;
 export const configurationSelector = state => state.sector.configuration;
-export const savedSectorSelector = state => state.sector.saved;
-export const sharedSectorSelector = state => state.sector.shared;
 export const holdKeySelector = state => state.sector.holdKey;
 export const hoverKeySelector = state => state.sector.hoverKey;
 export const renderSectorSelector = state => state.sector.renderSector;
