@@ -60,5 +60,5 @@ ExportModal.propTypes = {
   exportType: PropTypes.string.isRequired,
   onCancel: PropTypes.func.isRequired,
   setEntityExport: PropTypes.func.isRequired,
-  intl: intlShape.isRequried,
+  intl: intlShape.isRequired,
 };
