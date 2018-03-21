@@ -19,11 +19,13 @@ import {
   doLogin,
   doPasswordReset,
   doLogout,
+  getCurrentUser,
+} from 'store/api/user';
+import {
+  getCurrentSector,
   getSyncedSectors,
   uploadEntities,
-  getCurrentUser,
-  getCurrentSector,
-} from 'store/api/firebase';
+} from 'store/api/entity';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';

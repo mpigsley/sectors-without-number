@@ -38,11 +38,12 @@ import {
   getTopLevelEntity,
   initialSyncToast,
   preventSync,
+  saveEntities,
+  deleteEntities,
   SYNC_TOAST_ID,
 } from 'utils/entity';
 import { coordinatesFromKey } from 'utils/common';
 import { removeToastById } from 'utils/toasts';
-import { saveEntities, deleteEntities } from 'store/api/shared';
 import Entities from 'constants/entities';
 
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
