@@ -10,10 +10,6 @@ const mapStateToProps = state => ({
   location: routerLocationSelector(state),
 });
 
-const mapDispatchToProps = (dispatch, props) => ({
-  initialize: location => dispatch(initialize(location, props.intl)),
-});
-
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(InitWrapper),
+  connect(mapStateToProps, { initialize })(InitWrapper),
 );

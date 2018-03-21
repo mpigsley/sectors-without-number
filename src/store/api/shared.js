@@ -12,7 +12,6 @@ import {
 import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 import { mergeEntityUpdates } from 'utils/entity';
 
-import { deleteEntities as localDeleteEntities } from 'store/api/local';
 import {
   uploadEntities,
   deleteEntities as syncDeleteEntities,
@@ -28,18 +27,13 @@ export const deleteEntities = ({ state, deleted }, intl) => {
   if (!isSaved) {
     return Promise.resolve();
   }
-  let promise;
-  if (isLoggedIn) {
-    promise = syncDeleteEntities(deleted);
-  } else if (currentEntityType === Entities.sector.key) {
-    promise = localDeleteEntities(deleted);
-  } else {
+  if (!isLoggedIn) {
     return Promise.resolve();
   }
   const entityName = intl.formatMessage({
     id: Entities[currentEntityType].name,
   });
-  return promise
+  return syncDeleteEntities(deleted)
     .then(() => ({
       action: SuccessToast({
         title: intl.formatMessage(

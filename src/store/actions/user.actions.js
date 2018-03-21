@@ -1,4 +1,4 @@
-import { size, keys, pick } from 'lodash';
+import { keys, pick } from 'lodash';
 import { push } from 'react-router-redux';
 import { addLocaleData } from 'react-intl';
 
@@ -23,18 +23,11 @@ import {
   uploadEntities,
   getCurrentUser,
   getCurrentSector,
-  convertOldSectors,
 } from 'store/api/firebase';
-import { clearLocalDatabase, getEntities } from 'store/api/local';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
-import {
-  SuccessToast,
-  ErrorToast,
-  InfoToast,
-  removeToastById,
-} from 'utils/toasts';
+import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { mergeEntityUpdates } from 'utils/entity';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
@@ -70,10 +63,7 @@ const onLogin = (dispatch, state) => result => {
   const uid = result.user ? result.user.uid : result.uid;
   let promise = Promise.resolve();
   if (localSync) {
-    promise = Promise.all([
-      uploadEntities(getSavedEntities(state), uid),
-      clearLocalDatabase(),
-    ]);
+    promise = uploadEntities(getSavedEntities(state), uid);
   }
   return promise
     .then(() => Promise.all([getSyncedSectors(uid), getUserData(uid)]))
@@ -96,8 +86,8 @@ const onLogin = (dispatch, state) => result => {
     });
 };
 
-export const initialize = (location, intl) => dispatch =>
-  Promise.all([getCurrentUser(), getEntities()]).then(([user, local]) => {
+export const initialize = location => dispatch =>
+  getCurrentUser().then(user => {
     const { uid, locale } = user || {};
     const sectorId = location.pathname.split('/')[2];
     const promises = [
@@ -107,48 +97,18 @@ export const initialize = (location, intl) => dispatch =>
     ];
     if (uid) {
       promises.push(getSyncedSectors(uid));
-      promises.push(
-        convertOldSectors({
-          uid,
-          onComplete: () => dispatch(removeToastById('sync-toastr')),
-          onConvert: () =>
-            dispatch(
-              InfoToast({
-                title: intl.formatMessage({ id: 'misc.syncingSectors' }),
-                message: intl.formatMessage({ id: 'misc.noExit' }),
-                config: {
-                  id: 'sync-toastr',
-                  options: {
-                    removeOnHover: false,
-                    showCloseButton: false,
-                    progressBar: false,
-                  },
-                },
-              }),
-            ),
-        }),
-      );
     }
     if (locale && locale !== 'en' && Locale[locale]) {
       promises.push(Locale[locale].localeFetch().then(addLocaleData));
     }
-    return Promise.all(promises).then(
-      ([currentSector, onlySynced, converted]) => {
-        const synced = size(onlySynced) ? onlySynced : converted;
-        dispatch({
-          type: INITIALIZE,
-          user,
-          entities: mergeEntityUpdates(
-            mergeEntityUpdates(local, synced),
-            currentSector,
-          ),
-          shared: keys(currentSector[Entities.sector.key] || {}),
-          saved: [
-            ...keys((synced || {})[Entities.sector.key]),
-            ...keys((local || {})[Entities.sector.key]),
-          ],
-        });
-      },
+    return Promise.all(promises).then(([currentSector, synced]) =>
+      dispatch({
+        type: INITIALIZE,
+        user,
+        entities: mergeEntityUpdates(synced, currentSector),
+        shared: keys(currentSector[Entities.sector.key] || {}),
+        saved: keys((synced || {})[Entities.sector.key] || {}),
+      }),
     );
   });
 
