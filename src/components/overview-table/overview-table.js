@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import { intlShape, FormattedMessage } from 'react-intl';
 import { values, size } from 'lodash';
 import Pluralize from 'pluralize';
 
@@ -15,66 +16,75 @@ import { generateCSV, createCSVDownload } from 'utils/export';
 import { sortByKey } from 'utils/common';
 import './style.css';
 
-const getColumnsFromType = entityType => {
-  const common = [
-    {
-      accessor: 'name',
-      Header: 'Name',
-      Cell: (name, { link }) => (
-        <Link className="OverviewTable-Link" to={link}>
-          {name}
-        </Link>
-      ),
-    },
-  ];
-  if (Entities[entityType].topLevel) {
-    return [
-      ...common,
-      { accessor: 'location', Header: 'Location', centered: true },
-      { accessor: 'children', Header: 'Children', centered: true },
-      { accessor: 'neighbors', Header: 'Neighbors' },
-    ];
-  }
-  const columns = [
-    ...common,
-    {
-      accessor: 'parent',
-      Header: 'Parent',
-      Cell: (parent, { parentLink }) => (
-        <Link className="OverviewTable-Link" to={parentLink}>
-          {parent}
-        </Link>
-      ),
-    },
-  ];
-  if (Entities[entityType].children.length) {
-    columns.splice(2, 0, {
-      accessor: 'children',
-      Header: 'Children',
-      centered: true,
-    });
-  }
-  if ((Entities[entityType].attributes || []).length) {
-    Entities[entityType].attributes.forEach(({ key, name }) => {
-      columns.push({ accessor: key, Header: name });
-    });
-  }
-  if (Entities[entityType].tags) {
-    columns.push({ accessor: 'tags', Header: 'Tags' });
-  }
-  return columns;
-};
-
 export default function OverviewTable({
   entities,
-  currentSector,
   routeParams,
+  currentSector,
+  intl,
 }) {
-  const pluralName = Pluralize(Entities[routeParams.entityType].name);
+  const pluralName = intl.formatMessage({
+    id: Pluralize(Entities[routeParams.entityType].name),
+  });
+
+  const getColumnsFromType = entityType => {
+    const common = [
+      {
+        accessor: 'name',
+        Header: 'misc.name',
+        Cell: (name, { link }) => (
+          <Link className="OverviewTable-Link" to={link}>
+            {name}
+          </Link>
+        ),
+      },
+    ];
+    if (Entities[entityType].topLevel) {
+      return [
+        ...common,
+        { accessor: 'location', Header: 'misc.location', centered: true },
+        { accessor: 'children', Header: 'misc.children', centered: true },
+        { accessor: 'neighbors', Header: 'misc.neighbors' },
+      ];
+    }
+    const columns = [
+      ...common,
+      {
+        accessor: 'parent',
+        Header: 'misc.parent',
+        Cell: (parent, { parentLink, parentType }) => (
+          <Link className="OverviewTable-Link" to={parentLink}>
+            {parent} ({intl.formatMessage({ id: parentType })})
+          </Link>
+        ),
+      },
+    ];
+    if (Entities[entityType].children.length) {
+      columns.splice(2, 0, {
+        accessor: 'children',
+        Header: 'misc.children',
+        centered: true,
+      });
+    }
+    if ((Entities[entityType].attributes || []).length) {
+      Entities[entityType].attributes.forEach(({ key, name }) => {
+        columns.push({ accessor: key, Header: name, translateItem: true });
+      });
+    }
+    if (Entities[entityType].tags) {
+      columns.push({ accessor: 'tags', Header: 'misc.tags' });
+    }
+    return columns;
+  };
+
   if (!size(entities[routeParams.entityType])) {
     return (
       <EmptyOverview>
-        You do not have any {pluralName} in this sector
+        <FormattedMessage
+          id="misc.noEntities"
+          values={{
+            entities: pluralName,
+          }}
+        />
       </EmptyOverview>
     );
   }
@@ -85,8 +95,17 @@ export default function OverviewTable({
   );
 
   const exportTable = () => {
-    const table = [columns.map(col => col.Header)].concat(
-      tableData.map(data => columns.map(col => data[col.accessor])),
+    const table = [
+      columns.map(col => intl.formatMessage({ id: col.Header })),
+    ].concat(
+      tableData.map(data =>
+        columns.map(
+          ({ accessor, translateItem }) =>
+            translateItem
+              ? intl.formatMessage({ id: data[accessor] })
+              : data[accessor],
+        ),
+      ),
     );
     return createCSVDownload(
       generateCSV(table),
@@ -104,10 +123,15 @@ export default function OverviewTable({
       <div className="OverviewTable-FlexWrap">
         <FlexContainer justify="spaceBetween" align="baseline">
           <Header type={HeaderType.header3}>
-            {Entities[routeParams.entityType].name}
+            {intl.formatMessage({ id: Entities[routeParams.entityType].name })}
           </Header>
           <Button minimal onClick={exportTable}>
-            Export {pluralName}
+            <FormattedMessage
+              id="misc.exportEntity"
+              values={{
+                entity: pluralName,
+              }}
+            />
           </Button>
         </FlexContainer>
       </div>
@@ -130,6 +154,7 @@ OverviewTable.propTypes = {
   routeParams: PropTypes.shape({
     entityType: PropTypes.string.isRequired,
   }).isRequired,
+  intl: intlShape.isRequired,
 };
 
 OverviewTable.defaultProps = {

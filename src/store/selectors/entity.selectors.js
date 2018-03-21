@@ -275,9 +275,8 @@ export const getPrintableEntities = createDeepEqualSelector(
               ? coordinateKey(entity.x, entity.y)
               : undefined,
             children: entityChildren[entityId] || 0,
-            parent: `${
-              currentEntities[entity.parentEntity][entity.parent].name
-            } (${Entities[entity.parentEntity].name})`,
+            parent: currentEntities[entity.parentEntity][entity.parent].name,
+            parentType: Entities[entity.parentEntity].name,
             parentLink: `/sector/${currentSector}${
               entity.parentEntity !== Entities.sector.key
                 ? `/${entity.parentEntity}/${entity.parent}`

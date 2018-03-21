@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   getCurrentEntity,
@@ -19,6 +20,6 @@ const mapStateToProps = state => ({
   isAncestorHidden: isAncestorHidden(state),
 });
 
-export default connect(mapStateToProps, { updateEntityInEdit })(
-  EntityAttributes,
+export default injectIntl(
+  connect(mapStateToProps, { updateEntityInEdit })(EntityAttributes),
 );

@@ -1,26 +1,26 @@
 export default {
-  name: 'Occupation',
+  name: 'misc.occupation',
   key: 'occupation',
   attributes: {
     serfs: {
       key: 'serfs',
-      name: 'Miserable gas-miner slaves or serfs',
+      name: 'entity.gasGiantMine.occupation.serfs',
     },
     robots: {
       key: 'robots',
-      name: 'Strange robots and their overseers',
+      name: 'entity.gasGiantMine.occupation.robots',
     },
     alien: {
       key: 'alien',
-      name: 'Scientists studying the alien life',
+      name: 'entity.gasGiantMine.occupation.alien',
     },
     mine: {
       key: 'mine',
-      name: 'Scrappers in the ruined old mine',
+      name: 'entity.gasGiantMine.occupation.mine',
     },
     group: {
       key: 'group',
-      name: 'Impoverished separatists group',
+      name: 'entity.gasGiantMine.occupation.group',
     },
   },
 };

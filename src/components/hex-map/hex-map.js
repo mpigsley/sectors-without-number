@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { FormattedMessage } from 'react-intl';
 
 import Hex from 'components/hex';
 import MovementVector, { MarkerDefs } from 'components/movement-vector';
@@ -24,8 +25,7 @@ export default function HexMap({
       <AbsoluteContainer>
         <ContentContainer direction="column" align="center" justify="center">
           <SubContainer className="HexMap-Message">
-            Your browser window is too small to render the sector. Please try on
-            a larger screen.
+            <FormattedMessage id="misc.windowTooSmall" />
           </SubContainer>
         </ContentContainer>
       </AbsoluteContainer>

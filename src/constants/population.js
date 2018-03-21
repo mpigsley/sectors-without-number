@@ -1,34 +1,34 @@
 export default {
-  name: 'Population',
+  name: 'population',
   key: 'population',
   attributes: {
     failed: {
       key: 'failed',
-      name: 'Failed Colony',
+      name: 'population.failed',
     },
     outpost: {
       key: 'outpost',
-      name: 'Outpost',
+      name: 'population.outpost',
     },
     lessThanMillion: {
       key: 'lessThanMillion',
-      name: 'Fewer than a million inhabitants',
+      name: 'population.lessThanMillion',
     },
     severalMillion: {
       key: 'severalMillion',
-      name: 'Several million inhabitants',
+      name: 'population.severalMillion',
     },
     hundredsOfMillions: {
       key: 'hundredsOfMillions',
-      name: 'Hundreds of millions of inhabitants',
+      name: 'population.hundredsOfMillions',
     },
     billions: {
       key: 'billions',
-      name: 'Billions of inhabitants',
+      name: 'population.billions',
     },
     alien: {
       key: 'alien',
-      name: 'Alien inhabitants',
+      name: 'population.alien',
     },
   },
 };

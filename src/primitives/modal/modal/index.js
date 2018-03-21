@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ReactModal from 'react-modal';
 import { X } from 'react-feather';
+import { FormattedMessage } from 'react-intl';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
@@ -61,7 +62,7 @@ export default function Modal(props) {
         <div className="Modal-Content">{children}</div>
         <FlexContainer justify="flexEnd" className="Modal-Section Modal-Footer">
           <Button className="Model-FooterButton" onClick={onCancel}>
-            {cancelText}
+            {cancelText || <FormattedMessage id="misc.cancel" />}
           </Button>
           {React.Children.map(actionButtons, button =>
             React.cloneElement(button, {
@@ -92,7 +93,7 @@ Modal.propTypes = {
 Modal.defaultProps = {
   className: null,
   overlayClassName: null,
-  cancelText: 'Cancel',
+  cancelText: undefined,
   actionButtons: null,
   doubleSize: false,
   hideHeader: false,

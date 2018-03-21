@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
+import Firebase from 'firebase';
+import Fastclick from 'react-fastclick';
+import 'firebase/firestore';
 
 import store from 'store';
-import init from 'init';
 
 import AppWrapper from 'components/app-wrapper';
 import HexBackground from 'components/hex-background';
@@ -21,7 +23,15 @@ import EmptyOverview from 'components/empty-overview';
 import 'styles/global.css';
 import 'react-hint/css/index.css';
 
-init(store);
+Fastclick();
+Firebase.initializeApp({
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_DATABASE_URL,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_SENDER_ID,
+});
 
 const history = syncHistoryWithStore(browserHistory, store);
 

@@ -1,26 +1,26 @@
 export default {
-  name: 'Situation',
+  name: 'misc.situation',
   key: 'situation',
   attributes: {
     life: {
       key: 'life',
-      name: 'Life support is threatened',
+      name: 'entity.asteroidBase.situation.life',
     },
     asteroid: {
       key: 'asteroid',
-      name: 'Base needs a new asteroid',
+      name: 'entity.asteroidBase.situation.asteroid',
     },
     nasty: {
       key: 'nasty',
-      name: 'Dug out something nasty',
+      name: 'entity.asteroidBase.situation.nasty',
     },
     fighting: {
       key: 'fighting',
-      name: 'Fighting another asteroid',
+      name: 'entity.asteroidBase.situation.fighting',
     },
     priceless: {
       key: 'priceless',
-      name: 'Hit a priceless vein of ore',
+      name: 'entity.asteroidBase.situation.priceless',
     },
   },
 };

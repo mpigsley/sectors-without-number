@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Home, Zap } from 'react-feather';
+import { FormattedMessage } from 'react-intl';
 
 import SubContainer from 'primitives/container/sub-container';
 import ContentContainer from 'primitives/container/content-container';
@@ -29,15 +30,17 @@ export default function Error({ generateSector }) {
       />
       <AbsoluteContainer>
         <ContentContainer direction="column" align="center" justify="center">
-          <Header type={HeaderType.header2}>Sector Does Not Exist</Header>
+          <Header type={HeaderType.header2}>
+            <FormattedMessage id="misc.noSector" />
+          </Header>
           <SubContainer wrap justify="center" align="center">
             <ButtonLink to="/">
               <LinkIcon icon={Home} size="20" />
-              Dashboard
+              <FormattedMessage id="misc.dashboard" />
             </ButtonLink>
             <Button onClick={generateSector}>
               <LinkIcon icon={Zap} size="20" />
-              Generate
+              <FormattedMessage id="misc.generate" />
             </Button>
           </SubContainer>
         </ContentContainer>

@@ -1,26 +1,26 @@
 export default {
-  name: 'Situation',
+  name: 'misc.situation',
   key: 'situation',
   attributes: {
     dark: {
       key: 'dark',
-      name: 'Something dark has awoken',
+      name: 'entity.moonBase.situation.dark',
     },
     criminals: {
       key: 'criminals',
-      name: 'Criminals trying to take over',
+      name: 'entity.moonBase.situation.criminals',
     },
     plague: {
       key: 'plague',
-      name: 'Moon plague breaking out',
+      name: 'entity.moonBase.situation.plague',
     },
     supplies: {
       key: 'supplies',
-      name: 'Desperate for vital supplies',
+      name: 'entity.moonBase.situation.supplies',
     },
     rich: {
       key: 'rich',
-      name: 'Rich but badly-protected',
+      name: 'entity.moonBase.situation.rich',
     },
   },
 };

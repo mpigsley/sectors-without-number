@@ -33,22 +33,25 @@ export const syncLock = (action, parameters = {}) => (dispatch, getState) => {
   return dispatch({ type: action, ...parameters });
 };
 
-export const preventSync = (state, dispatch, isGenerating) => {
+export const preventSync = (state, dispatch, intl, isGenerating) => {
   const isSyncing = !isCurrentSectorSaved(state);
   const isLoggedIn = !!userModelSelector(state);
   const reachedSectorLimit = savedSectorSelector(state).length >= SECTOR_LIMIT;
   if (!isLoggedIn && !isGenerating) {
     dispatch(
       WarningToast({
-        title: `Sign up to persist sector`,
-        message: `Your current sector(s) will be synced automatically.`,
+        title: intl.formatMessage({ id: 'misc.signUpPersist' }),
+        message: intl.formatMessage({ id: 'misc.syncedAutomatically' }),
       }),
     );
   } else if (reachedSectorLimit && isSyncing) {
     dispatch(
       InfoToast({
-        title: 'Reached Sector Limit',
-        message: `You already have at least ${SECTOR_LIMIT} sectors.`,
+        title: intl.formatMessage({ id: 'misc.reacedLimit' }),
+        message: intl.formatMessage(
+          { id: 'misc.haveNumSectors' },
+          { num: SECTOR_LIMIT },
+        ),
       }),
     );
   }
@@ -59,13 +62,13 @@ export const preventSync = (state, dispatch, isGenerating) => {
 };
 
 export const SYNC_TOAST_ID = 'initial-sync';
-export const initialSyncToast = (state, dispatch) => {
+export const initialSyncToast = (state, dispatch, intl) => {
   if (!isCurrentSectorSaved(state)) {
     return new Promise(resolve => {
       dispatch(
         InfoToast({
-          title: 'Syncing Sector',
-          message: 'Do not exit out of this web page.',
+          title: intl.formatMessage({ id: 'misc.syncingSector' }),
+          message: intl.formatMessage({ id: 'misc.noExit' }),
           config: {
             id: SYNC_TOAST_ID,
             options: {

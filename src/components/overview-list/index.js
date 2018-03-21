@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
+import { injectIntl } from 'react-intl';
 
 import { getCurrentEntities } from 'store/selectors/entity.selectors';
 import {
@@ -18,4 +19,6 @@ const mapDispatchToProps = dispatch => ({
   toHome: () => dispatch(push('/')),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(OverviewList);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(OverviewList),
+);

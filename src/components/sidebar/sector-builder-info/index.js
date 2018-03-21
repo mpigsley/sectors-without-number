@@ -1,4 +1,5 @@
 import React from 'react';
+import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -13,16 +14,18 @@ export default function SectorBuilderInfo() {
       direction="column"
       align="center"
     >
-      <Header type={HeaderType.header3}>Welcome to the Sector Builder</Header>
+      <Header type={HeaderType.header3}>
+        <FormattedMessage id="misc.welcomeBuilder" />
+      </Header>
       <ol className="SectorBuilderInfo-WelcomeList">
         <li className="SectorBuilderInfo-WelcomeItem">
-          To <b>create a system</b> click and hold a hex to the left.
+          <FormattedMessage id="misc.createASystem" />
         </li>
         <li className="SectorBuilderInfo-WelcomeItem">
-          To <b>move an existing system</b> click, hold, and drag.
+          <FormattedMessage id="misc.moveSystem" />
         </li>
         <li className="SectorBuilderInfo-WelcomeItem">
-          <b>Create and edit planets</b> here from the sidebar.
+          <FormattedMessage id="misc.createEditPlanets" />
         </li>
       </ol>
     </FlexContainer>

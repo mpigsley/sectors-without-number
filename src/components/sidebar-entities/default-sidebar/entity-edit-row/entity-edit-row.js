@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { X, RefreshCw, RotateCcw } from 'react-feather';
 import ReactHintFactory from 'react-hint';
+import { intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Input from 'primitives/form/input';
@@ -23,6 +24,7 @@ export default function EntityEditRow({
   undoDeleteChildInEdit,
   updateChildInEdit,
   isCurrentOrAncestorHidden,
+  intl,
 }) {
   const entityConfig = Entities[entityType];
 
@@ -95,7 +97,10 @@ export default function EntityEditRow({
       <span
         data-rh={
           isCurrentOrAncestorHidden
-            ? `A parent entity is hiding this ${entityConfig.shortName.toLowerCase()}.`
+            ? intl.formatMessage(
+                { id: 'misc.hiddenParrent' },
+                { entity: intl.formatMessage({ id: entityConfig.shortName }) },
+              )
             : null
         }
       >
@@ -131,6 +136,7 @@ EntityEditRow.propTypes = {
   undoDeleteChildInEdit: PropTypes.func.isRequired,
   updateChildInEdit: PropTypes.func.isRequired,
   isCurrentOrAncestorHidden: PropTypes.bool.isRequired,
+  intl: intlShape.isRequired,
 };
 
 EntityEditRow.defaultProps = {

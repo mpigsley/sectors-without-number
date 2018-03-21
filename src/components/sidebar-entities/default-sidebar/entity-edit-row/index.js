@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   deleteChildInEdit,
@@ -27,4 +28,6 @@ const mapDispatchToProps = (dispatch, props) => ({
     ),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EntityEditRow);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(EntityEditRow),
+);

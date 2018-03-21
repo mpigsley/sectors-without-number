@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   updateUserForm,
@@ -8,17 +9,21 @@ import {
 
 import ProfileModal from './profile-modal';
 import {
-  displayNameSelector,
-  isUserEditModalOpen,
+  userFormSelector,
+  isUserEditModalOpenSelector,
 } from '../../store/selectors/base.selectors';
 
 const mapStateToProps = state => ({
-  displayName: displayNameSelector(state),
-  isEditModalOpen: isUserEditModalOpen(state),
+  form: userFormSelector(state),
+  isEditModalOpen: isUserEditModalOpenSelector(state),
 });
 
-export default connect(mapStateToProps, {
-  updateUserForm,
-  updateUser,
-  closeEditModal,
-})(ProfileModal);
+const mapDispatchToProps = (dispatch, props) => ({
+  updateUserForm: (key, value) => dispatch(updateUserForm(key, value)),
+  updateUser: () => dispatch(updateUser(props.intl)),
+  closeEditModal: () => dispatch(closeEditModal()),
+});
+
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(ProfileModal),
+);

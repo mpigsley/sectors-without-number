@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   getPrintableEntities,
@@ -11,4 +12,4 @@ const mapStateToProps = state => ({
   currentSector: getCurrentSector(state),
 });
 
-export default connect(mapStateToProps)(OverviewTable);
+export default injectIntl(connect(mapStateToProps)(OverviewTable));

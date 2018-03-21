@@ -1,10 +1,13 @@
 /* User */
 export const userModelSelector = state => state.user.model;
+export const userLocaleSelector = state =>
+  (state.user.model || {}).locale || 'en';
 export const isDropdownActiveSelector = state => state.user.isDropdownActive;
-export const isUserEditModalOpen = state => state.user.isEditModalOpen;
+export const isUserEditModalOpenSelector = state => state.user.isEditModalOpen;
+export const isSyncModalOpenSelector = state => state.user.isSyncModalOpen;
 export const isInitializedSelector = state => state.user.isInitialized;
 export const userUidSelector = state => (state.user.model || {}).uid;
-export const displayNameSelector = state => state.user.form.displayName;
+export const userFormSelector = state => state.user.form;
 
 /* Entity */
 export const entitySelector = state => state.entity;
@@ -31,3 +34,7 @@ export const isSidebarEditActiveSelector = state =>
   state.sidebarEdit.isSidebarEditActive;
 export const sidebarEditEntitySelector = state => state.sidebarEdit.entity;
 export const sidebarEditChildrenSelector = state => state.sidebarEdit.children;
+
+/* Router */
+export const routerLocationSelector = state =>
+  state.routing.locationBeforeTransitions;

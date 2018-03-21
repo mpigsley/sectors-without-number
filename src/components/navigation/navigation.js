@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router';
+import { FormattedMessage } from 'react-intl';
 import { User, Home, List, Grid, LogIn, LogOut } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -25,7 +26,7 @@ export default function Navigation({
         <FlexContainer align="center">
           <User size="25" className="Navigation-Icon" />
           <Header type={HeaderType.header4} className="Navigation-Title">
-            User Profile
+            <FormattedMessage id="misc.userProfile" />
           </Header>
         </FlexContainer>
       </span>
@@ -35,7 +36,7 @@ export default function Navigation({
         <FlexContainer align="center">
           <LogOut size="25" className="Navigation-Icon" />
           <Header type={HeaderType.header4} className="Navigation-Title">
-            Log Out
+            <FormattedMessage id="misc.logOut" />
           </Header>
         </FlexContainer>
       </span>
@@ -49,7 +50,7 @@ export default function Navigation({
         <FlexContainer align="center">
           <LogIn size="25" className="Navigation-Icon" />
           <Header type={HeaderType.header4} className="Navigation-Title">
-            Sign Up
+            <FormattedMessage id="misc.signUp" />
           </Header>
         </FlexContainer>
       </span>
@@ -73,7 +74,7 @@ export default function Navigation({
           <FlexContainer align="center">
             <Home size="25" className="Navigation-Icon" />
             <Header type={HeaderType.header4} className="Navigation-Title">
-              Home
+              <FormattedMessage id="misc.home" />
             </Header>
           </FlexContainer>
         </Link>
@@ -86,7 +87,7 @@ export default function Navigation({
           <FlexContainer align="center">
             <Grid size="25" className="Navigation-Icon" />
             <Header type={HeaderType.header4} className="Navigation-Title">
-              Sector
+              <FormattedMessage id="misc.sector" />
             </Header>
           </FlexContainer>
         </Link>
@@ -99,7 +100,7 @@ export default function Navigation({
           <FlexContainer align="center">
             <List size="25" className="Navigation-Icon" />
             <Header type={HeaderType.header4} className="Navigation-Title">
-              Overview
+              <FormattedMessage id="misc.overview" />
             </Header>
           </FlexContainer>
         </Link>

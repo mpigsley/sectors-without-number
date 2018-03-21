@@ -1,26 +1,26 @@
 export default {
-  name: 'Situation',
+  name: 'misc.situation',
   key: 'situation',
   attributes: {
     distress: {
       key: 'distress',
-      name: 'A ship is in severe distress',
+      name: 'entity.refuelingStation.situation.distress',
     },
     pirates: {
       key: 'pirates',
-      name: 'Pirates have taken over',
+      name: 'entity.refuelingStation.situation.pirates',
     },
     agents: {
       key: 'agents',
-      name: 'Has corrupt customs agents',
+      name: 'entity.refuelingStation.situation.agents',
     },
     saboteurs: {
       key: 'saboteurs',
-      name: 'Foreign saboteurs are active',
+      name: 'entity.refuelingStation.situation.saboteurs',
     },
     alien: {
       key: 'alien',
-      name: 'Deep-space alien signal',
+      name: 'entity.refuelingStation.situation.alien',
     },
   },
 };

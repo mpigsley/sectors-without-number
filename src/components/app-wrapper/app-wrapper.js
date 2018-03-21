@@ -1,30 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReduxToastr from 'react-redux-toastr';
+import { IntlProvider } from 'react-intl';
 
+import InitWrapper from 'components/init-wrapper';
 import LoginModal from 'components/login-modal';
-import Modal from 'primitives/modal/modal';
+import SectorSyncModal from 'components/sector-sync-modal';
+import Lang from 'lang';
 
 export default function AppWrapper({
   children,
   isSyncModalOpen,
   closeSyncModal,
+  userLocale,
 }) {
   return (
-    <div>
-      <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
-      <LoginModal />
-      <Modal
-        isOpen={isSyncModalOpen}
-        title="Sectors Synced"
-        cancelText="Continue"
-        onCancel={closeSyncModal}
-      >
-        You&#39;re sector(s) have been synced. You can now share them with your
-        friends.
-      </Modal>
-      {children}
-    </div>
+    <IntlProvider
+      locale={userLocale}
+      messages={{ ...Lang.en, ...Lang[userLocale] }}
+    >
+      <InitWrapper>
+        <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
+        <LoginModal />
+        <SectorSyncModal isOpen={isSyncModalOpen} onCancel={closeSyncModal} />
+        {children}
+      </InitWrapper>
+    </IntlProvider>
   );
 }
 
@@ -32,4 +33,5 @@ AppWrapper.propTypes = {
   children: PropTypes.node.isRequired,
   isSyncModalOpen: PropTypes.bool.isRequired,
   closeSyncModal: PropTypes.func.isRequired,
+  userLocale: PropTypes.string.isRequired,
 };

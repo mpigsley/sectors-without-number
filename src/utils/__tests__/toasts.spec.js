@@ -45,12 +45,6 @@ describe('Store Utils', () => {
       expect(type).toEqual('success');
     });
 
-    test('should have default title and message', () => {
-      const { title, message } = SuccessToast();
-      expect(title).toEqual('Sector Saved');
-      expect(message).toEqual('Your sector has been saved.');
-    });
-
     test('should allow overriding title and message', () => {
       const testTitle = 'asdf';
       const testMessage = 'fdsa';
@@ -89,12 +83,6 @@ describe('Store Utils', () => {
     test('should be a success toast', () => {
       const { type } = ErrorToast();
       expect(type).toEqual('error');
-    });
-
-    test('should have default title and message', () => {
-      const { title, message } = ErrorToast();
-      expect(title).toEqual('There has been an error');
-      expect(message).toEqual('Report a problem if it persists.');
     });
   });
 });

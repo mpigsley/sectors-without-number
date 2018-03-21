@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   openEditModal,
@@ -16,12 +17,14 @@ const mapStateToProps = state => ({
   isInitialized: state.user.isInitialized,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   openEditModal: () => dispatch(openEditModal()),
   openLoginModal: () => dispatch(openLoginModal()),
   openUserDropdown: () => dispatch(openUserDropdown()),
   closeUserDropdown: () => dispatch(closeUserDropdown()),
-  logout: () => dispatch(logout()),
+  logout: () => dispatch(logout(props.intl)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(AccountManager);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(AccountManager),
+);

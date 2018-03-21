@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Settings, Zap } from 'react-feather';
+import { FormattedMessage } from 'react-intl';
 
 import { sortByKey } from 'utils/common';
 import LinkRow from 'primitives/other/link-row';
@@ -27,9 +28,11 @@ export default function Home({ saved, generateSector }) {
           className="Home-SavedTitleContainer"
         >
           <Header type={HeaderType.header3} className="Home-SavedTitle">
-            Saved Sectors
+            <FormattedMessage id="misc.savedSectors" />
           </Header>
-          <div className="Home-SavedSecondary">Select a sector to begin.</div>
+          <div className="Home-SavedSecondary">
+            <FormattedMessage id="misc.selectSector" />
+          </div>
         </FlexContainer>
         <FlexContainer direction="column" className="Home-SavedList">
           {Object.keys(saved)
@@ -50,12 +53,16 @@ export default function Home({ saved, generateSector }) {
 
   return (
     <ContentContainer direction="column" align="center" justify="center">
-      <Header type={HeaderType.header1}>Sectors Without Number</Header>
+      <Header type={HeaderType.header1}>
+        <FormattedMessage id="misc.sectorsWithoutNumber" />
+      </Header>
       <SubContainer fullWidth justify="center" align="center">
         <div className="Home-RowContainer">
           <div className="Home-Row Home-Row--left" />
         </div>
-        <Header type={HeaderType.header2}>Sector Generator</Header>
+        <Header type={HeaderType.header2}>
+          <FormattedMessage id="misc.sectorGenerator" />
+        </Header>
         <div className="Home-RowContainer">
           <div className="Home-Row" />
         </div>
@@ -64,11 +71,11 @@ export default function Home({ saved, generateSector }) {
       <SubContainer wrap justify="center" align="center">
         <ButtonLink to="/configure">
           <LinkIcon icon={Settings} size="20" />
-          Configure
+          <FormattedMessage id="misc.configure" />
         </ButtonLink>
         <Button onClick={generateSector}>
           <LinkIcon icon={Zap} size="20" />
-          Generate
+          <FormattedMessage id="misc.generate" />
         </Button>
       </SubContainer>
     </ContentContainer>

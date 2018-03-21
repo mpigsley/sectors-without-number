@@ -77,9 +77,12 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
   });
 };
 
-export const generateEntity = (entity, parameters) => (dispatch, getState) => {
+export const generateEntity = (entity, parameters, intl) => (
+  dispatch,
+  getState,
+) => {
   const state = getState();
-  if (preventSync(state, dispatch, true)) {
+  if (preventSync(state, dispatch, intl, true)) {
     return Promise.resolve();
   }
   const entities = generateEntityUtil({
@@ -101,8 +104,8 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   }
 
   if (entity.entityType !== Entities.sector.key) {
-    return initialSyncToast(state, dispatch).then(isInitialSync =>
-      saveEntities({ state, created: entities, entities }).then(results =>
+    return initialSyncToast(state, dispatch, intl).then(isInitialSync =>
+      saveEntities({ state, created: entities, entities }, intl).then(results =>
         updateHandler(state, dispatch, results, isInitialSync),
       ),
     );
@@ -110,9 +113,9 @@ export const generateEntity = (entity, parameters) => (dispatch, getState) => {
   return dispatch(releaseSyncLock());
 };
 
-export const moveTopLevelEntity = () => (dispatch, getState) => {
+export const moveTopLevelEntity = intl => (dispatch, getState) => {
   const state = getState();
-  if (preventSync(state, dispatch)) {
+  if (preventSync(state, dispatch, intl)) {
     return dispatch(entityRelease());
   }
   const topLevelEntities = getCurrentTopLevelEntities(state);
@@ -143,18 +146,18 @@ export const moveTopLevelEntity = () => (dispatch, getState) => {
     };
   }
   return Promise.all([
-    initialSyncToast(state, dispatch),
+    initialSyncToast(state, dispatch, intl),
     dispatch({ type: UPDATE_ENTITIES, entities }),
   ]).then(([isInitialSync]) =>
-    saveEntities({ state, updated: entities, entities }).then(results =>
+    saveEntities({ state, updated: entities, entities }, intl).then(results =>
       updateHandler(state, dispatch, results, isInitialSync),
     ),
   );
 };
 
-export const deleteEntity = () => (dispatch, getState) => {
+export const deleteEntity = intl => (dispatch, getState) => {
   const state = getState();
-  if (preventSync(state, dispatch)) {
+  if (preventSync(state, dispatch, intl)) {
     return Promise.resolve();
   }
   const entity = getCurrentEntity(state);
@@ -177,29 +180,29 @@ export const deleteEntity = () => (dispatch, getState) => {
     type: DELETE_ENTITIES,
     entities: deleted,
   });
-  return deleteEntities({ state, deleted }).then(results =>
+  return deleteEntities({ state, deleted }, intl).then(results =>
     updateHandler(state, dispatch, results),
   );
 };
 
-export const saveSector = () => (dispatch, getState) => {
+export const saveSector = intl => (dispatch, getState) => {
   const state = getState();
-  if (preventSync(state, dispatch)) {
+  if (preventSync(state, dispatch, intl)) {
     return Promise.resolve();
   }
   return Promise.all([
-    initialSyncToast(state, dispatch),
+    initialSyncToast(state, dispatch, intl),
     dispatch({ type: SAVE_SECTOR }),
   ]).then(([isInitialSync]) =>
-    saveEntities({ state }).then(results =>
+    saveEntities({ state }, intl).then(results =>
       updateHandler(state, dispatch, results, isInitialSync),
     ),
   );
 };
 
-export const saveEntityEdit = () => (dispatch, getState) => {
+export const saveEntityEdit = intl => (dispatch, getState) => {
   const state = getState();
-  if (preventSync(state, dispatch)) {
+  if (preventSync(state, dispatch, intl)) {
     return dispatch(deactivateSidebarEdit());
   }
   const currentEntityType = getCurrentEntityType(state);
@@ -284,21 +287,22 @@ export const saveEntityEdit = () => (dispatch, getState) => {
   const filteredUpdatedEntities = pickBy(allEntities, size);
   if (size(filteredUpdatedEntities)) {
     return Promise.all([
-      initialSyncToast(state, dispatch),
+      initialSyncToast(state, dispatch, intl),
       dispatch({
         type: UPDATE_ENTITIES,
         entities: filteredUpdatedEntities,
       }),
     ]).then(([isInitialSync]) =>
-      saveEntities({
-        state,
-        entities: filteredUpdatedEntities,
-        updated: updatedEntities,
-        created: createdEntities,
-        deleted: deletedEntities,
-      }).then(results =>
-        updateHandler(state, dispatch, results, isInitialSync),
-      ),
+      saveEntities(
+        {
+          state,
+          entities: filteredUpdatedEntities,
+          updated: updatedEntities,
+          created: createdEntities,
+          deleted: deletedEntities,
+        },
+        intl,
+      ).then(results => updateHandler(state, dispatch, results, isInitialSync)),
     );
   }
   return Promise.all([

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { RefreshCw, X, Plus } from 'react-feather';
 import ReactHintFactory from 'react-hint';
+import { FormattedMessage, intlShape } from 'react-intl';
 import {
   filter,
   map,
@@ -40,6 +41,7 @@ export default class TopLevelEntityModal extends Component {
     currentSector: PropTypes.string.isRequired,
     cancelTopLevelEntityCreate: PropTypes.func.isRequired,
     generateEntity: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
   };
 
   static defaultProps = {
@@ -229,7 +231,7 @@ export default class TopLevelEntityModal extends Component {
         onChange={this.onChangeChildType(entityType, key)}
         options={Entities[this.state.entityType].children.map(child => ({
           value: child,
-          label: Entities[child].name,
+          label: this.props.intl.formatMessage({ id: Entities[child].name }),
         }))}
       />
       <IconInput
@@ -255,8 +257,15 @@ export default class TopLevelEntityModal extends Component {
       return (
         <FlexContainer direction="column">
           <FlexContainer justify="spaceBetween" align="flexEnd">
-            <Label>Children</Label>
-            <Dice data-rh="Select to generate entity data." size={22} />
+            <Label>
+              <FormattedMessage id="misc.children" />
+            </Label>
+            <Dice
+              data-rh={this.props.intl.formatMessage({
+                id: 'misc.selectGenerateEntity',
+              })}
+              size={22}
+            />
           </FlexContainer>
           <FlexContainer direction="column">
             {flatten(
@@ -274,7 +283,7 @@ export default class TopLevelEntityModal extends Component {
               onClick={this.onAddChild}
             >
               <Plus className="TopLevelEntityModal-Plus" size={20} />
-              Add Child
+              <FormattedMessage id="misc.addChild" />
             </FlexContainer>
           </FlexContainer>
         </FlexContainer>
@@ -286,7 +295,7 @@ export default class TopLevelEntityModal extends Component {
           type={HeaderType.header4}
           className="TopLevelEntityModal-EmptyText"
         >
-          Selected entity has no associated children.
+          <FormattedMessage id="misc.selectedNoChilden" />
         </Header>
       </FlexContainer>
     );
@@ -298,10 +307,10 @@ export default class TopLevelEntityModal extends Component {
         doubleSize
         isOpen={this.props.isOpen}
         onCancel={this.props.cancelTopLevelEntityCreate}
-        title="Create Sector Entity"
+        title={this.props.intl.formatMessage({ id: 'misc.createEntity' })}
         actionButtons={[
           <Button primary key="create" onClick={this.onSubmit}>
-            Create
+            <FormattedMessage id="misc.create" />
           </Button>,
         ]}
       >
@@ -312,7 +321,7 @@ export default class TopLevelEntityModal extends Component {
             className="TopLevelEntityModal-Type"
           >
             <Label noPadding htmlFor="name">
-              Entity Type
+              <FormattedMessage id="misc.entityType" />
             </Label>
             <Dropdown
               value={this.state.entityType}
@@ -326,7 +335,7 @@ export default class TopLevelEntityModal extends Component {
               }}
               options={TopLevelLeveEntities.map(attr => ({
                 value: attr.key,
-                label: attr.name,
+                label: this.props.intl.formatMessage({ id: attr.name }),
               }))}
             />
           </FlexContainer>
@@ -335,7 +344,14 @@ export default class TopLevelEntityModal extends Component {
             className="TopLevelEntityModal-Name"
           >
             <Label noPadding htmlFor="name">
-              {Entities[this.state.entityType].name} Name
+              <FormattedMessage
+                id="misc.entityName"
+                values={{
+                  entity: this.props.intl.formatMessage({
+                    id: Entities[this.state.entityType].name,
+                  }),
+                }}
+              />
             </Label>
             <IconInput
               id="name"

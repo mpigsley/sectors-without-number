@@ -1,4 +1,12 @@
 {
+  "3.14.0": {
+    "description": "Internationalization.",
+    "date": "3-21-2018",
+    "changes": [
+      "Adds French, German, and Swedish translations (not all english text is translated yet).",
+      "Choose your preferred language in your user account."
+    ]
+  },
   "3.13.0": {
     "description": "Add new cosmic (Sector, system, planet) names.",
     "date": "3-18-2018"

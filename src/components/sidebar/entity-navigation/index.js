@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   userModelSelector,
@@ -31,9 +32,13 @@ const mapStateToProps = state => ({
   isSidebarEditActive: isSidebarEditActiveSelector(state),
 });
 
-export default connect(mapStateToProps, {
-  activateSidebarEdit,
-  deactivateSidebarEdit,
-  saveEntityEdit,
-  saveSector,
-})(EntityNavigation);
+const mapDispatchToProps = (dispatch, props) => ({
+  activateSidebarEdit: () => dispatch(activateSidebarEdit()),
+  deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
+  saveEntityEdit: () => dispatch(saveEntityEdit(props.intl)),
+  saveSector: () => dispatch(saveSector(props.intl)),
+});
+
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(EntityNavigation),
+);

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   isSidebarEditActiveSelector,
@@ -17,4 +18,6 @@ const mapDispatchToProps = (dispatch, props) => ({
   createChildInEdit: () => dispatch(createChildInEdit(props.entityType)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(EntityList);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(EntityList),
+);

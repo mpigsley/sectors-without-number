@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 
 import {
   closeLoginModal,
@@ -17,14 +18,16 @@ const mapStateToProps = ({ user }) => ({
   error: user.error,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   facebookLogin: () => dispatch(facebookLogin()),
   googleLogin: () => dispatch(googleLogin()),
-  signup: () => dispatch(signup()),
-  login: () => dispatch(login()),
+  signup: () => dispatch(signup(props.intl)),
+  login: () => dispatch(login(props.intl)),
   closeLoginModal: () => dispatch(closeLoginModal()),
   updateUserForm: (key, value) => dispatch(updateUserForm(key, value)),
-  passwordReset: () => dispatch(passwordReset()),
+  passwordReset: () => dispatch(passwordReset(props.intl)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginModal);
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(LoginModal),
+);

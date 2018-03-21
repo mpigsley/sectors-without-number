@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactMarkdown from 'react-markdown';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Input from 'primitives/form/input';
@@ -12,6 +13,7 @@ export default function NoteSidebar({
   isAncestorHidden,
   updateEntityInEdit,
   note,
+  intl,
 }) {
   if (!isSidebarEditActive) {
     return (
@@ -28,7 +30,9 @@ export default function NoteSidebar({
       className="NoteSidebar-Attributes"
     >
       <FlexContainer align="center" className="NoteSidebar-Attribute">
-        <b className="NoteSidebar-Header">Name:</b>
+        <b className="NoteSidebar-Header">
+          <FormattedMessage id="misc.name" />:
+        </b>
         <Input
           className="NoteSidebar-Item"
           value={note.name}
@@ -36,7 +40,9 @@ export default function NoteSidebar({
         />
       </FlexContainer>
       <FlexContainer align="center" className="NoteSidebar-Attribute">
-        <b className="NoteSidebar-Header">Is Hidden:</b>
+        <b className="NoteSidebar-Header">
+          <FormattedMessage id="misc.isHidden" />:
+        </b>
         <Input
           className="NoteSidebar-Item"
           type="checkbox"
@@ -50,7 +56,7 @@ export default function NoteSidebar({
       <FlexContainer align="center" flex="1" className="NoteSidebar-Attribute">
         <Input
           type="textarea"
-          placeholder="Note Content"
+          placeholder={intl.formatMessage({ id: 'misc.noteContent' })}
           className="NoteSidebar-Textarea"
           value={(note.attributes || {}).content || ''}
           onChange={({ target } = {}) =>
@@ -73,4 +79,5 @@ NoteSidebar.propTypes = {
       content: PropTypes.string,
     }),
   }).isRequired,
+  intl: intlShape.isRequired,
 };

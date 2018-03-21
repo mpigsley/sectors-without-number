@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { intlShape } from 'react-intl';
 import { omit, map, size } from 'lodash';
 
 import ProfileModal from 'components/profile-modal';
@@ -19,6 +20,7 @@ export default function OverviewList({
   entities,
   isInitialized,
   params,
+  intl,
 }) {
   if (!entities[Entities.sector.key][currentSector] && isInitialized) {
     toHome();
@@ -41,7 +43,7 @@ export default function OverviewList({
                 <LinkRow
                   key={entityType}
                   to={`/overview/${currentSector}/${entityType}`}
-                  title={Entities[entityType].name}
+                  title={intl.formatMessage({ id: Entities[entityType].name })}
                   additional={isInitialized ? `${size(entityList)}` : undefined}
                   arrowClassName="OverviewList-Arrow"
                   className={
@@ -70,4 +72,5 @@ OverviewList.propTypes = {
   params: PropTypes.shape({
     entityType: PropTypes.string,
   }).isRequired,
+  intl: intlShape.isRequired,
 };

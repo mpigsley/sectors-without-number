@@ -1,26 +1,26 @@
 export default {
-  name: 'Occupation',
+  name: 'misc.occupation',
   key: 'occupation',
   attributes: {
     robots: {
       key: 'robots',
-      name: 'Robots of dubious sentience',
+      name: 'entity.orbitalRuin.occupation.robots',
     },
     scavengers: {
       key: 'scavengers',
-      name: 'Trigger-happy scavengers',
+      name: 'entity.orbitalRuin.occupation.scavengers',
     },
     researchers: {
       key: 'researchers',
-      name: 'Government researchers',
+      name: 'entity.orbitalRuin.occupation.researchers',
     },
     military: {
       key: 'military',
-      name: 'Military quarantine enforces',
+      name: 'entity.orbitalRuin.occupation.military',
     },
     heirs: {
       key: 'heirs',
-      name: 'Heirs of the original alien builders',
+      name: 'entity.orbitalRuin.occupation.heirs',
     },
   },
 };

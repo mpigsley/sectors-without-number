@@ -33,8 +33,10 @@ describe('generateSectorName', () => {
     );
   });
 
-  it('is two words', () => {
-    expect(generateSectorName(chance).split(' ')).toHaveLength(2);
+  it('is two or three words', () => {
+    expect(
+      [2, 3].indexOf(generateSectorName(chance).split(' ').length) >= 0,
+    ).toEqual(true);
   });
 
   it("doesn't generate the same name twice", () => {

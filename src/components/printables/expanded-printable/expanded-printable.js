@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { map } from 'lodash';
+import { FormattedMessage } from 'react-intl';
 
 import HexMap from 'components/hex-map';
 import FlexContainer from 'primitives/container/flex-container';
@@ -18,7 +19,9 @@ const renderEntity = (entityId, entityType, entity) => {
   if (entity.tags) {
     blockAttributes.push(
       <div key="tags">
-        <b>Tags: </b>
+        <b>
+          <FormattedMessage id="misc.tags" />:{' '}
+        </b>
         {entity.tags}
       </div>,
     );
@@ -27,8 +30,10 @@ const renderEntity = (entityId, entityType, entity) => {
     conf.attributes.filter(({ key }) => entity[key]).forEach(({ key, name }) =>
       blockAttributes.push(
         <div key={key}>
-          <b>{name}: </b>
-          {entity[key]}
+          <b>
+            <FormattedMessage id={name} />:{' '}
+          </b>
+          <FormattedMessage id={entity[key]} />
         </div>,
       ),
     );
@@ -36,7 +41,9 @@ const renderEntity = (entityId, entityType, entity) => {
   if (entity.neighbors) {
     blockAttributes.push(
       <div key="neighbors">
-        <b>Neighbors: </b>
+        <b>
+          <FormattedMessage id="misc.neighbors" />:{' '}
+        </b>
         {entity.neighbors}
       </div>,
     );
@@ -44,7 +51,9 @@ const renderEntity = (entityId, entityType, entity) => {
   if (entity.children) {
     blockAttributes.push(
       <div key="children">
-        <b>Children: </b>
+        <b>
+          <FormattedMessage id="misc.children" />:{' '}
+        </b>
         {entity.children}
       </div>,
     );
@@ -52,7 +61,9 @@ const renderEntity = (entityId, entityType, entity) => {
   if (entity.description) {
     blockAttributes.push(
       <div key="description">
-        <b>Description: </b>
+        <b>
+          <FormattedMessage id="misc.description" />:{' '}
+        </b>
         {entity.description}
       </div>,
     );
@@ -83,7 +94,7 @@ const renderEntity = (entityId, entityType, entity) => {
           dark
           className="ExpandedPrintable-Type"
         >
-          ({conf.name}
+          (<FormattedMessage id={conf.name} />
           {entity.location ? ` - ${entity.location}` : ''})
         </Header>
       </FlexContainer>

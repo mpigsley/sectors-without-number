@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import { injectIntl } from 'react-intl';
 
 import {
   openLoginModal,
@@ -18,10 +19,12 @@ const mapStateToProps = state => ({
   currentSector: currentSectorSelector(state),
 });
 
-export default withRouter(
-  connect(mapStateToProps, {
-    openLoginModal,
-    openEditModal,
-    logout,
-  })(Navigation),
+const mapDispatchTopProps = (dispatch, props) => ({
+  openLoginModal: () => dispatch(openLoginModal()),
+  openEditModal: () => dispatch(openEditModal()),
+  logout: () => dispatch(logout(props.intl)),
+});
+
+export default injectIntl(
+  withRouter(connect(mapStateToProps, mapDispatchTopProps)(Navigation)),
 );

@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
@@ -13,10 +14,10 @@ export default function EmptyOverview({ children, isInitialized }) {
     body = (
       <Fragment>
         <Header type={HeaderType.header2} className="EmptyOverview-Header1">
-          Entity Overview
+          <FormattedMessage id="misc.entityOverview" />
         </Header>
         <Header type={HeaderType.header3} className="EmptyOverview-Header2">
-          {children || 'Select an entity on the left to begin'}
+          {children || <FormattedMessage id="misc.selectEntity" />}
         </Header>
       </Fragment>
     );

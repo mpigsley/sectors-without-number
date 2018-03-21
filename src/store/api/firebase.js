@@ -7,12 +7,49 @@ import { coordinatesFromKey } from 'utils/common';
 export const getCurrentUser = () =>
   new Promise(resolve => {
     FirebaseAuth().onAuthStateChanged(user => {
-      resolve(user ? user.toJSON() : null);
+      if (!(user || {}).uid) {
+        return resolve(null);
+      }
+      return Firestore()
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then(doc => {
+          if (doc.exists) {
+            resolve({ ...doc.data(), ...user.toJSON() });
+          }
+          resolve(user.toJSON());
+        });
     });
   });
 
-export const updateCurrentUser = ({ displayName }) =>
-  FirebaseAuth().currentUser.updateProfile({ displayName });
+export const getUserData = uid =>
+  Firestore()
+    .collection('users')
+    .doc(uid)
+    .get()
+    .then(doc => {
+      if (!doc.exists) {
+        return null;
+      }
+      return doc.data();
+    });
+
+export const updateCurrentUser = (uid, { displayName, ...rest }) => {
+  if (!uid) {
+    return new Error('Uid required to update a user.');
+  }
+  const promises = [FirebaseAuth().currentUser.updateProfile({ displayName })];
+  if (size(rest)) {
+    promises.push(
+      Firestore()
+        .collection('users')
+        .doc(uid)
+        .set(rest, { merge: true }),
+    );
+  }
+  return Promise.all(promises);
+};
 
 export const doFacebookLogin = () => {
   const provider = new FirebaseAuth.FacebookAuthProvider();

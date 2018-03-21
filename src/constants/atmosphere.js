@@ -1,34 +1,34 @@
 export default {
-  name: 'Atmosphere',
+  name: 'atmosphere',
   key: 'atmosphere',
   attributes: {
     corrosive: {
       key: 'corrosive',
-      name: 'Corrosive',
+      name: 'atmosphere.corrosive',
     },
     inert: {
       key: 'inert',
-      name: 'Inert',
+      name: 'atmosphere.inert',
     },
     airlessThin: {
       key: 'airlessThin',
-      name: 'Airless/Thin',
+      name: 'atmosphere.airlessThin',
     },
     breathable: {
       key: 'breathable',
-      name: 'Breathable',
+      name: 'atmosphere.breathable',
     },
     thick: {
       key: 'thick',
-      name: 'Thick',
+      name: 'atmosphere.thick',
     },
     invasive: {
       key: 'invasive',
-      name: 'Invasive',
+      name: 'atmosphere.invasive',
     },
     corrosiveInvasive: {
       key: 'corrosiveInvasive',
-      name: 'Corrosive & Invasive',
+      name: 'atmosphere.corrosiveInvasive',
     },
   },
 };

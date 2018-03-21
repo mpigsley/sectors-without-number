@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { intlShape, FormattedMessage } from 'react-intl';
 
 import ProfileModal from 'components/profile-modal';
 import Button from 'primitives/other/button';
@@ -16,6 +17,7 @@ export default function AccountManager({
   isInitialized,
   isDropdownActive,
   user,
+  intl,
 }) {
   if (!isInitialized) {
     return null;
@@ -23,7 +25,7 @@ export default function AccountManager({
   if (!user) {
     return (
       <Button className="AccountManager-Button" onClick={openLoginModal}>
-        Log In
+        <FormattedMessage id="misc.logIn" />
       </Button>
     );
   }
@@ -46,16 +48,16 @@ export default function AccountManager({
         })}
         minimal
       >
-        {user.displayName || 'User Account'}
+        {user.displayName || intl.formatMessage({ id: 'misc.userAccount' })}
         <div className="AccountManager-Menu">
           <div
             className="AccountManager-Item"
             onClick={onActionClick(openEditModal)}
           >
-            Edit Profile
+            <FormattedMessage id="misc.editProfile" />
           </div>
           <div className="AccountManager-Item" onClick={onActionClick(logout)}>
-            Log Out
+            <FormattedMessage id="misc.logOut" />
           </div>
         </div>
       </Button>
@@ -75,6 +77,7 @@ AccountManager.propTypes = {
   user: PropTypes.shape({
     displayName: PropTypes.string,
   }),
+  intl: intlShape.isRequired,
 };
 
 AccountManager.defaultProps = {

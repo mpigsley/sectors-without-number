@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { omit, map, values } from 'lodash';
 import { RefreshCw } from 'react-feather';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -22,9 +23,11 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
 
   return (
     <FlexContainer key={key} className="EntityAttributes-Attribute">
-      <b className="EntityAttributes-Header">{name}:</b>
+      <b className="EntityAttributes-Header">
+        <FormattedMessage id={name} />:
+      </b>
       <span className="EntityAttributes-Item">
-        {attributes[attribute].name}
+        <FormattedMessage id={attributes[attribute].name} />
       </span>
     </FlexContainer>
   );
@@ -40,6 +43,7 @@ export default function EntityAttributes({
   toggleAttributesOpen,
   toggleTagsOpen,
   isAncestorHidden,
+  intl,
 }) {
   const noAttributes =
     !entity.attributes || !Object.keys(entity.attributes).length;
@@ -59,7 +63,9 @@ export default function EntityAttributes({
     if (isSidebarEditActive) {
       nameAttribute = (
         <FlexContainer align="center" className="EntityAttributes-Attribute">
-          <b className="EntityAttributes-Header">Name:</b>
+          <b className="EntityAttributes-Header">
+            <FormattedMessage id="misc.name" />:
+          </b>
           <IconInput
             wrapperClassName="EntityAttributes-Item"
             value={entity.name}
@@ -89,7 +95,9 @@ export default function EntityAttributes({
       if (entityType !== Entities.sector.key) {
         hiddenAttribute = (
           <FlexContainer align="center" className="EntityAttributes-Attribute">
-            <b className="EntityAttributes-Header">Is Hidden:</b>
+            <b className="EntityAttributes-Header">
+              <FormattedMessage id="misc.isHidden" />:
+            </b>
             <Input
               className="EntityAttributes-Item"
               type="checkbox"
@@ -108,7 +116,9 @@ export default function EntityAttributes({
           direction="column"
           className="EntityAttributes-Attribute"
         >
-          <b className="EntityAttributes-Header">Description:</b>
+          <b className="EntityAttributes-Header">
+            <FormattedMessage id="misc.description" />:
+          </b>
           <span className="EntityAttributes-Item EntityAttributes-Item--multiline">
             {(entity.attributes || {}).description}
           </span>
@@ -123,7 +133,9 @@ export default function EntityAttributes({
         align="center"
         className="EntityAttributes-Attribute"
       >
-        <b className="EntityAttributes-Header">{name}:</b>
+        <b className="EntityAttributes-Header">
+          <FormattedMessage id={name} />:
+        </b>
         <Dropdown
           wrapperClassName="EntityAttributes-Item"
           value={attribute}
@@ -132,7 +144,7 @@ export default function EntityAttributes({
           }
           options={map(attributes, attr => ({
             value: attr.key,
-            label: attr.name,
+            label: intl.formatMessage({ id: attr.name }),
           }))}
         />
       </FlexContainer>
@@ -161,7 +173,9 @@ export default function EntityAttributes({
     attributesSection = (
       <div key="attributes">
         <SectionHeader isOpen={isAttributesOpen} onClick={toggleAttributesOpen}>
-          <span className="EntityAttributes-Name">Attributes</span>
+          <span className="EntityAttributes-Name">
+            <FormattedMessage id="misc.attributes" />
+          </span>
         </SectionHeader>
         {attributes}
       </div>
@@ -178,6 +192,7 @@ export default function EntityAttributes({
       updateEntityInEdit={updateEntityInEdit}
       isOpen={isTagsOpen}
       toggleOpen={toggleTagsOpen}
+      intl={intl}
     />,
   ];
 }
@@ -194,6 +209,7 @@ EntityAttributes.propTypes = {
   toggleAttributesOpen: PropTypes.func.isRequired,
   toggleTagsOpen: PropTypes.func.isRequired,
   isAncestorHidden: PropTypes.bool.isRequired,
+  intl: intlShape.isRequired,
 };
 
 EntityAttributes.defaultProps = {

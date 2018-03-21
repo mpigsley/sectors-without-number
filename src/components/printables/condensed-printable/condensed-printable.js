@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { map, values } from 'lodash';
+import { FormattedMessage } from 'react-intl';
 
 import HexMap from 'components/hex-map';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -14,30 +15,41 @@ import './style.css';
 import '../style.css';
 
 const getColumnsFromType = entityType => {
-  const common = [{ accessor: 'name', Header: 'Name' }];
+  const common = [{ accessor: 'name', Header: 'misc.name' }];
   if (Entities[entityType].topLevel) {
     return [
       ...common,
-      { accessor: 'location', Header: 'Location', centered: true },
-      { accessor: 'children', Header: 'Children', centered: true },
-      { accessor: 'neighbors', Header: 'Neighbors' },
+      { accessor: 'location', Header: 'misc.location', centered: true },
+      { accessor: 'children', Header: 'misc.children', centered: true },
+      { accessor: 'neighbors', Header: 'misc.neighbors' },
     ];
   }
-  const columns = [...common, { accessor: 'parent', Header: 'Parent' }];
+  const columns = [
+    ...common,
+    {
+      accessor: 'parent',
+      Header: 'misc.parent',
+      Cell: (parent, { parentType }) => (
+        <span>
+          {parent} (<FormattedMessage id={parentType} />)
+        </span>
+      ),
+    },
+  ];
   if (Entities[entityType].children.length) {
     columns.splice(2, 0, {
       accessor: 'children',
-      Header: 'Children',
+      Header: 'misc.children',
       centered: true,
     });
   }
   if ((Entities[entityType].attributes || []).length) {
     Entities[entityType].attributes.forEach(({ key, name }) => {
-      columns.push({ accessor: key, Header: name });
+      columns.push({ accessor: key, Header: name, translateItem: true });
     });
   }
   if (Entities[entityType].tags) {
-    columns.push({ accessor: 'tags', Header: 'Tags' });
+    columns.push({ accessor: 'tags', Header: 'misc.tags' });
   }
   return columns;
 };
@@ -56,7 +68,7 @@ const renderEntityType = (
       type={HeaderType.header3}
       className="CondensedPrintable-EntityTitle"
     >
-      {Entities[entityType].name}
+      <FormattedMessage id={Entities[entityType].name} />
     </Header>
     <Table
       light

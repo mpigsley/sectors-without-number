@@ -1,28 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { injectIntl, intlShape, FormattedMessage } from 'react-intl';
 
 import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 
-export default function ConfirmModal({
-  isOpen,
-  onConfirm,
-  onCancel,
-  children,
-}) {
+function ConfirmModal({ isOpen, onConfirm, onCancel, children, intl }) {
   return (
     <Modal
       isOpen={isOpen}
       onCancel={onCancel}
-      cancelText="No"
+      cancelText={intl.formatMessage({ id: 'misc.no' })}
       title="Confirm"
       actionButtons={[
         <Button primary key="save" onClick={onConfirm}>
-          Yes
+          <FormattedMessage id="misc.yes" />
         </Button>,
       ]}
     >
-      {children}
+      {children || <FormattedMessage id="misc.toContinue" />}
     </Modal>
   );
 }
@@ -32,10 +28,13 @@ ConfirmModal.propTypes = {
   onConfirm: PropTypes.func,
   onCancel: PropTypes.func,
   children: PropTypes.node,
+  intl: intlShape.isRequired,
 };
 
 ConfirmModal.defaultProps = {
   onConfirm: () => {},
   onCancel: () => {},
-  children: 'Are you sure you want to continue?',
+  children: undefined,
 };
+
+export default injectIntl(ConfirmModal);

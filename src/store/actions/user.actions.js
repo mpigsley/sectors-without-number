@@ -1,12 +1,18 @@
-import { actions as ReduxToastrActions } from 'react-redux-toastr';
-import { keys } from 'lodash';
+import { size, keys, pick } from 'lodash';
 import { push } from 'react-router-redux';
+import { addLocaleData } from 'react-intl';
 
-import { savedSectorSelector } from 'store/selectors/base.selectors';
+import {
+  savedSectorSelector,
+  userFormSelector,
+  userUidSelector,
+  userLocaleSelector,
+} from 'store/selectors/base.selectors';
 import { getSavedEntities } from 'store/selectors/entity.selectors';
 
 import {
   updateCurrentUser,
+  getUserData,
   doFacebookLogin,
   doGoogleLogin,
   doSignup,
@@ -15,10 +21,20 @@ import {
   doLogout,
   getSyncedSectors,
   uploadEntities,
+  getCurrentUser,
+  getCurrentSector,
+  convertOldSectors,
 } from 'store/api/firebase';
-import { clearLocalDatabase } from 'store/api/local';
+import { clearLocalDatabase, getEntities } from 'store/api/local';
+
+import Locale from 'constants/locale';
 import Entities from 'constants/entities';
-import { ErrorToast } from 'utils/toasts';
+import {
+  SuccessToast,
+  ErrorToast,
+  InfoToast,
+  removeToastById,
+} from 'utils/toasts';
 import { mergeEntityUpdates } from 'utils/entity';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
@@ -60,12 +76,15 @@ const onLogin = (dispatch, state) => result => {
     ]);
   }
   return promise
-    .then(() => getSyncedSectors(uid))
-    .then(entities => {
+    .then(() => Promise.all([getSyncedSectors(uid), getUserData(uid)]))
+    .then(([entities, userData]) => {
       dispatch(push('/'));
       dispatch({
         type: LOGGED_IN,
-        user: result.user ? result.user.toJSON() : result.toJSON(),
+        user: {
+          ...(result.user ? result.user.toJSON() : result.toJSON()),
+          ...userData,
+        },
         didSyncLocal: localSync,
         entities,
       });
@@ -77,24 +96,61 @@ const onLogin = (dispatch, state) => result => {
     });
 };
 
-export const initialize = ({
-  local,
-  user,
-  synced = {},
-  currentSector = {},
-}) => ({
-  type: INITIALIZE,
-  user,
-  entities: mergeEntityUpdates(
-    mergeEntityUpdates(local, synced),
-    currentSector,
-  ),
-  shared: keys(currentSector[Entities.sector.key] || {}),
-  saved: [
-    ...keys(synced[Entities.sector.key]),
-    ...keys(local[Entities.sector.key]),
-  ],
-});
+export const initialize = (location, intl) => dispatch =>
+  Promise.all([getCurrentUser(), getEntities()]).then(([user, local]) => {
+    const { uid, locale } = user || {};
+    const sectorId = location.pathname.split('/')[2];
+    const promises = [
+      location.pathname.startsWith('/sector')
+        ? getCurrentSector(sectorId, uid)
+        : Promise.resolve({}),
+    ];
+    if (uid) {
+      promises.push(getSyncedSectors(uid));
+      promises.push(
+        convertOldSectors({
+          uid,
+          onComplete: () => dispatch(removeToastById('sync-toastr')),
+          onConvert: () =>
+            dispatch(
+              InfoToast({
+                title: intl.formatMessage({ id: 'misc.syncingSectors' }),
+                message: intl.formatMessage({ id: 'misc.noExit' }),
+                config: {
+                  id: 'sync-toastr',
+                  options: {
+                    removeOnHover: false,
+                    showCloseButton: false,
+                    progressBar: false,
+                  },
+                },
+              }),
+            ),
+        }),
+      );
+    }
+    if (locale && locale !== 'en' && Locale[locale]) {
+      promises.push(Locale[locale].localeFetch().then(addLocaleData));
+    }
+    return Promise.all(promises).then(
+      ([currentSector, onlySynced, converted]) => {
+        const synced = size(onlySynced) ? onlySynced : converted;
+        dispatch({
+          type: INITIALIZE,
+          user,
+          entities: mergeEntityUpdates(
+            mergeEntityUpdates(local, synced),
+            currentSector,
+          ),
+          shared: keys(currentSector[Entities.sector.key] || {}),
+          saved: [
+            ...keys((synced || {})[Entities.sector.key]),
+            ...keys((local || {})[Entities.sector.key]),
+          ],
+        });
+      },
+    );
+  });
 
 export const facebookLogin = () => (dispatch, getState) =>
   doFacebookLogin()
@@ -112,18 +168,18 @@ export const googleLogin = () => (dispatch, getState) =>
       console.error(error);
     });
 
-export const signup = () => (dispatch, getState) => {
+export const signup = intl => (dispatch, getState) => {
   const state = getState();
   const { email, password, confirm } = state.user.form;
   if (!email || !password || !confirm) {
     return dispatch({
       type: AUTH_FAILURE,
-      error: 'Email and password are required.',
+      error: intl.formatMessage({ id: 'misc.emailPassword' }),
     });
   } else if (password !== confirm) {
     return dispatch({
       type: AUTH_FAILURE,
-      error: 'Passwords do not match.',
+      error: intl.formatMessage({ id: 'misc.noPasswordMatch' }),
     });
   }
   return doSignup(state.user.form.email, state.user.form.password)
@@ -135,13 +191,13 @@ export const signup = () => (dispatch, getState) => {
     });
 };
 
-export const login = () => (dispatch, getState) => {
+export const login = intl => (dispatch, getState) => {
   const state = getState();
   const { email, password } = state.user.form;
   if (!email || !password) {
     return dispatch({
       type: AUTH_FAILURE,
-      error: 'Email and password are required.',
+      error: intl.formatMessage({ id: 'misc.emailPassword' }),
     });
   }
   return doLogin(state.user.form.email, state.user.form.password)
@@ -152,21 +208,15 @@ export const login = () => (dispatch, getState) => {
     });
 };
 
-export const passwordReset = () => (dispatch, getState) => {
+export const passwordReset = intl => (dispatch, getState) => {
   const { user } = getState();
   return doPasswordReset(user.form.email)
     .then(() => {
       dispatch(closeLoginModal());
       dispatch(
-        ReduxToastrActions.add({
-          options: {
-            removeOnHover: true,
-            showCloseButton: true,
-          },
-          position: 'bottom-left',
-          title: 'Password Reset Sent',
-          message: 'You should be receiving an email soon.',
-          type: 'success',
+        SuccessToast({
+          title: intl.formatMessage({ id: 'misc.passwordResetSent' }),
+          message: intl.formatMessage({ id: 'misc.receiveEmail' }),
         }),
       );
     })
@@ -176,28 +226,47 @@ export const passwordReset = () => (dispatch, getState) => {
     });
 };
 
-export const updateUser = () => (dispatch, getState) => {
+export const updateUser = intl => (dispatch, getState) => {
   const state = getState();
-  return updateCurrentUser({ displayName: state.user.form.displayName })
+  const uid = userUidSelector(state);
+  let filteredForm = pick(userFormSelector(state), 'displayName', 'locale');
+  if (!Locale[filteredForm.local || 'en']) {
+    filteredForm = { ...filteredForm, locale: 'en' };
+  }
+  return updateCurrentUser(uid, { ...filteredForm })
     .then(() => {
-      dispatch({
-        type: UPDATE_USER,
-        user: { displayName: state.user.form.displayName },
-      });
+      if (userLocaleSelector(state) !== (filteredForm.locale || 'en')) {
+        window.location.reload();
+      } else {
+        dispatch({
+          type: UPDATE_USER,
+          user: filteredForm,
+        });
+      }
     })
     .catch(err => {
-      dispatch(ErrorToast());
+      dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
       console.error(err);
     });
 };
 
-export const logout = () => dispatch =>
+export const logout = intl => dispatch =>
   doLogout()
     .then(() => {
       dispatch(push('/'));
       dispatch({ type: LOGGED_OUT });
     })
     .catch(err => {
-      dispatch(ErrorToast());
+      dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
       console.error(err);
     });
