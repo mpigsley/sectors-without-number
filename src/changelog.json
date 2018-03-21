@@ -1,4 +1,9 @@
 {
+  "3.14.2": {
+    "description":
+      "Fix problem with translations when an attribute is undefined.",
+    "date": "3-21-2018"
+  },
   "3.14.1": {
     "description": "Allow planets to be children of black holes.",
     "date": "3-21-2018"

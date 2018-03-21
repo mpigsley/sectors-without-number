@@ -139,8 +139,8 @@ export default function EntityAttributes({
         <Dropdown
           wrapperClassName="EntityAttributes-Item"
           value={attribute}
-          onChange={({ value } = {}) =>
-            updateEntityInEdit({ attributes: { [key]: value } })
+          onChange={item =>
+            updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
           }
           options={map(attributes, attr => ({
             value: attr.key,

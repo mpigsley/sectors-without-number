@@ -98,9 +98,10 @@ class Table extends Component {
   }
 
   renderRowItem(row, { Cell, accessor, translateItem }) {
-    const item = translateItem
-      ? this.props.intl.formatMessage({ id: row[accessor] })
-      : row[accessor];
+    const item =
+      translateItem && row[accessor]
+        ? this.props.intl.formatMessage({ id: row[accessor] })
+        : row[accessor];
     return Cell ? Cell(item, row) : item;
   }
 
