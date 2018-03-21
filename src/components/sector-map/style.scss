@@ -1,5 +1,9 @@
 @import 'styles/theme';
 
+.SectorMap {
+  overflow: hidden;
+}
+
 .SectorMap-Sidebar {
   background-color: $dark3;
   display: flex;
