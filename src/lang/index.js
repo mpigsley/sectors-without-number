@@ -1,5 +1,6 @@
 import de from './de';
 import en from './en';
 import fr from './fr';
+import sv from './sv';
 
-export default { en, de, fr };
+export default { de, en, fr, sv };
