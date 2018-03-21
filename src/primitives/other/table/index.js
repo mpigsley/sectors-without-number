@@ -98,7 +98,6 @@ class Table extends Component {
   }
 
   renderRowItem(row, { Cell, accessor, translateItem }) {
-    console.log(row[accessor], translateItem);
     const item = translateItem
       ? this.props.intl.formatMessage({ id: row[accessor] })
       : row[accessor];
