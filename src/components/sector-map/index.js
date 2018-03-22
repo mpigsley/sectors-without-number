@@ -7,6 +7,7 @@ import { generateEntity } from 'store/actions/entity.actions';
 import {
   getCurrentTopLevelEntities,
   getCurrentSector,
+  isFetchingCurrent,
 } from 'store/selectors/entity.selectors';
 import {
   renderSectorSelector,
@@ -19,7 +20,7 @@ import SectorMap from './sector-map';
 const mapStateToProps = state => ({
   renderSector: renderSectorSelector(state),
   sector: getCurrentSector(state),
-  isInitialized: isInitializedSelector(state),
+  hasLoaded: isInitializedSelector(state) && !isFetchingCurrent(state),
   topLevelEntities: getCurrentTopLevelEntities(state),
   exportType: exportTypeSelector(state),
 });

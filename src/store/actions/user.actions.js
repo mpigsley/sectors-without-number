@@ -22,7 +22,7 @@ import {
   getCurrentUser,
 } from 'store/api/user';
 import {
-  getCurrentSector,
+  getSectorEntities,
   getSyncedSectors,
   uploadEntities,
 } from 'store/api/entity';
@@ -94,8 +94,8 @@ export const initialize = location => dispatch =>
     const sectorId = location.pathname.split('/')[2];
     const promises = [
       location.pathname.startsWith('/sector')
-        ? getCurrentSector(sectorId, uid)
-        : Promise.resolve(),
+        ? getSectorEntities(sectorId, uid)
+        : Promise.resolve({}),
     ];
     if (uid) {
       promises.push(getSyncedSectors(uid));
@@ -103,16 +103,16 @@ export const initialize = location => dispatch =>
     if (locale && locale !== 'en' && Locale[locale]) {
       promises.push(Locale[locale].localeFetch().then(addLocaleData));
     }
-    return Promise.all(promises).then(([currentSector, sectors]) =>
+    return Promise.all(promises).then(([current, sectors]) =>
       dispatch({
         type: INITIALIZE,
         user,
         entities: mergeEntityUpdates(
           { [Entities.sector.key]: sectors },
-          currentSector,
+          current.entities || {},
         ),
-        shared: keys((currentSector || {})[Entities.sector.key] || {}),
-        share: currentSector ? sectorId : undefined,
+        sectorId: current.sectorId,
+        share: current.share,
         saved: keys(sectors || {}),
       }),
     );

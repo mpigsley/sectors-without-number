@@ -34,7 +34,7 @@ export default class SectorMap extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
-    isInitialized: PropTypes.bool.isRequired,
+    hasLoaded: PropTypes.bool.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     sector: PropTypes.shape({
       rows: PropTypes.number,
@@ -108,7 +108,7 @@ export default class SectorMap extends Component {
   }
 
   render() {
-    if (!this.props.isInitialized) {
+    if (!this.props.hasLoaded) {
       return <Loading />;
     } else if (isEmpty(this.props.sector)) {
       return <Error generateSector={this.props.generateSector} />;

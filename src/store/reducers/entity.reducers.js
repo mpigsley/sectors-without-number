@@ -15,6 +15,7 @@ import {
   UPDATE_ENTITIES,
   DELETE_ENTITIES,
   UPDATE_ID_MAPPING,
+  FETCHED_SECTOR,
 } from 'store/actions/entity.actions';
 import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 import { mergeEntityUpdates } from 'utils/entity';
@@ -22,6 +23,7 @@ import { mergeEntityUpdates } from 'utils/entity';
 const initialState = {
   models: mapValues(Entities, () => ({})),
   saved: [],
+  fetched: [],
   share: null,
   currentSector: null,
   currentEntityType: null,
@@ -34,12 +36,20 @@ export default function entity(state = initialState, action) {
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),
+        fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
         saved: action.saved,
         share: action.share,
       };
     case UPDATE_ENTITIES:
       return {
         ...state,
+        models: mergeEntityUpdates(state.models, action.entities),
+      };
+    case FETCHED_SECTOR:
+      return {
+        ...state,
+        share: action.share,
+        fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
         models: mergeEntityUpdates(state.models, action.entities),
       };
     case LOGGED_IN:

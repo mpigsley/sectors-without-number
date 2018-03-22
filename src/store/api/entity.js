@@ -1,5 +1,5 @@
 import { firestore as Firestore } from 'firebase';
-import { size, values, map, forEach, flatten, includes } from 'lodash';
+import { omit, size, values, map, forEach, flatten, includes } from 'lodash';
 
 import Entities from 'constants/entities';
 
@@ -84,7 +84,7 @@ export const getSyncedSectors = uid =>
       return sectors;
     });
 
-export const getCurrentSector = (sectorId, uid) => {
+export const getSectorEntities = (sectorId, uid) => {
   let entities = {};
   return Firestore()
     .collection('entities')
@@ -93,36 +93,38 @@ export const getCurrentSector = (sectorId, uid) => {
     .doc(sectorId)
     .get()
     .then(doc => {
-      if (doc.exists) {
-        const data = doc.data();
-        if (data.creator !== uid) {
-          entities[Entities.sector.key] = {
-            [doc.id]: data,
-          };
-          return Promise.all(
-            map(Entities, ({ key }) =>
-              Firestore()
-                .collection('entities')
-                .doc(key)
-                .collection('entity')
-                .where('sector', '==', sectorId)
-                .get()
-                .then(typeSnapshot => {
-                  typeSnapshot.forEach(typeDoc => {
-                    entities = {
-                      ...entities,
-                      [key]: {
-                        ...entities[key],
-                        [typeDoc.id]: typeDoc.data(),
-                      },
-                    };
-                  });
-                }),
-            ),
-          ).then(() => entities);
-        }
+      if (!doc.exists) {
+        return { entities };
       }
-      return entities;
+      const data = doc.data();
+      entities[Entities.sector.key] = {
+        [doc.id]: data,
+      };
+      return Promise.all(
+        map(omit(Entities, Entities.sector.key), ({ key }) =>
+          Firestore()
+            .collection('entities')
+            .doc(key)
+            .collection('entity')
+            .where('sector', '==', sectorId)
+            .get()
+            .then(typeSnapshot => {
+              typeSnapshot.forEach(typeDoc => {
+                entities = {
+                  ...entities,
+                  [key]: {
+                    ...entities[key],
+                    [typeDoc.id]: typeDoc.data(),
+                  },
+                };
+              });
+            }),
+        ),
+      ).then(() => ({
+        entities,
+        sectorId,
+        share: data.creator !== uid ? sectorId : undefined,
+      }));
     });
 };
 
