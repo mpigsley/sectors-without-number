@@ -1,5 +1,14 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { uniq, mapValues, mapKeys, omit, keys } from 'lodash';
+import {
+  includes,
+  uniq,
+  mapValues,
+  mapKeys,
+  omit,
+  keys,
+  pick,
+  pickBy,
+} from 'lodash';
 
 import Entities from 'constants/entities';
 import {
@@ -32,7 +41,6 @@ export default function entity(state = initialState, action) {
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),
-        saved: uniq([...state.saved, state.currentSector]).filter(s => s),
       };
     case LOGGED_IN:
       return {
@@ -43,50 +51,50 @@ export default function entity(state = initialState, action) {
       };
     case LOCATION_CHANGE: {
       const { pathname } = action.payload;
-      if (
-        pathname.startsWith('/sector/') ||
-        pathname.startsWith('/overview/')
-      ) {
-        return {
-          ...state,
-          currentSector: pathname.split('/')[2],
-          currentEntityType: pathname.split('/')[3],
-          currentEntity: pathname.split('/')[4],
-        };
-      }
+      const isGameView =
+        pathname.startsWith('/sector/') || pathname.startsWith('/overview/');
+      const currentSector = isGameView ? pathname.split('/')[2] : null;
+      const uniqSectors = uniq([...state.saved, currentSector]).filter(s => s);
       return {
         ...state,
-        currentSector: null,
-        currentEntityType: null,
-        currentEntity: null,
+        currentSector,
+        share:
+          isGameView && includes(uniqSectors, state.share) ? state.share : null,
+        currentEntityType: isGameView ? pathname.split('/')[3] : null,
+        currentEntity: isGameView ? pathname.split('/')[4] : null,
+        models: mapValues(state.models, (entities, entityType) => {
+          if (entityType === Entities.sector.key) {
+            return pick(entities, ...uniqSectors);
+          }
+          return pickBy(entities, ({ sector }) =>
+            includes(uniqSectors, sector),
+          );
+        }),
       };
     }
     case UPDATE_ID_MAPPING:
       return {
         ...state,
         saved: state.saved.map(saveId => action.mapping[saveId] || saveId),
-        models: {
-          ...state.models,
-          ...mapValues(state.models, entities =>
-            mapValues(
-              mapKeys(entities, (_, key) => action.mapping[key] || key),
-              entityObj => {
-                const sector =
-                  action.mapping[entityObj.sector] || entityObj.sector;
-                let update = { ...entityObj };
-                if (sector) {
-                  update = { ...update, sector };
-                }
-                const parent =
-                  action.mapping[entityObj.parent] || entityObj.parent;
-                if (parent) {
-                  update = { ...update, parent };
-                }
-                return update;
-              },
-            ),
+        models: mapValues(state.models, entities =>
+          mapValues(
+            mapKeys(entities, (_, key) => action.mapping[key] || key),
+            entityObj => {
+              const sector =
+                action.mapping[entityObj.sector] || entityObj.sector;
+              let update = { ...entityObj };
+              if (sector) {
+                update = { ...update, sector };
+              }
+              const parent =
+                action.mapping[entityObj.parent] || entityObj.parent;
+              if (parent) {
+                update = { ...update, parent };
+              }
+              return update;
+            },
           ),
-        },
+        ),
       };
     case DELETE_ENTITIES: {
       const deletedSectorIds = action.entities[Entities.sector.key] || [];
