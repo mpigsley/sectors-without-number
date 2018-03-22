@@ -92,10 +92,11 @@ export const initialize = location => dispatch =>
   getCurrentUser().then(user => {
     const { uid, locale } = user || {};
     const sectorId = location.pathname.split('/')[2];
+    const isGameView =
+      location.pathname.startsWith('/sector') ||
+      location.pathname.startsWith('/overview');
     const promises = [
-      location.pathname.startsWith('/sector')
-        ? getSectorEntities(sectorId, uid)
-        : Promise.resolve({}),
+      isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
     ];
     if (uid) {
       promises.push(getSyncedSectors(uid));
