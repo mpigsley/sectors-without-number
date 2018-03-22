@@ -66,30 +66,23 @@ export const uploadEntities = (entities, uid, sectorId) => {
   }));
 };
 
-export const getSyncedSectors = uid => {
-  let entities = {};
-  return Promise.all(
-    map(Entities, ({ key }) =>
-      Firestore()
-        .collection('entities')
-        .doc(key)
-        .collection('entity')
-        .where('creator', '==', uid)
-        .get()
-        .then(typeSnapshot => {
-          typeSnapshot.forEach(doc => {
-            entities = {
-              ...entities,
-              [key]: {
-                ...entities[key],
-                [doc.id]: doc.data(),
-              },
-            };
-          });
-        }),
-    ),
-  ).then(() => entities);
-};
+export const getSyncedSectors = uid =>
+  Firestore()
+    .collection('entities')
+    .doc(Entities.sector.key)
+    .collection('entity')
+    .where('creator', '==', uid)
+    .get()
+    .then(typeSnapshot => {
+      let sectors = {};
+      typeSnapshot.forEach(doc => {
+        sectors = {
+          ...sectors,
+          [doc.id]: doc.data(),
+        };
+      });
+      return sectors;
+    });
 
 export const getCurrentSector = (sectorId, uid) => {
   let entities = {};

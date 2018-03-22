@@ -69,7 +69,7 @@ const onLogin = (dispatch, state) => result => {
   }
   return promise
     .then(() => Promise.all([getSyncedSectors(uid), getUserData(uid)]))
-    .then(([entities, userData]) => {
+    .then(([sectors, userData]) => {
       dispatch(push('/'));
       dispatch({
         type: LOGGED_IN,
@@ -78,7 +78,7 @@ const onLogin = (dispatch, state) => result => {
           ...userData,
         },
         didSyncLocal: localSync,
-        entities,
+        sectors,
       });
       return result;
     })
@@ -103,14 +103,17 @@ export const initialize = location => dispatch =>
     if (locale && locale !== 'en' && Locale[locale]) {
       promises.push(Locale[locale].localeFetch().then(addLocaleData));
     }
-    return Promise.all(promises).then(([currentSector, synced]) =>
+    return Promise.all(promises).then(([currentSector, sectors]) =>
       dispatch({
         type: INITIALIZE,
         user,
-        entities: mergeEntityUpdates(synced, currentSector),
+        entities: mergeEntityUpdates(
+          { [Entities.sector.key]: sectors },
+          currentSector,
+        ),
         shared: keys((currentSector || {})[Entities.sector.key] || {}),
         share: currentSector ? sectorId : undefined,
-        saved: keys((synced || {})[Entities.sector.key] || {}),
+        saved: keys(sectors || {}),
       }),
     );
   });

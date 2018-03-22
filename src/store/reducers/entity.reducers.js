@@ -45,8 +45,10 @@ export default function entity(state = initialState, action) {
     case LOGGED_IN:
       return {
         ...state,
-        models: mergeEntityUpdates(initialState.models, action.entities),
-        saved: keys(action.entities[Entities.sector.key] || {}),
+        models: mergeEntityUpdates(initialState.models, {
+          [Entities.sector.key]: action.sectors,
+        }),
+        saved: keys(action.sectors || {}),
         share: null,
       };
     case LOCATION_CHANGE: {
