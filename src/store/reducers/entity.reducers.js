@@ -72,6 +72,9 @@ export default function entity(state = initialState, action) {
         currentSector,
         share:
           isGameView && includes(uniqSectors, state.share) ? state.share : null,
+        fetched: isGameView
+          ? state.fetched
+          : state.fetched.filter(id => includes(state.saved, id)),
         currentEntityType: isGameView ? pathname.split('/')[3] : null,
         currentEntity: isGameView ? pathname.split('/')[4] : null,
         models: mapValues(state.models, (entities, entityType) => {
