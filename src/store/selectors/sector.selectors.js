@@ -5,7 +5,7 @@ import {
   currentSectorSelector,
   sectorSelector,
   savedSectorSelector,
-  sharedSectorSelector,
+  shareSectorSelector,
 } from 'store/selectors/base.selectors';
 
 export const getUserSectors = createSelector(
@@ -23,6 +23,6 @@ export const isCurrentSectorSaved = createSelector(
 );
 
 export const isViewingSharedSector = createSelector(
-  [currentSectorSelector, sharedSectorSelector],
-  (currentSector, shared) => includes(shared, currentSector),
+  [currentSectorSelector, shareSectorSelector],
+  (currentSector, share) => currentSector === share,
 );

@@ -23,6 +23,7 @@ import {
   sidebarEditEntitySelector,
   sidebarEditChildrenSelector,
   savedSectorSelector,
+  fetchedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
@@ -30,6 +31,12 @@ import { allSectorKeys, coordinateKey } from 'utils/common';
 import { areNeighbors } from 'utils/hex-generator';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
+
+export const isFetchingCurrent = createDeepEqualSelector(
+  [fetchedSectorSelector, savedSectorSelector, currentSectorSelector],
+  (fetched, saved, sector) =>
+    includes(saved, sector) && !includes(fetched, sector),
+);
 
 export const getSavedEntities = createDeepEqualSelector(
   [entitySelector, savedSectorSelector],

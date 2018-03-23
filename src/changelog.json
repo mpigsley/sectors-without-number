@@ -1,4 +1,14 @@
 {
+  "4.0.0": {
+    "description":
+      "Optimize webapp start time and remove old sector converter.",
+    "date": "3-23-2018",
+    "changes": [
+      "Locally saved sectors can no longer be retrieved.",
+      "Remove the scripts that converted the old sector format into the new format.",
+      "Optimize webapp startup time by only fetching the minimum amount of data necessary."
+    ]
+  },
   "3.14.2": {
     "description":
       "Fix problem with translations when an attribute is undefined.",

@@ -8,11 +8,7 @@ jest.mock('react-redux-toastr', () => ({
   },
 }));
 
-jest.mock('../../store/api/local', () => ({
-  setSector: jest.fn(() => Promise.resolve()),
-}));
-
-jest.mock('../../store/api/firebase', () => ({
+jest.mock('../../store/api/entity', () => ({
   uploadSector: jest.fn(() => Promise.resolve()),
 }));
 

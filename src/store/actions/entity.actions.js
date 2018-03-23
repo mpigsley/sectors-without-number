@@ -9,6 +9,7 @@ import {
   zipObject,
   pickBy,
   size,
+  includes,
 } from 'lodash';
 
 import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
@@ -23,6 +24,9 @@ import {
   holdKeySelector,
   hoverKeySelector,
   sectorSelector,
+  fetchedSectorSelector,
+  userUidSelector,
+  isInitializedSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -38,13 +42,16 @@ import {
   getTopLevelEntity,
   initialSyncToast,
   preventSync,
+  saveEntities,
+  deleteEntities,
   SYNC_TOAST_ID,
 } from 'utils/entity';
+import { getSectorEntities } from 'store/api/entity';
 import { coordinatesFromKey } from 'utils/common';
 import { removeToastById } from 'utils/toasts';
-import { saveEntities, deleteEntities } from 'store/api/shared';
 import Entities from 'constants/entities';
 
+export const FETCHED_SECTOR = 'FETCHED_SECTOR';
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
 export const DELETE_ENTITIES = 'DELETE_ENTITIES';
 export const SAVE_SECTOR = 'SAVE_SECTOR';
@@ -75,6 +82,25 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
       push(`/sector/${mapping[currentSector] || currentSector}${entityUrl}`),
     );
   });
+};
+
+export const fetchSectorEntities = sector => (dispatch, getState) => {
+  const state = getState();
+  if (
+    includes(fetchedSectorSelector(state), sector) ||
+    !isInitializedSelector(state)
+  ) {
+    return Promise.resolve();
+  }
+  return getSectorEntities(sector, userUidSelector(state)).then(
+    ({ entities, sectorId, share }) =>
+      dispatch({
+        type: 'FETCHED_SECTOR',
+        entities,
+        sectorId,
+        share,
+      }),
+  );
 };
 
 export const generateEntity = (entity, parameters, intl) => (

@@ -34,7 +34,7 @@ export default class SectorMap extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
-    isInitialized: PropTypes.bool.isRequired,
+    hasLoaded: PropTypes.bool.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     sector: PropTypes.shape({
       rows: PropTypes.number,
@@ -60,7 +60,10 @@ export default class SectorMap extends Component {
 
   componentWillMount() {
     const splitPath = this.props.location.pathname.split('/');
-    if (splitPath.length > 5 || (splitPath[4] || '').length !== 20) {
+    if (
+      splitPath.length > 5 ||
+      (splitPath[4] || splitPath[2] || '').length !== 20
+    ) {
       this.props.toSafeRoute(this.props.routeParams.sector);
     }
   }
@@ -105,7 +108,7 @@ export default class SectorMap extends Component {
   }
 
   render() {
-    if (!this.props.isInitialized) {
+    if (!this.props.hasLoaded) {
       return <Loading />;
     } else if (isEmpty(this.props.sector)) {
       return <Error generateSector={this.props.generateSector} />;

@@ -8,6 +8,7 @@ import Fastclick from 'react-fastclick';
 import 'firebase/firestore';
 
 import store from 'store';
+import { fetchSectorEntities } from 'store/actions/entity.actions';
 
 import AppWrapper from 'components/app-wrapper';
 import HexBackground from 'components/hex-background';
@@ -35,6 +36,9 @@ Firebase.initializeApp({
 
 const history = syncHistoryWithStore(browserHistory, store);
 
+const onEnterGameRoute = ({ params }) =>
+  store.dispatch(fetchSectorEntities(params.sector));
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
@@ -44,12 +48,20 @@ ReactDOM.render(
           <Route path="/configure" component={Configure} />
           <Route path="/changelog" component={Changelog} />
         </Route>
-        <Route path="/sector/:sector" component={SectorMap}>
+        <Route
+          path="/sector/:sector"
+          component={SectorMap}
+          onEnter={onEnterGameRoute}
+        >
           <IndexRoute component={Sidebar} />
           <Route path=":entityType/:entity" component={Sidebar} />
           <Route path="**" component={Sidebar} />
         </Route>
-        <Route path="/overview/:sector" component={OverviewList}>
+        <Route
+          path="/overview/:sector"
+          component={OverviewList}
+          onEnter={onEnterGameRoute}
+        >
           <IndexRoute component={EmptyOverview} />
           <Route path=":entityType" component={OverviewTable} />
         </Route>
