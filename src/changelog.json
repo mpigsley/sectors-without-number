@@ -1,4 +1,12 @@
 {
+  "4.1.0": {
+    "description": "Allow attribute values to be customized.",
+    "date": "3-26-2018",
+    "changes": [
+      "Any entity attribute can be customized by clicking the dropdown, typing whatever you'd like, and hitting enter.",
+      "Updates to French and German translations."
+    ]
+  },
   "4.0.0": {
     "description":
       "Optimize webapp start time and remove old sector converter.",
