@@ -17,7 +17,7 @@ import './style.css';
 
 // eslint-disable-next-line react/prop-types
 const renderAttribute = ({ key, name, attributes }, attribute) => {
-  if (!attributes && !attribute) {
+  if (!attributes || !attribute) {
     return null;
   }
 
