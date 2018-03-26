@@ -41,15 +41,15 @@
   "techLevel.5": "T5",
   "entity.asteroidBase": "Asteroidenbasis",
   "entity.asteroidBases": "Asteroidenbasen",
-  "entity.asteroidBase.occupation.sectarians": "Eifriger Sektierer",
+  "entity.asteroidBase.occupation.sectarians": "Eifriger SektiererInnen",
   "entity.asteroidBase.occupation.rebels":
-    "Gescheiterte Rebellinnen von einem anderen Planeten",
+    "Gescheiterte RebellInnen von einem anderen Planeten",
   "entity.asteroidBase.occupation.miners":
     "Genossenschaftliche Lohnsklaven Bergarbeiter",
   "entity.asteroidBase.occupation.prospectors":
-    "Unabhängige Asteroidenschürfer",
+    "Unabhängige AsteroidenschürferInnen",
   "entity.asteroidBase.occupation.pirates":
-    "Piraten, die sich als etwas anderes ausgeben",
+    "PiratInnen, die sich als etwas anderes ausgeben",
   "entity.asteroidBase.situation.life":
     "Lebenserhaltungssystems sind gefährdet",
   "entity.asteroidBase.situation.asteroid":
@@ -61,14 +61,14 @@
   "entity.asteroidBelt": "Asteroidengürtel",
   "entity.asteroidBelts": "Asteroidengürtel",
   "entity.asteroidBelt.occupation.mine":
-    "Verwitterte (Asteroiden-) Bergarbeiter",
+    "Verwitterte (Asteroiden-) BergarbeiterInnen",
   "entity.asteroidBelt.occupation.drones": "Uralte, automatische Wächterdronen",
   "entity.asteroidBelt.occupation.base":
     "Überlebende einer zerstörten Asteroidenbasis",
   "entity.asteroidBelt.occupation.pirates":
-    "Piraten verstecken sich zwischen den Felsen",
+    "PiratInnen verstecken sich zwischen den Felsen",
   "entity.asteroidBelt.occupation.patrol":
-    "Einsame Mitarbeiter auf Militärpatroullienbasis",
+    "Einsame MitarbeiterInnen auf Militärpatroullienbasis",
   "entity.asteroidBelt.situation.rock":
     "Ein zerbrochener Felsen hat eine Gefahr freigelassen",
   "entity.asteroidBelt.situation.spy":
@@ -79,21 +79,88 @@
   "entity.asteroidBelt.situation.war": "Krieg zwischen rivalisierenden Felsen",
   "entity.blackHole": "Schwarzes Loch",
   "entity.blackHoles": "Schwarze Löcher",
+  "entity.deepSpaceStation": "Tiefraumstation",
+  "entity.deepSpaceStations": "Tiefraumstationen",
+  "entity.gasGiantMine": "Gasriesenmine",
+  "entity.gasGiantMines": "Gasriesenminen",
+  "entity.gasGiantMine.occupation.serfs":
+    "Elende Gasminensklaven oder -leibeigene",
+  "entity.gasGiantMine.occupation.robots":
+    "Seltsame Roboter und ihre AufseherInnen",
+  "entity.gasGiantMine.occupation.alien":
+    "WissenschaftlerIn, die/der das Leben von Aliens studiert",
+  "entity.gasGiantMine.occupation.mine":
+    "SchrottsammlerInnen in der alten Minenruine",
+  "entity.gasGiantMine.occupation.group": "Verarmte SeparatistInnengruppe",
+  "entity.gasGiantMine.situation.things": "Dinge erscheinen von unterhalb",
+  "entity.gasGiantMine.situation.supplies":
+    "Sie brauchen überlebenswichtige Vorräte",
+  "entity.gasGiantMine.situation.revolt": "Die ArbeiterInnen revoltieren",
+  "entity.gasGiantMine.situation.pirates": "PiratInnen tanken dort heimlich",
+  "entity.gasGiantMine.situation.remnants": "Alienüberreste wurden gefunden",
+  "entity.moon": "Mond",
+  "entity.moons": "Monde",
+  "entity.moonBase": "Mondbasis",
+  "entity.moonBases": "Mondbasen",
+  "entity.moonBase.occupation.researchers": "Glücklose KonzernforscherInnen",
+  "entity.moonBase.occupation.genius": "Zurückgezogenes Einsiedlergenie",
+  "entity.moonBase.occupation.colony": "Überreste einer gescheiterten Kolonie",
+  "entity.moonBase.occupation.military": "Militärischer Abhörposten",
+  "entity.moonBase.occupation.miners":
+    "Einsame AufseherInnen und Roboterminenarbeiter",
+  "entity.moonBase.situation.dark": "Etwas Dunkles ist erwacht",
+  "entity.moonBase.situation.criminals":
+    "Kriminelle versuchen, die Macht zu übernehmen",
+  "entity.moonBase.situation.plague": "Eine Mondseuche bricht aus",
+  "entity.moonBase.situation.supplies":
+    "Überlebenswichtiger Vorräte verzweifelt bedürftig",
+  "entity.moonBase.situation.rich": "Reich aber schlecht geschützt",
+  "entity.note": "Notiz",
+  "entity.notes": "Notizen",
+  "entity.orbitalRuin": "Orbitalruine",
+  "entity.orbitalRuins": "Orbitalruinen",
+  "entity.orbitalRuin.occupation.robots": "Roboter mit dubiosem Bewusstsein",
+  "entity.orbitalRuin.occupation.scavengers":
+    "Schießwütige SchrottsammlerInnen",
+  "entity.orbitalRuin.occupation.researchers": "ForscherInnen der Regierung",
+  "entity.orbitalRuin.occupation.military":
+    "DurchsetzerInnen der Militärquarantäne",
+  "entity.orbitalRuin.occupation.heirs":
+    "ErbInnen der ursprünglichen ErbauerInnen",
+  "entity.orbitalRuin.situation.awakening":
+    "Sein Erwachen zu stoppen versuchend",
+  "entity.orbitalRuin.situation.tech":
+    "Mit seltsamer Technologie herumbastelnd",
+  "entity.orbitalRuin.situation.calamity": "Drohendes technologisches Unheil",
+  "entity.orbitalRuin.situation.secret":
+    "Ein schreckliches Geheimnis wird entdeckt",
+  "entity.orbitalRuin.situation.interlopers":
+    "Eindringlinge von außen bekämpfend",
+  "entity.planet": "Planet",
+  "entity.planets": "Planeten",
+  "entity.refuelingStation": "Versorgungsstation",
+  "entity.refuelingStations": "Versorgungsstationen",
+  "entity.refuelingStation.occupation.hermit":
+    "Halbverrückte/r, zurückgezogene/r VerwalterIn",
+  "entity.refuelingStation.occupation.fun":
+    "Schmuddelige DienstleisterInnen für dekadenten Spaß",
+  "entity.refuelingStation.occupation.minions":
+    "Halsabschneiderische Konzernlakaien",
   "entity.refuelingStation.occupation.vendors": "Hirnlose Verkaufsautomaten",
   "entity.refuelingStation.situation.distress":
     "Ein Schiff hat einen schweren Notfall",
   "entity.refuelingStation.situation.pirates":
-    "Piraten haben die Macht übernommen",
-  "entity.refuelingStation.situation.agents": "Hat korrupte Zollagenten",
+    "PiratInnen haben die Macht übernommen",
+  "entity.refuelingStation.situation.agents": "Hat korrupte ZollagentInnen",
   "entity.refuelingStation.situation.saboteurs": "Fremde Saboteure sind aktiv",
   "entity.refuelingStation.situation.alien": "Signal aus dem fernen Weltraum",
   "entity.researchBase": "Forschungsstation",
   "entity.researchBases": "Forschungsstationen",
   "entity.researchBase.occupation.experminents": "Enkommene Expetimente",
   "entity.researchBase.occupation.scientists":
-    "Wissenschaftler eines lokalen Großunternehmens",
+    "WissenschaftlerIn eines lokalen Großunternehmens",
   "entity.researchBase.occupation.researchers":
-    "Behördliche Black-Ops Forscher",
+    "Behördliche Black-Ops ForscherInnen",
   "entity.researchBase.occupation.secret":
     "Von einer fremden Macht infiltriert",
   "entity.researchBase.occupation.alien": "Alien studiert die Einheimischen",
@@ -113,7 +180,7 @@
   "entity.spaceStation.occupation.odd": "Gefährlich merkwürdige Menschen",
   "entity.spaceStation.occupation.corpses": "Uralte gefriergetrocknete Leichen",
   "entity.spaceStation.occupation.observers":
-    "Geheimnistuerische Militärbeobachter",
+    "Geheimnistuerische MilitärbeobachterInnen",
   "entity.spaceStation.occupation.minions":
     "Exzentrische OligarchIn und Gefolgsleute",
   "entity.spaceStation.occupation.scientist":
@@ -145,12 +212,14 @@
   "misc.toContinue": "Fortfahren?",
   "misc.toDeleteEntity": "{entity} löschen, sicher?",
   "misc.attributes": "Attribute",
+  "misc.back": "Zurück",
   "misc.cancel": "Abbrechen",
   "misc.changelog": "Changelog",
   "misc.children": "Nachfolger",
   "misc.columns": "Spalten",
+  "misc.complications": "Komplikationen",
   "misc.condensed": "Zusammengefasst",
-  "misc.configure": "Anpassen",
+  "misc.configure": "Konfigurieren",
   "misc.continue": "Weiter",
   "misc.confirm": "Bestätigen",
   "misc.confirmPassword": "Passwort bestätigen",
@@ -167,13 +236,15 @@
   "misc.editProfile": "Profil bearbeiten",
   "misc.email": "E-Mail",
   "misc.emailPassword": "E-Mail und Passwort werden benötigt.",
+  "misc.enemies": "Feinde",
   "misc.entities": "Items",
   "misc.entityOverview": "Itemübersicht",
   "misc.entityType": "Itemtyp",
   "misc.expanded": "Ausführlich",
   "misc.exportEntity": "{entity} exportieren",
   "misc.forgotPassword": "Passwort vergessen?",
-  "misc.generate": "Erzeugen",
+  "misc.friends": "Freunde",
+  "misc.generate": "Erstellen",
   "misc.home": "Home",
   "misc.initializeEmpty": "Leeren Sektor erstellen",
   "misc.isHidden": "Ist versteckt",
@@ -190,11 +261,14 @@
   "misc.noteContent": "Notizinhalt",
   "misc.occupation": "Beruf",
   "misc.oneEntity": "Ein Item pro Seite mit viel Platz für Notizen.",
-  "misc.or": "oder",
+  "misc.or": "Übersicht",
+  "misc.overview": "Overview",
   "misc.parent": "Vorgänger",
   "misc.password": "Passwort",
   "misc.passwordResetSent": "Passwortreset versendet",
   "misc.noPasswordMatch": "Passwörter stimmen nicht überein.",
+  "misc.places": "Orte",
+  "misc.print": "Drucken",
   "misc.printOptions": "Drucksoptionen",
   "misc.printEntitiesTable":
     "Drucke deine Items in Tabellenform, um eine Übersicht über deinen Sektor zu bekommen.",
@@ -203,7 +277,7 @@
   "misc.reportProblemPersists": "Melde Probleme, die immer häufig auftreten.",
   "misc.rows": "Reihen",
   "misc.save": "Speichern",
-  "misc.saveUser": "Nutzer speichern",
+  "misc.saveUser": "Speichern",
   "misc.savedSectors": "Gespeicherte Sektoren",
   "misc.sector": "Sektor",
   "misc.noSector": "Dieser Sektor existiert nicht",
@@ -227,6 +301,9 @@
   "misc.syncingSectors": "Sektoren werden synchronisiert",
   "misc.tags": "Merkmale",
   "misc.error": "Ein Fehler ist aufgetreten",
+  "misc.things": "Dinge",
+  "misc.createASystem":
+    "Um ein System zu erstellen, klicke links auf ein Hexagon und halte die Maustaste.",
   "misc.moveSystem":
     "Um ein existierenden Sternensystem zu verschieben, klicke und ziehe, während du den Mausbutton gedrückt hätlst.",
   "misc.useAPOI": "Weitere Points of Interest benutzen.",
@@ -239,6 +316,7 @@
   "misc.haveNumSectors": "YDu hast mindestens {num} Sektoren.",
   "misc.copiedLinkTo": "Du hast einen Direktlink kopiert: {entity}.",
   "misc.receiveEmail": "Eine E-Mail sollte demnächst bei dir eintreffen.",
+  "misc.successfullyRemoved": "{entity} wurde erfolgreich entfernt.",
   "misc.sectorsSynced":
     "Deine Sektoren wurden synchronisiert. Du kannst sie jetzt mit Freunden teilen.",
   "misc.windowTooSmall":
