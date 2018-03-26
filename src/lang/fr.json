@@ -41,9 +41,10 @@
   "techLevel.5": "T5",
   "entity.asteroidBase": "Base d'astéroïde",
   "entity.asteroidBases": "Bases d'astéroïde",
-  "entity.asteroidBase.occupation.sectarians": "Fanatique religieux intolérant",
+  "entity.asteroidBase.occupation.sectarians":
+    "Fanatiques religieux intolérants",
   "entity.asteroidBase.occupation.rebels":
-    "Membre d'une rébellion ratée d'un autre monde",
+    "Membres d'une rébellion ratée d'un autre monde",
   "entity.asteroidBase.occupation.miners":
     "Esclaves salariés d'une corporation minière",
   "entity.asteroidBase.occupation.prospectors":
@@ -54,28 +55,31 @@
   "entity.asteroidBase.situation.asteroid":
     "La base a besoin d'un nouvel astéroïde",
   "entity.asteroidBase.situation.nasty":
-    "Découverte de quelque chose de dangereux",
-  "entity.asteroidBase.situation.fighting": "Combattre un autre astéroïde",
+    "On découvre quelque chose de dangereux",
+  "entity.asteroidBase.situation.fighting": "On combat un autre astéroïde",
   "entity.asteroidBase.situation.priceless":
-    "Découverte d'une veine de minerai inestimable",
+    "On découvre une veine de minerai inestimable",
   "entity.asteroidBelt": "Ceinture d'astéroïdes",
   "entity.asteroidBelts": "Ceintures d'astéroïdes",
   "entity.asteroidBelt.occupation.mine": "Mineurs d'astéroïdes âgés",
-  "entity.asteroidBelt.occupation.drones": "Antique drone gardien automatisé",
+  "entity.asteroidBelt.occupation.drones":
+    "Antiques drones gardiens automatisés",
   "entity.asteroidBelt.occupation.base":
-    "Survivant d'une base d'astéroïde détruite",
+    "Survivants d'une base d'astéroïde détruite",
   "entity.asteroidBelt.occupation.pirates":
     "Pirates se cachant parmis les roches",
   "entity.asteroidBelt.occupation.patrol":
-    "Patrouilleur solitaire d'une base militaire",
+    "Patrouilleurs d'une base militaire souffrant de solitude",
   "entity.asteroidBelt.situation.rock":
     "Un péril s'échappe d'une roche fracturée",
   "entity.asteroidBelt.situation.spy":
     "Un astronef espion étranger se cache ici",
-  "entity.asteroidBelt.situation.minerals": "Ruée vers un nouveau matériau",
+  "entity.asteroidBelt.situation.minerals":
+    "Il y a une ruée vers un nouveau matériau",
   "entity.asteroidBelt.situation.ruins":
     "La roche est parsemée de ruines anciennes",
-  "entity.asteroidBelt.situation.war": "Guerre entre roches rivales",
+  "entity.asteroidBelt.situation.war":
+    "Il y a une guerre entre des roches rivales",
   "entity.blackHole": "Trou noir",
   "entity.blackHoles": "Trous noirs",
   "entity.deepSpaceStation": "Station spatiale éloignée",
@@ -89,10 +93,9 @@
     "Scientifiques étudiant la vie indigène",
   "entity.gasGiantMine.occupation.mine":
     "Ferrailleurs dans les ruines de la vieille mine",
-  "entity.gasGiantMine.occupation.group": "Groupe séparatiste appauvri",
+  "entity.gasGiantMine.occupation.group": "Groupe de séparatistes démunis",
   "entity.gasGiantMine.situation.things": "Des choses émergent sous la surface",
-  "entity.gasGiantMine.situation.supplies":
-    "Ils ont besoin de ressources vitales",
+  "entity.gasGiantMine.situation.supplies": "On a besoin de ressources vitales",
   "entity.gasGiantMine.situation.revolt": "Les travailleurs se révoltent",
   "entity.gasGiantMine.situation.pirates":
     "Des pirates s'approvisionnent secrètement en carburant ici",
@@ -103,7 +106,7 @@
   "entity.moonBase": "Base lunaire",
   "entity.moonBases": "Bases lunaires",
   "entity.moonBase.occupation.researchers":
-    "Chercheur malchanceux employé par une corporation",
+    "Chercheurs malchanceux employés par une corporation",
   "entity.moonBase.occupation.genius": "Génie vivant en ermite",
   "entity.moonBase.occupation.colony": "Survivants d'une colonie avortée",
   "entity.moonBase.occupation.military": "Poste d'écoute militaire",
@@ -112,10 +115,10 @@
   "entity.moonBase.situation.dark": "Une chose lugubre s'est éveillée",
   "entity.moonBase.situation.criminals":
     "Des criminels tentent de prendre le contrôle",
-  "entity.moonBase.situation.plague": "Éclosion d'une maladie lunaire",
+  "entity.moonBase.situation.plague": "Une maladie contagieuse lunaire éclate",
   "entity.moonBase.situation.supplies":
-    "Désespérément besoin de ressources vitales",
-  "entity.moonBase.situation.rich": "Riche mais mal protégé",
+    "On a désespérément besoin de ressources vitales",
+  "entity.moonBase.situation.rich": "On est riche mais mal protégé",
   "entity.note": "Note",
   "entity.notes": "Notes",
   "entity.orbitalRuin": "Ruine orbitale",
@@ -124,14 +127,16 @@
   "entity.orbitalRuin.occupation.scavengers":
     "Ferrailleurs à la gâchette facile",
   "entity.orbitalRuin.occupation.researchers": "Chercheurs gouvernementaux",
-  "entity.orbitalRuin.occupation.military": "Agents de quarantaine militaire",
+  "entity.orbitalRuin.occupation.military":
+    "Agents assurant une quarantaine militaire",
   "entity.orbitalRuin.occupation.heirs": "Héritiers des premiers bâtisseurs ",
-  "entity.orbitalRuin.situation.awakening": "Tenter d'éviter de la réactiver",
+  "entity.orbitalRuin.situation.awakening": "On tente d'éviter de la réactiver",
   "entity.orbitalRuin.situation.tech":
-    "Bricoler avec des technologies étranges",
-  "entity.orbitalRuin.situation.calamity": "Calamité technologique imminente",
+    "On bricole avec des technologies étranges",
+  "entity.orbitalRuin.situation.calamity":
+    "Une calamité technologique est imminente",
   "entity.orbitalRuin.situation.secret": "Un terrible secret est découvert",
-  "entity.orbitalRuin.situation.interlopers": "Combattre des intrus étrangers",
+  "entity.orbitalRuin.situation.interlopers": "On combat des intrus étrangers",
   "entity.planet": "Planète",
   "entity.planets": "Planètes",
   "entity.refuelingStation": "Station d'approvisonnement",
@@ -141,13 +146,13 @@
   "entity.refuelingStation.occupation.fun":
     "Fournisseurs sordides de plaisirs décadents",
   "entity.refuelingStation.occupation.minions":
-    "Sbires faisant de l'extortion employés par une corporation",
+    "Sbires employés par une corporation qui font de l'extortion",
   "entity.refuelingStation.occupation.religious":
     "Missionnaires religieux ciblant les voyageurs",
   "entity.refuelingStation.occupation.vendors":
     "Vendeurs automatisés sans intelligence",
   "entity.refuelingStation.situation.distress":
-    "Un astronef en grande détresse",
+    "Il y a un astronef en grande détresse",
   "entity.refuelingStation.situation.pirates":
     "Des pirates ont pris le contrôle",
   "entity.refuelingStation.situation.agents":
@@ -155,7 +160,7 @@
   "entity.refuelingStation.situation.saboteurs":
     "Des saboteurs étrangers sont actifs",
   "entity.refuelingStation.situation.alien":
-    "Signal provenant de l'espace éloigné",
+    "On capte un signal xénosapien provenant de l'espace éloigné",
   "entity.researchBase": "Base de recherche",
   "entity.researchBases": "Bases de recherche",
   "entity.researchBase.occupation.experminents":
@@ -168,13 +173,16 @@
     "Personnes secrètements employées par une puissance étrangère",
   "entity.researchBase.occupation.alien":
     "Xénosapien étudiant les humains locaux",
-  "entity.researchBase.situation.research": "Recherche périlleuse en cours",
-  "entity.researchBase.situation.immoral": "Recherche hideuse et immorale",
-  "entity.researchBase.situation.outsiders": "Tenu en otage par des étrangers",
+  "entity.researchBase.situation.research":
+    "Des recherches périlleuses sont en cours",
+  "entity.researchBase.situation.immoral":
+    "On y fait de la recherche hideuse et immorale",
+  "entity.researchBase.situation.outsiders":
+    "On est tenu en otage par des étrangers",
   "entity.researchBase.situation.monsters":
-    "Monstres de la science sont en liberté",
+    "Des monstres de la science sont en liberté",
   "entity.researchBase.situation.tech":
-    "Vendre des technologie réservée au marché noir",
+    "On vend des technologie réservées au marché noir",
   "entity.sector": "Secteur",
   "entity.sectors": "Secteurs",
   "entity.spaceStation": "Station spatiale",
@@ -186,14 +194,14 @@
   "entity.spaceStation.occupation.minions": "Eccentric oligarch and minions",
   "entity.spaceStation.occupation.scientist":
     "Deranged but brilliant scientist",
-  "entity.spaceStation.situation.systems": "Systèmes tombent en panne",
+  "entity.spaceStation.situation.systems": "Les systèmes tombent en panne",
   "entity.spaceStation.situation.sabotage":
-    "Tentative de sabotage par un agent étranger",
-  "entity.spaceStation.situation.market": "Marché noir réservé à l'élite",
+    "Une tentative de sabotage par un agent étranger",
+  "entity.spaceStation.situation.market": "Un marché noir réservé à l'élite",
   "entity.spaceStation.situation.pretech":
-    "Chambre forte pour prétech dangereuse",
+    "Une chambre forte pour prétech dangereuse",
   "entity.spaceStation.situation.pirates":
-    "Base d'approvisionnemement pour pirates",
+    "Une base d'approvisionnemement pour pirates",
   "entity.system": "Système",
   "entity.systems": "Systèmes",
   "entity.base": "Base",
