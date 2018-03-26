@@ -17,7 +17,7 @@ import './style.css';
 
 // eslint-disable-next-line react/prop-types
 const renderAttribute = ({ key, name, attributes }, attribute) => {
-  if ((!attributes && !attribute) || (attributes && !attributes[attribute])) {
+  if (!attributes && !attribute) {
     return null;
   }
 
@@ -27,7 +27,11 @@ const renderAttribute = ({ key, name, attributes }, attribute) => {
         <FormattedMessage id={name} />:
       </b>
       <span className="EntityAttributes-Item">
-        <FormattedMessage id={attributes[attribute].name} />
+        {attributes[attribute] ? (
+          <FormattedMessage id={attributes[attribute].name} />
+        ) : (
+          attribute
+        )}
       </span>
     </FlexContainer>
   );
@@ -137,15 +141,21 @@ export default function EntityAttributes({
           <FormattedMessage id={name} />:
         </b>
         <Dropdown
+          allowCreate
           wrapperClassName="EntityAttributes-Item"
           value={attribute}
           onChange={item =>
             updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
           }
-          options={map(attributes, attr => ({
-            value: attr.key,
-            label: intl.formatMessage({ id: attr.name }),
-          }))}
+          options={[
+            ...map(attributes, attr => ({
+              value: attr.key,
+              label: intl.formatMessage({ id: attr.name }),
+            })),
+            ...(!attributes[attribute]
+              ? [{ value: attribute, label: attribute }]
+              : []),
+          ]}
         />
       </FlexContainer>
     );
