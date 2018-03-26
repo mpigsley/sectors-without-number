@@ -206,6 +206,7 @@
   "entity.mines": "Mines",
   "entity.ruin": "Ruine",
   "entity.ruins": "Ruines",
+  "misc.entityDeleted": "{entity} Supprimé",
   "misc.entityName": "{entity} Nom",
   "misc.entityTags": "{entity} Marqueurs",
   "misc.hiddenParrent": "Une entité parent masque ce {entity}.",
@@ -312,7 +313,7 @@
     "Pour créer un système, cliquer et maintenir le bouton enfoncé dans le menu de gauche",
   "misc.moveSystem":
     "Pour déplacer un système existant, cliquer, maintenir, et déplacer.",
-  "misc.useAPOI": "Utiliser des lieux d'intérêts additionnels",
+  "misc.useAPOI": "Utiliser des lieux d'intérêt additionnels",
   "misc.userAccount": "Compte de l'utilisateur",
   "misc.userProfile": "Profil de l'utilisateur",
   "misc.username": "Nom d'utilisateur",
@@ -322,6 +323,7 @@
   "misc.haveNumSectors": "Vous avez au moins {num} secteurs.",
   "misc.copiedLinkTo": "Vous avez copié un lien direct vers {entity}.",
   "misc.receiveEmail": "Vous devriez recevoir un courriel bientôt.",
+  "misc.successfullyRemoved": "Votre {singular noun} a été retiré avec succès.",
   "misc.sectorsSynced":
     "Vos secteurs ont été synchronisés. Vous pouvez maintenant les partager avec vos amis.",
   "misc.windowTooSmall":
