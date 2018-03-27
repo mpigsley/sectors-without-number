@@ -98,10 +98,10 @@ class Table extends Component {
   }
 
   renderRowItem(row, { Cell, accessor, translateItem }) {
-    const item =
-      translateItem && row[accessor]
-        ? this.props.intl.formatMessage({ id: row[accessor] })
-        : row[accessor];
+    let item = row[accessor];
+    if (translateItem && this.props.intl.messages[row[accessor]]) {
+      item = this.props.intl.formatMessage({ id: row[accessor] });
+    }
     return Cell ? Cell(item, row) : item;
   }
 
