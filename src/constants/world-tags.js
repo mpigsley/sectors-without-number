@@ -102,7 +102,7 @@ export const worldTagKeys = {
 };
 
 export default {
-    [worldTagKeys.abandonedColony]: {
+  [worldTagKeys.abandonedColony]: {
     key: worldTagKeys.abandonedColony,
     enemies: 3,
     friends: 3,
@@ -110,7 +110,7 @@ export default {
     things: 3,
     places: 3,
   },
-   [worldTagKeys.alienRuins]: {
+  [worldTagKeys.alienRuins]: {
     key: worldTagKeys.alienRuins,
     enemies: 3,
     friends: 3,
