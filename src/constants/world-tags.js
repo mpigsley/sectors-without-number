@@ -846,234 +846,60 @@ export default {
     things: 3,
     places: 4,
   },
-
-  
-
-
   [worldTagKeys.unbrakedAi]: {
     key: worldTagKeys.unbrakedAi,
-    name: 'Unbraked AI',
-    description:
-      'Artificial intelligences are costly and difficult to create, requiring a careful sequence of “growth stages” in order to bring them to sentience before artificial limits on cognition speed and learning development are installed. These “brakes” prevent runaway cognition metastasis. This world has an “unbraked AI” on it, probably with a witting or unwitting corps of servants. Unbraked AIs are quite insane, but they learn and reason with a speed impossible for humans, and can demonstrate a truly distressing subtlety.',
-    'misc.enemies': [
-      'AI cultist',
-      'maltech researcher',
-      'government official dependent on the AI',
-    ],
-    'misc.friends': ['perimeter agent', 'AI researcher', 'braked AI'],
-    'misc.complications': [
-      "the AI's presence is unknown to the locals",
-      'the locals depend on the AI for some vital service',
-      'the AI appears to be harmless',
-      "the AI has fixated on the group's ship's computer",
-      'the AI wants transport offworld',
-    ],
-    'misc.things': [
-      'the room-sized AI core itself',
-      'maltech research files',
-      'perfectly tabulated blackmail on government officials',
-      'pretech computer circuitry',
-    ],
-    'misc.places': [
-      'municipal computing banks',
-      'cult compound',
-      'repair center',
-      'ancient hardcopy library',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 5,
+    things: 4,
+    places: 4,
   },
   [worldTagKeys.urbanizedSurface]: {
     key: worldTagKeys.urbanizedSurface,
-    name: 'Urbanized Surface',
-    description:
-      "The world's land area is covered with buildings that extend downward for multiple levels. Such worlds either have a population in the trillions, extremely little land area, or are largely-abandoned due to some past catastrophe. Agriculture and resource extraction are part of the urban complex, and there may be an advanced maintenance system that may not be entirely under the control of present natives.",
-    'misc.enemies': [
-      'maintenance AI that hates outsiders',
-      'tyrant of a habitation block',
-      'deep-dwelling prophet who considers "the sky" a blasphemy to be quelled',
-    ],
-    'misc.friends': [
-      'local yearning for wild spaces',
-      'grubby urchin of the underlevels',
-      'harried engineer trying to maintain ancient works',
-      'grizzled hab cop',
-    ],
-    'misc.complications': [
-      'the urban blocks are needed to survive the environment',
-      'the blocks were part of an ancient device of world-spanning size',
-      'the blocks require constant maintenance to avoid dangerous types of decay',
-    ],
-    'misc.things': [
-      'massively efficient power source',
-      'map of the secret ways of a zone',
-      'passkey into restricted hab block areas',
-    ],
-    'misc.places': [
-      'giant hab block now devoid of inhabitants',
-      'chemical-reeking underway',
-      'seawater mine full of salt and massive flowing channels',
-    ],
+    enemies: 3,
+    friends: 4,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.utopia]: {
     key: worldTagKeys.utopia,
-    name: 'Utopia',
-    description:
-      'Natural and social conditions on this world have made it a paradise for its inhabitants, a genuine utopia of happiness and fulfillment. This is normally the result of drastic human engineering, including brain-gelding, neurochemical control, personality curbs, or complete "humanity" redefinitions. Even so, the natives are extremely happy with their lot, and may wish to extend that joy to poor, sad outsiders.',
-    'misc.enemies': [
-      'compassionate neurotherapist',
-      'proselytizing native missionary to outsiders',
-      'brutal tyrant who rules through inexorable happiness',
-    ],
-    'misc.friends': [
-      'deranged malcontent',
-      'bloody-handed guerilla leader of a rebellion of madmen',
-      'outsider trying to find a way to reverse the utopian changes',
-    ],
-    'misc.complications': [
-      'the natives really are deeply and contentedly happy with their altered lot',
-      'the utopia produces something that attracts others',
-      'the utopia works on converting outsiders through persuasion and generosity',
-      "the utopia involves some sacrifice that's horrifying to non-members",
-    ],
-    'misc.things': [
-      'portable device that applies the utopian change',
-      'plans for a device that would destroy the utopia',
-      'goods created joyfully by the locals',
-    ],
-    'misc.places': [
-      'plaza full of altered humans',
-      'social ritual site',
-      'secret office where "normal" humans rule',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.warlords]: {
     key: worldTagKeys.warlords,
-    name: 'Warlords',
-    description:
-      'The world is plagued by warlords. Numerous powerful men and women control private armies sufficiently strong to cow whatever local government may exist. On the lands they claim, their word is law. Most spend their time oppressing their own subjects and murderously pillaging those of their neighbors. Most like to wrap themselves in the mantle of ideology, religious fervor, or an ostensibly legitimate right to rule.',
-    'misc.enemies': [
-      'warlord',
-      'avaricious lieutenant',
-      'expensive assassin',
-      'aspiring minion',
-    ],
-    'misc.friends': [
-      'Vengeful commoner',
-      'government military officer',
-      'humanitarian aid official',
-      'village priest',
-    ],
-    'misc.complications': [
-      'the warlords are willing to cooperate to fight mutual threats',
-      'the warlords favor specific religions or races over others',
-      'the warlords are using substantially more sophisticated tech than others',
-      'some of the warlords are better rulers than the government',
-    ],
-    'misc.things': [
-      'weapons cache, Buried plunder',
-      "a warlord's personal battle harness",
-      'captured merchant shipping',
-    ],
-    'misc.places': [
-      'gory battlefield',
-      'burnt-out village',
-      'barbaric warlord palace',
-      'squalid refugee camp',
-    ],
+    enemies: 4,
+    friends: 4,
+    complications: 4,
+    things: 3,
+    places: 4,
   },
   [worldTagKeys.xenophiles]: {
     key: worldTagKeys.xenophiles,
-    name: 'Xenophiles',
-    description:
-      'The natives of this world are fast friends with a particular alien race. The aliens may have saved the planet at some point in the past, or awed the locals with superior tech or impressive cultural qualities. The aliens might even be the ruling class on the planet.',
-    'misc.enemies': [
-      'offworld xenophobe',
-      'suspicious alien leader',
-      'xenocultural imperialist',
-    ],
-    'misc.friends': [
-      'benevolent alien',
-      'native malcontent',
-      'gone-native offworlder',
-    ],
-    'misc.complications': [
-      'the enthusiasm is due to alien psionics or tech',
-      'the enthusiasm is based on a lie, The aliens strongly dislike their “groupies”',
-      'the aliens feel obliged to rule humanity for its own good',
-      'humans badly misunderstand the aliens',
-    ],
-    'misc.things': [
-      'hybrid alien-human tech',
-      'exotic alien crafts',
-      'sophisticated xenolinguistic and xenocultural research data',
-    ],
-    'misc.places': [
-      'alien district',
-      'alien-influenced human home',
-      'cultural festival celebrating alien artist',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.xenophobes]: {
     key: worldTagKeys.xenophobes,
-    name: 'Xenophobes',
-    description:
-      'The natives are intensely averse to dealings with outworlders. Whether through cultural revulsion, fear of tech contamination, or a genuine immunodeficiency, the locals shun foreigners from offworld and refuse to have anything to do with them beyond the bare necessities of contact. Trade may or may not exist on this world, but if it does, it is almost certainly conducted by a caste of untouchables and outcasts.',
-    'misc.enemies': [
-      'revulsed local ruler',
-      'native convinced some wrong was done to him',
-      'cynical demagogue',
-    ],
-    'misc.friends': [
-      'curious native',
-      'exiled former ruler',
-      'local desperately seeking outworlder help',
-    ],
-    'misc.complications': [
-      'the natives are symptomless carriers of a contagious and dangerous disease',
-      'the natives are exceptionally vulnerable to offworld diseases',
-      'the natives require elaborate purification rituals after speaking to an offworlder or touching them',
-      'the local ruler has forbidden any mercantile dealings with outworlders',
-    ],
-    'misc.things': [
-      'jealously-guarded precious relic',
-      'local product under export ban',
-      'esoteric local technology',
-    ],
-    'misc.places': [
-      'sealed treaty port',
-      'public ritual not open to outsiders',
-      'outcaste slum home',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.zombies]: {
     key: worldTagKeys.zombies,
-    name: 'Zombies',
-    description:
-      'This menace may not take the form of shambling corpses, but some disease, alien artifact, or crazed local practice produces men and women with habits similar to those of murderous cannibal undead. These outbreaks may be regular elements in local society, either provoked by some malevolent creators or the consequence of some local condition.',
-    'misc.enemies': [
-      'soulless maltech biotechnology cult',
-      'sinister governmental agent',
-      'crazed zombie cultist',
-    ],
-    'misc.friends': [
-      'survivor of an outbreak',
-      'doctor searching for a cure',
-      'rebel against the secret malefactors',
-    ],
-    'misc.complications': [
-      'the zombies retain human intelligence',
-      'the zombies can be cured',
-      'the process is voluntary among devotees',
-      'the condition is infectious',
-    ],
-    'misc.things': [
-      'cure for the condition',
-      'alien artifact that causes it',
-      "details of the cult's conversion process",
-    ],
-    'misc.places': [
-      'house with boarded-up windows',
-      'dead city',
-      'fortified bunker that was overrun from within',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
 };
