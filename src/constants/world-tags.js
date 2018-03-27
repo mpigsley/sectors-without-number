@@ -654,399 +654,108 @@ export default {
     things: 3,
     places: 3,
   },
-
-  
-  
   [worldTagKeys.radioactiveWorld]: {
     key: worldTagKeys.radioactiveWorld,
-    name: 'Radioactive World',
-    description:
-      'Whether due to a legacy of atomic warfare unhindered by nuke snuffers or a simple profusion of radioactive elements, this world glows in the dark. Even heavy vacc suits can filter only so much of the radiation, and most natives suffer a wide variety of cancers, mutations and other illnesses without the protection of advanced medical treatments.',
-    'misc.enemies': [
-      'bitter mutant',
-      'relic warlord',
-      'desperate would be escapee',
-    ],
-    'misc.friends': [
-      'reckless prospector',
-      'offworld scavenger',
-      'biogenetic variety seeker',
-    ],
-    'misc.complications': [
-      'the radioactivity is steadily growing worse',
-      "the planet's medical resources break down",
-      'the radioactivity has inexplicable effects on living creatures',
-      'the radioactivity is the product of a malfunctioning pretech manufactory',
-    ],
-    'misc.things': [
-      'ancient atomic weaponry',
-      'pretech anti-radioactivity drugs',
-      'untainted water supply',
-    ],
-    'misc.places': [
-      'mutant-infested ruins',
-      'scorched glass plain',
-      'wilderness of bizarre native life',
-      'glowing barrens',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 4,
   },
   [worldTagKeys.refugees]: {
     key: worldTagKeys.refugees,
-    name: 'Refugees',
-    description:
-      'The world teems with refugees, either exiles from another planet who managed to get here, or the human detritus of some local conflict that have fled to the remaining stable states. The natives usually regard the refugees with hostility, an attitude returned by many among their unwilling guests.',
-    'misc.enemies': [
-      'xenophobic native leader',
-      'refugee chief aspiring to seize the host nation',
-      'politician seeking to use the refugees as a weapon',
-    ],
-    'misc.friends': [
-      'sympathetic refugee waif',
-      'local hard-pressed by refugee gangs',
-      'clergy seeking peace',
-    ],
-    'misc.complications': [
-      'the xenophobes are right that the refugees are taking over',
-      'the refugees are right that the xenophobes want them out or dead',
-      'both are right',
-      'outside powers are using hte refugees to destabalize an enemy government',
-      'refugee and local cultures are extremely incompatible',
-    ],
-    'misc.things': [
-      'treasures brought out by fleeing refugees',
-      'citizenship papers',
-      'cache of vital refugee supplies',
-      'hidden arms for terrorists',
-    ],
-    'misc.places': [
-      'hopeless refugee camp',
-      'city swarming with confused strangers',
-      'festival full of angry locals',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 5,
+    things: 4,
+    places: 3,
   },
   [worldTagKeys.regionalHegemon]: {
     key: worldTagKeys.regionalHegemon,
-    name: 'Regional Hegemon',
-    description:
-      'This world has the technological sophistication, natural resources, and determined polity necessary to be a regional hegemon for the sector. Nearby worlds are likely either directly subservient to it or tack carefully to avoid its anger. It may even be the capital of a small stellar empire.',
-    'misc.enemies': [
-      'ambitious general',
-      'colonial official',
-      'contemptuous noble',
-    ],
-    'misc.friends': ['diplomat', 'offworld ambassador', 'foreign spy'],
-    'misc.complications': [
-      "the hegemon's influence is all that's keeping a murderous war from breaking out on nearby worlds",
-      'the hegemon is decaying and losing its control',
-      'the government is riddled with spies',
-      'the hegemon is genuinely benign',
-    ],
-    'misc.things': [
-      'diplomat carte blanche',
-      'deed to an offworld estate',
-      'foreign aid grant',
-    ],
-    'misc.places': [
-      'palace or seat of government',
-      'salon teeming with spies',
-      'protets rally',
-      'military base',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 4,
   },
   [worldTagKeys.restrictiveLaws]: {
     key: worldTagKeys.restrictiveLaws,
-    name: 'Restrictive Laws',
-    description:
-      'A myriad of laws, customs, and rules constrain the inhabitants of this world, and even acts that are completely permissible elsewhere are punished severely here. The locals may provide lists of these laws to offworlders, but few non-natives can hope to master all the important intricacies.',
-    'misc.enemies': [
-      'law enforcement officer',
-      'outraged native',
-      'native lawyer specializing in peeling offworlders',
-      'paid snitch',
-    ],
-    'misc.friends': [
-      'frustrated offworlder',
-      'repressed native',
-      'reforming crusader',
-    ],
-    'misc.complications': [
-      'the laws chnage regularly in patterns only natives understand',
-      'the laws forbid some action vital to the party',
-      'the laws forbid the simple existence of some party members',
-      'the laws are secret to offworlders',
-    ],
-    'misc.things': [
-      'complete legal codex',
-      'writ of diplomatic immunity',
-      'fine collection of vault contents',
-    ],
-    'misc.places': [
-      'courtroom',
-      'mob scene of outraged locals',
-      'legislative chamber',
-      'police station',
-    ],
+    enemies: 4,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 4,
   },
   [worldTagKeys.revanchists]: {
     key: worldTagKeys.revanchists,
-    name: 'Revanchists',
-    description:
-      "The locals formerly owned another world, or a major nation on the planet formerly owned an additional region of land. Something happened to take away this control or drive out the former rulers, and they've never forgotten it. The locals are obsessed with reclaiming their lost lands, and will allow no questions of practicality to interfere with their cause.",
-    'misc.enemies': [
-      'demagogue whipping the locals on to a hopeless war',
-      'politician seeking to use the resentment for their own ends',
-      'local convinced the PCs are agents of the "thieving" power',
-      'refugee from the land bitterly demanding it be reclaimed',
-    ],
-    'misc.friends': [
-      'realist local clergy seeking peace',
-      'olitician trying to calm the public',
-      'third-party diplomat trying to stamp out the fire',
-    ],
-    'misc.complications': [
-      "the revanchists' claim is completely just and reasonable",
-      'the land is now occupied entirely by heirs of the conquerors',
-      'both sides have seized lands the other thinks are theirs',
-    ],
-    'misc.things': [
-      'stock of vital resource produced by the taken land',
-      'relic carried out of it',
-      'proof that the land claim is justified or unjustified',
-    ],
-    'misc.places': [
-      'memorial monument to the loss',
-      'cemetery of those who died in the conquest',
-      'public ceremony commemorating the disaster',
-    ],
+    enemies: 4,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.revolutionaries]: {
     key: worldTagKeys.revolutionaries,
-    name: 'Revolutionaries',
-    description:
-      'The world is convulsed by one or more bands of revolutionaries, with some nations perhaps in the grip of a current revolution. Most of these upheavals can be expected only to change the general flavor of problems in the polity, but the process of getting there usually produces a tremendous amount of suffering.',
-    'misc.enemies': [
-      'blood-drenched revolutionary leader',
-      'blood-drenched secret police chief',
-      'hostile foreign agent seeking further turmoil',
-    ],
-    'misc.friends': [
-      'sympathetic victim accused of revolutionary sympathies or government collaboration',
-      'revolutionary or state agent who now repents',
-      'agent of a neutral power that wants peace',
-    ],
-    'misc.complications': [
-      'the revolutionaries actually do seem likely to put in better rulers',
-      'the revolutionaries are client groups that got out of hand',
-      'the revolutionaries are clearly much worse than the government',
-      'the revolutionaries have no real ideals beyond power and merely pretend to ideology',
-    ],
-    'misc.things': [
-      'list of secret revolutionary sympathizers',
-      'proof of rebel hypocrisy',
-      'confiscated wealth',
-    ],
-    'misc.places': [
-      'festival that explodes into violence',
-      'heavily-fortified police station',
-      'revolutionary base hidden in the wilderness',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.rigidCulture]: {
     key: worldTagKeys.rigidCulture,
-    name: 'Rigid Culture',
-    description:
-      'The local culture is extremely rigid. Certain forms of behavior and belief are absolutely mandated, and any deviation from these principles is punished, or else society may be strongly stratified by birth with limited prospects for change. Anything which threatens the existing social order is feared and shunned.',
-    'misc.enemies': [
-      'rigid reactionary',
-      'wary ruler',
-      'regime ideologue',
-      'offended potentate',
-    ],
-    'misc.friends': [
-      'revolutionary agitator',
-      'ambitious peasant',
-      'frustrated merchant',
-    ],
-    'misc.complications': [
-      'the cultural patterns are enforced by technological aids',
-      'the culture is run by a secret cabal of manipulators',
-      'the culture has explicit religious sanction',
-      'the culture evolved due to important necessities that have since been forgotten',
-    ],
-    'misc.things': [
-      'precious traditional regalia',
-      'peasant tribute',
-      'opulent trasures of the ruling class',
-    ],
-    'misc.places': [
-      'time-worn palace',
-      'low caste slums',
-      'bandit den',
-      'reformist temple',
-    ],
+    enemies: 4,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 4,
   },
   [worldTagKeys.risingHegemon]: {
     key: worldTagKeys.risingHegemon,
-    name: 'Rising Hegemon',
-    description:
-      "This world is not yet a dominant power in the sector, but it's well on its way there. Whether through newly-blossoming economic, military, or cultural power, they're extending their influence over their neighbors and forging new arrangements between their government and the rulers of nearby worlds.",
-    'misc.enemies': [
-      'jingoistic supremacist',
-      'official bent on glorious success',
-      'foreign agent saboteur',
-    ],
-    'misc.friends': [
-      'friendly emissary to the benighted',
-      'hardscrabble local turned great success',
-      'foreign visitor seeking contracts or knowledge',
-    ],
-    'misc.complications': [
-      "they're only strong because their neighbors have been weakened",
-      'their success is based on a fluke resource or pretech find',
-      'they bitterly resent their neighbors as former oppressors',
-    ],
-    'misc.things': [
-      'tribute shipment',
-      'factory or barracks emblematic of their power source',
-      'tech or data that will deal a blow to their rise',
-    ],
-    'misc.places': [
-      'rustic town being hurled into prosperity',
-      'government building being expanded',
-      'starport struggling under the flow of new ships',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.ritualCombat]: {
     key: worldTagKeys.ritualCombat,
-    name: 'Ritual Combat',
-    description:
-      "The locals favor some form of stylized combat to resolve disputes, provide entertainment, or settle religious differences. This combat is probably not normally lethal unless it's reserved for a specific disposable class of slaves or professionals. Some combat may involve mastery of esoteric weapons and complex arenas, while other forms might require nothing more than a declaration in the street and a drawn gun.",
-    'misc.enemies': [
-      'bloodthirsty local champion',
-      'ambitious gladiator stable owner',
-      'xenophobic master fighter',
-    ],
-    'misc.friends': [
-      'peace-minded foreign missionary',
-      'temperate defender of the weak',
-      'local eager to learn of offworld fighting styles',
-    ],
-    'misc.complications': [
-      'The required weapons are strange pretech artifacts',
-      'certain classes are forbidden from fighting and require champions',
-      "loss doesn't mean death but it does mean ritual scarring or property loss",
-    ],
-    'misc.things': [
-      'magnificent weapon',
-      'secret book of martial techniques',
-      'token signifying immunity to ritual combat challenges',
-      'prize won in bloody battle',
-    ],
-    'misc.places': [
-      'area full of cheering spectators',
-      'dusty street outside a saloon',
-      'memorial for fallen warriors',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 4,
+    places: 3,
   },
   [worldTagKeys.robots]: {
     key: worldTagKeys.robots,
-    name: 'Robots',
-    description:
-      'The world has a great many robots on it. Most bots are going to be non-sentient expert systems, though an AI with enough computing resources can control many bots at once, and some worlds may have developed VIs to a degree that individual bots can seem (or be) sentient. Some worlds might even be ruled by metal overlords, ones which do not need to be sentient so long as they have overwhelming force.',
-    'misc.enemies': [
-      'hostile robot master',
-      'robot greedy to seize offworld tech',
-      "robot fallen in love with the PC's ship",
-      'oligarch whose factories build robots',
-    ],
-    'misc.friends': [
-      'data-seeking robot',
-      'plucky young robot tech',
-      'local being pushed out of a job by robots',
-    ],
-    'misc.complications': [
-      'the robots are only partially controlled',
-      'the robots are salvaged and originally meant for a much darker use',
-      'the robots require a rare material that the locals fight over',
-      "the robots require the planet's specific infrastructure so cannot be exported",
-    ],
-    'misc.things': [
-      'prototype robot',
-      'secret robot override codes',
-      'vast cache of robot-made goods',
-      'robot-destroying pretech weapon',
-    ],
-    'misc.places': [
-      'humming robotic factory',
-      'stark robotic "barracks"',
-      'house crowded with robot servants and only one human owner',
-    ],
+    enemies: 4,
+    friends: 3,
+    complications: 4,
+    things: 4,
+    places: 3,
   },
   [worldTagKeys.seagoingCities]: {
     key: worldTagKeys.seagoingCities,
-    name: 'Seagoing Cities',
-    description:
-      'Either the world is entirely water or else the land is simply too dangerous for most humans. Human settlement on this world consists of a number of floating cities that follow the currents and the fish. These city-ships might have been purpose-built for their task, or they could be jury-rigged conglomerations of ships and structures thrown together when the need for seagoing life become apparent to the locals.',
-    'misc.enemies': [
-      'pirate city lord',
-      'mer-human raider chieftain',
-      'hostile landsman noble',
-      'enemy city saboteur',
-    ],
-    'misc.friends': [
-      'city navigator',
-      'scout captain',
-      'curious mer-human',
-      'hard-pressed ship-city engineer',
-    ],
-    'misc.complications': [
-      'the seas are not water',
-      'the fish schools have vanished and the city faces starvation',
-      'terrible storms drive the city into the glacial regions',
-      "suicide ships ram the city's hull",
-    ],
-    'misc.things': [
-      'giant pearls with mysterious chemical properties',
-      'buried treasure',
-      'vital repair materials',
-    ],
-    'misc.places': [
-      'Bridge of the city',
-      'storm-tossed sea',
-      'a bridge fashioned of many small boats',
-    ],
+    enemies: 4,
+    friends: 4,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.sealedMenace]: {
     key: worldTagKeys.sealedMenace,
-    name: 'Sealed Menace',
-    description:
-      'Something on this planet has the potential to create enormous havoc for the inhabitants if it is not kept safely contained by its keepers. Whether a massive seismic fault line suppressed by pretech terraforming technology, a disease that has to be quarantined within hours of discovery, or an ancient alien relic that requires regular upkeep in order to prevent planetary catastrophe, the menace is a constant shadow on the fearful populace.',
-    'misc.enemies': [
-      'hostile outsider bent on freeing the menace',
-      'misguided fool who thinks he can use it',
-      'reckless researcher who thinks he can fix it',
-    ],
-    'misc.friends': [
-      'keeper of the menace',
-      'student of its nature',
-      'victim of the menace',
-    ],
-    'misc.complications': [
-      'the menace would bring great wealth along with destruction',
-      'the menace is intelligent',
-      "the natives don't all believe in the menace",
-    ],
-    'misc.things': [
-      'a key to unlock the menace',
-      'a precious byproduct of the menace',
-      "the secret of the menace's true nature",
-    ],
-    'misc.places': [
-      'guarded fortress containing the menace',
-      'monitoring station',
-      'scene of a prior outbreak of the menace',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
+
+
+
+
+
+
   [worldTagKeys.secretMasters]: {
     key: worldTagKeys.secretMasters,
     name: 'Secret Masters',
