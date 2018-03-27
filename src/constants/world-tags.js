@@ -422,522 +422,137 @@ export default {
     things: 3,
     places: 3,
   },
-
-  
-
-
-
-
   [worldTagKeys.immortals]: {
     key: worldTagKeys.immortals,
-    name: 'Immortals',
-    description:
-      "Natives of this world are effectively immortal. They may have been gengineered for tremendous lifespans, or have found some local anagathic, or be cyborg life forms, or be so totally convinced of reincarnation that death is a cultural irrelevance. Any immortality technique is likely applicable only to them, or else it's apt to be a massive draw to outside imperialists.",
-    'misc.enemies': [
-      'outsider determined to steal immortality',
-      'smug local convinced of their immortal wisdom to rule all',
-      "offworlder seeking the world's ruin before it becomes a threat to all",
-    ],
-    'misc.friends': ['curious longevity researcher', 'thrill-seeking local'],
-    'misc.complications': [
-      "immortality requires doing something that outsiders can't or won't willingly do",
-      'the immortality ends if they leave the world',
-      'death is the punishment for even minor crimes',
-      'immortals must die or go offworld after a certain span',
-      'immortality has brutal side-effects',
-    ],
-    'misc.things': [
-      'immortality drug',
-      'masterwork of an ageless artisan',
-      'toxin that only affects immortals',
-    ],
-    'misc.places': [
-      'community with no visible children',
-      'unchanging structure of obvious ancient age',
-      'cultural performance relying on a century of in-jokes',
-    ],
+    enemies: 3,
+    friends: 2,
+    complications: 5,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.localSpecialty]: {
     key: worldTagKeys.localSpecialty,
-    name: 'Local Specialty',
-    description:
-      'The world may be sophisticated or barely capable of steam engines, but either way it produces something rare and precious to the wider galaxy. It might be some pharmaceutical extract produced by a secret recipe, a remarkably popular cultural product, or even gengineered humans uniquely suited for certain work.',
-    'misc.enemies': [
-      'monopolist',
-      'offworlder seeking prohibition of the specialty',
-      'native who views the specialty as sacred',
-    ],
-    'misc.friends': [
-      'spy searching for the source',
-      'artisan seeking protection',
-      'exporter with problems',
-    ],
-    'misc.complications': [
-      'the specialty is repugnant in nature',
-      'the crafters refuse to sell to offworlders',
-      'the specialty is made in a remote, dangerous place',
-      "the crafters don't make the specialty any more",
-    ],
-    'misc.things': [
-      'the specialty itself',
-      'the secret recipe',
-      'sample of a new improved variety',
-    ],
-    'misc.places': [
-      'secret manufactory',
-      'hidden cache',
-      'artistic competition for best artisan',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.localTech]: {
     key: worldTagKeys.localTech,
-    name: 'Local Tech',
-    description:
-      'The locals can create a particular example of extremely high tech, possibly even something that exceeds pretech standards. They may use unique local resources to do so, or have stumbled on a narrow scientific breakthrough, or still have a functional experimental manufactory.',
-    'misc.enemies': [
-      'keeper of the tech',
-      'offworld industrialist',
-      'automated defenses that suddenly come alive',
-      'native alien mentors',
-    ],
-    'misc.friends': [
-      'curious offworld scientist',
-      'eager tech buyer',
-      'native in need of technical help',
-    ],
-    'misc.complications': [
-      'the tech is unreliable',
-      'the tech only works on this world',
-      'the tech hs poorly-understood side effects',
-      'the tech is alien in nature',
-    ],
-    'misc.things': [
-      'the tech itself',
-      'an unclaimed payment for a large shipment',
-      'the secret blueprints for its construction',
-      'an ancient alien R&D database',
-    ],
-    'misc.places': [
-      'alien factory',
-      'lethal R&D center',
-      'tech brokerage vault',
-    ],
+    enemies: 4,
+    friends: 3,
+    complications: 4,
+    things: 4,
+    places: 3,
   },
   [worldTagKeys.majorSpaceyard]: {
     key: worldTagKeys.majorSpaceyard,
-    name: 'Major Spaceyard',
-    description:
-      'Most worlds of tech level 4 or greater have the necessary tech and orbital facilities to build spike drives and starships. This world is blessed with a major spaceyard facility, either inherited from before the Silence or painstakingly constructed in more recent decades. It can build even capital-class hulls, and do so more quickly and cheaply than its neighbors.',
-    'misc.enemies': [
-      'enemy saboteur',
-      'industrial spy',
-      'scheming construction tycoon',
-      'aspiring ship hijacker',
-    ],
-    'misc.friends': [
-      'captain stuck in drydock',
-      'maintenance chief',
-      'mad innovator',
-    ],
-    'misc.complications': [
-      'the spaceyard is an alien relic',
-      'the spaceyard is burning out from overuse',
-      'the spaceyard is alive',
-      'the spaceyard relies on maltech to function',
-    ],
-    'misc.things': [
-      'intellectual property-locked pretech blueprints',
-      'override keys for activating old pretech facilities',
-      'a purchased but unclaimed spaceship',
-    ],
-    'misc.places': [
-      'hidden shipyard bay',
-      'surface of a partially-complete ship',
-      'ship scrap graveyard',
-    ],
+    enemies: 4,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.mandarinate]: {
     key: worldTagKeys.mandarinate,
-    name: 'Mandarinate',
-    description:
-      'The planet is ruled by an intellectual elite chosen via ostensibly neutral examinations or tests. The values this system selects for may or may not have anything to do with actual practical leadership skills, and the examinations may be more or less corruptible.',
-    'misc.enemies': [
-      'corrupt test administrator',
-      'incompetent but highly-rated graduate',
-      'ruthless leader of a clan of high-testing relations',
-    ],
-    'misc.friends': [
-      'crusader for test reform',
-      'talented but poorly-connected graduate',
-      'genius who tests badly',
-    ],
-    'misc.complications': [
-      'the test is totally unrelated to necessary governing skills',
-      'the test was very pertinent in the past but tech or culture has changes',
-      'the test is for a skill that is vital to maintaining society but irrelevant to day-to-day governance',
-      'the test is a sham and passage is based on wealth or influence',
-    ],
-    'misc.things': [
-      'answer key to the next test',
-      'lost essay of incredible merit',
-      'proof of cheating',
-    ],
-    'misc.places': [
-      'massive structure full of test-taking cubicles',
-      'school filled with desperate students',
-      'ornate government building decorated with scholarly quotes and academic images',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.mandateBase]: {
     key: worldTagKeys.mandateBase,
-    name: 'Mandate Base',
-    description:
-      'The Terran Mandate retained its control over this world for much longer than usual, and the world may still consider itself a true inheritor of Mandate legitimacy. Most of these worlds have or had superior technology, but they may still labor under the burden of ancient restrictive tech or monitoring systems designed to prevent them from rebelling.',
-    'misc.enemies': [
-      'deranged mandate monitoring AI',
-      'aspiring sector ruler',
-      'demagogue preaching local superiority over "traitorous rebel worlds"',
-    ],
-    'misc.friends': [
-      'idealistic do-gooder local',
-      'missionary for advanced mandate tech',
-      'outsider seeking lost data from Mandate records',
-    ],
-    'misc.complications': [
-      'the monitoring system forces the locals to behave in aggressive ways toward "rebel" worlds',
-      'the monitoring system severely hiders offworld use of their tech',
-      "the original colonists are all dead and have been replaced by outsiders who don't understand all the details",
-    ],
-    'misc.things': [
-      'ultra-advanced pretech',
-      'Mandate military gear',
-      'databank containing precious tech schematics',
-    ],
-    'misc.places': [
-      'faded Mandate offices still in use',
-      'vault containing ancient pretech',
-      'carefully-maintained monument to Mandate glory',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.maneaters]: {
     key: worldTagKeys.maneaters,
-    name: 'Maneaters',
-    description:
-      'The locals are cannibals, either out of necessity or out of cultural preference. Some worlds may actually eat human flesh, while others simply require the rendering of humans into important chemicals or pharmaceutical compounds, perhaps to prolong the lives of ghoul overlords. This cannibalism plays a major role in their society.',
-    'misc.enemies': [
-      'ruthless ghoul leader',
-      'chieftan of a ravenous tribe',
-      'sophisticated degenerate preaching the splendid authenticity of cannibalism',
-    ],
-    'misc.friends': [
-      'sympathetic local fleeing the fork',
-      'escapee from a pharmaceutical rendering plant',
-      'reformer seeking to break the custom or its necessity',
-    ],
-    'misc.complications': [
-      'local food or environmental conditions make human consumption grimly necessary',
-      'the locals farm human beings',
-      'outsiders are expected to join in the custom',
-      'the custom is totally unnecessary but jealously maintained by the people',
-    ],
-    'misc.things': [
-      'belongings of a recent meal',
-      'an offworlder VIP due for the menu',
-      'a toxin that makes human flesh lethal to consumers',
-    ],
-    'misc.places': [
-      'hideous human abattoir',
-      'extremely civilized restaurant',
-      'funeral-home-cum-kitchen',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.megacorps]: {
     key: worldTagKeys.megacorps,
-    name: 'Megacorps',
-    description:
-      'The world is dominated by classic cyberpunk-esque megacorporations, each one far more important than the vestigial national remnants that encompass them. These megacorps are usually locked in a cold war, trading and dealing with each other even as they try to strike in deniable ways. An over-council of corporations usually acts to bring into line any that get excessively overt in their activities.',
-    'misc.enemies': [
-      'megalomaniacal executive',
-      'underling looking to use the PCs as catspaws',
-      'ruthless mercenary who wants what the PCs have',
-    ],
-    'misc.friends': [
-      'victim of megacorp scheming',
-      'offworlder merchant in far over their head',
-      'local reformer struggling to cope with megacorp indifference',
-    ],
-    'misc.complications': [
-      'the megacorps are the only source of something vital to life on this world',
-      'an autonomous Mandate system acts to punish excessively overt violence',
-      'the megacorps are struggling against much more horrible national governments',
-    ],
-    'misc.things': [
-      'blackmail on a megacorp exec',
-      'keycodes to critical corp secrets',
-      'proof of corp responsibility for a heinously unacceptable public atrocity',
-      'data on a vital new product line coming out soon',
-    ],
-    'misc.places': [
-      'a place plastered in megacorp ads',
-      'a public plaza discreetly branded',
-      'private corp military base',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 4,
+    places: 3,
   },
   [worldTagKeys.mercenaries]: {
     key: worldTagKeys.mercenaries,
-    name: 'Mercenaries',
-    description:
-      'The world is either famous for its mercenary bands or it is plagued by countless groups of condottieri in service to whatever magnate can afford to pay or bribe them adequately.',
-    'misc.enemies': [
-      'moral mercenary leader',
-      'rich offworlder trying to buy rule of the world',
-      'mercenary press gang chief forcing locals into service',
-    ],
-    'misc.friends': [
-      'young and idealistic mercenary chief',
-      'harried leader of enfeebled national army',
-      'offworlder trying to hire help for a noble cause',
-    ],
-    'misc.complications': [
-      'the mercenaries area ll that stand between the locals and a hungry imperial power',
-      'the mercenaries are remnants of a former offial army',
-      'the mercenaries hardly ever actually fight as compared to taking bribes to walk away',
-    ],
-    'misc.things': [
-      'lost mercenary payroll shipment',
-      'forbidden military tech',
-      "proof of a band's impending treachery against their employers",
-    ],
-    'misc.places': [
-      'shabby camp of undisciplined mercs',
-      'burnt-out village occupied by mercenaries',
-      'luxurious and exceedingly well-defended merc leader villa',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.minimalContact]: {
     key: worldTagKeys.minimalContact,
-    name: 'Minimal Contact',
-    description:
-      'The locals refuse most contact with offworlders. Only a small, quarantined treaty port is provided for offworld trade, and ships can expect an exhaustive search for contraband. Local governments may be trying to keep the very existence of interstellar trade a secret from their populations, or they may simply consider offworlders too dangerous or repugnant to be allowed among the population.',
-    'misc.enemies': [
-      'customs official',
-      'xenophobic natives',
-      "existing merchant who doesn't like competition",
-    ],
-    'misc.friends': [
-      'aspiring tourist',
-      'anthropological researcher',
-      'offworld thief',
-      'religious missionary',
-    ],
-    'misc.complications': [
-      'the locals carry a disease harmless to them and lethal to outsiders',
-      'the locals hide dark purposes from offworlders',
-      "the locals have something desperately needed but won't bring it into the treaty port",
-    ],
-    'misc.things': [
-      'contraband trade goods',
-      'security perimeter codes',
-      'black market local products',
-    ],
-    'misc.places': [
-      'treaty port bar',
-      'black market zone',
-      'secret smuggler landing site',
-    ],
+    enemies: 3,
+    friends: 4,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.misandryMisogyny]: {
     key: worldTagKeys.misandryMisogyny,
-    name: 'Misandry/Misogyny',
-    description:
-      'The culture on this world holds a particular gender in contempt. Members of that gender are not permitted positions of formal power, and may be restricted in their movements and activities. Some worlds may go so far as to scorn both traditional genders, using gengineering techniques to hybridize or alter conventional human biology.',
-    'misc.enemies': [
-      'cultural fundamentalist',
-      'cultural missionary to outworlders',
-      'local rebel driven to pointless and meaningless violence',
-    ],
-    'misc.friends': [
-      'oppressed native',
-      'research scientist',
-      'offworld emancipationist',
-      'local reformer',
-    ],
-    'misc.complications': [
-      'the oppressed gender is restive against the customs',
-      'the oppressed gender largely supports the customs',
-      'the customs relate to some physical quality of the world',
-      'the oppressed gender has had maltech gengineering done to "tame" them',
-    ],
-    'misc.things': [
-      'aerosol reversion formula for undoing genginerring docility',
-      'hidden history of the world',
-      'pretech gengineering equipment',
-    ],
-    'misc.places': [
-      'shrine to the virtues of the favored gender',
-      'security center for controlling the oppressed',
-      'gengineering lab',
-    ],
+    enemies: 3,
+    friends: 4,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.nightWorld]: {
     key: worldTagKeys.nightWorld,
-    name: 'Night World',
-    description:
-      "The world is plunged into eternal darkness. The only life on this planet derives its energy from other sources, such as geothermal heat, extremely volatile chemical reactions in the planet's soil, or light in a non-visible spectrum. Most flora and fauna is voraciously eager to consume other life.",
-    'misc.enemies': [
-      'monstrous thing from the night',
-      'offworlder finding the obscurity of the world convenient for dark purposes',
-      'mad scientist experimenting with local life',
-    ],
-    'misc.friends': [
-      'curious offworlder researcher',
-      'hard-pressed colony leader',
-      'high priest of a sect that finds religious significance in the night',
-    ],
-    'misc.complications': [
-      'daylight comes as a cataclysmic event at very long intervals',
-      'light causes very dangerous reactions to native life or chemicals here',
-      'the locals have been gengineered to exist without light',
-    ],
-    'misc.things': [
-      'rare chemicals created in the darkness',
-      'light source usable on this world',
-      'smuggler cache hidden here in ages past',
-    ],
-    'misc.places': [
-      'formlessly pitch-black wilderness',
-      'sea without a sun',
-      'location defined by sounds or smells',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.nomads]: {
     key: worldTagKeys.nomads,
-    name: 'Nomads',
-    description:
-      'Most of the natives of this world are nomadic, usually following a traditional cycle of movement through the lands they possess. Promises of rich plunder or local environmental perils can force these groups to strike out against neighbors. Other groups are forced to move constantly due to unpredictable dangers that crop up on the planet.',
-    'misc.enemies': [
-      'desperate tribal leader who needs what the PCs have',
-      'ruthless raider chieftain',
-      'leader seeking to weld the nomads into an army',
-    ],
-    'misc.friends': [
-      'free-spirited young nomad',
-      'dreamer imagining a stable life',
-      'offwolder enamoured of the life',
-    ],
-    'misc.complications': [
-      'an irresistably lethal swarm of native life forces locals to move regularly',
-      'ancient defense systems destroy too-long-stationary communities',
-      'local chemical patches require careful balancing of exposure times to avoid side effects',
-    ],
-    'misc.things': [
-      'cache of rare and precious resource',
-      'plunder seized by a tribal raid',
-      'tech that makes a place safe for long-term inhabitation',
-    ],
-    'misc.places': [
-      'temporary nomad camp',
-      'oasis or resource reserve',
-      'trackless waste that kills the unprepared',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.oceanicWorld]: {
     key: worldTagKeys.oceanicWorld,
-    name: 'Oceanic World',
-    description:
-      'The world is entirely or almost entirely covered with liquid water. Habitations might be floating cities, or might cling precariously to the few rocky atolls jutting up from the waves, or are planted as bubbles on promontories deep beneath the stormy surface. Survival depends on aquaculture. Planets with inedible alien life rely on gengineered Terran sea crops.',
-    'misc.enemies': [
-      'pirate raider',
-      'violent "salvager" gang',
-      'tentacled sea monster',
-    ],
-    'misc.friends': [
-      'daredevil fishermen',
-      'sea hermit',
-      'sapient native life',
-    ],
-    'misc.complications': [
-      'the liquid flux confuses grav engines too badly for them to function on this world',
-      'sea is corrosive or toxic',
-      'the seas are wracked by regular storms',
-    ],
-    'misc.things': [
-      'buried pirate treasure',
-      'location of enormous schools of fish',
-      'pretech water purification equipment',
-    ],
-    'misc.places': [
-      'the only island on the planet',
-      'floating spaceport',
-      'deck of storm-swept ship',
-      'undersea bubble city',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 4,
   },
   [worldTagKeys.outOfContact]: {
     key: worldTagKeys.outOfContact,
-    name: 'Out of Contact',
-    description:
-      'The natives have been entirely out of contact with the greater galaxy for centuries or longer. Perhaps the original colonists were seeking to hide from the rest of the universe, or the Silence destroyed any means of communication. It may have been so long that human origins on other worlds have regressed into a topic for legends. The players might be on the first offworld ship to land since the First Wave of colonization a thousand years ago.',
-    'misc.enemies': [
-      'fearful local ruler',
-      'zealous native cleric',
-      'sinister power that has kept the world isolated',
-    ],
-    'misc.friends': [
-      'scheming native noble',
-      'heretical theologian',
-      'UFO cultist native',
-    ],
-    'misc.complications': [
-      'automated defenses fire on ships that try to take off',
-      'the natives want to stay out of contact',
-      'the natives are highly vulnerable to offworld diseases',
-      'the native language is completely unlike any known to the group',
-    ],
-    'misc.things': [
-      'ancient pretech equipment',
-      'terran relic brought from earth',
-      'logs of the original colonists',
-    ],
-    'misc.places': [
-      'long-lost colonial landing site',
-      'court of the local ruler',
-      'ancient defense battery controls',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.outpostWorld]: {
     key: worldTagKeys.outpostWorld,
-    name: 'Outpost World',
-    description:
-      'The world is only a tiny outpost of human habitation planted by an offworld corporation or government. Perhaps the staff is there to serve as a refueling and repair stop for passing ships, or to oversee an automated mining and refinery complex. They might be there to study ancient ruins, or simply serve as a listening and monitoring post for traffic through the system. The outpost is likely well-equipped with defenses against casual piracy.',
-    'misc.enemies': [
-      'space-mad outpost staffer',
-      'outpost commander who wants it to stay undiscovered',
-      'undercover saboteur',
-    ],
-    'misc.friends': [
-      'lonely staffer',
-      'fixated researcher',
-      'overtaxed maintenance chief',
-    ],
-    'misc.complications': [
-      'the alien ruin defense systems are waking up',
-      'atmospheric disturbances trap the group inside the outpost for a month',
-      'pirates raid the outpost',
-      'the crew have become converts to a strange set of beliefs',
-    ],
-    'misc.things': [
-      'alien relics',
-      'vital scientific data',
-      'secret corporate exploitation plans',
-    ],
-    'misc.places': [
-      'grimy recreation room',
-      'refueling station',
-      'the only building on the planet',
-      'a "starport" of swept bare rock',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 4,
   },
+
+  
+
   [worldTagKeys.perimeterAgency]: {
     key: worldTagKeys.perimeterAgency,
     name: 'Perimeter Agency',
