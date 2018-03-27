@@ -750,418 +750,106 @@ export default {
     things: 3,
     places: 3,
   },
-
-
-
-
-
-
   [worldTagKeys.secretMasters]: {
     key: worldTagKeys.secretMasters,
-    name: 'Secret Masters',
-    description:
-      "The world is actually run by a hidden cabal, acting through their catspaws in the visible government. For one reason or another, this group finds it imperative that they not be identified by outsiders, and in some cases even the planet's own government may not realize that they're actually being manipulated by hidden masters.",
-    'misc.enemies': [
-      'an agent of the cabal',
-      'government official who wants no questions asked',
-      'willfully blinded local',
-    ],
-    'misc.friends': [
-      'paranoid conspiracy theorist',
-      'machiavellian gamesman within the cabal',
-      'interstellar investigator',
-    ],
-    'misc.complications': [
-      'the secret masters have a benign reason for wanting secrecy',
-      'the cabal fights openly amongst itself',
-      'the cabal is recruiting new members',
-    ],
-    'misc.things': [
-      'a dossier of secrets on a government official',
-      'a briefcase of unmarked credit notes',
-      'the identity of a cabal member',
-    ],
-    'misc.places': [
-      'smoke-filled room',
-      'shadowy alleyway',
-      'secret underground bunker',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.sectarians]: {
     key: worldTagKeys.sectarians,
-    name: 'Sectarians',
-    description:
-      'The world is torn by violent disagreement between sectarians of a particular faith. Each views the other as a damnable heresy in need of extirpation. Local government may be able to keep open war from breaking out, but the poisonous hatred divides communities. The nature of the faith may be religious, or it may be based on some secular ideology.',
-    'misc.enemies': [
-      'paranoid believer',
-      'native convinced the party is working for the other side',
-      'absolutist ruler',
-    ],
-    'misc.friends': [
-      'reformist clergy',
-      'local peacekeeping official',
-      'offworld missionary',
-      'exhausted ruler',
-    ],
-    'misc.complications': [
-      'the conflict has more than two sides',
-      'the sectarians hate each other for multiple reasons',
-      'the sectarians must cooperate or else life on this world is imperiled',
-      'the sectarians hate outsiders more than they hate each other',
-      'the differences in sects are incomprehensible to an outsider',
-    ],
-    'misc.things': [
-      'ancient holy book',
-      'incontrovertible proof',
-      'offering to a local holy man',
-    ],
-    'misc.places': [
-      'sectarian battlefield',
-      'crusading temple',
-      "philosopher's salon",
-      'bitterly divided village',
-    ],
+    enemies: 3,
+    friends: 4,
+    complications: 5,
+    things: 3,
+    places: 4,
   },
   [worldTagKeys.seismicInstability]: {
     key: worldTagKeys.seismicInstability,
-    name: 'Seismic Instability',
-    description:
-      'The local land masses are remarkably unstable, and regular earthquakes rack the surface. Local construction is either advanced enough to sway and move with the vibrations or primitive enough that it is easily rebuilt. Severe volcanic activity may be part of the instability.',
-    'misc.enemies': [
-      'earthquake cultist',
-      'hermit seismologist',
-      'burrowing native life form',
-      'earthquake-inducing saboteur',
-    ],
-    'misc.friends': [
-      'experimental construction firm owner',
-      'adventurous volcanologist',
-      'geothermal prospector',
-    ],
-    'misc.complications': [
-      'the earthquakes are caused by malfunctioning pretech terraformers',
-      "they're caused by alien technology",
-      "they're restrained by alien technology that is being plundered by offworlders",
-      'the earthquakes are used to generate enormous amounts of energy',
-    ],
-    'misc.things': [
-      'earthquake generator',
-      'earthquake suppressor',
-      'mineral formed at the core of the world',
-      'earthquake-proof building schematics',
-    ],
-    'misc.places': [
-      'volcanic caldera',
-      'village during an earthquake',
-      'mud slide',
-      'earthquake opening superheated steam fissures',
-    ],
+    enemies: 4,
+    friends: 3,
+    complications: 4,
+    things: 4,
+    places: 4,
   },
   [worldTagKeys.shackledWorld]: {
     key: worldTagKeys.shackledWorld,
-    name: 'Shackled World',
-    description:
-      'This world is being systematically contained by an outside power. Some ancient autonomous defense grid, robot law enforcement, alien artifact, or other force is preventing the locals from developing certain technology, or using certain devices, or perhaps from developing interstellar flight. This limit may or may not apply to offworlders; in the former case, the PCs may have to figure out a way to beat the shackles simply to escape the world.',
-    'misc.enemies': [
-      'passionless jailer-AI',
-      'paranoid military grid AI',
-      'robot overlord',
-      'enigmatic alien master',
-    ],
-    'misc.friends': [
-      'struggling local researcher',
-      'offworlder trapped here',
-      'scientist with a plan to break the chains',
-    ],
-    'misc.complications': [
-      'the shackles come off for certain brief windows of time',
-      'the locals think the shackles are imposed by God',
-      'an outside power greatly profits from the shackles',
-      'the rulers are exempt from the shackles',
-    ],
-    'misc.things': [
-      'keycode to bypass the shackle',
-      'tech shielded from the shackle',
-      'exportable version of the shackle that can affect other worlds',
-    ],
-    'misc.places': [
-      'grim high-tech control center',
-      'factory full of workaround tech',
-      'temple to the power or entity that imposed the shackle',
-    ],
+    enemies: 4,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.societalDespair]: {
     key: worldTagKeys.societalDespair,
-    name: 'Societal Despair',
-    description:
-      "The world's dominant society has lost faith in itself. Whether through some all-consuming war, great catastrophe, overwhelming outside culture, or religious collapse, the natives no longer believe in their old values, and search desperately for something new. Fierce conflict often exists between the last believers in the old dispensation and the nihilistic or searching disciples of the new age.",
-    'misc.enemies': [
-      'zealot who blames outsiders for the decay',
-      'nihilistic warlord',
-      'offworlder looking to exploit the local despair',
-    ],
-    'misc.friends': [
-      'struggling messenger of a new way',
-      'valiant paragon of a fading tradition',
-      'local going through the motions of serving a now-irrelevant role',
-    ],
-    'misc.complications': [
-      'a massive war discredited all the old values',
-      'outside powers are working to erode societal confidence for their own benefit',
-      'a local power is profiting greatly from the despair',
-      'the old ways were meant to aid survival on this world and their passing is causing many new woes',
-    ],
-    'misc.things': [
-      'relic that would inspire a renaissance',
-      'art that would inspire new ideas',
-      'priceless artifact of a now-scorned belief',
-    ],
-    'misc.places': [
-      'empty temple',
-      'crowded den of obliviating vice',
-      'smoky hall full of frantic speakers',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.soleSupplier]: {
     key: worldTagKeys.soleSupplier,
-    name: 'Sole Supplier',
-    description:
-      "Some extremely important resource is exported from this world and this world alone. It's unlikely that the substance is critical for building spike drives unless this world is also the first to begin interstellar flight, but it may be critical to other high-tech processes or devices. The locals make a large amount of money off this trade and control of it is of critical importance to the planet's rulers, and potentially to outside powers.",
-    'misc.enemies': [
-      'resource oligarch, Ruthless smuggler',
-      'resource-controlling warlord',
-      'foreign agent seeking to subvert local government',
-    ],
-    'misc.friends': [
-      'doughty resource miner',
-      'researcher trying to synthesize the stuff',
-      'small-scale resource producer',
-      'harried starport trade overseer',
-    ],
-    'misc.complications': [
-      'the substance is slow poison to process',
-      'the substance is created by hostile alien natives',
-      'the substance is very easy to smuggle in usable amounts',
-      'only the natives have the genes or tech to extract it effectively',
-    ],
-    'misc.things': [
-      'cache of processed resource',
-      'trade permit to buy a load of it',
-      'a shipment of nigh-undetectably fake substance',
-    ],
-    'misc.places': [
-      'bustling resource extraction site',
-      'opulent palace built with resource money',
-      'lazy town square where everyone lives on resource payments',
-    ],
+    enemies: 3,
+    friends: 4,
+    complications: 4,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.tabooTreasure]: {
     key: worldTagKeys.tabooTreasure,
-    name: 'Taboo Treasure',
-    description:
-      'The natives here produce something that is both fabulously valuable and strictly forbidden elsewhere in the sector. It may be a lethally addictive drug, forbidden gengineering tech, vat-grown "perfect slaves", or a useful substance that can only be made through excruciating human suffering. This treasure is freely traded on the world, but bringing it elsewhere is usually an invitation to a long prison stay or worse.',
-    'misc.enemies': [
-      'maker of a vile commodity',
-      'smuggler for a powerful offworlder',
-      'depraved offworlder here for "fun"',
-      'local warlord who controls the treasure',
-    ],
-    'misc.friends': [
-      'reformer seeking to end its use',
-      'innovator trying to repurpose the treasure in innocent ways',
-      'wretched addict unwillingly prey to the treasure',
-    ],
-    'misc.complications': [
-      'the treasure is extremely hard to smuggle',
-      'its use visibly marks a user',
-      'the natives consider it for their personal use only',
-    ],
-    'misc.things': [
-      'load of the forbidden good',
-      'smuggling tech that could hide the good perfectly',
-      'blackmail data on offworld buyers of the good',
-    ],
-    'misc.places': [
-      'den where the good is used',
-      'market selling the good to locals and a few outsiders',
-      'factory or processing area where the good is created',
-    ],
+    enemies: 4,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.terraformFailure]: {
     key: worldTagKeys.terraformFailure,
-    name: 'Terraform Failure',
-    description:
-      "This world was marginal for human habitation when it was discovered, but the Mandate or the early government put in pretech terraforming engines to correct its more extreme qualities. The terraforming did not entirely work, either failing of its own or suffering the destruction of the engines during the Silence. The natives are only partly adapted to the world's current state, and struggle with the environment.",
-    'misc.enemies': [
-      'brutal ruler who cares only for their people',
-      'offworlder trying to loot the damaged engines',
-      'warlord trying to seize limited habitable land',
-    ],
-    'misc.friends': [
-      'local trying to fix the engines',
-      'offworlder student of the engines',
-      'world-wise native survivor',
-    ],
-    'misc.complications': [
-      'the engines produced too much of something instead of too little',
-      'the engines were hijacked by aliens with different preferences',
-      'it was discovered that an Earth-like environment would eventually cause a catastrophic disaster',
-    ],
-    'misc.things': [
-      'parts to repair or restore the engines',
-      'lootable pretech fragments',
-      'valuable local tech devised to cope with the world',
-    ],
-    'misc.places': [
-      'zone of tolerable gravity or temperature',
-      'native settlement built to cope with the environment',
-      'massive ruined terraforming engine',
-    ],
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
   },
   [worldTagKeys.theocracy]: {
     key: worldTagKeys.theocracy,
-    name: 'Theocracy',
-    description:
-      'The planet is ruled by the priesthood of the predominant religion or ideology. The rest of the locals may or may not be terribly pious, but the clergy have the necessary military strength, popular support or control of resources to maintain their rule. Alternative faiths or incompatible ideologies are likely to be both illegal and socially unacceptable.',
-    'misc.enemies': [
-      'decadent priest-ruler',
-      'zealous inquisitor',
-      'relentless proselytizer',
-      'True Believer',
-    ],
-    'misc.friends': [
-      'heretic',
-      'offworld theologian',
-      'atheistic merchant',
-      'desperate commoner',
-    ],
-    'misc.complications': [
-      'the theocracy actually works well',
-      'the theocracy is decadent and hated by the common folk',
-      'the theocracy is divided into mutually hostile sects',
-      'the theocracy is led by aliens',
-    ],
-    'misc.things': [
-      'precious holy text',
-      "martyr's bones",
-      'secret church records',
-      'ancient church treasures',
-    ],
-    'misc.places': [
-      'glorious temple',
-      'austere monastery',
-      'academy for ideological indoctrination',
-      'decadent pleasure-cathedral',
-    ],
+    enemies: 4,
+    friends: 4,
+    complications: 4,
+    things: 4,
+    places: 4,
   },
   [worldTagKeys.tombWorld]: {
     key: worldTagKeys.tombWorld,
-    name: 'Tomb World',
-    description:
-      'Tomb worlds are planets that were once inhabited by humans before the Silence. The sudden collapse of the jump gate network and the inability to bring in the massive food supplies required by the planet resulted in starvation, warfare, and death. Most tomb worlds are naturally hostile to human habitation and could not raise sufficient crops to maintain life. The few hydroponic facilities were usually destroyed in the fighting, and all that is left now are ruins, bones, and silence.',
-    'misc.enemies': [
-      'demented survivor tribe chieftain',
-      'avaricious scavenger',
-      'automated defense system',
-      'native predator',
-    ],
-    'misc.friends': [
-      'scavenger fleet captain',
-      'archaeologist',
-      'salvaging historian',
-      'xenophilic native survivor',
-    ],
-    'misc.complications': [
-      'the ruins are full of booby-traps left by the final inhabitants',
-      "the world's atmosphere quickly degrades anything in an opened building",
-      'a handful of desperate natives survived the Silence',
-      'the structures are unstable and collapsing',
-    ],
-    'misc.things': [
-      'lost pretech equipment',
-      'tech caches',
-      'stores of unused munitions',
-      'ancient historical data',
-    ],
-    'misc.places': [
-      'crumbling hive-city',
-      'city square carpeted in bones',
-      'ruined hydroponic facility',
-      "cannibal tribe's lair",
-      'dead orbital jump gate',
-    ],
+    enemies: 4,
+    friends: 4,
+    complications: 4,
+    things: 4,
+    places: 5,
   },
   [worldTagKeys.tradeHub]: {
     key: worldTagKeys.tradeHub,
-    name: 'Trade Hub',
-    description:
-      'This world is a major crossroads for local interstellar trade. It is well-positioned at the nexus of several short-drill trade routes, and has facilities for easy transfer of valuable cargoes and the fueling and repairing of starships. The natives are accustomed to outsiders, and a polyglot mass of people from every nearby world can be found trading here.',
-    'misc.enemies': [
-      'cheating merchant',
-      'thieving dockworker',
-      'commercial spy',
-      'corrupt customs official',
-    ],
-    'misc.friends': [
-      'rich tourist',
-      'hardscrabble free trader',
-      'merchant prince in need of catspaws',
-      'friendly spaceport urchin',
-    ],
-    'misc.complications': [
-      'an outworlder faction schemes to seize the trade hub',
-      "saboteurs seek to blow up a rival's warehouses",
-      'enemies are blockading the trade routes',
-      'pirates lace the hub with spies',
-    ],
-    'misc.things': [
-      "voucher for a warehouse's contents",
-      'insider trading information',
-      'case of precious offworld pharmaceuticals',
-      'box of legitimate tax stamps indicating customs dues have been paid',
-    ],
-    'misc.places': [
-      'raucous bazaar',
-      'elegant restaurant',
-      'spaceport teeming with activity',
-      'foggy street lined with warehouses',
-    ],
+    enemies: 4,
+    friends: 4,
+    complications: 4,
+    things: 4,
+    places: 4,
   },
   [worldTagKeys.tyranny]: {
     key: worldTagKeys.tyranny,
-    name: 'Tyranny',
-    description:
-      'The local government is brutal and indifferent to the will of the people. Laws may or may not exist, but the only one that matters is the whim of the rulers on any given day. Their minions swagger through the streets while the common folk live in terror of their appetites. The only people who stay wealthy are friends and servants of the ruling class.',
-    'misc.enemies': [
-      'debauched autocrat',
-      'sneering bully-boy',
-      'soulless government official',
-      'occupying army officer',
-    ],
-    'misc.friends': [
-      'conspiring rebel',
-      'oppressed merchant',
-      'desperate peasant',
-      'inspiring religious leader',
-    ],
-    'misc.complications': [
-      'the tyrant rules with vastly superior technology',
-      'the tyrant is a figurehead for a cabal of powerful men and women',
-      'the people are resigned to their suffering',
-      'the tyrant is hostile to “meddlesome outworlders”',
-    ],
-    'misc.things': [
-      'plundered wealth',
-      'beautiful toys of the elite',
-      'regalia of rulership',
-    ],
-    'misc.places': [
-      'impoverished village',
-      'protest rally massacre',
-      'decadent palace',
-      'religious hospital for the indigent',
-    ],
+    enemies: 5,
+    friends: 4,
+    complications: 4,
+    things: 3,
+    places: 4,
   },
+
+  
+
+
   [worldTagKeys.unbrakedAi]: {
     key: worldTagKeys.unbrakedAi,
     name: 'Unbraked AI',
