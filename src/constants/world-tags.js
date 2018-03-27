@@ -350,290 +350,84 @@ export default {
     things: 3,
     places: 3,
   },
+  [worldTagKeys.goldRush]: {
+    key: worldTagKeys.goldRush,
+    enemies: 4,
+    friends: 4,
+    complications: 3,
+    things: 3,
+    places: 4,
+  },
+  [worldTagKeys.greatWork]: {
+    key: worldTagKeys.greatWork,
+    enemies: 4,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
+  },
+  [worldTagKeys.hatred]: {
+    key: worldTagKeys.hatred,
+    enemies: 2,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
+  },
+  [worldTagKeys.heavyIndustry]: {
+    key: worldTagKeys.heavyIndustry,
+    enemies: 4,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 4,
+  },
+  [worldTagKeys.heavyMining]: {
+    key: worldTagKeys.heavyMining,
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
+  },
+  [worldTagKeys.hivemind]: {
+    key: worldTagKeys.hivemind,
+    enemies: 3,
+    friends: 3,
+    complications: 5,
+    things: 3,
+    places: 3,
+  },
+  [worldTagKeys.holyWar]: {
+    key: worldTagKeys.holyWar,
+    enemies: 3,
+    friends: 3,
+    complications: 4,
+    things: 3,
+    places: 3,
+  },
+  [worldTagKeys.hostileBiosphere]: {
+    key: worldTagKeys.hostileBiosphere,
+    enemies: 4,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
+  },
+  [worldTagKeys.hostileSpace]: {
+    key: worldTagKeys.hostileSpace,
+    enemies: 3,
+    friends: 3,
+    complications: 3,
+    things: 3,
+    places: 3,
+  },
 
   
 
 
 
 
-  [worldTagKeys.goldRush]: {
-    key: worldTagKeys.goldRush,
-    name: 'Gold Rush',
-    description:
-      'Gold, silver, and other conventional precious minerals are common and cheap now that asteroid mining is practical for most worlds. But some minerals and compounds remain precious and rare, and this world has recently been discovered to have a supply of them. People from across the sector have come to strike it rich.',
-    'misc.enemies': [
-      'paranoid prospector',
-      'aspiring mining tycoon',
-      'rapacious merchant',
-    ],
-    'misc.friends': ['claim-jumped miner', 'native alien', 'curious tourist'],
-    'misc.complications': [
-      'the strike is a hoax',
-      'the strike is of a dangerous toxic substance',
-      'export of the mineral is prohibited by the planetary government',
-      "the native aliens live around the strike's location",
-    ],
-    'misc.things': [
-      'cases of the refined element',
-      'pretech mining equipment',
-      "a dead prospector's claim deed",
-    ],
-    'misc.places': [
-      'secret mine',
-      'native alien village',
-      'processing plant',
-      'boom town',
-    ],
-  },
-  [worldTagKeys.greatWork]: {
-    key: worldTagKeys.greatWork,
-    name: 'Great Work',
-    description:
-      'The locals are obsessed with completing a massive project, one that has consumed them for generations. It might be the completion of a functioning spaceyard, a massive solar power array, a network of terraforming engines, or the universal conversion of their neighbors to their own faith. The purpose of their entire civilization is to progress and some day complete the work.',
-    'misc.enemies': [
-      'local planning to sacrifice the PCs for the work',
-      'local who thinks the PCs threten the work',
-      'obsessive zealot ready to destroy someone or something important to the PCs for the sake of the work',
-    ],
-    'misc.friends': [
-      'outsider studying the work',
-      'local with a more temperate attitude',
-      'supplier of work materials',
-    ],
-    'misc.complications': [
-      'the work is totally hopeless',
-      'different factions disagree on what the work is',
-      'an outside power is determined to thwart the work',
-    ],
-    'misc.things': [
-      'vital supplies for th work',
-      'plans that have been lost',
-      'tech that greatly speeds the work',
-    ],
-    'misc.places': [
-      'a bustling work site',
-      'ancestral worker housing',
-      'local community made only semi-livable by the demands of the work',
-    ],
-  },
-  [worldTagKeys.hatred]: {
-    key: worldTagKeys.hatred,
-    name: 'Hatred',
-    description:
-      "For whatever reason, this world's populace has a burning hatred for the inhabitants of a neighboring system. Perhaps this world was colonized by exiles, or there was a recent interstellar war, or ideas of racial or religious superiority have fanned the hatred. Regardless of the cause, the locals view their neighbor and any sympathizers with loathing.",
-    'misc.enemies': [
-      'native conviced that the offworlders are agents of Them',
-      'cynical politician in need of scapegoats',
-    ],
-    'misc.friends': [
-      'intelligence agent needing catspaws',
-      'holodoc producers needing "an inside look"',
-      'unlucky offworlder from the hated system',
-    ],
-    'misc.complications': [
-      'the characters are wearing or using items from the hated world',
-      'the characters are known to have done business there',
-      'the characters "look like" the hated others',
-    ],
-    'misc.things': [
-      'proof of Their evildoings',
-      'reward for turning in enemy agents',
-      'relic stolen by Them years ago',
-    ],
-    'misc.places': [
-      'war crimes museum',
-      'atrocity site',
-      'captured and decommissioned spacehsip kept as a trophy',
-    ],
-  },
-  [worldTagKeys.heavyIndustry]: {
-    key: worldTagKeys.heavyIndustry,
-    name: 'Heavy Industry',
-    description:
-      'With interstellar transport so limited in the bulk it can move, worlds have to be largely self-sufficient in industry. Some worlds are more sufficient than others, however, and this planet has a thriving manufacturing sector capable of producing large amounts of goods appropriate to its tech level. The locals may enjoy a correspondingly higher lifestyle, or the products might be devoted towards vast projects for the aggrandizement of the rulers.',
-    'misc.enemies': [
-      'tycoon monopolist',
-      'industrial spy',
-      'malcontent revolutionary',
-    ],
-    'misc.friends': [
-      'aspiring entrepreneur',
-      'worker union leader',
-      'ambitious inventor',
-    ],
-    'misc.complications': [
-      'the factories are toxic',
-      'the resources extractable at their tech level are running out',
-      'the masses required the factory output for survival',
-      "the industries' major output is being obsoleted by offworld tech",
-    ],
-    'misc.things': [
-      'confidential industrial data',
-      'secret union membership lists',
-      'ownership shares in an industrial complex',
-    ],
-    'misc.places': [
-      'factory floor',
-      'union meeting hall',
-      'toxic waste dump',
-      'R&D complex',
-    ],
-  },
-  [worldTagKeys.heavyMining]: {
-    key: worldTagKeys.heavyMining,
-    name: 'Heavy Mining',
-    description:
-      'This world has large stocks of valuable minerals, usually necessary for local industry, life support, or refinement into loads small enough to export offworld. Major mining efforts are necessary to extract the minerals, and many natives work in the industry.',
-    'misc.enemies': ['Mine boss', 'tunnel saboteur', 'subterranean predators'],
-    'misc.friends': [
-      'hermit prospector',
-      'offworld investigator',
-      "miner's union representative",
-    ],
-    'misc.complications': [
-      'the refinery equipment breaks down',
-      'tunnel collapse',
-      "silicate life forms growing in the miner's lungs",
-    ],
-    'misc.things': [
-      'the mother lode',
-      'smuggled case of refined mineral',
-      'silicate faked crystalline mineral samples',
-    ],
-    'misc.places': [
-      'vertical mine face',
-      'tailing piles',
-      'roaring smelting complex',
-    ],
-  },
-  [worldTagKeys.hivemind]: {
-    key: worldTagKeys.hivemind,
-    name: 'Hivemind',
-    description:
-      'Natives of this world exist in a kind of mental gestalt, sharing thoughts and partaking of a single identity. Powerful pretech, exotic psionics, alien influence, or some other cause has left the world sharing one identity. Individual members may have greater or lesser degrees of effective coordination with the whole.',
-    'misc.enemies': [
-      'a hivemind that wants to assimilate outsiders',
-      'a hivemind that has no respect for unjoined life',
-      'a hivemind that fears and hates unjoined life',
-    ],
-    'misc.friends': [
-      'a scholar studying the hivemind',
-      'a person severed from the gestalt',
-      'a relative of someone who has been assimilated',
-    ],
-    'misc.complications': [
-      'the hivemind only functions on this world',
-      'the hivemind has strict range limits',
-      'the hivemind has different personality factions',
-      'the hivemind only happens at particular times',
-      'the world is made of semi-sentient drones and a single AI',
-    ],
-    'misc.things': [
-      'vital tech for maintaining the mind',
-      'precious treasure held by now-assimilated outsider',
-      'tech that "blinds" the hivemind ot the tech\'s users',
-    ],
-    'misc.places': [
-      'barely tolerable living cells for individuals',
-      'workside where individuals casually die in their labors',
-      'community with absolutely no social or group-gathering facilities',
-    ],
-  },
-  [worldTagKeys.holyWar]: {
-    key: worldTagKeys.holyWar,
-    name: 'Holy War',
-    description:
-      'A savage holy war is raging on this world, either between factions of locals or as a united effort against the pagans of some neighboring world. This war might involve a conventional religion, or it might be the result of a branding campaign, political ideology, artistic movement, or any other cause that people use as a substitute for traditional religion.',
-    'misc.enemies': [
-      'blood-mad pontiff',
-      'coldly cynical secular leader',
-      'totalitarian political demagogue',
-    ],
-    'misc.friends': [
-      'desperate peacemaker',
-      'hard-pressed refugee of the fighting',
-      'peaceful religious leader who lost the internal debate',
-    ],
-    'misc.complications': [
-      'the targets of the war really are doing something diabolically horrible',
-      'the holy war is just a mask for a very traditional casus belli',
-      "the leaders don't want the war won but only prolonged",
-      'both this world and the target of the war are religious-obsessed',
-    ],
-    'misc.things': [
-      'sacred relic of the faith',
-      'a captured blasphemer under a death sentence',
-      'plunder seized in battle',
-    ],
-    'misc.places': [
-      'massive holy structure',
-      'razed community of infidels',
-      'vast shrine to the martyrs dead in war',
-    ],
-  },
-  [worldTagKeys.hostileBiosphere]: {
-    key: worldTagKeys.hostileBiosphere,
-    name: 'Hostile Biosphere',
-    description:
-      'The world is teeming with life, and it hates humans. Perhaps the life is xenoallergenic, forcing filter masks and tailored antiallergens for survival. It could be the native predators are huge and fearless, or the toxic flora ruthlessly outcompetes earth crops.',
-    'misc.enemies': [
-      'local fauna',
-      'nature cultist',
-      'native aliens',
-      'callous labor overseer',
-    ],
-    'misc.friends': [
-      'xenobiologist',
-      'tourist on safari',
-      'grizzled local guide',
-    ],
-    'misc.complications': [
-      'filter masks fail',
-      'parasitic alien infestation',
-      'crop greenhouses lose bio-integrity',
-    ],
-    'misc.things': [
-      'valuable native biological extract',
-      'abandoned colony vault',
-      'remains of an unsuccessful expedition',
-    ],
-    'misc.places': [
-      'deceptively peacful glade',
-      'steaming polychrome jungle',
-      'nightfall when surrounded by Things',
-    ],
-  },
-  [worldTagKeys.hostileSpace]: {
-    key: worldTagKeys.hostileSpace,
-    name: 'Hostile Space',
-    description:
-      'The system in which the world exists is a dangerous neighborhood. Something about the system is perilous to inhabitants, either through meteor swarms, stellar radiation, hostile aliens in the asteroid belt, or periodic comet clouds.',
-    'misc.enemies': [
-      'alien raid leader',
-      'meteor-launching terrorists',
-      'paranoid local leader',
-    ],
-    'misc.friends': [
-      'astronomic researcher',
-      'local defense commander',
-      'early warning monitor agent',
-    ],
-    'misc.complications': [
-      'the natives believe the danger is divine chastisement',
-      'the natives blame outworlders for the danger',
-      'the native elite profit from the danger in some way',
-    ],
-    'misc.things': [
-      'early warning of a raid or impact',
-      'abandoned riches in a disaster zone',
-      'key to a secure bunker',
-    ],
-    'misc.places': [
-      'city watching an approaching asteroid',
-      'village burnt in an alien raid',
-      'massive ancient crater',
-    ],
-  },
   [worldTagKeys.immortals]: {
     key: worldTagKeys.immortals,
     name: 'Immortals',
