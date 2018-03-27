@@ -288,7 +288,7 @@ export default {
   },
   [worldTagKeys.fallenHegemon]: {
     key: worldTagKeys.fallenHegemon,
-    enemies: 4,
+    enemies: 3,
     friends: 3,
     complications: 4,
     things: 3,
@@ -352,7 +352,7 @@ export default {
   },
   [worldTagKeys.goldRush]: {
     key: worldTagKeys.goldRush,
-    enemies: 4,
+    enemies: 3,
     friends: 4,
     complications: 3,
     things: 3,
@@ -376,7 +376,7 @@ export default {
   },
   [worldTagKeys.heavyIndustry]: {
     key: worldTagKeys.heavyIndustry,
-    enemies: 4,
+    enemies: 3,
     friends: 3,
     complications: 4,
     things: 3,
