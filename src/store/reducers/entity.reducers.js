@@ -87,10 +87,18 @@ export default function entity(state = initialState, action) {
         }),
       };
     }
-    case UPDATE_ID_MAPPING:
+    case UPDATE_ID_MAPPING: {
+      const transformedSector = action.mapping[state.currentSector];
       return {
         ...state,
-        saved: state.saved.map(saveId => action.mapping[saveId] || saveId),
+        currentSector: transformedSector || state.currentSector,
+        currentEntity:
+          action.mapping[state.currentEntity] || state.currentEntity,
+        fetched: uniq([...state.fetched, transformedSector]).filter(f => f),
+        saved: uniq([
+          ...state.saved.map(saveId => action.mapping[saveId] || saveId),
+          transformedSector,
+        ]).filter(s => s),
         models: mapValues(state.models, entities =>
           mapValues(
             mapKeys(entities, (_, key) => action.mapping[key] || key),
@@ -111,6 +119,7 @@ export default function entity(state = initialState, action) {
           ),
         ),
       };
+    }
     case DELETE_ENTITIES: {
       const deletedSectorIds = action.entities[Entities.sector.key] || [];
       return {
