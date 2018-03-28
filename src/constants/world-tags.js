@@ -875,7 +875,7 @@ export default {
     enemies: 4,
     friends: 4,
     complications: 4,
-    things: 3,
+    things: 4,
     places: 4,
   },
   [worldTagKeys.xenophiles]: {
