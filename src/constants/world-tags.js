@@ -288,7 +288,7 @@ export default {
   },
   [worldTagKeys.fallenHegemon]: {
     key: worldTagKeys.fallenHegemon,
-    enemies: 4,
+    enemies: 3,
     friends: 3,
     complications: 4,
     things: 3,
@@ -352,7 +352,7 @@ export default {
   },
   [worldTagKeys.goldRush]: {
     key: worldTagKeys.goldRush,
-    enemies: 4,
+    enemies: 3,
     friends: 4,
     complications: 3,
     things: 3,
@@ -376,7 +376,7 @@ export default {
   },
   [worldTagKeys.heavyIndustry]: {
     key: worldTagKeys.heavyIndustry,
-    enemies: 4,
+    enemies: 3,
     friends: 3,
     complications: 4,
     things: 3,
@@ -792,7 +792,7 @@ export default {
   },
   [worldTagKeys.soleSupplier]: {
     key: worldTagKeys.soleSupplier,
-    enemies: 3,
+    enemies: 4,
     friends: 4,
     complications: 4,
     things: 3,
@@ -842,7 +842,7 @@ export default {
     key: worldTagKeys.tyranny,
     enemies: 5,
     friends: 4,
-    complications: 4,
+    complications: 3,
     things: 3,
     places: 4,
   },
@@ -875,7 +875,7 @@ export default {
     enemies: 4,
     friends: 4,
     complications: 4,
-    things: 3,
+    things: 4,
     places: 4,
   },
   [worldTagKeys.xenophiles]: {
