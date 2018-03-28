@@ -792,7 +792,7 @@ export default {
   },
   [worldTagKeys.soleSupplier]: {
     key: worldTagKeys.soleSupplier,
-    enemies: 3,
+    enemies: 4,
     friends: 4,
     complications: 4,
     things: 3,
