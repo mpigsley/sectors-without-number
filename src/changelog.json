@@ -1,4 +1,9 @@
 {
+  "4.1.1": {
+    "description":
+      "When saving a new sector, update application state so that every new save doesn't create another sector.",
+    "date": "3-28-2018"
+  },
   "4.1.0": {
     "description": "Allow attribute values to be customized.",
     "date": "3-26-2018",
