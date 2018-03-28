@@ -842,7 +842,7 @@ export default {
     key: worldTagKeys.tyranny,
     enemies: 5,
     friends: 4,
-    complications: 4,
+    complications: 3,
     things: 3,
     places: 4,
   },
