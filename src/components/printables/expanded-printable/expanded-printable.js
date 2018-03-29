@@ -23,7 +23,9 @@ export default function ExpandedPrintable({ printable, entities, intl }) {
           <b>
             <FormattedMessage id="misc.tags" />:{' '}
           </b>
-          {entity.tags}
+          {entity.tags
+            .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
+            .join(', ')}
         </div>,
       );
     }
