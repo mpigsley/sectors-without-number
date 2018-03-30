@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { X, Plus } from 'react-feather';
-import { filter, includes, map, pull, capitalize } from 'lodash';
+import { filter, includes, map, pull } from 'lodash';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -13,13 +13,17 @@ import LinkIcon from 'primitives/other/link-icon';
 
 import Entities from 'constants/entities';
 
-const renderList = (list, listKey) => (
+const renderList = (listLength, listKey, key) => (
   <div key={listKey} className="EntityAttributes-Content">
     <b>
-      <FormattedMessage id={listKey} />:
+      <FormattedMessage id={`misc.${listKey}`} />:
     </b>
     <ul className="EntityAttributes-ContentList">
-      {list.map(capitalize).map(element => <li key={element}>{element}</li>)}
+      {[...Array(listLength).keys()].map(index => (
+        <li key={`${listKey}-${index}`}>
+          <FormattedMessage id={`tags.${key}.${listKey}.${index}`} />
+        </li>
+      ))}
     </ul>
   </div>
 );
@@ -69,9 +73,9 @@ export default function EntityTags({
           options={filter(
             Entities[entityType].tags,
             ({ key }) => !includes(entity.attributes.tags, key) || key === tag,
-          ).map(({ key, name }) => ({
+          ).map(({ key }) => ({
             value: key,
-            label: name,
+            label: intl.formatMessage({ id: `tags.${key}` }),
           }))}
         />
       </FlexContainer>
@@ -81,9 +85,15 @@ export default function EntityTags({
       .map(tag => Entities[entityType].tags[tag])
       .map(({ key, name, description, ...lists }) => (
         <div key={key} className="EntityAttributes-Tag">
-          <Header type={HeaderType.header4}>{name}</Header>
-          <p className="EntityAttributes-Content">{description}</p>
-          {map(lists, renderList)}
+          <Header type={HeaderType.header4}>
+            <FormattedMessage id={`tags.${key}`} />
+          </Header>
+          <p className="EntityAttributes-Content">
+            <FormattedMessage id={`tags.${key}.description`} />
+          </p>
+          {map(lists, (listLength, listKey) =>
+            renderList(listLength, listKey, key),
+          )}
         </div>
       ));
   }

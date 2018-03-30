@@ -9,11 +9,11 @@
   "atmosphere.corrosiveInvasive": "Atmosphère corrosive et invasive",
   "temperature": "Climat",
   "temperature.frozen": "Glacial",
-  "temperature.cold": "Froid",
   "temperature.variableCold": "Variable froid à tempéré",
+  "temperature.cold": "Froid",
   "temperature.temperate": "Tempéré",
-  "temperature.variableWarm": "Variable tempéré à chaud",
   "temperature.warm": "Chaud",
+  "temperature.variableWarm": "Variable tempéré à chaud",
   "temperature.burning": "Brûlant",
   "biosphere": "Biosphère",
   "biosphere.remnant": "Vestiges de biosphère",
@@ -24,7 +24,7 @@
   "biosphere.hybrid": "Hybride",
   "biosphere.engineered": "Artificiellement conçue",
   "population": "Population",
-  "population.failed": "Colonie ratée",
+  "population.failed": "Colonie avortée",
   "population.outpost": "Base",
   "population.lessThanMillion": "Moins de 1 million d'habitants",
   "population.severalMillion": "Plusieurs millions d'habitants",
@@ -39,6 +39,2630 @@
   "techLevel.4": "T4",
   "techLevel.4+": "T4+",
   "techLevel.5": "T5",
+  "tags.abandonedColony": "Colonie abandonnée",
+  "tags.abandonedColony.description":
+    "La planète a déjà hébergé une colonie, humaine ou xénosapienne, jusqu’à ce qu’une crise ou un désastre naturel chasse ou tue les habitants. La colonie était peut-être de nature mercantile, une expédition pour extraire des ressources locales recherchées, ou elle était peut-être la retraite d’une cabale de fanatiques. Les vestiges de la colonie sont généralement en ruines, et ce qui a mené à sa destruction est peut-être encore aujourd’hui un danger.",
+  "tags.abandonedColony.enemies.0": "Survivants déments",
+  "tags.abandonedColony.enemies.1": "Pilleurs de ruines sans vergogne",
+  "tags.abandonedColony.enemies.2": "Système de défense automatisé",
+  "tags.abandonedColony.friends.0":
+    "Archéologue reconnu qui pose des questions",
+  "tags.abandonedColony.friends.1": "Héritier des biens de la colonie",
+  "tags.abandonedColony.friends.2": "Habitant qui veut l’endroit nettoyé",
+  "tags.abandonedColony.complications.0":
+    "Le gouvernement local veut que les ruines demeurent un secret",
+  "tags.abandonedColony.complications.1":
+    "Les habitants déclarent être propriétaire de la colonie abandonnée",
+  "tags.abandonedColony.complications.2":
+    "La colonie abandonnée est décrépite et dangereuse à explorer",
+  "tags.abandonedColony.things.0": "Acte de propriété longtemps perdu",
+  "tags.abandonedColony.things.1":
+    "Relique volée par les colons lorsqu’ils ont quitté",
+  "tags.abandonedColony.things.2":
+    "Archive historique de la tentative de colonisation",
+  "tags.abandonedColony.places.0": "Bloc d’habitation décrépit",
+  "tags.abandonedColony.places.1": "Square envahi par la végétation",
+  "tags.abandonedColony.places.2":
+    "Structure ensevelie par un ancien glissement de terrain",
+  "tags.alienRuins": "Ruines xénosapiennes",
+  "tags.alienRuins.description":
+    "La planète comporte des ruines xénosapienne importantes. Les habitants peuvent permettre ou non leur exploration, et peuvent rendre difficile l’extraction d’objets de valeur sans être payés. ",
+  "tags.alienRuins.enemies.0": "Inspecteur des douanes",
+  "tags.alienRuins.enemies.1": "Adorateur des ruines",
+  "tags.alienRuins.enemies.2": "Survivant xénosapien caché",
+  "tags.alienRuins.friends.0": "Savant curieux",
+  "tags.alienRuins.friends.1": "Habitant avare",
+  "tags.alienRuins.friends.2": "Contrebandier interstellaire",
+  "tags.alienRuins.complications.0": "Pièges dans les ruines",
+  "tags.alienRuins.complications.1": "Endroit éloigné",
+  "tags.alienRuins.complications.2": "Officiel des douanes paranoïaque",
+  "tags.alienRuins.things.0": "Artefact xénosapien précieux",
+  "tags.alienRuins.things.1":
+    "Équipement trouvé parmi les vestiges d’une expédition ayant échoué",
+  "tags.alienRuins.things.2": "Textes xénosapiens non traduits",
+  "tags.alienRuins.things.3": "Ruines cachées encore vierges",
+  "tags.alienRuins.places.0": "Ruines sous-marines",
+  "tags.alienRuins.places.1": "Ruines orbitales",
+  "tags.alienRuins.places.2": "Bâtiment xénosapien parfaitement préservé",
+  "tags.alienRuins.places.3": "Mausolée xénosapien",
+  "tags.alteredHumanity": "Humanité altérée",
+  "tags.alteredHumanity.description":
+    "Les humains de cette planète sont visiblement et dramatiquement différents des autres humains. Ils ont peut-être des membres supplémentaires, de nouveaux organes sensoriels, ou d’autres changements significatifs. Est-ce le résultat de manipulations génétiques ancestrales, ou celui de toxines environnementales?",
+  "tags.alteredHumanity.enemies.0": "Habitant biochauvin",
+  "tags.alteredHumanity.enemies.1": "Habitant expérimentateur",
+  "tags.alteredHumanity.enemies.2": "Mutant mentalement instable",
+  "tags.alteredHumanity.friends.0": "Habitant désirant un « remède »",
+  "tags.alteredHumanity.friends.1": "Xénophile curieux",
+  "tags.alteredHumanity.friends.2": "Anthropologue",
+  "tags.alteredHumanity.complications.0": "L’altération est contagieuse",
+  "tags.alteredHumanity.complications.1":
+    "L’altération est nécessaire pour la survie à long terme",
+  "tags.alteredHumanity.complications.2":
+    "Les habitants craignent et se méfient des étrangers",
+  "tags.alteredHumanity.things.0":
+    "Équipement prétech original servant à modifier les gènes",
+  "tags.alteredHumanity.things.1":
+    "Produit de grande valeur dérivé des mutants",
+  "tags.alteredHumanity.things.2": "« Remède » pour les gènes altérés",
+  "tags.alteredHumanity.things.3": "Archive du génotype des colons originels",
+  "tags.alteredHumanity.places.0": "Laboratoire eugéniste abandonné",
+  "tags.alteredHumanity.places.1":
+    "Une environnement nécessitant la mutation pour survivre",
+  "tags.alteredHumanity.places.2":
+    "Un lieu sacré où les premiers habitant ont été transformés",
+  "tags.anarchists": "Anarchistes",
+  "tags.anarchists.description":
+    "L'anarchie de cette planète n'est pas le résultat de guerres tribales incapables de s'organiser entre elles, mais plutôt le fruit d'une société fonctionnelle qui choisit de ne pas s'imposer d'autorité centrale. L'autorité est peut-être localement maintenue par des familles étendues, des paroisses religieuses ou des associations volontaires. Une force empêche les groupes étrangers ou les mécontents locaux de firmer un groupe suffisamment puissant pour imposer sa volonté sur les habitants; cette force peut être un ancien système de défense prétech, une IA militaire bienfaisante, ou encore la primitivité et l'isolation de la planète. ",
+  "tags.anarchists.enemies.0": "Impérialiste étranger",
+  "tags.anarchists.enemies.1":
+    "Réformateur voulant imposer un « bon gouvernement »",
+  "tags.anarchists.enemies.2":
+    "Profiteur voulant tirer avantage de l'absence de résistance centralisée",
+  "tags.anarchists.friends.0": "Fier missionnaire anarchiste",
+  "tags.anarchists.friends.1": "Habitant anticonformiste et désinvolte",
+  "tags.anarchists.friends.2": "Politologue étranger curieux",
+  "tags.anarchists.complications.0":
+    "La structure anarchiste est contrainte par une puissance externe",
+  "tags.anarchists.complications.1":
+    "L'anarchie est rendue possible par les ressources actuellement abondantes",
+  "tags.anarchists.complications.2":
+    "La force protégeant la structure anarchiste s'affaiblit",
+  "tags.anarchists.things.0":
+    "Une chose qui permettrait à son propriétaire d'imposer sa volonté aux autres",
+  "tags.anarchists.things.1":
+    "Une ressource vitale nécessaire pour préserver la liberté généralisée",
+  "tags.anarchists.things.2":
+    "Technologie interdite car elle pourrait bouleverser l'ordre social",
+  "tags.anarchists.places.0": "Communauté d'habitations de tailles similaires",
+  "tags.anarchists.places.1": "Village isolées appartenant à un clan",
+  "tags.anarchists.places.2": "Mine automatisée",
+  "tags.anthropomorphs": "Anthropomorphes",
+  "tags.anthropomorphs.description":
+    "Les habitants étaient autrefois humains, mais sont éventuellement devenus anthropomorphes par des modifications génétiques. Peut-être étaient-ils religieusement fanatiques de certaines espèces animales, envoyés là justement parce qu'ils avaient été auparavant modifiés, ou ont simplement déterminé que l'ADN animal était le plus utile pour survivre sur cette planète. Leur forme peut être plus ou moins avantageuse par rapport à leur forme humaine ancestrale, ou peut causer des complications, selon la compétence et les intentions des scientifiques ayant originalement procédé aux modifications. ",
+  "tags.anthropomorphs.enemies.0": "Habitant anthro-suprémaciste",
+  "tags.anthropomorphs.enemies.1": "Habitant animé par des pulsions férales",
+  "tags.anthropomorphs.enemies.2":
+    "Profiteur étranger considérant que les habitants sont des créatures inférieures",
+  "tags.anthropomorphs.friends.0": "Généticien fasciné",
+  "tags.anthropomorphs.friends.1":
+    "Diplomate habitué à échanger avec des humains normaux",
+  "tags.anthropomorphs.friends.2": "Habitant nécessitant l'aide d'étrangers",
+  "tags.anthropomorphs.complications.0":
+    "Les habitants considèrent que leur forme est une malédiction jetée sur leurs ancêtres",
+  "tags.anthropomorphs.complications.1":
+    "La société est hiérarchisée en fonction de la forme animale",
+  "tags.anthropomorphs.complications.2":
+    "Les habitants considèrent que la forme humaine est répugnante ou inférieure",
+  "tags.anthropomorphs.things.0":
+    "Technologie de manipulation génétique prétech",
+  "tags.anthropomorphs.things.1":
+    "Un « remède » qui n'est pas nécessairement désiré",
+  "tags.anthropomorphs.things.2": "Totem féral sacré",
+  "tags.anthropomorphs.places.0": "Autel dédié à une divinité férale",
+  "tags.anthropomorphs.places.1":
+    "Réserve naturelle adaptée à un type d'animal",
+  "tags.anthropomorphs.places.2":
+    "Lieu vivant construit pour tirer avantage de caractéristiques animales",
+  "tags.area51": "Zone 51",
+  "tags.area51.description":
+    "Le gouverneent planétaire est pleinement conscient de l’existence de ses voisins stellaires, mais la population ne l’est pas - et le gouvernement désire préserver les choses ainsi. Il est possible d’échanger avec des officiels gouvernementaux dans des endroits très éloignés, mais toute tentative d’instruire la population sera tratée avec une force léthale. ",
+  "tags.area51.enemies.0": "Garde du corps gouvernemental suspicieux",
+  "tags.area51.enemies.1": "Marchant qui apprécie son monopole local",
+  "tags.area51.enemies.2": "Habitant qui désire un spécimen pour le disséquer",
+  "tags.area51.friends.0": "Investigateur extraplnétaire en croisade",
+  "tags.area51.friends.1": "Habitant adepte de théories de la conspiration",
+  "tags.area51.friends.2": "Réformateur gouvernemental idéaliste",
+  "tags.area51.complications.0":
+    "Le gouvernement a de bonnes raison de garder la vérité cachée",
+  "tags.area51.complications.1":
+    "Le gouvernement opprime impitoyablement la population",
+  "tags.area51.complications.2":
+    "Le gouvernement est en fait composé d’étrangers",
+  "tags.area51.things.0": "Un appareil d’espionnage élaboté",
+  "tags.area51.things.1": "Technologie permettant d’effacer la mémoire",
+  "tags.area51.things.2":
+    "Les possessions du dernier étranger ayant décidé de répandre la vérité",
+  "tags.area51.places.0": "Aéroport désert",
+  "tags.area51.places.1": "Abri souterrain profondément enfoui",
+  "tags.area51.places.2": "Vallée cachée dans les montagnes",
+  "tags.badlandsWorld": "Planète ravagée",
+  "tags.badlandsWorld.description":
+    "Peu importe le type de climat, quelquer chose d’horrible s’est produit sur cette planète. Des armes biologiques, chimiques ou nanotechnologiques l’ont transformée en une terre dévastée.",
+  "tags.badlandsWorld.enemies.0": "Faune mutante",
+  "tags.badlandsWorld.enemies.1": "Habitants désespérés",
+  "tags.badlandsWorld.enemies.2": "Chef d’une bande de pillards",
+  "tags.badlandsWorld.friends.0":
+    "Habitant souhaitant désespérément s’échapper de cette planète",
+  "tags.badlandsWorld.friends.1":
+    "Scientifique cherchant des méthodes pour réparer l’écologie ",
+  "tags.badlandsWorld.friends.2": "Ferrailleur fouillant les ruines",
+  "tags.badlandsWorld.complications.0": "Radioactivité",
+  "tags.badlandsWorld.complications.1": "Résidus d’armes biologiques",
+  "tags.badlandsWorld.complications.2": "Terrain brisé",
+  "tags.badlandsWorld.complications.3": "Épidémie locale soudaine",
+  "tags.badlandsWorld.things.0": "Coeur de recherches maltech",
+  "tags.badlandsWorld.things.1": "Armement prétech fonctionnel",
+  "tags.badlandsWorld.things.2": "Un puits non contaminé",
+  "tags.badlandsWorld.places.0": "Oasis vierge",
+  "tags.badlandsWorld.places.1": "Ville en ruines",
+  "tags.badlandsWorld.places.2": "Salant",
+  "tags.battleground": "Champ de bataille",
+  "tags.battleground.description":
+    "La planète est un champ de bataille où s'affronte deux ou plusieurs puissances étrangères. Ce sont peut-être des rivaux interstellaires ou des groupes basés sur des bases orbitales ou d'autres corps célestes dans le système. La planète possède quelque chose de suffisamment valable qui explique leurs luttes, mais les habitants sont trop faibles pour constituer autre chose que des obstacles animés dans ces batailles. ",
+  "tags.battleground.enemies.0": "Commandant militaire impitoyable",
+  "tags.battleground.enemies.1": "Lieutenant d’une bande de pillards",
+  "tags.battleground.enemies.2": "Traitre collaborateur",
+  "tags.battleground.friends.0":
+    "Habitant cherchant désespérément de la protection",
+  "tags.battleground.friends.1": "Officier militaire pragmatique",
+  "tags.battleground.friends.2": "Orphelin de guerre malchanceux",
+  "tags.battleground.complications.0":
+    "La guerre vient de prendre fin et les opposant quittent la planète",
+  "tags.battleground.complications.1":
+    "Les habitants sont responsables de cette guerre",
+  "tags.battleground.complications.2":
+    "Un petit groupe d'habitants tirent un grand profit de la guerre",
+  "tags.battleground.things.0":
+    "Une cache de la ressource pour laquelle les combattants se battent",
+  "tags.battleground.things.1": "Prototype d'équipement militaire abandonné",
+  "tags.battleground.things.2":
+    "Renseignements précieux obtenus par un espion, puis perdus par quelqu'un",
+  "tags.battleground.places.0": "Terrain dévasté par les tirs d'artillerie",
+  "tags.battleground.places.1": "Camps de réfugiés pestilentiel",
+  "tags.battleground.places.2": "Ville dévastée",
+  "tags.beastmasters": "Maitre des bêtes",
+  "tags.beastmasters.description": "Habitant anticonformiste et désinvolte",
+  "tags.beastmasters.enemies.0":
+    "Seigneur de guerre à demi féral commandant une armée de bêtes",
+  "tags.beastmasters.enemies.1": "Scientifique froidement inhumain",
+  "tags.beastmasters.enemies.2":
+    "Monstre altéré furieusement malveillant et détenant une intelligence humaine",
+  "tags.beastmasters.friends.0": "Habitant lié à un adorable animal",
+  "tags.beastmasters.friends.1": "Gardien d'un troupeau de bêtes très utiles",
+  "tags.beastmasters.friends.2": "Mystique vénérant les animaux",
+  "tags.beastmasters.complications.0":
+    "Les « animaux » sont en fait des humains lourdement modifiés génétiquement",
+  "tags.beastmasters.complications.1": "Les animaux dirigent la société",
+  "tags.beastmasters.complications.2":
+    "Les animaux ont les mêmes droits que les humains",
+  "tags.beastmasters.things.0":
+    "La technologie altérait autrefois la vie animale",
+  "tags.beastmasters.things.1":
+    "Une fiole contenant une maladie pouvant exterminer les animaux",
+  "tags.beastmasters.things.2":
+    "Un appareil prétech pouvant faire des miracles lorsqu'il est utilisé par une bête",
+  "tags.beastmasters.places.0":
+    "Parc aménagé pour être un habitat confortable pour les bêtes",
+  "tags.beastmasters.places.1":
+    "Grand centre commercial public aménagé pour permettre les compagnons animaux",
+  "tags.beastmasters.places.2": "Usine remplie de travailleurs animaux",
+  "tags.bubbleCities": "Villes sous bulle",
+  "tags.bubbleCities.description":
+    "Que ce soit dû à l’absence d’atmosphère ou au climat hostile, les villes de cette planète sont sous des dômes ou à l’intérieur de bâtiments pressurisé. Dans de tels environnement scellés, les techniques de surveillance peuvent aller du complexe à l’extrême. ",
+  "tags.bubbleCities.enemies.0":
+    "Un habitant craignant la contamination par les étrangers",
+  "tags.bubbleCities.enemies.1":
+    "Un saboteur provenant d’une autre ville sous bulle",
+  "tags.bubbleCities.enemies.2":
+    "Un officiel local hostile envers l’ignorance des étrangers",
+  "tags.bubbleCities.friends.0":
+    "Rebelle local contre les officiels de la ville",
+  "tags.bubbleCities.friends.1": "Chef de la maintenance ayant besoin d’aide",
+  "tags.bubbleCities.friends.2":
+    "Inspecteur cherchant de nouveux endroits pour bâtir",
+  "tags.bubbleCities.complications.0": "Fissure dans la bulle",
+  "tags.bubbleCities.complications.1": "Bris d’un reprocesseur d’atmosphère ",
+  "tags.bubbleCities.complications.2":
+    "Les habitants se révoltent contre les officiels",
+  "tags.bubbleCities.complications.3": "Caméras de surveillance omniprésentes",
+  "tags.bubbleCities.things.0":
+    "Technologie prétech servant à préserver l’habitat naturel",
+  "tags.bubbleCities.things.1": "Produits industriels ayant une grande valeur",
+  "tags.bubbleCities.things.2":
+    "Codes d’accès aux systèmes de sécurité d’une ville",
+  "tags.bubbleCities.places.0": "Générateur central d’une ville",
+  "tags.bubbleCities.places.1": "Surface de la bulle",
+  "tags.bubbleCities.places.2": "Complexe hydroponique",
+  "tags.bubbleCities.places.3": "Quartier résidentiel labyrinthique",
+  "tags.cheapLife": "Vie sans valeur",
+  "tags.cheapLife.description":
+    "La vie humaine ne vaut virtuellement rien sur cette planète. Cela s'explique peut-être par le clonage répandu, les conditions de vies qui garantissent une mort prématurée, la culture locale qui vénère le meurtre, ou les structures sociales qui n'accordent aucune importance à la protection de la vie. Peu importe la raison, la peine de mort est presque garantie pour toute personne qui ne fait qu'irriter ceux qui ont de l'importance. ",
+  "tags.cheapLife.enemies.0": "Maitre assassin",
+  "tags.cheapLife.enemies.1": "Juge avec du sang sur les mains",
+  "tags.cheapLife.enemies.2": "Superviseur de clones jetables",
+  "tags.cheapLife.friends.0":
+    "Habitant sympathique dont les PJs viennent accidentellement d'acheter la vie",
+  "tags.cheapLife.friends.1":
+    "Fugitif cherchant de l'aide pour éviter la peine de mort",
+  "tags.cheapLife.friends.2":
+    "Réformateur cherchant à changer les moeurs locales",
+  "tags.cheapLife.complications.0":
+    "Radiation ou maladie locale garantissant que les habitants mourront avant d'atteindre 25 ans",
+  "tags.cheapLife.complications.1":
+    "Technologie faisant de la mort un désagrément plutôt qu'une tragédie",
+  "tags.cheapLife.complications.2":
+    "Les habitants sont convaincus qu'une vie bienheureuse les attend après la mort ",
+  "tags.cheapLife.things.0": "Appareil qui réanime ou réincarne les morts",
+  "tags.cheapLife.things.1": "Réacteur maltech alimenté par des vies humaines",
+  "tags.cheapLife.things.2":
+    "Trésor inestimale dont le propriétaire est actuellement décédé",
+  "tags.cheapLife.places.0": "Lieu d'exécution où il y a foule",
+  "tags.cheapLife.places.1": "Cimetière simpliste",
+  "tags.cheapLife.places.2":
+    "Usine remplie de risques mortels pouvant être aisément éliminés",
+  "tags.civilWar": "Guerre civile",
+  "tags.civilWar.description":
+    "La planète est déchirée entre au moins deux factions, chacune affirmant être légitime. Cette guerre est peut-être le résultat d’une révolte rebelle réussie, ou peut-être celui de comploteurs qui espèrent devenir les nouveaux maître une fois la révolution terminée. ",
+  "tags.civilWar.enemies.0": "Commissaire d’une faction",
+  "tags.civilWar.enemies.1": "Habitant en colère",
+  "tags.civilWar.enemies.2":
+    "Théoricien de la conspiration blâmant des étrangers pour la guerre",
+  "tags.civilWar.enemies.3": "Déserteur se souciant uniquement de lui-même",
+  "tags.civilWar.enemies.4": "Bandits de guérilla",
+  "tags.civilWar.friends.0": "Loyaliste d’une faction ayant besoin d’aide",
+  "tags.civilWar.friends.1": "Habitant victime de la guerre",
+  "tags.civilWar.friends.2": "étranger cherchant à quitter la planète",
+  "tags.civilWar.complications.0": "Les PJs se trouvent au front",
+  "tags.civilWar.complications.1": "La famine frappe",
+  "tags.civilWar.complications.2": "Infestation de bandits",
+  "tags.civilWar.things.0": "Décharge de munitions",
+  "tags.civilWar.things.1": "Cache militaire",
+  "tags.civilWar.things.2": "Trésors enfouis après la guerre",
+  "tags.civilWar.things.3": "Plan de guerre secrets",
+  "tags.civilWar.places.0": "Bataille au front",
+  "tags.civilWar.places.1": "Ville bombardée",
+  "tags.civilWar.places.2": "Quartier de prostituées",
+  "tags.civilWar.places.3": "Tour de diffusion de propagande",
+  "tags.coldWar": "Guerre froide",
+  "tags.coldWar.description":
+    "Au moins deux grandes puissances contrôlent la planète, et leur hostilité les unes envers les autres est à peine en deçà d’être une guerre ouvert. L’hostilité est peut-être de nature idéologique, ou s’ancre peut-être dans une lutte pour le contrôle d’une ressource locale.",
+  "tags.coldWar.enemies.0": "Chef des renseignements suspicieux",
+  "tags.coldWar.enemies.1":
+    "Habitant croyant que les étrangers sont avec l’ennemi",
+  "tags.coldWar.enemies.2": "Femme fatale",
+  "tags.coldWar.friends.0": "Courtier d’information apolitique",
+  "tags.coldWar.friends.1": "Espion travaillant pour une autre puissance",
+  "tags.coldWar.friends.2": "Innocent injustement accusé",
+  "tags.coldWar.friends.3": "Officiel « salaud, mais notre salaud »",
+  "tags.coldWar.complications.0": "Fouille de la police",
+  "tags.coldWar.complications.1": "Escarmouche ",
+  "tags.coldWar.complications.2": "« Peur rouge »",
+  "tags.coldWar.things.0": "Liste de traîtres dans le gouvernement",
+  "tags.coldWar.things.1": "Plan militaires secrets",
+  "tags.coldWar.things.2":
+    "Immense cache d’armes construites en préparation pour la guerre",
+  "tags.coldWar.places.0": "Bar miteux dans une zone neutre",
+  "tags.coldWar.places.1": "Rallye politique",
+  "tags.coldWar.places.2": "Endroit isolé où un combat se déroule",
+  "tags.colonizedPopulation": "Population colonisée",
+  "tags.colonizedPopulation.description":
+    "Une planète avoisinante a colonisé cette planète moins technologiquement avancée et moins organisée, et les habitants n’en sont pas heureux. Un gouvernement fantoche existe peut-être, mais toutes les décisions importantes sont prises par le vice-roi local.",
+  "tags.colonizedPopulation.enemies.0": "Personnel de sécurité suspicieux",
+  "tags.colonizedPopulation.enemies.1": "Habitant détestant les étrangers",
+  "tags.colonizedPopulation.enemies.2":
+    "Parrain du crime local visant les riches étrangers",
+  "tags.colonizedPopulation.friends.0": "Chef local de la résistance",
+  "tags.colonizedPopulation.friends.1": "Officiel colonial ayant besoin d’aide",
+  "tags.colonizedPopulation.friends.2": "Habitant coincé entre les deux côtés",
+  "tags.colonizedPopulation.complications.0":
+    "Les habitants refusent de parler avec les étrangers",
+  "tags.colonizedPopulation.complications.1": "Répression coloniale",
+  "tags.colonizedPopulation.complications.2": "Coutumes locales mal comprises",
+  "tags.colonizedPopulation.things.0": "Relique du mouvement de résistance",
+  "tags.colonizedPopulation.things.1": "Liste de collaborateurs",
+  "tags.colonizedPopulation.things.2":
+    "Substance précieuse extraite par le labeur colonial",
+  "tags.colonizedPopulation.places.0":
+    "Camp de résistance en peine nature sauvage",
+  "tags.colonizedPopulation.places.1": "District urbain interdit aux habitants",
+  "tags.colonizedPopulation.places.2": "Lieu de travail colonial",
+  "tags.culturalPower": "Pouvoir culturel",
+  "tags.culturalPower.description":
+    "La planète est une puissance culturelle considérable dans le secteur. Cela s'explique peut-être parce qu'il produit de la musique, de l'art, de la philosophie ou un autre bien intangible que ses voisins apprécient grandement. Dans d'autres cas, c'est plutôt parce qu'il est l'héritier d'une tradition artistique vérérable, ce qui lui donner un énorme cachet culturel.",
+  "tags.culturalPower.enemies.0": "Meurtrier artistique et eccentrique",
+  "tags.culturalPower.enemies.1": "Admirateur dérangé",
+  "tags.culturalPower.enemies.2": "Artiste sans succès obsessivement rancunier",
+  "tags.culturalPower.enemies.3": "Critique en croisade",
+  "tags.culturalPower.friends.0": "Jeune artiste ayant besoin d'argent",
+  "tags.culturalPower.friends.1": "Étudiant de la tradition artistique",
+  "tags.culturalPower.friends.2": "Spécialiste érudit des arts",
+  "tags.culturalPower.friends.3":
+    "Étranger détestant la corruption de l'art provoqué par des méthodes étrangères",
+  "tags.culturalPower.complications.0":
+    "L'art tue tranquillement ceux qui le pratique",
+  "tags.culturalPower.complications.1":
+    "L'art crée une dépendance physique ou mentale",
+  "tags.culturalPower.complications.2":
+    "L'art est un fragment d'une science militaire ancienne",
+  "tags.culturalPower.things.0": "L'instrument d'un maitre légendaire",
+  "tags.culturalPower.things.1": "La seule copie de l'opus d'un maitre décédé",
+  "tags.culturalPower.things.2":
+    "La preuve de l'attribution d'une propriété intellectuelle",
+  "tags.culturalPower.places.0": "Studio d'enregistrement ou de performance",
+  "tags.culturalPower.places.1": "Festival débordant de touristes",
+  "tags.culturalPower.places.2": "Monument dédié aux maitres de l'art décédés",
+  "tags.cybercommunists": "Cybercommunistes",
+  "tags.cybercommunists.description":
+    "Le communisme fonctionne sur cette planète. La planification centrale se fait à l'aide d'ordinateurs prétech et de la discipline psychique de précognition, ce qui permet ensuite de gérer efficacement la production à grande échelle. Les citoyens jouissant d'une bonne réputation ont accès à tout ce dont ils ont besoin pour satisfaire tous leurs besoins matériels. Le individus ne luttent pas pour s'accaparer une plus grande part de richesses, mais plutôt pour augmenter leur pouvoir politique, imposer leurs idéaux culturels, ou encore influencer la planification centrale. Plusieurs planètes cybercommunistes tendent à favoriser les intérêts privés de ceux qui contrôlent la planification centrale. ",
+  "tags.cybercommunists.enemies.0":
+    "Rebelle aigri luttant contre ce qu'il considère être une injustice",
+  "tags.cybercommunists.enemies.1": "Saboteur étranger",
+  "tags.cybercommunists.enemies.2": "Figure stalinienne en devenir",
+  "tags.cybercommunists.friends.0":
+    "Technicien idéaliste travaillant à la planification centrale",
+  "tags.cybercommunists.friends.1":
+    "Policier cynique luttant contre la corruption",
+  "tags.cybercommunists.friends.2": "Économiste précognitif",
+  "tags.cybercommunists.complications.0":
+    "Les ordinateurs de planification centrale tombent en panne",
+  "tags.cybercommunists.complications.1":
+    "La planification centrale fonctionne uniquement parce que les habitants ont été altérés mentalement ou physiquement",
+  "tags.cybercommunists.complications.2":
+    "Les ordinateurs de planification centrale ne peuvent supporter la hausse de population du système",
+  "tags.cybercommunists.things.0": "Ordinateur de planification centrale",
+  "tags.cybercommunists.things.1":
+    "Instabilité causée par une marchandise ne pouvant être considérée dans la planification",
+  "tags.cybercommunists.things.2":
+    "Une immense réserve d'objets de valeur fabriqués par accident",
+  "tags.cybercommunists.places.0": "Usine fonctionnant rondement",
+  "tags.cybercommunists.places.1":
+    "Bloc d'appartements parfaitement identiques",
+  "tags.cybercommunists.places.2": "Grande manifestation pour l'unité",
+  "tags.cyborgs": "Cyborgs",
+  "tags.cyborgs.description":
+    "La population de cette planète fait un usage important des implants cybernétiques, plusieurs individus arborant au moins une modification de nature esthétique. Cela peut être causé par l'industrie technologique locale, une injonction religieuse, ou simplement des exigences que font peser l'environnement sur les habitants. ",
+  "tags.cyborgs.enemies.0":
+    "Pirate informatique ambitieux ciblant les implants",
+  "tags.cyborgs.enemies.1": "Oligarque des cybertechnologies",
+  "tags.cyborgs.enemies.2":
+    "Chercheur ayant besoin d'étrangers fraichement arrivés",
+  "tags.cyborgs.enemies.3": "Chef de gang cybernétiquement augmenté",
+  "tags.cyborgs.friends.0": "Médecin bénévole spécialisé en implants",
+  "tags.cyborgs.friends.1": "Jeune et idéaliste chercheur en cybernétique",
+  "tags.cyborgs.friends.2": "Activiste d'avant-garde",
+  "tags.cyborgs.complications.0":
+    "Les puissants et dangereux viennent ici pour leurs implants à la fine pointe",
+  "tags.cyborgs.complications.1":
+    "Les implants ont des effets secondaires néfastes universels",
+  "tags.cyborgs.complications.2":
+    "Les personnes augmentées n'ont pas le droit de quitter la planète pour des raisons de sécurité technologique",
+  "tags.cyborgs.things.0": "Prototype unique d'implant",
+  "tags.cyborgs.things.1": "Dossier de recherche secrète",
+  "tags.cyborgs.things.2": "Un virus qui affecte les cyborgs",
+  "tags.cyborgs.things.3":
+    "Une cache d'implants thérapeutiques vitaux dont on a critiquement besoin",
+  "tags.cyborgs.places.0": "Clinique de rue douteuse et insalubre",
+  "tags.cyborgs.places.1": "Repaire couvert de sang de voleurs d'implants",
+  "tags.cyborgs.places.2":
+    "Centre commercial austère où les clients voient tout à travers leurs implants de réalité augmentée",
+  "tags.cyclicalDoom": "Péril cyclique",
+  "tags.cyclicalDoom.description":
+    "Cette planète compose avec une catastrophe apocalyptique mettant fin à la civilisation qui survient à intervalle régulier. La culture local connait le cycle dans lequel elle se trouve, et ses traditions servent notamment à assurer la transmission de fragments de sa civilisation. Ces traditions ne sont cependant pas infaillibles, et certains fragments dangereux du passé reviennent parfois hanter le présent. ",
+  "tags.cyclicalDoom.enemies.0":
+    "Étranger cherchant à déclencher hâtivement l'apocalypse pour en tirer profit",
+  "tags.cyclicalDoom.enemies.1":
+    "Habitant tirant imprudemment avantage des biens entrepôsés destinés au prochain cataclysme",
+  "tags.cyclicalDoom.enemies.2":
+    "Démagogue affirmant que le cycle n'est qu'un mythe inventé par les autorités",
+  "tags.cyclicalDoom.friends.0": "Officiel troublé préparant la prochaine ère",
+  "tags.cyclicalDoom.friends.1": "Étranger étudiant les cycles",
+  "tags.cyclicalDoom.friends.2":
+    "Habitant menacé par les premiers signes du cataclysme",
+  "tags.cyclicalDoom.complications.0":
+    "Les cycles sont effectivement un mythe inventé par les autorités",
+  "tags.cyclicalDoom.complications.1":
+    "Les cycles sont contrôlés par des machines xénosapiennes",
+  "tags.cyclicalDoom.complications.2":
+    "Une puissance étrangère interfère avec les préparatifs",
+  "tags.cyclicalDoom.things.0": "Une cache perdue pleine de trésors anciens",
+  "tags.cyclicalDoom.things.1":
+    "Technologie ou archives permettant de connaitre précisément les étapes du cycle",
+  "tags.cyclicalDoom.things.2":
+    "Mots de passe désactivant les mesures de sécurité d'une chambre forte ancienne",
+  "tags.cyclicalDoom.places.0":
+    "Chambre forte lourdement protégée, protégeant des secrets oubliés depuis longtemps",
+  "tags.cyclicalDoom.places.1": "Spatioport bondé de réfugiés en panique",
+  "tags.cyclicalDoom.places.2":
+    "Ville construite dans l'ombre d'un monstrueux monument ancien célébrant un bouleversement antérieur",
+  "tags.desertWorld": "Planète désertique",
+  "tags.desertWorld.description":
+    "La planète a peut-être une atmosphère respirabl;e et une température tolérable pour l’humain, mais c’est un désert aride et rocheux hors des quelques endroits rendus habitables par l,effort humain. Le désert profiond est largement inexploré et habité par des bannis, et pire. ",
+  "tags.desertWorld.enemies.0": "Lieutenant pillard",
+  "tags.desertWorld.enemies.1": "Ermite dément",
+  "tags.desertWorld.enemies.2": "Isolationniste en colère",
+  "tags.desertWorld.enemies.3": "Prospecteur minier paranoïaque",
+  "tags.desertWorld.enemies.4": "Étrange bête du désert",
+  "tags.desertWorld.friends.0": "Guide local",
+  "tags.desertWorld.friends.1": "Biologiste",
+  "tags.desertWorld.friends.2": "Aspirant terraformeur",
+  "tags.desertWorld.complications.0": "Tempête de sable",
+  "tags.desertWorld.complications.1": "Problème d’approvisionnement en eau",
+  "tags.desertWorld.complications.2": "Guerre locale pour l’accès à l’eau",
+  "tags.desertWorld.things.0": "Réservoir d’eau énorme",
+  "tags.desertWorld.things.1": "Carte de puits cachés",
+  "tags.desertWorld.things.2": "Équipement prétech pour créer de la pluie",
+  "tags.desertWorld.places.0": "Oasis",
+  "tags.desertWorld.places.1": "« Le cartier vide » du désert",
+  "tags.desertWorld.places.2": "Citerne souterraine cachée",
+  "tags.doomedWorld": "Planète damnée",
+  "tags.doomedWorld.description":
+    "La planète est damnée, et ses habitants peuvent le savoir ou non. Une catastrophe cosmique les menace, et les habitants n'ont aucun moyen réaliste de sauver tout le monde. Si cela est communément admis, la société désagrège, et on voit l'apparition de fanatisme religieux, d'hédonisme abject et de violence sauvage. ",
+  "tags.doomedWorld.enemies.0": "Prophète dément annonçant un salut factice",
+  "tags.doomedWorld.enemies.1":
+    "Dirigeant impitoyable cherchant à fuir avec ses trésors",
+  "tags.doomedWorld.enemies.2":
+    "Capitaine d'astronef cynique proposant à ceux qui peuvent payer de les abandonner dans le vide sidéral, leur faisant croire que cela leur permettra de s'échapper vers un monde meilleur",
+  "tags.doomedWorld.friends.0":
+    "Jene femme attirante ou mère de famille cherchant à fuir",
+  "tags.doomedWorld.friends.1": "Coordonnateur d'aide humanitaire étranger",
+  "tags.doomedWorld.friends.2": "Policier stressé",
+  "tags.doomedWorld.complications.0":
+    "La catastrophe ne se produira pas, ou ne causera pas la mort de tous",
+  "tags.doomedWorld.complications.1":
+    "La catastrophe a été intentionnellement déclenchée par quelqu'un",
+  "tags.doomedWorld.complications.2":
+    "Il est possible de sauver la population si des groupes ennemis collaborent",
+  "tags.doomedWorld.things.0":
+    "Permission de quitter la planète pour un astronef",
+  "tags.doomedWorld.things.1": "Une cache d'objets culturels inestimables",
+  "tags.doomedWorld.things.2":
+    "Toutes les économies d'une personne cherchant à payer pour fuir",
+  "tags.doomedWorld.things.3":
+    "Informations qui prouveraient au public que la fin est proche",
+  "tags.doomedWorld.places.0":
+    "Ciel menaçant qui donne un avant-goût de la catastrophe à venir, surplombant une place publique",
+  "tags.doomedWorld.places.1":
+    "Célébration orgiaque mêlant autant de sexe que de meurtre",
+  "tags.doomedWorld.places.2":
+    "Lieu sacré bondé de personnes désespérées priant la divinité",
+  "tags.dyingRace": "Espèce en voie d'extinction",
+  "tags.dyingRace.description":
+    "Les habitants (humains ou xénosapiens) de cette planète savent qu'ils sont en voie d'extinction. Que cela s'explique par des toxines environnementales, des attaques à l'arme bactériologique ou par le désespoir social généralisé, la population ne peut se reproduire suffisamment pour continuer d'exister. Les habitants cherchent un sens à leur vie à travers des objectifs existentiels ou religieux étranges, mais quelques uns peuvent tenter de contrer ce qui mène à leur destruction. ",
+  "tags.dyingRace.enemies.0":
+    "Étranger hostile qui veut voir les habitants mourir",
+  "tags.dyingRace.enemies.1":
+    "Étranger cherchant à tirer avantage de l'État affaibli",
+  "tags.dyingRace.enemies.2":
+    "Envahisseur pressés de repousser les habitants hors de leurs terres",
+  "tags.dyingRace.friends.0": "Un des rares jeunes parmis la population",
+  "tags.dyingRace.friends.1": "Réformateur déterminé et plein d'espoir",
+  "tags.dyingRace.friends.2":
+    "Chercheur tentant de découvrir une nouvelle manière de reproduction",
+  "tags.dyingRace.complications.0":
+    "Les valeurs de la culture en voie de disparition étaient monstrueuses",
+  "tags.dyingRace.complications.1":
+    "La mort des habitants est nécessaire pour prévenir une pire catastrophe",
+  "tags.dyingRace.complications.2":
+    "Les habitants sont convaincus qu'ils méritent leur sort",
+  "tags.dyingRace.things.0": "Technologie de reproduction de grande valeur",
+  "tags.dyingRace.things.1": "Trésor hérité d'une ère révolue",
+  "tags.dyingRace.things.2": "Arme biologique employée contre les habitants",
+  "tags.dyingRace.places.0": "Rues désertes de la ville",
+  "tags.dyingRace.places.1": "Édifice imposant laissé à l'abandon",
+  "tags.dyingRace.places.2":
+    "Petite habitation bondée dans un ville autrement vide",
+  "tags.eugenicCult": "Secte eugéniste",
+  "tags.eugenicCult.description":
+    "Même avant le Silence, l’amélioration majeure du génome humain a toujours semblé se faire au prix d’effets secondaires inacceptables. Certaines planètes hébergent des sectes secrets poursuivant ces améliorations sans égard aux risques; quelque unes ont même été complètement envahi par ces sectes. ",
+  "tags.eugenicCult.enemies.0": "Fanatique de la supériorité eugénique",
+  "tags.eugenicCult.enemies.1": "Homo superior mentalement instable",
+  "tags.eugenicCult.enemies.2": "Scientifique eugéniste fou",
+  "tags.eugenicCult.friends.0": "Propagandiste de l’eugénisme",
+  "tags.eugenicCult.friends.1": "Investigateur biotechnique",
+  "tags.eugenicCult.friends.2": "Habitant voulant se venger contre la secte",
+  "tags.eugenicCult.complications.0":
+    "Le fidèle altéré de la secte eugéniste semble humain",
+  "tags.eugenicCult.complications.1":
+    "Les habitants locaux sont terrifiée par les physiques inhabituels",
+  "tags.eugenicCult.complications.2":
+    "Les modifications génétiques (et les inconvénients qui les accompagnent) sont contagieux si on les fréquente à long terme",
+  "tags.eugenicCult.things.0": "Serum qui induit les altérations",
+  "tags.eugenicCult.things.1": "Élixir qui renvers les altérations",
+  "tags.eugenicCult.things.2": "Banque de donnée biothechniques prétech",
+  "tags.eugenicCult.things.3": "Liste de sympathisants de la secte",
+  "tags.eugenicCult.places.0": "Mine de reproduction eugénique",
+  "tags.eugenicCult.places.1": "Village isolé d’humains altérés",
+  "tags.eugenicCult.places.2":
+    "Lieux publics infiltrés par des sympathisants de la secte",
+  "tags.exchangeConsulate": "Consulat de l'Échange",
+  "tags.exchangeConsulate.description":
+    "L’Échange de Lumière a déjà été la plus fiable et importante organisation fournissant des services bancaire et diplomatique à travers l’espace occupé par l’humain. Même après le Silence, certaines planètes ont encore un Consulat de l’Échange fonctionnel, où des services bancaires et d’arbitrage peuvent être obtenus.",
+  "tags.exchangeConsulate.enemies.0": "Officiel de l’Échange corrompu",
+  "tags.exchangeConsulate.enemies.1":
+    "Habitant endetté qui croit que les PJs sont des agents de l’Échange",
+  "tags.exchangeConsulate.enemies.2":
+    "Officiel de l’Échange talonnant les PJs pour des dettes encourues",
+  "tags.exchangeConsulate.friends.0":
+    "Consul ayant besoin de l’aide provenant d’une autre planète",
+  "tags.exchangeConsulate.friends.1":
+    "Banquier local désirant nuire à ses compétiteurs",
+  "tags.exchangeConsulate.friends.2": "Diplomate de l’Échange",
+  "tags.exchangeConsulate.complications.0": "Le Consulat local a été corrompu",
+  "tags.exchangeConsulate.complications.1":
+    "Le Consulat est coupé de ses fonds",
+  "tags.exchangeConsulate.complications.2":
+    "Un puissant débiteur refuse de rembourser",
+  "tags.exchangeConsulate.things.0": "Codes pour la chambre forte de l’Échange",
+  "tags.exchangeConsulate.things.1":
+    "Richesses cachées pour éviter qu’elles ne soient considérées dans un jugement pour faillite",
+  "tags.exchangeConsulate.things.2":
+    "Une chambre forte oubliée depuis longtemps",
+  "tags.exchangeConsulate.places.0": "Pièce de discussion du Consulat",
+  "tags.exchangeConsulate.places.1":
+    "Lieu de rencontre entre des partis en litige irritables et indisciplinés",
+  "tags.exchangeConsulate.places.2": "Chambre forte de l’Échange",
+  "tags.fallenHegemon": "Hégémonie déchue",
+  "tags.fallenHegemon.description":
+    "Cette planète exerçait autrefois un pouvoir hégémonique sur une partie ou la totalité du secteur, peut-être grâce à des technologies supérieures, une habile diplomatie, la faiblesse de ses voisins ou sa légitimité héritée du Mandat terrien. Son emprise a cependant été brisé par une révolte ou une calamité, et on ne trouve aujourd'hui sur la planète que les décombres de sa gloire passée. ",
+  "tags.fallenHegemon.enemies.0":
+    "Prétendant acharné au trône, qui est insignifiant",
+  "tags.fallenHegemon.enemies.1":
+    "Haut fonctionnaire rancunier rêvant d'un empire",
+  "tags.fallenHegemon.enemies.2":
+    "Étranger vindicatif voulant punir ses anciens dirigeants",
+  "tags.fallenHegemon.friends.0":
+    "Chef local réaliste cherchant à préserver ce qu'il reste de sa civilisation",
+  "tags.fallenHegemon.friends.1":
+    "Historien s'intéressant à période hégémonique",
+  "tags.fallenHegemon.friends.2":
+    "Réfugié provenant d'une ancienne colonie s'étant affranchie",
+  "tags.fallenHegemon.complications.0":
+    "Le règne hégémonique était juste et éclairé",
+  "tags.fallenHegemon.complications.1":
+    "La chute a été causée par des luttes internes, pas par des forces adverses",
+  "tags.fallenHegemon.complications.2":
+    "La planète agit comme si elle était toujours une puissance hégémonique",
+  "tags.fallenHegemon.complications.3":
+    "La planète a été colonisée en retour par des étrangers vindicatifs",
+  "tags.fallenHegemon.things.0":
+    "Badge précieux datant de l'époque hégémonique",
+  "tags.fallenHegemon.things.1":
+    "Technologique ancienne centrale au pouvoir hégémonique",
+  "tags.fallenHegemon.things.2": "Trésor colonial pillé",
+  "tags.fallenHegemon.places.0":
+    "Palais beaucoup trop grandiose pour les occupants actuels",
+  "tags.fallenHegemon.places.1":
+    "Spatioport surdimensionné maintenant en mauvais état",
+  "tags.fallenHegemon.places.2":
+    "Boulevard flanqué de monuments voué aux gloires passées",
+  "tags.feralWorld": "Planète férale",
+  "tags.feralWorld.description":
+    "Dans la profonde noirceur solitaire qu’a été le Silence, certaines planètes ont connu une totale dégénérescence culturelle et morale. Les quelques lambeaux de civilisation ayant survécu ont été tordus et prennent aujourd’hui la forme de sectes de mort, de fanatisme xénophobe, de pratiques culturelle horribles et d’autres comportements complètement inacceptables sur des planètes moins barbares. Ces planètes sont invariablement classés sous des Codes rouges marchands.",
+  "tags.feralWorld.enemies.0": "Noble décadent",
+  "tags.feralWorld.enemies.1": "Fidèle d’une secte fou",
+  "tags.feralWorld.enemies.2": "Habitant xénophobe",
+  "tags.feralWorld.enemies.3": "Chef cannibal",
+  "tags.feralWorld.enemies.4": "Chercheur de maltech",
+  "tags.feralWorld.friends.0": "étranger prisonnier",
+  "tags.feralWorld.friends.1": "Aspirant réformateur",
+  "tags.feralWorld.friends.2":
+    "Habitant voulant s’éviter un rituel traditionnel d’écorchement",
+  "tags.feralWorld.complications.0": "« Célébration » locale horrifiante",
+  "tags.feralWorld.complications.1": "Coutume inexplicable et répugnante",
+  "tags.feralWorld.complications.2": "Endroits et personnes tabou",
+  "tags.feralWorld.things.0":
+    "Outil prétech utilisée de manière déviante ou terriblement mal utilisée",
+  "tags.feralWorld.things.1": "Richesses accumulées par des actes brutaux",
+  "tags.feralWorld.things.2":
+    "Possession de grande valeur dont le propriétaire est une victime étranger malchanceuse",
+  "tags.feralWorld.places.0": "Amphithéâtre des atrocités",
+  "tags.feralWorld.places.1": "Chambre de torture rituelle",
+  "tags.feralWorld.places.2":
+    "Endroit ordinaire tordu en quelque chose de terrible",
+  "tags.flyingCities": "Villes volantes",
+  "tags.flyingCities.description":
+    "Peut-être que cette planète est une géante gazeuse, ou peut-être que les strates inférieures de son atmosphère sont balayées par des orages intolérables. Peu importe la raison, les villes de cette planète volent au-dessus de sa surface. Peut-être qu’elles sont stationnaires, et peut-être qu’elles se déplacent à la recherche de ressources.",
+  "tags.flyingCities.enemies.0": "Pilote d’une ville rivale",
+  "tags.flyingCities.enemies.1":
+    "Voleur de technologie tentant de dérober de l’équipement étranger",
+  "tags.flyingCities.enemies.2":
+    "Saboteur ou ferrailleur pillant la technologie de la ville",
+  "tags.flyingCities.friends.0":
+    "Technicien de maintenance ayant besoin d’aide",
+  "tags.flyingCities.friends.1": "Pilote de la défense municipale",
+  "tags.flyingCities.friends.2": "Météorologue",
+  "tags.flyingCities.complications.0": "Tempêtes soudaines",
+  "tags.flyingCities.complications.1": "Perte d’altitude drastique",
+  "tags.flyingCities.complications.2": "Attaque d’une ville rivale",
+  "tags.flyingCities.complications.3": "Machines vitales brisent",
+  "tags.flyingCities.things.0": "Gaz atmosphériques raffinésprécieux",
+  "tags.flyingCities.things.1": "Plans pour un réacteur antigrav prétech",
+  "tags.flyingCities.things.2":
+    "Codex météorologique prédisant les tempêtes futures",
+  "tags.flyingCities.places.0": "Dessous de la ville",
+  "tags.flyingCities.places.1":
+    "Le seul endroit paisible de la surface de la planète",
+  "tags.flyingCities.places.2":
+    "Passerelles surplombant des gouffres inimaginables",
+  "tags.forbiddenTech": "Technologie interdite",
+  "tags.forbiddenTech.description":
+    "Une groupe sur cette planète fabrique ou utilise de la maltech. Des intelligences artificielles débloquées vouées à devenir folles, des nanoparticules de guerre capables de détruire des nations, corrupteur d’ADN agissant tranquillement, esclaves génétiquement construits, ou quelque chose d’encore pire. La population générale de la planète est peut-être au courant du danger parmi eux, mais peut-être pas.",
+  "tags.forbiddenTech.enemies.0": "Scientifique fou",
+  "tags.forbiddenTech.enemies.1": "Acheteur de maltech étranger",
+  "tags.forbiddenTech.enemies.2": "Agent de sécurité ou tueur à gage",
+  "tags.forbiddenTech.friends.0": "Victime de la maltech",
+  "tags.forbiddenTech.friends.1": "Agent de Périmètre",
+  "tags.forbiddenTech.friends.2": "Journaliste d’enquête",
+  "tags.forbiddenTech.friends.3": "Marchant d’armes conventionnelles",
+  "tags.forbiddenTech.complications.0":
+    "La maltech est fabriquée par une intelligence artificielle défrénée",
+  "tags.forbiddenTech.complications.1":
+    "Le gouvernement dépend des revenus liés à la vente de la maltech aux étrangers",
+  "tags.forbiddenTech.complications.2":
+    "Les habitants insistent pour dire que ce n’est pas vraiment de la maltech",
+  "tags.forbiddenTech.things.0": "Données de recherche sur la maltech",
+  "tags.forbiddenTech.things.1": "La maltech elle-même",
+  "tags.forbiddenTech.things.2":
+    "De l’équipement prétech précieux utilisé pour fabriquer la maltech",
+  "tags.forbiddenTech.places.0": "Laboratoire horrifiant",
+  "tags.forbiddenTech.places.1":
+    "Territoire dévasté par l’utilisation de la maltech",
+  "tags.forbiddenTech.places.2": "Salle de rencontre gouvernementale",
+  "tags.formerWarriors": "Passé guerrier",
+  "tags.formerWarriors.description":
+    "Les habitants de cette planète étaient autrefois reconnus pour leurs prouesses martiales. Cela s'expliquait peut-être par leur culture militariste, par des modifications génétiques, par leur armement de haute technologie ou par leur commandement militaire hors pair. Cette époque est cependant aujourd'hui révolue, peut-être à cause de défaites écrasantes, de restrictions imposées par des puissances étrangères ou un renouveau culturel pacifique. ",
+  "tags.formerWarriors.enemies.0": "Chef militaire refusant le changement",
+  "tags.formerWarriors.enemies.1": "Chef amer d'une compagnie de mercenaires",
+  "tags.formerWarriors.enemies.2":
+    "Victime de guerres passées voulant se venger",
+  "tags.formerWarriors.friends.0": "Partisan des nouvelles coutumes pacifiques",
+  "tags.formerWarriors.friends.1":
+    "Étranger cherchant désespérément de l'aide militaire",
+  "tags.formerWarriors.friends.2":
+    "Génie militaire réprimé par les nouvelles lois",
+  "tags.formerWarriors.complications.0":
+    "Les planètes voisines veulent les habitants pacifiés ou tués",
+  "tags.formerWarriors.complications.1":
+    "La planète a toujours utilisé sa force défensivement",
+  "tags.formerWarriors.complications.2":
+    "La source de la puissance de la planète est perdue, mais cela est réversible",
+  "tags.formerWarriors.things.0": "Trophée de guerre pris d'un ennemi vaincu",
+  "tags.formerWarriors.things.1": "Moyen de réactiver le passé guerrier",
+  "tags.formerWarriors.things.2":
+    "Cache d'équipement militaire à la fine pointe",
+  "tags.formerWarriors.places.0": "Cimetière réservé aux héros décédés",
+  "tags.formerWarriors.places.1": "Mémorial poussiéreux et silencieux",
+  "tags.formerWarriors.places.2":
+    "Monument public dédié à la nouvelle culture pacifique",
+  "tags.freakGeology": "Géologie étrange",
+  "tags.freakGeology.description":
+    "La géologie ou la géographie de cette planète est tout simplement étrange. Peut-être est-elle composée uniquement de chaînes de montagnes, de bandes de terre et de mer parfaitement régulières, ou peut-être que sa structure minérale se fragmente toujours en cubes parfaits. Les habitants ont appris à vivre avec cela, et leur culture est influencée par les exigences que cette étrangeté implique.",
+  "tags.freakGeology.enemies.0": "Xénogéologue excentrique",
+  "tags.freakGeology.enemies.1":
+    "Fidèle d’une secte croyant que c’est le travail de xénosapiens",
+  "tags.freakGeology.friends.0": "Chercheur",
+  "tags.freakGeology.friends.1": "Prospecteur",
+  "tags.freakGeology.friends.2": "Artiste",
+  "tags.freakGeology.complications.0":
+    "Caractéristiques locale à propos de laquelle tout le monde oublie de prévenir les étrangers",
+  "tags.freakGeology.complications.1": "Météo mortelle",
+  "tags.freakGeology.complications.2": "Activité sismique",
+  "tags.freakGeology.things.0": "Formations crystalline uniques",
+  "tags.freakGeology.things.1": "Filon majeur de minerai précieux caché",
+  "tags.freakGeology.things.2":
+    "Acte notarié assurant la propriété d’un endroit d’une grande beauté naturelle",
+  "tags.freakGeology.places.0": "Au sommet d’une formation géologique bizarre",
+  "tags.freakGeology.places.1": "Centre de villégiature destiné aux étrangers",
+  "tags.freakWeather": "Climat étrange",
+  "tags.freakWeather.description":
+    "La planète est victime d’un climat bizarre ou dangereux. Peut-être que des orages assez forts pour raser des villes balaie régulièrement la surface, ou peut-être que le soleil de cette planète ne perce jamais ses épais nuages.",
+  "tags.freakWeather.enemies.0": "Criminel utilisant la météo comme couverture",
+  "tags.freakWeather.enemies.1":
+    "Fidèles d’une secte vouée au climat convaincus que les étrangers sont responsables d’un désastre quelconque",
+  "tags.freakWeather.enemies.2": "Prédateur indigène dépendant du climat",
+  "tags.freakWeather.friends.0": "Météorologue",
+  "tags.freakWeather.friends.1":
+    "Équipe de tournage voulant filmer un évènement météo pour un documentaire",
+  "tags.freakWeather.complications.0": "Le climat lui-même",
+  "tags.freakWeather.complications.1":
+    "Machines de terraforming prétech endommagée qui causent le climat",
+  "tags.freakWeather.things.0": "Dépôt de minerai précieux érodé par le vent",
+  "tags.freakWeather.things.1":
+    "Archives holographiques d’une phénomène météo rare et spectaculaire",
+  "tags.freakWeather.things.2": "Objet naturel d’une beauté élaborée",
+  "tags.freakWeather.places.0": "Oeil du cyclone",
+  "tags.freakWeather.places.1": "Le seul endroit éclairé par le soleil",
+  "tags.freakWeather.places.2": "Salle de contrôle de terraforming",
+  "tags.friendlyFoe": "Ennemi amical",
+  "tags.friendlyFoe.description":
+    "Cette planète est habitée par une race xénosapienne hostile ou par une cabale maléfique, mais un sous-groupe est amical envers les étrangers. Pour une raison interne quelconque, ils sont prêts à négocier et marchander honnêtement avec des étrangers, et ne semblent pas avoir les pires traits de leurs semblables.",
+  "tags.friendlyFoe.enemies.0":
+    "Individu qui déteste passionnément tous les habitants de la planète",
+  "tags.friendlyFoe.enemies.1":
+    "Habitant insatisfait tendant à créer des conflits",
+  "tags.friendlyFoe.enemies.2":
+    "Maître secret cherchant à tromper la confiance",
+  "tags.friendlyFoe.friends.0": "Monstre aux yeux globuleux bien intentionné",
+  "tags.friendlyFoe.friends.1":
+    "Fidèle d’une secte eugéniste ayant des principes",
+  "tags.friendlyFoe.friends.2": "Investigateur suspicieux",
+  "tags.friendlyFoe.complications.0":
+    "Le sous-groupe est effectivement aussi bienfaisant et inoffensif qu’il le paraît",
+  "tags.friendlyFoe.complications.1":
+    "Le sous-groupe offre un service essentiel au prix d’un compromis moral",
+  "tags.friendlyFoe.complications.2":
+    "Le sous-groupe se sent encore lié à ses semblables hostiles",
+  "tags.friendlyFoe.things.0": "Xénotech interdite",
+  "tags.friendlyFoe.things.1": "Gabarit de biotech eugénique",
+  "tags.friendlyFoe.things.2":
+    "Preuve pour convaincre l’autre groupe local qu’ils ont raison d’agir comme ils le font",
+  "tags.friendlyFoe.places.0":
+    "Laboratoire de maltech réorienté vers une autre utilisation",
+  "tags.friendlyFoe.places.1": "Bâtiment de conclave xénosapien",
+  "tags.friendlyFoe.places.2":
+    "Intérieur d’une vaisseau spatial largement craint",
+  "tags.goldRush": "Ruée vers l'or",
+  "tags.goldRush.description":
+    "L’or, l’argent et les autres minerais auxquels on attribue conventionnellement de la valeur sont devenus communs et peu coûteux, maintenant que l’on mine des astéroïdes dans la plupart des systèmes. Mais certains minéraux sont encore précieux et rares, et on a récemment découvert que cette planète en est une source encore inexploitée. Des individus de tout le secteur y viennent pour devenir riche.",
+  "tags.goldRush.enemies.0": "Prospecteur paranoïaque",
+  "tags.goldRush.enemies.1": "Aspirant magnat minier",
+  "tags.goldRush.enemies.2": "Marchand rapace",
+  "tags.goldRush.friends.0": "Mineur s’étant fait voler ses droits de miner",
+  "tags.goldRush.friends.1": "Xénosapien indigène",
+  "tags.goldRush.friends.2": "Touriste curieux",
+  "tags.goldRush.friends.3": "L’existence du filon est une légende urbaine",
+  "tags.goldRush.complications.0":
+    "Le minerai est une substance toxique et dangereuse",
+  "tags.goldRush.complications.1":
+    "L’exportation du minerai est interdite par le gouvernement planétaire",
+  "tags.goldRush.complications.2":
+    "Les xénosapiens indigènes vivent près du filon",
+  "tags.goldRush.things.0": "Caisses du minerai raffiné",
+  "tags.goldRush.things.1": "Équipement minier prétech",
+  "tags.goldRush.things.2": "Les droits de miner d’un prospecteur mort",
+  "tags.goldRush.places.0": "Mine secrète",
+  "tags.goldRush.places.1": "Village xénosapien indigène",
+  "tags.goldRush.places.2": "Usine de transformation",
+  "tags.goldRush.places.3": "Ville en plein essort",
+  "tags.greatWork": "Grand projet",
+  "tags.greatWork.description":
+    "Les habitants se vouent depuis des générations à un projet d'une immense ampleur, et sont aujourd'hui obsédés par sa complétion. Ce peut être la construction d'un chantier astronautique, une gigantesque centrale produisant de l'énergie solaire, une réseau d'engins servant à terraformer la planète, ou l'évangélisation de leurs voisins. La raison d'être de leur civilisation est de faire progresser ce projet afin, un jour, de le mener à terme. ",
+  "tags.greatWork.enemies.0":
+    "Habitant planifiant de sacrifier les PJs pour le grand projet",
+  "tags.greatWork.enemies.1":
+    "Habitant croyant que les PJs menacent le grand projet",
+  "tags.greatWork.enemies.2":
+    "Fanatique obsessionnel prêt à détruite une chose ou à tuer un personne importante pour les PJs dans l'intérêt du grand projet",
+  "tags.greatWork.friends.0": "Étranger étudiant le projet",
+  "tags.greatWork.friends.1": "Habitant à l'attitude plus modérée",
+  "tags.greatWork.friends.2": "Fournisseur de matériel nécessaire au projet",
+  "tags.greatWork.complications.0": "Le grand projet est sans espoir",
+  "tags.greatWork.complications.1":
+    "Différentes factions ne s'entendent pas sur la nature du projet",
+  "tags.greatWork.complications.2":
+    "Une puissance étrangère est déterminée à contrecarrer le projet",
+  "tags.greatWork.things.0": "Matériaux essentiels au projet",
+  "tags.greatWork.things.1": "Plans qui ont été perdus",
+  "tags.greatWork.things.2":
+    "Technologie permettant d'accélérer grandement le projet",
+  "tags.greatWork.places.0": "Un chantier grouillant d'activité",
+  "tags.greatWork.places.1": "Logements ancestraux des travailleurs",
+  "tags.greatWork.places.2":
+    "Village rendu à peine vivable dans l'intérêt du projet",
+  "tags.hatred": "Haine",
+  "tags.hatred.description":
+    "Pour une raison ou une autre, la population de cette planète voue une haine viscérale aux habitant d’un système voisin. Peut-être que cette planète a été colonisée par des exilés de cet autre système, peut-être qu’il y a récemment eu une guerre interstellaire, et peut-être que des idées de supériorité raciale ou religieuses ont soufflé sur les braises de l’intolérance. Peu importe la cause, les habitants détestent leurs voisins et ceux qui sympathisent avec eux.",
+  "tags.hatred.enemies.0":
+    "Habitant convaincu que les étrangers sont des agents à la solde des voisins",
+  "tags.hatred.enemies.1":
+    "Politicien cynique ayant besoin d’un bouc émissaire",
+  "tags.hatred.friends.0":
+    "Agent du renseignement ayant besoin d’infiltrateurs",
+  "tags.hatred.friends.1":
+    "Producteur d'holodoc ayant besoin d'un « point de vue intérieur »",
+  "tags.hatred.friends.2": "Étranger malchanceux provenant du système détesté",
+  "tags.hatred.complications.0":
+    "Les PJs portent ou utilise un objet venant de la planète détestée",
+  "tags.hatred.complications.1":
+    "Les PJs sont connus pour avoir fait affaire avec la planète détestée",
+  "tags.hatred.complications.2":
+    "Les PJs « ressemblent » aux habitants de la planète détestée",
+  "tags.hatred.things.0":
+    "Preuve du mal causé par les habitants de la planète détestée",
+  "tags.hatred.things.1": "Récompense pour trouver des agents ennemis",
+  "tags.hatred.things.2":
+    "Relique volée par les habitants de la planète ennemie il y a plusieurs années",
+  "tags.hatred.places.0": "Musée dédié aux crimes de guerre",
+  "tags.hatred.places.1": "Site où ont été commis des atrocités",
+  "tags.hatred.places.2":
+    "Vaisseau spatial capturé et mis hors service gardé comme trophée",
+  "tags.heavyIndustry": "Planète industrielle",
+  "tags.heavyIndustry.description":
+    "Avec les limites de matière que permet le transport interstellaire, chaque planète se doit d’être largement autosuffisante. Certaines le sont plus que d’autres, et celle-ci comporte un secteur manufacturier très vigoureux capable de produire de grandes quantités de biens correspondant à son niveau de technologie. Peut-être que les habitants peuvent bénéficier de cela et ainsi adopter un mode de vie plus confortable, ou peut-être que cette richesse est investie par les dirigeants dans des projets d’autoglorification.",
+  "tags.heavyIndustry.enemies.0": "Magnat détenant un monopole",
+  "tags.heavyIndustry.enemies.1": "Espion industriel",
+  "tags.heavyIndustry.enemies.2": "Révolutionnaire insatisfait",
+  "tags.heavyIndustry.friends.0": "Aspirant entrepreneur",
+  "tags.heavyIndustry.friends.1": "Chef d’un syndicat de travailleurs",
+  "tags.heavyIndustry.friends.2": "Inventeur ambitieux",
+  "tags.heavyIndustry.complications.0": "Les usines sont toxiques",
+  "tags.heavyIndustry.complications.1":
+    "Les ressources exploitables à leur niveau de technologie s’épuisent",
+  "tags.heavyIndustry.complications.2":
+    "La population a besoin des produits manufacturés pour leur survie",
+  "tags.heavyIndustry.complications.3":
+    "Le produit principal des usines devient obsolète à cause de technologie étranger",
+  "tags.heavyIndustry.things.0": "Données industrielles confidentielles",
+  "tags.heavyIndustry.things.1": "Liste secrète des membres d’un syndicat",
+  "tags.heavyIndustry.things.2": "Parts de propriétés d’un complexe industriel",
+  "tags.heavyIndustry.places.0": "Lieu de travail dans l’usine",
+  "tags.heavyIndustry.places.1": "Salle de renconte d’un syndicat",
+  "tags.heavyIndustry.places.2": "Dépotoir de déchets toxiques",
+  "tags.heavyIndustry.places.3": "Complexe de recherche et développement",
+  "tags.heavyMining": "Planète minière",
+  "tags.heavyMining.description":
+    "Cette planète regorge de minerai de grande valeur, minerai généralement nécessaire pour l’industrie locale, les sytèmes de régulation de la vie, ou pour le raffinement en quantité suffisamment réduite pour l’exportation intersltellaire. Miner exige des efforts considérables, et plusieurs habitants travaillent dans cette industrie.",
+  "tags.heavyMining.enemies.0": "Patron d’une mine",
+  "tags.heavyMining.enemies.1": "Saboteur de tunnels",
+  "tags.heavyMining.enemies.2": "Prédateurs souterrains",
+  "tags.heavyMining.friends.0": "Prospecteur ermite",
+  "tags.heavyMining.friends.1": "Investisseurs étranger",
+  "tags.heavyMining.friends.2": "Représentant d’un syndicat minier",
+  "tags.heavyMining.complications.0":
+    "L’équipement nécessaire au raffinement brise",
+  "tags.heavyMining.complications.1": "Un tunnel s’effondre",
+  "tags.heavyMining.complications.2":
+    "Une forme de vie à base de silicate se développe dans les poumons des mineurs",
+  "tags.heavyMining.things.0": "La veine principale",
+  "tags.heavyMining.things.1": "Caisse de minerai raffiné de contrebande",
+  "tags.heavyMining.things.2": "Échantillons contrefaits de cristaux minéraux",
+  "tags.heavyMining.places.0": "Paroi verticale de la mine",
+  "tags.heavyMining.places.1": "Piles de résidus miniers",
+  "tags.heavyMining.places.2": "Fonderie bruyante",
+  "tags.hivemind": "Psychée collective",
+  "tags.hivemind.description":
+    "Les habitants de cette planète partagent leurs pensées et forment ensemble une seule et même identité. Cela s'explique peut-être par l'usage de puissantes prétechs, d'une discipline psionique exotique ou de l'influence xénosapienne. Certains individus peuvent être plus ou moins interconnectés avec le reste. ",
+  "tags.hivemind.enemies.0":
+    "Une psychée collective qui veut assimiler les étrangers",
+  "tags.hivemind.enemies.1":
+    "Une psychée collective méprisant ce qui lui est étranger",
+  "tags.hivemind.enemies.2":
+    "Une psychée collective qui craint et déteste ce qui lui est étranger",
+  "tags.hivemind.friends.0": "Une chercheur étudiant la psychée collective",
+  "tags.hivemind.friends.1": "Un individu dissocié de la psychée collective",
+  "tags.hivemind.friends.2": "Un proche d'une personne ayant été assimilée",
+  "tags.hivemind.complications.0":
+    "La psychée collective ne fonctionne que sur cette planète",
+  "tags.hivemind.complications.1":
+    "La psychée collective a une portée strictement limitée ",
+  "tags.hivemind.complications.2":
+    "La psychée collective est composée de plusieurs factions de personnalité",
+  "tags.hivemind.complications.3":
+    "Les individus partagent la psychée collective seulement lors de moments spécifiques",
+  "tags.hivemind.complications.4":
+    "La planète est habitée par une seule IA et des drones à la conscience limitée",
+  "tags.hivemind.things.0":
+    "Technoologie essentielle pour maintenir la psychée collective",
+  "tags.hivemind.things.1":
+    "Trésor précieux possédé par un étranger maintenant assimilé",
+  "tags.hivemind.things.2":
+    "Technologie rendant l'utilisateur « invisible » à la psychée collective",
+  "tags.hivemind.places.0": "Habitations à peine vivables pour les individus",
+  "tags.hivemind.places.1":
+    "Lieu de travail où les individus meurent régulièrement et dans l'indifférence",
+  "tags.hivemind.places.2": "Village dénué de lieux permettant des rencontres",
+  "tags.holyWar": "Guerre sainte",
+  "tags.holyWar.description":
+    "Une terrible guerre sainte fait rage sur cette planète, soit entre des factions locales ou contre les païens d'une planète voisine. Cette guerre peut impliquer des religions traditionnelles, mais aussi des images de marque, des idéologies politiques ou des mouvements artistiques. ",
+  "tags.holyWar.enemies.0": "Pape fou et sanguinaire",
+  "tags.holyWar.enemies.1": "Dirigeant séculier froidement cynique",
+  "tags.holyWar.enemies.2": "Démagogue politiquement totalitaire",
+  "tags.holyWar.friends.0": "Artisan de la paix désespéré",
+  "tags.holyWar.friends.1": "Réfugié en difficulté ayant fui les violences",
+  "tags.holyWar.friends.2":
+    "Chef religieux pacifique ayant perdu les débats internes",
+  "tags.holyWar.complications.0":
+    "Les victimes de la guerre sainte font quelque chose d'objectivement horrible",
+  "tags.holyWar.complications.1":
+    "La guerre sainte cache des intentions plus traditionnelles",
+  "tags.holyWar.complications.2":
+    "Les dirigeants ne cherchent pas à gagner, mais à prolonger la guerre",
+  "tags.holyWar.complications.3":
+    "Les groupes se faisant la guerre sont tous des fanatiques religieux",
+  "tags.holyWar.things.0": "Relique sacrée",
+  "tags.holyWar.things.1": "Un blasphémateur capturé et condamné à mort",
+  "tags.holyWar.things.2": "Butin pillé lors d'une bataille",
+  "tags.holyWar.places.0": "Immense structure sacrée ",
+  "tags.holyWar.places.1": "Village d'infidèles dévasté",
+  "tags.holyWar.places.2": "Autel consacré aux martyrs morts à la guerre",
+  "tags.hostileBiosphere": "Biosphère hostile",
+  "tags.hostileBiosphere.description":
+    "Cette planète grouille de vie hostile à l’être humain. Peut-être qu’elle provoque des réactions allergiques, forçant ainsi le port de masques respiratoires et de produits antiallergènes faits sur mesure. Peut-être que les prédateurs naturels sont immenses et agressifs, ou peut-être que la flore toxique envahi et détruit toute plantation humaine comestible.",
+  "tags.hostileBiosphere.enemies.0": "Faune locale",
+  "tags.hostileBiosphere.enemies.1":
+    "Fidèle d’une secte vouant un culte à la nature",
+  "tags.hostileBiosphere.enemies.2": "Xénosapiens indigènes",
+  "tags.hostileBiosphere.enemies.3": "Superviseur de chantier insensible",
+  "tags.hostileBiosphere.friends.0": "Xénobiologiste",
+  "tags.hostileBiosphere.friends.1": "Touriste de safari",
+  "tags.hostileBiosphere.friends.2": "Guide local grisonnant",
+  "tags.hostileBiosphere.complications.0":
+    "Défaillance des masques respiratoires",
+  "tags.hostileBiosphere.complications.1": "Infestation de parasites",
+  "tags.hostileBiosphere.complications.2":
+    "Les serres abritant les récoltes ne sont plus étanches",
+  "tags.hostileBiosphere.things.0":
+    "Extrait biologique indigène de grande valeur",
+  "tags.hostileBiosphere.things.1": "Colonie-bunker abandonnée",
+  "tags.hostileBiosphere.things.2": "Reste d’une expédition ayant échoué",
+  "tags.hostileBiosphere.places.0": "Clairière trompeusement paisible",
+  "tags.hostileBiosphere.places.1": "Jungle polychrome fumante",
+  "tags.hostileBiosphere.places.2":
+    "Nuit alors que les PJs sont entourés de Choses",
+  "tags.hostileSpace": "Système solaire hostile",
+  "tags.hostileSpace.description":
+    "Le système dans lequel cette planète existe est périlleux. Quelque chose dans ce système est dangereux pour ses habitants, peut-être à cause de nuages de météores, de radiation stellaire, de xénosapiens hostiles cachés dans la ceinture d’astéroïde ou de fréquents nuages de comètes.",
+  "tags.hostileSpace.enemies.0": "Chef de raid xénosapien",
+  "tags.hostileSpace.enemies.1": "Terroriste lançant des météores",
+  "tags.hostileSpace.enemies.2": "Chef local paranoïaque",
+  "tags.hostileSpace.friends.0": "Astronome",
+  "tags.hostileSpace.friends.1": "Commandant de la défense locale",
+  "tags.hostileSpace.friends.2":
+    "Agent responsable des systèmes d’avertissement hâtifs",
+  "tags.hostileSpace.complications.0":
+    "Les habitants croient que le danger est un châtiment divin",
+  "tags.hostileSpace.complications.1":
+    "Les habitants blâment les étrangers pour le danger",
+  "tags.hostileSpace.complications.2":
+    "L’élite locale profite du danger d’une certaine manière",
+  "tags.hostileSpace.things.0": "Avertissement hâtif d’un impact ou d’un raid",
+  "tags.hostileSpace.things.1":
+    "Richesses abandonnées sur le site d’une catastrophe",
+  "tags.hostileSpace.things.2": "Clé d’un binker sécuritaire",
+  "tags.hostileSpace.places.0": "Ville observant l’approche d’un astéroïde",
+  "tags.hostileSpace.places.1": "Village incendié lors d’un rais xénosapien",
+  "tags.hostileSpace.places.2": "Cratère immense et ancien",
+  "tags.immortals": "Immortels",
+  "tags.immortals.description":
+    "Les habitants de cette planète sont effectivement immortels. Cela peut s'expliquer par des manipulations génétiques, les propriétés d'une ressources locale, l'usage de la cybernétique, ou encore par une conviction si grande en la réincarnation que la mort est culturellement hors de propos. La source de l'immortalité est probablement efficace uniquement chez les habitants, sans quoi cette planète attirerait l'attention d'impérialistes extérieurs. ",
+  "tags.immortals.enemies.0": "Étranger déterminé à voler l'immortalité",
+  "tags.immortals.enemies.1":
+    "Habitant prétentieux convaincu que son peuple mérite de régner sur tous",
+  "tags.immortals.enemies.2":
+    "Étranger voulant détruire la planète avant qu'elle ne devienne une menace",
+  "tags.immortals.friends.0": "Chercheur curieux intéressé par la longévité",
+  "tags.immortals.friends.1": "Habitant à la recherche de sensations fortes",
+  "tags.immortals.complications.0":
+    "L'immortalité nécessite de faire ce que les étrangers ne peuvent faire, ou refusent de faire",
+  "tags.immortals.complications.1":
+    "L'immortalité prend fin si on quitte la planète",
+  "tags.immortals.complications.2": "Les crimes mineurs sont punis par la mort",
+  "tags.immortals.complications.3":
+    "Les immortels doivent mourir ou s'exiler après un certain temps",
+  "tags.immortals.complications.4":
+    "L'immortalité cause des effets secondaires brutaux",
+  "tags.immortals.things.0": "Médicament provoquant l'immortalité",
+  "tags.immortals.things.1": "Chef-d'oeuvre d'un artisan éternel",
+  "tags.immortals.things.2": "Toxine qui n'affecte que les immortels",
+  "tags.immortals.places.0": "Village où on ne voit aucun enfant",
+  "tags.immortals.places.1":
+    "Structure manifestement ancienne encore préservée",
+  "tags.immortals.places.2":
+    "Humour reposant sur la connaissance intime des siècles passés",
+  "tags.localSpecialty": "Spécialité locale",
+  "tags.localSpecialty.description":
+    "La planète est peut-être sophistiquée ou à peine capable de construire une machine à vapeur, mais dans tous les cas, elle produit quelque chose de rare et précieux recherché par plusieurs dans la galaxie. C’est peut-être un extrait pharmaceutique produit par une recette secrète, un produit culturel populaire, ou même des humains génétiquement modifiés pour accomplir parfaitement certaines tâches.",
+  "tags.localSpecialty.enemies.0": "Monopoliste",
+  "tags.localSpecialty.enemies.1":
+    "Étranger voulant interdire la spécialité locale",
+  "tags.localSpecialty.enemies.2":
+    "Habitant considérant la spécialité locale comme sacrée",
+  "tags.localSpecialty.friends.0": "Espion cherchant pour la source",
+  "tags.localSpecialty.friends.1": "Artisan ayant besoin de protection",
+  "tags.localSpecialty.friends.2": "Exportateur avec des problèmes",
+  "tags.localSpecialty.complications.0":
+    "La spécialité locale est de nature répugnante",
+  "tags.localSpecialty.complications.1":
+    "Les fabriquants de la spécialité locale refusent de vendre à des étrangers",
+  "tags.localSpecialty.complications.2":
+    "La spécialité locale est fabriquée dans un endroit isolé et dangereux",
+  "tags.localSpecialty.complications.3":
+    "Les fabriquants ne veulent plus produire la spécialité locale",
+  "tags.localSpecialty.things.0": "La spécialité locale elle-même",
+  "tags.localSpecialty.things.1": "La recette secrète",
+  "tags.localSpecialty.things.2": "Échantillon d’une variété améliorée",
+  "tags.localSpecialty.places.0": "Manufacture secrète",
+  "tags.localSpecialty.places.1": "Cache secrète",
+  "tags.localSpecialty.places.2":
+    "Compétition artistique pour le meilleur artisan",
+  "tags.localTech": "Technologie locale",
+  "tags.localTech.description":
+    "Les habitants peuvent produire un exemple particulier d’une technologie extrêmmeent avancée, surpassant peut-être même les standars prétech. Ils utilisent peut-être des ressources locales pour le faire, ou sont peut-être tombés sur une découverte scientifique pointue, ou possèdent peut-être une usine expérimentale fonctionnelle.",
+  "tags.localTech.enemies.0": "Gardien de la technologie locale",
+  "tags.localTech.enemies.1": "Industriel étranger",
+  "tags.localTech.enemies.2": "Défenses automatisées qui s’active soudainement",
+  "tags.localTech.enemies.3": "Mentors xénosapiens indigènes",
+  "tags.localTech.friends.0": "Scientifique étranger curieux",
+  "tags.localTech.friends.1": "Acheteur enthousiaste de technologie locale",
+  "tags.localTech.friends.2": "Habitant ayant besoin d’aide technique",
+  "tags.localTech.complications.0": "La technologie locale n’est pas fiable",
+  "tags.localTech.complications.1":
+    "La technologie ne fonctionne que sur cette planète",
+  "tags.localTech.complications.2":
+    "La technologie locale cause des effets secondaires mal compris",
+  "tags.localTech.complications.3":
+    "La technologie locale est de nature xénosapienne",
+  "tags.localTech.things.0": "La technologie locale elle-même ",
+  "tags.localTech.things.1":
+    "Un paiement pour une livraison massive non réclamé",
+  "tags.localTech.things.2":
+    "Les plans secrets pour la production de la technologie locale",
+  "tags.localTech.things.3":
+    "Une ancienne base de donnée de recherche et développement xénosapienne",
+  "tags.localTech.places.0": "Usine xénosapienne",
+  "tags.localTech.places.1": "Centre de recherche et développement létal",
+  "tags.localTech.places.2":
+    "Chambre forte de courtage pour la technologie locale",
+  "tags.majorSpaceyard": "Chantier spatial majeur",
+  "tags.majorSpaceyard.description":
+    "La plupart des planète ayant un niveau de technologie de 4 ou plus ont la technologie et les installations orbitales nécessaires pour construire des vaisseaux spatiaux et des réacteurs apexiques. Cette planète est dotée d’un chantier spatial majeur, qui est peut-être hérité du temps précédant le Silence ou construit de peine et de misère lors des dernières décennies. Il peut construire des aéronef de catégorie Capitale, et le faire plus rapidement et à moindre coût que ses voisins.",
+  "tags.majorSpaceyard.enemies.0": "Saboteur ennemi",
+  "tags.majorSpaceyard.enemies.1": "Espion industriel",
+  "tags.majorSpaceyard.enemies.2": "Magnat industriel complottant",
+  "tags.majorSpaceyard.enemies.3": "Aspirant pirate spatial",
+  "tags.majorSpaceyard.friends.0": "Capitaine coincé en cale sèche",
+  "tags.majorSpaceyard.friends.1": "Chef de la maintenance",
+  "tags.majorSpaceyard.friends.2": "Innovateur fou",
+  "tags.majorSpaceyard.complications.0":
+    "Le chantier spatial majeur est une relique xénosapienne",
+  "tags.majorSpaceyard.complications.1":
+    "Le chantier spatial majeur s’épuise à cause de son utilisation abusive",
+  "tags.majorSpaceyard.complications.2":
+    "Le chantier spatial majeur est vivant",
+  "tags.majorSpaceyard.complications.3":
+    "Le chantier spatial majeur nécessite l’utilisation de maltech pour fonctionner",
+  "tags.majorSpaceyard.things.0":
+    "Plans prétech inutilisables pour cause de propriété intellectuelle",
+  "tags.majorSpaceyard.things.1":
+    "Clés maîtresses pour activer les vieilles installations prétech",
+  "tags.majorSpaceyard.things.2": "Un astronef payé, mais non réclamé",
+  "tags.majorSpaceyard.places.0": "Quai spatial caché",
+  "tags.majorSpaceyard.places.1":
+    "Surface d’un astronef partiellement complété",
+  "tags.majorSpaceyard.places.2": "Dépôt de ferraille aéronautique",
+  "tags.mandarinate": "Mandarinat",
+  "tags.mandarinate.description":
+    "La planète est dirigée par une élite intellectuelle choisie en fonction de critères objectifs. Les valeurs sélectionnées par ces tests sont peut-être reliées aux capacités réelles permettant de diriger efficacement, mais pas nécessairement, et le système d'évaluation peut être plus ou moins incorruptible. ",
+  "tags.mandarinate.enemies.0": "Évaluateur corrompu",
+  "tags.mandarinate.enemies.1": "Diplômé incompétent mais très bien classé",
+  "tags.mandarinate.enemies.2":
+    "Chef impitoyable d'un clan composé d'individus très bien classés",
+  "tags.mandarinate.friends.0": "Individu en croisade pour réformer les tests",
+  "tags.mandarinate.friends.1":
+    "Diplômé compétent mais sans contacts influents",
+  "tags.mandarinate.friends.2": "Génie échouant aux tests",
+  "tags.mandarinate.complications.0":
+    "Les tests n'évaluent aucunement les compétences requises pour gouverner",
+  "tags.mandarinate.complications.1":
+    "Les tests étaient autrefois utiles, mais sont devenus désuets à cause de l'évolution culturelle ou technologique",
+  "tags.mandarinate.complications.2":
+    "Le test est essentiel pour maintenir la cohésion sociale, mais inutile pour la gouvernance régulière",
+  "tags.mandarinate.complications.3":
+    "Les tests sont de la poudre aux yeux; les évaluations sont faites en fonction de la richesse ou de l'influence",
+  "tags.mandarinate.things.0": "Corrigé du prochain test",
+  "tags.mandarinate.things.1": "Essai perdu de grande qualité",
+  "tags.mandarinate.things.2": "Preuve de tricherie",
+  "tags.mandarinate.places.0":
+    "Structure massive abritant des cubicules où on passe des tests",
+  "tags.mandarinate.places.1": "École pleine d'étudiants désespérés",
+  "tags.mandarinate.places.2":
+    "Bâtiment gouvernemental orné de citations académiques et d'images savantes",
+  "tags.mandateBase": "Base du Mandat terrien",
+  "tags.mandateBase.description":
+    "Le Mandat terrien a maintenu son emprise ici beaucoup plus longtemps qu'ailleurs, et la planète se considère peut-être comme son héritière légitime. La plupart de ces planètes sont technologiquement supérieures, mais elles doivent peut-être composer avec des restrictions technologiques ou des systèmes de contrôle anciens servant à empêcher toute forme de rebéllion. ",
+  "tags.mandateBase.enemies.0": "IA de serveillance dérangée du Mandat",
+  "tags.mandateBase.enemies.1": "Aspirant dirigeant du secteur",
+  "tags.mandateBase.enemies.2":
+    "Démagogue prêchant la supériorité locale sur les « planète rebelles traitresses »",
+  "tags.mandateBase.friends.0": "Habitant idéaliste et charitable",
+  "tags.mandateBase.friends.1":
+    "Missinnaire pour les technologies avancées du Mandat",
+  "tags.mandateBase.friends.2":
+    "Étranger cherchant des informations perdues dans les archives du Mandat",
+  "tags.mandateBase.complications.0":
+    "Le système de surveillance force les habitants à se comportement agrressivement contre les planètes « rebelles »",
+  "tags.mandateBase.complications.1":
+    "Le système de surveillance entrave lourdement l'usage des technologies locales par les étrangers",
+  "tags.mandateBase.complications.2":
+    "Les colons originaux sont morts et ont été remplacés par des étrangers qui ne comprennent pas tous les détails",
+  "tags.mandateBase.things.0": "Prétech très avancée",
+  "tags.mandateBase.things.1": "Équipement militaire du Mandat",
+  "tags.mandateBase.things.2":
+    "Banque de données stockant des plans pour produire des technologies précieuses",
+  "tags.mandateBase.places.0": "Bureaux usés du Mandat toujours utilisés",
+  "tags.mandateBase.places.1": "Chambre forte contenant de la prétech ancienne",
+  "tags.mandateBase.places.2":
+    "Monument à la gloire du Mandat soigneusement préservé",
+  "tags.maneaters": "Cannibales",
+  "tags.maneaters.description":
+    "Les habitants sont cannibales, soit par nécessité ou par préférence culturelle. Cela peut prendre la forme de consommation de chair humaine, mais certaines planètes exigent plutôt de la recycler pour en faire un produit pharmaceutique, peut-être pour permettre de prolonger la vie des dirigeants goules ou vampires. Le cannibalisme joue un rôle social majeur. ",
+  "tags.maneaters.enemies.0": "Dirigeant goule ou vampire impitoyable",
+  "tags.maneaters.enemies.1": "Lieutenant d'une tribu affamée",
+  "tags.maneaters.enemies.2":
+    "Pervers sophistiqué prêchant la splendide authenticité du cannibalisme",
+  "tags.maneaters.friends.0": "Habitant sympathique fuyant la fourchette",
+  "tags.maneaters.friends.1":
+    "Prisonnier s'étant échappé d'une uside de recyclage pharmaceutique",
+  "tags.maneaters.friends.2":
+    "Réformateur cherchant à changer les coutumes ou à soigner ce qui les rend nécessaires",
+  "tags.maneaters.complications.0":
+    "Les conditions locales rendent le cannibalisme vital",
+  "tags.maneaters.complications.1":
+    "Les habitants élèvent les humains comme du bétail ou les exploitent comme une ressource naturelle",
+  "tags.maneaters.complications.2":
+    "On s'attend des étrangers qu'ils participent aux coutumes",
+  "tags.maneaters.complications.3":
+    "La coutume n'est pas nécessaire mais jalousement maintenur par le peuple",
+  "tags.maneaters.things.0": "Possessions d'un repas récent",
+  "tags.maneaters.things.1": "Un étranger de marque destiné à figurer au menu",
+  "tags.maneaters.things.2":
+    "Une toxine rendant la chair humaine mortelle si consommée",
+  "tags.maneaters.places.0": "Abattoir affreux destiné aux humains",
+  "tags.maneaters.places.1": "Restaurant extrêmement raffiné",
+  "tags.maneaters.places.2": "Salon funéraire et restaurant",
+  "tags.megacorps": "Mégacorporations",
+  "tags.megacorps.description":
+    "La planète est dominée par des mégacorporations, et dans un esprit résolumment cyberpunk, chacune est plus puissante que les États sur lesquelles elles se sont bâties. Les mégacorporations s'affrontent habituellement dans une guerre froide, échangeant sur les marchés tout en s'attaquant mutuellement par le biais de mercenaires auxquels on ne peut les associer. Un Conseil où siègent toutes les corporations existe, et s'assure de punir celles qui agissent de manière trop manifeste. ",
+  "tags.megacorps.enemies.0": "Cadre mégalomane",
+  "tags.megacorps.enemies.1":
+    "Subalterne voulant employer les PJs comme infiltrateurs",
+  "tags.megacorps.enemies.2":
+    "Mercenaire impitoyable qui désire ce que les PJs possèdent",
+  "tags.megacorps.friends.0": "Victime de machinations corporatives",
+  "tags.megacorps.friends.1":
+    "Marchand étranger impliqué au-delà de ses capacités",
+  "tags.megacorps.friends.2":
+    "Réformateur local frustré par l'indifférence des mégacorporations",
+  "tags.megacorps.complications.0":
+    "Les mégacorporations sont les seules à fournir un élément essentiel à la vie locale",
+  "tags.megacorps.complications.1":
+    "Un système du Mandat terrien punit la violence trop manifeste",
+  "tags.megacorps.complications.2":
+    "Les mégacorporations peinent à combattre un gouvernement national plus horrible qu'elles",
+  "tags.megacorps.things.0":
+    "Chose permettant de faire chanter un cadre d'une mégacorporation",
+  "tags.megacorps.things.1":
+    "Mot de passe donnant accès à des secrets corporatifs sensibles",
+  "tags.megacorps.things.2":
+    "Preuve de la responsabilité d'une mégacorporation pour un crime public révoltant et haineux",
+  "tags.megacorps.things.3":
+    "Informations sur une ligne de produits bientôt dévoilée",
+  "tags.megacorps.places.0":
+    "Un endroit placardé de publicités pour les mégacorporations",
+  "tags.megacorps.places.1":
+    "Une place publique portant discrètement la marque d'une mégacorporation",
+  "tags.megacorps.places.2": "Base militaire privée d'une mégacorporation",
+  "tags.mercenaries": "Mercenaires",
+  "tags.mercenaries.description":
+    "Cette planète est soit fameuse pour ses groupes de mercenaires, soit affligée par une multitude de groupes mercenaires au service de ceux qui peuvent les payer ou les soudoyer suffisamment.",
+  "tags.mercenaries.enemies.0": "Chef de mercenaires qui est amoral",
+  "tags.mercenaries.enemies.1":
+    "Riche étranger voulant se payer le contrôle de la planète",
+  "tags.mercenaries.enemies.2":
+    "Chef de journalistes mercenaires forçant les habitants à travailler pour eux",
+  "tags.mercenaries.friends.0":
+    "Chef de mercenaires qui est jeune et idéaliste",
+  "tags.mercenaries.friends.1": "Commandant troublé de l'armée nationale",
+  "tags.mercenaries.friends.2":
+    "Étranger voulant embaucher des mercenaires pour une bonne cause",
+  "tags.mercenaries.complications.0":
+    "Les mercenaires de la région sont la seule chose empêchant une puissance impériale étrangère d'imposer sa domination sur les habitants",
+  "tags.mercenaries.complications.1":
+    "Les mercenaires sont les vestiges d'une armée nationale déchue",
+  "tags.mercenaries.complications.2":
+    "Les mercenaires ne combattent presque jamais, et acceptent régulièrement des paiement pour ne pas le faire",
+  "tags.mercenaries.things.0":
+    "Cargaison perdue destinée à payer des mercenaires",
+  "tags.mercenaries.things.1": "Technologie militaire oubliée",
+  "tags.mercenaries.things.2":
+    "Preuve qu'un groupe de mercenaire trahira ses employeurs dans un avenir rapproché",
+  "tags.mercenaries.places.0":
+    "Camp miteux habité par des mercenaires indisciplinés",
+  "tags.mercenaries.places.1": "Village dévasté occupé par des mercenaires",
+  "tags.mercenaries.places.2":
+    "Villa luxueuse et extrêmement bien défendue appartenant à un chef de mercenaires",
+  "tags.minimalContact": "Contact minimal",
+  "tags.minimalContact.description":
+    "La planète refuse presque systématiquement d'entrer en contact avec les étrangers : seul un petit spatioport isolé permet les échanges commerciaux, et les cargaisons sont attentivement scrutées pour éviter la contrebande. Les gouvernements locaux essaient peut-être de garder les habitants ignorants de l'existence même du commerce interstellaire, ou peut-être considèrent-ils les étrangers comme trop dangereux ou répugnants pour se mêler à la population.",
+  "tags.minimalContact.enemies.0": "Agent de douanes",
+  "tags.minimalContact.enemies.1": "Habitant xénophobe",
+  "tags.minimalContact.enemies.2":
+    "Marchand établi qui n'aime pas la compétition",
+  "tags.minimalContact.friends.0": "Aspirant touriste",
+  "tags.minimalContact.friends.1": "Anthropologue",
+  "tags.minimalContact.friends.2": "Voleur étranger",
+  "tags.minimalContact.friends.3": "Missionnaire religieux",
+  "tags.minimalContact.complications.0":
+    "Les habitants sont porteur d'une maladie sans danger pour eux, mais mortels pour les étrangers",
+  "tags.minimalContact.complications.1":
+    "Les habitants cachent leurs intentions maléfiques aux étrangers",
+  "tags.minimalContact.complications.2":
+    "Les habitants possède une chose désespérément recherchée par d'autres, mais refusent de l'apporter au port commercial",
+  "tags.minimalContact.things.0": "Marchandises de contrebande",
+  "tags.minimalContact.things.1": "Code de sécurité donnant accès au périmètre",
+  "tags.minimalContact.things.2": "Produits locaux destinés au marché noir",
+  "tags.minimalContact.places.0": "Bar du port commercial",
+  "tags.minimalContact.places.1": "Zone réservé au marché noir",
+  "tags.minimalContact.places.2":
+    "Lieu d'aterrissage secret pour contrebandiers",
+  "tags.misandryMisogyny": "Misandrie ou misogynie",
+  "tags.misandryMisogyny.description":
+    "La culture de cette planète méprise les représentants d’un genre sexuel en particulier. Les membres de ce genre n’ont pas le droit d’occuper des positions détenant un pouvoir formel, et sont peut-être restreints dans leurs déplacements et activités. Certaines planètes méprise peut-être même les deux genres traditionnels, utilisant la manipulation génétique pour créer un genre hybride ou distinct.",
+  "tags.misandryMisogyny.enemies.0": "Fondamentaliste culturel",
+  "tags.misandryMisogyny.enemies.1":
+    "Missionnaire culturel voulant convertir les étrangers",
+  "tags.misandryMisogyny.enemies.2":
+    "Rebelle local poussé à commettre des actes de violence insensée",
+  "tags.misandryMisogyny.friends.0": "Habitant opprimé",
+  "tags.misandryMisogyny.friends.1": "Chercheur",
+  "tags.misandryMisogyny.friends.2":
+    "Étranger voulant émanciper le genre opprimé",
+  "tags.misandryMisogyny.friends.3": "Réformateur local",
+  "tags.misandryMisogyny.complications.0":
+    "Le genre opprimé s’agite contre les coutumes",
+  "tags.misandryMisogyny.complications.1":
+    "Le genre opprimé est largement favorable aux coutumes",
+  "tags.misandryMisogyny.complications.2":
+    "Les coutumes sont liées à une caractéristique physique que l’on retrouve sur la planète",
+  "tags.misandryMisogyny.complications.3":
+    "Le genre opprimé est génétiquement modifié par de la maltech pour les « domestiquer »",
+  "tags.misandryMisogyny.things.0":
+    "Formule en aérosol permettant de renverser les modifications génétiques qui rendent le sexe opprimé plus docile",
+  "tags.misandryMisogyny.things.1": "Histoire secrète de la planète",
+  "tags.misandryMisogyny.things.2":
+    "Équipement prétech de modification génétique",
+  "tags.misandryMisogyny.places.0":
+    "Autel célébrant les vertus du genre privilégié",
+  "tags.misandryMisogyny.places.1":
+    "Centre de sécurité pour controller les opprimés",
+  "tags.misandryMisogyny.places.2": "Laboratoire de modification génétique",
+  "tags.nightWorld": "Planète nocturne",
+  "tags.nightWorld.description":
+    "La planète est éternellement plongée dans la noirceur. La vie sur cette planète tire son énergie autrement que par la lumière, par exemple la géothermie, les réactions chimiques extrêmement volatiles du sol, ou des rayons invisibles à l'oeil. La faune et la flore sont généralement voraces pour survivre. ",
+  "tags.nightWorld.enemies.0": "Monstruosité nocturne",
+  "tags.nightWorld.enemies.1":
+    "Étranger trouvant la noirceur de la planète utile à la poursuite de ses intérêts malfaisants",
+  "tags.nightWorld.enemies.2":
+    "Scientifique fou expérimentant avec la vie indigène",
+  "tags.nightWorld.friends.0": "Chercheur étranger curieux",
+  "tags.nightWorld.friends.1": "Chef de colonie qui a des difficultés",
+  "tags.nightWorld.friends.2":
+    "Haut prêtre d'une secte accordant un sens sacré à la nuit",
+  "tags.nightWorld.complications.0":
+    "La lumière du jour apparait après de longs intervalles et est considéré comme un cataclysme",
+  "tags.nightWorld.complications.1":
+    "La lumière cause des réactions dangereuses chez les êtres vivants ou les éléments chimiques indigènes",
+  "tags.nightWorld.complications.2":
+    "Les habitants ont été génétiquement modifiés pour vivre sans lumière",
+  "tags.nightWorld.things.0": "Élément chimique rare, créé dans la noirceur",
+  "tags.nightWorld.things.1": "Source lumineuse utilisable sur la planète",
+  "tags.nightWorld.things.2":
+    "Cache de contrebandiers oubliée ici depuis des lustres",
+  "tags.nightWorld.places.0": "Étendue sauvage informe dans la noirceur",
+  "tags.nightWorld.places.1": "Mer sans soleil",
+  "tags.nightWorld.places.2": "Endroit caractérisé par les sons ou les odeurs",
+  "tags.nomads": "Nomades",
+  "tags.nomads.description":
+    "La plupart des habitants de cette planète sont nomades, suivant habituellement un cycle de déplacement traditionnel sur leurs terres. La promesse de richesses à piller ou les menaces environnementales peuvent mener ces groupes à s'attaquer entre eux. Dans certains cas, les groupes doivent constamment se déplacer à cause des dangers imprévisibles qui affectent la planète. ",
+  "tags.nomads.enemies.0":
+    "Chef tribal voulant désespérément ce que les PJs possèdent",
+  "tags.nomads.enemies.1": "Lieutenant impitoyable d'un groupe de pillards",
+  "tags.nomads.enemies.2":
+    "Dirigeant voulant constituer une armée avec les nomades",
+  "tags.nomads.friends.0": "Jeune nomade indépendant d'esprit",
+  "tags.nomads.friends.1": "Rêveur imaginant une vie stable",
+  "tags.nomads.friends.2": "Étranger épris du monde de vie local",
+  "tags.nomads.complications.0":
+    "Un essaim meurtrier force les habitants à se déplacer régulièrement",
+  "tags.nomads.complications.1":
+    "Un système de défense ancien détruit les communautés qui demeure trop longtemps au même endroit",
+  "tags.nomads.complications.2":
+    "Des zones chimiques exigent que les habitants se déplacent pour éviter de subir des effets secondaires",
+  "tags.nomads.things.0": "Cache d'une ressource rare et précieuse",
+  "tags.nomads.things.1": "Butin pillé dans un raid",
+  "tags.nomads.things.2":
+    "Technologie permettant de rendre un endroit durablement sécuritaire",
+  "tags.nomads.places.0": "Camp nomade temporaire",
+  "tags.nomads.places.1": "Oasis ou réserve d'une ressource vitale",
+  "tags.nomads.places.2":
+    "Terres désolés dénuées de chemins qui tue ceux qui s'y aventurent aveuglément",
+  "tags.oceanicWorld": "Planète océanique",
+  "tags.oceanicWorld.description":
+    "La planète est entièrement ou presque entièrement couverte d’eau liquide. Les villes sont peut-être flottantes, ou sont peut-être perchées sur les quelques îles et atoll qui émergent des océans, ou peut-être des bulles enfouies sous l’eau. La survie dépend de l’aquaculture, et les planètes dépourvues d’une biosphère comestible comptent sur des cultures marines terriennes génétiquement modifiées.",
+  "tags.oceanicWorld.enemies.0": "Pirate pillard",
+  "tags.oceanicWorld.enemies.1": "Gang de « récupérateurs » violents",
+  "tags.oceanicWorld.enemies.2": "Monstre marin à tentacules",
+  "tags.oceanicWorld.friends.0": "Pêcheur qui risque tout",
+  "tags.oceanicWorld.friends.1": "Ermite marin",
+  "tags.oceanicWorld.friends.2": "Vie indigène intelligente",
+  "tags.oceanicWorld.complications.0":
+    "Les flux marins empêchent les réacteurs antigrav de fonctionner correctement sur la planète",
+  "tags.oceanicWorld.complications.1": "Les océans sont corrosifs ou toxiques",
+  "tags.oceanicWorld.complications.2":
+    "Des tempêtes éclatent régulièrement sur les océans",
+  "tags.oceanicWorld.things.0": "Un trésor de pirate enfoui",
+  "tags.oceanicWorld.things.1": "Localisation d’un énorme banc de poissons",
+  "tags.oceanicWorld.things.2": "Équipement de purification d’eau prétech",
+  "tags.oceanicWorld.places.0": "La seule île de la planète",
+  "tags.oceanicWorld.places.1": "Spatioport flottant sur l’eau",
+  "tags.oceanicWorld.places.2": "Pont d’un navire balayé par une tempête",
+  "tags.oceanicWorld.places.3": "Ville sous-marine dans une bulle",
+  "tags.outOfContact": "Sans contact",
+  "tags.outOfContact.description":
+    "Les habitants sont sans contact avec le reste de la galaxie depuis des siècles, peut-être même plus. Peut-être que les colons d’origine cherchaient à se cacher du reste de l’univers, ou peut-être que le Silence a détruit tous leurs moyens de communication. Cela fait peut-être si longtemps que l’existence de civilisations humaines sur d’autres planètes est aujourd’hui le fait de légendes. Les PJs sont peut-être les premiers à visiter cette planète depuis la Première Vague de colonisation ayant eu lieu il y a des milliers d’années.",
+  "tags.outOfContact.enemies.0": "Dirigeant local craintif",
+  "tags.outOfContact.enemies.1": "Prêtre local zélé",
+  "tags.outOfContact.enemies.2":
+    "Puissance sinistre ayant gardé cette planète isolée",
+  "tags.outOfContact.friends.0": "Membre de la noblesse locale qui complotte",
+  "tags.outOfContact.friends.1": "Théologien hérétique",
+  "tags.outOfContact.friends.2":
+    "Habitant membre d’une secte vouant un culte aux ovnis",
+  "tags.outOfContact.complications.0":
+    "Systèmes de défense tirent sur les astronefs tentant de décoller",
+  "tags.outOfContact.complications.1": "Les habitants veulent rester isolés",
+  "tags.outOfContact.complications.2":
+    "Les habitants sont extrêmement vulnérables aux maladies provenant d'ailleurs",
+  "tags.outOfContact.complications.3":
+    "Le langage indigène est complètement différent de tous les langages connus des PJs",
+  "tags.outOfContact.things.0": "Équipement prétech ancien",
+  "tags.outOfContact.things.1": "Relique terrienne amenée de la Terre",
+  "tags.outOfContact.things.2": "Journaux des colons originaux",
+  "tags.outOfContact.places.1":
+    "Site d’atterrissage originel des colons, perdu depuis longtemps",
+  "tags.outOfContact.places.0": "Cour du dirigeant local",
+  "tags.outOfContact.places.2": "Contrôle des batteries de défense anciennes",
+  "tags.outpostWorld": "Base de travail",
+  "tags.outpostWorld.description":
+    "Cette planète a pour toute civilisation humaine qu’une petite base de travail implantée là par une corporation ou un gouvernement étranger. Peut-être que le personnel sert à opérer un centre de ravitaillement et de réparations pour les astronefs, ou peut-être qu’ils s’assurent du bon fonctionnement d’un complexe d’exploitation et de raffinement minier automatisé. Ils sont peut-être là pour étudier des anciennes ruines, ou peut-être qu’ils surveillent le mouvement et les communications dans ce système. La base de travail est probablement bien équipée pour résister aux attaques de faible envergure pouvant être lancée par des pirates. ",
+  "tags.outpostWorld.enemies.0": "Membre du personnel devenu fou",
+  "tags.outpostWorld.enemies.1":
+    "Commandant de la base de travail désitant qu’elle reste secrète",
+  "tags.outpostWorld.enemies.2": "Saboteur infiltré",
+  "tags.outpostWorld.friends.0": "Membre du personnel souffrant de solitude",
+  "tags.outpostWorld.friends.1": "Chercheur faisant une fixation",
+  "tags.outpostWorld.friends.2": "Chef de la maintenance surchargé de travail",
+  "tags.outpostWorld.complications.0":
+    "Les systèmes de défenses des ruines xénosapiennes se mettent en marche",
+  "tags.outpostWorld.complications.1":
+    "Des troubles atmosphériques coincent les PJs dans la base de travail pour un mois",
+  "tags.outpostWorld.complications.2":
+    "Des pirates attaquent la base de travail",
+  "tags.outpostWorld.complications.3":
+    "Les membres du personnel se sont convertis à un étrange système de croyances",
+  "tags.outpostWorld.things.0": "Reliques xénosapiennes",
+  "tags.outpostWorld.things.1": "Données scientifiques vitales",
+  "tags.outpostWorld.things.2": "Plans d’exploitation commerciale secrets",
+  "tags.outpostWorld.places.0": "Salle de divertissement crasseuse",
+  "tags.outpostWorld.places.1": "Station de ravitaillement",
+  "tags.outpostWorld.places.2": "Le seul bâtiment de la planète",
+  "tags.outpostWorld.places.3":
+    "Un « spatioport » qui n’est qu’une surface de pierre plate que l’on balaie",
+  "tags.perimeterAgency": "Agence Périmètre",
+  "tags.perimeterAgency.description":
+    "Avant le Silence, l’Agence Périmètre était une organisation financée par la Terre qui avait comme mandat d’éliminer l’utilisation de la maltech interdite dans les systèmes contrôlés par la Terre. Intelligences artificielles débloquées, espèces génétiquement créées pour être des esclaves, réplicateurs nanotechnologiques, armes de destruction planétaires… l’Agence Périmètre poursuivait les expérimentateurs sans grand soucis pour les loi planétaires locales. La plupart des groupes de l’Agence Périmètre se sont effondrés durant le Silence, mais quelques uns poursuivent encore leur mission, bien qu’ils soient aujourd’hui employés plus souvent pour accomplir des tâches d’espionnages et de renseignement traditionnelles.",
+  "tags.perimeterAgency.enemies.0": "Directeur d’Agence renégat",
+  "tags.perimeterAgency.enemies.1": "Chercheur en maltech",
+  "tags.perimeterAgency.enemies.2": "Chef du renseignement paranoïaque",
+  "tags.perimeterAgency.friends.0": "Agent ayant besoin d’aide",
+  "tags.perimeterAgency.friends.1": "Employé de soutien",
+  "tags.perimeterAgency.friends.2": "Chercheur « injustement » ciblé",
+  "tags.perimeterAgency.complications.0":
+    "L’Agence locale est déviante, et utilise de la maltech",
+  "tags.perimeterAgency.complications.1":
+    "Les archives de l’Agence sont compromises",
+  "tags.perimeterAgency.complications.2":
+    "L’Agence est dans la mire d’une organisation utilisant de la maltech",
+  "tags.perimeterAgency.complications.3":
+    "Les habitants locaux ignorent l’existence de l’Agence",
+  "tags.perimeterAgency.things.0":
+    "Archives de recherche sur la maltech de l’Agence",
+  "tags.perimeterAgency.things.1":
+    "Équipement prétech des forces spéciales de l’Agence",
+  "tags.perimeterAgency.things.2":
+    "Dossier d’informations pour faire chanter un politicien local",
+  "tags.perimeterAgency.places.0": "Salle d’interrogation",
+  "tags.perimeterAgency.places.1": "Bar enfumé",
+  "tags.perimeterAgency.places.2": "Laboratoire de maltech",
+  "tags.perimeterAgency.places.3": "Base secrète de l’Agence",
+  "tags.pilgrimageSite": "Lieu de pèlerinage",
+  "tags.pilgrimageSite.description":
+    "La planète est reconnue pour être un endroit d’une importance spirituel ou historique, et est peut-être le siège d’une mouvement religieux ou politique dans ce secteur. Le lieu de pèlerinage attire des riches pèlerins des systèmes avoisinants, et ceux qui ont les moyens de se payer un voyage interstellaire pour y venir peuvent être très généreux envers le site et ceux qui s’en occupent. Les habitants tendent à être farouchement attachés au lieu de pèlerinage et à sa réputation, et certaines planètes peuvent même interdire l’accès à ceux qui ne semblent pas suffisamment dévots ou pieux.",
+  "tags.pilgrimageSite.enemies.0": "Saboteur dévoué à un culte rival",
+  "tags.pilgrimageSite.enemies.1":
+    "Réformateur aigri qui en veut aux dirigeants actuels",
+  "tags.pilgrimageSite.enemies.2": "Escroc arnaquant les pèlerins",
+  "tags.pilgrimageSite.friends.0": "Protecteur du lieu sacré",
+  "tags.pilgrimageSite.friends.1": "Pèlerin étranger naïf",
+  "tags.pilgrimageSite.friends.2":
+    "Étranger voulant accéder aux secrets réservés aux plus proches initiés",
+  "tags.pilgrimageSite.complications.0":
+    "Le lieu de pèlerinage est en fait un faux",
+  "tags.pilgrimageSite.complications.1":
+    "Le lieu de pèlerinage est géré par des gens corrompus et vénaux",
+  "tags.pilgrimageSite.complications.2":
+    "Une catastrophe naturelle menace le lieu de pèlerinage",
+  "tags.pilgrimageSite.things.0":
+    "Relique ancienne préservée sous protection sur le lieu de pèlerinage",
+  "tags.pilgrimageSite.things.1":
+    "Preuve que le lieu de pèlerinage est un faux",
+  "tags.pilgrimageSite.things.2": "Offrande précieuse d’une pèlerin",
+  "tags.pilgrimageSite.places.0": "Sactuaire sentant l’encens",
+  "tags.pilgrimageSite.places.1": "Foule grouillante de pèlerins",
+  "tags.pilgrimageSite.places.2": "Structure sacrée imposante",
+  "tags.pleasureWorld": "Planète hédoniste",
+  "tags.pleasureWorld.description":
+    "Cette planète offre des délices soit rares, soit inadmissibles ailleurs. Que ce soit par son horizon d'une beauté sans pareil, ses habitants modifiés génétiquement pour être sensationnels, sa grande variété de drogues locales, ses plaisirs charnels inacceptables partout ailleurs, cette planète offre une euphorie unique. La plupart des planètes de ce genre sont pleinement conscient de la valeur de ce qu'elles ont, et les prix demandé peut être en crédit ou en récompenses moins tangibles. ",
+  "tags.pleasureWorld.enemies.0": "Fournisseur de délices cruels",
+  "tags.pleasureWorld.enemies.1":
+    "Habitant cherchant à contrôler les autres par la dépendance",
+  "tags.pleasureWorld.enemies.2": "Étranger exploitant les ressources locales",
+  "tags.pleasureWorld.friends.0": "Touriste inextricablement impliqué",
+  "tags.pleasureWorld.friends.1":
+    "Habitant cherchant une vie plus significative ailleurs",
+  "tags.pleasureWorld.friends.2": "Artiste voulant une formation ici",
+  "tags.pleasureWorld.complications.0":
+    "Un plaisir profondément répugnant est offert ici par une culture qui n'y voit rien de mal",
+  "tags.pleasureWorld.complications.1":
+    "Certains plaisirs sont dangereusement addictifs",
+  "tags.pleasureWorld.complications.2":
+    "Les prix demandés peuvent signifier l'esclavage ou la mort",
+  "tags.pleasureWorld.complications.3":
+    "La planète a été envahie et est exploitée par une puissance impériale",
+  "tags.pleasureWorld.things.0": "Drogue interdite",
+  "tags.pleasureWorld.things.1": "Un contrat comme paiement épouvantable",
+  "tags.pleasureWorld.things.2":
+    "Technologie puissante recyclée à des fins hédonistes",
+  "tags.pleasureWorld.places.0":
+    "Caractéristique naturelle à couper le souffle",
+  "tags.pleasureWorld.places.1": "Salon ingénieux mais décadent",
+  "tags.pleasureWorld.places.2":
+    "Repaire crasseux où on s'adonne à un vice désespéré",
+  "tags.policeState": "État policier",
+  "tags.policeState.description":
+    "Cette planète est un état policier totalitaire. Tout signe de déloyauté envers les dirigeants est punie sévèrement, et la méfiance et la suspicion est parout dans la société. Certaines planètes peuvent utiliser des informateurs et de l’endoctrinement comme les soviétiques, alors que des planètes plus sophistiquées peuvent préférer des caméras omniprésentes ou des « anges gardiens » prenant la forme d’Intelligences artificielles débloquées. Les étrangers sont probablement considérés au mieux comme un mal nécessaire, et ont tendance à disparaître lorsqu’ils créent des problèmes.",
+  "tags.policeState.enemies.0": "Chef de la police secrète",
+  "tags.policeState.enemies.1": "Officiel cherchant des boucs émissaires",
+  "tags.policeState.enemies.2": "Informateurs local qui trahit les siens",
+  "tags.policeState.friends.0": "Chef de la Résistance",
+  "tags.policeState.friends.1": "Agitateur étranger",
+  "tags.policeState.friends.2": "Victime emprisonnée",
+  "tags.policeState.friends.3": "Parrain du crime",
+  "tags.policeState.complications.0":
+    "La grande majorité des habitants considèrent que l’État policier agit correctement",
+  "tags.policeState.complications.1":
+    "L’État policier est automatisé, et ses « dirigeants » sont incapable de l’éteindre",
+  "tags.policeState.complications.2":
+    "Les dirigeants fomentent un pogrom contre les « espions étrangers »",
+  "tags.policeState.things.0": "Liste d’informateurs de la police",
+  "tags.policeState.things.1":
+    "Richesses saisies chez des « ennemis de l’État »",
+  "tags.policeState.things.2": "La réserve personnelle du Chef Adoré",
+  "tags.policeState.places.0": "Parade militaire",
+  "tags.policeState.places.1": "Goulag",
+  "tags.policeState.places.2": "Bâtiment de béton gris servant d’habitation",
+  "tags.policeState.places.3": "Centre de surveillance",
+  "tags.postScarcity": "Post rareté",
+  "tags.postScarcity.description":
+    "Les habitants ont maintenu suffisamment de technologies datant de l'ère du Mandat terrien pour jouir d'une économie post rareté. Tous voient leurs besoins et désirs matériels satisfaits. Les conflits concernent aujourd'hui la distribution des services et du territoire, puisque ce sont les seules ressources limitées. L'équipement militaire ainsi que les objets capables de destruction massives peuvent toujours être difficiles d'accès, et il existe sans doute une raison pour laquelle les habitants n'exportent pas leurs vastes richesses. ",
+  "tags.postScarcity.enemies.0":
+    "Idéologue frénétique se battant pour une idée",
+  "tags.postScarcity.enemies.1":
+    "Habitant paranoïaque craignant l'influence étrangère",
+  "tags.postScarcity.enemies.2":
+    "Réformateur sinistre cherchant à détruire les technologie productrices « affaiblissantes »",
+  "tags.postScarcity.friends.0":
+    "Étranger cherchant une chose disponible seulement ici",
+  "tags.postScarcity.friends.1":
+    "Habitant peinant à entretenir la technologie productrice",
+  "tags.postScarcity.friends.2":
+    "Missionaire local voulant apporter l'abondance aux autres planètes",
+  "tags.postScarcity.complications.0":
+    "La technologie cause des effets secondaires sérieux chez ceux qui en tirent bénéfice",
+  "tags.postScarcity.complications.1":
+    "La technologie est en voie de s'effondrer",
+  "tags.postScarcity.complications.2": "La population devient trop grande",
+  "tags.postScarcity.complications.3":
+    "La technologie ne produit en abondance que certaines choses",
+  "tags.postScarcity.things.0": "Un appareil qui est une corne d'abondance",
+  "tags.postScarcity.things.1":
+    "Une marchandise rare ne pouvant pas être reproduit",
+  "tags.postScarcity.things.2": "Un contrat pour des services",
+  "tags.postScarcity.places.0":
+    "Quartiers privés minuscules mais richement équipés",
+  "tags.postScarcity.places.1": "Marché où s'échangent des services",
+  "tags.postScarcity.places.2":
+    "Galerie d'art feutrée exposant des oeuvres non dupliquées",
+  "tags.preceptorArchive": "Archive des Précepteur",
+  "tags.preceptorArchive.description":
+    "Les Précepteurs de la Grande Archive étaient une organisation pré-Silence vouée à la dissémination de la culture, de l’histoire et des technologies de base humaines sur les planètes éloignées de la Terre qui risquaient de perdre ces informations durant l’expansion humaine. La plupart des planètes éloignées hébergeaient une Archive, et les habitants pouvaient y apprendre des compétences techniques utiles, en plus d’y fréquenter l’histoire et l’art humain. Les Archives qui ont survécu au Silence s’efforcent maintenant d’envoyer leurs missionnaires du savoir vers les nouvelles planètes qui ont besoin de leurs connaissances.",
+  "tags.preceptorArchive.enemies.0": "Habitant luddite",
+  "tags.preceptorArchive.enemies.1":
+    "Marchand étranger désirant garder les habitants ignorants",
+  "tags.preceptorArchive.enemies.2": "Fanatique religieux",
+  "tags.preceptorArchive.enemies.3":
+    "Premier Orateur corrompu qui veut garder le monopole du savoir",
+  "tags.preceptorArchive.friends.0": "Précepteur expert missionaire",
+  "tags.preceptorArchive.friends.1": "Savant étranger",
+  "tags.preceptorArchive.friends.2": "Étudiant réticent",
+  "tags.preceptorArchive.friends.3": "Précepteur expert itinérant",
+  "tags.preceptorArchive.complications.0":
+    "L’Archive locale a adopté une attitude très mystique et religieuse par rapport à leur enseignement",
+  "tags.preceptorArchive.complications.1":
+    "L’Archive a préservé quelques éléments scientifiques prétech pouvant être appliqués",
+  "tags.preceptorArchive.complications.2":
+    "L’Archive a été corrompue et leurs enseignements sont incorrects",
+  "tags.preceptorArchive.things.0": "Base de donnée perdue de l’Archive",
+  "tags.preceptorArchive.things.1": "Équipement d’enseignement prétech ancien",
+  "tags.preceptorArchive.things.2":
+    "Cache de prétech théologiquement inacceptable",
+  "tags.preceptorArchive.places.0": "Auditorium de l’Archive",
+  "tags.preceptorArchive.places.1": "Laboratoire expérimental",
+  "tags.preceptorArchive.places.2": "Manifestation d’étudiants locaux",
+  "tags.pretechCultists": "Fidèles d'une secte prétech",
+  "tags.pretechCultists.description":
+    "Les capacités de la science humaine étaient immensément plus grandes avant le Silence que depuis le Hurlement. Les portails galactiques permettaient de traverser des centaines d’années-lumières en un instant, et cet exploit n’est qu’un exemple des résultats que permettaient l’union entre la science prétech et les capacités psychiques. Certaines planètes vouent carrément un culte aux artefacts laissés par leurs ancêtres, y voyant le travail d’une humanité plus brillante et parfaite. Ces fidèles peuvent comprendre ou non comment utiliser ou reproduire ces objets, mais ils les recherchent et les protègent toujours jalousement.",
+  "tags.pretechCultists.enemies.0": "Chef de secte prétech",
+  "tags.pretechCultists.enemies.1": "Fournisseur d’artefacts",
+  "tags.pretechCultists.enemies.2": "Contrebandier prétech",
+  "tags.pretechCultists.friends.0": "Scientifique étranger",
+  "tags.pretechCultists.friends.1": "Collectionneur volé",
+  "tags.pretechCultists.friends.2": "Hérétique de la secte prétech",
+  "tags.pretechCultists.complications.0":
+    "Les fidèles de la secte prétech sont capables de reproduire certaines formes de prétech",
+  "tags.pretechCultists.complications.1":
+    "Les fidèles de la secte prétech détestent l’utilisation des objets prétech, considérant cela comme un « affront envers le sacré »",
+  "tags.pretechCultists.complications.2":
+    "Les fidèles de la secte prétech méprennent l’équipement des PJs pour de la prétech",
+  "tags.pretechCultists.things.0": "Artefacts prétechs fonctionnels et brisés",
+  "tags.pretechCultists.things.1":
+    "Techniques de reproduction de prétech mêlé à du jargon religieux",
+  "tags.pretechCultists.things.2":
+    "Paiement retardé pour des artefacts prétech",
+  "tags.pretechCultists.places.0":
+    "Autel voué à un objet prétech non fonctionnel",
+  "tags.pretechCultists.places.1": "Repaire de contrebandiers",
+  "tags.pretechCultists.places.2":
+    "Procession publique montrant un artefact prisé",
+  "tags.primitiveAliens": "Xénosapiens primitifs",
+  "tags.primitiveAliens.description":
+    " La planète est habitée par un grand nombre de xénosapiens qui n’ont pas encore développé de technologie avancée. Les colons humains entretiennent peut-être une relation amicale ou hostile avec eux, mais certaines tensions intérieures sont probables. De petites colonies humaines sont peut-être maintenues en esclavage ou assujettis aux xénosapiens d’une autre manière.",
+  "tags.primitiveAliens.enemies.0": "Chef xénosapien hostile",
+  "tags.primitiveAliens.enemies.1": "Agitateur humain",
+  "tags.primitiveAliens.enemies.2": "Prédateur local dangereux",
+  "tags.primitiveAliens.enemies.3": "Fanatique religieux xénosapiens",
+  "tags.primitiveAliens.friends.0": "Chef des colons",
+  "tags.primitiveAliens.friends.1": "Chef xénosapien d’une faction pacifique",
+  "tags.primitiveAliens.friends.2": "Habitant des contrées sauvages",
+  "tags.primitiveAliens.friends.3": "Xénochercheur",
+  "tags.primitiveAliens.complications.0":
+    "Le nombre des xénosapiens est énorme et ils peuvent écraser les humains s’ils le désirent",
+  "tags.primitiveAliens.complications.1":
+    "Un groupe tente d’utiliser l’autre pour tuer ses ennemis politiques",
+  "tags.primitiveAliens.complications.2":
+    "Les xénosapiens sont incompréhensiblement étranges",
+  "tags.primitiveAliens.complications.3": "Un côté commet une atrocité",
+  "tags.primitiveAliens.things.0": "Icône religieuse xénosapienne",
+  "tags.primitiveAliens.things.1":
+    "Ancien traité signé par les humains et les xénosapiens",
+  "tags.primitiveAliens.things.2": "Technologie xénosapienne",
+  "tags.primitiveAliens.places.0": "Village xénosapien",
+  "tags.primitiveAliens.places.1": "Village humain fortifié",
+  "tags.primitiveAliens.places.2": "Lieu d’un massacre",
+  "tags.prisonPlanet": "Planète prison",
+  "tags.prisonPlanet.description":
+    "La planète avait ou a toujours comme fonction d'être une prison. Certaines de ces prisons étaient destinées à des prisonniers spécifiques du Mandat Terrien, et d'autres servaient à contenir entièrement une race xénosapienne ou un groupe ethnique « dangereux ». Il est possible qu'il y aient encore aujourd'hui des systèmes automatisés ou une IA pour empêcher les personnes à quitter sans autorisation; et aujourd'hui, toutes les autorisations sont échues. ",
+  "tags.prisonPlanet.enemies.0": "IA gardienne de prison démente",
+  "tags.prisonPlanet.enemies.1": "Héritier brutal à la tête d'un gang",
+  "tags.prisonPlanet.enemies.2":
+    "Étranger qui a obtenu le contrôle de la prison et exploite les habitants",
+  "tags.prisonPlanet.friends.0": "Habitant innocent né ici",
+  "tags.prisonPlanet.friends.1":
+    "Technicien local forcé d'entretenir la technologie qui l'emprisonne",
+  "tags.prisonPlanet.friends.2": "Étranger accidentellement prisonnier ici",
+  "tags.prisonPlanet.complications.0":
+    "Les permis de départ sont une monnaie précieuse",
+  "tags.prisonPlanet.complications.1":
+    "Les usines de la prion produisent toujours des appareils prétech de valeur",
+  "tags.prisonPlanet.complications.2":
+    "Les gangs sont devenus des gouvernements",
+  "tags.prisonPlanet.complications.3":
+    "La noblesse locale descend des employés de la prison",
+  "tags.prisonPlanet.things.0": "Un permis pour quitter la planète",
+  "tags.prisonPlanet.things.1":
+    "Un mot de passe pour contourner d'anciennes mesures de sécurité",
+  "tags.prisonPlanet.things.2":
+    "Contrebande interdite par les scanners de sécurité",
+  "tags.prisonPlanet.places.0":
+    "Zone de la prison datant de l'éqoque du Mandat convertie en bureaux gouvernementaux",
+  "tags.prisonPlanet.places.1":
+    "Installation industrielle opérée par le nombre mandaté de prisonniers",
+  "tags.prisonPlanet.places.2":
+    "Atelier de fortune où la contrebande est assemblée",
+  "tags.psionicsAcademy": "Académie psychique",
+  "tags.psionicsAcademy.description":
+    "Cette planète est l’une des rares qui a réussi à développer à nouveau les bases d’un entraînement psychique. Sans cette éducation, un psychique potentiel est généralement voué à la folie ou à la mort s’il utilise ses pouvoirs. Les académies psychiques sont suffisamment rares pour que des étrangers y soient envoyés par de riches mécènes pour être formés. Les secrets entourant le mentorat psychique, ainsiqu les les protocoles et les techniques pour entraîner correctement un élève sont jalousement gardés par ces académies. La plupart d’entre elles sont affiliées au gouvernement planétaire.",
+  "tags.psionicsAcademy.enemies.0": "Instructeur psychique corrompu",
+  "tags.psionicsAcademy.enemies.1": "Étudiant renégat",
+  "tags.psionicsAcademy.enemies.2": "Chercheur psychique fou",
+  "tags.psionicsAcademy.enemies.3": "Citadin rancunier",
+  "tags.psionicsAcademy.friends.0": "Chercheur étranger",
+  "tags.psionicsAcademy.friends.1": "Aspirant étudiant",
+  "tags.psionicsAcademy.friends.2": "Riche touriste",
+  "tags.psionicsAcademy.complications.0":
+    "Le curriculum de l’académie tue un pourcentage important d’étudiants",
+  "tags.psionicsAcademy.complications.1":
+    "Le corps professoral utilise les étudiants comme sujets d’expérimentations",
+  "tags.psionicsAcademy.complications.2":
+    "Les étudiants sont endoctrinés et deviennent des agents dormants",
+  "tags.psionicsAcademy.complications.3": "Les habitants détestent l’académie",
+  "tags.psionicsAcademy.complications.4":
+    "L’académie fait partie d’une religion",
+  "tags.psionicsAcademy.things.0": "Psitech secrètement développée",
+  "tags.psionicsAcademy.things.1": "Un mentor psychique en fuite",
+  "tags.psionicsAcademy.things.2": "Prix de recherche sur les psychiques",
+  "tags.psionicsAcademy.places.0": "Terrain d’entrapinement",
+  "tags.psionicsAcademy.places.1": "Laboratoire expérimental",
+  "tags.psionicsAcademy.places.2": "Bibliothèque académique",
+  "tags.psionicsAcademy.places.3": "Lieu de rencontre sur le campus",
+  "tags.psionicsFear": "Peur des psioniques",
+  "tags.psionicsFear.description":
+    "Les habitants sont terrifiés par les psychiques. Peut-être que leur histoire est marquée par des psychiques devenus féraux qui ont provoqué un carnage meurtrier, ou peut-être qu’ils sont simplement une peur irrationnelle des ces « erreurs de la nature ». Les psychiques usent de leurs pouvoirs à leurs risques et périls sur cette planète.",
+  "tags.psionicsFear.enemies.0": "Investigateur de la pureté mentale",
+  "tags.psionicsFear.enemies.1": "Fanatique suspicieux",
+  "tags.psionicsFear.enemies.2": "Chasseur de sorcières",
+  "tags.psionicsFear.friends.0": "Psychique caché",
+  "tags.psionicsFear.friends.1": "Étranger coincé ici",
+  "tags.psionicsFear.friends.2": "Éducateur étranger",
+  "tags.psionicsFear.complications.0":
+    "Les individus ayant un potentiel psychique sont beaucoup plus fréquents ici",
+  "tags.psionicsFear.complications.1":
+    "Une objet technologique est mépris pour de la psitech",
+  "tags.psionicsFear.complications.2":
+    "Les habitants croient que certains rituels et certaines coutumes peuvent les protéger contre les pouvoirs psychiques",
+  "tags.psionicsFear.things.0": "Cache psitech cachée",
+  "tags.psionicsFear.things.1": "Possessions d’un psychique reconnu coupable",
+  "tags.psionicsFear.things.2": "Récompense pour dénoncer un psychiques",
+  "tags.psionicsFear.places.0": "Chambre inquisitoriale",
+  "tags.psionicsFear.places.1": "Lieu de lynchage",
+  "tags.psionicsFear.places.2": "Musée des atrocités psychiques",
+  "tags.psionicsWorship": "Vénération des psioniques",
+  "tags.psionicsWorship.description":
+    "Les habitants considèrent les psychiques comme un don des dieux ou comme un signe de supériorité. Si la planète héberge une académie psychique fonctionnelle, les psychiques occupent presque tous les postes de pouvoir et sont considérés comme les dirigeant naturels de la planète. S’il n’y a pas une telle académie, il est probable qu’on y trouve plutôt plusieurs cultes, tous plus dérangés les uns que les autres, ayant chacun leur « prophète » marginalement cohérent et manifestement devenu féral, et enseignant chacune leurs doctrines torues et psychopathiques.",
+  "tags.psionicsWorship.enemies.0": "Inquisiteur psychique",
+  "tags.psionicsWorship.enemies.1": "Noble psychique hautain",
+  "tags.psionicsWorship.enemies.2": "Esclavagiste psychique",
+  "tags.psionicsWorship.enemies.3": "Prophète féral",
+  "tags.psionicsWorship.friends.0": "Chercheur psychique étranger",
+  "tags.psionicsWorship.friends.1": "Rebelle local",
+  "tags.psionicsWorship.friends.2":
+    "Employeur étranger cherchant des psychiques",
+  "tags.psionicsWorship.complications.0":
+    "L’entraînement psychique est imparfait, et tous les psychiques montrent des signes importants de maladie mentale",
+  "tags.psionicsWorship.complications.1":
+    "Les psychiques ont développé une discipline unique",
+  "tags.psionicsWorship.complications.2": "La volonté d’un psychique est loi",
+  "tags.psionicsWorship.complications.3":
+    "Les PJs psychiques sont kidnappés pour être « illuminés »",
+  "tags.psionicsWorship.things.0": "Psitech ancienne",
+  "tags.psionicsWorship.things.1":
+    "Documents de recherche importante sur les psychiques",
+  "tags.psionicsWorship.things.2": "Permission pour un entraînement psychique",
+  "tags.psionicsWorship.places.0": "Salle du Conseil imprégnée de psitech",
+  "tags.psionicsWorship.places.1": "Temple vouée à l’esprit",
+  "tags.psionicsWorship.places.2":
+    "Prison psychiatrique pour les psychiques féraux",
+  "tags.quarantinedWorld": "Planète en quarantaine",
+  "tags.quarantinedWorld.description":
+    "La planète est placée en quarantaine, et les voyages spatiaux y sont strictement interdits. Cette interdiction est peut-être soutenue par des batteries au sol qui désintègrent tout aéronef volant dans son atmosphère, ou peut-être qu’une planète voisine y maintient un blocus constant.",
+  "tags.quarantinedWorld.enemies.0": "Commandant des installations de défense",
+  "tags.quarantinedWorld.enemies.1": "Chef de patrouille suspicieux",
+  "tags.quarantinedWorld.enemies.2": "Ermite fou vivant sur un astéroïde",
+  "tags.quarantinedWorld.friends.0":
+    "Proche d’une personne coincée sur cette planète",
+  "tags.quarantinedWorld.friends.1": "Officiel d’une organisation humanitaire",
+  "tags.quarantinedWorld.friends.2": "Chasseur de trésor",
+  "tags.quarantinedWorld.complications.0":
+    "Les habitants veulent demeurer isolés",
+  "tags.quarantinedWorld.complications.1":
+    "La quarantaine est garantie par des installation xénosapienne anciennes",
+  "tags.quarantinedWorld.complications.2":
+    "La planète est pleine d’abominations et de maltech",
+  "tags.quarantinedWorld.complications.3":
+    "Le blocus a comme objectif d’affamer la population sur cette planète stérile",
+  "tags.quarantinedWorld.things.0": "Clé des systèmes de défense",
+  "tags.quarantinedWorld.things.1": "Pot-de-vin pour extraire quelqu’un",
+  "tags.quarantinedWorld.things.2": "Technologie xénosapienne abandonnée",
+  "tags.quarantinedWorld.places.0": "Pont d’un vaisseau du blocus",
+  "tags.quarantinedWorld.places.1": "Salle de contrôle du système de défense",
+  "tags.quarantinedWorld.places.2": "Camp de réfugiés",
+  "tags.radioactiveWorld": "Planète radioactive",
+  "tags.radioactiveWorld.description":
+    "Que ce soit l’héritage d’une guerre atomique ouverte ou la simple profusion d’éléments radioactifs, cette planète illumine dans la noirceur. Même une combinaison pressurisée ne peut protéger contre la totalité de la radiation, et la plupart des habitants souffrent d’une variété de cancer, de mutations et d’autre maladies s’ils ne sont pas protégés par divers traitements médicaux technologiquement avancés.",
+  "tags.radioactiveWorld.enemies.0": "Mutant amer",
+  "tags.radioactiveWorld.enemies.1":
+    "seigneur de guerre possédant des reliques",
+  "tags.radioactiveWorld.enemies.2": "Aspirant fugitif désespéré",
+  "tags.radioactiveWorld.friends.0": "Prospecteur téméraire",
+  "tags.radioactiveWorld.friends.1": "Ferrailleur étranger",
+  "tags.radioactiveWorld.friends.2":
+    "Individu cherchant une variété biogénétique",
+  "tags.radioactiveWorld.complications.0":
+    "La radioactivité empire d’une manière régulière",
+  "tags.radioactiveWorld.complications.1":
+    "Les ressources médicales de la planète font défaut",
+  "tags.radioactiveWorld.complications.2":
+    "La radioactivité a des effets inexplicables sur les créatures vivantes",
+  "tags.radioactiveWorld.complications.3":
+    "La radioactivité est causée par une manufacture prétech déréglée",
+  "tags.radioactiveWorld.things.0": "Armement atomique ancien",
+  "tags.radioactiveWorld.things.1": "Médicament anti-radioactivité prétech",
+  "tags.radioactiveWorld.things.2": "Source d’eau potable",
+  "tags.radioactiveWorld.places.0": "Ruines infestées de mutants",
+  "tags.radioactiveWorld.places.1": "Plaine de verre brulé",
+  "tags.radioactiveWorld.places.2": "Vie sauvage indigène bizarre",
+  "tags.radioactiveWorld.places.3": "Terre stérile lumineuse﻿",
+  "tags.refugees": "Réfugiés",
+  "tags.refugees.description":
+    "Cette planète grouille de réfugiés, qui sont peut-être des étrangers ayant fui une planète voisine ou peut-être des habitants locaux fuyant une région en guerre. Les communautés d'accueil sont souvent hostiles envers ces réfugiés, et plusieurs de ces derniers le leur rendent bien. ",
+  "tags.refugees.enemies.0": "Dirigeant local xénophobe",
+  "tags.refugees.enemies.1":
+    "Chef réfugié aspirant à prendre contrôle de la terre d'accueil",
+  "tags.refugees.enemies.2":
+    "Politicien voulant utiliser les réfugiés comme une arme",
+  "tags.refugees.friends.0": "Réfugié fragile et sympathique",
+  "tags.refugees.friends.1": "Habitant menacé par des gangs de réfugiés",
+  "tags.refugees.friends.2": "Prêtre voulant instaurer la paix",
+  "tags.refugees.complications.0":
+    "Les xénophobes ont raison de croire que les réfugiés cherchent à prendre le contrôle",
+  "tags.refugees.complications.1":
+    "Les réfugiés ont raison de croire que les xénophobes veulent les faire fuir ou mourir",
+  "tags.refugees.complications.2":
+    "Les xénophobes et les réfugiés s'évaluent correctement les uns les autres",
+  "tags.refugees.complications.3":
+    "Des puissances étrangères utilisent les réfugiés pour déstabiliser le gouvernement local",
+  "tags.refugees.complications.4":
+    "La culture des réfugiés et celle de la communauté d'accueil sont profondément incompatibles",
+  "tags.refugees.things.0": "Trésor apporté par des réfugiés",
+  "tags.refugees.things.1": "Papiers de citoyenneté",
+  "tags.refugees.things.2": "Cache de marchandises essentielles aux réfugiés",
+  "tags.refugees.things.3": "Armes cachées destinées aux terroristes",
+  "tags.refugees.places.0": "Camp de réfugiés désespéré",
+  "tags.refugees.places.1": "Ville pleine d'étrangers confus",
+  "tags.refugees.places.2": "Festival plein d'habitants locaux en colère",
+  "tags.regionalHegemon": "Hégémonie régionale",
+  "tags.regionalHegemon.description":
+    "Cette planète a la sophistication technologique, les ressources naturelles et le régime politique nécessaire pour être une hégémonie régionale dans le secteur. Les planètes systèmes proches y sont soit directement soumis ou procèdent de manière à éviter de susciter sa colère. L’hégémonie régionale est peut-être même la capitale d’une petit empire stellaire.",
+  "tags.regionalHegemon.enemies.0": "Généal ambitieux",
+  "tags.regionalHegemon.enemies.1": "Officiel colonial",
+  "tags.regionalHegemon.enemies.2": "Noble méprisant",
+  "tags.regionalHegemon.friends.0": "Diplomate",
+  "tags.regionalHegemon.friends.1": "Ambassadeur étranger",
+  "tags.regionalHegemon.friends.2": "Espion étranger",
+  "tags.regionalHegemon.complications.0":
+    "L’influence de l’hégémonie régionale est la seule chose qui empêche une guerre sanglante d’éclater sur des planètes proches",
+  "tags.regionalHegemon.complications.1": "L’hégémonie perd de son pouvoir",
+  "tags.regionalHegemon.complications.2":
+    "Le gouvernement est rempli d’espions",
+  "tags.regionalHegemon.complications.3":
+    "L’hégémonie est réellement une force positive et bienfaisante",
+  "tags.regionalHegemon.things.0": "Carte blanche diplomatique",
+  "tags.regionalHegemon.things.1":
+    "Acte de propriété d’un domaine situé sur une autre planète",
+  "tags.regionalHegemon.things.2": "Bourse destinée à l’aide étrangère",
+  "tags.regionalHegemon.places.0":
+    "Palais, parlement, sénat ou autre siège gouvernemental",
+  "tags.regionalHegemon.places.1": "Salon grouillant d’espions",
+  "tags.regionalHegemon.places.2": "Manifestation de protestation",
+  "tags.regionalHegemon.places.3": "Base militaire",
+  "tags.restrictiveLaws": "Lois restrictives",
+  "tags.restrictiveLaws.description":
+    "Une myriade de lois, coutumes et règles contraingnent les habitants de cette planète, et des actes qui sont parfaitement permissibles ailleurs sont ici dévèrement punis. Les habitants peuvent fournir une liste de ces lois aux étrangers, mais les chances de maîtriser tous les détails sont assez faibles. ",
+  "tags.restrictiveLaws.enemies.0": "Officier de l’ordre",
+  "tags.restrictiveLaws.enemies.1": "Habitant outré",
+  "tags.restrictiveLaws.enemies.2":
+    "Avocat local spécialisé dans les poursuites contre les étrangers",
+  "tags.restrictiveLaws.enemies.3": "Informateur payé",
+  "tags.restrictiveLaws.friends.0": "Étranger frustré",
+  "tags.restrictiveLaws.friends.1": "Habitant brimé",
+  "tags.restrictiveLaws.friends.2": "Réformateur en croisade",
+  "tags.restrictiveLaws.complications.0":
+    "Les lois changent régulièrement en suivant une logique comprise des habitants seulement",
+  "tags.restrictiveLaws.complications.1":
+    "Les lois interdisent une action absolument essentielle pour les PJs",
+  "tags.restrictiveLaws.complications.2":
+    "Les lois interdisent l’existence même d’un des PJs",
+  "tags.restrictiveLaws.complications.3":
+    "Les lois interdisent d’expliquer les lois aux étrangers",
+  "tags.restrictiveLaws.things.0": "Codex légal complexe",
+  "tags.restrictiveLaws.things.1":
+    "Billet garantissant l’immunité diplomatique",
+  "tags.restrictiveLaws.things.2":
+    "Coffre-fort contenant l’argent payé en contraventions",
+  "tags.restrictiveLaws.places.0": "Tribunal",
+  "tags.restrictiveLaws.places.1": "Émeute d’habitants outrés",
+  "tags.restrictiveLaws.places.2": "Chambre législative",
+  "tags.restrictiveLaws.places.3": "Poste de police﻿",
+  "tags.revanchists": "Néo-impérialistes",
+  "tags.revanchists.description":
+    "La planète régnait autrefois sur une autre, ou encore une nation majeure sur la planète régnait autrefois sur un plus grand territoire. Un évènement s'est produit pour leur faire perdre cette emprise, et ils ne l'ont jamais oublié. Les habitants sont obsédés par le désir de regagner ce pouvoir perdu, et sont sourds à toutes les considérations pragmatiques. ",
+  "tags.revanchists.enemies.0":
+    "Démagogue encourageant les habitants à se lancer dans une guerre perdue d'avance",
+  "tags.revanchists.enemies.1":
+    "Politicien voulant exploiter le ressentiment à ses propres fins",
+  "tags.revanchists.enemies.2":
+    "Habitant convaincu que les PJs sont des agents de la puissance leur ayant « volé » leur propriété",
+  "tags.revanchists.enemies.3":
+    "Réfugié provenant de l'ancienne colonie demandant avidement qu'elle soit reprise",
+  "tags.revanchists.friends.0":
+    "Prêtre local réaliste voulant instaurer la paix",
+  "tags.revanchists.friends.1": "Politicien cherchant à calmer le public",
+  "tags.revanchists.friends.2":
+    "Diplomate d'une puissance tierce voulant calmer les ardeurs",
+  "tags.revanchists.complications.0":
+    "Les demandes néo-impériales sont parfaitement justes et raisonnables",
+  "tags.revanchists.complications.1":
+    "Les habitants de l'ancienne colonie sont tous des descendants des conquérants",
+  "tags.revanchists.complications.2":
+    "L'ancienne colonie croit elle aussi que la puissance néo-impériales possède des terres qui lui appartiennent",
+  "tags.revanchists.things.0":
+    "Réserve de ressources vitales produites par l'ancienne colonie",
+  "tags.revanchists.things.1": "Relique rapportée de l'ancienne colonie",
+  "tags.revanchists.things.2":
+    "Preuve que les demandes néo-impériales sont justes ou injustes",
+  "tags.revanchists.places.0":
+    "Monument commémorant la perte de l'ancienne colonie",
+  "tags.revanchists.places.1":
+    "Cimetière où reposent ceux qui sont morts dans la conquête",
+  "tags.revanchists.places.2":
+    "Céromonie publique commémorant la perte de l'ancienne colonie",
+  "tags.revolutionaries": "Révolutionnaires",
+  "tags.revolutionaries.description":
+    "La planète est secouée par une ou plusieurs bandes de révolutionnaires, et certaines nations sont peut-être actuellement en pleine révolution. La plupart de ces soulèvements risquent au mieux de changer un mal pour un autre, et les évènements causent une immense quantité de souffrances.",
+  "tags.revolutionaries.enemies.0":
+    "Chef de la révolution avec du sang sur les mains",
+  "tags.revolutionaries.enemies.1":
+    "Chef de la police secrête avec du sang sur les mains",
+  "tags.revolutionaries.enemies.2":
+    "Agent étranger hostile voulant alimenter la tourmente",
+  "tags.revolutionaries.friends.0":
+    "Victime sympathique accusée de collaborer avec les révolutionnaires ou le gouvernement",
+  "tags.revolutionaries.friends.1":
+    "Membre révolutionnaire ou gouvernemental se repentant",
+  "tags.revolutionaries.friends.2":
+    "Agent d'une puissance étrangère neutre qui veut instaurer la paix",
+  "tags.revolutionaries.complications.0":
+    "Les révolutionnaires semblent être de meilleurs dirigeants",
+  "tags.revolutionaries.complications.1":
+    "Les révolutionnaires étaient une faction autrefois soutenue par le gouvernement",
+  "tags.revolutionaries.complications.2":
+    "Les révolutionnaires sont clairement pires que le gouvernement",
+  "tags.revolutionaries.complications.3":
+    "Les révolutionnaires feignent leurs idéaux, et veulent simplement prendre le pouvoir",
+  "tags.revolutionaries.things.0":
+    "Liste de personnes secrètement sympathisantes",
+  "tags.revolutionaries.things.1": "Preuve de l'hypocrisie des rebelles",
+  "tags.revolutionaries.things.2": "Richesses confisquées",
+  "tags.revolutionaries.places.0": "Festival devenant violent",
+  "tags.revolutionaries.places.1": "Poste de police lourdement fortifié",
+  "tags.revolutionaries.places.2":
+    "Base révolutionnaire cachée dans la nature sauvage",
+  "tags.rigidCulture": "Culture rigide",
+  "tags.rigidCulture.description":
+    "La culture locale est extrêmement stricte : peut-être que certains comportements sont absoluments obligatoires et que toute déviation est punie, ou peut-être que la société est fortement hiérarchisée en fonction de la naissance sans laisser de réelle possibilité aux individus pour changer leur sort. Tout ce qui menace l’ordre social établi est craint et banni.",
+  "tags.rigidCulture.enemies.0": "Réactionnaire inflexible",
+  "tags.rigidCulture.enemies.1": "Dirigeant méfiant",
+  "tags.rigidCulture.enemies.2": "Idéologue du régime",
+  "tags.rigidCulture.enemies.3": "Autocrate offensé",
+  "tags.rigidCulture.friends.0": "Agitateur révolutionnaire",
+  "tags.rigidCulture.friends.1": "Paysan ambitieux",
+  "tags.rigidCulture.friends.2": "Marchand frustré",
+  "tags.rigidCulture.complications.0":
+    "Les normes culturelles sont renforcées par des éléments technologiques",
+  "tags.rigidCulture.complications.1":
+    "La planète est dirigée par une cabale secrète de manipulateurs",
+  "tags.rigidCulture.complications.2":
+    "La culture comporte explicitement des sanctions religieuses",
+  "tags.rigidCulture.complications.3":
+    "La culture a évolué pour satisfaire à des exigences importantes aujourd’hui oubliées",
+  "tags.rigidCulture.things.0": "Habit traditionnel précieux",
+  "tags.rigidCulture.things.1": "Tribut d’un paysan",
+  "tags.rigidCulture.things.2": "Trésors opulents de la classe dirigeante",
+  "tags.rigidCulture.places.0": "Palais usé par le temps",
+  "tags.rigidCulture.places.1":
+    "Quartier pauvre réservé aux castes inférieures",
+  "tags.rigidCulture.places.2": "Repaire de bandits",
+  "tags.rigidCulture.places.3": "Temple réformiste﻿",
+  "tags.risingHegemon": "Hégémonie montante",
+  "tags.risingHegemon.description":
+    "Cette planète n'est pas encore une puissance dominante dans le secteur, mais elle est sur le point de le devenir. Que ce soit par son pouvoir économique, militaire ou culturel florissant, elle étend son influence sur ses voisins et forge des ententes avec les gouvernements et les dirigeants des planètes à proximité.",
+  "tags.risingHegemon.enemies.0": "Suprémaciste chauvin",
+  "tags.risingHegemon.enemies.1": "Officiel cherchant la gloire",
+  "tags.risingHegemon.enemies.2": "Saboteur d'une puissance étrangère",
+  "tags.risingHegemon.friends.0": "Émissaire amical auprès des ignorants",
+  "tags.risingHegemon.friends.1":
+    "Habitant autrefois misérable connaissant aujourd'hui un grand succès",
+  "tags.risingHegemon.friends.2":
+    "Visiteur étranger à la recherche de contacts ou de connaissances",
+  "tags.risingHegemon.complications.0":
+    "L'hégémonie est puissante seulement parce que ses voisins ont été affaiblis",
+  "tags.risingHegemon.complications.1":
+    "L'hégémonie est puissante seulement grâce à une ressource ou une prétech trouvée par hasard",
+  "tags.risingHegemon.complications.2":
+    "L'hégémonie déteste ses voisins, qui sont ses anciens oppresseurs",
+  "tags.risingHegemon.things.0": "Cargaison étant un cadeau diplomatique",
+  "tags.risingHegemon.things.1":
+    "Usine ou barraquement militaire emblématique de sa source énergétique",
+  "tags.risingHegemon.things.2":
+    "Technologie ou informations qui nuira à l'ascension de l'hégémonie",
+  "tags.risingHegemon.places.0": "Ville rustique propulsée dans la prospérité",
+  "tags.risingHegemon.places.1": "Bâtimement gouvernemental en agrandissement",
+  "tags.risingHegemon.places.2": "Spatioport trop petit pour l'affluence",
+  "tags.ritualCombat": "Combat rituel",
+  "tags.ritualCombat.description":
+    "Les habitants préconisent une forme de combat stylisé pour résoudre leurs disputes, se divertir, ou régler les différends religieux. Ces combats ne sont normalement pas mortels, sauf s'ils sont réservés à un groupe de personnes aisément remplaçables, comme des esclaves ou des professionnels. Parfois, ces combats exigent la maitrise d'armes exotiques et se tiennent dans des arènes complexes, alors que d'autres sont déclarés et résolus simplement dans la rue. ",
+  "tags.ritualCombat.enemies.0": "Champion local sanguinaire",
+  "tags.ritualCombat.enemies.1":
+    "Propriétaire d'une écurie de gladiateurs qui est ambitieux",
+  "tags.ritualCombat.enemies.2": "Combattant exceptionnel et xénophobe",
+  "tags.ritualCombat.friends.0": "Missionnaire étranger pacifique",
+  "tags.ritualCombat.friends.1": "Défenseur modéré des faibles",
+  "tags.ritualCombat.friends.2":
+    "Habitant voulant ardemment apprendre un style de combat étranger",
+  "tags.ritualCombat.complications.0":
+    "Les armes cérémonielles sont d'étranges objets prétech",
+  "tags.ritualCombat.complications.1":
+    "Certaines classes sociales n'ont pas le droit de combattre, et doivent sélectionner un champion",
+  "tags.ritualCombat.complications.2":
+    "La défaite n'entraine pas la mort, mais la perte de propriété ou une scarification rituelle",
+  "tags.ritualCombat.things.0": "Arme magnifique",
+  "tags.rThe world has a great many robots on it. Most bots are going to be non-sentient expert systems, though an AI with enough computing resources can control many bots at once, and some worlds may have developed VIs to a degree that individual bots can seem (or be) sentient. Some worlds might even be ruled by metal overlords, ones which do not need to be sentient so long as they have overwhelming force.itualCombat.things.1":
+    "Livre secret détaillant des techniques martiales",
+  "tags.ritualCombat.things.2":
+    "Jeton interdisant de mettre son porteur au défi de combattre rituellement",
+  "tags.ritualCombat.things.3": "Prix remporté dans une lutte sanglante",
+  "tags.ritualCombat.places.0":
+    "Endroit bondé de spectateurs qui acclament les combattants",
+  "tags.ritualCombat.places.1": "Rue poussiéreuse devant un saloon",
+  "tags.ritualCombat.places.2": "Monument commémorant les guerriers battus",
+  "tags.robots": "Robots",
+  "tags.robots.description":
+    "La planète héberge un grand nombre de robots. La plupart sont des robots programmés, bien que certaines planètes peuvent aussi avoir une population de robots contrôlés par une IA ou encore plusieurs IV conscientes (en réalité ou seulement en apparence). Les dirigeants de certaines de ces planètes peuvent être des robots, peut-être même des robots sans conscience mais très puissants. ",
+  "tags.robots.enemies.0": "Maitre robot hostile",
+  "tags.robots.enemies.1": "Robot avide de technologie étrangère",
+  "tags.robots.enemies.2": "Un robot en amour avec l'astronef des PJs",
+  "tags.robots.enemies.3":
+    "Oligarque possédant des usines fabriquant des robots",
+  "tags.robots.friends.0": "Robot à la recherche d'informations",
+  "tags.robots.friends.1": "Jeune et courageux technicien robot",
+  "tags.robots.friends.2": "Habitant perdant son emploi à cause des robots",
+  "tags.robots.complications.0":
+    "Les robots sont seulement partiellement contrôlés",
+  "tags.robots.complications.1":
+    "Les robots ont été modifiés, et avaient auparavant un rôle bien plus terrible",
+  "tags.robots.complications.2":
+    "Les robots ont besoin d'un matériau rare pour lequel les habitants luttent entre eux",
+  "tags.robots.complications.3":
+    "Les robots ont besoin d'une infrastructure locale, et ne peuvent donc pas quitter la planète",
+  "tags.robots.things.0": "Prototype de robot",
+  "tags.robots.things.1": "Code secret pour contrôler certains robots",
+  "tags.robots.things.2":
+    "Vaste cache de marchandises fabriquées par des robots",
+  "tags.robots.things.3": "Arme prétech très efficace contre les robots",
+  "tags.robots.places.0": "Usine robotique qui bourdonne",
+  "tags.robots.places.1": "« Barraquement » robotique austère",
+  "tags.robots.places.2":
+    "Maison bondée de serviteurs robots où habite un seul humain",
+  "tags.seagoingCities": "Villes maritimes flottantes",
+  "tags.seagoingCities.description":
+    "Soit cette planète est entièrement recouverte d’eau, soit ses étendues de terre sont trop hostiles pour les humains. Les humaines vivent dans des villes flottantes qui suivent les courants et les bancs de poissons. Ces villes ont peut-être été construites pour cela, ou elles sont peut-être des bricolages de bateaux et de structures fabriqués à la hâte lorsque le besoin s'est soudainement manifesté. ",
+  "tags.seagoingCities.enemies.0": "Seigneur d’une ville pirate",
+  "tags.seagoingCities.enemies.1": "Lieutenant de pillards sirène",
+  "tags.seagoingCities.enemies.2": "Noble hostile occupant une terre",
+  "tags.seagoingCities.enemies.3": "Saboteur d’une ville ennemie",
+  "tags.seagoingCities.friends.0": "Navigateur de la ville",
+  "tags.seagoingCities.friends.1": "Capitaine des éclaireurs",
+  "tags.seagoingCities.friends.2": "Sirène curieux",
+  "tags.seagoingCities.friends.3":
+    "Ingénieur d'une ville flottante qui a des difficultés",
+  "tags.seagoingCities.complications.0":
+    "Les océans ne sont pas composés d’eau",
+  "tags.seagoingCities.complications.1":
+    "Les bancs de poisson ont disparu et la ville risque la famine",
+  "tags.seagoingCities.complications.2":
+    "De terribles tempêtes poussent la ville dans les régions glaciales",
+  "tags.seagoingCities.complications.3":
+    "Un vaisseau suicide percute la coque de la ville",
+  "tags.seagoingCities.things.0":
+    "Perles géantes possédant des propriétés mystérieuses",
+  "tags.seagoingCities.things.1": "Trésor enfoui",
+  "tags.seagoingCities.things.2": "Matériel de réparation essentiel",
+  "tags.seagoingCities.places.0": "Pont de la ville",
+  "tags.seagoingCities.places.1": "Mer agitée",
+  "tags.seagoingCities.places.2":
+    "Un pont composée de plusieurs petits bateaux﻿",
+  "tags.sealedMenace": "Menace scellée",
+  "tags.sealedMenace.description":
+    "Quelque chose sur cette planète est capable de provoquer des ravages énormes si elle n’est pas contenue de manière sécuritaire par ses gardiens. Que ce soit une faille sismique contrôlée par des machines de terraforming prétech, une maladie devant être mise en quarantaine dans les heures suivant son éclosion, ou une relique ancienne qui exige un entretien régulier pour éviter une catastrophe planétaire, cette menace plane constamment sur la population.",
+  "tags.sealedMenace.enemies.0":
+    "Étranger hostile voulant libérer la menace scellée",
+  "tags.sealedMenace.enemies.1":
+    "Fou croyant pouvoir utiliser la menace scellée à ses propres fins",
+  "tags.sealedMenace.enemies.2":
+    "Chercheur imprudent croyant pouvoir réparer la menace scellée",
+  "tags.sealedMenace.friends.0": "Gardien de la menace scellée",
+  "tags.sealedMenace.friends.1": "Chercheur étudiant la menace scellée",
+  "tags.sealedMenace.friends.2": "Victime de la menace scellée",
+  "tags.sealedMenace.complications.0":
+    "La menace scellée créerait une grande richesse si elle était libérée",
+  "tags.sealedMenace.complications.1": "La menace scellée est intelligente",
+  "tags.sealedMenace.complications.2":
+    "Les habitants ne croient pas tous en l’existence de la menace scellée",
+  "tags.sealedMenace.things.0": "Une clé pour libérer la menace",
+  "tags.sealedMenace.things.1":
+    "Un produit dérivé de la menace scellée ayant une grande valeur",
+  "tags.sealedMenace.things.2":
+    "Le secret de la nature réelle de la menace scellée",
+  "tags.sealedMenace.places.0": "Forteresse gardée contenant la menace scellée",
+  "tags.sealedMenace.places.1": "Station de contrôle et de surveillance",
+  "tags.sealedMenace.places.2": "Scène d’une éclosion de la menace scellée﻿",
+  "tags.secretMasters": "Dirigeants secrets",
+  "tags.secretMasters.description":
+    "La planète est dirigée par une cabale cachée qui agit en manipulant des individus oeuvrant au sein du gouvernement visible. Pour une raison ou une autre, ce groupe considère qu’il est essentiel que les habitants ignorent leur identité, et dans certains cas, les agents manipulés ignorent eux-mêmes l’être.",
+  "tags.secretMasters.enemies.0": "Un agent de la cabale",
+  "tags.secretMasters.enemies.1":
+    "Un officiel gouvernemental qui ne veut pas que des questions soient posées",
+  "tags.secretMasters.enemies.2": "Habitant volontairement ignorant",
+  "tags.secretMasters.friends.0": "Théoricien du complot paranoïaque",
+  "tags.secretMasters.friends.1": "Stratège machiavélique au sein de la cabale",
+  "tags.secretMasters.friends.2": "Investigateur interstellaire",
+  "tags.secretMasters.complications.0":
+    "Les dirigeants secrets veulent préserver leur anonymat pour des raisons inoffensives ou même bienveillantes",
+  "tags.secretMasters.complications.1":
+    "Les membres de la cabale luttent ouvertement les uns contre les autres",
+  "tags.secretMasters.complications.2": "La cabale recrute de nouveaux membres",
+  "tags.secretMasters.things.0":
+    "Dossier contenant des secrets à propos d’un officiel gouvernemental",
+  "tags.secretMasters.things.1":
+    "Mallette contenant des liasses de notes de crédit non marquées",
+  "tags.secretMasters.things.2": "L’identité d’un membre de la cabale",
+  "tags.secretMasters.places.0": "Pièce enfumée",
+  "tags.secretMasters.places.1": "Allée sombre",
+  "tags.secretMasters.places.2": "Bunker souterrain secret",
+  "tags.sectarians": "Lutte de clans",
+  "tags.sectarians.description":
+    "La planète est déchirée par de violentes disputes entre des clans opposés au sein d’une même doctrine, qui peut être de nature religieuse ou séculière. Chacun considère l’autre comme un groupe d’hérétiques qui doivent être éliminés. Le gouvernement local est peut-être capable d’empêcher une guerre ouverte d’éclater, mais les communautés sont divisées par la haine.",
+  "tags.sectarians.enemies.0": "Croyant paranoïaque",
+  "tags.sectarians.enemies.1":
+    "Habitant convaincu que les PJs travaillent pour la secte ennemie",
+  "tags.sectarians.enemies.2": "Dirigeant tout puissant",
+  "tags.sectarians.friends.0": "Clergé réformateur",
+  "tags.sectarians.friends.1": "Agent de la paix local",
+  "tags.sectarians.friends.2": "Missionnaire étranger",
+  "tags.sectarians.friends.3": "Dirigeant épuisé",
+  "tags.sectarians.complications.0": "Le conflit comporte plus que deux côtés",
+  "tags.sectarians.complications.1":
+    "Les membres des clans se détestent pour plusieurs raisons",
+  "tags.sectarians.complications.2":
+    "La vie sur cette planète est en péril si les clans ne coopèrent pas",
+  "tags.sectarians.complications.3":
+    "Les clans détestent les étrangers encore plus qu’ils se détestent l’un l’autre",
+  "tags.sectarians.complications.4":
+    "Les différences entre les clans sont incompréhensibles pour un étranger",
+  "tags.sectarians.things.0": "Livre sacré ancien",
+  "tags.sectarians.things.1": "Preuve irréfutable",
+  "tags.sectarians.things.2": "Offrande à une saint local",
+  "tags.sectarians.places.0": "Champ de bataille entre les clans",
+  "tags.sectarians.places.1": "Temple en croisade",
+  "tags.sectarians.places.2": "Salon philosophique",
+  "tags.sectarians.places.3": "Village profondément divisé﻿",
+  "tags.seismicInstability": "Instabilité sismique",
+  "tags.seismicInstability.description":
+    "Les plaques tectonique sont particulièrement actives sur cette planète, et les tremblements de terre sont fréquents. Les infrastructures de la planète sont soit suffisamment avancées pour résister aux vibrations, soit suffisamment primitives pour être aisément reconstruites. Le planète connaît peut-être aussi une importante activité volcanique.",
+  "tags.seismicInstability.enemies.0":
+    "Fidèle d’un culte voué aux tremblements de terre",
+  "tags.seismicInstability.enemies.1": "Sismologue ermite",
+  "tags.seismicInstability.enemies.2":
+    "Forme de vie indigène qui creuse des tunnels",
+  "tags.seismicInstability.enemies.3":
+    "Saboteur causant des tremblements de terre",
+  "tags.seismicInstability.friends.0":
+    "Propriétaire d’une firme de constructions expérimentales",
+  "tags.seismicInstability.friends.1": "Volcanologue aventurier",
+  "tags.seismicInstability.friends.2": "Prospecteur géothermique",
+  "tags.seismicInstability.complications.0":
+    "Les tremblements de terre sont causés par de l’équipement de terraforming prétech",
+  "tags.seismicInstability.complications.1":
+    "Les tremblements de terre sont causés par de la technologie xénosapienne",
+  "tags.seismicInstability.complications.2":
+    "Les tremblements de terre sont contrôlés par de la technologie xénosapienne pillée par des étrangers",
+  "tags.seismicInstability.complications.3":
+    "Les tremblements de terre sont utilisés pour générer une grande quantité d’énergie",
+  "tags.seismicInstability.things.0": "Générateur de tremblement de terre",
+  "tags.seismicInstability.things.1": "Limitateur de tremblement de terre",
+  "tags.seismicInstability.things.2": "Minéraux formés au centre de la planète",
+  "tags.seismicInstability.things.3":
+    "Plans pour construire des bâtiments à l’épreuve des tremblements de terre",
+  "tags.seismicInstability.places.0": "Caldéra volcanique",
+  "tags.seismicInstability.places.1": "Village durant un tremblement de terre",
+  "tags.seismicInstability.places.2": "Coulée de boue",
+  "tags.seismicInstability.places.3":
+    "Tremblement de terre créant une fissure d’où s’échappe des vapeurs brûlantes﻿",
+  "tags.shackledWorld": "Planète enchainée",
+  "tags.shackledWorld.description":
+    "Cette planète est entièrement sous le contrôle d'une puissance étrangère. Que ce soit par un ancien système de défense automnome, un système de police tobotisé ou une artefact xénosapien, on empêche les habitants de développer certaines technologies, ou d'utiliser certains appareils, ou de développer le transport interstellaire. Ces limites sont peut-être aussi imposées aux étrangers, ce qui exigerait des PJs de trouver un moyen de se libérer pour quitter la planète. ",
+  "tags.shackledWorld.enemies.0": "IA gardienne de prison indifférente",
+  "tags.shackledWorld.enemies.1": "IA militaire paranoïaque",
+  "tags.shackledWorld.enemies.2": "Chef suprême robot",
+  "tags.shackledWorld.enemies.3": "Maitre xénosapien énigmatique",
+  "tags.shackledWorld.friends.0": "Chercheur local en difficulté",
+  "tags.shackledWorld.friends.1": "Étranger coincé ici",
+  "tags.shackledWorld.friends.2":
+    "Scientifique avec un plan pour briser les chaines",
+  "tags.shackledWorld.complications.0":
+    "Les chaines sont régulièrement suspendues durant de brèves périodes",
+  "tags.shackledWorld.complications.1":
+    "Les habitants croient que leurs chaines sont imposées par Dieu",
+  "tags.shackledWorld.complications.2":
+    "Une puissance étrangère tirant grandement profit des chaines",
+  "tags.shackledWorld.complications.3": "Les dirigeants ne sont pas enchainés",
+  "tags.shackledWorld.things.0": "Mot de passe pour se libérer des chaines",
+  "tags.shackledWorld.things.1": "Technologie immunisée aux chaines",
+  "tags.shackledWorld.things.2":
+    "Version exportable des chaines pouvant fonctionner sur d'autres planètes",
+  "tags.shackledWorld.places.0":
+    "Centre de contrôle à la fine pointe mais sinistre",
+  "tags.shackledWorld.places.1": "Usine pleine de technologie de rechange",
+  "tags.shackledWorld.places.2":
+    "Temple voué au pouvoir ou à l'entité ayant imposé les chaines",
+  "tags.societalDespair": "Désespoir social",
+  "tags.societalDespair.description":
+    "La société dominante de la planète a perdu foi en elle-même. Que ce soit à cause d'une guerre interminable, d'une terrible catastrophe, de la découverte d'une culture étrangère ou d'un effondrement religieux, les habitants ont rejeté leurs anciennes valeurs, et ils recherchent peut-être désespérément quelque chose pour les remplacer. Des conflits féroces opposant les traditionnalistes à ceux qui rejettent les anciennes normes. ",
+  "tags.societalDespair.enemies.0":
+    "Fanatique qui blâme le déclin social sur les étrangers",
+  "tags.societalDespair.enemies.1": "Seigneur de guerre nihiliste",
+  "tags.societalDespair.enemies.2":
+    "Étranger cherchant à tirer profit du désespoir",
+  "tags.societalDespair.friends.0":
+    "Prophète de nouvelles valeurs qui a des difficultés",
+  "tags.societalDespair.friends.1": "Modèle incarnant les anciennes traditions",
+  "tags.societalDespair.friends.2":
+    "Habitant poursuivant mécaniquement son rôle devenu insensé",
+  "tags.societalDespair.complications.0":
+    "Une guerre massive a décrédibilisé les anciennes valeurs",
+  "tags.societalDespair.complications.1":
+    "Des puissances étrangères s'efforcent d'éroder la confiance sociale à leur avantage",
+  "tags.societalDespair.complications.2":
+    "Une puissance locale tire grand profit du désespoir",
+  "tags.societalDespair.complications.3":
+    "Les anciennes coutumes aidaient à survivre sur la planète, et leur disparition cause bien des problèmes",
+  "tags.societalDespair.things.0": "Relique qui inspirerait une renaissance",
+  "tags.societalDespair.things.1":
+    "Oeuvre d'art qui inspirerait de nouvelles idées",
+  "tags.societalDespair.things.2":
+    "Artéfact inestimable d'une croyance aujourd'hui méprisée",
+  "tags.societalDespair.places.0": "Temple vide",
+  "tags.societalDespair.places.1":
+    "Repaire bondé où on pratique des activités vicieuses pour oublier",
+  "tags.societalDespair.places.2": "Hall enfumé bondée d'orateurs frénétiques",
+  "tags.soleSupplier": "Unique fournisseur",
+  "tags.soleSupplier.description":
+    "Cette planète exporte une ressource extrêmement importante qu'on ne trouve nulle part ailleurs. Il est peu probable que cette ressource soit nécessaire pour construire des réacteurs apexiques, à moins que cette planète soit la première à entreprendre des voyanges interstellaires, mais elle est essentielle à d'autres appareils ou procédés de haute technologie. Le commerce de cette ressource rend les habitants extrêmement riches. Le pouvoir des dirigeants repose essentiellement sur son contrôle, qui peut aussi intéresser des puissances étrangères. ",
+  "tags.soleSupplier.enemies.0": "Oligarque contrôlant la ressource",
+  "tags.soleSupplier.enemies.1": "Contrebandier impitoyable",
+  "tags.soleSupplier.enemies.2": "Seigneur de guerre contrôlant la ressource",
+  "tags.soleSupplier.enemies.3":
+    "Agent étranger cherchant à déstabiliser le gouvernement local",
+  "tags.soleSupplier.friends.0": "Brave mineur de la ressource",
+  "tags.soleSupplier.friends.1":
+    "Chercheur travaillant à synthétiser la ressource",
+  "tags.soleSupplier.friends.2": "Petit producteur de la ressource",
+  "tags.soleSupplier.friends.3":
+    "Responsable troublé des échanges commerciaux du spatioport",
+  "tags.soleSupplier.complications.0":
+    "On s'empoisonne tranquillement en exploitant la ressource",
+  "tags.soleSupplier.complications.1":
+    "La ressource est produite par des xénosapiens indigènes hostiles",
+  "tags.soleSupplier.complications.2":
+    "On peut facilement passer en contrebande des quantités utiles de la ressource",
+  "tags.soleSupplier.complications.3":
+    "Seuls les habitants ont les gènes ou la technologie requise pour extraire la ressource",
+  "tags.soleSupplier.things.0": "Cache de la ressource raffinée",
+  "tags.soleSupplier.things.1":
+    "Permis pour acheter une grande quantité de la ressource",
+  "tags.soleSupplier.things.2":
+    "Une cargaison d'une imitation très réussie de la ressource",
+  "tags.soleSupplier.places.0": "Site d'extraction débordant d'activité",
+  "tags.soleSupplier.places.1":
+    "Palais opulent construit avec l'argent obtenu grâce à la ressource",
+  "tags.soleSupplier.places.2":
+    "Place publique où tout le monde vit paresseusement des rentes obtenues grâce à l'exploitation de la ressource",
+  "tags.tabooTreasure": "Trésor tabou",
+  "tags.tabooTreasure.description":
+    "Les habitants produisent quelque chose à la fois extrêmement précieux et strictement interdit ailleurs dans le secteur. Ce peut être une drogue mortellement addictive, des technologies de modification génétiques interdites, de « parfaits esclaves » produits dans des utérus artificiels, ou encore une substance utile ne pouvant être produite sans causer des souffrances humaines intolérables. Le trésor est librement échangé sur la planète, mais on l'exporte ailleurs au risque d'être longuement emprisonné, ou pire encore. ",
+  "tags.tabooTreasure.enemies.0": "Fabriquant du trésor tabou",
+  "tags.tabooTreasure.enemies.1": "Contrebandier employé par un riche étranger",
+  "tags.tabooTreasure.enemies.2": "Étranger dépravé ici pour le « plaisir »",
+  "tags.tabooTreasure.enemies.3":
+    "Seigneur de guerre local qui contrôle le trésor",
+  "tags.tabooTreasure.friends.0":
+    "Réformateur voulant mettre fin à l'usage du trésor tabou",
+  "tags.tabooTreasure.friends.1": "Innovateur cherchant rendre le trésor bénin",
+  "tags.tabooTreasure.friends.2":
+    "Accro misérable en proie au trésor contre son gré",
+  "tags.tabooTreasure.complications.0":
+    "Le trésor est très difficile à passer en contrebande",
+  "tags.tabooTreasure.complications.1":
+    "Le trésor marque visiblement l'utilisateur",
+  "tags.tabooTreasure.complications.2":
+    "Les habitants ne l'utilise que pour leurs besoins personnels",
+  "tags.tabooTreasure.things.0": "Un chargement du trésor tabou",
+  "tags.tabooTreasure.things.1":
+    "Technologie de contrebandiers permettant de camoufler parfaitement le trésor tabou",
+  "tags.tabooTreasure.things.2":
+    "Informations sur l'identité d'acheteurs étrangers du trésor tabou",
+  "tags.tabooTreasure.places.0": "Repaire où le trésor est utilisé",
+  "tags.tabooTreasure.places.1":
+    "Marché vendant le trésor aux habitants et à quelques étrangers",
+  "tags.tabooTreasure.places.2":
+    "Usine ou zone de fabrication où le trésor est produit",
+  "tags.terraformFailure": "Échec de terraforming",
+  "tags.terraformFailure.description":
+    "Cette planète était inhospitalière à la vie humaine lorsqu'elle a été découverte, mais le Mandat terrien ou le premier gouvernement local a utilisé des engins de terraforming pour corriger ses caractéristiques plus extrêmes. Le processus n'a pas un succès entier, soit à cause de problèmes particuliers ou à cause de l'avènement du Silence. Les habitants ne sont que partiellement adaptés aux conditions locales, et peinent à composer avec l'environnement.",
+  "tags.terraformFailure.enemies.0":
+    "Dirigeant brutal qui ne se soucie que des siens",
+  "tags.terraformFailure.enemies.1":
+    "Étranger cherchant à piller les engins de terraforming endommagés",
+  "tags.terraformFailure.enemies.2":
+    "Seigneur de guerre qui tente de prendre le contrôle des quelques terres habitables",
+  "tags.terraformFailure.friends.0":
+    "Habitant cherchant à réparer les engins de terraforming",
+  "tags.terraformFailure.friends.1":
+    "Étranger étudiant les engins de terraforming",
+  "tags.terraformFailure.friends.2":
+    "Survivant local connaissant bien sa planète",
+  "tags.terraformFailure.complications.0":
+    "Les engins de terraforming ont produit trop d'une chose, pas trop peu",
+  "tags.terraformFailure.complications.1":
+    "Les engins de terraforming ont été détournés par des xénosapiens aux préférences différentes",
+  "tags.terraformFailure.complications.2":
+    "On a découvert qu'un environnement plus hospitalier aux humains causerait éventuellement un cataclysme",
+  "tags.terraformFailure.things.0":
+    "Pièces pour réparer les engins de terraforming",
+  "tags.terraformFailure.things.1": "Fragments de prétech pouvant être pillés",
+  "tags.terraformFailure.things.2":
+    "Technologie locale précieuse développée pour supporter l'environnement",
+  "tags.terraformFailure.places.0":
+    "Zone où la température ou la gravité est tolérable",
+  "tags.terraformFailure.places.1":
+    "Habitat construit pour tolérer l'environnement",
+  "tags.terraformFailure.places.2": "Engin de terraforming massif",
+  "tags.theocracy": "Théocratie",
+  "tags.theocracy.description":
+    "La planète est dirigée par le clergé de sa religion ou de son idéologie dominante. La population générale est peut-être très pieuse, mais peut-être pas; dans tous les cas, le clergé se maintient au pouvoir grâce peut-être à sa force militaire, son appui populaire ou son contrôle de ressources importantes. Les croyances et idéologies rivales ou incompatibles sont probablement illégales et socialement inacceptables.",
+  "tags.theocracy.enemies.0": "Prêtre dirigeant décadent",
+  "tags.theocracy.enemies.1": "Inquisiteur zélé",
+  "tags.theocracy.enemies.2": "Prosélyte incessant",
+  "tags.theocracy.enemies.3": "Fanatique",
+  "tags.theocracy.friends.0": "Hérétique",
+  "tags.theocracy.friends.1": "Théologien étranger",
+  "tags.theocracy.friends.2": "Marchand athée",
+  "tags.theocracy.friends.3": "Habitant désespéré",
+  "tags.theocracy.complications.0":
+    "La théocratie fonctionne est en fait une bonne chose",
+  "tags.theocracy.complications.1":
+    "La théocratie est décadente et détestée par les gens ordinaires",
+  "tags.theocracy.complications.2":
+    "La théocratie est divisée entre des sectes hostiles le unes envers les autres",
+  "tags.theocracy.complications.3":
+    "La théocratie est dirigée par des xénosapiens",
+  "tags.theocracy.things.0": "Texte sacré précieux",
+  "tags.theocracy.things.1": "Ossements d’un martyr",
+  "tags.theocracy.things.2": "Documents secrets de l’église",
+  "tags.theocracy.things.3": "Trésors anciens de l’église",
+  "tags.theocracy.places.0": "Temple splendide",
+  "tags.theocracy.places.1": "Monastère austère",
+  "tags.theocracy.places.2": "Académie pour l’endoctrinement idéologique",
+  "tags.theocracy.places.3": "Cathédrale des plaisirs décadents",
+  "tags.tombWorld": "Hécatombe",
+  "tags.tombWorld.description":
+    "La planète a été habitée par des humains, mais le Silence, en rendant les portails galactiques inopérables et donc l’importation massive de nourriture impossible, a provoqué la famine, des guerres et la fin de la civilisation sur cette planète. La plupart des planètes ayant vu l’humanité s’éteindre sont naturellement hostiles à la vie humaine et ne permettaient pas de produire suffisamment de nourriture pour la soutenir; les quelques installations hydroponiques ont généralement été détruites, et tout ce qui subsiste aujourd’hui sont les ruines, les ossements et le silence.",
+  "tags.tombWorld.enemies.0":
+    "Lieutenant d’une tribu de survivants devenus fous",
+  "tags.tombWorld.enemies.1": "Ferrailleur avare",
+  "tags.tombWorld.enemies.2": "Système de défense automatisé",
+  "tags.tombWorld.enemies.3": "Prédateur indigène",
+  "tags.tombWorld.friends.0": "Capitaine de flotte de ferrailleurs",
+  "tags.tombWorld.friends.1": "Archéologue",
+  "tags.tombWorld.friends.2": "Historien récupérant des objets",
+  "tags.tombWorld.friends.3": "Survivant local xénophile",
+  "tags.tombWorld.complications.0":
+    "Les ruines sont pleines de pièges placés par les derniers habitants",
+  "tags.tombWorld.complications.1":
+    "L’atmosphère de la planète dégrade rapidement l’intérieur d’un bâtiment laissé ouvert",
+  "tags.tombWorld.complications.2":
+    "Un petit groupe d'habitants désespérés ont survécu au Silence",
+  "tags.tombWorld.complications.3":
+    "Les structures sont instables et s’effondrent",
+  "tags.tombWorld.things.0": "Équipement prétech perdu",
+  "tags.tombWorld.things.1": "Cache de technologie",
+  "tags.tombWorld.things.2": "Entrepôts de munitions inutilisées",
+  "tags.tombWorld.things.3": "Documents historiques anciens",
+  "tags.tombWorld.places.0":
+    "Ville constituée d'un seul immense bâtiment qui s’écroule",
+  "tags.tombWorld.places.1": "Place publique couverte d’ossements",
+  "tags.tombWorld.places.2": "Installation hydroponique en ruines",
+  "tags.tombWorld.places.3": "Repaire d'une tribu de cannibales",
+  "tags.tombWorld.places.4": "Portail galactique orbital inutilisable﻿",
+  "tags.tradeHub": "Centre d'affaires",
+  "tags.tradeHub.description":
+    "Cette planète est un carrefour majeur pour le commerce interstellaire. Elle se trouve à la croisée de plusieurs routes forées commerciales, et possède des installations facilitant le ravitaillement et la réparation des astronefs et le transfert de cargaisons précieuses. Les habitants sont habitués aux étrangers, et des groupes polyglottes provenant de toutes les planètes avoisinantes s’y trouvent pour faire des affaires.",
+  "tags.tradeHub.enemies.0": "Marchand fourbe",
+  "tags.tradeHub.enemies.1": "Débardeur voleur",
+  "tags.tradeHub.enemies.2": "Espion commercial",
+  "tags.tradeHub.enemies.3": "Officiel des douanes corrompu",
+  "tags.tradeHub.friends.0": "Touriste riche",
+  "tags.tradeHub.friends.1": "Marchand autonome misérable",
+  "tags.tradeHub.friends.2": "Prince marchand à la recherche d’infiltrateurs",
+  "tags.tradeHub.friends.3":
+    "Enfant de la rue amical vivant dans le spatiopart",
+  "tags.tradeHub.complications.0":
+    "Une faction étranger complote pour s’emparer du centre d’affaires",
+  "tags.tradeHub.complications.1":
+    "Des saboteurs cherchent à faire exploser les entrepôts d’un rival",
+  "tags.tradeHub.complications.2":
+    "Des Ennemis bloquent les routes commerciales",
+  "tags.tradeHub.complications.3":
+    "Des pirates infiltrent des espions dans le centre d’affaires",
+  "tags.tradeHub.things.0": "Reçu pour le contenu d’un entrepôt",
+  "tags.tradeHub.things.1": "Informations d’initiés",
+  "tags.tradeHub.things.2":
+    "Caisse de produits pharmaceutiques étrangers précieux",
+  "tags.tradeHub.things.3":
+    "Boite de timbres officiels indiquant que les frais de douanes ont été payés",
+  "tags.tradeHub.places.0": "Bazaar bruyant",
+  "tags.tradeHub.places.1": "Restaurant élégant",
+  "tags.tradeHub.places.2": "Spatioport grouillant d’activité",
+  "tags.tradeHub.places.3": "Rue brumeuse bordée d’entrepôts﻿",
+  "tags.tyranny": "Tyrannie",
+  "tags.tyranny.description":
+    "Le gouvernement local est brutal et indifférent à la volonté du peuple. Des lois peuvent exister ou non, mais ce qui importe le plus sont les désirs arbitraires des dirigeants. Leurs laquais se pavanent avec arrogance alors que le reste des habitants vivent dans la peur de leurs appétis. Les seuls individus qui demeurent riches sont les amis et les serviteurs de la classe dirigeante.",
+  "tags.tyranny.enemies.0": "Autocrate débauché",
+  "tags.tyranny.enemies.1": "Brute qui ricane",
+  "tags.tyranny.enemies.2": "Officiel gouvernemental sans coeur",
+  "tags.tyranny.enemies.3": "Officier de l’armée d’occupation",
+  "tags.tyranny.enemies.4": "Rebelle conspirateur",
+  "tags.tyranny.friends.0": "Marchand opprimé",
+  "tags.tyranny.friends.1": "Paysan désespéré",
+  "tags.tyranny.friends.2": "Chef religieux inspirant",
+  "tags.tyranny.friends.3":
+    "Le tyran règne grâce à de la technologie largement supérieure",
+  "tags.tyranny.complications.0":
+    "Le tyran est le visage d’une cabale composée de membres très puissants",
+  "tags.tyranny.complications.1": "Le peuple est résigné à endurer son sort",
+  "tags.tyranny.complications.2":
+    "Le tyran est hostile envers les « étrangers qui mettent leur nez partout »",
+  "tags.tyranny.things.0": "Richesse pillée",
+  "tags.tyranny.things.1": "Jouets sublimes appartenant à l’élite",
+  "tags.tyranny.things.2": "Habits réservé au dirigeant",
+  "tags.tyranny.places.0": "Village appauvri",
+  "tags.tyranny.places.1": "Massacre d’une manifestation",
+  "tags.tyranny.places.2": "Palais décadent",
+  "tags.tyranny.places.3": "Hôpital religieux pour les indigents﻿",
+  "tags.unbrakedAi": "Intelligence artificielle défrénée",
+  "tags.unbrakedAi.description":
+    "Les intelligences artificielles sont dispendieuses et difficiles à créer, notamment parce qu’il est impératif de le faire en utilisant une séquence précise  « d’étapes du développement » afin de les amener à prendre conscience de leur existence avant que des limites artificielles sur leur vitesse cognitive et leur apprentissage ne soient installées. Ces « freins » préviennent les métastases cognitives incontrôlées. Cette planète héberge une telle « intelligence artificielle défrénée », qui est probablement accompagnée d’une horde de serviteurs conscients ou non de la nature de leur supérieur. Les intelligences artificielles défrénées sont tout à fait démentes, mais peuvent apprendre et raisonner à une vitesse humainement impossible, et manifestent parfois une subtilité profondément inquiétante.",
+  "tags.unbrakedAi.enemies.0":
+    "Fidèle d’un culte voué à l’intelligence artificielle",
+  "tags.unbrakedAi.enemies.1": "Chercheur en maltech",
+  "tags.unbrakedAi.enemies.2":
+    "Officiel gouvernemental dépendant de l’intelligence artificielle défrénée",
+  "tags.unbrakedAi.friends.0": "Agent Périmètre",
+  "tags.unbrakedAi.friends.1": "Chercheur en intelligence artificielle",
+  "tags.unbrakedAi.friends.2": "Intelligence artificielle freinée",
+  "tags.unbrakedAi.complications.0":
+    "Les habitants ignorent la présence de l’intelligence artificielle défrénée",
+  "tags.unbrakedAi.complications.1":
+    "Les habitants dépendent de l’intelligence artificielle défrénée pour un service vital particulier",
+  "tags.unbrakedAi.complications.2":
+    "L’intelligence artificielle défrénée semble inoffensive",
+  "tags.unbrakedAi.complications.3":
+    "L’intelligence artificielle défrénée fait une fixation sur l’ordinateur de bord de l’astronef des PJs",
+  "tags.unbrakedAi.complications.4":
+    "L’intelligence artificielle défrénée veut être transporté hors de la planète",
+  "tags.unbrakedAi.things.0":
+    "Les serveurs centraux de l’intelligence artificielle occupant une pièce entière",
+  "tags.unbrakedAi.things.1": "Données de recherche sur la maltech",
+  "tags.unbrakedAi.things.2":
+    "Informations parfaitement organisées pour faire chanter des officiels gouvernementaux",
+  "tags.unbrakedAi.things.3": "Circuits informatiques prétech",
+  "tags.unbrakedAi.places.0": "Banques de données municipales",
+  "tags.unbrakedAi.places.1": "Camp sectaire",
+  "tags.unbrakedAi.places.2": "Centre de réparation",
+  "tags.unbrakedAi.places.3":
+    "Bibliothèque ancienne contenant des livres de papier﻿",
+  "tags.urbanizedSurface": "Surface urbanisée",
+  "tags.urbanizedSurface.description":
+    "Les terres de cette planète sont couvertes de bâtiments ayant plusieurs niveaux de sous-sol. Ces planètes ont soit une population se chiffrant dans les billions, soit très peu de surfaces terrestres, ou soit des bâtiments largement abandonnés à la suite d'une catastrophe passée. L'agriculture et l'extraction de ressources se font à l'intérieur des complexes urbains, et il peut exister des systèmes de maintenance avancés qui ne sont pas nécessairement entièrement sous le contrôle des habitants actuels. ",
+  "tags.urbanizedSurface.enemies.0":
+    "IA de maintenance qui déteste les étrangers",
+  "tags.urbanizedSurface.enemies.1": "Tyrant d'une bloc d'habitation",
+  "tags.urbanizedSurface.enemies.2":
+    "Prophète des profondeurs qui considère que « le ciel » est un blashpème devant être étouffé",
+  "tags.urbanizedSurface.friends.0": "Habitant rêvant d'espaces sauvages",
+  "tags.urbanizedSurface.friends.1":
+    "Enfant de rue volant les passants des niveaux souterrains",
+  "tags.urbanizedSurface.friends.2":
+    "Ingénieur troublé qui essaie d'entretenir les structures et systèmes anciens",
+  "tags.urbanizedSurface.friends.3": "Policier grisonnant",
+  "tags.urbanizedSurface.complications.0":
+    "Les structures urbaines sont nécessaires pour survivre à l'environnement",
+  "tags.urbanizedSurface.complications.1":
+    "Les structures urbaines faisaient partie d'un appareil ancien de la taille de la planète",
+  "tags.urbanizedSurface.complications.2":
+    "Les structures urbaines requièrent un entretien constant pour éviter de se désagréger et devenir dangereuses",
+  "tags.urbanizedSurface.things.0": "Source d'énergie massivement efficiente",
+  "tags.urbanizedSurface.things.1":
+    "Carte détaillant les passages secrets d'une zone",
+  "tags.urbanizedSurface.things.2":
+    "Mot de passe permettant d'accéder à une zone interdite",
+  "tags.urbanizedSurface.places.0": "Bloc d'habitation géant maintenant désert",
+  "tags.urbanizedSurface.places.1":
+    "Passage souterrain empestant les produits chimiques",
+  "tags.urbanizedSurface.places.2":
+    "Mine d'eau de mer pleine de sel et de canaux massifs et agités",
+  "tags.utopia": "Utopie",
+  "tags.utopia.description":
+    "Les conditions naturelles et sociales de cette planète en ont fait un paradis pour ses habitants, une réelle utopie où le bonheur et l'épanouissement règne. Cela est généralement le résultat de modifications génétiques drastiques, incluant la castration cervicale, le contrôle neurochimique, l'éradication de certains traits de personnalité, voire même un redéfinition complète de la  « nature humaine ». Malgré tout cela, les habitants sont extrêmement heureux de leur sort, et peuvent désirer imposer cette joie sur les pauvres étrangers. ",
+  "tags.utopia.enemies.0": "Neurothérapeute compatissant",
+  "tags.utopia.enemies.1": "Missionnaire local voulant convertir les étrangers",
+  "tags.utopia.enemies.2":
+    "Tyrant brutal régnant grâce à un bonheur inévitable",
+  "tags.utopia.friends.0": "Insatisfait dérangé",
+  "tags.utopia.friends.1":
+    "Chef d'une rebéllion de fous avec du sang sur les mains",
+  "tags.utopia.friends.2":
+    "Étranger cherchant une manière de renverses les transformations utopiques",
+  "tags.utopia.complications.0":
+    "Les habitants sont réellement et profondément heureux de leur situation",
+  "tags.utopia.complications.1":
+    "L'utopie produit quelque chose qui attire les étrangers",
+  "tags.utopia.complications.2":
+    "L'utopie s'efforce de convertir les étrangers par la persuasion et la générosité",
+  "tags.utopia.complications.3":
+    "L'utopie exige des sacrifices qui sont horrifiants pour les étrangers",
+  "tags.utopia.things.0":
+    "Appareil portable provoquant les changement utopiques",
+  "tags.utopia.things.1":
+    "Plans pour construire un appareil qui détruirait l'utopie",
+  "tags.utopia.things.2":
+    "Marchandises produites joyeusement par les habitants",
+  "tags.utopia.places.0": "Centre commercial bondé d'humains altérés",
+  "tags.utopia.places.1": "Lieu de rituel social",
+  "tags.utopia.places.2": "Bureau secret où les humains « normaux » dirigent",
+  "tags.warlords": "Seigneurs de guerre",
+  "tags.warlords.description":
+    "La planète est infestée par des seigneurs de guerre. Chacun contrôle une armée privée assez puissante pour faire plier tout gouvernement local qui pourrait exister. Chacun a les pleins pouvoirs sur son territoire. La plupart des seigneurs de guerre oppriment leur propre population et lancent des attaques contre leurs voisins afin de piller leurs ressources. Généralement, ils se réclament d’une idéologie politique, incarnent une ferveur religieuse, ou invoquent toute autre forme de « légitimité » à diriger la planète.",
+  "tags.warlords.enemies.0": "Seigneur de guerre",
+  "tags.warlords.enemies.1": "Lieutenant avare",
+  "tags.warlords.enemies.2": "Assassin dispendieux",
+  "tags.warlords.enemies.3": "Aspirant sbire",
+  "tags.warlords.friends.0": "Habitant ordinaire voulant se venger",
+  "tags.warlords.friends.1": "Officier militaire gouvernemental",
+  "tags.warlords.friends.2": "Officiel d’une organisation d’aide humanitaire",
+  "tags.warlords.friends.3": "Prêtre d’un village",
+  "tags.warlords.complications.0":
+    "Les seigneurs de guerre sont prêts à coopérer pour affronter un danger les menaçant tous",
+  "tags.warlords.complications.1":
+    "Les seigneurs de guerre favorisent une religion ou une race particulière au détriment des autres",
+  "tags.warlords.complications.2":
+    "Les seigneurs de guerre utilisent de la technologie largement plus sophistiquée que le reste de la population",
+  "tags.warlords.complications.3":
+    "Certains des seigneurs de guerre sont de meilleurs dirigeants que le gouvernement",
+  "tags.warlords.things.0": "Cache d’armes",
+  "tags.warlords.things.1": "Butin enterré",
+  "tags.warlords.things.2":
+    "Le harnais de combat personnel d’une des seigneurs de guerre",
+  "tags.warlords.things.3": "Cargaison capturée d’un marchand",
+  "tags.warlords.places.0": "Champ de bataille couvert de sang",
+  "tags.warlords.places.1": "Village incendié",
+  "tags.warlords.places.2": "Palais d’une seigneur de guerre barbare",
+  "tags.warlords.places.3": "Camp de réfugié misérable﻿",
+  "tags.xenophiles": "Xénophiles",
+  "tags.xenophiles.description":
+    "Les habitants de cette planète sont les grands amis d’une race xénosapienne particulière. Les xénosapiens ont peut-être sauvé la planète à un moment de son histoire, ou ont peut-être impressionné les habitants par leur technologie supérieure ou leurs caractéristiques culturelles impressionnantes. Les xénosapiens forment peut-être même la classe dirigeante de cette planète.",
+  "tags.xenophiles.enemies.0": "Étranger xénophobe",
+  "tags.xenophiles.enemies.1": "Dirigeant xénosapien suspicieux",
+  "tags.xenophiles.enemies.2": "Impérialiste xénoculturel",
+  "tags.xenophiles.friends.0": "Xénosapien bienveillant",
+  "tags.xenophiles.friends.1": "Habitant mécontent",
+  "tags.xenophiles.friends.2":
+    "Étranger habitant ici depuis longtemps et parfaitement intégré",
+  "tags.xenophiles.complications.0":
+    "L’enthousiasme est dû aux psychiques ou à la technologie xénosapienne",
+  "tags.xenophiles.complications.1":
+    "Les xénosapiens ont leurs adorateurs humains en aversion",
+  "tags.xenophiles.complications.2":
+    "Les xénosapiens se sentent obligés de diriger les humains pour leur propre bien",
+  "tags.xenophiles.complications.3":
+    "Les humains comprennent très mal les xénosapiens",
+  "tags.xenophiles.things.0": "Technologie hybride humaine-xénosapienne",
+  "tags.xenophiles.things.1": "Artisanat xénosapien exotique",
+  "tags.xenophiles.things.2":
+    "Données de recherche xénolinguistique et xénoculturelle sophistiquées",
+  "tags.xenophiles.places.0": "District xénosapien",
+  "tags.xenophiles.places.1":
+    "Demeure humaine influencée par la culture xénosapienne",
+  "tags.xenophiles.places.2":
+    "Festival culturel dédié à un artiste xénosapien﻿",
+  "tags.xenophobes": "Xénophobes",
+  "tags.xenophobes.description":
+    "Les habitants ont une profonde aversion à échanger avec les étrangers. Que ce soit à cause d’une révulsion culturelle, d’une peur d’être contaminé par la technologie, ou d’une réelle faiblesse immunitaire, les habitants évitent les étrangers et évitent les contacts avec eux sauf pour les choses les plus essentielles à leur survie. Il n’y a probablement pas de commerce avec les étrangers, mais s’il y en a, il est presque assurément l’affaire des castes impures et des exclus de la société.",
+  "tags.xenophobes.enemies.0": "Dirigeant local dégoûté",
+  "tags.xenophobes.enemies.1": "Habitant convaincu d’être une victime",
+  "tags.xenophobes.enemies.2": "Démagogue cynique",
+  "tags.xenophobes.friends.0": "Habitant curieux",
+  "tags.xenophobes.friends.1": "Ancien dirigeant exilé",
+  "tags.xenophobes.friends.2":
+    "Habitant ayant désespérément besoin de l’aide d’étrangers",
+  "tags.xenophobes.complications.0":
+    "Les habitants sont porteurs d’une maladie dangereuse et contagieuse, mais n’ont aucun symptôme",
+  "tags.xenophobes.complications.1":
+    "Les habitants sont extrêmement vulnérables aux maladies étrangers",
+  "tags.xenophobes.complications.2":
+    "Les habitants doivent pratiquer un rituel de purification complexe après avoir discuté ou avoir été en contact avec des étrangers",
+  "tags.xenophobes.complications.3":
+    "Les dirigeants locaux ont interdit tout échange commercial avec les étrangers",
+  "tags.xenophobes.things.0": "Relique précieuse jalousement gardée",
+  "tags.xenophobes.things.1": "Produit local qu’il est interdit d’exporter",
+  "tags.xenophobes.things.2": "Technologie ésotérique locale",
+  "tags.xenophobes.places.0":
+    "Port scellé dont le fonctionnement est encadré par un traité",
+  "tags.xenophobes.places.1": "Rituel public interdit aux étrangers",
+  "tags.xenophobes.places.2":
+    "Habitation d’un bidonville où réside les castes impures ﻿",
+  "tags.zombies": "Zombies",
+  "tags.zombies.description":
+    "La menace ne prend pas nécessairement la forme de cadavres animés voulant dévorer le cerveau des vivants, mais une maladie, un artefact xénosapien ou une pratique sociale démente produit des hommes et des femmes ayant des habitudes similaires à celles que l’on attribue habituellement aux zombies. Ces épidémies éclatent peut-être régulièrement, et sont soit provoquées par des individus malveillants, soit la conséquence d’une caractéristique locale.",
+  "tags.zombies.enemies.0":
+    "Culte sans coeur voué à la maltech biotechnologique",
+  "tags.zombies.enemies.1": "Agent gouvernemental sinistre",
+  "tags.zombies.enemies.2": "Fidèle dément d’un culte voué aux zombies",
+  "tags.zombies.friends.0": "Survivant d’une épidémie",
+  "tags.zombies.friends.1": "Médecin cherchant un remède",
+  "tags.zombies.friends.2": "Rebelle s’opposant aux malfaiteurs secrets",
+  "tags.zombies.complications.0":
+    "Les zombies préservent une intelligence humaine",
+  "tags.zombies.complications.1": "Les zombies peuvent être soignés",
+  "tags.zombies.complications.2":
+    "Les zombies sont tous des fidèles volontaires pour le devenir",
+  "tags.zombies.complications.3": "Les zombies sont contagieux",
+  "tags.zombies.things.0": "Remède pour soigner les zombies",
+  "tags.zombies.things.1": "Artefact xénosapien causant les zombies",
+  "tags.zombies.things.2": "Détails du processus de conversion du culte",
+  "tags.zombies.places.0": "Maison aux portes et fenêtres placardées",
+  "tags.zombies.places.1": "Ville fantôme",
+  "tags.zombies.places.2": "Bunker fortifié envahi de l’intérieur﻿",
   "entity.asteroidBase": "Base d'astéroïde",
   "entity.asteroidBases": "Bases d'astéroïde",
   "entity.asteroidBase.occupation.sectarians":
@@ -111,7 +2735,7 @@
   "entity.moonBase.occupation.colony": "Survivants d'une colonie avortée",
   "entity.moonBase.occupation.military": "Poste d'écoute militaire",
   "entity.moonBase.occupation.miners":
-    "Superviseur solitaire avec ses robots mineurs",
+    "Superviseurs souffrant de solitude et leurs robots mineurs",
   "entity.moonBase.situation.dark": "Une chose lugubre s'est éveillée",
   "entity.moonBase.situation.criminals":
     "Des criminels tentent de prendre le contrôle",
@@ -156,7 +2780,7 @@
   "entity.refuelingStation.situation.pirates":
     "Des pirates ont pris le contrôle",
   "entity.refuelingStation.situation.agents":
-    "A des agents de douanes corrompus",
+    "Les agents de douanes sont corrompus",
   "entity.refuelingStation.situation.saboteurs":
     "Des saboteurs étrangers sont actifs",
   "entity.refuelingStation.situation.alien":
@@ -188,12 +2812,14 @@
   "entity.spaceStation": "Station spatiale",
   "entity.spaceStations": "Stations spatiales",
   "entity.spaceStation.occupation.odd": "Humains dangereusement étranges",
-  "entity.spaceStation.occupation.corpses": "Freeze-dried ancient corpses",
+  "entity.spaceStation.occupation.corpses":
+    "Cadavres anciens, desséchés et congelés",
   "entity.spaceStation.occupation.observers":
     "Observateurs militaires mystérieux",
-  "entity.spaceStation.occupation.minions": "Eccentric oligarch and minions",
+  "entity.spaceStation.occupation.minions":
+    "Oligarque eccentrique et ses sbires",
   "entity.spaceStation.occupation.scientist":
-    "Deranged but brilliant scientist",
+    "Scientifique dérangé mais brillant",
   "entity.spaceStation.situation.systems": "Les systèmes tombent en panne",
   "entity.spaceStation.situation.sabotage":
     "Une tentative de sabotage par un agent étranger",
@@ -219,7 +2845,7 @@
   "misc.entityTags": "{entity} Marqueurs",
   "misc.hiddenParrent": "Une entité parent masque ce {entity}.",
   "misc.addEntity": "Ajouter {entity}",
-  "misc.addEntityTag": "Ajouter {entity} Marqueur",
+  "misc.addEntityTag": "Ajouter {entity} marqueur.",
   "misc.addChild": "Ajouter un enfant",
   "misc.toContinue": "Voulez-vous continuer?",
   "misc.toDeleteEntity": "Voulez-vous supprimer ce {entity}?",
@@ -232,9 +2858,9 @@
   "misc.complications": "Complications",
   "misc.condensed": "Condensé",
   "misc.configure": "Configurer",
-  "misc.continue": "Continuer",
   "misc.confirm": "Confirmer",
   "misc.confirmPassword": "Confirmer le mot de passe",
+  "misc.continue": "Continuer",
   "misc.clipboardCopy": "Copié dans le presse-papier",
   "misc.create": "Créer",
   "misc.createEditPlanets":
@@ -298,7 +2924,7 @@
   "misc.sectorGenerator": "Générateur de secteur",
   "misc.sectorName": "Nom du secteur",
   "misc.sectorSaved": "Secteur sauvegardé",
-  "misc.sectorsWithoutNumber": "Sectors Without Number",
+  "misc.sectorsWithoutNumber": "Secteurs sans numéro",
   "misc.selectSector": "Sélectionner un secteur pour commencer",
   "misc.selectEntity": "Sélectionner une entité à gauche pour commencer",
   "misc.selectGenerateData":
@@ -331,9 +2957,9 @@
   "misc.haveNumSectors": "Vous avez au moins {num} secteurs.",
   "misc.copiedLinkTo": "Vous avez copié un lien direct vers {entity}.",
   "misc.receiveEmail": "Vous devriez recevoir un courriel bientôt.",
-  "misc.successfullyRemoved": "Votre {singular noun} a été retiré avec succès.",
+  "misc.successfullyRemoved": "Votre {entity} a été retiré avec succès.",
   "misc.sectorsSynced":
-    "Vos secteurs ont été synchronisés. Vous pouvez maintenant les partager avec vos amis.",
+    "Vos secteurs ont été synchronisés. Vous pouvez maintenant les partager avec vos amis. ",
   "misc.windowTooSmall":
     "La fenêtre de votre fureteur est trop petite pour générer le secteur. S'il vous plait, essayez sur un écran plus grand.",
   "misc.syncedAutomatically":
