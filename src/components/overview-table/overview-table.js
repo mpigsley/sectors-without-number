@@ -71,7 +71,12 @@ export default function OverviewTable({
       });
     }
     if (Entities[entityType].tags) {
-      columns.push({ accessor: 'tags', Header: 'misc.tags' });
+      columns.push({
+        accessor: 'tags',
+        Header: 'misc.tags',
+        Cell: tags =>
+          tags.map(tag => intl.formatMessage({ id: `tags.${tag}` })).join(', '),
+      });
     }
     return columns;
   };

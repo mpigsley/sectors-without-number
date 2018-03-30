@@ -148,7 +148,7 @@ const EntityList = ({
         additional: Entities[entityType].topLevel
           ? coordinateKey(entity.x, entity.y)
           : ((entity.attributes || {}).tags || [])
-              .map(tag => Entities[entityType].tags[tag].name)
+              .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
               .map(toCommaArray)
               .join(''),
       };
