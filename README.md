@@ -14,13 +14,23 @@ This project is a front-end application written in React + Redux with a [Firebas
 
 ### Getting Started
 
-1. `npm i` and `cd functions && npm i`
-2. `cp .env.example .env`
-3. Create a [firebase project](https://console.firebase.google.com/) and fill out `.env`.
-4. `$(npm bin)/firebase login` or use your global firebase instance if you installed it globally.
-5. `$(npm bin)/firebase use --add` and select the project you configured in the firebase console.
-6. `npm start`
+1.  `npm i` and `cd functions && npm i`
+2.  `cp .env.example .env`
+3.  Create a [firebase project](https://console.firebase.google.com/) and fill out `.env`.
+4.  `$(npm bin)/firebase login` or use your global firebase instance if you installed it globally.
+5.  `$(npm bin)/firebase use --add` and select the project you configured in the firebase console.
+6.  `npm start`
 
 ### Deploying to Firebase
 
 After you've logged into firebase and selected the project from the CLI, you can deploy by simply running `npm run deploy`.
+
+## Internationalization
+
+Translations for all the strings on the site are [in a google sheet](https://docs.google.com/spreadsheets/d/162lUcFa6cZdEy3hHQGqMRlgHNhTTL-szWexLtdpLllY/edit?usp=sharing). If you would like to help out just request access and tell me what language you'd like to work on.
+
+### Convert GDrive spreadsheet into intl files
+
+1.  Use ExportSheetData plugin (https://github.com/Synthoid/ExportSheetData) to export json from google sheets
+2.  Drop the downloaded file into the project's base directory
+3.  `npm run translate`, which will take this file and get the translations where they need to be
