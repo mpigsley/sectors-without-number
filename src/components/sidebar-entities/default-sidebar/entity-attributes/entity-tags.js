@@ -73,9 +73,9 @@ export default function EntityTags({
           options={filter(
             Entities[entityType].tags,
             ({ key }) => !includes(entity.attributes.tags, key) || key === tag,
-          ).map(({ key, name }) => ({
+          ).map(({ key }) => ({
             value: key,
-            label: name,
+            label: intl.formatMessage({ id: `tags.${key}` }),
           }))}
         />
       </FlexContainer>
