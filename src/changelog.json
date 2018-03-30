@@ -1,4 +1,8 @@
 {
+  "4.2.0": {
+    "description": "Add french translations for world tags.",
+    "date": "3-30-2018"
+  },
   "4.1.1": {
     "description":
       "When saving a new sector, update application state so that every new save doesn't create another sector.",
