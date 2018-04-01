@@ -1,4 +1,14 @@
 {
+  "4.2.1": {
+    "description": "Fix adding/removing world tags from the sidebar.",
+    "date": "4-1-2018",
+    "changes": [
+      "Add a couple missing translations",
+      "Order world tags in sidebar edit dropdown for all languages",
+      "Center hex tooltips for all languages",
+      "Make the navigation sidebar design more resilient to longer text in other languages"
+    ]
+  },
   "4.2.0": {
     "description": "Add french translations for world tags.",
     "date": "3-30-2018"
