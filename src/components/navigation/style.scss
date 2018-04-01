@@ -5,7 +5,7 @@ $margin: 1.55rem;
 .Navigation {
   background-color: $dark2;
   height: 100vh;
-  min-width: 188px;
+  width: 188px;
 }
 
 .Navigation-LinkContainer {
@@ -51,7 +51,7 @@ $margin: 1.55rem;
 
 @media (max-width: 1500px) {
   .Navigation {
-    min-width: 75px;
+    width: 75px;
   }
 
   .Navigation-Icon {
