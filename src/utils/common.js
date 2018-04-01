@@ -135,7 +135,6 @@ export const sortByKey = (key, stripDiatrics = false) => (a, b) => {
   const strip = stripDiatrics ? removeDiacritics : str => str;
   const keyA = isNumber(a[key]) ? a[key] : strip(a[key] || '').toUpperCase();
   const keyB = isNumber(b[key]) ? b[key] : strip(b[key] || '').toUpperCase();
-  console.log(stripDiatrics, keyA);
   if (keyA < keyB) return -1;
   if (keyA > keyB) return 1;
   return 0;

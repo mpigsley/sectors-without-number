@@ -1,4 +1,8 @@
-import { createSelectorCreator, defaultMemoize } from 'reselect';
+import {
+  createSelector,
+  createSelectorCreator,
+  defaultMemoize,
+} from 'reselect';
 import {
   omit,
   filter,
@@ -94,7 +98,7 @@ export const getCurrentSector = createDeepEqualSelector(
   (currentSector, entities) => entities[Entities.sector.key][currentSector],
 );
 
-export const getCurrentEntity = createDeepEqualSelector(
+export const getCurrentEntity = createSelector(
   [
     currentSectorSelector,
     currentEntityTypeSelector,
