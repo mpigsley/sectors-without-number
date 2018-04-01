@@ -12,6 +12,7 @@ import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 
 import Entities from 'constants/entities';
+import { sortByKey } from 'utils/common';
 
 const renderList = (listLength, listKey, key) => (
   <div key={listKey} className="EntityAttributes-Content">
@@ -61,7 +62,6 @@ export default function EntityTags({
         <Dropdown
           wrapperClassName="EntityTag-Dropdown"
           value={tag}
-          dropUp
           clearable={false}
           onChange={({ value }) =>
             updateEntityInEdit({
@@ -73,10 +73,12 @@ export default function EntityTags({
           options={filter(
             Entities[entityType].tags,
             ({ key }) => !includes(entity.attributes.tags, key) || key === tag,
-          ).map(({ key }) => ({
-            value: key,
-            label: intl.formatMessage({ id: `tags.${key}` }),
-          }))}
+          )
+            .map(({ key }) => ({
+              value: key,
+              label: intl.formatMessage({ id: `tags.${key}` }),
+            }))
+            .sort(sortByKey('label', true))}
         />
       </FlexContainer>
     ));
