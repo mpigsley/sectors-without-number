@@ -3,7 +3,7 @@ import { ROWS, COLUMNS } from 'constants/defaults';
 
 // Constants
 const defaultHexWidth = 50; // Hex width when not rendering sector
-const hexPadding = 0; // Pixels between hexes
+const hexPadding = 2; // Pixels between hexes
 const extraHexes = 1; // Extra hexes around canvas edges
 const pixelBuffer = 75; // Pixel buffer between the sector and window
 const maxHexes = 800; // Number of hexagons to render before this generator is short circuited

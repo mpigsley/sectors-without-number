@@ -1,27 +1,35 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import { FormattedMessage } from 'react-intl';
 
-import Hex from 'components/hex';
-import MovementVector, { MarkerDefs } from 'components/movement-vector';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
+import hexCanvas from 'utils/hex-canvas';
 
 import './style.css';
 
-export default function HexMap({
-  height,
-  width,
-  viewbox,
-  holdKey,
-  activeKey,
-  hexes,
-}) {
-  let emptyMessage = null;
-  if (hexes.length === 0) {
-    emptyMessage = (
+export default class HexMap extends Component {
+  componentDidMount() {
+    this.ctx = this.canvas.getContext('2d');
+    hexCanvas({
+      ctx: this.ctx,
+      hexes: this.props.hexes,
+    });
+  }
+
+  componentDidUpdate(nextProps) {
+    hexCanvas({
+      ctx: this.ctx,
+      hexes: nextProps.hexes,
+    });
+  }
+
+  renderEmptyMessage() {
+    if (this.props.hexes.length > 0) {
+      return null;
+    }
+    return (
       <AbsoluteContainer>
         <ContentContainer direction="column" align="center" justify="center">
           <SubContainer className="HexMap-Message">
@@ -31,34 +39,26 @@ export default function HexMap({
       </AbsoluteContainer>
     );
   }
-  return (
-    <div className="HexMap-Container">
-      {emptyMessage}
-      <svg
-        className={classNames('HexMap-SVG', {
-          'HexMap-SVG--drag': !!holdKey,
-        })}
-        width={width}
-        height={height}
-        viewBox={viewbox}
-        preserveAspectRatio="xMidYMid meet"
-      >
-        <defs>{MarkerDefs}</defs>
-        {hexes.map(hex => (
-          <Hex data={hex} key={hex.hexKey} active={hex.hexKey === activeKey} />
-        ))}
-        <MovementVector hexes={hexes} />
-      </svg>
-    </div>
-  );
+
+  render() {
+    return (
+      <div className="HexMap-Container">
+        {this.renderEmptyMessage()}
+        <canvas
+          width={this.props.width}
+          height={this.props.height}
+          ref={canvas => {
+            this.canvas = canvas;
+          }}
+        />
+      </div>
+    );
+  }
 }
 
 HexMap.propTypes = {
   height: PropTypes.number,
   width: PropTypes.number,
-  viewbox: PropTypes.string,
-  holdKey: PropTypes.string,
-  activeKey: PropTypes.string,
   hexes: PropTypes.arrayOf(
     PropTypes.shape({
       hexKey: PropTypes.string.isRequired,
@@ -69,8 +69,5 @@ HexMap.propTypes = {
 HexMap.defaultProps = {
   height: null,
   width: null,
-  viewbox: null,
-  holdKey: null,
-  activeKey: null,
   hexes: [],
 };
