@@ -1,4 +1,9 @@
 {
+  "4.2.2": {
+    "description":
+      "Fix incorrectly formatted french translation for entity tags.",
+    "date": "4-2-2018"
+  },
   "4.2.1": {
     "description": "Fix adding/removing world tags from the sidebar.",
     "date": "4-2-2018",
