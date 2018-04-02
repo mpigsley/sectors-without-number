@@ -1,7 +1,7 @@
 {
   "4.2.1": {
     "description": "Fix adding/removing world tags from the sidebar.",
-    "date": "4-1-2018",
+    "date": "4-2-2018",
     "changes": [
       "Add a couple missing translations",
       "Order world tags in sidebar edit dropdown for all languages",
