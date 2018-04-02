@@ -1,4 +1,9 @@
 {
+  "4.2.3": {
+    "description":
+      "Fix problem with tags where edit would persist even when 'cancel' was selected.",
+    "date": "4-2-2018"
+  },
   "4.2.2": {
     "description":
       "Fix incorrectly formatted french translation for entity tags.",

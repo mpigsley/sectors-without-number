@@ -46,7 +46,9 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
     entity: omitBy(
       {
         name: entity.name,
-        attributes: entity.attributes,
+        attributes: entity.attributes
+          ? { ...entity.attributes, tags: [...(entity.attributes.tags || [])] }
+          : undefined,
         isHidden: entity.isHidden,
       },
       isNil,
