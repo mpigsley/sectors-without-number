@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import { omit, map, size } from 'lodash';
 
 import ProfileModal from 'components/profile-modal';
@@ -35,7 +35,9 @@ export default function OverviewList({
           align="center"
           className="OverviewList"
         >
-          <Header type={HeaderType.header2}>Entities</Header>
+          <Header type={HeaderType.header2}>
+            <FormattedMessage id="misc.entities" />
+          </Header>
           <div className="OverviewList-List">
             {map(
               omit(entities, Entities.sector.key),
