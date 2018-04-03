@@ -5,15 +5,20 @@ import { FormattedMessage } from 'react-intl';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
-import hexCanvas from 'utils/hex-canvas';
+import hexCanvas, { getPixelRatio } from 'utils/hex-canvas';
 
 import './style.css';
 
 export default class HexMap extends Component {
+  componentWillMount() {
+    this.ratio = getPixelRatio();
+  }
+
   componentDidMount() {
     this.ctx = this.canvas.getContext('2d');
     hexCanvas({
       ctx: this.ctx,
+      ratio: this.ratio,
       hexes: this.props.hexes,
       entities: this.props.topLevelEntities,
     });
@@ -22,6 +27,7 @@ export default class HexMap extends Component {
   componentDidUpdate(nextProps) {
     hexCanvas({
       ctx: this.ctx,
+      ratio: this.ratio,
       hexes: nextProps.hexes,
       entities: nextProps.topLevelEntities,
     });
@@ -47,8 +53,12 @@ export default class HexMap extends Component {
       <div className="HexMap-Container">
         {this.renderEmptyMessage()}
         <canvas
-          width={this.props.width}
-          height={this.props.height}
+          width={this.props.width * this.ratio}
+          height={this.props.height * this.ratio}
+          style={{
+            width: this.props.width,
+            height: this.props.height,
+          }}
           ref={canvas => {
             this.canvas = canvas;
           }}

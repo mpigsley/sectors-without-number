@@ -14,15 +14,38 @@ const getHexPoints = ({ width, xOffset, yOffset }) => {
   return hexagon;
 };
 
-export default ({ ctx, hexes, entities }) => {
-  ctx.strokeStyle = '#283647';
-  ctx.lineWidth = 2;
+export const getPixelRatio = () => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const bsr =
+    ctx.webkitBackingStorePixelRatio ||
+    ctx.mozBackingStorePixelRatio ||
+    ctx.msBackingStorePixelRatio ||
+    ctx.oBackingStorePixelRatio ||
+    ctx.backingStorePixelRatio ||
+    1;
+  return dpr / bsr;
+};
 
-  const hexEntities = hexes.map(hex => ({
-    ...hex,
-    points: getHexPoints(hex),
-    ...getTopLevelEntity(entities, hex.hexKey),
-  }));
+export default ({ ctx, ratio, hexes, entities }) => {
+  const step = 2 * ratio;
+  ctx.strokeStyle = '#283647';
+  ctx.lineWidth = 2 * ratio;
+
+  const hexEntities = hexes
+    .map(hex => ({
+      ...hex,
+      xOffset: hex.xOffset * ratio,
+      yOffset: hex.yOffset * ratio,
+      width: hex.width * ratio,
+      height: hex.height * ratio,
+      ...getTopLevelEntity(entities, hex.hexKey),
+    }))
+    .map(hex => ({
+      ...hex,
+      points: getHexPoints(hex),
+    }));
 
   hexEntities.forEach(({ points, highlighted }) => {
     ctx.beginPath();
@@ -43,11 +66,15 @@ export default ({ ctx, hexes, entities }) => {
     .filter(({ highlighted, width }) => highlighted && width > 45)
     .forEach(({ hexKey, entity, xOffset, yOffset, height }) => {
       // Draw Text
-      ctx.font = '9px Raleway,sans-serif';
+      ctx.font = `${9 * ratio}px Raleway,sans-serif`;
       ctx.fillStyle = '#8f8f8f';
-      ctx.fillText(hexKey, xOffset - 10, yOffset + height / 2 - 4);
+      ctx.fillText(hexKey, xOffset - step * 5, yOffset + height / 2 - step * 2);
       if (entity) {
-        ctx.fillText(entity.numChildren, xOffset - 2, yOffset - height / 2 + 8);
+        ctx.fillText(
+          entity.numChildren,
+          xOffset - step,
+          yOffset - height / 2 + step * 4,
+        );
       }
     });
 };
