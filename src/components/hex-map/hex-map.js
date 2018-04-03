@@ -15,6 +15,7 @@ export default class HexMap extends Component {
     hexCanvas({
       ctx: this.ctx,
       hexes: this.props.hexes,
+      entities: this.props.topLevelEntities,
     });
   }
 
@@ -22,6 +23,7 @@ export default class HexMap extends Component {
     hexCanvas({
       ctx: this.ctx,
       hexes: nextProps.hexes,
+      entities: nextProps.topLevelEntities,
     });
   }
 
@@ -57,6 +59,7 @@ export default class HexMap extends Component {
 }
 
 HexMap.propTypes = {
+  topLevelEntities: PropTypes.shape().isRequired,
   height: PropTypes.number,
   width: PropTypes.number,
   hexes: PropTypes.arrayOf(
