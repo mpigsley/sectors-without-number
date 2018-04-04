@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { throttle } from 'lodash';
+import { debounce } from 'lodash';
 
 import hexGenerator from 'utils/hex-generator';
 
@@ -28,7 +28,7 @@ export default class HexBackground extends Component {
     window.removeEventListener('resize', this.onResize);
   }
 
-  onResize = throttle(() => {
+  onResize = debounce(() => {
     this.setState({
       height: window.innerHeight,
       width: window.innerWidth,

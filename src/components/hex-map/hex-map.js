@@ -24,12 +24,12 @@ export default class HexMap extends Component {
     });
   }
 
-  componentDidUpdate(nextProps) {
+  componentDidUpdate() {
     hexCanvas({
       ctx: this.ctx,
       ratio: this.ratio,
-      hexes: nextProps.hexes,
-      entities: nextProps.topLevelEntities,
+      hexes: this.props.hexes,
+      entities: this.props.topLevelEntities,
     });
   }
 

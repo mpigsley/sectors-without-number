@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { throttle, isEmpty, map } from 'lodash';
+import { debounce, isEmpty, map } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';
@@ -76,7 +76,7 @@ export default class SectorMap extends Component {
     window.removeEventListener('resize', this.onResize);
   }
 
-  onResize = throttle(() => {
+  onResize = debounce(() => {
     this.setState({
       height: window.innerHeight,
       width: calcWidth(),
