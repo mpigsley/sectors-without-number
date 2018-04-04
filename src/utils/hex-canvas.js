@@ -1,4 +1,5 @@
 import { getTopLevelEntity } from 'utils/entity';
+import Entities from 'constants/entities';
 
 const getHexPoints = ({ width, xOffset, yOffset }) => {
   const radius = width / 2;
@@ -64,17 +65,28 @@ export default ({ ctx, ratio, hexes, entities }) => {
 
   hexEntities
     .filter(({ highlighted, width }) => highlighted && width > 45)
-    .forEach(({ hexKey, entity, xOffset, yOffset, height }) => {
-      // Draw Text
-      ctx.font = `${9 * ratio}px Raleway,sans-serif`;
-      ctx.fillStyle = '#8f8f8f';
-      ctx.fillText(hexKey, xOffset - step * 5, yOffset + height / 2 - step * 2);
-      if (entity) {
+    .forEach(
+      ({ hexKey, entity, entityType, xOffset, yOffset, height, width }) => {
+        // Draw Text
+        ctx.font = `${9 * ratio}px Raleway,sans-serif`;
+        ctx.fillStyle = '#8f8f8f';
         ctx.fillText(
-          entity.numChildren,
-          xOffset - step,
-          yOffset - height / 2 + step * 4,
+          hexKey,
+          xOffset - step * 5,
+          yOffset + height / 2 - step * 2,
         );
-      }
-    });
+        if (entity) {
+          ctx.fillText(
+            entity.numChildren,
+            xOffset - step,
+            yOffset - height / 2 + step * 4,
+          );
+          ctx.fillStyle =
+            entityType === Entities.blackHole.key ? '#000000' : '#dbdbdb';
+          ctx.beginPath();
+          ctx.arc(xOffset, yOffset, width / 13, 0, 2 * Math.PI);
+          ctx.fill();
+        }
+      },
+    );
 };
