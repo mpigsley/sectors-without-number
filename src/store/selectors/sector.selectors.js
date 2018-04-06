@@ -10,11 +10,7 @@ import {
 
 export const getUserSectors = createSelector(
   [sectorSelector, savedSectorSelector],
-  (sectors, saved) =>
-    omitBy(
-      sectors,
-      (sector, key) => sector.isCloudSave || !includes(saved, key),
-    ),
+  (sectors, saved) => omitBy(sectors, (sector, key) => !includes(saved, key)),
 );
 
 export const isCurrentSectorSaved = createSelector(
