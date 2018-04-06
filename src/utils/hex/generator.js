@@ -1,48 +1,28 @@
 import { coordinateKey } from 'utils/common';
-import { ROWS, COLUMNS } from 'constants/defaults';
-
-// Constants
-const defaultHexWidth = 50; // Hex width when not rendering sector
-const hexPadding = 2; // Pixels between hexes
-const extraHexes = 1; // Extra hexes around canvas edges
-const pixelBuffer = 75; // Pixel buffer between the sector and window
-const maxHexes = 800; // Number of hexagons to render before this generator is short circuited
-
-// Size Conversion
-const sizeDiff = Math.sqrt(3) / 2;
-const toWidth = height => height / sizeDiff;
-const toHeight = width => width * sizeDiff;
-
-// Height/Vertical Calculations
-const getTotalHeight = (hexHeight, rows) => (rows + 1 / 2) * hexHeight;
-const getHexHeight = (totalHeight, rows) => totalHeight / (rows + 1 / 2);
-const getRows = (totalHeight, hexHeight) =>
-  (totalHeight - 2 / hexHeight) / hexHeight;
-
-// Width/Horizontal Calculations
-const getTotalWidth = (hexWidth, columns) => hexWidth / 4 * (3 * columns + 1);
-const getHexWidth = (totalWidth, columns) => 4 * totalWidth / (3 * columns + 1);
-const getColumns = (totalWidth, hexWidth) =>
-  4 * totalWidth / (3 * hexWidth) - 1 / 3;
-
-// Helpers
-export const areNeighbors = (a, b) => {
-  if (a.x % 2 === 1) {
-    return (
-      (Math.abs(a.x - b.x) <= 1 && [0, 1].indexOf(a.y - b.y) >= 0) ||
-      (a.x === b.x && a.y === b.y - 1)
-    );
-  }
-  return (
-    (Math.abs(a.x - b.x) <= 1 && [0, 1].indexOf(b.y - a.y) >= 0) ||
-    (a.x === b.x && a.y === b.y + 1)
-  );
-};
+import {
+  ROWS,
+  COLUMNS,
+  DEFAULT_HEX_WIDTH,
+  HEX_PADDING,
+  EXTRA_HEXES,
+  PIXEL_BUFFER,
+  MAX_HEXES,
+} from 'constants/defaults';
+import {
+  toWidth,
+  toHeight,
+  getTotalHeight,
+  getHexHeight,
+  getRows,
+  getTotalWidth,
+  getHexWidth,
+  getColumns,
+} from 'utils/hex/common';
 
 const getHexSize = ({ width, height, columns, rows, renderSector }) => {
-  const bufferedHeight = height - 2 * pixelBuffer;
-  const bufferedWidth = width - 2 * pixelBuffer;
-  let scaledWidth = defaultHexWidth;
+  const bufferedHeight = height - 2 * PIXEL_BUFFER;
+  const bufferedWidth = width - 2 * PIXEL_BUFFER;
+  let scaledWidth = DEFAULT_HEX_WIDTH;
   if (renderSector) {
     const pixelHeight = getHexHeight(bufferedHeight, rows);
     const pixelWidth = getHexWidth(bufferedWidth, columns);
@@ -51,8 +31,8 @@ const getHexSize = ({ width, height, columns, rows, renderSector }) => {
   const scaledHeight = toHeight(scaledWidth);
   const totalHeight = getTotalHeight(scaledHeight, rows);
   const totalWidth = getTotalWidth(scaledWidth, columns);
-  const scaledXBuffer = pixelBuffer + (bufferedWidth - totalWidth) / 2;
-  const scaledYBuffer = pixelBuffer + (bufferedHeight - totalHeight) / 2;
+  const scaledXBuffer = PIXEL_BUFFER + (bufferedWidth - totalWidth) / 2;
+  const scaledYBuffer = PIXEL_BUFFER + (bufferedHeight - totalHeight) / 2;
   const widthUnit = scaledWidth / 4;
   const heightUnit = scaledHeight / 2;
   return {
@@ -70,8 +50,8 @@ const getGridData = (
   { rows, columns },
 ) => {
   const hexesInVertical = getRows(scaledYBuffer, scaledHeight);
-  const paddedRows = Math.ceil(hexesInVertical) + extraHexes;
-  const extraHexYMultiplier = (extraHexes * 2 + 1) / 2;
+  const paddedRows = Math.ceil(hexesInVertical) + EXTRA_HEXES;
+  const extraHexYMultiplier = (EXTRA_HEXES * 2 + 1) / 2;
   const totalRows = rows + 2 * paddedRows;
   const yRemainder = Math.trunc(hexesInVertical);
   const scaledYOffset =
@@ -79,9 +59,9 @@ const getGridData = (
     scaledHeight * extraHexYMultiplier;
 
   const hexesInHorizontal = getColumns(scaledXBuffer, scaledWidth);
-  let paddedColumns = Math.ceil(hexesInHorizontal) + extraHexes;
+  let paddedColumns = Math.ceil(hexesInHorizontal) + EXTRA_HEXES;
   const extraHexXMultiplier =
-    ((paddedColumns % 2 ? extraHexes + 1 : extraHexes) * 2 + 1) / 4;
+    ((paddedColumns % 2 ? EXTRA_HEXES + 1 : EXTRA_HEXES) * 2 + 1) / 4;
   paddedColumns = paddedColumns % 2 ? paddedColumns + 1 : paddedColumns;
   const totalColumns = columns + 2 * paddedColumns;
   const xRemainder = Math.trunc(hexesInHorizontal);
@@ -179,8 +159,8 @@ export default config => {
         i,
         j,
         hexKey,
-        width: scaledWidth - hexPadding,
-        height: scaledHeight - hexPadding,
+        width: scaledWidth - HEX_PADDING,
+        height: scaledHeight - HEX_PADDING,
         xOffset,
         yOffset: j % 2 ? minRowHeight + heightUnit : minRowHeight,
         highlighted:
@@ -197,7 +177,7 @@ export default config => {
     i += 1;
     isWithinWidth = true;
     isWithinHeight = i < totalRows;
-    isLessThanMaximum = hexes.length <= maxHexes || !isSmallWindow;
+    isLessThanMaximum = hexes.length <= MAX_HEXES || !isSmallWindow;
   }
 
   hexes = isLessThanMaximum ? hexes : [];

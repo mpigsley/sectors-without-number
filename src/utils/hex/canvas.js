@@ -1,18 +1,10 @@
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
+import { getHexPoints, pixelToHex } from 'utils/hex/common';
 
-const getHexPoints = ({ width, xOffset, yOffset }) => {
-  const radius = width / 2;
-  const hexagon = [];
-
-  for (let i = 0; i < 6; i += 1) {
-    const pointOnCircle = i * Math.PI / 3;
-    const x = radius * Math.cos(pointOnCircle);
-    const y = radius * Math.sin(pointOnCircle);
-    hexagon.push({ x: x + xOffset, y: y + yOffset });
-  }
-
-  return hexagon;
+export const hexFromHover = ({ x, y, width }) => {
+  const hex = pixelToHex({ x, y, width });
+  console.log(hex);
 };
 
 export const getPixelRatio = () => {
@@ -89,4 +81,6 @@ export default ({ ctx, ratio, hexes, entities }) => {
         }
       },
     );
+
+  return { hexWidth: (hexes[0] || {}).width };
 };

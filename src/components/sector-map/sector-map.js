@@ -12,7 +12,7 @@ import HexMap from 'components/hex-map';
 import Navigation from 'components/navigation';
 
 import ExportTypes from 'constants/export-types';
-import hexGenerator from 'utils/hex-generator';
+import hexGenerator from 'utils/hex/generator';
 import { coordinateKey } from 'utils/common';
 import Loading from './loading';
 import Error from './error';

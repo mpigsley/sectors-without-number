@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce } from 'lodash';
 
-import hexGenerator from 'utils/hex-generator';
+import hexGenerator from 'utils/hex/generator';
 
 import HexMap from 'components/hex-map';
 import AccountManager from 'components/account-manager';
