@@ -50,7 +50,15 @@ export const getPixelRatio = () => {
   return dpr / bsr;
 };
 
-export default ({ ctx, ratio, hexes, entities, q, r }) => {
+export default ({
+  ctx,
+  ratio,
+  hexes,
+  entities,
+  hoverKey,
+  holdKey,
+  activeKey,
+}) => {
   const step = 2 * ratio;
   ctx.strokeStyle = '#283647';
   ctx.lineWidth = 2 * ratio;
@@ -69,7 +77,7 @@ export default ({ ctx, ratio, hexes, entities, q, r }) => {
       points: getHexPoints(hex),
     }));
 
-  hexEntities.forEach(({ points, highlighted }) => {
+  hexEntities.forEach(({ points, highlighted, hexKey }) => {
     ctx.beginPath();
     const [first, ...rest] = points;
     ctx.moveTo(first.x, first.y);
@@ -79,6 +87,15 @@ export default ({ ctx, ratio, hexes, entities, q, r }) => {
     ctx.fillStyle = '#233142';
     if (highlighted) {
       ctx.fillStyle = '#303e4f';
+    }
+    if (hoverKey === hexKey) {
+      ctx.fillStyle = '#863c4e';
+    }
+    if (activeKey === hexKey) {
+      ctx.fillStyle = '#792f41';
+    }
+    if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
+      ctx.fillStyle = '#637182';
     }
     ctx.stroke();
     ctx.fill();
@@ -110,20 +127,4 @@ export default ({ ctx, ratio, hexes, entities, q, r }) => {
         }
       },
     );
-
-  // Draw Temporary mouse dot
-  hexEntities.forEach(({ i, j, xOffset, yOffset, height, width }) => {
-    if (i === Math.floor(r) && j === Math.floor(q)) {
-      ctx.fillStyle = 'red';
-      ctx.beginPath();
-      ctx.arc(
-        xOffset + (r % 1 - 0.5) * width,
-        yOffset + (q % 1 - 0.5) * height,
-        width / 15,
-        0,
-        2 * Math.PI,
-      );
-      ctx.fill();
-    }
-  });
 };

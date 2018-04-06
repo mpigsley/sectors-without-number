@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { delay } from 'lodash';
 
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
@@ -21,6 +22,9 @@ export default class HexMap extends Component {
       ratio: this.ratio,
       hexes: this.props.hexes,
       entities: this.props.topLevelEntities,
+      hoverKey: this.props.hoverKey,
+      activeKey: this.props.activeKey,
+      holdKey: this.props.holdKey,
     });
   }
 
@@ -30,6 +34,9 @@ export default class HexMap extends Component {
       ratio: this.ratio,
       hexes: this.props.hexes,
       entities: this.props.topLevelEntities,
+      hoverKey: this.props.hoverKey,
+      activeKey: this.props.activeKey,
+      holdKey: this.props.holdKey,
     });
   }
 
