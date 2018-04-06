@@ -75,7 +75,7 @@ export default function sector(state = initialState, action) {
     case ENTITY_HOLD:
       return { ...state, holdKey: action.key };
     case RELEASE_HOLD:
-      return { ...state, holdKey: null };
+      return { ...state, holdKey: null, hoverKey: null };
     case ENTITY_HOVER:
       return { ...state, hoverKey: action.key };
     case RELEASE_SYNC_LOCK:

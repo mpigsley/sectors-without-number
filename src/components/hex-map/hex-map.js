@@ -140,6 +140,13 @@ class HexMap extends Component {
     }
   };
 
+  mouseLeave = () => {
+    if (this.props.holdKey || this.props.hoverKey) {
+      this.props.entityRelease();
+      this.isMouseDown = false;
+    }
+  };
+
   renderEmptyMessage() {
     if (this.props.hexes.length > 0) {
       return null;
@@ -172,6 +179,7 @@ class HexMap extends Component {
           onMouseMove={this.mouseMove}
           onMouseDown={this.mouseDown}
           onMouseUp={this.mouseUp}
+          onMouseLeave={this.mouseLeave}
         />
       </div>
     );
