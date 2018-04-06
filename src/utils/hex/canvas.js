@@ -177,17 +177,21 @@ export default ({
         // Draw Text
         ctx.font = `${9 * ratio}px Raleway,sans-serif`;
         ctx.fillStyle = '#8f8f8f';
-        ctx.fillText(
-          hexKey,
-          xOffset - step * 5,
-          yOffset + height / 2 - step * 2,
-        );
-        if (entity) {
+        if (width > 45 * ratio) {
           ctx.fillText(
-            entity.numChildren,
-            xOffset - step,
-            yOffset - height / 2 + step * 4,
+            hexKey,
+            xOffset - step * 5,
+            yOffset + height / 2 - step * 2,
           );
+        }
+        if (entity) {
+          if (width > 45 * ratio) {
+            ctx.fillText(
+              entity.numChildren,
+              xOffset - step,
+              yOffset - height / 2 + step * 4,
+            );
+          }
           ctx.fillStyle =
             entityType === Entities.blackHole.key ? '#000000' : '#dbdbdb';
           ctx.beginPath();
