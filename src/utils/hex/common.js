@@ -35,8 +35,6 @@ export const areNeighbors = (a, b) => {
   );
 };
 
-export const pixelToHex = ({ x, y, hexes }) => {};
-
 export const getHexPoints = ({ width, xOffset, yOffset }) => {
   const radius = width / 2;
   const hexagon = [];

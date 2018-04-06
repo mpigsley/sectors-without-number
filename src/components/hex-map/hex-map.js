@@ -23,7 +23,6 @@ class HexMap extends Component {
     deactivateSidebarEdit: PropTypes.func.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     isShare: PropTypes.bool.isRequired,
-    activeKey: PropTypes.string,
     hoverKey: PropTypes.string,
     holdKey: PropTypes.string,
     height: PropTypes.number,
@@ -44,7 +43,6 @@ class HexMap extends Component {
   static defaultProps = {
     height: null,
     width: null,
-    activeKey: null,
     hoverKey: null,
     holdKey: null,
     hexes: [],
