@@ -50,6 +50,28 @@ export const getPixelRatio = () => {
   return dpr / bsr;
 };
 
+const ARROW_SIZE = 20;
+const drawArrowhead = (ctx, radians, x, y, isForward) => {
+  ctx.fillStyle = '#dbdbdb';
+  ctx.lineWidth = 2;
+  ctx.save();
+  ctx.beginPath();
+  ctx.translate(x, y);
+  ctx.rotate(radians);
+  ctx.moveTo(0, 6 * (isForward ? -1 : 1));
+  ctx.lineTo(
+    ARROW_SIZE / 2,
+    ARROW_SIZE * (isForward ? 1 : -1) + 6 * (isForward ? -1 : 1),
+  );
+  ctx.lineTo(
+    -ARROW_SIZE / 2,
+    ARROW_SIZE * (isForward ? 1 : -1) + 6 * (isForward ? -1 : 1),
+  );
+  ctx.closePath();
+  ctx.restore();
+  ctx.fill();
+};
+
 export default ({
   ctx,
   ratio,
@@ -77,29 +99,76 @@ export default ({
       points: getHexPoints(hex),
     }));
 
-  hexEntities.forEach(({ points, highlighted, hexKey }) => {
+  let holdLocation;
+  let hoverLocation;
+  let isVectorSwitch = false;
+
+  hexEntities.forEach(
+    ({ points, highlighted, hexKey, xOffset, yOffset, entity }) => {
+      ctx.beginPath();
+      const [first, ...rest] = points;
+      ctx.moveTo(first.x, first.y);
+      rest.forEach(({ x, y }) => {
+        ctx.lineTo(x, y);
+      });
+      ctx.fillStyle = '#233142';
+      if (highlighted) {
+        ctx.fillStyle = '#303e4f';
+      }
+      if (hoverKey === hexKey) {
+        ctx.fillStyle = '#863c4e';
+      }
+      if (activeKey === hexKey) {
+        ctx.fillStyle = '#792f41';
+      }
+      if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
+        ctx.fillStyle = '#637182';
+      }
+      ctx.stroke();
+      ctx.fill();
+
+      if (hexKey === holdKey) {
+        holdLocation = { x: xOffset, y: yOffset };
+      }
+      if (hexKey === hoverKey) {
+        hoverLocation = { x: xOffset, y: yOffset };
+        isVectorSwitch = !!entity;
+      }
+    },
+  );
+
+  if (holdLocation && hoverLocation && holdKey !== hoverKey) {
+    const vectorRatio =
+      (isVectorSwitch ? 16 : 10) / distanceBetween(holdLocation, hoverLocation);
+    const xEnd =
+      (1 - vectorRatio) * hoverLocation.x + vectorRatio * holdLocation.x;
+    const yEnd =
+      (1 - vectorRatio) * hoverLocation.y + vectorRatio * holdLocation.y;
+
+    let xStart = holdLocation.x;
+    let yStart = holdLocation.y;
+    if (isVectorSwitch) {
+      xStart =
+        (1 - vectorRatio) * holdLocation.x + vectorRatio * hoverLocation.x;
+      yStart =
+        (1 - vectorRatio) * holdLocation.y + vectorRatio * hoverLocation.y;
+    }
+
+    // Draw Path
+    ctx.strokeStyle = '#dbdbdb';
     ctx.beginPath();
-    const [first, ...rest] = points;
-    ctx.moveTo(first.x, first.y);
-    rest.forEach(({ x, y }) => {
-      ctx.lineTo(x, y);
-    });
-    ctx.fillStyle = '#233142';
-    if (highlighted) {
-      ctx.fillStyle = '#303e4f';
-    }
-    if (hoverKey === hexKey) {
-      ctx.fillStyle = '#863c4e';
-    }
-    if (activeKey === hexKey) {
-      ctx.fillStyle = '#792f41';
-    }
-    if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
-      ctx.fillStyle = '#637182';
-    }
+    ctx.moveTo(xStart, yStart);
+    ctx.lineTo(xEnd, yEnd);
     ctx.stroke();
-    ctx.fill();
-  });
+
+    // Draw arrow heads
+    let radians = Math.atan((yEnd - yStart) / (xEnd - xStart));
+    radians += (xEnd >= xStart ? 90 : -90) * Math.PI / 180;
+    drawArrowhead(ctx, radians, xEnd, yEnd, true);
+    if (isVectorSwitch) {
+      drawArrowhead(ctx, radians, xStart, yStart, false);
+    }
+  }
 
   hexEntities
     .filter(({ highlighted, width }) => highlighted && width > 45)
