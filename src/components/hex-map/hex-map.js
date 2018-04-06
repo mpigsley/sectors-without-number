@@ -60,11 +60,7 @@ class HexMap extends Component {
     hexCanvas({
       ctx: this.ctx,
       ratio: this.ratio,
-      hexes: this.props.hexes,
-      entities: this.props.topLevelEntities,
-      hoverKey: this.props.hoverKey,
-      activeKey: this.props.activeKey,
-      holdKey: this.props.holdKey,
+      ...this.props,
     });
   }
 
@@ -72,11 +68,7 @@ class HexMap extends Component {
     hexCanvas({
       ctx: this.ctx,
       ratio: this.ratio,
-      hexes: this.props.hexes,
-      entities: this.props.topLevelEntities,
-      hoverKey: this.props.hoverKey,
-      activeKey: this.props.activeKey,
-      holdKey: this.props.holdKey,
+      ...this.props,
     });
   }
 

@@ -76,11 +76,15 @@ export default ({
   ctx,
   ratio,
   hexes,
-  entities,
+  topLevelEntities,
   hoverKey,
   holdKey,
   activeKey,
+  width,
+  height,
 }) => {
+  ctx.clearRect(0, 0, width * ratio, height * ratio);
+
   const step = 2 * ratio;
   ctx.strokeStyle = '#283647';
   ctx.lineWidth = 2 * ratio;
@@ -92,7 +96,7 @@ export default ({
       yOffset: hex.yOffset * ratio,
       width: hex.width * ratio,
       height: hex.height * ratio,
-      ...getTopLevelEntity(entities, hex.hexKey),
+      ...getTopLevelEntity(topLevelEntities, hex.hexKey),
     }))
     .map(hex => ({
       ...hex,
@@ -170,34 +174,30 @@ export default ({
     }
   }
 
-  hexEntities
-    .filter(({ highlighted, width }) => highlighted && width > 45)
-    .forEach(
-      ({ hexKey, entity, entityType, xOffset, yOffset, height, width }) => {
-        // Draw Text
-        ctx.font = `${9 * ratio}px Raleway,sans-serif`;
-        ctx.fillStyle = '#8f8f8f';
-        if (width > 45 * ratio) {
-          ctx.fillText(
-            hexKey,
-            xOffset - step * 5,
-            yOffset + height / 2 - step * 2,
-          );
-        }
-        if (entity) {
-          if (width > 45 * ratio) {
-            ctx.fillText(
-              entity.numChildren,
-              xOffset - step,
-              yOffset - height / 2 + step * 4,
-            );
-          }
-          ctx.fillStyle =
-            entityType === Entities.blackHole.key ? '#000000' : '#dbdbdb';
-          ctx.beginPath();
-          ctx.arc(xOffset, yOffset, width / 13, 0, 2 * Math.PI);
-          ctx.fill();
-        }
-      },
-    );
+  hexEntities.filter(hex => hex.highlighted && hex.width > 45).forEach(hex => {
+    // Draw Text
+    ctx.font = `${9 * ratio}px Raleway,sans-serif`;
+    ctx.fillStyle = '#8f8f8f';
+    if (hex.width > 45 * ratio) {
+      ctx.fillText(
+        hex.hexKey,
+        hex.xOffset - step * 5,
+        hex.yOffset + hex.height / 2 - step * 2,
+      );
+    }
+    if (hex.entity) {
+      if (hex.width > 45 * ratio) {
+        ctx.fillText(
+          hex.entity.numChildren,
+          hex.xOffset - step,
+          hex.yOffset - hex.height / 2 + step * 4,
+        );
+      }
+      ctx.fillStyle =
+        hex.entityType === Entities.blackHole.key ? '#000000' : '#dbdbdb';
+      ctx.beginPath();
+      ctx.arc(hex.xOffset, hex.yOffset, hex.width / 13, 0, 2 * Math.PI);
+      ctx.fill();
+    }
+  });
 };
