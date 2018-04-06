@@ -1,10 +1,39 @@
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
-import { getHexPoints, pixelToHex } from 'utils/hex/common';
+import { getHexPoints } from 'utils/hex/common';
+import { HEX_PADDING } from 'constants/defaults';
 
-export const hexFromHover = ({ x, y, width }) => {
-  const hex = pixelToHex({ x, y, width });
-  console.log(hex);
+const getHexBoundingBox = ({ height, width, xOffset, yOffset }) => ({
+  x1: xOffset - (width + HEX_PADDING) / 2,
+  x2: xOffset + (width + HEX_PADDING) / 2,
+  y1: yOffset - (height + HEX_PADDING) / 2,
+  y2: yOffset + (height + HEX_PADDING) / 2,
+});
+const distanceBetween = (a, b) =>
+  Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
+const isWithin = ({ x, y }, { x1, x2, y1, y2 }) =>
+  x >= x1 && x <= x2 && y >= y1 && y <= y2;
+export const getHoveredHex = ({ x, y, hexes }) => {
+  const containedInBoundingBox = hexes.filter(
+    hex => isWithin({ x, y }, getHexBoundingBox(hex)) && hex.highlighted,
+  );
+  if (!containedInBoundingBox.length) {
+    return undefined;
+  } else if (containedInBoundingBox.length === 1) {
+    return containedInBoundingBox[0].hexKey;
+  }
+  return containedInBoundingBox.reduce(
+    (minVal, hex) => {
+      const distance = distanceBetween(
+        { x, y },
+        { x: hex.xOffset, y: hex.yOffset },
+      );
+      return distance < minVal.distance
+        ? { hexKey: hex.hexKey, distance }
+        : minVal;
+    },
+    { distance: Number.MAX_SAFE_INTEGER },
+  ).hexKey;
 };
 
 export const getPixelRatio = () => {
@@ -21,7 +50,7 @@ export const getPixelRatio = () => {
   return dpr / bsr;
 };
 
-export default ({ ctx, ratio, hexes, entities }) => {
+export default ({ ctx, ratio, hexes, entities, q, r }) => {
   const step = 2 * ratio;
   ctx.strokeStyle = '#283647';
   ctx.lineWidth = 2 * ratio;
@@ -82,5 +111,19 @@ export default ({ ctx, ratio, hexes, entities }) => {
       },
     );
 
-  return { hexWidth: (hexes[0] || {}).width };
+  // Draw Temporary mouse dot
+  hexEntities.forEach(({ i, j, xOffset, yOffset, height, width }) => {
+    if (i === Math.floor(r) && j === Math.floor(q)) {
+      ctx.fillStyle = 'red';
+      ctx.beginPath();
+      ctx.arc(
+        xOffset + (r % 1 - 0.5) * width,
+        yOffset + (q % 1 - 0.5) * height,
+        width / 15,
+        0,
+        2 * Math.PI,
+      );
+      ctx.fill();
+    }
+  });
 };

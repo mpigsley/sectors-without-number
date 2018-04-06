@@ -4,8 +4,7 @@ import {
   UPDATE_CONFIGURATION,
   ENTITY_HOLD,
   RELEASE_HOLD,
-  ENTITY_HOVER_START,
-  ENTITY_HOVER_END,
+  ENTITY_HOVER,
   RELEASE_SYNC_LOCK,
   TOP_LEVEL_ENTITY_CREATE,
   CANCEL_TOP_LEVEL_ENTITY_CREATE,
@@ -77,10 +76,8 @@ export default function sector(state = initialState, action) {
       return { ...state, holdKey: action.key };
     case RELEASE_HOLD:
       return { ...state, holdKey: null };
-    case ENTITY_HOVER_START:
+    case ENTITY_HOVER:
       return { ...state, hoverKey: action.key };
-    case ENTITY_HOVER_END:
-      return { ...state, hoverKey: null };
     case RELEASE_SYNC_LOCK:
       return { ...state, syncLock: false };
     case TOP_LEVEL_ENTITY_CREATE:

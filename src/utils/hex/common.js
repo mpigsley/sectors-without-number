@@ -21,13 +21,6 @@ export const getHexWidth = (totalWidth, columns) =>
 export const getColumns = (totalWidth, hexWidth) =>
   4 * totalWidth / (3 * hexWidth) - 1 / 3;
 
-// Coordinate Conversion
-export const cubeToAxial = ({ x, z }) => ({ q: x, r: (z + (x - x % 2)) / 2 });
-export const axialToCube = ({ q, r }) => {
-  const z = r - (q - q % 2) / 2;
-  return { x: q, z: r, y: -q - z };
-};
-
 // Other Helpers
 export const areNeighbors = (a, b) => {
   if (a.x % 2 === 1) {
@@ -42,32 +35,7 @@ export const areNeighbors = (a, b) => {
   );
 };
 
-export const hexRound = ({ x, y, z }) => {
-  let rx = Math.round(x);
-  let ry = Math.round(y);
-  let rz = Math.round(z);
-
-  const xDiff = Math.abs(rx - x);
-  const yDiff = Math.abs(ry - y);
-  const zDiff = Math.abs(rz - z);
-
-  if (xDiff > yDiff && xDiff > zDiff) {
-    rx = -ry - rz;
-  } else if (yDiff > zDiff) {
-    ry = -rx - rz;
-  } else {
-    rz = -rx - ry;
-  }
-
-  return { x: rx, y: ry, z: rz };
-};
-
-export const pixelToHex = ({ x, y, width }) => {
-  const size = width / 2;
-  const q = x * 2 / 3 / size;
-  const r = (-x / 3 + Math.sqrt(3) / 3 * y) / size;
-  return cubeToAxial(hexRound(axialToCube({ q, r })));
-};
+export const pixelToHex = ({ x, y, hexes }) => {};
 
 export const getHexPoints = ({ width, xOffset, yOffset }) => {
   const radius = width / 2;

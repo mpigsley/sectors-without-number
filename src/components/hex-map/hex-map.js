@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
-import hexCanvas, { getPixelRatio, hexFromHover } from 'utils/hex/canvas';
+import hexCanvas, { getPixelRatio, getHoveredHex } from 'utils/hex/canvas';
 
 import './style.css';
 
@@ -16,30 +16,26 @@ export default class HexMap extends Component {
 
   componentDidMount() {
     this.ctx = this.canvas.getContext('2d');
-    const { hexWidth } = hexCanvas({
+    hexCanvas({
       ctx: this.ctx,
       ratio: this.ratio,
       hexes: this.props.hexes,
       entities: this.props.topLevelEntities,
     });
-    this.hexWidth = hexWidth;
   }
 
   componentDidUpdate() {
-    const { hexWidth } = hexCanvas({
+    hexCanvas({
       ctx: this.ctx,
       ratio: this.ratio,
       hexes: this.props.hexes,
       entities: this.props.topLevelEntities,
     });
-    this.hexWidth = hexWidth;
   }
 
   mouseMove = event => {
     let totalOffsetX = 0;
     let totalOffsetY = 0;
-    let canvasX = 0;
-    let canvasY = 0;
     let currentElement = event.target;
 
     do {
@@ -48,10 +44,18 @@ export default class HexMap extends Component {
       currentElement = currentElement.offsetParent;
     } while (currentElement);
 
-    canvasX = event.pageX - totalOffsetX;
-    canvasY = event.pageY - totalOffsetY;
+    const hovered = getHoveredHex({
+      x: event.pageX - totalOffsetX,
+      y: event.pageY - totalOffsetY,
+      hexes: this.props.hexes,
+    });
 
-    hexFromHover({ x: canvasX, y: canvasY, width: this.hexWidth });
+    if (
+      (hovered && hovered !== this.props.hoverKey) ||
+      (!hovered && this.props.hoverKey)
+    ) {
+      this.props.entityHover(hovered);
+    }
   };
 
   renderEmptyMessage() {
@@ -91,7 +95,11 @@ export default class HexMap extends Component {
 }
 
 HexMap.propTypes = {
+  entityHover: PropTypes.func.isRequired,
   topLevelEntities: PropTypes.shape().isRequired,
+  activeKey: PropTypes.string,
+  hoverKey: PropTypes.string,
+  holdKey: PropTypes.string,
   height: PropTypes.number,
   width: PropTypes.number,
   hexes: PropTypes.arrayOf(
@@ -104,5 +112,8 @@ HexMap.propTypes = {
 HexMap.defaultProps = {
   height: null,
   width: null,
+  activeKey: null,
+  hoverKey: null,
+  holdKey: null,
   hexes: [],
 };
