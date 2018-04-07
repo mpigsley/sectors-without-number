@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { map } from 'lodash';
 import { intlShape, FormattedMessage } from 'react-intl';
 
-import HexMap from 'components/hex-map';
+import MapPrintable from 'components/printables/map-printable';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 
@@ -140,7 +140,7 @@ export default class ExpandedPrintable extends Component {
     return (
       <div className="Printable">
         <div className="Printable-Container">
-          <HexMap
+          <MapPrintable
             hexes={this.props.printable.hexes}
             viewbox={this.props.printable.viewbox}
           />

@@ -1,0 +1,59 @@
+@import 'styles/theme';
+
+.MapPrintable-SVG {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.MapPrintable-Container {
+  background-color: white;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.MapPrintable-BlackHole {
+  fill: $dark4;
+  stroke: $dark4;
+  font-size: 25px;
+}
+
+.MapPrintable-System {
+  stroke: $dark4;
+  fill: white;
+  font-size: 25px;
+  stroke-width: 6px;
+}
+
+.MapPrintable-Polygon {
+  fill: white;
+  stroke-width: 3px;
+  stroke: $dark4;
+  transition: all 0.3s;
+}
+
+.MapPrintable-Text {
+  fill: $dark4;
+  font-size: 25px;
+  font-weight: 100;
+  stroke: $dark4;
+  text-anchor: middle;
+  stroke-width: 0.6px;
+  user-select: none;
+}
+
+.MapPrintable-Children {
+  transform: translateY(25px);
+}
+
+.MapPrintable-Key {
+  transform: translateY(-8px);
+}
+
+.MapPrintable-Name {
+  transform: translateY(-24px);
+}
