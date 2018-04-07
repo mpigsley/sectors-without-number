@@ -18,7 +18,7 @@ import { generateSectorName } from 'utils/name-generator';
 
 import './style.css';
 
-const MAX_DIMENSION = 15;
+const MAX_DIMENSION = 20;
 
 export default function Configure({
   additionalPointsOfInterest,
