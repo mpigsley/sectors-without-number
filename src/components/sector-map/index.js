@@ -13,6 +13,7 @@ import {
   renderSectorSelector,
   isInitializedSelector,
   exportTypeSelector,
+  isPrintingSelector,
 } from 'store/selectors/base.selectors';
 
 import SectorMap from './sector-map';
@@ -23,6 +24,7 @@ const mapStateToProps = state => ({
   hasLoaded: isInitializedSelector(state) && !isFetchingCurrent(state),
   topLevelEntities: getCurrentTopLevelEntities(state),
   exportType: exportTypeSelector(state),
+  isPrinting: isPrintingSelector(state),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

@@ -10,26 +10,20 @@ import ExportTypes from 'constants/export-types';
 import './style.css';
 
 export default function ExportModal({
-  isOpen,
+  isExportOpen,
   exportType,
-  onCancel,
+  closeExport,
+  startPrint,
   setEntityExport,
   intl,
 }) {
-  const onPrint = () => {
-    onCancel();
-    setTimeout(() => {
-      window.print();
-    }, 1);
-  };
-
   return (
     <Modal
-      isOpen={isOpen}
-      onCancel={onCancel}
+      isOpen={isExportOpen}
+      onCancel={closeExport}
       title={intl.formatMessage({ id: 'misc.printOptions' })}
       actionButtons={[
-        <Button primary key="continue" onClick={onPrint}>
+        <Button primary key="continue" onClick={startPrint}>
           <FormattedMessage id="misc.continue" />
         </Button>,
       ]}
@@ -56,9 +50,10 @@ export default function ExportModal({
 }
 
 ExportModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
+  isExportOpen: PropTypes.bool.isRequired,
   exportType: PropTypes.string.isRequired,
-  onCancel: PropTypes.func.isRequired,
+  closeExport: PropTypes.func.isRequired,
+  startPrint: PropTypes.func.isRequired,
   setEntityExport: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
 };

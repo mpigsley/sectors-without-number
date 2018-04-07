@@ -47,6 +47,7 @@ export default class SectorMap extends Component {
     }).isRequired,
     routeParams: PropTypes.shape().isRequired,
     exportType: PropTypes.string.isRequired,
+    isPrinting: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -101,6 +102,9 @@ export default class SectorMap extends Component {
   }
 
   renderPrintable(printable) {
+    if (!this.props.isPrinting) {
+      return null;
+    }
     if (this.props.exportType === ExportTypes.expanded.key) {
       return <ExpandedPrintable printable={printable} />;
     }

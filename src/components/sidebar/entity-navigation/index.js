@@ -15,6 +15,7 @@ import {
   getCurrentEntityType,
 } from 'store/selectors/entity.selectors';
 
+import { openExport } from 'store/actions/sector.actions';
 import { saveEntityEdit, saveSector } from 'store/actions/entity.actions';
 import {
   activateSidebarEdit,
@@ -37,6 +38,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
   saveEntityEdit: () => dispatch(saveEntityEdit(props.intl)),
   saveSector: () => dispatch(saveSector(props.intl)),
+  openExport: () => dispatch(openExport()),
 });
 
 export default injectIntl(

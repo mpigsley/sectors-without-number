@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { map, values } from 'lodash';
 import { intlShape, FormattedMessage } from 'react-intl';
@@ -14,8 +14,25 @@ import Entities from 'constants/entities';
 import './style.css';
 import '../style.css';
 
-export default function CondensedPrintable(props) {
-  const getColumnsFromType = entityType => {
+export default class CondensedPrintable extends Component {
+  static propTypes = {
+    entities: PropTypes.shape().isRequired,
+    printable: PropTypes.shape({
+      hexes: PropTypes.arrayOf(PropTypes.object).isRequired,
+      viewbox: PropTypes.string.isRequired,
+    }).isRequired,
+    intl: intlShape.isRequired,
+    endPrint: PropTypes.func.isRequired,
+  };
+
+  componentDidMount() {
+    setTimeout(() => {
+      window.print();
+      this.props.endPrint();
+    }, 1);
+  }
+
+  getColumnsFromType = entityType => {
     const common = [{ accessor: 'name', Header: 'misc.name' }];
     if (Entities[entityType].topLevel) {
       return [
@@ -55,14 +72,14 @@ export default function CondensedPrintable(props) {
         Header: 'misc.tags',
         Cell: tags =>
           tags
-            .map(tag => props.intl.formatMessage({ id: `tags.${tag}` }))
+            .map(tag => this.props.intl.formatMessage({ id: `tags.${tag}` }))
             .join(', '),
       });
     }
     return columns;
   };
 
-  const renderEntityType = (
+  renderEntityType = (
     { entityType, ...entities }, // eslint-disable-line
   ) => (
     <FlexContainer
@@ -83,37 +100,30 @@ export default function CondensedPrintable(props) {
         condensed
         className="CondensedPrintable-Table"
         dataIdAccessor="key"
-        columns={getColumnsFromType(entityType)}
+        columns={this.getColumnsFromType(entityType)}
         data={values(entities).sort(sortByKey('name'))}
       />
     </FlexContainer>
   );
 
-  const renderEntities = entities =>
+  renderEntities = entities =>
     map(entities, (entity, entityType) => ({ ...entity, entityType }))
       .sort(sortByKey('entityType'))
-      .map(renderEntityType);
+      .map(this.renderEntityType);
 
-  return (
-    <div className="Printable">
-      <div className="Printable-Container">
-        <HexMap
-          hexes={props.printable.hexes}
-          viewbox={props.printable.viewbox}
-        />
+  render() {
+    return (
+      <div className="Printable">
+        <div className="Printable-Container">
+          <HexMap
+            hexes={this.props.printable.hexes}
+            viewbox={this.props.printable.viewbox}
+          />
+        </div>
+        <div className="Printable-EntityContainer">
+          {this.renderEntities(this.props.entities)}
+        </div>
       </div>
-      <div className="Printable-EntityContainer">
-        {renderEntities(props.entities)}
-      </div>
-    </div>
-  );
+    );
+  }
 }
-
-CondensedPrintable.propTypes = {
-  entities: PropTypes.shape().isRequired,
-  printable: PropTypes.shape({
-    hexes: PropTypes.arrayOf(PropTypes.object).isRequired,
-    viewbox: PropTypes.string.isRequired,
-  }).isRequired,
-  intl: intlShape.isRequired,
-};

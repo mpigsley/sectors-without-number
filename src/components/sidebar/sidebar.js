@@ -32,7 +32,6 @@ export default class Sidebar extends Component {
   state = {
     entity: { ...this.props.entity },
     isConfirmDeleteOpen: false,
-    isExportOpen: false,
   };
 
   componentWillReceiveProps(nextProps) {
@@ -55,10 +54,6 @@ export default class Sidebar extends Component {
 
   onRandomizeName = namingFunc => () =>
     this.setState({ entity: { ...this.state.entity, name: namingFunc() } });
-
-  openExportModal = () => this.setState({ isExportOpen: true });
-
-  closeExportModal = () => this.setState({ isExportOpen: false });
 
   updateAttribute = (key, value, extraState = {}) =>
     this.setState({
@@ -102,15 +97,11 @@ export default class Sidebar extends Component {
       <EntityNavigation
         name={this.props.entity.name}
         onDeleteEntity={this.onConfirmDelete}
-        openExportModal={this.openExportModal}
       >
         <EntitySidebar />
         {this.renderSectorBuilderText()}
         {this.renderConfirmDeleteModal()}
-        <ExportModal
-          isOpen={this.state.isExportOpen}
-          onCancel={this.closeExportModal}
-        />
+        <ExportModal />
       </EntityNavigation>
     );
   }

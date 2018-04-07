@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { map } from 'lodash';
 import { intlShape, FormattedMessage } from 'react-intl';
@@ -12,8 +12,25 @@ import Entities from 'constants/entities';
 import './style.css';
 import '../style.css';
 
-export default function ExpandedPrintable({ printable, entities, intl }) {
-  const renderEntity = (entityId, entityType, entity) => {
+export default class ExpandedPrintable extends Component {
+  static propTypes = {
+    entities: PropTypes.shape().isRequired,
+    printable: PropTypes.shape({
+      hexes: PropTypes.arrayOf(PropTypes.object).isRequired,
+      viewbox: PropTypes.string.isRequired,
+    }).isRequired,
+    intl: intlShape.isRequired,
+    endPrint: PropTypes.func.isRequired,
+  };
+
+  componentDidMount() {
+    setTimeout(() => {
+      window.print();
+      this.props.endPrint();
+    }, 1);
+  }
+
+  renderEntity = (entityId, entityType, entity) => {
     const conf = Entities[entityType];
 
     const blockAttributes = [];
@@ -24,7 +41,7 @@ export default function ExpandedPrintable({ printable, entities, intl }) {
             <FormattedMessage id="misc.tags" />:{' '}
           </b>
           {entity.tags
-            .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
+            .map(tag => this.props.intl.formatMessage({ id: `tags.${tag}` }))
             .join(', ')}
         </div>,
       );
@@ -38,7 +55,7 @@ export default function ExpandedPrintable({ printable, entities, intl }) {
               <b>
                 <FormattedMessage id={name} />:{' '}
               </b>
-              {intl.messages[entity[key]] ? (
+              {this.props.intl.messages[entity[key]] ? (
                 <FormattedMessage id={entity[key]} />
               ) : (
                 entity[key]
@@ -112,28 +129,24 @@ export default function ExpandedPrintable({ printable, entities, intl }) {
     );
   };
 
-  const renderEntities = () =>
-    map(entities, (entityList, entityType) =>
+  renderEntities = () =>
+    map(this.props.entities, (entityList, entityType) =>
       map(entityList, (entity, entityId) =>
-        renderEntity(entityId, entityType, entity),
+        this.renderEntity(entityId, entityType, entity),
       ),
     );
 
-  return (
-    <div className="Printable">
-      <div className="Printable-Container">
-        <HexMap hexes={printable.hexes} viewbox={printable.viewbox} />
+  render() {
+    return (
+      <div className="Printable">
+        <div className="Printable-Container">
+          <HexMap
+            hexes={this.props.printable.hexes}
+            viewbox={this.props.printable.viewbox}
+          />
+        </div>
+        <div className="Printable-EntityContainer">{this.renderEntities()}</div>
       </div>
-      <div className="Printable-EntityContainer">{renderEntities()}</div>
-    </div>
-  );
+    );
+  }
 }
-
-ExpandedPrintable.propTypes = {
-  entities: PropTypes.shape().isRequired,
-  printable: PropTypes.shape({
-    hexes: PropTypes.arrayOf(PropTypes.object).isRequired,
-    viewbox: PropTypes.string.isRequired,
-  }).isRequired,
-  intl: intlShape.isRequired,
-};
