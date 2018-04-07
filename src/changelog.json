@@ -1,4 +1,14 @@
 {
+  "4.3.0": {
+    "description": "Improve map and website performance.",
+    "date": "4-7-2018",
+    "changes": [
+      "Increase the maximum sector size to 20x20 and allow more hexagons to be rendered at once.",
+      "Only render the printable version of the sector when necessary to improve overall performance.",
+      "Render sector map onto a canvas instead of SVG elements to improve performance of large sectors.",
+      "Simplify system hover/move on map to prevent potential errors."
+    ]
+  },
   "4.2.3": {
     "description":
       "Fix problem with tags where edit would persist even when 'cancel' was selected.",
