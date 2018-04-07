@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { throttle, isEmpty, map } from 'lodash';
+import { debounce, isEmpty, map } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';
@@ -12,7 +12,7 @@ import HexMap from 'components/hex-map';
 import Navigation from 'components/navigation';
 
 import ExportTypes from 'constants/export-types';
-import hexGenerator from 'utils/hex-generator';
+import hexGenerator from 'utils/hex/generator';
 import { coordinateKey } from 'utils/common';
 import Loading from './loading';
 import Error from './error';
@@ -47,6 +47,7 @@ export default class SectorMap extends Component {
     }).isRequired,
     routeParams: PropTypes.shape().isRequired,
     exportType: PropTypes.string.isRequired,
+    isPrinting: PropTypes.bool.isRequired,
   };
 
   static defaultProps = {
@@ -76,7 +77,7 @@ export default class SectorMap extends Component {
     window.removeEventListener('resize', this.onResize);
   }
 
-  onResize = throttle(() => {
+  onResize = debounce(() => {
     this.setState({
       height: window.innerHeight,
       width: calcWidth(),
@@ -101,6 +102,9 @@ export default class SectorMap extends Component {
   }
 
   renderPrintable(printable) {
+    if (!this.props.isPrinting) {
+      return null;
+    }
     if (this.props.exportType === ExportTypes.expanded.key) {
       return <ExpandedPrintable printable={printable} />;
     }

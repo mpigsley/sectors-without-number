@@ -27,7 +27,7 @@ export default function EntityNavigation({
   isSynced,
   isShared,
   isSidebarEditActive,
-  openExportModal,
+  openExport,
   intl,
 }) {
   const onCopy = () => {
@@ -144,7 +144,7 @@ export default function EntityNavigation({
         {deleteButton ? <span className="EntityNavigation-Spacer" /> : null}
         {shareButton}
         {shareButton ? <span className="EntityNavigation-Spacer" /> : null}
-        <Button minimal onClick={openExportModal}>
+        <Button minimal onClick={openExport}>
           <FormattedMessage id="misc.print" />
         </Button>
       </FlexContainer>
@@ -211,7 +211,7 @@ EntityNavigation.propTypes = {
   isSynced: PropTypes.bool.isRequired,
   isShared: PropTypes.bool.isRequired,
   isSidebarEditActive: PropTypes.bool.isRequired,
-  openExportModal: PropTypes.func.isRequired,
+  openExport: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
 };
 

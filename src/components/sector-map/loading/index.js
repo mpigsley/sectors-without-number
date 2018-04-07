@@ -7,7 +7,7 @@ import Header, { HeaderType } from 'primitives/text/header';
 import Spinner from 'primitives/other/spinner';
 import HexMap from 'components/hex-map';
 
-import hexGenerator from 'utils/hex-generator';
+import hexGenerator from 'utils/hex/generator';
 
 export default function Loading() {
   const { hexes } = hexGenerator({

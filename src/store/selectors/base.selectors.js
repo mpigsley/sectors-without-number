@@ -28,6 +28,8 @@ export const renderSectorSelector = state => state.sector.renderSector;
 export const topLevelKeySelector = state => state.sector.topLevelKey;
 export const syncLockSelector = state => state.sector.syncLock;
 export const exportTypeSelector = state => state.sector.exportType;
+export const isExportOpenSelector = state => state.sector.isExportOpen;
+export const isPrintingSelector = state => state.sector.isPrinting;
 
 /* Sidebar Edit */
 export const sidebarEditSelector = state => state.sidebarEdit;

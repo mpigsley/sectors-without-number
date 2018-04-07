@@ -4,12 +4,15 @@ import {
   UPDATE_CONFIGURATION,
   ENTITY_HOLD,
   RELEASE_HOLD,
-  ENTITY_HOVER_START,
-  ENTITY_HOVER_END,
+  ENTITY_HOVER,
   RELEASE_SYNC_LOCK,
   TOP_LEVEL_ENTITY_CREATE,
   CANCEL_TOP_LEVEL_ENTITY_CREATE,
   SET_EXPORT_TYPE,
+  OPENED_EXPORT,
+  CLOSED_EXPORT,
+  PRINTING_STARTED,
+  PRINTING_COMPLETE,
 } from 'store/actions/sector.actions';
 import {
   SAVE_SECTOR,
@@ -28,6 +31,8 @@ const initialState = {
   topLevelKey: null,
   syncLock: false,
   exportType: ExportTypes.condensed.key,
+  isExportOpen: false,
+  isPrinting: false,
   configuration: {
     name: Entities.sector.nameGenerator(),
     isBuilder: false,
@@ -76,11 +81,9 @@ export default function sector(state = initialState, action) {
     case ENTITY_HOLD:
       return { ...state, holdKey: action.key };
     case RELEASE_HOLD:
-      return { ...state, holdKey: null };
-    case ENTITY_HOVER_START:
+      return { ...state, holdKey: null, hoverKey: null };
+    case ENTITY_HOVER:
       return { ...state, hoverKey: action.key };
-    case ENTITY_HOVER_END:
-      return { ...state, hoverKey: null };
     case RELEASE_SYNC_LOCK:
       return { ...state, syncLock: false };
     case TOP_LEVEL_ENTITY_CREATE:
@@ -89,6 +92,14 @@ export default function sector(state = initialState, action) {
       return { ...state, topLevelKey: null };
     case SET_EXPORT_TYPE:
       return { ...state, exportType: action.exportType };
+    case OPENED_EXPORT:
+      return { ...state, isExportOpen: true };
+    case CLOSED_EXPORT:
+      return { ...state, isExportOpen: false };
+    case PRINTING_STARTED:
+      return { ...state, isExportOpen: false, isPrinting: true };
+    case PRINTING_COMPLETE:
+      return { ...state, isPrinting: false };
     default:
       return state;
   }

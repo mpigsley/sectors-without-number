@@ -12,7 +12,7 @@ import ButtonLink from 'primitives/other/button-link';
 import LinkIcon from 'primitives/other/link-icon';
 import HexMap from 'components/hex-map';
 
-import hexGenerator from 'utils/hex-generator';
+import hexGenerator from 'utils/hex/generator';
 
 export default function Error({ generateSector }) {
   const { hexes } = hexGenerator({

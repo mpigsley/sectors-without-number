@@ -32,7 +32,7 @@ import {
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
 import { allSectorKeys, coordinateKey } from 'utils/common';
-import { areNeighbors } from 'utils/hex-generator';
+import { areNeighbors } from 'utils/hex/common';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
 
