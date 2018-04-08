@@ -108,7 +108,8 @@ export const generateEntity = (entity, parameters, intl) => (
   getState,
 ) => {
   const state = getState();
-  if (preventSync(state, dispatch, intl, true)) {
+  const isSector = entity.entityType === Entities.sector.key;
+  if (preventSync(state, dispatch, intl, isSector)) {
     return Promise.resolve();
   }
   const entities = generateEntityUtil({
@@ -129,7 +130,7 @@ export const generateEntity = (entity, parameters, intl) => (
     dispatch(push(`/sector/${newSectorKeys[0]}`));
   }
 
-  if (entity.entityType !== Entities.sector.key) {
+  if (!isSector) {
     return initialSyncToast(state, dispatch, intl).then(isInitialSync =>
       saveEntities({ state, created: entities, entities }, intl).then(results =>
         updateHandler(state, dispatch, results, isInitialSync),

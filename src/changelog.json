@@ -1,4 +1,9 @@
 {
+  "4.3.2": {
+    "description":
+      "Prevent syncing when non-logged users try to create system from sector map.",
+    "date": "4-8-2018"
+  },
   "4.3.1": {
     "description": "Ensure active system is shown in the map.",
     "date": "4-8-2018"
