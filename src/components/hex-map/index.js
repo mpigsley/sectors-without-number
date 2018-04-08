@@ -14,12 +14,16 @@ import {
   hoverKeySelector,
   shareSectorSelector,
 } from 'store/selectors/base.selectors';
-import { getCurrentTopLevelEntities } from 'store/selectors/entity.selectors';
+import {
+  getCurrentTopLevelEntities,
+  getActiveEntityKey,
+} from 'store/selectors/entity.selectors';
 import HexMap from './hex-map';
 
 const mapStateToProps = state => ({
   holdKey: holdKeySelector(state),
   hoverKey: hoverKeySelector(state),
+  activeKey: getActiveEntityKey(state),
   topLevelEntities: getCurrentTopLevelEntities(state),
   isShare: !!shareSectorSelector(state),
 });
