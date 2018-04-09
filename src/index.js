@@ -3,8 +3,10 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import Firebase from 'firebase';
+import Firebase, { functions as FirebaseFunctions } from 'firebase/app';
+
 import Fastclick from 'react-fastclick';
+import 'firebase/functions';
 import 'firebase/firestore';
 
 import store from 'store';
@@ -35,6 +37,11 @@ Firebase.initializeApp({
 });
 
 const history = syncHistoryWithStore(browserHistory, store);
+
+FirebaseFunctions()
+  .httpsCallable('entities')
+  .call({ test: 'string' })
+  .then(console.log);
 
 const onEnterGameRoute = ({ params }) =>
   store.dispatch(fetchSectorEntities(params.sector));
