@@ -12,6 +12,7 @@ export const OPENED_EXPORT = 'OPENED_EXPORT';
 export const CLOSED_EXPORT = 'CLOSED_EXPORT';
 export const PRINTING_STARTED = 'PRINTING_STARTED';
 export const PRINTING_COMPLETE = 'PRINTING_COMPLETE';
+export const CLEARED_MAP_KEYS = 'CLEARED_MAP_KEYS';
 
 export const entityHold = key => syncLock(ENTITY_HOLD, { key });
 export const entityRelease = () => syncLock(RELEASE_HOLD);
@@ -29,3 +30,4 @@ export const openExport = () => ({ type: OPENED_EXPORT });
 export const closeExport = () => ({ type: CLOSED_EXPORT });
 export const startPrint = () => ({ type: PRINTING_STARTED });
 export const endPrint = () => ({ type: PRINTING_COMPLETE });
+export const clearMapKeys = () => ({ type: CLEARED_MAP_KEYS });

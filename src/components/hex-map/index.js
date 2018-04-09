@@ -2,8 +2,9 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import {
-  entityHover,
   entityHold,
+  entityHover,
+  clearMapKeys,
   entityRelease,
   topLevelEntityCreate,
 } from 'store/actions/sector.actions';
@@ -13,6 +14,7 @@ import {
   holdKeySelector,
   hoverKeySelector,
   shareSectorSelector,
+  isSidebarEditActiveSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -26,6 +28,7 @@ const mapStateToProps = state => ({
   activeKey: getActiveEntityKey(state),
   topLevelEntities: getCurrentTopLevelEntities(state),
   isShare: !!shareSectorSelector(state),
+  isSidebarEditActive: isSidebarEditActiveSelector(state),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -35,6 +38,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   moveTopLevelEntity: () => dispatch(moveTopLevelEntity(props.intl)),
   topLevelEntityCreate: key => dispatch(topLevelEntityCreate(key)),
   deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
+  clearMapKeys: () => dispatch(clearMapKeys()),
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(HexMap));

@@ -1,4 +1,12 @@
 {
+  "4.3.3": {
+    "description":
+      "Fix clicking on map and, in some cases, the systems being deleted.",
+    "date": "4-9-2018",
+    "changes": [
+      "Fix arrow size so that it looks consistent between monitor resolutions"
+    ]
+  },
   "4.3.2": {
     "description":
       "Prevent syncing when non-logged users try to create system from sector map.",

@@ -13,6 +13,7 @@ import {
   CLOSED_EXPORT,
   PRINTING_STARTED,
   PRINTING_COMPLETE,
+  CLEARED_MAP_KEYS,
 } from 'store/actions/sector.actions';
 import {
   SAVE_SECTOR,
@@ -81,7 +82,7 @@ export default function sector(state = initialState, action) {
     case ENTITY_HOLD:
       return { ...state, holdKey: action.key };
     case RELEASE_HOLD:
-      return { ...state, holdKey: null, hoverKey: null };
+      return { ...state, holdKey: null };
     case ENTITY_HOVER:
       return { ...state, hoverKey: action.key };
     case RELEASE_SYNC_LOCK:
@@ -100,6 +101,8 @@ export default function sector(state = initialState, action) {
       return { ...state, isExportOpen: false, isPrinting: true };
     case PRINTING_COMPLETE:
       return { ...state, isPrinting: false };
+    case CLEARED_MAP_KEYS:
+      return { ...state, holdKey: null, hoverKey: null };
     default:
       return state;
   }

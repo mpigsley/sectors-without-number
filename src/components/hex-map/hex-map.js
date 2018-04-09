@@ -21,8 +21,10 @@ class HexMap extends Component {
     moveTopLevelEntity: PropTypes.func.isRequired,
     topLevelEntityCreate: PropTypes.func.isRequired,
     deactivateSidebarEdit: PropTypes.func.isRequired,
+    clearMapKeys: PropTypes.func.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     isShare: PropTypes.bool.isRequired,
+    isSidebarEditActive: PropTypes.bool.isRequired,
     hoverKey: PropTypes.string,
     holdKey: PropTypes.string,
     height: PropTypes.number,
@@ -37,6 +39,9 @@ class HexMap extends Component {
       params: PropTypes.shape({
         sector: PropTypes.string,
       }),
+    }).isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
     }).isRequired,
   };
 
@@ -93,7 +98,9 @@ class HexMap extends Component {
     this.isMousedDown = true;
     delay(() => {
       if (this.isMousedDown && !this.props.isShare) {
-        this.props.deactivateSidebarEdit();
+        if (this.props.isSidebarEditActive) {
+          this.props.deactivateSidebarEdit();
+        }
         const { entity } = getTopLevelEntity(
           this.props.topLevelEntities,
           hexKey,
@@ -104,7 +111,7 @@ class HexMap extends Component {
           this.props.topLevelEntityCreate(hexKey);
         }
       }
-    }, 100);
+    }, 600);
   };
 
   mouseUp = event => {
@@ -115,10 +122,15 @@ class HexMap extends Component {
       hexKey,
     );
     if (entity && !this.props.holdKey) {
-      this.props.deactivateSidebarEdit();
-      this.props.router.push(
-        `/sector/${this.props.router.params.sector}/${entity.type}/${entityId}`,
-      );
+      if (this.props.isSidebarEditActive) {
+        this.props.deactivateSidebarEdit();
+      }
+      const route = `/sector/${this.props.router.params.sector}/${
+        entity.type
+      }/${entityId}`;
+      if (this.props.location.pathname !== route) {
+        this.props.router.push(route);
+      }
     } else if (!this.props.isShare) {
       if (!hexKey || this.props.holdKey === this.props.hoverKey) {
         this.props.entityRelease();
@@ -140,7 +152,7 @@ class HexMap extends Component {
 
   mouseLeave = () => {
     if (this.props.holdKey || this.props.hoverKey) {
-      this.props.entityRelease();
+      this.props.clearMapKeys();
       this.isMouseDown = false;
     }
   };
