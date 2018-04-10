@@ -1,4 +1,9 @@
 {
+  "4.3.4": {
+    "description":
+      "Fix bug where large sectors in small viewports wouldn't render the system & black hole icons.",
+    "date": "4-10-2018"
+  },
   "4.3.3": {
     "description":
       "Fix clicking on map and, in some cases, the systems being deleted.",

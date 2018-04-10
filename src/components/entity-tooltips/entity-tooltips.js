@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -29,7 +29,11 @@ export default function EntityTooltips({
     </div>
   );
 
-  return <div>{hexes.map(renderTooltip)}</div>;
+  return (
+    <Fragment>
+      {hexes.filter(({ hexKey }) => hexKey).map(renderTooltip)}
+    </Fragment>
+  );
 }
 
 EntityTooltips.propTypes = {
@@ -38,11 +42,11 @@ EntityTooltips.propTypes = {
   leftOffset: PropTypes.number,
   hexes: PropTypes.arrayOf(
     PropTypes.shape({
-      hexKey: PropTypes.string.isRequired,
+      hexKey: PropTypes.string,
       name: PropTypes.string.isRequired,
-      xOffset: PropTypes.number.isRequired,
-      yOffset: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
+      xOffset: PropTypes.number,
+      yOffset: PropTypes.number,
+      height: PropTypes.number,
     }),
   ).isRequired,
 };

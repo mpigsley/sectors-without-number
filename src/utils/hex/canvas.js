@@ -169,11 +169,12 @@ export default ({
     }
   }
 
-  hexEntities.filter(hex => hex.highlighted && hex.width > 45).forEach(hex => {
+  hexEntities.filter(hex => hex.highlighted).forEach(hex => {
     // Draw Text
     ctx.font = `${9 * ratio}px Raleway,sans-serif`;
     ctx.fillStyle = '#8f8f8f';
-    if (hex.width > 45 * ratio) {
+    const renderText = hex.width > 45 * ratio;
+    if (renderText) {
       ctx.fillText(
         hex.hexKey,
         hex.xOffset - step * 5,
@@ -181,7 +182,7 @@ export default ({
       );
     }
     if (hex.entity) {
-      if (hex.width > 45 * ratio) {
+      if (renderText) {
         ctx.fillText(
           hex.entity.numChildren,
           hex.xOffset - step,
