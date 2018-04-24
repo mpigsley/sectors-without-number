@@ -84,12 +84,22 @@ export const getCurrentEntities = createDeepEqualSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
   (currentSector, entities, isShared) =>
     mapValues(entities, entityList =>
-      pickBy(
-        entityList,
-        ({ sector, isHidden }, entityId) =>
-          (sector === currentSector || entityId === currentSector) &&
-          (!isShared || !isHidden),
-      ),
+      pickBy(entityList, (entity, entityId) => {
+        if (entity.sector !== currentSector && entityId !== currentSector) {
+          return false;
+        } else if (!isShared) {
+          return true;
+        }
+        let { isHidden } = entity;
+        let currentEntity = entity;
+        while (!isHidden && currentEntity) {
+          isHidden = currentEntity.isHidden; // eslint-disable-line
+          currentEntity = (entities[currentEntity.parentEntity] || {})[
+            currentEntity.parent
+          ];
+        }
+        return !isHidden;
+      }),
     ),
 );
 
