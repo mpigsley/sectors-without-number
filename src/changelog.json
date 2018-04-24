@@ -1,4 +1,14 @@
 {
+  "4.3.5": {
+    "description":
+      "Hide children entities of hidden parents in overview lists.",
+    "date": "4-24-2018",
+    "changelog": [
+      "Fix misspelling in local tech world tags.",
+      "Fix missing ritual combat things translation.",
+      "Fix moon base situation misspelling."
+    ]
+  },
   "4.3.4": {
     "description":
       "Fix bug where large sectors in small viewports wouldn't render the system & black hole icons.",
