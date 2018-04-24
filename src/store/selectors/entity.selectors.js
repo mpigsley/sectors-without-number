@@ -87,6 +87,8 @@ export const getCurrentEntities = createDeepEqualSelector(
       pickBy(entityList, (entity, entityId) => {
         if (entity.sector !== currentSector && entityId !== currentSector) {
           return false;
+        } else if (!isShared) {
+          return true;
         }
         let { isHidden } = entity;
         let currentEntity = entity;
@@ -96,7 +98,7 @@ export const getCurrentEntities = createDeepEqualSelector(
             currentEntity.parent
           ];
         }
-        return !isShared || !isHidden;
+        return !isHidden;
       }),
     ),
 );
