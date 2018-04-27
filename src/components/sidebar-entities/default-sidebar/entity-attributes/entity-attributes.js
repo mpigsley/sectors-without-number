@@ -48,6 +48,7 @@ export default function EntityAttributes({
   toggleTagsOpen,
   isAncestorHidden,
   intl,
+  isShared,
 }) {
   const noAttributes =
     !entity.attributes || !Object.keys(entity.attributes).length;
@@ -192,6 +193,10 @@ export default function EntityAttributes({
     );
   }
 
+  if (isShared) {
+    return attributesSection;
+  }
+
   return [
     attributesSection,
     <EntityTags
@@ -220,6 +225,7 @@ EntityAttributes.propTypes = {
   toggleTagsOpen: PropTypes.func.isRequired,
   isAncestorHidden: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
+  isShared: PropTypes.bool.isRequired,
 };
 
 EntityAttributes.defaultProps = {
