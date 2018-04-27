@@ -21,6 +21,7 @@ export default function OverviewTable({
   routeParams,
   currentSector,
   intl,
+  isShared,
 }) {
   const pluralName = intl.formatMessage({
     id: Pluralize(Entities[routeParams.entityType].name),
@@ -70,7 +71,7 @@ export default function OverviewTable({
         columns.push({ accessor: key, Header: name, translateItem: true });
       });
     }
-    if (Entities[entityType].tags) {
+    if (Entities[entityType].tags && !isShared) {
       columns.push({
         accessor: 'tags',
         Header: 'misc.tags',
@@ -160,6 +161,7 @@ OverviewTable.propTypes = {
     entityType: PropTypes.string.isRequired,
   }).isRequired,
   intl: intlShape.isRequired,
+  isShared: PropTypes.bool.isRequired,
 };
 
 OverviewTable.defaultProps = {
