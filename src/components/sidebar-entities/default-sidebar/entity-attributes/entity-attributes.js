@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { omit, map, values } from 'lodash';
-import { RefreshCw } from 'react-feather';
+import ReactHintFactory from 'react-hint';
+import { omit, map, values, pickBy, size } from 'lodash';
+import { RefreshCw, EyeOff } from 'react-feather';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
+import LinkIcon from 'primitives/other/link-icon';
 import Dropdown from 'primitives/form/dropdown';
 import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
@@ -15,27 +17,7 @@ import Entities from 'constants/entities';
 import EntityTags from './entity-tags';
 import './style.css';
 
-// eslint-disable-next-line react/prop-types
-const renderAttribute = ({ key, name, attributes }, attribute) => {
-  if (!attributes || !attribute) {
-    return null;
-  }
-
-  return (
-    <FlexContainer key={key} className="EntityAttributes-Attribute">
-      <b className="EntityAttributes-Header">
-        <FormattedMessage id={name} />:
-      </b>
-      <span className="EntityAttributes-Item">
-        {attributes[attribute] ? (
-          <FormattedMessage id={attributes[attribute].name} />
-        ) : (
-          attribute
-        )}
-      </span>
-    </FlexContainer>
-  );
-};
+const ReactHint = ReactHintFactory(React);
 
 export default function EntityAttributes({
   isSidebarEditActive,
@@ -50,16 +32,19 @@ export default function EntityAttributes({
   intl,
   isShared,
 }) {
-  const noAttributes =
-    !entity.attributes || !Object.keys(entity.attributes).length;
+  const hiddenAttributes = isShared
+    ? Object.keys(pickBy(entity.visibility, vision => vision === false))
+    : [];
+  const allAttributes = omit(entity.attributes, hiddenAttributes);
+  const noAttributes = !entity.attributes || !size(allAttributes);
   if (!isSidebarEditActive && noAttributes) {
     return null;
   }
 
   let attributesSection = null;
-  const hasNonTagAttributes = values(
-    omit({ ...entity.attributes }, 'tags'),
-  ).filter(v => v).length;
+  const hasNonTagAttributes = values(omit({ ...allAttributes }, 'tags')).filter(
+    v => v,
+  ).length;
 
   if (isSidebarEditActive || hasNonTagAttributes) {
     let nameAttribute = null;
@@ -81,6 +66,13 @@ export default function EntityAttributes({
               updateEntityInEdit({ name: Entities[entityType].nameGenerator() })
             }
             icon={RefreshCw}
+          />
+          <Input
+            className="EntityAttributes-Checkbox"
+            disabled
+            checked={false}
+            onChange={() => {}}
+            type="checkbox"
           />
         </FlexContainer>
       );
@@ -131,6 +123,31 @@ export default function EntityAttributes({
       );
     }
 
+    const renderAttribute = (
+      { key, name, attributes }, // eslint-disable-line react/prop-types
+      attribute,
+      visibility,
+    ) => {
+      if (!attributes || !attribute || (visibility === false && isShared)) {
+        return null;
+      }
+
+      return (
+        <FlexContainer key={key} className="EntityAttributes-Attribute">
+          <b className="EntityAttributes-Header">
+            <FormattedMessage id={name} />:
+          </b>
+          <span className="EntityAttributes-Item">
+            {attributes[attribute] ? (
+              <FormattedMessage id={attributes[attribute].name} />
+            ) : (
+              attribute
+            )}
+          </span>
+        </FlexContainer>
+      );
+    };
+
     // eslint-disable-next-line react/prop-types
     const renderAttributeEdit = ({ key, name, attributes }, attribute) => (
       <FlexContainer
@@ -158,6 +175,20 @@ export default function EntityAttributes({
               : []),
           ]}
         />
+        <Input
+          className="EntityAttributes-Checkbox"
+          checked={
+            (entity.visibility || {})[key] === undefined
+              ? false
+              : !(entity.visibility || {})[key]
+          }
+          onChange={({ target }) =>
+            updateEntityInEdit({
+              visibility: { ...entity.visibility, [key]: !target.checked },
+            })
+          }
+          type="checkbox"
+        />
       </FlexContainer>
     );
 
@@ -173,6 +204,7 @@ export default function EntityAttributes({
             (isSidebarEditActive ? renderAttributeEdit : renderAttribute)(
               attribute,
               (entity.attributes || {})[attribute.key],
+              (entity.visibility || {})[attribute.key],
             ),
           )}
           {hiddenAttribute}
@@ -181,6 +213,26 @@ export default function EntityAttributes({
       );
     }
 
+    const renderSubHeader = () => {
+      if (!isSidebarEditActive || !isAttributesOpen) {
+        return null;
+      }
+      return (
+        <FlexContainer
+          justify="flexEnd"
+          align="center"
+          className="EntityAttributes-SubHeader"
+        >
+          <LinkIcon
+            data-rh={intl.formatMessage({ id: 'misc.selectHidden' })}
+            className="EntityAttributes-SubHeaderHidden"
+            icon={EyeOff}
+            size={18}
+          />
+        </FlexContainer>
+      );
+    };
+
     attributesSection = (
       <div key="attributes">
         <SectionHeader isOpen={isAttributesOpen} onClick={toggleAttributesOpen}>
@@ -188,34 +240,35 @@ export default function EntityAttributes({
             <FormattedMessage id="misc.attributes" />
           </span>
         </SectionHeader>
+        {renderSubHeader()}
         {attributes}
       </div>
     );
   }
 
-  if (isShared) {
-    return attributesSection;
-  }
-
-  return [
-    attributesSection,
-    <EntityTags
-      key="tags"
-      isSidebarEditActive={isSidebarEditActive}
-      entity={entity}
-      entityType={entityType}
-      updateEntityInEdit={updateEntityInEdit}
-      isOpen={isTagsOpen}
-      toggleOpen={toggleTagsOpen}
-      intl={intl}
-    />,
-  ];
+  return (
+    <Fragment>
+      {attributesSection}
+      <EntityTags
+        key="tags"
+        isSidebarEditActive={isSidebarEditActive}
+        entity={entity}
+        entityType={entityType}
+        updateEntityInEdit={updateEntityInEdit}
+        isOpen={isTagsOpen}
+        toggleOpen={toggleTagsOpen}
+        intl={intl}
+      />
+      <ReactHint events position="left" />
+    </Fragment>
+  );
 }
 
 EntityAttributes.propTypes = {
   isSidebarEditActive: PropTypes.bool.isRequired,
   entity: PropTypes.shape({
     attributes: PropTypes.shape(),
+    visibility: PropTypes.shape(),
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   updateEntityInEdit: PropTypes.func.isRequired,
@@ -226,8 +279,4 @@ EntityAttributes.propTypes = {
   isAncestorHidden: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
   isShared: PropTypes.bool.isRequired,
-};
-
-EntityAttributes.defaultProps = {
-  attributes: null,
 };

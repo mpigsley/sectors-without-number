@@ -49,6 +49,7 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
         attributes: entity.attributes
           ? { ...entity.attributes, tags: [...(entity.attributes.tags || [])] }
           : undefined,
+        visibility: entity.visibility,
         isHidden: entity.isHidden,
       },
       isNil,

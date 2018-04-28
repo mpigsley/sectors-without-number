@@ -97,12 +97,8 @@ export const generatePlanets = ({
   let numChildren = children;
   if (!numChildren) {
     const chance = new Chance();
-    if (additionalPointsOfInterest) {
-      if (parentEntity === Entities.blackHole.key) {
-        numChildren = [...Array(chance.weighted([0, 1], [15, 1]))];
-      } else {
-        numChildren = [...Array(chance.weighted([0, 1, 2, 3], [5, 15, 5, 2]))];
-      }
+    if (parentEntity === Entities.blackHole.key) {
+      numChildren = [...Array(chance.weighted([0, 1], [15, 1]))];
     } else {
       numChildren = [...Array(chance.weighted([1, 2, 3], [8, 3, 2]))];
     }
