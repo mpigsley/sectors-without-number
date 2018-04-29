@@ -267,8 +267,9 @@ export const getPrintableEntities = createDeepEqualSelector(
     getEntityChildren,
     getEntityNeighbors,
     currentSectorSelector,
+    isViewingSharedSector,
   ],
-  (currentEntities, entityChildren, entityNeighbors, currentSector) =>
+  (currentEntities, entityChildren, entityNeighbors, currentSector, isShared) =>
     mapValues(
       pickBy(omit(currentEntities, Entities.sector.key), size),
       (entities, entityType) =>
@@ -282,8 +283,10 @@ export const getPrintableEntities = createDeepEqualSelector(
               (Entities[entityType].attributes || []).map(({ key }) => key),
               (Entities[entityType].attributes || []).map(
                 ({ key, attributes }) =>
-                  (attributes[(entity.attributes || {})[key]] || {}).name ||
-                  (entity.attributes || {})[key],
+                  isShared && (entity.visibility || {})[key] === false
+                    ? undefined
+                    : (attributes[(entity.attributes || {})[key]] || {}).name ||
+                      (entity.attributes || {})[key],
               ),
             ),
             tags: (entity.attributes || {}).tags || [],

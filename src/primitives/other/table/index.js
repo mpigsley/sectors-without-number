@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 import { ChevronDown, ChevronUp } from 'react-feather';
+import { isNil } from 'lodash';
 
 import './style.css';
 
@@ -99,9 +100,10 @@ class Table extends Component {
 
   renderRowItem(row, { Cell, accessor, translateItem }) {
     let item = row[accessor];
-    if (translateItem && this.props.intl.messages[row[accessor]]) {
+    if (item && translateItem && this.props.intl.messages[row[accessor]]) {
       item = this.props.intl.formatMessage({ id: row[accessor] });
     }
+    item = isNil(item) ? '-' : item;
     return Cell ? Cell(item, row) : item;
   }
 
