@@ -4,6 +4,7 @@ import ReactHintFactory from 'react-hint';
 import { omit, map, values, pickBy, size } from 'lodash';
 import { RefreshCw, EyeOff } from 'react-feather';
 import { FormattedMessage, intlShape } from 'react-intl';
+import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -133,7 +134,12 @@ export default function EntityAttributes({
       }
 
       return (
-        <FlexContainer key={key} className="EntityAttributes-Attribute">
+        <FlexContainer
+          key={key}
+          className={classNames('EntityAttributes-Attribute', {
+            'EntityAttributes-Attribute--hidden': visibility === false,
+          })}
+        >
           <b className="EntityAttributes-Header">
             <FormattedMessage id={name} />:
           </b>
