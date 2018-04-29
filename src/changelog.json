@@ -4,7 +4,8 @@
     "date": "4-29-2018",
     "changes": [
       "Add option in configuration to hide all tags upon generation.",
-      "Hidden attributes & tags are hidden in overview & printables from planets."
+      "Hidden attributes & tags are hidden in overview & printables from planets.",
+      "Updates planet generator to always generate at least one planet in all cases"
     ]
   },
   "4.4.0": {
