@@ -34,7 +34,9 @@ export default function EntityAttributes({
   isShared,
 }) {
   const hiddenAttributes = isShared
-    ? Object.keys(pickBy(entity.visibility, vision => vision === false))
+    ? Object.keys(pickBy(entity.visibility, vision => vision === false)).map(
+        key => key.replace('attr.', ''),
+      )
     : [];
   const allAttributes = omit(entity.attributes, hiddenAttributes);
   const noAttributes = !entity.attributes || !size(allAttributes);
@@ -184,13 +186,16 @@ export default function EntityAttributes({
         <Input
           className="EntityAttributes-Checkbox"
           checked={
-            (entity.visibility || {})[key] === undefined
+            (entity.visibility || {})[`attr.${key}`] === undefined
               ? false
-              : !(entity.visibility || {})[key]
+              : !(entity.visibility || {})[`attr.${key}`]
           }
           onChange={({ target }) =>
             updateEntityInEdit({
-              visibility: { ...entity.visibility, [key]: !target.checked },
+              visibility: {
+                ...entity.visibility,
+                [`attr.${key}`]: !target.checked,
+              },
             })
           }
           type="checkbox"
@@ -210,7 +215,7 @@ export default function EntityAttributes({
             (isSidebarEditActive ? renderAttributeEdit : renderAttribute)(
               attribute,
               (entity.attributes || {})[attribute.key],
-              (entity.visibility || {})[attribute.key],
+              (entity.visibility || {})[`attr.${attribute.key}`],
             ),
           )}
           {hiddenAttribute}
@@ -264,6 +269,7 @@ export default function EntityAttributes({
         isOpen={isTagsOpen}
         toggleOpen={toggleTagsOpen}
         intl={intl}
+        isShared={isShared}
       />
       <ReactHint events position="left" />
     </Fragment>

@@ -21,7 +21,6 @@ export default class ExpandedPrintable extends Component {
     }).isRequired,
     intl: intlShape.isRequired,
     endPrint: PropTypes.func.isRequired,
-    isShared: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -35,7 +34,7 @@ export default class ExpandedPrintable extends Component {
     const conf = Entities[entityType];
 
     const blockAttributes = [];
-    if (entity.tags && !this.props.isShared) {
+    if (entity.tags && entity.tags.length) {
       blockAttributes.push(
         <div key="tags">
           <b>

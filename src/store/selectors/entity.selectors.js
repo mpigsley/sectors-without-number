@@ -283,13 +283,16 @@ export const getPrintableEntities = createDeepEqualSelector(
               (Entities[entityType].attributes || []).map(({ key }) => key),
               (Entities[entityType].attributes || []).map(
                 ({ key, attributes }) =>
-                  isShared && (entity.visibility || {})[key] === false
+                  isShared && (entity.visibility || {})[`attr.${key}`] === false
                     ? undefined
                     : (attributes[(entity.attributes || {})[key]] || {}).name ||
                       (entity.attributes || {})[key],
               ),
             ),
-            tags: (entity.attributes || {}).tags || [],
+            tags: ((entity.attributes || {}).tags || []).filter(
+              tag =>
+                !isShared || (entity.visibility || {})[`tag.${tag}`] !== false,
+            ),
             description: (entity.attributes || {}).description,
             key: entityId,
             name: entity.name,

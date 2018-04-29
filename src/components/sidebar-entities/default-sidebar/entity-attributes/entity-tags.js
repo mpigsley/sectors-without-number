@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { X, Plus } from 'react-feather';
+import ReactHintFactory from 'react-hint';
+import { X, Plus, EyeOff } from 'react-feather';
 import { filter, includes, map, pull } from 'lodash';
 import { FormattedMessage, intlShape } from 'react-intl';
 
@@ -10,9 +11,12 @@ import Header, { HeaderType } from 'primitives/text/header';
 import Dropdown from 'primitives/form/dropdown';
 import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
+import Input from 'primitives/form/input';
 
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
+
+const ReactHint = ReactHintFactory(React);
 
 const renderList = (listLength, listKey, key) => (
   <div key={listKey} className="EntityAttributes-Content">
@@ -37,6 +41,7 @@ export default function EntityTags({
   isOpen,
   toggleOpen,
   intl,
+  isShared,
 }) {
   if (
     !Entities[entityType].tags ||
@@ -80,24 +85,57 @@ export default function EntityTags({
             }))
             .sort(sortByKey('label', true))}
         />
+        <Input
+          className="EntityAttributes-Checkbox"
+          disabled={!tag}
+          checked={
+            !tag || (entity.visibility || {})[`tag.${tag}`] === undefined
+              ? false
+              : !(entity.visibility || {})[`tag.${tag}`]
+          }
+          onChange={({ target }) =>
+            updateEntityInEdit({
+              visibility: {
+                ...entity.visibility,
+                [`tag.${tag}`]: !target.checked,
+              },
+            })
+          }
+          type="checkbox"
+        />
       </FlexContainer>
     ));
   } else {
     tags = entityTags
       .map(tag => Entities[entityType].tags[tag])
-      .map(({ key, name, description, ...lists }) => (
-        <div key={key} className="EntityAttributes-Tag">
-          <Header type={HeaderType.header4}>
-            <FormattedMessage id={`tags.${key}`} />
-          </Header>
-          <p className="EntityAttributes-Content">
-            <FormattedMessage id={`tags.${key}.description`} />
-          </p>
-          {map(lists, (listLength, listKey) =>
-            renderList(listLength, listKey, key),
-          )}
-        </div>
-      ));
+      .filter(
+        ({ key }) =>
+          !isShared || (entity.visibility || {})[`tag.${key}`] !== false,
+      )
+      .map(({ key, name, description, ...lists }) => {
+        let visibility;
+        if (!isShared && (entity.visibility || {})[`tag.${key}`] === false) {
+          visibility = <LinkIcon icon={EyeOff} size={18} />;
+        }
+        return (
+          <div key={key} className="EntityAttributes-Tag">
+            <Header type={HeaderType.header4}>
+              {visibility}
+              <FormattedMessage id={`tags.${key}`} />
+            </Header>
+            <p className="EntityAttributes-Content">
+              <FormattedMessage id={`tags.${key}.description`} />
+            </p>
+            {map(lists, (listLength, listKey) =>
+              renderList(listLength, listKey, key),
+            )}
+          </div>
+        );
+      });
+  }
+
+  if (!tags.length) {
+    return null;
   }
 
   let header = (
@@ -157,10 +195,30 @@ export default function EntityTags({
     tagsSection = <div className="EntityAttributes-Section">{tags}</div>;
   }
 
+  let subHeader = null;
+  if (isSidebarEditActive && isOpen) {
+    subHeader = (
+      <FlexContainer
+        justify="flexEnd"
+        align="center"
+        className="EntityAttributes-SubHeader"
+      >
+        <LinkIcon
+          data-rh={intl.formatMessage({ id: 'misc.selectHidden' })}
+          className="EntityAttributes-SubHeaderHidden"
+          icon={EyeOff}
+          size={18}
+        />
+      </FlexContainer>
+    );
+  }
+
   return (
     <div>
       {header}
+      {subHeader}
       {tagsSection}
+      <ReactHint events position="left" />
     </div>
   );
 }
@@ -175,4 +233,5 @@ EntityTags.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleOpen: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
+  isShared: PropTypes.bool.isRequired,
 };

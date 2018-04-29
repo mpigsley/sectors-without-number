@@ -21,7 +21,6 @@ export default function OverviewTable({
   routeParams,
   currentSector,
   intl,
-  isShared,
 }) {
   const pluralName = intl.formatMessage({
     id: Pluralize(Entities[routeParams.entityType].name),
@@ -71,12 +70,14 @@ export default function OverviewTable({
         columns.push({ accessor: key, Header: name, translateItem: true });
       });
     }
-    if (Entities[entityType].tags && !isShared) {
+    if (Entities[entityType].tags) {
       columns.push({
         accessor: 'tags',
         Header: 'misc.tags',
         Cell: tags =>
-          tags.map(tag => intl.formatMessage({ id: `tags.${tag}` })).join(', '),
+          tags
+            .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
+            .join(', ') || '-',
       });
     }
     return columns;
@@ -161,7 +162,6 @@ OverviewTable.propTypes = {
     entityType: PropTypes.string.isRequired,
   }).isRequired,
   intl: intlShape.isRequired,
-  isShared: PropTypes.bool.isRequired,
 };
 
 OverviewTable.defaultProps = {

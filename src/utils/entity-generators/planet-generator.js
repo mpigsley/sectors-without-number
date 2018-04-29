@@ -80,13 +80,7 @@ export const generatePlanet = ({
   return planet;
 };
 
-export const generatePlanets = ({
-  sector,
-  parent,
-  parentEntity,
-  additionalPointsOfInterest,
-  children,
-}) => {
+export const generatePlanets = ({ sector, parent, parentEntity, children }) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate planets');
   }
