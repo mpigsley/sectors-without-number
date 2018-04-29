@@ -38,6 +38,7 @@ const initialState = {
     name: Entities.sector.nameGenerator(),
     isBuilder: false,
     additionalPointsOfInterest: true,
+    hideTags: true,
     columns: COLUMNS,
     rows: ROWS,
   },
