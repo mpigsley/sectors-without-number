@@ -28,6 +28,10 @@
   color: $light2;
   font-size: 0.9rem;
   padding: 0.2rem 0;
+
+  &--hidden {
+    color: $light1;
+  }
 }
 
 .EntityAttributes-Header {
@@ -70,4 +74,18 @@
 .EntityTags-Name,
 .EntityAttributes-Name {
   cursor: pointer;
+}
+
+.EntityAttributes-Checkbox {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+.EntityAttributes-SubHeader {
+  color: $light2;
+  margin: 0 1rem;
+}
+
+.EntityAttributes-SubHeaderHidden {
+  margin: 0rem 0.1rem 0 0.5rem;
 }

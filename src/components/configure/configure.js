@@ -25,6 +25,7 @@ export default function Configure({
   updateConfiguration,
   generateSector,
   isBuilder,
+  hideTags,
   columns,
   rows,
   name,
@@ -120,6 +121,12 @@ export default function Configure({
           onChange={updateInput}
           label={intl.formatMessage({ id: 'misc.useAPOI' })}
         />
+        <Checkbox
+          data-key="hideTags"
+          value={hideTags}
+          onChange={updateInput}
+          label={intl.formatMessage({ id: 'misc.hideTagsFromPlayers' })}
+        />
       </SubContainer>
       <SubContainer
         className="Configure-PaddedButtons"
@@ -141,6 +148,7 @@ Configure.propTypes = {
   updateConfiguration: PropTypes.func.isRequired,
   generateSector: PropTypes.func.isRequired,
   isBuilder: PropTypes.bool.isRequired,
+  hideTags: PropTypes.bool.isRequired,
   columns: PropTypes.number,
   rows: PropTypes.number,
   name: PropTypes.string,

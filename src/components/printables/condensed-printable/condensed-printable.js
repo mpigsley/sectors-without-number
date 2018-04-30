@@ -23,7 +23,6 @@ export default class CondensedPrintable extends Component {
     }).isRequired,
     intl: intlShape.isRequired,
     endPrint: PropTypes.func.isRequired,
-    isShared: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -67,14 +66,14 @@ export default class CondensedPrintable extends Component {
         columns.push({ accessor: key, Header: name, translateItem: true });
       });
     }
-    if (Entities[entityType].tags && !this.props.isShared) {
+    if (Entities[entityType].tags) {
       columns.push({
         accessor: 'tags',
         Header: 'misc.tags',
         Cell: tags =>
           tags
             .map(tag => this.props.intl.formatMessage({ id: `tags.${tag}` }))
-            .join(', '),
+            .join(', ') || '-',
       });
     }
     return columns;
