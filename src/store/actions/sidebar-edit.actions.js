@@ -17,6 +17,7 @@ import {
   getCurrentEntityChildren,
 } from 'store/selectors/entity.selectors';
 import {
+  sidebarEditEntitySelector,
   sidebarEditChildrenSelector,
   syncLockSelector,
 } from 'store/selectors/base.selectors';
@@ -49,7 +50,7 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
         attributes: entity.attributes
           ? { ...entity.attributes, tags: [...(entity.attributes.tags || [])] }
           : undefined,
-        visibility: entity.visibility,
+        visibility: entity.visibility || {},
         isHidden: entity.isHidden,
       },
       isNil,
@@ -86,13 +87,34 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
   });
 };
 
-export const updateEntityInEdit = updates => (dispatch, getState) => {
+export const updateEntityInEdit = changes => (dispatch, getState) => {
   const state = getState();
   if (syncLockSelector(state)) {
     return Promise.resolve();
   }
   const entityId = getCurrentEntityId(state);
   const entityType = getCurrentEntityType(state);
+  const entity = sidebarEditEntitySelector(state);
+  const updates = {
+    ...changes,
+    attributes: omitBy(
+      {
+        ...(entity.attributes || {}),
+        ...(changes.attributes || {}),
+      },
+      isNil,
+    ),
+    visibility: omitBy(
+      {
+        ...(entity.visibility || {}),
+        ...(changes.visibility || {}),
+      },
+      isNil,
+    ),
+  };
+
+  console.log(changes);
+
   return dispatch({
     type: UPDATE_ENTITY_IN_EDIT,
     entityId,

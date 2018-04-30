@@ -1,4 +1,4 @@
-import { omit } from 'lodash';
+import { omit, omitBy, isNil } from 'lodash';
 
 import {
   ACTIVATE_SIDEBAR_EDIT,
@@ -32,15 +32,14 @@ export default function sidebarEdit(state = initialState, action) {
     case UPDATE_ENTITY_IN_EDIT:
       return {
         ...state,
-        entity: {
-          ...state.entity,
-          ...action.updates,
-          attributes: {
-            ...state.entity.attributes,
-            ...action.updates.attributes,
+        entity: omitBy(
+          {
+            ...state.entity,
+            ...action.updates,
+            isUpdated: true,
           },
-          isUpdated: true,
-        },
+          isNil,
+        ),
       };
     case DELETE_CHILD_IN_EDIT: {
       let entityTypeList;

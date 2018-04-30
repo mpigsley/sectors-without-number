@@ -61,6 +61,7 @@ export default function EntityTags({
           onClick={() =>
             updateEntityInEdit({
               attributes: { tags: pull(entityTags, tag) },
+              visibility: { [`tag.${tag}`]: undefined },
             })
           }
         />

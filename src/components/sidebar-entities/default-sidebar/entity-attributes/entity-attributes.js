@@ -192,10 +192,7 @@ export default function EntityAttributes({
           }
           onChange={({ target }) =>
             updateEntityInEdit({
-              visibility: {
-                ...entity.visibility,
-                [`attr.${key}`]: !target.checked,
-              },
+              visibility: { [`attr.${key}`]: !target.checked },
             })
           }
           type="checkbox"
