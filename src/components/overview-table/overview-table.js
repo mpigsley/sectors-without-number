@@ -75,7 +75,9 @@ export default function OverviewTable({
         accessor: 'tags',
         Header: 'misc.tags',
         Cell: tags =>
-          tags.map(tag => intl.formatMessage({ id: `tags.${tag}` })).join(', '),
+          tags
+            .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
+            .join(', ') || '-',
       });
     }
     return columns;

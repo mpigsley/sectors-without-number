@@ -34,7 +34,7 @@ export default class ExpandedPrintable extends Component {
     const conf = Entities[entityType];
 
     const blockAttributes = [];
-    if (entity.tags) {
+    if (entity.tags && entity.tags.length) {
       blockAttributes.push(
         <div key="tags">
           <b>

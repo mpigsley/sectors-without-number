@@ -1,4 +1,40 @@
 {
+  "4.5.0": {
+    "description": "Allow attribute and tag visibility to be toggled.",
+    "date": "4-29-2018",
+    "changes": [
+      "Add option in configuration to hide all tags upon generation.",
+      "Hidden attributes & tags are hidden in overview & printables from planets.",
+      "Updates planet generator to always generate at least one planet in all cases"
+    ]
+  },
+  "4.4.0": {
+    "description": "Hide world tags by default to players.",
+    "date": "4-27-2018"
+  },
+  "4.3.5": {
+    "description":
+      "Hide children entities of hidden parents in overview lists.",
+    "date": "4-24-2018",
+    "changes": [
+      "Fix misspelling in local tech world tags.",
+      "Fix missing ritual combat things translation.",
+      "Fix moon base situation misspelling."
+    ]
+  },
+  "4.3.4": {
+    "description":
+      "Fix bug where large sectors in small viewports wouldn't render the system & black hole icons.",
+    "date": "4-10-2018"
+  },
+  "4.3.3": {
+    "description":
+      "Fix clicking on map and, in some cases, the systems being deleted.",
+    "date": "4-9-2018",
+    "changes": [
+      "Fix arrow size so that it looks consistent between monitor resolutions"
+    ]
+  },
   "4.3.2": {
     "description":
       "Prevent syncing when non-logged users try to create system from sector map.",

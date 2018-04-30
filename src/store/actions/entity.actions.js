@@ -146,11 +146,9 @@ export const moveTopLevelEntity = intl => (dispatch, getState) => {
     return dispatch(entityRelease());
   }
   const topLevelEntities = getCurrentTopLevelEntities(state);
-  const holdEntity = getTopLevelEntity(
-    topLevelEntities,
-    holdKeySelector(state),
-  );
-  const hoverKey = hoverKeySelector(state);
+  const holdKey = holdKeySelector(state);
+  const holdEntity = getTopLevelEntity(topLevelEntities, holdKey);
+  const hoverKey = hoverKeySelector(state) || holdKey;
   const hoverEntity = getTopLevelEntity(topLevelEntities, hoverKey);
   const holdUpdate = { ...holdEntity.entity, ...coordinatesFromKey(hoverKey) };
   let entities = {

@@ -282,6 +282,7 @@
   "misc.haveNumSectors": "Du har minst {num} sektorer.",
   "misc.copiedLinkTo": "Du har kopierat en länk direkt till denna {entity}.",
   "misc.receiveEmail": "Du kommer snart få ett email.",
+  "misc.successfullyRemoved": "{entity} har tagis bort.",
   "misc.sectorsSynced":
     "Dina sektorer har synkroniserats. Du kan nu dela dem med dina vänner.",
   "misc.windowTooSmall":

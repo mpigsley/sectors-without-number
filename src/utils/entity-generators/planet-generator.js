@@ -1,4 +1,5 @@
 import Chance from 'chance';
+import { zipObject } from 'lodash';
 
 import { generateName } from 'utils/name-generator';
 import { worldTagKeys } from 'constants/world-tags';
@@ -15,6 +16,7 @@ export const generatePlanet = ({
   name = generateName(),
   generate = true,
   isHidden,
+  hideTags = false,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a planet');
@@ -29,10 +31,17 @@ export const generatePlanet = ({
     planet = { ...planet, isHidden };
   }
   if (generate) {
+    const tags = chance.pickset(Object.keys(worldTagKeys), 2);
+    if (hideTags) {
+      planet.visibility = zipObject(
+        tags.map(tag => `tag.${tag}`),
+        tags.map(() => false),
+      );
+    }
     planet = {
       ...planet,
       attributes: {
-        tags: chance.pickset(Object.keys(worldTagKeys), 2),
+        tags,
         techLevel: `TL${chance.weighted(
           ['0', '1', '2', '3', '4', '4+', '5'],
           [1, 1, 2, 2, 3, 1, 1],
@@ -84,8 +93,8 @@ export const generatePlanets = ({
   sector,
   parent,
   parentEntity,
-  additionalPointsOfInterest,
   children,
+  hideTags,
 }) => {
   if (!sector) {
     throw new Error('Sector id must be defined to generate planets');
@@ -97,12 +106,8 @@ export const generatePlanets = ({
   let numChildren = children;
   if (!numChildren) {
     const chance = new Chance();
-    if (additionalPointsOfInterest) {
-      if (parentEntity === Entities.blackHole.key) {
-        numChildren = [...Array(chance.weighted([0, 1], [15, 1]))];
-      } else {
-        numChildren = [...Array(chance.weighted([0, 1, 2, 3], [5, 15, 5, 2]))];
-      }
+    if (parentEntity === Entities.blackHole.key) {
+      numChildren = [...Array(chance.weighted([0, 1], [15, 1]))];
     } else {
       numChildren = [...Array(chance.weighted([1, 2, 3], [8, 3, 2]))];
     }
@@ -116,6 +121,7 @@ export const generatePlanets = ({
         parentEntity,
         name,
         generate,
+        hideTags,
       }),
     ),
   };

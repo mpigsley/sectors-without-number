@@ -50,8 +50,9 @@ export const getPixelRatio = () => {
   return dpr / bsr;
 };
 
-const ARROW_SIZE = 20;
-const drawArrowhead = (ctx, radians, x, y, isForward) => {
+const ARROW_SIZE = 10;
+const drawArrowhead = (ctx, radians, x, y, ratio, isForward) => {
+  const size = ARROW_SIZE * ratio;
   ctx.fillStyle = '#dbdbdb';
   ctx.lineWidth = 2;
   ctx.save();
@@ -59,14 +60,8 @@ const drawArrowhead = (ctx, radians, x, y, isForward) => {
   ctx.translate(x, y);
   ctx.rotate(radians);
   ctx.moveTo(0, 6 * (isForward ? -1 : 1));
-  ctx.lineTo(
-    ARROW_SIZE / 2,
-    ARROW_SIZE * (isForward ? 1 : -1) + 6 * (isForward ? -1 : 1),
-  );
-  ctx.lineTo(
-    -ARROW_SIZE / 2,
-    ARROW_SIZE * (isForward ? 1 : -1) + 6 * (isForward ? -1 : 1),
-  );
+  ctx.lineTo(size / 2, size * (isForward ? 1 : -1) + 6 * (isForward ? -1 : 1));
+  ctx.lineTo(-size / 2, size * (isForward ? 1 : -1) + 6 * (isForward ? -1 : 1));
   ctx.closePath();
   ctx.restore();
   ctx.fill();
@@ -168,17 +163,18 @@ export default ({
     // Draw arrow heads
     let radians = Math.atan((yEnd - yStart) / (xEnd - xStart));
     radians += (xEnd >= xStart ? 90 : -90) * Math.PI / 180;
-    drawArrowhead(ctx, radians, xEnd, yEnd, true);
+    drawArrowhead(ctx, radians, xEnd, yEnd, ratio, true);
     if (isVectorSwitch) {
-      drawArrowhead(ctx, radians, xStart, yStart, false);
+      drawArrowhead(ctx, radians, xStart, yStart, ratio, false);
     }
   }
 
-  hexEntities.filter(hex => hex.highlighted && hex.width > 45).forEach(hex => {
+  hexEntities.filter(hex => hex.highlighted).forEach(hex => {
     // Draw Text
     ctx.font = `${9 * ratio}px Raleway,sans-serif`;
     ctx.fillStyle = '#8f8f8f';
-    if (hex.width > 45 * ratio) {
+    const renderText = hex.width > 45 * ratio;
+    if (renderText) {
       ctx.fillText(
         hex.hexKey,
         hex.xOffset - step * 5,
@@ -186,7 +182,7 @@ export default ({
       );
     }
     if (hex.entity) {
-      if (hex.width > 45 * ratio) {
+      if (renderText) {
         ctx.fillText(
           hex.entity.numChildren,
           hex.xOffset - step,

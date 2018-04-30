@@ -1007,7 +1007,7 @@
   "tags.localTech.complications.0": "The tech is unreliable",
   "tags.localTech.complications.1": "The tech only works on this world",
   "tags.localTech.complications.2":
-    "The tech hs poorly-understood side effects",
+    "The tech has poorly-understood side effects",
   "tags.localTech.complications.3": "The tech is alien in nature",
   "tags.localTech.things.0": "The tech itself",
   "tags.localTech.things.1": "An unclaimed payment for a large shipment",
@@ -1861,8 +1861,7 @@
   "tags.ritualCombat.complications.2":
     "Loss doesn't mean death but it does mean ritual scarring or property loss",
   "tags.ritualCombat.things.0": "Magnificent weapon",
-  "tags.rThe world has a great many robots on it. Most bots are going to be non-sentient expert systems, though an AI with enough computing resources can control many bots at once, and some worlds may have developed VIs to a degree that individual bots can seem (or be) sentient. Some worlds might even be ruled by metal overlords, ones which do not need to be sentient so long as they have overwhelming force.itualCombat.things.1":
-    "Secret book of martial techniques",
+  "tags.ritualCombat.things.1": "Secret book of martial techniques",
   "tags.ritualCombat.things.2":
     "Token signifying immunity to ritual combat challenges",
   "tags.ritualCombat.things.3": "Prize won in bloody battle",
@@ -2470,7 +2469,7 @@
   "entity.moonBase.occupation.military": "Military listening post",
   "entity.moonBase.occupation.miners": "Lonely overseers and robot miners",
   "entity.moonBase.situation.dark": "Something dark has awoken",
-  "entity.moonBase.situation.criminals": "Cirminals trying to take over",
+  "entity.moonBase.situation.criminals": "Criminals trying to take over",
   "entity.moonBase.situation.plague": "Moon plague breaking out",
   "entity.moonBase.situation.supplies": "Desperate for vital supplies",
   "entity.moonBase.situation.rich": "Rich but badly-protected",
@@ -2590,6 +2589,7 @@
   "misc.forgotPassword": "Forgot Password?",
   "misc.friends": "Friends",
   "misc.generate": "Generate",
+  "misc.hideTagsFromPlayers": "Hide Tags from Players",
   "misc.home": "Home",
   "misc.initializeEmpty": "Initialize Empty Sector",
   "misc.isHidden": "Is Hidden",

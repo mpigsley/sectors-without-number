@@ -73,7 +73,7 @@ export default class CondensedPrintable extends Component {
         Cell: tags =>
           tags
             .map(tag => this.props.intl.formatMessage({ id: `tags.${tag}` }))
-            .join(', '),
+            .join(', ') || '-',
       });
     }
     return columns;

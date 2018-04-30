@@ -84,12 +84,22 @@ export const getCurrentEntities = createDeepEqualSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
   (currentSector, entities, isShared) =>
     mapValues(entities, entityList =>
-      pickBy(
-        entityList,
-        ({ sector, isHidden }, entityId) =>
-          (sector === currentSector || entityId === currentSector) &&
-          (!isShared || !isHidden),
-      ),
+      pickBy(entityList, (entity, entityId) => {
+        if (entity.sector !== currentSector && entityId !== currentSector) {
+          return false;
+        } else if (!isShared) {
+          return true;
+        }
+        let { isHidden } = entity;
+        let currentEntity = entity;
+        while (!isHidden && currentEntity) {
+          isHidden = currentEntity.isHidden; // eslint-disable-line
+          currentEntity = (entities[currentEntity.parentEntity] || {})[
+            currentEntity.parent
+          ];
+        }
+        return !isHidden;
+      }),
     ),
 );
 
@@ -257,8 +267,9 @@ export const getPrintableEntities = createDeepEqualSelector(
     getEntityChildren,
     getEntityNeighbors,
     currentSectorSelector,
+    isViewingSharedSector,
   ],
-  (currentEntities, entityChildren, entityNeighbors, currentSector) =>
+  (currentEntities, entityChildren, entityNeighbors, currentSector, isShared) =>
     mapValues(
       pickBy(omit(currentEntities, Entities.sector.key), size),
       (entities, entityType) =>
@@ -272,11 +283,16 @@ export const getPrintableEntities = createDeepEqualSelector(
               (Entities[entityType].attributes || []).map(({ key }) => key),
               (Entities[entityType].attributes || []).map(
                 ({ key, attributes }) =>
-                  (attributes[(entity.attributes || {})[key]] || {}).name ||
-                  (entity.attributes || {})[key],
+                  isShared && (entity.visibility || {})[`attr.${key}`] === false
+                    ? undefined
+                    : (attributes[(entity.attributes || {})[key]] || {}).name ||
+                      (entity.attributes || {})[key],
               ),
             ),
-            tags: (entity.attributes || {}).tags || [],
+            tags: ((entity.attributes || {}).tags || []).filter(
+              tag =>
+                !isShared || (entity.visibility || {})[`tag.${tag}`] !== false,
+            ),
             description: (entity.attributes || {}).description,
             key: entityId,
             name: entity.name,
