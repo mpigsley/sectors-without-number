@@ -113,8 +113,6 @@ export const updateEntityInEdit = changes => (dispatch, getState) => {
     ),
   };
 
-  console.log(changes);
-
   return dispatch({
     type: UPDATE_ENTITY_IN_EDIT,
     entityId,
