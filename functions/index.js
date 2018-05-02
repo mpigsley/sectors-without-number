@@ -17,7 +17,11 @@ exports.sectorCounter = functions.firestore
       .collection('entity')
       .where('creator', '==', creator)
       .get()
-      .then(snapshot => {
-        console.log(snapshot.size);
-      });
+      .then(snapshot =>
+        admin
+          .firestore()
+          .collection('users')
+          .doc(creator)
+          .set({ sectors: snapshot.size }, { merge: true })
+      );
   });
