@@ -1,6 +1,23 @@
 const functions = require('firebase-functions');
+const admin = require('firebase-admin');
 
-exports.entities = functions.https.onCall((data, context) => {
-  console.log(data);
-  console.log(context.auth.uid);
-});
+admin.initializeApp();
+
+exports.sectorCounter = functions.firestore
+  .document('entities/sector/entity/{entityId}')
+  .onWrite(change => {
+    const { creator } = change.after.exists
+      ? change.after.data()
+      : change.before.data();
+
+    return admin
+      .firestore()
+      .collection('entities')
+      .doc('sector')
+      .collection('entity')
+      .where('creator', '==', creator)
+      .get()
+      .then(snapshot => {
+        console.log(snapshot.size);
+      });
+  });
