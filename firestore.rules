@@ -1,10 +1,5 @@
 service cloud.firestore {
   match /databases/{database}/documents {
-    match /sectors/{sector=**} {
-      allow delete: if resource.data.creator == request.auth.uid;
-      allow create, update: if false;
-      allow read;
-    }
     match /entities {
       match /{entityType}/entity/{entityId} {
         allow create: if request.auth != null &&
@@ -19,7 +14,16 @@ service cloud.firestore {
       }
     }
     match /users/{uid} {
-      allow read, write: if request.auth != null && uid == request.auth.uid
+      function isCurrentUser() {
+        return request.auth != null && uid == request.auth.uid;
+      }
+
+      function didNotUpdateProtectedData() {
+        return resource.data.sectors == request.resource.data.sectors;
+      }
+
+      allow read: if isCurrentUser();
+      allow write: if isCurrentUser() && didNotUpdateProtectedData();
     }
     match /{document=**} {
       allow read, write: if false;
