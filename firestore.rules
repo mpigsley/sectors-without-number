@@ -2,10 +2,7 @@ service cloud.firestore {
   match /databases/{database}/documents {
     match /entities {
       match /{entityType}/entity/{entityId} {
-        allow create: if request.auth != null &&
-          entityType in ["asteroidBase", "asteroidBelt", "blackHole", "deepSpaceStation",
-            "gasGiantMine", "moon", "moonBase", "note", "orbitalRuin", "planet",
-            "refuelingStation", "researchBase", "sector", "spaceStation", "system"];
+        allow create: if false;
         allow update, delete: if resource.data.creator == request.auth.uid &&
           entityType in ["asteroidBase", "asteroidBelt", "blackHole", "deepSpaceStation",
             "gasGiantMine", "moon", "moonBase", "note", "orbitalRuin", "planet", 
@@ -14,16 +11,7 @@ service cloud.firestore {
       }
     }
     match /users/{uid} {
-      function isCurrentUser() {
-        return request.auth != null && uid == request.auth.uid;
-      }
-
-      function didNotUpdateProtectedData() {
-        return resource.data.sectors == request.resource.data.sectors;
-      }
-
-      allow read: if isCurrentUser();
-      allow write: if isCurrentUser() && didNotUpdateProtectedData();
+      allow read, write: if request.auth != null && uid == request.auth.uid;
     }
     match /{document=**} {
       allow read, write: if false;

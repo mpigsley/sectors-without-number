@@ -310,7 +310,7 @@ export const saveEntities = (
   if (isSaved) {
     if (uid) {
       promise = Promise.all([
-        uploadEntities(created, uid, currentSectorSelector(state)),
+        uploadEntities(created, currentSectorSelector(state)),
         syncDeleteEntities(deleted),
         syncUpdateEntities(updated),
       ]).then(([uploaded]) => ({ mapping: uploaded.mapping }));
@@ -323,7 +323,7 @@ export const saveEntities = (
       size,
     );
     if (uid) {
-      promise = uploadEntities(updates, uid);
+      promise = uploadEntities(updates);
     } else {
       return Promise.resolve();
     }
