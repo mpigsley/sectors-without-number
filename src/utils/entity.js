@@ -63,7 +63,7 @@ export const preventSync = (state, dispatch, intl, isGenerating) => {
   } else if (reachedSectorLimit && isSyncing) {
     dispatch(
       InfoToast({
-        title: intl.formatMessage({ id: 'misc.reacedLimit' }),
+        title: intl.formatMessage({ id: 'misc.reachedLimit' }),
         message: intl.formatMessage(
           { id: 'misc.haveNumSectors' },
           { num: SECTOR_LIMIT },

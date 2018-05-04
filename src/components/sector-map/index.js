@@ -30,7 +30,9 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = (dispatch, props) => ({
   toSafeRoute: sector => dispatch(push(sector ? `/sector/${sector}` : '/')),
   generateSector: () =>
-    dispatch(generateEntity({ entityType: Entities.sector.key }, props.intl)),
+    dispatch(
+      generateEntity({ entityType: Entities.sector.key }, null, props.intl),
+    ),
 });
 
 export default injectIntl(
