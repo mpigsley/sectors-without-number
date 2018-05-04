@@ -1,4 +1,8 @@
 {
+  "4.6.0": {
+    "description": "Enforce sector limit of 5 sectors.",
+    "date": "5-4-2018"
+  },
   "4.5.0": {
     "description": "Allow attribute and tag visibility to be toggled.",
     "date": "4-29-2018",
