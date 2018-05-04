@@ -50,7 +50,7 @@ exports.saveEntities = functions.https.onCall((data, context) => {
       if (snapshot.size >= SECTOR_LIMIT) {
         throw new functions.https.HttpsError(
           'permission-denied',
-          'You have reached your total number of sectors limit.',
+          'You have reached your limit on total number of sectors.',
           { limit: SECTOR_LIMIT }
         );
       }
