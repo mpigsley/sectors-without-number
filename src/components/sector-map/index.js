@@ -31,7 +31,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   toSafeRoute: sector => dispatch(push(sector ? `/sector/${sector}` : '/')),
   generateSector: () =>
     dispatch(
-      generateEntity({ entityType: Entities.sector.key }, null, props.intl),
+      generateEntity({ entityType: Entities.sector.key }, {}, props.intl),
     ),
 });
 

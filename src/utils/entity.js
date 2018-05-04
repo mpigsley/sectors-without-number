@@ -329,20 +329,31 @@ export const saveEntities = (
     }
   }
   return promise
-    .then(({ mapping }) => ({
+    .then(uploaded => ({
       action: SuccessToast({
         title: intl.formatMessage({ id: 'misc.sectorSaved' }),
         message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
       }),
-      mapping,
+      mapping: (uploaded || {}).mapping || {},
     }))
     .catch(err => {
       console.error(err);
+      let action = ErrorToast({
+        title: intl.formatMessage({ id: 'misc.error' }),
+        message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+      });
+      if (err.code === 'permission-denied') {
+        action = InfoToast({
+          title: intl.formatMessage({ id: 'misc.reachedLimit' }),
+          message: intl.formatMessage(
+            { id: 'misc.haveNumSectors' },
+            { num: err.details.limit },
+          ),
+        });
+      }
       return {
-        action: ErrorToast({
-          title: intl.formatMessage({ id: 'misc.error' }),
-          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
-        }),
+        action,
+        mapping: {},
       };
     });
 };

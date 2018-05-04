@@ -4,6 +4,25 @@ const _ = require('lodash');
 
 admin.initializeApp();
 
+const SECTOR_LIMIT = 5;
+const ENTITY_TYPES = [
+  'asteroidBase',
+  'asteroidBelt',
+  'blackHole',
+  'deepSpaceStation',
+  'gasGiantMine',
+  'moon',
+  'moonBase',
+  'note',
+  'orbitalRuin',
+  'planet',
+  'refuelingStation',
+  'researchBase',
+  'sector',
+  'spaceStation',
+  'system',
+];
+
 exports.saveEntities = functions.https.onCall((data, context) => {
   if (!context.auth) {
     throw new functions.https.HttpsError(
@@ -14,64 +33,89 @@ exports.saveEntities = functions.https.onCall((data, context) => {
 
   const { sectorId, entities } = data || {};
   if (!sectorId && (!entities || !_.size(entities.sector))) {
-    throw new functions.HttpsError(
+    throw new functions.https.HttpsError(
       'invalid-argument',
       'To save entities a new sector must exist or an existing sector should be given.'
     );
   }
 
-  const allKeys = _.flatten(_.values(_.map(entities, Object.keys)));
-  const mapping = {};
-  const batches = [admin.firestore().batch()];
-  let batchCount = 0;
-  let batchIndex = 0;
+  return admin
+    .firestore()
+    .collection('entities')
+    .doc('sector')
+    .collection('entity')
+    .where('creator', '==', context.auth.uid)
+    .get()
+    .then(snapshot => {
+      if (snapshot.size >= SECTOR_LIMIT) {
+        throw new functions.https.HttpsError(
+          'permission-denied',
+          'You have reached your total number of sectors limit.',
+          { limit: SECTOR_LIMIT }
+        );
+      }
 
-  const saveEntityTree = (parentId, newParentId, thisSectorId) => {
-    _.forEach(entities, (entityTypes, entityType) =>
-      _.forEach(entityTypes, (entity, oldId) => {
-        if (
-          parentId !== entity.parent &&
-          (parentId || _.includes(allKeys, entity.parent))
-        ) {
-          return Promise.resolve();
-        }
+      const allKeys = _.flatten(_.values(_.map(entities, Object.keys)));
+      const mapping = {};
+      const batches = [admin.firestore().batch()];
+      let batchCount = 0;
+      let batchIndex = 0;
 
-        const timestamp = admin.firestore.FieldValue.serverTimestamp();
-        const savableEntity = Object.assign({}, entity, {
-          creator: context.auth.uid,
-          created: timestamp,
-          updated: timestamp,
-        });
-        if (newParentId) {
-          savableEntity.parent = newParentId;
-          savableEntity.sector = thisSectorId;
-        }
-        const newRef = admin
-          .firestore()
-          .collection('entities')
-          .doc(entityType)
-          .collection('entity')
-          .doc();
-        batches[batchIndex].set(newRef, savableEntity);
-        batchCount += 1;
-        if (batchCount === 500) {
-          batches.push(admin.firestore().batch());
-          batchIndex += 1;
-          batchCount = 0;
-        }
-        mapping[oldId] = newRef.id;
-        let savableSectorId = thisSectorId || sectorId;
-        if (entityType === 'sector') {
-          savableSectorId = newRef.id;
-        }
-        return saveEntityTree(oldId, newRef.id, savableSectorId);
-      })
-    );
-  };
+      const saveEntityTree = (parentId, newParentId, thisSectorId) => {
+        _.forEach(
+          _.pick(entities, ...ENTITY_TYPES),
+          (entityTypes, entityType) =>
+            _.forEach(entityTypes, (entity, oldId) => {
+              if (
+                parentId !== entity.parent &&
+                (parentId || _.includes(allKeys, entity.parent))
+              ) {
+                return Promise.resolve();
+              }
 
-  saveEntityTree();
+              const timestamp = admin.firestore.FieldValue.serverTimestamp();
+              const savableEntity = Object.assign({}, entity, {
+                creator: context.auth.uid,
+                created: timestamp,
+                updated: timestamp,
+              });
+              if (newParentId) {
+                savableEntity.parent = newParentId;
+                savableEntity.sector = thisSectorId;
+              }
+              console.log('Creating new doc', entityType);
+              const newRef = admin
+                .firestore()
+                .collection('entities')
+                .doc(entityType)
+                .collection('entity')
+                .doc();
+              batches[batchIndex].set(newRef, savableEntity);
+              batchCount += 1;
+              if (batchCount === 500) {
+                batches.push(admin.firestore().batch());
+                batchIndex += 1;
+                batchCount = 0;
+              }
+              mapping[oldId] = newRef.id;
+              let savableSectorId = thisSectorId || sectorId;
+              if (entityType === 'sector') {
+                savableSectorId = newRef.id;
+              }
+              return saveEntityTree(oldId, newRef.id, savableSectorId);
+            })
+        );
+      };
 
-  return Promise.all(batches.map(batch => batch.commit())).then(() => ({
-    mapping,
-  }));
+      saveEntityTree();
+
+      return Promise.all(batches.map(batch => batch.commit())).then(() => ({
+        mapping,
+      }));
+    })
+    .catch(error => {
+      throw error.code === 'permission-denied'
+        ? error
+        : new functions.https.HttpsError('unknown', error.message, error);
+    });
 });
