@@ -183,6 +183,7 @@ export default class TopLevelEntityModal extends Component {
         parent: this.props.currentSector,
         parentEntity: Entities.sector.key,
       },
+      this.props.intl,
     );
 
   generateChildrenNames(parentEntity) {

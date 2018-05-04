@@ -12,7 +12,9 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   generateSector: () =>
-    dispatch(generateEntity({ entityType: Entities.sector.key }, props.intl)),
+    dispatch(
+      generateEntity({ entityType: Entities.sector.key }, {}, props.intl),
+    ),
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(Home));

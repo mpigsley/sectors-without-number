@@ -63,7 +63,7 @@ export const preventSync = (state, dispatch, intl, isGenerating) => {
   } else if (reachedSectorLimit && isSyncing) {
     dispatch(
       InfoToast({
-        title: intl.formatMessage({ id: 'misc.reacedLimit' }),
+        title: intl.formatMessage({ id: 'misc.reachedLimit' }),
         message: intl.formatMessage(
           { id: 'misc.haveNumSectors' },
           { num: SECTOR_LIMIT },
@@ -310,7 +310,7 @@ export const saveEntities = (
   if (isSaved) {
     if (uid) {
       promise = Promise.all([
-        uploadEntities(created, uid, currentSectorSelector(state)),
+        uploadEntities(created, currentSectorSelector(state)),
         syncDeleteEntities(deleted),
         syncUpdateEntities(updated),
       ]).then(([uploaded]) => ({ mapping: uploaded.mapping }));
@@ -323,26 +323,37 @@ export const saveEntities = (
       size,
     );
     if (uid) {
-      promise = uploadEntities(updates, uid);
+      promise = uploadEntities(updates);
     } else {
       return Promise.resolve();
     }
   }
   return promise
-    .then(({ mapping }) => ({
+    .then(uploaded => ({
       action: SuccessToast({
         title: intl.formatMessage({ id: 'misc.sectorSaved' }),
         message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
       }),
-      mapping,
+      mapping: (uploaded || {}).mapping || {},
     }))
     .catch(err => {
       console.error(err);
+      let action = ErrorToast({
+        title: intl.formatMessage({ id: 'misc.error' }),
+        message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+      });
+      if (err.code === 'permission-denied') {
+        action = InfoToast({
+          title: intl.formatMessage({ id: 'misc.reachedLimit' }),
+          message: intl.formatMessage(
+            { id: 'misc.haveNumSectors' },
+            { num: err.details.limit },
+          ),
+        });
+      }
       return {
-        action: ErrorToast({
-          title: intl.formatMessage({ id: 'misc.error' }),
-          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
-        }),
+        action,
+        mapping: {},
       };
     });
 };

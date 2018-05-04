@@ -3,8 +3,9 @@ import ReactDOM from 'react-dom';
 import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
-import Firebase from 'firebase';
 import Fastclick from 'react-fastclick';
+import Firebase from 'firebase/app';
+import 'firebase/functions';
 import 'firebase/firestore';
 
 import store from 'store';

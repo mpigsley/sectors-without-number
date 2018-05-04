@@ -65,7 +65,7 @@ const onLogin = (dispatch, state) => result => {
   const uid = result.user ? result.user.uid : result.uid;
   let promise = Promise.resolve();
   if (localSync) {
-    promise = uploadEntities(getSavedEntities(state), uid);
+    promise = uploadEntities(getSavedEntities(state));
   }
   return promise
     .then(() => Promise.all([getSyncedSectors(uid), getUserData(uid)]))
