@@ -83,7 +83,6 @@ exports.saveEntities = functions.https.onCall((data, context) => {
                 savableEntity.parent = newParentId;
                 savableEntity.sector = thisSectorId;
               }
-              console.log('Creating new doc', entityType);
               const newRef = admin
                 .firestore()
                 .collection('entities')
