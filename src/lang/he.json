@@ -6,5 +6,21 @@
   "atmosphere.breathable": "ערבוב בר נשימה",
   "atmosphere.thick": "אטמוספירה סמיכה, נשימה עם מסכת לחץ",
   "atmosphere.invasive": "אטמוספירה פולשנית ורעילה",
-  "atmosphere.corrosiveInvasive": "אטמוספירה פולשנית ומאכלת"
+  "atmosphere.corrosiveInvasive": "אטמוספירה פולשנית ומאכלת",
+  "temperature": "טמפרטורה",
+  "temperature.frozen": "קפוא",
+  "temperature.variableCold": "משתנה מקר לממוזג",
+  "temperature.cold": "קר",
+  "temperature.temperate": "ממוזג",
+  "temperature.warm": "חם",
+  "temperature.variableWarm": "משתנה מממוזג לחם",
+  "temperature.burning": "לוהט",
+  "biosphere": "ביוספרה",
+  "biosphere.remnant": "שאריות ביוספרה",
+  "biosphere.microbial": "חיים מיקרוביאלים",
+  "biosphere.none": "אין ביוספירה טבעית",
+  "biosphere.humanMiscible": "מתאימה לבני אדם",
+  "biosphere.immiscible": "לא מתאימה לבני אדם",
+  "biosphere.hybrid": "היברידית",
+  "biosphere.engineered": "מהונדסת"
 }
