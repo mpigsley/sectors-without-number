@@ -1,4 +1,12 @@
 {
+  "4.6.1": {
+    "description": "Begin adding Hebrew translations.",
+    "date": "5-7-2018",
+    "changes": [
+      "Replace donate link with link to the new Patreon.",
+      "Fix Perimiter Agency tag typo."
+    ]
+  },
   "4.6.0": {
     "description": "Enforce sector limit of 5 sectors.",
     "date": "5-4-2018"
