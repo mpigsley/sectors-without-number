@@ -95,6 +95,15 @@ export default function EntityNavigation({
       <FlexContainer justify="center">
         <ButtonLink
           minimal
+          to="https://www.patreon.com/sectorswithoutnumber"
+          target="_blank"
+          className="EntityNavigation-Patreon"
+        >
+          Patreon
+        </ButtonLink>
+        <span className="EntityNavigation-Spacer" />
+        <ButtonLink
+          minimal
           to="https://goo.gl/forms/eOanpGEuglCYYg7u2"
           target="_blank"
         >
@@ -111,14 +120,6 @@ export default function EntityNavigation({
           target="_blank"
         >
           Github
-        </ButtonLink>
-        <span className="EntityNavigation-Spacer" />
-        <ButtonLink
-          minimal
-          to="https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=H3JGPZYSSK66W&lc=US&item_name=Sectors%20Without%20Number&currency_code=USD&bn=PP%2dDonationsBF%3abtn_donate_SM%2egif%3aNonHosted"
-          target="_blank"
-        >
-          <FormattedMessage id="misc.donate" />
         </ButtonLink>
       </FlexContainer>
     </div>
