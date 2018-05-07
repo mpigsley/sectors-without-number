@@ -1,0 +1,10 @@
+{
+  "atmosphere": "אטמוספירה",
+  "atmosphere.corrosive": "אטמוספירה מאכלת",
+  "atmosphere.inert": "גז אציל",
+  "atmosphere.airlessThin": "אטמוספירה דלילה או חסרה",
+  "atmosphere.breathable": "ערבוב בר נשימה",
+  "atmosphere.thick": "אטמוספירה סמיכה, נשימה עם מסכת לחץ",
+  "atmosphere.invasive": "אטמוספירה פולשנית ורעילה",
+  "atmosphere.corrosiveInvasive": "אטמוספירה פולשנית ומאכלת"
+}
