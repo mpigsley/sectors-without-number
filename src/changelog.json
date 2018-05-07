@@ -1,4 +1,12 @@
 {
+  "4.6.1": {
+    "description": "Begin adding Hebrew translations.",
+    "date": "5-7-2018",
+    "changes": [
+      "Replace donate link with link to the new Patreon.",
+      "Fix Perimiter Agency tag typo."
+    ]
+  },
   "4.6.0": {
     "description": "Enforce sector limit of 5 sectors.",
     "date": "5-4-2018"
@@ -8,8 +16,8 @@
     "date": "4-29-2018",
     "changes": [
       "Add option in configuration to hide all tags upon generation.",
-      "Hidden attributes & tags are hidden in overview & printables from planets.",
-      "Updates planet generator to always generate at least one planet in all cases"
+      "Hidden attributes & tags are hidden in overview & printables from players.",
+      "Updates planet generator to always generate at least one planet in all cases."
     ]
   },
   "4.4.0": {

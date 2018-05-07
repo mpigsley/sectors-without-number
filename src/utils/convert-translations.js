@@ -16,12 +16,14 @@ const LOCALE_BY_LANG = {
   FRENCH: 'fr',
   GERMAN: 'de',
   SWEDISH: 'sv',
+  HEBREW: 'he',
 };
 const TRANSLATIONS = {
   ENGLISH: {},
   FRENCH: {},
   GERMAN: {},
   SWEDISH: {},
+  HEBREW: {},
 };
 
 // Compile objects

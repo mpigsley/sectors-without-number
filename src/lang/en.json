@@ -1344,7 +1344,7 @@
   "tags.perimeterAgency.complications.2":
     "The Agency has been targeted by a maltech-using organization",
   "tags.perimeterAgency.complications.3":
-    "The Agency's existance is unknown to the locals",
+    "The Agency's existence is unknown to the locals",
   "tags.perimeterAgency.things.0": "Agency maltech research archives",
   "tags.perimeterAgency.things.1": "Agency pretech spec-ops gear",
   "tags.perimeterAgency.things.2": "File of blackmail on local politicians",
@@ -2575,7 +2575,6 @@
   "misc.delete": "Delete",
   "misc.description": "Description",
   "misc.noExit": "Do not exit out of this web page.",
-  "misc.donate": "Donate",
   "misc.edit": "Edit",
   "misc.editProfile": "Edit Profile",
   "misc.email": "Email",
