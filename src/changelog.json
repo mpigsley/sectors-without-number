@@ -1,4 +1,8 @@
 {
+  "4.7.0": {
+    "description": "Add a json export option in the existing print modal.",
+    "date": "5-8-2018"
+  },
   "4.6.1": {
     "description": "Begin adding Hebrew translations.",
     "date": "5-7-2018",
