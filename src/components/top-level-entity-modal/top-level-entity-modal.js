@@ -305,7 +305,7 @@ export default class TopLevelEntityModal extends Component {
   render() {
     return (
       <Modal
-        doubleSize
+        width={600}
         isOpen={this.props.isOpen}
         onCancel={this.props.cancelTopLevelEntityCreate}
         title={this.props.intl.formatMessage({ id: 'misc.createEntity' })}

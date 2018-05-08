@@ -7,6 +7,10 @@ const ExportTypes = {
     key: 'expanded',
     description: 'misc.oneEntity',
   },
+  json: {
+    key: 'json',
+    description: 'misc.jsonDescription',
+  },
 };
 
 export default ExportTypes;

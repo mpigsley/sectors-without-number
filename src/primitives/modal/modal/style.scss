@@ -6,12 +6,7 @@
   color: $light2;
   outline: none;
   overflow: auto;
-  width: 400px;
   -webkit-overflow-scrolling: touch;
-
-  &--doubleSize {
-    width: 600px;
-  }
 }
 
 .Modal-Overlay {
