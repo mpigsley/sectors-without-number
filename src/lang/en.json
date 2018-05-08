@@ -2584,7 +2584,9 @@
   "misc.entityOverview": "Entity Overview",
   "misc.entityType": "Entity Type",
   "misc.expanded": "Expanded",
+  "misc.export": "Export",
   "misc.exportEntity": "Export {entity}",
+  "misc.exportOptions": "Export Options",
   "misc.forgotPassword": "Forgot Password?",
   "misc.friends": "Friends",
   "misc.generate": "Generate",
@@ -2592,6 +2594,9 @@
   "misc.home": "Home",
   "misc.initializeEmpty": "Initialize Empty Sector",
   "misc.isHidden": "Is Hidden",
+  "misc.jsonDescription":
+    "Download the entire sector in JSON to import into any custom program.",
+  "misc.jsonFormat": "JSON Format",
   "misc.language": "Language",
   "misc.loadingSector": "Loading Sector",
   "misc.location": "Location",
@@ -2613,8 +2618,6 @@
   "misc.passwordResetSent": "Password Reset Sent",
   "misc.noPasswordMatch": "Passwords do not match.",
   "misc.places": "Places",
-  "misc.print": "Print",
-  "misc.printOptions": "Print Options",
   "misc.printEntitiesTable":
     "Print your entities in a table format to easily get an overview of your sector.",
   "misc.reachedLimit": "Reached Sector Limit",

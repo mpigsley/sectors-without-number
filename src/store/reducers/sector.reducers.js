@@ -97,7 +97,11 @@ export default function sector(state = initialState, action) {
     case OPENED_EXPORT:
       return { ...state, isExportOpen: true };
     case CLOSED_EXPORT:
-      return { ...state, isExportOpen: false };
+      return {
+        ...state,
+        isExportOpen: false,
+        exportType: ExportTypes.condensed.key,
+      };
     case PRINTING_STARTED:
       return { ...state, isExportOpen: false, isPrinting: true };
     case PRINTING_COMPLETE:

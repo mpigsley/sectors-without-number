@@ -2907,8 +2907,6 @@
   "misc.passwordResetSent": "Réinitialisation du mot de passé envoyée",
   "misc.noPasswordMatch": "Mot de passe incorrect",
   "misc.places": "Endroits",
-  "misc.print": "Imprimer",
-  "misc.printOptions": "Options d'impression",
   "misc.printEntitiesTable":
     "Imprimer vos entités dans un tableau, afin de facilement survoler votre secteur.",
   "misc.reachedLimit": "Limite du secteur atteinte",

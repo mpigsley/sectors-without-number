@@ -13,3 +13,15 @@ export const createCSVDownload = (csvContent, fileName = 'data') => {
   document.body.appendChild(link); // Required for FF
   link.click();
 };
+
+export const createJSONDownload = (jsonContent, fileName = 'data') => {
+  const str = JSON.stringify(jsonContent, null, 2);
+  const dataUri = `data:application/json;charset=utf-8,${encodeURIComponent(
+    str,
+  )}`;
+  const link = document.createElement('a');
+  link.setAttribute('href', dataUri);
+  link.setAttribute('download', `${fileName}.json`);
+  document.body.appendChild(link); // Required for FF
+  link.click();
+};

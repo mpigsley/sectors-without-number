@@ -146,7 +146,7 @@ export default function EntityNavigation({
         {shareButton}
         {shareButton ? <span className="EntityNavigation-Spacer" /> : null}
         <Button minimal onClick={openExport}>
-          <FormattedMessage id="misc.print" />
+          <FormattedMessage id="misc.export" />
         </Button>
       </FlexContainer>
     );

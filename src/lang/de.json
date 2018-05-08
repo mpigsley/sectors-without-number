@@ -402,8 +402,6 @@
   "misc.passwordResetSent": "Passwortreset versendet",
   "misc.noPasswordMatch": "Passwörter stimmen nicht überein.",
   "misc.places": "Orte",
-  "misc.print": "Drucken",
-  "misc.printOptions": "Drucksoptionen",
   "misc.printEntitiesTable":
     "Drucke deine Items in Tabellenform, um eine Übersicht über deinen Sektor zu bekommen.",
   "misc.reachedLimit": "Maximale Zahl an Sektoren erreicht",

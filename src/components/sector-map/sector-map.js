@@ -102,7 +102,10 @@ export default class SectorMap extends Component {
   }
 
   renderPrintable(printable) {
-    if (!this.props.isPrinting) {
+    if (
+      !this.props.isPrinting ||
+      this.props.exportType === ExportTypes.json.key
+    ) {
       return null;
     }
     if (this.props.exportType === ExportTypes.expanded.key) {

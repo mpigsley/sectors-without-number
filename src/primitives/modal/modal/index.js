@@ -18,7 +18,7 @@ export default function Modal(props) {
     cancelText,
     onCancel,
     actionButtons,
-    doubleSize,
+    width,
     hideHeader,
     ...rest
   } = props;
@@ -43,11 +43,10 @@ export default function Modal(props) {
     <ReactModal
       contentLabel={title}
       ariaHideApp={false}
+      style={{ content: { width } }}
       {...rest}
       className={{
-        base: classNames('Modal', props.className, {
-          'Modal--doubleSize': doubleSize,
-        }),
+        base: 'Modal',
         afterOpen: 'Modal--open',
         beforeClose: 'Modal--closed',
       }}
@@ -86,7 +85,7 @@ Modal.propTypes = {
   cancelText: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   actionButtons: PropTypes.arrayOf(PropTypes.node),
-  doubleSize: PropTypes.bool,
+  width: PropTypes.number,
   hideHeader: PropTypes.bool,
 };
 
@@ -95,6 +94,6 @@ Modal.defaultProps = {
   overlayClassName: null,
   cancelText: undefined,
   actionButtons: null,
-  doubleSize: false,
+  width: 400,
   hideHeader: false,
 };

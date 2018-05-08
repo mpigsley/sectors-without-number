@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
+import { createStructuredSelector } from 'reselect';
 
 import {
   exportTypeSelector,
   isExportOpenSelector,
 } from 'store/selectors/base.selectors';
+import {
+  getCurrentEntities,
+  getCurrentSector,
+} from 'store/selectors/entity.selectors';
 import {
   setEntityExport,
   closeExport,
@@ -13,9 +18,11 @@ import {
 
 import ExportModal from './export-modal';
 
-const mapStateToProps = state => ({
-  exportType: exportTypeSelector(state),
-  isExportOpen: isExportOpenSelector(state),
+const mapStateToProps = createStructuredSelector({
+  exportType: exportTypeSelector,
+  isExportOpen: isExportOpenSelector,
+  sector: getCurrentSector,
+  entities: getCurrentEntities,
 });
 
 export default injectIntl(

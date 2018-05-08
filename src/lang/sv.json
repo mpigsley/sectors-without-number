@@ -234,8 +234,6 @@
   "misc.passwordResetSent": "Lösenordsåterställning skickad",
   "misc.noPasswordMatch": "Lösenorden matchar inte",
   "misc.places": "Platser",
-  "misc.print": "Skriv ut",
-  "misc.printOptions": "Utskrivningsalternativ",
   "misc.printEntitiesTable":
     "Skriv ut dina enheter i tabellformat för att enkelt få en översikt över din sektor.",
   "misc.reachedLimit": "Sektorgräns uppnådd",
