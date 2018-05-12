@@ -1,5 +1,33 @@
+@import 'styles/theme';
+
 .FloatingToolbar {
-  left: 1rem;
   position: absolute;
+  right: 1rem;
   top: 1rem;
+}
+
+.FloatingToolbar-Item {
+  background-color: $dark2;
+  color: $light1;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: color 0.3s linear;
+
+  &:hover {
+    color: $light2;
+  }
+
+  &:first-of-type {
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+  }
+
+  &:last-of-type {
+    border-bottom-left-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+  }
+}
+
+.FloatingToolbar-Lock--active {
+  background-color: $primary;
 }

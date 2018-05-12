@@ -108,6 +108,11 @@ export const getCurrentSector = createDeepEqualSelector(
   (currentSector, entities) => entities[Entities.sector.key][currentSector],
 );
 
+export const getMapLock = createDeepEqualSelector(
+  [getCurrentSector],
+  currentSector => !!(currentSector || {}).mapLocked,
+);
+
 export const getCurrentEntity = createSelector(
   [
     currentSectorSelector,

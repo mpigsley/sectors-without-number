@@ -2604,6 +2604,7 @@
   "misc.facebook": "Log In with Facebook",
   "misc.google": "Log In with Google",
   "misc.logOut": "Log Out",
+  "misc.mapLockInfo": "Lock to prevent map edits",
   "misc.name": "Name",
   "misc.neighbors": "Neighbors",
   "misc.no": "No",
