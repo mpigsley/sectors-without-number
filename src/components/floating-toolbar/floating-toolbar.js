@@ -15,9 +15,9 @@ const ReactHint = ReactHintFactory(React);
 export default function FloatingToolbar({ mapLocked, toggleMapLock, intl }) {
   const renderSectorLock = () => {
     if (mapLocked) {
-      return <Lock size={18} onClick={toggleMapLock} />;
+      return <Lock size={18} />;
     }
-    return <Unlock size={18} onClick={toggleMapLock} />;
+    return <Unlock size={18} />;
   };
 
   return (
@@ -29,6 +29,7 @@ export default function FloatingToolbar({ mapLocked, toggleMapLock, intl }) {
               ? intl.formatMessage({ id: 'misc.mapLockInfo' })
               : undefined
           }
+          onClick={toggleMapLock}
           className={classNames('FloatingToolbar-Item', {
             'FloatingToolbar-Lock--active': mapLocked,
           })}
