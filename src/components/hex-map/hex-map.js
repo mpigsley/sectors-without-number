@@ -7,6 +7,7 @@ import { delay } from 'lodash';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
+import FloatingToolbar from 'components/floating-toolbar';
 
 import { getTopLevelEntity } from 'utils/entity';
 import hexCanvas, { getPixelRatio, getHoveredHex } from 'utils/hex/canvas';
@@ -25,6 +26,7 @@ class HexMap extends Component {
     topLevelEntities: PropTypes.shape().isRequired,
     isShare: PropTypes.bool.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
+    isSector: PropTypes.bool,
     hoverKey: PropTypes.string,
     holdKey: PropTypes.string,
     height: PropTypes.number,
@@ -48,6 +50,7 @@ class HexMap extends Component {
   static defaultProps = {
     height: null,
     width: null,
+    isSector: false,
     hoverKey: null,
     holdKey: null,
     hexes: [],
@@ -172,10 +175,18 @@ class HexMap extends Component {
     );
   }
 
+  renderToolbar() {
+    if (!this.props.isSector) {
+      return null;
+    }
+    return <FloatingToolbar />;
+  }
+
   render() {
     return (
       <div className="HexMap-Container">
         {this.renderEmptyMessage()}
+        {this.renderToolbar()}
         <canvas
           width={this.props.width * this.ratio}
           height={this.props.height * this.ratio}

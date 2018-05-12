@@ -135,6 +135,7 @@ export default class SectorMap extends Component {
             width={this.state.width}
             height={this.state.height}
             hexes={hexes}
+            isSector
           />
           <div className="SectorMap-Sidebar">{this.props.children}</div>
         </FlexContainer>
