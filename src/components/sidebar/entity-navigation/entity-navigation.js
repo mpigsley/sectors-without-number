@@ -99,27 +99,7 @@ export default function EntityNavigation({
           target="_blank"
           className="EntityNavigation-Patreon"
         >
-          Patreon
-        </ButtonLink>
-        <span className="EntityNavigation-Spacer" />
-        <ButtonLink
-          minimal
-          to="https://goo.gl/forms/eOanpGEuglCYYg7u2"
-          target="_blank"
-        >
-          <FormattedMessage id="misc.reportProblem" />
-        </ButtonLink>
-        <span className="EntityNavigation-Spacer" />
-        <ButtonLink minimal to="/changelog">
-          <FormattedMessage id="misc.changelog" />
-        </ButtonLink>
-        <span className="EntityNavigation-Spacer" />
-        <ButtonLink
-          minimal
-          to="https://github.com/mpigsley/sectors-without-number"
-          target="_blank"
-        >
-          Github
+          <FormattedMessage id="misc.becomePatron" />
         </ButtonLink>
       </FlexContainer>
     </div>

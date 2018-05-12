@@ -1,6 +1,7 @@
 @import 'styles/theme';
 
 .FloatingToolbar {
+  font-size: 0.9rem;
   position: absolute;
   right: 1rem;
   top: 1rem;
@@ -8,13 +9,21 @@
 
 .FloatingToolbar-Item {
   background-color: $dark2;
+  border-bottom: 1px solid $dark3;
   color: $light1;
   cursor: pointer;
   padding: 0.5rem;
-  transition: color 0.3s linear;
+  position: relative;
+  transition: color, background-color 0.2s linear;
 
   &:hover {
+    background-color: $dark3;
     color: $light2;
+
+    .FloatingToolbar-SubList {
+      display: flex;
+      position: absolute;
+    }
   }
 
   &:first-of-type {
@@ -23,11 +32,55 @@
   }
 
   &:last-of-type {
+    border-bottom: 0;
     border-bottom-left-radius: 0.2rem;
     border-bottom-right-radius: 0.2rem;
   }
 }
 
-.FloatingToolbar-Lock--active {
+.FloatingToolbar-SubList {
+  display: none;
+  padding-right: 0.6rem;
+  right: 100%;
+  top: 0;
+}
+
+.FloatingToolbar-SubItem {
+  background-color: $dark2;
+  border-bottom: 1px solid $dark3;
+  border-left: 1px solid $dark3;
+  border-right: 1px solid $dark3;
+  color: $light2;
+  cursor: pointer;
+  padding: 0.8rem;
+  text-decoration: none;
+  transition: color, background-color 0.2s linear;
+  white-space: nowrap;
+
+  &:first-of-type {
+    border-top: 1px solid $dark3;
+    border-top-left-radius: 0.2rem;
+    border-top-right-radius: 0.2rem;
+  }
+
+  &:last-of-type {
+    border-bottom-left-radius: 0.2rem;
+    border-bottom-right-radius: 0.2rem;
+  }
+
+  &:hover {
+    background-color: $dark3;
+    color: $light4;
+  }
+}
+
+.FloatingToolbar-Container .react-hint__content {
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.FloatingToolbar-Lock--active,
+.FloatingToolbar-Lock--active:hover {
   background-color: $primary;
+  transition: color 0.2s linear;
 }
