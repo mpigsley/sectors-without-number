@@ -19,6 +19,7 @@ export const currentEntitySelector = state => state.entity.currentEntity;
 export const savedSectorSelector = state => state.entity.saved;
 export const fetchedSectorSelector = state => state.entity.fetched;
 export const shareSectorSelector = state => state.entity.share;
+export const isSharedSectorSelector = state => !!state.entity.share;
 
 /* Sector */
 export const configurationSelector = state => state.sector.configuration;

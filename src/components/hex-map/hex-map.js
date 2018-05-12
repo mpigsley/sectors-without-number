@@ -27,6 +27,7 @@ class HexMap extends Component {
     isShare: PropTypes.bool.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
     isSector: PropTypes.bool,
+    mapLocked: PropTypes.bool.isRequired,
     hoverKey: PropTypes.string,
     holdKey: PropTypes.string,
     height: PropTypes.number,
@@ -100,7 +101,7 @@ class HexMap extends Component {
     const hexKey = this.getHexFromEvent(event);
     this.isMousedDown = true;
     delay(() => {
-      if (this.isMousedDown && !this.props.isShare) {
+      if (this.isMousedDown && !this.props.isShare && !this.props.mapLocked) {
         if (this.props.isSidebarEditActive) {
           this.props.deactivateSidebarEdit();
         }
@@ -134,7 +135,7 @@ class HexMap extends Component {
       if (this.props.location.pathname !== route) {
         this.props.router.push(route);
       }
-    } else if (!this.props.isShare) {
+    } else if (!this.props.isShare && !this.props.mapLocked) {
       if (!hexKey || this.props.holdKey === this.props.hoverKey) {
         this.props.entityRelease();
       } else if (this.props.holdKey) {

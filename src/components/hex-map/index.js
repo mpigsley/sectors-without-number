@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import {
@@ -13,22 +14,24 @@ import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
 import {
   holdKeySelector,
   hoverKeySelector,
-  shareSectorSelector,
+  isSharedSectorSelector,
   isSidebarEditActiveSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
   getActiveEntityKey,
+  getMapLock,
 } from 'store/selectors/entity.selectors';
 import HexMap from './hex-map';
 
-const mapStateToProps = state => ({
-  holdKey: holdKeySelector(state),
-  hoverKey: hoverKeySelector(state),
-  activeKey: getActiveEntityKey(state),
-  topLevelEntities: getCurrentTopLevelEntities(state),
-  isShare: !!shareSectorSelector(state),
-  isSidebarEditActive: isSidebarEditActiveSelector(state),
+const mapStateToProps = createStructuredSelector({
+  holdKey: holdKeySelector,
+  hoverKey: hoverKeySelector,
+  activeKey: getActiveEntityKey,
+  topLevelEntities: getCurrentTopLevelEntities,
+  isShare: isSharedSectorSelector,
+  isSidebarEditActive: isSidebarEditActiveSelector,
+  mapLocked: getMapLock,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
