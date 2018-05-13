@@ -45,28 +45,50 @@
   top: 0;
 }
 
-.FloatingToolbar-SubItem {
+.FloatingToolbar-SubItemOuter {
   background-color: $dark2;
   border-bottom: 1px solid $dark3;
   border-left: 1px solid $dark3;
   border-right: 1px solid $dark3;
-  color: $light2;
-  cursor: pointer;
-  padding: 0.8rem;
-  text-decoration: none;
-  transition: color, background-color 0.2s linear;
-  white-space: nowrap;
 
   &:first-of-type {
     border-top: 1px solid $dark3;
+  }
+
+  &:first-of-type,
+  &:first-of-type .FloatingToolbar-SubItemName {
     border-top-left-radius: 0.2rem;
     border-top-right-radius: 0.2rem;
   }
 
-  &:last-of-type {
+  &:first-of-type .FloatingToolbar-SubItemName--edit {
+    border-top-right-radius: 0;
+  }
+
+  &:last-of-type,
+  &:last-of-type .FloatingToolbar-SubItemName {
     border-bottom-left-radius: 0.2rem;
     border-bottom-right-radius: 0.2rem;
   }
+
+  &:last-of-type .FloatingToolbar-SubItemName--edit {
+    border-bottom-right-radius: 0;
+  }
+}
+
+.FloatingToolbar-ItemEdit {
+  border-left: 1px solid $dark3;
+}
+
+.FloatingToolbar-SubItemName,
+.FloatingToolbar-ItemEdit {
+  color: $light2;
+  cursor: pointer;
+  flex: 1;
+  padding: 0.6rem 0.8rem;
+  text-decoration: none;
+  transition: color, background-color 0.2s linear;
+  white-space: nowrap;
 
   &:hover {
     background-color: $dark3;
@@ -81,8 +103,8 @@
 
 .FloatingToolbar-Lock--active,
 .FloatingToolbar-Lock--active:hover,
-.FloatingToolbar-SubItem--active,
-.FloatingToolbar-SubItem--active:hover {
+.FloatingToolbar-SubItemName--active,
+.FloatingToolbar-SubItemName--active:hover {
   background-color: $primary;
   transition: color 0.2s linear;
 }

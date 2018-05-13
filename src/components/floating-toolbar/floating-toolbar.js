@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-import { Lock, Unlock, Layers, HelpCircle } from 'react-feather';
+import { Lock, Unlock, Layers, HelpCircle, Edit2 } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 
@@ -45,49 +45,65 @@ export default function FloatingToolbar({
         <FlexContainer className="FloatingToolbar-Item">
           <Layers size={18} />
           <FlexContainer className="FloatingToolbar-SubList" direction="column">
-            <div
-              onClick={() => toggleLayer('systemText')}
-              className={classNames('FloatingToolbar-SubItem', {
-                'FloatingToolbar-SubItem--active':
-                  layers.systemText === undefined || layers.systemText,
-              })}
-            >
-              System Text
-            </div>
-
-            <div
-              onClick={() => toggleLayer('navigation')}
-              className={classNames('FloatingToolbar-SubItem', {
-                'FloatingToolbar-SubItem--active':
-                  layers.navigation === undefined || layers.navigation,
-              })}
-            >
-              Navigation Routes
-            </div>
+            <FlexContainer className="FloatingToolbar-SubItemOuter">
+              <FlexContainer
+                onClick={() => toggleLayer('navigation')}
+                className={classNames(
+                  'FloatingToolbar-SubItemName',
+                  'FloatingToolbar-SubItemName--edit',
+                  {
+                    'FloatingToolbar-SubItemName--active':
+                      layers.navigation === undefined || layers.navigation,
+                  },
+                )}
+              >
+                Navigation Routes
+              </FlexContainer>
+              <FlexContainer className="FloatingToolbar-ItemEdit">
+                <Edit2 size={18} />
+              </FlexContainer>
+            </FlexContainer>
+            <FlexContainer className="FloatingToolbar-SubItemOuter">
+              <FlexContainer
+                onClick={() => toggleLayer('systemText')}
+                className={classNames('FloatingToolbar-SubItemName', {
+                  'FloatingToolbar-SubItemName--active':
+                    layers.systemText === undefined || layers.systemText,
+                })}
+              >
+                Hex System Text
+              </FlexContainer>
+            </FlexContainer>
           </FlexContainer>
         </FlexContainer>
         <FlexContainer className="FloatingToolbar-Item">
           <HelpCircle size={18} />
           <FlexContainer className="FloatingToolbar-SubList" direction="column">
-            <a
-              href="https://goo.gl/forms/eOanpGEuglCYYg7u2"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="FloatingToolbar-SubItem"
-            >
-              <FormattedMessage id="misc.reportProblem" />
-            </a>
-            <Link to="/changelog" className="FloatingToolbar-SubItem">
-              <FormattedMessage id="misc.changelog" />
-            </Link>
-            <a
-              href="https://github.com/mpigsley/sectors-without-number"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="FloatingToolbar-SubItem"
-            >
-              Github
-            </a>
+            <FlexContainer className="FloatingToolbar-SubItemOuter">
+              <a
+                href="https://goo.gl/forms/eOanpGEuglCYYg7u2"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="FloatingToolbar-SubItemName"
+              >
+                <FormattedMessage id="misc.reportProblem" />
+              </a>
+            </FlexContainer>
+            <FlexContainer className="FloatingToolbar-SubItemOuter">
+              <Link to="/changelog" className="FloatingToolbar-SubItemName">
+                <FormattedMessage id="misc.changelog" />
+              </Link>
+            </FlexContainer>
+            <FlexContainer className="FloatingToolbar-SubItemOuter">
+              <a
+                href="https://github.com/mpigsley/sectors-without-number"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="FloatingToolbar-SubItemName"
+              >
+                Github
+              </a>
+            </FlexContainer>
           </FlexContainer>
         </FlexContainer>
       </FlexContainer>
