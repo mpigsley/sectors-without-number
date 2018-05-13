@@ -12,7 +12,13 @@ import './style.css';
 
 const ReactHint = ReactHintFactory(React);
 
-export default function FloatingToolbar({ mapLocked, toggleMapLock, intl }) {
+export default function FloatingToolbar({
+  mapLocked,
+  toggleMapLock,
+  layers,
+  toggleLayer,
+  intl,
+}) {
   const renderSectorLock = () => {
     if (mapLocked) {
       return <Lock size={18} />;
@@ -38,6 +44,27 @@ export default function FloatingToolbar({ mapLocked, toggleMapLock, intl }) {
         </FlexContainer>
         <FlexContainer className="FloatingToolbar-Item">
           <Layers size={18} />
+          <FlexContainer className="FloatingToolbar-SubList" direction="column">
+            <div
+              onClick={() => toggleLayer('systemText')}
+              className={classNames('FloatingToolbar-SubItem', {
+                'FloatingToolbar-SubItem--active':
+                  layers.systemText === undefined || layers.systemText,
+              })}
+            >
+              System Text
+            </div>
+
+            <div
+              onClick={() => toggleLayer('navigation')}
+              className={classNames('FloatingToolbar-SubItem', {
+                'FloatingToolbar-SubItem--active':
+                  layers.navigation === undefined || layers.navigation,
+              })}
+            >
+              Navigation Routes
+            </div>
+          </FlexContainer>
         </FlexContainer>
         <FlexContainer className="FloatingToolbar-Item">
           <HelpCircle size={18} />
@@ -72,5 +99,7 @@ export default function FloatingToolbar({ mapLocked, toggleMapLock, intl }) {
 FloatingToolbar.propTypes = {
   mapLocked: PropTypes.bool.isRequired,
   toggleMapLock: PropTypes.func.isRequired,
+  layers: PropTypes.shape().isRequired,
+  toggleLayer: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
 };

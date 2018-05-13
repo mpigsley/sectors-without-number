@@ -80,7 +80,9 @@
 }
 
 .FloatingToolbar-Lock--active,
-.FloatingToolbar-Lock--active:hover {
+.FloatingToolbar-Lock--active:hover,
+.FloatingToolbar-SubItem--active,
+.FloatingToolbar-SubItem--active:hover {
   background-color: $primary;
   transition: color 0.2s linear;
 }

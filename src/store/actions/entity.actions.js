@@ -359,3 +359,31 @@ export const toggleMapLock = () => (dispatch, getState) => {
     mapLocked: !sector.mapLocked,
   }).then(() => dispatch(releaseSyncLock()));
 };
+
+export const toggleLayer = layerId => (dispatch, getState) => {
+  const state = getState();
+  const sectorId = currentSectorSelector(state);
+  const sector = getCurrentSector(state);
+  if (!sectorId || !sector || syncLockSelector(state)) {
+    return Promise.resolve();
+  }
+  const layers = sector.layers || {};
+  const layerToggle = layers[layerId] !== undefined && !layers[layerId];
+  const sectorUpdate = {
+    layers: {
+      ...layers,
+      [layerId]: layerToggle,
+    },
+  };
+  dispatch({
+    type: UPDATE_ENTITIES,
+    entities: {
+      [Entities.sector.key]: {
+        [sectorId]: sectorUpdate,
+      },
+    },
+  });
+  return updateEntity(sectorId, Entities.sector.key, sectorUpdate).then(() =>
+    dispatch(releaseSyncLock()),
+  );
+};

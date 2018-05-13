@@ -113,6 +113,11 @@ export const getMapLock = createDeepEqualSelector(
   currentSector => !!(currentSector || {}).mapLocked,
 );
 
+export const getLayers = createDeepEqualSelector(
+  [getCurrentSector],
+  currentSector => (currentSector || {}).layers || {},
+);
+
 export const getCurrentEntity = createSelector(
   [
     currentSectorSelector,
