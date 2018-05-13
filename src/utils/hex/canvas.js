@@ -77,6 +77,7 @@ export default ({
   activeKey,
   width,
   height,
+  layers,
 }) => {
   ctx.clearRect(0, 0, width * ratio, height * ratio);
 
@@ -173,7 +174,9 @@ export default ({
     // Draw Text
     ctx.font = `${9 * ratio}px Raleway,sans-serif`;
     ctx.fillStyle = '#8f8f8f';
-    const renderText = hex.width > 45 * ratio;
+    const renderText =
+      hex.width > 45 * ratio &&
+      (layers.systemText === undefined || layers.systemText);
     if (renderText) {
       ctx.fillText(
         hex.hexKey,
