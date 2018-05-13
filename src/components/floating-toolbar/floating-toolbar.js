@@ -13,6 +13,7 @@ import './style.css';
 const ReactHint = ReactHintFactory(React);
 
 export default function FloatingToolbar({
+  sectorId,
   mapLocked,
   toggleMapLock,
   layers,
@@ -59,9 +60,12 @@ export default function FloatingToolbar({
               >
                 Navigation Routes
               </FlexContainer>
-              <FlexContainer className="FloatingToolbar-ItemEdit">
+              <Link
+                to={`/sector/${sectorId}/navigation`}
+                className="FloatingToolbar-ItemEdit"
+              >
                 <Edit2 size={18} />
-              </FlexContainer>
+              </Link>
             </FlexContainer>
             <FlexContainer className="FloatingToolbar-SubItemOuter">
               <FlexContainer
@@ -113,6 +117,7 @@ export default function FloatingToolbar({
 }
 
 FloatingToolbar.propTypes = {
+  sectorId: PropTypes.string.isRequired,
   mapLocked: PropTypes.bool.isRequired,
   toggleMapLock: PropTypes.func.isRequired,
   layers: PropTypes.shape().isRequired,

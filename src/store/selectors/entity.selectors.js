@@ -203,10 +203,10 @@ export const getEmptyHexKeys = createDeepEqualSelector(
 export const isAncestorHidden = createDeepEqualSelector(
   [getCurrentEntityId, getCurrentEntityType, entitySelector],
   (currentEntityId, currentEntityType, entities) => {
-    if (currentEntityType === Entities.sector.key) {
+    const currentEntity = entities[currentEntityType][currentEntityId];
+    if (!currentEntity || currentEntityType === Entities.sector.key) {
       return false;
     }
-    const currentEntity = entities[currentEntityType][currentEntityId];
     let thisEntity = {
       ...entities[currentEntity.parentEntity][currentEntity.parent],
     };

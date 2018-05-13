@@ -78,10 +78,15 @@
 
 .FloatingToolbar-ItemEdit {
   border-left: 1px solid $dark3;
+
+  a {
+    color: $light1;
+  }
 }
 
 .FloatingToolbar-SubItemName,
 .FloatingToolbar-ItemEdit {
+  align-items: center;
   color: $light2;
   cursor: pointer;
   flex: 1;

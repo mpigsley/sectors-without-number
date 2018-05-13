@@ -2473,6 +2473,8 @@
   "entity.moonBase.situation.plague": "Moon plague breaking out",
   "entity.moonBase.situation.supplies": "Desperate for vital supplies",
   "entity.moonBase.situation.rich": "Rich but badly-protected",
+  "entity.navigation": "Navigation",
+  "entity.navigations": "Navigation",
   "entity.note": "Note",
   "entity.notes": "Notes",
   "entity.orbitalRuin": "Orbital Ruin",

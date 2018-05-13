@@ -32,6 +32,20 @@ import ResearchBaseSituation from 'constants/research-base/situation';
 
 import DefaultSidebar from 'components/sidebar-entities/default-sidebar';
 import NoteSidebar from 'components/sidebar-entities/note-sidebar';
+import NavigationSidebar from 'components/sidebar-entities/navigation-sidebar';
+
+const navigation = {
+  key: 'navigation',
+  name: 'entity.navigation',
+  shortName: 'entity.navigation',
+  topLevel: false,
+  isAdditional: false,
+  editable: false,
+  nameGenerator: () => {},
+  attributes: [],
+  children: [],
+  Sidebar: NavigationSidebar,
+};
 
 const note = {
   key: 'note',
@@ -39,6 +53,7 @@ const note = {
   shortName: 'entity.note',
   topLevel: false,
   isAdditional: false,
+  editable: true,
   nameGenerator: () => {},
   attributes: [],
   children: [],
@@ -51,6 +66,7 @@ const researchBase = {
   shortName: 'entity.base',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [ResearchBaseOccupation, ResearchBaseSituation],
   children: [note.key],
@@ -63,6 +79,7 @@ const refuelingStation = {
   shortName: 'entity.station',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [RefuelingStationOccupation, RefuelingStationSituation],
   children: [note.key],
@@ -75,6 +92,7 @@ const moonBase = {
   shortName: 'entity.base',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [MoonBaseOccupation, MoonBaseSituation],
   children: [note.key],
@@ -87,6 +105,7 @@ const orbitalRuin = {
   shortName: 'entity.ruin',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [OrbitalRuinOccupation, OrbitalRuinSituation],
   children: [note.key],
@@ -99,6 +118,7 @@ const gasGiantMine = {
   shortName: 'entity.mine',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateMineName,
   attributes: [GasGiantMineOccupation, GasGiantMineSituation],
   children: [note.key],
@@ -111,6 +131,7 @@ const spaceStation = {
   shortName: 'entity.station',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [SpaceStationOccupation, SpaceStationSituation],
   children: [note.key],
@@ -123,6 +144,7 @@ const asteroidBase = {
   shortName: 'entity.base',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [AsteroidBaseOccupation, AsteroidBaseSituation],
   children: [note.key],
@@ -135,6 +157,7 @@ const moon = {
   shortName: 'entity.moon',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateName,
   children: [
     moonBase.key,
@@ -152,6 +175,7 @@ const planet = {
   shortName: 'entity.planet',
   topLevel: false,
   isAdditional: false,
+  editable: true,
   tags: WorldTags,
   nameGenerator: generateName,
   attributes: [Atmosphere, Temperature, Biosphere, Population, TechLevel],
@@ -173,6 +197,7 @@ const asteroidBelt = {
   shortName: 'entity.belt',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateAsteroidBeltName,
   attributes: [AsteroidBeltOccupation, AsteroidBeltSituation],
   children: [
@@ -191,6 +216,7 @@ const deepSpaceStation = {
   shortName: 'entity.station',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [SpaceStationOccupation, SpaceStationSituation],
   children: [note.key],
@@ -203,6 +229,7 @@ const blackHole = {
   shortName: 'entity.blackHole',
   topLevel: true,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateBlackHoleName,
   children: [
     deepSpaceStation.key,
@@ -221,6 +248,7 @@ const system = {
   shortName: 'entity.system',
   topLevel: true,
   isAdditional: false,
+  editable: true,
   nameGenerator: generateName,
   children: [
     asteroidBelt.key,
@@ -239,6 +267,7 @@ const sector = {
   shortName: 'entity.sector',
   topLevel: false,
   isAdditional: false,
+  editable: true,
   nameGenerator: generateSectorName,
   children: [blackHole.key, note.key, system.key],
   Sidebar: DefaultSidebar,
@@ -252,6 +281,7 @@ export default {
   gasGiantMine,
   moon,
   moonBase,
+  navigation,
   note,
   orbitalRuin,
   planet,
