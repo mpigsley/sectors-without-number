@@ -63,6 +63,6 @@ export const completeRoute = () => (dispatch, getState) => {
   dispatch(setSyncLock());
   const sectorId = currentSectorSelector(state);
   return createRoute(sectorId, update).then(({ key, route }) =>
-    dispatch({ type: COMPLETED_ROUTE, key, route }),
+    dispatch({ type: COMPLETED_ROUTE, sectorId, key, route }),
   );
 };

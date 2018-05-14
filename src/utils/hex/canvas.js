@@ -1,4 +1,4 @@
-import { includes } from 'lodash';
+import { values, includes, uniq } from 'lodash';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
@@ -107,6 +107,10 @@ export default ({
       points: getHexPoints(hex),
     }));
 
+  const allRouteKeys = values(navigationRoutes).reduce(
+    (keys, sectorNav) => uniq([...keys, ...sectorNav.route]),
+    [],
+  );
   const routeLocations = {};
   let holdLocation;
   let hoverLocation;
@@ -143,40 +147,38 @@ export default ({
         hoverLocation = { x: xOffset, y: yOffset };
         isVectorSwitch = !!entity;
       }
-      if (includes(navigationSettings.route, hexKey)) {
+      if (includes(allRouteKeys, hexKey)) {
         routeLocations[hexKey] = { x: xOffset, y: yOffset };
       }
     },
   );
 
-  forEach(navigationRoutes);
-  if (
-    navigationSettings.isCreatingRoute &&
-    navigationSettings.route.length > 1
-  ) {
-    ctx.strokeStyle = navigationSettings.color;
-    const lineWidth = NAVIGATION_WIDTHS[navigationSettings.width] * ratio;
-    if (navigationSettings.type === 'dotted') {
-      ctx.setLineDash([lineWidth, 12]);
-    } else if (navigationSettings.type === 'short') {
-      ctx.setLineDash([15, 15]);
-    } else if (navigationSettings.type === 'long') {
-      ctx.setLineDash([35, 35]);
-    } else {
-      ctx.setLineDash([1, 0]);
-    }
-    ctx.lineWidth = lineWidth;
-    ctx.beginPath();
-    navigationSettings.route.forEach((routeLocation, index) => {
-      const { x, y } = routeLocations[routeLocation];
-      if (index) {
-        ctx.lineTo(x, y);
+  values(navigationRoutes).forEach(navRoute => {
+    if (navRoute.route.length > 1) {
+      ctx.strokeStyle = navRoute.color;
+      const lineWidth = NAVIGATION_WIDTHS[navRoute.width] * ratio;
+      if (navRoute.type === 'dotted') {
+        ctx.setLineDash([lineWidth, 12]);
+      } else if (navRoute.type === 'short') {
+        ctx.setLineDash([15, 15]);
+      } else if (navRoute.type === 'long') {
+        ctx.setLineDash([35, 35]);
       } else {
-        ctx.moveTo(x, y);
+        ctx.setLineDash([1, 0]);
       }
-    });
-    ctx.stroke();
-  }
+      ctx.lineWidth = lineWidth;
+      ctx.beginPath();
+      navRoute.route.forEach((routeLocation, index) => {
+        const { x, y } = routeLocations[routeLocation];
+        if (index) {
+          ctx.lineTo(x, y);
+        } else {
+          ctx.moveTo(x, y);
+        }
+      });
+      ctx.stroke();
+    }
+  });
 
   if (holdLocation && hoverLocation && holdKey !== hoverKey) {
     const vectorRatio =

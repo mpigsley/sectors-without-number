@@ -70,7 +70,10 @@ export default function navigation(state = initialState, action) {
         },
         routes: {
           ...state.routes,
-          [action.key]: action.route,
+          [action.sectorId]: {
+            ...state.routes[action.sectorId],
+            [action.key]: action.route,
+          },
         },
         syncLock: false,
       };
