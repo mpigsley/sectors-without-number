@@ -1,4 +1,5 @@
 import {
+  FETCHED_NAVIGATION,
   SET_SYNC_LOCK,
   OPENED_HELP,
   RESET_NAV_SETTINGS,
@@ -6,6 +7,7 @@ import {
   ADDED_ROUTE_LOCATION,
   COMPLETED_ROUTE,
 } from 'store/actions/navigation.actions';
+import { INITIALIZE } from 'store/actions/user.actions';
 
 const initialSettings = () => ({
   route: [],
@@ -24,6 +26,9 @@ export const initialState = {
 
 export default function navigation(state = initialState, action) {
   switch (action.type) {
+    case INITIALIZE:
+    case FETCHED_NAVIGATION:
+      return { ...state, routes: action.routes };
     case SET_SYNC_LOCK:
       return { ...state, syncLock: true };
     case OPENED_HELP:

@@ -10,6 +10,7 @@ import 'firebase/firestore';
 
 import store from 'store';
 import { fetchSectorEntities } from 'store/actions/entity.actions';
+import { fetchNavigation } from 'store/actions/navigation.actions';
 
 import AppWrapper from 'components/app-wrapper';
 import HexBackground from 'components/hex-background';
@@ -38,7 +39,10 @@ Firebase.initializeApp({
 const history = syncHistoryWithStore(browserHistory, store);
 
 const onEnterGameRoute = ({ params }) =>
-  store.dispatch(fetchSectorEntities(params.sector));
+  Promise.all([
+    store.dispatch(fetchSectorEntities(params.sector)),
+    store.dispatch(fetchNavigation(params.sector)),
+  ]);
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,10 +1,13 @@
 import { uniq } from 'lodash';
 
 import {
+  currentSectorSelector,
   navigationSettingsSelector,
   navigationSettingsRouteSelector,
 } from 'store/selectors/base.selectors';
+import { createRoute, getNavigationData } from 'store/api/navigation';
 
+export const FETCHED_NAVIGATION = 'FETCHED_NAVIGATION';
 export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
 export const OPENED_HELP = 'OPENED_HELP';
 export const RESET_NAV_SETTINGS = 'RESET_NAV_SETTINGS';
@@ -21,6 +24,13 @@ export const updateNavSettings = (key, value) => ({
   value,
 });
 
+export const fetchNavigation = sectorId => dispatch =>
+  getNavigationData(sectorId).then(routes =>
+    dispatch({
+      type: FETCHED_NAVIGATION,
+      routes,
+    }),
+  );
 export const addRouteLocation = location => (dispatch, getState) => {
   const state = getState();
   const existingLocations = navigationSettingsRouteSelector(state);
@@ -34,12 +44,14 @@ export const addRouteLocation = location => (dispatch, getState) => {
 };
 export const completeRoute = () => (dispatch, getState) => {
   const state = getState();
-  const { route } = navigationSettingsSelector(state);
-  if (route.length < 2) {
+  const { isCreatingRoute, ...update } = navigationSettingsSelector(state);
+  if (update.route.length < 2) {
     return dispatch(updateNavSettings('isCreatingRoute', false));
   }
 
   dispatch(setSyncLock());
-  // Sync with firestore
-  return dispatch({ type: COMPLETED_ROUTE, key: 'asdf', route: 'asdf' });
+  const sectorId = currentSectorSelector(state);
+  return createRoute(sectorId, update).then(({ key, route }) =>
+    dispatch({ type: COMPLETED_ROUTE, key, route }),
+  );
 };
