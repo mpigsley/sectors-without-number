@@ -85,7 +85,7 @@ export default ({
   width,
   height,
   layers,
-  navigationSettings,
+  navigationRoutes,
 }) => {
   ctx.clearRect(0, 0, width * ratio, height * ratio);
 
@@ -149,6 +149,7 @@ export default ({
     },
   );
 
+  forEach(navigationRoutes);
   if (
     navigationSettings.isCreatingRoute &&
     navigationSettings.route.length > 1

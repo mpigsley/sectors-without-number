@@ -44,6 +44,7 @@ export const routerLocationSelector = state =>
   state.routing.locationBeforeTransitions;
 
 /* Navigation */
+export const navigationRoutesSelector = state => state.navigation.routes;
 export const navigationSettingsSelector = state => state.navigation.settings;
 export const navigationSettingsRouteSelector = state =>
   state.navigation.settings.route;

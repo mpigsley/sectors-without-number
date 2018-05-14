@@ -12,6 +12,7 @@ import {
 import { moveTopLevelEntity } from 'store/actions/entity.actions';
 import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
 import { addRouteLocation } from 'store/actions/navigation.actions';
+import { getCurrentNavigationWithSettings } from 'store/selectors/navigation.selectors';
 import {
   holdKeySelector,
   hoverKeySelector,
@@ -37,6 +38,7 @@ const mapStateToProps = createStructuredSelector({
   mapLocked: getMapLock,
   layers: getLayers,
   navigationSettings: navigationSettingsSelector,
+  navigationRoutes: getCurrentNavigationWithSettings,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
