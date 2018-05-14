@@ -38,7 +38,8 @@ export default function ColorPicker({ onChange, value }) {
         <input
           className="ColorPicker-Input"
           value={value}
-          onChange={handleChange}
+          onChange={({ target }) => onChange(target.value)}
+          onBlur={handleChange}
           onKeyPress={({ key, target }) => {
             if (key === 'Enter') {
               target.blur();

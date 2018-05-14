@@ -1,16 +1,23 @@
 import React, { Component } from 'react';
+import ReactHintFactory from 'react-hint';
 import PropTypes from 'prop-types';
-// import { FormattedMessage } from 'react-intl';
+import { X, EyeOff } from 'react-feather';
+import { map } from 'lodash';
+import { intlShape } from 'react-intl';
 
+import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import ColorPicker from 'primitives/other/color-picker';
+import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
 import Dropdown from 'primitives/form/dropdown';
 import Label from 'primitives/form/label';
+import Input from 'primitives/form/input';
 
 import './style.css';
 
+const ReactHint = ReactHintFactory(React);
 const LINE_WIDTHS = [
   { value: 'thin', label: 'Thin' },
   { value: 'normal', label: 'Normal' },
@@ -31,10 +38,12 @@ export default class NavigationSidebar extends Component {
       width: PropTypes.string.isRequired,
       isCreatingRoute: PropTypes.bool.isRequired,
     }).isRequired,
+    navigation: PropTypes.shape().isRequired,
     resetNavSettings: PropTypes.func.isRequired,
     updateNavSettings: PropTypes.func.isRequired,
     openHelp: PropTypes.func.isRequired,
     completeRoute: PropTypes.func.isRequired,
+    intl: intlShape.isRequired,
   };
 
   componentWillUnmount() {
@@ -67,79 +76,127 @@ export default class NavigationSidebar extends Component {
     }
 
     return (
-      <FlexContainer
-        className="NavigationSidebar-Options"
-        direction="column"
-        flex="1"
-      >
-        <div className="NavigationSidebar-FormRow">
-          <Label htmlFor="color" noPadding>
-            Line Color
-          </Label>
-          <ColorPicker
-            value={color}
-            onChange={value => updateNavSettings('color', value)}
-          />
-        </div>
-        <FlexContainer className="NavigationSidebar-FormRow">
-          <FlexContainer
-            className="NavigationSidebar-FormColumn"
-            direction="column"
-            flex="1"
-          >
-            <Label htmlFor="width" noPadding>
-              Line Width
-            </Label>
-            <Dropdown
-              id="width"
-              name="width"
-              clearable={false}
-              value={width}
-              options={LINE_WIDTHS}
-              onChange={({ value }) => updateNavSettings('width', value)}
-            />
-          </FlexContainer>
-          <FlexContainer
-            className="NavigationSidebar-FormColumn"
-            direction="column"
-            flex="1"
-          >
-            <Label htmlFor="type" noPadding>
-              Line Type
-            </Label>
-            <Dropdown
-              id="type"
-              name="type"
-              clearable={false}
-              value={type}
-              options={LINE_TYPES}
-              onChange={({ value }) => updateNavSettings('type', value)}
-            />
-          </FlexContainer>
-        </FlexContainer>
+      <div>
         <FlexContainer
-          className="NavigationSidebar-FormRow"
-          justify="spaceBetween"
-          align="flexEnd"
+          className="NavigationSidebar-Options"
+          direction="column"
+          flex="1"
         >
-          <span>
-            <Button
-              primary
-              onClick={() =>
-                isCreatingRoute
-                  ? completeRoute()
-                  : updateNavSettings('isCreatingRoute', !isCreatingRoute)
-              }
+          <div className="NavigationSidebar-FormRow">
+            <Label htmlFor="color" noPadding>
+              Line Color
+            </Label>
+            <ColorPicker
+              value={color}
+              onChange={value => updateNavSettings('color', value)}
+            />
+          </div>
+          <FlexContainer className="NavigationSidebar-FormRow">
+            <FlexContainer
+              className="NavigationSidebar-FormColumn"
+              direction="column"
+              flex="1"
             >
-              {isCreatingRoute ? 'Complete Route' : 'Create Route'}
-            </Button>
-            {cancelButton}
-          </span>
-          {helpButton}
-        </FlexContainer>
+              <Label htmlFor="width" noPadding>
+                Line Width
+              </Label>
+              <Dropdown
+                id="width"
+                name="width"
+                clearable={false}
+                value={width}
+                options={LINE_WIDTHS}
+                onChange={({ value }) => updateNavSettings('width', value)}
+              />
+            </FlexContainer>
+            <FlexContainer
+              className="NavigationSidebar-FormColumn"
+              direction="column"
+              flex="1"
+            >
+              <Label htmlFor="type" noPadding>
+                Line Type
+              </Label>
+              <Dropdown
+                id="type"
+                name="type"
+                clearable={false}
+                value={type}
+                options={LINE_TYPES}
+                onChange={({ value }) => updateNavSettings('type', value)}
+              />
+            </FlexContainer>
+          </FlexContainer>
+          <FlexContainer
+            className="NavigationSidebar-FormRow"
+            justify="spaceBetween"
+            align="flexEnd"
+          >
+            <span>
+              <Button
+                primary
+                onClick={() =>
+                  isCreatingRoute
+                    ? completeRoute()
+                    : updateNavSettings('isCreatingRoute', !isCreatingRoute)
+                }
+              >
+                {isCreatingRoute ? 'Complete Route' : 'Create Route'}
+              </Button>
+              {cancelButton}
+            </span>
+            {helpButton}
+          </FlexContainer>
 
-        <SectionHeader>Navigation Routes</SectionHeader>
-      </FlexContainer>
+          <SectionHeader>Navigation Routes</SectionHeader>
+          <FlexContainer
+            justify="flexEnd"
+            align="center"
+            className="NavigationSidebar-SubHeader"
+          >
+            <LinkIcon
+              data-rh={this.props.intl.formatMessage({
+                id: 'misc.selectHidden',
+              })}
+              className="NavigationSidebar-SubHeaderHidden"
+              icon={EyeOff}
+              size={18}
+            />
+          </FlexContainer>
+          <FlexContainer direction="column">
+            {map(this.props.navigation, ({ route }, routeId) => (
+              <FlexContainer
+                className="NavigationSidebar-NavItem"
+                key={routeId}
+                align="center"
+                justify="spaceBetween"
+              >
+                <FlexContainer align="center">
+                  <X
+                    className="NavigationSidebar-Delete"
+                    size={25}
+                    onClick={() => {}}
+                  />
+                  <Header type={HeaderType.header4} noMargin>
+                    {route[0]}
+                  </Header>
+                  <span className="NavigationSidebar-Additional">to</span>
+                  <Header type={HeaderType.header4} noMargin>
+                    {route[route.length - 1]}
+                  </Header>
+                </FlexContainer>
+                <Input
+                  className="NavigationSidebar-Checkbox"
+                  checked={false}
+                  onChange={() => {}}
+                  type="checkbox"
+                />
+              </FlexContainer>
+            ))}
+          </FlexContainer>
+          <ReactHint events position="left" />
+        </FlexContainer>
+      </div>
     );
   }
 }
