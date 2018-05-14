@@ -1,3 +1,5 @@
+import { newRouteSelector } from 'store/selectors/base.selectors';
+
 export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
 export const OPENED_HELP = 'OPENED_HELP';
 export const RESET_NAV_SETTINGS = 'RESET_NAV_SETTINGS';
@@ -18,9 +20,14 @@ export const addRouteLocation = location => ({
   location,
 });
 
-export const completeRoute = () => dispatch => {
-  dispatch(setSyncLock());
+export const completeRoute = () => (dispatch, getState) => {
+  const state = getState();
+  const newRoute = newRouteSelector(state);
+  if (!newRoute.length) {
+    return dispatch(updateNavSettings('isCreatingRoute', false));
+  }
 
+  dispatch(setSyncLock());
   // Sync with firestore
   return dispatch({ type: COMPLETED_ROUTE, key: 'asdf', route: 'asdf' });
 };
