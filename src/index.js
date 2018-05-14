@@ -5,8 +5,9 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import Fastclick from 'react-fastclick';
 import Firebase from 'firebase/app';
-import 'firebase/functions';
 import 'firebase/firestore';
+import 'firebase/functions';
+import { firestore as Firestore } from 'firebase';
 
 import store from 'store';
 import { fetchSectorEntities } from 'store/actions/entity.actions';
@@ -35,6 +36,9 @@ Firebase.initializeApp({
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_SENDER_ID,
 });
+
+// Temporary until deprecation notice goes away
+Firestore().settings({ timestampsInSnapshots: true });
 
 const history = syncHistoryWithStore(browserHistory, store);
 
