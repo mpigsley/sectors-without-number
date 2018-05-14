@@ -4,6 +4,12 @@ import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
 import { HEX_PADDING } from 'constants/defaults';
 
+const NAVIGATION_WIDTHS = {
+  thin: 1,
+  normal: 2.5,
+  wide: 5,
+};
+
 const getHexBoundingBox = ({ height, width, xOffset, yOffset }) => ({
   x1: xOffset - (width + HEX_PADDING) / 2,
   x2: xOffset + (width + HEX_PADDING) / 2,
@@ -143,11 +149,24 @@ export default ({
     },
   );
 
-  const { isCreatingRoute, route, color } = navigationSettings;
-  if (isCreatingRoute && route.length > 1) {
-    ctx.strokeStyle = color;
+  if (
+    navigationSettings.isCreatingRoute &&
+    navigationSettings.route.length > 1
+  ) {
+    ctx.strokeStyle = navigationSettings.color;
+    const lineWidth = NAVIGATION_WIDTHS[navigationSettings.width] * ratio;
+    if (navigationSettings.type === 'dotted') {
+      ctx.setLineDash([lineWidth, 12]);
+    } else if (navigationSettings.type === 'short') {
+      ctx.setLineDash([15, 15]);
+    } else if (navigationSettings.type === 'long') {
+      ctx.setLineDash([35, 35]);
+    } else {
+      ctx.setLineDash([1, 0]);
+    }
+    ctx.lineWidth = lineWidth;
     ctx.beginPath();
-    route.forEach((routeLocation, index) => {
+    navigationSettings.route.forEach((routeLocation, index) => {
       const { x, y } = routeLocations[routeLocation];
       if (index) {
         ctx.lineTo(x, y);
@@ -176,6 +195,7 @@ export default ({
     }
 
     // Draw Path
+    ctx.lineWidth = 2 * ratio;
     ctx.strokeStyle = '#dbdbdb';
     ctx.beginPath();
     ctx.moveTo(xStart, yStart);
