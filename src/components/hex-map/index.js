@@ -11,11 +11,13 @@ import {
 } from 'store/actions/sector.actions';
 import { moveTopLevelEntity } from 'store/actions/entity.actions';
 import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
+import { addRouteLocation } from 'store/actions/navigation.actions';
 import {
   holdKeySelector,
   hoverKeySelector,
   isSharedSectorSelector,
   isSidebarEditActiveSelector,
+  navigationSettingsSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -34,6 +36,7 @@ const mapStateToProps = createStructuredSelector({
   isSidebarEditActive: isSidebarEditActiveSelector,
   mapLocked: getMapLock,
   layers: getLayers,
+  navigationSettings: navigationSettingsSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -44,6 +47,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   topLevelEntityCreate: key => dispatch(topLevelEntityCreate(key)),
   deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
   clearMapKeys: () => dispatch(clearMapKeys()),
+  addRouteLocation: key => dispatch(addRouteLocation(key)),
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(HexMap));

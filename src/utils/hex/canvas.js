@@ -1,3 +1,4 @@
+import { includes } from 'lodash';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
@@ -78,6 +79,7 @@ export default ({
   width,
   height,
   layers,
+  navigationSettings,
 }) => {
   ctx.clearRect(0, 0, width * ratio, height * ratio);
 
@@ -99,6 +101,7 @@ export default ({
       points: getHexPoints(hex),
     }));
 
+  const routeLocations = {};
   let holdLocation;
   let hoverLocation;
   let isVectorSwitch = false;
@@ -134,8 +137,26 @@ export default ({
         hoverLocation = { x: xOffset, y: yOffset };
         isVectorSwitch = !!entity;
       }
+      if (includes(navigationSettings.route, hexKey)) {
+        routeLocations[hexKey] = { x: xOffset, y: yOffset };
+      }
     },
   );
+
+  const { isCreatingRoute, route, color } = navigationSettings;
+  if (isCreatingRoute && route.length > 1) {
+    ctx.strokeStyle = color;
+    ctx.beginPath();
+    route.forEach((routeLocation, index) => {
+      const { x, y } = routeLocations[routeLocation];
+      if (index) {
+        ctx.lineTo(x, y);
+      } else {
+        ctx.moveTo(x, y);
+      }
+    });
+    ctx.stroke();
+  }
 
   if (holdLocation && hoverLocation && holdKey !== hoverKey) {
     const vectorRatio =

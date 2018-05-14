@@ -1,4 +1,4 @@
-import { newRouteSelector } from 'store/selectors/base.selectors';
+import { navigationSettingsSelector } from 'store/selectors/base.selectors';
 
 export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
 export const OPENED_HELP = 'OPENED_HELP';
@@ -22,8 +22,8 @@ export const addRouteLocation = location => ({
 
 export const completeRoute = () => (dispatch, getState) => {
   const state = getState();
-  const newRoute = newRouteSelector(state);
-  if (!newRoute.length) {
+  const { route } = navigationSettingsSelector(state);
+  if (route.length < 2) {
     return dispatch(updateNavSettings('isCreatingRoute', false));
   }
 

@@ -23,6 +23,7 @@ class HexMap extends Component {
     topLevelEntityCreate: PropTypes.func.isRequired,
     deactivateSidebarEdit: PropTypes.func.isRequired,
     clearMapKeys: PropTypes.func.isRequired,
+    addRouteLocation: PropTypes.func.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     isShare: PropTypes.bool.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
@@ -45,6 +46,9 @@ class HexMap extends Component {
     }).isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
+    }).isRequired,
+    navigationSettings: PropTypes.shape({
+      isCreatingRoute: PropTypes.bool.isRequired,
     }).isRequired,
   };
 
@@ -101,7 +105,12 @@ class HexMap extends Component {
     const hexKey = this.getHexFromEvent(event);
     this.isMousedDown = true;
     delay(() => {
-      if (this.isMousedDown && !this.props.isShare && !this.props.mapLocked) {
+      if (
+        this.isMousedDown &&
+        !this.props.isShare &&
+        !this.props.mapLocked &&
+        !this.props.navigationSettings.isCreatingRoute
+      ) {
         if (this.props.isSidebarEditActive) {
           this.props.deactivateSidebarEdit();
         }
@@ -125,7 +134,9 @@ class HexMap extends Component {
       this.props.topLevelEntities,
       hexKey,
     );
-    if (entity && !this.props.holdKey) {
+    if (hexKey && this.props.navigationSettings.isCreatingRoute) {
+      this.props.addRouteLocation(hexKey);
+    } else if (entity && !this.props.holdKey) {
       if (this.props.isSidebarEditActive) {
         this.props.deactivateSidebarEdit();
       }

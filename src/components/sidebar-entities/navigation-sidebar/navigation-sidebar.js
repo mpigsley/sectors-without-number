@@ -24,7 +24,7 @@ const LINE_TYPES = [
 ];
 
 export default class NavigationSidebar extends Component {
-  propTypes = {
+  static propTypes = {
     settings: PropTypes.shape({
       color: PropTypes.string.isRequired,
       type: PropTypes.string.isRequired,
@@ -63,7 +63,7 @@ export default class NavigationSidebar extends Component {
           <FlexContainer
             className="NavigationSidebar-FormColumn"
             direction="column"
-            flex={1}
+            flex="1"
           >
             <Label htmlFor="width" noPadding>
               Line Width
@@ -80,7 +80,7 @@ export default class NavigationSidebar extends Component {
           <FlexContainer
             className="NavigationSidebar-FormColumn"
             direction="column"
-            flex={1}
+            flex="1"
           >
             <Label htmlFor="type" noPadding>
               Line Type

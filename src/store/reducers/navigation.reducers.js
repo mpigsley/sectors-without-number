@@ -8,6 +8,7 @@ import {
 } from 'store/actions/navigation.actions';
 
 const initialSettings = () => ({
+  route: [],
   isCreatingRoute: false,
   color: '#dbdbdb',
   width: 'normal',
@@ -16,7 +17,6 @@ const initialSettings = () => ({
 
 export const initialState = {
   settings: initialSettings(),
-  newRoute: [],
   routes: {},
   isHelpOpen: false,
   syncLock: false,
@@ -41,16 +41,19 @@ export default function navigation(state = initialState, action) {
     case ADDED_ROUTE_LOCATION:
       return {
         ...state,
-        newRoute: [...state.newRoute, action.location],
+        settings: {
+          ...state.settings,
+          route: [...state.settings.route, action.location],
+        },
       };
     case COMPLETED_ROUTE:
       return {
         ...state,
         settings: {
           ...state.settings,
+          route: [],
           isCreatingRoute: false,
         },
-        newRoute: [],
         routes: {
           ...state.routes,
           [action.key]: action.route,

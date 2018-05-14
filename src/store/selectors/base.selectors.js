@@ -46,4 +46,3 @@ export const routerLocationSelector = state =>
 /* Navigation */
 export const navigationSettingsSelector = state => state.navigation.settings;
 export const isHelpOpenSelector = state => state.navigation.isHelpOpen;
-export const newRouteSelector = state => state.navigation.newRoute;
