@@ -44,6 +44,28 @@ export default class NavigationSidebar extends Component {
   render() {
     const { settings, updateNavSettings, openHelp, completeRoute } = this.props;
     const { color, type, width, isCreatingRoute } = settings;
+
+    let cancelButton = null;
+    if (isCreatingRoute) {
+      cancelButton = (
+        <Button
+          className="NavigationSidebar-Cancel"
+          onClick={this.props.resetNavSettings}
+        >
+          Cancel
+        </Button>
+      );
+    }
+
+    let helpButton = null;
+    if (!isCreatingRoute) {
+      helpButton = (
+        <Button minimal onClick={openHelp}>
+          Routing Help
+        </Button>
+      );
+    }
+
     return (
       <FlexContainer
         className="NavigationSidebar-Options"
@@ -100,18 +122,20 @@ export default class NavigationSidebar extends Component {
           justify="spaceBetween"
           align="flexEnd"
         >
-          <Button
-            onClick={() =>
-              isCreatingRoute
-                ? completeRoute()
-                : updateNavSettings('isCreatingRoute', !isCreatingRoute)
-            }
-          >
-            {isCreatingRoute ? 'Complete Route' : 'Create Route'}
-          </Button>
-          <Button minimal onClick={openHelp}>
-            Routing Help
-          </Button>
+          <span>
+            <Button
+              primary
+              onClick={() =>
+                isCreatingRoute
+                  ? completeRoute()
+                  : updateNavSettings('isCreatingRoute', !isCreatingRoute)
+              }
+            >
+              {isCreatingRoute ? 'Complete Route' : 'Create Route'}
+            </Button>
+            {cancelButton}
+          </span>
+          {helpButton}
         </FlexContainer>
 
         <SectionHeader>Navigation Routes</SectionHeader>
