@@ -1,9 +1,11 @@
 import {
+  OPENED_HELP,
   RESET_NAV_SETTINGS,
   UPDATED_NAV_SETTINGS,
 } from 'store/actions/navigation.actions';
 
 const initialSettings = () => ({
+  isCreatingRoute: false,
   color: '#dbdbdb',
   width: 'normal',
   type: 'solid',
@@ -11,11 +13,17 @@ const initialSettings = () => ({
 
 export const initialState = {
   settings: initialSettings(),
+  newRoute: [],
   isHelpOpen: false,
 };
 
 export default function navigation(state = initialState, action) {
   switch (action.type) {
+    case OPENED_HELP:
+      return {
+        ...state,
+        isHelpOpen: true,
+      };
     case RESET_NAV_SETTINGS:
       return {
         ...state,

@@ -23,8 +23,12 @@ const LINE_TYPES = [
   { value: 'long', label: 'Long Dashes' },
 ];
 
-export default function NavigationSidebar({ settings, updateNavSettings }) {
-  const { color, type, width } = settings;
+export default function NavigationSidebar({
+  settings,
+  updateNavSettings,
+  openHelp,
+}) {
+  const { color, type, width, isCreatingRoute } = settings;
   return (
     <FlexContainer
       className="NavigationSidebar-Options"
@@ -81,8 +85,14 @@ export default function NavigationSidebar({ settings, updateNavSettings }) {
         justify="spaceBetween"
         align="flexEnd"
       >
-        <Button>Create Route</Button>
-        <Button minimal>Routing Help</Button>
+        <Button
+          onClick={() => updateNavSettings('isCreatingRoute', !isCreatingRoute)}
+        >
+          {isCreatingRoute ? 'Complete Route' : 'Create Route'}
+        </Button>
+        <Button minimal onClick={openHelp}>
+          Routing Help
+        </Button>
       </FlexContainer>
 
       <SectionHeader>Navigation Routes</SectionHeader>
@@ -95,6 +105,8 @@ NavigationSidebar.propTypes = {
     color: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
     width: PropTypes.string.isRequired,
+    isCreatingRoute: PropTypes.bool.isRequired,
   }).isRequired,
   updateNavSettings: PropTypes.func.isRequired,
+  openHelp: PropTypes.func.isRequired,
 };
