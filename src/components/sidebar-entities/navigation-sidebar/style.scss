@@ -1,6 +1,29 @@
 @import 'styles/theme';
 
-.NavigationSidebar-Attributes {
-  margin: 1rem;
+.NavigationSidebar-Options {
+  margin-top: 1rem;
+}
+
+.NavigationSidebar {
   width: calc(100% - 2rem);
+}
+
+.NavigationSidebar-FormRow {
+  margin: 0 1rem 1rem;
+
+  button {
+    margin: 0;
+  }
+}
+
+.NavigationSidebar-FormColumn {
+  margin: 0.2rem;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
 }

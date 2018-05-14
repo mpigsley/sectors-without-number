@@ -52,7 +52,8 @@
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.1"
+    "reselect": "^3.0.1",
+    "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",

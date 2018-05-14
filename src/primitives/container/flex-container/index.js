@@ -15,15 +15,16 @@ export default function FlexContainer(props) {
     scroll,
     flex,
     shrink,
+    style,
     ...rest
   } = props;
 
-  const style = flex !== null ? { flex } : {};
+  const containerStyle = flex !== null ? { ...style, flex } : style;
 
   return (
     <div
       {...rest}
-      style={style}
+      style={containerStyle}
       className={classNames('FlexContainer', className, {
         [`FlexContainer-Align--${props.align}`]: align,
         [`FlexContainer-Justify--${justify}`]: justify,
@@ -65,6 +66,7 @@ FlexContainer.propTypes = {
   scroll: PropTypes.bool,
   flex: PropTypes.string,
   shrink: PropTypes.oneOf(['0', '1']),
+  style: PropTypes.shape(),
 };
 
 FlexContainer.defaultProps = {
@@ -76,4 +78,5 @@ FlexContainer.defaultProps = {
   scroll: false,
   flex: null,
   shrink: null,
+  style: {},
 };
