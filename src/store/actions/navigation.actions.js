@@ -1,4 +1,9 @@
-import { navigationSettingsSelector } from 'store/selectors/base.selectors';
+import { uniq } from 'lodash';
+
+import {
+  navigationSettingsSelector,
+  navigationSettingsRouteSelector,
+} from 'store/selectors/base.selectors';
 
 export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
 export const OPENED_HELP = 'OPENED_HELP';
@@ -15,11 +20,18 @@ export const updateNavSettings = (key, value) => ({
   key,
   value,
 });
-export const addRouteLocation = location => ({
-  type: ADDED_ROUTE_LOCATION,
-  location,
-});
 
+export const addRouteLocation = location => (dispatch, getState) => {
+  const state = getState();
+  const existingLocations = navigationSettingsRouteSelector(state);
+  const newLocations = uniq([...existingLocations, location]);
+  if (newLocations.length > existingLocations.length) {
+    dispatch({
+      type: ADDED_ROUTE_LOCATION,
+      location,
+    });
+  }
+};
 export const completeRoute = () => (dispatch, getState) => {
   const state = getState();
   const { route } = navigationSettingsSelector(state);
