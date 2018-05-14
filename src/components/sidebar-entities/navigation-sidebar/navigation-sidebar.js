@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 // import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -22,7 +23,8 @@ const LINE_TYPES = [
   { value: 'long', label: 'Long Dashes' },
 ];
 
-export default function NavigationSidebar() {
+export default function NavigationSidebar({ settings, updateNavSettings }) {
+  const { color, type, width } = settings;
   return (
     <FlexContainer
       className="NavigationSidebar-Options"
@@ -33,7 +35,10 @@ export default function NavigationSidebar() {
         <Label htmlFor="color" noPadding>
           Line Color
         </Label>
-        <ColorPicker onChange={() => {}} />
+        <ColorPicker
+          value={color}
+          onChange={value => updateNavSettings('color', value)}
+        />
       </div>
       <FlexContainer className="NavigationSidebar-FormRow">
         <FlexContainer
@@ -48,9 +53,9 @@ export default function NavigationSidebar() {
             id="width"
             name="width"
             clearable={false}
-            value="normal"
+            value={width}
             options={LINE_WIDTHS}
-            onChange={() => {}}
+            onChange={({ value }) => updateNavSettings('width', value)}
           />
         </FlexContainer>
         <FlexContainer
@@ -65,9 +70,9 @@ export default function NavigationSidebar() {
             id="type"
             name="type"
             clearable={false}
-            value="solid"
+            value={type}
             options={LINE_TYPES}
-            onChange={() => {}}
+            onChange={({ value }) => updateNavSettings('type', value)}
           />
         </FlexContainer>
       </FlexContainer>
@@ -84,3 +89,12 @@ export default function NavigationSidebar() {
     </FlexContainer>
   );
 }
+
+NavigationSidebar.propTypes = {
+  settings: PropTypes.shape({
+    color: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    width: PropTypes.string.isRequired,
+  }).isRequired,
+  updateNavSettings: PropTypes.func.isRequired,
+};

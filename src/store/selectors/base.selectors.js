@@ -42,3 +42,7 @@ export const sidebarEditChildrenSelector = state => state.sidebarEdit.children;
 /* Router */
 export const routerLocationSelector = state =>
   state.routing.locationBeforeTransitions;
+
+/* Navigation */
+export const navigationSettingsSelector = state => state.navigation.settings;
+export const isHelpOpenSelector = state => state.navigation.isHelpOpen;
