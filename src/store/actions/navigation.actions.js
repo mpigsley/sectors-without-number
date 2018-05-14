@@ -1,7 +1,9 @@
-import { uniq } from 'lodash';
+import { uniq, includes } from 'lodash';
 
 import {
+  isInitializedSelector,
   currentSectorSelector,
+  fetchedNavigationSelector,
   navigationSettingsSelector,
   navigationSettingsRouteSelector,
 } from 'store/selectors/base.selectors';
@@ -24,13 +26,22 @@ export const updateNavSettings = (key, value) => ({
   value,
 });
 
-export const fetchNavigation = sectorId => dispatch =>
-  getNavigationData(sectorId).then(routes =>
+export const fetchNavigation = sectorId => (dispatch, getState) => {
+  const state = getState();
+  if (
+    includes(fetchedNavigationSelector(state), sectorId) ||
+    !isInitializedSelector(state)
+  ) {
+    return Promise.resolve({});
+  }
+  return getNavigationData(sectorId).then(routes =>
     dispatch({
       type: FETCHED_NAVIGATION,
+      sectorId,
       routes,
     }),
   );
+};
 export const addRouteLocation = location => (dispatch, getState) => {
   const state = getState();
   const existingLocations = navigationSettingsRouteSelector(state);

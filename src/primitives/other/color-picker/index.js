@@ -32,7 +32,7 @@ export default function ColorPicker({ onChange, value }) {
       <FlexContainer
         style={{ backgroundColor: value, border }}
         align="center"
-        flex={1}
+        flex="1"
         className="ColorPicker-InputContainer"
       >
         <input

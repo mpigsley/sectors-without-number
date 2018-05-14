@@ -1,3 +1,5 @@
+import { uniq } from 'lodash';
+
 import {
   FETCHED_NAVIGATION,
   SET_SYNC_LOCK,
@@ -20,6 +22,7 @@ const initialSettings = () => ({
 export const initialState = {
   settings: initialSettings(),
   routes: {},
+  fetched: [],
   isHelpOpen: false,
   syncLock: false,
 };
@@ -28,7 +31,13 @@ export default function navigation(state = initialState, action) {
   switch (action.type) {
     case INITIALIZE:
     case FETCHED_NAVIGATION:
-      return { ...state, routes: action.routes };
+      return {
+        ...state,
+        routes: {
+          [action.sectorId]: action.routes,
+        },
+        fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
+      };
     case SET_SYNC_LOCK:
       return { ...state, syncLock: true };
     case OPENED_HELP:
