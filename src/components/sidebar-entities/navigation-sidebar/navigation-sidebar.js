@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 // import { FormattedMessage } from 'react-intl';
 
@@ -23,90 +23,99 @@ const LINE_TYPES = [
   { value: 'long', label: 'Long Dashes' },
 ];
 
-export default function NavigationSidebar({
-  settings,
-  updateNavSettings,
-  openHelp,
-}) {
-  const { color, type, width, isCreatingRoute } = settings;
-  return (
-    <FlexContainer
-      className="NavigationSidebar-Options"
-      direction="column"
-      flex="1"
-    >
-      <div className="NavigationSidebar-FormRow">
-        <Label htmlFor="color" noPadding>
-          Line Color
-        </Label>
-        <ColorPicker
-          value={color}
-          onChange={value => updateNavSettings('color', value)}
-        />
-      </div>
-      <FlexContainer className="NavigationSidebar-FormRow">
-        <FlexContainer
-          className="NavigationSidebar-FormColumn"
-          direction="column"
-          flex={1}
-        >
-          <Label htmlFor="width" noPadding>
-            Line Width
-          </Label>
-          <Dropdown
-            id="width"
-            name="width"
-            clearable={false}
-            value={width}
-            options={LINE_WIDTHS}
-            onChange={({ value }) => updateNavSettings('width', value)}
-          />
-        </FlexContainer>
-        <FlexContainer
-          className="NavigationSidebar-FormColumn"
-          direction="column"
-          flex={1}
-        >
-          <Label htmlFor="type" noPadding>
-            Line Type
-          </Label>
-          <Dropdown
-            id="type"
-            name="type"
-            clearable={false}
-            value={type}
-            options={LINE_TYPES}
-            onChange={({ value }) => updateNavSettings('type', value)}
-          />
-        </FlexContainer>
-      </FlexContainer>
+export default class NavigationSidebar extends Component {
+  propTypes = {
+    settings: PropTypes.shape({
+      color: PropTypes.string.isRequired,
+      type: PropTypes.string.isRequired,
+      width: PropTypes.string.isRequired,
+      isCreatingRoute: PropTypes.bool.isRequired,
+    }).isRequired,
+    resetNavSettings: PropTypes.func.isRequired,
+    updateNavSettings: PropTypes.func.isRequired,
+    openHelp: PropTypes.func.isRequired,
+    completeRoute: PropTypes.func.isRequired,
+  };
+
+  componentWillUnmount() {
+    this.props.resetNavSettings();
+  }
+
+  render() {
+    const { settings, updateNavSettings, openHelp, completeRoute } = this.props;
+    const { color, type, width, isCreatingRoute } = settings;
+    return (
       <FlexContainer
-        className="NavigationSidebar-FormRow"
-        justify="spaceBetween"
-        align="flexEnd"
+        className="NavigationSidebar-Options"
+        direction="column"
+        flex="1"
       >
-        <Button
-          onClick={() => updateNavSettings('isCreatingRoute', !isCreatingRoute)}
+        <div className="NavigationSidebar-FormRow">
+          <Label htmlFor="color" noPadding>
+            Line Color
+          </Label>
+          <ColorPicker
+            value={color}
+            onChange={value => updateNavSettings('color', value)}
+          />
+        </div>
+        <FlexContainer className="NavigationSidebar-FormRow">
+          <FlexContainer
+            className="NavigationSidebar-FormColumn"
+            direction="column"
+            flex={1}
+          >
+            <Label htmlFor="width" noPadding>
+              Line Width
+            </Label>
+            <Dropdown
+              id="width"
+              name="width"
+              clearable={false}
+              value={width}
+              options={LINE_WIDTHS}
+              onChange={({ value }) => updateNavSettings('width', value)}
+            />
+          </FlexContainer>
+          <FlexContainer
+            className="NavigationSidebar-FormColumn"
+            direction="column"
+            flex={1}
+          >
+            <Label htmlFor="type" noPadding>
+              Line Type
+            </Label>
+            <Dropdown
+              id="type"
+              name="type"
+              clearable={false}
+              value={type}
+              options={LINE_TYPES}
+              onChange={({ value }) => updateNavSettings('type', value)}
+            />
+          </FlexContainer>
+        </FlexContainer>
+        <FlexContainer
+          className="NavigationSidebar-FormRow"
+          justify="spaceBetween"
+          align="flexEnd"
         >
-          {isCreatingRoute ? 'Complete Route' : 'Create Route'}
-        </Button>
-        <Button minimal onClick={openHelp}>
-          Routing Help
-        </Button>
+          <Button
+            onClick={() =>
+              isCreatingRoute
+                ? completeRoute()
+                : updateNavSettings('isCreatingRoute', !isCreatingRoute)
+            }
+          >
+            {isCreatingRoute ? 'Complete Route' : 'Create Route'}
+          </Button>
+          <Button minimal onClick={openHelp}>
+            Routing Help
+          </Button>
+        </FlexContainer>
+
+        <SectionHeader>Navigation Routes</SectionHeader>
       </FlexContainer>
-
-      <SectionHeader>Navigation Routes</SectionHeader>
-    </FlexContainer>
-  );
+    );
+  }
 }
-
-NavigationSidebar.propTypes = {
-  settings: PropTypes.shape({
-    color: PropTypes.string.isRequired,
-    type: PropTypes.string.isRequired,
-    width: PropTypes.string.isRequired,
-    isCreatingRoute: PropTypes.bool.isRequired,
-  }).isRequired,
-  updateNavSettings: PropTypes.func.isRequired,
-  openHelp: PropTypes.func.isRequired,
-};

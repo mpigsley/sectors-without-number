@@ -5,7 +5,12 @@ import {
   navigationSettingsSelector,
   isHelpOpenSelector,
 } from 'store/selectors/base.selectors';
-import { updateNavSettings, openHelp } from 'store/actions/navigation.actions';
+import {
+  resetNavSettings,
+  updateNavSettings,
+  openHelp,
+  completeRoute,
+} from 'store/actions/navigation.actions';
 
 import NavigationSidebar from './navigation-sidebar';
 
@@ -14,6 +19,9 @@ const mapStateToProps = createStructuredSelector({
   isHelpOpen: isHelpOpenSelector,
 });
 
-export default connect(mapStateToProps, { updateNavSettings, openHelp })(
-  NavigationSidebar,
-);
+export default connect(mapStateToProps, {
+  resetNavSettings,
+  updateNavSettings,
+  openHelp,
+  completeRoute,
+})(NavigationSidebar);
