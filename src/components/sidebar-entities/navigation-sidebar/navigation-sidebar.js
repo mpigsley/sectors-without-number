@@ -38,7 +38,7 @@ export default class NavigationSidebar extends Component {
       width: PropTypes.string.isRequired,
       isCreatingRoute: PropTypes.bool.isRequired,
     }).isRequired,
-    navigation: PropTypes.shape().isRequired,
+    routes: PropTypes.shape().isRequired,
     resetNavSettings: PropTypes.func.isRequired,
     updateNavSettings: PropTypes.func.isRequired,
     openHelp: PropTypes.func.isRequired,
@@ -52,7 +52,7 @@ export default class NavigationSidebar extends Component {
   }
 
   renderRoutes() {
-    if (!size(this.props.navigation)) {
+    if (!size(this.props.routes)) {
       return null;
     }
     return (
@@ -73,7 +73,7 @@ export default class NavigationSidebar extends Component {
           />
         </FlexContainer>
         <FlexContainer direction="column">
-          {map(this.props.navigation, ({ route }, routeId) => (
+          {map(this.props.routes, ({ from, to }, routeId) => (
             <FlexContainer
               className="NavigationSidebar-NavItem"
               key={routeId}
@@ -87,11 +87,11 @@ export default class NavigationSidebar extends Component {
                   onClick={() => this.props.removeRoute(routeId)}
                 />
                 <Header type={HeaderType.header4} noMargin>
-                  {route[0]}
+                  {from}
                 </Header>
                 <span className="NavigationSidebar-Additional">to</span>
                 <Header type={HeaderType.header4} noMargin>
-                  {route[route.length - 1]}
+                  {to}
                 </Header>
               </FlexContainer>
               <Input

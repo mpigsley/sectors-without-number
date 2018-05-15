@@ -9,6 +9,7 @@ import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
 import FloatingToolbar from 'components/floating-toolbar';
 
+import Entities from 'constants/entities';
 import { getTopLevelEntity } from 'utils/entity';
 import hexCanvas, { getPixelRatio, getHoveredHex } from 'utils/hex/canvas';
 
@@ -31,6 +32,7 @@ class HexMap extends Component {
     mapLocked: PropTypes.bool.isRequired,
     hoverKey: PropTypes.string,
     holdKey: PropTypes.string,
+    currentEntityType: PropTypes.string.isRequired,
     height: PropTypes.number,
     width: PropTypes.number,
     hexes: PropTypes.arrayOf(
@@ -134,9 +136,10 @@ class HexMap extends Component {
       this.props.topLevelEntities,
       hexKey,
     );
-    if (hexKey && this.props.navigationSettings.isCreatingRoute) {
+    const isOnNav = this.props.currentEntityType === Entities.navigation.key;
+    if (hexKey && isOnNav && this.props.navigationSettings.isCreatingRoute) {
       this.props.addRouteLocation(hexKey);
-    } else if (entity && !this.props.holdKey) {
+    } else if (entity && !this.props.holdKey && !isOnNav) {
       if (this.props.isSidebarEditActive) {
         this.props.deactivateSidebarEdit();
       }

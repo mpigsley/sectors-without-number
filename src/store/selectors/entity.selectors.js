@@ -50,7 +50,7 @@ export const getSavedEntities = createDeepEqualSelector(
     ),
 );
 
-export const getCurrentTopLevelEntities = createDeepEqualSelector(
+export const getCurrentTopLevelEntities = createSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
   (currentSector, entities, isShared) =>
     Object.assign(
