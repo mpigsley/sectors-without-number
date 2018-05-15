@@ -1,4 +1,4 @@
-import { values, includes, uniq } from 'lodash';
+import { find, values, includes, uniq } from 'lodash';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
@@ -135,6 +135,10 @@ export default ({
         ctx.fillStyle = '#792f41';
       }
       if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
+        ctx.fillStyle = '#637182';
+      }
+      const newRoute = find(navigationRoutes, { isCreatingRoute: true });
+      if (newRoute && includes(newRoute.route, hexKey)) {
         ctx.fillStyle = '#637182';
       }
       ctx.stroke();
