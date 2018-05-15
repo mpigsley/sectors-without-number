@@ -3,8 +3,9 @@ import ReactHintFactory from 'react-hint';
 import PropTypes from 'prop-types';
 import { X, EyeOff, Crosshair } from 'react-feather';
 import { size, map } from 'lodash';
-import { intlShape } from 'react-intl';
+import { intlShape, FormattedMessage } from 'react-intl';
 
+import ConfirmModal from 'primitives/modal/confirm-modal';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -52,8 +53,31 @@ export default class NavigationSidebar extends Component {
     intl: intlShape.isRequired,
   };
 
+  state = {
+    confirmDelete: false,
+    deletionRoute: null,
+  };
+
   componentWillUnmount() {
     this.props.resetNavSettings();
+  }
+
+  renderConfirmDeleteModal() {
+    return (
+      <ConfirmModal
+        isOpen={this.state.confirmDelete}
+        onConfirm={() => {
+          this.props.removeRoute(this.state.deletionRoute);
+          this.setState({ confirmDelete: false });
+        }}
+        onCancel={() => this.setState({ confirmDelete: false })}
+      >
+        <FormattedMessage
+          id="misc.toDeleteEntity"
+          values={{ entity: 'route' }}
+        />
+      </ConfirmModal>
+    );
   }
 
   renderRoutes() {
@@ -91,7 +115,12 @@ export default class NavigationSidebar extends Component {
                   <X
                     className="NavigationSidebar-Delete"
                     size={25}
-                    onClick={() => this.props.removeRoute(routeId)}
+                    onClick={() =>
+                      this.setState({
+                        confirmDelete: true,
+                        deletionRoute: routeId,
+                      })
+                    }
                   />
                   <Crosshair
                     className="NavigationSidebar-Delete"
@@ -218,6 +247,7 @@ export default class NavigationSidebar extends Component {
           </FlexContainer>
           {this.renderRoutes()}
         </FlexContainer>
+        {this.renderConfirmDeleteModal()}
         <ReactHint events position="left" />
       </div>
     );
