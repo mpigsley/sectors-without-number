@@ -15,6 +15,8 @@ import Dropdown from 'primitives/form/dropdown';
 import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
 
+import { sortByKey } from 'utils/common';
+
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
@@ -44,6 +46,7 @@ export default class NavigationSidebar extends Component {
     openHelp: PropTypes.func.isRequired,
     completeRoute: PropTypes.func.isRequired,
     removeRoute: PropTypes.func.isRequired,
+    toggleVisibility: PropTypes.func.isRequired,
     intl: intlShape.isRequired,
   };
 
@@ -73,35 +76,37 @@ export default class NavigationSidebar extends Component {
           />
         </FlexContainer>
         <FlexContainer direction="column">
-          {map(this.props.routes, ({ from, to }, routeId) => (
-            <FlexContainer
-              className="NavigationSidebar-NavItem"
-              key={routeId}
-              align="center"
-              justify="spaceBetween"
-            >
-              <FlexContainer align="center">
-                <X
-                  className="NavigationSidebar-Delete"
-                  size={25}
-                  onClick={() => this.props.removeRoute(routeId)}
+          {map(this.props.routes, (route, routeId) => ({ ...route, routeId }))
+            .sort(sortByKey('from'))
+            .map(({ from, to, isHidden, routeId }) => (
+              <FlexContainer
+                className="NavigationSidebar-NavItem"
+                key={routeId}
+                align="center"
+                justify="spaceBetween"
+              >
+                <FlexContainer align="center">
+                  <X
+                    className="NavigationSidebar-Delete"
+                    size={25}
+                    onClick={() => this.props.removeRoute(routeId)}
+                  />
+                  <Header type={HeaderType.header4} noMargin>
+                    {from}
+                  </Header>
+                  <span className="NavigationSidebar-Additional">to</span>
+                  <Header type={HeaderType.header4} noMargin>
+                    {to}
+                  </Header>
+                </FlexContainer>
+                <Input
+                  className="NavigationSidebar-Checkbox"
+                  checked={!!isHidden}
+                  onChange={() => this.props.toggleVisibility(routeId)}
+                  type="checkbox"
                 />
-                <Header type={HeaderType.header4} noMargin>
-                  {from}
-                </Header>
-                <span className="NavigationSidebar-Additional">to</span>
-                <Header type={HeaderType.header4} noMargin>
-                  {to}
-                </Header>
               </FlexContainer>
-              <Input
-                className="NavigationSidebar-Checkbox"
-                checked={false}
-                onChange={() => {}}
-                type="checkbox"
-              />
-            </FlexContainer>
-          ))}
+            ))}
         </FlexContainer>
       </FlexContainer>
     );

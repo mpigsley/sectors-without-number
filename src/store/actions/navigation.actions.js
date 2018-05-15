@@ -3,26 +3,32 @@ import { uniq, includes } from 'lodash';
 import {
   isInitializedSelector,
   currentSectorSelector,
+  navigationRoutesSelector,
   fetchedNavigationSelector,
+  navigationSyncLockSelector,
   navigationSettingsSelector,
   navigationSettingsRouteSelector,
 } from 'store/selectors/base.selectors';
 import {
   createRoute,
   deleteRoute,
+  setVisibility,
   getNavigationData,
 } from 'store/api/navigation';
 
 export const FETCHED_NAVIGATION = 'FETCHED_NAVIGATION';
 export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
+export const RELEASE_SYNC_LOCK = 'RELEASE_SYNC_LOCK';
 export const OPENED_HELP = 'OPENED_HELP';
 export const RESET_NAV_SETTINGS = 'RESET_NAV_SETTINGS';
 export const UPDATED_NAV_SETTINGS = 'UPDATED_NAV_SETTINGS';
 export const ADDED_ROUTE_LOCATION = 'ADDED_ROUTE_LOCATION';
 export const COMPLETED_ROUTE = 'COMPLETED_ROUTE';
 export const DELETED_ROUTE = 'DELETED_ROUTE';
+export const TOGGLED_VISIBILITY = 'TOGGLED_VISIBILITY';
 
 export const setSyncLock = () => ({ type: SET_SYNC_LOCK });
+export const releaseSyncLock = () => ({ type: RELEASE_SYNC_LOCK });
 export const openHelp = () => ({ type: OPENED_HELP });
 export const resetNavSettings = () => ({ type: RESET_NAV_SETTINGS });
 export const updateNavSettings = (key, value) => ({
@@ -73,9 +79,26 @@ export const completeRoute = () => (dispatch, getState) => {
 };
 export const removeRoute = routeId => (dispatch, getState) => {
   const state = getState();
+  if (navigationSyncLockSelector(state)) {
+    return Promise.resolve();
+  }
   const sectorId = currentSectorSelector(state);
   dispatch(setSyncLock());
   return deleteRoute(sectorId, routeId).then(() =>
     dispatch({ type: DELETED_ROUTE, sectorId, routeId }),
+  );
+};
+
+export const toggleVisibility = routeId => (dispatch, getState) => {
+  const state = getState();
+  if (navigationSyncLockSelector(state)) {
+    return Promise.resolve();
+  }
+  const sectorId = currentSectorSelector(state);
+  const currentRoute = navigationRoutesSelector(state)[sectorId][routeId];
+  const isHidden = !currentRoute.isHidden;
+  dispatch({ type: TOGGLED_VISIBILITY, sectorId, routeId, isHidden });
+  return setVisibility(sectorId, routeId, isHidden).then(() =>
+    dispatch(releaseSyncLock()),
   );
 };

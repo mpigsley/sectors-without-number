@@ -106,8 +106,8 @@ export const initialize = location => dispatch =>
     if (locale && locale !== 'en' && Locale[locale]) {
       promises.push(Locale[locale].localeFetch().then(addLocaleData));
     }
-    return Promise.all(promises).then(([current, routes, sectors]) => {
-      return dispatch({
+    return Promise.all(promises).then(([current, routes, sectors]) =>
+      dispatch({
         type: INITIALIZE,
         user,
         entities: mergeEntityUpdates(
@@ -118,8 +118,8 @@ export const initialize = location => dispatch =>
         sectorId: current.sectorId,
         share: current.share,
         saved: keys(sectors || {}),
-      });
-    });
+      }),
+    );
   });
 
 export const facebookLogin = () => (dispatch, getState) =>

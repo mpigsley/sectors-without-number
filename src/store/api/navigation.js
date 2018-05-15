@@ -16,6 +16,14 @@ export const deleteRoute = (sectorId, routeId) =>
     .doc(routeId)
     .delete();
 
+export const setVisibility = (sectorId, routeId, isHidden) =>
+  Firestore()
+    .collection('navigation')
+    .doc(sectorId)
+    .collection('routes')
+    .doc(routeId)
+    .set({ isHidden }, { merge: true });
+
 export const getNavigationData = sectorId =>
   Firestore()
     .collection('navigation')

@@ -13,6 +13,7 @@ import {
   openHelp,
   completeRoute,
   removeRoute,
+  toggleVisibility,
 } from 'store/actions/navigation.actions';
 
 import NavigationSidebar from './navigation-sidebar';
@@ -30,5 +31,6 @@ export default injectIntl(
     openHelp,
     completeRoute,
     removeRoute,
+    toggleVisibility,
   })(NavigationSidebar),
 );

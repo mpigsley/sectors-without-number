@@ -3,12 +3,14 @@ import { uniq, omit } from 'lodash';
 import {
   FETCHED_NAVIGATION,
   SET_SYNC_LOCK,
+  RELEASE_SYNC_LOCK,
   OPENED_HELP,
   RESET_NAV_SETTINGS,
   UPDATED_NAV_SETTINGS,
   ADDED_ROUTE_LOCATION,
   COMPLETED_ROUTE,
   DELETED_ROUTE,
+  TOGGLED_VISIBILITY,
 } from 'store/actions/navigation.actions';
 import { INITIALIZE } from 'store/actions/user.actions';
 
@@ -41,6 +43,8 @@ export default function navigation(state = initialState, action) {
       };
     case SET_SYNC_LOCK:
       return { ...state, syncLock: true };
+    case RELEASE_SYNC_LOCK:
+      return { ...state, syncLock: false };
     case OPENED_HELP:
       return { ...state, isHelpOpen: true };
     case RESET_NAV_SETTINGS:
@@ -89,6 +93,21 @@ export default function navigation(state = initialState, action) {
           ),
         },
         syncLock: false,
+      };
+    case TOGGLED_VISIBILITY:
+      return {
+        ...state,
+        routes: {
+          ...state.routes,
+          [action.sectorId]: {
+            ...state.routes[action.sectorId],
+            [action.routeId]: {
+              ...state.routes[action.sectorId][action.routeId],
+              isHidden: action.isHidden,
+            },
+          },
+        },
+        syncLock: true,
       };
     default:
       return state;
