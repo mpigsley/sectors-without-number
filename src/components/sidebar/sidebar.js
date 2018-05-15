@@ -102,7 +102,8 @@ export default class Sidebar extends Component {
 
   render() {
     const EntitySidebar =
-      ENTITY_SIDEBAR[Entities[this.props.entityType].sidebar];
+      ENTITY_SIDEBAR[Entities[this.props.entityType].sidebar] ||
+      ENTITY_SIDEBAR.default;
     return (
       <EntityNavigation
         name={this.props.entity.name}

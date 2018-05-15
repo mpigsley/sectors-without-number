@@ -9,11 +9,13 @@ import {
 import { getNamedRoutes } from 'store/selectors/navigation.selectors';
 import {
   resetNavSettings,
+  cancelNavigation,
   updateNavSettings,
   openHelp,
   completeRoute,
   removeRoute,
   toggleVisibility,
+  locateRoute,
 } from 'store/actions/navigation.actions';
 
 import NavigationSidebar from './navigation-sidebar';
@@ -27,10 +29,12 @@ const mapStateToProps = createStructuredSelector({
 export default injectIntl(
   connect(mapStateToProps, {
     resetNavSettings,
+    cancelNavigation,
     updateNavSettings,
     openHelp,
     completeRoute,
     removeRoute,
     toggleVisibility,
+    locateRoute,
   })(NavigationSidebar),
 );

@@ -51,3 +51,4 @@ export const navigationSettingsRouteSelector = state =>
 export const isHelpOpenSelector = state => state.navigation.isHelpOpen;
 export const fetchedNavigationSelector = state => state.navigation.fetched;
 export const navigationSyncLockSelector = state => state.navigation.syncLock;
+export const routeLocatorSelector = state => state.navigation.routeLocator;

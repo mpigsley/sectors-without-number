@@ -6,11 +6,13 @@ import {
   RELEASE_SYNC_LOCK,
   OPENED_HELP,
   RESET_NAV_SETTINGS,
+  CANCEL_NAVIGATION,
   UPDATED_NAV_SETTINGS,
   ADDED_ROUTE_LOCATION,
   COMPLETED_ROUTE,
   DELETED_ROUTE,
   TOGGLED_VISIBILITY,
+  SET_ROUTE_LOCATOR,
 } from 'store/actions/navigation.actions';
 import { INITIALIZE } from 'store/actions/user.actions';
 
@@ -28,6 +30,7 @@ export const initialState = {
   fetched: [],
   isHelpOpen: false,
   syncLock: false,
+  routeLocator: null,
 };
 
 export default function navigation(state = initialState, action) {
@@ -49,6 +52,15 @@ export default function navigation(state = initialState, action) {
       return { ...state, isHelpOpen: true };
     case RESET_NAV_SETTINGS:
       return { ...state, settings: initialSettings() };
+    case CANCEL_NAVIGATION:
+      return {
+        ...state,
+        settings: {
+          ...state.settings,
+          route: [],
+          isCreatingRoute: false,
+        },
+      };
     case UPDATED_NAV_SETTINGS:
       return {
         ...state,
@@ -108,6 +120,11 @@ export default function navigation(state = initialState, action) {
           },
         },
         syncLock: true,
+      };
+    case SET_ROUTE_LOCATOR:
+      return {
+        ...state,
+        routeLocator: action.routeId,
       };
     default:
       return state;

@@ -21,16 +21,19 @@ export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
 export const RELEASE_SYNC_LOCK = 'RELEASE_SYNC_LOCK';
 export const OPENED_HELP = 'OPENED_HELP';
 export const RESET_NAV_SETTINGS = 'RESET_NAV_SETTINGS';
+export const CANCEL_NAVIGATION = 'CANCEL_NAVIGATION';
 export const UPDATED_NAV_SETTINGS = 'UPDATED_NAV_SETTINGS';
 export const ADDED_ROUTE_LOCATION = 'ADDED_ROUTE_LOCATION';
 export const COMPLETED_ROUTE = 'COMPLETED_ROUTE';
 export const DELETED_ROUTE = 'DELETED_ROUTE';
 export const TOGGLED_VISIBILITY = 'TOGGLED_VISIBILITY';
+export const SET_ROUTE_LOCATOR = 'SET_ROUTE_LOCATOR';
 
 export const setSyncLock = () => ({ type: SET_SYNC_LOCK });
 export const releaseSyncLock = () => ({ type: RELEASE_SYNC_LOCK });
 export const openHelp = () => ({ type: OPENED_HELP });
 export const resetNavSettings = () => ({ type: RESET_NAV_SETTINGS });
+export const cancelNavigation = () => ({ type: CANCEL_NAVIGATION });
 export const updateNavSettings = (key, value) => ({
   type: UPDATED_NAV_SETTINGS,
   key,
@@ -53,6 +56,7 @@ export const fetchNavigation = sectorId => (dispatch, getState) => {
     }),
   );
 };
+
 export const addRouteLocation = location => (dispatch, getState) => {
   const state = getState();
   const existingLocations = navigationSettingsRouteSelector(state);
@@ -64,6 +68,7 @@ export const addRouteLocation = location => (dispatch, getState) => {
     });
   }
 };
+
 export const completeRoute = () => (dispatch, getState) => {
   const state = getState();
   const { isCreatingRoute, ...update } = navigationSettingsSelector(state);
@@ -77,6 +82,7 @@ export const completeRoute = () => (dispatch, getState) => {
     dispatch({ type: COMPLETED_ROUTE, sectorId, key, route }),
   );
 };
+
 export const removeRoute = routeId => (dispatch, getState) => {
   const state = getState();
   if (navigationSyncLockSelector(state)) {
@@ -101,4 +107,16 @@ export const toggleVisibility = routeId => (dispatch, getState) => {
   return setVisibility(sectorId, routeId, isHidden).then(() =>
     dispatch(releaseSyncLock()),
   );
+};
+
+let locationTimer;
+export const locateRoute = routeId => dispatch => {
+  if (locationTimer) {
+    clearTimeout(locationTimer);
+  }
+  dispatch({ type: SET_ROUTE_LOCATOR, routeId });
+  locationTimer = setTimeout(() => {
+    locationTimer = null;
+    dispatch({ type: SET_ROUTE_LOCATOR, routeId: null });
+  }, 2000);
 };

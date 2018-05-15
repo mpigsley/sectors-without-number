@@ -20,6 +20,7 @@ import {
   isSidebarEditActiveSelector,
   navigationSettingsSelector,
   currentEntityTypeSelector,
+  routeLocatorSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -33,6 +34,7 @@ const mapStateToProps = createStructuredSelector({
   holdKey: holdKeySelector,
   hoverKey: hoverKeySelector,
   activeKey: getActiveEntityKey,
+  currentEntityType: currentEntityTypeSelector,
   topLevelEntities: getCurrentTopLevelEntities,
   isShare: isSharedSectorSelector,
   isSidebarEditActive: isSidebarEditActiveSelector,
@@ -40,7 +42,7 @@ const mapStateToProps = createStructuredSelector({
   layers: getLayers,
   navigationSettings: navigationSettingsSelector,
   navigationRoutes: getCurrentNavigationWithSettings,
-  currentEntityType: currentEntityTypeSelector,
+  routeLocator: routeLocatorSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

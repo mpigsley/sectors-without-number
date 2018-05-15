@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactHintFactory from 'react-hint';
 import PropTypes from 'prop-types';
-import { X, EyeOff } from 'react-feather';
+import { X, EyeOff, Crosshair } from 'react-feather';
 import { size, map } from 'lodash';
 import { intlShape } from 'react-intl';
 
@@ -42,11 +42,13 @@ export default class NavigationSidebar extends Component {
     }).isRequired,
     routes: PropTypes.shape().isRequired,
     resetNavSettings: PropTypes.func.isRequired,
+    cancelNavigation: PropTypes.func.isRequired,
     updateNavSettings: PropTypes.func.isRequired,
     openHelp: PropTypes.func.isRequired,
     completeRoute: PropTypes.func.isRequired,
     removeRoute: PropTypes.func.isRequired,
     toggleVisibility: PropTypes.func.isRequired,
+    locateRoute: PropTypes.func.isRequired,
     intl: intlShape.isRequired,
   };
 
@@ -91,6 +93,11 @@ export default class NavigationSidebar extends Component {
                     size={25}
                     onClick={() => this.props.removeRoute(routeId)}
                   />
+                  <Crosshair
+                    className="NavigationSidebar-Delete"
+                    size={20}
+                    onClick={() => this.props.locateRoute(routeId)}
+                  />
                   <Header type={HeaderType.header4} noMargin>
                     {from}
                   </Header>
@@ -121,7 +128,7 @@ export default class NavigationSidebar extends Component {
       cancelButton = (
         <Button
           className="NavigationSidebar-Cancel"
-          onClick={this.props.resetNavSettings}
+          onClick={this.props.cancelNavigation}
         >
           Cancel
         </Button>

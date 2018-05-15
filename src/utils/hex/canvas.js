@@ -1,4 +1,4 @@
-import { find, values, includes, uniq } from 'lodash';
+import { forEach, find, values, includes, uniq } from 'lodash';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
@@ -86,6 +86,7 @@ export default ({
   height,
   layers,
   navigationRoutes,
+  routeLocator,
 }) => {
   ctx.clearRect(0, 0, width * ratio, height * ratio);
 
@@ -157,18 +158,24 @@ export default ({
     },
   );
 
-  values(navigationRoutes).forEach(navRoute => {
+  forEach(navigationRoutes, (navRoute, routeId) => {
     if (navRoute.route.length > 1) {
-      ctx.strokeStyle = navRoute.color;
-      const lineWidth = NAVIGATION_WIDTHS[navRoute.width] * ratio;
-      if (navRoute.type === 'dotted') {
+      const isLocating = routeId === routeLocator;
+      let lineWidth = NAVIGATION_WIDTHS[navRoute.width] * ratio;
+      if (isLocating) {
+        lineWidth = NAVIGATION_WIDTHS.wide * ratio;
+        ctx.strokeStyle = 'red';
+      } else {
+        ctx.strokeStyle = navRoute.color;
+      }
+      if (navRoute.type === 'solid' || isLocating) {
+        ctx.setLineDash([1, 0]);
+      } else if (navRoute.type === 'dotted') {
         ctx.setLineDash([lineWidth, 12]);
       } else if (navRoute.type === 'short') {
         ctx.setLineDash([15, 15]);
-      } else if (navRoute.type === 'long') {
-        ctx.setLineDash([35, 35]);
       } else {
-        ctx.setLineDash([1, 0]);
+        ctx.setLineDash([35, 35]);
       }
       ctx.lineWidth = lineWidth;
       ctx.beginPath();
