@@ -12,6 +12,7 @@ import {
   updateNavSettings,
   openHelp,
   completeRoute,
+  removeRoute,
 } from 'store/actions/navigation.actions';
 
 import NavigationSidebar from './navigation-sidebar';
@@ -28,5 +29,6 @@ export default injectIntl(
     updateNavSettings,
     openHelp,
     completeRoute,
+    removeRoute,
   })(NavigationSidebar),
 );

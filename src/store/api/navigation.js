@@ -8,6 +8,14 @@ export const createRoute = (sectorId, route) =>
     .add(route)
     .then(doc => ({ key: doc.id, route }));
 
+export const deleteRoute = (sectorId, routeId) =>
+  Firestore()
+    .collection('navigation')
+    .doc(sectorId)
+    .collection('routes')
+    .doc(routeId)
+    .delete();
+
 export const getNavigationData = sectorId =>
   Firestore()
     .collection('navigation')

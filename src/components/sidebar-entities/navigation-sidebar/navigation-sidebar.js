@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactHintFactory from 'react-hint';
 import PropTypes from 'prop-types';
 import { X, EyeOff } from 'react-feather';
-import { map } from 'lodash';
+import { size, map } from 'lodash';
 import { intlShape } from 'react-intl';
 
 import Header, { HeaderType } from 'primitives/text/header';
@@ -43,11 +43,68 @@ export default class NavigationSidebar extends Component {
     updateNavSettings: PropTypes.func.isRequired,
     openHelp: PropTypes.func.isRequired,
     completeRoute: PropTypes.func.isRequired,
+    removeRoute: PropTypes.func.isRequired,
     intl: intlShape.isRequired,
   };
 
   componentWillUnmount() {
     this.props.resetNavSettings();
+  }
+
+  renderRoutes() {
+    if (!size(this.props.navigation)) {
+      return null;
+    }
+    return (
+      <FlexContainer direction="column">
+        <SectionHeader>Navigation Routes</SectionHeader>
+        <FlexContainer
+          justify="flexEnd"
+          align="center"
+          className="NavigationSidebar-SubHeader"
+        >
+          <LinkIcon
+            data-rh={this.props.intl.formatMessage({
+              id: 'misc.selectHidden',
+            })}
+            className="NavigationSidebar-SubHeaderHidden"
+            icon={EyeOff}
+            size={18}
+          />
+        </FlexContainer>
+        <FlexContainer direction="column">
+          {map(this.props.navigation, ({ route }, routeId) => (
+            <FlexContainer
+              className="NavigationSidebar-NavItem"
+              key={routeId}
+              align="center"
+              justify="spaceBetween"
+            >
+              <FlexContainer align="center">
+                <X
+                  className="NavigationSidebar-Delete"
+                  size={25}
+                  onClick={() => this.props.removeRoute(routeId)}
+                />
+                <Header type={HeaderType.header4} noMargin>
+                  {route[0]}
+                </Header>
+                <span className="NavigationSidebar-Additional">to</span>
+                <Header type={HeaderType.header4} noMargin>
+                  {route[route.length - 1]}
+                </Header>
+              </FlexContainer>
+              <Input
+                className="NavigationSidebar-Checkbox"
+                checked={false}
+                onChange={() => {}}
+                type="checkbox"
+              />
+            </FlexContainer>
+          ))}
+        </FlexContainer>
+      </FlexContainer>
+    );
   }
 
   render() {
@@ -147,55 +204,9 @@ export default class NavigationSidebar extends Component {
             </span>
             {helpButton}
           </FlexContainer>
-
-          <SectionHeader>Navigation Routes</SectionHeader>
-          <FlexContainer
-            justify="flexEnd"
-            align="center"
-            className="NavigationSidebar-SubHeader"
-          >
-            <LinkIcon
-              data-rh={this.props.intl.formatMessage({
-                id: 'misc.selectHidden',
-              })}
-              className="NavigationSidebar-SubHeaderHidden"
-              icon={EyeOff}
-              size={18}
-            />
-          </FlexContainer>
-          <FlexContainer direction="column">
-            {map(this.props.navigation, ({ route }, routeId) => (
-              <FlexContainer
-                className="NavigationSidebar-NavItem"
-                key={routeId}
-                align="center"
-                justify="spaceBetween"
-              >
-                <FlexContainer align="center">
-                  <X
-                    className="NavigationSidebar-Delete"
-                    size={25}
-                    onClick={() => {}}
-                  />
-                  <Header type={HeaderType.header4} noMargin>
-                    {route[0]}
-                  </Header>
-                  <span className="NavigationSidebar-Additional">to</span>
-                  <Header type={HeaderType.header4} noMargin>
-                    {route[route.length - 1]}
-                  </Header>
-                </FlexContainer>
-                <Input
-                  className="NavigationSidebar-Checkbox"
-                  checked={false}
-                  onChange={() => {}}
-                  type="checkbox"
-                />
-              </FlexContainer>
-            ))}
-          </FlexContainer>
-          <ReactHint events position="left" />
+          {this.renderRoutes()}
         </FlexContainer>
+        <ReactHint events position="left" />
       </div>
     );
   }

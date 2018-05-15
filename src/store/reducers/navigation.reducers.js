@@ -1,4 +1,4 @@
-import { uniq } from 'lodash';
+import { uniq, omit } from 'lodash';
 
 import {
   FETCHED_NAVIGATION,
@@ -8,6 +8,7 @@ import {
   UPDATED_NAV_SETTINGS,
   ADDED_ROUTE_LOCATION,
   COMPLETED_ROUTE,
+  DELETED_ROUTE,
 } from 'store/actions/navigation.actions';
 import { INITIALIZE } from 'store/actions/user.actions';
 
@@ -74,6 +75,18 @@ export default function navigation(state = initialState, action) {
             ...state.routes[action.sectorId],
             [action.key]: action.route,
           },
+        },
+        syncLock: false,
+      };
+    case DELETED_ROUTE:
+      return {
+        ...state,
+        routes: {
+          ...state.routes,
+          [action.sectorId]: omit(
+            state.routes[action.sectorId],
+            action.routeId,
+          ),
         },
         syncLock: false,
       };

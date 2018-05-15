@@ -7,7 +7,11 @@ import {
   navigationSettingsSelector,
   navigationSettingsRouteSelector,
 } from 'store/selectors/base.selectors';
-import { createRoute, getNavigationData } from 'store/api/navigation';
+import {
+  createRoute,
+  deleteRoute,
+  getNavigationData,
+} from 'store/api/navigation';
 
 export const FETCHED_NAVIGATION = 'FETCHED_NAVIGATION';
 export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
@@ -16,6 +20,7 @@ export const RESET_NAV_SETTINGS = 'RESET_NAV_SETTINGS';
 export const UPDATED_NAV_SETTINGS = 'UPDATED_NAV_SETTINGS';
 export const ADDED_ROUTE_LOCATION = 'ADDED_ROUTE_LOCATION';
 export const COMPLETED_ROUTE = 'COMPLETED_ROUTE';
+export const DELETED_ROUTE = 'DELETED_ROUTE';
 
 export const setSyncLock = () => ({ type: SET_SYNC_LOCK });
 export const openHelp = () => ({ type: OPENED_HELP });
@@ -64,5 +69,13 @@ export const completeRoute = () => (dispatch, getState) => {
   const sectorId = currentSectorSelector(state);
   return createRoute(sectorId, update).then(({ key, route }) =>
     dispatch({ type: COMPLETED_ROUTE, sectorId, key, route }),
+  );
+};
+export const removeRoute = routeId => (dispatch, getState) => {
+  const state = getState();
+  const sectorId = currentSectorSelector(state);
+  dispatch(setSyncLock());
+  return deleteRoute(sectorId, routeId).then(() =>
+    dispatch({ type: DELETED_ROUTE, sectorId, routeId }),
   );
 };
