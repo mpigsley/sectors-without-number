@@ -113,6 +113,7 @@ export default ({
     [],
   );
   const routeLocations = {};
+  const newRoute = find(navigationRoutes, { isCreatingRoute: true });
   let holdLocation;
   let hoverLocation;
   let isVectorSwitch = false;
@@ -138,7 +139,6 @@ export default ({
       if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
         ctx.fillStyle = '#637182';
       }
-      const newRoute = find(navigationRoutes, { isCreatingRoute: true });
       if (newRoute && includes(newRoute.route, hexKey)) {
         ctx.fillStyle = '#637182';
       }
@@ -158,38 +158,41 @@ export default ({
     },
   );
 
-  forEach(navigationRoutes, (navRoute, routeId) => {
-    if (navRoute.route.length > 1) {
-      const isLocating = routeId === routeLocator;
-      let lineWidth = NAVIGATION_WIDTHS[navRoute.width] * ratio;
-      if (isLocating) {
-        lineWidth = NAVIGATION_WIDTHS.wide * ratio;
-        ctx.strokeStyle = 'red';
-      } else {
-        ctx.strokeStyle = navRoute.color;
-      }
-      if (navRoute.type === 'solid' || isLocating) {
-        ctx.setLineDash([1, 0]);
-      } else if (navRoute.type === 'dotted') {
-        ctx.setLineDash([lineWidth, 12]);
-      } else if (navRoute.type === 'short') {
-        ctx.setLineDash([15, 15]);
-      } else {
-        ctx.setLineDash([35, 35]);
-      }
-      ctx.lineWidth = lineWidth;
-      ctx.beginPath();
-      navRoute.route.forEach((routeLocation, index) => {
-        const { x, y } = routeLocations[routeLocation];
-        if (index) {
-          ctx.lineTo(x, y);
+  const renderNavigation = layers.navigation === undefined || layers.navigation;
+  if (renderNavigation || newRoute) {
+    forEach(navigationRoutes, (navRoute, routeId) => {
+      if (navRoute.route.length > 1) {
+        const isLocating = routeId === routeLocator;
+        let lineWidth = NAVIGATION_WIDTHS[navRoute.width] * ratio;
+        if (isLocating) {
+          lineWidth = NAVIGATION_WIDTHS.wide * ratio;
+          ctx.strokeStyle = 'red';
         } else {
-          ctx.moveTo(x, y);
+          ctx.strokeStyle = navRoute.color;
         }
-      });
-      ctx.stroke();
-    }
-  });
+        if (navRoute.type === 'solid' || isLocating) {
+          ctx.setLineDash([1, 0]);
+        } else if (navRoute.type === 'dotted') {
+          ctx.setLineDash([lineWidth, 12]);
+        } else if (navRoute.type === 'short') {
+          ctx.setLineDash([15, 15]);
+        } else {
+          ctx.setLineDash([35, 35]);
+        }
+        ctx.lineWidth = lineWidth;
+        ctx.beginPath();
+        navRoute.route.forEach((routeLocation, index) => {
+          const { x, y } = routeLocations[routeLocation];
+          if (index) {
+            ctx.lineTo(x, y);
+          } else {
+            ctx.moveTo(x, y);
+          }
+        });
+        ctx.stroke();
+      }
+    });
+  }
 
   if (holdLocation && hoverLocation && holdKey !== hoverKey) {
     const vectorRatio =
