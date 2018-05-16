@@ -50,6 +50,29 @@ export const getSavedEntities = createDeepEqualSelector(
     ),
 );
 
+export const getAllTopLevelEntities = createSelector(
+  [currentSectorSelector, entitySelector],
+  (currentSector, entities) =>
+    Object.assign(
+      ...filter(Entities, ({ topLevel }) => topLevel).map(({ key }) =>
+        mapValues(
+          pickBy(entities[key], ({ sector }) => sector === currentSector),
+          (entity, entityId) => ({
+            ...entity,
+            type: key,
+            numChildren: Entities[key].children.reduce(
+              (total, childKey) =>
+                total +
+                filter(entities[childKey], ({ parent }) => parent === entityId)
+                  .length,
+              0,
+            ),
+          }),
+        ),
+      ),
+    ),
+);
+
 export const getCurrentTopLevelEntities = createSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
   (currentSector, entities, isShared) =>

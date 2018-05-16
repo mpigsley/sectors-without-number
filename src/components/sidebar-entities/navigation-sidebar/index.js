@@ -6,7 +6,7 @@ import {
   navigationSettingsSelector,
   isHelpOpenSelector,
 } from 'store/selectors/base.selectors';
-import { getNamedRoutes } from 'store/selectors/navigation.selectors';
+import { getCurrentSectorNavigation } from 'store/selectors/navigation.selectors';
 import {
   resetNavSettings,
   cancelNavigation,
@@ -23,7 +23,7 @@ import NavigationSidebar from './navigation-sidebar';
 const mapStateToProps = createStructuredSelector({
   settings: navigationSettingsSelector,
   isHelpOpen: isHelpOpenSelector,
-  routes: getNamedRoutes,
+  routes: getCurrentSectorNavigation,
 });
 
 export default injectIntl(

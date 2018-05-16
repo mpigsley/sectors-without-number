@@ -104,7 +104,7 @@ export default class NavigationSidebar extends Component {
         <FlexContainer direction="column">
           {map(this.props.routes, (route, routeId) => ({ ...route, routeId }))
             .sort(sortByKey('from'))
-            .map(({ from, to, isHidden, routeId }) => (
+            .map(({ from, to, hiddenByEntity, isHidden, routeId }) => (
               <FlexContainer
                 className="NavigationSidebar-NavItem"
                 key={routeId}
@@ -135,12 +135,21 @@ export default class NavigationSidebar extends Component {
                     {to}
                   </Header>
                 </FlexContainer>
-                <Input
-                  className="NavigationSidebar-Checkbox"
-                  checked={!!isHidden}
-                  onChange={() => this.props.toggleVisibility(routeId)}
-                  type="checkbox"
-                />
+                <span
+                  data-rh={
+                    hiddenByEntity
+                      ? 'Route is hidden by hidden entity at endpoint'
+                      : undefined
+                  }
+                >
+                  <Input
+                    className="NavigationSidebar-Checkbox"
+                    disabled={hiddenByEntity}
+                    checked={!!isHidden || hiddenByEntity}
+                    onChange={() => this.props.toggleVisibility(routeId)}
+                    type="checkbox"
+                  />
+                </span>
               </FlexContainer>
             ))}
         </FlexContainer>
