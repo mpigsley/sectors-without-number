@@ -4,10 +4,11 @@ import { injectIntl } from 'react-intl';
 
 import Entities from 'constants/entities';
 import { generateEntity } from 'store/actions/entity.actions';
+import { isFetchingCurrentNavigation } from 'store/selectors/navigation.selectors';
 import {
   getCurrentTopLevelEntities,
   getCurrentSector,
-  isFetchingCurrent,
+  isFetchingCurrentSector,
 } from 'store/selectors/entity.selectors';
 import {
   renderSectorSelector,
@@ -21,7 +22,10 @@ import SectorMap from './sector-map';
 const mapStateToProps = state => ({
   renderSector: renderSectorSelector(state),
   sector: getCurrentSector(state),
-  hasLoaded: isInitializedSelector(state) && !isFetchingCurrent(state),
+  hasLoaded:
+    isInitializedSelector(state) &&
+    !isFetchingCurrentSector(state) &&
+    !isFetchingCurrentNavigation(state),
   topLevelEntities: getCurrentTopLevelEntities(state),
   exportType: exportTypeSelector(state),
   isPrinting: isPrintingSelector(state),

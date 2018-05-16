@@ -36,7 +36,7 @@ import { areNeighbors } from 'utils/hex/common';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
 
-export const isFetchingCurrent = createDeepEqualSelector(
+export const isFetchingCurrentSector = createDeepEqualSelector(
   [fetchedSectorSelector, savedSectorSelector, currentSectorSelector],
   (fetched, saved, sector) =>
     includes(saved, sector) && !includes(fetched, sector),
