@@ -219,6 +219,7 @@ export const blacklistedAttributes = [
   'isUpdated',
   'isCreated',
   'type',
+  'key',
 ];
 export const mergeEntityUpdates = (state, updates) => ({
   ...state,
