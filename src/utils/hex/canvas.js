@@ -84,6 +84,7 @@ export default ({
   activeKey,
   width,
   height,
+  isShared,
   layers,
   navigationRoutes,
   routeLocator,
@@ -161,36 +162,37 @@ export default ({
   const renderNavigation = layers.navigation === undefined || layers.navigation;
   if (renderNavigation || newRoute) {
     forEach(navigationRoutes, (navRoute, routeId) => {
-      if (navRoute.route.length > 1) {
-        const isLocating = routeId === routeLocator;
-        let lineWidth = NAVIGATION_WIDTHS[navRoute.width] * ratio;
-        if (isLocating) {
-          lineWidth = NAVIGATION_WIDTHS.wide * ratio;
-          ctx.strokeStyle = 'red';
-        } else {
-          ctx.strokeStyle = navRoute.color;
-        }
-        if (navRoute.type === 'solid' || isLocating) {
-          ctx.setLineDash([1, 0]);
-        } else if (navRoute.type === 'dotted') {
-          ctx.setLineDash([lineWidth, 12]);
-        } else if (navRoute.type === 'short') {
-          ctx.setLineDash([15, 15]);
-        } else {
-          ctx.setLineDash([35, 35]);
-        }
-        ctx.lineWidth = lineWidth;
-        ctx.beginPath();
-        navRoute.route.forEach((routeLocation, index) => {
-          const { x, y } = routeLocations[routeLocation];
-          if (index) {
-            ctx.lineTo(x, y);
-          } else {
-            ctx.moveTo(x, y);
-          }
-        });
-        ctx.stroke();
+      if (navRoute.route.length < 2 || (isShared && navRoute.isHidden)) {
+        return;
       }
+      const isLocating = routeId === routeLocator;
+      let lineWidth = NAVIGATION_WIDTHS[navRoute.width] * ratio;
+      if (isLocating) {
+        lineWidth = NAVIGATION_WIDTHS.wide * ratio;
+        ctx.strokeStyle = 'red';
+      } else {
+        ctx.strokeStyle = navRoute.color;
+      }
+      if (navRoute.type === 'solid' || isLocating) {
+        ctx.setLineDash([1, 0]);
+      } else if (navRoute.type === 'dotted') {
+        ctx.setLineDash([lineWidth, 12]);
+      } else if (navRoute.type === 'short') {
+        ctx.setLineDash([15, 15]);
+      } else {
+        ctx.setLineDash([35, 35]);
+      }
+      ctx.lineWidth = lineWidth;
+      ctx.beginPath();
+      navRoute.route.forEach((routeLocation, index) => {
+        const { x, y } = routeLocations[routeLocation];
+        if (index) {
+          ctx.lineTo(x, y);
+        } else {
+          ctx.moveTo(x, y);
+        }
+      });
+      ctx.stroke();
     });
   }
 

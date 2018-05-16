@@ -26,7 +26,7 @@ class HexMap extends Component {
     clearMapKeys: PropTypes.func.isRequired,
     addRouteLocation: PropTypes.func.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
-    isShare: PropTypes.bool.isRequired,
+    isShared: PropTypes.bool.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
     isSector: PropTypes.bool,
     mapLocked: PropTypes.bool.isRequired,
@@ -110,7 +110,7 @@ class HexMap extends Component {
     delay(() => {
       if (
         this.isMousedDown &&
-        !this.props.isShare &&
+        !this.props.isShared &&
         !this.props.mapLocked &&
         !this.props.navigationSettings.isCreatingRoute
       ) {
@@ -150,7 +150,7 @@ class HexMap extends Component {
       if (this.props.location.pathname !== route) {
         this.props.router.push(route);
       }
-    } else if (!this.props.isShare && !this.props.mapLocked) {
+    } else if (!this.props.isShared && !this.props.mapLocked) {
       if (!hexKey || this.props.holdKey === this.props.hoverKey) {
         this.props.entityRelease();
       } else if (this.props.holdKey) {

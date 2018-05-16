@@ -36,7 +36,7 @@ export const getCurrentSectorNavigation = createSelector(
       return {
         ...route,
         hiddenByEntity,
-        isHidden: route.isHidden || (isShared && hiddenByEntity),
+        isHidden: route.isHidden || hiddenByEntity,
         from: firstEntity ? firstEntity.name : firstKey,
         to: lastEntity ? lastEntity.name : lastKey,
       };

@@ -36,7 +36,7 @@ const mapStateToProps = createStructuredSelector({
   activeKey: getActiveEntityKey,
   currentEntityType: currentEntityTypeSelector,
   topLevelEntities: getCurrentTopLevelEntities,
-  isShare: isSharedSectorSelector,
+  isShared: isSharedSectorSelector,
   isSidebarEditActive: isSidebarEditActiveSelector,
   mapLocked: getMapLock,
   layers: getLayers,
