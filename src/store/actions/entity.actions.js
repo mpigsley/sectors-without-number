@@ -28,6 +28,7 @@ import {
   userUidSelector,
   isInitializedSelector,
   syncLockSelector,
+  isSharedSectorSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -383,6 +384,9 @@ export const toggleLayer = layerId => (dispatch, getState) => {
       },
     },
   });
+  if (isSharedSectorSelector(state)) {
+    return Promise.resolve(dispatch(releaseSyncLock()));
+  }
   return updateEntity(sectorId, Entities.sector.key, sectorUpdate).then(() =>
     dispatch(releaseSyncLock()),
   );

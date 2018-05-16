@@ -37,49 +37,53 @@ export default class FloatingToolbar extends Component {
     return <Unlock size={18} />;
   }
 
-  renderLayers() {
+  renderLock() {
     if (this.props.isShared) {
       return null;
     }
     return (
-      <FlexContainer className="FloatingToolbar-Item">
-        <Layers size={18} />
-        <FlexContainer className="FloatingToolbar-SubList" direction="column">
-          <FlexContainer className="FloatingToolbar-SubItemOuter">
-            <FlexContainer
-              onClick={() => this.props.toggleLayer('navigation')}
-              className={classNames(
-                'FloatingToolbar-SubItemName',
-                'FloatingToolbar-SubItemName--edit',
-                {
-                  'FloatingToolbar-SubItemName--active':
-                    this.props.layers.navigation === undefined ||
-                    this.props.layers.navigation,
-                },
-              )}
-            >
-              Navigation Routes
-            </FlexContainer>
-            <Link
-              to={`/sector/${this.props.sectorId}/navigation`}
-              className="FloatingToolbar-ItemEdit"
-            >
-              <Edit2 size={18} />
-            </Link>
-          </FlexContainer>
-          <FlexContainer className="FloatingToolbar-SubItemOuter">
-            <FlexContainer
-              onClick={() => this.props.toggleLayer('systemText')}
-              className={classNames('FloatingToolbar-SubItemName', {
-                'FloatingToolbar-SubItemName--active':
-                  this.props.layers.systemText === undefined ||
-                  this.props.layers.systemText,
-              })}
-            >
-              Hex System Text
-            </FlexContainer>
-          </FlexContainer>
+      <FlexContainer
+        data-rh={
+          !this.props.mapLocked
+            ? this.props.intl.formatMessage({ id: 'misc.mapLockInfo' })
+            : undefined
+        }
+        onClick={this.props.toggleMapLock}
+        className={classNames('FloatingToolbar-Item', {
+          'FloatingToolbar-Lock--active': this.props.mapLocked,
+        })}
+      >
+        {this.renderSectorLock()}
+      </FlexContainer>
+    );
+  }
+
+  renderLayers() {
+    let editButton = null;
+    if (!this.props.isShared) {
+      editButton = (
+        <Link
+          to={`/sector/${this.props.sectorId}/navigation`}
+          className="FloatingToolbar-ItemEdit"
+        >
+          <Edit2 size={18} />
+        </Link>
+      );
+    }
+    return (
+      <FlexContainer className="FloatingToolbar-SubItemOuter">
+        <FlexContainer
+          onClick={() => this.props.toggleLayer('navigation')}
+          className={classNames('FloatingToolbar-SubItemName', {
+            'FloatingToolbar-SubItemName--edit': !this.props.isShared,
+            'FloatingToolbar-SubItemName--active':
+              this.props.layers.navigation === undefined ||
+              this.props.layers.navigation,
+          })}
+        >
+          Navigation Routes
         </FlexContainer>
+        {editButton}
       </FlexContainer>
     );
   }
@@ -88,20 +92,28 @@ export default class FloatingToolbar extends Component {
     return (
       <div className="FloatingToolbar-Container">
         <FlexContainer className="FloatingToolbar" direction="column">
-          <FlexContainer
-            data-rh={
-              !this.props.mapLocked
-                ? this.props.intl.formatMessage({ id: 'misc.mapLockInfo' })
-                : undefined
-            }
-            onClick={this.props.toggleMapLock}
-            className={classNames('FloatingToolbar-Item', {
-              'FloatingToolbar-Lock--active': this.props.mapLocked,
-            })}
-          >
-            {this.renderSectorLock()}
+          {this.renderLock()}
+          <FlexContainer className="FloatingToolbar-Item">
+            <Layers size={18} />
+            <FlexContainer
+              className="FloatingToolbar-SubList"
+              direction="column"
+            >
+              {this.renderLayers()}
+              <FlexContainer className="FloatingToolbar-SubItemOuter">
+                <FlexContainer
+                  onClick={() => this.props.toggleLayer('systemText')}
+                  className={classNames('FloatingToolbar-SubItemName', {
+                    'FloatingToolbar-SubItemName--active':
+                      this.props.layers.systemText === undefined ||
+                      this.props.layers.systemText,
+                  })}
+                >
+                  Hex System Text
+                </FlexContainer>
+              </FlexContainer>
+            </FlexContainer>
           </FlexContainer>
-          {this.renderLayers()}
           <FlexContainer className="FloatingToolbar-Item">
             <HelpCircle size={18} />
             <FlexContainer
