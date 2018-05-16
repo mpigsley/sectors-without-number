@@ -32,7 +32,7 @@ class HexMap extends Component {
     mapLocked: PropTypes.bool.isRequired,
     hoverKey: PropTypes.string,
     holdKey: PropTypes.string,
-    currentEntityType: PropTypes.string.isRequired,
+    currentEntityType: PropTypes.string,
     height: PropTypes.number,
     width: PropTypes.number,
     hexes: PropTypes.arrayOf(
@@ -60,6 +60,7 @@ class HexMap extends Component {
     isSector: false,
     hoverKey: null,
     holdKey: null,
+    currentEntityType: Entities.sector.key,
     hexes: [],
   };
 
