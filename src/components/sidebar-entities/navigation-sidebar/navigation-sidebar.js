@@ -5,6 +5,7 @@ import { X, EyeOff, Crosshair } from 'react-feather';
 import { size, map } from 'lodash';
 import { intlShape, FormattedMessage } from 'react-intl';
 
+import Modal from 'primitives/modal/modal';
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
@@ -45,7 +46,6 @@ export default class NavigationSidebar extends Component {
     resetNavSettings: PropTypes.func.isRequired,
     cancelNavigation: PropTypes.func.isRequired,
     updateNavSettings: PropTypes.func.isRequired,
-    openHelp: PropTypes.func.isRequired,
     completeRoute: PropTypes.func.isRequired,
     removeRoute: PropTypes.func.isRequired,
     toggleVisibility: PropTypes.func.isRequired,
@@ -54,7 +54,8 @@ export default class NavigationSidebar extends Component {
   };
 
   state = {
-    confirmDelete: false,
+    isHelpOpen: false,
+    isConfirmDeleteOpen: false,
     deletionRoute: null,
   };
 
@@ -65,18 +66,66 @@ export default class NavigationSidebar extends Component {
   renderConfirmDeleteModal() {
     return (
       <ConfirmModal
-        isOpen={this.state.confirmDelete}
+        isOpen={this.state.isConfirmDeleteOpen}
         onConfirm={() => {
           this.props.removeRoute(this.state.deletionRoute);
-          this.setState({ confirmDelete: false });
+          this.setState({ isConfirmDeleteOpen: false });
         }}
-        onCancel={() => this.setState({ confirmDelete: false })}
+        onCancel={() => this.setState({ isConfirmDeleteOpen: false })}
       >
         <FormattedMessage
           id="misc.toDeleteEntity"
           values={{ entity: 'route' }}
         />
       </ConfirmModal>
+    );
+  }
+
+  renderHelpModal() {
+    return (
+      <Modal
+        width={600}
+        title="Navigation Help"
+        isOpen={this.state.isHelpOpen}
+        cancelText={this.props.intl.formatMessage({ id: 'misc.continue' })}
+        onCancel={() => this.setState({ isHelpOpen: false })}
+      >
+        <FlexContainer direction="column" align="flexStart">
+          <Header type={HeaderType.header4} noMargin>
+            Create Route
+          </Header>
+          <p>
+            Decide what navigation line color, width, and type you would like to
+            create and then select the &quot;Create Route&quot; button. Select
+            any number of hexes to build your route. When you are finished,
+            select &quot;Complete Route&quot; in the sidebar to sync it, or
+            cancel if you would like to start over.
+          </p>
+          <Header type={HeaderType.header4} noMargin>
+            Edit/Delete Route
+          </Header>
+          <p>
+            In the &quot;Navigation Routes&quot; section, you can select the X
+            to delete any route. There will be a confirmation of deletion. You
+            can hide any route by clicking the checkbox to the right of the
+            route name. To find a given route, you can click on the crosshair
+            icon to highlight it on the map for an interval.
+          </p>
+          <Header type={HeaderType.header4} noMargin>
+            Tips
+          </Header>
+          <p>
+            Build routes only between two entities at a time. In this way, you
+            can modify these routes individually in the future. In addition, if
+            an entity is hidden and there are routes to that entity, those
+            routes will be hidden automatically from your players.
+          </p>
+          <p>
+            You can create a route and then edit line color, width, and type
+            before completing the route to see the updates live.
+          </p>
+        </FlexContainer>
+      </Modal>
     );
   }
 
@@ -117,7 +166,7 @@ export default class NavigationSidebar extends Component {
                     size={25}
                     onClick={() =>
                       this.setState({
-                        confirmDelete: true,
+                        isConfirmDeleteOpen: true,
                         deletionRoute: routeId,
                       })
                     }
@@ -145,7 +194,7 @@ export default class NavigationSidebar extends Component {
                   <Input
                     className="NavigationSidebar-Checkbox"
                     disabled={hiddenByEntity}
-                    checked={!!isHidden || hiddenByEntity}
+                    checked={!!isHidden}
                     onChange={() => this.props.toggleVisibility(routeId)}
                     type="checkbox"
                   />
@@ -158,7 +207,7 @@ export default class NavigationSidebar extends Component {
   }
 
   render() {
-    const { settings, updateNavSettings, openHelp, completeRoute } = this.props;
+    const { settings, updateNavSettings, completeRoute } = this.props;
     const { color, type, width, isCreatingRoute } = settings;
 
     let cancelButton = null;
@@ -176,8 +225,8 @@ export default class NavigationSidebar extends Component {
     let helpButton = null;
     if (!isCreatingRoute) {
       helpButton = (
-        <Button minimal onClick={openHelp}>
-          Routing Help
+        <Button minimal onClick={() => this.setState({ isHelpOpen: true })}>
+          Navigation Help
         </Button>
       );
     }
@@ -256,6 +305,7 @@ export default class NavigationSidebar extends Component {
           </FlexContainer>
           {this.renderRoutes()}
         </FlexContainer>
+        {this.renderHelpModal()}
         {this.renderConfirmDeleteModal()}
         <ReactHint events position="left" />
       </div>

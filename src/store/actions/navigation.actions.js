@@ -19,7 +19,6 @@ import {
 export const FETCHED_NAVIGATION = 'FETCHED_NAVIGATION';
 export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
 export const RELEASE_SYNC_LOCK = 'RELEASE_SYNC_LOCK';
-export const OPENED_HELP = 'OPENED_HELP';
 export const RESET_NAV_SETTINGS = 'RESET_NAV_SETTINGS';
 export const CANCEL_NAVIGATION = 'CANCEL_NAVIGATION';
 export const UPDATED_NAV_SETTINGS = 'UPDATED_NAV_SETTINGS';
@@ -31,7 +30,6 @@ export const SET_ROUTE_LOCATOR = 'SET_ROUTE_LOCATOR';
 
 export const setSyncLock = () => ({ type: SET_SYNC_LOCK });
 export const releaseSyncLock = () => ({ type: RELEASE_SYNC_LOCK });
-export const openHelp = () => ({ type: OPENED_HELP });
 export const resetNavSettings = () => ({ type: RESET_NAV_SETTINGS });
 export const cancelNavigation = () => ({ type: CANCEL_NAVIGATION });
 export const updateNavSettings = (key, value) => ({

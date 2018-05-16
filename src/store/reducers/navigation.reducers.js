@@ -4,7 +4,6 @@ import {
   FETCHED_NAVIGATION,
   SET_SYNC_LOCK,
   RELEASE_SYNC_LOCK,
-  OPENED_HELP,
   RESET_NAV_SETTINGS,
   CANCEL_NAVIGATION,
   UPDATED_NAV_SETTINGS,
@@ -28,7 +27,6 @@ export const initialState = {
   settings: initialSettings(),
   routes: {},
   fetched: [],
-  isHelpOpen: false,
   syncLock: false,
   routeLocator: null,
 };
@@ -48,8 +46,6 @@ export default function navigation(state = initialState, action) {
       return { ...state, syncLock: true };
     case RELEASE_SYNC_LOCK:
       return { ...state, syncLock: false };
-    case OPENED_HELP:
-      return { ...state, isHelpOpen: true };
     case RESET_NAV_SETTINGS:
       return { ...state, settings: initialSettings() };
     case CANCEL_NAVIGATION:
