@@ -22,7 +22,9 @@ import './style.css';
 const calcNavWidth = () => (window.innerWidth > 1500 ? 200 : 75);
 const calcWidth = () => {
   let width = window.innerWidth - 75;
-  if (window.innerWidth > 1200) {
+  if (window.innerWidth > 1500) {
+    width -= 575;
+  } else if (window.innerWidth > 1200) {
     width -= 450;
   } else if (window.innerWidth > 700) {
     width -= 375;
