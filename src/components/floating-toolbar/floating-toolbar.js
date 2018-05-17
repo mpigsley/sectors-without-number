@@ -81,7 +81,7 @@ export default class FloatingToolbar extends Component {
               this.props.layers.navigation,
           })}
         >
-          Navigation Routes
+          <FormattedMessage id="misc.navRoutes" />
         </FlexContainer>
         {editButton}
       </FlexContainer>
@@ -109,7 +109,7 @@ export default class FloatingToolbar extends Component {
                       this.props.layers.systemText,
                   })}
                 >
-                  Hex System Text
+                  <FormattedMessage id="misc.hexSystemText" />
                 </FlexContainer>
               </FlexContainer>
             </FlexContainer>

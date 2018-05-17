@@ -2605,6 +2605,7 @@
   "misc.generate": "Generate",
   "misc.google": "Log In with Google",
   "misc.haveNumSectors": "You have at least {num} sectors.",
+  "misc.hexSystemText": "Hex System Text",
   "misc.hiddenParrent": "A parent entity is hiding this {entity}.",
   "misc.hideTagsFromPlayers": "Hide Tags from Players",
   "misc.home": "Home",
