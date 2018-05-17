@@ -153,7 +153,7 @@ export default ({
         hoverLocation = { x: xOffset, y: yOffset };
         isVectorSwitch = !!entity;
       }
-      if (includes(allRouteKeys, hexKey)) {
+      if (includes(allRouteKeys, hexKey) && highlighted) {
         routeLocations[hexKey] = { x: xOffset, y: yOffset };
       }
     },
@@ -185,7 +185,7 @@ export default ({
       ctx.lineWidth = lineWidth;
       ctx.beginPath();
       navRoute.route.forEach((routeLocation, index) => {
-        const { x, y } = routeLocations[routeLocation];
+        const { x, y } = routeLocations[routeLocation] || {};
         if (index) {
           ctx.lineTo(x, y);
         } else {
