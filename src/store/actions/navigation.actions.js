@@ -15,6 +15,7 @@ import {
   setVisibility,
   getNavigationData,
 } from 'store/api/navigation';
+import { SuccessToast, ErrorToast } from 'utils/toasts';
 
 export const FETCHED_NAVIGATION = 'FETCHED_NAVIGATION';
 export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
@@ -67,7 +68,7 @@ export const addRouteLocation = location => (dispatch, getState) => {
   }
 };
 
-export const completeRoute = () => (dispatch, getState) => {
+export const completeRoute = intl => (dispatch, getState) => {
   const state = getState();
   const { isCreatingRoute, ...update } = navigationSettingsSelector(state);
   if (update.route.length < 2) {
@@ -76,24 +77,63 @@ export const completeRoute = () => (dispatch, getState) => {
 
   dispatch(setSyncLock());
   const sectorId = currentSectorSelector(state);
-  return createRoute(sectorId, update).then(({ key, route }) =>
-    dispatch({ type: COMPLETED_ROUTE, sectorId, key, route }),
-  );
+  return createRoute(sectorId, update)
+    .then(({ key, route }) => {
+      dispatch(
+        SuccessToast({
+          title: intl.formatMessage({ id: 'misc.sectorSaved' }),
+          message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
+        }),
+      );
+      return dispatch({ type: COMPLETED_ROUTE, sectorId, key, route });
+    })
+    .catch(err => {
+      console.error(err);
+      return dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
+    });
 };
 
-export const removeRoute = routeId => (dispatch, getState) => {
+export const removeRoute = (routeId, intl) => (dispatch, getState) => {
   const state = getState();
   if (navigationSyncLockSelector(state)) {
     return Promise.resolve();
   }
   const sectorId = currentSectorSelector(state);
   dispatch(setSyncLock());
-  return deleteRoute(sectorId, routeId).then(() =>
-    dispatch({ type: DELETED_ROUTE, sectorId, routeId }),
-  );
+  return deleteRoute(sectorId, routeId)
+    .then(() => {
+      const entityName = intl.formatMessage({ id: 'entity.route' });
+      dispatch(
+        SuccessToast({
+          title: intl.formatMessage(
+            { id: 'misc.entityDeleted' },
+            { entity: entityName },
+          ),
+          message: intl.formatMessage(
+            { id: 'misc.successfullyRemoved' },
+            { entity: entityName },
+          ),
+        }),
+      );
+      return dispatch({ type: DELETED_ROUTE, sectorId, routeId });
+    })
+    .catch(err => {
+      console.error(err);
+      return dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
+    });
 };
 
-export const toggleVisibility = routeId => (dispatch, getState) => {
+export const toggleVisibility = (routeId, intl) => (dispatch, getState) => {
   const state = getState();
   if (navigationSyncLockSelector(state)) {
     return Promise.resolve();
@@ -102,9 +142,17 @@ export const toggleVisibility = routeId => (dispatch, getState) => {
   const currentRoute = navigationRoutesSelector(state)[sectorId][routeId];
   const isHidden = !currentRoute.isHidden;
   dispatch({ type: TOGGLED_VISIBILITY, sectorId, routeId, isHidden });
-  return setVisibility(sectorId, routeId, isHidden).then(() =>
-    dispatch(releaseSyncLock()),
-  );
+  return setVisibility(sectorId, routeId, isHidden)
+    .then(() => dispatch(releaseSyncLock()))
+    .catch(err => {
+      console.error(err);
+      return dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
+    });
 };
 
 let locationTimer;

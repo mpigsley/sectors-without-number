@@ -22,17 +22,6 @@ import { sortByKey } from 'utils/common';
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
-const LINE_WIDTHS = [
-  { value: 'thin', label: 'Thin' },
-  { value: 'normal', label: 'Normal' },
-  { value: 'wide', label: 'Wide' },
-];
-const LINE_TYPES = [
-  { value: 'solid', label: 'Solid' },
-  { value: 'dotted', label: 'Dotted' },
-  { value: 'short', label: 'Short Dashes' },
-  { value: 'long', label: 'Long Dashes' },
-];
 
 export default class NavigationSidebar extends Component {
   static propTypes = {
@@ -63,6 +52,40 @@ export default class NavigationSidebar extends Component {
     this.props.resetNavSettings();
   }
 
+  lineWidths = [
+    {
+      value: 'thin',
+      label: this.props.intl.formatMessage({ id: 'misc.thin' }),
+    },
+    {
+      value: 'normal',
+      label: this.props.intl.formatMessage({ id: 'misc.normal' }),
+    },
+    {
+      value: 'wide',
+      label: this.props.intl.formatMessage({ id: 'misc.wide' }),
+    },
+  ];
+
+  lineTypes = [
+    {
+      value: 'solid',
+      label: this.props.intl.formatMessage({ id: 'misc.solid' }),
+    },
+    {
+      value: 'dotted',
+      label: this.props.intl.formatMessage({ id: 'misc.dotted' }),
+    },
+    {
+      value: 'short',
+      label: this.props.intl.formatMessage({ id: 'misc.shortDashes' }),
+    },
+    {
+      value: 'long',
+      label: this.props.intl.formatMessage({ id: 'misc.longDashes' }),
+    },
+  ];
+
   renderConfirmDeleteModal() {
     return (
       <ConfirmModal
@@ -85,44 +108,32 @@ export default class NavigationSidebar extends Component {
     return (
       <Modal
         width={600}
-        title="Navigation Help"
+        title={this.props.intl.formatMessage({ id: 'misc.navHelp' })}
         isOpen={this.state.isHelpOpen}
         cancelText={this.props.intl.formatMessage({ id: 'misc.continue' })}
         onCancel={() => this.setState({ isHelpOpen: false })}
       >
         <FlexContainer direction="column" align="flexStart">
           <Header type={HeaderType.header4} noMargin>
-            Create Route
+            <FormattedMessage id="misc.createRoute" />
           </Header>
           <p>
-            Decide what navigation line color, width, and type you would like to
-            create and then select the &quot;Create Route&quot; button. Select
-            any number of hexes to build your route. When you are finished,
-            select &quot;Complete Route&quot; in the sidebar to sync it, or
-            cancel if you would like to start over.
+            <FormattedMessage id="misc.createRoute.help" />
           </p>
           <Header type={HeaderType.header4} noMargin>
-            Edit/Delete Route
+            <FormattedMessage id="misc.editDeleteRoute" />
           </Header>
           <p>
-            In the &quot;Navigation Routes&quot; section, you can select the X
-            to delete any route. There will be a confirmation of deletion. You
-            can hide any route by clicking the checkbox to the right of the
-            route name. To find a given route, you can click on the crosshair
-            icon to highlight it on the map for an interval.
+            <FormattedMessage id="misc.editDeleteRoute.help" />
           </p>
           <Header type={HeaderType.header4} noMargin>
-            Tips
+            <FormattedMessage id="misc.navTips" />
           </Header>
           <p>
-            Build routes only between two entities at a time. In this way, you
-            can modify these routes individually in the future. In addition, if
-            an entity is hidden and there are routes to that entity, those
-            routes will be hidden automatically from your players.
+            <FormattedMessage id="misc.navTips.help.1" />
           </p>
           <p>
-            You can create a route and then edit line color, width, and type
-            before completing the route to see the updates live.
+            <FormattedMessage id="misc.navTips.help.2" />
           </p>
         </FlexContainer>
       </Modal>
@@ -135,7 +146,9 @@ export default class NavigationSidebar extends Component {
     }
     return (
       <FlexContainer direction="column">
-        <SectionHeader>Navigation Routes</SectionHeader>
+        <SectionHeader>
+          <FormattedMessage id="misc.navRoutes" />
+        </SectionHeader>
         <FlexContainer
           justify="flexEnd"
           align="center"
@@ -179,7 +192,9 @@ export default class NavigationSidebar extends Component {
                   <Header type={HeaderType.header4} noMargin>
                     {from}
                   </Header>
-                  <span className="NavigationSidebar-Additional">to</span>
+                  <span className="NavigationSidebar-Additional">
+                    <FormattedMessage id="misc.to" />
+                  </span>
                   <Header type={HeaderType.header4} noMargin>
                     {to}
                   </Header>
@@ -187,7 +202,9 @@ export default class NavigationSidebar extends Component {
                 <span
                   data-rh={
                     hiddenByEntity
-                      ? 'Route is hidden by hidden entity at endpoint'
+                      ? this.props.intl.formatMessage({
+                          id: 'misc.routeHiddenByParent',
+                        })
                       : undefined
                   }
                 >
@@ -217,7 +234,7 @@ export default class NavigationSidebar extends Component {
           className="NavigationSidebar-Cancel"
           onClick={this.props.cancelNavigation}
         >
-          Cancel
+          <FormattedMessage id="misc.cancel" />
         </Button>
       );
     }
@@ -226,7 +243,7 @@ export default class NavigationSidebar extends Component {
     if (!isCreatingRoute) {
       helpButton = (
         <Button minimal onClick={() => this.setState({ isHelpOpen: true })}>
-          Navigation Help
+          <FormattedMessage id="misc.navHelp" />
         </Button>
       );
     }
@@ -240,7 +257,7 @@ export default class NavigationSidebar extends Component {
         >
           <div className="NavigationSidebar-FormRow">
             <Label htmlFor="color" noPadding>
-              Line Color
+              <FormattedMessage id="misc.lineColor" />
             </Label>
             <ColorPicker
               value={color}
@@ -254,14 +271,14 @@ export default class NavigationSidebar extends Component {
               flex="1"
             >
               <Label htmlFor="width" noPadding>
-                Line Width
+                <FormattedMessage id="misc.lineWidth" />
               </Label>
               <Dropdown
                 id="width"
                 name="width"
                 clearable={false}
                 value={width}
-                options={LINE_WIDTHS}
+                options={this.lineWidths}
                 onChange={({ value }) => updateNavSettings('width', value)}
               />
             </FlexContainer>
@@ -271,14 +288,14 @@ export default class NavigationSidebar extends Component {
               flex="1"
             >
               <Label htmlFor="type" noPadding>
-                Line Type
+                <FormattedMessage id="misc.lineType" />
               </Label>
               <Dropdown
                 id="type"
                 name="type"
                 clearable={false}
                 value={type}
-                options={LINE_TYPES}
+                options={this.lineTypes}
                 onChange={({ value }) => updateNavSettings('type', value)}
               />
             </FlexContainer>
@@ -297,7 +314,11 @@ export default class NavigationSidebar extends Component {
                     : updateNavSettings('isCreatingRoute', !isCreatingRoute)
                 }
               >
-                {isCreatingRoute ? 'Complete Route' : 'Create Route'}
+                <FormattedMessage
+                  id={
+                    isCreatingRoute ? 'misc.completeRoute' : 'misc.createRoute'
+                  }
+                />
               </Button>
               {cancelButton}
             </span>
