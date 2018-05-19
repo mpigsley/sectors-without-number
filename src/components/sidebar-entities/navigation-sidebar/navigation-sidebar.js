@@ -43,7 +43,7 @@ export default class NavigationSidebar extends Component {
   };
 
   state = {
-    isHelpOpen: false,
+    isHelpOpen: !size(this.props.routes),
     isConfirmDeleteOpen: false,
     deletionRoute: null,
   };

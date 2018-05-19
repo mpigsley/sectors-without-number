@@ -38,6 +38,7 @@ export default function navigation(state = initialState, action) {
       return {
         ...state,
         routes: {
+          ...state.routes,
           [action.sectorId]: action.routes,
         },
         fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),

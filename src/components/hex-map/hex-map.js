@@ -108,11 +108,12 @@ class HexMap extends Component {
     const hexKey = this.getHexFromEvent(event);
     this.isMousedDown = true;
     delay(() => {
+      const isOnNav = this.props.currentEntityType === Entities.navigation.key;
       if (
         this.isMousedDown &&
         !this.props.isShared &&
         !this.props.mapLocked &&
-        !this.props.navigationSettings.isCreatingRoute
+        !isOnNav
       ) {
         if (this.props.isSidebarEditActive) {
           this.props.deactivateSidebarEdit();
@@ -140,21 +141,23 @@ class HexMap extends Component {
     const isOnNav = this.props.currentEntityType === Entities.navigation.key;
     if (hexKey && isOnNav && this.props.navigationSettings.isCreatingRoute) {
       this.props.addRouteLocation(hexKey);
-    } else if (entity && !this.props.holdKey && !isOnNav) {
-      if (this.props.isSidebarEditActive) {
-        this.props.deactivateSidebarEdit();
-      }
-      const route = `/sector/${this.props.router.params.sector}/${
-        entity.type
-      }/${entityId}`;
-      if (this.props.location.pathname !== route) {
-        this.props.router.push(route);
-      }
-    } else if (!this.props.isShared && !this.props.mapLocked) {
-      if (!hexKey || this.props.holdKey === this.props.hoverKey) {
-        this.props.entityRelease();
-      } else if (this.props.holdKey) {
-        this.props.moveTopLevelEntity();
+    } else if (!isOnNav) {
+      if (entity && !this.props.holdKey) {
+        if (this.props.isSidebarEditActive) {
+          this.props.deactivateSidebarEdit();
+        }
+        const route = `/sector/${this.props.router.params.sector}/${
+          entity.type
+        }/${entityId}`;
+        if (this.props.location.pathname !== route) {
+          this.props.router.push(route);
+        }
+      } else if (!this.props.isShared && !this.props.mapLocked) {
+        if (!hexKey || this.props.holdKey === this.props.hoverKey) {
+          this.props.entityRelease();
+        } else if (this.props.holdKey) {
+          this.props.moveTopLevelEntity();
+        }
       }
     }
   };

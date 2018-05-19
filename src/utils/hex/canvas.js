@@ -216,6 +216,7 @@ export default ({
     // Draw Path
     ctx.lineWidth = 2 * ratio;
     ctx.strokeStyle = '#dbdbdb';
+    ctx.setLineDash([1, 0]);
     ctx.beginPath();
     ctx.moveTo(xStart, yStart);
     ctx.lineTo(xEnd, yEnd);
