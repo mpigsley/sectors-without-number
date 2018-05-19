@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { withRouter } from 'react-router';
 import { delay } from 'lodash';
 
 import AbsoluteContainer from 'primitives/container/absolute-container';
@@ -15,7 +14,7 @@ import hexCanvas, { getPixelRatio, getHoveredHex } from 'utils/hex/canvas';
 
 import './style.css';
 
-class HexMap extends Component {
+export default class HexMap extends Component {
   static propTypes = {
     entityHover: PropTypes.func.isRequired,
     entityHold: PropTypes.func.isRequired,
@@ -243,5 +242,3 @@ class HexMap extends Component {
     );
   }
 }
-
-export default withRouter(HexMap);

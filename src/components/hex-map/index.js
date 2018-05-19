@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
@@ -62,4 +63,6 @@ const mapDispatchToProps = (dispatch, props) => ({
   updateNavSettings: (key, value) => dispatch(updateNavSettings(key, value)),
 });
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(HexMap));
+export default injectIntl(
+  connect(mapStateToProps, mapDispatchToProps)(withRouter(HexMap)),
+);
