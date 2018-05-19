@@ -1,4 +1,15 @@
 {
+  "5.0.0": {
+    "description": "Sector Navigation Routes.",
+    "date": "5-19-2018",
+    "changes": [
+      "Create floating toolbar located on the top right of the map.",
+      "Toggle layer visibility from the floating toolbar",
+      "Create navigation routes with your own line color, width, and type.",
+      "Add option to lock sector map from accidental changes.",
+      "Move help links to floating toolbar."
+    ]
+  },
   "4.7.0": {
     "description": "Add a json export option in the existing print modal.",
     "date": "5-8-2018"
