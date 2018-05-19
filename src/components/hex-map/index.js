@@ -11,7 +11,11 @@ import {
 } from 'store/actions/sector.actions';
 import { moveTopLevelEntity } from 'store/actions/entity.actions';
 import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
-import { addRouteLocation } from 'store/actions/navigation.actions';
+import {
+  addRouteLocation,
+  completeRoute,
+  updateNavSettings,
+} from 'store/actions/navigation.actions';
 import { getCurrentNavigationWithSettings } from 'store/selectors/navigation.selectors';
 import {
   holdKeySelector,
@@ -54,6 +58,8 @@ const mapDispatchToProps = (dispatch, props) => ({
   deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
   clearMapKeys: () => dispatch(clearMapKeys()),
   addRouteLocation: key => dispatch(addRouteLocation(key)),
+  completeRoute: () => dispatch(completeRoute(props.intl)),
+  updateNavSettings: (key, value) => dispatch(updateNavSettings(key, value)),
 });
 
 export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(HexMap));

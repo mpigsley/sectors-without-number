@@ -2632,7 +2632,7 @@
   "misc.navTips.help.1":
     "Build routes only between two entities at a time. In this way, you can modify these routes individually in the future. In addition, if an entity is hidden and there are routes to that entity, those routes will be hidden automatically from your players.",
   "misc.navTips.help.2":
-    "You can create a route and then edit line color, width, and type before completing the route to see the updates live.",
+    "While on the map, you can right click to enter and exit routing mode to save time.",
   "misc.neighbors": "Neighbors",
   "misc.no": "No",
   "misc.noEntities": "You do not have any {entities} in this sector",

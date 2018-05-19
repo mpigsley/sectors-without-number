@@ -25,6 +25,8 @@ class HexMap extends Component {
     deactivateSidebarEdit: PropTypes.func.isRequired,
     clearMapKeys: PropTypes.func.isRequired,
     addRouteLocation: PropTypes.func.isRequired,
+    completeRoute: PropTypes.func.isRequired,
+    updateNavSettings: PropTypes.func.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     isShared: PropTypes.bool.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
@@ -86,6 +88,15 @@ class HexMap extends Component {
     });
   }
 
+  onContextMenu = e => {
+    e.preventDefault();
+    if (this.props.navigationSettings.isCreatingRoute) {
+      this.props.completeRoute();
+    } else {
+      this.props.updateNavSettings('isCreatingRoute', true);
+    }
+  };
+
   getHexFromEvent = event => {
     let totalOffsetX = 0;
     let totalOffsetY = 0;
@@ -105,6 +116,9 @@ class HexMap extends Component {
   };
 
   mouseDown = event => {
+    if (event.nativeEvent.which === 3) {
+      return; // right click
+    }
     const hexKey = this.getHexFromEvent(event);
     this.isMousedDown = true;
     delay(() => {
@@ -133,6 +147,9 @@ class HexMap extends Component {
 
   mouseUp = event => {
     this.isMousedDown = false;
+    if (event.nativeEvent.which === 3) {
+      return; // right click
+    }
     const hexKey = this.getHexFromEvent(event);
     const { entity, entityId } = getTopLevelEntity(
       this.props.topLevelEntities,
@@ -220,6 +237,7 @@ class HexMap extends Component {
           onMouseDown={this.mouseDown}
           onMouseUp={this.mouseUp}
           onMouseLeave={this.mouseLeave}
+          onContextMenu={this.onContextMenu}
         />
       </div>
     );
