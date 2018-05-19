@@ -89,6 +89,10 @@ export default class HexMap extends Component {
 
   onContextMenu = e => {
     e.preventDefault();
+    const isOnNav = this.props.currentEntityType === Entities.navigation.key;
+    if (!isOnNav) {
+      return;
+    }
     if (this.props.navigationSettings.isCreatingRoute) {
       this.props.completeRoute();
     } else {
