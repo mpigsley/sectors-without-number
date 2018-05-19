@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { withRouter } from 'react-router';
 import { delay } from 'lodash';
 
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
+import FloatingToolbar from 'components/floating-toolbar';
 
+import Entities from 'constants/entities';
 import { getTopLevelEntity } from 'utils/entity';
 import hexCanvas, { getPixelRatio, getHoveredHex } from 'utils/hex/canvas';
 
 import './style.css';
 
-class HexMap extends Component {
+export default class HexMap extends Component {
   static propTypes = {
     entityHover: PropTypes.func.isRequired,
     entityHold: PropTypes.func.isRequired,
@@ -22,11 +23,17 @@ class HexMap extends Component {
     topLevelEntityCreate: PropTypes.func.isRequired,
     deactivateSidebarEdit: PropTypes.func.isRequired,
     clearMapKeys: PropTypes.func.isRequired,
+    addRouteLocation: PropTypes.func.isRequired,
+    completeRoute: PropTypes.func.isRequired,
+    updateNavSettings: PropTypes.func.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
-    isShare: PropTypes.bool.isRequired,
+    isShared: PropTypes.bool.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
+    isSector: PropTypes.bool,
+    mapLocked: PropTypes.bool.isRequired,
     hoverKey: PropTypes.string,
     holdKey: PropTypes.string,
+    currentEntityType: PropTypes.string,
     height: PropTypes.number,
     width: PropTypes.number,
     hexes: PropTypes.arrayOf(
@@ -43,13 +50,18 @@ class HexMap extends Component {
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
+    navigationSettings: PropTypes.shape({
+      isCreatingRoute: PropTypes.bool.isRequired,
+    }).isRequired,
   };
 
   static defaultProps = {
     height: null,
     width: null,
+    isSector: false,
     hoverKey: null,
     holdKey: null,
+    currentEntityType: Entities.sector.key,
     hexes: [],
   };
 
@@ -75,6 +87,19 @@ class HexMap extends Component {
     });
   }
 
+  onContextMenu = e => {
+    e.preventDefault();
+    const isOnNav = this.props.currentEntityType === Entities.navigation.key;
+    if (!isOnNav) {
+      return;
+    }
+    if (this.props.navigationSettings.isCreatingRoute) {
+      this.props.completeRoute();
+    } else {
+      this.props.updateNavSettings('isCreatingRoute', true);
+    }
+  };
+
   getHexFromEvent = event => {
     let totalOffsetX = 0;
     let totalOffsetY = 0;
@@ -94,10 +119,19 @@ class HexMap extends Component {
   };
 
   mouseDown = event => {
+    if (event.nativeEvent.which === 3) {
+      return; // right click
+    }
     const hexKey = this.getHexFromEvent(event);
     this.isMousedDown = true;
     delay(() => {
-      if (this.isMousedDown && !this.props.isShare) {
+      const isOnNav = this.props.currentEntityType === Entities.navigation.key;
+      if (
+        this.isMousedDown &&
+        !this.props.isShared &&
+        !this.props.mapLocked &&
+        !isOnNav
+      ) {
         if (this.props.isSidebarEditActive) {
           this.props.deactivateSidebarEdit();
         }
@@ -116,26 +150,34 @@ class HexMap extends Component {
 
   mouseUp = event => {
     this.isMousedDown = false;
+    if (event.nativeEvent.which === 3) {
+      return; // right click
+    }
     const hexKey = this.getHexFromEvent(event);
     const { entity, entityId } = getTopLevelEntity(
       this.props.topLevelEntities,
       hexKey,
     );
-    if (entity && !this.props.holdKey) {
-      if (this.props.isSidebarEditActive) {
-        this.props.deactivateSidebarEdit();
-      }
-      const route = `/sector/${this.props.router.params.sector}/${
-        entity.type
-      }/${entityId}`;
-      if (this.props.location.pathname !== route) {
-        this.props.router.push(route);
-      }
-    } else if (!this.props.isShare) {
-      if (!hexKey || this.props.holdKey === this.props.hoverKey) {
-        this.props.entityRelease();
-      } else if (this.props.holdKey) {
-        this.props.moveTopLevelEntity();
+    const isOnNav = this.props.currentEntityType === Entities.navigation.key;
+    if (hexKey && isOnNav && this.props.navigationSettings.isCreatingRoute) {
+      this.props.addRouteLocation(hexKey);
+    } else if (!isOnNav) {
+      if (entity && !this.props.holdKey) {
+        if (this.props.isSidebarEditActive) {
+          this.props.deactivateSidebarEdit();
+        }
+        const route = `/sector/${this.props.router.params.sector}/${
+          entity.type
+        }/${entityId}`;
+        if (this.props.location.pathname !== route) {
+          this.props.router.push(route);
+        }
+      } else if (!this.props.isShared && !this.props.mapLocked) {
+        if (!hexKey || this.props.holdKey === this.props.hoverKey) {
+          this.props.entityRelease();
+        } else if (this.props.holdKey) {
+          this.props.moveTopLevelEntity();
+        }
       }
     }
   };
@@ -172,10 +214,18 @@ class HexMap extends Component {
     );
   }
 
+  renderToolbar() {
+    if (!this.props.isSector) {
+      return null;
+    }
+    return <FloatingToolbar />;
+  }
+
   render() {
     return (
       <div className="HexMap-Container">
         {this.renderEmptyMessage()}
+        {this.renderToolbar()}
         <canvas
           width={this.props.width * this.ratio}
           height={this.props.height * this.ratio}
@@ -190,10 +240,9 @@ class HexMap extends Component {
           onMouseDown={this.mouseDown}
           onMouseUp={this.mouseUp}
           onMouseLeave={this.mouseLeave}
+          onContextMenu={this.onContextMenu}
         />
       </div>
     );
   }
 }
-
-export default withRouter(HexMap);

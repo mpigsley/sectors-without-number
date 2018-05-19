@@ -27,12 +27,15 @@ import {
   fetchedSectorSelector,
   userUidSelector,
   isInitializedSelector,
+  syncLockSelector,
+  isSharedSectorSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
   getCurrentEntityType,
   getCurrentEntityId,
   getCurrentEntity,
+  getCurrentSector,
 } from 'store/selectors/entity.selectors';
 
 import {
@@ -46,7 +49,7 @@ import {
   deleteEntities,
   SYNC_TOAST_ID,
 } from 'utils/entity';
-import { getSectorEntities } from 'store/api/entity';
+import { getSectorEntities, updateEntity } from 'store/api/entity';
 import { coordinatesFromKey } from 'utils/common';
 import { removeToastById } from 'utils/toasts';
 import Entities from 'constants/entities';
@@ -334,4 +337,57 @@ export const saveEntityEdit = intl => (dispatch, getState) => {
     dispatch(deactivateSidebarEdit()),
     dispatch(releaseSyncLock()),
   ]);
+};
+
+export const toggleMapLock = () => (dispatch, getState) => {
+  const state = getState();
+  const sectorId = currentSectorSelector(state);
+  const sector = getCurrentSector(state);
+  if (!sectorId || !sector || syncLockSelector(state)) {
+    return Promise.resolve();
+  }
+  dispatch({
+    type: UPDATE_ENTITIES,
+    entities: {
+      [Entities.sector.key]: {
+        [sectorId]: {
+          mapLocked: !sector.mapLocked,
+        },
+      },
+    },
+  });
+  return updateEntity(sectorId, Entities.sector.key, {
+    mapLocked: !sector.mapLocked,
+  }).then(() => dispatch(releaseSyncLock()));
+};
+
+export const toggleLayer = layerId => (dispatch, getState) => {
+  const state = getState();
+  const sectorId = currentSectorSelector(state);
+  const sector = getCurrentSector(state);
+  if (!sectorId || !sector || syncLockSelector(state)) {
+    return Promise.resolve();
+  }
+  const layers = sector.layers || {};
+  const layerToggle = layers[layerId] !== undefined && !layers[layerId];
+  const sectorUpdate = {
+    layers: {
+      ...layers,
+      [layerId]: layerToggle,
+    },
+  };
+  dispatch({
+    type: UPDATE_ENTITIES,
+    entities: {
+      [Entities.sector.key]: {
+        [sectorId]: sectorUpdate,
+      },
+    },
+  });
+  if (isSharedSectorSelector(state)) {
+    return Promise.resolve(dispatch(releaseSyncLock()));
+  }
+  return updateEntity(sectorId, Entities.sector.key, sectorUpdate).then(() =>
+    dispatch(releaseSyncLock()),
+  );
 };

@@ -36,7 +36,7 @@ import { areNeighbors } from 'utils/hex/common';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
 
-export const isFetchingCurrent = createDeepEqualSelector(
+export const isFetchingCurrentSector = createDeepEqualSelector(
   [fetchedSectorSelector, savedSectorSelector, currentSectorSelector],
   (fetched, saved, sector) =>
     includes(saved, sector) && !includes(fetched, sector),
@@ -50,7 +50,30 @@ export const getSavedEntities = createDeepEqualSelector(
     ),
 );
 
-export const getCurrentTopLevelEntities = createDeepEqualSelector(
+export const getAllTopLevelEntities = createSelector(
+  [currentSectorSelector, entitySelector],
+  (currentSector, entities) =>
+    Object.assign(
+      ...filter(Entities, ({ topLevel }) => topLevel).map(({ key }) =>
+        mapValues(
+          pickBy(entities[key], ({ sector }) => sector === currentSector),
+          (entity, entityId) => ({
+            ...entity,
+            type: key,
+            numChildren: Entities[key].children.reduce(
+              (total, childKey) =>
+                total +
+                filter(entities[childKey], ({ parent }) => parent === entityId)
+                  .length,
+              0,
+            ),
+          }),
+        ),
+      ),
+    ),
+);
+
+export const getCurrentTopLevelEntities = createSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
   (currentSector, entities, isShared) =>
     Object.assign(
@@ -106,6 +129,16 @@ export const getCurrentEntities = createDeepEqualSelector(
 export const getCurrentSector = createDeepEqualSelector(
   [currentSectorSelector, entitySelector],
   (currentSector, entities) => entities[Entities.sector.key][currentSector],
+);
+
+export const getMapLock = createDeepEqualSelector(
+  [getCurrentSector],
+  currentSector => !!(currentSector || {}).mapLocked,
+);
+
+export const getLayers = createDeepEqualSelector(
+  [getCurrentSector],
+  currentSector => (currentSector || {}).layers || {},
 );
 
 export const getCurrentEntity = createSelector(
@@ -193,10 +226,10 @@ export const getEmptyHexKeys = createDeepEqualSelector(
 export const isAncestorHidden = createDeepEqualSelector(
   [getCurrentEntityId, getCurrentEntityType, entitySelector],
   (currentEntityId, currentEntityType, entities) => {
-    if (currentEntityType === Entities.sector.key) {
+    const currentEntity = entities[currentEntityType][currentEntityId];
+    if (!currentEntity || currentEntityType === Entities.sector.key) {
       return false;
     }
-    const currentEntity = entities[currentEntityType][currentEntityId];
     let thisEntity = {
       ...entities[currentEntity.parentEntity][currentEntity.parent],
     };

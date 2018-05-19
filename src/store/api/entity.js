@@ -70,6 +70,14 @@ export const getSectorEntities = (sectorId, uid) => {
     });
 };
 
+export const updateEntity = (entityId, entityType, update) =>
+  Firestore()
+    .collection('entities')
+    .doc(entityType)
+    .collection('entity')
+    .doc(entityId)
+    .set(update, { merge: true });
+
 export const updateEntities = entities => {
   const batch = Firestore().batch();
   forEach(entities, (entityUpdates, entityType) =>

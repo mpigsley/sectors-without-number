@@ -5,11 +5,13 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import Fastclick from 'react-fastclick';
 import Firebase from 'firebase/app';
-import 'firebase/functions';
 import 'firebase/firestore';
+import 'firebase/functions';
+import { firestore as Firestore } from 'firebase';
 
 import store from 'store';
 import { fetchSectorEntities } from 'store/actions/entity.actions';
+import { fetchNavigation } from 'store/actions/navigation.actions';
 
 import AppWrapper from 'components/app-wrapper';
 import HexBackground from 'components/hex-background';
@@ -35,10 +37,16 @@ Firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_SENDER_ID,
 });
 
+// Temporary until deprecation notice goes away
+Firestore().settings({ timestampsInSnapshots: true });
+
 const history = syncHistoryWithStore(browserHistory, store);
 
 const onEnterGameRoute = ({ params }) =>
-  store.dispatch(fetchSectorEntities(params.sector));
+  Promise.all([
+    store.dispatch(fetchSectorEntities(params.sector)),
+    store.dispatch(fetchNavigation(params.sector)),
+  ]);
 
 ReactDOM.render(
   <Provider store={store}>

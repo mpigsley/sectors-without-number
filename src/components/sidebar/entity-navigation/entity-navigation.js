@@ -56,7 +56,7 @@ export default function EntityNavigation({
   }
 
   let editButton = null;
-  if (!isShared) {
+  if (!isShared && Entities[entityType].editable) {
     editButton = (
       <Button minimal onClick={activateSidebarEdit}>
         <FormattedMessage id="misc.edit" />
@@ -74,7 +74,7 @@ export default function EntityNavigation({
   }
 
   let deleteButton = null;
-  if (isSaved && !isShared) {
+  if (isSaved && !isShared && Entities[entityType].editable) {
     deleteButton = (
       <Button minimal onClick={onDeleteEntity}>
         <FormattedMessage id="misc.delete" />
@@ -83,9 +83,9 @@ export default function EntityNavigation({
   }
 
   let backUrl = '/';
-  if (entity.parent) {
+  if (entity.parent || entityType === Entities.navigation.key) {
     backUrl = `${backUrl}sector/${currentSector}`;
-    if (entity.parentEntity !== Entities.sector.key) {
+    if (entity.parentEntity && entity.parentEntity !== Entities.sector.key) {
       backUrl = `${backUrl}/${entity.parentEntity}/${entity.parent}`;
     }
   }
@@ -99,27 +99,7 @@ export default function EntityNavigation({
           target="_blank"
           className="EntityNavigation-Patreon"
         >
-          Patreon
-        </ButtonLink>
-        <span className="EntityNavigation-Spacer" />
-        <ButtonLink
-          minimal
-          to="https://goo.gl/forms/eOanpGEuglCYYg7u2"
-          target="_blank"
-        >
-          <FormattedMessage id="misc.reportProblem" />
-        </ButtonLink>
-        <span className="EntityNavigation-Spacer" />
-        <ButtonLink minimal to="/changelog">
-          <FormattedMessage id="misc.changelog" />
-        </ButtonLink>
-        <span className="EntityNavigation-Spacer" />
-        <ButtonLink
-          minimal
-          to="https://github.com/mpigsley/sectors-without-number"
-          target="_blank"
-        >
-          Github
+          <FormattedMessage id="misc.becomePatron" />
         </ButtonLink>
       </FlexContainer>
     </div>

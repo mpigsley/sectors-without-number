@@ -30,8 +30,18 @@ import RefuelingStationSituation from 'constants/refueling-station/situation';
 import ResearchBaseOccupation from 'constants/research-base/occupation';
 import ResearchBaseSituation from 'constants/research-base/situation';
 
-import DefaultSidebar from 'components/sidebar-entities/default-sidebar';
-import NoteSidebar from 'components/sidebar-entities/note-sidebar';
+const navigation = {
+  key: 'navigation',
+  name: 'entity.navigation',
+  shortName: 'entity.navigation',
+  topLevel: false,
+  isAdditional: false,
+  editable: false,
+  nameGenerator: () => {},
+  attributes: [],
+  children: [],
+  sidebar: 'navigation',
+};
 
 const note = {
   key: 'note',
@@ -39,10 +49,11 @@ const note = {
   shortName: 'entity.note',
   topLevel: false,
   isAdditional: false,
+  editable: true,
   nameGenerator: () => {},
   attributes: [],
   children: [],
-  Sidebar: NoteSidebar,
+  sidebar: 'note',
 };
 
 const researchBase = {
@@ -51,10 +62,11 @@ const researchBase = {
   shortName: 'entity.base',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [ResearchBaseOccupation, ResearchBaseSituation],
   children: [note.key],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const refuelingStation = {
@@ -63,10 +75,11 @@ const refuelingStation = {
   shortName: 'entity.station',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [RefuelingStationOccupation, RefuelingStationSituation],
   children: [note.key],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const moonBase = {
@@ -75,10 +88,11 @@ const moonBase = {
   shortName: 'entity.base',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [MoonBaseOccupation, MoonBaseSituation],
   children: [note.key],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const orbitalRuin = {
@@ -87,10 +101,11 @@ const orbitalRuin = {
   shortName: 'entity.ruin',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [OrbitalRuinOccupation, OrbitalRuinSituation],
   children: [note.key],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const gasGiantMine = {
@@ -99,10 +114,11 @@ const gasGiantMine = {
   shortName: 'entity.mine',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateMineName,
   attributes: [GasGiantMineOccupation, GasGiantMineSituation],
   children: [note.key],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const spaceStation = {
@@ -111,10 +127,11 @@ const spaceStation = {
   shortName: 'entity.station',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [SpaceStationOccupation, SpaceStationSituation],
   children: [note.key],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const asteroidBase = {
@@ -123,10 +140,11 @@ const asteroidBase = {
   shortName: 'entity.base',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [AsteroidBaseOccupation, AsteroidBaseSituation],
   children: [note.key],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const moon = {
@@ -135,6 +153,7 @@ const moon = {
   shortName: 'entity.moon',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateName,
   children: [
     moonBase.key,
@@ -143,7 +162,7 @@ const moon = {
     refuelingStation.key,
     researchBase.key,
   ],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const planet = {
@@ -152,6 +171,7 @@ const planet = {
   shortName: 'entity.planet',
   topLevel: false,
   isAdditional: false,
+  editable: true,
   tags: WorldTags,
   nameGenerator: generateName,
   attributes: [Atmosphere, Temperature, Biosphere, Population, TechLevel],
@@ -164,7 +184,7 @@ const planet = {
     researchBase.key,
     spaceStation.key,
   ],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const asteroidBelt = {
@@ -173,6 +193,7 @@ const asteroidBelt = {
   shortName: 'entity.belt',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateAsteroidBeltName,
   attributes: [AsteroidBeltOccupation, AsteroidBeltSituation],
   children: [
@@ -182,7 +203,7 @@ const asteroidBelt = {
     researchBase.key,
     spaceStation.key,
   ],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const deepSpaceStation = {
@@ -191,10 +212,11 @@ const deepSpaceStation = {
   shortName: 'entity.station',
   topLevel: false,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateStationName,
   attributes: [SpaceStationOccupation, SpaceStationSituation],
   children: [note.key],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const blackHole = {
@@ -203,6 +225,7 @@ const blackHole = {
   shortName: 'entity.blackHole',
   topLevel: true,
   isAdditional: true,
+  editable: true,
   nameGenerator: generateBlackHoleName,
   children: [
     deepSpaceStation.key,
@@ -212,7 +235,7 @@ const blackHole = {
     refuelingStation.key,
     researchBase.key,
   ],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const system = {
@@ -221,6 +244,7 @@ const system = {
   shortName: 'entity.system',
   topLevel: true,
   isAdditional: false,
+  editable: true,
   nameGenerator: generateName,
   children: [
     asteroidBelt.key,
@@ -230,7 +254,7 @@ const system = {
     refuelingStation.key,
     researchBase.key,
   ],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 const sector = {
@@ -239,9 +263,10 @@ const sector = {
   shortName: 'entity.sector',
   topLevel: false,
   isAdditional: false,
+  editable: true,
   nameGenerator: generateSectorName,
   children: [blackHole.key, note.key, system.key],
-  Sidebar: DefaultSidebar,
+  sidebar: 'defualt',
 };
 
 export default {
@@ -252,6 +277,7 @@ export default {
   gasGiantMine,
   moon,
   moonBase,
+  navigation,
   note,
   orbitalRuin,
   planet,

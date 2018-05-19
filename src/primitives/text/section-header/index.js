@@ -7,17 +7,26 @@ import FlexContainer from 'primitives/container/flex-container';
 
 import './style.css';
 
-export default function SectionHeader(props) {
-  const { className, isOpen, onIconClick, ...rest } = props;
+export default function SectionHeader({
+  className,
+  isOpen,
+  onIconClick,
+  children,
+  ...rest
+}) {
+  let chevron;
+  if (isOpen === undefined) {
+    chevron = null;
+  } else if (isOpen) {
+    chevron = <ChevronDown onClick={onIconClick} size={20} />;
+  } else {
+    chevron = <ChevronRight onClick={onIconClick} size={20} />;
+  }
   return (
     <FlexContainer align="center" className="SectionHeader" {...rest}>
-      {isOpen ? (
-        <ChevronDown onClick={onIconClick} size={20} />
-      ) : (
-        <ChevronRight onClick={onIconClick} size={20} />
-      )}
+      {chevron}
       <h3 className={classNames('SectionHeader-Inner', className)}>
-        {props.children}
+        {children}
       </h3>
     </FlexContainer>
   );
@@ -31,7 +40,7 @@ SectionHeader.propTypes = {
 };
 
 SectionHeader.defaultProps = {
-  className: null,
-  isOpen: true,
+  className: undefined,
+  isOpen: undefined,
   onIconClick: () => {},
 };

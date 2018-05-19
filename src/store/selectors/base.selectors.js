@@ -19,6 +19,7 @@ export const currentEntitySelector = state => state.entity.currentEntity;
 export const savedSectorSelector = state => state.entity.saved;
 export const fetchedSectorSelector = state => state.entity.fetched;
 export const shareSectorSelector = state => state.entity.share;
+export const isSharedSectorSelector = state => !!state.entity.share;
 
 /* Sector */
 export const configurationSelector = state => state.sector.configuration;
@@ -41,3 +42,13 @@ export const sidebarEditChildrenSelector = state => state.sidebarEdit.children;
 /* Router */
 export const routerLocationSelector = state =>
   state.routing.locationBeforeTransitions;
+
+/* Navigation */
+export const navigationRoutesSelector = state => state.navigation.routes;
+export const navigationSettingsSelector = state => state.navigation.settings;
+export const navigationSettingsRouteSelector = state =>
+  state.navigation.settings.route;
+export const isHelpOpenSelector = state => state.navigation.isHelpOpen;
+export const fetchedNavigationSelector = state => state.navigation.fetched;
+export const navigationSyncLockSelector = state => state.navigation.syncLock;
+export const routeLocatorSelector = state => state.navigation.routeLocator;

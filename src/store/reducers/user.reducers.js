@@ -3,7 +3,7 @@ import {
   CLOSE_LOGIN_MODAL,
   OPEN_EDIT_MODAL,
   CLOSE_EDIT_MODAL,
-  UPDATE_USER_FORM,
+  UPDATED_USER_FORM,
   UPDATE_USER,
   LOGGED_IN,
   LOGGED_OUT,
@@ -54,7 +54,7 @@ export default function user(state = initialState, action) {
       return { ...state, isEditModalOpen: true, isDropdownActive: false };
     case CLOSE_EDIT_MODAL:
       return { ...state, isEditModalOpen: false, error: null };
-    case UPDATE_USER_FORM:
+    case UPDATED_USER_FORM:
       return {
         ...state,
         error: null,

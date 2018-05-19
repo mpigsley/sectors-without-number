@@ -11,8 +11,14 @@ export const HeaderType = {
   header4: 'header4',
 };
 
-export default function Header(props) {
-  const { type, className, dark, ...rest } = props;
+export default function Header({
+  type,
+  className,
+  dark,
+  noMargin,
+  children,
+  ...rest
+}) {
   const headerNum = type.split('header').pop();
   const Component = `h${headerNum}`;
   return (
@@ -20,9 +26,10 @@ export default function Header(props) {
       {...rest}
       className={classNames('Header', `Header-${headerNum}`, className, {
         'Header--dark': dark,
+        'Header--noMargin': noMargin,
       })}
     >
-      {props.children}
+      {children}
     </Component>
   );
 }
@@ -32,10 +39,12 @@ Header.propTypes = {
   children: PropTypes.node.isRequired,
   dark: PropTypes.bool,
   className: PropTypes.string,
+  noMargin: PropTypes.bool,
 };
 
 Header.defaultProps = {
   type: HeaderType.header1,
   dark: false,
   className: null,
+  noMargin: false,
 };

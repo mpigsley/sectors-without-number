@@ -1,10 +1,18 @@
-@import "styles/theme";
+@import 'styles/theme';
 
 .Header {
   color: $light4;
   font-weight: 200;
   margin: 1rem 0;
   text-align: center;
+
+  &--dark {
+    color: $dark4;
+  }
+
+  &--noMargin {
+    margin: 0;
+  }
 }
 .Header-1 {
   font-size: 4rem;
@@ -18,7 +26,4 @@
 }
 .Header-4 {
   font-size: 1.1rem;
-}
-.Header--dark {
-  color: $dark4;
 }

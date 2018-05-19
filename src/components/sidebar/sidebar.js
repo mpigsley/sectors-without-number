@@ -5,10 +5,19 @@ import { FormattedMessage, intlShape } from 'react-intl';
 
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import Entities from 'constants/entities';
+import DefaultSidebar from 'components/sidebar-entities/default-sidebar';
+import NoteSidebar from 'components/sidebar-entities/note-sidebar';
+import NavigationSidebar from 'components/sidebar-entities/navigation-sidebar';
 
 import SectorBuilderInfo from './sector-builder-info';
 import EntityNavigation from './entity-navigation';
 import ExportModal from './export-modal';
+
+const ENTITY_SIDEBAR = {
+  default: DefaultSidebar,
+  note: NoteSidebar,
+  navigation: NavigationSidebar,
+};
 
 export default class Sidebar extends Component {
   static propTypes = {
@@ -92,7 +101,9 @@ export default class Sidebar extends Component {
   }
 
   render() {
-    const EntitySidebar = Entities[this.props.entityType].Sidebar;
+    const EntitySidebar =
+      ENTITY_SIDEBAR[Entities[this.props.entityType].sidebar] ||
+      ENTITY_SIDEBAR.default;
     return (
       <EntityNavigation
         name={this.props.entity.name}

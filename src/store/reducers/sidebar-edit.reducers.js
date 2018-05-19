@@ -1,3 +1,4 @@
+import { LOCATION_CHANGE } from 'react-router-redux';
 import { omit, omitBy, isNil } from 'lodash';
 
 import {
@@ -28,6 +29,7 @@ export default function sidebarEdit(state = initialState, action) {
       };
     case UPDATE_ENTITIES:
     case DEACTIVATE_SIDEBAR_EDIT:
+    case LOCATION_CHANGE:
       return initialState;
     case UPDATE_ENTITY_IN_EDIT:
       return {

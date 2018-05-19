@@ -26,6 +26,7 @@ import {
   getSyncedSectors,
   uploadEntities,
 } from 'store/api/entity';
+import { getNavigationData } from 'store/api/navigation';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
@@ -40,7 +41,7 @@ export const OPEN_USER_DROPDOWN = 'OPEN_USER_DROPDOWN';
 export const CLOSE_USER_DROPDOWN = 'CLOSE_USER_DROPDOWN';
 export const CLOSE_SYNC_MODAL = 'CLOSE_SYNC_MODAL';
 
-export const UPDATE_USER_FORM = 'UPDATE_USER_FORM';
+export const UPDATED_USER_FORM = 'UPDATED_USER_FORM';
 export const UPDATE_USER = 'UPDATE_USER';
 export const LOGGED_IN = 'LOGGED_IN';
 export const LOGGED_OUT = 'LOGGED_OUT';
@@ -55,7 +56,7 @@ export const openUserDropdown = () => ({ type: OPEN_USER_DROPDOWN });
 export const closeUserDropdown = () => ({ type: CLOSE_USER_DROPDOWN });
 export const closeSyncModal = () => ({ type: CLOSE_SYNC_MODAL });
 export const updateUserForm = (key, value) => ({
-  type: UPDATE_USER_FORM,
+  type: UPDATED_USER_FORM,
   key,
   value,
 });
@@ -97,6 +98,7 @@ export const initialize = location => dispatch =>
       location.pathname.startsWith('/overview');
     const promises = [
       isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
+      isGameView ? getNavigationData(sectorId) : Promise.resolve({}),
     ];
     if (uid) {
       promises.push(getSyncedSectors(uid));
@@ -104,7 +106,7 @@ export const initialize = location => dispatch =>
     if (locale && locale !== 'en' && Locale[locale]) {
       promises.push(Locale[locale].localeFetch().then(addLocaleData));
     }
-    return Promise.all(promises).then(([current, sectors]) =>
+    return Promise.all(promises).then(([current, routes, sectors]) =>
       dispatch({
         type: INITIALIZE,
         user,
@@ -112,6 +114,7 @@ export const initialize = location => dispatch =>
           { [Entities.sector.key]: sectors },
           current.entities || {},
         ),
+        routes,
         sectorId: current.sectorId,
         share: current.share,
         saved: keys(sectors || {}),
@@ -137,7 +140,7 @@ export const googleLogin = () => (dispatch, getState) =>
 
 export const signup = intl => (dispatch, getState) => {
   const state = getState();
-  const { email, password, confirm } = state.user.form;
+  const { email, password, confirm } = userFormSelector(state);
   if (!email || !password || !confirm) {
     return dispatch({
       type: AUTH_FAILURE,
@@ -149,7 +152,7 @@ export const signup = intl => (dispatch, getState) => {
       error: intl.formatMessage({ id: 'misc.noPasswordMatch' }),
     });
   }
-  return doSignup(state.user.form.email, state.user.form.password)
+  return doSignup(email, password)
     .then(onLogin(dispatch, state))
     .then(result => result.sendEmailVerification())
     .catch(error => {
@@ -160,14 +163,14 @@ export const signup = intl => (dispatch, getState) => {
 
 export const login = intl => (dispatch, getState) => {
   const state = getState();
-  const { email, password } = state.user.form;
+  const { email, password } = userFormSelector(state);
   if (!email || !password) {
     return dispatch({
       type: AUTH_FAILURE,
       error: intl.formatMessage({ id: 'misc.emailPassword' }),
     });
   }
-  return doLogin(state.user.form.email, state.user.form.password)
+  return doLogin(email, password)
     .then(onLogin(dispatch, state))
     .catch(error => {
       dispatch({ type: AUTH_FAILURE });
@@ -176,8 +179,9 @@ export const login = intl => (dispatch, getState) => {
 };
 
 export const passwordReset = intl => (dispatch, getState) => {
-  const { user } = getState();
-  return doPasswordReset(user.form.email)
+  const state = getState();
+  const { email } = userFormSelector(state);
+  return doPasswordReset(email)
     .then(() => {
       dispatch(closeLoginModal());
       dispatch(

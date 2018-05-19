@@ -1,7 +1,14 @@
+import { forEach, find, values, includes, uniq } from 'lodash';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
 import { HEX_PADDING } from 'constants/defaults';
+
+const NAVIGATION_WIDTHS = {
+  thin: 1,
+  normal: 2.5,
+  wide: 5,
+};
 
 const getHexBoundingBox = ({ height, width, xOffset, yOffset }) => ({
   x1: xOffset - (width + HEX_PADDING) / 2,
@@ -77,6 +84,10 @@ export default ({
   activeKey,
   width,
   height,
+  isShared,
+  layers,
+  navigationRoutes,
+  routeLocator,
 }) => {
   ctx.clearRect(0, 0, width * ratio, height * ratio);
 
@@ -98,6 +109,12 @@ export default ({
       points: getHexPoints(hex),
     }));
 
+  const allRouteKeys = values(navigationRoutes).reduce(
+    (keys, sectorNav) => uniq([...keys, ...sectorNav.route]),
+    [],
+  );
+  const routeLocations = {};
+  const newRoute = find(navigationRoutes, { isCreatingRoute: true });
   let holdLocation;
   let hoverLocation;
   let isVectorSwitch = false;
@@ -123,6 +140,9 @@ export default ({
       if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
         ctx.fillStyle = '#637182';
       }
+      if (newRoute && includes(newRoute.route, hexKey)) {
+        ctx.fillStyle = '#637182';
+      }
       ctx.stroke();
       ctx.fill();
 
@@ -133,8 +153,48 @@ export default ({
         hoverLocation = { x: xOffset, y: yOffset };
         isVectorSwitch = !!entity;
       }
+      if (includes(allRouteKeys, hexKey) && highlighted) {
+        routeLocations[hexKey] = { x: xOffset, y: yOffset };
+      }
     },
   );
+
+  const renderNavigation = layers.navigation === undefined || layers.navigation;
+  if (renderNavigation || newRoute) {
+    forEach(navigationRoutes, (navRoute, routeId) => {
+      if (navRoute.route.length < 2 || (isShared && navRoute.isHidden)) {
+        return;
+      }
+      const isLocating = routeId === routeLocator;
+      let lineWidth = NAVIGATION_WIDTHS[navRoute.width] * ratio;
+      if (isLocating) {
+        lineWidth = NAVIGATION_WIDTHS.wide * ratio;
+        ctx.strokeStyle = 'red';
+      } else {
+        ctx.strokeStyle = navRoute.color;
+      }
+      if (navRoute.type === 'solid' || isLocating) {
+        ctx.setLineDash([1, 0]);
+      } else if (navRoute.type === 'dotted') {
+        ctx.setLineDash([lineWidth, 12]);
+      } else if (navRoute.type === 'short') {
+        ctx.setLineDash([15, 15]);
+      } else {
+        ctx.setLineDash([35, 35]);
+      }
+      ctx.lineWidth = lineWidth;
+      ctx.beginPath();
+      navRoute.route.forEach((routeLocation, index) => {
+        const { x, y } = routeLocations[routeLocation] || {};
+        if (index) {
+          ctx.lineTo(x, y);
+        } else {
+          ctx.moveTo(x, y);
+        }
+      });
+      ctx.stroke();
+    });
+  }
 
   if (holdLocation && hoverLocation && holdKey !== hoverKey) {
     const vectorRatio =
@@ -154,7 +214,9 @@ export default ({
     }
 
     // Draw Path
+    ctx.lineWidth = 2 * ratio;
     ctx.strokeStyle = '#dbdbdb';
+    ctx.setLineDash([1, 0]);
     ctx.beginPath();
     ctx.moveTo(xStart, yStart);
     ctx.lineTo(xEnd, yEnd);
@@ -173,7 +235,9 @@ export default ({
     // Draw Text
     ctx.font = `${9 * ratio}px Raleway,sans-serif`;
     ctx.fillStyle = '#8f8f8f';
-    const renderText = hex.width > 45 * ratio;
+    const renderText =
+      hex.width > 45 * ratio &&
+      (layers.systemText === undefined || layers.systemText);
     if (renderText) {
       ctx.fillText(
         hex.hexKey,

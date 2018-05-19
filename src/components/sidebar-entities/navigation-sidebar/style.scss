@@ -1,0 +1,68 @@
+@import 'styles/theme';
+
+.NavigationSidebar-Options {
+  margin-top: 1rem;
+}
+
+.NavigationSidebar {
+  width: calc(100% - 2rem);
+}
+
+.NavigationSidebar-FormRow {
+  margin: 0 1rem 1rem;
+
+  button {
+    margin: 0;
+  }
+
+  .NavigationSidebar-Cancel {
+    margin-left: 0.5rem;
+  }
+}
+
+.NavigationSidebar-FormColumn {
+  margin: 0.2rem;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}
+
+.NavigationSidebar-NavItem {
+  padding: 0 1rem;
+}
+
+.NavigationSidebar-SubHeader {
+  color: $light2;
+  margin: 0 1rem;
+}
+
+.NavigationSidebar-Delete {
+  color: $light2;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
+.NavigationSidebar-Checkbox {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+.NavigationSidebar-SubHeaderHidden {
+  margin: 0rem 0.1rem 0 0.5rem;
+}
+
+.NavigationSidebar-Additional {
+  color: $light1;
+  font-size: 0.8rem;
+  margin: 0 0.5rem;
+}
