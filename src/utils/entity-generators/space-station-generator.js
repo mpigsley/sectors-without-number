@@ -6,6 +6,7 @@ import Situation from 'constants/space-station/situation';
 
 export const generateSpaceStation = ({
   name = generateStationName(),
+  hideOccAndSit = false,
   sector,
   parent,
   parentEntity,
@@ -27,6 +28,12 @@ export const generateSpaceStation = ({
     station = { ...station, isHidden };
   }
   if (generate) {
+    if (hideOccAndSit) {
+      station.visibility = {
+        'attr.occupation': false,
+        'attr.situation': false,
+      };
+    }
     station = {
       ...station,
       attributes: {
@@ -44,6 +51,7 @@ export const generateSpaceStations = ({
   parentEntity,
   additionalPointsOfInterest,
   children = [...Array(new Chance().weighted([0, 1, 2], [3, 1, 1]))],
+  hideOccAndSit,
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -63,6 +71,7 @@ export const generateSpaceStations = ({
         sector,
         parent,
         parentEntity,
+        hideOccAndSit,
       }),
     ),
   };

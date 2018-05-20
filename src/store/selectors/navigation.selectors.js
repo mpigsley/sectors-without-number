@@ -8,6 +8,7 @@ import {
   navigationRoutesSelector,
   navigationSettingsSelector,
   isSharedSectorSelector,
+  savedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { getAllTopLevelEntities } from 'store/selectors/entity.selectors';
 
@@ -50,6 +51,7 @@ export const getCurrentNavigationWithSettings = createSelector(
 );
 
 export const isFetchingCurrentNavigation = createSelector(
-  [fetchedNavigationSelector, currentSectorSelector],
-  (fetched, sector) => !includes(fetched, sector),
+  [fetchedNavigationSelector, savedSectorSelector, currentSectorSelector],
+  (fetched, saved, sector) =>
+    includes(saved, sector) && !includes(fetched, sector),
 );

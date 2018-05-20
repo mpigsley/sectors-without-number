@@ -9,6 +9,7 @@ export const generateResearchBase = ({
   parent,
   parentEntity,
   name = generateStationName(),
+  hideOccAndSit = false,
   generate = true,
   isHidden,
 } = {}) => {
@@ -27,6 +28,12 @@ export const generateResearchBase = ({
     researchBase = { ...researchBase, isHidden };
   }
   if (generate) {
+    if (hideOccAndSit) {
+      researchBase.visibility = {
+        'attr.occupation': false,
+        'attr.situation': false,
+      };
+    }
     researchBase = {
       ...researchBase,
       attributes: {
@@ -44,6 +51,7 @@ export const generateResearchBases = ({
   parentEntity,
   additionalPointsOfInterest,
   children = [...Array(new Chance().weighted([0, 1], [3, 1]))],
+  hideOccAndSit,
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -63,6 +71,7 @@ export const generateResearchBases = ({
         sector,
         parent,
         parentEntity,
+        hideOccAndSit,
       }),
     ),
   };

@@ -7,6 +7,7 @@ import Situation from 'constants/asteroid-belt/situation';
 export const generateAsteroidBelt = ({
   sector,
   name = generateAsteroidBeltName(),
+  hideOccAndSit = false,
   parent,
   parentEntity,
   generate = true,
@@ -25,6 +26,12 @@ export const generateAsteroidBelt = ({
     asteroidBelt = { ...asteroidBelt, isHidden };
   }
   if (generate) {
+    if (hideOccAndSit) {
+      asteroidBelt.visibility = {
+        'attr.occupation': false,
+        'attr.situation': false,
+      };
+    }
     asteroidBelt = {
       ...asteroidBelt,
       attributes: {
@@ -42,6 +49,7 @@ export const generateAsteroidBelts = ({
   parentEntity,
   children = [...Array(new Chance().weighted([0, 1], [4, 1]))],
   additionalPointsOfInterest,
+  hideOccAndSit,
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -61,6 +69,7 @@ export const generateAsteroidBelts = ({
         parentEntity,
         name,
         generate,
+        hideOccAndSit,
       }),
     ),
   };

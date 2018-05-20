@@ -9,6 +9,7 @@ export const generateOrbitalRuin = ({
   parent,
   parentEntity,
   name = generateStationName(),
+  hideOccAndSit = false,
   generate = true,
   isHidden,
 } = {}) => {
@@ -27,6 +28,12 @@ export const generateOrbitalRuin = ({
     orbitalRuin = { ...orbitalRuin, isHidden };
   }
   if (generate) {
+    if (hideOccAndSit) {
+      orbitalRuin.visibility = {
+        'attr.occupation': false,
+        'attr.situation': false,
+      };
+    }
     orbitalRuin = {
       ...orbitalRuin,
       attributes: {
@@ -44,6 +51,7 @@ export const generateOrbitalRuins = ({
   parentEntity,
   children = [...Array(new Chance().weighted([0, 1], [3, 1]))],
   additionalPointsOfInterest,
+  hideOccAndSit,
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -63,6 +71,7 @@ export const generateOrbitalRuins = ({
         parentEntity,
         name,
         generate,
+        hideOccAndSit,
       }),
     ),
   };

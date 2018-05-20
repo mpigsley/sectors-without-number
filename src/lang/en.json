@@ -2607,6 +2607,7 @@
   "misc.haveNumSectors": "You have at least {num} sectors.",
   "misc.hexSystemText": "Hex System Text",
   "misc.hiddenParrent": "A parent entity is hiding this {entity}.",
+  "misc.hideOccAndSit": "Hide Occupation & Situation from Players",
   "misc.hideTagsFromPlayers": "Hide Tags from Players",
   "misc.home": "Home",
   "misc.initializeEmpty": "Initialize Empty Sector",

@@ -9,6 +9,7 @@ export const generateMoonBase = ({
   parent,
   parentEntity,
   name = generateStationName(),
+  hideOccAndSit = false,
   generate = true,
   isHidden,
 } = {}) => {
@@ -27,6 +28,12 @@ export const generateMoonBase = ({
     asteroidBase = { ...asteroidBase, isHidden };
   }
   if (generate) {
+    if (hideOccAndSit) {
+      asteroidBase.visibility = {
+        'attr.occupation': false,
+        'attr.situation': false,
+      };
+    }
     asteroidBase = {
       ...asteroidBase,
       attributes: {
@@ -44,6 +51,7 @@ export const generateMoonBases = ({
   parentEntity,
   additionalPointsOfInterest,
   children = [...Array(new Chance().weighted([0, 1], [5, 2]))],
+  hideOccAndSit,
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -61,6 +69,7 @@ export const generateMoonBases = ({
         sector,
         parent,
         parentEntity,
+        hideOccAndSit,
       }),
     ),
   };
