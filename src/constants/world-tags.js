@@ -360,7 +360,7 @@ export default {
   },
   [worldTagKeys.greatWork]: {
     key: worldTagKeys.greatWork,
-    enemies: 4,
+    enemies: 3,
     friends: 3,
     complications: 3,
     things: 3,

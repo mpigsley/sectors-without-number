@@ -135,7 +135,7 @@ export default function EntityTags({
       });
   }
 
-  if (!tags.length) {
+  if (!isSidebarEditActive && !tags.length) {
     return null;
   }
 

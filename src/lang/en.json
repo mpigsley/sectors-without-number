@@ -771,7 +771,7 @@
     "The locals are obsessed with completing a massive project, one that has consumed them for generations. It might be the completion of a functioning spaceyard, a massive solar power array, a network of terraforming engines, or the universal conversion of their neighbors to their own faith. The purpose of their entire civilization is to progress and some day complete the work.",
   "tags.greatWork.enemies.0":
     "Local planning to sacrifice the PCs for the work",
-  "tags.greatWork.enemies.1": "lLocal who thinks the PCs threten the work",
+  "tags.greatWork.enemies.1": "Local who thinks the PCs threaten the work",
   "tags.greatWork.enemies.2":
     "Obsessive zealot ready to destroy someone or something important to the PCs for the sake of the work",
   "tags.greatWork.friends.0": "Outsider studying the work",
@@ -782,7 +782,7 @@
     "Different factions disagree on what the work is",
   "tags.greatWork.complications.2":
     "An outside power is determined to thwart the work",
-  "tags.greatWork.things.0": "Vital supplies for th work",
+  "tags.greatWork.things.0": "Vital supplies for the work",
   "tags.greatWork.things.1": "Plans that have been lost",
   "tags.greatWork.things.2": "Tech that greatly speeds the work",
   "tags.greatWork.places.0": "A bustling work site",
@@ -1680,7 +1680,7 @@
     "The refugees are right that the xenophobes want them out or dead",
   "tags.refugees.complications.2": "Both are right",
   "tags.refugees.complications.3":
-    "Outside powers are using hte refugees to destabalize an enemy government",
+    "Outside powers are using the refugees to destabalize an enemy government",
   "tags.refugees.complications.4":
     "Refugee and local cultures are extremely incompatible",
   "tags.refugees.things.0": "Treasures brought out by fleeing refugees",

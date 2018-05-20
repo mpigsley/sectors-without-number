@@ -1,4 +1,9 @@
 {
+  "5.0.1": {
+    "description":
+      "Fix the great work tag misspellings & missing tags section in edit.",
+    "date": "5-19-2018"
+  },
   "5.0.0": {
     "description": "Sector Navigation Routes.",
     "date": "5-19-2018",
