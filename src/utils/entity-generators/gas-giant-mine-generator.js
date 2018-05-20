@@ -9,6 +9,7 @@ export const generateGasGiantMine = ({
   parent,
   parentEntity,
   name = generateMineName(),
+  hideOccAndSit = false,
   generate = true,
   isHidden,
 } = {}) => {
@@ -27,6 +28,12 @@ export const generateGasGiantMine = ({
     gasGiantMine = { ...gasGiantMine, isHidden };
   }
   if (generate) {
+    if (hideOccAndSit) {
+      gasGiantMine.visibility = {
+        'attr.occupation': false,
+        'attr.situation': false,
+      };
+    }
     gasGiantMine = {
       ...gasGiantMine,
       attributes: {
@@ -44,6 +51,7 @@ export const generateGasGiantMines = ({
   parentEntity,
   children = [...Array(new Chance().weighted([0, 1, 2], [8, 3, 1]))],
   additionalPointsOfInterest,
+  hideOccAndSit,
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -63,6 +71,7 @@ export const generateGasGiantMines = ({
         parentEntity,
         name,
         generate,
+        hideOccAndSit,
       }),
     ),
   };

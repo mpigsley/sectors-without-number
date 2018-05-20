@@ -24,6 +24,7 @@ export default function Configure({
   additionalPointsOfInterest,
   updateConfiguration,
   generateSector,
+  hideOccAndSit,
   isBuilder,
   hideTags,
   columns,
@@ -127,6 +128,12 @@ export default function Configure({
           onChange={updateInput}
           label={intl.formatMessage({ id: 'misc.hideTagsFromPlayers' })}
         />
+        <Checkbox
+          data-key="hideOccAndSit"
+          value={hideOccAndSit}
+          onChange={updateInput}
+          label={intl.formatMessage({ id: 'misc.hideOccAndSit' })}
+        />
       </SubContainer>
       <SubContainer
         className="Configure-PaddedButtons"
@@ -149,6 +156,7 @@ Configure.propTypes = {
   generateSector: PropTypes.func.isRequired,
   isBuilder: PropTypes.bool.isRequired,
   hideTags: PropTypes.bool.isRequired,
+  hideOccAndSit: PropTypes.bool.isRequired,
   columns: PropTypes.number,
   rows: PropTypes.number,
   name: PropTypes.string,

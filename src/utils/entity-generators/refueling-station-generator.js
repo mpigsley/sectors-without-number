@@ -9,6 +9,7 @@ export const generateRefuelingStation = ({
   parent,
   parentEntity,
   name = generateStationName(),
+  hideOccAndSit = false,
   generate = true,
   isHidden,
 } = {}) => {
@@ -27,6 +28,12 @@ export const generateRefuelingStation = ({
     refuelingStation = { ...refuelingStation, isHidden };
   }
   if (generate) {
+    if (hideOccAndSit) {
+      refuelingStation.visibility = {
+        'attr.occupation': false,
+        'attr.situation': false,
+      };
+    }
     refuelingStation = {
       ...refuelingStation,
       attributes: {
@@ -44,6 +51,7 @@ export const generateRefuelingStations = ({
   parentEntity,
   additionalPointsOfInterest,
   children = [...Array(new Chance().weighted([0, 1], [3, 1]))],
+  hideOccAndSit,
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
@@ -63,6 +71,7 @@ export const generateRefuelingStations = ({
         sector,
         parent,
         parentEntity,
+        hideOccAndSit,
       }),
     ),
   };
