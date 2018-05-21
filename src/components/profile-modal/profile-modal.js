@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { map } from 'lodash';
+import map from 'lodash/map';
 import { intlShape, FormattedMessage } from 'react-intl';
 
 import Button from 'primitives/other/button';

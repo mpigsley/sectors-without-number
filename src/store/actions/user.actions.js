@@ -1,4 +1,5 @@
-import { keys, pick } from 'lodash';
+import keys from 'lodash/keys';
+import pick from 'lodash/pick';
 import { push } from 'react-router-redux';
 import { addLocaleData } from 'react-intl';
 
@@ -6,7 +7,7 @@ import {
   savedSectorSelector,
   userFormSelector,
   userUidSelector,
-  userLocaleSelector,
+  userModelLocaleSelector,
 } from 'store/selectors/base.selectors';
 import { getSavedEntities } from 'store/selectors/entity.selectors';
 
@@ -99,26 +100,31 @@ export const initialize = location => dispatch =>
     const promises = [
       isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
       isGameView ? getNavigationData(sectorId) : Promise.resolve({}),
+      uid ? getSyncedSectors(uid) : Promise.resolve(),
     ];
-    if (uid) {
-      promises.push(getSyncedSectors(uid));
-    }
     if (locale && locale !== 'en' && Locale[locale]) {
-      promises.push(Locale[locale].localeFetch().then(addLocaleData));
+      promises.push(
+        Locale[locale].localeFetch().then(([userLocale, localeData]) => {
+          addLocaleData(localeData);
+          return userLocale;
+        }),
+      );
     }
-    return Promise.all(promises).then(([current, routes, sectors]) =>
-      dispatch({
-        type: INITIALIZE,
-        user,
-        entities: mergeEntityUpdates(
-          { [Entities.sector.key]: sectors },
-          current.entities || {},
-        ),
-        routes,
-        sectorId: current.sectorId,
-        share: current.share,
-        saved: keys(sectors || {}),
-      }),
+    return Promise.all(promises).then(
+      ([current, routes, sectors, userLocale]) =>
+        dispatch({
+          type: INITIALIZE,
+          user,
+          entities: mergeEntityUpdates(
+            { [Entities.sector.key]: sectors },
+            current.entities || {},
+          ),
+          routes,
+          sectorId: current.sectorId,
+          share: current.share,
+          saved: keys(sectors || {}),
+          locale: userLocale,
+        }),
     );
   });
 
@@ -206,7 +212,7 @@ export const updateUser = intl => (dispatch, getState) => {
   }
   return updateCurrentUser(uid, { ...filteredForm })
     .then(() => {
-      if (userLocaleSelector(state) !== (filteredForm.locale || 'en')) {
+      if (userModelLocaleSelector(state) !== (filteredForm.locale || 'en')) {
         window.location.reload();
       } else {
         dispatch({

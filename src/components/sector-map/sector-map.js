@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { debounce, isEmpty, map } from 'lodash';
+import debounce from 'lodash/debounce';
+import isEmpty from 'lodash/isEmpty';
+import map from 'lodash/map';
 
 import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';

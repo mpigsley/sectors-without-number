@@ -1,5 +1,7 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { omit, omitBy, isNil } from 'lodash';
+import omit from 'lodash/omit';
+import omitBy from 'lodash/omitBy';
+import isNil from 'lodash/isNil';
 
 import {
   ACTIVATE_SIDEBAR_EDIT,

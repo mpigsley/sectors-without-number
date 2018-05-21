@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import ReactModal from 'react-modal';
-import { X } from 'react-feather';
 import { FormattedMessage } from 'react-intl';
 
+import { X } from 'constants/icons';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import Button from 'primitives/other/button';

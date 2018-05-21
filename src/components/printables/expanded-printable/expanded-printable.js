@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { map } from 'lodash';
+import map from 'lodash/map';
 import { intlShape, FormattedMessage } from 'react-intl';
 
 import MapPrintable from 'components/printables/map-printable';

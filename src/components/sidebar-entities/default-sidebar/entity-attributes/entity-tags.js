@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
-import { X, Plus, EyeOff } from 'react-feather';
-import { filter, includes, map, pull } from 'lodash';
+import filter from 'lodash/filter';
+import includes from 'lodash/includes';
+import map from 'lodash/map';
+import pull from 'lodash/pull';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -13,6 +15,7 @@ import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 import Input from 'primitives/form/input';
 
+import { X, Plus, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
 

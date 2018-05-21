@@ -6,19 +6,16 @@ import { IntlProvider } from 'react-intl';
 import InitWrapper from 'components/init-wrapper';
 import LoginModal from 'components/login-modal';
 import SectorSyncModal from 'components/sector-sync-modal';
-import Lang from 'lang';
 
 export default function AppWrapper({
   children,
   isSyncModalOpen,
   closeSyncModal,
   userLocale,
+  locale,
 }) {
   return (
-    <IntlProvider
-      locale={userLocale}
-      messages={{ ...Lang.en, ...Lang[userLocale] }}
-    >
+    <IntlProvider locale={userLocale} messages={locale}>
       <InitWrapper>
         <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
         <LoginModal />
@@ -34,4 +31,5 @@ AppWrapper.propTypes = {
   isSyncModalOpen: PropTypes.bool.isRequired,
   closeSyncModal: PropTypes.func.isRequired,
   userLocale: PropTypes.string.isRequired,
+  locale: PropTypes.shape().isRequired,
 };

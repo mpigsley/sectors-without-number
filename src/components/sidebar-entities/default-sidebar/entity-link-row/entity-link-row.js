@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { EyeOff } from 'react-feather';
 
+import { EyeOff } from 'constants/icons';
 import LinkRow from 'primitives/other/link-row';
 
 export default function EntityLinkRow({

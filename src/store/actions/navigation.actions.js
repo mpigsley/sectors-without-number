@@ -1,4 +1,5 @@
-import { uniq, includes } from 'lodash';
+import uniq from 'lodash/uniq';
+import includes from 'lodash/includes';
 
 import {
   isInitializedSelector,

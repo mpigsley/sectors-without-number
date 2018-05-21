@@ -1,4 +1,4 @@
-import { firestore as Firestore } from 'firebase';
+import Firestore from 'firebase/firestore';
 
 export const createRoute = (sectorId, route) =>
   Firestore()

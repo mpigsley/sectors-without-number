@@ -1,5 +1,8 @@
-import { firestore as Firestore, functions as Functions } from 'firebase';
-import { omit, map, forEach } from 'lodash';
+import Firestore from 'firebase/firestore';
+import Functions from 'firebase/functions';
+import omit from 'lodash/omit';
+import map from 'lodash/map';
+import forEach from 'lodash/forEach';
 
 import Entities from 'constants/entities';
 

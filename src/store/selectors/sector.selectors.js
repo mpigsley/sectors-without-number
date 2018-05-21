@@ -1,4 +1,5 @@
-import { omitBy, includes } from 'lodash';
+import omitBy from 'lodash/omitBy';
+import includes from 'lodash/includes';
 import { createSelector } from 'reselect';
 
 import {

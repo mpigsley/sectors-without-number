@@ -1,5 +1,5 @@
 import Chance from 'chance';
-import { zipObject } from 'lodash';
+import zipObject from 'lodash/zipObject';
 
 import { generateName } from 'utils/name-generator';
 import { worldTagKeys } from 'constants/world-tags';

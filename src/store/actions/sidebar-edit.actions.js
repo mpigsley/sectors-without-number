@@ -1,13 +1,11 @@
-import {
-  mapValues,
-  sortBy,
-  pickBy,
-  size,
-  omitBy,
-  isNil,
-  zipObject,
-  isNumber,
-} from 'lodash';
+import mapValues from 'lodash/mapValues';
+import sortBy from 'lodash/sortBy';
+import pickBy from 'lodash/pickBy';
+import size from 'lodash/size';
+import omitBy from 'lodash/omitBy';
+import isNil from 'lodash/isNil';
+import zipObject from 'lodash/zipObject';
+import isNumber from 'lodash/isNumber';
 
 import {
   getEmptyHexKeys,

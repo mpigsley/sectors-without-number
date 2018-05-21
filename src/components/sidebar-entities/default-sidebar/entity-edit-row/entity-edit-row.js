@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { X, RefreshCw, RotateCcw } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 import { intlShape } from 'react-intl';
 
@@ -9,6 +8,7 @@ import Input from 'primitives/form/input';
 import IconInput from 'primitives/form/icon-input';
 import Dropdown from 'primitives/form/dropdown';
 
+import { X, RefreshCw, RotateCcw } from 'constants/icons';
 import Entities from 'constants/entities';
 import { coordinateKey, coordinatesFromKey } from 'utils/common';
 

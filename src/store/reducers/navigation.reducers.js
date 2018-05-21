@@ -1,4 +1,5 @@
-import { uniq, omit } from 'lodash';
+import uniq from 'lodash/uniq';
+import omit from 'lodash/omit';
 
 import {
   FETCHED_NAVIGATION,

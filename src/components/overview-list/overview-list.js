@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
-import { omit, map, size } from 'lodash';
+import omit from 'lodash/omit';
+import map from 'lodash/map';
+import size from 'lodash/size';
 
 import ProfileModal from 'components/profile-modal';
 import Navigation from 'components/navigation';

@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { intlShape, FormattedMessage } from 'react-intl';
-import { values, size } from 'lodash';
+import values from 'lodash/values';
+import size from 'lodash/size';
 import Pluralize from 'pluralize';
 
 import EmptyOverview from 'components/empty-overview';

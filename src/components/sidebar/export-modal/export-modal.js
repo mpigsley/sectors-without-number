@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
-import { mapValues, omit } from 'lodash';
+import mapValues from 'lodash/mapValues';
+import omit from 'lodash/omit';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Modal from 'primitives/modal/modal';

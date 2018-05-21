@@ -1,4 +1,8 @@
-import { forEach, find, values, includes, uniq } from 'lodash';
+import forEach from 'lodash/forEach';
+import find from 'lodash/find';
+import values from 'lodash/values';
+import includes from 'lodash/includes';
+import uniq from 'lodash/uniq';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';

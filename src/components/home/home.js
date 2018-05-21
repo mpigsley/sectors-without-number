@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Settings, Zap } from 'react-feather';
 import { FormattedMessage } from 'react-intl';
 
+import { Settings, Zap } from 'constants/icons';
 import { sortByKey } from 'utils/common';
 import LinkRow from 'primitives/other/link-row';
 import Header, { HeaderType } from 'primitives/text/header';

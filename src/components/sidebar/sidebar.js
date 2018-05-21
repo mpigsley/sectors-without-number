@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { some, size } from 'lodash';
+import some from 'lodash/some';
+import size from 'lodash/size';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import ConfirmModal from 'primitives/modal/confirm-modal';

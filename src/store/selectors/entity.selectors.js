@@ -3,20 +3,18 @@ import {
   createSelectorCreator,
   defaultMemoize,
 } from 'reselect';
-import {
-  omit,
-  filter,
-  pickBy,
-  mapValues,
-  zipObject,
-  difference,
-  values,
-  includes,
-  isEqual,
-  flatten,
-  map,
-  size,
-} from 'lodash';
+import omit from 'lodash/omit';
+import filter from 'lodash/filter';
+import pickBy from 'lodash/pickBy';
+import mapValues from 'lodash/mapValues';
+import zipObject from 'lodash/zipObject';
+import difference from 'lodash/difference';
+import values from 'lodash/values';
+import includes from 'lodash/includes';
+import isEqual from 'lodash/isEqual';
+import flatten from 'lodash/flatten';
+import map from 'lodash/map';
+import size from 'lodash/size';
 
 import {
   currentSectorSelector,
