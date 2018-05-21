@@ -5,6 +5,7 @@ import { Link } from 'react-router';
 import { Lock, Unlock, Layers, HelpCircle, Edit2 } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
+import { includes } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 
@@ -22,10 +23,16 @@ export default class FloatingToolbar extends Component {
     isShared: PropTypes.bool.isRequired,
     redirectToHome: PropTypes.func.isRequired,
     intl: intlShape.isRequired,
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
   };
 
   componentWillMount() {
-    if (this.props.isShared) {
+    if (
+      this.props.isShared &&
+      includes(this.props.location.pathname.split('/'), 'navigation')
+    ) {
       this.props.redirectToHome(this.props.sectorId);
     }
   }

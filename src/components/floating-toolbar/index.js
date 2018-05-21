@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
@@ -26,5 +27,5 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(FloatingToolbar),
+  connect(mapStateToProps, mapDispatchToProps)(withRouter(FloatingToolbar)),
 );

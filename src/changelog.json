@@ -1,4 +1,14 @@
 {
+  "5.1.1": {
+    "description":
+      "Fix redirects from overview to sector view when viewing a shared sector.",
+    "date": "5-21-2018"
+  },
+  "5.1.0": {
+    "description":
+      "Add configuration parameter to hide occupation and situation.",
+    "date": "5-20-2018"
+  },
   "5.0.1": {
     "description":
       "Fix the great work tag misspellings & missing tags section in edit.",
