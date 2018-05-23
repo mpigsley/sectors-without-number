@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map';
 import { intlShape, FormattedMessage } from 'react-intl';
 
 import Button from 'primitives/other/button';
@@ -9,6 +8,7 @@ import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
 import Dropdown from 'primitives/form/dropdown';
 import LOCALES from 'constants/locale';
+import { map } from 'constants/lodash';
 
 export default function ProfileModal({
   closeEditModal,

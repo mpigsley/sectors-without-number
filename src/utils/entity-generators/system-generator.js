@@ -1,6 +1,6 @@
 import Chance from 'chance';
-import xor from 'lodash/xor';
 
+import { xor } from 'constants/lodash';
 import { generateName } from 'utils/name-generator';
 
 export const generateSystem = ({

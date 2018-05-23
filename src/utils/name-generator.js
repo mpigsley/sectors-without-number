@@ -1,9 +1,7 @@
 /* eslint-disable no-bitwise */
 import Chance from 'chance';
-import forEach from 'lodash/forEach';
-import capitalize from 'lodash/capitalize';
-import toUpper from 'lodash/toUpper';
 
+import { forEach, capitalize, toUpper } from 'constants/lodash';
 import CosmicNames from 'constants/language/cosmic-names';
 import GreekLetters from 'constants/language/greek-letters';
 import MarsCraters from 'constants/language/mars-craters';

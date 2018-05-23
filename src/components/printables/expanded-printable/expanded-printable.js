@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map';
 import { intlShape, FormattedMessage } from 'react-intl';
 
 import MapPrintable from 'components/printables/map-printable';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 
+import { map } from 'constants/lodash';
 import Entities from 'constants/entities';
 
 import './style.css';

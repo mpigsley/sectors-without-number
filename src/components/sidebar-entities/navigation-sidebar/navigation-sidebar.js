@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import ReactHintFactory from 'react-hint';
 import PropTypes from 'prop-types';
-import size from 'lodash/size';
-import map from 'lodash/map';
 import { intlShape, FormattedMessage } from 'react-intl';
 
 import Modal from 'primitives/modal/modal';
@@ -17,6 +15,7 @@ import Dropdown from 'primitives/form/dropdown';
 import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
 
+import { size, map } from 'constants/lodash';
 import { X, EyeOff, Crosshair } from 'constants/icons';
 import { sortByKey } from 'utils/common';
 

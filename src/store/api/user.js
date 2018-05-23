@@ -1,5 +1,5 @@
 import { auth as FirebaseAuth, firestore as Firestore } from 'firebase';
-import size from 'lodash/size';
+import { size } from 'constants/lodash';
 
 export const getCurrentUser = () =>
   new Promise(resolve => {

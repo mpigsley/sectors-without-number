@@ -1,5 +1,3 @@
-import keys from 'lodash/keys';
-import pick from 'lodash/pick';
 import { push } from 'react-router-redux';
 import { addLocaleData } from 'react-intl';
 
@@ -10,6 +8,7 @@ import {
   userModelLocaleSelector,
 } from 'store/selectors/base.selectors';
 import { getSavedEntities } from 'store/selectors/entity.selectors';
+import { keys, pick } from 'constants/lodash';
 
 import {
   updateCurrentUser,

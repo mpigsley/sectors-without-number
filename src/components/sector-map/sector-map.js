@@ -1,8 +1,5 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import debounce from 'lodash/debounce';
-import isEmpty from 'lodash/isEmpty';
-import map from 'lodash/map';
 
 import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';
@@ -14,6 +11,7 @@ import HexMap from 'components/hex-map';
 import Navigation from 'components/navigation';
 
 import ExportTypes from 'constants/export-types';
+import { debounce, isEmpty, map } from 'constants/lodash';
 import hexGenerator from 'utils/hex/generator';
 import { coordinateKey } from 'utils/common';
 import Loading from './loading';

@@ -1,6 +1,4 @@
-import uniq from 'lodash/uniq';
-import omit from 'lodash/omit';
-
+import { uniq, omit } from 'constants/lodash';
 import {
   FETCHED_NAVIGATION,
   SET_SYNC_LOCK,

@@ -1,15 +1,16 @@
-import zipObject from 'lodash/zipObject';
-import pickBy from 'lodash/pickBy';
-import size from 'lodash/size';
-import merge from 'lodash/merge';
-import mapValues from 'lodash/mapValues';
-import omitBy from 'lodash/omitBy';
-import isNil from 'lodash/isNil';
-import omit from 'lodash/omit';
-import isObject from 'lodash/isObject';
-import findKey from 'lodash/findKey';
-import find from 'lodash/find';
-
+import {
+  zipObject,
+  pickBy,
+  size,
+  merge,
+  mapValues,
+  omitBy,
+  isNil,
+  omit,
+  isObject,
+  findKey,
+  find,
+} from 'constants/lodash';
 import {
   syncLockSelector,
   savedSectorSelector,

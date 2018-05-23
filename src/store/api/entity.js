@@ -1,8 +1,6 @@
 import { firestore as Firestore, functions as Functions } from 'firebase';
-import omit from 'lodash/omit';
-import map from 'lodash/map';
-import forEach from 'lodash/forEach';
 
+import { omit, map, forEach } from 'constants/lodash';
 import Entities from 'constants/entities';
 
 export const uploadEntities = (entities, sectorId) =>

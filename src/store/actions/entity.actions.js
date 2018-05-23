@@ -1,14 +1,4 @@
 import { push } from 'react-router-redux';
-import mapValues from 'lodash/mapValues';
-import merge from 'lodash/merge';
-import omit from 'lodash/omit';
-import omitBy from 'lodash/omitBy';
-import isNil from 'lodash/isNil';
-import forEach from 'lodash/forEach';
-import zipObject from 'lodash/zipObject';
-import pickBy from 'lodash/pickBy';
-import size from 'lodash/size';
-import includes from 'lodash/includes';
 
 import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
 import { releaseSyncLock, entityRelease } from 'store/actions/sector.actions';
@@ -48,9 +38,21 @@ import {
   SYNC_TOAST_ID,
 } from 'utils/entity';
 import { getSectorEntities, updateEntity } from 'store/api/entity';
+import Entities from 'constants/entities';
 import { coordinatesFromKey } from 'utils/common';
 import { removeToastById } from 'utils/toasts';
-import Entities from 'constants/entities';
+import {
+  mapValues,
+  merge,
+  omit,
+  omitBy,
+  isNil,
+  forEach,
+  zipObject,
+  pickBy,
+  size,
+  includes,
+} from 'constants/lodash';
 
 export const FETCHED_SECTOR = 'FETCHED_SECTOR';
 export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';

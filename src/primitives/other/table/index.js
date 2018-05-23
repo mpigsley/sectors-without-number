@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
-import isNil from 'lodash/isNil';
 
+import { isNil } from 'constants/lodash';
 import { ChevronDown, ChevronUp } from 'constants/icons';
 
 import './style.css';

@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import delay from 'lodash/delay';
 
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
 import FloatingToolbar from 'components/floating-toolbar';
 
+import { delay } from 'constants/lodash';
 import Entities from 'constants/entities';
 import { getTopLevelEntity } from 'utils/entity';
 import hexCanvas, { getPixelRatio, getHoveredHex } from 'utils/hex/canvas';

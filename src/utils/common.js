@@ -1,6 +1,6 @@
 import Chance from 'chance';
-import reduce from 'lodash/reduce';
-import isNumber from 'lodash/isNumber';
+
+import { reduce, isNumber } from 'constants/lodash';
 
 export const createId = () => new Chance().hash({ length: 20 });
 

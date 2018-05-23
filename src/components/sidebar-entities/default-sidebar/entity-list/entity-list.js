@@ -1,8 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import map from 'lodash/map';
-import size from 'lodash/size';
-import isNumber from 'lodash/isNumber';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 
@@ -14,6 +11,7 @@ import Dice from 'primitives/icons/dice';
 
 import { Plus, EyeOff } from 'constants/icons';
 import { sortByKey, coordinateKey, toCommaArray } from 'utils/common';
+import { map, size, isNumber } from 'constants/lodash';
 import Entities from 'constants/entities';
 
 import EntityLinkRow from '../entity-link-row';

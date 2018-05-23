@@ -2,15 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
-import filter from 'lodash/filter';
-import map from 'lodash/map';
-import mapValues from 'lodash/mapValues';
-import zipObject from 'lodash/zipObject';
-import omit from 'lodash/omit';
-import values from 'lodash/values';
-import size from 'lodash/size';
-import pickBy from 'lodash/pickBy';
-import flatten from 'lodash/flatten';
 
 import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
@@ -26,6 +17,17 @@ import { RefreshCw, X, Plus } from 'constants/icons';
 import Entities from 'constants/entities';
 import { createId, coordinatesFromKey } from 'utils/common';
 import EntityGenerators from 'utils/entity-generators';
+import {
+  filter,
+  map,
+  mapValues,
+  zipObject,
+  omit,
+  values,
+  size,
+  pickBy,
+  flatten,
+} from 'constants/lodash';
 
 import './style.css';
 

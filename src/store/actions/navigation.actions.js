@@ -1,6 +1,3 @@
-import uniq from 'lodash/uniq';
-import includes from 'lodash/includes';
-
 import {
   isInitializedSelector,
   currentSectorSelector,
@@ -17,6 +14,7 @@ import {
   getNavigationData,
 } from 'store/api/navigation';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
+import { uniq, includes } from 'constants/lodash';
 
 export const FETCHED_NAVIGATION = 'FETCHED_NAVIGATION';
 export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';

@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
-import omit from 'lodash/omit';
-import map from 'lodash/map';
-import size from 'lodash/size';
 
 import ProfileModal from 'components/profile-modal';
 import Navigation from 'components/navigation';
@@ -11,6 +8,7 @@ import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import LinkRow from 'primitives/other/link-row';
 
+import { omit, map, size } from 'constants/lodash';
 import Entities from 'constants/entities';
 
 import './style.css';

@@ -1,13 +1,15 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
-import includes from 'lodash/includes';
-import uniq from 'lodash/uniq';
-import mapValues from 'lodash/mapValues';
-import mapKeys from 'lodash/mapKeys';
-import omit from 'lodash/omit';
-import keys from 'lodash/keys';
-import pick from 'lodash/pick';
-import pickBy from 'lodash/pickBy';
 
+import {
+  includes,
+  uniq,
+  mapValues,
+  mapKeys,
+  omit,
+  keys,
+  pick,
+  pickBy,
+} from 'constants/lodash';
 import Entities from 'constants/entities';
 import {
   UPDATE_ENTITIES,

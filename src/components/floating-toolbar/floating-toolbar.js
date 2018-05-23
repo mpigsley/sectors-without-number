@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import { Link } from 'react-router';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
-import includes from 'lodash/includes';
 
+import { includes } from 'constants/lodash';
 import { Lock, Unlock, Layers, HelpCircle, Edit2 } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
