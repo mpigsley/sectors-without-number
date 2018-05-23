@@ -5,7 +5,8 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import Fastclick from 'react-fastclick';
 import Firebase from 'firebase/app';
-import Firestore from 'firebase/firestore';
+import { firestore as Firestore } from 'firebase';
+import 'firebase/firestore';
 import 'firebase/functions';
 
 import store from 'store';
