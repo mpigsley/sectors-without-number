@@ -17,11 +17,29 @@ export default {
     localeFetch: () =>
       Promise.all([import('lang/en'), import('react-intl/locale-data/en')]),
   },
+  es: {
+    value: 'es',
+    name: 'Spanish',
+    localeFetch: () =>
+      Promise.all([import('lang/es'), import('react-intl/locale-data/es')]),
+  },
   he: {
     value: 'he',
     name: 'Hebrew',
     localeFetch: () =>
       Promise.all([import('lang/he'), import('react-intl/locale-data/he')]),
+  },
+  ru: {
+    value: 'ru',
+    name: 'Russian',
+    localeFetch: () =>
+      Promise.all([import('lang/ru'), import('react-intl/locale-data/ru')]),
+  },
+  sr: {
+    value: 'sr',
+    name: 'Latin',
+    localeFetch: () =>
+      Promise.all([import('lang/sr'), import('react-intl/locale-data/sr')]),
   },
   sv: {
     value: 'sv',

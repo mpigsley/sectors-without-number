@@ -17,6 +17,9 @@ const LOCALE_BY_LANG = {
   GERMAN: 'de',
   SWEDISH: 'sv',
   HEBREW: 'he',
+  LATIN: 'sr',
+  SPANISH: 'es',
+  RUSSIAN: 'ru',
 };
 const TRANSLATIONS = {
   ENGLISH: {},
@@ -24,6 +27,9 @@ const TRANSLATIONS = {
   GERMAN: {},
   SWEDISH: {},
   HEBREW: {},
+  LATIN: {},
+  SPANISH: {},
+  RUSSIAN: {},
 };
 
 // Compile objects
