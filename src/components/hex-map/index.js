@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
+import { push } from 'react-router-redux';
 
 import {
   entityHold,
@@ -61,8 +62,16 @@ const mapDispatchToProps = (dispatch, props) => ({
   addRouteLocation: key => dispatch(addRouteLocation(key)),
   completeRoute: () => dispatch(completeRoute(props.intl)),
   updateNavSettings: (key, value) => dispatch(updateNavSettings(key, value)),
+  toEntity: (entityType, entityId) => {
+    const route = `/sector/${
+      props.match.params.sector
+    }/${entityType}/${entityId}`;
+    if (props.location.pathname !== route) {
+      dispatch(push(route));
+    }
+  },
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(withRouter(HexMap)),
+  withRouter(connect(mapStateToProps, mapDispatchToProps)(HexMap)),
 );

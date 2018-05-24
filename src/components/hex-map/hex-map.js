@@ -26,6 +26,7 @@ export default class HexMap extends Component {
     addRouteLocation: PropTypes.func.isRequired,
     completeRoute: PropTypes.func.isRequired,
     updateNavSettings: PropTypes.func.isRequired,
+    toEntity: PropTypes.func.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     isShared: PropTypes.bool.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
@@ -41,8 +42,7 @@ export default class HexMap extends Component {
         hexKey: PropTypes.string.isRequired,
       }),
     ),
-    router: PropTypes.shape({
-      push: PropTypes.func.isRequired,
+    match: PropTypes.shape({
       params: PropTypes.shape({
         sector: PropTypes.string,
       }),
@@ -166,11 +166,11 @@ export default class HexMap extends Component {
         if (this.props.isSidebarEditActive) {
           this.props.deactivateSidebarEdit();
         }
-        const route = `/sector/${this.props.router.params.sector}/${
+        const route = `/sector/${this.props.match.params.sector}/${
           entity.type
         }/${entityId}`;
         if (this.props.location.pathname !== route) {
-          this.props.router.push(route);
+          this.props.toEntity(entity.type, entityId);
         }
       } else if (!this.props.isShared && !this.props.mapLocked) {
         if (!hexKey || this.props.holdKey === this.props.hoverKey) {

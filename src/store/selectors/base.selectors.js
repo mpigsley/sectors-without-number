@@ -41,8 +41,7 @@ export const sidebarEditEntitySelector = state => state.sidebarEdit.entity;
 export const sidebarEditChildrenSelector = state => state.sidebarEdit.children;
 
 /* Router */
-export const routerLocationSelector = state =>
-  state.routing.locationBeforeTransitions;
+export const routerLocationSelector = state => state.router.location;
 
 /* Navigation */
 export const navigationRoutesSelector = state => state.navigation.routes;

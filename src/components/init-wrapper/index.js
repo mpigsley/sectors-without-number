@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
-import { initialize } from 'store/actions/user.actions';
+import { initialize } from 'store/actions/combined.actions';
 import { routerLocationSelector } from 'store/selectors/base.selectors';
 
 import InitWrapper from './init-wrapper';

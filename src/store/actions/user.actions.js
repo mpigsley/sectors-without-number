@@ -1,5 +1,4 @@
 import { push } from 'react-router-redux';
-import { addLocaleData } from 'react-intl';
 
 import {
   savedSectorSelector,
@@ -8,7 +7,7 @@ import {
   userModelLocaleSelector,
 } from 'store/selectors/base.selectors';
 import { getSavedEntities } from 'store/selectors/entity.selectors';
-import { keys, pick } from 'constants/lodash';
+import { pick } from 'constants/lodash';
 
 import {
   updateCurrentUser,
@@ -19,19 +18,11 @@ import {
   doLogin,
   doPasswordReset,
   doLogout,
-  getCurrentUser,
 } from 'store/api/user';
-import {
-  getSectorEntities,
-  getSyncedSectors,
-  uploadEntities,
-} from 'store/api/entity';
-import { getNavigationData } from 'store/api/navigation';
+import { getSyncedSectors, uploadEntities } from 'store/api/entity';
 
 import Locale from 'constants/locale';
-import Entities from 'constants/entities';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { mergeEntityUpdates } from 'utils/entity';
 
 export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
 export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
@@ -88,44 +79,6 @@ const onLogin = (dispatch, state) => result => {
       console.error(error);
     });
 };
-
-export const initialize = location => dispatch =>
-  getCurrentUser().then(user => {
-    const { uid, locale } = user || {};
-    const sectorId = location.pathname.split('/')[2];
-    const isGameView =
-      location.pathname.startsWith('/sector') ||
-      location.pathname.startsWith('/overview');
-    const promises = [
-      isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
-      isGameView ? getNavigationData(sectorId) : Promise.resolve({}),
-      uid ? getSyncedSectors(uid) : Promise.resolve(),
-    ];
-    if (locale && locale !== 'en' && Locale[locale]) {
-      promises.push(
-        Locale[locale].localeFetch().then(([userLocale, localeData]) => {
-          addLocaleData(localeData);
-          return userLocale;
-        }),
-      );
-    }
-    return Promise.all(promises).then(
-      ([current, routes, sectors, userLocale]) =>
-        dispatch({
-          type: INITIALIZE,
-          user,
-          entities: mergeEntityUpdates(
-            { [Entities.sector.key]: sectors },
-            current.entities || {},
-          ),
-          routes,
-          sectorId: current.sectorId,
-          share: current.share,
-          saved: keys(sectors || {}),
-          locale: userLocale,
-        }),
-    );
-  });
 
 export const facebookLogin = () => (dispatch, getState) =>
   doFacebookLogin()

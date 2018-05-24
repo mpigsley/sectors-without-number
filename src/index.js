@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
+import { Switch, Route } from 'react-router-dom';
+import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import Fastclick from 'react-fastclick';
 import Firebase from 'firebase/app';
@@ -9,12 +9,9 @@ import { firestore as Firestore } from 'firebase';
 import 'firebase/firestore';
 import 'firebase/functions';
 
-import store from 'store';
-import { fetchSectorEntities } from 'store/actions/entity.actions';
-import { fetchNavigation } from 'store/actions/navigation.actions';
+import store, { history } from 'store';
 
 import AppWrapper from 'components/app-wrapper';
-import HexBackground from 'components/hex-background';
 import Home from 'components/home';
 import Configure from 'components/configure';
 import Changelog from 'components/changelog';
@@ -40,42 +37,41 @@ Firebase.initializeApp({
 // Temporary until deprecation notice goes away
 Firestore().settings({ timestampsInSnapshots: true });
 
-const history = syncHistoryWithStore(browserHistory, store);
-
-const onEnterGameRoute = ({ params }) =>
-  Promise.all([
-    store.dispatch(fetchSectorEntities(params.sector)),
-    store.dispatch(fetchNavigation(params.sector)),
-  ]);
-
 ReactDOM.render(
   <Provider store={store}>
-    <Router history={history}>
-      <Route path="/" component={AppWrapper}>
-        <Route component={HexBackground}>
-          <IndexRoute component={Home} />
+    <ConnectedRouter history={history}>
+      <Switch>
+        <AppWrapper>
+          <Route exact path="/" component={Home} />
           <Route path="/configure" component={Configure} />
           <Route path="/changelog" component={Changelog} />
-        </Route>
-        <Route
-          path="/sector/:sector"
-          component={SectorMap}
-          onEnter={onEnterGameRoute}
-        >
-          <IndexRoute component={Sidebar} />
-          <Route path=":entityType/:entity" component={Sidebar} />
-          <Route path="**" component={Sidebar} />
-        </Route>
-        <Route
-          path="/overview/:sector"
-          component={OverviewList}
-          onEnter={onEnterGameRoute}
-        >
-          <IndexRoute component={EmptyOverview} />
-          <Route path=":entityType" component={OverviewTable} />
-        </Route>
-      </Route>
-    </Router>
+
+          <Route
+            path="/sector/:sector"
+            render={() => (
+              <Switch>
+                <SectorMap>
+                  <Route exact path="/" component={Sidebar} />
+                  <Route path=":entityType/:entity" component={Sidebar} />
+                  <Route path="**" component={Sidebar} />
+                </SectorMap>
+              </Switch>
+            )}
+          />
+          <Route
+            path="/overview/:sector"
+            render={() => (
+              <Switch>
+                <OverviewList>
+                  <Route exact path="/" component={EmptyOverview} />
+                  <Route path=":entityType" component={OverviewTable} />
+                </OverviewList>
+              </Switch>
+            )}
+          />
+        </AppWrapper>
+      </Switch>
+    </ConnectedRouter>
   </Provider>,
   document.getElementById('root'),
 );

@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { injectIntl } from 'react-intl';
 
+import { enterGameRoute } from 'store/actions/combined.actions';
 import { getCurrentEntities } from 'store/selectors/entity.selectors';
 import {
   currentSectorSelector,
@@ -16,7 +17,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  toHome: () => dispatch(push('/')),
+  toSafeRoute: () => dispatch(push('/')),
+  enterGameRoute: () => dispatch(enterGameRoute()),
 });
 
 export default injectIntl(

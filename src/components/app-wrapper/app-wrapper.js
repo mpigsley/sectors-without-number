@@ -13,6 +13,7 @@ export default function AppWrapper({
   closeSyncModal,
   userLocale,
   locale,
+  location,
 }) {
   return (
     <IntlProvider locale={userLocale} messages={locale}>
@@ -20,7 +21,9 @@ export default function AppWrapper({
         <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
         <LoginModal />
         <SectorSyncModal isOpen={isSyncModalOpen} onCancel={closeSyncModal} />
-        {children}
+        {React.Children.map(children, child =>
+          React.cloneElement(child, { location }),
+        )}
       </InitWrapper>
     </IntlProvider>
   );
@@ -32,4 +35,5 @@ AppWrapper.propTypes = {
   closeSyncModal: PropTypes.func.isRequired,
   userLocale: PropTypes.string.isRequired,
   locale: PropTypes.shape().isRequired,
+  location: PropTypes.shape().isRequired,
 };
