@@ -21,6 +21,7 @@ export default class FloatingToolbar extends Component {
     layers: PropTypes.shape().isRequired,
     toggleLayer: PropTypes.func.isRequired,
     isShared: PropTypes.bool.isRequired,
+    isSaved: PropTypes.bool.isRequired,
     redirectToHome: PropTypes.func.isRequired,
     intl: intlShape.isRequired,
     location: PropTypes.shape({
@@ -67,7 +68,7 @@ export default class FloatingToolbar extends Component {
 
   renderLayers() {
     let editButton = null;
-    if (!this.props.isShared) {
+    if (!this.props.isShared && this.props.isSaved) {
       editButton = (
         <Link
           to={`/sector/${this.props.sectorId}/navigation`}
