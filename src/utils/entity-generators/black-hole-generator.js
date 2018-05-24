@@ -1,6 +1,6 @@
 import Chance from 'chance';
-import { xor } from 'lodash';
 
+import { xor } from 'constants/lodash';
 import { generateBlackHoleName } from 'utils/name-generator';
 
 export const generateBlackHole = ({

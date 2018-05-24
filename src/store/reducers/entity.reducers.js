@@ -1,4 +1,5 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
+
 import {
   includes,
   uniq,
@@ -8,8 +9,7 @@ import {
   keys,
   pick,
   pickBy,
-} from 'lodash';
-
+} from 'constants/lodash';
 import Entities from 'constants/entities';
 import {
   UPDATE_ENTITIES,

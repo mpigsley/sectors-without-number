@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect';
-import { includes, find, mapValues } from 'lodash';
+
+import { includes, find, mapValues } from 'constants/lodash';
 import { coordinateKey } from 'utils/common';
 
 import {

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { intlShape, FormattedMessage } from 'react-intl';
-import { values, size } from 'lodash';
 import Pluralize from 'pluralize';
 
 import EmptyOverview from 'components/empty-overview';
@@ -14,6 +13,7 @@ import Entities from 'constants/entities';
 
 import { generateCSV, createCSVDownload } from 'utils/export';
 import { sortByKey } from 'utils/common';
+import { values, size } from 'constants/lodash';
 import './style.css';
 
 export default function OverviewTable({

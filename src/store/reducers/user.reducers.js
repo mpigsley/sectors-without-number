@@ -13,6 +13,7 @@ import {
   CLOSE_USER_DROPDOWN,
   CLOSE_SYNC_MODAL,
 } from 'store/actions/user.actions';
+import englishLocale from 'lang/en';
 
 const initialForm = () => ({
   email: '',
@@ -30,6 +31,7 @@ export const initialState = {
   error: null,
   model: null,
   form: initialForm(),
+  locale: englishLocale,
 };
 
 export default function user(state = initialState, action) {
@@ -40,6 +42,7 @@ export default function user(state = initialState, action) {
         model: action.user,
         isLoginModalOpen: false,
         isInitialized: true,
+        locale: { ...englishLocale, ...action.locale },
         form: {
           ...state.form,
           displayName: (action.user || {}).displayName || '',

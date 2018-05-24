@@ -10,8 +10,7 @@ import {
   isObject,
   findKey,
   find,
-} from 'lodash';
-
+} from 'constants/lodash';
 import {
   syncLockSelector,
   savedSectorSelector,

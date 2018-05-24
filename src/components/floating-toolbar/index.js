@@ -8,6 +8,7 @@ import {
   currentSectorSelector,
   isSharedSectorSelector,
 } from 'store/selectors/base.selectors';
+import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 import { getMapLock, getLayers } from 'store/selectors/entity.selectors';
 import { toggleMapLock, toggleLayer } from 'store/actions/entity.actions';
 
@@ -18,6 +19,7 @@ const mapStateToProps = createStructuredSelector({
   mapLocked: getMapLock,
   layers: getLayers,
   isShared: isSharedSectorSelector,
+  isSaved: isCurrentSectorSaved,
 });
 
 const mapDispatchToProps = dispatch => ({

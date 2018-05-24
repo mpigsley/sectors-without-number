@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { ChevronRight, ChevronDown } from 'react-feather';
 
+import { ChevronRight, ChevronDown } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
 import './style.css';

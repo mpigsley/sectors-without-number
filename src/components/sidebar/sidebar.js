@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { some, size } from 'lodash';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import ConfirmModal from 'primitives/modal/confirm-modal';
@@ -8,6 +7,7 @@ import Entities from 'constants/entities';
 import DefaultSidebar from 'components/sidebar-entities/default-sidebar';
 import NoteSidebar from 'components/sidebar-entities/note-sidebar';
 import NavigationSidebar from 'components/sidebar-entities/navigation-sidebar';
+import { some, size } from 'constants/lodash';
 
 import SectorBuilderInfo from './sector-builder-info';
 import EntityNavigation from './entity-navigation';

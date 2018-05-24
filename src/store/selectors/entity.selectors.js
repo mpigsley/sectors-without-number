@@ -3,20 +3,6 @@ import {
   createSelectorCreator,
   defaultMemoize,
 } from 'reselect';
-import {
-  omit,
-  filter,
-  pickBy,
-  mapValues,
-  zipObject,
-  difference,
-  values,
-  includes,
-  isEqual,
-  flatten,
-  map,
-  size,
-} from 'lodash';
 
 import {
   currentSectorSelector,
@@ -33,6 +19,20 @@ import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
 import { allSectorKeys, coordinateKey } from 'utils/common';
 import { areNeighbors } from 'utils/hex/common';
+import {
+  omit,
+  filter,
+  pickBy,
+  mapValues,
+  zipObject,
+  difference,
+  values,
+  includes,
+  isEqual,
+  flatten,
+  map,
+  size,
+} from 'constants/lodash';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
 

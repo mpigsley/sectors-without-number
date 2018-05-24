@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router';
 import { FormattedMessage } from 'react-intl';
-import { User, Home, List, Grid, LogIn, LogOut } from 'react-feather';
 
+import { User, Home, List, Grid, LogIn, LogOut } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 

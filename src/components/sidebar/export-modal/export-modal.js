@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
-import { mapValues, omit } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 import ExportTypes from 'constants/export-types';
 import { createJSONDownload } from 'utils/export';
+import { mapValues, omit } from 'constants/lodash';
 
 import './style.css';
 

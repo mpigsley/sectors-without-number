@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Link } from 'react-router';
-import { Lock, Unlock, Layers, HelpCircle, Edit2 } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
-import { includes } from 'lodash';
 
+import { includes } from 'constants/lodash';
+import { Lock, Unlock, Layers, HelpCircle, Edit2 } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
 import './style.css';
@@ -21,6 +21,7 @@ export default class FloatingToolbar extends Component {
     layers: PropTypes.shape().isRequired,
     toggleLayer: PropTypes.func.isRequired,
     isShared: PropTypes.bool.isRequired,
+    isSaved: PropTypes.bool.isRequired,
     redirectToHome: PropTypes.func.isRequired,
     intl: intlShape.isRequired,
     location: PropTypes.shape({
@@ -67,7 +68,7 @@ export default class FloatingToolbar extends Component {
 
   renderLayers() {
     let editButton = null;
-    if (!this.props.isShared) {
+    if (!this.props.isShared && this.props.isSaved) {
       editButton = (
         <Link
           to={`/sector/${this.props.sectorId}/navigation`}

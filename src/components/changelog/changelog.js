@@ -1,5 +1,5 @@
 import React from 'react';
-import Moment from 'moment';
+import dayjs from 'dayjs';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
@@ -31,7 +31,7 @@ export default function Changelog() {
               <Header type={HeaderType.header3} className="Changelog-Version">
                 {`v${version}`}
                 <span className="Changelog-Date">
-                  ({Moment(date, 'MM-DD-YYYY').format('MMMM Do YYYY')})
+                  ({dayjs(date).format('MMMM D, YYYY')})
                 </span>
               </Header>
               <span>

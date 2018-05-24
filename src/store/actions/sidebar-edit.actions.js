@@ -1,15 +1,4 @@
 import {
-  mapValues,
-  sortBy,
-  pickBy,
-  size,
-  omitBy,
-  isNil,
-  zipObject,
-  isNumber,
-} from 'lodash';
-
-import {
   getEmptyHexKeys,
   getCurrentEntity,
   getCurrentEntityId,
@@ -24,6 +13,16 @@ import {
 import Entities from 'constants/entities';
 import { createId, coordinatesFromKey, coordinateKey } from 'utils/common';
 import { syncLock } from 'utils/entity';
+import {
+  mapValues,
+  sortBy,
+  pickBy,
+  size,
+  omitBy,
+  isNil,
+  zipObject,
+  isNumber,
+} from 'constants/lodash';
 
 export const ACTIVATE_SIDEBAR_EDIT = 'ACTIVATE_SIDEBAR_EDIT';
 export const DEACTIVATE_SIDEBAR_EDIT = 'DEACTIVATE_SIDEBAR_EDIT';

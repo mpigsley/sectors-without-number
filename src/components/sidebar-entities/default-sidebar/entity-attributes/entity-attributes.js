@@ -1,8 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
-import { omit, map, values, pickBy, size } from 'lodash';
-import { RefreshCw, EyeOff } from 'react-feather';
 import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
 
@@ -13,6 +11,8 @@ import Dropdown from 'primitives/form/dropdown';
 import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
 
+import { omit, map, values, pickBy, size } from 'constants/lodash';
+import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 
 import EntityTags from './entity-tags';

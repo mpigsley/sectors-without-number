@@ -1,6 +1,6 @@
 import Chance from 'chance';
-import { zipObject } from 'lodash';
 
+import { zipObject } from 'constants/lodash';
 import { generateName } from 'utils/name-generator';
 import { worldTagKeys } from 'constants/world-tags';
 import Atmosphere from 'constants/atmosphere';

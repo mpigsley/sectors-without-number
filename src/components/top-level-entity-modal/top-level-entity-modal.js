@@ -1,19 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { RefreshCw, X, Plus } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
-import {
-  filter,
-  map,
-  mapValues,
-  zipObject,
-  omit,
-  values,
-  size,
-  pickBy,
-  flatten,
-} from 'lodash';
 
 import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
@@ -25,9 +13,21 @@ import FlexContainer from 'primitives/container/flex-container';
 import Dice from 'primitives/icons/dice';
 import Header, { HeaderType } from 'primitives/text/header';
 
+import { RefreshCw, X, Plus } from 'constants/icons';
 import Entities from 'constants/entities';
 import { createId, coordinatesFromKey } from 'utils/common';
 import EntityGenerators from 'utils/entity-generators';
+import {
+  filter,
+  map,
+  mapValues,
+  zipObject,
+  omit,
+  values,
+  size,
+  pickBy,
+  flatten,
+} from 'constants/lodash';
 
 import './style.css';
 

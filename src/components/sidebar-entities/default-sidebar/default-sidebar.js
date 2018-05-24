@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { map, mapValues } from 'lodash';
+
+import { map, mapValues } from 'constants/lodash';
 
 import EntityAttributes from './entity-attributes';
 import EntityList from './entity-list';

@@ -1,4 +1,3 @@
-import { omitBy, includes } from 'lodash';
 import { createSelector } from 'reselect';
 
 import {
@@ -7,6 +6,7 @@ import {
   savedSectorSelector,
   shareSectorSelector,
 } from 'store/selectors/base.selectors';
+import { omitBy, includes } from 'constants/lodash';
 
 export const getUserSectors = createSelector(
   [sectorSelector, savedSectorSelector],

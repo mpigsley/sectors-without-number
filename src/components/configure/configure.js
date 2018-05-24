@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Zap, RefreshCw } from 'react-feather';
 import Chance from 'chance';
 import { intlShape, FormattedMessage } from 'react-intl';
 
@@ -14,6 +13,7 @@ import Label from 'primitives/form/label';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
 
+import { Zap, RefreshCw } from 'constants/icons';
 import { generateSectorName } from 'utils/name-generator';
 
 import './style.css';

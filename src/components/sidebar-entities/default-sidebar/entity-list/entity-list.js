@@ -1,7 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { map, size, isNumber } from 'lodash';
-import { Plus, EyeOff } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 
@@ -11,7 +9,9 @@ import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 import Dice from 'primitives/icons/dice';
 
+import { Plus, EyeOff } from 'constants/icons';
 import { sortByKey, coordinateKey, toCommaArray } from 'utils/common';
+import { map, size, isNumber } from 'constants/lodash';
 import Entities from 'constants/entities';
 
 import EntityLinkRow from '../entity-link-row';

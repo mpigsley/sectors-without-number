@@ -1,5 +1,4 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
-import { omit, omitBy, isNil } from 'lodash';
 
 import {
   ACTIVATE_SIDEBAR_EDIT,
@@ -11,6 +10,7 @@ import {
   CREATE_CHILD_IN_EDIT,
 } from 'store/actions/sidebar-edit.actions';
 import { UPDATE_ENTITIES } from 'store/actions/entity.actions';
+import { omit, omitBy, isNil } from 'constants/lodash';
 
 const initialState = {
   isSidebarEditActive: false,

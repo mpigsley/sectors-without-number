@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { debounce } from 'lodash';
-
-import hexGenerator from 'utils/hex/generator';
 
 import HexMap from 'components/hex-map';
 import AccountManager from 'components/account-manager';
 import AbsoluteContainer from 'primitives/container/absolute-container';
+
+import hexGenerator from 'utils/hex/generator';
+import { debounce } from 'constants/lodash';
 
 export default class HexBackground extends Component {
   static propTypes = {
