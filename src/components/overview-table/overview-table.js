@@ -14,16 +14,17 @@ import Entities from 'constants/entities';
 import { generateCSV, createCSVDownload } from 'utils/export';
 import { sortByKey } from 'utils/common';
 import { values, size } from 'constants/lodash';
+
 import './style.css';
 
 export default function OverviewTable({
   entities,
-  routeParams,
+  match,
   currentSector,
   intl,
 }) {
   const pluralName = intl.formatMessage({
-    id: Pluralize(Entities[routeParams.entityType].name),
+    id: Pluralize(Entities[match.params.entityType].name),
   });
 
   const getColumnsFromType = entityType => {
@@ -83,7 +84,7 @@ export default function OverviewTable({
     return columns;
   };
 
-  if (!size(entities[routeParams.entityType])) {
+  if (!size(entities[match.params.entityType])) {
     return (
       <EmptyOverview>
         <FormattedMessage
@@ -96,8 +97,8 @@ export default function OverviewTable({
     );
   }
 
-  const columns = getColumnsFromType(routeParams.entityType);
-  const tableData = values(entities[routeParams.entityType]).sort(
+  const columns = getColumnsFromType(match.params.entityType);
+  const tableData = values(entities[match.params.entityType]).sort(
     sortByKey('name'),
   );
 
@@ -130,7 +131,7 @@ export default function OverviewTable({
       <div className="OverviewTable-FlexWrap">
         <FlexContainer justify="spaceBetween" align="baseline">
           <Header type={HeaderType.header3}>
-            {intl.formatMessage({ id: Entities[routeParams.entityType].name })}
+            {intl.formatMessage({ id: Entities[match.params.entityType].name })}
           </Header>
           <Button minimal onClick={exportTable}>
             <FormattedMessage
@@ -158,8 +159,10 @@ OverviewTable.propTypes = {
   currentSector: PropTypes.shape({
     name: PropTypes.string,
   }),
-  routeParams: PropTypes.shape({
-    entityType: PropTypes.string.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      entityType: PropTypes.string.isRequired,
+    }).isRequired,
   }).isRequired,
   intl: intlShape.isRequired,
 };

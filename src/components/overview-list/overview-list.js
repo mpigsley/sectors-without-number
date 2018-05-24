@@ -21,8 +21,10 @@ export default class OverviewList extends Component {
     currentSector: PropTypes.string.isRequired,
     entities: PropTypes.shape().isRequired,
     isInitialized: PropTypes.bool.isRequired,
-    params: PropTypes.shape({
-      entityType: PropTypes.string,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        entityType: PropTypes.string,
+      }).isRequired,
     }).isRequired,
     intl: intlShape.isRequired,
   };
@@ -68,7 +70,7 @@ export default class OverviewList extends Component {
                     }
                     arrowClassName="OverviewList-Arrow"
                     className={
-                      this.props.params.entityType === entityType
+                      this.props.match.params.entityType === entityType
                         ? 'OverviewList-Item--selected'
                         : ''
                     }

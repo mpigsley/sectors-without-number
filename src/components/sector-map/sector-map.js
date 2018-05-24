@@ -48,8 +48,10 @@ export default class SectorMap extends Component {
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
-    computedMatch: PropTypes.shape({
-      sector: PropTypes.string,
+    match: PropTypes.shape({
+      params: PropTypes.shape({
+        sector: PropTypes.string,
+      }),
     }).isRequired,
     exportType: PropTypes.string.isRequired,
     isPrinting: PropTypes.bool.isRequired,
@@ -70,7 +72,7 @@ export default class SectorMap extends Component {
       splitPath.length > 5 ||
       (splitPath[4] || splitPath[2] || '').length !== 20
     ) {
-      this.props.toSafeRoute(this.props.computedMatch.sector);
+      this.props.toSafeRoute(this.props.match.params.sector);
     } else {
       this.props.enterGameRoute();
     }

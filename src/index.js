@@ -45,28 +45,36 @@ ReactDOM.render(
           <Route exact path="/" component={Home} />
           <Route path="/configure" component={Configure} />
           <Route path="/changelog" component={Changelog} />
-
           <Route
             path="/sector/:sector"
-            render={() => (
-              <Switch>
-                <SectorMap>
-                  <Route exact path="/" component={Sidebar} />
-                  <Route path=":entityType/:entity" component={Sidebar} />
-                  <Route path="**" component={Sidebar} />
-                </SectorMap>
-              </Switch>
+            render={({ match }) => (
+              <SectorMap>
+                <Switch>
+                  <Route
+                    path={`${match.path}/:entityType/:entity`}
+                    component={Sidebar}
+                  />
+                  <Route
+                    path={`${match.path}/:entityType`}
+                    component={Sidebar}
+                  />
+                  <Route path={match.path} component={Sidebar} />
+                </Switch>
+              </SectorMap>
             )}
           />
           <Route
             path="/overview/:sector"
-            render={() => (
-              <Switch>
-                <OverviewList>
-                  <Route exact path="/" component={EmptyOverview} />
-                  <Route path=":entityType" component={OverviewTable} />
-                </OverviewList>
-              </Switch>
+            render={({ match }) => (
+              <OverviewList>
+                <Switch>
+                  <Route
+                    path={`${match.path}/:entityType`}
+                    component={OverviewTable}
+                  />
+                  <Route path={match.path} component={EmptyOverview} />
+                </Switch>
+              </OverviewList>
             )}
           />
         </AppWrapper>
