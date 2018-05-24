@@ -17,7 +17,9 @@ import Configure from 'components/configure';
 import Changelog from 'components/changelog';
 import SectorMap from 'components/sector-map';
 import Sidebar from 'components/sidebar';
-import Overview from 'components/overview';
+import OverviewList from 'components/overview-list';
+import OverviewTable from 'components/overview-table';
+import EmptyOverview from 'components/empty-overview';
 
 import 'styles/global.css';
 import 'react-hint/css/index.css';
@@ -61,7 +63,20 @@ ReactDOM.render(
               </SectorMap>
             )}
           />
-          <Route path="/overview/:sector" component={Overview} />
+          <Route
+            path="/overview/:sector"
+            render={({ match }) => (
+              <OverviewList>
+                <Switch>
+                  <Route
+                    path={`${match.path}/:entityType`}
+                    component={OverviewTable}
+                  />
+                  <Route path={match.path} component={EmptyOverview} />
+                </Switch>
+              </OverviewList>
+            )}
+          />
         </AppWrapper>
       </Switch>
     </ConnectedRouter>

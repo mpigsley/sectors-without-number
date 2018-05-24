@@ -1,12 +1,15 @@
 import React from 'react';
-import { injectIntl, intlShape } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import Loading from 'primitives/other/loading';
+import ContentContainer from 'primitives/container/content-container';
+import AbsoluteContainer from 'primitives/container/absolute-container';
+import Header, { HeaderType } from 'primitives/text/header';
+import Spinner from 'primitives/other/spinner';
 import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex/generator';
 
-function SectorLoading({ intl }) {
+export default function Loading() {
   const { hexes } = hexGenerator({
     renderSector: false,
     height: window.innerHeight,
@@ -20,13 +23,14 @@ function SectorLoading({ intl }) {
         width={window.innerWidth}
         hexes={hexes}
       />
-      <Loading message={intl.formatMessage({ id: 'misc.loadingSector' })} />
+      <AbsoluteContainer>
+        <ContentContainer direction="column" align="center" justify="center">
+          <Spinner size={100} />
+          <Header type={HeaderType.header2}>
+            <FormattedMessage id="misc.loadingSector" />
+          </Header>
+        </ContentContainer>
+      </AbsoluteContainer>
     </div>
   );
 }
-
-SectorLoading.propTypes = {
-  intl: intlShape.isRequired,
-};
-
-export default injectIntl(SectorLoading);
