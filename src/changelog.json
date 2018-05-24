@@ -1,4 +1,13 @@
 {
+  "5.2.0": {
+    "description": "Reduce overall bundle size and speed up the site loading.",
+    "date": "5-24-2018",
+    "changes": [
+      "Delete navigation routes when a sector is deleted.",
+      "Begin translating Spanish, Russian, and Latin.",
+      "Hide navigation edit when viewing a newly generated and unsaved sector."
+    ]
+  },
   "5.1.1": {
     "description":
       "Fix redirects from overview to sector view when viewing a shared sector.",
