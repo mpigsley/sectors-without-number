@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { injectIntl } from 'react-intl';
+import { withRouter } from 'react-router-dom';
 
 import Entities from 'constants/entities';
+import { enterGameRoute } from 'store/actions/combined.actions';
 import { generateEntity } from 'store/actions/entity.actions';
 import { isFetchingCurrentNavigation } from 'store/selectors/navigation.selectors';
 import {
@@ -33,6 +35,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   toSafeRoute: sector => dispatch(push(sector ? `/sector/${sector}` : '/')),
+  enterGameRoute: () => dispatch(enterGameRoute()),
   generateSector: () =>
     dispatch(
       generateEntity({ entityType: Entities.sector.key }, {}, props.intl),
@@ -40,5 +43,5 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(SectorMap),
+  withRouter(connect(mapStateToProps, mapDispatchToProps)(SectorMap)),
 );

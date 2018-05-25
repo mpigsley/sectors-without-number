@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 

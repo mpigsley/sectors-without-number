@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';

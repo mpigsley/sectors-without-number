@@ -1,13 +1,14 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
-import { browserHistory } from 'react-router';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import { reducer as toastrReducer } from 'react-redux-toastr';
+import createHistory from 'history/createBrowserHistory';
 
 import reducers from './reducers';
 
-const middleware = [thunk, routerMiddleware(browserHistory)];
+export const history = createHistory();
+const middleware = [thunk, routerMiddleware(history)];
 
 if (process.env.NODE_ENV !== 'production') {
   middleware.push(createLogger());
@@ -16,7 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
 export default createStore(
   combineReducers({
     ...reducers,
-    routing: routerReducer,
+    router: routerReducer,
     toastr: toastrReducer,
   }),
   applyMiddleware(...middleware),
