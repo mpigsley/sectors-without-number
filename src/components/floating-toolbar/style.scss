@@ -113,3 +113,13 @@
   background-color: $primary;
   transition: color 0.2s linear;
 }
+
+.FloatingToolbar-CreateLayer {
+  padding-bottom: 0.4rem;
+  padding-top: 0.4rem;
+
+  span {
+    margin-left: 0.5rem;
+    margin-right: 0.8rem;
+  }
+}

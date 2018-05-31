@@ -6,7 +6,7 @@ import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import { includes } from 'constants/lodash';
-import { Lock, Unlock, Layers, HelpCircle, Edit2 } from 'constants/icons';
+import { Plus, Lock, Unlock, Layers, HelpCircle, Edit2 } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
 import './style.css';
@@ -107,7 +107,6 @@ export default class FloatingToolbar extends Component {
               className="FloatingToolbar-SubList"
               direction="column"
             >
-              {this.renderLayers()}
               <FlexContainer className="FloatingToolbar-SubItemOuter">
                 <FlexContainer
                   onClick={() => this.props.toggleLayer('systemText')}
@@ -118,6 +117,16 @@ export default class FloatingToolbar extends Component {
                   })}
                 >
                   <FormattedMessage id="misc.hexSystemText" />
+                </FlexContainer>
+              </FlexContainer>
+              {this.renderLayers()}
+              <FlexContainer className="FloatingToolbar-SubItemOuter">
+                <FlexContainer
+                  onClick={() => {}}
+                  justify="center"
+                  className="FloatingToolbar-SubItemName FloatingToolbar-CreateLayer"
+                >
+                  <Plus size={18} /> <span>Create Layer</span>
                 </FlexContainer>
               </FlexContainer>
             </FlexContainer>
