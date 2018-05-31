@@ -30,6 +30,19 @@ import RefuelingStationSituation from 'constants/refueling-station/situation';
 import ResearchBaseOccupation from 'constants/research-base/occupation';
 import ResearchBaseSituation from 'constants/research-base/situation';
 
+const layer = {
+  key: 'layer',
+  name: 'entity.layer',
+  shortName: 'entity.layer',
+  topLevel: false,
+  isAdditional: false,
+  editable: false,
+  nameGenerator: () => {},
+  attributes: [],
+  children: [],
+  sidebar: 'layer',
+};
+
 const navigation = {
   key: 'navigation',
   name: 'entity.navigation',
@@ -275,6 +288,7 @@ export default {
   blackHole,
   deepSpaceStation,
   gasGiantMine,
+  layer,
   moon,
   moonBase,
   navigation,

@@ -121,13 +121,12 @@ export default class FloatingToolbar extends Component {
               </FlexContainer>
               {this.renderLayers()}
               <FlexContainer className="FloatingToolbar-SubItemOuter">
-                <FlexContainer
-                  onClick={() => {}}
-                  justify="center"
+                <Link
+                  to={`/sector/${this.props.sectorId}/layer`}
                   className="FloatingToolbar-SubItemName FloatingToolbar-CreateLayer"
                 >
                   <Plus size={18} /> <span>Create Layer</span>
-                </FlexContainer>
+                </Link>
               </FlexContainer>
             </FlexContainer>
           </FlexContainer>

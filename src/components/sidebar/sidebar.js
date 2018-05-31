@@ -7,6 +7,7 @@ import Entities from 'constants/entities';
 import DefaultSidebar from 'components/sidebar-entities/default-sidebar';
 import NoteSidebar from 'components/sidebar-entities/note-sidebar';
 import NavigationSidebar from 'components/sidebar-entities/navigation-sidebar';
+import LayerSidebar from 'components/sidebar-entities/layer-sidebar';
 import { some, size } from 'constants/lodash';
 
 import SectorBuilderInfo from './sector-builder-info';
@@ -17,6 +18,7 @@ const ENTITY_SIDEBAR = {
   default: DefaultSidebar,
   note: NoteSidebar,
   navigation: NavigationSidebar,
+  layer: LayerSidebar,
 };
 
 export default class Sidebar extends Component {

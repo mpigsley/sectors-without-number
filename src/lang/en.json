@@ -73,6 +73,8 @@
   "entity.gasGiantMine.situation.revolt": "The workers are in revolt",
   "entity.gasGiantMine.situation.pirates": "Pirates secretly fuel there",
   "entity.gasGiantMine.situation.remnants": "Alien remnants were found",
+  "entity.layer": "Layer",
+  "entity.layers": "Layers",
   "entity.moon": "Moon",
   "entity.moons": "Moons",
   "entity.moonBase": "Moon Base",
