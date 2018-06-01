@@ -1,13 +1,13 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import {
-  UPDATE_CONFIGURATION,
-  ENTITY_HOLD,
-  RELEASE_HOLD,
-  ENTITY_HOVER,
-  RELEASE_SYNC_LOCK,
-  TOP_LEVEL_ENTITY_CREATE,
-  CANCEL_TOP_LEVEL_ENTITY_CREATE,
+  UPDATED_CONFIGURATION,
+  ENTITY_HELD,
+  RELEASE_HELD,
+  ENTITY_HOVERED,
+  RELEASED_SYNC_LOCK,
+  TOP_LEVEL_ENTITY_CREATED,
+  CANCELED_TOP_LEVEL_ENTITY_CREATE,
   SET_EXPORT_TYPE,
   OPENED_EXPORT,
   CLOSED_EXPORT,
@@ -16,9 +16,9 @@ import {
   CLEARED_MAP_KEYS,
 } from 'store/actions/sector.actions';
 import {
-  SAVE_SECTOR,
-  UPDATE_ENTITIES,
-  DELETE_ENTITIES,
+  SAVED_SECTOR,
+  UPDATED_ENTITIES,
+  DELETED_ENTITIES,
 } from 'store/actions/entity.actions';
 
 import { ROWS, COLUMNS } from 'constants/defaults';
@@ -63,9 +63,9 @@ export default function sector(state = initialState, action) {
       }
       return { ...state, renderSector: false };
     }
-    case SAVE_SECTOR:
-    case UPDATE_ENTITIES:
-    case DELETE_ENTITIES:
+    case SAVED_SECTOR:
+    case UPDATED_ENTITIES:
+    case DELETED_ENTITIES:
       return {
         ...state,
         holdKey: null,
@@ -73,7 +73,7 @@ export default function sector(state = initialState, action) {
         topLevelKey: null,
         syncLock: true,
       };
-    case UPDATE_CONFIGURATION:
+    case UPDATED_CONFIGURATION:
       return {
         ...state,
         configuration: {
@@ -81,17 +81,17 @@ export default function sector(state = initialState, action) {
           [action.key]: action.value,
         },
       };
-    case ENTITY_HOLD:
+    case ENTITY_HELD:
       return { ...state, holdKey: action.key };
-    case RELEASE_HOLD:
+    case RELEASE_HELD:
       return { ...state, holdKey: null };
-    case ENTITY_HOVER:
+    case ENTITY_HOVERED:
       return { ...state, hoverKey: action.key };
-    case RELEASE_SYNC_LOCK:
+    case RELEASED_SYNC_LOCK:
       return { ...state, syncLock: false };
-    case TOP_LEVEL_ENTITY_CREATE:
+    case TOP_LEVEL_ENTITY_CREATED:
       return { ...state, topLevelKey: action.key };
-    case CANCEL_TOP_LEVEL_ENTITY_CREATE:
+    case CANCELED_TOP_LEVEL_ENTITY_CREATE:
       return { ...state, topLevelKey: null };
     case SET_EXPORT_TYPE:
       return { ...state, exportType: action.exportType };

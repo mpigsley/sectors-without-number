@@ -5,7 +5,7 @@ import {
   isSidebarEditActiveSelector,
   sidebarEditChildrenSelector,
 } from 'store/selectors/base.selectors';
-import { createChildInEdit } from 'store/actions/sidebar-edit.actions';
+import { createChildInEdit } from 'store/actions/sidebar.actions';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 
 import EntityList from './entity-list';

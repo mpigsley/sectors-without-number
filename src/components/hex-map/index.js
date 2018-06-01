@@ -12,7 +12,7 @@ import {
   topLevelEntityCreate,
 } from 'store/actions/sector.actions';
 import { moveTopLevelEntity } from 'store/actions/entity.actions';
-import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
+import { deactivateSidebarEdit } from 'store/actions/sidebar.actions';
 import {
   addRouteLocation,
   completeRoute,

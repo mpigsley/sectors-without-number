@@ -14,7 +14,8 @@ import Entities from 'constants/entities';
 import { mergeEntityUpdates } from 'utils/entity';
 import { keys } from 'constants/lodash';
 
-export const INITIALIZE = 'INITIALIZE';
+const ACTION_PREFIX = '@@combined';
+export const INITIALIZED = `${ACTION_PREFIX}/INITIALIZED`;
 
 export const initialize = location => dispatch =>
   getCurrentUser().then(user => {
@@ -39,7 +40,7 @@ export const initialize = location => dispatch =>
     return Promise.all(promises).then(
       ([current, routes, sectors, userLocale]) =>
         dispatch({
-          type: INITIALIZE,
+          type: INITIALIZED,
           user,
           entities: mergeEntityUpdates(
             { [Entities.sector.key]: sectors },

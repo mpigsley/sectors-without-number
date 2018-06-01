@@ -12,12 +12,13 @@ import {
 } from 'constants/lodash';
 import Entities from 'constants/entities';
 import {
-  UPDATE_ENTITIES,
-  DELETE_ENTITIES,
-  UPDATE_ID_MAPPING,
+  UPDATED_ENTITIES,
+  DELETED_ENTITIES,
+  UPDATED_ID_MAPPING,
   FETCHED_SECTOR,
 } from 'store/actions/entity.actions';
-import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
+import { INITIALIZED } from 'store/actions/combined.actions';
+import { LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 import { mergeEntityUpdates } from 'utils/entity';
 
 const initialState = {
@@ -32,7 +33,7 @@ const initialState = {
 
 export default function entity(state = initialState, action) {
   switch (action.type) {
-    case INITIALIZE:
+    case INITIALIZED:
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),
@@ -40,7 +41,7 @@ export default function entity(state = initialState, action) {
         saved: action.saved,
         share: action.share,
       };
-    case UPDATE_ENTITIES:
+    case UPDATED_ENTITIES:
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),
@@ -87,7 +88,7 @@ export default function entity(state = initialState, action) {
         }),
       };
     }
-    case UPDATE_ID_MAPPING: {
+    case UPDATED_ID_MAPPING: {
       const transformedSector = action.mapping[state.currentSector];
       return {
         ...state,
@@ -120,7 +121,7 @@ export default function entity(state = initialState, action) {
         ),
       };
     }
-    case DELETE_ENTITIES: {
+    case DELETED_ENTITIES: {
       const deletedSectorIds = action.entities[Entities.sector.key] || [];
       return {
         ...state,

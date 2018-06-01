@@ -1,15 +1,15 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
 
 import {
-  ACTIVATE_SIDEBAR_EDIT,
-  DEACTIVATE_SIDEBAR_EDIT,
-  UPDATE_ENTITY_IN_EDIT,
-  DELETE_CHILD_IN_EDIT,
+  ACTIVATED_EDIT,
+  DEACTIVATED_EDIT,
+  UPDATED_ENTITY_IN_EDIT,
+  DELETED_CHILD_IN_EDIT,
   UNDO_DELETE_CHILD_IN_EDIT,
-  UPDATE_CHILD_IN_EDIT,
-  CREATE_CHILD_IN_EDIT,
-} from 'store/actions/sidebar-edit.actions';
-import { UPDATE_ENTITIES } from 'store/actions/entity.actions';
+  UPDATED_CHILD_IN_EDIT,
+  CREATED_CHILD_IN_EDIT,
+} from 'store/actions/sidebar.actions';
+import { UPDATED_ENTITIES } from 'store/actions/entity.actions';
 import { omit, omitBy, isNil } from 'constants/lodash';
 
 const initialState = {
@@ -20,18 +20,18 @@ const initialState = {
 
 export default function sidebarEdit(state = initialState, action) {
   switch (action.type) {
-    case ACTIVATE_SIDEBAR_EDIT:
+    case ACTIVATED_EDIT:
       return {
         ...state,
         isSidebarEditActive: true,
         entity: action.entity,
         children: action.children,
       };
-    case UPDATE_ENTITIES:
-    case DEACTIVATE_SIDEBAR_EDIT:
+    case UPDATED_ENTITIES:
+    case DEACTIVATED_EDIT:
     case LOCATION_CHANGE:
       return initialState;
-    case UPDATE_ENTITY_IN_EDIT:
+    case UPDATED_ENTITY_IN_EDIT:
       return {
         ...state,
         entity: omitBy(
@@ -43,7 +43,7 @@ export default function sidebarEdit(state = initialState, action) {
           isNil,
         ),
       };
-    case DELETE_CHILD_IN_EDIT: {
+    case DELETED_CHILD_IN_EDIT: {
       let entityTypeList;
       const doDelete =
         state.children[action.entityType][action.entityId].isCreated;
@@ -83,7 +83,7 @@ export default function sidebarEdit(state = initialState, action) {
           },
         },
       };
-    case UPDATE_CHILD_IN_EDIT:
+    case UPDATED_CHILD_IN_EDIT:
       return {
         ...state,
         children: {
@@ -98,7 +98,7 @@ export default function sidebarEdit(state = initialState, action) {
           },
         },
       };
-    case CREATE_CHILD_IN_EDIT:
+    case CREATED_CHILD_IN_EDIT:
       return {
         ...state,
         children: {

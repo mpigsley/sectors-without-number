@@ -20,7 +20,7 @@ import { saveEntityEdit, saveSector } from 'store/actions/entity.actions';
 import {
   activateSidebarEdit,
   deactivateSidebarEdit,
-} from 'store/actions/sidebar-edit.actions';
+} from 'store/actions/sidebar.actions';
 import EntityNavigation from './entity-navigation';
 
 const mapStateToProps = state => ({

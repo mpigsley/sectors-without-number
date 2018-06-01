@@ -2,9 +2,9 @@ import { uniq, omit } from 'constants/lodash';
 import {
   FETCHED_NAVIGATION,
   SET_SYNC_LOCK,
-  RELEASE_SYNC_LOCK,
+  RELEASED_SYNC_LOCK,
   RESET_NAV_SETTINGS,
-  CANCEL_NAVIGATION,
+  CANCELED_NAVIGATION,
   UPDATED_NAV_SETTINGS,
   ADDED_ROUTE_LOCATION,
   COMPLETED_ROUTE,
@@ -12,7 +12,7 @@ import {
   TOGGLED_VISIBILITY,
   SET_ROUTE_LOCATOR,
 } from 'store/actions/navigation.actions';
-import { INITIALIZE } from 'store/actions/user.actions';
+import { INITIALIZED } from 'store/actions/combined.actions';
 
 const initialSettings = () => ({
   route: [],
@@ -32,7 +32,7 @@ export const initialState = {
 
 export default function navigation(state = initialState, action) {
   switch (action.type) {
-    case INITIALIZE:
+    case INITIALIZED:
     case FETCHED_NAVIGATION:
       return {
         ...state,
@@ -44,11 +44,11 @@ export default function navigation(state = initialState, action) {
       };
     case SET_SYNC_LOCK:
       return { ...state, syncLock: true };
-    case RELEASE_SYNC_LOCK:
+    case RELEASED_SYNC_LOCK:
       return { ...state, syncLock: false };
     case RESET_NAV_SETTINGS:
       return { ...state, settings: initialSettings() };
-    case CANCEL_NAVIGATION:
+    case CANCELED_NAVIGATION:
       return {
         ...state,
         settings: {

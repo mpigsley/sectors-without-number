@@ -16,22 +16,23 @@ import {
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { uniq, includes } from 'constants/lodash';
 
-export const FETCHED_NAVIGATION = 'FETCHED_NAVIGATION';
-export const SET_SYNC_LOCK = 'SET_SYNC_LOCK';
-export const RELEASE_SYNC_LOCK = 'RELEASE_SYNC_LOCK';
-export const RESET_NAV_SETTINGS = 'RESET_NAV_SETTINGS';
-export const CANCEL_NAVIGATION = 'CANCEL_NAVIGATION';
-export const UPDATED_NAV_SETTINGS = 'UPDATED_NAV_SETTINGS';
-export const ADDED_ROUTE_LOCATION = 'ADDED_ROUTE_LOCATION';
-export const COMPLETED_ROUTE = 'COMPLETED_ROUTE';
-export const DELETED_ROUTE = 'DELETED_ROUTE';
-export const TOGGLED_VISIBILITY = 'TOGGLED_VISIBILITY';
-export const SET_ROUTE_LOCATOR = 'SET_ROUTE_LOCATOR';
+const ACTION_PREFIX = '@@navigation';
+export const FETCHED_NAVIGATION = `${ACTION_PREFIX}/FETCHED_NAVIGATION`;
+export const SET_SYNC_LOCK = `${ACTION_PREFIX}/SET_SYNC_LOCK`;
+export const RELEASED_SYNC_LOCK = `${ACTION_PREFIX}/RELEASED_SYNC_LOCK`;
+export const RESET_NAV_SETTINGS = `${ACTION_PREFIX}/RESET_NAV_SETTINGS`;
+export const CANCELED_NAVIGATION = `${ACTION_PREFIX}/CANCELED_NAVIGATION`;
+export const UPDATED_NAV_SETTINGS = `${ACTION_PREFIX}/UPDATED_NAV_SETTINGS`;
+export const ADDED_ROUTE_LOCATION = `${ACTION_PREFIX}/ADDED_ROUTE_LOCATION`;
+export const COMPLETED_ROUTE = `${ACTION_PREFIX}/COMPLETED_ROUTE`;
+export const DELETED_ROUTE = `${ACTION_PREFIX}/DELETED_ROUTE`;
+export const TOGGLED_VISIBILITY = `${ACTION_PREFIX}/TOGGLED_VISIBILITY`;
+export const SET_ROUTE_LOCATOR = `${ACTION_PREFIX}/SET_ROUTE_LOCATOR`;
 
 export const setSyncLock = () => ({ type: SET_SYNC_LOCK });
-export const releaseSyncLock = () => ({ type: RELEASE_SYNC_LOCK });
+export const releaseSyncLock = () => ({ type: RELEASED_SYNC_LOCK });
 export const resetNavSettings = () => ({ type: RESET_NAV_SETTINGS });
-export const cancelNavigation = () => ({ type: CANCEL_NAVIGATION });
+export const cancelNavigation = () => ({ type: CANCELED_NAVIGATION });
 export const updateNavSettings = (key, value) => ({
   type: UPDATED_NAV_SETTINGS,
   key,

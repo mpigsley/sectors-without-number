@@ -34,11 +34,11 @@ export const isExportOpenSelector = state => state.sector.isExportOpen;
 export const isPrintingSelector = state => state.sector.isPrinting;
 
 /* Sidebar Edit */
-export const sidebarEditSelector = state => state.sidebarEdit;
+export const sidebarEditSelector = state => state.sidebar;
 export const isSidebarEditActiveSelector = state =>
-  state.sidebarEdit.isSidebarEditActive;
-export const sidebarEditEntitySelector = state => state.sidebarEdit.entity;
-export const sidebarEditChildrenSelector = state => state.sidebarEdit.children;
+  state.sidebar.isSidebarEditActive;
+export const sidebarEditEntitySelector = state => state.sidebar.entity;
+export const sidebarEditChildrenSelector = state => state.sidebar.children;
 
 /* Router */
 export const routerLocationSelector = state => state.router.location;
