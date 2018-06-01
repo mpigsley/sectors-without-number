@@ -15,6 +15,7 @@
   line-height: 38px;
   margin: 0.4rem 1rem;
   padding: 0 30px;
+  position: relative;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
@@ -27,6 +28,20 @@
     border-color: $light2;
     outline: 0;
   }
+}
+
+.Button-Inner {
+  pointer-events: none;
+}
+
+.Button-Loading {
+  visibility: hidden;
+}
+
+.Button-Spinner {
+  left: calc(50% - 10px);
+  position: absolute;
+  top: calc(50% - 10px);
 }
 
 .Button-Primary {

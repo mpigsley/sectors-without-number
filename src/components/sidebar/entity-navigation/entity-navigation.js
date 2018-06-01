@@ -83,7 +83,9 @@ export default function EntityNavigation({
   }
 
   let backUrl = '/';
-  if (entity.parent || entityType === Entities.navigation.key) {
+  const isSpecialEntity =
+    [Entities.navigation.key, Entities.layer.key].indexOf(entityType) !== -1;
+  if (entity.parent || isSpecialEntity) {
     backUrl = `${backUrl}sector/${currentSector}`;
     if (entity.parentEntity && entity.parentEntity !== Entities.sector.key) {
       backUrl = `${backUrl}/${entity.parentEntity}/${entity.parent}`;
