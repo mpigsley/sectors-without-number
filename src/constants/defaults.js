@@ -1,6 +1,6 @@
 export const ROWS = 10;
 export const COLUMNS = 8;
-export const SECTOR_LIMIT = 5;
+export const SECTOR_LIMIT = 10;
 export const DEFAULT_HEX_WIDTH = 50; // Hex width when not rendering sector
 export const HEX_PADDING = 2; // Pixels between hexes
 export const EXTRA_HEXES = 1; // Extra hexes around canvas edges
