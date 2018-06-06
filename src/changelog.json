@@ -1,4 +1,8 @@
 {
+  "5.4.0": {
+    "description": "Increase Sector Limit to 10.",
+    "date": "6-6-2018"
+  },
   "5.3.0": {
     "description": "Upgrade routing library.",
     "date": "5-25-2018"
