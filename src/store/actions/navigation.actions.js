@@ -7,6 +7,7 @@ import {
   navigationSettingsSelector,
   navigationSettingsRouteSelector,
 } from 'store/selectors/base.selectors';
+import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 import {
   createRoute,
   deleteRoute,
@@ -28,6 +29,10 @@ export const DELETED_ROUTE = 'DELETED_ROUTE';
 export const TOGGLED_VISIBILITY = 'TOGGLED_VISIBILITY';
 export const SET_ROUTE_LOCATOR = 'SET_ROUTE_LOCATOR';
 
+export const addBlankNavigationFetch = sectorId => ({
+  type: FETCHED_NAVIGATION,
+  sectorId,
+});
 export const setSyncLock = () => ({ type: SET_SYNC_LOCK });
 export const releaseSyncLock = () => ({ type: RELEASE_SYNC_LOCK });
 export const resetNavSettings = () => ({ type: RESET_NAV_SETTINGS });
@@ -42,7 +47,8 @@ export const fetchNavigation = sectorId => (dispatch, getState) => {
   const state = getState();
   if (
     includes(fetchedNavigationSelector(state), sectorId) ||
-    !isInitializedSelector(state)
+    !isInitializedSelector(state) ||
+    !isCurrentSectorSaved(state)
   ) {
     return Promise.resolve({});
   }

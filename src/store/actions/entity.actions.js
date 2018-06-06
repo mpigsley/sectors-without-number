@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux';
 
+import { addBlankNavigationFetch } from 'store/actions/navigation.actions';
 import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
 import { releaseSyncLock, entityRelease } from 'store/actions/sector.actions';
 import {
@@ -81,9 +82,9 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
     dispatch({ type: UPDATE_ID_MAPPING, mapping }),
   ]).then(() => {
     const currentSector = currentSectorSelector(state);
-    return dispatch(
-      push(`/sector/${mapping[currentSector] || currentSector}${entityUrl}`),
-    );
+    const newSector = mapping[currentSector] || currentSector;
+    dispatch(addBlankNavigationFetch(newSector));
+    dispatch(push(`/sector/${newSector}${entityUrl}`));
   });
 };
 

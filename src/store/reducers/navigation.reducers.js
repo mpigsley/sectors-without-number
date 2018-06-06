@@ -33,15 +33,17 @@ export const initialState = {
 export default function navigation(state = initialState, action) {
   switch (action.type) {
     case INITIALIZE:
-    case FETCHED_NAVIGATION:
+    case FETCHED_NAVIGATION: {
+      let { routes } = state;
+      if (action.sectorId) {
+        routes = { ...state.routes, [action.sectorId]: action.routes || {} };
+      }
       return {
         ...state,
-        routes: {
-          ...state.routes,
-          [action.sectorId]: action.routes,
-        },
+        routes,
         fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
       };
+    }
     case SET_SYNC_LOCK:
       return { ...state, syncLock: true };
     case RELEASE_SYNC_LOCK:
