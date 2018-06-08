@@ -69,7 +69,7 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
   if (action) {
     dispatches.push(dispatch(action));
   }
-  if (!mapping) {
+  if (!size(mapping || {})) {
     return Promise.all(dispatches);
   }
   const currentEntity = currentEntitySelector(state);
