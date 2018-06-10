@@ -19,13 +19,17 @@ import {
   SAVED_SECTOR,
   UPDATED_ENTITIES,
   DELETED_ENTITIES,
+  UPDATED_ID_MAPPING,
 } from 'store/actions/entity.actions';
+import { INITIALIZED, FETCHED_SECTOR } from 'store/actions/combined.actions';
 
+import { uniq } from 'constants/lodash';
 import { ROWS, COLUMNS } from 'constants/defaults';
 import Entities from 'constants/entities';
 import ExportTypes from 'constants/export-types';
 
 const initialState = {
+  fetched: [],
   renderSector: false,
   holdKey: null,
   hoverKey: null,
@@ -47,12 +51,27 @@ const initialState = {
 
 export default function sector(state = initialState, action) {
   switch (action.type) {
+    case INITIALIZED:
+    case FETCHED_SECTOR:
+      return {
+        ...state,
+        fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
+      };
+    case UPDATED_ID_MAPPING:
+      return {
+        ...state,
+        fetched: uniq([
+          ...state.fetched,
+          action.mapping[state.currentSector],
+        ]).filter(f => f),
+      };
     case LOCATION_CHANGE: {
       const { pathname } = action.payload;
       if (['/', '/configure', '/changelog'].indexOf(pathname) >= 0) {
         return {
           ...initialState,
           renderSector: false,
+          fetched: state.fetched,
           configuration: {
             ...initialState.configuration,
             name: Entities.sector.nameGenerator(),

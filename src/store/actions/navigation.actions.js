@@ -1,28 +1,20 @@
 import {
-  isInitializedSelector,
   currentSectorSelector,
   navigationRoutesSelector,
-  fetchedNavigationSelector,
   navigationSyncLockSelector,
   navigationSettingsSelector,
   navigationSettingsRouteSelector,
 } from 'store/selectors/base.selectors';
-import {
-  createRoute,
-  deleteRoute,
-  setVisibility,
-  getNavigationData,
-} from 'store/api/navigation';
+import { createRoute, deleteRoute, setVisibility } from 'store/api/navigation';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { uniq, includes } from 'constants/lodash';
+import { uniq } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@navigation';
-export const FETCHED_NAVIGATION = `${ACTION_PREFIX}/FETCHED_NAVIGATION`;
 export const SET_SYNC_LOCK = `${ACTION_PREFIX}/SET_SYNC_LOCK`;
 export const RELEASED_SYNC_LOCK = `${ACTION_PREFIX}/RELEASED_SYNC_LOCK`;
-export const RESET_NAV_SETTINGS = `${ACTION_PREFIX}/RESET_NAV_SETTINGS`;
-export const CANCELED_NAVIGATION = `${ACTION_PREFIX}/CANCELED_NAVIGATION`;
-export const UPDATED_NAV_SETTINGS = `${ACTION_PREFIX}/UPDATED_NAV_SETTINGS`;
+export const RESET_SETTINGS = `${ACTION_PREFIX}/RESET_SETTINGS`;
+export const CANCELED = `${ACTION_PREFIX}/CANCELED`;
+export const UPDATED_SETTINGS = `${ACTION_PREFIX}/UPDATED_SETTINGS`;
 export const ADDED_ROUTE_LOCATION = `${ACTION_PREFIX}/ADDED_ROUTE_LOCATION`;
 export const COMPLETED_ROUTE = `${ACTION_PREFIX}/COMPLETED_ROUTE`;
 export const DELETED_ROUTE = `${ACTION_PREFIX}/DELETED_ROUTE`;
@@ -31,30 +23,13 @@ export const SET_ROUTE_LOCATOR = `${ACTION_PREFIX}/SET_ROUTE_LOCATOR`;
 
 export const setSyncLock = () => ({ type: SET_SYNC_LOCK });
 export const releaseSyncLock = () => ({ type: RELEASED_SYNC_LOCK });
-export const resetNavSettings = () => ({ type: RESET_NAV_SETTINGS });
-export const cancelNavigation = () => ({ type: CANCELED_NAVIGATION });
+export const resetNavSettings = () => ({ type: RESET_SETTINGS });
+export const cancelNavigation = () => ({ type: CANCELED });
 export const updateNavSettings = (key, value) => ({
-  type: UPDATED_NAV_SETTINGS,
+  type: UPDATED_SETTINGS,
   key,
   value,
 });
-
-export const fetchNavigation = sectorId => (dispatch, getState) => {
-  const state = getState();
-  if (
-    includes(fetchedNavigationSelector(state), sectorId) ||
-    !isInitializedSelector(state)
-  ) {
-    return Promise.resolve({});
-  }
-  return getNavigationData(sectorId).then(routes =>
-    dispatch({
-      type: FETCHED_NAVIGATION,
-      sectorId,
-      routes,
-    }),
-  );
-};
 
 export const addRouteLocation = location => (dispatch, getState) => {
   const state = getState();

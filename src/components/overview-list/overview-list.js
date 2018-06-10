@@ -16,7 +16,7 @@ import './style.css';
 export default class OverviewList extends Component {
   static propTypes = {
     toSafeRoute: PropTypes.func.isRequired,
-    enterGameRoute: PropTypes.func.isRequired,
+    fetchSector: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     currentSector: PropTypes.string.isRequired,
     entities: PropTypes.shape().isRequired,
@@ -36,7 +36,7 @@ export default class OverviewList extends Component {
     ) {
       this.props.toSafeRoute();
     } else {
-      this.props.enterGameRoute();
+      this.props.fetchSector();
     }
   }
 

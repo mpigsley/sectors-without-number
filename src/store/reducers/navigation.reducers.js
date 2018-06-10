@@ -1,18 +1,17 @@
-import { uniq, omit } from 'constants/lodash';
+import { omit } from 'constants/lodash';
 import {
-  FETCHED_NAVIGATION,
   SET_SYNC_LOCK,
   RELEASED_SYNC_LOCK,
-  RESET_NAV_SETTINGS,
-  CANCELED_NAVIGATION,
-  UPDATED_NAV_SETTINGS,
+  RESET_SETTINGS,
+  CANCELED,
+  UPDATED_SETTINGS,
   ADDED_ROUTE_LOCATION,
   COMPLETED_ROUTE,
   DELETED_ROUTE,
   TOGGLED_VISIBILITY,
   SET_ROUTE_LOCATOR,
 } from 'store/actions/navigation.actions';
-import { INITIALIZED } from 'store/actions/combined.actions';
+import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
 
 const initialSettings = () => ({
   route: [],
@@ -25,7 +24,6 @@ const initialSettings = () => ({
 export const initialState = {
   settings: initialSettings(),
   routes: {},
-  fetched: [],
   syncLock: false,
   routeLocator: null,
 };
@@ -33,22 +31,21 @@ export const initialState = {
 export default function navigation(state = initialState, action) {
   switch (action.type) {
     case INITIALIZED:
-    case FETCHED_NAVIGATION:
+    case FETCHED_SECTOR:
       return {
         ...state,
         routes: {
           ...state.routes,
           [action.sectorId]: action.routes,
         },
-        fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
       };
     case SET_SYNC_LOCK:
       return { ...state, syncLock: true };
     case RELEASED_SYNC_LOCK:
       return { ...state, syncLock: false };
-    case RESET_NAV_SETTINGS:
+    case RESET_SETTINGS:
       return { ...state, settings: initialSettings() };
-    case CANCELED_NAVIGATION:
+    case CANCELED:
       return {
         ...state,
         settings: {
@@ -57,7 +54,7 @@ export default function navigation(state = initialState, action) {
           isCreatingRoute: false,
         },
       };
-    case UPDATED_NAV_SETTINGS:
+    case UPDATED_SETTINGS:
       return {
         ...state,
         settings: {

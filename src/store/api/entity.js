@@ -64,7 +64,6 @@ export const getSectorEntities = (sectorId, uid) => {
         ),
       ).then(() => ({
         entities,
-        sectorId,
         share: data.creator !== uid ? sectorId : undefined,
       }));
     });

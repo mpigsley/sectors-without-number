@@ -15,16 +15,14 @@ import {
   UPDATED_ENTITIES,
   DELETED_ENTITIES,
   UPDATED_ID_MAPPING,
-  FETCHED_SECTOR,
 } from 'store/actions/entity.actions';
-import { INITIALIZED } from 'store/actions/combined.actions';
+import { INITIALIZED, FETCHED_SECTOR } from 'store/actions/combined.actions';
 import { LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 import { mergeEntityUpdates } from 'utils/entity';
 
 const initialState = {
   models: mapValues(Entities, () => ({})),
   saved: [],
-  fetched: [],
   share: null,
   currentSector: null,
   currentEntityType: null,
@@ -37,7 +35,6 @@ export default function entity(state = initialState, action) {
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),
-        fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
         saved: action.saved,
         share: action.share,
       };
@@ -50,7 +47,6 @@ export default function entity(state = initialState, action) {
       return {
         ...state,
         share: action.share,
-        fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
         models: mergeEntityUpdates(state.models, action.entities),
       };
     case LOGGED_IN:
@@ -73,9 +69,6 @@ export default function entity(state = initialState, action) {
         currentSector,
         share:
           isGameView && includes(uniqSectors, state.share) ? state.share : null,
-        fetched: isGameView
-          ? state.fetched
-          : state.fetched.filter(id => includes(state.saved, id)),
         currentEntityType: isGameView ? pathname.split('/')[3] : null,
         currentEntity: isGameView ? pathname.split('/')[4] : null,
         models: mapValues(state.models, (entities, entityType) => {
@@ -95,7 +88,6 @@ export default function entity(state = initialState, action) {
         currentSector: transformedSector || state.currentSector,
         currentEntity:
           action.mapping[state.currentEntity] || state.currentEntity,
-        fetched: uniq([...state.fetched, transformedSector]).filter(f => f),
         saved: uniq([
           ...state.saved.map(saveId => action.mapping[saveId] || saveId),
           transformedSector,

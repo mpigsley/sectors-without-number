@@ -1,15 +1,13 @@
 import { createSelector } from 'reselect';
 
-import { includes, find, mapValues } from 'constants/lodash';
+import { find, mapValues } from 'constants/lodash';
 import { coordinateKey } from 'utils/common';
 
 import {
   currentSectorSelector,
-  fetchedNavigationSelector,
   navigationRoutesSelector,
   navigationSettingsSelector,
   isSharedSectorSelector,
-  savedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { getAllTopLevelEntities } from 'store/selectors/entity.selectors';
 
@@ -49,10 +47,4 @@ export const getCurrentNavigationWithSettings = createSelector(
   [getCurrentSectorNavigation, navigationSettingsSelector],
   (routes, settings) =>
     settings.isCreatingRoute ? { ...routes, settings } : routes,
-);
-
-export const isFetchingCurrentNavigation = createSelector(
-  [fetchedNavigationSelector, savedSectorSelector, currentSectorSelector],
-  (fetched, saved, sector) =>
-    includes(saved, sector) && !includes(fetched, sector),
 );
