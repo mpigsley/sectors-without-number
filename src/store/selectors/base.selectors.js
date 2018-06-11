@@ -53,5 +53,6 @@ export const navigationSyncLockSelector = state => state.navigation.syncLock;
 export const routeLocatorSelector = state => state.navigation.routeLocator;
 
 /* Layer */
-export const layersSelector = state => state.layer.layers;
-export const layerSyncLockSelector = state => state.layer.syncLock;
+export const layersSelector = state => state.layer.models;
+export const layerFormSelector = state => state.layer.layerForm;
+export const regionFormSelector = state => state.layer.regionForm;
