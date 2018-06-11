@@ -10,14 +10,20 @@ import Input from 'primitives/form/input';
 
 import './style.css';
 
-export default function LayerSidebar({ intl, entity, layerForm, updateLayer }) {
+export default function LayerSidebar({
+  intl,
+  entity,
+  layerForm,
+  updateLayer,
+  addLayer,
+}) {
   const isSaved = !!entity;
   if (isSaved) {
     return <div />;
   }
   return (
     <FlexContainer className="LayerSidebar" direction="column">
-      <Label noPadding>Layer Name</Label>
+      <Label noPadding>Layer Name *</Label>
       <Input
         placeholder="Name (25 characters)"
         value={layerForm.name}
@@ -37,7 +43,9 @@ export default function LayerSidebar({ intl, entity, layerForm, updateLayer }) {
         onChange={({ target }) => updateLayer('isHidden', target.checked)}
       />
       <FlexContainer>
-        <Button className="LayerSidebar-Create">Create Layer</Button>
+        <Button className="LayerSidebar-Create" onClick={() => addLayer()}>
+          Create Layer
+        </Button>
       </FlexContainer>
     </FlexContainer>
   );
@@ -52,6 +60,7 @@ LayerSidebar.propTypes = {
     isHidden: PropTypes.bool.isRequired,
   }).isRequired,
   updateLayer: PropTypes.func.isRequired,
+  addLayer: PropTypes.func.isRequired,
 };
 
 LayerSidebar.defaultProps = {

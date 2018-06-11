@@ -6,7 +6,7 @@ import {
   currentEntitySelector,
   layerFormSelector,
 } from 'store/selectors/base.selectors';
-import { updateLayer } from 'store/actions/layer.actions';
+import { updateLayer, addLayer } from 'store/actions/layer.actions';
 
 import LayerSidebar from './layer-sidebar';
 
@@ -15,6 +15,11 @@ const mapStateToProps = createStructuredSelector({
   layerForm: layerFormSelector,
 });
 
+const mapDispatchToProps = (dispatch, props) => ({
+  updateLayer: (key, value) => dispatch(updateLayer(key, value)),
+  addLayer: () => dispatch(addLayer(props.intl)),
+});
+
 export default injectIntl(
-  connect(mapStateToProps, { updateLayer })(LayerSidebar),
+  connect(mapStateToProps, mapDispatchToProps)(LayerSidebar),
 );
