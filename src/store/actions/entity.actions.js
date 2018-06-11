@@ -64,7 +64,7 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
   if (action) {
     dispatches.push(dispatch(action));
   }
-  if (!mapping) {
+  if (!size(mapping || {})) {
     return Promise.all(dispatches);
   }
   const currentEntity = currentEntitySelector(state);
@@ -77,9 +77,8 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
     dispatch({ type: UPDATED_ID_MAPPING, mapping }),
   ]).then(() => {
     const currentSector = currentSectorSelector(state);
-    return dispatch(
-      push(`/sector/${mapping[currentSector] || currentSector}${entityUrl}`),
-    );
+    const newSector = mapping[currentSector] || currentSector;
+    return dispatch(push(`/sector/${newSector}${entityUrl}`));
   });
 };
 

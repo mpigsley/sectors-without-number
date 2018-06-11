@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const _ = require('lodash');
 
-const SECTOR_LIMIT = 5;
+const SECTOR_LIMIT = 10;
 const ENTITY_TYPES = [
   'asteroidBase',
   'asteroidBelt',

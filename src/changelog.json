@@ -1,4 +1,18 @@
 {
+  "5.4.2": {
+    "description":
+      "Fix bug with disappearing navigation routes when an entity is updated.",
+    "date": "6-8-2018"
+  },
+  "5.4.1": {
+    "description":
+      "Fix bug where newly saved sector redirects to a loading view.",
+    "date": "6-6-2018"
+  },
+  "5.4.0": {
+    "description": "Increase Sector Limit to 10.",
+    "date": "6-6-2018"
+  },
   "5.3.0": {
     "description": "Upgrade routing library.",
     "date": "5-25-2018"
