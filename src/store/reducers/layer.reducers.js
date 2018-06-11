@@ -3,6 +3,7 @@ import {
   RESET_FORMS,
   UPDATED_LAYER,
   UPDATED_REGION,
+  CREATED_LAYER,
 } from 'store/actions/layer.actions';
 
 const initialLayer = () => ({
@@ -55,6 +56,18 @@ export default function layer(state = initialState, action) {
         regionForm: {
           ...state.regionForm,
           [action.key]: action.value,
+        },
+      };
+    case CREATED_LAYER:
+      return {
+        ...state,
+        layerForm: initialLayer(),
+        models: {
+          ...state.models,
+          [action.sectorId]: {
+            ...(state.models[action.sectorId] || {}),
+            [action.key]: action.layer,
+          },
         },
       };
     default:

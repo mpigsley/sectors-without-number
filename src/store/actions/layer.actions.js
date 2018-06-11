@@ -1,5 +1,3 @@
-import { push } from 'react-router-redux';
-
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { createLayer } from 'store/api/layer';
 import {
@@ -30,7 +28,6 @@ export const addLayer = intl => (dispatch, getState) => {
   const update = layerFormSelector(state);
 
   const sectorId = currentSectorSelector(state);
-  console.log(sectorId, update);
   return createLayer(sectorId, update)
     .then(({ key, layer }) => {
       dispatch(
@@ -39,7 +36,6 @@ export const addLayer = intl => (dispatch, getState) => {
           message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
         }),
       );
-      dispatch(push(`/sector/${sectorId}/layer/${key}`));
       dispatch({ type: CREATED_LAYER, sectorId, key, layer });
     })
     .catch(err => {
