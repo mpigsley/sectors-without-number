@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { injectIntl } from 'react-intl';
 import { createStructuredSelector } from 'reselect';
 
 import { currentEntitySelector } from 'store/selectors/base.selectors';
@@ -9,4 +10,4 @@ const mapStateToProps = createStructuredSelector({
   entity: currentEntitySelector,
 });
 
-export default connect(mapStateToProps)(LayerSidebar);
+export default injectIntl(connect(mapStateToProps)(LayerSidebar));
