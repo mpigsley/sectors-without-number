@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import {
-  userModelSelector,
   currentSectorSelector,
   isSidebarEditActiveSelector,
 } from 'store/selectors/base.selectors';
@@ -13,24 +12,29 @@ import {
 import {
   getCurrentEntity,
   getCurrentEntityType,
+  getCurrentEntityChildren,
 } from 'store/selectors/entity.selectors';
 
 import { openExport } from 'store/actions/sector.actions';
-import { saveEntityEdit, saveSector } from 'store/actions/entity.actions';
+import {
+  saveEntityEdit,
+  saveSector,
+  deleteEntity,
+} from 'store/actions/entity.actions';
 import {
   activateSidebarEdit,
   deactivateSidebarEdit,
 } from 'store/actions/sidebar.actions';
-import EntityNavigation from './entity-navigation';
+import DefaultActions from './default-actions';
 
 const mapStateToProps = state => ({
   isSaved: isCurrentSectorSaved(state),
-  isSynced: !!userModelSelector(state),
   isShared: isViewingSharedSector(state),
   currentSector: currentSectorSelector(state),
   entity: getCurrentEntity(state),
   entityType: getCurrentEntityType(state),
   isSidebarEditActive: isSidebarEditActiveSelector(state),
+  entityChildren: getCurrentEntityChildren(state),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -39,8 +43,9 @@ const mapDispatchToProps = (dispatch, props) => ({
   saveEntityEdit: () => dispatch(saveEntityEdit(props.intl)),
   saveSector: () => dispatch(saveSector(props.intl)),
   openExport: () => dispatch(openExport()),
+  deleteEntity: () => dispatch(deleteEntity(props.intl)),
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(EntityNavigation),
+  connect(mapStateToProps, mapDispatchToProps)(DefaultActions),
 );

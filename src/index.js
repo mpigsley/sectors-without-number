@@ -51,14 +51,9 @@ ReactDOM.render(
               <SectorMap>
                 <Switch>
                   <Route
-                    path={`${match.path}/:entityType/:entity`}
+                    path={`${match.path}/:entityType?/:entity?`}
                     component={Sidebar}
                   />
-                  <Route
-                    path={`${match.path}/:entityType`}
-                    component={Sidebar}
-                  />
-                  <Route path={match.path} component={Sidebar} />
                 </Switch>
               </SectorMap>
             )}

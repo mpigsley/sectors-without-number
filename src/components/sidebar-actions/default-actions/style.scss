@@ -1,36 +1,36 @@
 @import 'styles/theme';
 
-.EntityNavigation-Info {
+.DefaultActions-Info {
   height: 100vh;
   width: 100%;
 }
 
-.EntityNavigation-Header {
+.DefaultActions-Header {
   border-bottom: 1px solid $dark2;
   overflow: hidden;
 }
 
-.EntityNavigation-SubHeader {
+.DefaultActions-SubHeader {
   padding-bottom: 0.6rem;
 }
 
-.EntityNavigation-TypeHeader {
+.DefaultActions-TypeHeader {
   color: $light1;
   margin-left: 0.8rem;
 }
 
-.EntityNavigation-Footer {
+.DefaultActions-Footer {
   padding: 0.6rem 0;
   border-top: 1px solid $dark2;
 }
 
-.EntityNavigation-Spacer {
+.DefaultActions-Spacer {
   background-color: $dark1;
   width: 1px;
   margin: 0.2rem;
 }
 
-.EntityNavigation-FooterButton {
+.DefaultActions-FooterButton {
   border: 0;
   border-radius: 0;
   box-sizing: border-box;
@@ -55,7 +55,7 @@
   }
 }
 
-.EntityNavigation-Cancel {
+.DefaultActions-Cancel {
   background-color: $dark1;
 
   &:hover {
@@ -63,7 +63,7 @@
   }
 }
 
-.EntityNavigation-Save {
+.DefaultActions-Save {
   background-color: $primary;
 
   &:hover {
@@ -71,6 +71,19 @@
   }
 }
 
-.EntityNavigation-Patreon {
+.DefaultActions-Patreon {
   color: $error;
+}
+
+.DefaultActions-Welcome {
+  padding-top: 3rem;
+}
+
+.DefaultActions-WelcomeList {
+  color: $light1;
+  margin: 0 1rem 0 0.5rem;
+}
+
+.DefaultActions-WelcomeItem {
+  margin-top: 1rem;
 }
