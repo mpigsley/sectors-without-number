@@ -7,18 +7,12 @@ import {
   currentSectorSelector,
   navigationRoutesSelector,
   navigationSettingsSelector,
-  isSharedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { getAllTopLevelEntities } from 'store/selectors/entity.selectors';
 
 export const getCurrentSectorNavigation = createSelector(
-  [
-    currentSectorSelector,
-    navigationRoutesSelector,
-    isSharedSectorSelector,
-    getAllTopLevelEntities,
-  ],
-  (sector, routes, isShared, entities) =>
+  [currentSectorSelector, navigationRoutesSelector, getAllTopLevelEntities],
+  (sector, routes, entities) =>
     mapValues(routes[sector], route => {
       const firstKey = route.route[0];
       const lastKey = route.route[route.route.length - 1];

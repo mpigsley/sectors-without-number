@@ -85,7 +85,7 @@ export default ({
   width,
   height,
   isShared,
-  layers,
+  sectorLayers,
   navigationRoutes,
   routeLocator,
 }) => {
@@ -159,7 +159,8 @@ export default ({
     },
   );
 
-  const renderNavigation = layers.navigation === undefined || layers.navigation;
+  const renderNavigation =
+    sectorLayers.navigation === undefined || sectorLayers.navigation;
   if (renderNavigation || newRoute) {
     forEach(navigationRoutes, (navRoute, routeId) => {
       if (navRoute.route.length < 2 || (isShared && navRoute.isHidden)) {
@@ -237,7 +238,7 @@ export default ({
     ctx.fillStyle = '#8f8f8f';
     const renderText =
       hex.width > 45 * ratio &&
-      (layers.systemText === undefined || layers.systemText);
+      (sectorLayers.systemText === undefined || sectorLayers.systemText);
     if (renderText) {
       ctx.fillText(
         hex.hexKey,

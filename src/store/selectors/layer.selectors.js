@@ -1,10 +1,18 @@
 import { createSelector } from 'reselect';
 
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
-import { layerFormSelector } from 'store/selectors/base.selectors';
+import {
+  currentSectorSelector,
+  layersSelector,
+  layerFormSelector,
+} from 'store/selectors/base.selectors';
 
-// eslint-disable-next-line
 export const isValidLayerForm = createSelector(
   [layerFormSelector],
   ({ name }) => !!name && name.length <= LAYER_NAME_LENGTH,
+);
+
+export const currentSectorLayers = createSelector(
+  [currentSectorSelector, layersSelector],
+  (sector, layers) => (layers || {})[sector] || {},
 );

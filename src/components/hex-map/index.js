@@ -32,7 +32,7 @@ import {
   getCurrentTopLevelEntities,
   getActiveEntityKey,
   getMapLock,
-  getLayers,
+  getSectorLayers,
 } from 'store/selectors/entity.selectors';
 import HexMap from './hex-map';
 
@@ -45,7 +45,7 @@ const mapStateToProps = createStructuredSelector({
   isShared: isSharedSectorSelector,
   isSidebarEditActive: isSidebarEditActiveSelector,
   mapLocked: getMapLock,
-  layers: getLayers,
+  sectorLayers: getSectorLayers,
   navigationSettings: navigationSettingsSelector,
   navigationRoutes: getCurrentNavigationWithSettings,
   routeLocator: routeLocatorSelector,
