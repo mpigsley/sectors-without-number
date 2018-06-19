@@ -8,6 +8,7 @@ import Checkbox from 'primitives/form/checkbox';
 import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
 
+import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import './style.css';
 
 export default function LayerSidebar({
@@ -16,6 +17,7 @@ export default function LayerSidebar({
   layerForm,
   updateLayer,
   addLayer,
+  isValid,
 }) {
   const isSaved = !!entity;
   if (isSaved) {
@@ -25,7 +27,8 @@ export default function LayerSidebar({
     <FlexContainer className="LayerSidebar" direction="column">
       <Label noPadding>Layer Name *</Label>
       <Input
-        placeholder="Name (25 characters)"
+        error={layerForm.name.length > LAYER_NAME_LENGTH}
+        placeholder={`Name (${LAYER_NAME_LENGTH} characters)`}
         value={layerForm.name}
         onChange={({ target }) => updateLayer('name', target.value)}
       />
@@ -43,7 +46,11 @@ export default function LayerSidebar({
         onChange={({ target }) => updateLayer('isHidden', target.checked)}
       />
       <FlexContainer>
-        <Button className="LayerSidebar-Create" onClick={() => addLayer()}>
+        <Button
+          disabled={!isValid}
+          className="LayerSidebar-Create"
+          onClick={() => addLayer()}
+        >
           Create Layer
         </Button>
       </FlexContainer>
@@ -61,6 +68,7 @@ LayerSidebar.propTypes = {
   }).isRequired,
   updateLayer: PropTypes.func.isRequired,
   addLayer: PropTypes.func.isRequired,
+  isValid: PropTypes.bool.isRequired,
 };
 
 LayerSidebar.defaultProps = {

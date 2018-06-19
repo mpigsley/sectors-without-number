@@ -6,6 +6,7 @@ import {
   currentEntitySelector,
   layerFormSelector,
 } from 'store/selectors/base.selectors';
+import { isValidLayerForm } from 'store/selectors/layer.selectors';
 import { updateLayer, addLayer } from 'store/actions/layer.actions';
 
 import LayerSidebar from './layer-sidebar';
@@ -13,6 +14,7 @@ import LayerSidebar from './layer-sidebar';
 const mapStateToProps = createStructuredSelector({
   entity: currentEntitySelector,
   layerForm: layerFormSelector,
+  isValid: isValidLayerForm,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

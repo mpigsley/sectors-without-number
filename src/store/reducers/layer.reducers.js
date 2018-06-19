@@ -29,6 +29,9 @@ export default function layer(state = initialState, action) {
   switch (action.type) {
     case INITIALIZED:
     case FETCHED_SECTOR:
+      if (!action.sectorId) {
+        return state;
+      }
       return {
         ...state,
         models: {

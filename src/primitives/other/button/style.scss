@@ -23,6 +23,12 @@
   transition: all 0.2s;
   font-weight: 400;
 
+  &:disabled,
+  &:disabled:hover {
+    border-color: $dark1;
+    color: $dark1;
+  }
+
   &:hover {
     color: $light2;
     border-color: $light2;
