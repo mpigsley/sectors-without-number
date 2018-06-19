@@ -13,6 +13,7 @@ import {
   sidebarEditEntitySelector,
   sidebarEditChildrenSelector,
   savedSectorSelector,
+  layersSelector,
 } from 'store/selectors/base.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
@@ -142,6 +143,7 @@ export const getCurrentEntity = createSelector(
     entitySelector,
     isSidebarEditActiveSelector,
     sidebarEditEntitySelector,
+    layersSelector,
   ],
   (
     currentSector,
@@ -150,11 +152,18 @@ export const getCurrentEntity = createSelector(
     entities,
     isSidebarEditActive,
     sidebarEditEntity,
+    layers,
   ) => {
     if (isSidebarEditActive) {
       return sidebarEditEntity;
     }
-    return !currentEntity
+    if (currentEntityType === Entities.layer.key) {
+      return !currentEntity
+        ? entities[Entities.sector.key][currentSector]
+        : (layers[currentSector] || {})[currentEntity];
+    }
+    const isNavigation = currentEntityType === Entities.navigation.key;
+    return !currentEntity || isNavigation
       ? entities[Entities.sector.key][currentSector]
       : entities[currentEntityType][currentEntity];
   },

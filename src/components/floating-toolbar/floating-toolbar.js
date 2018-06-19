@@ -118,7 +118,7 @@ export default class FloatingToolbar extends Component {
                 this.renderLayer(
                   key,
                   layer.name,
-                  `/sector/${this.props.sectorId}/navigation/${key}`,
+                  `/sector/${this.props.sectorId}/layer/${key}`,
                 ),
               )}
               <FlexContainer className="FloatingToolbar-SubItemOuter">
