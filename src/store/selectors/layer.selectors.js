@@ -2,6 +2,7 @@ import { createSelector } from 'reselect';
 
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import {
+  currentEntitySelector,
   currentSectorSelector,
   layersSelector,
   layerFormSelector,
@@ -15,4 +16,9 @@ export const isValidLayerForm = createSelector(
 export const currentSectorLayers = createSelector(
   [currentSectorSelector, layersSelector],
   (sector, layers) => (layers || {})[sector] || {},
+);
+
+export const currentLayer = createSelector(
+  [currentSectorLayers, currentEntitySelector],
+  (layers, current) => (layers || {})[current],
 );
