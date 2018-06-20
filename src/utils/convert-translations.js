@@ -1,7 +1,7 @@
 const fs = require('fs');
+const { forEach, map } = require('lodash');
 const prettier = require('prettier');
 
-const { forEach, map } = require('../constants/lodash');
 const ExportedFile = require('../../Sectors Without Number Translations.json');
 
 const convertKey = key => key.toUpperCase().trim();

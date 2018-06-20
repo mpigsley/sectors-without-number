@@ -154,6 +154,16 @@ export default class FloatingToolbar extends Component {
               </FlexContainer>
               <FlexContainer className="FloatingToolbar-SubItemOuter">
                 <a
+                  href="https://medium.com/sectors-without-number"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="FloatingToolbar-SubItemName"
+                >
+                  <FormattedMessage id="misc.blog" />
+                </a>
+              </FlexContainer>
+              <FlexContainer className="FloatingToolbar-SubItemOuter">
+                <a
                   href="https://github.com/mpigsley/sectors-without-number"
                   target="_blank"
                   rel="noopener noreferrer"
