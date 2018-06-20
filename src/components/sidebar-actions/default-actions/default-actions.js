@@ -16,7 +16,6 @@ import './style.css';
 
 export default function DefaultActions({
   currentSector,
-  entity,
   entityType,
   children,
   isSaved,
@@ -58,12 +57,8 @@ export default function DefaultActions({
       <div className="DefaultActions-Header">
         <FlexContainer align="center" shrink="0">
           <FlexContainer flex="1" justify="center" align="flexEnd">
-            <Header type={HeaderType.header2}>{entity.name}</Header>
-            <Header
-              type={HeaderType.header3}
-              className="DefaultActions-TypeHeader"
-            >
-              (<FormattedMessage id={Entities[entityType].name} />)
+            <Header type={HeaderType.header2}>
+              <FormattedMessage id={Entities[entityType].name} />
             </Header>
           </FlexContainer>
         </FlexContainer>
@@ -107,11 +102,6 @@ export default function DefaultActions({
 
 DefaultActions.propTypes = {
   currentSector: PropTypes.string.isRequired,
-  entity: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    parent: PropTypes.string,
-    parentEntity: PropTypes.string,
-  }).isRequired,
   entityType: PropTypes.string,
   children: PropTypes.node.isRequired,
   isSaved: PropTypes.bool.isRequired,

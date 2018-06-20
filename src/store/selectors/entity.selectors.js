@@ -152,18 +152,11 @@ export const getCurrentEntity = createSelector(
     entities,
     isSidebarEditActive,
     sidebarEditEntity,
-    layers,
   ) => {
     if (isSidebarEditActive) {
       return sidebarEditEntity;
     }
-    if (currentEntityType === Entities.layer.key) {
-      return !currentEntity
-        ? entities[Entities.sector.key][currentSector]
-        : (layers[currentSector] || {})[currentEntity];
-    }
-    const isNavigation = currentEntityType === Entities.navigation.key;
-    return !currentEntity || isNavigation
+    return !currentEntity
       ? entities[Entities.sector.key][currentSector]
       : entities[currentEntityType][currentEntity];
   },
