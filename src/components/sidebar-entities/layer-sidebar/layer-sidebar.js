@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import NewLayer from './new-layer';
 
-import './style.css';
-
 export default function LayerSidebar({ layer }) {
   if (!layer) {
     return <NewLayer />;
