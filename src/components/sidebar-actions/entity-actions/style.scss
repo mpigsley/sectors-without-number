@@ -1,33 +1,8 @@
 @import 'styles/theme';
 
-.EntityActions-Info {
-  height: 100vh;
-  width: 100%;
-}
-
-.EntityActions-Header {
-  border-bottom: 1px solid $dark2;
-  overflow: hidden;
-}
-
-.EntityActions-SubHeader {
-  padding-bottom: 0.6rem;
-}
-
 .EntityActions-TypeHeader {
   color: $light1;
   margin-left: 0.8rem;
-}
-
-.EntityActions-Footer {
-  padding: 0.6rem 0;
-  border-top: 1px solid $dark2;
-}
-
-.EntityActions-Spacer {
-  background-color: $dark1;
-  width: 1px;
-  margin: 0.2rem;
 }
 
 .EntityActions-FooterButton {
@@ -69,10 +44,6 @@
   &:hover {
     background-color: $primary-alt;
   }
-}
-
-.EntityActions-Patreon {
-  color: $error;
 }
 
 .EntityActions-Welcome {

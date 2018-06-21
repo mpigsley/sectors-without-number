@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { toastr } from 'react-redux-toastr';
-import copy from 'copy-to-clipboard';
 import { FormattedMessage, intlShape } from 'react-intl';
 
-import ExportModal from 'components/export-modal';
+import ActionLayout from 'components/sidebar-actions/action-layout';
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
-import Button from 'primitives/other/button';
-import ButtonLink from 'primitives/other/button-link';
 
 import Entities from 'constants/entities';
 import { some, size } from 'constants/lodash';
@@ -35,7 +31,6 @@ export default class EntityActions extends Component {
     isSaved: PropTypes.bool.isRequired,
     isShared: PropTypes.bool.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
-    openExport: PropTypes.func.isRequired,
     intl: intlShape.isRequired,
   };
 
@@ -48,31 +43,78 @@ export default class EntityActions extends Component {
   };
 
   onConfirmDelete = () => this.setState({ isConfirmDeleteOpen: true });
-
   onCancelDelete = () => this.setState({ isConfirmDeleteOpen: false });
-
   onDeleteEntity = () => {
     this.onCancelDelete();
     this.props.deleteEntity();
   };
 
-  onCopy = () => {
-    let url = window.location.href;
-    const split = url.split('/');
-    if (split.length === 7) {
-      url = split.slice(0, 5).join('/');
+  get backUrl() {
+    let backUrl = '/';
+    const isSpecialEntity =
+      [Entities.navigation.key, Entities.layer.key].indexOf(
+        this.props.entityType,
+      ) !== -1;
+    if (this.props.entity.parent || isSpecialEntity) {
+      backUrl = `${backUrl}sector/${this.props.currentSector}`;
+      if (
+        this.props.entity.parentEntity &&
+        this.props.entity.parentEntity !== Entities.sector.key
+      ) {
+        backUrl = `${backUrl}/${this.props.entity.parentEntity}/${
+          this.props.entity.parent
+        }`;
+      }
     }
-    copy(url);
-    toastr.success(
-      this.props.intl.formatMessage({ id: 'misc.clipboardCopy' }),
-      this.props.intl.formatMessage(
-        { id: 'misc.copiedLinkTo' },
-        {
-          entity: this.props.intl.formatMessage({
-            id: Entities[this.props.entityType].name,
-          }),
-        },
-      ),
+    return backUrl;
+  }
+
+  buildActions = () => {
+    const actions = [];
+    if (!this.props.isSaved && !this.props.isShared) {
+      actions.push({
+        key: 'save',
+        children: this.props.intl.formatMessage({ id: 'misc.save' }),
+        onClick: this.props.saveSector,
+      });
+    }
+    if (!this.props.isShared) {
+      actions.push({
+        key: 'edit',
+        children: this.props.intl.formatMessage({ id: 'misc.edit' }),
+        onClick: this.props.activateSidebarEdit,
+      });
+    }
+    if (this.props.isSaved && !this.props.isShared) {
+      actions.push({
+        key: 'delete',
+        children: this.props.intl.formatMessage({ id: 'misc.delete' }),
+        onClick: this.onConfirmDelete,
+      });
+    }
+
+    return actions;
+  };
+
+  renderFooter = () => {
+    if (!this.props.isSidebarEditActive) {
+      return null;
+    }
+    return (
+      <FlexContainer>
+        <button
+          className="EntityActions-FooterButton EntityActions-Cancel"
+          onClick={this.props.deactivateSidebarEdit}
+        >
+          <FormattedMessage id="misc.cancel" />
+        </button>
+        <button
+          className="EntityActions-FooterButton EntityActions-Save"
+          onClick={this.props.saveEntityEdit}
+        >
+          <FormattedMessage id="misc.save" />
+        </button>
+      </FlexContainer>
     );
   };
 
@@ -109,154 +151,28 @@ export default class EntityActions extends Component {
     );
   }
 
-  renderSaveButton = () => {
-    if (this.props.isSaved || this.props.isShared) {
-      return null;
-    }
-    return (
-      <Button minimal onClick={this.props.saveSector}>
-        <FormattedMessage id="misc.save" />
-      </Button>
-    );
-  };
-
-  renderEditButton = () => {
-    if (this.props.isShared) {
-      return null;
-    }
-    return (
-      <Button minimal onClick={this.props.activateSidebarEdit}>
-        <FormattedMessage id="misc.edit" />
-      </Button>
-    );
-  };
-
-  renderShareButton = () => {
-    if (!this.props.isSaved || this.props.isShared) {
-      return null;
-    }
-    return (
-      <Button minimal onClick={this.onCopy}>
-        <FormattedMessage id="misc.share" />
-      </Button>
-    );
-  };
-
-  renderDeleteButton = () => {
-    if (!this.props.isSaved || this.props.isShared) {
-      return null;
-    }
-    return (
-      <Button minimal onClick={this.onConfirmDelete}>
-        <FormattedMessage id="misc.delete" />
-      </Button>
-    );
-  };
-
   render() {
-    let backUrl = '/';
-    const isSpecialEntity =
-      [Entities.navigation.key, Entities.layer.key].indexOf(
-        this.props.entityType,
-      ) !== -1;
-    if (this.props.entity.parent || isSpecialEntity) {
-      backUrl = `${backUrl}sector/${this.props.currentSector}`;
-      if (
-        this.props.entity.parentEntity &&
-        this.props.entity.parentEntity !== Entities.sector.key
-      ) {
-        backUrl = `${backUrl}/${this.props.entity.parentEntity}/${
-          this.props.entity.parent
-        }`;
-      }
-    }
-
-    let footer = (
-      <div className="EntityActions-Footer">
-        <FlexContainer justify="center">
-          <ButtonLink
-            minimal
-            to="https://www.patreon.com/sectorswithoutnumber"
-            target="_blank"
-            className="EntityActions-Patreon"
-          >
-            <FormattedMessage id="misc.becomePatron" />
-          </ButtonLink>
-        </FlexContainer>
-      </div>
-    );
-
-    let subHeader = null;
-    if (!this.props.isSidebarEditActive) {
-      const saveButton = this.renderSaveButton();
-      const editButton = this.renderEditButton();
-      const deleteButton = this.renderDeleteButton();
-      const shareButton = this.renderShareButton();
-      subHeader = (
-        <FlexContainer
-          justify="center"
-          shrink="0"
-          className="EntityActions-SubHeader"
-        >
-          <ButtonLink minimal to={backUrl}>
-            <FormattedMessage id="misc.back" />
-          </ButtonLink>
-          <span className="EntityActions-Spacer" />
-          {saveButton}
-          {saveButton ? <span className="EntityActions-Spacer" /> : null}
-          {editButton}
-          {editButton ? <span className="EntityActions-Spacer" /> : null}
-          {deleteButton}
-          {deleteButton ? <span className="EntityActions-Spacer" /> : null}
-          {shareButton}
-          {shareButton ? <span className="EntityActions-Spacer" /> : null}
-          <Button minimal onClick={this.props.openExport}>
-            <FormattedMessage id="misc.export" />
-          </Button>
-        </FlexContainer>
-      );
-    } else {
-      footer = (
-        <FlexContainer>
-          <button
-            className="EntityActions-FooterButton EntityActions-Cancel"
-            onClick={this.props.deactivateSidebarEdit}
-          >
-            <FormattedMessage id="misc.cancel" />
-          </button>
-          <button
-            className="EntityActions-FooterButton EntityActions-Save"
-            onClick={this.props.saveEntityEdit}
-          >
-            <FormattedMessage id="misc.save" />
-          </button>
-        </FlexContainer>
-      );
-    }
-
     return (
-      <FlexContainer className="EntityActions-Info" direction="column">
-        <div className="EntityActions-Header">
-          <FlexContainer align="center" shrink="0">
-            <FlexContainer flex="1" justify="center" align="flexEnd">
-              <Header type={HeaderType.header2}>
-                {this.props.entity.name}
-              </Header>
-              <Header
-                type={HeaderType.header3}
-                className="EntityActions-TypeHeader"
-              >
-                (<FormattedMessage id={Entities[this.props.entityType].name} />)
-              </Header>
-            </FlexContainer>
-          </FlexContainer>
-          {subHeader}
-        </div>
-        <FlexContainer direction="column" flex="1" scroll>
-          {this.props.children}
-        </FlexContainer>
-        {footer}
-        <ExportModal />
+      <ActionLayout
+        renderActions={!this.props.isSidebarEditActive}
+        backUrl={this.backUrl}
+        actions={this.buildActions()}
+        footer={this.renderFooter()}
+        name={[
+          <Header key="header" type={HeaderType.header2}>
+            {this.props.entity.name}
+          </Header>,
+          <Header
+            key="sub-header"
+            type={HeaderType.header3}
+            className="EntityActions-TypeHeader"
+          >
+            (<FormattedMessage id={Entities[this.props.entityType].name} />)
+          </Header>,
+        ]}
+      >
+        {this.renderSectorBuilderText()}
+        {this.props.children}
         <ConfirmModal
           isOpen={this.state.isConfirmDeleteOpen}
           onConfirm={this.onDeleteEntity}
@@ -271,7 +187,7 @@ export default class EntityActions extends Component {
             }}
           />
         </ConfirmModal>
-      </FlexContainer>
+      </ActionLayout>
     );
   }
 }

@@ -15,7 +15,6 @@ import {
   getCurrentEntityChildren,
 } from 'store/selectors/entity.selectors';
 
-import { openExport } from 'store/actions/sector.actions';
 import {
   saveEntityEdit,
   saveSector,
@@ -42,7 +41,6 @@ const mapDispatchToProps = (dispatch, props) => ({
   deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
   saveEntityEdit: () => dispatch(saveEntityEdit(props.intl)),
   saveSector: () => dispatch(saveSector(props.intl)),
-  openExport: () => dispatch(openExport()),
   deleteEntity: () => dispatch(deleteEntity(props.intl)),
 });
 
