@@ -46,6 +46,7 @@ const layer = {
   name: 'entity.layer',
   shortName: 'entity.layer',
   sidebar: 'layer',
+  action: 'layer',
 };
 
 const navigation = {

@@ -1,9 +1,12 @@
+import { omit } from 'constants/lodash';
+
 import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
 import {
   RESET_FORMS,
   UPDATED_LAYER,
   UPDATED_REGION,
   CREATED_LAYER,
+  DELETED_LAYER,
 } from 'store/actions/layer.actions';
 
 const initialLayer = () => ({
@@ -71,6 +74,17 @@ export default function layer(state = initialState, action) {
             ...(state.models[action.sectorId] || {}),
             [action.key]: action.layer,
           },
+        },
+      };
+    case DELETED_LAYER:
+      return {
+        ...state,
+        models: {
+          ...state.models,
+          [action.sectorId]: omit(
+            state.models[action.sectorId],
+            action.layerId,
+          ),
         },
       };
     default:

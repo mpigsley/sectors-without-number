@@ -1,8 +1,11 @@
+import { push } from 'react-router-redux';
+
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { createLayer } from 'store/api/layer';
+import { createLayer, deleteLayer } from 'store/api/layer';
 import {
   layerFormSelector,
   currentSectorSelector,
+  currentEntitySelector,
 } from 'store/selectors/base.selectors';
 
 const ACTION_PREFIX = '@@navigation';
@@ -10,6 +13,7 @@ export const RESET_FORMS = `${ACTION_PREFIX}/RESET_FORMS`;
 export const UPDATED_LAYER = `${ACTION_PREFIX}/UPDATED_LAYER`;
 export const UPDATED_REGION = `${ACTION_PREFIX}/UPDATED_REGION`;
 export const CREATED_LAYER = `${ACTION_PREFIX}/CREATED_LAYER`;
+export const DELETED_LAYER = `${ACTION_PREFIX}/DELETED_LAYER`;
 
 export const resetForms = () => ({ type: RESET_FORMS });
 export const updateLayer = (key, value) => ({
@@ -37,6 +41,33 @@ export const addLayer = intl => (dispatch, getState) => {
         }),
       );
       dispatch({ type: CREATED_LAYER, sectorId, key, layer });
+      dispatch(push(`/sector/${sectorId}/layer/${key}`));
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
+    });
+};
+
+export const removeLayer = intl => (dispatch, getState) => {
+  const state = getState();
+  const sectorId = currentSectorSelector(state);
+  const layerId = currentEntitySelector(state);
+  return deleteLayer(sectorId, layerId)
+    .then(() => {
+      dispatch(
+        SuccessToast({
+          title: intl.formatMessage({ id: 'misc.sectorSaved' }),
+          message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
+        }),
+      );
+      dispatch(push(`/sector/${sectorId}`));
+      dispatch({ type: DELETED_LAYER, sectorId, layerId });
     })
     .catch(err => {
       console.error(err);

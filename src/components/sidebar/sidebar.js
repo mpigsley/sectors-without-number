@@ -10,6 +10,7 @@ import LayerSidebar from 'components/sidebar-entities/layer-sidebar';
 
 import DefaultActions from 'components/sidebar-actions/default-actions';
 import EntityActions from 'components/sidebar-actions/entity-actions';
+import LayerActions from 'components/sidebar-actions/layer-actions';
 
 const SIDEBAR_TYPE = {
   default: DefaultSidebar,
@@ -21,6 +22,7 @@ const SIDEBAR_TYPE = {
 const ACTION_TYPE = {
   default: DefaultActions,
   entity: EntityActions,
+  layer: LayerActions,
 };
 
 export default function Sidebar({ entityType }) {
