@@ -1,4 +1,9 @@
 {
+  "5.4.4": {
+    "description":
+      "Fix bug where navigation would disappear after entity edit.",
+    "date": "6-24-2018"
+  },
   "5.4.3": {
     "description":
       "Update planet attribute probability to match the 2d6 dice rolls.",

@@ -36,7 +36,10 @@ export default function navigation(state = initialState, action) {
         ...state,
         routes: {
           ...state.routes,
-          [action.sectorId]: action.routes,
+          [action.sectorId]: {
+            ...(state.routes[action.sectorId] || {}),
+            ...(action.routes || {}),
+          },
         },
       };
     case SET_SYNC_LOCK:
