@@ -36,7 +36,13 @@ export default function navigation(state = initialState, action) {
     case FETCHED_NAVIGATION: {
       let { routes } = state;
       if (action.sectorId) {
-        routes = { ...state.routes, [action.sectorId]: action.routes || {} };
+        routes = {
+          ...state.routes,
+          [action.sectorId]: {
+            ...(state.routes[action.sectorId] || {}),
+            ...(action.routes || {}),
+          },
+        };
       }
       return {
         ...state,
