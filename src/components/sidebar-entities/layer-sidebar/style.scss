@@ -1,0 +1,26 @@
+@import 'styles/theme';
+
+.LayerSidebar {
+  font-size: 0.9rem;
+  margin: 1rem 1rem 0;
+}
+
+.LayerSidebar-Hidden {
+  color: $light1;
+  margin-bottom: 1rem;
+
+  span {
+    margin-left: 0.5rem;
+  }
+}
+
+.LayerSidebar-Label {
+  color: $light3;
+  font-weight: bold;
+}
+
+.LayerSidebar-Description {
+  color: $light3;
+  font-weight: 100;
+  margin: 0.3rem 0 1rem;
+}

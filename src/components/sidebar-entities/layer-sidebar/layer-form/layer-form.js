@@ -11,7 +11,7 @@ import Input from 'primitives/form/input';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import './style.css';
 
-export default function NewLayer({
+export default function LayerForm({
   intl,
   layerForm,
   updateLayer,
@@ -19,7 +19,7 @@ export default function NewLayer({
   isValid,
 }) {
   return (
-    <FlexContainer className="NewLayer" direction="column">
+    <FlexContainer className="LayerForm" direction="column">
       <Label noPadding>Layer Name *</Label>
       <Input
         error={layerForm.name.length > LAYER_NAME_LENGTH}
@@ -43,7 +43,7 @@ export default function NewLayer({
       <FlexContainer>
         <Button
           disabled={!isValid}
-          className="NewLayer-Create"
+          className="LayerForm-Create"
           onClick={() => addLayer()}
         >
           Create Layer
@@ -53,7 +53,7 @@ export default function NewLayer({
   );
 }
 
-NewLayer.propTypes = {
+LayerForm.propTypes = {
   intl: intlShape.isRequired,
   layerForm: PropTypes.shape({
     name: PropTypes.string.isRequired,

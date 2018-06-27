@@ -6,7 +6,7 @@ import { layerFormSelector } from 'store/selectors/base.selectors';
 import { isValidLayerForm } from 'store/selectors/layer.selectors';
 import { updateLayer, addLayer } from 'store/actions/layer.actions';
 
-import NewLayer from './new-layer';
+import LayerForm from './layer-form';
 
 const mapStateToProps = createStructuredSelector({
   layerForm: layerFormSelector,
@@ -19,5 +19,5 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(NewLayer),
+  connect(mapStateToProps, mapDispatchToProps)(LayerForm),
 );
