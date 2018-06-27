@@ -54,5 +54,5 @@ export const routeLocatorSelector = state => state.navigation.routeLocator;
 
 /* Layer */
 export const layersSelector = state => state.layer.models;
-export const layerFormSelector = state => state.layer.layerForm;
-export const regionFormSelector = state => state.layer.regionForm;
+export const layerFormSelector = state => state.layer.form;
+export const layerIsEditingSelector = state => state.layer.isEditing;

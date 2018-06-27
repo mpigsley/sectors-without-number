@@ -3,29 +3,22 @@ import { omit } from 'constants/lodash';
 import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
 import {
   RESET_FORMS,
-  UPDATED_LAYER,
-  UPDATED_REGION,
-  CREATED_LAYER,
-  DELETED_LAYER,
+  FORM_UPDATED,
+  SUBMITTED,
+  DELETED,
+  INITIALIZE_EDIT,
 } from 'store/actions/layer.actions';
 
-const initialLayer = () => ({
+const initialForm = () => ({
   name: '',
   description: '',
-  isHidden: false,
-});
-
-const initialRegion = () => ({
-  name: '',
-  description: '',
-  color: '',
   isHidden: false,
 });
 
 export const initialState = {
   models: {},
-  layerForm: initialLayer(),
-  regionForm: initialRegion(),
+  form: initialForm(),
+  isEditing: false,
 };
 
 export default function layer(state = initialState, action) {
@@ -45,29 +38,21 @@ export default function layer(state = initialState, action) {
     case RESET_FORMS:
       return {
         ...state,
-        layerForm: initialLayer(),
-        regionForm: initialRegion(),
+        form: initialForm(),
       };
-    case UPDATED_LAYER:
+    case FORM_UPDATED:
       return {
         ...state,
-        layerForm: {
-          ...state.layerForm,
+        form: {
+          ...state.form,
           [action.key]: action.value,
         },
       };
-    case UPDATED_REGION:
+    case SUBMITTED:
       return {
         ...state,
-        regionForm: {
-          ...state.regionForm,
-          [action.key]: action.value,
-        },
-      };
-    case CREATED_LAYER:
-      return {
-        ...state,
-        layerForm: initialLayer(),
+        form: initialForm(),
+        isEditing: false,
         models: {
           ...state.models,
           [action.sectorId]: {
@@ -76,7 +61,7 @@ export default function layer(state = initialState, action) {
           },
         },
       };
-    case DELETED_LAYER:
+    case DELETED:
       return {
         ...state,
         models: {
@@ -86,6 +71,12 @@ export default function layer(state = initialState, action) {
             action.layerId,
           ),
         },
+      };
+    case INITIALIZE_EDIT:
+      return {
+        ...state,
+        isEditing: true,
+        form: action.layer,
       };
     default:
       return state;

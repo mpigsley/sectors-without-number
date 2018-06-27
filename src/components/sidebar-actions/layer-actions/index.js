@@ -6,7 +6,7 @@ import {
   isViewingSharedSector,
 } from 'store/selectors/sector.selectors';
 import { currentLayer } from 'store/selectors/layer.selectors';
-import { removeLayer } from 'store/actions/layer.actions';
+import { removeLayer, initializeLayerEdit } from 'store/actions/layer.actions';
 import LayerActions from './layer-actions';
 
 const mapStateToProps = state => ({
@@ -17,6 +17,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = (dispatch, props) => ({
   removeLayer: () => dispatch(removeLayer(props.intl)),
+  initializeLayerEdit: () => dispatch(initializeLayerEdit()),
 });
 
 export default injectIntl(

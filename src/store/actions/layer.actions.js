@@ -1,38 +1,39 @@
 import { push } from 'react-router-redux';
 
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { createLayer, deleteLayer } from 'store/api/layer';
+import { createLayer, editLayer, deleteLayer } from 'store/api/layer';
 import {
   layerFormSelector,
   currentSectorSelector,
   currentEntitySelector,
 } from 'store/selectors/base.selectors';
+import { currentLayer } from 'store/selectors/layer.selectors';
 
-const ACTION_PREFIX = '@@navigation';
+const ACTION_PREFIX = '@@layer';
 export const RESET_FORMS = `${ACTION_PREFIX}/RESET_FORMS`;
-export const UPDATED_LAYER = `${ACTION_PREFIX}/UPDATED_LAYER`;
-export const UPDATED_REGION = `${ACTION_PREFIX}/UPDATED_REGION`;
-export const CREATED_LAYER = `${ACTION_PREFIX}/CREATED_LAYER`;
-export const DELETED_LAYER = `${ACTION_PREFIX}/DELETED_LAYER`;
+export const FORM_UPDATED = `${ACTION_PREFIX}/FORM_UPDATED`;
+export const SUBMITTED = `${ACTION_PREFIX}/SUBMITTED`;
+export const DELETED = `${ACTION_PREFIX}/DELETED`;
+export const INITIALIZE_EDIT = `${ACTION_PREFIX}/INITIALIZE_EDIT`;
 
 export const resetForms = () => ({ type: RESET_FORMS });
 export const updateLayer = (key, value) => ({
-  type: UPDATED_LAYER,
-  key,
-  value,
-});
-export const updateRegion = (key, value) => ({
-  type: UPDATED_REGION,
+  type: FORM_UPDATED,
   key,
   value,
 });
 
-export const addLayer = intl => (dispatch, getState) => {
+export const submitForm = intl => (dispatch, getState) => {
   const state = getState();
   const update = layerFormSelector(state);
-
   const sectorId = currentSectorSelector(state);
-  return createLayer(sectorId, update)
+  const layerId = currentEntitySelector(state);
+
+  const promise = layerId
+    ? editLayer(sectorId, layerId, update)
+    : createLayer(sectorId, update);
+
+  return promise
     .then(({ key, layer }) => {
       dispatch(
         SuccessToast({
@@ -40,7 +41,7 @@ export const addLayer = intl => (dispatch, getState) => {
           message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
         }),
       );
-      dispatch({ type: CREATED_LAYER, sectorId, key, layer });
+      dispatch({ type: SUBMITTED, sectorId, key, layer });
       dispatch(push(`/sector/${sectorId}/layer/${key}`));
     })
     .catch(err => {
@@ -67,7 +68,7 @@ export const removeLayer = intl => (dispatch, getState) => {
         }),
       );
       dispatch(push(`/sector/${sectorId}`));
-      dispatch({ type: DELETED_LAYER, sectorId, layerId });
+      dispatch({ type: DELETED, sectorId, layerId });
     })
     .catch(err => {
       console.error(err);
@@ -79,3 +80,6 @@ export const removeLayer = intl => (dispatch, getState) => {
       );
     });
 };
+
+export const initializeLayerEdit = () => (dispatch, getState) =>
+  dispatch({ type: INITIALIZE_EDIT, layer: currentLayer(getState()) });

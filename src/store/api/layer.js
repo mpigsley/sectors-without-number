@@ -8,6 +8,15 @@ export const createLayer = (sectorId, layer) =>
     .add(layer)
     .then(doc => ({ key: doc.id, layer }));
 
+export const editLayer = (sectorId, layerId, layer) =>
+  Firestore()
+    .collection('layers')
+    .doc(sectorId)
+    .collection('layer')
+    .doc(layerId)
+    .set(layer, { merge: true })
+    .then(() => ({ key: layerId, layer }));
+
 export const deleteLayer = (sectorId, layerId) =>
   Firestore()
     .collection('layers')
@@ -15,14 +24,6 @@ export const deleteLayer = (sectorId, layerId) =>
     .collection('layer')
     .doc(layerId)
     .delete();
-
-export const setVisibility = (sectorId, layerId, isHidden) =>
-  Firestore()
-    .collection('layers')
-    .doc(sectorId)
-    .collection('layer')
-    .doc(layerId)
-    .set({ isHidden }, { merge: true });
 
 export const getLayerData = sectorId =>
   Firestore()

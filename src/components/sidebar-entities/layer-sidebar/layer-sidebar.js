@@ -8,8 +8,8 @@ import { EyeOff } from 'constants/icons';
 import LayerForm from './layer-form';
 import './style.css';
 
-export default function LayerSidebar({ layer }) {
-  if (!layer) {
+export default function LayerSidebar({ layer, isEditing }) {
+  if (!layer || isEditing) {
     return <LayerForm />;
   }
 
@@ -52,6 +52,7 @@ LayerSidebar.propTypes = {
     description: PropTypes.string,
     isHidden: PropTypes.bool.isRequired,
   }),
+  isEditing: PropTypes.bool.isRequired,
 };
 
 LayerSidebar.defaultProps = {

@@ -14,6 +14,7 @@ export default class EntityActions extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     removeLayer: PropTypes.func.isRequired,
+    initializeLayerEdit: PropTypes.func.isRequired,
     layer: PropTypes.shape({
       name: PropTypes.string.isRequired,
     }),
@@ -38,16 +39,22 @@ export default class EntityActions extends Component {
   };
 
   buildActions = () => {
+    const actions = [];
     if (this.props.isSaved && !this.props.isShared) {
-      return [
-        {
-          key: 'delete',
-          children: this.props.intl.formatMessage({ id: 'misc.delete' }),
-          onClick: this.onConfirmDelete,
-        },
-      ];
+      if (this.props.layer) {
+        actions.push({
+          key: 'edit',
+          children: this.props.intl.formatMessage({ id: 'misc.edit' }),
+          onClick: this.props.initializeLayerEdit,
+        });
+      }
+      actions.push({
+        key: 'delete',
+        children: this.props.intl.formatMessage({ id: 'misc.delete' }),
+        onClick: this.onConfirmDelete,
+      });
     }
-    return [];
+    return actions;
   };
 
   renderName() {

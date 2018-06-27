@@ -15,8 +15,9 @@ export default function LayerForm({
   intl,
   layerForm,
   updateLayer,
-  addLayer,
+  submitForm,
   isValid,
+  isEditing,
 }) {
   return (
     <FlexContainer className="LayerForm" direction="column">
@@ -44,9 +45,9 @@ export default function LayerForm({
         <Button
           disabled={!isValid}
           className="LayerForm-Create"
-          onClick={() => addLayer()}
+          onClick={() => submitForm()}
         >
-          Create Layer
+          {isEditing ? 'Edit' : 'Create'} Layer
         </Button>
       </FlexContainer>
     </FlexContainer>
@@ -61,6 +62,7 @@ LayerForm.propTypes = {
     isHidden: PropTypes.bool.isRequired,
   }).isRequired,
   updateLayer: PropTypes.func.isRequired,
-  addLayer: PropTypes.func.isRequired,
+  submitForm: PropTypes.func.isRequired,
   isValid: PropTypes.bool.isRequired,
+  isEditing: PropTypes.bool.isRequired,
 };
