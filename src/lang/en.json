@@ -2659,6 +2659,8 @@
     "Print your entities in a table format to easily get an overview of your sector.",
   "misc.reachedLimit": "Reached Sector Limit",
   "misc.receiveEmail": "You should be receiving an email soon.",
+  "misc.region": "Region",
+  "misc.regions": "Regions",
   "misc.reportProblem": "Report a Problem",
   "misc.reportProblemPersists": "Report a problem if it persists.",
   "misc.routeHiddenByParent": "Route is hidden by hidden entity at endpoint",

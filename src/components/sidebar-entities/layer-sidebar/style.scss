@@ -2,25 +2,33 @@
 
 .LayerSidebar {
   font-size: 0.9rem;
-  margin: 1rem 1rem 0;
+  margin-top: 1rem;
 }
 
 .LayerSidebar-Hidden {
   color: $light1;
-  margin-bottom: 1rem;
+  margin: 0 1rem 1rem;
 
   span {
     margin-left: 0.5rem;
   }
 }
 
-.LayerSidebar-Label {
+.LayerSidebar-DescriptionContainer {
   color: $light3;
+  margin: 0 1rem;
+}
+
+.LayerSidebar-Label {
   font-weight: bold;
 }
 
 .LayerSidebar-Description {
   color: $light3;
   font-weight: 100;
-  margin: 0.3rem 0 1rem;
+  margin-top: 0.3rem;
+}
+
+.LayerSidebar-AddButton {
+  margin: 0;
 }

@@ -38,3 +38,24 @@ export const getLayerData = sectorId =>
       });
       return layers;
     });
+
+export const createRegion = (sectorId, layerId, region) =>
+  Firestore()
+    .collection('layers')
+    .doc(sectorId)
+    .collection('layer')
+    .doc(layerId)
+    .collection('regions')
+    .add(region)
+    .then(doc => ({ key: doc.id, region }));
+
+export const editRegion = (sectorId, layerId, regionId, region) =>
+  Firestore()
+    .collection('layers')
+    .doc(sectorId)
+    .collection('layer')
+    .doc(layerId)
+    .collection('regions')
+    .doc(regionId)
+    .set(region, { merge: true })
+    .then(doc => ({ key: doc.id, region }));
