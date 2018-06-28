@@ -7,7 +7,9 @@ import SectionHeader from 'primitives/text/section-header';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
 import { EyeOff, Plus } from 'constants/icons';
+import { map } from 'constants/lodash';
 
+import RegionRow from './region-row';
 import LayerForm from './layer-form';
 import './style.css';
 
@@ -15,6 +17,7 @@ export default function LayerSidebar({
   intl,
   layer,
   isEditing,
+  regionEdit,
   initializeRegionEdit,
 }) {
   if (!layer || isEditing) {
@@ -48,6 +51,11 @@ export default function LayerSidebar({
     );
   }
 
+  let newRegion = null;
+  if (regionEdit && !regionEdit.regionId) {
+    newRegion = <RegionRow />;
+  }
+
   return (
     <div>
       <FlexContainer className="LayerSidebar" direction="column" flex="1">
@@ -71,6 +79,10 @@ export default function LayerSidebar({
             </Button>
           </FlexContainer>
         </SectionHeader>
+        {newRegion}
+        {map(layer.regions || [], (region, regionId) => (
+          <RegionRow key={regionId} region={region} />
+        ))}
       </FlexContainer>
     </div>
   );
@@ -81,11 +93,24 @@ LayerSidebar.propTypes = {
   layer: PropTypes.shape({
     description: PropTypes.string,
     isHidden: PropTypes.bool.isRequired,
+    regions: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        regionId: PropTypes.string,
+        isHidden: PropTypes.bool,
+      }),
+    ),
   }),
   isEditing: PropTypes.bool.isRequired,
+  regionEdit: PropTypes.shape({
+    name: PropTypes.string,
+    regionId: PropTypes.string,
+    isHidden: PropTypes.bool,
+  }),
   initializeRegionEdit: PropTypes.func.isRequired,
 };
 
 LayerSidebar.defaultProps = {
   layer: null,
+  regionEdit: null,
 };

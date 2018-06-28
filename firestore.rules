@@ -29,6 +29,15 @@ service cloud.firestore {
       allow update, delete: if request.auth != null
         && getSector().data.creator == request.auth.uid;
       allow read;
+
+      match /regions/{regionId} {
+        allow create: if request.auth != null
+          && getSector().data.creator == request.auth.uid
+          && request.resource.data.name.size() <= 40;
+        allow update, delete: if request.auth != null
+          && getSector().data.creator == request.auth.uid;
+        allow read;
+      }
     }
     match /{document=**} {
       allow read, write: if false;

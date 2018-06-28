@@ -1,3 +1,4 @@
+import Check from 'react-feather/dist/icons/check';
 import ChevronDown from 'react-feather/dist/icons/chevron-down';
 import ChevronRight from 'react-feather/dist/icons/chevron-right';
 import ChevronUp from 'react-feather/dist/icons/chevron-up';
@@ -22,6 +23,7 @@ import X from 'react-feather/dist/icons/x';
 import Zap from 'react-feather/dist/icons/zap';
 
 export {
+  Check,
   ChevronDown,
   ChevronRight,
   ChevronUp,

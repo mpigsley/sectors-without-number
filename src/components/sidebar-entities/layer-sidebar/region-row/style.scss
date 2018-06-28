@@ -1,0 +1,23 @@
+@import 'styles/theme';
+
+.RegionRow {
+  margin: 0 1rem 0.5rem;
+}
+
+.RegionRow-Check {
+  color: $light3;
+  cursor: pointer;
+  padding-right: 0.5rem;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light2;
+  }
+}
+
+.RegionRow-Close {
+  color: $light1;
+  cursor: pointer;
+  padding-right: 0.5rem;
+  transition: color 0.2s linear;
+}

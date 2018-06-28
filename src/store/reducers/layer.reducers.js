@@ -8,6 +8,7 @@ import {
   DELETED,
   INITIALIZE_LAYER_EDIT,
   INITIALIZE_REGION_EDIT,
+  REGION_FORM_UPDATED,
   CANCEL_REGION_EDIT,
   SUBMITTED_REGION,
 } from 'store/actions/layer.actions';
@@ -84,6 +85,11 @@ export default function layer(state = initialState, action) {
       };
     case INITIALIZE_REGION_EDIT:
       return { ...state, regionEdit: action.region };
+    case REGION_FORM_UPDATED:
+      return {
+        ...state,
+        regionEdit: { ...state.regionEdit, ...action.update },
+      };
     case CANCEL_REGION_EDIT:
       return { ...state, regionEdit: null };
     case SUBMITTED_REGION:

@@ -23,6 +23,7 @@ export const SUBMITTED = `${ACTION_PREFIX}/SUBMITTED`;
 export const DELETED = `${ACTION_PREFIX}/DELETED`;
 export const INITIALIZE_LAYER_EDIT = `${ACTION_PREFIX}/INITIALIZE_LAYER_EDIT`;
 export const INITIALIZE_REGION_EDIT = `${ACTION_PREFIX}/INITIALIZE_REGION_EDIT`;
+export const REGION_FORM_UPDATED = `${ACTION_PREFIX}/REGION_FORM_UPDATED`;
 export const CANCEL_REGION_EDIT = `${ACTION_PREFIX}/CANCEL_REGION_EDIT`;
 export const SUBMITTED_REGION = `${ACTION_PREFIX}/SUBMITTED_REGION`;
 
@@ -106,6 +107,8 @@ export const initializeRegionEdit = regionId => (dispatch, getState) => {
   }
   dispatch({ type: INITIALIZE_REGION_EDIT, region });
 };
+
+export const updateRegion = update => ({ type: REGION_FORM_UPDATED, update });
 
 export const cancelRegionEdit = () => ({ type: CANCEL_REGION_EDIT });
 
