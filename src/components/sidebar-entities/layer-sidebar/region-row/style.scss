@@ -1,10 +1,10 @@
 @import 'styles/theme';
 
 .RegionRow {
-  margin: 0 1rem 0.5rem;
+  margin: 0 1rem 1rem;
 }
 
-.RegionRow-Check {
+.RegionRow-Icon {
   color: $light3;
   cursor: pointer;
   padding-right: 0.5rem;
@@ -20,4 +20,33 @@
   cursor: pointer;
   padding-right: 0.5rem;
   transition: color 0.2s linear;
+}
+
+.RegionRow-Color {
+  border-radius: 5px;
+  cursor: pointer;
+  height: 25px;
+  margin-right: 0.5rem;
+  width: 25px;
+
+  &:hover {
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.9);
+  }
+}
+
+.RegionRow-Name {
+  flex: 1;
+  margin: 0;
+  text-align: left;
+}
+
+.RegionRow-OtherActions {
+  color: $light3;
+  cursor: pointer;
+  padding-left: 0.5rem;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light2;
+  }
 }

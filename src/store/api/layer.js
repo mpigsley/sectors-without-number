@@ -32,11 +32,29 @@ export const getLayerData = sectorId =>
     .collection('layer')
     .get()
     .then(snapshot => {
-      const layers = {};
+      const layers = [];
       snapshot.forEach(doc => {
-        layers[doc.id] = doc.data();
+        layers.push({ ref: doc.ref, data: doc.data(), id: doc.id });
       });
-      return layers;
+      return Promise.all(
+        layers.map(({ ref, data, id }) =>
+          ref
+            .collection('regions')
+            .get()
+            .then(regionShapshot => {
+              const fullObj = { ...data, id, regions: {} };
+              regionShapshot.forEach(doc => {
+                fullObj.regions[doc.id] = doc.data();
+              });
+              return fullObj;
+            }),
+        ),
+      ).then(layerArray =>
+        layerArray.reduce(
+          (obj, { id, ...layer }) => ({ ...obj, [id]: layer }),
+          {},
+        ),
+      );
     });
 
 export const createRegion = (sectorId, layerId, region) =>

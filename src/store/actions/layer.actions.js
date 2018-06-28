@@ -1,4 +1,5 @@
 import { push } from 'react-router-redux';
+import Chance from 'chance';
 
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import {
@@ -119,7 +120,10 @@ export const submitRegionEdit = intl => (dispatch, getState) => {
   const layerId = currentEntitySelector(state);
   const promise = regionId
     ? editRegion(sectorId, layerId, regionId, regionEdit)
-    : createRegion(sectorId, layerId, regionEdit);
+    : createRegion(sectorId, layerId, {
+        ...regionEdit,
+        color: new Chance().color({ format: 'hex' }),
+      });
   return promise
     .then(({ key, region }) => {
       dispatch(

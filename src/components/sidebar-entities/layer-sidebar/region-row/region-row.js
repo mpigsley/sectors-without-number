@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Check, X } from 'constants/icons';
+import { Check, X, Edit3, MoreHorizontal } from 'constants/icons';
 
 import FlexContainer from 'primitives/container/flex-container';
+import Header, { HeaderType } from 'primitives/text/header';
 import Input from 'primitives/form/input';
 
 import './style.css';
@@ -17,16 +18,16 @@ export default function RegionRow({
 }) {
   if (!regionId && !regionEdit) {
     return null;
-  } else if (!regionId || regionId === regionEdit.regionId) {
+  } else if (!regionId || regionId === (regionEdit || {}).regionId) {
     return (
       <FlexContainer className="RegionRow" align="center">
         <Check
-          className="RegionRow-Icon RegionRow-Check"
+          className="RegionRow-Icon"
           size={25}
           onClick={() => submitRegionEdit()}
         />
         <X
-          className="RegionRow-Icon RegionRow-Close"
+          className="RegionRow-Close"
           size={25}
           onClick={() => cancelRegionEdit()}
         />
@@ -37,12 +38,27 @@ export default function RegionRow({
       </FlexContainer>
     );
   }
+
+  return (
+    <FlexContainer className="RegionRow" align="center">
+      <Edit3 className="RegionRow-Icon" size={20} />
+      <span
+        style={{ backgroundColor: region.color }}
+        className="RegionRow-Color"
+      />
+      <Header type={HeaderType.header4} className="RegionRow-Name">
+        {region.name}
+      </Header>
+      <MoreHorizontal className="RegionRow-OtherActions" size={25} />
+    </FlexContainer>
+  );
 }
 
 RegionRow.propTypes = {
   regionId: PropTypes.string,
   region: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
     isHidden: PropTypes.bool.isRequired,
   }),
   regionEdit: PropTypes.shape({

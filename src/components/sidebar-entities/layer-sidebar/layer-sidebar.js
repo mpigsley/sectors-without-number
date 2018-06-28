@@ -7,7 +7,7 @@ import SectionHeader from 'primitives/text/section-header';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
 import { EyeOff, Plus } from 'constants/icons';
-import { map } from 'constants/lodash';
+import { map, sortBy } from 'constants/lodash';
 
 import RegionRow from './region-row';
 import LayerForm from './layer-form';
@@ -80,8 +80,14 @@ export default function LayerSidebar({
           </FlexContainer>
         </SectionHeader>
         {newRegion}
-        {map(layer.regions || [], (region, regionId) => (
-          <RegionRow key={regionId} region={region} />
+        {sortBy(
+          map(layer.regions || {}, (region, regionId) => ({
+            ...region,
+            regionId,
+          })),
+          'name',
+        ).map(({ regionId, ...region }) => (
+          <RegionRow key={regionId} region={region} regionId={regionId} />
         ))}
       </FlexContainer>
     </div>
@@ -93,13 +99,7 @@ LayerSidebar.propTypes = {
   layer: PropTypes.shape({
     description: PropTypes.string,
     isHidden: PropTypes.bool.isRequired,
-    regions: PropTypes.arrayOf(
-      PropTypes.shape({
-        name: PropTypes.string,
-        regionId: PropTypes.string,
-        isHidden: PropTypes.bool,
-      }),
-    ),
+    regions: PropTypes.shape(),
   }),
   isEditing: PropTypes.bool.isRequired,
   regionEdit: PropTypes.shape({
