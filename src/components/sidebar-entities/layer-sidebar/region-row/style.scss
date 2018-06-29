@@ -50,3 +50,49 @@
     color: $light2;
   }
 }
+
+.RegionRow-OptionDropdown {
+  position: relative;
+
+  &::after {
+    border: 5px solid transparent;
+    border-bottom-color: $dark1;
+    border-top: none;
+    bottom: auto;
+    content: '';
+    display: block;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    height: 0;
+    right: 0;
+    top: -5px;
+    width: 0;
+  }
+
+  &--content {
+    background-color: $dark1;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+    position: absolute;
+    right: -16px;
+  }
+}
+
+.RegionRow-Option {
+  color: $light4;
+  cursor: pointer;
+  white-space: nowrap;
+  padding-bottom: 0.4rem;
+  text-align: right;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light2;
+  }
+
+  &:last-of-type {
+    padding-bottom: 0;
+  }
+}

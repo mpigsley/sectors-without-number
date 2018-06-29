@@ -1,12 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Check, X, Edit3, MoreHorizontal } from 'constants/icons';
+import ReactHintFactory from 'react-hint';
+import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Input from 'primitives/form/input';
 
+import { Check, X, Edit3, MoreHorizontal } from 'constants/icons';
 import './style.css';
+
+const ReactHint = ReactHintFactory(React);
 
 export default function RegionRow({
   regionId,
@@ -41,6 +45,21 @@ export default function RegionRow({
     );
   }
 
+  const onRenderContent = () => (
+    <FlexContainer
+      className="RegionRow-OptionDropdown--content"
+      direction="column"
+    >
+      <div className="RegionRow-Option">Hide Region</div>
+      <div className="RegionRow-Option">Edit Name</div>
+      <div className="RegionRow-Option">
+        <FormattedMessage id="misc.delete" />
+      </div>
+    </FlexContainer>
+  );
+
+  const drodownAttr = `data-options-${regionId}`;
+
   return (
     <FlexContainer className="RegionRow" align="center">
       <Edit3 className="RegionRow-Icon" size={20} />
@@ -55,7 +74,19 @@ export default function RegionRow({
       <Header type={HeaderType.header4} className="RegionRow-Name">
         {region.name}
       </Header>
-      <MoreHorizontal className="RegionRow-OtherActions" size={25} />
+      <MoreHorizontal
+        {...{ [drodownAttr]: true }}
+        className="RegionRow-OtherActions"
+        size={25}
+      />
+      <ReactHint
+        autoPosition
+        attribute={drodownAttr}
+        className="RegionRow-OptionDropdown"
+        events={{ click: true }}
+        position="bottom"
+        onRenderContent={onRenderContent}
+      />
     </FlexContainer>
   );
 }
