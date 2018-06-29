@@ -72,13 +72,13 @@ export const fetchSector = () => (dispatch, getState) => {
     getSectorEntities(sectorId, userId),
     getNavigationData(sectorId),
     getLayerData(sectorId),
-  ]).then(([{ entities, share }, navigation, layers]) =>
+  ]).then(([{ entities, share }, routes, layers]) =>
     dispatch({
       type: FETCHED_SECTOR,
       sectorId,
       entities,
       share,
-      navigation,
+      routes,
       layers,
     }),
   );
