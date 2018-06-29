@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 import ReactHintFactory from 'react-hint';
-import { CompactPicker } from 'react-color';
+import CompactPicker from 'react-color/lib/Compact';
 import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
