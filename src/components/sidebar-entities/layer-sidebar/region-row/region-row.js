@@ -12,9 +12,11 @@ export default function RegionRow({
   regionId,
   region,
   regionEdit,
+  colorPicker,
   updateRegion,
   cancelRegionEdit,
   submitRegionEdit,
+  openColorPicker,
 }) {
   if (!regionId && !regionEdit) {
     return null;
@@ -43,7 +45,11 @@ export default function RegionRow({
     <FlexContainer className="RegionRow" align="center">
       <Edit3 className="RegionRow-Icon" size={20} />
       <span
+        data-color
         style={{ backgroundColor: region.color }}
+        onClick={() =>
+          colorPicker !== regionId ? openColorPicker(regionId) : undefined
+        }
         className="RegionRow-Color"
       />
       <Header type={HeaderType.header4} className="RegionRow-Name">
@@ -66,13 +72,16 @@ RegionRow.propTypes = {
     name: PropTypes.string.isRequired,
     isHidden: PropTypes.bool.isRequired,
   }),
+  colorPicker: PropTypes.string,
   updateRegion: PropTypes.func.isRequired,
   cancelRegionEdit: PropTypes.func.isRequired,
   submitRegionEdit: PropTypes.func.isRequired,
+  openColorPicker: PropTypes.func.isRequired,
 };
 
 RegionRow.defaultProps = {
   regionId: null,
   region: null,
   regionEdit: {},
+  colorPicker: null,
 };

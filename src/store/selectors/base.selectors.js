@@ -57,3 +57,4 @@ export const layersSelector = state => state.layer.models;
 export const layerFormSelector = state => state.layer.form;
 export const layerIsEditingSelector = state => state.layer.isEditing;
 export const layerRegionEditSelector = state => state.layer.regionEdit;
+export const layerColorPickerSelector = state => state.layer.colorPicker;

@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
+import ReactHintFactory from 'react-hint';
+import { CompactPicker } from 'react-color';
+import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -13,32 +16,68 @@ import RegionRow from './region-row';
 import LayerForm from './layer-form';
 import './style.css';
 
-export default function LayerSidebar({
-  intl,
-  layer,
-  isEditing,
-  regionEdit,
-  initializeRegionEdit,
-}) {
-  if (!layer || isEditing) {
-    return <LayerForm />;
-  }
+const ReactHint = ReactHintFactory(React);
 
-  let hidden = null;
-  if (layer.isHidden) {
-    hidden = (
+export default class LayerSidebar extends Component {
+  static propTypes = {
+    intl: intlShape.isRequired,
+    layer: PropTypes.shape({
+      description: PropTypes.string,
+      isHidden: PropTypes.bool.isRequired,
+      regions: PropTypes.shape(),
+      name: PropTypes.string.isRequired,
+    }),
+    isEditing: PropTypes.bool.isRequired,
+    regionEdit: PropTypes.shape({
+      name: PropTypes.string,
+      regionId: PropTypes.string,
+      isHidden: PropTypes.bool,
+    }),
+    colorPicker: PropTypes.string,
+    initializeRegionEdit: PropTypes.func.isRequired,
+    submitColorChange: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    layer: null,
+    regionEdit: null,
+    colorPicker: null,
+  };
+
+  onRenderContent = () => {
+    if (!this.props.colorPicker) {
+      return null;
+    }
+    return (
+      <div className="LayerSidebar-ColorHint--content">
+        <CompactPicker
+          className="LayerSidebar-ColorHint--picker"
+          onChangeComplete={({ hex }) => this.props.submitColorChange(hex)}
+          color={this.props.layer.regions[this.props.colorPicker].color}
+        />
+      </div>
+    );
+  };
+
+  renderHidden() {
+    if (!this.props.layer.isHidden) {
+      return null;
+    }
+    return (
       <FlexContainer className="LayerSidebar-Hidden">
         <EyeOff size={18} />
         <span>
-          The <b>{layer.name}</b> layer is hidden from players
+          The <b>{this.props.layer.name}</b> layer is hidden from players
         </span>
       </FlexContainer>
     );
   }
 
-  let description = null;
-  if (layer.description) {
-    description = (
+  renderDescription() {
+    if (!this.props.layer.description) {
+      return null;
+    }
+    return (
       <FlexContainer
         direction="column"
         className="LayerSidebar-DescriptionContainer"
@@ -46,71 +85,70 @@ export default function LayerSidebar({
         <span className="LayerSidebar-Label">
           <FormattedMessage id="misc.description" />
         </span>
-        <p className="LayerSidebar-Description">{layer.description}</p>
+        <p className="LayerSidebar-Description">
+          {this.props.layer.description}
+        </p>
       </FlexContainer>
     );
   }
 
-  let newRegion = null;
-  if (regionEdit && !regionEdit.regionId) {
-    newRegion = <RegionRow />;
+  render() {
+    if (!this.props.layer || this.props.isEditing) {
+      return <LayerForm />;
+    }
+
+    let newRegion = null;
+    if (this.props.regionEdit && !this.props.regionEdit.regionId) {
+      newRegion = <RegionRow />;
+    }
+
+    return (
+      <div>
+        <FlexContainer className="LayerSidebar" direction="column" flex="1">
+          {this.renderHidden()}
+          {this.renderDescription()}
+          <SectionHeader>
+            <FlexContainer justify="spaceBetween" align="flexEnd">
+              <FormattedMessage id="misc.regions" />
+              <Button
+                minimal
+                className="LayerSidebar-AddButton"
+                onClick={() => this.props.initializeRegionEdit()}
+              >
+                <LinkIcon size={15} icon={Plus} />
+                <FormattedMessage
+                  id="misc.addEntity"
+                  values={{
+                    entity: this.props.intl.formatMessage({
+                      id: 'misc.region',
+                    }),
+                  }}
+                />
+              </Button>
+            </FlexContainer>
+          </SectionHeader>
+          {newRegion}
+          {sortBy(
+            map(this.props.layer.regions || {}, (region, regionId) => ({
+              ...region,
+              regionId,
+            })),
+            'name',
+          ).map(({ regionId, ...region }) => (
+            <RegionRow key={regionId} region={region} regionId={regionId} />
+          ))}
+        </FlexContainer>
+        <ReactHint
+          persist
+          attribute="data-color"
+          className={classNames({
+            'LayerSidebar-ColorHint': this.props.colorPicker,
+          })}
+          events={{ click: true }}
+          position="right"
+          onRenderContent={this.onRenderContent}
+        />
+      </div>
+    );
   }
-
-  return (
-    <div>
-      <FlexContainer className="LayerSidebar" direction="column" flex="1">
-        {hidden}
-        {description}
-        <SectionHeader>
-          <FlexContainer justify="spaceBetween" align="flexEnd">
-            <FormattedMessage id="misc.regions" />
-            <Button
-              minimal
-              className="LayerSidebar-AddButton"
-              onClick={() => initializeRegionEdit()}
-            >
-              <LinkIcon size={15} icon={Plus} />
-              <FormattedMessage
-                id="misc.addEntity"
-                values={{
-                  entity: intl.formatMessage({ id: 'misc.region' }),
-                }}
-              />
-            </Button>
-          </FlexContainer>
-        </SectionHeader>
-        {newRegion}
-        {sortBy(
-          map(layer.regions || {}, (region, regionId) => ({
-            ...region,
-            regionId,
-          })),
-          'name',
-        ).map(({ regionId, ...region }) => (
-          <RegionRow key={regionId} region={region} regionId={regionId} />
-        ))}
-      </FlexContainer>
-    </div>
-  );
 }
-
-LayerSidebar.propTypes = {
-  intl: intlShape.isRequired,
-  layer: PropTypes.shape({
-    description: PropTypes.string,
-    isHidden: PropTypes.bool.isRequired,
-    regions: PropTypes.shape(),
-  }),
-  isEditing: PropTypes.bool.isRequired,
-  regionEdit: PropTypes.shape({
-    name: PropTypes.string,
-    regionId: PropTypes.string,
-    isHidden: PropTypes.bool,
-  }),
-  initializeRegionEdit: PropTypes.func.isRequired,
-};
-
-LayerSidebar.defaultProps = {
-  layer: null,
-  regionEdit: null,
-};

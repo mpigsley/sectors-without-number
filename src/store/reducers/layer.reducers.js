@@ -11,6 +11,8 @@ import {
   REGION_FORM_UPDATED,
   CANCEL_REGION_EDIT,
   SUBMITTED_REGION,
+  OPENED_COLOR_PICKER,
+  CLOSED_COLOR_PICKER,
 } from 'store/actions/layer.actions';
 
 const initialForm = () => ({
@@ -24,6 +26,7 @@ export const initialState = {
   form: initialForm(),
   regionEdit: null,
   isEditing: false,
+  colorPicker: null,
 };
 
 export default function layer(state = initialState, action) {
@@ -111,6 +114,10 @@ export default function layer(state = initialState, action) {
           },
         },
       };
+    case OPENED_COLOR_PICKER:
+      return { ...state, colorPicker: action.regionId };
+    case CLOSED_COLOR_PICKER:
+      return { ...state, colorPicker: null };
     default:
       return state;
   }

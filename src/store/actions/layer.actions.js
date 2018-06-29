@@ -14,6 +14,7 @@ import {
   currentSectorSelector,
   currentEntitySelector,
   layerRegionEditSelector,
+  layerColorPickerSelector,
 } from 'store/selectors/base.selectors';
 import { currentLayer } from 'store/selectors/layer.selectors';
 
@@ -27,6 +28,8 @@ export const INITIALIZE_REGION_EDIT = `${ACTION_PREFIX}/INITIALIZE_REGION_EDIT`;
 export const REGION_FORM_UPDATED = `${ACTION_PREFIX}/REGION_FORM_UPDATED`;
 export const CANCEL_REGION_EDIT = `${ACTION_PREFIX}/CANCEL_REGION_EDIT`;
 export const SUBMITTED_REGION = `${ACTION_PREFIX}/SUBMITTED_REGION`;
+export const OPENED_COLOR_PICKER = `${ACTION_PREFIX}/OPENED_COLOR_PICKER`;
+export const CLOSED_COLOR_PICKER = `${ACTION_PREFIX}/CLOSED_COLOR_PICKER`;
 
 export const resetForms = () => ({ type: RESET_FORMS });
 export const updateLayer = (key, value) => ({
@@ -144,3 +147,29 @@ export const submitRegionEdit = intl => (dispatch, getState) => {
       );
     });
 };
+
+export const submitColorChange = color => (dispatch, getState) => {
+  const state = getState();
+  const regionId = layerColorPickerSelector(state);
+  const layerId = currentEntitySelector(state);
+  if (!regionId || !layerId) {
+    return Promise.resolve();
+  }
+  const sectorId = currentSectorSelector(state);
+  const layer = currentLayer(state);
+  dispatch({
+    type: SUBMITTED_REGION,
+    sectorId,
+    layerId,
+    key: regionId,
+    region: { ...(layer.regions[regionId] || {}), color },
+  });
+  return editRegion(sectorId, layerId, regionId, { color });
+};
+
+export const openColorPicker = regionId => ({
+  type: OPENED_COLOR_PICKER,
+  regionId,
+});
+
+export const closeColorPicker = () => ({ type: CLOSED_COLOR_PICKER });

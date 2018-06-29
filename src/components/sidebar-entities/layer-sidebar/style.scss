@@ -32,3 +32,34 @@
 .LayerSidebar-AddButton {
   margin: 0;
 }
+
+.LayerSidebar-ColorHint {
+  position: relative;
+
+  &::after {
+    border: 5px solid transparent;
+    border-left: none;
+    border-right-color: $light4;
+    bottom: 0;
+    content: '';
+    display: block;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    height: 0;
+    right: auto;
+    top: 0;
+    width: 0;
+  }
+
+  &--content {
+    background-color: $light4;
+    left: 5px;
+    position: absolute;
+    top: -16px;
+  }
+
+  &--picker {
+    background-color: $light4;
+  }
+}
