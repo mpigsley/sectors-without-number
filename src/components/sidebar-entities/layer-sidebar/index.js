@@ -11,6 +11,7 @@ import { currentLayer } from 'store/selectors/layer.selectors';
 import {
   initializeRegionEdit,
   updateRegion,
+  removeRegion,
 } from 'store/actions/layer.actions';
 
 import LayerSidebar from './layer-sidebar';
@@ -22,8 +23,12 @@ const mapStateToProps = createStructuredSelector({
   colorPicker: layerColorPickerSelector,
 });
 
+const mapDispatchToProps = (dispatch, props) => ({
+  initializeRegionEdit: regionId => dispatch(initializeRegionEdit(regionId)),
+  updateRegion: (regionId, update) => dispatch(updateRegion(regionId, update)),
+  removeRegion: regionId => dispatch(removeRegion(regionId, props.intl)),
+});
+
 export default injectIntl(
-  connect(mapStateToProps, { initializeRegionEdit, updateRegion })(
-    LayerSidebar,
-  ),
+  connect(mapStateToProps, mapDispatchToProps)(LayerSidebar),
 );

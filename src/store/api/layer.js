@@ -77,3 +77,13 @@ export const editRegion = (sectorId, layerId, regionId, region) =>
     .doc(regionId)
     .set(region, { merge: true })
     .then(() => ({ key: regionId, region }));
+
+export const deleteRegion = (sectorId, layerId, regionId) =>
+  Firestore()
+    .collection('layers')
+    .doc(sectorId)
+    .collection('layer')
+    .doc(layerId)
+    .collection('regions')
+    .doc(regionId)
+    .delete();

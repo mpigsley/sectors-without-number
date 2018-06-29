@@ -5,6 +5,7 @@ import ReactHintFactory from 'react-hint';
 import CompactPicker from 'react-color/lib/Compact';
 import classNames from 'classnames';
 
+import ConfirmModal from 'primitives/modal/confirm-modal';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import LinkIcon from 'primitives/other/link-icon';
@@ -36,12 +37,17 @@ export default class LayerSidebar extends Component {
     colorPicker: PropTypes.string,
     initializeRegionEdit: PropTypes.func.isRequired,
     updateRegion: PropTypes.func.isRequired,
+    removeRegion: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     layer: null,
     regionEdit: null,
     colorPicker: null,
+  };
+
+  state = {
+    regionDeletion: null,
   };
 
   onRenderContent = () => {
@@ -59,6 +65,10 @@ export default class LayerSidebar extends Component {
         />
       </div>
     );
+  };
+
+  confirmDeletion = regionId => {
+    this.setState({ regionDeletion: regionId });
   };
 
   renderHidden() {
@@ -137,7 +147,12 @@ export default class LayerSidebar extends Component {
             })),
             'name',
           ).map(({ regionId, ...region }) => (
-            <RegionRow key={regionId} region={region} regionId={regionId} />
+            <RegionRow
+              key={regionId}
+              region={region}
+              regionId={regionId}
+              onDelete={this.confirmDeletion}
+            />
           ))}
         </FlexContainer>
         <ReactHint
@@ -149,6 +164,15 @@ export default class LayerSidebar extends Component {
           events={{ click: true }}
           position="right"
           onRenderContent={this.onRenderContent}
+        />
+        <ConfirmModal
+          intl={this.props.intl}
+          isOpen={!!this.state.regionDeletion}
+          onCancel={() => this.setState({ regionDeletion: null })}
+          onConfirm={() => {
+            this.props.removeRegion(this.state.regionDeletion);
+            this.setState({ regionDeletion: null });
+          }}
         />
       </div>
     );

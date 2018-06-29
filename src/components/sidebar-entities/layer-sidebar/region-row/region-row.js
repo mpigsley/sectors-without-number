@@ -18,6 +18,7 @@ export default function RegionRow({
   region,
   regionEdit,
   colorPicker,
+  onDelete,
   updateRegionForm,
   initializeRegionEdit,
   cancelRegionEdit,
@@ -65,7 +66,7 @@ export default function RegionRow({
       >
         Edit Name
       </div>
-      <div className="RegionRow-Option">
+      <div className="RegionRow-Option" onClick={() => onDelete(regionId)}>
         <FormattedMessage id="misc.delete" />
       </div>
     </FlexContainer>
@@ -128,6 +129,7 @@ RegionRow.propTypes = {
     isHidden: PropTypes.bool.isRequired,
   }),
   colorPicker: PropTypes.string,
+  onDelete: PropTypes.func.isRequired,
   updateRegionForm: PropTypes.func.isRequired,
   initializeRegionEdit: PropTypes.func.isRequired,
   cancelRegionEdit: PropTypes.func.isRequired,

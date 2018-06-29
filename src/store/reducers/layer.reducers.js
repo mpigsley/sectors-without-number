@@ -11,6 +11,7 @@ import {
   REGION_FORM_UPDATED,
   CANCEL_REGION_EDIT,
   SUBMITTED_REGION,
+  DELETED_REGION,
   OPENED_COLOR_PICKER,
   CLOSED_COLOR_PICKER,
 } from 'store/actions/layer.actions';
@@ -110,6 +111,23 @@ export default function layer(state = initialState, action) {
                   {}),
                 [action.key]: action.region,
               },
+            },
+          },
+        },
+      };
+    case DELETED_REGION:
+      return {
+        ...state,
+        models: {
+          ...state.models,
+          [action.sectorId]: {
+            ...state.models[action.sectorId],
+            [action.layerId]: {
+              ...state.models[action.sectorId][action.layerId],
+              regions: omit(
+                state.models[action.sectorId][action.layerId].regions,
+                action.regionId,
+              ),
             },
           },
         },

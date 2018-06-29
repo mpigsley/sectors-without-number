@@ -8,6 +8,7 @@ import {
   deleteLayer,
   editRegion,
   createRegion,
+  deleteRegion,
 } from 'store/api/layer';
 import {
   layerFormSelector,
@@ -27,6 +28,7 @@ export const INITIALIZE_REGION_EDIT = `${ACTION_PREFIX}/INITIALIZE_REGION_EDIT`;
 export const REGION_FORM_UPDATED = `${ACTION_PREFIX}/REGION_FORM_UPDATED`;
 export const CANCEL_REGION_EDIT = `${ACTION_PREFIX}/CANCEL_REGION_EDIT`;
 export const SUBMITTED_REGION = `${ACTION_PREFIX}/SUBMITTED_REGION`;
+export const DELETED_REGION = `${ACTION_PREFIX}/DELETED_REGION`;
 export const OPENED_COLOR_PICKER = `${ACTION_PREFIX}/OPENED_COLOR_PICKER`;
 export const CLOSED_COLOR_PICKER = `${ACTION_PREFIX}/CLOSED_COLOR_PICKER`;
 
@@ -166,6 +168,40 @@ export const updateRegion = (regionId, update) => (dispatch, getState) => {
     region: { ...(layer.regions[regionId] || {}), ...update },
   });
   return editRegion(sectorId, layerId, regionId, update);
+};
+
+export const removeRegion = (regionId, intl) => (dispatch, getState) => {
+  const state = getState();
+  const layerId = currentEntitySelector(state);
+  if (!regionId || !layerId) {
+    return Promise.resolve();
+  }
+  const sectorId = currentSectorSelector(state);
+  dispatch({ type: DELETED_REGION, sectorId, layerId, regionId });
+  return deleteRegion(sectorId, layerId, regionId)
+    .then(() =>
+      dispatch(
+        SuccessToast({
+          title: intl.formatMessage(
+            { id: 'misc.entityDeleted' },
+            { entity: intl.formatMessage({ id: 'misc.region' }) },
+          ),
+          message: intl.formatMessage(
+            { id: 'misc.successfullyRemoved' },
+            { entity: intl.formatMessage({ id: 'misc.region' }) },
+          ),
+        }),
+      ),
+    )
+    .catch(err => {
+      console.error(err);
+      return dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
+    });
 };
 
 export const openColorPicker = regionId => ({
