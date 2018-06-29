@@ -7,11 +7,12 @@ import {
   layerColorPickerSelector,
 } from 'store/selectors/base.selectors';
 import {
-  updateRegion,
+  updateRegionForm,
   initializeRegionEdit,
   cancelRegionEdit,
   submitRegionEdit,
   openColorPicker,
+  updateRegion,
 } from 'store/actions/layer.actions';
 import RegionRow from './region-row';
 
@@ -21,11 +22,12 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  updateRegion: update => dispatch(updateRegion(update)),
+  updateRegionForm: update => dispatch(updateRegionForm(update)),
   cancelRegionEdit: () => dispatch(cancelRegionEdit()),
   submitRegionEdit: () => dispatch(submitRegionEdit(props.intl)),
   openColorPicker: regionId => dispatch(openColorPicker(regionId)),
   initializeRegionEdit: regionId => dispatch(initializeRegionEdit(regionId)),
+  updateRegion: (regionId, update) => dispatch(updateRegion(regionId, update)),
 });
 
 export default injectIntl(

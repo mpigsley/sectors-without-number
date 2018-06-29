@@ -35,7 +35,7 @@ export default class LayerSidebar extends Component {
     }),
     colorPicker: PropTypes.string,
     initializeRegionEdit: PropTypes.func.isRequired,
-    submitColorChange: PropTypes.func.isRequired,
+    updateRegion: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -52,7 +52,9 @@ export default class LayerSidebar extends Component {
       <div className="LayerSidebar-ColorHint--content">
         <CompactPicker
           className="LayerSidebar-ColorHint--picker"
-          onChangeComplete={({ hex }) => this.props.submitColorChange(hex)}
+          onChangeComplete={({ hex }) =>
+            this.props.updateRegion(this.props.colorPicker, { color: hex })
+          }
           color={this.props.layer.regions[this.props.colorPicker].color}
         />
       </div>

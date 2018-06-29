@@ -10,7 +10,7 @@ import {
 import { currentLayer } from 'store/selectors/layer.selectors';
 import {
   initializeRegionEdit,
-  submitColorChange,
+  updateRegion,
 } from 'store/actions/layer.actions';
 
 import LayerSidebar from './layer-sidebar';
@@ -23,7 +23,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, { initializeRegionEdit, submitColorChange })(
+  connect(mapStateToProps, { initializeRegionEdit, updateRegion })(
     LayerSidebar,
   ),
 );

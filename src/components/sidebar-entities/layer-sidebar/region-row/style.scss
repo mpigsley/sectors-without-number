@@ -34,10 +34,19 @@
   }
 }
 
+.RegionRow-HiddenIcon {
+  color: $light1;
+  margin-left: 0.5rem;
+}
+
 .RegionRow-Name {
   flex: 1;
   margin: 0;
   text-align: left;
+
+  &--hidden {
+    color: $light1;
+  }
 }
 
 .RegionRow-OtherActions {

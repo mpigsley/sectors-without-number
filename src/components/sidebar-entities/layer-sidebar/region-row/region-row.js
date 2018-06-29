@@ -2,12 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage } from 'react-intl';
+import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Input from 'primitives/form/input';
 
-import { Check, X, Edit3, MoreHorizontal } from 'constants/icons';
+import { Check, X, Edit3, MoreHorizontal, EyeOff } from 'constants/icons';
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
@@ -17,11 +18,12 @@ export default function RegionRow({
   region,
   regionEdit,
   colorPicker,
-  updateRegion,
+  updateRegionForm,
   initializeRegionEdit,
   cancelRegionEdit,
   submitRegionEdit,
   openColorPicker,
+  updateRegion,
 }) {
   if (!regionId && !regionEdit) {
     return null;
@@ -40,7 +42,7 @@ export default function RegionRow({
         />
         <Input
           value={regionEdit.name}
-          onChange={({ target }) => updateRegion({ name: target.value })}
+          onChange={({ target }) => updateRegionForm({ name: target.value })}
         />
       </FlexContainer>
     );
@@ -51,7 +53,12 @@ export default function RegionRow({
       className="RegionRow-OptionDropdown--content"
       direction="column"
     >
-      <div className="RegionRow-Option">Hide Region</div>
+      <div
+        className="RegionRow-Option"
+        onClick={() => updateRegion(regionId, { isHidden: !region.isHidden })}
+      >
+        {region.isHidden ? 'Show' : 'Hide'} Region
+      </div>
       <div
         className="RegionRow-Option"
         onClick={() => initializeRegionEdit(regionId)}
@@ -66,6 +73,11 @@ export default function RegionRow({
 
   const drodownAttr = `data-options-${regionId.toLowerCase()}`;
 
+  let hidden = null;
+  if (region.isHidden) {
+    hidden = <EyeOff className="RegionRow-HiddenIcon" size={18} />;
+  }
+
   return (
     <FlexContainer className="RegionRow" align="center">
       <Edit3 className="RegionRow-Icon" size={20} />
@@ -77,9 +89,15 @@ export default function RegionRow({
         }
         className="RegionRow-Color"
       />
-      <Header type={HeaderType.header4} className="RegionRow-Name">
+      <Header
+        type={HeaderType.header4}
+        className={classNames('RegionRow-Name', {
+          'RegionRow-Name--hidden': region.isHidden,
+        })}
+      >
         {region.name}
       </Header>
+      {hidden}
       <MoreHorizontal
         {...{ [drodownAttr]: true }}
         className="RegionRow-OtherActions"
@@ -110,11 +128,12 @@ RegionRow.propTypes = {
     isHidden: PropTypes.bool.isRequired,
   }),
   colorPicker: PropTypes.string,
-  updateRegion: PropTypes.func.isRequired,
+  updateRegionForm: PropTypes.func.isRequired,
   initializeRegionEdit: PropTypes.func.isRequired,
   cancelRegionEdit: PropTypes.func.isRequired,
   submitRegionEdit: PropTypes.func.isRequired,
   openColorPicker: PropTypes.func.isRequired,
+  updateRegion: PropTypes.func.isRequired,
 };
 
 RegionRow.defaultProps = {
