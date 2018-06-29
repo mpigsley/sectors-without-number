@@ -18,6 +18,7 @@ export default function RegionRow({
   regionEdit,
   colorPicker,
   updateRegion,
+  initializeRegionEdit,
   cancelRegionEdit,
   submitRegionEdit,
   openColorPicker,
@@ -51,14 +52,19 @@ export default function RegionRow({
       direction="column"
     >
       <div className="RegionRow-Option">Hide Region</div>
-      <div className="RegionRow-Option">Edit Name</div>
+      <div
+        className="RegionRow-Option"
+        onClick={() => initializeRegionEdit(regionId)}
+      >
+        Edit Name
+      </div>
       <div className="RegionRow-Option">
         <FormattedMessage id="misc.delete" />
       </div>
     </FlexContainer>
   );
 
-  const drodownAttr = `data-options-${regionId}`;
+  const drodownAttr = `data-options-${regionId.toLowerCase()}`;
 
   return (
     <FlexContainer className="RegionRow" align="center">
@@ -105,6 +111,7 @@ RegionRow.propTypes = {
   }),
   colorPicker: PropTypes.string,
   updateRegion: PropTypes.func.isRequired,
+  initializeRegionEdit: PropTypes.func.isRequired,
   cancelRegionEdit: PropTypes.func.isRequired,
   submitRegionEdit: PropTypes.func.isRequired,
   openColorPicker: PropTypes.func.isRequired,

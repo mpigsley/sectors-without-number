@@ -8,6 +8,7 @@ import {
 } from 'store/selectors/base.selectors';
 import {
   updateRegion,
+  initializeRegionEdit,
   cancelRegionEdit,
   submitRegionEdit,
   openColorPicker,
@@ -24,6 +25,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   cancelRegionEdit: () => dispatch(cancelRegionEdit()),
   submitRegionEdit: () => dispatch(submitRegionEdit(props.intl)),
   openColorPicker: regionId => dispatch(openColorPicker(regionId)),
+  initializeRegionEdit: regionId => dispatch(initializeRegionEdit(regionId)),
 });
 
 export default injectIntl(

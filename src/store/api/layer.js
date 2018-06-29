@@ -76,4 +76,4 @@ export const editRegion = (sectorId, layerId, regionId, region) =>
     .collection('regions')
     .doc(regionId)
     .set(region, { merge: true })
-    .then(() => ({ key: layerId, region }));
+    .then(() => ({ key: regionId, region }));
