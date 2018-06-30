@@ -26,6 +26,7 @@ export default class HexMap extends Component {
     addRouteLocation: PropTypes.func.isRequired,
     completeRoute: PropTypes.func.isRequired,
     updateNavSettings: PropTypes.func.isRequired,
+    addRegionToHex: PropTypes.func.isRequired,
     toEntity: PropTypes.func.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     isShared: PropTypes.bool.isRequired,
@@ -53,6 +54,7 @@ export default class HexMap extends Component {
     navigationSettings: PropTypes.shape({
       isCreatingRoute: PropTypes.bool.isRequired,
     }).isRequired,
+    paintRegionId: PropTypes.string,
   };
 
   static defaultProps = {
@@ -63,6 +65,7 @@ export default class HexMap extends Component {
     holdKey: null,
     currentEntityType: Entities.sector.key,
     hexes: [],
+    paintRegionId: null,
   };
 
   componentWillMount() {
@@ -126,11 +129,13 @@ export default class HexMap extends Component {
     this.isMousedDown = true;
     delay(() => {
       const isOnNav = this.props.currentEntityType === Entities.navigation.key;
+      const isOnLayers = this.props.currentEntityType === Entities.layer.key;
       if (
         this.isMousedDown &&
         !this.props.isShared &&
         !this.props.mapLocked &&
-        !isOnNav
+        !isOnNav &&
+        !isOnLayers
       ) {
         if (this.props.isSidebarEditActive) {
           this.props.deactivateSidebarEdit();
@@ -159,7 +164,13 @@ export default class HexMap extends Component {
       hexKey,
     );
     const isOnNav = this.props.currentEntityType === Entities.navigation.key;
-    if (hexKey && isOnNav && this.props.navigationSettings.isCreatingRoute) {
+    if (this.props.paintRegionId) {
+      this.props.addRegionToHex(hexKey);
+    } else if (
+      hexKey &&
+      isOnNav &&
+      this.props.navigationSettings.isCreatingRoute
+    ) {
       this.props.addRouteLocation(hexKey);
     } else if (!isOnNav) {
       if (entity && !this.props.holdKey) {

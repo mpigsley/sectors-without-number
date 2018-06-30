@@ -18,6 +18,8 @@ import {
   completeRoute,
   updateNavSettings,
 } from 'store/actions/navigation.actions';
+import { addRegionToHex } from 'store/actions/layer.actions';
+
 import { getCurrentNavigationWithSettings } from 'store/selectors/navigation.selectors';
 import {
   holdKeySelector,
@@ -27,6 +29,7 @@ import {
   navigationSettingsSelector,
   currentEntityTypeSelector,
   routeLocatorSelector,
+  layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -51,6 +54,7 @@ const mapStateToProps = createStructuredSelector({
   navigationRoutes: getCurrentNavigationWithSettings,
   routeLocator: routeLocatorSelector,
   paintRegion: currentPaintRegion,
+  paintRegionId: layerRegionPaintSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -64,6 +68,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   addRouteLocation: key => dispatch(addRouteLocation(key)),
   completeRoute: () => dispatch(completeRoute(props.intl)),
   updateNavSettings: (key, value) => dispatch(updateNavSettings(key, value)),
+  addRegionToHex: hexKey => dispatch(addRegionToHex(hexKey)),
   toEntity: (entityType, entityId) => {
     const route = `/sector/${
       props.match.params.sector

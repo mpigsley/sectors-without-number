@@ -219,3 +219,8 @@ export const beginRegionPaint = regionId => ({
 });
 
 export const closeRegionPaint = () => ({ type: CLOSED_REGION_PAINT });
+
+export const addRegionToHex = hexKey => (dispatch, getState) => {
+  // const state = getState();
+  console.log(hexKey);
+};
