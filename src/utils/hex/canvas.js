@@ -1,4 +1,4 @@
-import { forEach, find, values, includes, uniq } from 'constants/lodash';
+import { forEach, find, values, includes, uniq, keys } from 'constants/lodash';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
@@ -89,6 +89,7 @@ export default ({
   navigationRoutes,
   routeLocator,
   paintRegion,
+  layerHexes,
 }) => {
   ctx.clearRect(0, 0, width * ratio, height * ratio);
 
@@ -111,7 +112,7 @@ export default ({
     }));
 
   const allRouteKeys = values(navigationRoutes).reduce(
-    (keys, sectorNav) => uniq([...keys, ...sectorNav.route]),
+    (routeKeys, sectorNav) => uniq([...routeKeys, ...sectorNav.route]),
     [],
   );
   const routeLocations = {};
@@ -133,7 +134,7 @@ export default ({
         ctx.fillStyle = '#303e4f';
       }
       if (hoverKey === hexKey) {
-        ctx.fillStyle = paintRegion ? paintRegion.color : '#863c4e';
+        ctx.fillStyle = '#863c4e';
       }
       if (activeKey === hexKey) {
         ctx.fillStyle = '#792f41';
@@ -143,6 +144,35 @@ export default ({
       }
       if (newRoute && includes(newRoute.route, hexKey)) {
         ctx.fillStyle = '#637182';
+      }
+      if (
+        includes(keys(layerHexes), hexKey) ||
+        (hoverKey === hexKey && paintRegion)
+      ) {
+        let hexLayer = layerHexes[hexKey] || [];
+        if (
+          hoverKey === hexKey &&
+          paintRegion &&
+          !includes(hexLayer, paintRegion.color)
+        ) {
+          hexLayer = [paintRegion.color, ...hexLayer];
+        }
+        if (hexLayer.length === 1) {
+          const [fillStyle] = hexLayer;
+          ctx.fillStyle = fillStyle;
+        } else if (hexLayer.length > 1) {
+          const gradient = ctx.createLinearGradient(
+            points[1].x,
+            points[1].y,
+            points[4].x,
+            points[4].y,
+          );
+          const gStep = 1 / (hexLayer.length - 1);
+          hexLayer.forEach((color, index) => {
+            gradient.addColorStop(gStep * index, color);
+          });
+          ctx.fillStyle = gradient;
+        }
       }
       ctx.stroke();
       ctx.fill();
