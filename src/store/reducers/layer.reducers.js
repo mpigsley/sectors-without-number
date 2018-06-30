@@ -47,6 +47,7 @@ export default function layer(state = initialState, action) {
     case RESET_FORMS:
       return {
         ...state,
+        isEditing: false,
         form: initialForm(),
       };
     case FORM_UPDATED:
