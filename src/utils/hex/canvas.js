@@ -1,3 +1,5 @@
+import tinycolor from 'tinycolor2';
+
 import { forEach, find, values, includes, uniq, keys } from 'constants/lodash';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
@@ -116,6 +118,7 @@ export default ({
     [],
   );
   const routeLocations = {};
+  const hexesWithDarkText = [];
   const newRoute = find(navigationRoutes, { isCreatingRoute: true });
   let holdLocation;
   let hoverLocation;
@@ -142,9 +145,6 @@ export default ({
       if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
         ctx.fillStyle = '#637182';
       }
-      if (newRoute && includes(newRoute.route, hexKey)) {
-        ctx.fillStyle = '#637182';
-      }
       if (
         includes(keys(layerHexes), hexKey) ||
         (hoverKey === hexKey && paintRegion)
@@ -157,6 +157,16 @@ export default ({
         ) {
           hexLayer = [paintRegion.color, ...hexLayer];
         }
+
+        const lightColors = hexLayer.reduce(
+          (num, color) =>
+            num + tinycolor(color).getBrightness() > 100 ? 1 : 0,
+          0,
+        );
+        if (lightColors > hexLayer.length / 2) {
+          hexesWithDarkText.push(hexKey);
+        }
+
         if (hexLayer.length === 1) {
           const [fillStyle] = hexLayer;
           ctx.fillStyle = fillStyle;
@@ -173,6 +183,9 @@ export default ({
           });
           ctx.fillStyle = gradient;
         }
+      }
+      if (newRoute && includes(newRoute.route, hexKey)) {
+        ctx.fillStyle = '#637182';
       }
       ctx.stroke();
       ctx.fill();
@@ -266,7 +279,9 @@ export default ({
   hexEntities.filter(hex => hex.highlighted).forEach(hex => {
     // Draw Text
     ctx.font = `${9 * ratio}px Raleway,sans-serif`;
-    ctx.fillStyle = '#8f8f8f';
+    ctx.fillStyle = includes(hexesWithDarkText, hex.hexKey)
+      ? '#000000'
+      : '#b2b2b2';
     const renderText =
       hex.width > 45 * ratio &&
       (sectorLayers.systemText === undefined || sectorLayers.systemText);
