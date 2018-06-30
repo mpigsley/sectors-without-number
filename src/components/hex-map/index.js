@@ -18,7 +18,7 @@ import {
   completeRoute,
   updateNavSettings,
 } from 'store/actions/navigation.actions';
-import { addRegionToHex } from 'store/actions/layer.actions';
+import { toggleRegionAtHex } from 'store/actions/layer.actions';
 
 import { getCurrentNavigationWithSettings } from 'store/selectors/navigation.selectors';
 import {
@@ -68,7 +68,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   addRouteLocation: key => dispatch(addRouteLocation(key)),
   completeRoute: () => dispatch(completeRoute(props.intl)),
   updateNavSettings: (key, value) => dispatch(updateNavSettings(key, value)),
-  addRegionToHex: hexKey => dispatch(addRegionToHex(hexKey)),
+  toggleRegionAtHex: hexKey => dispatch(toggleRegionAtHex(hexKey)),
   toEntity: (entityType, entityId) => {
     const route = `/sector/${
       props.match.params.sector

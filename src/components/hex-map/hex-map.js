@@ -26,7 +26,7 @@ export default class HexMap extends Component {
     addRouteLocation: PropTypes.func.isRequired,
     completeRoute: PropTypes.func.isRequired,
     updateNavSettings: PropTypes.func.isRequired,
-    addRegionToHex: PropTypes.func.isRequired,
+    toggleRegionAtHex: PropTypes.func.isRequired,
     toEntity: PropTypes.func.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     isShared: PropTypes.bool.isRequired,
@@ -165,7 +165,7 @@ export default class HexMap extends Component {
     );
     const isOnNav = this.props.currentEntityType === Entities.navigation.key;
     if (this.props.paintRegionId) {
-      this.props.addRegionToHex(hexKey);
+      this.props.toggleRegionAtHex(hexKey);
     } else if (
       hexKey &&
       isOnNav &&

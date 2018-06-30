@@ -25,7 +25,7 @@ service cloud.firestore {
       }
       allow create: if request.auth != null
         && getSector().data.creator == request.auth.uid
-        && request.resource.data.name.size() <= 25;
+        && ('regions' in request.resource.data || request.resource.data.name.size() <= 25);
       allow update, delete: if request.auth != null
         && getSector().data.creator == request.auth.uid;
       allow read;

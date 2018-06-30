@@ -17,6 +17,7 @@ import {
   CLOSED_COLOR_PICKER,
   BEGAN_REGION_PAINT,
   CLOSED_REGION_PAINT,
+  UPDATE_LAYER_HEX,
 } from 'store/actions/layer.actions';
 
 const initialForm = () => ({
@@ -148,6 +149,26 @@ export default function layer(state = initialState, action) {
       return { ...state, regionPaint: action.regionId };
     case CLOSED_REGION_PAINT:
       return { ...state, regionPaint: null };
+    case UPDATE_LAYER_HEX: {
+      const theseHexes =
+        state.models[action.sectorId][action.layerId].hexes || {};
+      const hexes = action.hex
+        ? { ...theseHexes, [action.hexId]: action.hex }
+        : omit(theseHexes, action.hexId);
+      return {
+        ...state,
+        models: {
+          ...state.models,
+          [action.sectorId]: {
+            ...state.models[action.sectorId],
+            [action.layerId]: {
+              ...state.models[action.sectorId][action.layerId],
+              hexes,
+            },
+          },
+        },
+      };
+    }
     default:
       return state;
   }

@@ -2,6 +2,7 @@ import { push } from 'react-router-redux';
 import Chance from 'chance';
 
 import { SuccessToast, ErrorToast } from 'utils/toasts';
+import { includes } from 'constants/lodash';
 import {
   createLayer,
   editLayer,
@@ -9,12 +10,15 @@ import {
   editRegion,
   createRegion,
   deleteRegion,
+  createOrUpdateHex,
+  deleteHex,
 } from 'store/api/layer';
 import {
   layerFormSelector,
   currentSectorSelector,
   currentEntitySelector,
   layerRegionEditSelector,
+  layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
 import { currentLayer } from 'store/selectors/layer.selectors';
 
@@ -33,6 +37,7 @@ export const OPENED_COLOR_PICKER = `${ACTION_PREFIX}/OPENED_COLOR_PICKER`;
 export const CLOSED_COLOR_PICKER = `${ACTION_PREFIX}/CLOSED_COLOR_PICKER`;
 export const BEGAN_REGION_PAINT = `${ACTION_PREFIX}/BEGAN_REGION_PAINT`;
 export const CLOSED_REGION_PAINT = `${ACTION_PREFIX}/CLOSED_REGION_PAINT`;
+export const UPDATE_LAYER_HEX = `${ACTION_PREFIX}/UPDATE_LAYER_HEX`;
 
 export const resetForms = () => ({ type: RESET_FORMS });
 export const updateLayer = (key, value) => ({
@@ -220,7 +225,27 @@ export const beginRegionPaint = regionId => ({
 
 export const closeRegionPaint = () => ({ type: CLOSED_REGION_PAINT });
 
-export const addRegionToHex = hexKey => (dispatch, getState) => {
-  // const state = getState();
-  console.log(hexKey);
+export const toggleRegionAtHex = hexId => (dispatch, getState) => {
+  const state = getState();
+  const layerId = currentEntitySelector(state);
+  const regionId = layerRegionPaintSelector(state);
+  if (!hexId || !regionId || !layerId) {
+    return Promise.resolve();
+  }
+  const sectorId = currentSectorSelector(state);
+  const layer = currentLayer(state);
+  const existingHexRegions = (layer.hexes[hexId] || {}).regions || [];
+  const newRegions = includes(existingHexRegions, regionId)
+    ? existingHexRegions.filter(reg => reg !== regionId)
+    : [...existingHexRegions, regionId];
+  dispatch({
+    type: UPDATE_LAYER_HEX,
+    sectorId,
+    layerId,
+    hexId,
+    hex: newRegions.length ? { regions: newRegions } : undefined,
+  });
+  return newRegions.length
+    ? createOrUpdateHex(sectorId, layerId, hexId, { regions: newRegions })
+    : deleteHex(sectorId, layerId, hexId);
 };

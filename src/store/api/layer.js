@@ -90,3 +90,23 @@ export const deleteRegion = (sectorId, layerId, regionId) =>
     .collection('regions')
     .doc(regionId)
     .delete();
+
+export const createOrUpdateHex = (sectorId, layerId, hexId, hex) =>
+  Firestore()
+    .collection('layers')
+    .doc(sectorId)
+    .collection('layer')
+    .doc(layerId)
+    .collection('hexes')
+    .doc(hexId)
+    .set(hex);
+
+export const deleteHex = (sectorId, layerId, hexId) =>
+  Firestore()
+    .collection('layers')
+    .doc(sectorId)
+    .collection('layer')
+    .doc(layerId)
+    .collection('hexes')
+    .doc(hexId)
+    .delete();
