@@ -19,7 +19,7 @@ service cloud.firestore {
         && getSector().data.creator == request.auth.uid;
       allow read;
     }
-    match /layers/{sectorId}/layer/{layerId} {
+    match /layers/{sectorId}/layer/{layerId=**} {
       function getSector() {
         return get(/databases/$(database)/documents/entities/sector/entity/$(sectorId));
       }
@@ -29,15 +29,6 @@ service cloud.firestore {
       allow update, delete: if request.auth != null
         && getSector().data.creator == request.auth.uid;
       allow read;
-
-      match /regions/{regionId} {
-        allow create: if request.auth != null
-          && getSector().data.creator == request.auth.uid
-          && request.resource.data.name.size() <= 40;
-        allow update, delete: if request.auth != null
-          && getSector().data.creator == request.auth.uid;
-        allow read;
-      }
     }
     match /{document=**} {
       allow read, write: if false;

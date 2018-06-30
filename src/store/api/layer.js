@@ -38,16 +38,19 @@ export const getLayerData = sectorId =>
       });
       return Promise.all(
         layers.map(({ ref, data, id }) =>
-          ref
-            .collection('regions')
-            .get()
-            .then(regionShapshot => {
-              const fullObj = { ...data, id, regions: {} };
-              regionShapshot.forEach(doc => {
-                fullObj.regions[doc.id] = doc.data();
-              });
-              return fullObj;
-            }),
+          Promise.all([
+            ref.collection('regions').get(),
+            ref.collection('hexes').get(),
+          ]).then(([regionSnapshot, hexSnapshot]) => {
+            const fullObj = { ...data, id, regions: {}, hexes: {} };
+            regionSnapshot.forEach(doc => {
+              fullObj.regions[doc.id] = doc.data();
+            });
+            hexSnapshot.forEach(doc => {
+              fullObj.hexes[doc.id] = doc.data();
+            });
+            return fullObj;
+          }),
         ),
       ).then(layerArray =>
         layerArray.reduce(
