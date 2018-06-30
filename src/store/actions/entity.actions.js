@@ -22,6 +22,7 @@ import {
   getCurrentEntity,
   getCurrentSector,
 } from 'store/selectors/entity.selectors';
+import { currentSectorLayers } from 'store/selectors/layer.selectors';
 
 import {
   generateEntity as generateEntityUtil,
@@ -344,8 +345,15 @@ export const toggleLayer = layerId => (dispatch, getState) => {
   if (!sectorId || !sector || syncLockSelector(state)) {
     return Promise.resolve();
   }
-  const layers = sector.layers || {};
+
+  const customLayers = currentSectorLayers(state);
+  let layers = sector.layers || {};
   const layerToggle = layers[layerId] !== undefined && !layers[layerId];
+  layers =
+    customLayers[layerId] && layerToggle
+      ? { ...layers, ...mapValues(customLayers, () => false) }
+      : layers;
+
   const sectorUpdate = {
     layers: {
       ...layers,

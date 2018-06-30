@@ -1,6 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
+import { zipObject, keys, map, sortBy } from 'constants/lodash';
 import {
   currentEntitySelector,
   currentSectorSelector,
@@ -28,3 +29,17 @@ export const currentPaintRegion = createSelector(
   [currentLayer, layerRegionPaintSelector],
   (layer, regionPaint) => ((layer || {}).regions || {})[regionPaint],
 );
+
+export const currentLayerHexes = createSelector([currentLayer], layer => {
+  const regionMap = (layer || {}).regions || {};
+  const hexMap = (layer || {}).hexes || {};
+  return zipObject(
+    keys(hexMap),
+    map(hexMap, ({ regions }) =>
+      sortBy(
+        regions.map(regionId => regionMap[regionId]).filter(r => r),
+        'name',
+      ).map(({ color }) => color),
+    ),
+  );
+});
