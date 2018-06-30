@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
-import { zipObject, keys, map, sortBy } from 'constants/lodash';
+import { zipObject, keys, map, sortBy, pick, reduce } from 'constants/lodash';
 import {
   currentEntitySelector,
   currentSectorSelector,
@@ -9,6 +9,7 @@ import {
   layerFormSelector,
   layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
+import { getSectorLayers } from 'store/selectors/entity.selectors';
 
 export const isValidLayerForm = createSelector(
   [layerFormSelector],
@@ -25,12 +26,25 @@ export const currentLayer = createSelector(
   (layers, current) => (layers || {})[current],
 );
 
+export const activeLayer = createSelector(
+  [currentSectorLayers, getSectorLayers],
+  (layers, sectorLayerMap) => {
+    const syncedLayers = pick(sectorLayerMap, keys(layers || {}));
+    const activeLayerId = reduce(
+      syncedLayers,
+      (active, layer, layerId) => (layer ? layerId : active),
+      undefined,
+    );
+    return (layers || {})[activeLayerId];
+  },
+);
+
 export const currentPaintRegion = createSelector(
   [currentLayer, layerRegionPaintSelector],
   (layer, regionPaint) => ((layer || {}).regions || {})[regionPaint],
 );
 
-export const currentLayerHexes = createSelector([currentLayer], layer => {
+export const currentLayerHexes = createSelector([activeLayer], layer => {
   const regionMap = (layer || {}).regions || {};
   const hexMap = (layer || {}).hexes || {};
   return zipObject(
