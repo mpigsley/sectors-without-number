@@ -5,6 +5,7 @@ import { injectIntl } from 'react-intl';
 import {
   layerRegionEditSelector,
   layerColorPickerSelector,
+  layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
 import {
   updateRegionForm,
@@ -13,12 +14,15 @@ import {
   submitRegionEdit,
   openColorPicker,
   updateRegion,
+  beginRegionPaint,
+  closeRegionPaint,
 } from 'store/actions/layer.actions';
 import RegionRow from './region-row';
 
 const mapStateToProps = createStructuredSelector({
   regionEdit: layerRegionEditSelector,
   colorPicker: layerColorPickerSelector,
+  regionPaint: layerRegionPaintSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -28,6 +32,8 @@ const mapDispatchToProps = (dispatch, props) => ({
   openColorPicker: regionId => dispatch(openColorPicker(regionId)),
   initializeRegionEdit: regionId => dispatch(initializeRegionEdit(regionId)),
   updateRegion: (regionId, update) => dispatch(updateRegion(regionId, update)),
+  beginRegionPaint: regionId => dispatch(beginRegionPaint(regionId)),
+  closeRegionPaint: () => dispatch(closeRegionPaint()),
 });
 
 export default injectIntl(

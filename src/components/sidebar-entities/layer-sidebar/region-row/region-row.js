@@ -18,12 +18,15 @@ export default function RegionRow({
   region,
   regionEdit,
   colorPicker,
+  regionPaint,
   onDelete,
   updateRegionForm,
   initializeRegionEdit,
   cancelRegionEdit,
   submitRegionEdit,
   openColorPicker,
+  beginRegionPaint,
+  closeRegionPaint,
   updateRegion,
 }) {
   if (!regionId && !regionEdit) {
@@ -79,9 +82,27 @@ export default function RegionRow({
     hidden = <EyeOff className="RegionRow-HiddenIcon" size={18} />;
   }
 
+  let paintIcon = (
+    <Edit3
+      className="RegionRow-Icon"
+      size={20}
+      onClick={() => beginRegionPaint(regionId)}
+    />
+  );
+  if (regionId === regionPaint) {
+    paintIcon = (
+      <X
+        data-paint="Select hexes in sector to paint"
+        className="RegionRow-Close"
+        size={20}
+        onClick={() => closeRegionPaint()}
+      />
+    );
+  }
+
   return (
     <FlexContainer className="RegionRow" align="center">
-      <Edit3 className="RegionRow-Icon" size={20} />
+      {paintIcon}
       <span
         data-color
         style={{ backgroundColor: region.color }}
@@ -129,6 +150,7 @@ RegionRow.propTypes = {
     isHidden: PropTypes.bool.isRequired,
   }),
   colorPicker: PropTypes.string,
+  regionPaint: PropTypes.string,
   onDelete: PropTypes.func.isRequired,
   updateRegionForm: PropTypes.func.isRequired,
   initializeRegionEdit: PropTypes.func.isRequired,
@@ -136,6 +158,8 @@ RegionRow.propTypes = {
   submitRegionEdit: PropTypes.func.isRequired,
   openColorPicker: PropTypes.func.isRequired,
   updateRegion: PropTypes.func.isRequired,
+  beginRegionPaint: PropTypes.func.isRequired,
+  closeRegionPaint: PropTypes.func.isRequired,
 };
 
 RegionRow.defaultProps = {
@@ -143,4 +167,5 @@ RegionRow.defaultProps = {
   region: null,
   regionEdit: {},
   colorPicker: null,
+  regionPaint: null,
 };

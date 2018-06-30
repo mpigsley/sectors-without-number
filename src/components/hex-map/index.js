@@ -34,6 +34,7 @@ import {
   getMapLock,
   getSectorLayers,
 } from 'store/selectors/entity.selectors';
+import { currentPaintRegion } from 'store/selectors/layer.selectors';
 import HexMap from './hex-map';
 
 const mapStateToProps = createStructuredSelector({
@@ -49,6 +50,7 @@ const mapStateToProps = createStructuredSelector({
   navigationSettings: navigationSettingsSelector,
   navigationRoutes: getCurrentNavigationWithSettings,
   routeLocator: routeLocatorSelector,
+  paintRegion: currentPaintRegion,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

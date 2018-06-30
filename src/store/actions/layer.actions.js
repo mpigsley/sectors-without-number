@@ -31,6 +31,8 @@ export const SUBMITTED_REGION = `${ACTION_PREFIX}/SUBMITTED_REGION`;
 export const DELETED_REGION = `${ACTION_PREFIX}/DELETED_REGION`;
 export const OPENED_COLOR_PICKER = `${ACTION_PREFIX}/OPENED_COLOR_PICKER`;
 export const CLOSED_COLOR_PICKER = `${ACTION_PREFIX}/CLOSED_COLOR_PICKER`;
+export const BEGAN_REGION_PAINT = `${ACTION_PREFIX}/BEGAN_REGION_PAINT`;
+export const CLOSED_REGION_PAINT = `${ACTION_PREFIX}/CLOSED_REGION_PAINT`;
 
 export const resetForms = () => ({ type: RESET_FORMS });
 export const updateLayer = (key, value) => ({
@@ -210,3 +212,10 @@ export const openColorPicker = regionId => ({
 });
 
 export const closeColorPicker = () => ({ type: CLOSED_COLOR_PICKER });
+
+export const beginRegionPaint = regionId => ({
+  type: BEGAN_REGION_PAINT,
+  regionId,
+});
+
+export const closeRegionPaint = () => ({ type: CLOSED_REGION_PAINT });

@@ -165,6 +165,7 @@ export default class LayerSidebar extends Component {
           position="right"
           onRenderContent={this.onRenderContent}
         />
+        <ReactHint events attribute="data-paint" position="right" />
         <ConfirmModal
           intl={this.props.intl}
           isOpen={!!this.state.regionDeletion}

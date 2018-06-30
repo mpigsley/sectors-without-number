@@ -88,6 +88,7 @@ export default ({
   sectorLayers,
   navigationRoutes,
   routeLocator,
+  paintRegion,
 }) => {
   ctx.clearRect(0, 0, width * ratio, height * ratio);
 
@@ -132,7 +133,7 @@ export default ({
         ctx.fillStyle = '#303e4f';
       }
       if (hoverKey === hexKey) {
-        ctx.fillStyle = '#863c4e';
+        ctx.fillStyle = paintRegion ? paintRegion.color : '#863c4e';
       }
       if (activeKey === hexKey) {
         ctx.fillStyle = '#792f41';

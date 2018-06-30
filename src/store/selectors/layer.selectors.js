@@ -6,6 +6,7 @@ import {
   currentSectorSelector,
   layersSelector,
   layerFormSelector,
+  layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
 
 export const isValidLayerForm = createSelector(
@@ -21,4 +22,9 @@ export const currentSectorLayers = createSelector(
 export const currentLayer = createSelector(
   [currentSectorLayers, currentEntitySelector],
   (layers, current) => (layers || {})[current],
+);
+
+export const currentPaintRegion = createSelector(
+  [currentLayer, layerRegionPaintSelector],
+  (layer, regionPaint) => ((layer || {}).regions || {})[regionPaint],
 );

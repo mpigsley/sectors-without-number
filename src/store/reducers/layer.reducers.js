@@ -1,3 +1,4 @@
+import { LOCATION_CHANGE } from 'react-router-redux';
 import { omit } from 'constants/lodash';
 
 import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
@@ -14,6 +15,8 @@ import {
   DELETED_REGION,
   OPENED_COLOR_PICKER,
   CLOSED_COLOR_PICKER,
+  BEGAN_REGION_PAINT,
+  CLOSED_REGION_PAINT,
 } from 'store/actions/layer.actions';
 
 const initialForm = () => ({
@@ -26,6 +29,7 @@ export const initialState = {
   models: {},
   form: initialForm(),
   regionEdit: null,
+  regionPaint: null,
   isEditing: false,
   colorPicker: null,
 };
@@ -44,9 +48,12 @@ export default function layer(state = initialState, action) {
           [action.sectorId]: action.layers,
         },
       };
+    case LOCATION_CHANGE:
     case RESET_FORMS:
       return {
         ...state,
+        regionPaint: null,
+        colorPicker: null,
         isEditing: false,
         form: initialForm(),
       };
@@ -137,6 +144,10 @@ export default function layer(state = initialState, action) {
       return { ...state, colorPicker: action.regionId };
     case CLOSED_COLOR_PICKER:
       return { ...state, colorPicker: null };
+    case BEGAN_REGION_PAINT:
+      return { ...state, regionPaint: action.regionId };
+    case CLOSED_REGION_PAINT:
+      return { ...state, regionPaint: null };
     default:
       return state;
   }

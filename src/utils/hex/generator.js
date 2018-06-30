@@ -20,7 +20,6 @@ import {
 } from 'utils/hex/common';
 
 const getHexSize = ({ width, height, columns, rows, renderSector }) => {
-  console.log(1250 / width);
   const modifiedBuffer = Math.min(PIXEL_BUFFER / (900 / width), 75);
   const bufferedHeight = height - 2 * modifiedBuffer;
   const bufferedWidth = width - 2 * modifiedBuffer;
