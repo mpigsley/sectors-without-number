@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 
-import { map, includes } from 'constants/lodash';
+import { sortBy, map, includes } from 'constants/lodash';
 import { Plus, Lock, Unlock, Layers, HelpCircle, Edit2 } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
@@ -114,10 +114,17 @@ export default class FloatingToolbar extends Component {
                 this.props.intl.formatMessage({ id: 'misc.navRoutes' }),
                 `/sector/${this.props.sectorId}/navigation`,
               )}
-              {map(this.props.layers, (layer, key) =>
+              {sortBy(
+                map(this.props.layers, (layer, key) => ({
+                  ...layer,
+                  sort: layer.name.toLowerCase(),
+                  key,
+                })),
+                'sort',
+              ).map(({ key, name }) =>
                 this.renderLayer(
                   key,
-                  layer.name,
+                  name,
                   `/sector/${this.props.sectorId}/layer/${key}`,
                 ),
               )}
