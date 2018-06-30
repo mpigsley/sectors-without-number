@@ -20,7 +20,7 @@ import {
 } from 'utils/hex/common';
 
 const getHexSize = ({ width, height, columns, rows, renderSector }) => {
-  const modifiedBuffer = Math.min(PIXEL_BUFFER / (900 / width), 75);
+  const modifiedBuffer = Math.min(PIXEL_BUFFER / (800 / width), 75);
   const bufferedHeight = height - 2 * modifiedBuffer;
   const bufferedWidth = width - 2 * modifiedBuffer;
   let scaledWidth = DEFAULT_HEX_WIDTH;
