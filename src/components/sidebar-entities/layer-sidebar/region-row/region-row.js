@@ -9,6 +9,7 @@ import Header, { HeaderType } from 'primitives/text/header';
 import Input from 'primitives/form/input';
 
 import { Check, X, Edit3, MoreHorizontal, EyeOff } from 'constants/icons';
+import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
@@ -32,12 +33,17 @@ export default function RegionRow({
   if (!regionId && !regionForm) {
     return null;
   } else if (!regionId || regionId === (regionForm || {}).regionId) {
+    const isOutOfRange = regionForm.name.length > 40;
     return (
       <FlexContainer className="RegionRow" align="center">
         <Check
-          className="RegionRow-Icon"
+          className={!isOutOfRange ? 'RegionRow-Icon' : 'RegionRow-Close'}
           size={25}
-          onClick={() => submitRegionForm()}
+          onClick={() => {
+            if (!isOutOfRange) {
+              submitRegionForm();
+            }
+          }}
         />
         <X
           className="RegionRow-Close"
@@ -46,6 +52,8 @@ export default function RegionRow({
         />
         <Input
           value={regionForm.name}
+          error={isOutOfRange}
+          placeholder={`Name (${LAYER_NAME_LENGTH} characters)`}
           onChange={({ target }) => updateRegionForm({ name: target.value })}
         />
       </FlexContainer>
