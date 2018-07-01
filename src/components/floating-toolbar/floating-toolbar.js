@@ -94,6 +94,22 @@ export default class FloatingToolbar extends Component {
     );
   }
 
+  renderCreateLayer() {
+    if (this.props.isShared || !this.props.isSaved) {
+      return null;
+    }
+    return (
+      <FlexContainer className="FloatingToolbar-SubItemOuter">
+        <Link
+          to={`/sector/${this.props.sectorId}/layer`}
+          className="FloatingToolbar-SubItemName FloatingToolbar-CreateLayer"
+        >
+          <Plus size={18} /> <span>Create Layer</span>
+        </Link>
+      </FlexContainer>
+    );
+  }
+
   render() {
     return (
       <div className="FloatingToolbar-Container">
@@ -128,14 +144,7 @@ export default class FloatingToolbar extends Component {
                   `/sector/${this.props.sectorId}/layer/${key}`,
                 ),
               )}
-              <FlexContainer className="FloatingToolbar-SubItemOuter">
-                <Link
-                  to={`/sector/${this.props.sectorId}/layer`}
-                  className="FloatingToolbar-SubItemName FloatingToolbar-CreateLayer"
-                >
-                  <Plus size={18} /> <span>Create Layer</span>
-                </Link>
-              </FlexContainer>
+              {this.renderCreateLayer()}
             </FlexContainer>
           </FlexContainer>
           <FlexContainer className="FloatingToolbar-Item">
