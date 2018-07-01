@@ -14,7 +14,14 @@ import { addLayer } from 'store/actions/combined.actions';
 
 import { createId } from 'utils/common';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { includes, omit } from 'constants/lodash';
+import {
+  keys,
+  includes,
+  omit,
+  pickBy,
+  mapValues,
+  zipObject,
+} from 'constants/lodash';
 
 const ACTION_PREFIX = '@@layer';
 export const RESET_FORMS = `${ACTION_PREFIX}/RESET_FORMS`;
@@ -151,14 +158,34 @@ export const removeRegion = (regionId, intl) => (dispatch, getState) => {
   }
   const sectorId = currentSectorSelector(state);
   const current = currentLayer(state);
+  const reducedHexes = mapValues(
+    pickBy(current.hexes, ({ regions }) => includes(regions, regionId)),
+    hex => ({
+      ...hex,
+      regions: omit(hex.regions, regionId),
+    }),
+  );
+  const deletedHexIds = keys(
+    pickBy(reducedHexes, ({ regions }) => !regions.length),
+  );
   dispatch({
     type: EDITED,
     sectorId,
     layerId,
-    layer: { regions: omit(current.regions, regionId) },
+    layer: {
+      regions: omit(current.regions, regionId),
+      hexes: omit({ ...current.hexes, ...reducedHexes }, ...deletedHexIds),
+    },
   });
   return editLayer(sectorId, layerId, {
     regions: { [regionId]: Firebase.firestore.FieldValue.delete() },
+    hexes: {
+      ...omit(reducedHexes, ...deletedHexIds),
+      ...zipObject(
+        deletedHexIds,
+        deletedHexIds.map(() => Firebase.firestore.FieldValue.delete()),
+      ),
+    },
   })
     .then(() =>
       dispatch(
