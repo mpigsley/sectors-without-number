@@ -16,7 +16,11 @@ import {
   DELETED_ENTITIES,
   UPDATED_ID_MAPPING,
 } from 'store/actions/entity.actions';
-import { INITIALIZED, FETCHED_SECTOR } from 'store/actions/combined.actions';
+import {
+  INITIALIZED,
+  FETCHED_SECTOR,
+  CREATED_LAYER,
+} from 'store/actions/combined.actions';
 import { LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 import { mergeEntityUpdates } from 'utils/entity';
 
@@ -125,6 +129,21 @@ export default function entity(state = initialState, action) {
           ...mapValues(action.entities, (entityIds, entityType) =>
             omit(state.models[entityType], entityIds),
           ),
+        },
+      };
+    }
+    case CREATED_LAYER: {
+      return {
+        ...state,
+        models: {
+          ...state.models,
+          [Entities.sector.key]: {
+            ...state.models[Entities.sector.key],
+            [action.sectorId]: {
+              ...state.models[Entities.sector.key][action.sectorId],
+              layers: action.layers,
+            },
+          },
         },
       };
     }

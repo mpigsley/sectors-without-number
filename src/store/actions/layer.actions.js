@@ -4,7 +4,6 @@ import Chance from 'chance';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { includes } from 'constants/lodash';
 import {
-  createLayer,
   editLayer,
   deleteLayer,
   editRegion,
@@ -21,11 +20,12 @@ import {
   layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
 import { currentLayer } from 'store/selectors/layer.selectors';
+import { addLayer } from 'store/actions/combined.actions';
 
 const ACTION_PREFIX = '@@layer';
 export const RESET_FORMS = `${ACTION_PREFIX}/RESET_FORMS`;
 export const FORM_UPDATED = `${ACTION_PREFIX}/FORM_UPDATED`;
-export const SUBMITTED = `${ACTION_PREFIX}/SUBMITTED`;
+export const EDITED = `${ACTION_PREFIX}/SUBMITTED`;
 export const DELETED = `${ACTION_PREFIX}/DELETED`;
 export const INITIALIZE_LAYER_EDIT = `${ACTION_PREFIX}/INITIALIZE_LAYER_EDIT`;
 export const INITIALIZE_REGION_EDIT = `${ACTION_PREFIX}/INITIALIZE_REGION_EDIT`;
@@ -53,19 +53,19 @@ export const submitForm = intl => (dispatch, getState) => {
   const layerId = currentEntitySelector(state);
 
   const promise = layerId
-    ? editLayer(sectorId, layerId, update)
-    : createLayer(sectorId, update);
+    ? editLayer(sectorId, layerId, update).then(({ layer }) =>
+        dispatch({ type: EDITED, sectorId, layerId, layer }),
+      )
+    : dispatch(addLayer(update));
 
   return promise
-    .then(({ key, layer }) => {
+    .then(() => {
       dispatch(
         SuccessToast({
           title: intl.formatMessage({ id: 'misc.sectorSaved' }),
           message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
         }),
       );
-      dispatch({ type: SUBMITTED, sectorId, key, layer });
-      dispatch(push(`/sector/${sectorId}/layer/${key}`));
     })
     .catch(err => {
       console.error(err);
@@ -234,7 +234,7 @@ export const toggleRegionAtHex = hexId => (dispatch, getState) => {
   }
   const sectorId = currentSectorSelector(state);
   const layer = currentLayer(state);
-  const existingHexRegions = (layer.hexes[hexId] || {}).regions || [];
+  const existingHexRegions = ((layer.hexes || {})[hexId] || {}).regions || [];
   const newRegions = includes(existingHexRegions, regionId)
     ? existingHexRegions.filter(reg => reg !== regionId)
     : [...existingHexRegions, regionId];

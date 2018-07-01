@@ -6,7 +6,7 @@ export const createLayer = (sectorId, layer) =>
     .doc(sectorId)
     .collection('layer')
     .add(layer)
-    .then(doc => ({ key: doc.id, layer }));
+    .then(doc => ({ layerId: doc.id, layer }));
 
 export const editLayer = (sectorId, layerId, layer) =>
   Firebase.firestore()
@@ -15,7 +15,7 @@ export const editLayer = (sectorId, layerId, layer) =>
     .collection('layer')
     .doc(layerId)
     .set(layer, { merge: true })
-    .then(() => ({ key: layerId, layer }));
+    .then(() => ({ layerId, layer }));
 
 export const deleteLayer = (sectorId, layerId) =>
   Firebase.firestore()

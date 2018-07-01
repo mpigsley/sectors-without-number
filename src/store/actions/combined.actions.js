@@ -1,9 +1,14 @@
 import { addLocaleData } from 'react-intl';
+import { push } from 'react-router-redux';
 
 import { getCurrentUser } from 'store/api/user';
-import { getSectorEntities, getSyncedSectors } from 'store/api/entity';
+import {
+  getSectorEntities,
+  getSyncedSectors,
+  updateEntity,
+} from 'store/api/entity';
 import { getNavigationData } from 'store/api/navigation';
-import { getLayerData } from 'store/api/layer';
+import { getLayerData, createLayer } from 'store/api/layer';
 
 import {
   isInitializedSelector,
@@ -11,15 +16,18 @@ import {
   currentSectorSelector,
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorFetched } from 'store/selectors/sector.selectors';
+import { currentSectorLayers } from 'store/selectors/layer.selectors';
+import { getSectorLayers } from 'store/selectors/entity.selectors';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
 import { mergeEntityUpdates } from 'utils/entity';
-import { keys } from 'constants/lodash';
+import { zipObject, keys } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@combined';
 export const INITIALIZED = `${ACTION_PREFIX}/INITIALIZED`;
 export const FETCHED_SECTOR = `${ACTION_PREFIX}/FETCHED_SECTOR`;
+export const CREATED_LAYER = `${ACTION_PREFIX}/CREATED_LAYER`;
 
 export const initialize = location => dispatch =>
   getCurrentUser().then(user => {
@@ -82,4 +90,23 @@ export const fetchSector = () => (dispatch, getState) => {
       layers,
     }),
   );
+};
+
+export const addLayer = model => (dispatch, getState) => {
+  const state = getState();
+  const sectorId = currentSectorSelector(state);
+  console.log(sectorId, model);
+  return createLayer(sectorId, model).then(({ layerId, layer }) => {
+    const sectorLayers = getSectorLayers(state);
+    const currentLayerIds = keys(currentSectorLayers(state));
+    const layers = {
+      ...sectorLayers,
+      ...zipObject(currentLayerIds, currentLayerIds.map(() => false)),
+      [layerId]: true,
+    };
+    return updateEntity(sectorId, Entities.sector.key, { layers }).then(() => {
+      dispatch({ type: CREATED_LAYER, sectorId, layerId, layer, layers });
+      dispatch(push(`/sector/${sectorId}/layer/${layerId}`));
+    });
+  });
 };

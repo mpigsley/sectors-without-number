@@ -1,11 +1,15 @@
 import { LOCATION_CHANGE } from 'react-router-redux';
 import { omit } from 'constants/lodash';
 
-import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
+import {
+  FETCHED_SECTOR,
+  INITIALIZED,
+  CREATED_LAYER,
+} from 'store/actions/combined.actions';
 import {
   RESET_FORMS,
   FORM_UPDATED,
-  SUBMITTED,
+  EDITED,
   DELETED,
   INITIALIZE_LAYER_EDIT,
   INITIALIZE_REGION_EDIT,
@@ -66,7 +70,8 @@ export default function layer(state = initialState, action) {
           [action.key]: action.value,
         },
       };
-    case SUBMITTED:
+    case EDITED:
+    case CREATED_LAYER:
       return {
         ...state,
         form: initialForm(),
@@ -75,7 +80,7 @@ export default function layer(state = initialState, action) {
           ...state.models,
           [action.sectorId]: {
             ...(state.models[action.sectorId] || {}),
-            [action.key]: action.layer,
+            [action.layerId]: action.layer,
           },
         },
       };
