@@ -143,10 +143,11 @@ export default class LayerSidebar extends Component {
           {sortBy(
             map(this.props.layer.regions || {}, (region, regionId) => ({
               ...region,
+              sort: region.name.toLowerCase(),
               regionId,
             })),
-            'name',
-          ).map(({ regionId, ...region }) => (
+            'sort',
+          ).map(({ regionId, sort, ...region }) => (
             <RegionRow
               key={regionId}
               region={region}

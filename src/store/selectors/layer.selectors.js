@@ -53,10 +53,9 @@ export const currentLayerHexes = createSelector(
     return zipObject(
       keys(hexMap),
       map(hexMap, ({ regions }) =>
-        sortBy(
-          regions.map(regionId => regionMap[regionId]).filter(r => r),
-          'name',
-        ).map(({ color }) => color),
+        sortBy(regions.map(regionId => regionMap[regionId]).filter(r => r), [
+          ({ name }) => name.toLowerCase(),
+        ]).map(({ color }) => color),
       ),
     );
   },
