@@ -44,16 +44,20 @@ export const currentPaintRegion = createSelector(
   (layer, regionPaint) => ((layer || {}).regions || {})[regionPaint],
 );
 
-export const currentLayerHexes = createSelector([activeLayer], layer => {
-  const regionMap = (layer || {}).regions || {};
-  const hexMap = (layer || {}).hexes || {};
-  return zipObject(
-    keys(hexMap),
-    map(hexMap, ({ regions }) =>
-      sortBy(
-        regions.map(regionId => regionMap[regionId]).filter(r => r),
-        'name',
-      ).map(({ color }) => color),
-    ),
-  );
-});
+export const currentLayerHexes = createSelector(
+  [currentLayer, activeLayer],
+  (current, active) => {
+    const layer = current || active;
+    const regionMap = (layer || {}).regions || {};
+    const hexMap = (layer || {}).hexes || {};
+    return zipObject(
+      keys(hexMap),
+      map(hexMap, ({ regions }) =>
+        sortBy(
+          regions.map(regionId => regionMap[regionId]).filter(r => r),
+          'name',
+        ).map(({ color }) => color),
+      ),
+    );
+  },
+);
