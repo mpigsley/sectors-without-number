@@ -23,7 +23,7 @@ import {
 } from 'store/actions/entity.actions';
 import { INITIALIZED, FETCHED_SECTOR } from 'store/actions/combined.actions';
 
-import { uniq } from 'constants/lodash';
+import { keys, uniq } from 'constants/lodash';
 import { ROWS, COLUMNS } from 'constants/defaults';
 import Entities from 'constants/entities';
 import ExportTypes from 'constants/export-types';
@@ -79,8 +79,19 @@ export default function sector(state = initialState, action) {
       }
       return { ...state, renderSector: false };
     }
-    case SAVED_SECTOR:
     case UPDATED_ENTITIES:
+      return {
+        ...state,
+        holdKey: null,
+        fetched: uniq([
+          ...state.fetched,
+          ...keys(action.entities[Entities.sector.key]),
+        ]),
+        hoverKey: null,
+        topLevelKey: null,
+        syncLock: true,
+      };
+    case SAVED_SECTOR:
     case DELETED_ENTITIES:
       return {
         ...state,
