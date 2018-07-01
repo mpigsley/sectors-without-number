@@ -47,7 +47,7 @@ export const completeRoute = intl => (dispatch, getState) => {
   const state = getState();
   const { isCreatingRoute, ...update } = navigationSettingsSelector(state);
   if (update.route.length < 2) {
-    return dispatch(updateNavSettings('isCreatingRoute', false));
+    return dispatch(cancelNavigation());
   }
 
   dispatch(setSyncLock());
