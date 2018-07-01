@@ -15,13 +15,10 @@ import {
   INITIALIZE_REGION_EDIT,
   REGION_FORM_UPDATED,
   CANCEL_REGION_EDIT,
-  SUBMITTED_REGION,
-  DELETED_REGION,
   OPENED_COLOR_PICKER,
   CLOSED_COLOR_PICKER,
   BEGAN_REGION_PAINT,
   CLOSED_REGION_PAINT,
-  UPDATE_LAYER_HEX,
 } from 'store/actions/layer.actions';
 
 const initialForm = () => ({
@@ -33,7 +30,7 @@ const initialForm = () => ({
 export const initialState = {
   models: {},
   form: initialForm(),
-  regionEdit: null,
+  regionForm: null,
   regionPaint: null,
   isEditing: false,
   colorPicker: null,
@@ -61,6 +58,7 @@ export default function layer(state = initialState, action) {
         colorPicker: null,
         isEditing: false,
         form: initialForm(),
+        regionForm: null,
       };
     case FORM_UPDATED:
       return {
@@ -76,11 +74,15 @@ export default function layer(state = initialState, action) {
         ...state,
         form: initialForm(),
         isEditing: false,
+        regionForm: null,
         models: {
           ...state.models,
           [action.sectorId]: {
             ...(state.models[action.sectorId] || {}),
-            [action.layerId]: action.layer,
+            [action.layerId]: {
+              ...((state.models[action.sectorId] || {})[action.layerId] || {}),
+              ...action.layer,
+            },
           },
         },
       };
@@ -102,50 +104,14 @@ export default function layer(state = initialState, action) {
         form: action.layer,
       };
     case INITIALIZE_REGION_EDIT:
-      return { ...state, regionEdit: action.region };
+      return { ...state, regionForm: action.region };
     case REGION_FORM_UPDATED:
       return {
         ...state,
-        regionEdit: { ...state.regionEdit, ...action.update },
+        regionForm: { ...state.regionForm, ...action.update },
       };
     case CANCEL_REGION_EDIT:
-      return { ...state, regionEdit: null };
-    case SUBMITTED_REGION:
-      return {
-        ...state,
-        regionEdit: null,
-        models: {
-          ...state.models,
-          [action.sectorId]: {
-            ...state.models[action.sectorId],
-            [action.layerId]: {
-              ...state.models[action.sectorId][action.layerId],
-              regions: {
-                ...(state.models[action.sectorId][action.layerId].regions ||
-                  {}),
-                [action.key]: action.region,
-              },
-            },
-          },
-        },
-      };
-    case DELETED_REGION:
-      return {
-        ...state,
-        models: {
-          ...state.models,
-          [action.sectorId]: {
-            ...state.models[action.sectorId],
-            [action.layerId]: {
-              ...state.models[action.sectorId][action.layerId],
-              regions: omit(
-                state.models[action.sectorId][action.layerId].regions,
-                action.regionId,
-              ),
-            },
-          },
-        },
-      };
+      return { ...state, regionForm: null };
     case OPENED_COLOR_PICKER:
       return { ...state, colorPicker: action.regionId };
     case CLOSED_COLOR_PICKER:
@@ -154,26 +120,6 @@ export default function layer(state = initialState, action) {
       return { ...state, regionPaint: action.regionId };
     case CLOSED_REGION_PAINT:
       return { ...state, regionPaint: null };
-    case UPDATE_LAYER_HEX: {
-      const theseHexes =
-        state.models[action.sectorId][action.layerId].hexes || {};
-      const hexes = action.hex
-        ? { ...theseHexes, [action.hexId]: action.hex }
-        : omit(theseHexes, action.hexId);
-      return {
-        ...state,
-        models: {
-          ...state.models,
-          [action.sectorId]: {
-            ...state.models[action.sectorId],
-            [action.layerId]: {
-              ...state.models[action.sectorId][action.layerId],
-              hexes,
-            },
-          },
-        },
-      };
-    }
     default:
       return state;
   }

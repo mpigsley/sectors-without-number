@@ -16,36 +16,36 @@ const ReactHint = ReactHintFactory(React);
 export default function RegionRow({
   regionId,
   region,
-  regionEdit,
+  regionForm,
   colorPicker,
   regionPaint,
   onDelete,
   updateRegionForm,
-  initializeRegionEdit,
-  cancelRegionEdit,
-  submitRegionEdit,
+  initializeRegionForm,
+  cancelRegionForm,
+  submitRegionForm,
   openColorPicker,
   beginRegionPaint,
   closeRegionPaint,
   updateRegion,
 }) {
-  if (!regionId && !regionEdit) {
+  if (!regionId && !regionForm) {
     return null;
-  } else if (!regionId || regionId === (regionEdit || {}).regionId) {
+  } else if (!regionId || regionId === (regionForm || {}).regionId) {
     return (
       <FlexContainer className="RegionRow" align="center">
         <Check
           className="RegionRow-Icon"
           size={25}
-          onClick={() => submitRegionEdit()}
+          onClick={() => submitRegionForm()}
         />
         <X
           className="RegionRow-Close"
           size={25}
-          onClick={() => cancelRegionEdit()}
+          onClick={() => cancelRegionForm()}
         />
         <Input
-          value={regionEdit.name}
+          value={regionForm.name}
           onChange={({ target }) => updateRegionForm({ name: target.value })}
         />
       </FlexContainer>
@@ -65,7 +65,7 @@ export default function RegionRow({
       </div>
       <div
         className="RegionRow-Option"
-        onClick={() => initializeRegionEdit(regionId)}
+        onClick={() => initializeRegionForm(regionId)}
       >
         Edit Name
       </div>
@@ -144,7 +144,7 @@ RegionRow.propTypes = {
     color: PropTypes.string.isRequired,
     isHidden: PropTypes.bool.isRequired,
   }),
-  regionEdit: PropTypes.shape({
+  regionForm: PropTypes.shape({
     regionId: PropTypes.string,
     name: PropTypes.string.isRequired,
     isHidden: PropTypes.bool.isRequired,
@@ -153,9 +153,9 @@ RegionRow.propTypes = {
   regionPaint: PropTypes.string,
   onDelete: PropTypes.func,
   updateRegionForm: PropTypes.func.isRequired,
-  initializeRegionEdit: PropTypes.func.isRequired,
-  cancelRegionEdit: PropTypes.func.isRequired,
-  submitRegionEdit: PropTypes.func.isRequired,
+  initializeRegionForm: PropTypes.func.isRequired,
+  cancelRegionForm: PropTypes.func.isRequired,
+  submitRegionForm: PropTypes.func.isRequired,
   openColorPicker: PropTypes.func.isRequired,
   updateRegion: PropTypes.func.isRequired,
   beginRegionPaint: PropTypes.func.isRequired,
@@ -165,7 +165,7 @@ RegionRow.propTypes = {
 RegionRow.defaultProps = {
   regionId: null,
   region: null,
-  regionEdit: {},
+  regionForm: {},
   colorPicker: null,
   regionPaint: null,
   onDelete: () => {},

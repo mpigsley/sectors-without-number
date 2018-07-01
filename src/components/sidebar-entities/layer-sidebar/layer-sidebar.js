@@ -29,20 +29,20 @@ export default class LayerSidebar extends Component {
       name: PropTypes.string.isRequired,
     }),
     isEditing: PropTypes.bool.isRequired,
-    regionEdit: PropTypes.shape({
+    regionForm: PropTypes.shape({
       name: PropTypes.string,
       regionId: PropTypes.string,
       isHidden: PropTypes.bool,
     }),
     colorPicker: PropTypes.string,
-    initializeRegionEdit: PropTypes.func.isRequired,
+    initializeRegionForm: PropTypes.func.isRequired,
     updateRegion: PropTypes.func.isRequired,
     removeRegion: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
     layer: null,
-    regionEdit: null,
+    regionForm: null,
     colorPicker: null,
   };
 
@@ -110,7 +110,7 @@ export default class LayerSidebar extends Component {
     }
 
     let newRegion = null;
-    if (this.props.regionEdit && !this.props.regionEdit.regionId) {
+    if (this.props.regionForm && !this.props.regionForm.regionId) {
       newRegion = <RegionRow />;
     }
 
@@ -125,7 +125,7 @@ export default class LayerSidebar extends Component {
               <Button
                 minimal
                 className="LayerSidebar-AddButton"
-                onClick={() => this.props.initializeRegionEdit()}
+                onClick={() => this.props.initializeRegionForm()}
               >
                 <LinkIcon size={15} icon={Plus} />
                 <FormattedMessage

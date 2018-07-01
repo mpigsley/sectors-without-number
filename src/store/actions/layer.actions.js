@@ -1,40 +1,33 @@
 import Chance from 'chance';
+import Firebase from 'firebase/app';
 
-import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { includes } from 'constants/lodash';
-import {
-  editLayer,
-  editRegion,
-  createRegion,
-  deleteRegion,
-  createOrUpdateHex,
-  deleteHex,
-} from 'store/api/layer';
+import { editLayer } from 'store/api/layer';
 import {
   layerFormSelector,
   currentSectorSelector,
   currentEntitySelector,
-  layerRegionEditSelector,
+  layerRegionFormSelector,
   layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
 import { currentLayer } from 'store/selectors/layer.selectors';
 import { addLayer } from 'store/actions/combined.actions';
 
+import { createId } from 'utils/common';
+import { SuccessToast, ErrorToast } from 'utils/toasts';
+import { includes, omit } from 'constants/lodash';
+
 const ACTION_PREFIX = '@@layer';
 export const RESET_FORMS = `${ACTION_PREFIX}/RESET_FORMS`;
 export const FORM_UPDATED = `${ACTION_PREFIX}/FORM_UPDATED`;
-export const EDITED = `${ACTION_PREFIX}/SUBMITTED`;
+export const EDITED = `${ACTION_PREFIX}/EDITED`;
 export const INITIALIZE_LAYER_EDIT = `${ACTION_PREFIX}/INITIALIZE_LAYER_EDIT`;
 export const INITIALIZE_REGION_EDIT = `${ACTION_PREFIX}/INITIALIZE_REGION_EDIT`;
 export const REGION_FORM_UPDATED = `${ACTION_PREFIX}/REGION_FORM_UPDATED`;
 export const CANCEL_REGION_EDIT = `${ACTION_PREFIX}/CANCEL_REGION_EDIT`;
-export const SUBMITTED_REGION = `${ACTION_PREFIX}/SUBMITTED_REGION`;
-export const DELETED_REGION = `${ACTION_PREFIX}/DELETED_REGION`;
 export const OPENED_COLOR_PICKER = `${ACTION_PREFIX}/OPENED_COLOR_PICKER`;
 export const CLOSED_COLOR_PICKER = `${ACTION_PREFIX}/CLOSED_COLOR_PICKER`;
 export const BEGAN_REGION_PAINT = `${ACTION_PREFIX}/BEGAN_REGION_PAINT`;
 export const CLOSED_REGION_PAINT = `${ACTION_PREFIX}/CLOSED_REGION_PAINT`;
-export const UPDATE_LAYER_HEX = `${ACTION_PREFIX}/UPDATE_LAYER_HEX`;
 
 export const resetForms = () => ({ type: RESET_FORMS });
 export const updateLayer = (key, value) => ({
@@ -75,7 +68,7 @@ export const submitForm = intl => (dispatch, getState) => {
 export const initializeLayerEdit = () => (dispatch, getState) =>
   dispatch({ type: INITIALIZE_LAYER_EDIT, layer: currentLayer(getState()) });
 
-export const initializeRegionEdit = regionId => (dispatch, getState) => {
+export const initializeRegionForm = regionId => (dispatch, getState) => {
   const layer = currentLayer(getState());
   let region = { name: '', isHidden: false };
   if (regionId) {
@@ -93,28 +86,30 @@ export const updateRegionForm = update => ({
   update,
 });
 
-export const cancelRegionEdit = () => ({ type: CANCEL_REGION_EDIT });
+export const cancelRegionForm = () => ({ type: CANCEL_REGION_EDIT });
 
-export const submitRegionEdit = intl => (dispatch, getState) => {
+export const submitRegionForm = intl => (dispatch, getState) => {
   const state = getState();
-  const { regionId, ...regionEdit } = layerRegionEditSelector(state);
+  const { regionId, ...regionForm } = layerRegionFormSelector(state);
   const sectorId = currentSectorSelector(state);
   const layerId = currentEntitySelector(state);
-  const promise = regionId
-    ? editRegion(sectorId, layerId, regionId, regionEdit)
-    : createRegion(sectorId, layerId, {
-        ...regionEdit,
+  return editLayer(sectorId, layerId, {
+    regions: {
+      ...(currentLayer(state).regions || {}),
+      [regionId || createId()]: {
         color: new Chance().color({ format: 'hex' }),
-      });
-  return promise
-    .then(({ key, region }) => {
+        ...regionForm,
+      },
+    },
+  })
+    .then(({ layer }) => {
       dispatch(
         SuccessToast({
           title: intl.formatMessage({ id: 'misc.sectorSaved' }),
           message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
         }),
       );
-      dispatch({ type: SUBMITTED_REGION, sectorId, layerId, key, region });
+      dispatch({ type: EDITED, sectorId, layerId, layer });
     })
     .catch(err => {
       console.error(err);
@@ -134,15 +129,18 @@ export const updateRegion = (regionId, update) => (dispatch, getState) => {
     return Promise.resolve();
   }
   const sectorId = currentSectorSelector(state);
-  const layer = currentLayer(state);
-  dispatch({
-    type: SUBMITTED_REGION,
-    sectorId,
-    layerId,
-    key: regionId,
-    region: { ...(layer.regions[regionId] || {}), ...update },
-  });
-  return editRegion(sectorId, layerId, regionId, update);
+  const current = currentLayer(state);
+  const layer = {
+    regions: {
+      ...current.regions,
+      [regionId]: {
+        ...current.regions[regionId],
+        ...update,
+      },
+    },
+  };
+  dispatch({ type: EDITED, sectorId, layerId, layer });
+  return editLayer(sectorId, layerId, layer);
 };
 
 export const removeRegion = (regionId, intl) => (dispatch, getState) => {
@@ -152,8 +150,16 @@ export const removeRegion = (regionId, intl) => (dispatch, getState) => {
     return Promise.resolve();
   }
   const sectorId = currentSectorSelector(state);
-  dispatch({ type: DELETED_REGION, sectorId, layerId, regionId });
-  return deleteRegion(sectorId, layerId, regionId)
+  const current = currentLayer(state);
+  dispatch({
+    type: EDITED,
+    sectorId,
+    layerId,
+    layer: { regions: omit(current.regions, regionId) },
+  });
+  return editLayer(sectorId, layerId, {
+    regions: { [regionId]: Firebase.firestore.FieldValue.delete() },
+  })
     .then(() =>
       dispatch(
         SuccessToast({
@@ -201,19 +207,26 @@ export const toggleRegionAtHex = hexId => (dispatch, getState) => {
     return Promise.resolve();
   }
   const sectorId = currentSectorSelector(state);
-  const layer = currentLayer(state);
-  const existingHexRegions = ((layer.hexes || {})[hexId] || {}).regions || [];
+  const current = currentLayer(state);
+  const existingHexRegions = ((current.hexes || {})[hexId] || {}).regions || [];
   const newRegions = includes(existingHexRegions, regionId)
     ? existingHexRegions.filter(reg => reg !== regionId)
     : [...existingHexRegions, regionId];
-  dispatch({
-    type: UPDATE_LAYER_HEX,
-    sectorId,
-    layerId,
-    hexId,
-    hex: newRegions.length ? { regions: newRegions } : undefined,
-  });
-  return newRegions.length
-    ? createOrUpdateHex(sectorId, layerId, hexId, { regions: newRegions })
-    : deleteHex(sectorId, layerId, hexId);
+  const commonAction = { type: EDITED, sectorId, layerId };
+  if (!newRegions.length) {
+    dispatch({
+      ...commonAction,
+      layer: {
+        hexes: omit(current.hexes, hexId),
+      },
+    });
+    return editLayer(sectorId, layerId, {
+      hexes: { [hexId]: Firebase.firestore.FieldValue.delete() },
+    });
+  }
+  const layer = {
+    hexes: { ...(current.hexes || {}), [hexId]: { regions: newRegions } },
+  };
+  dispatch({ ...commonAction, layer });
+  return editLayer(sectorId, layerId, layer);
 };

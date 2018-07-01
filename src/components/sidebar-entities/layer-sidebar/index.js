@@ -4,12 +4,12 @@ import { injectIntl } from 'react-intl';
 
 import {
   layerIsEditingSelector,
-  layerRegionEditSelector,
+  layerRegionFormSelector,
   layerColorPickerSelector,
 } from 'store/selectors/base.selectors';
 import { currentLayer } from 'store/selectors/layer.selectors';
 import {
-  initializeRegionEdit,
+  initializeRegionForm,
   updateRegion,
   removeRegion,
 } from 'store/actions/layer.actions';
@@ -19,12 +19,12 @@ import LayerSidebar from './layer-sidebar';
 const mapStateToProps = createStructuredSelector({
   layer: currentLayer,
   isEditing: layerIsEditingSelector,
-  regionEdit: layerRegionEditSelector,
+  regionForm: layerRegionFormSelector,
   colorPicker: layerColorPickerSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  initializeRegionEdit: regionId => dispatch(initializeRegionEdit(regionId)),
+  initializeRegionForm: regionId => dispatch(initializeRegionForm(regionId)),
   updateRegion: (regionId, update) => dispatch(updateRegion(regionId, update)),
   removeRegion: regionId => dispatch(removeRegion(regionId, props.intl)),
 });

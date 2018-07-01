@@ -56,6 +56,6 @@ export const routeLocatorSelector = state => state.navigation.routeLocator;
 export const layersSelector = state => state.layer.models;
 export const layerFormSelector = state => state.layer.form;
 export const layerIsEditingSelector = state => state.layer.isEditing;
-export const layerRegionEditSelector = state => state.layer.regionEdit;
+export const layerRegionFormSelector = state => state.layer.regionForm;
 export const layerColorPickerSelector = state => state.layer.colorPicker;
 export const layerRegionPaintSelector = state => state.layer.regionPaint;

@@ -3,15 +3,15 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import {
-  layerRegionEditSelector,
+  layerRegionFormSelector,
   layerColorPickerSelector,
   layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
 import {
   updateRegionForm,
-  initializeRegionEdit,
-  cancelRegionEdit,
-  submitRegionEdit,
+  initializeRegionForm,
+  cancelRegionForm,
+  submitRegionForm,
   openColorPicker,
   updateRegion,
   beginRegionPaint,
@@ -20,17 +20,17 @@ import {
 import RegionRow from './region-row';
 
 const mapStateToProps = createStructuredSelector({
-  regionEdit: layerRegionEditSelector,
+  regionForm: layerRegionFormSelector,
   colorPicker: layerColorPickerSelector,
   regionPaint: layerRegionPaintSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
   updateRegionForm: update => dispatch(updateRegionForm(update)),
-  cancelRegionEdit: () => dispatch(cancelRegionEdit()),
-  submitRegionEdit: () => dispatch(submitRegionEdit(props.intl)),
+  cancelRegionForm: () => dispatch(cancelRegionForm()),
+  submitRegionForm: () => dispatch(submitRegionForm(props.intl)),
   openColorPicker: regionId => dispatch(openColorPicker(regionId)),
-  initializeRegionEdit: regionId => dispatch(initializeRegionEdit(regionId)),
+  initializeRegionForm: regionId => dispatch(initializeRegionForm(regionId)),
   updateRegion: (regionId, update) => dispatch(updateRegion(regionId, update)),
   beginRegionPaint: regionId => dispatch(beginRegionPaint(regionId)),
   closeRegionPaint: () => dispatch(closeRegionPaint()),
