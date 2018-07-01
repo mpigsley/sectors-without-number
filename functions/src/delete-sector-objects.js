@@ -36,9 +36,9 @@ module.exports = functions.firestore
       .collection('routes');
     const layerQuery = admin
       .firestore()
-      .collection('layer')
+      .collection('layers')
       .doc(sectorId)
-      .collection('layers');
+      .collection('layer');
 
     return Promise.all([
       new Promise((resolve, reject) =>
