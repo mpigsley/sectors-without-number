@@ -5,12 +5,12 @@ import {
   FETCHED_SECTOR,
   INITIALIZED,
   CREATED_LAYER,
+  DELETED_LAYER,
 } from 'store/actions/combined.actions';
 import {
   RESET_FORMS,
   FORM_UPDATED,
   EDITED,
-  DELETED,
   INITIALIZE_LAYER_EDIT,
   INITIALIZE_REGION_EDIT,
   REGION_FORM_UPDATED,
@@ -84,7 +84,7 @@ export default function layer(state = initialState, action) {
           },
         },
       };
-    case DELETED:
+    case DELETED_LAYER:
       return {
         ...state,
         models: {

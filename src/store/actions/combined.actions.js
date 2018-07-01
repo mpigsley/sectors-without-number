@@ -1,5 +1,6 @@
 import { addLocaleData } from 'react-intl';
 import { push } from 'react-router-redux';
+import Firebase from 'firebase/app';
 
 import { getCurrentUser } from 'store/api/user';
 import {
@@ -8,12 +9,13 @@ import {
   updateEntity,
 } from 'store/api/entity';
 import { getNavigationData } from 'store/api/navigation';
-import { getLayerData, createLayer } from 'store/api/layer';
+import { getLayerData, createLayer, deleteLayer } from 'store/api/layer';
 
 import {
   isInitializedSelector,
   userUidSelector,
   currentSectorSelector,
+  currentEntitySelector,
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorFetched } from 'store/selectors/sector.selectors';
 import { currentSectorLayers } from 'store/selectors/layer.selectors';
@@ -22,12 +24,14 @@ import { getSectorLayers } from 'store/selectors/entity.selectors';
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
 import { mergeEntityUpdates } from 'utils/entity';
-import { zipObject, keys } from 'constants/lodash';
+import { SuccessToast, ErrorToast } from 'utils/toasts';
+import { zipObject, keys, omit } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@combined';
 export const INITIALIZED = `${ACTION_PREFIX}/INITIALIZED`;
 export const FETCHED_SECTOR = `${ACTION_PREFIX}/FETCHED_SECTOR`;
 export const CREATED_LAYER = `${ACTION_PREFIX}/CREATED_LAYER`;
+export const DELETED_LAYER = `${ACTION_PREFIX}/DELETED_LAYER`;
 
 export const initialize = location => dispatch =>
   getCurrentUser().then(user => {
@@ -92,10 +96,9 @@ export const fetchSector = () => (dispatch, getState) => {
   );
 };
 
-export const addLayer = model => (dispatch, getState) => {
+export const addLayer = (model, intl) => (dispatch, getState) => {
   const state = getState();
   const sectorId = currentSectorSelector(state);
-  console.log(sectorId, model);
   return createLayer(sectorId, model).then(({ layerId, layer }) => {
     const sectorLayers = getSectorLayers(state);
     const currentLayerIds = keys(currentSectorLayers(state));
@@ -104,9 +107,57 @@ export const addLayer = model => (dispatch, getState) => {
       ...zipObject(currentLayerIds, currentLayerIds.map(() => false)),
       [layerId]: true,
     };
-    return updateEntity(sectorId, Entities.sector.key, { layers }).then(() => {
-      dispatch({ type: CREATED_LAYER, sectorId, layerId, layer, layers });
-      dispatch(push(`/sector/${sectorId}/layer/${layerId}`));
-    });
+    return updateEntity(sectorId, Entities.sector.key, { layers })
+      .then(() => {
+        dispatch(
+          SuccessToast({
+            title: intl.formatMessage({ id: 'misc.sectorSaved' }),
+            message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
+          }),
+        );
+        dispatch({ type: CREATED_LAYER, sectorId, layerId, layer, layers });
+        dispatch(push(`/sector/${sectorId}/layer/${layerId}`));
+      })
+      .catch(err => {
+        console.error(err);
+        dispatch(
+          ErrorToast({
+            title: intl.formatMessage({ id: 'misc.error' }),
+            message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+          }),
+        );
+      });
   });
+};
+
+export const removeLayer = intl => (dispatch, getState) => {
+  const state = getState();
+  const sectorId = currentSectorSelector(state);
+  const layerId = currentEntitySelector(state);
+  const layers = omit(getSectorLayers(state), layerId);
+  return Promise.all([
+    deleteLayer(sectorId, layerId),
+    updateEntity(sectorId, Entities.sector.key, {
+      layers: { [layerId]: Firebase.firestore.FieldValue.delete() },
+    }),
+  ])
+    .then(() => {
+      dispatch(
+        SuccessToast({
+          title: intl.formatMessage({ id: 'misc.sectorSaved' }),
+          message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
+        }),
+      );
+      dispatch(push(`/sector/${sectorId}`));
+      dispatch({ type: DELETED_LAYER, sectorId, layerId, layers });
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
+    });
 };

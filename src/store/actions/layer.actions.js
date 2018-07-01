@@ -1,11 +1,9 @@
-import { push } from 'react-router-redux';
 import Chance from 'chance';
 
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { includes } from 'constants/lodash';
 import {
   editLayer,
-  deleteLayer,
   editRegion,
   createRegion,
   deleteRegion,
@@ -26,7 +24,6 @@ const ACTION_PREFIX = '@@layer';
 export const RESET_FORMS = `${ACTION_PREFIX}/RESET_FORMS`;
 export const FORM_UPDATED = `${ACTION_PREFIX}/FORM_UPDATED`;
 export const EDITED = `${ACTION_PREFIX}/SUBMITTED`;
-export const DELETED = `${ACTION_PREFIX}/DELETED`;
 export const INITIALIZE_LAYER_EDIT = `${ACTION_PREFIX}/INITIALIZE_LAYER_EDIT`;
 export const INITIALIZE_REGION_EDIT = `${ACTION_PREFIX}/INITIALIZE_REGION_EDIT`;
 export const REGION_FORM_UPDATED = `${ACTION_PREFIX}/REGION_FORM_UPDATED`;
@@ -52,56 +49,27 @@ export const submitForm = intl => (dispatch, getState) => {
   const sectorId = currentSectorSelector(state);
   const layerId = currentEntitySelector(state);
 
-  const promise = layerId
-    ? editLayer(sectorId, layerId, update).then(({ layer }) =>
-        dispatch({ type: EDITED, sectorId, layerId, layer }),
-      )
-    : dispatch(addLayer(update));
-
-  return promise
-    .then(() => {
-      dispatch(
-        SuccessToast({
-          title: intl.formatMessage({ id: 'misc.sectorSaved' }),
-          message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
-        }),
-      );
-    })
-    .catch(err => {
-      console.error(err);
-      dispatch(
-        ErrorToast({
-          title: intl.formatMessage({ id: 'misc.error' }),
-          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
-        }),
-      );
-    });
-};
-
-export const removeLayer = intl => (dispatch, getState) => {
-  const state = getState();
-  const sectorId = currentSectorSelector(state);
-  const layerId = currentEntitySelector(state);
-  return deleteLayer(sectorId, layerId)
-    .then(() => {
-      dispatch(
-        SuccessToast({
-          title: intl.formatMessage({ id: 'misc.sectorSaved' }),
-          message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
-        }),
-      );
-      dispatch(push(`/sector/${sectorId}`));
-      dispatch({ type: DELETED, sectorId, layerId });
-    })
-    .catch(err => {
-      console.error(err);
-      dispatch(
-        ErrorToast({
-          title: intl.formatMessage({ id: 'misc.error' }),
-          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
-        }),
-      );
-    });
+  return !layerId
+    ? dispatch(addLayer(update, intl))
+    : editLayer(sectorId, layerId, update)
+        .then(({ layer }) => {
+          dispatch(
+            SuccessToast({
+              title: intl.formatMessage({ id: 'misc.sectorSaved' }),
+              message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
+            }),
+          );
+          dispatch({ type: EDITED, sectorId, layerId, layer });
+        })
+        .catch(err => {
+          console.error(err);
+          dispatch(
+            ErrorToast({
+              title: intl.formatMessage({ id: 'misc.error' }),
+              message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+            }),
+          );
+        });
 };
 
 export const initializeLayerEdit = () => (dispatch, getState) =>

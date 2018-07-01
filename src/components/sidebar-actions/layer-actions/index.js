@@ -6,7 +6,8 @@ import {
   isViewingSharedSector,
 } from 'store/selectors/sector.selectors';
 import { currentLayer } from 'store/selectors/layer.selectors';
-import { removeLayer, initializeLayerEdit } from 'store/actions/layer.actions';
+import { initializeLayerEdit } from 'store/actions/layer.actions';
+import { removeLayer } from 'store/actions/combined.actions';
 import LayerActions from './layer-actions';
 
 const mapStateToProps = state => ({

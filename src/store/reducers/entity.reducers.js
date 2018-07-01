@@ -20,6 +20,7 @@ import {
   INITIALIZED,
   FETCHED_SECTOR,
   CREATED_LAYER,
+  DELETED_LAYER,
 } from 'store/actions/combined.actions';
 import { LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 import { mergeEntityUpdates } from 'utils/entity';
@@ -132,7 +133,8 @@ export default function entity(state = initialState, action) {
         },
       };
     }
-    case CREATED_LAYER: {
+    case DELETED_LAYER:
+    case CREATED_LAYER:
       return {
         ...state,
         models: {
@@ -146,7 +148,6 @@ export default function entity(state = initialState, action) {
           },
         },
       };
-    }
     case LOGGED_OUT:
       return initialState;
     default:
