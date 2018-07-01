@@ -151,7 +151,7 @@ RegionRow.propTypes = {
   }),
   colorPicker: PropTypes.string,
   regionPaint: PropTypes.string,
-  onDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
   updateRegionForm: PropTypes.func.isRequired,
   initializeRegionEdit: PropTypes.func.isRequired,
   cancelRegionEdit: PropTypes.func.isRequired,
@@ -168,4 +168,5 @@ RegionRow.defaultProps = {
   regionEdit: {},
   colorPicker: null,
   regionPaint: null,
+  onDelete: () => {},
 };
