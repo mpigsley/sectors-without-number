@@ -369,7 +369,6 @@ export const toggleLayer = layerId => (dispatch, getState) => {
       },
     },
   });
-  console.log(isSharedSectorSelector(state));
   if (isSharedSectorSelector(state) || !isCurrentSectorSaved(state)) {
     return Promise.resolve(dispatch(releaseSyncLock()));
   }

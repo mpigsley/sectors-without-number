@@ -19,7 +19,10 @@ import {
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorFetched } from 'store/selectors/sector.selectors';
 import { currentSectorLayers } from 'store/selectors/layer.selectors';
-import { getSectorLayers } from 'store/selectors/entity.selectors';
+import {
+  getSectorLayers,
+  getCurrentSector,
+} from 'store/selectors/entity.selectors';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
@@ -55,7 +58,10 @@ export const initialize = location => dispatch =>
       );
     }
     return Promise.all(promises).then(
-      ([{ entities, share }, routes, layers, sectors, userLocale]) =>
+      ([{ entities, share }, routes, layers, sectors, userLocale]) => {
+        document.title = `Sector - ${
+          entities[Entities.sector.key][sectorId].name
+        }`;
         dispatch({
           type: INITIALIZED,
           user,
@@ -69,13 +75,18 @@ export const initialize = location => dispatch =>
           share,
           saved: keys(sectors || {}),
           locale: userLocale,
-        }),
+        });
+      },
     );
   });
 
 export const fetchSector = () => (dispatch, getState) => {
   const state = getState();
   const sectorId = currentSectorSelector(state);
+  const currentSector = getCurrentSector(state);
+  if (currentSector) {
+    document.title = `Sector - ${currentSector.name}`;
+  }
   if (!isInitializedSelector(state) || isCurrentSectorFetched(state)) {
     return Promise.resolve();
   }
