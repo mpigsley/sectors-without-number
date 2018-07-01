@@ -1,7 +1,7 @@
-import { firestore as Firestore } from 'firebase';
+import Firebase from 'firebase/app';
 
 export const createRoute = (sectorId, route) =>
-  Firestore()
+  Firebase.firestore()
     .collection('navigation')
     .doc(sectorId)
     .collection('routes')
@@ -9,7 +9,7 @@ export const createRoute = (sectorId, route) =>
     .then(doc => ({ key: doc.id, route }));
 
 export const deleteRoute = (sectorId, routeId) =>
-  Firestore()
+  Firebase.firestore()
     .collection('navigation')
     .doc(sectorId)
     .collection('routes')
@@ -17,7 +17,7 @@ export const deleteRoute = (sectorId, routeId) =>
     .delete();
 
 export const setVisibility = (sectorId, routeId, isHidden) =>
-  Firestore()
+  Firebase.firestore()
     .collection('navigation')
     .doc(sectorId)
     .collection('routes')
@@ -25,7 +25,7 @@ export const setVisibility = (sectorId, routeId, isHidden) =>
     .set({ isHidden }, { merge: true });
 
 export const getNavigationData = sectorId =>
-  Firestore()
+  Firebase.firestore()
     .collection('navigation')
     .doc(sectorId)
     .collection('routes')

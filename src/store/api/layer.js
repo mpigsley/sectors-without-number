@@ -1,7 +1,7 @@
-import { firestore as Firestore } from 'firebase';
+import Firebase from 'firebase/app';
 
 export const createLayer = (sectorId, layer) =>
-  Firestore()
+  Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
@@ -9,7 +9,7 @@ export const createLayer = (sectorId, layer) =>
     .then(doc => ({ key: doc.id, layer }));
 
 export const editLayer = (sectorId, layerId, layer) =>
-  Firestore()
+  Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
@@ -18,7 +18,7 @@ export const editLayer = (sectorId, layerId, layer) =>
     .then(() => ({ key: layerId, layer }));
 
 export const deleteLayer = (sectorId, layerId) =>
-  Firestore()
+  Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
@@ -26,7 +26,7 @@ export const deleteLayer = (sectorId, layerId) =>
     .delete();
 
 export const getLayerData = sectorId =>
-  Firestore()
+  Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
@@ -61,7 +61,7 @@ export const getLayerData = sectorId =>
     });
 
 export const createRegion = (sectorId, layerId, region) =>
-  Firestore()
+  Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
@@ -71,7 +71,7 @@ export const createRegion = (sectorId, layerId, region) =>
     .then(doc => ({ key: doc.id, region }));
 
 export const editRegion = (sectorId, layerId, regionId, region) =>
-  Firestore()
+  Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
@@ -82,7 +82,7 @@ export const editRegion = (sectorId, layerId, regionId, region) =>
     .then(() => ({ key: regionId, region }));
 
 export const deleteRegion = (sectorId, layerId, regionId) =>
-  Firestore()
+  Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
@@ -92,7 +92,7 @@ export const deleteRegion = (sectorId, layerId, regionId) =>
     .delete();
 
 export const createOrUpdateHex = (sectorId, layerId, hexId, hex) =>
-  Firestore()
+  Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
@@ -102,7 +102,7 @@ export const createOrUpdateHex = (sectorId, layerId, hexId, hex) =>
     .set(hex);
 
 export const deleteHex = (sectorId, layerId, hexId) =>
-  Firestore()
+  Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
