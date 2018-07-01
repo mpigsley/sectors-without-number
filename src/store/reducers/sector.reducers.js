@@ -65,6 +65,7 @@ export default function sector(state = initialState, action) {
     case LOCATION_CHANGE: {
       const { pathname } = action.payload;
       if (['/', '/configure', '/changelog'].indexOf(pathname) >= 0) {
+        document.title = 'Sectors Without Number';
         return {
           ...initialState,
           renderSector: false,

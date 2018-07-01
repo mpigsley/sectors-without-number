@@ -59,9 +59,11 @@ export const initialize = location => dispatch =>
     }
     return Promise.all(promises).then(
       ([{ entities, share }, routes, layers, sectors, userLocale]) => {
-        document.title = `Sector - ${
-          entities[Entities.sector.key][sectorId].name
-        }`;
+        if (entities) {
+          document.title = `Sector - ${
+            entities[Entities.sector.key][sectorId].name
+          }`;
+        }
         dispatch({
           type: INITIALIZED,
           user,
