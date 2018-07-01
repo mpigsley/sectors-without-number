@@ -23,6 +23,7 @@ import {
   getCurrentSector,
 } from 'store/selectors/entity.selectors';
 import { currentSectorLayers } from 'store/selectors/layer.selectors';
+import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 
 import {
   generateEntity as generateEntityUtil,
@@ -368,7 +369,8 @@ export const toggleLayer = layerId => (dispatch, getState) => {
       },
     },
   });
-  if (isSharedSectorSelector(state)) {
+  console.log(isSharedSectorSelector(state));
+  if (isSharedSectorSelector(state) || !isCurrentSectorSaved(state)) {
     return Promise.resolve(dispatch(releaseSyncLock()));
   }
   return updateEntity(sectorId, Entities.sector.key, sectorUpdate).then(() =>
