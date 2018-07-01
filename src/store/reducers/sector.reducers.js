@@ -60,10 +60,7 @@ export default function sector(state = initialState, action) {
     case UPDATED_ID_MAPPING:
       return {
         ...state,
-        fetched: uniq([
-          ...state.fetched,
-          action.mapping[state.currentSector],
-        ]).filter(f => f),
+        fetched: uniq(state.fetched.map(id => action.mapping[id] || id)),
       };
     case LOCATION_CHANGE: {
       const { pathname } = action.payload;
