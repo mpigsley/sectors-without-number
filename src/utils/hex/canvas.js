@@ -4,7 +4,7 @@ import { forEach, find, values, includes, uniq, keys } from 'constants/lodash';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
-import { HEX_PADDING } from 'constants/defaults';
+import { HEX_PADDING, TARGET_COLOR_WIDTH } from 'constants/defaults';
 
 const NAVIGATION_WIDTHS = {
   thin: 1,
@@ -176,10 +176,24 @@ export default ({
             points[4].x,
             points[4].y,
           );
-          const gStep = 1 / (hexLayer.length - 1);
-          hexLayer.forEach((color, index) => {
-            gradient.addColorStop(gStep * index, color);
-          });
+          let numSteps = Math.round(
+            distanceBetween(points[1], points[4]) / TARGET_COLOR_WIDTH,
+          );
+          numSteps = numSteps < hexLayer.length ? hexLayer.length : numSteps;
+          const gStep = 1 / numSteps;
+          console.log(gStep);
+          for (let i = 0; i < numSteps; i += 1) {
+            console.log(i, i % hexLayer.length);
+            const color = hexLayer[i % hexLayer.length];
+            gradient.addColorStop(gStep * i, color);
+            const nextColor = hexLayer[(i + 1) % hexLayer.length];
+            if (nextColor) {
+              gradient.addColorStop(
+                Math.min(gStep * (i + 1) - 0.001, 1),
+                color,
+              );
+            }
+          }
           ctx.fillStyle = gradient;
         }
       }
