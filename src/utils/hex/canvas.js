@@ -159,11 +159,10 @@ export default ({
         }
 
         const lightColors = hexLayer.reduce(
-          (num, color) =>
-            num + tinycolor(color).getBrightness() > 100 ? 1 : 0,
+          (num, color) => num + tinycolor(color).getBrightness(),
           0,
         );
-        if (lightColors > hexLayer.length / 2) {
+        if (lightColors / hexLayer.length >= 100) {
           hexesWithDarkText.push(hexKey);
         }
 
@@ -269,7 +268,7 @@ export default ({
 
     // Draw arrow heads
     let radians = Math.atan((yEnd - yStart) / (xEnd - xStart));
-    radians += (xEnd >= xStart ? 90 : -90) * Math.PI / 180;
+    radians += ((xEnd >= xStart ? 90 : -90) * Math.PI) / 180;
     drawArrowhead(ctx, radians, xEnd, yEnd, ratio, true);
     if (isVectorSwitch) {
       drawArrowhead(ctx, radians, xStart, yStart, ratio, false);
