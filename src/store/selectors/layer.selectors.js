@@ -8,6 +8,7 @@ import {
   mapValues,
   sortBy,
   pick,
+  pickBy,
   reduce,
 } from 'constants/lodash';
 import {
@@ -17,6 +18,7 @@ import {
   layerFormSelector,
   layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
+import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import { getSectorLayers } from 'store/selectors/entity.selectors';
 
 export const isValidLayerForm = createSelector(
@@ -25,8 +27,12 @@ export const isValidLayerForm = createSelector(
 );
 
 export const currentSectorLayers = createSelector(
-  [currentSectorSelector, layersSelector],
-  (sector, layers) => (layers || {})[sector] || {},
+  [currentSectorSelector, layersSelector, isViewingSharedSector],
+  (sector, layers, isShared) =>
+    pickBy(
+      (layers || {})[sector] || {},
+      ({ isHidden }) => !isShared || !isHidden,
+    ),
 );
 
 export const currentLayer = createSelector(
@@ -54,7 +60,7 @@ export const currentPaintRegion = createSelector(
 
 export const visibleLayer = createSelector(
   [currentLayer, activeLayer],
-  (current, active) => current || active,
+  (current, active) => current || active || {},
 );
 
 export const visibleLayerHexes = createSelector([visibleLayer], layer => {
