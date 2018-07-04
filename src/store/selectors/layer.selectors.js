@@ -63,18 +63,24 @@ export const visibleLayer = createSelector(
   (current, active) => current || active || {},
 );
 
-export const visibleLayerHexes = createSelector([visibleLayer], layer => {
-  const regionMap = (layer || {}).regions || {};
-  const hexMap = (layer || {}).hexes || {};
-  return zipObject(
-    keys(hexMap),
-    map(hexMap, ({ regions }) =>
-      sortBy(regions.map(regionId => regionMap[regionId]).filter(r => r), [
-        ({ name }) => name.toLowerCase(),
-      ]),
-    ),
-  );
-});
+export const visibleLayerHexes = createSelector(
+  [visibleLayer, isViewingSharedSector],
+  (layer, isShared) => {
+    const regionMap = pickBy(
+      (layer || {}).regions || {},
+      ({ isHidden }) => !isShared || !isHidden,
+    );
+    const hexMap = (layer || {}).hexes || {};
+    return zipObject(
+      keys(hexMap),
+      map(hexMap, ({ regions }) =>
+        sortBy(regions.map(regionId => regionMap[regionId]).filter(r => r), [
+          ({ name }) => name.toLowerCase(),
+        ]),
+      ),
+    );
+  },
+);
 
 export const visibleLayerHexColors = createSelector(
   [visibleLayerHexes],
