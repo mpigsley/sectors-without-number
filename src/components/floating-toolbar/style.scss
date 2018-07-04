@@ -80,7 +80,7 @@
   flex: 1;
 }
 
-.FloatingToolbar-ItemEdit {
+.FloatingToolbar-ItemAction {
   border-left: 1px solid $dark3;
   flex: 0;
 
@@ -90,7 +90,7 @@
 }
 
 .FloatingToolbar-SubItemName,
-.FloatingToolbar-ItemEdit {
+.FloatingToolbar-ItemAction {
   align-items: center;
   color: $light2;
   cursor: pointer;

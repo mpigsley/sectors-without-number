@@ -5,8 +5,16 @@ import { Link } from 'react-router-dom';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 
-import { sortBy, map, includes } from 'constants/lodash';
-import { Plus, Lock, Unlock, Layers, HelpCircle, Edit2 } from 'constants/icons';
+import { sortBy, map, includes, keys } from 'constants/lodash';
+import {
+  List,
+  Plus,
+  Lock,
+  Unlock,
+  Layers,
+  HelpCircle,
+  Edit2,
+} from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
 import './style.css';
@@ -68,11 +76,17 @@ export default class FloatingToolbar extends Component {
   }
 
   renderLayer(key, text, editLink) {
-    let editButton = null;
+    let actionButton = null;
     if (!this.props.isShared && this.props.isSaved && editLink) {
-      editButton = (
-        <Link to={editLink} className="FloatingToolbar-ItemEdit">
+      actionButton = (
+        <Link to={editLink} className="FloatingToolbar-ItemAction">
           <Edit2 size={18} />
+        </Link>
+      );
+    } else if (this.props.isShared && includes(keys(this.props.layers), key)) {
+      actionButton = (
+        <Link to={editLink} className="FloatingToolbar-ItemAction">
+          <List size={18} />
         </Link>
       );
     }
@@ -89,7 +103,7 @@ export default class FloatingToolbar extends Component {
         >
           {text}
         </FlexContainer>
-        {editButton}
+        {actionButton}
       </FlexContainer>
     );
   }
