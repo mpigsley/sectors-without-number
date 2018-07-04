@@ -115,15 +115,16 @@ export default function RegionRow({
         onClick={() => beginRegionPaint(regionId)}
       />
     );
-  } else if (regionId === regionPaint) {
-    paintIcon = (
-      <X
-        data-paint={intl.formatMessage({ id: 'misc.selectToPaint' })}
-        className="RegionRow-Close"
-        size={20}
-        onClick={() => closeRegionPaint()}
-      />
-    );
+    if (regionId === regionPaint) {
+      paintIcon = (
+        <X
+          data-paint={intl.formatMessage({ id: 'misc.selectToPaint' })}
+          className="RegionRow-Close"
+          size={20}
+          onClick={() => closeRegionPaint()}
+        />
+      );
+    }
   }
 
   return (
