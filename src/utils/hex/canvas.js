@@ -177,7 +177,8 @@ export default ({
             points[4].y,
           );
           let numSteps = Math.round(
-            distanceBetween(points[1], points[4]) / TARGET_COLOR_WIDTH,
+            distanceBetween(points[1], points[4]) /
+              (TARGET_COLOR_WIDTH * ratio),
           );
           numSteps = numSteps < hexLayer.length ? hexLayer.length : numSteps;
           const gStep = 1 / numSteps;
