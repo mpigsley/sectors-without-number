@@ -8,6 +8,7 @@ import {
   layerColorPickerSelector,
 } from 'store/selectors/base.selectors';
 import { visibleLayer } from 'store/selectors/layer.selectors';
+import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import {
   initializeRegionForm,
   updateRegion,
@@ -21,6 +22,7 @@ const mapStateToProps = createStructuredSelector({
   isEditing: layerIsEditingSelector,
   regionForm: layerRegionFormSelector,
   colorPicker: layerColorPickerSelector,
+  isShared: isViewingSharedSector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

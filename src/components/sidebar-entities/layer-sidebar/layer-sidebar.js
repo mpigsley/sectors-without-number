@@ -29,6 +29,7 @@ export default class LayerSidebar extends Component {
       name: PropTypes.string.isRequired,
     }),
     isEditing: PropTypes.bool.isRequired,
+    isShared: PropTypes.bool.isRequired,
     regionForm: PropTypes.shape({
       name: PropTypes.string,
       regionId: PropTypes.string,
@@ -104,6 +105,29 @@ export default class LayerSidebar extends Component {
     );
   }
 
+  renderAddButton() {
+    if (this.props.isShared) {
+      return null;
+    }
+    return (
+      <Button
+        minimal
+        className="LayerSidebar-AddButton"
+        onClick={() => this.props.initializeRegionForm()}
+      >
+        <LinkIcon size={15} icon={Plus} />
+        <FormattedMessage
+          id="misc.addEntity"
+          values={{
+            entity: this.props.intl.formatMessage({
+              id: 'misc.region',
+            }),
+          }}
+        />
+      </Button>
+    );
+  }
+
   render() {
     if (!this.props.layer || this.props.isEditing) {
       return <LayerForm />;
@@ -122,21 +146,7 @@ export default class LayerSidebar extends Component {
           <SectionHeader>
             <FlexContainer justify="spaceBetween" align="flexEnd">
               <FormattedMessage id="misc.regions" />
-              <Button
-                minimal
-                className="LayerSidebar-AddButton"
-                onClick={() => this.props.initializeRegionForm()}
-              >
-                <LinkIcon size={15} icon={Plus} />
-                <FormattedMessage
-                  id="misc.addEntity"
-                  values={{
-                    entity: this.props.intl.formatMessage({
-                      id: 'misc.region',
-                    }),
-                  }}
-                />
-              </Button>
+              {this.renderAddButton()}
             </FlexContainer>
           </SectionHeader>
           {newRegion}

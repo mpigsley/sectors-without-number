@@ -7,6 +7,7 @@ import {
   layerColorPickerSelector,
   layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
+import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import {
   updateRegionForm,
   initializeRegionForm,
@@ -23,6 +24,7 @@ const mapStateToProps = createStructuredSelector({
   regionForm: layerRegionFormSelector,
   colorPicker: layerColorPickerSelector,
   regionPaint: layerRegionPaintSelector,
+  isShared: isViewingSharedSector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -37,5 +39,8 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(RegionRow),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(RegionRow),
 );

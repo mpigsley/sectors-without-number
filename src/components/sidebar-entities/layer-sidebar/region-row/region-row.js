@@ -15,6 +15,7 @@ import './style.css';
 const ReactHint = ReactHintFactory(React);
 
 export default function RegionRow({
+  isShared,
   regionId,
   region,
   regionForm,
@@ -90,14 +91,24 @@ export default function RegionRow({
     hidden = <EyeOff className="RegionRow-HiddenIcon" size={18} />;
   }
 
-  let paintIcon = (
-    <Edit3
-      className="RegionRow-Icon"
-      size={20}
-      onClick={() => beginRegionPaint(regionId)}
-    />
-  );
-  if (regionId === regionPaint) {
+  let paintIcon;
+  let moreIcon;
+  if (!isShared) {
+    moreIcon = (
+      <MoreHorizontal
+        {...{ [drodownAttr]: true }}
+        className="RegionRow-OtherActions"
+        size={25}
+      />
+    );
+    paintIcon = (
+      <Edit3
+        className="RegionRow-Icon"
+        size={20}
+        onClick={() => beginRegionPaint(regionId)}
+      />
+    );
+  } else if (regionId === regionPaint) {
     paintIcon = (
       <X
         data-paint="Select hexes in sector to paint"
@@ -128,11 +139,7 @@ export default function RegionRow({
         {region.name}
       </Header>
       {hidden}
-      <MoreHorizontal
-        {...{ [drodownAttr]: true }}
-        className="RegionRow-OtherActions"
-        size={25}
-      />
+      {moreIcon}
       <ReactHint
         autoPosition
         attribute={drodownAttr}
@@ -146,6 +153,7 @@ export default function RegionRow({
 }
 
 RegionRow.propTypes = {
+  isShared: PropTypes.bool.isRequired,
   regionId: PropTypes.string,
   region: PropTypes.shape({
     name: PropTypes.string.isRequired,
