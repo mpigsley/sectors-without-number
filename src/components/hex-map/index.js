@@ -39,7 +39,7 @@ import {
 } from 'store/selectors/entity.selectors';
 import {
   currentPaintRegion,
-  currentLayerHexes,
+  visibleLayerHexColors,
 } from 'store/selectors/layer.selectors';
 import HexMap from './hex-map';
 
@@ -58,7 +58,7 @@ const mapStateToProps = createStructuredSelector({
   routeLocator: routeLocatorSelector,
   paintRegion: currentPaintRegion,
   paintRegionId: layerRegionPaintSelector,
-  layerHexes: currentLayerHexes,
+  layerHexes: visibleLayerHexColors,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -84,5 +84,10 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  withRouter(connect(mapStateToProps, mapDispatchToProps)(HexMap)),
+  withRouter(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps,
+    )(HexMap),
+  ),
 );

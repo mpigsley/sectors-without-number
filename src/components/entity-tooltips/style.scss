@@ -1,9 +1,10 @@
 @import 'styles/theme';
 
 .EntityTooltips-Tooltip {
+  max-width: 15rem;
+  opacity: 0;
   pointer-events: none;
   position: fixed;
-  opacity: 0;
   transition: opacity 0.5s;
   z-index: 1;
 
@@ -14,7 +15,7 @@
 
 .EntityTooltips-Text {
   background-color: $light4;
-  padding: 1rem;
+  padding: 0.8rem;
   border-radius: 6px;
   transform: translateX(-50%) translateY(-100%);
   z-index: 1;
@@ -34,14 +35,23 @@
 
 .EntityTooltips-Name {
   color: $dark4;
-  display: inline-block;
   font-size: 1.1rem;
   margin: 0;
 }
 
 .EntityTooltips-Key {
   color: $light1;
-  display: inline-block;
   font-size: 0.8rem;
   margin-left: 0.5rem;
+}
+
+.EntityTooltips-Regions {
+  color: $dark1;
+  font-size: 0.8rem;
+  margin-top: 0.4rem;
+  text-align: center;
+
+  b {
+    color: $dark2;
+  }
 }

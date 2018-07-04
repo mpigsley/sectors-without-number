@@ -1,7 +1,15 @@
 import { createSelector } from 'reselect';
 
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
-import { zipObject, keys, map, sortBy, pick, reduce } from 'constants/lodash';
+import {
+  zipObject,
+  keys,
+  map,
+  mapValues,
+  sortBy,
+  pick,
+  reduce,
+} from 'constants/lodash';
 import {
   currentEntitySelector,
   currentSectorSelector,
@@ -44,19 +52,25 @@ export const currentPaintRegion = createSelector(
   (layer, regionPaint) => ((layer || {}).regions || {})[regionPaint],
 );
 
-export const currentLayerHexes = createSelector(
+export const visibleLayer = createSelector(
   [currentLayer, activeLayer],
-  (current, active) => {
-    const layer = current || active;
-    const regionMap = (layer || {}).regions || {};
-    const hexMap = (layer || {}).hexes || {};
-    return zipObject(
-      keys(hexMap),
-      map(hexMap, ({ regions }) =>
-        sortBy(regions.map(regionId => regionMap[regionId]).filter(r => r), [
-          ({ name }) => name.toLowerCase(),
-        ]).map(({ color }) => color),
-      ),
-    );
-  },
+  (current, active) => current || active,
+);
+
+export const visibleLayerHexes = createSelector([visibleLayer], layer => {
+  const regionMap = (layer || {}).regions || {};
+  const hexMap = (layer || {}).hexes || {};
+  return zipObject(
+    keys(hexMap),
+    map(hexMap, ({ regions }) =>
+      sortBy(regions.map(regionId => regionMap[regionId]).filter(r => r), [
+        ({ name }) => name.toLowerCase(),
+      ]),
+    ),
+  );
+});
+
+export const visibleLayerHexColors = createSelector(
+  [visibleLayerHexes],
+  hexes => mapValues(hexes, list => list.map(({ color }) => color)),
 );

@@ -182,9 +182,7 @@ export default ({
           );
           numSteps = numSteps < hexLayer.length ? hexLayer.length : numSteps;
           const gStep = 1 / numSteps;
-          console.log(gStep);
           for (let i = 0; i < numSteps; i += 1) {
-            console.log(i, i % hexLayer.length);
             const color = hexLayer[i % hexLayer.length];
             gradient.addColorStop(gStep * i, color);
             const nextColor = hexLayer[(i + 1) % hexLayer.length];
