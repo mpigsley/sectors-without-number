@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -15,6 +15,7 @@ import './style.css';
 const ReactHint = ReactHintFactory(React);
 
 export default function RegionRow({
+  intl,
   isShared,
   regionId,
   region,
@@ -54,7 +55,10 @@ export default function RegionRow({
         <Input
           value={regionForm.name}
           error={isOutOfRange}
-          placeholder={`Name (${LAYER_NAME_LENGTH} characters)`}
+          placeholder={intl.formatMessage(
+            { id: 'misc.nameLimit' },
+            { num: LAYER_NAME_LENGTH },
+          )}
           onChange={({ target }) => updateRegionForm({ name: target.value })}
         />
       </FlexContainer>
@@ -70,13 +74,16 @@ export default function RegionRow({
         className="RegionRow-Option"
         onClick={() => updateRegion(regionId, { isHidden: !region.isHidden })}
       >
-        {region.isHidden ? 'Show' : 'Hide'} Region
+        <FormattedMessage
+          id={region.isHidden ? 'misc.showEntity' : 'misc.hideEntity'}
+          values={{ entity: intl.formatMessage({ id: 'misc.region' }) }}
+        />
       </div>
       <div
         className="RegionRow-Option"
         onClick={() => initializeRegionForm(regionId)}
       >
-        Edit Name
+        <FormattedMessage id="misc.editName" />
       </div>
       <div className="RegionRow-Option" onClick={() => onDelete(regionId)}>
         <FormattedMessage id="misc.delete" />
@@ -111,7 +118,7 @@ export default function RegionRow({
   } else if (regionId === regionPaint) {
     paintIcon = (
       <X
-        data-paint="Select hexes in sector to paint"
+        data-paint={intl.formatMessage({ id: 'misc.selectToPaint' })}
         className="RegionRow-Close"
         size={20}
         onClick={() => closeRegionPaint()}
@@ -153,6 +160,7 @@ export default function RegionRow({
 }
 
 RegionRow.propTypes = {
+  intl: intlShape.isRequired,
   isShared: PropTypes.bool.isRequired,
   regionId: PropTypes.string,
   region: PropTypes.shape({

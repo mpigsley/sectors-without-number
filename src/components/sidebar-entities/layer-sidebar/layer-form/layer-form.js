@@ -24,18 +24,25 @@ export default function LayerForm({
 }) {
   return (
     <FlexContainer className="LayerForm" direction="column">
-      <Label noPadding>Layer Name *</Label>
+      <Label noPadding>
+        <FormattedMessage id="misc.layerName" /> *
+      </Label>
       <Input
         error={layerForm.name.length > LAYER_NAME_LENGTH}
-        placeholder={`Name (${LAYER_NAME_LENGTH} characters)`}
+        placeholder={intl.formatMessage(
+          { id: 'misc.nameLimit' },
+          { num: LAYER_NAME_LENGTH },
+        )}
         value={layerForm.name}
         onChange={({ target }) => updateLayer('name', target.value)}
       />
-      <Label>Layer Description</Label>
+      <Label>
+        <FormattedMessage id="misc.layerDescription" />
+      </Label>
       <Input
         type="textarea"
         rows="7"
-        placeholder="Description"
+        placeholder={intl.formatMessage({ id: 'misc.description' })}
         value={layerForm.description}
         onChange={({ target }) => updateLayer('description', target.value)}
       />
@@ -51,7 +58,9 @@ export default function LayerForm({
           className="LayerForm-Button"
           onClick={() => submitForm()}
         >
-          {isEditing ? 'Edit' : 'Create'} Layer
+          <FormattedMessage
+            id={isEditing ? 'misc.editLayer' : 'misc.createLayer'}
+          />
         </Button>
         <Button
           className="LayerForm-Button"

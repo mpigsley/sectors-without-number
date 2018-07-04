@@ -95,7 +95,7 @@ export default class FloatingToolbar extends Component {
         <FlexContainer
           onClick={() => this.props.toggleLayer(key)}
           className={classNames('FloatingToolbar-SubItemName', {
-            'FloatingToolbar-SubItemName--edit': !this.props.isShared,
+            'FloatingToolbar-SubItemName--edit': actionButton,
             'FloatingToolbar-SubItemName--active':
               this.props.sectorLayers[key] === undefined ||
               this.props.sectorLayers[key],
@@ -118,7 +118,7 @@ export default class FloatingToolbar extends Component {
           to={`/sector/${this.props.sectorId}/layer`}
           className="FloatingToolbar-SubItemName FloatingToolbar-CreateLayer"
         >
-          <Plus size={18} /> <span>Create Layer</span>
+          <Plus size={18} /> <FormattedMessage id="misc.createLayer" />
         </Link>
       </FlexContainer>
     );

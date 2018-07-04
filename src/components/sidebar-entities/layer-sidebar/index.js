@@ -3,6 +3,7 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import {
+  currentEntitySelector,
   layerIsEditingSelector,
   layerRegionFormSelector,
   layerColorPickerSelector,
@@ -19,6 +20,7 @@ import LayerSidebar from './layer-sidebar';
 
 const mapStateToProps = createStructuredSelector({
   layer: visibleLayer,
+  layerId: currentEntitySelector,
   isEditing: layerIsEditingSelector,
   regionForm: layerRegionFormSelector,
   colorPicker: layerColorPickerSelector,

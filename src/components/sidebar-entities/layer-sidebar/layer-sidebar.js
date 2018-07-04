@@ -28,6 +28,7 @@ export default class LayerSidebar extends Component {
       regions: PropTypes.shape(),
       name: PropTypes.string.isRequired,
     }),
+    layerId: PropTypes.string,
     isEditing: PropTypes.bool.isRequired,
     isShared: PropTypes.bool.isRequired,
     regionForm: PropTypes.shape({
@@ -43,6 +44,7 @@ export default class LayerSidebar extends Component {
 
   static defaultProps = {
     layer: null,
+    layerId: null,
     regionForm: null,
     colorPicker: null,
   };
@@ -79,9 +81,10 @@ export default class LayerSidebar extends Component {
     return (
       <FlexContainer className="LayerSidebar-Hidden">
         <EyeOff size={18} />
-        <span>
-          The <b>{this.props.layer.name}</b> layer is hidden from players
-        </span>
+        <FormattedMessage
+          id="misc.layerHidden"
+          values={{ entity: this.props.layer.name }}
+        />
       </FlexContainer>
     );
   }
@@ -129,7 +132,7 @@ export default class LayerSidebar extends Component {
   }
 
   render() {
-    if (!this.props.layer || this.props.isEditing) {
+    if (!this.props.layerId || this.props.isEditing) {
       return <LayerForm />;
     }
 
