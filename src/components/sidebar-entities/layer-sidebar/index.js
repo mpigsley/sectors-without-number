@@ -7,7 +7,7 @@ import {
   layerRegionFormSelector,
   layerColorPickerSelector,
 } from 'store/selectors/base.selectors';
-import { currentLayer } from 'store/selectors/layer.selectors';
+import { visibleLayer } from 'store/selectors/layer.selectors';
 import {
   initializeRegionForm,
   updateRegion,
@@ -17,7 +17,7 @@ import {
 import LayerSidebar from './layer-sidebar';
 
 const mapStateToProps = createStructuredSelector({
-  layer: currentLayer,
+  layer: visibleLayer,
   isEditing: layerIsEditingSelector,
   regionForm: layerRegionFormSelector,
   colorPicker: layerColorPickerSelector,
@@ -30,5 +30,8 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(LayerSidebar),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(LayerSidebar),
 );
