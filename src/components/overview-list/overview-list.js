@@ -8,7 +8,7 @@ import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import LinkRow from 'primitives/other/link-row';
 
-import { omit, map, size } from 'constants/lodash';
+import { omitBy, map, size } from 'constants/lodash';
 import Entities from 'constants/entities';
 
 import './style.css';
@@ -55,7 +55,12 @@ export default class OverviewList extends Component {
             </Header>
             <div className="OverviewList-List">
               {map(
-                omit(this.props.entities, Entities.sector.key),
+                omitBy(
+                  this.props.entities,
+                  (list, type) =>
+                    type === Entities.sector.key ||
+                    Entities[type].action !== 'entity',
+                ),
                 (entityList, entityType) => (
                   <LinkRow
                     key={entityType}
