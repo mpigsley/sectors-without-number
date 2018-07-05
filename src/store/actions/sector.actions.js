@@ -14,6 +14,7 @@ export const CLOSED_EXPORT = `${ACTION_PREFIX}/CLOSED_EXPORT`;
 export const PRINTING_STARTED = `${ACTION_PREFIX}/PRINTING_STARTED`;
 export const PRINTING_COMPLETE = `${ACTION_PREFIX}/PRINTING_COMPLETE`;
 export const CLEARED_MAP_KEYS = `${ACTION_PREFIX}/CLEARED_MAP_KEYS`;
+export const TOGGLE_PLAYER_VIEW = `${ACTION_PREFIX}/TOGGLE_PLAYER_VIEW`;
 
 export const entityHold = key => syncLock(ENTITY_HELD, { key });
 export const entityRelease = () => syncLock(RELEASE_HELD);
@@ -32,3 +33,4 @@ export const closeExport = () => ({ type: CLOSED_EXPORT });
 export const startPrint = () => ({ type: PRINTING_STARTED });
 export const endPrint = () => ({ type: PRINTING_COMPLETE });
 export const clearMapKeys = () => ({ type: CLEARED_MAP_KEYS });
+export const togglePlayerView = () => ({ type: TOGGLE_PLAYER_VIEW });

@@ -14,6 +14,7 @@ import {
   PRINTING_STARTED,
   PRINTING_COMPLETE,
   CLEARED_MAP_KEYS,
+  TOGGLE_PLAYER_VIEW,
 } from 'store/actions/sector.actions';
 import {
   SAVED_SECTOR,
@@ -38,6 +39,7 @@ const initialState = {
   exportType: ExportTypes.condensed.key,
   isExportOpen: false,
   isPrinting: false,
+  playerView: false,
   configuration: {
     name: Entities.sector.nameGenerator(),
     isBuilder: false,
@@ -69,6 +71,7 @@ export default function sector(state = initialState, action) {
         return {
           ...initialState,
           renderSector: false,
+          playerView: false,
           fetched: state.fetched,
           configuration: {
             ...initialState.configuration,
@@ -137,6 +140,8 @@ export default function sector(state = initialState, action) {
       return { ...state, isPrinting: false };
     case CLEARED_MAP_KEYS:
       return { ...state, holdKey: null, hoverKey: null };
+    case TOGGLE_PLAYER_VIEW:
+      return { ...state, playerView: !state.playerView };
     default:
       return state;
   }

@@ -2663,6 +2663,7 @@
   "misc.password": "Password",
   "misc.passwordResetSent": "Password Reset Sent",
   "misc.places": "Places",
+  "misc.playerViewSwitcher": "Switch to your player's view",
   "misc.printEntitiesTable":
     "Print your entities in a table format to easily get an overview of your sector.",
   "misc.reachedLimit": "Reached Sector Limit",

@@ -20,11 +20,11 @@ import {
 } from 'store/actions/navigation.actions';
 import { toggleRegionAtHex } from 'store/actions/layer.actions';
 
+import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import { getCurrentNavigationWithSettings } from 'store/selectors/navigation.selectors';
 import {
   holdKeySelector,
   hoverKeySelector,
-  isSharedSectorSelector,
   isSidebarEditActiveSelector,
   navigationSettingsSelector,
   currentEntityTypeSelector,
@@ -49,7 +49,7 @@ const mapStateToProps = createStructuredSelector({
   activeKey: getActiveEntityKey,
   currentEntityType: currentEntityTypeSelector,
   topLevelEntities: getCurrentTopLevelEntities,
-  isShared: isSharedSectorSelector,
+  isShared: isViewingSharedSector,
   isSidebarEditActive: isSidebarEditActiveSelector,
   mapLocked: getMapLock,
   sectorLayers: getSectorLayers,

@@ -7,6 +7,7 @@ import {
   savedSectorSelector,
   shareSectorSelector,
   fetchedSectorSelector,
+  playerViewSelector,
 } from 'store/selectors/base.selectors';
 import { omitBy, includes } from 'constants/lodash';
 
@@ -25,9 +26,14 @@ export const isCurrentSectorFetched = createSelector(
   (currentSector, fetched) => includes(fetched, currentSector),
 );
 
-export const isViewingSharedSector = createSelector(
+export const isSharedSector = createSelector(
   [currentSectorSelector, shareSectorSelector],
   (currentSector, share) => currentSector === share,
+);
+
+export const isViewingSharedSector = createSelector(
+  [isSharedSector, playerViewSelector],
+  (isShared, isPlayerView) => isShared || isPlayerView,
 );
 
 export const currentSectorIsLoading = createSelector(
