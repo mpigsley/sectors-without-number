@@ -5,6 +5,7 @@ import ChevronUp from 'react-feather/dist/icons/chevron-up';
 import Crosshair from 'react-feather/dist/icons/crosshair';
 import Edit2 from 'react-feather/dist/icons/edit-2';
 import Edit3 from 'react-feather/dist/icons/edit-3';
+import Eye from 'react-feather/dist/icons/eye';
 import EyeOff from 'react-feather/dist/icons/eye-off';
 import Grid from 'react-feather/dist/icons/grid';
 import HelpCircle from 'react-feather/dist/icons/help-circle';
@@ -32,6 +33,7 @@ export {
   Crosshair,
   Edit2,
   Edit3,
+  Eye,
   EyeOff,
   Grid,
   HelpCircle,

@@ -33,6 +33,7 @@ export const exportTypeSelector = state => state.sector.exportType;
 export const isExportOpenSelector = state => state.sector.isExportOpen;
 export const isPrintingSelector = state => state.sector.isPrinting;
 export const fetchedSectorSelector = state => state.sector.fetched;
+export const playerViewSelector = state => state.sector.playerView;
 
 /* Sidebar Edit */
 export const sidebarEditSelector = state => state.sidebar;

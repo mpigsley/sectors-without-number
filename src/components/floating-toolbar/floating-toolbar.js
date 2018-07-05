@@ -14,6 +14,8 @@ import {
   Layers,
   HelpCircle,
   Edit2,
+  Eye,
+  EyeOff,
 } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
@@ -26,9 +28,12 @@ export default class FloatingToolbar extends Component {
     sectorId: PropTypes.string.isRequired,
     mapLocked: PropTypes.bool.isRequired,
     toggleMapLock: PropTypes.func.isRequired,
+    playerView: PropTypes.bool.isRequired,
+    togglePlayerView: PropTypes.func.isRequired,
     layers: PropTypes.shape().isRequired,
     sectorLayers: PropTypes.shape().isRequired,
     toggleLayer: PropTypes.func.isRequired,
+    isSharedSector: PropTypes.bool.isRequired,
     isShared: PropTypes.bool.isRequired,
     isSaved: PropTypes.bool.isRequired,
     redirectToHome: PropTypes.func.isRequired,
@@ -71,6 +76,34 @@ export default class FloatingToolbar extends Component {
         })}
       >
         {this.renderSectorLock()}
+      </FlexContainer>
+    );
+  }
+
+  renderSwitcherIcon() {
+    if (this.props.playerView) {
+      return <EyeOff size={18} />;
+    }
+    return <Eye size={18} />;
+  }
+
+  renderViewSwitcher() {
+    if (this.props.isSharedSector) {
+      return null;
+    }
+    return (
+      <FlexContainer
+        data-rh={
+          !this.props.playerView
+            ? this.props.intl.formatMessage({ id: 'misc.playerViewSwitcher' })
+            : undefined
+        }
+        onClick={this.props.togglePlayerView}
+        className={classNames('FloatingToolbar-Item', {
+          'FloatingToolbar-Lock--active': this.props.playerView,
+        })}
+      >
+        {this.renderSwitcherIcon()}
       </FlexContainer>
     );
   }
@@ -128,6 +161,7 @@ export default class FloatingToolbar extends Component {
     return (
       <div className="FloatingToolbar-Container">
         <FlexContainer className="FloatingToolbar" direction="column">
+          {this.renderViewSwitcher()}
           {this.renderLock()}
           <FlexContainer className="FloatingToolbar-Item">
             <Layers size={18} />
