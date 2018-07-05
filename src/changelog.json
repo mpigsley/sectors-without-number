@@ -1,4 +1,17 @@
 {
+  "6.0.0": {
+    "description": "Adds custom hex layers.",
+    "date": "7-5-2018",
+    "changes": [
+      "Add any number of custom layers, create new regions within a layer, and paint them on the hex map.",
+      "Toggle between the layers similar to how navigation and system text works.",
+      "Add multiple layer regions to a single hex.",
+      "Rework the underlying components that build the sidebar.",
+      "Hide entire layers or individual regions from your players.",
+      "Scale hex map better for smaller viewports.",
+      "Show the sector title in the browser tab title."
+    ]
+  },
   "5.4.4": {
     "description":
       "Fix bug where navigation would disappear after entity edit.",
