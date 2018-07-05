@@ -1,4 +1,9 @@
 {
+  "6.2.0": {
+    "description":
+      "Add option in the floating toolbar to toggle between player/game master views.",
+    "date": "7-5-2018"
+  },
   "6.1.0": {
     "description":
       "When navigating back to the overview lists, start at last viewed location.",
