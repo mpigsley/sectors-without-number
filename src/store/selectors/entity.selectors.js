@@ -13,7 +13,7 @@ import {
   sidebarEditEntitySelector,
   sidebarEditChildrenSelector,
   savedSectorSelector,
-  fetchedSectorSelector,
+  layersSelector,
 } from 'store/selectors/base.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import Entities from 'constants/entities';
@@ -35,12 +35,6 @@ import {
 } from 'constants/lodash';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
-
-export const isFetchingCurrentSector = createDeepEqualSelector(
-  [fetchedSectorSelector, savedSectorSelector, currentSectorSelector],
-  (fetched, saved, sector) =>
-    includes(saved, sector) && !includes(fetched, sector),
-);
 
 export const getSavedEntities = createDeepEqualSelector(
   [entitySelector, savedSectorSelector],
@@ -136,7 +130,7 @@ export const getMapLock = createDeepEqualSelector(
   currentSector => !!(currentSector || {}).mapLocked,
 );
 
-export const getLayers = createDeepEqualSelector(
+export const getSectorLayers = createDeepEqualSelector(
   [getCurrentSector],
   currentSector => (currentSector || {}).layers || {},
 );
@@ -149,6 +143,7 @@ export const getCurrentEntity = createSelector(
     entitySelector,
     isSidebarEditActiveSelector,
     sidebarEditEntitySelector,
+    layersSelector,
   ],
   (
     currentSector,

@@ -5,8 +5,16 @@ import { Link } from 'react-router-dom';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 
-import { includes } from 'constants/lodash';
-import { Lock, Unlock, Layers, HelpCircle, Edit2 } from 'constants/icons';
+import { sortBy, map, includes, keys } from 'constants/lodash';
+import {
+  List,
+  Plus,
+  Lock,
+  Unlock,
+  Layers,
+  HelpCircle,
+  Edit2,
+} from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
 import './style.css';
@@ -19,6 +27,7 @@ export default class FloatingToolbar extends Component {
     mapLocked: PropTypes.bool.isRequired,
     toggleMapLock: PropTypes.func.isRequired,
     layers: PropTypes.shape().isRequired,
+    sectorLayers: PropTypes.shape().isRequired,
     toggleLayer: PropTypes.func.isRequired,
     isShared: PropTypes.bool.isRequired,
     isSaved: PropTypes.bool.isRequired,
@@ -66,32 +75,51 @@ export default class FloatingToolbar extends Component {
     );
   }
 
-  renderLayers() {
-    let editButton = null;
-    if (!this.props.isShared && this.props.isSaved) {
-      editButton = (
-        <Link
-          to={`/sector/${this.props.sectorId}/navigation`}
-          className="FloatingToolbar-ItemEdit"
-        >
+  renderLayer(key, text, editLink) {
+    let actionButton = null;
+    if (!this.props.isShared && this.props.isSaved && editLink) {
+      actionButton = (
+        <Link to={editLink} className="FloatingToolbar-ItemAction">
           <Edit2 size={18} />
+        </Link>
+      );
+    } else if (this.props.isShared && includes(keys(this.props.layers), key)) {
+      actionButton = (
+        <Link to={editLink} className="FloatingToolbar-ItemAction">
+          <List size={18} />
         </Link>
       );
     }
     return (
-      <FlexContainer className="FloatingToolbar-SubItemOuter">
+      <FlexContainer key={key} className="FloatingToolbar-SubItemOuter">
         <FlexContainer
-          onClick={() => this.props.toggleLayer('navigation')}
+          onClick={() => this.props.toggleLayer(key)}
           className={classNames('FloatingToolbar-SubItemName', {
-            'FloatingToolbar-SubItemName--edit': !this.props.isShared,
+            'FloatingToolbar-SubItemName--edit': actionButton,
             'FloatingToolbar-SubItemName--active':
-              this.props.layers.navigation === undefined ||
-              this.props.layers.navigation,
+              this.props.sectorLayers[key] === undefined ||
+              this.props.sectorLayers[key],
           })}
         >
-          <FormattedMessage id="misc.navRoutes" />
+          {text}
         </FlexContainer>
-        {editButton}
+        {actionButton}
+      </FlexContainer>
+    );
+  }
+
+  renderCreateLayer() {
+    if (this.props.isShared || !this.props.isSaved) {
+      return null;
+    }
+    return (
+      <FlexContainer className="FloatingToolbar-SubItemOuter">
+        <Link
+          to={`/sector/${this.props.sectorId}/layer`}
+          className="FloatingToolbar-SubItemName FloatingToolbar-CreateLayer"
+        >
+          <Plus size={18} /> <FormattedMessage id="misc.createLayer" />
+        </Link>
       </FlexContainer>
     );
   }
@@ -107,19 +135,30 @@ export default class FloatingToolbar extends Component {
               className="FloatingToolbar-SubList"
               direction="column"
             >
-              {this.renderLayers()}
-              <FlexContainer className="FloatingToolbar-SubItemOuter">
-                <FlexContainer
-                  onClick={() => this.props.toggleLayer('systemText')}
-                  className={classNames('FloatingToolbar-SubItemName', {
-                    'FloatingToolbar-SubItemName--active':
-                      this.props.layers.systemText === undefined ||
-                      this.props.layers.systemText,
-                  })}
-                >
-                  <FormattedMessage id="misc.hexSystemText" />
-                </FlexContainer>
-              </FlexContainer>
+              {this.renderLayer(
+                'systemText',
+                this.props.intl.formatMessage({ id: 'misc.hexSystemText' }),
+              )}
+              {this.renderLayer(
+                'navigation',
+                this.props.intl.formatMessage({ id: 'misc.navRoutes' }),
+                `/sector/${this.props.sectorId}/navigation`,
+              )}
+              {sortBy(
+                map(this.props.layers, (layer, key) => ({
+                  ...layer,
+                  sort: layer.name.toLowerCase(),
+                  key,
+                })),
+                'sort',
+              ).map(({ key, name }) =>
+                this.renderLayer(
+                  key,
+                  name,
+                  `/sector/${this.props.sectorId}/layer/${key}`,
+                ),
+              )}
+              {this.renderCreateLayer()}
             </FlexContainer>
           </FlexContainer>
           <FlexContainer className="FloatingToolbar-Item">
@@ -142,6 +181,16 @@ export default class FloatingToolbar extends Component {
                 <Link to="/changelog" className="FloatingToolbar-SubItemName">
                   <FormattedMessage id="misc.changelog" />
                 </Link>
+              </FlexContainer>
+              <FlexContainer className="FloatingToolbar-SubItemOuter">
+                <a
+                  href="https://medium.com/sectors-without-number"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="FloatingToolbar-SubItemName"
+                >
+                  <FormattedMessage id="misc.blog" />
+                </a>
               </FlexContainer>
               <FlexContainer className="FloatingToolbar-SubItemOuter">
                 <a

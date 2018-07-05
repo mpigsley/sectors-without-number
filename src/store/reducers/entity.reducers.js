@@ -12,18 +12,22 @@ import {
 } from 'constants/lodash';
 import Entities from 'constants/entities';
 import {
-  UPDATE_ENTITIES,
-  DELETE_ENTITIES,
-  UPDATE_ID_MAPPING,
-  FETCHED_SECTOR,
+  UPDATED_ENTITIES,
+  DELETED_ENTITIES,
+  UPDATED_ID_MAPPING,
 } from 'store/actions/entity.actions';
-import { INITIALIZE, LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
+import {
+  INITIALIZED,
+  FETCHED_SECTOR,
+  CREATED_LAYER,
+  DELETED_LAYER,
+} from 'store/actions/combined.actions';
+import { LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 import { mergeEntityUpdates } from 'utils/entity';
 
 const initialState = {
   models: mapValues(Entities, () => ({})),
   saved: [],
-  fetched: [],
   share: null,
   currentSector: null,
   currentEntityType: null,
@@ -32,15 +36,14 @@ const initialState = {
 
 export default function entity(state = initialState, action) {
   switch (action.type) {
-    case INITIALIZE:
+    case INITIALIZED:
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),
-        fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
         saved: action.saved,
         share: action.share,
       };
-    case UPDATE_ENTITIES:
+    case UPDATED_ENTITIES:
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),
@@ -49,7 +52,6 @@ export default function entity(state = initialState, action) {
       return {
         ...state,
         share: action.share,
-        fetched: uniq([...state.fetched, action.sectorId]).filter(f => f),
         models: mergeEntityUpdates(state.models, action.entities),
       };
     case LOGGED_IN:
@@ -72,9 +74,6 @@ export default function entity(state = initialState, action) {
         currentSector,
         share:
           isGameView && includes(uniqSectors, state.share) ? state.share : null,
-        fetched: isGameView
-          ? state.fetched
-          : state.fetched.filter(id => includes(state.saved, id)),
         currentEntityType: isGameView ? pathname.split('/')[3] : null,
         currentEntity: isGameView ? pathname.split('/')[4] : null,
         models: mapValues(state.models, (entities, entityType) => {
@@ -87,14 +86,13 @@ export default function entity(state = initialState, action) {
         }),
       };
     }
-    case UPDATE_ID_MAPPING: {
+    case UPDATED_ID_MAPPING: {
       const transformedSector = action.mapping[state.currentSector];
       return {
         ...state,
         currentSector: transformedSector || state.currentSector,
         currentEntity:
           action.mapping[state.currentEntity] || state.currentEntity,
-        fetched: uniq([...state.fetched, transformedSector]).filter(f => f),
         saved: uniq([
           ...state.saved.map(saveId => action.mapping[saveId] || saveId),
           transformedSector,
@@ -120,7 +118,7 @@ export default function entity(state = initialState, action) {
         ),
       };
     }
-    case DELETE_ENTITIES: {
+    case DELETED_ENTITIES: {
       const deletedSectorIds = action.entities[Entities.sector.key] || [];
       return {
         ...state,
@@ -135,6 +133,21 @@ export default function entity(state = initialState, action) {
         },
       };
     }
+    case DELETED_LAYER:
+    case CREATED_LAYER:
+      return {
+        ...state,
+        models: {
+          ...state.models,
+          [Entities.sector.key]: {
+            ...state.models[Entities.sector.key],
+            [action.sectorId]: {
+              ...state.models[Entities.sector.key][action.sectorId],
+              layers: action.layers,
+            },
+          },
+        },
+      };
     case LOGGED_OUT:
       return initialState;
     default:

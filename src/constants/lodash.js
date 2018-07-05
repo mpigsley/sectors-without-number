@@ -32,6 +32,7 @@ import isObject from 'lodash/isObject';
 import findKey from 'lodash/findKey';
 import capitalize from 'lodash/capitalize';
 import toUpper from 'lodash/toUpper';
+import intersection from 'lodash/intersection';
 
 export {
   includes,
@@ -68,4 +69,5 @@ export {
   findKey,
   capitalize,
   toUpper,
+  intersection,
 };

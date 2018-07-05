@@ -2,7 +2,6 @@
 export const userModelSelector = state => state.user.model;
 export const userModelLocaleSelector = state =>
   (state.user.model || {}).locale || 'en';
-export const isDropdownActiveSelector = state => state.user.isDropdownActive;
 export const isUserEditModalOpenSelector = state => state.user.isEditModalOpen;
 export const isSyncModalOpenSelector = state => state.user.isSyncModalOpen;
 export const isInitializedSelector = state => state.user.isInitialized;
@@ -18,7 +17,6 @@ export const currentEntityTypeSelector = state =>
   state.entity.currentEntityType;
 export const currentEntitySelector = state => state.entity.currentEntity;
 export const savedSectorSelector = state => state.entity.saved;
-export const fetchedSectorSelector = state => state.entity.fetched;
 export const shareSectorSelector = state => state.entity.share;
 export const isSharedSectorSelector = state => !!state.entity.share;
 
@@ -32,13 +30,14 @@ export const syncLockSelector = state => state.sector.syncLock;
 export const exportTypeSelector = state => state.sector.exportType;
 export const isExportOpenSelector = state => state.sector.isExportOpen;
 export const isPrintingSelector = state => state.sector.isPrinting;
+export const fetchedSectorSelector = state => state.sector.fetched;
 
 /* Sidebar Edit */
-export const sidebarEditSelector = state => state.sidebarEdit;
+export const sidebarEditSelector = state => state.sidebar;
 export const isSidebarEditActiveSelector = state =>
-  state.sidebarEdit.isSidebarEditActive;
-export const sidebarEditEntitySelector = state => state.sidebarEdit.entity;
-export const sidebarEditChildrenSelector = state => state.sidebarEdit.children;
+  state.sidebar.isSidebarEditActive;
+export const sidebarEditEntitySelector = state => state.sidebar.entity;
+export const sidebarEditChildrenSelector = state => state.sidebar.children;
 
 /* Router */
 export const routerLocationSelector = state => state.router.location;
@@ -49,6 +48,13 @@ export const navigationSettingsSelector = state => state.navigation.settings;
 export const navigationSettingsRouteSelector = state =>
   state.navigation.settings.route;
 export const isHelpOpenSelector = state => state.navigation.isHelpOpen;
-export const fetchedNavigationSelector = state => state.navigation.fetched;
 export const navigationSyncLockSelector = state => state.navigation.syncLock;
 export const routeLocatorSelector = state => state.navigation.routeLocator;
+
+/* Layer */
+export const layersSelector = state => state.layer.models;
+export const layerFormSelector = state => state.layer.form;
+export const layerIsEditingSelector = state => state.layer.isEditing;
+export const layerRegionFormSelector = state => state.layer.regionForm;
+export const layerColorPickerSelector = state => state.layer.colorPicker;
+export const layerRegionPaintSelector = state => state.layer.regionPaint;

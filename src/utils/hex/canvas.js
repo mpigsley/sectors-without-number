@@ -1,8 +1,10 @@
-import { forEach, find, values, includes, uniq } from 'constants/lodash';
+import tinycolor from 'tinycolor2';
+
+import { forEach, find, values, includes, uniq, keys } from 'constants/lodash';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
-import { HEX_PADDING } from 'constants/defaults';
+import { HEX_PADDING, TARGET_COLOR_WIDTH } from 'constants/defaults';
 
 const NAVIGATION_WIDTHS = {
   thin: 1,
@@ -85,9 +87,11 @@ export default ({
   width,
   height,
   isShared,
-  layers,
+  sectorLayers,
   navigationRoutes,
   routeLocator,
+  paintRegion,
+  layerHexes,
 }) => {
   ctx.clearRect(0, 0, width * ratio, height * ratio);
 
@@ -110,10 +114,11 @@ export default ({
     }));
 
   const allRouteKeys = values(navigationRoutes).reduce(
-    (keys, sectorNav) => uniq([...keys, ...sectorNav.route]),
+    (routeKeys, sectorNav) => uniq([...routeKeys, ...sectorNav.route]),
     [],
   );
   const routeLocations = {};
+  const hexesWithDarkText = [];
   const newRoute = find(navigationRoutes, { isCreatingRoute: true });
   let holdLocation;
   let hoverLocation;
@@ -140,6 +145,57 @@ export default ({
       if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
         ctx.fillStyle = '#637182';
       }
+      if (
+        includes(keys(layerHexes), hexKey) ||
+        (hoverKey === hexKey && paintRegion)
+      ) {
+        let hexLayer = layerHexes[hexKey] || [];
+        if (
+          hoverKey === hexKey &&
+          paintRegion &&
+          !includes(hexLayer, paintRegion.color)
+        ) {
+          hexLayer = [paintRegion.color, ...hexLayer];
+        }
+
+        const lightColors = hexLayer.reduce(
+          (num, color) => num + tinycolor(color).getBrightness(),
+          0,
+        );
+        if (lightColors / hexLayer.length >= 100) {
+          hexesWithDarkText.push(hexKey);
+        }
+
+        if (hexLayer.length === 1) {
+          const [fillStyle] = hexLayer;
+          ctx.fillStyle = fillStyle;
+        } else if (hexLayer.length > 1) {
+          const gradient = ctx.createLinearGradient(
+            points[1].x,
+            points[1].y,
+            points[4].x,
+            points[4].y,
+          );
+          let numSteps = Math.round(
+            distanceBetween(points[1], points[4]) /
+              (TARGET_COLOR_WIDTH * ratio),
+          );
+          numSteps = numSteps < hexLayer.length ? hexLayer.length : numSteps;
+          const gStep = 1 / numSteps;
+          for (let i = 0; i < numSteps; i += 1) {
+            const color = hexLayer[i % hexLayer.length];
+            gradient.addColorStop(gStep * i, color);
+            const nextColor = hexLayer[(i + 1) % hexLayer.length];
+            if (nextColor) {
+              gradient.addColorStop(
+                Math.min(gStep * (i + 1) - 0.001, 1),
+                color,
+              );
+            }
+          }
+          ctx.fillStyle = gradient;
+        }
+      }
       if (newRoute && includes(newRoute.route, hexKey)) {
         ctx.fillStyle = '#637182';
       }
@@ -159,7 +215,8 @@ export default ({
     },
   );
 
-  const renderNavigation = layers.navigation === undefined || layers.navigation;
+  const renderNavigation =
+    sectorLayers.navigation === undefined || sectorLayers.navigation;
   if (renderNavigation || newRoute) {
     forEach(navigationRoutes, (navRoute, routeId) => {
       if (navRoute.route.length < 2 || (isShared && navRoute.isHidden)) {
@@ -224,7 +281,7 @@ export default ({
 
     // Draw arrow heads
     let radians = Math.atan((yEnd - yStart) / (xEnd - xStart));
-    radians += (xEnd >= xStart ? 90 : -90) * Math.PI / 180;
+    radians += ((xEnd >= xStart ? 90 : -90) * Math.PI) / 180;
     drawArrowhead(ctx, radians, xEnd, yEnd, ratio, true);
     if (isVectorSwitch) {
       drawArrowhead(ctx, radians, xStart, yStart, ratio, false);
@@ -234,10 +291,12 @@ export default ({
   hexEntities.filter(hex => hex.highlighted).forEach(hex => {
     // Draw Text
     ctx.font = `${9 * ratio}px Raleway,sans-serif`;
-    ctx.fillStyle = '#8f8f8f';
+    ctx.fillStyle = includes(hexesWithDarkText, hex.hexKey)
+      ? '#000000'
+      : '#b2b2b2';
     const renderText =
       hex.width > 45 * ratio &&
-      (layers.systemText === undefined || layers.systemText);
+      (sectorLayers.systemText === undefined || sectorLayers.systemText);
     if (renderText) {
       ctx.fillText(
         hex.hexKey,

@@ -2,40 +2,36 @@ import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 
 import Entities from 'constants/entities';
-import { enterGameRoute } from 'store/actions/combined.actions';
+import { fetchSector } from 'store/actions/combined.actions';
 import { generateEntity } from 'store/actions/entity.actions';
-import { isFetchingCurrentNavigation } from 'store/selectors/navigation.selectors';
+import { currentSectorIsLoading } from 'store/selectors/sector.selectors';
 import {
   getCurrentTopLevelEntities,
   getCurrentSector,
-  isFetchingCurrentSector,
 } from 'store/selectors/entity.selectors';
 import {
   renderSectorSelector,
-  isInitializedSelector,
   exportTypeSelector,
   isPrintingSelector,
 } from 'store/selectors/base.selectors';
 
 import SectorMap from './sector-map';
 
-const mapStateToProps = state => ({
-  renderSector: renderSectorSelector(state),
-  sector: getCurrentSector(state),
-  hasLoaded:
-    isInitializedSelector(state) &&
-    !isFetchingCurrentSector(state) &&
-    !isFetchingCurrentNavigation(state),
-  topLevelEntities: getCurrentTopLevelEntities(state),
-  exportType: exportTypeSelector(state),
-  isPrinting: isPrintingSelector(state),
+const mapStateToProps = createStructuredSelector({
+  renderSector: renderSectorSelector,
+  sector: getCurrentSector,
+  isLoading: currentSectorIsLoading,
+  topLevelEntities: getCurrentTopLevelEntities,
+  exportType: exportTypeSelector,
+  isPrinting: isPrintingSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
   toSafeRoute: sector => dispatch(push(sector ? `/sector/${sector}` : '/')),
-  enterGameRoute: () => dispatch(enterGameRoute()),
+  fetchSector: () => dispatch(fetchSector()),
   generateSector: () =>
     dispatch(
       generateEntity({ entityType: Entities.sector.key }, {}, props.intl),

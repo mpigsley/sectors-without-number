@@ -76,8 +76,13 @@
   }
 }
 
-.FloatingToolbar-ItemEdit {
+.FloatingToolbar-SubItemName {
+  flex: 1;
+}
+
+.FloatingToolbar-ItemAction {
   border-left: 1px solid $dark3;
+  flex: 0;
 
   a {
     color: $light1;
@@ -85,11 +90,10 @@
 }
 
 .FloatingToolbar-SubItemName,
-.FloatingToolbar-ItemEdit {
+.FloatingToolbar-ItemAction {
   align-items: center;
   color: $light2;
   cursor: pointer;
-  flex: 1;
   padding: 0.6rem 0.8rem;
   text-decoration: none;
   transition: color, background-color 0.2s linear;
@@ -112,4 +116,17 @@
 .FloatingToolbar-SubItemName--active:hover {
   background-color: $primary;
   transition: color 0.2s linear;
+}
+
+.FloatingToolbar-CreateLayer {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 0.4rem;
+  padding-top: 0.4rem;
+
+  span {
+    margin-left: 0.5rem;
+    margin-right: 0.8rem;
+  }
 }

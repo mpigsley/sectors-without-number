@@ -5,7 +5,7 @@ import { ConnectedRouter } from 'react-router-redux';
 import { Provider } from 'react-redux';
 import Fastclick from 'react-fastclick';
 import Firebase from 'firebase/app';
-import { firestore as Firestore } from 'firebase';
+import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/functions';
 
@@ -35,7 +35,7 @@ Firebase.initializeApp({
 });
 
 // Temporary until deprecation notice goes away
-Firestore().settings({ timestampsInSnapshots: true });
+Firebase.firestore().settings({ timestampsInSnapshots: true });
 
 ReactDOM.render(
   <Provider store={store}>
@@ -51,14 +51,9 @@ ReactDOM.render(
               <SectorMap>
                 <Switch>
                   <Route
-                    path={`${match.path}/:entityType/:entity`}
+                    path={`${match.path}/:entityType?/:entity?`}
                     component={Sidebar}
                   />
-                  <Route
-                    path={`${match.path}/:entityType`}
-                    component={Sidebar}
-                  />
-                  <Route path={match.path} component={Sidebar} />
                 </Switch>
               </SectorMap>
             )}

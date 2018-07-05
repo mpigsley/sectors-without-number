@@ -1,11 +1,21 @@
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
-import { closeUserDropdown } from 'store/actions/user.actions';
+import {
+  userUidSelector,
+  isInitializedSelector,
+} from 'store/selectors/base.selectors';
+
+import { openLoginModal } from 'store/actions/user.actions';
 
 import HexBackground from './hex-background';
 
-const mapStateToProps = state => ({
-  isDropdownActive: state.user.isDropdownActive,
+const mapStateToProps = createStructuredSelector({
+  isInitialized: isInitializedSelector,
+  uid: userUidSelector,
 });
 
-export default connect(mapStateToProps, { closeUserDropdown })(HexBackground);
+export default connect(
+  mapStateToProps,
+  { openLoginModal },
+)(HexBackground);

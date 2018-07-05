@@ -1,18 +1,16 @@
 import {
-  OPEN_LOGIN_MODAL,
-  CLOSE_LOGIN_MODAL,
-  OPEN_EDIT_MODAL,
-  CLOSE_EDIT_MODAL,
+  OPENED_LOGIN_MODAL,
+  CLOSED_LOGIN_MODAL,
+  OPENED_EDIT_MODAL,
+  CLOSED_EDIT_MODAL,
   UPDATED_USER_FORM,
-  UPDATE_USER,
+  UPDATED_USER,
   LOGGED_IN,
   LOGGED_OUT,
-  INITIALIZE,
   AUTH_FAILURE,
-  OPEN_USER_DROPDOWN,
-  CLOSE_USER_DROPDOWN,
-  CLOSE_SYNC_MODAL,
+  CLOSED_SYNC_MODAL,
 } from 'store/actions/user.actions';
+import { INITIALIZED } from 'store/actions/combined.actions';
 import englishLocale from 'lang/en';
 
 const initialForm = () => ({
@@ -24,7 +22,6 @@ const initialForm = () => ({
 });
 export const initialState = {
   isInitialized: false,
-  isDropdownActive: false,
   isLoginModalOpen: false,
   isSyncModalOpen: false,
   isEditModalOpen: false,
@@ -36,7 +33,7 @@ export const initialState = {
 
 export default function user(state = initialState, action) {
   switch (action.type) {
-    case INITIALIZE:
+    case INITIALIZED:
       return {
         ...state,
         model: action.user,
@@ -49,13 +46,13 @@ export default function user(state = initialState, action) {
           locale: (action.user || {}).locale || 'en',
         },
       };
-    case OPEN_LOGIN_MODAL:
+    case OPENED_LOGIN_MODAL:
       return { ...state, isLoginModalOpen: true };
-    case CLOSE_LOGIN_MODAL:
+    case CLOSED_LOGIN_MODAL:
       return { ...state, isLoginModalOpen: false, error: null };
-    case OPEN_EDIT_MODAL:
-      return { ...state, isEditModalOpen: true, isDropdownActive: false };
-    case CLOSE_EDIT_MODAL:
+    case OPENED_EDIT_MODAL:
+      return { ...state, isEditModalOpen: true };
+    case CLOSED_EDIT_MODAL:
       return { ...state, isEditModalOpen: false, error: null };
     case UPDATED_USER_FORM:
       return {
@@ -66,7 +63,7 @@ export default function user(state = initialState, action) {
           [action.key]: action.value,
         },
       };
-    case UPDATE_USER:
+    case UPDATED_USER:
       return {
         ...state,
         isEditModalOpen: false,
@@ -93,14 +90,9 @@ export default function user(state = initialState, action) {
         model: null,
         form: initialForm(),
         isLoginModalOpen: false,
-        isDropdownActive: false,
       };
-    case CLOSE_SYNC_MODAL:
+    case CLOSED_SYNC_MODAL:
       return { ...state, isSyncModalOpen: false };
-    case OPEN_USER_DROPDOWN:
-      return { ...state, isDropdownActive: true };
-    case CLOSE_USER_DROPDOWN:
-      return { ...state, isDropdownActive: false };
     case AUTH_FAILURE:
       return {
         ...state,

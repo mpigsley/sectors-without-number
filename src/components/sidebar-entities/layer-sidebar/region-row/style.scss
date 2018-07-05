@@ -1,0 +1,107 @@
+@import 'styles/theme';
+
+.RegionRow {
+  margin: 0 1rem 1rem;
+}
+
+.RegionRow-Icon {
+  color: $light3;
+  cursor: pointer;
+  padding-right: 0.5rem;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light2;
+  }
+}
+
+.RegionRow-Close {
+  color: $light1;
+  cursor: pointer;
+  padding-right: 0.5rem;
+  transition: color 0.2s linear;
+}
+
+.RegionRow-Color {
+  border-radius: 5px;
+  cursor: pointer;
+  height: 25px;
+  margin-right: 0.5rem;
+  width: 25px;
+
+  &:hover {
+    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.9);
+  }
+}
+
+.RegionRow-HiddenIcon {
+  color: $light1;
+  margin-left: 0.5rem;
+}
+
+.RegionRow-Name {
+  flex: 1;
+  margin: 0;
+  text-align: left;
+
+  &--hidden {
+    color: $light1;
+  }
+}
+
+.RegionRow-OtherActions {
+  color: $light3;
+  cursor: pointer;
+  padding-left: 0.5rem;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light2;
+  }
+}
+
+.RegionRow-OptionDropdown {
+  position: relative;
+
+  &::after {
+    border: 5px solid transparent;
+    border-bottom-color: $dark1;
+    border-top: none;
+    bottom: auto;
+    content: '';
+    display: block;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    height: 0;
+    right: 0;
+    top: -5px;
+    width: 0;
+  }
+
+  &--content {
+    background-color: $dark1;
+    border-radius: 2px;
+    font-size: 0.9rem;
+    padding: 0.5rem 0.8rem;
+    position: absolute;
+    right: -16px;
+  }
+}
+
+.RegionRow-Option {
+  color: $light4;
+  cursor: pointer;
+  white-space: nowrap;
+  padding-bottom: 0.4rem;
+  text-align: right;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light2;
+  }
+
+  &:last-of-type {
+    padding-bottom: 0;
+  }
+}

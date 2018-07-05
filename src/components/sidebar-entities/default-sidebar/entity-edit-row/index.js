@@ -5,7 +5,7 @@ import {
   deleteChildInEdit,
   undoDeleteChildInEdit,
   updateChildInEdit,
-} from 'store/actions/sidebar-edit.actions';
+} from 'store/actions/sidebar.actions';
 import {
   isCurrentOrAncestorHidden,
   getEmptyHexKeys,

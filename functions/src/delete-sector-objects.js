@@ -2,7 +2,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 const BATCH_SIZE = 500;
-const deleteRoutesBatch = (query, resolve, reject) =>
+const deleteBatch = (query, resolve, reject) =>
   query
     .limit(BATCH_SIZE)
     .get()
@@ -19,7 +19,7 @@ const deleteRoutesBatch = (query, resolve, reject) =>
         return resolve();
       }
       return process.nextTick(() => {
-        deleteRoutesBatch(query, resolve, reject);
+        deleteBatch(query, resolve, reject);
       });
     })
     .catch(reject);
@@ -29,15 +29,25 @@ module.exports = functions.firestore
   .onDelete((snapshot, context) => {
     const { sectorId } = context.params;
 
-    const query = admin
+    const navigationQuery = admin
       .firestore()
       .collection('navigation')
       .doc(sectorId)
       .collection('routes');
+    const layerQuery = admin
+      .firestore()
+      .collection('layers')
+      .doc(sectorId)
+      .collection('layer');
 
-    return new Promise((resolve, reject) =>
-      deleteRoutesBatch(query, resolve, reject)
-    ).catch(
+    return Promise.all([
+      new Promise((resolve, reject) =>
+        deleteBatch(navigationQuery, resolve, reject)
+      ),
+      new Promise((resolve, reject) =>
+        deleteBatch(layerQuery, resolve, reject)
+      ),
+    ]).catch(
       error => new functions.https.HttpsError('unknown', error.message, error)
     );
   });

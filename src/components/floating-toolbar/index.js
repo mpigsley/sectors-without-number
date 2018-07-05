@@ -9,7 +9,8 @@ import {
   isSharedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
-import { getMapLock, getLayers } from 'store/selectors/entity.selectors';
+import { currentSectorLayers } from 'store/selectors/layer.selectors';
+import { getMapLock, getSectorLayers } from 'store/selectors/entity.selectors';
 import { toggleMapLock, toggleLayer } from 'store/actions/entity.actions';
 
 import FloatingToolbar from './floating-toolbar';
@@ -17,7 +18,8 @@ import FloatingToolbar from './floating-toolbar';
 const mapStateToProps = createStructuredSelector({
   sectorId: currentSectorSelector,
   mapLocked: getMapLock,
-  layers: getLayers,
+  layers: currentSectorLayers,
+  sectorLayers: getSectorLayers,
   isShared: isSharedSectorSelector,
   isSaved: isCurrentSectorSaved,
 });

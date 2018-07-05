@@ -36,7 +36,7 @@ export default class SectorMap extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
-    hasLoaded: PropTypes.bool.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     sector: PropTypes.shape({
       rows: PropTypes.number,
@@ -44,7 +44,7 @@ export default class SectorMap extends Component {
     }),
     generateSector: PropTypes.func.isRequired,
     toSafeRoute: PropTypes.func.isRequired,
-    enterGameRoute: PropTypes.func.isRequired,
+    fetchSector: PropTypes.func.isRequired,
     location: PropTypes.shape({
       pathname: PropTypes.string.isRequired,
     }).isRequired,
@@ -74,7 +74,7 @@ export default class SectorMap extends Component {
     ) {
       this.props.toSafeRoute(this.props.match.params.sector);
     } else {
-      this.props.enterGameRoute();
+      this.props.fetchSector();
     }
   }
 
@@ -121,7 +121,7 @@ export default class SectorMap extends Component {
   }
 
   render() {
-    if (!this.props.hasLoaded) {
+    if (this.props.isLoading) {
       return <Loading />;
     } else if (isEmpty(this.props.sector)) {
       return <Error generateSector={this.props.generateSector} />;

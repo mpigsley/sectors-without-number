@@ -20,8 +20,9 @@ import {
 } from 'utils/hex/common';
 
 const getHexSize = ({ width, height, columns, rows, renderSector }) => {
-  const bufferedHeight = height - 2 * PIXEL_BUFFER;
-  const bufferedWidth = width - 2 * PIXEL_BUFFER;
+  const modifiedBuffer = Math.min(PIXEL_BUFFER / (800 / width), PIXEL_BUFFER);
+  const bufferedHeight = height - 2 * modifiedBuffer;
+  const bufferedWidth = width - 2 * modifiedBuffer;
   let scaledWidth = DEFAULT_HEX_WIDTH;
   if (renderSector) {
     const pixelHeight = getHexHeight(bufferedHeight, rows);
@@ -31,8 +32,8 @@ const getHexSize = ({ width, height, columns, rows, renderSector }) => {
   const scaledHeight = toHeight(scaledWidth);
   const totalHeight = getTotalHeight(scaledHeight, rows);
   const totalWidth = getTotalWidth(scaledWidth, columns);
-  const scaledXBuffer = PIXEL_BUFFER + (bufferedWidth - totalWidth) / 2;
-  const scaledYBuffer = PIXEL_BUFFER + (bufferedHeight - totalHeight) / 2;
+  const scaledXBuffer = modifiedBuffer + (bufferedWidth - totalWidth) / 2;
+  const scaledYBuffer = modifiedBuffer + (bufferedHeight - totalHeight) / 2;
   const widthUnit = scaledWidth / 4;
   const heightUnit = scaledHeight / 2;
   return {

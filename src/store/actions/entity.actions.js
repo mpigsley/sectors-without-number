@@ -1,7 +1,6 @@
 import { push } from 'react-router-redux';
 
-import { addBlankNavigationFetch } from 'store/actions/navigation.actions';
-import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
+import { deactivateSidebarEdit } from 'store/actions/sidebar.actions';
 import { releaseSyncLock, entityRelease } from 'store/actions/sector.actions';
 import {
   configurationSelector,
@@ -13,9 +12,6 @@ import {
   holdKeySelector,
   hoverKeySelector,
   sectorSelector,
-  fetchedSectorSelector,
-  userUidSelector,
-  isInitializedSelector,
   syncLockSelector,
   isSharedSectorSelector,
 } from 'store/selectors/base.selectors';
@@ -26,6 +22,8 @@ import {
   getCurrentEntity,
   getCurrentSector,
 } from 'store/selectors/entity.selectors';
+import { currentSectorLayers } from 'store/selectors/layer.selectors';
+import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 
 import {
   generateEntity as generateEntityUtil,
@@ -38,7 +36,7 @@ import {
   deleteEntities,
   SYNC_TOAST_ID,
 } from 'utils/entity';
-import { getSectorEntities, updateEntity } from 'store/api/entity';
+import { updateEntity } from 'store/api/entity';
 import Entities from 'constants/entities';
 import { coordinatesFromKey } from 'utils/common';
 import { removeToastById } from 'utils/toasts';
@@ -52,14 +50,13 @@ import {
   zipObject,
   pickBy,
   size,
-  includes,
 } from 'constants/lodash';
 
-export const FETCHED_SECTOR = 'FETCHED_SECTOR';
-export const UPDATE_ENTITIES = 'UPDATE_ENTITIES';
-export const DELETE_ENTITIES = 'DELETE_ENTITIES';
-export const SAVE_SECTOR = 'SAVE_SECTOR';
-export const UPDATE_ID_MAPPING = 'UPDATE_ID_MAPPING';
+const ACTION_PREFIX = '@@entity';
+export const UPDATED_ENTITIES = `${ACTION_PREFIX}/UPDATED_ENTITIES`;
+export const DELETED_ENTITIES = `${ACTION_PREFIX}/DELETED_ENTITIES`;
+export const SAVED_SECTOR = `${ACTION_PREFIX}/SAVED_SECTOR`;
+export const UPDATED_ID_MAPPING = `${ACTION_PREFIX}/UPDATED_ID_MAPPING`;
 
 const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
   const dispatches = [dispatch(releaseSyncLock())];
@@ -79,32 +76,12 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
     : '';
   return Promise.all([
     ...dispatches,
-    dispatch({ type: UPDATE_ID_MAPPING, mapping }),
+    dispatch({ type: UPDATED_ID_MAPPING, mapping }),
   ]).then(() => {
     const currentSector = currentSectorSelector(state);
     const newSector = mapping[currentSector] || currentSector;
-    dispatch(addBlankNavigationFetch(newSector));
-    dispatch(push(`/sector/${newSector}${entityUrl}`));
+    return dispatch(push(`/sector/${newSector}${entityUrl}`));
   });
-};
-
-export const fetchSectorEntities = sector => (dispatch, getState) => {
-  const state = getState();
-  if (
-    includes(fetchedSectorSelector(state), sector) ||
-    !isInitializedSelector(state)
-  ) {
-    return Promise.resolve();
-  }
-  return getSectorEntities(sector, userUidSelector(state)).then(
-    ({ entities, sectorId, share }) =>
-      dispatch({
-        type: 'FETCHED_SECTOR',
-        entities,
-        sectorId,
-        share,
-      }),
-  );
 };
 
 export const generateEntity = (entity, parameters, intl) => (
@@ -123,7 +100,7 @@ export const generateEntity = (entity, parameters, intl) => (
     parameters,
   });
   dispatch({
-    type: UPDATE_ENTITIES,
+    type: UPDATED_ENTITIES,
     entities,
   });
 
@@ -176,7 +153,7 @@ export const moveTopLevelEntity = intl => (dispatch, getState) => {
   }
   return Promise.all([
     initialSyncToast(state, dispatch, intl),
-    dispatch({ type: UPDATE_ENTITIES, entities }),
+    dispatch({ type: UPDATED_ENTITIES, entities }),
   ]).then(([isInitialSync]) =>
     saveEntities({ state, updated: entities, entities }, intl).then(results =>
       updateHandler(state, dispatch, results, isInitialSync),
@@ -206,7 +183,7 @@ export const deleteEntity = intl => (dispatch, getState) => {
     entities: entitySelector(state),
   });
   dispatch({
-    type: DELETE_ENTITIES,
+    type: DELETED_ENTITIES,
     entities: deleted,
   });
   return deleteEntities({ state, deleted }, intl).then(results =>
@@ -221,7 +198,7 @@ export const saveSector = intl => (dispatch, getState) => {
   }
   return Promise.all([
     initialSyncToast(state, dispatch, intl),
-    dispatch({ type: SAVE_SECTOR }),
+    dispatch({ type: SAVED_SECTOR }),
   ]).then(([isInitialSync]) =>
     saveEntities({ state }, intl).then(results =>
       updateHandler(state, dispatch, results, isInitialSync),
@@ -318,7 +295,7 @@ export const saveEntityEdit = intl => (dispatch, getState) => {
     return Promise.all([
       initialSyncToast(state, dispatch, intl),
       dispatch({
-        type: UPDATE_ENTITIES,
+        type: UPDATED_ENTITIES,
         entities: filteredUpdatedEntities,
       }),
     ]).then(([isInitialSync]) =>
@@ -348,7 +325,7 @@ export const toggleMapLock = () => (dispatch, getState) => {
     return Promise.resolve();
   }
   dispatch({
-    type: UPDATE_ENTITIES,
+    type: UPDATED_ENTITIES,
     entities: {
       [Entities.sector.key]: {
         [sectorId]: {
@@ -369,8 +346,15 @@ export const toggleLayer = layerId => (dispatch, getState) => {
   if (!sectorId || !sector || syncLockSelector(state)) {
     return Promise.resolve();
   }
-  const layers = sector.layers || {};
+
+  const customLayers = currentSectorLayers(state);
+  let layers = sector.layers || {};
   const layerToggle = layers[layerId] !== undefined && !layers[layerId];
+  layers =
+    customLayers[layerId] && layerToggle
+      ? { ...layers, ...mapValues(customLayers, () => false) }
+      : layers;
+
   const sectorUpdate = {
     layers: {
       ...layers,
@@ -378,14 +362,14 @@ export const toggleLayer = layerId => (dispatch, getState) => {
     },
   };
   dispatch({
-    type: UPDATE_ENTITIES,
+    type: UPDATED_ENTITIES,
     entities: {
       [Entities.sector.key]: {
         [sectorId]: sectorUpdate,
       },
     },
   });
-  if (isSharedSectorSelector(state)) {
+  if (isSharedSectorSelector(state) || !isCurrentSectorSaved(state)) {
     return Promise.resolve(dispatch(releaseSyncLock()));
   }
   return updateEntity(sectorId, Entities.sector.key, sectorUpdate).then(() =>

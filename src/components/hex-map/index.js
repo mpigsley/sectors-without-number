@@ -12,12 +12,14 @@ import {
   topLevelEntityCreate,
 } from 'store/actions/sector.actions';
 import { moveTopLevelEntity } from 'store/actions/entity.actions';
-import { deactivateSidebarEdit } from 'store/actions/sidebar-edit.actions';
+import { deactivateSidebarEdit } from 'store/actions/sidebar.actions';
 import {
   addRouteLocation,
   completeRoute,
   updateNavSettings,
 } from 'store/actions/navigation.actions';
+import { toggleRegionAtHex } from 'store/actions/layer.actions';
+
 import { getCurrentNavigationWithSettings } from 'store/selectors/navigation.selectors';
 import {
   holdKeySelector,
@@ -27,13 +29,18 @@ import {
   navigationSettingsSelector,
   currentEntityTypeSelector,
   routeLocatorSelector,
+  layerRegionPaintSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
   getActiveEntityKey,
   getMapLock,
-  getLayers,
+  getSectorLayers,
 } from 'store/selectors/entity.selectors';
+import {
+  currentPaintRegion,
+  visibleLayerHexColors,
+} from 'store/selectors/layer.selectors';
 import HexMap from './hex-map';
 
 const mapStateToProps = createStructuredSelector({
@@ -45,10 +52,13 @@ const mapStateToProps = createStructuredSelector({
   isShared: isSharedSectorSelector,
   isSidebarEditActive: isSidebarEditActiveSelector,
   mapLocked: getMapLock,
-  layers: getLayers,
+  sectorLayers: getSectorLayers,
   navigationSettings: navigationSettingsSelector,
   navigationRoutes: getCurrentNavigationWithSettings,
   routeLocator: routeLocatorSelector,
+  paintRegion: currentPaintRegion,
+  paintRegionId: layerRegionPaintSelector,
+  layerHexes: visibleLayerHexColors,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
@@ -62,6 +72,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   addRouteLocation: key => dispatch(addRouteLocation(key)),
   completeRoute: () => dispatch(completeRoute(props.intl)),
   updateNavSettings: (key, value) => dispatch(updateNavSettings(key, value)),
+  toggleRegionAtHex: hexKey => dispatch(toggleRegionAtHex(hexKey)),
   toEntity: (entityType, entityId) => {
     const route = `/sector/${
       props.match.params.sector
@@ -73,5 +84,10 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  withRouter(connect(mapStateToProps, mapDispatchToProps)(HexMap)),
+  withRouter(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps,
+    )(HexMap),
+  ),
 );

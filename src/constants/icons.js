@@ -1,8 +1,10 @@
+import Check from 'react-feather/dist/icons/check';
 import ChevronDown from 'react-feather/dist/icons/chevron-down';
 import ChevronRight from 'react-feather/dist/icons/chevron-right';
 import ChevronUp from 'react-feather/dist/icons/chevron-up';
 import Crosshair from 'react-feather/dist/icons/crosshair';
 import Edit2 from 'react-feather/dist/icons/edit-2';
+import Edit3 from 'react-feather/dist/icons/edit-3';
 import EyeOff from 'react-feather/dist/icons/eye-off';
 import Grid from 'react-feather/dist/icons/grid';
 import HelpCircle from 'react-feather/dist/icons/help-circle';
@@ -12,6 +14,7 @@ import List from 'react-feather/dist/icons/list';
 import Lock from 'react-feather/dist/icons/lock';
 import LogIn from 'react-feather/dist/icons/log-in';
 import LogOut from 'react-feather/dist/icons/log-out';
+import MoreHorizontal from 'react-feather/dist/icons/more-horizontal';
 import Plus from 'react-feather/dist/icons/plus';
 import RefreshCw from 'react-feather/dist/icons/refresh-cw';
 import RotateCcw from 'react-feather/dist/icons/rotate-ccw';
@@ -22,11 +25,13 @@ import X from 'react-feather/dist/icons/x';
 import Zap from 'react-feather/dist/icons/zap';
 
 export {
+  Check,
   ChevronDown,
   ChevronRight,
   ChevronUp,
   Crosshair,
   Edit2,
+  Edit3,
   EyeOff,
   Grid,
   HelpCircle,
@@ -36,6 +41,7 @@ export {
   Lock,
   LogIn,
   LogOut,
+  MoreHorizontal,
   Plus,
   RefreshCw,
   RotateCcw,

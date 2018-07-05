@@ -24,16 +24,16 @@ import {
   isNumber,
 } from 'constants/lodash';
 
-export const ACTIVATE_SIDEBAR_EDIT = 'ACTIVATE_SIDEBAR_EDIT';
-export const DEACTIVATE_SIDEBAR_EDIT = 'DEACTIVATE_SIDEBAR_EDIT';
+const ACTION_PREFIX = '@@sidebar';
+export const ACTIVATED_EDIT = `${ACTION_PREFIX}/ACTIVATED_EDIT`;
+export const DEACTIVATED_EDIT = `${ACTION_PREFIX}/DEACTIVATED_EDIT`;
+export const UPDATED_ENTITY_IN_EDIT = `${ACTION_PREFIX}/UPDATED_ENTITY_IN_EDIT`;
+export const DELETED_CHILD_IN_EDIT = `${ACTION_PREFIX}/DELETED_CHILD_IN_EDIT`;
+export const UNDO_DELETE_CHILD_IN_EDIT = `${ACTION_PREFIX}/UNDO_DELETE_CHILD_IN_EDIT`;
+export const UPDATED_CHILD_IN_EDIT = `${ACTION_PREFIX}/UPDATED_CHILD_IN_EDIT`;
+export const CREATED_CHILD_IN_EDIT = `${ACTION_PREFIX}/CREATED_CHILD_IN_EDIT`;
 
-export const UPDATE_ENTITY_IN_EDIT = 'UPDATE_ENTITY_IN_EDIT';
-export const DELETE_CHILD_IN_EDIT = 'DELETE_CHILD_IN_EDIT';
-export const UNDO_DELETE_CHILD_IN_EDIT = 'UNDO_DELETE_CHILD_IN_EDIT';
-export const UPDATE_CHILD_IN_EDIT = 'UPDATE_CHILD_IN_EDIT';
-export const CREATE_CHILD_IN_EDIT = 'CREATE_CHILD_IN_EDIT';
-
-export const deactivateSidebarEdit = () => ({ type: DEACTIVATE_SIDEBAR_EDIT });
+export const deactivateSidebarEdit = () => ({ type: DEACTIVATED_EDIT });
 export const activateSidebarEdit = () => (dispatch, getState) => {
   const state = getState();
   if (syncLockSelector(state)) {
@@ -42,7 +42,7 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
   const entity = getCurrentEntity(state);
   const childrenByType = getCurrentEntityChildren(state);
   return dispatch({
-    type: ACTIVATE_SIDEBAR_EDIT,
+    type: ACTIVATED_EDIT,
     entity: omitBy(
       {
         name: entity.name,
@@ -113,7 +113,7 @@ export const updateEntityInEdit = changes => (dispatch, getState) => {
   };
 
   return dispatch({
-    type: UPDATE_ENTITY_IN_EDIT,
+    type: UPDATED_ENTITY_IN_EDIT,
     entityId,
     entityType,
     updates,
@@ -121,11 +121,11 @@ export const updateEntityInEdit = changes => (dispatch, getState) => {
 };
 
 export const deleteChildInEdit = (entityType, entityId) =>
-  syncLock(DELETE_CHILD_IN_EDIT, { entityType, entityId });
+  syncLock(DELETED_CHILD_IN_EDIT, { entityType, entityId });
 export const undoDeleteChildInEdit = (entityType, entityId) =>
   syncLock(UNDO_DELETE_CHILD_IN_EDIT, { entityType, entityId });
 export const updateChildInEdit = (entityType, entityId, updates) =>
-  syncLock(UPDATE_CHILD_IN_EDIT, { entityType, entityId, updates });
+  syncLock(UPDATED_CHILD_IN_EDIT, { entityType, entityId, updates });
 
 export const createChildInEdit = entityType => (dispatch, getState) => {
   const state = getState();
@@ -134,7 +134,7 @@ export const createChildInEdit = entityType => (dispatch, getState) => {
   }
   const entityChildren = sidebarEditChildrenSelector(state)[entityType];
   return dispatch({
-    type: CREATE_CHILD_IN_EDIT,
+    type: CREATED_CHILD_IN_EDIT,
     entityType,
     entityId: createId(),
     entity: {

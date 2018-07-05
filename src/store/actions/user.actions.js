@@ -24,28 +24,23 @@ import { getSyncedSectors, uploadEntities } from 'store/api/entity';
 import Locale from 'constants/locale';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 
-export const OPEN_LOGIN_MODAL = 'OPEN_LOGIN_MODAL';
-export const CLOSE_LOGIN_MODAL = 'CLOSE_LOGIN_MODAL';
-export const OPEN_EDIT_MODAL = 'OPEN_EDIT_MODAL';
-export const CLOSE_EDIT_MODAL = 'CLOSE_EDIT_MODAL';
-export const OPEN_USER_DROPDOWN = 'OPEN_USER_DROPDOWN';
-export const CLOSE_USER_DROPDOWN = 'CLOSE_USER_DROPDOWN';
-export const CLOSE_SYNC_MODAL = 'CLOSE_SYNC_MODAL';
+const ACTION_PREFIX = '@@user';
+export const OPENED_LOGIN_MODAL = `${ACTION_PREFIX}/OPENED_LOGIN_MODAL`;
+export const CLOSED_LOGIN_MODAL = `${ACTION_PREFIX}/CLOSED_LOGIN_MODAL`;
+export const OPENED_EDIT_MODAL = `${ACTION_PREFIX}/OPENED_EDIT_MODAL`;
+export const CLOSED_EDIT_MODAL = `${ACTION_PREFIX}/CLOSED_EDIT_MODAL`;
+export const CLOSED_SYNC_MODAL = `${ACTION_PREFIX}/CLOSED_SYNC_MODAL`;
+export const UPDATED_USER_FORM = `${ACTION_PREFIX}/UPDATED_USER_FORM`;
+export const UPDATED_USER = `${ACTION_PREFIX}/UPDATED_USER`;
+export const LOGGED_IN = `${ACTION_PREFIX}/LOGGED_IN`;
+export const LOGGED_OUT = `${ACTION_PREFIX}/LOGGED_OUT`;
+export const AUTH_FAILURE = `${ACTION_PREFIX}/AUTH_FAILURE`;
 
-export const UPDATED_USER_FORM = 'UPDATED_USER_FORM';
-export const UPDATE_USER = 'UPDATE_USER';
-export const LOGGED_IN = 'LOGGED_IN';
-export const LOGGED_OUT = 'LOGGED_OUT';
-export const INITIALIZE = 'INITIALIZE';
-export const AUTH_FAILURE = 'AUTH_FAILURE';
-
-export const openEditModal = () => ({ type: OPEN_EDIT_MODAL });
-export const closeEditModal = () => ({ type: CLOSE_EDIT_MODAL });
-export const openLoginModal = () => ({ type: OPEN_LOGIN_MODAL });
-export const closeLoginModal = () => ({ type: CLOSE_LOGIN_MODAL });
-export const openUserDropdown = () => ({ type: OPEN_USER_DROPDOWN });
-export const closeUserDropdown = () => ({ type: CLOSE_USER_DROPDOWN });
-export const closeSyncModal = () => ({ type: CLOSE_SYNC_MODAL });
+export const openEditModal = () => ({ type: OPENED_EDIT_MODAL });
+export const closeEditModal = () => ({ type: CLOSED_EDIT_MODAL });
+export const openLoginModal = () => ({ type: OPENED_LOGIN_MODAL });
+export const closeLoginModal = () => ({ type: CLOSED_LOGIN_MODAL });
+export const closeSyncModal = () => ({ type: CLOSED_SYNC_MODAL });
 export const updateUserForm = (key, value) => ({
   type: UPDATED_USER_FORM,
   key,
@@ -168,7 +163,7 @@ export const updateUser = intl => (dispatch, getState) => {
         window.location.reload();
       } else {
         dispatch({
-          type: UPDATE_USER,
+          type: UPDATED_USER,
           user: filteredForm,
         });
       }
