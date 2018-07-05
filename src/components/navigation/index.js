@@ -10,6 +10,7 @@ import {
 import {
   userUidSelector,
   currentSectorSelector,
+  lastOverviewEntitySelector,
 } from 'store/selectors/base.selectors';
 
 import Navigation from './navigation';
@@ -17,6 +18,7 @@ import Navigation from './navigation';
 const mapStateToProps = state => ({
   isLoggedIn: !!userUidSelector(state),
   currentSector: currentSectorSelector(state),
+  lastOverviewEntity: lastOverviewEntitySelector(state),
 });
 
 const mapDispatchTopProps = (dispatch, props) => ({
@@ -26,5 +28,10 @@ const mapDispatchTopProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  withRouter(connect(mapStateToProps, mapDispatchTopProps)(Navigation)),
+  withRouter(
+    connect(
+      mapStateToProps,
+      mapDispatchTopProps,
+    )(Navigation),
+  ),
 );
