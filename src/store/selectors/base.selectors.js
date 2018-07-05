@@ -2,7 +2,6 @@
 export const userModelSelector = state => state.user.model;
 export const userModelLocaleSelector = state =>
   (state.user.model || {}).locale || 'en';
-export const isDropdownActiveSelector = state => state.user.isDropdownActive;
 export const isUserEditModalOpenSelector = state => state.user.isEditModalOpen;
 export const isSyncModalOpenSelector = state => state.user.isSyncModalOpen;
 export const isInitializedSelector = state => state.user.isInitialized;

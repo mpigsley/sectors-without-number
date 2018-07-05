@@ -29,8 +29,6 @@ export const OPENED_LOGIN_MODAL = `${ACTION_PREFIX}/OPENED_LOGIN_MODAL`;
 export const CLOSED_LOGIN_MODAL = `${ACTION_PREFIX}/CLOSED_LOGIN_MODAL`;
 export const OPENED_EDIT_MODAL = `${ACTION_PREFIX}/OPENED_EDIT_MODAL`;
 export const CLOSED_EDIT_MODAL = `${ACTION_PREFIX}/CLOSED_EDIT_MODAL`;
-export const OPENED_USER_DROPDOWN = `${ACTION_PREFIX}/OPENED_USER_DROPDOWN`;
-export const CLOSED_USER_DROPDOWN = `${ACTION_PREFIX}/CLOSED_USER_DROPDOWN`;
 export const CLOSED_SYNC_MODAL = `${ACTION_PREFIX}/CLOSED_SYNC_MODAL`;
 export const UPDATED_USER_FORM = `${ACTION_PREFIX}/UPDATED_USER_FORM`;
 export const UPDATED_USER = `${ACTION_PREFIX}/UPDATED_USER`;
@@ -42,8 +40,6 @@ export const openEditModal = () => ({ type: OPENED_EDIT_MODAL });
 export const closeEditModal = () => ({ type: CLOSED_EDIT_MODAL });
 export const openLoginModal = () => ({ type: OPENED_LOGIN_MODAL });
 export const closeLoginModal = () => ({ type: CLOSED_LOGIN_MODAL });
-export const openUserDropdown = () => ({ type: OPENED_USER_DROPDOWN });
-export const closeUserDropdown = () => ({ type: CLOSED_USER_DROPDOWN });
 export const closeSyncModal = () => ({ type: CLOSED_SYNC_MODAL });
 export const updateUserForm = (key, value) => ({
   type: UPDATED_USER_FORM,

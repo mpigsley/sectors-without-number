@@ -1,18 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { FormattedMessage } from 'react-intl';
 
 import HexMap from 'components/hex-map';
-import AccountManager from 'components/account-manager';
 import AbsoluteContainer from 'primitives/container/absolute-container';
+import Button from 'primitives/other/button';
 
 import hexGenerator from 'utils/hex/generator';
 import { debounce } from 'constants/lodash';
 
+import './style.css';
+
 export default class HexBackground extends Component {
   static propTypes = {
     children: PropTypes.node.isRequired,
-    closeUserDropdown: PropTypes.func.isRequired,
-    isDropdownActive: PropTypes.bool.isRequired,
+    openLoginModal: PropTypes.func.isRequired,
+    isInitialized: PropTypes.bool.isRequired,
+    uid: PropTypes.string,
+  };
+
+  static defaultProps = {
+    uid: null,
   };
 
   state = {
@@ -35,6 +43,20 @@ export default class HexBackground extends Component {
     });
   }, 100);
 
+  renderLoginButton = () => {
+    if (!this.props.isInitialized || this.props.uid) {
+      return null;
+    }
+    return (
+      <Button
+        className="HexBackground-Login"
+        onClick={this.props.openLoginModal}
+      >
+        <FormattedMessage id="misc.logIn" />
+      </Button>
+    );
+  };
+
   render() {
     const { hexes } = hexGenerator({
       renderSector: false,
@@ -42,23 +64,18 @@ export default class HexBackground extends Component {
       height: this.state.height,
     });
 
-    let { closeUserDropdown } = this.props;
-    if (!this.props.isDropdownActive) {
-      closeUserDropdown = null;
-    }
-
     return (
-      <div onClick={closeUserDropdown}>
+      <Fragment>
         <HexMap
           width={this.state.width}
           height={this.state.height}
           hexes={hexes}
         />
         <AbsoluteContainer>
-          <AccountManager />
+          {this.renderLoginButton()}
           {this.props.children}
         </AbsoluteContainer>
-      </div>
+      </Fragment>
     );
   }
 }

@@ -8,8 +8,6 @@ import {
   LOGGED_IN,
   LOGGED_OUT,
   AUTH_FAILURE,
-  OPENED_USER_DROPDOWN,
-  CLOSED_USER_DROPDOWN,
   CLOSED_SYNC_MODAL,
 } from 'store/actions/user.actions';
 import { INITIALIZED } from 'store/actions/combined.actions';
@@ -24,7 +22,6 @@ const initialForm = () => ({
 });
 export const initialState = {
   isInitialized: false,
-  isDropdownActive: false,
   isLoginModalOpen: false,
   isSyncModalOpen: false,
   isEditModalOpen: false,
@@ -54,7 +51,7 @@ export default function user(state = initialState, action) {
     case CLOSED_LOGIN_MODAL:
       return { ...state, isLoginModalOpen: false, error: null };
     case OPENED_EDIT_MODAL:
-      return { ...state, isEditModalOpen: true, isDropdownActive: false };
+      return { ...state, isEditModalOpen: true };
     case CLOSED_EDIT_MODAL:
       return { ...state, isEditModalOpen: false, error: null };
     case UPDATED_USER_FORM:
@@ -93,14 +90,9 @@ export default function user(state = initialState, action) {
         model: null,
         form: initialForm(),
         isLoginModalOpen: false,
-        isDropdownActive: false,
       };
     case CLOSED_SYNC_MODAL:
       return { ...state, isSyncModalOpen: false };
-    case OPENED_USER_DROPDOWN:
-      return { ...state, isDropdownActive: true };
-    case CLOSED_USER_DROPDOWN:
-      return { ...state, isDropdownActive: false };
     case AUTH_FAILURE:
       return {
         ...state,
