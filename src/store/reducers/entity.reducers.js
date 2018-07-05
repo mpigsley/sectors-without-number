@@ -32,6 +32,7 @@ const initialState = {
   currentSector: null,
   currentEntityType: null,
   currentEntity: null,
+  lastOverviewEntity: null,
 };
 
 export default function entity(state = initialState, action) {
@@ -65,16 +66,21 @@ export default function entity(state = initialState, action) {
       };
     case LOCATION_CHANGE: {
       const { pathname } = action.payload;
-      const isGameView =
-        pathname.startsWith('/sector/') || pathname.startsWith('/overview/');
+      const isOverview = pathname.startsWith('/overview/');
+      const isGameView = pathname.startsWith('/sector/') || isOverview;
       const currentSector = isGameView ? pathname.split('/')[2] : null;
       const uniqSectors = uniq([...state.saved, currentSector]).filter(s => s);
+      const currentEntityType = isGameView ? pathname.split('/')[3] : null;
       return {
         ...state,
         currentSector,
+        currentEntityType,
+        lastOverviewEntity:
+          isOverview && currentEntityType
+            ? currentEntityType
+            : state.lastOverviewEntity,
         share:
           isGameView && includes(uniqSectors, state.share) ? state.share : null,
-        currentEntityType: isGameView ? pathname.split('/')[3] : null,
         currentEntity: isGameView ? pathname.split('/')[4] : null,
         models: mapValues(state.models, (entities, entityType) => {
           if (entityType === Entities.sector.key) {

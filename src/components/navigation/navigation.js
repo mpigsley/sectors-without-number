@@ -17,6 +17,7 @@ export default function Navigation({
   isLoggedIn,
   currentSector,
   location,
+  lastOverviewEntity,
 }) {
   let userButton;
   let logoutButton = null;
@@ -95,7 +96,9 @@ export default function Navigation({
           className={classNames('Navigation-Link', {
             'Navigation-Link--active': route === 'overview',
           })}
-          to={`/overview/${currentSector}`}
+          to={`/overview/${currentSector}${
+            lastOverviewEntity ? `/${lastOverviewEntity}` : ''
+          }`}
         >
           <FlexContainer align="center">
             <List size="25" className="Navigation-Icon" />
@@ -119,8 +122,10 @@ Navigation.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
+  lastOverviewEntity: PropTypes.string,
 };
 
 Navigation.defaultProps = {
   currentSector: '',
+  lastOverviewEntity: null,
 };
