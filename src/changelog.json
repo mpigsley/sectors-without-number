@@ -1,4 +1,9 @@
 {
+  "6.1.0": {
+    "description":
+      "When navigating back to the overview lists, start at last viewed location.",
+    "date": "7-5-2018"
+  },
   "6.0.0": {
     "description": "Adds custom hex layers.",
     "date": "7-5-2018",
