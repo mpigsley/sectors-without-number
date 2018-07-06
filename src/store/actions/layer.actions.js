@@ -162,7 +162,7 @@ export const removeRegion = (regionId, intl) => (dispatch, getState) => {
     pickBy(current.hexes, ({ regions }) => includes(regions, regionId)),
     hex => ({
       ...hex,
-      regions: omit(hex.regions, regionId),
+      regions: hex.regions.filter(reg => reg !== regionId),
     }),
   );
   const deletedHexIds = keys(
