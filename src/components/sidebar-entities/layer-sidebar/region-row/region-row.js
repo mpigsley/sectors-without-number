@@ -131,12 +131,16 @@ export default function RegionRow({
     <FlexContainer className="RegionRow" align="center">
       {paintIcon}
       <span
-        data-color
+        {...(isShared ? {} : { 'data-color': true })}
         style={{ backgroundColor: region.color }}
         onClick={() =>
-          colorPicker !== regionId ? openColorPicker(regionId) : undefined
+          colorPicker !== regionId && !isShared
+            ? openColorPicker(regionId)
+            : undefined
         }
-        className="RegionRow-Color"
+        className={classNames('RegionRow-Color', {
+          'RegionRow-Color--hoverable': !isShared,
+        })}
       />
       <Header
         type={HeaderType.header4}

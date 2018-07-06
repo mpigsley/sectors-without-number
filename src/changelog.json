@@ -1,4 +1,8 @@
 {
+  "6.2.1": {
+    "description": "Don't allow players to change region colors.",
+    "date": "7-6-2018"
+  },
   "6.2.0": {
     "description":
       "Add option in the floating toolbar to toggle between player/game master views.",
