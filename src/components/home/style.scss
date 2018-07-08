@@ -1,78 +1,18 @@
 @import 'styles/theme';
 
-.Home-RowContainer {
-  flex: 1;
+.Home-Header {
+  height: 100vh;
 }
 
-.Home-Row {
-  height: 1px;
-  margin: 0 10%;
-  border: none;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
-
-  &--left {
-    background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
-  }
+.Home-MainHeader {
+  color: $cyber;
+  font-family: 'KillTheNoise', sans-serif !important;
+  font-size: 8rem;
+  font-weight: 200;
 }
 
-.Home-Saved {
-  margin-top: 1rem;
-  margin-bottom: 1.8rem;
-}
-
-.Home-SavedTitleContainer {
-  padding-right: 1.5rem;
-}
-
-.Home-SavedTitle {
-  margin-bottom: 0.2rem;
-}
-
-.Home-SavedList {
-  border-left: solid 1px $light1;
-  list-style: none;
-  margin-bottom: 0;
-  margin-top: 0;
-  padding: 0;
-  padding-left: 1.5rem;
-}
-
-.Home-SavedName {
-  color: $light3;
-  font-weight: 500;
-  font-size: 1.1rem;
-  margin: 0 0.5rem;
-}
-
-.Home-SavedSecondary {
-  color: $light1;
-  font-size: 0.9rem;
-  text-align: right;
-}
-
-@media (max-width: 700px) {
-  .Home-Row {
-    display: none;
-  }
-
-  .Home-Saved {
-    flex-direction: column;
-  }
-
-  .Home-SavedTitleContainer {
-    align-items: center;
-    padding: 0;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid $light1;
-  }
-
-  .Home-SavedList {
-    border-left: 0;
-    padding: 0;
-  }
-
-  .Home-SavedSecondary {
-    text-align: center;
-  }
+.Home-SubHeader {
+  font-size: 4rem;
+  font-style: italic;
+  font-weight: bold;
 }

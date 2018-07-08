@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 
-import Loading from 'primitives/other/loading';
+import Loading from 'primitives/regions/loading';
 import HexMap from 'components/hex-map';
 
 import hexGenerator from 'utils/hex/generator';

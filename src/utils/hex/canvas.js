@@ -2,61 +2,15 @@ import tinycolor from 'tinycolor2';
 
 import { forEach, find, values, includes, uniq, keys } from 'constants/lodash';
 import { getTopLevelEntity } from 'utils/entity';
+import { distanceBetween } from 'utils/canvas-helpers';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
-import { HEX_PADDING, TARGET_COLOR_WIDTH } from 'constants/defaults';
+import { TARGET_COLOR_WIDTH } from 'constants/defaults';
 
 const NAVIGATION_WIDTHS = {
   thin: 1,
   normal: 2.5,
   wide: 5,
-};
-
-const getHexBoundingBox = ({ height, width, xOffset, yOffset }) => ({
-  x1: xOffset - (width + HEX_PADDING) / 2,
-  x2: xOffset + (width + HEX_PADDING) / 2,
-  y1: yOffset - (height + HEX_PADDING) / 2,
-  y2: yOffset + (height + HEX_PADDING) / 2,
-});
-const distanceBetween = (a, b) =>
-  Math.sqrt((a.x - b.x) ** 2 + (a.y - b.y) ** 2);
-const isWithin = ({ x, y }, { x1, x2, y1, y2 }) =>
-  x >= x1 && x <= x2 && y >= y1 && y <= y2;
-export const getHoveredHex = ({ x, y, hexes }) => {
-  const containedInBoundingBox = hexes.filter(
-    hex => isWithin({ x, y }, getHexBoundingBox(hex)) && hex.highlighted,
-  );
-  if (!containedInBoundingBox.length) {
-    return undefined;
-  } else if (containedInBoundingBox.length === 1) {
-    return containedInBoundingBox[0].hexKey;
-  }
-  return containedInBoundingBox.reduce(
-    (minVal, hex) => {
-      const distance = distanceBetween(
-        { x, y },
-        { x: hex.xOffset, y: hex.yOffset },
-      );
-      return distance < minVal.distance
-        ? { hexKey: hex.hexKey, distance }
-        : minVal;
-    },
-    { distance: Number.MAX_SAFE_INTEGER },
-  ).hexKey;
-};
-
-export const getPixelRatio = () => {
-  const canvas = document.createElement('canvas');
-  const ctx = canvas.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  const bsr =
-    ctx.webkitBackingStorePixelRatio ||
-    ctx.mozBackingStorePixelRatio ||
-    ctx.msBackingStorePixelRatio ||
-    ctx.oBackingStorePixelRatio ||
-    ctx.backingStorePixelRatio ||
-    1;
-  return dpr / bsr;
 };
 
 const ARROW_SIZE = 10;
@@ -74,6 +28,15 @@ const drawArrowhead = (ctx, radians, x, y, ratio, isForward) => {
   ctx.closePath();
   ctx.restore();
   ctx.fill();
+};
+
+const COLORS = {
+  DARK4: '#091833',
+  DARK3: '#13223D',
+  DARK2: '#1D2C47',
+  DARK1: '#133e7c',
+  PRIMARY: '#863c4e',
+  PRIMARY_ALT: '#792f41',
 };
 
 export default ({
@@ -96,7 +59,7 @@ export default ({
   ctx.clearRect(0, 0, width * ratio, height * ratio);
 
   const step = 2 * ratio;
-  ctx.strokeStyle = '#283647';
+  ctx.strokeStyle = COLORS.DARK3;
   ctx.lineWidth = 2 * ratio;
 
   const hexEntities = hexes
@@ -132,18 +95,18 @@ export default ({
       rest.forEach(({ x, y }) => {
         ctx.lineTo(x, y);
       });
-      ctx.fillStyle = '#233142';
+      ctx.fillStyle = COLORS.DARK4;
       if (highlighted) {
-        ctx.fillStyle = '#303e4f';
+        ctx.fillStyle = COLORS.DARK2;
       }
       if (hoverKey === hexKey) {
-        ctx.fillStyle = '#863c4e';
+        ctx.fillStyle = COLORS.PRIMARY;
       }
       if (activeKey === hexKey) {
-        ctx.fillStyle = '#792f41';
+        ctx.fillStyle = COLORS.PRIMARY_ALT;
       }
       if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
-        ctx.fillStyle = '#637182';
+        ctx.fillStyle = COLORS.DARK1;
       }
       if (
         includes(keys(layerHexes), hexKey) ||
@@ -197,7 +160,7 @@ export default ({
         }
       }
       if (newRoute && includes(newRoute.route, hexKey)) {
-        ctx.fillStyle = '#637182';
+        ctx.fillStyle = COLORS.DARK1;
       }
       ctx.stroke();
       ctx.fill();
@@ -290,7 +253,7 @@ export default ({
 
   hexEntities.filter(hex => hex.highlighted).forEach(hex => {
     // Draw Text
-    ctx.font = `${9 * ratio}px Raleway,sans-serif`;
+    ctx.font = `${9 * ratio}px Titillium Web,sans-serif`;
     ctx.fillStyle = includes(hexesWithDarkText, hex.hexKey)
       ? '#000000'
       : '#b2b2b2';

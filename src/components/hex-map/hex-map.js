@@ -10,7 +10,8 @@ import FloatingToolbar from 'components/floating-toolbar';
 import { delay } from 'constants/lodash';
 import Entities from 'constants/entities';
 import { getTopLevelEntity } from 'utils/entity';
-import hexCanvas, { getPixelRatio, getHoveredHex } from 'utils/hex/canvas';
+import hexCanvas from 'utils/hex/canvas';
+import { getPixelRatio, getHoveredHex } from 'utils/canvas-helpers';
 
 import './style.css';
 
@@ -68,13 +69,16 @@ export default class HexMap extends Component {
     paintRegionId: null,
   };
 
-  componentWillMount() {
+  constructor(props) {
+    super(props);
+
     this.ratio = getPixelRatio();
     this.isMouseDown = false;
+    this.canvas = React.createRef();
   }
 
   componentDidMount() {
-    this.ctx = this.canvas.getContext('2d');
+    this.ctx = this.canvas.current.getContext('2d');
     hexCanvas({
       ctx: this.ctx,
       ratio: this.ratio,
@@ -244,9 +248,7 @@ export default class HexMap extends Component {
             width: this.props.width,
             height: this.props.height,
           }}
-          ref={canvas => {
-            this.canvas = canvas;
-          }}
+          ref={this.canvas}
           onMouseMove={this.mouseMove}
           onMouseDown={this.mouseDown}
           onMouseUp={this.mouseUp}
