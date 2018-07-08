@@ -8,7 +8,6 @@ import {
   LOGGED_IN,
   LOGGED_OUT,
   AUTH_FAILURE,
-  CLOSED_SYNC_MODAL,
 } from 'store/actions/user.actions';
 import { INITIALIZED } from 'store/actions/combined.actions';
 import englishLocale from 'lang/en';
@@ -23,7 +22,6 @@ const initialForm = () => ({
 export const initialState = {
   isInitialized: false,
   isLoginModalOpen: false,
-  isSyncModalOpen: false,
   isEditModalOpen: false,
   error: null,
   model: null,
@@ -77,7 +75,6 @@ export default function user(state = initialState, action) {
         ...state,
         model: action.user,
         isLoginModalOpen: false,
-        isSyncModalOpen: action.didSyncLocal,
         form: {
           ...state.form,
           displayName: (action.user || {}).displayName || '',
@@ -91,8 +88,6 @@ export default function user(state = initialState, action) {
         form: initialForm(),
         isLoginModalOpen: false,
       };
-    case CLOSED_SYNC_MODAL:
-      return { ...state, isSyncModalOpen: false };
     case AUTH_FAILURE:
       return {
         ...state,
