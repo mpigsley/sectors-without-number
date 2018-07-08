@@ -1,7 +1,55 @@
 @import 'styles/theme';
 
+$bg-color: $dark4;
+$txt-color: $cyber;
+$color-c1: #00b8ff;
+$color-c2: #001eff;
+
+$offset-c1: 3;
+$offset-c2: 4;
+
+$lay-c1: 3;
+$lay-c2: 4;
+
 .Home-Header {
+  align-items: center;
+  display: flex;
   height: 100vh;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  z-index: 1;
+
+  &:before {
+    position: absolute;
+    z-index: 999999;
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    animation: bg-move 2s linear infinite;
+    background-size: 100% 8px;
+    background-image: linear-gradient(
+      0,
+      rgba(255, 255, 255, 0.05) 10%,
+      transparent 10%,
+      transparent 50%,
+      rgba(255, 255, 255, 0.05) 50%,
+      rgba(255, 255, 255, 0.05) 60%,
+      transparent 60%,
+      transparent
+    );
+  }
+}
+
+.Home-Glitch {
+  animation: text-bag 4s linear infinite;
+  cursor: default;
+  display: block;
+  transform: skewX(0deg) scaleY(1);
+  z-index: 9;
 }
 
 .Home-MainHeader {
@@ -15,4 +63,89 @@
   font-size: 4rem;
   font-style: italic;
   font-weight: bold;
+}
+
+.Home-MainHeader {
+  display: block;
+  position: relative;
+
+  &:before,
+  &:after {
+    display: block;
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    color: $txt-color;
+    background: $bg-color;
+    overflow: hidden;
+    clip: rect(0, 900px, 0, 0);
+  }
+  &:before {
+    left: -(#{$offset-c2}px);
+    text-shadow: #{$lay-c2}px 0 $color-c2;
+    animation: c2 1s infinite linear alternate-reverse;
+  }
+  &:after {
+    left: #{$offset-c1}px;
+    text-shadow: -(#{$lay-c1}px) 0 $color-c1;
+    animation: c1 2s infinite linear alternate-reverse;
+  }
+}
+
+@function randomVal($val) {
+  @return floor(random($val));
+}
+
+@keyframes c1 {
+  @for $i from 0 through 20 {
+    #{$i * (1 / 20) * 10 * 10%} {
+      clip: rect(#{randomVal(100)}px, 9999px, #{randomVal(100)}px, 0);
+    }
+  }
+}
+
+@keyframes c2 {
+  @for $i from 0 through 20 {
+    #{$i * (1 / 20) * 10 * 10%} {
+      clip: rect(#{randomVal(100)}px, 9999px, #{randomVal(100)}px, 0);
+    }
+  }
+  23% {
+    transform: scaleX(0.8);
+  }
+}
+
+@keyframes text-bag {
+  @for $i from 0 through 50 {
+    #{$i * (1 / 50) * 10 * 10%} {
+      transform: translate(#{randomVal(5)}px, #{randomVal(5)}px);
+    }
+  }
+  1% {
+    transform: scaleY(1) skewX(0deg);
+  }
+  1.5% {
+    transform: scaleY(3) skewX(-60deg);
+  }
+  2% {
+    transform: scaleY(1) skewX(0deg);
+  }
+  51% {
+    transform: scaleX(1) scaleY(1) skewX(0deg);
+  }
+  52% {
+    transform: scaleX(1.5) scaleY(0.2) skewX(80deg);
+  }
+  53% {
+    transform: scaleX(1) scaleY(1) skewX(0deg);
+  }
+}
+
+@keyframes bg-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 -32px;
+  }
 }
