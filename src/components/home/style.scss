@@ -1,3 +1,4 @@
+@import 'styles/utilities';
 @import 'styles/theme';
 
 $bg-color: $dark4;
@@ -55,12 +56,13 @@ $lay-c2: 4;
 .Home-MainHeader {
   color: $cyber;
   font-family: 'KillTheNoise', sans-serif !important;
-  font-size: 8rem;
+  font-size: variableSize(46, 150);
   font-weight: 200;
+  line-height: variableSize(8, 90);
 }
 
 .Home-SubHeader {
-  font-size: 4rem;
+  font-size: variableSize(26, 72);
   font-style: italic;
   font-weight: bold;
 }
@@ -90,10 +92,6 @@ $lay-c2: 4;
     text-shadow: -(#{$lay-c1}px) 0 $color-c1;
     animation: c1 2s infinite linear alternate-reverse;
   }
-}
-
-@function randomVal($val) {
-  @return floor(random($val));
 }
 
 @keyframes c1 {
