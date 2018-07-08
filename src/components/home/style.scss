@@ -20,11 +20,9 @@ $lay-c2: 4;
   overflow: hidden;
   position: relative;
   width: 100%;
-  z-index: 1;
 
   &:before {
     position: absolute;
-    z-index: 999999;
     content: '';
     top: 0;
     right: 0;
@@ -46,11 +44,26 @@ $lay-c2: 4;
 }
 
 .Home-Glitch {
-  animation: text-bag 4s linear infinite;
   cursor: default;
   display: block;
-  transform: skewX(0deg) scaleY(1);
-  z-index: 9;
+
+  &:hover {
+    animation: text-bag 4s linear infinite;
+    transform: skewX(0deg) scaleY(1);
+
+    .Home-MainHeader {
+      &:before {
+        left: -(#{$offset-c2}px);
+        text-shadow: #{$lay-c2}px 0 $color-c2;
+        animation: c2 2s infinite linear alternate-reverse;
+      }
+      &:after {
+        left: #{$offset-c1}px;
+        text-shadow: -(#{$lay-c1}px) 0 $color-c1;
+        animation: c1 4s infinite linear alternate-reverse;
+      }
+    }
+  }
 }
 
 .Home-MainHeader {
@@ -75,29 +88,20 @@ $lay-c2: 4;
   &:after {
     display: block;
     content: attr(data-text);
+    font-size: variableSize(45, 149);
     position: absolute;
     top: 0;
     color: $txt-color;
     background: $bg-color;
     overflow: hidden;
-    clip: rect(0, 900px, 0, 0);
-  }
-  &:before {
-    left: -(#{$offset-c2}px);
-    text-shadow: #{$lay-c2}px 0 $color-c2;
-    animation: c2 1s infinite linear alternate-reverse;
-  }
-  &:after {
-    left: #{$offset-c1}px;
-    text-shadow: -(#{$lay-c1}px) 0 $color-c1;
-    animation: c1 2s infinite linear alternate-reverse;
+    clip: rect(0, 9999px, 0, 0);
   }
 }
 
 @keyframes c1 {
   @for $i from 0 through 20 {
     #{$i * (1 / 20) * 10 * 10%} {
-      clip: rect(#{randomVal(100)}px, 9999px, #{randomVal(100)}px, 0);
+      clip: rect(#{randomVal(80)}px, 9999px, #{randomVal(80)}px, 0);
     }
   }
 }
@@ -105,11 +109,11 @@ $lay-c2: 4;
 @keyframes c2 {
   @for $i from 0 through 20 {
     #{$i * (1 / 20) * 10 * 10%} {
-      clip: rect(#{randomVal(100)}px, 9999px, #{randomVal(100)}px, 0);
+      clip: rect(#{randomVal(80)}px, 9999px, #{randomVal(80)}px, 0);
     }
   }
   23% {
-    transform: scaleX(0.8);
+    transform: scaleX(0.9);
   }
 }
 
