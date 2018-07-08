@@ -67,14 +67,16 @@ $lay-c2: 4;
 }
 
 .Home-MainHeader {
+  animation: fadein 2s;
   color: $cyber;
-  font-family: 'KillTheNoise', sans-serif !important;
+  font-family: KillTheNoise, sans-serif !important;
   font-size: variableSize(46, 150);
   font-weight: 200;
   line-height: variableSize(8, 90);
 }
 
 .Home-SubHeader {
+  animation: fadein 2s;
   font-size: variableSize(26, 72);
   font-style: italic;
   font-weight: bold;
@@ -95,6 +97,18 @@ $lay-c2: 4;
     background: $bg-color;
     overflow: hidden;
     clip: rect(0, 9999px, 0, 0);
+  }
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
   }
 }
 

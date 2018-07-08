@@ -27,8 +27,8 @@ export default function StarBackground({
     <Fragment>
       <StarField />
       <AbsoluteContainer>
-        {loginButton}
         {children}
+        {loginButton}
       </AbsoluteContainer>
     </Fragment>
   );
