@@ -1,5 +1,7 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { Link } from 'react-router-dom';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -7,7 +9,7 @@ import StarBackground from 'components/star-background';
 
 import './style.css';
 
-export default function Home() {
+export default function Home({ generateSector }) {
   return (
     <Fragment>
       <StarBackground>
@@ -35,13 +37,13 @@ export default function Home() {
             </Header>
           </div>
           <FlexContainer className="Home-Actions">
-            <button className="Home-Action">
+            <Link to="/configure" className="Home-Action">
               <span className="Home-HexagonWrap">
                 <span className="Home-Hexagon" />
               </span>
               <FormattedMessage id="misc.configure" />
-            </button>
-            <button className="Home-Action">
+            </Link>
+            <button onClick={generateSector} className="Home-Action">
               <span className="Home-HexagonWrap">
                 <span className="Home-Hexagon" />
               </span>
@@ -54,3 +56,7 @@ export default function Home() {
     </Fragment>
   );
 }
+
+Home.propTypes = {
+  generateSector: PropTypes.func.isRequired,
+};

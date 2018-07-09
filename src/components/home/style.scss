@@ -81,12 +81,16 @@ $lay-c2: 4;
 }
 
 .Home-Action {
+  align-items: center;
   background-color: transparent;
   border: $hexBorder;
   border-radius: 50%;
   color: $light2;
+  cursor: pointer;
+  display: flex;
   font-size: variableSize(20, 32);
   height: $hexSize;
+  justify-content: center;
   margin-right: 5rem;
   outline: none;
   padding: 0;
@@ -95,8 +99,21 @@ $lay-c2: 4;
   white-space: nowrap;
   width: $hexSize;
 
-  &:last-of-type {
+  &:last-child {
     margin-right: 0;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    background: radial-gradient(
+      rgba(255, 255, 255, 0.2),
+      rgba(255, 255, 255, 0.04),
+      transparent
+    );
+
+    .Home-Hexagon {
+      animation-duration: 4s;
+    }
   }
 }
 
