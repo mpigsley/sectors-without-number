@@ -17,7 +17,7 @@ export default function StarBackground({
   let loginButton = null;
   if (isInitialized && !uid) {
     loginButton = (
-      <Button className="HexBackground-Login" onClick={openLoginModal}>
+      <Button className="StarBackground-Login" onClick={openLoginModal}>
         <FormattedMessage id="misc.logIn" />
       </Button>
     );
@@ -26,7 +26,7 @@ export default function StarBackground({
   return (
     <Fragment>
       <StarField />
-      <AbsoluteContainer>
+      <AbsoluteContainer className="StarBackground-Container">
         {children}
         {loginButton}
       </AbsoluteContainer>
