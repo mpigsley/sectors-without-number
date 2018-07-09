@@ -1,17 +1,21 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import StarBackground from 'components/star-background';
+import Featured from 'components/home/featured';
+
+import featured from 'featured.json';
 
 import './style.css';
 
 export default class Home extends Component {
   static propTypes = {
+    intl: intlShape.isRequired,
     generateSector: PropTypes.func.isRequired,
   };
 
@@ -46,16 +50,18 @@ export default class Home extends Component {
                   noMargin
                   type={HeaderType.header1}
                   className="Home-MainHeader"
-                  data-text="Sectors Without Number"
+                  data-text={this.props.intl.formatMessage({
+                    id: 'misc.sectorsWithoutNumber',
+                  })}
                 >
-                  Sectors Without Number
+                  {this.props.intl.formatMessage({
+                    id: 'misc.sectorsWithoutNumber',
+                  })}
                 </Header>
-                <Header
-                  type={HeaderType.header2}
-                  className="Home-SubHeader"
-                  data-text="Sector Generator"
-                >
-                  Sector Generator
+                <Header type={HeaderType.header2} className="Home-SubHeader">
+                  {this.props.intl.formatMessage({
+                    id: 'misc.sectorGenerator',
+                  })}
                 </Header>
               </div>
               <FlexContainer className="Home-Actions">
@@ -82,7 +88,19 @@ export default class Home extends Component {
               })}
             />
           </FlexContainer>
-          <h1>Some more stuff</h1>
+          <Header type={HeaderType.header2}>
+            <FormattedMessage id="misc.featured" />
+          </Header>
+          <div className="Home-Featured">
+            {featured.map(({ username, ...data }) => (
+              <Featured key={username} {...data} />
+            ))}
+            <Featured
+              name={this.props.intl.formatMessage({
+                id: 'misc.featureWithPatreon',
+              })}
+            />
+          </div>
         </StarBackground>
       </Fragment>
     );

@@ -1,0 +1,38 @@
+@import 'styles/theme';
+
+$border: 1px solid $dark2;
+
+.Featured {
+  border: $border;
+  border-radius: 5px;
+}
+
+.Featured-Title {
+  flex: 1;
+  line-height: initial;
+  padding: 1rem;
+}
+
+.Featured-Sector,
+.Featured-Website,
+.Featured-Patreon {
+  color: $light3;
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $dark2;
+    color: $light3;
+  }
+}
+
+.Featured-Website {
+  border-top: $border;
+}
+
+.Featured-Sector {
+  border-right: $border;
+  border-top: $border;
+}

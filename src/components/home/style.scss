@@ -175,6 +175,31 @@ $innerHex: 5px;
   }
 }
 
+$featured-width: 20rem;
+$featured-height: 12rem;
+
+.Home-Featured {
+  display: grid;
+  grid-auto-rows: $featured-height;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(3, $featured-width);
+  justify-content: center;
+  margin-bottom: 4rem;
+  margin-top: 2rem;
+}
+
+@media (max-width: 1100px) {
+  .Home-Featured {
+    grid-template-columns: repeat(2, $featured-width);
+  }
+}
+
+@media (max-width: 750px) {
+  .Home-Featured {
+    grid-template-columns: $featured-width;
+  }
+}
+
 @media (max-width: 500px) {
   .Home-Actions {
     flex-direction: column;

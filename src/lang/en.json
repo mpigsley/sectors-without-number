@@ -2606,6 +2606,9 @@
   "misc.exportEntity": "Export {entity}",
   "misc.exportOptions": "Export Options",
   "misc.facebook": "Log In with Facebook",
+  "misc.featured": "Featured Sectors",
+  "misc.featureWithPatreon":
+    "Feature your sector here by subscribing with Patreon.",
   "misc.forgotPassword": "Forgot Password?",
   "misc.friends": "Friends",
   "misc.generate": "Generate",
@@ -2714,6 +2717,7 @@
   "misc.userAccount": "User Account",
   "misc.username": "Username",
   "misc.userProfile": "User Profile",
+  "misc.website": "Website",
   "misc.welcomeBuilder": "Welcome to the Sector Builder",
   "misc.wide": "Wide",
   "misc.windowTooSmall":
