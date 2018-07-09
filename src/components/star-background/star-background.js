@@ -13,6 +13,7 @@ export default function StarBackground({
   openLoginModal,
   isInitialized,
   uid,
+  ...props,
 }) {
   let loginButton = null;
   if (isInitialized && !uid) {
@@ -26,7 +27,7 @@ export default function StarBackground({
   return (
     <Fragment>
       <StarField />
-      <AbsoluteContainer className="StarBackground-Container">
+      <AbsoluteContainer className="StarBackground-Container" {...props}>
         {children}
         {loginButton}
       </AbsoluteContainer>
