@@ -1,7 +1,7 @@
 @import 'styles/utilities';
 @import 'styles/theme';
 
-$hexSize: 200px;
+$hexSize: variableSize(140, 200);
 $hexBorder: 1px solid $dark2;
 
 $bg-color: $dark4;
@@ -45,7 +45,7 @@ $lay-c2: 4;
 }
 
 .Home-MainHeader {
-  animation: fadein 2s;
+  animation: fadein 1.5s;
   color: $cyber;
   display: block;
   font-family: KillTheNoise, sans-serif !important;
@@ -69,14 +69,15 @@ $lay-c2: 4;
 }
 
 .Home-SubHeader {
-  animation: fadein 2s;
+  animation: fadein 1.5s;
   font-size: variableSize(26, 72);
   font-style: italic;
   font-weight: bold;
 }
 
 .Home-Actions {
-  margin-top: 4rem;
+  animation: fadein 1.5s;
+  margin-top: variableSize(20, 70);
 }
 
 .Home-Action {
@@ -84,7 +85,7 @@ $lay-c2: 4;
   border: $hexBorder;
   border-radius: 50%;
   color: $light2;
-  font-size: 1.8rem;
+  font-size: variableSize(20, 32);
   height: $hexSize;
   margin-right: 5rem;
   outline: none;
@@ -99,48 +100,55 @@ $lay-c2: 4;
   }
 }
 
+$innerHex: 5px;
+
 .Home-HexagonWrap {
-  bottom: 5px;
-  display: inline-block;
-  left: 5px;
+  bottom: $innerHex;
+  left: $innerHex;
   position: absolute;
-  right: 5px;
+  right: $innerHex;
   text-align: center;
-  top: 5px;
+  top: $innerHex;
 }
 
 .Home-Hexagon {
   animation: spin 8s linear infinite;
   border-bottom: $hexBorder;
   border-top: $hexBorder;
+  display: block;
   height: 100%;
+  margin: auto;
   width: calc(100% * 0.57735);
-  display: inline-block;
 
-  &:before {
-    border-bottom: $hexBorder;
-    border-top: $hexBorder;
-    position: absolute;
-    top: 0;
-    right: calc((100% / 2) - ((100% * 0.57735) / 2));
-    background-color: inherit;
-    height: inherit;
-    width: inherit;
-    content: '';
-    transform: rotateZ(60deg);
-  }
-
+  &:before,
   &:after {
     border-bottom: $hexBorder;
     border-top: $hexBorder;
-    position: absolute;
-    top: 0;
-    right: calc((100% / 2) - ((100% * 0.57735) / 2));
-    background-color: inherit;
-    height: inherit;
-    width: inherit;
     content: '';
+    height: 100%;
+    width: 100%;
+  }
+
+  &:before {
+    position: absolute;
+    right: 0;
     transform: rotateZ(-60deg);
+  }
+
+  &:after {
+    display: block;
+    transform: rotateZ(60deg);
+  }
+}
+
+@media (max-width: 500px) {
+  .Home-Actions {
+    flex-direction: column;
+  }
+
+  .Home-Action {
+    margin: 0;
+    margin-bottom: 1.5rem;
   }
 }
 
@@ -148,7 +156,7 @@ $lay-c2: 4;
   0% {
     opacity: 0;
   }
-  40% {
+  20% {
     opacity: 0;
   }
   100% {
