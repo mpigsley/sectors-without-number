@@ -1,4 +1,9 @@
 {
+  "6.2.3": {
+    "description":
+      "Fix a long-standing bug where entities generated in the sidebar wouldn't generate children even if that box was checked.",
+    "date": "7-10-2018"
+  },
   "6.2.2": {
     "description":
       "When removing a region, don't remove other regions on the same hexes.",
