@@ -1,4 +1,8 @@
 {
+  "6.3.0": {
+    "description": "New color scheme and home page design.",
+    "date": "7-10-2018"
+  },
   "6.2.3": {
     "description":
       "Fix a long-standing bug where entities generated in the sidebar wouldn't generate children even if that box was checked.",
