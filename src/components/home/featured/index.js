@@ -8,19 +8,23 @@ import Header, { HeaderType } from 'primitives/text/header';
 
 import './style.css';
 
-export default function Featured({ name, sector, website }) {
+export default function HomeFeatured({ name, sector, website }) {
   if (!sector || !website) {
     return (
       <FlexContainer
         direction="column"
         justify="spaceBetween"
-        className="Featured"
+        className="HomeFeatured"
       >
         <a
           href="https://www.patreon.com/sectorswithoutnumber"
-          className="Featured-Patreon"
+          className="HomeFeatured-Patreon"
         >
-          <Header noMargin type={HeaderType.header3} className="Featured-Title">
+          <Header
+            noMargin
+            type={HeaderType.header3}
+            className="HomeFeatured-Title"
+          >
             {name}
           </Header>
         </a>
@@ -31,18 +35,22 @@ export default function Featured({ name, sector, website }) {
     <FlexContainer
       direction="column"
       justify="spaceBetween"
-      className="Featured"
+      className="HomeFeatured"
     >
       <FlexContainer align="center" flex="1">
-        <Header noMargin type={HeaderType.header3} className="Featured-Title">
+        <Header
+          noMargin
+          type={HeaderType.header3}
+          className="HomeFeatured-Title"
+        >
           {name}
         </Header>
       </FlexContainer>
       <FlexContainer>
-        <Link to={`/sector/${sector}`} className="Featured-Sector">
+        <Link to={`/sector/${sector}`} className="HomeFeatured-Sector">
           <FormattedMessage id="misc.sector" />
         </Link>
-        <a href={website} className="Featured-Website">
+        <a href={website} className="HomeFeatured-Website">
           <FormattedMessage id="misc.website" />
         </a>
       </FlexContainer>
@@ -50,8 +58,13 @@ export default function Featured({ name, sector, website }) {
   );
 }
 
-Featured.propTypes = {
+HomeFeatured.propTypes = {
   name: PropTypes.string.isRequired,
-  sector: PropTypes.string.isRequired,
-  website: PropTypes.string.isRequired,
+  sector: PropTypes.string,
+  website: PropTypes.string,
+};
+
+HomeFeatured.defaultProps = {
+  sector: null,
+  website: null,
 };

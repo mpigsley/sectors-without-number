@@ -8,7 +8,9 @@ import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import StarBackground from 'components/star-background';
 import Featured from 'components/home/featured';
+import Saved from 'components/home/saved';
 
+import { size, map, sortBy } from 'constants/lodash';
 import featured from 'featured.json';
 
 import './style.css';
@@ -16,6 +18,7 @@ import './style.css';
 export default class Home extends Component {
   static propTypes = {
     intl: intlShape.isRequired,
+    saved: PropTypes.shape().isRequired,
     generateSector: PropTypes.func.isRequired,
   };
 
@@ -23,12 +26,33 @@ export default class Home extends Component {
     didScroll: false,
   };
 
+  renderSavedSectors() {
+    if (!size(this.props.saved)) {
+      return null;
+    }
+    return (
+      <Fragment>
+        <Header type={HeaderType.header2} className="Home-SectionHeader">
+          <FormattedMessage id="misc.savedSectors" />
+        </Header>
+        <div className="Home-Grid">
+          {sortBy(
+            map(this.props.saved, (data, key) => ({ key, ...data })),
+            ({ created }) => (created ? -created.toDate() : -new Date()),
+          ).map(({ key, ...data }) => (
+            <Saved key={key} {...data} sector={key} />
+          ))}
+        </div>
+      </Fragment>
+    );
+  }
+
   render() {
     return (
       <Fragment>
         <StarBackground
           onScroll={() => {
-            if (!this.state.disScroll) {
+            if (!this.state.didScroll) {
               this.setState({ didScroll: true });
             }
           }}
@@ -88,10 +112,11 @@ export default class Home extends Component {
               })}
             />
           </FlexContainer>
+          {this.renderSavedSectors()}
           <Header type={HeaderType.header2} className="Home-SectionHeader">
             <FormattedMessage id="misc.featured" />
           </Header>
-          <div className="Home-Featured">
+          <div className="Home-Grid">
             {featured.map(({ username, ...data }) => (
               <Featured key={username} {...data} />
             ))}

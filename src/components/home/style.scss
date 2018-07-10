@@ -185,28 +185,28 @@ $innerHex: 5px;
   width: 90%;
 }
 
-$featured-width: 20rem;
-$featured-height: 12rem;
+$grid-width: 20rem;
+$grid-height: 12rem;
 
-.Home-Featured {
+.Home-Grid {
   display: grid;
-  grid-auto-rows: $featured-height;
+  grid-auto-rows: $grid-height;
   grid-gap: 2rem;
-  grid-template-columns: repeat(3, $featured-width);
+  grid-template-columns: repeat(3, $grid-width);
   justify-content: center;
-  margin-bottom: 4rem;
+  margin-bottom: 8rem;
   margin-top: 1rem;
 }
 
 @media (max-width: 1100px) {
-  .Home-Featured {
-    grid-template-columns: repeat(2, $featured-width);
+  .Home-Grid {
+    grid-template-columns: repeat(2, $grid-width);
   }
 }
 
 @media (max-width: 750px) {
-  .Home-Featured {
-    grid-template-columns: $featured-width;
+  .Home-Grid {
+    grid-template-columns: $grid-width;
   }
 }
 

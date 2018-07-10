@@ -2,21 +2,22 @@
 
 $border: 1px solid $dark1;
 
-.Featured {
+.HomeFeatured {
   border: $border;
   border-radius: 5px;
 }
 
-.Featured-Title {
+.HomeFeatured-Title {
   flex: 1;
+  font-weight: bold;
   line-height: initial;
   padding: 1rem;
 }
 
-.Featured-Sector,
-.Featured-Website,
-.Featured-Patreon {
-  color: $light3;
+.HomeFeatured-Sector,
+.HomeFeatured-Website,
+.HomeFeatured-Patreon {
+  color: $light2;
   flex: 1;
   padding: 1rem;
   text-align: center;
@@ -24,15 +25,15 @@ $border: 1px solid $dark1;
 
   &:hover {
     background-color: $transparentDark;
-    color: $light3;
+    color: $light2;
   }
 }
 
-.Featured-Website {
+.HomeFeatured-Website {
   border-top: $border;
 }
 
-.Featured-Sector {
+.HomeFeatured-Sector {
   border-right: $border;
   border-top: $border;
 }

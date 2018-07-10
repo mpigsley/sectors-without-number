@@ -3,8 +3,13 @@ import { injectIntl } from 'react-intl';
 
 import Entities from 'constants/entities';
 import { generateEntity } from 'store/actions/entity.actions';
+import { getUserSectors } from 'store/selectors/sector.selectors';
 
 import Home from './home';
+
+const mapStateToProps = state => ({
+  saved: getUserSectors(state),
+});
 
 const mapDispatchToProps = (dispatch, props) => ({
   generateSector: () =>
@@ -15,7 +20,7 @@ const mapDispatchToProps = (dispatch, props) => ({
 
 export default injectIntl(
   connect(
-    undefined,
+    mapStateToProps,
     mapDispatchToProps,
   )(Home),
 );
