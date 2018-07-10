@@ -88,7 +88,7 @@ export default class Home extends Component {
               })}
             />
           </FlexContainer>
-          <Header type={HeaderType.header2}>
+          <Header type={HeaderType.header2} className="Home-SectionHeader">
             <FormattedMessage id="misc.featured" />
           </Header>
           <div className="Home-Featured">

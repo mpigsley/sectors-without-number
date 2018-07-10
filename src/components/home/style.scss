@@ -2,7 +2,7 @@
 @import 'styles/theme';
 
 $hexSize: variableSize(140, 200);
-$hexBorder: 1px solid $dark2;
+$hexBorder: 1px solid $dark1;
 
 $bg-color: $dark4;
 $txt-color: $cyber;
@@ -26,7 +26,7 @@ $lay-c2: 4;
 .Home-Glitch {
   cursor: default;
   display: block;
-  margin-top: 2rem;
+  margin-top: 5rem;
 
   &:hover {
     animation: text-bag 4s linear infinite;
@@ -107,12 +107,8 @@ $lay-c2: 4;
   }
 
   &:hover {
-    background: rgba(255, 255, 255, 0.2);
-    background: radial-gradient(
-      rgba(255, 255, 255, 0.2),
-      rgba(255, 255, 255, 0.04),
-      transparent
-    );
+    background: $transparentDark;
+    background: radial-gradient($transparentDark, transparent);
 
     .Home-Hexagon {
       animation-duration: 4s;
@@ -175,6 +171,20 @@ $innerHex: 5px;
   }
 }
 
+.Home-SectionHeader {
+  align-items: flex-end;
+  background: linear-gradient(transparent, transparent, $transparentDark);
+  border-bottom: $hexBorder;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+  margin: 0 auto 3rem auto;
+  padding-bottom: 2.5rem;
+  width: 90%;
+}
+
 $featured-width: 20rem;
 $featured-height: 12rem;
 
@@ -185,7 +195,7 @@ $featured-height: 12rem;
   grid-template-columns: repeat(3, $featured-width);
   justify-content: center;
   margin-bottom: 4rem;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 @media (max-width: 1100px) {

@@ -1,6 +1,6 @@
 @import 'styles/theme';
 
-$border: 1px solid $dark2;
+$border: 1px solid $dark1;
 
 .Featured {
   border: $border;
@@ -23,7 +23,7 @@ $border: 1px solid $dark2;
   text-decoration: none;
 
   &:hover {
-    background-color: $dark2;
+    background-color: $transparentDark;
     color: $light3;
   }
 }
