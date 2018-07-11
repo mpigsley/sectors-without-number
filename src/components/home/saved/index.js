@@ -9,7 +9,6 @@ import Header, { HeaderType } from 'primitives/text/header';
 import './style.css';
 
 export default function HomeSaved({ name, sector, rows, columns, created }) {
-  console.log(created);
   return (
     <FlexContainer
       direction="column"
