@@ -32,9 +32,9 @@ const drawArrowhead = (ctx, radians, x, y, ratio, isForward) => {
 
 const COLORS = {
   DARK4: '#091833',
-  DARK3: '#13223D',
-  DARK2: '#1D2C47',
-  DARK1: '#133e7c',
+  DARK3: '#11203b',
+  DARK2: '#182742',
+  DARK1: '#3c4b66',
   PRIMARY: '#863c4e',
   PRIMARY_ALT: '#792f41',
 };

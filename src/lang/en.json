@@ -2573,6 +2573,7 @@
   "misc.continue": "Continue",
   "misc.copiedLinkTo": "You have copied a link directly to this {entity}.",
   "misc.create": "Create",
+  "misc.created": "Created",
   "misc.createASystem": "To create a system click and hold a hex to the left.",
   "misc.createEditPlanets": "Create and edit planets here from the sidebar.",
   "misc.createEntity": "Create Sector Entity",
@@ -2684,8 +2685,6 @@
   "misc.sectorGenerator": "Sector Generator",
   "misc.sectorName": "Sector Name",
   "misc.sectorSaved": "Sector Saved",
-  "misc.sectorsSynced":
-    "Your sector(s) have been synced. You can now share them with your friends",
   "misc.sectorsWithoutNumber": "Sectors Without Number",
   "misc.selectedNoChilden": "Selected entity has no associated children.",
   "misc.selectEntity": "Select an entity on the left to begin",
@@ -2701,6 +2700,7 @@
   "misc.signUp": "Sign up",
   "misc.signUpPersist": "Sign up to persist sector",
   "misc.situation": "Situation",
+  "misc.size": "Size",
   "misc.solid": "Solid",
   "misc.successfullyRemoved": "Your {entity} has been successfully removed.",
   "misc.syncedAutomatically":
@@ -2717,8 +2717,8 @@
   "misc.userAccount": "User Account",
   "misc.username": "Username",
   "misc.userProfile": "User Profile",
-  "misc.website": "Website",
   "misc.welcomeBuilder": "Welcome to the Sector Builder",
+  "misc.website": "Website",
   "misc.wide": "Wide",
   "misc.windowTooSmall":
     "Your browser window is too small to render the sector. Please try on a larger screen.",

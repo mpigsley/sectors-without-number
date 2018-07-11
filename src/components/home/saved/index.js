@@ -2,6 +2,7 @@ import React from 'react';
 import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -20,10 +21,15 @@ export default function HomeSaved({ name, sector, rows, columns, created }) {
           {name}
         </Header>
         <p className="HomeSaved-Supporting">
-          <b>Size:</b> {columns}, {rows}
+          <b>
+            <FormattedMessage id="misc.size" />:
+          </b>{' '}
+          {columns}, {rows}
         </p>
         <p className="HomeSaved-Supporting">
-          <b>Created:</b>{' '}
+          <b>
+            <FormattedMessage id="misc.created" />:
+          </b>{' '}
           {dayjs(created ? created.toDate() : undefined).format('MMMM D, YYYY')}
         </p>
       </Link>
