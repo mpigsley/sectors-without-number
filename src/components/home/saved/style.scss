@@ -1,0 +1,35 @@
+@import 'styles/theme';
+
+$border: 1px solid $dark1;
+
+.HomeSaved {
+  border: $border;
+  border-radius: 5px;
+}
+
+.HomeSaved-Title {
+  font-weight: bold;
+  line-height: initial;
+  padding: 0 0 1rem;
+}
+
+.HomeSaved-Link {
+  color: $light3;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 0.2rem 1rem;
+  justify-content: center;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $transparentDark;
+  }
+}
+
+.HomeSaved-Supporting {
+  color: $light2;
+  margin: 0;
+  padding-bottom: 0.5rem;
+}

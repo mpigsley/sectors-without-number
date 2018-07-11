@@ -2954,8 +2954,6 @@
   "misc.sectorGenerator": "Générateur de secteur",
   "misc.sectorName": "Nom du secteur",
   "misc.sectorSaved": "Secteur sauvegardé",
-  "misc.sectorsSynced":
-    "Vos secteurs ont été synchronisés. Vous pouvez maintenant les partager avec vos amis. ",
   "misc.sectorsWithoutNumber": "Secteurs sans numéro",
   "misc.selectedNoChilden": "L'entité sélectionnée n'a pas d'enfant associé",
   "misc.selectEntity": "Sélectionner une entité à gauche pour commencer",

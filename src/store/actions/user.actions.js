@@ -1,12 +1,10 @@
 import { push } from 'react-router-redux';
 
 import {
-  savedSectorSelector,
   userFormSelector,
   userUidSelector,
   userModelLocaleSelector,
 } from 'store/selectors/base.selectors';
-import { getSavedEntities } from 'store/selectors/entity.selectors';
 import { pick } from 'constants/lodash';
 
 import {
@@ -19,7 +17,7 @@ import {
   doPasswordReset,
   doLogout,
 } from 'store/api/user';
-import { getSyncedSectors, uploadEntities } from 'store/api/entity';
+import { getSyncedSectors } from 'store/api/entity';
 
 import Locale from 'constants/locale';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
@@ -29,7 +27,6 @@ export const OPENED_LOGIN_MODAL = `${ACTION_PREFIX}/OPENED_LOGIN_MODAL`;
 export const CLOSED_LOGIN_MODAL = `${ACTION_PREFIX}/CLOSED_LOGIN_MODAL`;
 export const OPENED_EDIT_MODAL = `${ACTION_PREFIX}/OPENED_EDIT_MODAL`;
 export const CLOSED_EDIT_MODAL = `${ACTION_PREFIX}/CLOSED_EDIT_MODAL`;
-export const CLOSED_SYNC_MODAL = `${ACTION_PREFIX}/CLOSED_SYNC_MODAL`;
 export const UPDATED_USER_FORM = `${ACTION_PREFIX}/UPDATED_USER_FORM`;
 export const UPDATED_USER = `${ACTION_PREFIX}/UPDATED_USER`;
 export const LOGGED_IN = `${ACTION_PREFIX}/LOGGED_IN`;
@@ -40,22 +37,15 @@ export const openEditModal = () => ({ type: OPENED_EDIT_MODAL });
 export const closeEditModal = () => ({ type: CLOSED_EDIT_MODAL });
 export const openLoginModal = () => ({ type: OPENED_LOGIN_MODAL });
 export const closeLoginModal = () => ({ type: CLOSED_LOGIN_MODAL });
-export const closeSyncModal = () => ({ type: CLOSED_SYNC_MODAL });
 export const updateUserForm = (key, value) => ({
   type: UPDATED_USER_FORM,
   key,
   value,
 });
 
-const onLogin = (dispatch, state) => result => {
-  const localSync = !!savedSectorSelector(state).length;
+const onLogin = dispatch => result => {
   const uid = result.user ? result.user.uid : result.uid;
-  let promise = Promise.resolve();
-  if (localSync) {
-    promise = uploadEntities(getSavedEntities(state));
-  }
-  return promise
-    .then(() => Promise.all([getSyncedSectors(uid), getUserData(uid)]))
+  return Promise.all([getSyncedSectors(uid), getUserData(uid)])
     .then(([sectors, userData]) => {
       dispatch(push('/'));
       dispatch({
@@ -64,7 +54,6 @@ const onLogin = (dispatch, state) => result => {
           ...(result.user ? result.user.toJSON() : result.toJSON()),
           ...userData,
         },
-        didSyncLocal: localSync,
         sectors,
       });
       return result;

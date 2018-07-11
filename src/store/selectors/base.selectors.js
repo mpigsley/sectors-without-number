@@ -3,7 +3,6 @@ export const userModelSelector = state => state.user.model;
 export const userModelLocaleSelector = state =>
   (state.user.model || {}).locale || 'en';
 export const isUserEditModalOpenSelector = state => state.user.isEditModalOpen;
-export const isSyncModalOpenSelector = state => state.user.isSyncModalOpen;
 export const isInitializedSelector = state => state.user.isInitialized;
 export const userUidSelector = state => (state.user.model || {}).uid;
 export const userFormSelector = state => state.user.form;

@@ -15,11 +15,7 @@ import AppWrapper from 'components/app-wrapper';
 import Home from 'components/home';
 import Configure from 'components/configure';
 import Changelog from 'components/changelog';
-import SectorMap from 'components/sector-map';
-import Sidebar from 'components/sidebar';
-import OverviewList from 'components/overview-list';
-import OverviewTable from 'components/overview-table';
-import EmptyOverview from 'components/empty-overview';
+import GameRoutes from 'components/game-routes';
 
 import 'styles/global.css';
 import 'react-hint/css/index.css';
@@ -45,33 +41,7 @@ ReactDOM.render(
           <Route exact path="/" component={Home} />
           <Route path="/configure" component={Configure} />
           <Route path="/changelog" component={Changelog} />
-          <Route
-            path="/sector/:sector"
-            render={({ match }) => (
-              <SectorMap>
-                <Switch>
-                  <Route
-                    path={`${match.path}/:entityType?/:entity?`}
-                    component={Sidebar}
-                  />
-                </Switch>
-              </SectorMap>
-            )}
-          />
-          <Route
-            path="/overview/:sector"
-            render={({ match }) => (
-              <OverviewList>
-                <Switch>
-                  <Route
-                    path={`${match.path}/:entityType`}
-                    component={OverviewTable}
-                  />
-                  <Route path={match.path} component={EmptyOverview} />
-                </Switch>
-              </OverviewList>
-            )}
-          />
+          <Route path="/(sector|overview)/:sector" component={GameRoutes} />
         </AppWrapper>
       </Switch>
     </ConnectedRouter>

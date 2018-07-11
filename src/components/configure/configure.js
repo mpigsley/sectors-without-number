@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Chance from 'chance';
 import { intlShape, FormattedMessage } from 'react-intl';
 
-import HexBackground from 'components/hex-background';
+import StarBackground from 'components/star-background';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
@@ -59,7 +59,7 @@ export default function Configure({
   };
 
   return (
-    <HexBackground>
+    <StarBackground>
       <ContentContainer direction="column" align="center" justify="center">
         <Header type={HeaderType.header2}>
           <FormattedMessage id="misc.configure" />
@@ -149,7 +149,7 @@ export default function Configure({
           </Button>
         </SubContainer>
       </ContentContainer>
-    </HexBackground>
+    </StarBackground>
   );
 }
 

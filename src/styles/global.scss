@@ -1,5 +1,7 @@
-@import 'react-redux-toastr/src/styles/index.scss';
+@import 'react-redux-toastr/src/styles/index';
+@import 'react-select/scss/default';
 @import 'styles/theme';
+@import 'styles/fonts';
 
 body {
   margin: 0;
@@ -8,7 +10,7 @@ body {
 }
 
 * {
-  font-family: 'Raleway', sans-serif !important;
+  font-family: 'Titillium Web', sans-serif !important;
 }
 
 .DefaultIcon g {

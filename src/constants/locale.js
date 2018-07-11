@@ -3,48 +3,63 @@ export default {
     value: 'de',
     name: 'German',
     localeFetch: () =>
-      Promise.all([import('lang/de'), import('react-intl/locale-data/de')]),
+      Promise.all([
+        import(/* webpackChunkName: "german" */ 'lang/de'),
+        import(/* webpackChunkName: "german-locale" */ 'react-intl/locale-data/de'),
+      ]),
   },
   fr: {
     value: 'fr',
     name: 'French',
     localeFetch: () =>
-      Promise.all([import('lang/fr'), import('react-intl/locale-data/fr')]),
-  },
-  en: {
-    value: 'en',
-    name: 'English',
-    localeFetch: () =>
-      Promise.all([import('lang/en'), import('react-intl/locale-data/en')]),
+      Promise.all([
+        import(/* webpackChunkName: "french" */ 'lang/fr'),
+        import(/* webpackChunkName: "french-locale" */ 'react-intl/locale-data/fr'),
+      ]),
   },
   es: {
     value: 'es',
     name: 'Spanish',
     localeFetch: () =>
-      Promise.all([import('lang/es'), import('react-intl/locale-data/es')]),
+      Promise.all([
+        import(/* webpackChunkName: "spanish" */ 'lang/es'),
+        import(/* webpackChunkName: "spanish-locale" */ 'react-intl/locale-data/es'),
+      ]),
   },
   he: {
     value: 'he',
     name: 'Hebrew',
     localeFetch: () =>
-      Promise.all([import('lang/he'), import('react-intl/locale-data/he')]),
+      Promise.all([
+        import(/* webpackChunkName: "hebrew" */ 'lang/he'),
+        import(/* webpackChunkName: "hebrew-locale" */ 'react-intl/locale-data/he'),
+      ]),
   },
   ru: {
     value: 'ru',
     name: 'Russian',
     localeFetch: () =>
-      Promise.all([import('lang/ru'), import('react-intl/locale-data/ru')]),
+      Promise.all([
+        import(/* webpackChunkName: "russian" */ 'lang/ru'),
+        import(/* webpackChunkName: "russian-locale" */ 'react-intl/locale-data/ru'),
+      ]),
   },
   sr: {
     value: 'sr',
     name: 'Latin',
     localeFetch: () =>
-      Promise.all([import('lang/sr'), import('react-intl/locale-data/sr')]),
+      Promise.all([
+        import(/* webpackChunkName: "latin" */ 'lang/sr'),
+        import(/* webpackChunkName: "latin-locale" */ 'react-intl/locale-data/sr'),
+      ]),
   },
   sv: {
     value: 'sv',
     name: 'Swedish',
     localeFetch: () =>
-      Promise.all([import('lang/sv'), import('react-intl/locale-data/sv')]),
+      Promise.all([
+        import(/* webpackChunkName: "swedish" */ 'lang/sv'),
+        import(/* webpackChunkName: "swedish-locale" */ 'react-intl/locale-data/sv'),
+      ]),
   },
 };

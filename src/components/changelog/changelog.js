@@ -1,7 +1,7 @@
 import React from 'react';
 import dayjs from 'dayjs';
 
-import HexBackground from 'components/hex-background';
+import StarBackground from 'components/star-background';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
 import FlexContainer from 'primitives/container/flex-container';
@@ -12,7 +12,7 @@ import './style.css';
 
 export default function Changelog() {
   return (
-    <HexBackground>
+    <StarBackground>
       <ContentContainer align="flexStart" justify="center">
         <FlexContainer direction="column">
           <Header className="Changelog-Header" type={HeaderType.header2}>
@@ -56,6 +56,6 @@ export default function Changelog() {
             ))}
         </FlexContainer>
       </ContentContainer>
-    </HexBackground>
+    </StarBackground>
   );
 }

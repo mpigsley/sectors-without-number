@@ -4,12 +4,12 @@ import { FormattedMessage } from 'react-intl';
 
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
-import Spinner from 'primitives/other/spinner';
+import Loading from 'primitives/regions/loading';
 
 import './style.css';
 
 export default function EmptyOverview({ children, isInitialized }) {
-  let body = <Spinner size={100} />;
+  let body = <Loading />;
   if (isInitialized) {
     body = (
       <Fragment>

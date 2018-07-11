@@ -1,78 +1,319 @@
+@import 'styles/utilities';
 @import 'styles/theme';
 
-.Home-RowContainer {
-  flex: 1;
+$hexSize: variableSize(140, 200);
+$hexBorder: 1px solid $dark1;
+
+$bg-color: $dark4;
+$txt-color: $cyber;
+$color-c1: #00b8ff;
+$color-c2: #001eff;
+$offset-c1: 3;
+$offset-c2: 4;
+$lay-c1: 3;
+$lay-c2: 4;
+
+.Home-HeroContainer {
+  height: 100vh;
 }
 
-.Home-Row {
-  height: 1px;
-  margin: 0 10%;
-  border: none;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.8), transparent);
+.Home-Hero {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
 
-  &--left {
-    background: linear-gradient(to left, rgba(255, 255, 255, 0.8), transparent);
+.Home-Glitch {
+  cursor: default;
+  display: block;
+  margin-top: 5rem;
+
+  &:hover {
+    animation: text-bag 4s linear infinite;
+    transform: skewX(0deg) scaleY(1);
+
+    .Home-MainHeader {
+      &:before {
+        left: -(#{$offset-c2}px);
+        text-shadow: #{$lay-c2}px 0 $color-c2;
+        animation: c2 2s infinite linear alternate-reverse;
+      }
+      &:after {
+        left: #{$offset-c1}px;
+        text-shadow: -(#{$lay-c1}px) 0 $color-c1;
+        animation: c1 4s infinite linear alternate-reverse;
+      }
+    }
   }
 }
 
-.Home-Saved {
-  margin-top: 1rem;
-  margin-bottom: 1.8rem;
+.Home-MainHeader {
+  animation: fadein 1.5s;
+  color: $cyber;
+  display: block;
+  font-family: KillTheNoise, sans-serif !important;
+  font-size: variableSize(46, 150);
+  font-weight: 200;
+  line-height: variableSize(8, 90);
+  position: relative;
+
+  &:before,
+  &:after {
+    display: block;
+    content: attr(data-text);
+    font-size: variableSize(45, 149);
+    position: absolute;
+    top: 0;
+    color: $txt-color;
+    background: $bg-color;
+    overflow: hidden;
+    clip: rect(0, 9999px, 0, 0);
+  }
 }
 
-.Home-SavedTitleContainer {
-  padding-right: 1.5rem;
+.Home-SubHeader {
+  animation: fadein 1.5s;
+  font-size: variableSize(26, 72);
+  font-style: italic;
+  font-weight: bold;
 }
 
-.Home-SavedTitle {
-  margin-bottom: 0.2rem;
+.Home-Actions {
+  animation: fadein 1.5s;
+  margin-top: variableSize(20, 70);
 }
 
-.Home-SavedList {
-  border-left: solid 1px $light1;
-  list-style: none;
-  margin-bottom: 0;
-  margin-top: 0;
+.Home-Action {
+  align-items: center;
+  background-color: transparent;
+  border: $hexBorder;
+  border-radius: 50%;
+  color: $light2;
+  cursor: pointer;
+  display: flex;
+  font-size: variableSize(20, 32);
+  height: $hexSize;
+  justify-content: center;
+  margin-right: 5rem;
+  outline: none;
   padding: 0;
-  padding-left: 1.5rem;
-}
+  position: relative;
+  text-decoration: none;
+  white-space: nowrap;
+  width: $hexSize;
 
-.Home-SavedName {
-  color: $light3;
-  font-weight: 500;
-  font-size: 1.1rem;
-  margin: 0 0.5rem;
-}
-
-.Home-SavedSecondary {
-  color: $light1;
-  font-size: 0.9rem;
-  text-align: right;
-}
-
-@media (max-width: 700px) {
-  .Home-Row {
-    display: none;
+  &:last-child {
+    margin-right: 0;
   }
 
-  .Home-Saved {
+  &:hover {
+    background: $transparentDark;
+    background: radial-gradient($transparentDark, transparent);
+
+    .Home-Hexagon {
+      animation-duration: 4s;
+    }
+  }
+}
+
+$innerHex: 5px;
+
+.Home-HexagonWrap {
+  bottom: $innerHex;
+  left: $innerHex;
+  position: absolute;
+  right: $innerHex;
+  text-align: center;
+  top: $innerHex;
+}
+
+.Home-Hexagon {
+  animation: spin 8s linear infinite;
+  border-bottom: $hexBorder;
+  border-top: $hexBorder;
+  display: block;
+  height: 100%;
+  margin: auto;
+  width: calc(100% * 0.57735);
+
+  &:before,
+  &:after {
+    border-bottom: $hexBorder;
+    border-top: $hexBorder;
+    content: '';
+    height: 100%;
+    width: 100%;
+  }
+
+  &:before {
+    position: absolute;
+    right: 0;
+    transform: rotateZ(-60deg);
+  }
+
+  &:after {
+    display: block;
+    transform: rotateZ(60deg);
+  }
+}
+
+.Home-ArrowDown {
+  animation: fadein 1.5s, bounce 6s linear infinite;
+  border-bottom: 4px solid $dark2;
+  border-right: 4px solid $dark2;
+  height: variableSize(30, 45);
+  transform: scale(2, 1) rotate(45deg);
+  transition: opacity 1s linear;
+  width: variableSize(30, 45);
+
+  &--hidden {
+    opacity: 0;
+  }
+}
+
+.Home-SectionHeader {
+  align-items: flex-end;
+  background: linear-gradient(transparent, transparent, $transparentDark);
+  border-bottom: $hexBorder;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  display: flex;
+  height: 4rem;
+  justify-content: center;
+  margin: 0 auto 3rem auto;
+  padding-bottom: 2.5rem;
+  width: 90%;
+}
+
+$grid-width: 20rem;
+$grid-height: 12rem;
+
+.Home-Grid {
+  display: grid;
+  grid-auto-rows: $grid-height;
+  grid-gap: 2rem;
+  grid-template-columns: repeat(3, $grid-width);
+  justify-content: center;
+  margin-bottom: 8rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 1100px) {
+  .Home-Grid {
+    grid-template-columns: repeat(2, $grid-width);
+  }
+}
+
+@media (max-width: 750px) {
+  .Home-Grid {
+    grid-template-columns: $grid-width;
+  }
+}
+
+@media (max-width: 500px) {
+  .Home-Actions {
     flex-direction: column;
   }
 
-  .Home-SavedTitleContainer {
-    align-items: center;
-    padding: 0;
-    padding-bottom: 1rem;
-    margin-bottom: 1rem;
-    border-bottom: 1px solid $light1;
+  .Home-Action {
+    margin: 0;
+    margin-bottom: 1.5rem;
   }
+}
 
-  .Home-SavedList {
-    border-left: 0;
-    padding: 0;
+@keyframes bounce {
+  0% {
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
   }
+  10% {
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+  }
+  12% {
+    margin-bottom: 2.5rem;
+    margin-top: 0;
+  }
+  14% {
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+  }
+  16% {
+    margin-bottom: 2.2rem;
+    margin-top: 0.3rem;
+  }
+  18% {
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+  }
+  100% {
+    margin-bottom: 2rem;
+    margin-top: 0.5rem;
+  }
+}
 
-  .Home-SavedSecondary {
-    text-align: center;
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes c1 {
+  @for $i from 0 through 20 {
+    #{$i * (1 / 20) * 10 * 10%} {
+      clip: rect(#{randomVal(80)}px, 9999px, #{randomVal(80)}px, 0);
+    }
+  }
+}
+
+@keyframes c2 {
+  @for $i from 0 through 20 {
+    #{$i * (1 / 20) * 10 * 10%} {
+      clip: rect(#{randomVal(80)}px, 9999px, #{randomVal(80)}px, 0);
+    }
+  }
+  23% {
+    transform: scaleX(0.9);
+  }
+}
+
+@keyframes text-bag {
+  @for $i from 0 through 50 {
+    #{$i * (1 / 50) * 10 * 10%} {
+      transform: translate(#{randomVal(5)}px, #{randomVal(5)}px);
+    }
+  }
+  1% {
+    transform: scaleY(1) skewX(0deg);
+  }
+  1.5% {
+    transform: scaleY(3) skewX(-60deg);
+  }
+  2% {
+    transform: scaleY(1) skewX(0deg);
+  }
+  51% {
+    transform: scaleX(1) scaleY(1) skewX(0deg);
+  }
+  52% {
+    transform: scaleX(1.5) scaleY(0.2) skewX(80deg);
+  }
+  53% {
+    transform: scaleX(1) scaleY(1) skewX(0deg);
   }
 }

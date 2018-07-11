@@ -8,7 +8,7 @@ import {
 
 import { openLoginModal } from 'store/actions/user.actions';
 
-import HexBackground from './hex-background';
+import StarBackground from './star-background';
 
 const mapStateToProps = createStructuredSelector({
   isInitialized: isInitializedSelector,
@@ -18,4 +18,4 @@ const mapStateToProps = createStructuredSelector({
 export default connect(
   mapStateToProps,
   { openLoginModal },
-)(HexBackground);
+)(StarBackground);

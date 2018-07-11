@@ -1,0 +1,39 @@
+@import 'styles/theme';
+
+$border: 1px solid $dark1;
+
+.HomeFeatured {
+  border: $border;
+  border-radius: 5px;
+}
+
+.HomeFeatured-Title {
+  flex: 1;
+  font-weight: bold;
+  line-height: initial;
+  padding: 1rem;
+}
+
+.HomeFeatured-Sector,
+.HomeFeatured-Website,
+.HomeFeatured-Patreon {
+  color: $light2;
+  flex: 1;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    background-color: $transparentDark;
+    color: $light2;
+  }
+}
+
+.HomeFeatured-Website {
+  border-top: $border;
+}
+
+.HomeFeatured-Sector {
+  border-right: $border;
+  border-top: $border;
+}

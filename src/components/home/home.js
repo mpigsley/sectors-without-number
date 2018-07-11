@@ -1,92 +1,133 @@
-import React from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
+import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
-import HexBackground from 'components/hex-background';
-import LinkRow from 'primitives/other/link-row';
-import Header, { HeaderType } from 'primitives/text/header';
-import ContentContainer from 'primitives/container/content-container';
 import FlexContainer from 'primitives/container/flex-container';
-import SubContainer from 'primitives/container/sub-container';
-import LinkIcon from 'primitives/other/link-icon';
-import ButtonLink from 'primitives/other/button-link';
-import Button from 'primitives/other/button';
+import Header, { HeaderType } from 'primitives/text/header';
+import StarBackground from 'components/star-background';
+import Featured from 'components/home/featured';
+import Saved from 'components/home/saved';
 
-import { Settings, Zap } from 'constants/icons';
-import { sortByKey } from 'utils/common';
+import { size, map, sortBy } from 'constants/lodash';
+import featured from 'featured.json';
 
 import './style.css';
 
-export default function Home({ saved, generateSector }) {
-  const renderSaved = () => {
-    if (Object.keys(saved).length === 0) {
+export default class Home extends Component {
+  static propTypes = {
+    intl: intlShape.isRequired,
+    saved: PropTypes.shape().isRequired,
+    generateSector: PropTypes.func.isRequired,
+  };
+
+  state = {
+    didScroll: false,
+  };
+
+  renderSavedSectors() {
+    if (!size(this.props.saved)) {
       return null;
     }
     return (
-      <SubContainer wrap direction="row" className="Home-Saved">
-        <FlexContainer
-          direction="column"
-          align="flexEnd"
-          className="Home-SavedTitleContainer"
-        >
-          <Header type={HeaderType.header3} className="Home-SavedTitle">
-            <FormattedMessage id="misc.savedSectors" />
-          </Header>
-          <div className="Home-SavedSecondary">
-            <FormattedMessage id="misc.selectSector" />
-          </div>
-        </FlexContainer>
-        <FlexContainer direction="column" className="Home-SavedList">
-          {Object.keys(saved)
-            .map(key => ({ key, ...saved[key] }))
-            .sort(sortByKey('name'))
-            .map(({ key, name, rows, columns }) => (
-              <LinkRow
-                key={key}
-                to={`/sector/${key}`}
-                title={name}
-                additional={`${columns}, ${rows}`}
-              />
-            ))}
-        </FlexContainer>
-      </SubContainer>
-    );
-  };
-
-  return (
-    <HexBackground>
-      <ContentContainer direction="column" align="center" justify="center">
-        <Header type={HeaderType.header1}>
-          <FormattedMessage id="misc.sectorsWithoutNumber" />
+      <Fragment>
+        <Header type={HeaderType.header2} className="Home-SectionHeader">
+          <FormattedMessage id="misc.savedSectors" />
         </Header>
-        <SubContainer fullWidth justify="center" align="center">
-          <div className="Home-RowContainer">
-            <div className="Home-Row Home-Row--left" />
-          </div>
-          <Header type={HeaderType.header2}>
-            <FormattedMessage id="misc.sectorGenerator" />
-          </Header>
-          <div className="Home-RowContainer">
-            <div className="Home-Row" />
-          </div>
-        </SubContainer>
-        {renderSaved()}
-        <SubContainer wrap justify="center" align="center">
-          <ButtonLink to="/configure">
-            <LinkIcon icon={Settings} size="20" />
-            <FormattedMessage id="misc.configure" />
-          </ButtonLink>
-          <Button onClick={generateSector}>
-            <LinkIcon icon={Zap} size="20" />
-            <FormattedMessage id="misc.generate" />
-          </Button>
-        </SubContainer>
-      </ContentContainer>
-    </HexBackground>
-  );
-}
+        <div className="Home-Grid">
+          {sortBy(
+            map(this.props.saved, (data, key) => ({ key, ...data })),
+            ({ created }) => (created ? -created.toDate() : -new Date()),
+          ).map(({ key, ...data }) => (
+            <Saved key={key} {...data} sector={key} />
+          ))}
+        </div>
+      </Fragment>
+    );
+  }
 
-Home.propTypes = {
-  saved: PropTypes.shape().isRequired,
-  generateSector: PropTypes.func.isRequired,
-};
+  render() {
+    return (
+      <Fragment>
+        <StarBackground
+          onScroll={() => {
+            if (!this.state.didScroll) {
+              this.setState({ didScroll: true });
+            }
+          }}
+        >
+          <FlexContainer
+            direction="column"
+            align="center"
+            className="Home-HeroContainer"
+          >
+            <FlexContainer
+              direction="column"
+              align="center"
+              justify="center"
+              flex="1"
+              className="Home-Hero"
+            >
+              <div className="Home-Glitch">
+                <Header
+                  noMargin
+                  type={HeaderType.header1}
+                  className="Home-MainHeader"
+                  data-text={this.props.intl.formatMessage({
+                    id: 'misc.sectorsWithoutNumber',
+                  })}
+                >
+                  {this.props.intl.formatMessage({
+                    id: 'misc.sectorsWithoutNumber',
+                  })}
+                </Header>
+                <Header type={HeaderType.header2} className="Home-SubHeader">
+                  {this.props.intl.formatMessage({
+                    id: 'misc.sectorGenerator',
+                  })}
+                </Header>
+              </div>
+              <FlexContainer className="Home-Actions">
+                <Link to="/configure" className="Home-Action">
+                  <span className="Home-HexagonWrap">
+                    <span className="Home-Hexagon" />
+                  </span>
+                  <FormattedMessage id="misc.configure" />
+                </Link>
+                <button
+                  onClick={this.props.generateSector}
+                  className="Home-Action"
+                >
+                  <span className="Home-HexagonWrap">
+                    <span className="Home-Hexagon" />
+                  </span>
+                  <FormattedMessage id="misc.generate" />
+                </button>
+              </FlexContainer>
+            </FlexContainer>
+            <div
+              className={classNames('Home-ArrowDown', {
+                'Home-ArrowDown--hidden': this.state.didScroll,
+              })}
+            />
+          </FlexContainer>
+          {this.renderSavedSectors()}
+          <Header type={HeaderType.header2} className="Home-SectionHeader">
+            <FormattedMessage id="misc.featured" />
+          </Header>
+          <div className="Home-Grid">
+            {featured.map(({ username, ...data }) => (
+              <Featured key={username} {...data} />
+            ))}
+            <Featured
+              name={this.props.intl.formatMessage({
+                id: 'misc.featureWithPatreon',
+              })}
+            />
+          </div>
+        </StarBackground>
+      </Fragment>
+    );
+  }
+}

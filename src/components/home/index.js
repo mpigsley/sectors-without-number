@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import Entities from 'constants/entities';
 import { generateEntity } from 'store/actions/entity.actions';
 import { getUserSectors } from 'store/selectors/sector.selectors';
+
 import Home from './home';
 
 const mapStateToProps = state => ({
@@ -17,4 +18,9 @@ const mapDispatchToProps = (dispatch, props) => ({
     ),
 });
 
-export default injectIntl(connect(mapStateToProps, mapDispatchToProps)(Home));
+export default injectIntl(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(Home),
+);

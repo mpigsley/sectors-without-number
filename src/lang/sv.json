@@ -255,8 +255,6 @@
   "misc.sectorGenerator": "Sektorgenerator",
   "misc.sectorName": "Sektornamn",
   "misc.sectorSaved": "Sektor sparad",
-  "misc.sectorsSynced":
-    "Dina sektorer har synkroniserats. Du kan nu dela dem med dina vänner.",
   "misc.sectorsWithoutNumber": "Sektorer utan nummer",
   "misc.selectedNoChilden": "Väld enhet har inga associerade barn.",
   "misc.selectEntity": "Välj en enhet till vänster att börja med",
