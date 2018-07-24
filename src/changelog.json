@@ -1,4 +1,8 @@
 {
+  "6.3.1": {
+    "description": "Fix incorrect tooltip offset in sector map.",
+    "date": "7-24-2018"
+  },
   "6.3.0": {
     "description": "New color scheme and home page design.",
     "date": "7-11-2018"

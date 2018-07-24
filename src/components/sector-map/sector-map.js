@@ -19,7 +19,7 @@ import Error from './error';
 
 import './style.css';
 
-const calcNavWidth = () => (window.innerWidth > 1500 ? 200 : 75);
+const calcNavWidth = () => (window.innerWidth > 1500 ? 185 : 75);
 const calcWidth = () => {
   let width = window.innerWidth - 75;
   if (window.innerWidth > 1500) {
