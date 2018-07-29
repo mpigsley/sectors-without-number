@@ -1,4 +1,9 @@
 {
+  "6.3.2": {
+    "description":
+      "Fix API errors that resulted in an error popup although the update succeeded.",
+    "date": "7-29-2018"
+  },
   "6.3.1": {
     "description": "Fix incorrect tooltip offset in sector map.",
     "date": "7-24-2018"

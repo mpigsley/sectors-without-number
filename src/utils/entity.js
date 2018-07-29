@@ -308,11 +308,19 @@ export const saveEntities = (
   let promise;
   if (isSaved) {
     if (uid) {
-      promise = Promise.all([
-        uploadEntities(created, currentSectorSelector(state)),
-        syncDeleteEntities(deleted),
-        syncUpdateEntities(updated),
-      ]).then(([uploaded]) => ({ mapping: uploaded.mapping }));
+      const promises = [];
+      if (created) {
+        promises.push(uploadEntities(created, currentSectorSelector(state)));
+      }
+      if (deleted) {
+        promises.push(syncDeleteEntities(deleted));
+      }
+      if (updated) {
+        promises.push(syncUpdateEntities(updated));
+      }
+      promise = Promise.all(promises).then(([uploaded]) => ({
+        mapping: (uploaded || {}).mapping || {},
+      }));
     } else {
       return Promise.resolve();
     }

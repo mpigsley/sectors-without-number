@@ -5,5 +5,7 @@ const deleteSectorObjects = require('./src/delete-sector-objects');
 
 admin.initializeApp();
 
+admin.firestore().settings({ timestampsInSnapshots: true });
+
 exports.saveEntities = saveEntities;
 exports.deleteSectorObjects = deleteSectorObjects;
