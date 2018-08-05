@@ -1,4 +1,8 @@
 {
+  "6.3.3": {
+    "description": "Fix blank home screen upon logging in for select users.",
+    "date": "8-5-2018"
+  },
   "6.3.2": {
     "description":
       "Fix API errors that resulted in an error popup although the update succeeded.",

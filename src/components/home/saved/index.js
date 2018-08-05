@@ -30,7 +30,9 @@ export default function HomeSaved({ name, sector, rows, columns, created }) {
           <b>
             <FormattedMessage id="misc.created" />:
           </b>{' '}
-          {dayjs(created ? created.toDate() : undefined).format('MMMM D, YYYY')}
+          {dayjs(
+            created && created.toDate ? created.toDate() : new Date(created),
+          ).format('MMMM D, YYYY')}
         </p>
       </Link>
     </FlexContainer>

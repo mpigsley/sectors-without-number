@@ -38,7 +38,10 @@ export default class Home extends Component {
         <div className="Home-Grid">
           {sortBy(
             map(this.props.saved, (data, key) => ({ key, ...data })),
-            ({ created }) => (created ? -created.toDate() : -new Date()),
+            ({ created }) =>
+              created && created.toDate
+                ? -created.toDate()
+                : -new Date(created),
           ).map(({ key, ...data }) => (
             <Saved key={key} {...data} sector={key} />
           ))}
