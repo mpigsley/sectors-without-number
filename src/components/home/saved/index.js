@@ -10,6 +10,12 @@ import Header, { HeaderType } from 'primitives/text/header';
 import './style.css';
 
 export default function HomeSaved({ name, sector, rows, columns, created }) {
+  let date = new Date(created);
+  if (!created) {
+    date = undefined;
+  } else if (created.toDate) {
+    date = created.toDate();
+  }
   return (
     <FlexContainer
       direction="column"
@@ -30,9 +36,7 @@ export default function HomeSaved({ name, sector, rows, columns, created }) {
           <b>
             <FormattedMessage id="misc.created" />:
           </b>{' '}
-          {dayjs(
-            created && created.toDate ? created.toDate() : new Date(created),
-          ).format('MMMM D, YYYY')}
+          {dayjs(date).format('MMMM D, YYYY')}
         </p>
       </Link>
     </FlexContainer>
