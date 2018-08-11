@@ -15,6 +15,7 @@ import { X, Plus, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
 import { filter, includes, map, pull } from 'constants/lodash';
+import generateAttribute from 'utils/entity-generators/attribute-generator'
 
 const ReactHint = ReactHintFactory(React);
 
@@ -62,7 +63,7 @@ export default function EntityTags({
             updateEntityInEdit({
               attributes: { tags: pull(entityTags, tag) },
               visibility: { [`tag.${tag}`]: undefined },
-            })
+           })
           }
         />
         <Dropdown
@@ -76,6 +77,7 @@ export default function EntityTags({
               },
             })
           }
+          onGenerate={() => updateEntityInEdit({ attributes: { tags: pull(entityTags, tag).concat(generateAttribute(entityType, 'tags')) } })}
           options={filter(
             Entities[entityType].tags,
             ({ key }) => !includes(entity.attributes.tags, key) || key === tag,

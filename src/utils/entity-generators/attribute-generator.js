@@ -4,6 +4,7 @@ import {
   generateTemperature,
   generateBiosphere,
   generatePopulation,
+  generateTag,
 } from './planet-generator'
 import * as refuelingStation from './refueling-station-generator'
 import * as asteroidBase from './asteroid-base-generator'
@@ -16,12 +17,14 @@ import * as researchBase from './research-base-generator'
 import * as spaceStation from './space-station-generator'
 
 export default (entityType, attribute) => {
+  console.log(entityType, attribute)
   switch (`${entityType}.${attribute}`) {
     case 'planet.techLevel': return generateTechLevel()
     case 'planet.atmosphere': return generateAtmosphere()
     case 'planet.temperature':return generateTemperature()
     case 'planet.biosphere': return generateBiosphere()
     case 'planet.population': return generatePopulation()
+    case 'planet.tags': return generateTag()
     case 'refuelingStation.situation': return refuelingStation.generateSituation()
     case 'refuelingStation.occupation': return refuelingStation.generateOccupation()
     case 'asteroidBase.situation': return asteroidBase.generateSituation()

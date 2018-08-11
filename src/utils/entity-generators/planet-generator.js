@@ -56,6 +56,8 @@ export const generateTechLevel = () => chance.weighted(Object.keys(TechLevel.att
   [1, 2, 7, 7, 16, 2, 1],
 )
 
+export const generateTag = () => chance.pickset(Object.keys(worldTagKeys));
+
 export const generatePlanet = ({
   sector,
   parent,
@@ -77,7 +79,7 @@ export const generatePlanet = ({
     planet = { ...planet, isHidden };
   }
   if (generate) {
-    const tags = chance.pickset(Object.keys(worldTagKeys), 2);
+    const tags = [generateTag(), generateTag()];
     if (hideTags) {
       planet.visibility = zipObject(
         tags.map(tag => `tag.${tag}`),
