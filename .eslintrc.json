@@ -25,6 +25,7 @@
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "off",
     "import/extensions": "off",
-    "no-console": "off"
+    "no-console": "off",
+    "indent": ["error", 2]
   }
 }
