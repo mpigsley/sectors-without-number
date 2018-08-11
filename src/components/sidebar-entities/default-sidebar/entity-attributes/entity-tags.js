@@ -63,7 +63,7 @@ export default function EntityTags({
             updateEntityInEdit({
               attributes: { tags: pull(entityTags, tag) },
               visibility: { [`tag.${tag}`]: undefined },
-           })
+            })
           }
         />
         <Dropdown
