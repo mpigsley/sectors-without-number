@@ -52,24 +52,24 @@ export const submitForm = intl => (dispatch, getState) => {
   return !layerId
     ? dispatch(addLayer(update, intl))
     : editLayer(sectorId, layerId, update)
-        .then(({ layer }) => {
-          dispatch(
-            SuccessToast({
-              title: intl.formatMessage({ id: 'misc.sectorSaved' }),
-              message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
-            }),
-          );
-          dispatch({ type: EDITED, sectorId, layerId, layer });
-        })
-        .catch(err => {
-          console.error(err);
-          dispatch(
-            ErrorToast({
-              title: intl.formatMessage({ id: 'misc.error' }),
-              message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
-            }),
-          );
-        });
+      .then(({ layer }) => {
+        dispatch(
+          SuccessToast({
+            title: intl.formatMessage({ id: 'misc.sectorSaved' }),
+            message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
+          }),
+        );
+        dispatch({ type: EDITED, sectorId, layerId, layer });
+      })
+      .catch(err => {
+        console.error(err);
+        dispatch(
+          ErrorToast({
+            title: intl.formatMessage({ id: 'misc.error' }),
+            message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+          }),
+        );
+      });
 };
 
 export const initializeLayerEdit = () => (dispatch, getState) =>

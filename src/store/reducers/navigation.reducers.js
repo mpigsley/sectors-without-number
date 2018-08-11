@@ -30,99 +30,99 @@ export const initialState = {
 
 export default function navigation(state = initialState, action) {
   switch (action.type) {
-    case INITIALIZED:
-    case FETCHED_SECTOR:
-      return {
-        ...state,
-        routes: {
-          ...state.routes,
-          [action.sectorId]: {
-            ...(state.routes[action.sectorId] || {}),
-            ...(action.routes || {}),
+  case INITIALIZED:
+  case FETCHED_SECTOR:
+    return {
+      ...state,
+      routes: {
+        ...state.routes,
+        [action.sectorId]: {
+          ...(state.routes[action.sectorId] || {}),
+          ...(action.routes || {}),
+        },
+      },
+    };
+  case SET_SYNC_LOCK:
+    return { ...state, syncLock: true };
+  case RELEASED_SYNC_LOCK:
+    return { ...state, syncLock: false };
+  case RESET_SETTINGS:
+    return { ...state, settings: initialSettings() };
+  case CANCELED:
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        route: [],
+        isCreatingRoute: false,
+      },
+    };
+  case UPDATED_SETTINGS:
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        [action.key]: action.value,
+      },
+    };
+  case ADDED_ROUTE_LOCATION:
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        route: [...state.settings.route, action.location],
+      },
+    };
+  case COMPLETED_ROUTE:
+    return {
+      ...state,
+      settings: {
+        ...state.settings,
+        route: [],
+        isCreatingRoute: false,
+      },
+      routes: {
+        ...state.routes,
+        [action.sectorId]: {
+          ...state.routes[action.sectorId],
+          [action.key]: action.route,
+        },
+      },
+      syncLock: false,
+    };
+  case DELETED_ROUTE:
+    return {
+      ...state,
+      routes: {
+        ...state.routes,
+        [action.sectorId]: omit(
+          state.routes[action.sectorId],
+          action.routeId,
+        ),
+      },
+      syncLock: false,
+    };
+  case TOGGLED_VISIBILITY:
+    return {
+      ...state,
+      routes: {
+        ...state.routes,
+        [action.sectorId]: {
+          ...state.routes[action.sectorId],
+          [action.routeId]: {
+            ...state.routes[action.sectorId][action.routeId],
+            isHidden: action.isHidden,
           },
         },
-      };
-    case SET_SYNC_LOCK:
-      return { ...state, syncLock: true };
-    case RELEASED_SYNC_LOCK:
-      return { ...state, syncLock: false };
-    case RESET_SETTINGS:
-      return { ...state, settings: initialSettings() };
-    case CANCELED:
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          route: [],
-          isCreatingRoute: false,
-        },
-      };
-    case UPDATED_SETTINGS:
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          [action.key]: action.value,
-        },
-      };
-    case ADDED_ROUTE_LOCATION:
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          route: [...state.settings.route, action.location],
-        },
-      };
-    case COMPLETED_ROUTE:
-      return {
-        ...state,
-        settings: {
-          ...state.settings,
-          route: [],
-          isCreatingRoute: false,
-        },
-        routes: {
-          ...state.routes,
-          [action.sectorId]: {
-            ...state.routes[action.sectorId],
-            [action.key]: action.route,
-          },
-        },
-        syncLock: false,
-      };
-    case DELETED_ROUTE:
-      return {
-        ...state,
-        routes: {
-          ...state.routes,
-          [action.sectorId]: omit(
-            state.routes[action.sectorId],
-            action.routeId,
-          ),
-        },
-        syncLock: false,
-      };
-    case TOGGLED_VISIBILITY:
-      return {
-        ...state,
-        routes: {
-          ...state.routes,
-          [action.sectorId]: {
-            ...state.routes[action.sectorId],
-            [action.routeId]: {
-              ...state.routes[action.sectorId][action.routeId],
-              isHidden: action.isHidden,
-            },
-          },
-        },
-        syncLock: true,
-      };
-    case SET_ROUTE_LOCATOR:
-      return {
-        ...state,
-        routeLocator: action.routeId,
-      };
-    default:
-      return state;
+      },
+      syncLock: true,
+    };
+  case SET_ROUTE_LOCATOR:
+    return {
+      ...state,
+      routeLocator: action.routeId,
+    };
+  default:
+    return state;
   }
 }
