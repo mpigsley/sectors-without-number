@@ -14,6 +14,7 @@ import Input from 'primitives/form/input';
 import { omit, map, values, pickBy, size } from 'constants/lodash';
 import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
+import generateAttribute from 'utils/entity-generators/attribute-generator'
 
 import EntityTags from './entity-tags';
 import './style.css';
@@ -182,6 +183,10 @@ export default function EntityAttributes({
               ? [{ value: attribute, label: attribute }]
               : []),
           ]}
+        />
+        <RefreshCw
+          onClick={() => updateEntityInEdit({ attributes: { [key]: generateAttribute(entityType, key) } })}
+          size={15}
         />
         <Input
           className="EntityAttributes-Checkbox"

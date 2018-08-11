@@ -4,6 +4,10 @@ import { generateStationName } from 'utils/name-generator';
 import Occupation from 'constants/space-station/occupation';
 import Situation from 'constants/space-station/situation';
 
+const chance = new Chance();
+export const generateOccupation = () => chance.pickone(Object.keys(Occupation.attributes));
+export const generateSituation = () => chance.pickone(Object.keys(Situation.attributes));
+
 export const generateSpaceStation = ({
   name = generateStationName(),
   hideOccAndSit = false,
@@ -22,7 +26,6 @@ export const generateSpaceStation = ({
     );
   }
 
-  const chance = new Chance();
   let station = { name, sector, parent, parentEntity };
   if (isHidden !== undefined) {
     station = { ...station, isHidden };
@@ -37,8 +40,8 @@ export const generateSpaceStation = ({
     station = {
       ...station,
       attributes: {
-        occupation: chance.pickone(Object.keys(Occupation.attributes)),
-        situation: chance.pickone(Object.keys(Situation.attributes)),
+        occupation: generateOccupation(),
+        situation: generateSituation(),
       },
     };
   }

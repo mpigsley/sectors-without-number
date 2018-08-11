@@ -4,6 +4,10 @@ import { generateMineName } from 'utils/name-generator';
 import Occupation from 'constants/gas-giant-mine/occupation';
 import Situation from 'constants/gas-giant-mine/situation';
 
+const chance = new Chance();
+export const generateOccupation = () => chance.pickone(Object.keys(Occupation.attributes));
+export const generateSituation = () => chance.pickone(Object.keys(Situation.attributes));
+
 export const generateGasGiantMine = ({
   sector,
   parent,
@@ -22,7 +26,6 @@ export const generateGasGiantMine = ({
     );
   }
 
-  const chance = new Chance();
   let gasGiantMine = { name, parent, parentEntity, sector };
   if (isHidden !== undefined) {
     gasGiantMine = { ...gasGiantMine, isHidden };
@@ -37,8 +40,8 @@ export const generateGasGiantMine = ({
     gasGiantMine = {
       ...gasGiantMine,
       attributes: {
-        occupation: chance.pickone(Object.keys(Occupation.attributes)),
-        situation: chance.pickone(Object.keys(Situation.attributes)),
+        occupation: generateOccupation(),
+        situation: generateSituation(),
       },
     };
   }

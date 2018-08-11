@@ -4,6 +4,10 @@ import { generateStationName } from 'utils/name-generator';
 import Occupation from 'constants/asteroid-base/occupation';
 import Situation from 'constants/asteroid-base/situation';
 
+const chance = new Chance();
+export const generateOccupation = () => chance.pickone(Object.keys(Occupation.attributes));
+export const generateSituation = () => chance.pickone(Object.keys(Situation.attributes));
+
 export const generateAsteroidBase = ({
   sector,
   parent,
@@ -22,7 +26,7 @@ export const generateAsteroidBase = ({
     );
   }
 
-  const chance = new Chance();
+
   let asteroidBase = { name, parent, parentEntity, sector };
   if (isHidden !== undefined) {
     asteroidBase = { ...asteroidBase, isHidden };
@@ -37,8 +41,8 @@ export const generateAsteroidBase = ({
     asteroidBase = {
       ...asteroidBase,
       attributes: {
-        occupation: chance.pickone(Object.keys(Occupation.attributes)),
-        situation: chance.pickone(Object.keys(Situation.attributes)),
+        occupation: generateOccupation(),
+        situation: generateSituation(),
       },
     };
   }
