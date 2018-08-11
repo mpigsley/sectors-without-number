@@ -56,7 +56,7 @@ export const generateTechLevel = () => chance.weighted(Object.keys(TechLevel.att
   [1, 2, 7, 7, 16, 2, 1],
 )
 
-export const generateTag = () => chance.pickset(Object.keys(worldTagKeys));
+export const generateTag = () => chance.pickone(Object.keys(worldTagKeys));
 
 export const generatePlanet = ({
   sector,
