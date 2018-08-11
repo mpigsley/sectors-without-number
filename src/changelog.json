@@ -1,4 +1,8 @@
 {
+  "6.3.5": {
+    "description": "Improve code linting and development documentation.",
+    "date": "8-11-2018"
+  },
   "6.3.4": {
     "description":
       "Sort newly saved sectors on home screen according to current date.",
