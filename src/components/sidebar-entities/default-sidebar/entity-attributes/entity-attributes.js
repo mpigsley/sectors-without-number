@@ -174,6 +174,7 @@ export default function EntityAttributes({
           onChange={item =>
             updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
           }
+          onGenerate={() => updateEntityInEdit({ attributes: { [key]: generateAttribute(entityType, key) } })}
           options={[
             ...map(attributes, attr => ({
               value: attr.key,
@@ -183,10 +184,6 @@ export default function EntityAttributes({
               ? [{ value: attribute, label: attribute }]
               : []),
           ]}
-        />
-        <RefreshCw
-          onClick={() => updateEntityInEdit({ attributes: { [key]: generateAttribute(entityType, key) } })}
-          size={15}
         />
         <Input
           className="EntityAttributes-Checkbox"
