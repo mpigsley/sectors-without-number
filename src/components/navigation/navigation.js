@@ -67,11 +67,15 @@ export default function Navigation({
     );
   }
 
+  const route = location.pathname.split('/')[1];
+
   let elementsBtn;
   if (!isSharedSector) {
     elementsBtn = (
       <Link
-        className={classNames('Navigation-Link', 'Navigation-Login')}
+        className={classNames('Navigation-Link', {
+          'Navigation-Link--active': route === 'elements',
+        })}
         to="/elements"
       >
         <FlexContainer align="center">
@@ -84,7 +88,6 @@ export default function Navigation({
     );
   }
 
-  const route = location.pathname.split('/')[1];
   return (
     <FlexContainer
       className="Navigation"
