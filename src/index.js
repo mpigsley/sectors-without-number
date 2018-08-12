@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Switch, Route } from 'react-router-dom';
-import { ConnectedRouter } from 'react-router-redux';
+import { ConnectedRouter } from 'connected-react-router';
 import { Provider } from 'react-redux';
 import Fastclick from 'react-fastclick';
 import Firebase from 'firebase/app';

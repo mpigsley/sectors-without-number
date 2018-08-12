@@ -1,4 +1,4 @@
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'connected-react-router';
 
 import {
   includes,
@@ -65,7 +65,7 @@ export default function entity(state = initialState, action) {
         share: null,
       };
     case LOCATION_CHANGE: {
-      const { pathname } = action.payload;
+      const { pathname } = action.payload.location;
       const isOverview = pathname.startsWith('/overview/');
       const isGameView = pathname.startsWith('/sector/') || isOverview;
       const currentSector = isGameView ? pathname.split('/')[2] : null;

@@ -1,5 +1,5 @@
 import { addLocaleData } from 'react-intl';
-import { push } from 'react-router-redux';
+import { push } from 'connected-react-router';
 import Firebase from 'firebase/app';
 
 import { getCurrentUser } from 'store/api/user';
