@@ -65,6 +65,7 @@ Promise.all(
   ),
 )
   .then(() => {
+    // eslint-disable-next-line no-console
     console.log('Complete!');
   })
   .catch(console.error);

@@ -10,5 +10,8 @@ const mapStateToProps = state => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, { endPrint })(ExpendedPrintable),
+  connect(
+    mapStateToProps,
+    { endPrint },
+  )(ExpendedPrintable),
 );

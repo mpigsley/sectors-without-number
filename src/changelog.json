@@ -1,4 +1,8 @@
 {
+  "6.3.6": {
+    "description": "Notify eslint of prettier errors & redux devtools.",
+    "date": "8-12-2018"
+  },
   "6.3.5": {
     "description": "Improve code linting and development documentation.",
     "date": "8-11-2018"

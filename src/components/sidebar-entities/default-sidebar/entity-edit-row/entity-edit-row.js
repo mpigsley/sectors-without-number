@@ -98,9 +98,9 @@ export default function EntityEditRow({
         data-rh={
           isCurrentOrAncestorHidden
             ? intl.formatMessage(
-              { id: 'misc.hiddenParrent' },
-              { entity: intl.formatMessage({ id: entityConfig.shortName }) },
-            )
+                { id: 'misc.hiddenParrent' },
+                { entity: intl.formatMessage({ id: entityConfig.shortName }) },
+              )
             : null
         }
       >

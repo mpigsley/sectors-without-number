@@ -13,7 +13,7 @@ export default function StarBackground({
   openLoginModal,
   isInitialized,
   uid,
-  ...props,
+  ...props
 }) {
   let loginButton = null;
   if (isInitialized && !uid) {

@@ -82,7 +82,7 @@ export default function MapPrintable({ topLevelEntities, data }) {
   const hexagon = [];
 
   for (let i = 0; i < points; i += 1) {
-    const pointOnCircle = i * Math.PI / 3;
+    const pointOnCircle = (i * Math.PI) / 3;
     const x = radius * Math.cos(pointOnCircle);
     const y = radius * Math.sin(pointOnCircle);
     hexagon.push(`${x + data.xOffset},${y + data.yOffset}`);

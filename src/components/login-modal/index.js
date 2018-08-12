@@ -29,5 +29,8 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(LoginModal),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(LoginModal),
 );

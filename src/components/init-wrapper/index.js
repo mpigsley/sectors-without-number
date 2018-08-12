@@ -11,5 +11,8 @@ const mapStateToProps = state => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, { initialize })(InitWrapper),
+  connect(
+    mapStateToProps,
+    { initialize },
+  )(InitWrapper),
 );

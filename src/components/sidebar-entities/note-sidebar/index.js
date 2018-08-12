@@ -17,5 +17,8 @@ const mapStateToProps = state => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, { updateEntityInEdit })(NoteSidebar),
+  connect(
+    mapStateToProps,
+    { updateEntityInEdit },
+  )(NoteSidebar),
 );

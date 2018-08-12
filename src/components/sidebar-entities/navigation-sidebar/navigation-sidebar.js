@@ -203,8 +203,8 @@ export default class NavigationSidebar extends Component {
                   data-rh={
                     hiddenByEntity
                       ? this.props.intl.formatMessage({
-                        id: 'misc.routeHiddenByParent',
-                      })
+                          id: 'misc.routeHiddenByParent',
+                        })
                       : undefined
                   }
                 >

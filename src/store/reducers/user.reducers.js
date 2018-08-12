@@ -31,69 +31,69 @@ export const initialState = {
 
 export default function user(state = initialState, action) {
   switch (action.type) {
-  case INITIALIZED:
-    return {
-      ...state,
-      model: action.user,
-      isLoginModalOpen: false,
-      isInitialized: true,
-      locale: { ...englishLocale, ...action.locale },
-      form: {
-        ...state.form,
-        displayName: (action.user || {}).displayName || '',
-        locale: (action.user || {}).locale || 'en',
-      },
-    };
-  case OPENED_LOGIN_MODAL:
-    return { ...state, isLoginModalOpen: true };
-  case CLOSED_LOGIN_MODAL:
-    return { ...state, isLoginModalOpen: false, error: null };
-  case OPENED_EDIT_MODAL:
-    return { ...state, isEditModalOpen: true };
-  case CLOSED_EDIT_MODAL:
-    return { ...state, isEditModalOpen: false, error: null };
-  case UPDATED_USER_FORM:
-    return {
-      ...state,
-      error: null,
-      form: {
-        ...state.form,
-        [action.key]: action.value,
-      },
-    };
-  case UPDATED_USER:
-    return {
-      ...state,
-      isEditModalOpen: false,
-      model: {
-        ...state.model,
-        ...action.user,
-      },
-    };
-  case LOGGED_IN:
-    return {
-      ...state,
-      model: action.user,
-      isLoginModalOpen: false,
-      form: {
-        ...state.form,
-        displayName: (action.user || {}).displayName || '',
-        locale: (action.user || {}).locale || 'en',
-      },
-    };
-  case LOGGED_OUT:
-    return {
-      ...state,
-      model: null,
-      form: initialForm(),
-      isLoginModalOpen: false,
-    };
-  case AUTH_FAILURE:
-    return {
-      ...state,
-      error: action.error || 'There has been an error. Please try again.',
-    };
-  default:
-    return state;
+    case INITIALIZED:
+      return {
+        ...state,
+        model: action.user,
+        isLoginModalOpen: false,
+        isInitialized: true,
+        locale: { ...englishLocale, ...action.locale },
+        form: {
+          ...state.form,
+          displayName: (action.user || {}).displayName || '',
+          locale: (action.user || {}).locale || 'en',
+        },
+      };
+    case OPENED_LOGIN_MODAL:
+      return { ...state, isLoginModalOpen: true };
+    case CLOSED_LOGIN_MODAL:
+      return { ...state, isLoginModalOpen: false, error: null };
+    case OPENED_EDIT_MODAL:
+      return { ...state, isEditModalOpen: true };
+    case CLOSED_EDIT_MODAL:
+      return { ...state, isEditModalOpen: false, error: null };
+    case UPDATED_USER_FORM:
+      return {
+        ...state,
+        error: null,
+        form: {
+          ...state.form,
+          [action.key]: action.value,
+        },
+      };
+    case UPDATED_USER:
+      return {
+        ...state,
+        isEditModalOpen: false,
+        model: {
+          ...state.model,
+          ...action.user,
+        },
+      };
+    case LOGGED_IN:
+      return {
+        ...state,
+        model: action.user,
+        isLoginModalOpen: false,
+        form: {
+          ...state.form,
+          displayName: (action.user || {}).displayName || '',
+          locale: (action.user || {}).locale || 'en',
+        },
+      };
+    case LOGGED_OUT:
+      return {
+        ...state,
+        model: null,
+        form: initialForm(),
+        isLoginModalOpen: false,
+      };
+    case AUTH_FAILURE:
+      return {
+        ...state,
+        error: action.error || 'There has been an error. Please try again.',
+      };
+    default:
+      return state;
   }
 }

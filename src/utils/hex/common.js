@@ -15,11 +15,11 @@ export const getRows = (totalHeight, hexHeight) =>
 
 // Width/Horizontal Calculations
 export const getTotalWidth = (hexWidth, columns) =>
-  hexWidth / 4 * (3 * columns + 1);
+  (hexWidth / 4) * (3 * columns + 1);
 export const getHexWidth = (totalWidth, columns) =>
-  4 * totalWidth / (3 * columns + 1);
+  (4 * totalWidth) / (3 * columns + 1);
 export const getColumns = (totalWidth, hexWidth) =>
-  4 * totalWidth / (3 * hexWidth) - 1 / 3;
+  (4 * totalWidth) / (3 * hexWidth) - 1 / 3;
 
 // Other Helpers
 export const areNeighbors = (a, b) => {
@@ -40,7 +40,7 @@ export const getHexPoints = ({ width, xOffset, yOffset }) => {
   const hexagon = [];
 
   for (let i = 0; i < 6; i += 1) {
-    const pointOnCircle = i * Math.PI / 3;
+    const pointOnCircle = (i * Math.PI) / 3;
     const x = radius * Math.cos(pointOnCircle);
     const y = radius * Math.sin(pointOnCircle);
     hexagon.push({ x: x + xOffset, y: y + yOffset });

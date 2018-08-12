@@ -23,5 +23,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default injectIntl(
-  withRouter(connect(mapStateToProps, mapDispatchToProps)(OverviewList)),
+  withRouter(
+    connect(
+      mapStateToProps,
+      mapDispatchToProps,
+    )(OverviewList),
+  ),
 );
