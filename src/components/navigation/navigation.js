@@ -76,7 +76,7 @@ export default function Navigation({
         className={classNames('Navigation-Link', {
           'Navigation-Link--active': route === 'elements',
         })}
-        to="/element"
+        to={`/elements/${currentSector}`}
       >
         <FlexContainer align="center">
           <Package size="25" className="Navigation-Icon" />

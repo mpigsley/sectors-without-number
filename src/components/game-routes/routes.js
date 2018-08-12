@@ -5,9 +5,13 @@ import SectorMap from 'components/sector-map';
 import Sidebar from 'components/sidebar';
 import OverviewList from 'components/overview-list';
 import OverviewTable from 'components/overview-table';
+import EmptyOverview from 'components/empty-overview';
 import FactionTable from 'components/faction-table';
 import FactionSidebar from 'components/faction-sidebar';
-import EmptyOverview from 'components/empty-overview';
+
+import Elements from 'constants/elements';
+
+const DEFAULT_ELEMENT_TYPE = Elements.faction.key;
 
 export default function GameRoutes() {
   return (
@@ -16,12 +20,10 @@ export default function GameRoutes() {
         path="/sector/:sector"
         render={({ match }) => (
           <SectorMap>
-            <Switch>
-              <Route
-                path={`${match.path}/:entityType?/:entity?`}
-                component={Sidebar}
-              />
-            </Switch>
+            <Route
+              path={`${match.path}/:entityType?/:entity?`}
+              component={Sidebar}
+            />
           </SectorMap>
         )}
       />
@@ -40,19 +42,17 @@ export default function GameRoutes() {
         )}
       />
       <Route
-        path="/element/faction"
+        path={`/elements/:sector/${Elements.faction.key}`}
         render={({ match }) => (
           <FactionTable>
-            <Switch>
-              <Route
-                path={`${match.path}/:faction`}
-                component={FactionSidebar}
-              />
-            </Switch>
+            <Route path={`${match.path}/:element`} component={FactionSidebar} />
           </FactionTable>
         )}
       />
-      <Redirect from="/element" to="/element/faction" />
+      <Redirect
+        from="/elements/:sector"
+        to={`/elements/:sector/${DEFAULT_ELEMENT_TYPE}`}
+      />
     </Switch>
   );
 }
