@@ -16,6 +16,7 @@ import Lock from 'react-feather/dist/icons/lock';
 import LogIn from 'react-feather/dist/icons/log-in';
 import LogOut from 'react-feather/dist/icons/log-out';
 import MoreHorizontal from 'react-feather/dist/icons/more-horizontal';
+import Package from 'react-feather/dist/icons/package';
 import Plus from 'react-feather/dist/icons/plus';
 import RefreshCw from 'react-feather/dist/icons/refresh-cw';
 import RotateCcw from 'react-feather/dist/icons/rotate-ccw';
@@ -44,6 +45,7 @@ export {
   LogIn,
   LogOut,
   MoreHorizontal,
+  Package,
   Plus,
   RefreshCw,
   RotateCcw,

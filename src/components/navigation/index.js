@@ -10,6 +10,7 @@ import {
 import {
   userUidSelector,
   currentSectorSelector,
+  isSharedSectorSelector,
   lastOverviewEntitySelector,
 } from 'store/selectors/base.selectors';
 
@@ -18,6 +19,7 @@ import Navigation from './navigation';
 const mapStateToProps = state => ({
   isLoggedIn: !!userUidSelector(state),
   currentSector: currentSectorSelector(state),
+  isSharedSector: isSharedSectorSelector(state),
   lastOverviewEntity: lastOverviewEntitySelector(state),
 });
 

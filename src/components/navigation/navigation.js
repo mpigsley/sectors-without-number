@@ -4,7 +4,15 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 
-import { User, Home, List, Grid, LogIn, LogOut } from 'constants/icons';
+import {
+  User,
+  Home,
+  List,
+  Grid,
+  LogIn,
+  LogOut,
+  Package,
+} from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 
@@ -15,6 +23,7 @@ export default function Navigation({
   openEditModal,
   openLoginModal,
   isLoggedIn,
+  isSharedSector,
   currentSector,
   location,
   lastOverviewEntity,
@@ -57,6 +66,24 @@ export default function Navigation({
       </span>
     );
   }
+
+  let elementsBtn;
+  if (!isSharedSector) {
+    elementsBtn = (
+      <Link
+        className={classNames('Navigation-Link', 'Navigation-Login')}
+        to="/elements"
+      >
+        <FlexContainer align="center">
+          <Package size="25" className="Navigation-Icon" />
+          <Header type={HeaderType.header4} className="Navigation-Title">
+            <FormattedMessage id="misc.elements" />
+          </Header>
+        </FlexContainer>
+      </Link>
+    );
+  }
+
   const route = location.pathname.split('/')[1];
   return (
     <FlexContainer
@@ -107,6 +134,7 @@ export default function Navigation({
             </Header>
           </FlexContainer>
         </Link>
+        {elementsBtn}
       </FlexContainer>
       {logoutButton}
     </FlexContainer>
@@ -116,6 +144,7 @@ export default function Navigation({
 Navigation.propTypes = {
   logout: PropTypes.func.isRequired,
   isLoggedIn: PropTypes.bool.isRequired,
+  isSharedSector: PropTypes.bool.isRequired,
   openEditModal: PropTypes.func.isRequired,
   openLoginModal: PropTypes.func.isRequired,
   currentSector: PropTypes.string,
