@@ -35,8 +35,8 @@ export default function EntityAttributes({
 }) {
   const hiddenAttributes = isShared
     ? Object.keys(pickBy(entity.visibility, vision => vision === false)).map(
-      key => key.replace('attr.', ''),
-    )
+        key => key.replace('attr.', ''),
+      )
     : [];
   const allAttributes = omit(entity.attributes, hiddenAttributes);
   const noAttributes = !entity.attributes || !size(allAttributes);

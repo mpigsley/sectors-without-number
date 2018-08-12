@@ -19,5 +19,8 @@ const mapStateToProps = state => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, { openExport })(ActionLayout),
+  connect(
+    mapStateToProps,
+    { openExport },
+  )(ActionLayout),
 );

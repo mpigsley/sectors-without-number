@@ -22,5 +22,8 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, mapDispatchToProps)(LayerActions),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(LayerActions),
 );

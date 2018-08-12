@@ -26,7 +26,8 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, { setEntityExport, closeExport, startPrint })(
-    ExportModal,
-  ),
+  connect(
+    mapStateToProps,
+    { setEntityExport, closeExport, startPrint },
+  )(ExportModal),
 );

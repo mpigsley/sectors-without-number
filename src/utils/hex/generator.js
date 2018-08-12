@@ -129,9 +129,9 @@ export default config => {
   const newConfig = config.renderSector
     ? config
     : Object.assign(config, {
-      rows: ROWS,
-      columns: COLUMNS,
-    });
+        rows: ROWS,
+        columns: COLUMNS,
+      });
   const hexSize = getHexSize(newConfig);
   const { widthUnit, scaledWidth, scaledHeight, heightUnit } = hexSize;
   const {

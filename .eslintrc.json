@@ -7,6 +7,7 @@
     "jest": true
   },
   "rules": {
+    "prettier/prettier": "error",
     "jsx-a11y/no-noninteractive-element-interactions": "off",
     "jsx-a11y/no-static-element-interactions": "off",
     "jsx-a11y/click-events-have-key-events": "off",
@@ -21,11 +22,10 @@
         "allowChildren": false
       }
     ],
-    "react/jsx-filename-extension": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".js"] }],
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "off",
     "import/extensions": "off",
-    "no-console": "off",
-    "indent": ["error", 2]
+    "no-console": ["error", { "allow": ["warn", "error"] }]
   }
 }
