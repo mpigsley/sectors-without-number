@@ -491,7 +491,7 @@
   "tags.culturalPower.description":
     "The world is a considerable cultural power in the sector, producing music, art, philosophy, or some similar intangible that their neighbors find irresistably attractive. Other worlds might have a profound degree of cultural cachet as the inheritor of some venerable artistic tradition.",
   "tags.culturalPower.enemies.0": "Murderously eccentric artist",
-  "tags.culturalPower.enemies.1": "Crazed fa",
+  "tags.culturalPower.enemies.1": "Crazed fan",
   "tags.culturalPower.enemies.2": "Failed artist with an obsessive grudge",
   "tags.culturalPower.enemies.3": "Critic with a crusade to enact",
   "tags.culturalPower.friends.0": "Struggling young artist",
@@ -502,7 +502,7 @@
   "tags.culturalPower.complications.0":
     "The art is slowly lethal to its masters",
   "tags.culturalPower.complications.1":
-    "The art ismentally or physically addictive",
+    "The art is mentally or physically addictive",
   "tags.culturalPower.complications.2":
     "The art is a fragment of ancient technical or military science",
   "tags.culturalPower.things.0": "The instrument of a legendary master",
@@ -565,7 +565,7 @@
   "tags.cyclicalDoom.enemies.0":
     "Offwolder seeking to trigger the apocalypse early for profit",
   "tags.cyclicalDoom.enemies.1":
-    "Local recklessly taking advantage or preparation stores",
+    "Local recklessly taking advantage of preparation stores",
   "tags.cyclicalDoom.enemies.2":
     "Demagogue claiming the cycle is merely a myth of the authorities",
   "tags.cyclicalDoom.friends.0": "Harried official working to prepare",
@@ -599,7 +599,7 @@
   "tags.desertWorld.friends.1": "Research biologist",
   "tags.desertWorld.friends.2": "Aspiring teraformer",
   "tags.desertWorld.complications.0": "Sandstorms",
-  "tags.desertWorld.complications.1": "Water supply failuer",
+  "tags.desertWorld.complications.1": "Water supply failure",
   "tags.desertWorld.complications.2": "Native warfare over water rights",
   "tags.desertWorld.things.0": "Enormous water reservoir",
   "tags.desertWorld.things.1": "Map of hidden wells",
@@ -663,7 +663,7 @@
   "tags.eugenicCult.description":
     "Even in the days before the Silence, major improvement of the human genome always seemed to come with unacceptable side-effects. Some worlds host secret cults that perpetuate these improvements regardless of the cost, and a few planets have been taken over entirely by the cults.",
   "tags.eugenicCult.enemies.0": "Eugenic superiority fanatic",
-  "tags.eugenicCult.enemies.1": "Mentally unstable hom superior",
+  "tags.eugenicCult.enemies.1": "Mentally unstable homo superior",
   "tags.eugenicCult.enemies.2": "Mad eugenic scientist",
   "tags.eugenicCult.friends.0": "Eugenic propagandist",
   "tags.eugenicCult.friends.1": "Biotechnical investigator",
@@ -2592,6 +2592,7 @@
   "misc.editLayer": "Edit Layer",
   "misc.editName": "Edit Name",
   "misc.editProfile": "Edit Profile",
+  "misc.elements": "Elements",
   "misc.email": "Email",
   "misc.emailPassword": "Email and password are required.",
   "misc.enemies": "Enemies",
@@ -2717,8 +2718,8 @@
   "misc.userAccount": "User Account",
   "misc.username": "Username",
   "misc.userProfile": "User Profile",
-  "misc.welcomeBuilder": "Welcome to the Sector Builder",
   "misc.website": "Website",
+  "misc.welcomeBuilder": "Welcome to the Sector Builder",
   "misc.wide": "Wide",
   "misc.windowTooSmall":
     "Your browser window is too small to render the sector. Please try on a larger screen.",
