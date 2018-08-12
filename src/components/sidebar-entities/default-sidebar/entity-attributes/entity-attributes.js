@@ -174,7 +174,8 @@ export default function EntityAttributes({
           onChange={item =>
             updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
           }
-          onGenerate={() => updateEntityInEdit({ attributes: { [key]: generateAttribute(entityType, key) } })}
+          icon={RefreshCw}
+          onItemClick={() => updateEntityInEdit({ attributes: { [key]: generateAttribute(entityType, key) } })}
           options={[
             ...map(attributes, attr => ({
               value: attr.key,

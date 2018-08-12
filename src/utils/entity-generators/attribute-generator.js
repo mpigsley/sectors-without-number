@@ -17,7 +17,6 @@ import * as researchBase from './research-base-generator'
 import * as spaceStation from './space-station-generator'
 
 export default (entityType, attribute) => {
-  console.log(entityType, attribute)
   switch (`${entityType}.${attribute}`) {
     case 'planet.techLevel': return generateTechLevel()
     case 'planet.atmosphere': return generateAtmosphere()

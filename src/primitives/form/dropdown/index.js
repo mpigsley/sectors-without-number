@@ -3,12 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Select, { Creatable } from 'react-select';
 
-import { RefreshCw } from 'constants/icons';
-
 import './style.css';
 
 export default function Dropdown(props) {
-  const { onGenerate, dropUp, allowCreate, wrapperClassName, ...rest } = props;
+  const { onItemClick, icon, dropUp, allowCreate, wrapperClassName, ...rest } = props;
   const newProps = Object.assign(
     {
       promptTextCreator: label => label,
@@ -16,6 +14,7 @@ export default function Dropdown(props) {
     rest,
   );
   const DropdownComponent = allowCreate ? Creatable : Select;
+  const Icon = icon;
   return (
     <div className={classNames('Dropdown', wrapperClassName)}>
       <DropdownComponent
@@ -25,12 +24,12 @@ export default function Dropdown(props) {
         })}
         optionClassName="Dropdown-Option"
       />
-      <div className="Generate">
-        <RefreshCw
-          onClick={onGenerate}
+      {icon && <div className="Dropdown-Generate">
+        <Icon
+          onClick={onItemClick}
           size={15}
         />
-      </div>
+      </div>}
     </div>
   );
 }
@@ -40,12 +39,12 @@ Dropdown.propTypes = {
   dropUp: PropTypes.bool,
   allowCreate: PropTypes.bool,
   wrapperClassName: PropTypes.string,
-  onGenerate: PropTypes.func,
+  onItemClick: PropTypes.func,
 };
 
 Dropdown.defaultProps = {
   dropUp: false,
   allowCreate: false,
   wrapperClassName: null,
-  onGenerate: () => {}
+  onItemClick: () => {}
 };

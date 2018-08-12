@@ -11,7 +11,7 @@ import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 import Input from 'primitives/form/input';
 
-import { X, Plus, EyeOff } from 'constants/icons';
+import { X, Plus, EyeOff, RefreshCw } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
 import { filter, includes, map, pull } from 'constants/lodash';
@@ -77,7 +77,8 @@ export default function EntityTags({
               },
             })
           }
-          onGenerate={() => updateEntityInEdit({ attributes: { tags: pull(entityTags, tag).concat(generateAttribute(entityType, 'tags')) } })}
+          icon={RefreshCw}
+          onItemClick={() => updateEntityInEdit({ attributes: { tags: pull(entityTags, tag).concat(generateAttribute(entityType, 'tags')) } })}
           options={filter(
             Entities[entityType].tags,
             ({ key }) => !includes(entity.attributes.tags, key) || key === tag,
