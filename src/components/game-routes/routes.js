@@ -1,10 +1,12 @@
 import React from 'react';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
 
 import SectorMap from 'components/sector-map';
 import Sidebar from 'components/sidebar';
 import OverviewList from 'components/overview-list';
 import OverviewTable from 'components/overview-table';
+import FactionTable from 'components/faction-table';
+import FactionSidebar from 'components/faction-sidebar';
 import EmptyOverview from 'components/empty-overview';
 
 export default function GameRoutes() {
@@ -37,6 +39,20 @@ export default function GameRoutes() {
           </OverviewList>
         )}
       />
+      <Route
+        path="/element/faction"
+        render={({ match }) => (
+          <FactionTable>
+            <Switch>
+              <Route
+                path={`${match.path}/:faction`}
+                component={FactionSidebar}
+              />
+            </Switch>
+          </FactionTable>
+        )}
+      />
+      <Redirect from="/element" to="/element/faction" />
     </Switch>
   );
 }
