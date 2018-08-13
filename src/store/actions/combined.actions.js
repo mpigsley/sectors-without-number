@@ -41,8 +41,9 @@ export const initialize = location => dispatch =>
     const { uid, locale } = user || {};
     const sectorId = location.pathname.split('/')[2];
     const isGameView =
-      location.pathname.startsWith('/sector') ||
-      location.pathname.startsWith('/overview');
+      location.pathname.startsWith('/sector/') ||
+      location.pathname.startsWith('/overview/') ||
+      location.pathname.startsWith('/elements/');
     const promises = [
       isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
       isGameView ? getNavigationData(sectorId) : Promise.resolve({}),

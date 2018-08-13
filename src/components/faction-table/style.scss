@@ -1,0 +1,18 @@
+.FactionTable {
+  display: grid;
+  grid-template-columns: [table] auto [sidebar] 0px [end];
+  grid-template-rows: [header] 4rem [table] auto [end];
+}
+
+.FactionTable-Header {
+  grid-column: table / sidebar;
+  grid-row: header / table;
+  padding: 0 2rem;
+}
+
+.FactionTable-Table {
+  grid-column: table / sidebar;
+  grid-row: table / end;
+  overflow: auto;
+  padding: 2rem;
+}

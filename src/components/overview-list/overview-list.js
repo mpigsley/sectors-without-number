@@ -42,7 +42,7 @@ export default class OverviewList extends Component {
   render() {
     return (
       <Fragment>
-        <FlexContainer flex="1">
+        <FlexContainer>
           <FlexContainer
             direction="column"
             align="center"
