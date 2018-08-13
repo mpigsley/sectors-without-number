@@ -67,7 +67,10 @@ export default function entity(state = initialState, action) {
     case LOCATION_CHANGE: {
       const { pathname } = action.payload.location;
       const isOverview = pathname.startsWith('/overview/');
-      const isGameView = pathname.startsWith('/sector/') || isOverview;
+      const isGameView =
+        pathname.startsWith('/sector/') ||
+        pathname.startsWith('/elements/') ||
+        isOverview;
       const currentSector = isGameView ? pathname.split('/')[2] : null;
       const uniqSectors = uniq([...state.saved, currentSector]).filter(s => s);
       const currentEntityType = isGameView ? pathname.split('/')[3] : null;
