@@ -1,4 +1,4 @@
-import { LOCATION_CHANGE } from 'react-router-redux';
+import { LOCATION_CHANGE } from 'connected-react-router';
 
 import {
   UPDATED_CONFIGURATION,
@@ -65,7 +65,7 @@ export default function sector(state = initialState, action) {
         fetched: uniq(state.fetched.map(id => action.mapping[id] || id)),
       };
     case LOCATION_CHANGE: {
-      const { pathname } = action.payload;
+      const { pathname } = action.payload.location;
       if (['/', '/configure', '/changelog'].indexOf(pathname) >= 0) {
         document.title = 'Sectors Without Number';
         return {
