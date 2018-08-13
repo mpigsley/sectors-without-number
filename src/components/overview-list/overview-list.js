@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import ProfileModal from 'components/profile-modal';
-import Navigation from 'components/navigation';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import LinkRow from 'primitives/other/link-row';
@@ -42,8 +41,7 @@ export default class OverviewList extends Component {
 
   render() {
     return (
-      <FlexContainer>
-        <Navigation />
+      <Fragment>
         <FlexContainer flex="1">
           <FlexContainer
             direction="column"
@@ -87,7 +85,7 @@ export default class OverviewList extends Component {
           {this.props.children}
         </FlexContainer>
         <ProfileModal />
-      </FlexContainer>
+      </Fragment>
     );
   }
 }

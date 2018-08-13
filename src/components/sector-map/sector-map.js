@@ -8,7 +8,6 @@ import ExpandedPrintable from 'components/printables/expanded-printable';
 import TopLevelEntityModal from 'components/top-level-entity-modal';
 import ProfileModal from 'components/profile-modal';
 import HexMap from 'components/hex-map';
-import Navigation from 'components/navigation';
 
 import ExportTypes from 'constants/export-types';
 import { debounce, isEmpty, map } from 'constants/lodash';
@@ -139,7 +138,6 @@ export default class SectorMap extends Component {
       <Fragment>
         <FlexContainer className="SectorMap" direction="row">
           {this.renderTooltips(hexes)}
-          <Navigation />
           <HexMap
             width={this.state.width}
             height={this.state.height}

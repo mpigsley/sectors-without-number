@@ -1,0 +1,14 @@
+.GameRoutes {
+  display: grid;
+  grid-template-columns: [navigation] 185px [game] auto [end];
+}
+
+.GameRoutes-Navigation {
+  grid-column: navigation / game;
+}
+
+@media (max-width: 1500px) {
+  .GameRoutes {
+    grid-template-columns: [navigation] 75px [game] auto [end];
+  }
+}
