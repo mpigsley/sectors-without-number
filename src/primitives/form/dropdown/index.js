@@ -32,8 +32,8 @@ export default function Dropdown(props) {
         optionClassName="Dropdown-Option"
       />
       {icon && (
-        <div className="Dropdown-Generate">
-          <Icon onClick={onItemClick} size={15} />
+        <div className="Dropdown-Icon" onClick={onItemClick}>
+          <Icon size={15} />
         </div>
       )}
     </div>

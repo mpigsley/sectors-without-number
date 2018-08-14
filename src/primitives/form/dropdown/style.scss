@@ -6,13 +6,14 @@
   letter-spacing: 0.1rem;
   position: relative;
 
-  .Dropdown-Generate {
+  .Dropdown-Icon {
     color: $dark1;
-    position: absolute;
-    left: 12px;
-    top: 11px;
-    transition: all 0.2s;
     cursor: pointer;
+    padding: 11px 11px 8px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transition: all 0.2s;
 
     &:hover {
       color: $dark3;
