@@ -4,7 +4,7 @@ import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
 import Chance from 'chance';
-import { without } from 'lodash';
+import { without } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -180,7 +180,9 @@ export default function EntityAttributes({
           onItemClick={() =>
             updateEntityInEdit({
               attributes: {
-                [key]: chance.pickone(without(Object.keys(attributes), attribute)),
+                [key]: chance.pickone(
+                  without(Object.keys(attributes), attribute),
+                ),
               },
             })
           }

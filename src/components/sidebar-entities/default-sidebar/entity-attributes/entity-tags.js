@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 import Chance from 'chance';
-import { without } from 'lodash'
+import { without } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -85,7 +85,9 @@ export default function EntityTags({
               attributes: {
                 tags: [
                   ...without(entityTags, tag),
-                  chance.pickone(without(Object.keys(Entities[entityType].tags), tag)),
+                  chance.pickone(
+                    without(Object.keys(Entities[entityType].tags), tag),
+                  ),
                 ],
               },
             })
