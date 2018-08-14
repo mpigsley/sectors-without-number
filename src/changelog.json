@@ -1,4 +1,8 @@
 {
+  "6.4.0": {
+    "description": "Upgrade router redux integration.",
+    "date": "8-13-2018"
+  },
   "6.3.6": {
     "description": "Notify eslint of prettier errors & redux devtools.",
     "date": "8-12-2018"
