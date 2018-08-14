@@ -13,16 +13,16 @@ export default function IconInput(props) {
   const Icon = icon;
   return (
     <div className={classNames('IconInput', wrapperClassName)}>
-      <Input
-        {...rest}
-        className={classNames('IconInput-Input', props.className)}
-      />
       <Icon
         className={classNames('IconInput-Icon', {
           'IconInput-Icon--clickable': onIconClick,
         })}
         onClick={onIconClick || defaultFunc}
         size={15}
+      />
+      <Input
+        {...rest}
+        className={classNames('IconInput-Input', props.className)}
       />
     </div>
   );
