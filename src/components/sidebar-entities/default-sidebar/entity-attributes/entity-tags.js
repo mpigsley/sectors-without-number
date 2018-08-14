@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
+import Chance from 'chance';
+import { without } from 'lodash'
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -15,9 +17,9 @@ import { X, Plus, EyeOff, RefreshCw } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
 import { filter, includes, map, pull } from 'constants/lodash';
-import generateAttribute from 'utils/entity-generators/attribute-generator'
 
 const ReactHint = ReactHintFactory(React);
+const chance = new Chance();
 
 const renderList = (listLength, listKey, key) => (
   <div key={listKey} className="EntityAttributes-Content">
@@ -78,7 +80,16 @@ export default function EntityTags({
             })
           }
           icon={RefreshCw}
-          onItemClick={() => updateEntityInEdit({ attributes: { tags: pull(entityTags, tag).concat(generateAttribute(entityType, 'tags')) } })}
+          onItemClick={() =>
+            updateEntityInEdit({
+              attributes: {
+                tags: [
+                  ...without(entityTags, tag),
+                  chance.pickone(without(Object.keys(Entities[entityType].tags), tag)),
+                ],
+              },
+            })
+          }
           options={filter(
             Entities[entityType].tags,
             ({ key }) => !includes(entity.attributes.tags, key) || key === tag,

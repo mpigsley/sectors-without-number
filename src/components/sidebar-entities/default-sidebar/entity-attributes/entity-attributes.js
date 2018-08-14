@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 import classNames from 'classnames';
+import Chance from 'chance';
+import { without } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -14,12 +16,12 @@ import Input from 'primitives/form/input';
 import { omit, map, values, pickBy, size } from 'constants/lodash';
 import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
-import generateAttribute from 'utils/entity-generators/attribute-generator'
 
 import EntityTags from './entity-tags';
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
+const chance = new Chance();
 
 export default function EntityAttributes({
   isSidebarEditActive,
@@ -175,7 +177,13 @@ export default function EntityAttributes({
             updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
           }
           icon={RefreshCw}
-          onItemClick={() => updateEntityInEdit({ attributes: { [key]: generateAttribute(entityType, key) } })}
+          onItemClick={() =>
+            updateEntityInEdit({
+              attributes: {
+                [key]: chance.pickone(without(Object.keys(attributes), attribute)),
+              },
+            })
+          }
           options={[
             ...map(attributes, attr => ({
               value: attr.key,
