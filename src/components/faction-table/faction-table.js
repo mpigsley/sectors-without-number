@@ -1,15 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
+import ButtonLink from 'primitives/other/button-link';
 import Button from 'primitives/other/button';
 
 import './style.css';
 
-export default function FactionTable({ children }) {
+export default function FactionTable({
+  children,
+  currentSector,
+  currentFaction,
+  isEditing,
+}) {
+  const isSidebarOpen = !!currentFaction || isEditing;
   return (
-    <div className="FactionTable">
+    <div
+      className={classNames('FactionTable', {
+        'FactionTable--sidebarOpen': isSidebarOpen,
+      })}
+    >
       <FlexContainer
         className="FactionTable-Header"
         justify="spaceBetween"
@@ -18,14 +30,30 @@ export default function FactionTable({ children }) {
         <Header type={HeaderType.header2} noMargin>
           Factions
         </Header>
-        <Button minimal>Export Factions</Button>
+        <FlexContainer>
+          <ButtonLink
+            to={`/elements/${currentSector}/faction/new`}
+            minimal
+            className="FactionTable-CreateAction"
+          >
+            Create Faction
+          </ButtonLink>
+          <Button minimal>Export Factions</Button>
+        </FlexContainer>
       </FlexContainer>
       <div className="FactionTable-Table">Table</div>
-      {children}
+      <div className="FactionTable-Sidebar">{children}</div>
     </div>
   );
 }
 
 FactionTable.propTypes = {
   children: PropTypes.node.isRequired,
+  currentSector: PropTypes.string.isRequired,
+  currentFaction: PropTypes.shape({}),
+  isEditing: PropTypes.bool.isRequired,
+};
+
+FactionTable.defaultProps = {
+  currentFaction: undefined,
 };

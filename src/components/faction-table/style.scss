@@ -1,7 +1,13 @@
+@import 'styles/constants';
+
 .FactionTable {
   display: grid;
   grid-template-columns: [table] auto [sidebar] 0px [end];
   grid-template-rows: [header] 4rem [table] auto [end];
+
+  &--sidebarOpen {
+    grid-template-columns: [table] auto [sidebar] $large-sidebar-width [end];
+  }
 }
 
 .FactionTable-Header {
@@ -15,4 +21,20 @@
   grid-row: table / end;
   overflow: auto;
   padding: 2rem;
+}
+
+.FactionTable-Sidebar {
+  grid-column: sidebar / end;
+  grid-row: header / end;
+  overflow: auto;
+}
+
+.FactionTable-CreateAction {
+  margin-right: 1rem;
+}
+
+@media (max-width: 1200px) {
+  .FactionTable--sidebarOpen {
+    grid-template-columns: [table] auto [sidebar] $small-sidebar-width [end];
+  }
 }

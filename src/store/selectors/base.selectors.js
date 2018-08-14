@@ -60,3 +60,7 @@ export const layerIsEditingSelector = state => state.layer.isEditing;
 export const layerRegionFormSelector = state => state.layer.regionForm;
 export const layerColorPickerSelector = state => state.layer.colorPicker;
 export const layerRegionPaintSelector = state => state.layer.regionPaint;
+
+/* Faction */
+export const factionsSelector = state => state.faction.models;
+export const factionIsEditingSelector = state => state.faction.isEditing;
