@@ -4,10 +4,6 @@ import { generateStationName } from 'utils/name-generator';
 import Occupation from 'constants/orbital-ruin/occupation';
 import Situation from 'constants/orbital-ruin/situation';
 
-const chance = new Chance();
-export const generateOccupation = () => chance.pickone(Object.keys(Occupation.attributes));
-export const generateSituation = () => chance.pickone(Object.keys(Situation.attributes));
-
 export const generateOrbitalRuin = ({
   sector,
   parent,
@@ -26,6 +22,7 @@ export const generateOrbitalRuin = ({
     );
   }
 
+  const chance = new Chance();
   let orbitalRuin = { name, parent, parentEntity, sector };
   if (isHidden !== undefined) {
     orbitalRuin = { ...orbitalRuin, isHidden };
@@ -40,8 +37,8 @@ export const generateOrbitalRuin = ({
     orbitalRuin = {
       ...orbitalRuin,
       attributes: {
-        occupation: generateOccupation(),
-        situation: generateSituation(),
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
       },
     };
   }

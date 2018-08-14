@@ -4,11 +4,6 @@ import { generateStationName } from 'utils/name-generator';
 import Occupation from 'constants/refueling-station/occupation';
 import Situation from 'constants/refueling-station/situation';
 
-const chance = new Chance();
-
-export const generateOccupation = () => chance.pickone(Object.keys(Occupation.attributes));
-export const generateSituation = () => chance.pickone(Object.keys(Situation.attributes));
-
 export const generateRefuelingStation = ({
   sector,
   parent,
@@ -27,6 +22,7 @@ export const generateRefuelingStation = ({
     );
   }
 
+  const chance = new Chance();
   let refuelingStation = { name, parent, parentEntity, sector };
   if (isHidden !== undefined) {
     refuelingStation = { ...refuelingStation, isHidden };
@@ -41,8 +37,8 @@ export const generateRefuelingStation = ({
     refuelingStation = {
       ...refuelingStation,
       attributes: {
-        occupation: generateOccupation(),
-        situation: generateSituation(),
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
       },
     };
   }

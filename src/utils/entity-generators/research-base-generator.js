@@ -4,10 +4,6 @@ import { generateStationName } from 'utils/name-generator';
 import Occupation from 'constants/research-base/occupation';
 import Situation from 'constants/research-base/situation';
 
-const chance = new Chance();
-export const generateOccupation = () => chance.pickone(Object.keys(Occupation.attributes));
-export const generateSituation = () => chance.pickone(Object.keys(Situation.attributes));
-
 export const generateResearchBase = ({
   sector,
   parent,
@@ -26,6 +22,7 @@ export const generateResearchBase = ({
     );
   }
 
+  const chance = new Chance();
   let researchBase = { name, parent, parentEntity, sector };
   if (isHidden !== undefined) {
     researchBase = { ...researchBase, isHidden };
@@ -40,8 +37,8 @@ export const generateResearchBase = ({
     researchBase = {
       ...researchBase,
       attributes: {
-        occupation: generateOccupation(),
-        situation: generateSituation(),
+        occupation: chance.pickone(Object.keys(Occupation.attributes)),
+        situation: chance.pickone(Object.keys(Situation.attributes)),
       },
     };
   }
