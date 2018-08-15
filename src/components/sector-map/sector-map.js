@@ -144,7 +144,7 @@ export default class SectorMap extends Component {
             hexes={hexes}
             isSector
           />
-          <div className="SectorMap-Sidebar">{this.props.children}</div>
+          {this.props.children}
         </FlexContainer>
         {this.renderPrintable(printable)}
         <TopLevelEntityModal />

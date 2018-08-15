@@ -1,5 +1,7 @@
 import React from 'react';
 
+import SidebarContainer from 'primitives/container/sidebar-container';
+
 export default function FactionTable() {
-  return <h1>Faction Sidebar</h1>;
+  return <SidebarContainer title="New Faction">Content</SidebarContainer>;
 }

@@ -5,21 +5,9 @@
   overflow: hidden;
 }
 
-.SectorMap-Sidebar {
-  background-color: $dark3;
-  display: flex;
-  width: $large-sidebar-width;
-}
-
 @media (max-width: 700px) {
   .SectorMap-Sidebar {
     display: none;
-  }
-}
-
-@media (max-width: 1200px) {
-  .SectorMap-Sidebar {
-    width: $small-sidebar-width;
   }
 }
 
