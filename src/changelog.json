@@ -1,4 +1,8 @@
 {
+  "6.5.0": {
+    "description": "Allow dropdown attributes/tags to be randomized with button.",
+    "date": "8-14-2018"
+  },
   "6.4.0": {
     "description": "Upgrade router redux integration.",
     "date": "8-13-2018"
@@ -12,8 +16,7 @@
     "date": "8-11-2018"
   },
   "6.3.4": {
-    "description":
-      "Sort newly saved sectors on home screen according to current date.",
+    "description": "Sort newly saved sectors on home screen according to current date.",
     "date": "8-6-2018"
   },
   "6.3.3": {
@@ -21,8 +24,7 @@
     "date": "8-5-2018"
   },
   "6.3.2": {
-    "description":
-      "Fix API errors that resulted in an error popup although the update succeeded.",
+    "description": "Fix API errors that resulted in an error popup although the update succeeded.",
     "date": "7-29-2018"
   },
   "6.3.1": {
@@ -34,13 +36,11 @@
     "date": "7-11-2018"
   },
   "6.2.3": {
-    "description":
-      "Fix a long-standing bug where entities generated in the sidebar wouldn't generate children even if that box was checked.",
+    "description": "Fix a long-standing bug where entities generated in the sidebar wouldn't generate children even if that box was checked.",
     "date": "7-10-2018"
   },
   "6.2.2": {
-    "description":
-      "When removing a region, don't remove other regions on the same hexes.",
+    "description": "When removing a region, don't remove other regions on the same hexes.",
     "date": "7-6-2018"
   },
   "6.2.1": {
@@ -48,13 +48,11 @@
     "date": "7-6-2018"
   },
   "6.2.0": {
-    "description":
-      "Add option in the floating toolbar to toggle between player/game master views.",
+    "description": "Add option in the floating toolbar to toggle between player/game master views.",
     "date": "7-5-2018"
   },
   "6.1.0": {
-    "description":
-      "When navigating back to the overview lists, start at last viewed location.",
+    "description": "When navigating back to the overview lists, start at last viewed location.",
     "date": "7-5-2018"
   },
   "6.0.0": {
@@ -71,23 +69,19 @@
     ]
   },
   "5.4.4": {
-    "description":
-      "Fix bug where navigation would disappear after entity edit.",
+    "description": "Fix bug where navigation would disappear after entity edit.",
     "date": "6-24-2018"
   },
   "5.4.3": {
-    "description":
-      "Update planet attribute probability to match the 2d6 dice rolls.",
+    "description": "Update planet attribute probability to match the 2d6 dice rolls.",
     "date": "6-18-2018"
   },
   "5.4.2": {
-    "description":
-      "Fix bug with disappearing navigation routes when an entity is updated.",
+    "description": "Fix bug with disappearing navigation routes when an entity is updated.",
     "date": "6-8-2018"
   },
   "5.4.1": {
-    "description":
-      "Fix bug where newly saved sector redirects to a loading view.",
+    "description": "Fix bug where newly saved sector redirects to a loading view.",
     "date": "6-6-2018"
   },
   "5.4.0": {
@@ -108,18 +102,15 @@
     ]
   },
   "5.1.1": {
-    "description":
-      "Fix redirects from overview to sector view when viewing a shared sector.",
+    "description": "Fix redirects from overview to sector view when viewing a shared sector.",
     "date": "5-21-2018"
   },
   "5.1.0": {
-    "description":
-      "Add configuration parameter to hide occupation and situation.",
+    "description": "Add configuration parameter to hide occupation and situation.",
     "date": "5-20-2018"
   },
   "5.0.1": {
-    "description":
-      "Fix the great work tag misspellings & missing tags section in edit.",
+    "description": "Fix the great work tag misspellings & missing tags section in edit.",
     "date": "5-19-2018"
   },
   "5.0.0": {
@@ -163,8 +154,7 @@
     "date": "4-27-2018"
   },
   "4.3.5": {
-    "description":
-      "Hide children entities of hidden parents in overview lists.",
+    "description": "Hide children entities of hidden parents in overview lists.",
     "date": "4-24-2018",
     "changes": [
       "Fix misspelling in local tech world tags.",
@@ -173,21 +163,18 @@
     ]
   },
   "4.3.4": {
-    "description":
-      "Fix bug where large sectors in small viewports wouldn't render the system & black hole icons.",
+    "description": "Fix bug where large sectors in small viewports wouldn't render the system & black hole icons.",
     "date": "4-10-2018"
   },
   "4.3.3": {
-    "description":
-      "Fix clicking on map and, in some cases, the systems being deleted.",
+    "description": "Fix clicking on map and, in some cases, the systems being deleted.",
     "date": "4-9-2018",
     "changes": [
       "Fix arrow size so that it looks consistent between monitor resolutions"
     ]
   },
   "4.3.2": {
-    "description":
-      "Prevent syncing when non-logged users try to create system from sector map.",
+    "description": "Prevent syncing when non-logged users try to create system from sector map.",
     "date": "4-8-2018"
   },
   "4.3.1": {
@@ -205,13 +192,11 @@
     ]
   },
   "4.2.3": {
-    "description":
-      "Fix problem with tags where edit would persist even when 'cancel' was selected.",
+    "description": "Fix problem with tags where edit would persist even when 'cancel' was selected.",
     "date": "4-2-2018"
   },
   "4.2.2": {
-    "description":
-      "Fix incorrectly formatted french translation for entity tags.",
+    "description": "Fix incorrectly formatted french translation for entity tags.",
     "date": "4-2-2018"
   },
   "4.2.1": {
@@ -229,8 +214,7 @@
     "date": "3-30-2018"
   },
   "4.1.1": {
-    "description":
-      "When saving a new sector, update application state so that every new save doesn't create another sector.",
+    "description": "When saving a new sector, update application state so that every new save doesn't create another sector.",
     "date": "3-28-2018"
   },
   "4.1.0": {
@@ -242,8 +226,7 @@
     ]
   },
   "4.0.0": {
-    "description":
-      "Optimize webapp start time and remove old sector converter.",
+    "description": "Optimize webapp start time and remove old sector converter.",
     "date": "3-23-2018",
     "changes": [
       "Locally saved sectors can no longer be retrieved.",
@@ -252,8 +235,7 @@
     ]
   },
   "3.14.2": {
-    "description":
-      "Fix problem with translations when an attribute is undefined.",
+    "description": "Fix problem with translations when an attribute is undefined.",
     "date": "3-21-2018"
   },
   "3.14.1": {
@@ -307,8 +289,7 @@
     "date": "3-2-2018"
   },
   "3.9.1": {
-    "description":
-      "Fix error that renders a blank page when compiling printable information.",
+    "description": "Fix error that renders a blank page when compiling printable information.",
     "date": "3-2-2018"
   },
   "3.9.0": {
@@ -339,23 +320,19 @@
     "date": "2-11-2018"
   },
   "3.5.0": {
-    "description":
-      "Use deep space station attributes for space station as well.",
+    "description": "Use deep space station attributes for space station as well.",
     "date": "2-7-2018"
   },
   "3.4.0": {
-    "description":
-      "Persisting sector updates locally is no longer possible. You'll need to sign up to sync them.",
+    "description": "Persisting sector updates locally is no longer possible. You'll need to sign up to sync them.",
     "date": "2-4-2018"
   },
   "3.3.0": {
-    "description":
-      "Allow entities to be hidden from anyone who is not the sector's creator (a.k.a. your players).",
+    "description": "Allow entities to be hidden from anyone who is not the sector's creator (a.k.a. your players).",
     "date": "2-4-2018"
   },
   "3.2.0": {
-    "description":
-      "Remove asteroid belts and deep space stations from sector (spike drill can't make it there).",
+    "description": "Remove asteroid belts and deep space stations from sector (spike drill can't make it there).",
     "date": "2-1-2018",
     "changes": [
       "Reconfigured asteroid belts to be apart of a system",
@@ -382,8 +359,7 @@
     ]
   },
   "3.0.1": {
-    "description":
-      "Fix minor issue where the last viewed sector overlays the changelog page.",
+    "description": "Fix minor issue where the last viewed sector overlays the changelog page.",
     "date": "1-16-2018"
   },
   "3.0.0": {
@@ -404,8 +380,7 @@
     "date": "12-25-2017"
   },
   "2.2.1": {
-    "description":
-      "Fix issue where planets in name would open a creation modal instead of an edit modal.",
+    "description": "Fix issue where planets in name would open a creation modal instead of an edit modal.",
     "date": "11-14-2017"
   },
   "2.2.0": {
@@ -413,8 +388,7 @@
     "date": "11-12-2017"
   },
   "2.1.1": {
-    "description":
-      "Fix issue where the sector builder wasn't being initialized.",
+    "description": "Fix issue where the sector builder wasn't being initialized.",
     "date": "11-11-2017"
   },
   "2.1.0": {
@@ -442,8 +416,7 @@
     "date": "10-10-2017"
   },
   "1.10.0": {
-    "description":
-      "Add a system by long-clicking on an empty hex in the sector view.",
+    "description": "Add a system by long-clicking on an empty hex in the sector view.",
     "date": "10-8-2017"
   },
   "1.9.0": {
@@ -459,8 +432,7 @@
     "date": "10-7-2017"
   },
   "1.8.2": {
-    "description":
-      "In large viewports don't show the 'Browser window too small' message.",
+    "description": "In large viewports don't show the 'Browser window too small' message.",
     "date": "10-4-2017"
   },
   "1.8.1": {
@@ -494,8 +466,7 @@
     ]
   },
   "1.5.0": {
-    "description":
-      "Add tests to the sector generator utilities so the core of the app doesn't break on subsequent changes.",
+    "description": "Add tests to the sector generator utilities so the core of the app doesn't break on subsequent changes.",
     "date": "9-9-2017"
   },
   "1.4.3": {
@@ -529,8 +500,7 @@
     "date": "8-22-2017"
   },
   "1.2.0": {
-    "description":
-      "Adds system movement. Click and hold any system in the grid, drag to a new location, and let go.",
+    "description": "Adds system movement. Click and hold any system in the grid, drag to a new location, and let go.",
     "date": "8-15-2017",
     "changes": [
       "Any un-saved sector will be saved on system movement.",
@@ -538,8 +508,7 @@
     ]
   },
   "1.1.0": {
-    "description":
-      "Ability to save a sector to the current browser. This is a local save rather than persistance to a backend.",
+    "description": "Ability to save a sector to the current browser. This is a local save rather than persistance to a backend.",
     "date": "8-13-2017",
     "changes": [
       "Save any generated sector locally.",
@@ -547,8 +516,7 @@
     ]
   },
   "1.0.0": {
-    "description":
-      "A scalable SVG viewport based on screen size with a random generator by seed.",
+    "description": "A scalable SVG viewport based on screen size with a random generator by seed.",
     "date": "8-11-2017",
     "changes": [
       "Randomly assign revised edition world tags.",

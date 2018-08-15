@@ -6,7 +6,14 @@ import Select, { Creatable } from 'react-select';
 import './style.css';
 
 export default function Dropdown(props) {
-  const { dropUp, allowCreate, wrapperClassName, ...rest } = props;
+  const {
+    onItemClick,
+    icon,
+    dropUp,
+    allowCreate,
+    wrapperClassName,
+    ...rest
+  } = props;
   const newProps = Object.assign(
     {
       promptTextCreator: label => label,
@@ -14,6 +21,7 @@ export default function Dropdown(props) {
     rest,
   );
   const DropdownComponent = allowCreate ? Creatable : Select;
+  const Icon = icon;
   return (
     <div className={classNames('Dropdown', wrapperClassName)}>
       <DropdownComponent
@@ -23,6 +31,11 @@ export default function Dropdown(props) {
         })}
         optionClassName="Dropdown-Option"
       />
+      {icon && (
+        <div className="Dropdown-Icon" onClick={onItemClick}>
+          <Icon size={15} />
+        </div>
+      )}
     </div>
   );
 }
@@ -32,10 +45,12 @@ Dropdown.propTypes = {
   dropUp: PropTypes.bool,
   allowCreate: PropTypes.bool,
   wrapperClassName: PropTypes.string,
+  onItemClick: PropTypes.func,
 };
 
 Dropdown.defaultProps = {
   dropUp: false,
   allowCreate: false,
   wrapperClassName: null,
+  onItemClick: () => {},
 };

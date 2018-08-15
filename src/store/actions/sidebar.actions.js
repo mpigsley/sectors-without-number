@@ -22,6 +22,7 @@ import {
   isNil,
   zipObject,
   isNumber,
+  includes,
 } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@sidebar';
@@ -94,29 +95,35 @@ export const updateEntityInEdit = changes => (dispatch, getState) => {
   const entityId = getCurrentEntityId(state);
   const entityType = getCurrentEntityType(state);
   const entity = sidebarEditEntitySelector(state);
-  const updates = {
-    ...changes,
-    attributes: omitBy(
-      {
-        ...(entity.attributes || {}),
-        ...(changes.attributes || {}),
-      },
-      isNil,
-    ),
-    visibility: omitBy(
-      {
-        ...(entity.visibility || {}),
-        ...(changes.visibility || {}),
-      },
-      isNil,
-    ),
-  };
+  const attributes = omitBy(
+    {
+      ...(entity.attributes || {}),
+      ...(changes.attributes || {}),
+    },
+    isNil,
+  );
+  const visibility = omitBy(
+    {
+      ...(entity.visibility || {}),
+      ...(changes.visibility || {}),
+    },
+    (item, key) => {
+      const [type, specifier] = key.split('.');
+      const tagNotIncluded =
+        type === 'tag' && !includes(attributes.tags, specifier);
+      return isNil(item) || tagNotIncluded;
+    },
+  );
 
   return dispatch({
     type: UPDATED_ENTITY_IN_EDIT,
     entityId,
     entityType,
-    updates,
+    updates: {
+      ...changes,
+      attributes,
+      visibility,
+    },
   });
 };
 
