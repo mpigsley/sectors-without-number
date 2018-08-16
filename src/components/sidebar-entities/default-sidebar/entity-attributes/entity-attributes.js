@@ -12,7 +12,7 @@ import LinkIcon from 'primitives/other/link-icon';
 import Dropdown from 'primitives/form/dropdown';
 import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
-import LabeledInput from 'primitives/form/labeled-input';
+import LabeledItem from 'primitives/form/labeled-item';
 
 import { omit, map, values, pickBy, size } from 'constants/lodash';
 import { RefreshCw, EyeOff } from 'constants/icons';
@@ -59,26 +59,30 @@ export default function EntityAttributes({
     let descriptionAttribute = null;
     if (isSidebarEditActive) {
       nameAttribute = (
-        <LabeledInput label={<FormattedMessage id="misc.name" />}>
-          <IconInput
-            wrapperClassName="EntityAttributes-Item"
-            value={entity.name}
-            onChange={({ target }) =>
-              updateEntityInEdit({ name: target.value })
-            }
-            onIconClick={() =>
-              updateEntityInEdit({ name: Entities[entityType].nameGenerator() })
-            }
-            icon={RefreshCw}
-          />
-          <Input
-            className="EntityAttributes-Checkbox"
-            disabled
-            checked={false}
-            onChange={() => {}}
-            type="checkbox"
-          />
-        </LabeledInput>
+        <LabeledItem label="misc.name">
+          <span>
+            <IconInput
+              wrapperClassName="EntityAttributes-Item"
+              value={entity.name}
+              onChange={({ target }) =>
+                updateEntityInEdit({ name: target.value })
+              }
+              onIconClick={() =>
+                updateEntityInEdit({
+                  name: Entities[entityType].nameGenerator(),
+                })
+              }
+              icon={RefreshCw}
+            />
+            <Input
+              className="EntityAttributes-Checkbox"
+              disabled
+              checked={false}
+              onChange={() => {}}
+              type="checkbox"
+            />
+          </span>
+        </LabeledItem>
       );
       descriptionAttribute = (
         <FlexContainer align="center" className="EntityAttributes-Attribute">
@@ -95,12 +99,8 @@ export default function EntityAttributes({
       );
       if (entityType !== Entities.sector.key) {
         hiddenAttribute = (
-          <FlexContainer align="center" className="EntityAttributes-Attribute">
-            <b className="EntityAttributes-Header">
-              <FormattedMessage id="misc.isHidden" />:
-            </b>
+          <LabeledItem label="misc.isHidden">
             <Input
-              className="EntityAttributes-Item"
               type="checkbox"
               checked={!!entity.isHidden || isAncestorHidden}
               disabled={isAncestorHidden}
@@ -108,22 +108,16 @@ export default function EntityAttributes({
                 updateEntityInEdit({ isHidden: target.checked })
               }
             />
-          </FlexContainer>
+          </LabeledItem>
         );
       }
     } else if ((entity.attributes || {}).description) {
       descriptionAttribute = (
-        <FlexContainer
-          direction="column"
-          className="EntityAttributes-Attribute"
-        >
-          <b className="EntityAttributes-Header">
-            <FormattedMessage id="misc.description" />:
-          </b>
-          <span className="EntityAttributes-Item EntityAttributes-Item--multiline">
+        <LabeledItem label="misc.description" isVertical>
+          <span className="EntityAttributes--itemMultiline">
             {(entity.attributes || {}).description}
           </span>
-        </FlexContainer>
+        </LabeledItem>
       );
     }
 
@@ -137,23 +131,19 @@ export default function EntityAttributes({
       }
 
       return (
-        <FlexContainer
+        <LabeledItem
           key={key}
-          className={classNames('EntityAttributes-Attribute', {
-            'EntityAttributes-Attribute--hidden': visibility === false,
+          label={name}
+          className={classNames({
+            'EntityAttributes--itemHidden': visibility === false,
           })}
         >
-          <b className="EntityAttributes-Header">
-            <FormattedMessage id={name} />:
-          </b>
-          <span className="EntityAttributes-Item">
-            {attributes[attribute] ? (
-              <FormattedMessage id={attributes[attribute].name} />
-            ) : (
-              attribute
-            )}
-          </span>
-        </FlexContainer>
+          {attributes[attribute] ? (
+            <FormattedMessage id={attributes[attribute].name} />
+          ) : (
+            attribute
+          )}
+        </LabeledItem>
       );
     };
 
