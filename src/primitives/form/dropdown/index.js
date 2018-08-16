@@ -5,15 +5,14 @@ import Select, { Creatable } from 'react-select';
 
 import './style.css';
 
-export default function Dropdown(props) {
-  const {
-    onItemClick,
-    icon,
-    dropUp,
-    allowCreate,
-    wrapperClassName,
-    ...rest
-  } = props;
+export default function Dropdown({
+  onItemClick,
+  icon,
+  dropUp,
+  allowCreate,
+  wrapperClassName,
+  ...rest
+}) {
   const newProps = Object.assign(
     {
       promptTextCreator: label => label,
@@ -27,7 +26,8 @@ export default function Dropdown(props) {
       <DropdownComponent
         {...newProps}
         className={classNames('Dropdown-Select', newProps.className, {
-          'Dropdoown-Up': dropUp,
+          'Dropdown-Select--up': dropUp,
+          'Dropdown-Select--icon': icon,
         })}
         optionClassName="Dropdown-Option"
       />

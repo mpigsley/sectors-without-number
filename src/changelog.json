@@ -1,4 +1,8 @@
 {
+  "6.5.1": {
+    "description": "Don't add left dropdown padding if icon is not supplied.",
+    "date": "8-16-2018"
+  },
   "6.5.0": {
     "description": "Allow dropdown attributes/tags to be randomized with button.",
     "date": "8-14-2018"
