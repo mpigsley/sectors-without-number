@@ -12,6 +12,7 @@ import LinkIcon from 'primitives/other/link-icon';
 import Dropdown from 'primitives/form/dropdown';
 import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
+import LabeledInput from 'primitives/form/labeled-input';
 
 import { omit, map, values, pickBy, size } from 'constants/lodash';
 import { RefreshCw, EyeOff } from 'constants/icons';
@@ -58,10 +59,7 @@ export default function EntityAttributes({
     let descriptionAttribute = null;
     if (isSidebarEditActive) {
       nameAttribute = (
-        <FlexContainer align="center" className="EntityAttributes-Attribute">
-          <b className="EntityAttributes-Header">
-            <FormattedMessage id="misc.name" />:
-          </b>
+        <LabeledInput label={<FormattedMessage id="misc.name" />}>
           <IconInput
             wrapperClassName="EntityAttributes-Item"
             value={entity.name}
@@ -80,7 +78,7 @@ export default function EntityAttributes({
             onChange={() => {}}
             type="checkbox"
           />
-        </FlexContainer>
+        </LabeledInput>
       );
       descriptionAttribute = (
         <FlexContainer align="center" className="EntityAttributes-Attribute">

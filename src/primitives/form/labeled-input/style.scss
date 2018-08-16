@@ -1,0 +1,17 @@
+@import 'styles/theme';
+
+.LabeledInput {
+  color: $light2;
+  font-size: 0.9rem;
+  padding: 0.2rem 0;
+
+  &--hidden {
+    color: $light1;
+  }
+}
+
+.LabeledInput-Label {
+  margin-top: 0.3rem;
+  min-width: 7rem;
+  padding-right: 0.5rem;
+}
