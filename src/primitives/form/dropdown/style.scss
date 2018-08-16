@@ -5,19 +5,19 @@
   font-weight: 400;
   letter-spacing: 0.1rem;
   position: relative;
+}
 
-  .Dropdown-Icon {
-    color: $dark1;
-    cursor: pointer;
-    padding: 11px 11px 8px;
-    position: absolute;
-    left: 0;
-    top: 0;
-    transition: all 0.2s;
+.Dropdown-Icon {
+  color: $dark1;
+  cursor: pointer;
+  padding: 11px 11px 8px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: all 0.2s;
 
-    &:hover {
-      color: $dark3;
-    }
+  &:hover {
+    color: $dark3;
   }
 }
 
@@ -31,7 +31,17 @@
     line-height: 20px;
   }
 
-  &.Dropdoown-Up {
+  &.Dropdown-Select--icon {
+    .Select-input > input {
+      padding-left: 30px;
+    }
+
+    .Select-value {
+      padding-left: 40px;
+    }
+  }
+
+  &.Dropdown-Select--up {
     .Select-menu-outer {
       bottom: 100%;
       top: auto;
@@ -67,7 +77,6 @@
     }
 
     .Select-value {
-      padding-left: 40px;
       color: $dark4;
       line-height: 35px;
     }
@@ -81,7 +90,6 @@
     }
 
     .Select-input > input {
-      padding-left: 30px;
       color: $dark4;
     }
   }
