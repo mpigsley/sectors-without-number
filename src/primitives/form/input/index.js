@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import Dropdown from 'primitives/form/dropdown';
+
 import './style.css';
 
 export default function Input(props) {
@@ -19,6 +21,10 @@ export default function Input(props) {
           'Input--error': error,
         })}
       />
+    );
+  } else if (type === 'dropdown') {
+    return (
+      <Dropdown wrapperClassName="Input-Dropdown" style={style} {...rest} />
     );
   }
   return (

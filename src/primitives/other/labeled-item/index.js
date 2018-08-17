@@ -19,11 +19,7 @@ export default function LabeledItem({ isVertical, label, children }) {
       <Label noPadding className="LabeledItem-Label">
         <FormattedMessage id={label} />:
       </Label>
-      {React.Children.map(children, child =>
-        React.cloneElement(child, {
-          className: classNames(child.props.className, 'LabeledItem-Input'),
-        }),
-      )}
+      <FlexContainer className="LabeledItem-Item">{children}</FlexContainer>
     </FlexContainer>
   );
 }
