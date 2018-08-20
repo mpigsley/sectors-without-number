@@ -10,7 +10,7 @@ import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import LinkIcon from 'primitives/other/link-icon';
 import Input from 'primitives/form/input';
-import LabeledItem from 'primitives/form/labeled-item';
+import LabeledItem from 'primitives/other/labeled-item';
 import LabeledInput from 'primitives/form/labeled-input';
 
 import { omit, map, values, pickBy, size } from 'constants/lodash';

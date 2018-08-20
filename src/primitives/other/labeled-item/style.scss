@@ -8,6 +8,7 @@
   &--vertical {
     align-items: flex-start;
     flex-direction: column;
+    width: 100%;
   }
 }
 
@@ -15,6 +16,7 @@
   margin: 0;
   min-width: 7rem;
   padding-right: 0.5rem;
+  text-align: left;
 }
 
 .LabeledItem-Item {

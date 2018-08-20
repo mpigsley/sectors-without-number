@@ -13,11 +13,17 @@ export default function LabeledInput({
   type,
   icon,
   checkboxes,
+  isVertical,
+  className,
   ...rest
 }) {
   const InputComponent = icon && type !== 'dropdown' ? IconInput : Input;
   return (
-    <LabeledItem label={label} isVertical={type === 'textarea'}>
+    <LabeledItem
+      className={className}
+      label={label}
+      isVertical={isVertical || type === 'textarea'}
+    >
       <InputComponent type={type} icon={icon} {...rest} />
       {React.Children.map(checkboxes, checkbox =>
         React.cloneElement(checkbox, {
@@ -36,10 +42,14 @@ LabeledInput.propTypes = {
   type: PropTypes.string,
   icon: PropTypes.func,
   checkboxes: PropTypes.arrayOf(PropTypes.node),
+  isVertical: PropTypes.bool,
+  className: PropTypes.string,
 };
 
 LabeledInput.defaultProps = {
   type: 'text',
   icon: undefined,
   checkboxes: [],
+  isVertical: false,
+  className: undefined,
 };

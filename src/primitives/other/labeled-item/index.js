@@ -8,11 +8,16 @@ import Label from 'primitives/form/label';
 
 import './style.css';
 
-export default function LabeledItem({ isVertical, label, children }) {
+export default function LabeledItem({
+  isVertical,
+  label,
+  children,
+  className,
+}) {
   return (
     <FlexContainer
       align="center"
-      className={classNames('LabeledItem', {
+      className={classNames('LabeledItem', className, {
         'LabeledItem--vertical': isVertical,
       })}
     >
@@ -28,8 +33,10 @@ LabeledItem.propTypes = {
   isVertical: PropTypes.bool,
   label: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
+  className: PropTypes.string,
 };
 
 LabeledItem.defaultProps = {
   isVertical: false,
+  className: undefined,
 };

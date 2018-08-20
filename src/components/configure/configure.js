@@ -7,12 +7,11 @@ import StarBackground from 'components/star-background';
 import Header, { HeaderType } from 'primitives/text/header';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
-import IconInput from 'primitives/form/icon-input';
 import Checkbox from 'primitives/form/checkbox';
-import Input from 'primitives/form/input';
-import Label from 'primitives/form/label';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
+import ItemRow from 'primitives/other/item-row';
+import LabeledInput from 'primitives/form/labeled-input';
 
 import { Zap, RefreshCw } from 'constants/icons';
 import { generateSectorName } from 'utils/name-generator';
@@ -65,10 +64,9 @@ export default function Configure({
           <FormattedMessage id="misc.configure" />
         </Header>
         <SubContainer noMargin direction="column" align="flexStart">
-          <Label noPadding htmlFor="name">
-            <FormattedMessage id="misc.sectorName" />
-          </Label>
-          <IconInput
+          <LabeledInput
+            isVertical
+            label="misc.sectorName"
             name="name"
             data-key="name"
             icon={RefreshCw}
@@ -76,42 +74,26 @@ export default function Configure({
             onChange={updateInput}
             onIconClick={regenerateName(generateSectorName)}
           />
-          <SubContainer noMargin>
-            <SubContainer
-              className="Configure-ButtonContainer"
-              noMargin
-              direction="column"
-              align="flexStart"
-            >
-              <Label htmlFor="rows">
-                <FormattedMessage id="misc.rows" />
-              </Label>
-              <Input
-                data-key="rows"
-                onChange={limitDimensions(updateInput)}
-                name="rows"
-                type="number"
-                value={rows || ''}
-              />
-            </SubContainer>
-            <SubContainer
-              className="Configure-ButtonContainer"
-              noMargin
-              direction="column"
-              align="flexStart"
-            >
-              <Label htmlFor="columns">
-                <FormattedMessage id="misc.columns" />
-              </Label>
-              <Input
-                data-key="columns"
-                onChange={limitDimensions(updateInput)}
-                name="columns"
-                type="number"
-                value={columns || ''}
-              />
-            </SubContainer>
-          </SubContainer>
+          <ItemRow>
+            <LabeledInput
+              isVertical
+              label="misc.rows"
+              data-key="rows"
+              onChange={limitDimensions(updateInput)}
+              name="rows"
+              type="number"
+              value={rows || ''}
+            />
+            <LabeledInput
+              isVertical
+              label="misc.columns"
+              data-key="columns"
+              onChange={limitDimensions(updateInput)}
+              name="columns"
+              type="number"
+              value={columns || ''}
+            />
+          </ItemRow>
           <Checkbox
             data-key="isBuilder"
             value={isBuilder}
