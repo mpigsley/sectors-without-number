@@ -34,40 +34,26 @@
   "entity.asteroidBase": "Asteroidenbasis",
   "entity.asteroidBases": "Asteroidenbasen",
   "entity.asteroidBase.occupation.sectarians": "Eifriger SektiererInnen",
-  "entity.asteroidBase.occupation.rebels":
-    "Gescheiterte RebellInnen von einem anderen Planeten",
-  "entity.asteroidBase.occupation.miners":
-    "Genossenschaftliche Lohnsklaven Bergarbeiter",
-  "entity.asteroidBase.occupation.prospectors":
-    "Unabhängige AsteroidenschürferInnen",
-  "entity.asteroidBase.occupation.pirates":
-    "PiratInnen, die sich als etwas anderes ausgeben",
-  "entity.asteroidBase.situation.life":
-    "Lebenserhaltungssystems sind gefährdet",
-  "entity.asteroidBase.situation.asteroid":
-    "Basis benötigt einen neuen Asteroid",
+  "entity.asteroidBase.occupation.rebels": "Gescheiterte RebellInnen von einem anderen Planeten",
+  "entity.asteroidBase.occupation.miners": "Genossenschaftliche Lohnsklaven Bergarbeiter",
+  "entity.asteroidBase.occupation.prospectors": "Unabhängige AsteroidenschürferInnen",
+  "entity.asteroidBase.occupation.pirates": "PiratInnen, die sich als etwas anderes ausgeben",
+  "entity.asteroidBase.situation.life": "Lebenserhaltungssystems sind gefährdet",
+  "entity.asteroidBase.situation.asteroid": "Basis benötigt einen neuen Asteroid",
   "entity.asteroidBase.situation.nasty": "Etwas Scheußliches wurde ausgegraben",
   "entity.asteroidBase.situation.fighting": "Bekämpft einen anderen Asteroiden",
-  "entity.asteroidBase.situation.priceless":
-    "Hat eine unschätzbare Erzader getroffen",
+  "entity.asteroidBase.situation.priceless": "Hat eine unschätzbare Erzader getroffen",
   "entity.asteroidBelt": "Asteroidengürtel",
   "entity.asteroidBelts": "Asteroidengürtel",
-  "entity.asteroidBelt.occupation.mine":
-    "Verwitterte (Asteroiden-) BergarbeiterInnen",
+  "entity.asteroidBelt.occupation.mine": "Verwitterte (Asteroiden-) BergarbeiterInnen",
   "entity.asteroidBelt.occupation.drones": "Uralte, automatische Wächterdronen",
-  "entity.asteroidBelt.occupation.base":
-    "Überlebende einer zerstörten Asteroidenbasis",
-  "entity.asteroidBelt.occupation.pirates":
-    "PiratInnen verstecken sich zwischen den Felsen",
-  "entity.asteroidBelt.occupation.patrol":
-    "Einsame MitarbeiterInnen auf Militärpatroullienbasis",
-  "entity.asteroidBelt.situation.rock":
-    "Ein zerbrochener Felsen hat eine Gefahr freigelassen",
-  "entity.asteroidBelt.situation.spy":
-    "Spionageraumschiffe einer fremden Macht sind hier versteckt",
+  "entity.asteroidBelt.occupation.base": "Überlebende einer zerstörten Asteroidenbasis",
+  "entity.asteroidBelt.occupation.pirates": "PiratInnen verstecken sich zwischen den Felsen",
+  "entity.asteroidBelt.occupation.patrol": "Einsame MitarbeiterInnen auf Militärpatroullienbasis",
+  "entity.asteroidBelt.situation.rock": "Ein zerbrochener Felsen hat eine Gefahr freigelassen",
+  "entity.asteroidBelt.situation.spy": "Spionageraumschiffe einer fremden Macht sind hier versteckt",
   "entity.asteroidBelt.situation.minerals": "Goldrausch für neue Materialien",
-  "entity.asteroidBelt.situation.ruins":
-    "Uralte Ruinen sind auf den Felsen verstreut",
+  "entity.asteroidBelt.situation.ruins": "Uralte Ruinen sind auf den Felsen verstreut",
   "entity.asteroidBelt.situation.war": "Krieg zwischen rivalisierenden Felsen",
   "entity.blackHole": "Schwarzes Loch",
   "entity.blackHoles": "Schwarze Löcher",
@@ -75,18 +61,13 @@
   "entity.deepSpaceStations": "Tiefraumstationen",
   "entity.gasGiantMine": "Gasriesenmine",
   "entity.gasGiantMines": "Gasriesenminen",
-  "entity.gasGiantMine.occupation.serfs":
-    "Elende Gasminensklaven oder -leibeigene",
-  "entity.gasGiantMine.occupation.robots":
-    "Seltsame Roboter und ihre AufseherInnen",
-  "entity.gasGiantMine.occupation.alien":
-    "WissenschaftlerIn, die/der das Leben von Aliens studiert",
-  "entity.gasGiantMine.occupation.mine":
-    "SchrottsammlerInnen in der alten Minenruine",
+  "entity.gasGiantMine.occupation.serfs": "Elende Gasminensklaven oder -leibeigene",
+  "entity.gasGiantMine.occupation.robots": "Seltsame Roboter und ihre AufseherInnen",
+  "entity.gasGiantMine.occupation.alien": "WissenschaftlerIn, die/der das Leben von Aliens studiert",
+  "entity.gasGiantMine.occupation.mine": "SchrottsammlerInnen in der alten Minenruine",
   "entity.gasGiantMine.occupation.group": "Verarmte SeparatistInnengruppe",
   "entity.gasGiantMine.situation.things": "Dinge erscheinen von unterhalb",
-  "entity.gasGiantMine.situation.supplies":
-    "Sie brauchen überlebenswichtige Vorräte",
+  "entity.gasGiantMine.situation.supplies": "Sie brauchen überlebenswichtige Vorräte",
   "entity.gasGiantMine.situation.revolt": "Die ArbeiterInnen revoltieren",
   "entity.gasGiantMine.situation.pirates": "PiratInnen tanken dort heimlich",
   "entity.gasGiantMine.situation.remnants": "Alienüberreste wurden gefunden",
@@ -98,72 +79,50 @@
   "entity.moonBase.occupation.genius": "Zurückgezogenes Einsiedlergenie",
   "entity.moonBase.occupation.colony": "Überreste einer gescheiterten Kolonie",
   "entity.moonBase.occupation.military": "Militärischer Abhörposten",
-  "entity.moonBase.occupation.miners":
-    "Einsame AufseherInnen und Roboterminenarbeiter",
+  "entity.moonBase.occupation.miners": "Einsame AufseherInnen und Roboterminenarbeiter",
   "entity.moonBase.situation.dark": "Etwas Dunkles ist erwacht",
-  "entity.moonBase.situation.criminals":
-    "Kriminelle versuchen, die Macht zu übernehmen",
+  "entity.moonBase.situation.criminals": "Kriminelle versuchen, die Macht zu übernehmen",
   "entity.moonBase.situation.plague": "Eine Mondseuche bricht aus",
-  "entity.moonBase.situation.supplies":
-    "Überlebenswichtiger Vorräte verzweifelt bedürftig",
+  "entity.moonBase.situation.supplies": "Überlebenswichtiger Vorräte verzweifelt bedürftig",
   "entity.moonBase.situation.rich": "Reich aber schlecht geschützt",
   "entity.note": "Notiz",
   "entity.notes": "Notizen",
   "entity.orbitalRuin": "Orbitalruine",
   "entity.orbitalRuins": "Orbitalruinen",
   "entity.orbitalRuin.occupation.robots": "Roboter mit dubiosem Bewusstsein",
-  "entity.orbitalRuin.occupation.scavengers":
-    "Schießwütige SchrottsammlerInnen",
+  "entity.orbitalRuin.occupation.scavengers": "Schießwütige SchrottsammlerInnen",
   "entity.orbitalRuin.occupation.researchers": "ForscherInnen der Regierung",
-  "entity.orbitalRuin.occupation.military":
-    "DurchsetzerInnen der Militärquarantäne",
-  "entity.orbitalRuin.occupation.heirs":
-    "ErbInnen der ursprünglichen ErbauerInnen",
-  "entity.orbitalRuin.situation.awakening":
-    "Sein Erwachen zu stoppen versuchend",
-  "entity.orbitalRuin.situation.tech":
-    "Mit seltsamer Technologie herumbastelnd",
+  "entity.orbitalRuin.occupation.military": "DurchsetzerInnen der Militärquarantäne",
+  "entity.orbitalRuin.occupation.heirs": "ErbInnen der ursprünglichen ErbauerInnen",
+  "entity.orbitalRuin.situation.awakening": "Sein Erwachen zu stoppen versuchend",
+  "entity.orbitalRuin.situation.tech": "Mit seltsamer Technologie herumbastelnd",
   "entity.orbitalRuin.situation.calamity": "Drohendes technologisches Unheil",
-  "entity.orbitalRuin.situation.secret":
-    "Ein schreckliches Geheimnis wird entdeckt",
-  "entity.orbitalRuin.situation.interlopers":
-    "Eindringlinge von außen bekämpfend",
+  "entity.orbitalRuin.situation.secret": "Ein schreckliches Geheimnis wird entdeckt",
+  "entity.orbitalRuin.situation.interlopers": "Eindringlinge von außen bekämpfend",
   "entity.planet": "Planet",
   "entity.planets": "Planeten",
   "entity.refuelingStation": "Versorgungsstation",
   "entity.refuelingStations": "Versorgungsstationen",
-  "entity.refuelingStation.occupation.hermit":
-    "Halbverrückte/r, zurückgezogene/r VerwalterIn",
-  "entity.refuelingStation.occupation.fun":
-    "Schmuddelige DienstleisterInnen für dekadenten Spaß",
-  "entity.refuelingStation.occupation.minions":
-    "Halsabschneiderische Konzernlakaien",
+  "entity.refuelingStation.occupation.hermit": "Halbverrückte/r, zurückgezogene/r VerwalterIn",
+  "entity.refuelingStation.occupation.fun": "Schmuddelige DienstleisterInnen für dekadenten Spaß",
+  "entity.refuelingStation.occupation.minions": "Halsabschneiderische Konzernlakaien",
   "entity.refuelingStation.occupation.vendors": "Hirnlose Verkaufsautomaten",
-  "entity.refuelingStation.situation.distress":
-    "Ein Schiff hat einen schweren Notfall",
-  "entity.refuelingStation.situation.pirates":
-    "PiratInnen haben die Macht übernommen",
+  "entity.refuelingStation.situation.distress": "Ein Schiff hat einen schweren Notfall",
+  "entity.refuelingStation.situation.pirates": "PiratInnen haben die Macht übernommen",
   "entity.refuelingStation.situation.agents": "Hat korrupte ZollagentInnen",
   "entity.refuelingStation.situation.saboteurs": "Fremde Saboteure sind aktiv",
   "entity.refuelingStation.situation.alien": "Signal aus dem fernen Weltraum",
   "entity.researchBase": "Forschungsstation",
   "entity.researchBases": "Forschungsstationen",
   "entity.researchBase.occupation.experminents": "Enkommene Expetimente",
-  "entity.researchBase.occupation.scientists":
-    "WissenschaftlerIn eines lokalen Großunternehmens",
-  "entity.researchBase.occupation.researchers":
-    "Behördliche Black-Ops ForscherInnen",
-  "entity.researchBase.occupation.secret":
-    "Von einer fremden Macht infiltriert",
+  "entity.researchBase.occupation.scientists": "WissenschaftlerIn eines lokalen Großunternehmens",
+  "entity.researchBase.occupation.researchers": "Behördliche Black-Ops ForscherInnen",
+  "entity.researchBase.occupation.secret": "Von einer fremden Macht infiltriert",
   "entity.researchBase.occupation.alien": "Alien studiert die Einheimischen",
-  "entity.researchBase.situation.research":
-    "Risikoreiches Forschungsprojekt im Gange",
-  "entity.researchBase.situation.immoral":
-    "Abscheuliches, unmoralisches Forschungsprojekt",
-  "entity.researchBase.situation.outsiders":
-    "Von Aussenstehenden als Geisel gehalten",
-  "entity.researchBase.situation.monsters":
-    "Fehlgeschlagenes Experiment läuft Amok",
+  "entity.researchBase.situation.research": "Risikoreiches Forschungsprojekt im Gange",
+  "entity.researchBase.situation.immoral": "Abscheuliches, unmoralisches Forschungsprojekt",
+  "entity.researchBase.situation.outsiders": "Von Aussenstehenden als Geisel gehalten",
+  "entity.researchBase.situation.monsters": "Fehlgeschlagenes Experiment läuft Amok",
   "entity.researchBase.situation.tech": "Schwarzmarkttechnologie verkaufend",
   "entity.sector": "Sektor",
   "entity.sectors": "Sektoren",
@@ -171,17 +130,13 @@
   "entity.spaceStations": "Raumstationen",
   "entity.spaceStation.occupation.odd": "Gefährlich merkwürdige Menschen",
   "entity.spaceStation.occupation.corpses": "Uralte gefriergetrocknete Leichen",
-  "entity.spaceStation.occupation.observers":
-    "Geheimnistuerische MilitärbeobachterInnen",
-  "entity.spaceStation.occupation.minions":
-    "Exzentrische/r OligarchIn und Gefolgsleute",
-  "entity.spaceStation.occupation.scientist":
-    "Verwirrte/r aber geniale/r WissenschaftlerIn",
+  "entity.spaceStation.occupation.observers": "Geheimnistuerische MilitärbeobachterInnen",
+  "entity.spaceStation.occupation.minions": "Exzentrische/r OligarchIn und Gefolgsleute",
+  "entity.spaceStation.occupation.scientist": "Verwirrte/r aber geniale/r WissenschaftlerIn",
   "entity.spaceStation.situation.systems": "Zusammenbrechende Systeme",
   "entity.spaceStation.situation.sabotage": "Fremder Sabotageversuch",
   "entity.spaceStation.situation.market": "Schwarzmarkt für die Elite",
-  "entity.spaceStation.situation.pretech":
-    "Schatzkammer mit gefährlichem Pretech",
+  "entity.spaceStation.situation.pretech": "Schatzkammer mit gefährlichem Pretech",
   "entity.spaceStation.situation.pirates": "Versorgungsbasis für PiratInnen",
   "entity.system": "System",
   "entity.systems": "Systeme",
@@ -204,32 +159,24 @@
   "techLevel.4+": "T4+",
   "techLevel.5": "T5",
   "tags.abandonedColony": "Aufgegebene Kolonie",
-  "tags.abandonedColony.description":
-    "Der Planet beherbergte einst eine Kolonie menschlichen oder anderen Ursprungs, bis eine Krise oder eine Naturkatastrophe die Einwohner vertrieb oder umbrachte. Die Kolonie könnte kaufmännischer Natur gewesen sein, eine Expedition, um wertvolle lokale Ressourcen zu extrahieren, oder eine Siedlung zurückgezogen lebender Gotteseiferer. Die Überreste solcher Kolonien sind in der Regel Ruinen, und die Ursache ihrer Zerstörung kann nachwievor eine Gefahr darstellen.",
+  "tags.abandonedColony.description": "Der Planet beherbergte einst eine Kolonie menschlichen oder anderen Ursprungs, bis eine Krise oder eine Naturkatastrophe die Einwohner vertrieb oder umbrachte. Die Kolonie könnte kaufmännischer Natur gewesen sein, eine Expedition, um wertvolle lokale Ressourcen zu extrahieren, oder eine Siedlung zurückgezogen lebender Gotteseiferer. Die Überreste solcher Kolonien sind in der Regel Ruinen, und die Ursache ihrer Zerstörung kann nachwievor eine Gefahr darstellen.",
   "tags.abandonedColony.enemies.0": "Durchgedrehte Überlebende",
   "tags.abandonedColony.enemies.1": "Skrupellose Plünderer der Ruinen",
   "tags.abandonedColony.enemies.2": "Automatisiertes Verteidigungssystem",
   "tags.abandonedColony.friends.0": "Wissbegierige/r SternenarcheologIn",
   "tags.abandonedColony.friends.1": "Erbe des Koloniebesitzes",
-  "tags.abandonedColony.friends.2":
-    "Ansässige, die den Ort in Schuss gebracht und gesichert sehen wollen",
-  "tags.abandonedColony.complications.0":
-    "Die lokale Regierung will die Ruinen geheim halten",
-  "tags.abandonedColony.complications.1":
-    "Die Ansässigen erheben Anspruch darauf",
-  "tags.abandonedColony.complications.2":
-    "Die Kolonie verfällt und ihr Betreten ist gefährlich",
+  "tags.abandonedColony.friends.2": "Ansässige, die den Ort in Schuss gebracht und gesichert sehen wollen",
+  "tags.abandonedColony.complications.0": "Die lokale Regierung will die Ruinen geheim halten",
+  "tags.abandonedColony.complications.1": "Die Ansässigen erheben Anspruch darauf",
+  "tags.abandonedColony.complications.2": "Die Kolonie verfällt und ihr Betreten ist gefährlich",
   "tags.abandonedColony.things.0": "Lange verschollene Besitzurkunden",
-  "tags.abandonedColony.things.1":
-    "Relikt, das von den KolonistInnen gestohlen wurde, als sie den Ort verließen",
-  "tags.abandonedColony.things.2":
-    "Historische Nachweise auf versuchte Kolonisation",
+  "tags.abandonedColony.things.1": "Relikt, das von den KolonistInnen gestohlen wurde, als sie den Ort verließen",
+  "tags.abandonedColony.things.2": "Historische Nachweise auf versuchte Kolonisation",
   "tags.abandonedColony.places.0": "Zerfallender Wohnblock",
   "tags.abandonedColony.places.1": "Mit Ranken überwucherter Stadtplatz",
   "tags.abandonedColony.places.2": "Von einem Erdrutsch verschüttetes Bauwerk",
   "tags.alienRuins": "Alienruinen",
-  "tags.alienRuins.description":
-    "Auf dem Planeten findet sich eine beachtliche Anzahl von Alienruinen. Die Einheimischen könnten für oder gegen eine Untersuchung der Ruinen sein, und sie haben möglicherweise etwas gegen die Mitnahme wertvoller Gegenstände ohne angemessene Gegenleistung. Alle Ruinen mit verwertbaren Schätzen sind ganz sicher irgendwie geschützt oder ihr Betreten ist gefährlich, was ihren unberührten Zustand erklärt.",
+  "tags.alienRuins.description": "Auf dem Planeten findet sich eine beachtliche Anzahl von Alienruinen. Die Einheimischen könnten für oder gegen eine Untersuchung der Ruinen sein, und sie haben möglicherweise etwas gegen die Mitnahme wertvoller Gegenstände ohne angemessene Gegenleistung. Alle Ruinen mit verwertbaren Schätzen sind ganz sicher irgendwie geschützt oder ihr Betreten ist gefährlich, was ihren unberührten Zustand erklärt.",
   "tags.alienRuins.enemies.0": "ZollinspekteurIn",
   "tags.alienRuins.enemies.1": "VerehrerInnen der Ruinen",
   "tags.alienRuins.enemies.2": "Versteckte/r Alienüberlebende/r",
@@ -240,8 +187,7 @@
   "tags.alienRuins.complications.1": "Abgelegender Ort",
   "tags.alienRuins.complications.2": "Paranoide Zollbeamtete",
   "tags.alienRuins.things.0": "Wertvolle Alienartifakte",
-  "tags.alienRuins.things.1":
-    "Von einer vergangenen Expedition zurückgelassene Gegenstände",
+  "tags.alienRuins.things.1": "Von einer vergangenen Expedition zurückgelassene Gegenstände",
   "tags.alienRuins.things.2": "Nicht übersetzte Alientexte",
   "tags.alienRuins.things.3": "Unberührte, versteckte Ruinen",
   "tags.alienRuins.places.0": "Unterseeruine",
@@ -249,73 +195,48 @@
   "tags.alienRuins.places.2": "Komplett erhaltenes Alienbauwerk",
   "tags.alienRuins.places.3": "Alienmausoleum",
   "tags.alteredHumanity": "Modifizierte Menschheit",
-  "tags.alteredHumanity.description":
-    "Die Menschen auf dieser Welt unterscheiden sich offensichtlich und drastisch von normalen Menschen. Sie haben möglicherweise zusätzliche Gliedmaßen, neue sensorische Organe, oder andere bezeichnende Veränderungen. Diese könnten z.B. von Manipulationen des Erbgutes, von fremdartigen, stellaren Mutationen, oder von toxischen Umwelteinflüssen abstammen.",
+  "tags.alteredHumanity.description": "Die Menschen auf dieser Welt unterscheiden sich offensichtlich und drastisch von normalen Menschen. Sie haben möglicherweise zusätzliche Gliedmaßen, neue sensorische Organe, oder andere bezeichnende Veränderungen. Diese könnten z.B. von Manipulationen des Erbgutes, von fremdartigen, stellaren Mutationen, oder von toxischen Umwelteinflüssen abstammen.",
   "tags.alteredHumanity.enemies.0": "Einheimische/r BiochauvinistIn",
   "tags.alteredHumanity.enemies.1": "Einheimische/r ExperimantatorIn",
   "tags.alteredHumanity.enemies.2": "Psychisch labile/r MutantIn",
-  "tags.alteredHumanity.friends.0":
-    "Einheimische/r auf der Suche nach einem \"Heilmittel\"",
+  "tags.alteredHumanity.friends.0": "Einheimische/r auf der Suche nach einem \"Heilmittel\"",
   "tags.alteredHumanity.friends.1": "Neugierige/r Xenophile/r",
   "tags.alteredHumanity.friends.2": "Anthropologische/r ForscherIn",
   "tags.alteredHumanity.complications.0": "Abänderung ist ansteckend",
-  "tags.alteredHumanity.complications.1":
-    "Abänderung ist nötig für langfristiges Überleben",
-  "tags.alteredHumanity.complications.2":
-    "Einheimische fürchten und misstrauen Fremden",
-  "tags.alteredHumanity.things.0":
-    "Originale Pretech-Ausrüsting zur Genmanipulation",
-  "tags.alteredHumanity.things.1":
-    "Wertvolle biologische Nebenprodukte von den Mutanten",
+  "tags.alteredHumanity.complications.1": "Abänderung ist nötig für langfristiges Überleben",
+  "tags.alteredHumanity.complications.2": "Einheimische fürchten und misstrauen Fremden",
+  "tags.alteredHumanity.things.0": "Originale Pretech-Ausrüsting zur Genmanipulation",
+  "tags.alteredHumanity.things.1": "Wertvolle biologische Nebenprodukte von den Mutanten",
   "tags.alteredHumanity.things.2": "\"Heilmittel\" für die veränderten Gene",
-  "tags.alteredHumanity.things.3":
-    "Aufzeichnungen vom originalen Erbgut der Kolonisten",
+  "tags.alteredHumanity.things.3": "Aufzeichnungen vom originalen Erbgut der Kolonisten",
   "tags.alteredHumanity.places.0": "Verlassenes Eugeniklabor",
-  "tags.alteredHumanity.places.1":
-    "Eine Umgebung, in der die Mutation zum Überleben benötigt wird",
-  "tags.alteredHumanity.places.2":
-    "Eine heilige Stätte, an der die/der erste Einheimische umgewandelt wurde",
+  "tags.alteredHumanity.places.1": "Eine Umgebung, in der die Mutation zum Überleben benötigt wird",
+  "tags.alteredHumanity.places.2": "Eine heilige Stätte, an der die/der erste Einheimische umgewandelt wurde",
   "tags.anarchists": "AnarchistInnen",
   "tags.anarchists.enemies.0": "Off-World ImperialistIn",
-  "tags.anarchists.enemies.1":
-    "ReformerIn, die/der \"eine gute Regierung\" einfürhren will",
-  "tags.anarchists.enemies.2":
-    "AusbeuterIn, die/der den Mangel einer zentralisierten Widerstandsbewegung ausnutzt",
+  "tags.anarchists.enemies.1": "ReformerIn, die/der \"eine gute Regierung\" einfürhren will",
+  "tags.anarchists.enemies.2": "AusbeuterIn, die/der den Mangel einer zentralisierten Widerstandsbewegung ausnutzt",
   "tags.anarchists.friends.0": "Stolze/r MissionarIn für Anarchie",
   "tags.anarchists.friends.1": "Zwanglose/r FreidenkerIn",
-  "tags.anarchists.friends.2":
-    "Neugierige/r Off-World PolitikwissenschaftlerIn",
-  "tags.anarchists.complications.0":
-    "Die anarchistische Struktur wird von einer externen Macht erzwungen",
-  "tags.anarchists.complications.1":
-    "Die Anarchie wird ermöglicht durch einen derzeitigen Überschuss an Ressourcen",
-  "tags.anarchists.complications.2":
-    "Die Streitmacht, die die Anarchie schützt, schwindet",
-  "tags.anarchists.things.0":
-    "Ein Objekt, Ereignis, oder eine Person (Plot-Element), die es dem Besitzer erlaubt seine Herrschaft zu erzwingen",
-  "tags.anarchists.things.1":
-    "Ein unerlässlicher Rohstoff, der zum Schutz der allgemeinen Unabhängigkeit benötigt wird",
-  "tags.anarchists.things.2":
-    "Technologie verboten, da störend für die Gesellschaftsordnung",
-  "tags.anarchists.places.0":
-    "Gemeinschaft, deren Wohnhäuser etwa die gleiche Größe haben",
+  "tags.anarchists.friends.2": "Neugierige/r Off-World PolitikwissenschaftlerIn",
+  "tags.anarchists.complications.0": "Die anarchistische Struktur wird von einer externen Macht erzwungen",
+  "tags.anarchists.complications.1": "Die Anarchie wird ermöglicht durch einen derzeitigen Überschuss an Ressourcen",
+  "tags.anarchists.complications.2": "Die Streitmacht, die die Anarchie schützt, schwindet",
+  "tags.anarchists.things.0": "Ein Objekt, Ereignis, oder eine Person (Plot-Element), die es dem Besitzer erlaubt seine Herrschaft zu erzwingen",
+  "tags.anarchists.things.1": "Ein unerlässlicher Rohstoff, der zum Schutz der allgemeinen Unabhängigkeit benötigt wird",
+  "tags.anarchists.things.2": "Technologie verboten, da störend für die Gesellschaftsordnung",
+  "tags.anarchists.places.0": "Gemeinschaft, deren Wohnhäuser etwa die gleiche Größe haben",
   "tags.anarchists.places.1": "Gehöft eines abgeschottet lebenden Clans",
   "tags.anarchists.places.2": "Automatisiertes Bergwerk",
   "tags.anthropomorphs": "Anthropomorphe",
-  "tags.anthropomorphs.description":
-    "Die Einheimischen waren ursprünglich menschlich, wurden irgendwann aber anthropomorpisch: entweder als Gruppe tieranbetender SektiererInnen oder als Gruppe von GentechnikerInnen, die Tiergene als für das Überleben auf dieser Welt am Besten geeignet erachteten. Abhängig von den Fähigkeiten der ursprünglichen GentechnikerInnen arbeiten diese neuen Körperformen genauso gut oder schlechter wie bzw. als rein menschliche Körper und bringen unter Umständen Nachteile mit sich, die den eingeschleusten tierischen Elementen zu eigen sind.",
-  "tags.anthropomorphs.enemies.0":
-    "Einheimische/r VerfechterIn menschlicher Vorherrschaft",
-  "tags.anthropomorphs.enemies.1":
-    "Einheimische/r , die/der wilde Triebe in sich trägt",
-  "tags.anthropomorphs.enemies.2":
-    "Fremde/r EntdeckerIn, die/der die Einheimischen als minderwertige Kreaturen ansieht",
+  "tags.anthropomorphs.description": "Die Einheimischen waren ursprünglich menschlich, wurden irgendwann aber anthropomorpisch: entweder als Gruppe tieranbetender SektiererInnen oder als Gruppe von GentechnikerInnen, die Tiergene als für das Überleben auf dieser Welt am Besten geeignet erachteten. Abhängig von den Fähigkeiten der ursprünglichen GentechnikerInnen arbeiten diese neuen Körperformen genauso gut oder schlechter wie bzw. als rein menschliche Körper und bringen unter Umständen Nachteile mit sich, die den eingeschleusten tierischen Elementen zu eigen sind.",
+  "tags.anthropomorphs.enemies.0": "Einheimische/r VerfechterIn menschlicher Vorherrschaft",
+  "tags.anthropomorphs.enemies.1": "Einheimische/r , die/der wilde Triebe in sich trägt",
+  "tags.anthropomorphs.enemies.2": "Fremde/r EntdeckerIn, die/der die Einheimischen als minderwertige Kreaturen ansieht",
   "tags.anthropomorphs.friends.0": "Faszinierte/r GenetikforscherIn",
-  "tags.anthropomorphs.friends.2":
-    "Einheimische/r, die/der Hilfe von außerhalb benötigt",
+  "tags.anthropomorphs.friends.2": "Einheimische/r, die/der Hilfe von außerhalb benötigt",
   "tags.area51": "Area 51",
-  "tags.badlandsWorld.friends.0":
-    "Einheimische/r, die/der den Planeten um jeden Preis verlassen will",
+  "tags.badlandsWorld.friends.0": "Einheimische/r, die/der den Planeten um jeden Preis verlassen will",
   "tags.badlandsWorld.complications.0": "Radioaktivität",
   "tags.badlandsWorld.complications.1": "Spuren von Biowaffen",
   "tags.badlandsWorld.complications.3": "Plötzliche, örtliche Seuche",
@@ -356,8 +277,7 @@
   "misc.continue": "Weiter",
   "misc.copiedLinkTo": "Du hast einen Direktlink kopiert: {entity}.",
   "misc.create": "Erstellen",
-  "misc.createASystem":
-    "Um ein System zu erstellen, klicke links auf ein Hexagon und halte die Maustaste.",
+  "misc.createASystem": "Um ein System zu erstellen, klicke links auf ein Hexagon und halte die Maustaste.",
   "misc.createEditPlanets": "Erstelle und bearbeite Planeten hier ",
   "misc.createEntity": "Sektoritem erstellen",
   "misc.dashboard": "Dashboard",
@@ -391,8 +311,7 @@
   "misc.location": "Ort",
   "misc.logIn": "Login",
   "misc.logOut": "Logout",
-  "misc.moveSystem":
-    "Um ein existierenden Sternensystem zu verschieben, klicke und ziehe, während du den Mausbutton gedrückt hätlst.",
+  "misc.moveSystem": "Um ein existierenden Sternensystem zu verschieben, klicke und ziehe, während du den Mausbutton gedrückt hätlst.",
   "misc.name": "Name",
   "misc.neighbors": "Nachbarn",
   "misc.no": "Nein",
@@ -409,8 +328,7 @@
   "misc.password": "Passwort",
   "misc.passwordResetSent": "Passwortreset versendet",
   "misc.places": "Orte",
-  "misc.printEntitiesTable":
-    "Drucke deine Items in Tabellenform, um eine Übersicht über deinen Sektor zu bekommen.",
+  "misc.printEntitiesTable": "Drucke deine Items in Tabellenform, um eine Übersicht über deinen Sektor zu bekommen.",
   "misc.reachedLimit": "Maximale Zahl an Sektoren erreicht",
   "misc.receiveEmail": "Eine E-Mail sollte demnächst bei dir eintreffen.",
   "misc.reportProblem": "Ein Problem melden",
@@ -424,8 +342,7 @@
   "misc.sectorName": "Sektorname",
   "misc.sectorSaved": "Sektor gespeichert",
   "misc.sectorsWithoutNumber": "Sectors Without Number",
-  "misc.selectedNoChilden":
-    "Ausgewähltes Item hat keine zugehörigen Nachfolger.",
+  "misc.selectedNoChilden": "Ausgewähltes Item hat keine zugehörigen Nachfolger.",
   "misc.selectEntity": "Wähle links ein Item, um loszulegen",
   "misc.selectGenerateData": "Auswählen, um Daten für {entity} zu erzeugen.",
   "misc.selectGenerateEntity": "Auswählen, um Daten für Item zu erzeugen.",
@@ -437,8 +354,7 @@
   "misc.signUpPersist": "Registrieren, um Sektor zu speichern",
   "misc.situation": "Situation",
   "misc.successfullyRemoved": "{entity} wurde erfolgreich entfernt.",
-  "misc.syncedAutomatically":
-    "Deine aktuellen Sektoren werden automatisch synchronisiert.",
+  "misc.syncedAutomatically": "Deine aktuellen Sektoren werden automatisch synchronisiert.",
   "misc.syncingSector": "Sektor wird synchronisiert",
   "misc.syncingSectors": "Sektoren werden synchronisiert",
   "misc.tags": "Merkmale",
@@ -450,8 +366,7 @@
   "misc.username": "Benutzername",
   "misc.userProfile": "Benutzerprofil",
   "misc.welcomeBuilder": "Willkommen im Sektorgenerator",
-  "misc.windowTooSmall":
-    "Das Browserfenster ist zu klein, um diesen Sektor zu rendern. Bitte probiere es mit einer höheren Auflösung.",
+  "misc.windowTooSmall": "Das Browserfenster ist zu klein, um diesen Sektor zu rendern. Bitte probiere es mit einer höheren Auflösung.",
   "misc.yes": "Ja",
   "misc.yourSectorSaved": "Dein Sektor wurde gespeichert."
 }

@@ -44,8 +44,7 @@
   "entity.moons": "Lunas",
   "entity.moonBase": "Base Lunar",
   "entity.moonBases": "Bases Lunar",
-  "entity.moonBase.occupation.researchers":
-    "Investigadores corporativos desafortunados",
+  "entity.moonBase.occupation.researchers": "Investigadores corporativos desafortunados",
   "entity.navigation": "Navegación",
   "entity.navigations": "Navegación",
   "entity.note": "Nota",

@@ -34,8 +34,7 @@
   "entity.asteroidBase": "Asteroidbas",
   "entity.asteroidBases": "Asteroidbaser",
   "entity.asteroidBase.occupation.sectarians": "Fanatiska religösa sekter",
-  "entity.asteroidBase.occupation.rebels":
-    "Misslyckade rebeller från en annan värld",
+  "entity.asteroidBase.occupation.rebels": "Misslyckade rebeller från en annan värld",
   "entity.asteroidBase.occupation.prospectors": "Oberoende asteroidmalmletare",
   "entity.asteroidBase.occupation.pirates": "Förklädda pirater",
   "entity.asteroidBase.situation.life": "Livsuppehållande system är hotat",
@@ -45,10 +44,8 @@
   "entity.asteroidBase.situation.priceless": "Hittat en ovärdelig malmåra",
   "entity.asteroidBelt": "Asteroidbälte",
   "entity.asteroidBelts": "Asteroidbälten",
-  "entity.asteroidBelt.occupation.drones":
-    "Uråldriga automatiska väktardrönare",
-  "entity.asteroidBelt.occupation.base":
-    "Överlevande från förstörd asteroidbas",
+  "entity.asteroidBelt.occupation.drones": "Uråldriga automatiska väktardrönare",
+  "entity.asteroidBelt.occupation.base": "Överlevande från förstörd asteroidbas",
   "entity.asteroidBelt.occupation.pirates": "Pirater gömda bland stenarna",
   "entity.asteroidBelt.occupation.patrol": "Enslig militärpatrullsbaspersonal",
   "entity.asteroidBelt.situation.spy": "Främmande spionskepp gömmer sig där",
@@ -61,17 +58,13 @@
   "entity.deepSpaceStations": "Yttre rymdsstationer",
   "entity.gasGiantMine": "Gasjättegruva",
   "entity.gasGiantMines": "Gasjättegruvor",
-  "entity.gasGiantMine.occupation.serfs":
-    "Förtvivlade gasjättegruvarbetarslavar",
-  "entity.gasGiantMine.occupation.robots":
-    "Underliga robotar och deras övervakare",
-  "entity.gasGiantMine.occupation.alien":
-    "Vetenskapsmän som studerar främmande liv",
+  "entity.gasGiantMine.occupation.serfs": "Förtvivlade gasjättegruvarbetarslavar",
+  "entity.gasGiantMine.occupation.robots": "Underliga robotar och deras övervakare",
+  "entity.gasGiantMine.occupation.alien": "Vetenskapsmän som studerar främmande liv",
   "entity.gasGiantMine.occupation.group": "Fattig separitistsgrupp",
   "entity.gasGiantMine.situation.supplies": "De behöver kritiska resurser",
   "entity.gasGiantMine.situation.revolt": "Arbetarna är i uppror",
-  "entity.gasGiantMine.situation.pirates":
-    "Pirater fyller i hemlighet på bränsle här",
+  "entity.gasGiantMine.situation.pirates": "Pirater fyller i hemlighet på bränsle här",
   "entity.gasGiantMine.situation.remnants": "Främmande lämningar hittades",
   "entity.moon": "Måne",
   "entity.moons": "Månar",
@@ -81,8 +74,7 @@
   "entity.moonBase.occupation.genius": "Tillbakadragen eremitgeni",
   "entity.moonBase.occupation.colony": "Lämningar från en misslyckad koloni",
   "entity.moonBase.occupation.military": "Militär lystningspost",
-  "entity.moonBase.occupation.miners":
-    "Ensliga tillsynsmän och gruvarbetarrobotar",
+  "entity.moonBase.occupation.miners": "Ensliga tillsynsmän och gruvarbetarrobotar",
   "entity.moonBase.situation.dark": "Något mörkt har vaknat",
   "entity.moonBase.situation.criminals": "Kriminella försöker ta över",
   "entity.moonBase.situation.plague": "Månpestutbrott",
@@ -96,36 +88,28 @@
   "entity.orbitalRuin.occupation.scavengers": "Sjutgalna sopletare",
   "entity.orbitalRuin.occupation.researchers": "Statliga forskare",
   "entity.orbitalRuin.occupation.military": "Uppräthållare av militärkarantän",
-  "entity.orbitalRuin.occupation.heirs":
-    "Arvtagare till de ursprungliga skaparna",
-  "entity.orbitalRuin.situation.awakening":
-    "Försöker hindra det från att vakna",
+  "entity.orbitalRuin.occupation.heirs": "Arvtagare till de ursprungliga skaparna",
+  "entity.orbitalRuin.situation.awakening": "Försöker hindra det från att vakna",
   "entity.orbitalRuin.situation.tech": "Rotar i underlig teknik",
   "entity.orbitalRuin.situation.calamity": "Hotande teknisk katastrof",
-  "entity.orbitalRuin.situation.secret":
-    "En hemsk hemlighet har blivit uppgrävd",
+  "entity.orbitalRuin.situation.secret": "En hemsk hemlighet har blivit uppgrävd",
   "entity.planet": "Planet",
   "entity.planets": "Planeter",
   "entity.refuelingStation": "Tankningsstation",
   "entity.refuelingStations": "Tankningsstation",
   "entity.refuelingStation.occupation.hermit": "Halvgalen eremitvårdare",
-  "entity.refuelingStation.occupation.religious":
-    "Religösa missonärer till resande",
+  "entity.refuelingStation.occupation.religious": "Religösa missonärer till resande",
   "entity.refuelingStation.situation.pirates": "Pirater har tagit över",
   "entity.refuelingStation.situation.agents": "Har korrputa agenter",
-  "entity.refuelingStation.situation.saboteurs":
-    "Främmande sabotörer är aktiva",
+  "entity.refuelingStation.situation.saboteurs": "Främmande sabotörer är aktiva",
   "entity.refuelingStation.situation.alien": "Yttry-rymdssignal",
   "entity.researchBase": "Forskningsbas",
   "entity.researchBases": "Forskningsbaser",
   "entity.researchBase.occupation.experminents": "Experiment har rymt",
-  "entity.researchBase.occupation.scientists":
-    "Vetenskapsmän från viktigt lokalt företag",
+  "entity.researchBase.occupation.scientists": "Vetenskapsmän från viktigt lokalt företag",
   "entity.researchBase.occupation.researchers": "Hemliga statliga forskare",
-  "entity.researchBase.occupation.secret":
-    "Hemliga anställda till främmande makt",
-  "entity.researchBase.occupation.alien":
-    "Ailien som studerar den mänskliga lokalbefolkningen",
+  "entity.researchBase.occupation.secret": "Hemliga anställda till främmande makt",
+  "entity.researchBase.occupation.alien": "Ailien som studerar den mänskliga lokalbefolkningen",
   "entity.researchBase.situation.research": "Riskabel forskning pågår",
   "entity.researchBase.situation.immoral": "Hemsk omoralisk forskning",
   "entity.researchBase.situation.outsiders": "Hålls gisslad av utomstående",
@@ -138,8 +122,7 @@
   "entity.spaceStation.occupation.odd": "Farligt udda människor",
   "entity.spaceStation.occupation.corpses": "Frystorkade forntida lik",
   "entity.spaceStation.occupation.observers": "Hemliga militära observatörer",
-  "entity.spaceStation.occupation.scientist":
-    "Rubbad men genialisk vetenskapsman",
+  "entity.spaceStation.occupation.scientist": "Rubbad men genialisk vetenskapsman",
   "entity.spaceStation.situation.systems": "Systemet bryter ihop",
   "entity.spaceStation.situation.sabotage": "Utomstående sabotörsförsök",
   "entity.spaceStation.situation.market": "Svart marknad för eliten",
@@ -187,8 +170,7 @@
   "misc.continue": "Fortsätt",
   "misc.copiedLinkTo": "Du har kopierat en länk direkt till denna {entity}.",
   "misc.create": "Skapa",
-  "misc.createASystem":
-    "För att skapa ett system, klicka och håll en hex till vänster",
+  "misc.createASystem": "För att skapa ett system, klicka och håll en hex till vänster",
   "misc.createEditPlanets": "Skapa och modifiera planeter här från sidomenun.",
   "misc.createEntity": "Skapa sektorenhet",
   "misc.dashboard": "Dashboard",
@@ -222,8 +204,7 @@
   "misc.location": "Plats",
   "misc.logIn": "Logga in",
   "misc.logOut": "Logga out",
-  "misc.moveSystem":
-    "För att flytta ett existerande system, klicka, håll och drag.",
+  "misc.moveSystem": "För att flytta ett existerande system, klicka, håll och drag.",
   "misc.name": "Namn",
   "misc.neighbors": "Grannar",
   "misc.no": "Nej",
@@ -233,16 +214,14 @@
   "misc.noSector": "Sektor finns inte",
   "misc.noteContent": "Notera innehållet",
   "misc.occupation": "Sysselsättning",
-  "misc.oneEntity":
-    "En enhet per sida med mycket tomt utrymme: Perfekt för anteckningar.",
+  "misc.oneEntity": "En enhet per sida med mycket tomt utrymme: Perfekt för anteckningar.",
   "misc.or": "eller",
   "misc.overview": "Översikt",
   "misc.parent": "Förälder",
   "misc.password": "Lösenord",
   "misc.passwordResetSent": "Lösenordsåterställning skickad",
   "misc.places": "Platser",
-  "misc.printEntitiesTable":
-    "Skriv ut dina enheter i tabellformat för att enkelt få en översikt över din sektor.",
+  "misc.printEntitiesTable": "Skriv ut dina enheter i tabellformat för att enkelt få en översikt över din sektor.",
   "misc.reachedLimit": "Sektorgräns uppnådd",
   "misc.receiveEmail": "Du kommer snart få ett email.",
   "misc.reportProblem": "Rapportera problem",
@@ -268,8 +247,7 @@
   "misc.signUpPersist": "Registerar dig för att spara sektorn",
   "misc.situation": "Situation",
   "misc.successfullyRemoved": "{entity} har tagis bort.",
-  "misc.syncedAutomatically":
-    "Dina nuvarande sektorer kommer synkroniseras automatiskt",
+  "misc.syncedAutomatically": "Dina nuvarande sektorer kommer synkroniseras automatiskt",
   "misc.syncingSector": "Synkroniserar sektor",
   "misc.syncingSectors": "Synkroniserar sektorer",
   "misc.tags": "Taggar",
@@ -281,8 +259,7 @@
   "misc.username": "Användarnamn",
   "misc.userProfile": "Användarprofil",
   "misc.welcomeBuilder": "Välkommen till sektorskaparen",
-  "misc.windowTooSmall":
-    "Ditt webbläsarfönster är för litet för att kunna rendera sektorn. Försök på en större skärm.",
+  "misc.windowTooSmall": "Ditt webbläsarfönster är för litet för att kunna rendera sektorn. Försök på en större skärm.",
   "misc.yes": "Ja",
   "misc.yourSectorSaved": "Dina sektorer har sparats"
 }
