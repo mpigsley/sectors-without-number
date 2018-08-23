@@ -363,7 +363,7 @@
   "faction.tags.pirates": "Pirates",
   "faction.tags.pirates.description": "This faction is a scourge of the spacelanes, driving up the cost of shipping and terrorizing merchant captains without pity. They steal and refit ships with vicious ingenuity, cobbling together space armadas out of the leavings of their prey.",
   "faction.tags.pirates.effect": "Any movement of an asset onto a world that has a Base of Influence for this faction costs one extra FacCred, paid to this faction.",
-  "faction.tags.planetaryGovernment": "Planeteary Government",
+  "faction.tags.planetaryGovernment": "Planetary Government",
   "faction.tags.planetaryGovernment.description": "This faction is the legitimate government of a planet. Rebel groups and rival factions may have assets on the planet, but control over the instruments of the state is firmly in this faction's hands. The faciton may rule openly, or it may simply have an inexorable grasp on the existing authorities.",
   "faction.tags.planetaryGovernment.effect": "The faction's permissions is required to buy or import those assets marked as needing government permission. This tag can be acquired multiple times, once for each planet the faction controls.",
   "faction.tags.plutocratic": "Plutocratic",
