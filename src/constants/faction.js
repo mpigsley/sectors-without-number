@@ -1061,6 +1061,7 @@ export const FACTION_ASSETS = {
   mercenaries: {
     key: 'mercenaries',
     category: FACTION_ASSET_CATEGORIES.wealth,
+    upkeep: 1,
     rating: 3,
     hp: 6,
     cost: 8,
@@ -1129,6 +1130,7 @@ export const FACTION_ASSETS = {
   pretechResearchers: {
     key: 'pretechResearchers',
     category: FACTION_ASSET_CATEGORIES.wealth,
+    upkeep: 1,
     rating: 5,
     hp: 6,
     cost: 14,
@@ -1149,6 +1151,7 @@ export const FACTION_ASSETS = {
   scavengerFleets: {
     key: 'scavengerFleets',
     category: FACTION_ASSET_CATEGORIES.wealth,
+    upkeep: 2,
     rating: 8,
     hp: 20,
     cost: 30,
