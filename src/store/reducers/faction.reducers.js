@@ -9,6 +9,7 @@ const initialForm = () => ({
   force: 0,
   cunning: 0,
   wealth: 0,
+  hitPoints: 0,
   balance: 0,
   experience: 0,
   goal: undefined,

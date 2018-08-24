@@ -9,6 +9,10 @@
     align-items: flex-start;
     flex-direction: column;
     width: 100%;
+
+    .LabeledItem-Label {
+      min-width: auto;
+    }
   }
 }
 

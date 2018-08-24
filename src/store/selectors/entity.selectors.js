@@ -125,6 +125,11 @@ export const getCurrentSector = createDeepEqualSelector(
   (currentSector, entities) => entities[Entities.sector.key][currentSector],
 );
 
+export const getCurrentPlanets = createDeepEqualSelector(
+  [getCurrentEntities],
+  entities => entities[Entities.planet.key],
+);
+
 export const getMapLock = createDeepEqualSelector(
   [getCurrentSector],
   currentSector => !!(currentSector || {}).mapLocked,
