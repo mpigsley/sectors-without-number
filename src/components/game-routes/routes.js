@@ -9,6 +9,7 @@ import OverviewTable from 'components/overview-table';
 import EmptyOverview from 'components/empty-overview';
 import FactionTable from 'components/faction-table';
 import FactionSidebar from 'components/faction-sidebar';
+import FactionForm from 'components/faction-form';
 
 import Elements from 'constants/elements';
 
@@ -50,6 +51,11 @@ export default function GameRoutes() {
           path={`/elements/:sector/${Elements.faction.key}`}
           render={({ match }) => (
             <FactionTable>
+              <Route path={`${match.path}/new`} component={FactionForm} />
+              <Route
+                path={`${match.path}/:element/edit`}
+                component={FactionForm}
+              />
               <Route
                 path={`${match.path}/:element`}
                 component={FactionSidebar}

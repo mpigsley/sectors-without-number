@@ -1,6 +1,7 @@
 import { LOCATION_CHANGE } from 'connected-react-router';
 
 import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
+import { UPDATE_FORM } from 'store/actions/faction.actions';
 
 const initialForm = () => ({
   name: '',
@@ -13,7 +14,6 @@ const initialForm = () => ({
   goal: undefined,
   relationship: undefined,
   homeworld: undefined,
-  isEditing: false,
   tags: [],
   assets: [],
 });
@@ -21,6 +21,7 @@ const initialForm = () => ({
 export const initialState = {
   models: {},
   form: initialForm(),
+  isCreating: false,
 };
 
 export default function faction(state = initialState, action) {
@@ -43,9 +44,17 @@ export default function faction(state = initialState, action) {
       return {
         ...state,
         form: (state.models[sectorId] || {})[factionId] || initialForm(),
-        isEditing: factionId === 'new',
+        isCreating: factionId === 'new',
       };
     }
+    case UPDATE_FORM:
+      return {
+        ...state,
+        form: {
+          ...state.form,
+          ...action.update,
+        },
+      };
     default:
       return state;
   }

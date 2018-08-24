@@ -13,9 +13,9 @@ export default function FactionTable({
   children,
   currentSector,
   currentFaction,
-  isEditing,
+  currentElement,
 }) {
-  const isSidebarOpen = !!currentFaction || isEditing;
+  const isSidebarOpen = !!currentFaction || !!currentElement;
   return (
     <div
       className={classNames('FactionTable', {
@@ -51,9 +51,10 @@ FactionTable.propTypes = {
   children: PropTypes.node.isRequired,
   currentSector: PropTypes.string.isRequired,
   currentFaction: PropTypes.shape({}),
-  isEditing: PropTypes.bool.isRequired,
+  currentElement: PropTypes.string,
 };
 
 FactionTable.defaultProps = {
   currentFaction: undefined,
+  currentElement: undefined,
 };

@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect';
 
 import {
   currentSectorSelector,
-  factionIsEditingSelector,
+  currentEntitySelector,
 } from 'store/selectors/base.selectors';
 import { currentFaction } from 'store/selectors/faction.selectors';
 
@@ -12,7 +12,7 @@ import FactionTable from './faction-table';
 
 const mapStateToProps = createStructuredSelector({
   currentSector: currentSectorSelector,
-  isEditing: factionIsEditingSelector,
+  currentElement: currentEntitySelector,
   currentFaction,
 });
 
