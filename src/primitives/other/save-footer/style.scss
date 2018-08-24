@@ -1,0 +1,42 @@
+@import 'styles/theme';
+
+.SaveFooter-Button {
+  border: 0;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: $light2;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 0.9rem;
+  letter-spacing: 0.1rem;
+  outline: none;
+  line-height: 56px;
+  padding: 0;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.2s;
+  font-weight: 300;
+  flex: 1;
+
+  &:hover {
+    color: $light4;
+    outline: 0;
+  }
+}
+
+.SaveFooter-Cancel {
+  background-color: $dark1;
+
+  &:hover {
+    background-color: $light1;
+  }
+}
+
+.SaveFooter-Save {
+  background-color: $primary;
+
+  &:hover {
+    background-color: $primary-alt;
+  }
+}

@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { push } from 'connected-react-router';
 import { createStructuredSelector } from 'reselect';
 
 import {
@@ -14,7 +15,12 @@ const mapStateToProps = createStructuredSelector({
   form: factionFormSelector,
 });
 
+const mapDispatchToProps = dispatch => ({
+  updateFaction: () => dispatch(updateFaction()),
+  toRoute: route => dispatch(push(route)),
+});
+
 export default connect(
   mapStateToProps,
-  { updateFaction },
+  mapDispatchToProps,
 )(FactionForm);
