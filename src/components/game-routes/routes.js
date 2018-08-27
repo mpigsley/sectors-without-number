@@ -51,14 +51,20 @@ export default function GameRoutes() {
           path={`/elements/:sector/${Elements.faction.key}`}
           render={({ match }) => (
             <FactionTable>
-              <Route path={`${match.path}/new`} component={FactionForm} />
+              <Route
+                exact
+                path={`${match.path}/:element`}
+                render={route =>
+                  route.match.params.element === 'new' ? (
+                    <FactionForm {...route} />
+                  ) : (
+                    <FactionSidebar {...route} />
+                  )
+                }
+              />
               <Route
                 path={`${match.path}/:element/edit`}
                 component={FactionForm}
-              />
-              <Route
-                path={`${match.path}/:element`}
-                component={FactionSidebar}
               />
             </FactionTable>
           )}
