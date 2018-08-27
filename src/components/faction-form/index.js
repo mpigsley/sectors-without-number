@@ -8,7 +8,7 @@ import {
   factionIsCreatingSelector,
 } from 'store/selectors/base.selectors';
 import { getCurrentPlanets } from 'store/selectors/entity.selectors';
-import { updateFaction } from 'store/actions/faction.actions';
+import { updateFaction, createBlankAsset } from 'store/actions/faction.actions';
 
 import FactionForm from './faction-form';
 
@@ -20,6 +20,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => ({
   updateFaction: update => dispatch(updateFaction(update)),
+  createBlankAsset: () => dispatch(createBlankAsset()),
   toRoute: route => dispatch(push(route)),
 });
 

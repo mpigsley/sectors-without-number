@@ -1,0 +1,12 @@
+@import 'styles/theme';
+
+.DeletableRow-Icon {
+  color: $light2;
+  cursor: pointer;
+  margin-right: 0.5rem;
+  transition: all 0.2s;
+
+  &:hover {
+    color: $light3;
+  }
+}

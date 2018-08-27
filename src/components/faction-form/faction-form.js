@@ -1,7 +1,7 @@
 import React from 'react';
 import Chance from 'chance';
 import PropTypes from 'prop-types';
-import { intlShape, FormattedMessage } from 'react-intl';
+import { intlShape } from 'react-intl';
 
 import SidebarContainer from 'primitives/container/sidebar-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -22,6 +22,7 @@ export default function FactionForm({
   isCreating,
   form,
   updateFaction,
+  createBlankAsset,
   toRoute,
   location,
   homeworlds,
@@ -69,9 +70,7 @@ export default function FactionForm({
         />
       }
     >
-      <SectionHeader>
-        <FormattedMessage id="misc.attributes" />
-      </SectionHeader>
+      <SectionHeader header="misc.attributes" />
       <div className="FactionForm">
         <LabeledInput
           label="misc.name"
@@ -192,6 +191,11 @@ export default function FactionForm({
           }
         />
       </div>
+      <SectionHeader
+        header="misc.assets"
+        addItemName="misc.asset"
+        onAdd={createBlankAsset}
+      />
     </SidebarContainer>
   );
 }
@@ -203,6 +207,7 @@ FactionForm.propTypes = {
     name: PropTypes.string.isRequired,
   }).isRequired,
   updateFaction: PropTypes.func.isRequired,
+  createBlankAsset: PropTypes.func.isRequired,
   toRoute: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,

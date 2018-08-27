@@ -147,9 +147,7 @@ export default class NavigationSidebar extends Component {
     }
     return (
       <FlexContainer direction="column">
-        <SectionHeader>
-          <FormattedMessage id="misc.navRoutes" />
-        </SectionHeader>
+        <SectionHeader header="misc.navRoutes" />
         <FlexContainer
           justify="flexEnd"
           align="center"

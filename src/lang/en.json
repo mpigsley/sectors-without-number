@@ -2250,6 +2250,8 @@
   "misc.addChild": "Add Child",
   "misc.addEntity": "Add {entity}",
   "misc.addEntityTag": "Add {entity} Tag",
+  "misc.asset": "Asset",
+  "misc.assets": "Assets",
   "misc.attributes": "Attributes",
   "misc.back": "Back",
   "misc.balance": "Balance",

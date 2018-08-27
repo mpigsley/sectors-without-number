@@ -7,13 +7,13 @@ import { without } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
+import DeletableRow from 'primitives/form/deletable-row';
 import Header, { HeaderType } from 'primitives/text/header';
 import Dropdown from 'primitives/form/dropdown';
-import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 import Input from 'primitives/form/input';
 
-import { X, Plus, EyeOff, RefreshCw } from 'constants/icons';
+import { EyeOff, RefreshCw } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
 import { filter, includes, map, pull } from 'constants/lodash';
@@ -57,17 +57,17 @@ export default function EntityTags({
   const entityTags = (entity.attributes || {}).tags || [];
   if (isSidebarEditActive) {
     tags = entityTags.sort().map(tag => (
-      <FlexContainer key={tag} align="center" className="EntityTag--edit">
-        <X
-          className="EntityTag-Action"
-          size={25}
-          onClick={() =>
-            updateEntityInEdit({
-              attributes: { tags: pull(entityTags, tag) },
-              visibility: { [`tag.${tag}`]: undefined },
-            })
-          }
-        />
+      <DeletableRow
+        key={tag}
+        align="center"
+        className="EntityTag--edit"
+        onAction={() =>
+          updateEntityInEdit({
+            attributes: { tags: pull(entityTags, tag) },
+            visibility: { [`tag.${tag}`]: undefined },
+          })
+        }
+      >
         <Dropdown
           wrapperClassName="EntityTag-Dropdown"
           value={tag}
@@ -120,7 +120,7 @@ export default function EntityTags({
           }
           type="checkbox"
         />
-      </FlexContainer>
+      </DeletableRow>
     ));
   } else {
     tags = entityTags
@@ -156,54 +156,46 @@ export default function EntityTags({
   }
 
   let header = (
-    <SectionHeader isOpen={isOpen} onClick={toggleOpen}>
-      <span className="EntityTags-Name">
+    <SectionHeader
+      header={
         <FormattedMessage
           id="misc.entityTags"
           values={{
             entity: intl.formatMessage({ id: Entities[entityType].name }),
           }}
         />
-      </span>
-    </SectionHeader>
+      }
+      isOpen={isOpen}
+      onClick={toggleOpen}
+    />
   );
   if (isSidebarEditActive) {
     header = (
-      <SectionHeader isOpen={isOpen} onIconClick={toggleOpen}>
-        <FlexContainer justify="spaceBetween" align="flexEnd">
-          <span className="EntityTags-Name" onClick={toggleOpen}>
-            <FormattedMessage
-              id="misc.entityTags"
-              values={{
-                entity: intl.formatMessage({ id: Entities[entityType].name }),
-              }}
-            />
-          </span>
-          <Button
-            minimal
-            className="EntityTags-AddButton"
-            onClick={() => {
-              const attributeTags = (entity.attributes || {}).tags || [];
-              if (includes(attributeTags, '')) {
-                return;
-              }
-              updateEntityInEdit({
-                attributes: {
-                  tags: attributeTags.concat(['']),
-                },
-              });
+      <SectionHeader
+        header={
+          <FormattedMessage
+            id="misc.entityTags"
+            values={{
+              entity: intl.formatMessage({ id: Entities[entityType].name }),
             }}
-          >
-            <LinkIcon size={15} icon={Plus} />
-            <FormattedMessage
-              id="misc.addEntityTag"
-              values={{
-                entity: intl.formatMessage({ id: Entities[entityType].name }),
-              }}
-            />
-          </Button>
-        </FlexContainer>
-      </SectionHeader>
+          />
+        }
+        isOpen={isOpen}
+        onIconClick={toggleOpen}
+        addItemTemplate="misc.addEntityTag"
+        addItemName={Entities[entityType].name}
+        onAdd={() => {
+          const attributeTags = (entity.attributes || {}).tags || [];
+          if (includes(attributeTags, '')) {
+            return;
+          }
+          updateEntityInEdit({
+            attributes: {
+              tags: attributeTags.concat(['']),
+            },
+          });
+        }}
+      />
     );
   }
 

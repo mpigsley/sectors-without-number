@@ -1,15 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
-import Button from 'primitives/other/button';
 import LinkIcon from 'primitives/other/link-icon';
 import Dice from 'primitives/icons/dice';
 
-import { Plus, EyeOff } from 'constants/icons';
+import { EyeOff } from 'constants/icons';
 import { sortByKey, coordinateKey, toCommaArray } from 'utils/common';
 import { map, size, isNumber } from 'constants/lodash';
 import Entities from 'constants/entities';
@@ -41,43 +40,23 @@ const EntityList = ({
     if (!isSidebarEditActive) {
       return (
         <SectionHeader
-          className="EntityList-Name"
           isOpen={isOpen}
           onClick={toggleListOpen}
-        >
-          <FlexContainer justify="spaceBetween" align="flexEnd">
-            <FormattedMessage id={Entities[entityType].name} />
-            <span className="EntityList-Size">
-              {numEntities}{' '}
-              <FormattedMessage id={Entities[entityType].shortName} />
-            </span>
-          </FlexContainer>
-        </SectionHeader>
+          header={Entities[entityType].name}
+          additional={`${numEntities} ${intl.formatMessage({
+            id: Entities[entityType].shortName,
+          })}`}
+        />
       );
     }
     return (
-      <SectionHeader isOpen={isOpen} onIconClick={toggleListOpen}>
-        <FlexContainer justify="spaceBetween" align="flexEnd">
-          <span className="EntityList-Name">
-            <FormattedMessage id={Entities[entityType].name} />
-          </span>
-          <Button
-            minimal
-            className="EntityList-AddButton"
-            onClick={createChildInEdit}
-          >
-            <LinkIcon size={15} icon={Plus} />
-            <FormattedMessage
-              id="misc.addEntity"
-              values={{
-                entity: intl.formatMessage({
-                  id: Entities[entityType].shortName,
-                }),
-              }}
-            />
-          </Button>
-        </FlexContainer>
-      </SectionHeader>
+      <SectionHeader
+        header={Entities[entityType].name}
+        isOpen={isOpen}
+        onIconClick={toggleListOpen}
+        onAdd={createChildInEdit}
+        addItemName={Entities[entityType].shortName}
+      />
     );
   };
 

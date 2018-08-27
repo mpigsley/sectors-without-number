@@ -38,28 +38,8 @@
   margin: 0 1rem 0.5rem;
 }
 
-.EntityTag-Action {
-  color: $light2;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  transition: all 0.2s;
-
-  &:hover {
-    color: $light3;
-  }
-}
-
 .EntityTag-Dropdown {
   flex: 1;
-}
-
-.EntityTag-AddButton {
-  margin: 0;
-}
-
-.EntityTags-Name,
-.EntityAttributes-Name {
-  cursor: pointer;
 }
 
 .EntityAttributes-Checkbox {

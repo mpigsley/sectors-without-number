@@ -232,11 +232,11 @@ export default function EntityAttributes({
 
     attributesSection = (
       <div key="attributes">
-        <SectionHeader isOpen={isAttributesOpen} onClick={toggleAttributesOpen}>
-          <span className="EntityAttributes-Name">
-            <FormattedMessage id="misc.attributes" />
-          </span>
-        </SectionHeader>
+        <SectionHeader
+          header="misc.attributes"
+          isOpen={isAttributesOpen}
+          onClick={toggleAttributesOpen}
+        />
         {renderSubHeader()}
         {attributes}
       </div>
