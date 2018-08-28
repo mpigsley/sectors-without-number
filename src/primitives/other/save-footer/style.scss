@@ -39,4 +39,10 @@
   &:hover {
     background-color: $primary-alt;
   }
+
+  &:disabled,
+  &:disabled:hover {
+    background-color: $light1;
+    color: $light2;
+  }
 }

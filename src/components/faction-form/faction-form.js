@@ -68,6 +68,7 @@ export default function FactionForm({
           onCancel={() =>
             toRoute(dropRight(location.pathname.split('/')).join('/'))
           }
+          disabled={!form.name}
           onSave={() => {}}
         />
       }
