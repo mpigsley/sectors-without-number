@@ -10,9 +10,10 @@ import SaveFooter from 'primitives/other/save-footer';
 import ItemRow from 'primitives/other/item-row';
 
 import { RefreshCw } from 'constants/icons';
-import { sortBy, map, dropRight } from 'constants/lodash';
+import { omit, sortBy, map, dropRight } from 'constants/lodash';
 import { FACTION_GOALS } from 'constants/faction';
 
+import FactionAssetForm from './faction-asset-form';
 import './style.css';
 
 const chance = new Chance();
@@ -22,6 +23,7 @@ export default function FactionForm({
   isCreating,
   form,
   updateFaction,
+  updateFactionAsset,
   createBlankAsset,
   toRoute,
   location,
@@ -70,132 +72,150 @@ export default function FactionForm({
         />
       }
     >
-      <SectionHeader header="misc.attributes" />
-      <div className="FactionForm">
-        <LabeledInput
-          label="misc.name"
-          value={form.name}
-          onChange={({ target }) => updateFaction({ name: target.value })}
-        />
-        <ItemRow>
+      <div>
+        <SectionHeader header="misc.attributes" />
+        <div className="FactionForm">
           <LabeledInput
-            label="faction.category.force"
-            value={form.force}
-            type="number"
-            isVertical
-            onChange={({ target }) => updateFaction({ force: target.value })}
+            label="misc.name"
+            value={form.name}
+            onChange={({ target }) => updateFaction({ name: target.value })}
           />
+          <ItemRow>
+            <LabeledInput
+              label="faction.category.force"
+              value={form.force}
+              type="number"
+              isVertical
+              onChange={({ target }) => updateFaction({ force: target.value })}
+            />
+            <LabeledInput
+              label="faction.category.cunning"
+              value={form.cunning}
+              type="number"
+              isVertical
+              onChange={({ target }) =>
+                updateFaction({ cunning: target.value })
+              }
+            />
+            <LabeledInput
+              label="faction.category.wealth"
+              value={form.wealth}
+              type="number"
+              isVertical
+              onChange={({ target }) => updateFaction({ wealth: target.value })}
+            />
+          </ItemRow>
+          <ItemRow>
+            <LabeledInput
+              label="misc.hitPoints"
+              value={form.hitPoints}
+              type="number"
+              isVertical
+              onChange={({ target }) =>
+                updateFaction({ hitPoints: target.value })
+              }
+            />
+            <LabeledInput
+              label="misc.balance"
+              value={form.balance}
+              type="number"
+              isVertical
+              onChange={({ target }) =>
+                updateFaction({ balance: target.value })
+              }
+            />
+            <LabeledInput
+              label="misc.experience"
+              value={form.experience}
+              type="number"
+              isVertical
+              onChange={({ target }) =>
+                updateFaction({ experience: target.value })
+              }
+            />
+          </ItemRow>
           <LabeledInput
-            label="faction.category.cunning"
-            value={form.cunning}
-            type="number"
-            isVertical
-            onChange={({ target }) => updateFaction({ cunning: target.value })}
-          />
-          <LabeledInput
-            label="faction.category.wealth"
-            value={form.wealth}
-            type="number"
-            isVertical
-            onChange={({ target }) => updateFaction({ wealth: target.value })}
-          />
-        </ItemRow>
-        <ItemRow>
-          <LabeledInput
-            label="misc.hitPoints"
-            value={form.hitPoints}
-            type="number"
-            isVertical
-            onChange={({ target }) =>
-              updateFaction({ hitPoints: target.value })
+            label="misc.relationship"
+            placeholder=""
+            type="dropdown"
+            value={form.relationship}
+            options={relationshipOptions}
+            onChange={item =>
+              updateFaction({ relationship: (item || {}).value })
+            }
+            icon={RefreshCw}
+            onItemClick={() =>
+              updateFaction({
+                relationship: chance.pickone(relationshipOptions).value,
+              })
             }
           />
           <LabeledInput
-            label="misc.balance"
-            value={form.balance}
-            type="number"
-            isVertical
-            onChange={({ target }) => updateFaction({ balance: target.value })}
-          />
-          <LabeledInput
-            label="misc.experience"
-            value={form.experience}
-            type="number"
-            isVertical
-            onChange={({ target }) =>
-              updateFaction({ experience: target.value })
+            label="misc.homeworld"
+            placeholder=""
+            type="dropdown"
+            value={form.homeworld}
+            options={homeworldOptions}
+            onChange={item => updateFaction({ homeworld: (item || {}).value })}
+            icon={RefreshCw}
+            onItemClick={() =>
+              updateFaction({
+                homeworld: chance.pickone(homeworldOptions).value,
+              })
             }
           />
-        </ItemRow>
-        <LabeledInput
-          label="misc.relationship"
-          placeholder=""
-          type="dropdown"
-          value={form.relationship}
-          options={relationshipOptions}
-          onChange={item => updateFaction({ relationship: (item || {}).value })}
-          icon={RefreshCw}
-          onItemClick={() =>
-            updateFaction({
-              relationship: chance.pickone(relationshipOptions).value,
-            })
-          }
+          <LabeledInput
+            label="misc.goal"
+            placeholder=""
+            type="dropdown"
+            value={form.goal}
+            options={goalOptions}
+            onChange={item => updateFaction({ goal: (item || {}).value })}
+            icon={RefreshCw}
+            onItemClick={() =>
+              updateFaction({
+                goal: chance.pickone(goalOptions).value,
+              })
+            }
+          />
+          <LabeledInput
+            label="misc.tags"
+            multi
+            placeholder=""
+            type="dropdown"
+            value={form.tags}
+            options={goalOptions}
+            onChange={items =>
+              updateFaction({ tags: items.map(item => (item || {}).value) })
+            }
+          />
+          <LabeledInput
+            label="misc.description"
+            rows="5"
+            type="textarea"
+            placeholder={intl.formatMessage({ id: 'misc.description' })}
+            value={form.description}
+            onChange={({ target } = {}) =>
+              updateFaction({ description: target.value })
+            }
+          />
+        </div>
+        <SectionHeader
+          header="misc.assets"
+          addItemName="misc.asset"
+          onAdd={createBlankAsset}
         />
-        <LabeledInput
-          label="misc.homeworld"
-          placeholder=""
-          type="dropdown"
-          value={form.homeworld}
-          options={homeworldOptions}
-          onChange={item => updateFaction({ homeworld: (item || {}).value })}
-          icon={RefreshCw}
-          onItemClick={() =>
-            updateFaction({
-              homeworld: chance.pickone(homeworldOptions).value,
-            })
-          }
-        />
-        <LabeledInput
-          label="misc.goal"
-          placeholder=""
-          type="dropdown"
-          value={form.goal}
-          options={goalOptions}
-          onChange={item => updateFaction({ goal: (item || {}).value })}
-          icon={RefreshCw}
-          onItemClick={() =>
-            updateFaction({
-              goal: chance.pickone(goalOptions).value,
-            })
-          }
-        />
-        <LabeledInput
-          label="misc.tags"
-          multi
-          placeholder=""
-          type="dropdown"
-          value={form.tags}
-          options={goalOptions}
-          onChange={items =>
-            updateFaction({ tags: items.map(item => (item || {}).value) })
-          }
-        />
-        <LabeledInput
-          label="misc.description"
-          rows="5"
-          type="textarea"
-          placeholder={intl.formatMessage({ id: 'misc.description' })}
-          value={form.description}
-          onChange={({ target } = {}) =>
-            updateFaction({ description: target.value })
-          }
-        />
+        {map(form.assets, (asset, key) => (
+          <FactionAssetForm
+            key={key}
+            intl={intl}
+            homeworlds={homeworldOptions}
+            onDelete={() => updateFaction({ assets: omit(form.assets, key) })}
+            onUpdate={update => updateFactionAsset(key, update)}
+            {...asset}
+          />
+        ))}
       </div>
-      <SectionHeader
-        header="misc.assets"
-        addItemName="misc.asset"
-        onAdd={createBlankAsset}
-      />
     </SidebarContainer>
   );
 }
@@ -207,6 +227,7 @@ FactionForm.propTypes = {
     name: PropTypes.string.isRequired,
   }).isRequired,
   updateFaction: PropTypes.func.isRequired,
+  updateFactionAsset: PropTypes.func.isRequired,
   createBlankAsset: PropTypes.func.isRequired,
   toRoute: PropTypes.func.isRequired,
   location: PropTypes.shape({

@@ -2,7 +2,8 @@ import { LOCATION_CHANGE } from 'connected-react-router';
 
 import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
 import {
-  UPDATE_FORM,
+  UPDATED_FORM,
+  UPDATED_ASSET_FORM,
   CREATED_BLANK_ASSET,
 } from 'store/actions/faction.actions';
 
@@ -57,15 +58,25 @@ export default function faction(state = initialState, action) {
         isCreating: factionId === 'new',
       };
     }
-    case UPDATE_FORM:
+    case UPDATED_FORM:
       return {
         ...state,
         form: {
           ...state.form,
           ...action.update,
+        },
+      };
+    case UPDATED_ASSET_FORM:
+      return {
+        ...state,
+        form: {
+          ...state.form,
           assets: {
             ...state.form.assets,
-            ...(action.update.assets || {}),
+            [action.key]: {
+              ...state.form.assets[action.key],
+              ...action.update,
+            },
           },
         },
       };
@@ -76,7 +87,7 @@ export default function faction(state = initialState, action) {
           ...state.form,
           assets: {
             ...state.form.assets,
-            [action.id]: initialAsset(),
+            [action.key]: initialAsset(),
           },
         },
       };

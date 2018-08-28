@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import DeletableRow from 'primitives/form/deletable-row';
@@ -10,12 +11,8 @@ import Input from 'primitives/form/input';
 import { map } from 'constants/lodash';
 import { FACTION_ASSETS } from 'constants/faction';
 
-const ASSET_OPTIONS = map(FACTION_ASSETS, ({ name, key }) => ({
-  label: name,
-  value: key,
-}));
-
 export default function FactionAssetForm({
+  intl,
   onDelete,
   onUpdate,
   type,
@@ -23,24 +20,35 @@ export default function FactionAssetForm({
   location,
   homeworlds,
 }) {
+  const assetOptions = map(FACTION_ASSETS, ({ key }) => ({
+    label: intl.formatMessage({ id: `faction.assets.${key}` }),
+    value: key,
+  }));
+
   return (
-    <DeletableRow onAction={onDelete}>
-      <FlexContainer direction="column">
+    <DeletableRow className="FactionAssetForm" onAction={onDelete}>
+      <FlexContainer direction="column" flex="1">
         <Input
+          dropUp
           type="dropdown"
           clearable={false}
           value={type}
-          options={ASSET_OPTIONS}
+          options={assetOptions}
           onChange={({ value }) => onUpdate({ type: value })}
         />
         <ItemRow>
           <LabeledInput
+            isVertical
             type="number"
             label="misc.hitPoints"
             value={hitPoints}
-            onChange={({ target }) => onUpdate({ hitPoints: target.value })}
+            onChange={({ target }) =>
+              onUpdate({ hitPoints: parseInt(target.value, 10) })
+            }
           />
           <LabeledInput
+            dropUp
+            isVertical
             type="dropdown"
             label="misc.location"
             value={location}
@@ -54,6 +62,7 @@ export default function FactionAssetForm({
 }
 
 FactionAssetForm.propTypes = {
+  intl: intlShape.isRequired,
   onDelete: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
   type: PropTypes.string,
