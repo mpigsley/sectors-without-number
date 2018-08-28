@@ -6,21 +6,27 @@ import FlexContainer from 'primitives/container/flex-container';
 
 import './style.css';
 
-export default function SaveFooter({ onCancel, onSave, disabled }) {
+export default function SaveFooter({
+  onCancel,
+  onSave,
+  cancelText,
+  saveText,
+  disabled,
+}) {
   return (
     <FlexContainer>
       <button
         className="SaveFooter-Button SaveFooter-Cancel"
         onClick={onCancel}
       >
-        <FormattedMessage id="misc.cancel" />
+        <FormattedMessage id={cancelText} />
       </button>
       <button
         disabled={disabled}
         className="SaveFooter-Button SaveFooter-Save"
         onClick={onSave}
       >
-        <FormattedMessage id="misc.save" />
+        <FormattedMessage id={saveText} />
       </button>
     </FlexContainer>
   );
@@ -29,9 +35,13 @@ export default function SaveFooter({ onCancel, onSave, disabled }) {
 SaveFooter.propTypes = {
   onCancel: PropTypes.func.isRequired,
   onSave: PropTypes.func.isRequired,
+  cancelText: PropTypes.string,
+  saveText: PropTypes.string,
   disabled: PropTypes.bool,
 };
 
 SaveFooter.defaultProps = {
+  cancelText: 'misc.cancel',
+  saveText: 'misc.save',
   disabled: false,
 };

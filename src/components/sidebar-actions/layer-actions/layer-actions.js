@@ -5,6 +5,7 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import ActionLayout from 'components/sidebar-actions/action-layout';
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import Header, { HeaderType } from 'primitives/text/header';
+import SaveFooter from 'primitives/other/save-footer';
 
 import Entities from 'constants/entities';
 
@@ -15,16 +16,24 @@ export default class EntityActions extends Component {
     children: PropTypes.node.isRequired,
     removeLayer: PropTypes.func.isRequired,
     initializeLayerEdit: PropTypes.func.isRequired,
+    submitForm: PropTypes.func.isRequired,
+    cancelForm: PropTypes.func.isRequired,
+    route: PropTypes.func.isRequired,
     layer: PropTypes.shape({
       name: PropTypes.string.isRequired,
     }),
+    layerId: PropTypes.string,
+    isEditing: PropTypes.bool.isRequired,
     isSaved: PropTypes.bool.isRequired,
     isShared: PropTypes.bool.isRequired,
+    isValid: PropTypes.bool.isRequired,
+    sector: PropTypes.string.isRequired,
     intl: intlShape.isRequired,
   };
 
   static defaultProps = {
     layer: null,
+    layerId: null,
   };
 
   state = {
@@ -75,12 +84,36 @@ export default class EntityActions extends Component {
     ];
   }
 
+  renderFooter() {
+    const {
+      layerId,
+      isEditing,
+      isValid,
+      cancelForm,
+      submitForm,
+      route,
+      sector,
+    } = this.props;
+    if (layerId && !isEditing) {
+      return null;
+    }
+    return (
+      <SaveFooter
+        onCancel={() => (isEditing ? cancelForm() : route(`/sector/${sector}`))}
+        onSave={() => submitForm()}
+        saveText={isEditing ? 'misc.editLayer' : 'misc.createLayer'}
+        disabled={!isValid}
+      />
+    );
+  }
+
   render() {
     return (
       <ActionLayout
         backUrl={this.backUrl}
         actions={this.buildActions()}
         name={this.renderName()}
+        footer={this.renderFooter()}
       >
         {this.props.children}
         <ConfirmModal
