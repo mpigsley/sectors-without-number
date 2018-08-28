@@ -14,6 +14,7 @@ export default function LabeledInput({
   icon,
   checkboxes,
   isVertical,
+  isRequired,
   className,
   ...rest
 }) {
@@ -23,6 +24,7 @@ export default function LabeledInput({
       className={className}
       label={label}
       isVertical={isVertical || type === 'textarea'}
+      isRequired={isRequired}
     >
       <InputComponent type={type} icon={icon} {...rest} />
       {React.Children.map(checkboxes, checkbox =>
@@ -43,6 +45,7 @@ LabeledInput.propTypes = {
   icon: PropTypes.func,
   checkboxes: PropTypes.arrayOf(PropTypes.node),
   isVertical: PropTypes.bool,
+  isRequired: PropTypes.bool,
   className: PropTypes.string,
 };
 
@@ -51,5 +54,6 @@ LabeledInput.defaultProps = {
   icon: undefined,
   checkboxes: [],
   isVertical: false,
+  isRequired: false,
   className: undefined,
 };

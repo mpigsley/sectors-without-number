@@ -10,10 +10,12 @@ import './style.css';
 
 export default function LabeledItem({
   isVertical,
+  isRequired,
   label,
   children,
   className,
 }) {
+  const requiredFlag = isRequired ? ' *' : '';
   return (
     <FlexContainer
       align="center"
@@ -22,7 +24,8 @@ export default function LabeledItem({
       })}
     >
       <Label noPadding className="LabeledItem-Label">
-        <FormattedMessage id={label} />:
+        <FormattedMessage id={label} />
+        {requiredFlag}
       </Label>
       <FlexContainer className="LabeledItem-Item">{children}</FlexContainer>
     </FlexContainer>
@@ -31,6 +34,7 @@ export default function LabeledItem({
 
 LabeledItem.propTypes = {
   isVertical: PropTypes.bool,
+  isRequired: PropTypes.bool,
   label: PropTypes.string.isRequired,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
@@ -38,5 +42,6 @@ LabeledItem.propTypes = {
 
 LabeledItem.defaultProps = {
   isVertical: false,
+  isRequired: false,
   className: undefined,
 };

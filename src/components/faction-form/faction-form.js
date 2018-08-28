@@ -76,6 +76,7 @@ export default function FactionForm({
         <SectionHeader header="misc.attributes" />
         <div className="FactionForm">
           <LabeledInput
+            isRequired
             label="misc.name"
             value={form.name}
             onChange={({ target }) => updateFaction({ name: target.value })}
