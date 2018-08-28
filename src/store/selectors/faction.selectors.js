@@ -1,10 +1,13 @@
 import { createSelector } from 'reselect';
 
 import { pickBy } from 'constants/lodash';
+import { LAYER_NAME_LENGTH } from 'constants/defaults';
+
 import {
   currentEntitySelector,
   currentSectorSelector,
   factionsSelector,
+  factionFormSelector,
 } from 'store/selectors/base.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 
@@ -20,4 +23,9 @@ export const currentSectorFactions = createSelector(
 export const currentFaction = createSelector(
   [currentSectorFactions, currentEntitySelector],
   (factions, current) => (factions || {})[current],
+);
+
+export const isValidFactionForm = createSelector(
+  [factionFormSelector],
+  ({ name }) => !!name && name.length <= LAYER_NAME_LENGTH,
 );

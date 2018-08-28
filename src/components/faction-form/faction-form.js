@@ -12,6 +12,7 @@ import ItemRow from 'primitives/other/item-row';
 import { RefreshCw } from 'constants/icons';
 import { omit, sortBy, map, dropRight } from 'constants/lodash';
 import { FACTION_GOALS } from 'constants/faction';
+import { LAYER_NAME_LENGTH } from 'constants/defaults';
 
 import FactionAssetForm from './faction-asset-form';
 import './style.css';
@@ -21,6 +22,7 @@ const chance = new Chance();
 export default function FactionForm({
   intl,
   isCreating,
+  isValid,
   form,
   updateFaction,
   updateFactionAsset,
@@ -68,7 +70,7 @@ export default function FactionForm({
           onCancel={() =>
             toRoute(dropRight(location.pathname.split('/')).join('/'))
           }
-          disabled={!form.name}
+          disabled={!isValid}
           onSave={() => {}}
         />
       }
@@ -79,6 +81,11 @@ export default function FactionForm({
           <LabeledInput
             isRequired
             label="misc.name"
+            error={form.name.length > LAYER_NAME_LENGTH}
+            placeholder={intl.formatMessage(
+              { id: 'misc.nameLimit' },
+              { num: LAYER_NAME_LENGTH },
+            )}
             value={form.name}
             onChange={({ target }) => updateFaction({ name: target.value })}
           />
@@ -225,6 +232,7 @@ export default function FactionForm({
 FactionForm.propTypes = {
   intl: intlShape.isRequired,
   isCreating: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool.isRequired,
   form: PropTypes.shape({
     name: PropTypes.string.isRequired,
   }).isRequired,
