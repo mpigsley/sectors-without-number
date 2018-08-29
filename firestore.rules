@@ -1,5 +1,9 @@
 service cloud.firestore {
   match /databases/{database}/documents {
+    function getSector(sectorId) {
+      return get(/databases/$(database)/documents/entities/sector/entity/$(sectorId));
+    }
+
     match /entities/{entityType}/entity/{entityId} {
       allow create: if false;
       allow update, delete: if resource.data.creator == request.auth.uid &&
@@ -12,22 +16,24 @@ service cloud.firestore {
       allow read, write: if request.auth != null && uid == request.auth.uid;
     }
     match /navigation/{sectorId}/routes/{routeId} {
-      function getSector() {
-        return get(/databases/$(database)/documents/entities/sector/entity/$(sectorId));
-      }
       allow write: if request.auth != null
-        && getSector().data.creator == request.auth.uid;
+        && getSector(sectorId).data.creator == request.auth.uid;
       allow read;
     }
     match /layers/{sectorId}/layer/{layerId=**} {
-      function getSector() {
-        return get(/databases/$(database)/documents/entities/sector/entity/$(sectorId));
-      }
       allow create: if request.auth != null
-        && getSector().data.creator == request.auth.uid
+        && getSector(sectorId).data.creator == request.auth.uid
         && ('regions' in request.resource.data || request.resource.data.name.size() <= 40);
       allow update, delete: if request.auth != null
-        && getSector().data.creator == request.auth.uid;
+        && getSector(sectorId).data.creator == request.auth.uid;
+      allow read;
+    }
+    match /factions/{sectorId}/faction/{factionId=**} {
+      allow create: if request.auth != null
+        && getSector(sectorId).data.creator == request.auth.uid
+        && request.resource.data.name.size() <= 40;
+      allow update, delete: if request.auth != null
+        && getSector(sectorId).data.creator == request.auth.uid;
       allow read;
     }
     match /{document=**} {

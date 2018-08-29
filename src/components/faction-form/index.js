@@ -13,6 +13,7 @@ import {
   updateFaction,
   updateFactionAsset,
   createBlankAsset,
+  submitForm,
 } from 'store/actions/faction.actions';
 
 import FactionForm from './faction-form';
@@ -24,12 +25,13 @@ const mapStateToProps = createStructuredSelector({
   homeworlds: getCurrentPlanets,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, props) => ({
   updateFaction: update => dispatch(updateFaction(update)),
   createBlankAsset: () => dispatch(createBlankAsset()),
   toRoute: route => dispatch(push(route)),
   updateFactionAsset: (key, update) =>
     dispatch(updateFactionAsset(key, update)),
+  submitForm: () => dispatch(submitForm(props.intl)),
 });
 
 export default injectIntl(

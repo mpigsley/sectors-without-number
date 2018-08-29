@@ -27,6 +27,7 @@ export default function FactionForm({
   updateFaction,
   updateFactionAsset,
   createBlankAsset,
+  submitForm,
   toRoute,
   location,
   homeworlds,
@@ -71,7 +72,7 @@ export default function FactionForm({
             toRoute(dropRight(location.pathname.split('/')).join('/'))
           }
           disabled={!isValid}
-          onSave={() => {}}
+          onSave={submitForm}
         />
       }
     >
@@ -239,6 +240,7 @@ FactionForm.propTypes = {
   updateFaction: PropTypes.func.isRequired,
   updateFactionAsset: PropTypes.func.isRequired,
   createBlankAsset: PropTypes.func.isRequired,
+  submitForm: PropTypes.func.isRequired,
   toRoute: PropTypes.func.isRequired,
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
