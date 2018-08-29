@@ -1,4 +1,8 @@
 {
+  "6.5.2": {
+    "description": "Fix user language selection and allow English to be reselected.",
+    "date": "8-29-2018"
+  },
   "6.5.1": {
     "description": "Don't add left dropdown padding if icon is not supplied.",
     "date": "8-16-2018"

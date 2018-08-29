@@ -43,6 +43,7 @@ export default function ProfileModal({
           <FormattedMessage id="misc.language" />
         </Label>
         <Dropdown
+          dropUp
           id="language"
           name="language"
           clearable={false}
