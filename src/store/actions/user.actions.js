@@ -143,7 +143,7 @@ export const updateUser = intl => (dispatch, getState) => {
   const state = getState();
   const uid = userUidSelector(state);
   let filteredForm = pick(userFormSelector(state), 'displayName', 'locale');
-  if (!Locale[filteredForm.local || 'en']) {
+  if (!Locale[filteredForm.locale || 'en']) {
     filteredForm = { ...filteredForm, locale: 'en' };
   }
   return updateCurrentUser(uid, { ...filteredForm })
