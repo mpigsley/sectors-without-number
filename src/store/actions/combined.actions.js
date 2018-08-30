@@ -10,6 +10,7 @@ import {
 } from 'store/api/entity';
 import { getNavigationData } from 'store/api/navigation';
 import { getLayerData, createLayer, deleteLayer } from 'store/api/layer';
+import { getFactionData } from 'store/api/faction';
 
 import {
   isInitializedSelector,
@@ -48,6 +49,7 @@ export const initialize = location => dispatch =>
       isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
       isGameView ? getNavigationData(sectorId) : Promise.resolve({}),
       isGameView ? getLayerData(sectorId) : Promise.resolve({}),
+      isGameView ? getFactionData(sectorId) : Promise.resolve({}),
       uid ? getSyncedSectors(uid) : Promise.resolve(),
     ];
     if (locale && locale !== 'en' && Locale[locale]) {
@@ -59,7 +61,14 @@ export const initialize = location => dispatch =>
       );
     }
     return Promise.all(promises).then(
-      ([{ entities, share }, routes, layers, sectors, userLocale]) => {
+      ([
+        { entities, share },
+        routes,
+        layers,
+        factions,
+        sectors,
+        userLocale,
+      ]) => {
         if (((entities || {})[Entities.sector.key] || {})[sectorId]) {
           document.title = `Sector - ${
             entities[Entities.sector.key][sectorId].name
@@ -74,6 +83,7 @@ export const initialize = location => dispatch =>
           ),
           routes,
           layers,
+          factions,
           sectorId,
           share,
           saved: keys(sectors || {}),
@@ -98,7 +108,8 @@ export const fetchSector = () => (dispatch, getState) => {
     getSectorEntities(sectorId, userId),
     getNavigationData(sectorId),
     getLayerData(sectorId),
-  ]).then(([{ entities, share }, routes, layers]) =>
+    getFactionData(sectorId),
+  ]).then(([{ entities, share }, routes, layers, factions]) =>
     dispatch({
       type: FETCHED_SECTOR,
       sectorId,
@@ -106,6 +117,7 @@ export const fetchSector = () => (dispatch, getState) => {
       share,
       routes,
       layers,
+      factions,
     }),
   );
 };

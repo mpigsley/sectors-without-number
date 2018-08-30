@@ -24,3 +24,17 @@ export const deleteLayer = (sectorId, factionId) =>
     .collection('faction')
     .doc(factionId)
     .delete();
+
+export const getFactionData = sectorId =>
+  Firebase.firestore()
+    .collection('factions')
+    .doc(sectorId)
+    .collection('faction')
+    .get()
+    .then(snapshot => {
+      const factions = {};
+      snapshot.forEach(doc => {
+        factions[doc.id] = doc.data();
+      });
+      return factions;
+    });
