@@ -1,6 +1,5 @@
 import { createSelector } from 'reselect';
 
-import { pickBy } from 'constants/lodash';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 
 import {
@@ -9,15 +8,10 @@ import {
   factionsSelector,
   factionFormSelector,
 } from 'store/selectors/base.selectors';
-import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 
 export const currentSectorFactions = createSelector(
-  [currentSectorSelector, factionsSelector, isViewingSharedSector],
-  (sector, layers, isShared) =>
-    pickBy(
-      (layers || {})[sector] || {},
-      ({ isHidden }) => !isShared || !isHidden,
-    ),
+  [currentSectorSelector, factionsSelector],
+  (sector, layers) => (layers || {})[sector] || {},
 );
 
 export const currentFaction = createSelector(
