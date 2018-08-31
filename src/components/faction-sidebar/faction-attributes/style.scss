@@ -1,0 +1,21 @@
+@import 'styles/theme';
+
+.FactionAttributes-Title {
+  font-style: italic;
+  margin-right: 0.3rem;
+}
+
+.FactionAttributes-Effect {
+  font-style: italic;
+  margin-right: 0.8rem;
+}
+
+.FactionAttributes-Link {
+  border-bottom-color: $dark1;
+  font-size: 0.9rem;
+  height: auto;
+  letter-spacing: 0;
+  line-height: normal;
+  margin: 0;
+  padding: 0;
+}

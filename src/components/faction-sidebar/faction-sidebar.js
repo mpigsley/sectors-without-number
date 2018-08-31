@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import SidebarContainer from 'primitives/container/sidebar-container';
 import SectionHeader from 'primitives/text/section-header';
 
+import FactionAssets from './faction-assets';
+import FactionAttributes from './faction-attributes';
 import './style.css';
 
 export default class FactionSidebar extends Component {
@@ -37,11 +39,20 @@ export default class FactionSidebar extends Component {
           }
           header="misc.attributes"
         />
+        {isAttributesOpen && (
+          <FactionAttributes
+            className="FactionSidebar-Content"
+            faction={faction}
+          />
+        )}
         <SectionHeader
           isOpen={isAssetsOpen}
           onIconClick={() => this.setState({ isAssetsOpen: !isAssetsOpen })}
           header="misc.assets"
         />
+        {isAttributesOpen && (
+          <FactionAssets className="FactionSidebar-Content" faction={faction} />
+        )}
       </SidebarContainer>
     );
   }
