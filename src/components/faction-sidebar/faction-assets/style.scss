@@ -1,0 +1,20 @@
+@import 'styles/theme';
+
+.FactionAssets-Asset {
+  margin-bottom: 1.5rem;
+}
+
+.FactionAssets-Header {
+  font-weight: 900;
+  margin-right: 0.5rem;
+}
+
+.FactionAssets-Description {
+  color: $light2;
+  font-size: 0.9rem;
+}
+
+.FactionAssets-Item {
+  margin-bottom: 0.1rem;
+  padding: 0;
+}

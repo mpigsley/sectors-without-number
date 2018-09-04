@@ -1,9 +1,12 @@
-// import { connect } from 'react-redux';
-// import { createStructuredSelector } from 'reselect';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+
+import { currentFactionAssets } from 'store/selectors/faction.selectors';
 
 import FactionAssets from './faction-assets';
 
-// const mapStateToProps = createStructuredSelector({
-// });
+const mapStateToProps = createStructuredSelector({
+  assets: currentFactionAssets,
+});
 
-export default FactionAssets;
+export default connect(mapStateToProps)(FactionAssets);

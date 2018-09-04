@@ -32,27 +32,27 @@ export default class FactionSidebar extends Component {
     const { isAttributesOpen, isAssetsOpen } = this.state;
     return (
       <SidebarContainer title={faction.name}>
-        <SectionHeader
-          isOpen={isAttributesOpen}
-          onIconClick={() =>
-            this.setState({ isAttributesOpen: !isAttributesOpen })
-          }
-          header="misc.attributes"
-        />
-        {isAttributesOpen && (
-          <FactionAttributes
-            className="FactionSidebar-Content"
-            faction={faction}
+        <div>
+          <SectionHeader
+            isOpen={isAttributesOpen}
+            onIconClick={() =>
+              this.setState({ isAttributesOpen: !isAttributesOpen })
+            }
+            header="misc.attributes"
           />
-        )}
-        <SectionHeader
-          isOpen={isAssetsOpen}
-          onIconClick={() => this.setState({ isAssetsOpen: !isAssetsOpen })}
-          header="misc.assets"
-        />
-        {isAttributesOpen && (
-          <FactionAssets className="FactionSidebar-Content" faction={faction} />
-        )}
+          {isAttributesOpen && (
+            <FactionAttributes
+              className="FactionSidebar-Content"
+              faction={faction}
+            />
+          )}
+          <SectionHeader
+            isOpen={isAssetsOpen}
+            onIconClick={() => this.setState({ isAssetsOpen: !isAssetsOpen })}
+            header="misc.assets"
+          />
+          {isAssetsOpen && <FactionAssets className="FactionSidebar-Content" />}
+        </div>
       </SidebarContainer>
     );
   }

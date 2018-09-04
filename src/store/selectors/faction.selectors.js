@@ -1,7 +1,9 @@
 import { createSelector } from 'reselect';
 
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
+import { FACTION_ASSETS } from 'constants/faction';
 import Entities from 'constants/entities';
+import { map } from 'constants/lodash';
 
 import {
   entitySelector,
@@ -33,6 +35,26 @@ export const currentFactionHomeworld = createSelector(
       name: homeworld.name,
     };
   },
+);
+
+export const currentFactionAssets = createSelector(
+  [currentSectorSelector, entitySelector, currentFaction],
+  (sector, entities, faction = {}) =>
+    map(faction.assets, ({ location, type, hitPoints }) => {
+      const locationEntity = entities[Entities.planet.key][location];
+      const { hp, ...asset } = FACTION_ASSETS[type];
+      return {
+        ...asset,
+        hitPoints: {
+          total: hp,
+          current: hitPoints,
+        },
+        location: {
+          link: `/sector/${sector}/${Entities.planet.key}/${location}`,
+          name: locationEntity.name,
+        },
+      };
+    }),
 );
 
 export const isValidFactionForm = createSelector(

@@ -14,14 +14,14 @@ const titledItem = (description, title) => {
     titleElement = <span className="FactionAttributes-Title">{title}: </span>;
   }
   return (
-    <span>
+    <span key="title">
       {titleElement}
       {description}
     </span>
   );
 };
 
-export default function FactionAttributes({ faction, homeworld, ...props }) {
+export default function FactionAttributes({ faction, homeworld, className }) {
   let homeworldElement;
   if (homeworld) {
     homeworldElement = (
@@ -90,7 +90,7 @@ export default function FactionAttributes({ faction, homeworld, ...props }) {
   }
 
   return (
-    <FlexContainer direction="column" {...props}>
+    <FlexContainer direction="column" className={className}>
       {homeworldElement}
       {relationship}
       {goal}
@@ -101,6 +101,7 @@ export default function FactionAttributes({ faction, homeworld, ...props }) {
 }
 
 FactionAttributes.propTypes = {
+  className: PropTypes.string,
   homeworld: PropTypes.shape({
     link: PropTypes.string,
     name: PropTypes.string,
@@ -113,5 +114,6 @@ FactionAttributes.propTypes = {
 };
 
 FactionAttributes.defaultProps = {
+  className: undefined,
   homeworld: undefined,
 };

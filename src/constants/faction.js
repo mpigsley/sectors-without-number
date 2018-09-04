@@ -274,12 +274,11 @@ export const FACTION_ASSETS = {
       attack: FACTION_ASSET_CATEGORIES.cunning,
       defense: FACTION_ASSET_CATEGORIES.cunning,
       damage: {
-        dice: '',
-        add: 1,
+        dice: '2d6',
       },
     },
     counter: {
-      dice: '',
+      dice: '1d6',
     },
     notes: [FACTION_ASSET_NOTES.specialFeatureCost],
   },
