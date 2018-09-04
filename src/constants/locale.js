@@ -66,4 +66,13 @@ export default {
         import(/* webpackChunkName: "swedish-locale" */ 'react-intl/locale-data/sv'),
       ]),
   },
+  pl: {
+    value: 'pl',
+    name: 'Polish',
+    localeFetch: () =>
+      Promise.all([
+        import(/* webpackChunkName: "polish" */ 'lang/pl'),
+        import(/* webpackChunkName: "polish-locale" */ 'react-intl/locale-data/pl'),
+      ]),
+  },
 };
