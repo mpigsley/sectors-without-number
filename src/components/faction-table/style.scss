@@ -33,6 +33,11 @@
   margin-right: 1rem;
 }
 
+.FactionTable-Income {
+  margin-left: 0.3rem;
+  margin-right: 0.1rem;
+}
+
 @media (max-width: 1200px) {
   .FactionTable--sidebarOpen {
     grid-template-columns: [table] auto [sidebar] $small-sidebar-width [end];

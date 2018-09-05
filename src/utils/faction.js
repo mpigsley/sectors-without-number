@@ -24,8 +24,3 @@ export const factionBaseIncome = faction =>
       faction[FACTION_ASSET_CATEGORIES.cunning]) /
       4,
   );
-
-export const buildFactionTableColumns = (intl, width) => {
-  console.log(width);
-  return [];
-};

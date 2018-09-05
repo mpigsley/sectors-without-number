@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import LabeledItem from 'primitives/other/labeled-item';
-import ButtonLink from 'primitives/other/button-link';
+import BasicLink from 'primitives/other/basic-link';
 
 import { RotateCcw } from 'constants/icons';
 
@@ -37,13 +37,9 @@ export default function FactionAttributes({ faction, attributes, className }) {
   if (attributes.homeworld) {
     homeworldElement = (
       <LabeledItem label="misc.homeworld">
-        <ButtonLink
-          className="FactionAttributes-Link"
-          minimal
-          to={attributes.homeworld.link}
-        >
+        <BasicLink to={attributes.homeworld.link}>
           {attributes.homeworld.name}
-        </ButtonLink>
+        </BasicLink>
       </LabeledItem>
     );
   }
