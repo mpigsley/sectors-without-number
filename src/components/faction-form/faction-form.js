@@ -1,7 +1,7 @@
 import React from 'react';
 import Chance from 'chance';
 import PropTypes from 'prop-types';
-import { intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import SidebarContainer from 'primitives/container/sidebar-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -31,6 +31,7 @@ export default function FactionForm({
   toRoute,
   location,
   homeworlds,
+  hitPoints,
 }) {
   const relationshipOptions = [
     {
@@ -96,7 +97,9 @@ export default function FactionForm({
               value={form.force}
               type="number"
               isVertical
-              onChange={({ target }) => updateFaction({ force: target.value })}
+              onChange={({ target }) =>
+                updateFaction({ force: parseInt(target.value, 10) })
+              }
             />
             <LabeledInput
               label="faction.category.cunning"
@@ -104,7 +107,7 @@ export default function FactionForm({
               type="number"
               isVertical
               onChange={({ target }) =>
-                updateFaction({ cunning: target.value })
+                updateFaction({ cunning: parseInt(target.value, 10) })
               }
             />
             <LabeledInput
@@ -112,17 +115,24 @@ export default function FactionForm({
               value={form.wealth}
               type="number"
               isVertical
-              onChange={({ target }) => updateFaction({ wealth: target.value })}
+              onChange={({ target }) =>
+                updateFaction({ wealth: parseInt(target.value, 10) })
+              }
             />
           </ItemRow>
           <ItemRow>
             <LabeledInput
-              label="misc.hitPoints"
+              label={
+                <span>
+                  <FormattedMessage id="misc.hitPoints" />
+                  {` (${hitPoints})`}
+                </span>
+              }
               value={form.hitPoints}
               type="number"
               isVertical
               onChange={({ target }) =>
-                updateFaction({ hitPoints: target.value })
+                updateFaction({ hitPoints: parseInt(target.value, 10) })
               }
             />
             <LabeledInput
@@ -131,7 +141,7 @@ export default function FactionForm({
               type="number"
               isVertical
               onChange={({ target }) =>
-                updateFaction({ balance: target.value })
+                updateFaction({ balance: parseInt(target.value, 10) })
               }
             />
             <LabeledInput
@@ -140,7 +150,7 @@ export default function FactionForm({
               type="number"
               isVertical
               onChange={({ target }) =>
-                updateFaction({ experience: target.value })
+                updateFaction({ experience: parseInt(target.value, 10) })
               }
             />
           </ItemRow>
@@ -246,4 +256,5 @@ FactionForm.propTypes = {
     pathname: PropTypes.string.isRequired,
   }).isRequired,
   homeworlds: PropTypes.shape().isRequired,
+  hitPoints: PropTypes.number.isRequired,
 };

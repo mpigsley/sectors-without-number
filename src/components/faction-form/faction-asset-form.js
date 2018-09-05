@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { intlShape } from 'react-intl';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import DeletableRow from 'primitives/form/deletable-row';
@@ -25,6 +25,11 @@ export default function FactionAssetForm({
     value: key,
   }));
 
+  let assetHitPoints;
+  if (type && FACTION_ASSETS[type]) {
+    assetHitPoints = ` (${FACTION_ASSETS[type].hp})`;
+  }
+
   return (
     <DeletableRow className="FactionAssetForm" onAction={onDelete}>
       <FlexContainer direction="column" flex="1">
@@ -40,7 +45,12 @@ export default function FactionAssetForm({
           <LabeledInput
             isVertical
             type="number"
-            label="misc.hitPoints"
+            label={
+              <span>
+                <FormattedMessage id="misc.hitPoints" />
+                {assetHitPoints}
+              </span>
+            }
             value={hitPoints}
             onChange={({ target }) =>
               onUpdate({ hitPoints: parseInt(target.value, 10) })

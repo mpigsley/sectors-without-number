@@ -16,6 +16,10 @@ export default function LabeledItem({
   className,
 }) {
   const requiredFlag = isRequired ? ' *' : '';
+  let labelItem = label;
+  if (typeof label === 'string') {
+    labelItem = <FormattedMessage id={label} />;
+  }
   return (
     <FlexContainer
       align="center"
@@ -24,7 +28,7 @@ export default function LabeledItem({
       })}
     >
       <Label noPadding className="LabeledItem-Label">
-        <FormattedMessage id={label} />
+        {labelItem}
         {requiredFlag}
       </Label>
       <FlexContainer className="LabeledItem-Item">{children}</FlexContainer>
@@ -35,7 +39,7 @@ export default function LabeledItem({
 LabeledItem.propTypes = {
   isVertical: PropTypes.bool,
   isRequired: PropTypes.bool,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };

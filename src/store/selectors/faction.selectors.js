@@ -4,6 +4,7 @@ import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import { FACTION_ASSET_CATEGORIES, FACTION_ASSETS } from 'constants/faction';
 import Entities from 'constants/entities';
 import { map, reduce } from 'constants/lodash';
+import { factionHitPoints, factionBaseIncome } from 'utils/faction';
 
 import {
   entitySelector,
@@ -12,6 +13,11 @@ import {
   factionsSelector,
   factionFormSelector,
 } from 'store/selectors/base.selectors';
+
+export const currentFormHitPoints = createSelector(
+  [factionFormSelector],
+  factionHitPoints,
+);
 
 export const currentSectorFactions = createSelector(
   [currentSectorSelector, factionsSelector],
@@ -22,17 +28,6 @@ export const currentFaction = createSelector(
   [currentSectorFactions, currentEntitySelector],
   (factions, current) => (factions || {})[current],
 );
-
-const RATING_TO_HP = {
-  1: 1,
-  2: 2,
-  3: 4,
-  4: 6,
-  5: 9,
-  6: 12,
-  7: 16,
-  8: 20,
-};
 
 export const currentFactionAttributes = createSelector(
   [currentSectorSelector, entitySelector, currentFaction],
@@ -46,20 +41,7 @@ export const currentFactionAttributes = createSelector(
       };
     }
 
-    let income =
-      Math.ceil(faction[FACTION_ASSET_CATEGORIES.wealth] / 2) +
-      Math.floor(
-        (faction[FACTION_ASSET_CATEGORIES.force] +
-          faction[FACTION_ASSET_CATEGORIES.cunning]) /
-          4,
-      );
-
-    const hitPoints =
-      4 +
-      RATING_TO_HP[faction[FACTION_ASSET_CATEGORIES.wealth]] +
-      RATING_TO_HP[faction[FACTION_ASSET_CATEGORIES.force]] +
-      RATING_TO_HP[faction[FACTION_ASSET_CATEGORIES.cunning]];
-
+    let income = factionBaseIncome(faction);
     const owned = reduce(
       faction.assets,
       (obj, { type }) => {
@@ -81,7 +63,7 @@ export const currentFactionAttributes = createSelector(
       { force: 0, cunning: 0, wealth: 0 },
     );
 
-    return { hitPoints, income, owned, homeworld };
+    return { hitPoints: factionHitPoints(faction), income, owned, homeworld };
   },
 );
 

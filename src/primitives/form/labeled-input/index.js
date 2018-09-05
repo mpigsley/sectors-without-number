@@ -40,7 +40,7 @@ export default function LabeledInput({
 }
 
 LabeledInput.propTypes = {
-  label: PropTypes.string.isRequired,
+  label: PropTypes.node.isRequired,
   type: PropTypes.string,
   icon: PropTypes.func,
   checkboxes: PropTypes.arrayOf(PropTypes.node),

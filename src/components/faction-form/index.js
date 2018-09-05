@@ -8,7 +8,10 @@ import {
   factionIsCreatingSelector,
 } from 'store/selectors/base.selectors';
 import { getCurrentPlanets } from 'store/selectors/entity.selectors';
-import { isValidFactionForm } from 'store/selectors/faction.selectors';
+import {
+  currentFormHitPoints,
+  isValidFactionForm,
+} from 'store/selectors/faction.selectors';
 import {
   updateFaction,
   updateFactionAsset,
@@ -23,6 +26,7 @@ const mapStateToProps = createStructuredSelector({
   isValid: isValidFactionForm,
   form: factionFormSelector,
   homeworlds: getCurrentPlanets,
+  hitPoints: currentFormHitPoints,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
