@@ -47,6 +47,7 @@
     "react-intl": "^2.4.0",
     "react-loadable": "^5.4.0",
     "react-markdown": "^3.3.4",
+    "react-measure": "^2.1.0",
     "react-modal": "^3.4.5",
     "react-redux": "^5.0.7",
     "react-redux-toastr": "^7.3.0",

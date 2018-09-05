@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import Measure from 'react-measure';
 
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import { getPixelRatio } from 'utils/canvas-helpers';
-import { debounce } from 'constants/lodash';
 
 import './style.css';
 
@@ -20,7 +20,6 @@ export default class StarField extends Component {
   };
 
   componentDidMount() {
-    window.addEventListener('resize', this.onResize);
     this.drawStars();
   }
 
@@ -33,17 +32,6 @@ export default class StarField extends Component {
   componentDidUpdate() {
     this.drawStars();
   }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize);
-  }
-
-  onResize = debounce(() => {
-    this.setState({
-      height: window.innerHeight,
-      width: window.innerWidth,
-    });
-  }, 100);
 
   drawStars() {
     const context = this.canvas.current.getContext('2d');
@@ -72,17 +60,25 @@ export default class StarField extends Component {
 
   render() {
     return (
-      <AbsoluteContainer className="StarField-Container">
-        <canvas
-          width={this.state.width * this.ratio}
-          height={this.state.height * this.ratio}
-          ref={this.canvas}
-          style={{
-            width: this.state.width,
-            height: this.state.height,
-          }}
-        />
-      </AbsoluteContainer>
+      <Measure
+        onResize={({ entry }) =>
+          this.setState({ width: entry.width, height: entry.height })
+        }
+      >
+        {({ measureRef }) => (
+          <AbsoluteContainer ref={measureRef} className="StarField-Container">
+            <canvas
+              width={this.state.width * this.ratio}
+              height={this.state.height * this.ratio}
+              ref={this.canvas}
+              style={{
+                width: this.state.width,
+                height: this.state.height,
+              }}
+            />
+          </AbsoluteContainer>
+        )}
+      </Measure>
     );
   }
 }

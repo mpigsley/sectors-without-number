@@ -27,7 +27,7 @@ export const currentSectorFactions = createSelector(
 export const currentSectorFactionTable = createSelector(
   [currentSectorFactions, entitySelector, currentSectorSelector],
   (factions, entities, sector) =>
-    map(factions, faction => {
+    map(factions, (faction, factionId) => {
       const {
         force,
         cunning,
@@ -39,13 +39,14 @@ export const currentSectorFactionTable = createSelector(
       } = faction;
 
       let income = factionBaseIncome(faction);
-      const children = map(assets, asset => {
+      const children = map(assets, (asset, assetId) => {
         const { category, hp, upkeep } = FACTION_ASSETS[asset.type];
         if (upkeep) {
           income -= upkeep;
         }
         const entity = entities[Entities.planet.key][asset.location];
         return {
+          key: assetId,
           name: asset.type,
           type: category,
           hitPoints: `${asset.hitPoints} / ${hp}`,
@@ -63,6 +64,7 @@ export const currentSectorFactionTable = createSelector(
       const entity = entities[Entities.planet.key][homeworld];
       return {
         ...rest,
+        key: factionId,
         income,
         type: `${force} / ${cunning} / ${wealth}`,
         hitPoints: `${hitPoints} / ${factionHitPoints(faction)}`,

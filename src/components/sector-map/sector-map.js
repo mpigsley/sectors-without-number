@@ -1,7 +1,7 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Measure from 'react-measure';
 
-import FlexContainer from 'primitives/container/flex-container';
 import EntityTooltips from 'components/entity-tooltips';
 import CondensedPrintable from 'components/printables/condensed-printable';
 import ExpandedPrintable from 'components/printables/expanded-printable';
@@ -10,26 +10,13 @@ import ProfileModal from 'components/profile-modal';
 import HexMap from 'components/hex-map';
 
 import ExportTypes from 'constants/export-types';
-import { debounce, isEmpty, map } from 'constants/lodash';
+import { isEmpty, map } from 'constants/lodash';
 import hexGenerator from 'utils/hex/generator';
 import { coordinateKey } from 'utils/common';
 import Loading from './loading';
 import Error from './error';
 
 import './style.css';
-
-const calcNavWidth = () => (window.innerWidth > 1500 ? 185 : 75);
-const calcWidth = () => {
-  let width = window.innerWidth - 75;
-  if (window.innerWidth > 1500) {
-    width -= 575;
-  } else if (window.innerWidth > 1200) {
-    width -= 450;
-  } else if (window.innerWidth > 700) {
-    width -= 375;
-  }
-  return width;
-};
 
 export default class SectorMap extends Component {
   static propTypes = {
@@ -60,11 +47,6 @@ export default class SectorMap extends Component {
     sector: {},
   };
 
-  state = {
-    height: window.innerHeight,
-    width: calcWidth(),
-  };
-
   componentWillMount() {
     const splitPath = this.props.location.pathname.split('/');
     if (
@@ -77,28 +59,12 @@ export default class SectorMap extends Component {
     }
   }
 
-  componentDidMount() {
-    window.addEventListener('resize', this.onResize);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('resize', this.onResize);
-  }
-
-  onResize = debounce(() => {
-    this.setState({
-      height: window.innerHeight,
-      width: calcWidth(),
-    });
-  }, 100);
-
   renderTooltips(hexData) {
     if (!this.props.renderSector) {
       return null;
     }
     return (
       <EntityTooltips
-        leftOffset={calcNavWidth()}
         hexes={map(this.props.topLevelEntities, entity => ({
           ...entity,
           ...hexData.find(
@@ -126,30 +92,31 @@ export default class SectorMap extends Component {
       return <Error generateSector={this.props.generateSector} />;
     }
 
-    const { hexes, printable } = hexGenerator({
-      renderSector: true,
-      height: this.state.height,
-      width: this.state.width,
-      rows: this.props.sector.rows,
-      columns: this.props.sector.columns,
-    });
-
     return (
-      <Fragment>
-        <FlexContainer className="SectorMap" direction="row">
-          {this.renderTooltips(hexes)}
-          <HexMap
-            width={this.state.width}
-            height={this.state.height}
-            hexes={hexes}
-            isSector
-          />
-          {this.props.children}
-        </FlexContainer>
-        {this.renderPrintable(printable)}
+      <div className="SectorMap">
+        <Measure>
+          {({ measureRef, contentRect }) => {
+            const { height, width } = contentRect.entry;
+            const { hexes, printable } = hexGenerator({
+              renderSector: true,
+              height,
+              width,
+              rows: this.props.sector.rows,
+              columns: this.props.sector.columns,
+            });
+            return (
+              <div ref={measureRef} className="SectorMap-Map">
+                <HexMap width={width} height={height} hexes={hexes} isSector />
+                {this.renderTooltips(hexes)}
+                {this.renderPrintable(printable)}
+              </div>
+            );
+          }}
+        </Measure>
+        <div className="SectorMap-Sidebar">{this.props.children}</div>
         <TopLevelEntityModal />
         <ProfileModal />
-      </Fragment>
+      </div>
     );
   }
 }

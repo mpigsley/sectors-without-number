@@ -1,5 +1,4 @@
 import includes from 'lodash/includes';
-import debounce from 'lodash/debounce';
 import delay from 'lodash/delay';
 import omit from 'lodash/omit';
 import map from 'lodash/map';
@@ -37,7 +36,6 @@ import dropRight from 'lodash/dropRight';
 
 export {
   includes,
-  debounce,
   delay,
   omit,
   map,

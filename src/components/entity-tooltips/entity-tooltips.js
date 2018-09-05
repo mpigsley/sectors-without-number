@@ -7,13 +7,7 @@ import { map } from 'constants/lodash';
 
 import './style.css';
 
-export default function EntityTooltips({
-  hoverKey,
-  holdKey,
-  layer,
-  hexes,
-  leftOffset,
-}) {
+export default function EntityTooltips({ hoverKey, holdKey, layer, hexes }) {
   const renderTooltip = system => {
     let hexLayerRegions;
     const hexLayer = (layer.hexes || {})[system.hexKey];
@@ -37,7 +31,7 @@ export default function EntityTooltips({
         })}
         style={{
           top: system.yOffset - system.height / 2 - 10,
-          left: system.xOffset + leftOffset,
+          left: system.xOffset,
         }}
       >
         <div className="EntityTooltips-Text">
@@ -63,7 +57,6 @@ export default function EntityTooltips({
 EntityTooltips.propTypes = {
   hoverKey: PropTypes.string,
   holdKey: PropTypes.string,
-  leftOffset: PropTypes.number,
   layer: PropTypes.shape({
     name: PropTypes.string,
     hexes: PropTypes.shape(),
@@ -83,5 +76,4 @@ EntityTooltips.propTypes = {
 EntityTooltips.defaultProps = {
   hoverKey: null,
   holdKey: null,
-  leftOffset: 0,
 };
