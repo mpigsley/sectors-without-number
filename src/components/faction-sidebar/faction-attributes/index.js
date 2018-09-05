@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { currentFactionHomeworld } from 'store/selectors/faction.selectors';
+import { currentFactionAttributes } from 'store/selectors/faction.selectors';
 
 import FactionAttributes from './faction-attributes';
 
 const mapStateToProps = createStructuredSelector({
-  homeworld: currentFactionHomeworld,
+  attributes: currentFactionAttributes,
 });
 
 export default connect(mapStateToProps)(FactionAttributes);

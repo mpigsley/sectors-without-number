@@ -21,17 +21,17 @@ const titledItem = (description, title) => {
   );
 };
 
-export default function FactionAttributes({ faction, homeworld, className }) {
+export default function FactionAttributes({ faction, attributes, className }) {
   let homeworldElement;
-  if (homeworld) {
+  if (attributes.homeworld) {
     homeworldElement = (
       <LabeledItem label="misc.homeworld">
         <ButtonLink
           className="FactionAttributes-Link"
           minimal
-          to={homeworld.link}
+          to={attributes.homeworld.link}
         >
-          {homeworld.name}
+          {attributes.homeworld.name}
         </ButtonLink>
       </LabeledItem>
     );
@@ -102,10 +102,19 @@ export default function FactionAttributes({ faction, homeworld, className }) {
 
 FactionAttributes.propTypes = {
   className: PropTypes.string,
-  homeworld: PropTypes.shape({
-    link: PropTypes.string,
-    name: PropTypes.string,
-  }),
+  attributes: PropTypes.shape({
+    hitPoints: PropTypes.number,
+    income: PropTypes.number,
+    homeworld: PropTypes.shape({
+      link: PropTypes.string,
+      name: PropTypes.string,
+    }),
+    owned: PropTypes.shape({
+      force: PropTypes.number,
+      cunning: PropTypes.number,
+      wealth: PropTypes.number,
+    }),
+  }).isRequired,
   faction: PropTypes.shape({
     goal: PropTypes.string,
     description: PropTypes.string,
