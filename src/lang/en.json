@@ -2277,6 +2277,7 @@
   "misc.createASystem": "To create a system click and hold a hex to the left.",
   "misc.createEditPlanets": "Create and edit planets here from the sidebar.",
   "misc.createEntity": "Create Sector Entity",
+  "misc.createFaction": "Create Faction",
   "misc.createLayer": "Create Layer",
   "misc.createRoute": "Create Route",
   "misc.createRoute.help": "Decide what navigation line color, width, and type you would like to create and then select the \"Create Route\" button. Select any number of hexes to build your route. When you are finished, select \"Complete Route\" in the sidebar to sync it, or cancel if you would like to start over.",

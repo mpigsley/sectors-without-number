@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -10,6 +11,7 @@ import Button from 'primitives/other/button';
 import './style.css';
 
 export default function FactionTable({
+  intl,
   children,
   currentSector,
   currentFaction,
@@ -28,7 +30,7 @@ export default function FactionTable({
         align="flexEnd"
       >
         <Header type={HeaderType.header2} noMargin>
-          Factions
+          <FormattedMessage id="misc.factions" />
         </Header>
         <FlexContainer>
           <ButtonLink
@@ -36,9 +38,14 @@ export default function FactionTable({
             minimal
             className="FactionTable-CreateAction"
           >
-            Create Faction
+            <FormattedMessage id="misc.createFaction" />
           </ButtonLink>
-          <Button minimal>Export Factions</Button>
+          <Button minimal>
+            <FormattedMessage
+              id="misc.exportEntity"
+              values={{ entity: intl.formatMessage({ id: 'misc.factions' }) }}
+            />
+          </Button>
         </FlexContainer>
       </FlexContainer>
       <div className="FactionTable-Table">Table</div>
@@ -48,6 +55,7 @@ export default function FactionTable({
 }
 
 FactionTable.propTypes = {
+  intl: intlShape.isRequired,
   children: PropTypes.node.isRequired,
   currentSector: PropTypes.string.isRequired,
   currentFaction: PropTypes.shape({}),
