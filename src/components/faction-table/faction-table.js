@@ -8,6 +8,7 @@ import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import ButtonLink from 'primitives/other/button-link';
 import BasicLink from 'primitives/other/basic-link';
+import Loading from 'primitives/regions/loading';
 import Button from 'primitives/other/button';
 import Table from 'primitives/other/table';
 
@@ -103,6 +104,7 @@ const buildFactionTableColumns = (intl, windowWidth) => {
 export default class FactionTable extends Component {
   static propTypes = {
     intl: intlShape.isRequired,
+    isLoading: PropTypes.bool.isRequired,
     table: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     children: PropTypes.node.isRequired,
     currentSector: PropTypes.string.isRequired,
@@ -121,7 +123,18 @@ export default class FactionTable extends Component {
   }
 
   render() {
-    const { table, intl, children, currentSector, openSidebar } = this.props;
+    const {
+      isLoading,
+      table,
+      intl,
+      children,
+      currentSector,
+      openSidebar,
+    } = this.props;
+
+    if (isLoading) {
+      return <Loading />;
+    }
 
     return (
       <div
@@ -157,7 +170,6 @@ export default class FactionTable extends Component {
           {({ measureRef, contentRect }) => (
             <div ref={measureRef} className="FactionTable-Table">
               <Table
-                sortable
                 dataIdAccessor="key"
                 onRowClick={openSidebar}
                 columns={buildFactionTableColumns(

@@ -12,11 +12,13 @@ import {
   currentSectorFactionTable,
   currentFaction,
 } from 'store/selectors/faction.selectors';
+import { currentSectorIsLoading } from 'store/selectors/sector.selectors';
 
 import FactionTable from './faction-table';
 
 const mapStateToProps = createStructuredSelector({
   table: currentSectorFactionTable,
+  isLoading: currentSectorIsLoading,
   currentSector: currentSectorSelector,
   currentElement: currentEntitySelector,
   currentFaction,
