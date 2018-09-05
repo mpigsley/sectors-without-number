@@ -6,6 +6,8 @@ import FlexContainer from 'primitives/container/flex-container';
 import LabeledItem from 'primitives/other/labeled-item';
 import ButtonLink from 'primitives/other/button-link';
 
+import { RotateCcw } from 'constants/icons';
+
 import './style.css';
 
 const titledItem = (description, title) => {
@@ -20,6 +22,15 @@ const titledItem = (description, title) => {
     </span>
   );
 };
+
+const attributeItem = (label, value, superscript) => (
+  <LabeledItem isVertical label={label} className="FactionAttributes-Attribute">
+    <FlexContainer flex="1" justify="center">
+      <span className="FactionAttributes-Value">{value}</span>
+      <span className="FactionAttributes-Superscript">{superscript}</span>
+    </FlexContainer>
+  </LabeledItem>
+);
 
 export default function FactionAttributes({ faction, attributes, className }) {
   let homeworldElement;
@@ -91,6 +102,39 @@ export default function FactionAttributes({ faction, attributes, className }) {
 
   return (
     <FlexContainer direction="column" className={className}>
+      <FlexContainer className="FactionAttributes-AttributeContainer">
+        {attributeItem(
+          'faction.category.force',
+          faction.force,
+          attributes.owned.force,
+        )}
+        {attributeItem(
+          'faction.category.cunning',
+          faction.cunning,
+          attributes.owned.cunning,
+        )}
+        {attributeItem(
+          'faction.category.wealth',
+          faction.wealth,
+          attributes.owned.wealth,
+        )}
+      </FlexContainer>
+      <FlexContainer className="FactionAttributes-AttributeContainer">
+        {attributeItem(
+          'misc.hitPoints',
+          faction.hitPoints,
+          attributes.hitPoints,
+        )}
+        {attributeItem(
+          'misc.balance',
+          faction.balance,
+          <span>
+            <RotateCcw size={14} />
+            {attributes.income}
+          </span>,
+        )}
+        {attributeItem('misc.experience', faction.experience)}
+      </FlexContainer>
       {homeworldElement}
       {relationship}
       {goal}

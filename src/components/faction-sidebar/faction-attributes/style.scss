@@ -19,3 +19,22 @@
   margin: 0;
   padding: 0;
 }
+
+.FactionAttributes-AttributeContainer {
+  margin-bottom: 1rem;
+}
+
+.FactionAttributes-Attribute {
+  align-items: center;
+}
+
+.FactionAttributes-Value {
+  color: $light4;
+  font-size: 3.5rem;
+  line-height: 3.2rem;
+}
+
+.FactionAttributes-Superscript {
+  font-size: 1.2rem;
+  margin-left: 0.2rem;
+}

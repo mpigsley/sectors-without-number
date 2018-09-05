@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import { RotateCcw } from 'constants/icons';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import LabeledItem from 'primitives/other/labeled-item';
 import ButtonLink from 'primitives/other/button-link';
+
+import { RotateCcw } from 'constants/icons';
 
 import './style.css';
 
