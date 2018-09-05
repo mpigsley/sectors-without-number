@@ -96,7 +96,7 @@ export default function FactionAssets({ assets, className }) {
         {upkeepRow}
         <LabeledItem className="FactionAssets-Item" label="entity.notes">
           <span>
-            {notes.map((note, i) => (
+            {(notes || []).map((note, i) => (
               <Fragment key={note}>
                 <FormattedMessage id={`faction.note.${note}`} />
                 {i + 1 === notes.length ? '' : ', '}

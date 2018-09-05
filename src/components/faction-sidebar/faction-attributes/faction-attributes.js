@@ -10,13 +10,13 @@ import { RotateCcw } from 'constants/icons';
 
 import './style.css';
 
-const titledItem = (description, title) => {
+const titledItem = (key, description, title) => {
   let titleElement;
   if (title) {
     titleElement = <span className="FactionAttributes-Title">{title}: </span>;
   }
   return (
-    <span key="title">
+    <span key={key}>
       {titleElement}
       {description}
     </span>
@@ -62,6 +62,7 @@ export default function FactionAttributes({ faction, attributes, className }) {
     goal = (
       <LabeledItem isVertical label="misc.goal">
         {titledItem(
+          faction.goal,
           <FormattedMessage id={`faction.goal.${faction.goal}.description`} />,
           <FormattedMessage id={`faction.goal.${faction.goal}`} />,
         )}
@@ -73,7 +74,7 @@ export default function FactionAttributes({ faction, attributes, className }) {
   if (faction.description) {
     description = (
       <LabeledItem isVertical label="misc.description">
-        {titledItem(faction.description)}
+        {titledItem('description', faction.description)}
       </LabeledItem>
     );
   }
@@ -82,20 +83,23 @@ export default function FactionAttributes({ faction, attributes, className }) {
   if ((faction.tags || []).length) {
     tags = (
       <LabeledItem isVertical label="misc.tags">
-        {faction.tags.map(tag =>
-          titledItem(
-            <Fragment>
-              <FormattedMessage id={`faction.tags.${tag}.description`} />
-              <FlexContainer>
-                <span className="FactionAttributes-Effect">
-                  <FormattedMessage id="misc.effect" />
-                </span>
-                <FormattedMessage id={`faction.tags.${tag}.effect`} />
-              </FlexContainer>
-            </Fragment>,
-            <FormattedMessage id={`faction.tags.${tag}`} />,
-          ),
-        )}
+        <FlexContainer direction="column">
+          {faction.tags.map(tag =>
+            titledItem(
+              tag,
+              <Fragment>
+                <FormattedMessage id={`faction.tags.${tag}.description`} />
+                <FlexContainer className="FactionAttributes-TagEffect">
+                  <span className="FactionAttributes-Effect">
+                    <FormattedMessage id="misc.effect" />
+                  </span>
+                  <FormattedMessage id={`faction.tags.${tag}.effect`} />
+                </FlexContainer>
+              </Fragment>,
+              <FormattedMessage id={`faction.tags.${tag}`} />,
+            ),
+          )}
+        </FlexContainer>
       </LabeledItem>
     );
   }

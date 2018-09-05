@@ -6,7 +6,7 @@ import {
   factionFormSelector,
   factionIsCreatingSelector,
 } from 'store/selectors/base.selectors';
-import { createFaction, editFaction } from 'store/api/faction';
+import { createFaction, editFaction, deleteFaction } from 'store/api/faction';
 
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { createId } from 'utils/common';
@@ -14,6 +14,7 @@ import { createId } from 'utils/common';
 const ACTION_PREFIX = '@@faction';
 export const CREATED = `${ACTION_PREFIX}/CREATED`;
 export const EDITED = `${ACTION_PREFIX}/EDITED`;
+export const DELETED = `${ACTION_PREFIX}/DELETED`;
 export const UPDATED_FORM = `${ACTION_PREFIX}/UPDATED_FORM`;
 export const UPDATED_ASSET_FORM = `${ACTION_PREFIX}/UPDATED_ASSET_FORM`;
 export const CREATED_BLANK_ASSET = `${ACTION_PREFIX}/CREATED_BLANK_ASSET`;
@@ -56,11 +57,46 @@ export const submitForm = intl => (dispatch, getState) => {
         factionId,
         faction,
       });
-      dispatch(push(`/elements/${sectorId}/faction`));
+      dispatch(push(`/elements/${sectorId}/faction/${factionId}`));
     })
     .catch(err => {
       console.error(err);
       dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
+    });
+};
+
+export const removeFaction = intl => (dispatch, getState) => {
+  const state = getState();
+  const factionId = currentEntitySelector(state);
+  if (!factionId) {
+    return Promise.resolve();
+  }
+  const sectorId = currentSectorSelector(state);
+  dispatch({ type: DELETED, sectorId, factionId });
+  dispatch(push(`/elements/${sectorId}/faction`));
+  return deleteFaction(sectorId, factionId)
+    .then(() => {
+      dispatch(
+        SuccessToast({
+          title: intl.formatMessage(
+            { id: 'misc.entityDeleted' },
+            { entity: intl.formatMessage({ id: 'misc.faction' }) },
+          ),
+          message: intl.formatMessage(
+            { id: 'misc.successfullyRemoved' },
+            { entity: intl.formatMessage({ id: 'misc.faction' }) },
+          ),
+        }),
+      );
+    })
+    .catch(err => {
+      console.error(err);
+      return dispatch(
         ErrorToast({
           title: intl.formatMessage({ id: 'misc.error' }),
           message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),

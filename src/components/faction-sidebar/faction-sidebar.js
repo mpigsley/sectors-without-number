@@ -18,6 +18,7 @@ export default class FactionSidebar extends Component {
     }),
     currentSector: PropTypes.string.isRequired,
     currentFaction: PropTypes.string.isRequired,
+    removeFaction: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -31,7 +32,13 @@ export default class FactionSidebar extends Component {
   };
 
   render() {
-    const { faction, intl, currentSector, currentFaction } = this.props;
+    const {
+      faction,
+      intl,
+      currentSector,
+      currentFaction,
+      removeFaction,
+    } = this.props;
     if (!faction) {
       return null;
     }
@@ -80,7 +87,7 @@ export default class FactionSidebar extends Component {
         </div>
         <ConfirmModal
           isOpen={this.state.isConfirmDeleteOpen}
-          onConfirm={() => {}}
+          onConfirm={removeFaction}
           onCancel={() => this.setState({ isConfirmDeleteOpen: false })}
         >
           <FormattedMessage

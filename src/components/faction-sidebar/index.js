@@ -7,6 +7,7 @@ import {
   currentEntitySelector,
 } from 'store/selectors/base.selectors';
 import { currentFaction } from 'store/selectors/faction.selectors';
+import { removeFaction } from 'store/actions/faction.actions';
 
 import FactionSidebar from './faction-sidebar';
 
@@ -16,4 +17,13 @@ const mapStateToProps = createStructuredSelector({
   currentFaction: currentEntitySelector,
 });
 
-export default injectIntl(connect(mapStateToProps)(FactionSidebar));
+const mapDispatchToProps = (dispatch, props) => ({
+  removeFaction: () => dispatch(removeFaction(props.intl)),
+});
+
+export default injectIntl(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  )(FactionSidebar),
+);

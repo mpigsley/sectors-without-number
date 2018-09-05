@@ -17,7 +17,7 @@ export const editFaction = (sectorId, factionId, faction) =>
     .set(faction, { merge: true })
     .then(() => ({ factionId, faction }));
 
-export const deleteLayer = (sectorId, factionId) =>
+export const deleteFaction = (sectorId, factionId) =>
   Firebase.firestore()
     .collection('factions')
     .doc(sectorId)

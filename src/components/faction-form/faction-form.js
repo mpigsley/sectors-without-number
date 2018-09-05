@@ -11,7 +11,7 @@ import ItemRow from 'primitives/other/item-row';
 
 import { RefreshCw } from 'constants/icons';
 import { omit, sortBy, map, dropRight } from 'constants/lodash';
-import { FACTION_GOALS } from 'constants/faction';
+import { FACTION_GOALS, FACTION_TAGS } from 'constants/faction';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 
 import FactionAssetForm from './faction-asset-form';
@@ -60,6 +60,14 @@ export default function FactionForm({
     map(FACTION_GOALS, value => ({
       value,
       label: intl.formatMessage({ id: `faction.goal.${value}` }),
+    })),
+    'label',
+  );
+
+  const tagOptions = sortBy(
+    map(FACTION_TAGS, value => ({
+      value,
+      label: intl.formatMessage({ id: `faction.tags.${value}` }),
     })),
     'label',
   );
@@ -204,7 +212,7 @@ export default function FactionForm({
             placeholder=""
             type="dropdown"
             value={form.tags}
-            options={goalOptions}
+            options={tagOptions}
             onChange={items =>
               updateFaction({ tags: items.map(item => (item || {}).value) })
             }

@@ -4,10 +4,13 @@ import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
 import {
   CREATED,
   EDITED,
+  DELETED,
   UPDATED_FORM,
   UPDATED_ASSET_FORM,
   CREATED_BLANK_ASSET,
 } from 'store/actions/faction.actions';
+
+import { omit } from 'constants/lodash';
 
 const initialAsset = () => ({
   type: undefined,
@@ -75,6 +78,18 @@ export default function faction(state = initialState, action) {
               ...action.faction,
             },
           },
+        },
+      };
+    case DELETED:
+      return {
+        ...state,
+        form: initialForm(),
+        models: {
+          ...state.models,
+          [action.sectorId]: omit(
+            state.models[action.sectorId] || {},
+            action.factionId,
+          ),
         },
       };
     case UPDATED_FORM:
