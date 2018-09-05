@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { RotateCcw } from 'constants/icons';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -33,6 +34,7 @@ export default function FactionAssets({ assets, className }) {
       attack,
       counter,
       location,
+      upkeep,
     } = asset;
 
     let attackRow = <FormattedMessage id="misc.none" />;
@@ -51,6 +53,18 @@ export default function FactionAssets({ assets, className }) {
     let counterRow = <FormattedMessage id="misc.none" />;
     if (counter) {
       counterRow = renderRoll(counter);
+    }
+
+    let upkeepRow;
+    if (upkeep) {
+      upkeepRow = (
+        <LabeledItem className="FactionAssets-Item" label="misc.upkeep">
+          <FlexContainer align="center">
+            <RotateCcw size={14} className="FactionAssets-Icon" />
+            {upkeep}
+          </FlexContainer>
+        </LabeledItem>
+      );
     }
 
     return (
@@ -78,6 +92,7 @@ export default function FactionAssets({ assets, className }) {
         <LabeledItem className="FactionAssets-Item" label="techLevel">
           {techLevel}
         </LabeledItem>
+        {upkeepRow}
         <LabeledItem className="FactionAssets-Item" label="entity.notes">
           <span>
             {notes.map((note, i) => (
