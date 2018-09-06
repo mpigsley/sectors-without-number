@@ -23,6 +23,7 @@ class Table extends Component {
     dataIdAccessor: PropTypes.string.isRequired,
     data: PropTypes.arrayOf(
       PropTypes.shape({
+        onClick: PropTypes.func,
         className: PropTypes.string,
       }),
     ).isRequired,
@@ -62,7 +63,10 @@ class Table extends Component {
     });
   }
 
-  onHeaderClick = accessor => () => {
+  onHeaderClick = (accessor, onClick) => () => {
+    if (onClick) {
+      return onClick();
+    }
     if (!this.props.sortable) {
       return null;
     }
@@ -118,9 +122,9 @@ class Table extends Component {
         <thead>
           <tr>
             {this.props.columns.map(
-              ({ Header, accessor, columnClass, centered }) => (
+              ({ Header, accessor, columnClass, centered, onClick }) => (
                 <th
-                  onClick={this.onHeaderClick(accessor)}
+                  onClick={this.onHeaderClick(accessor, onClick)}
                   className={classNames('Table-Header', columnClass, {
                     'Table-Header--light': this.props.light,
                     'Table-Header--condensed': this.props.condensed,
@@ -141,13 +145,18 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.sortedData.map(({ className, ...row }) => (
+          {this.sortedData.map(({ className, onClick, ...row }) => (
             <tr
               className={classNames('Table-Row', className)}
               key={row[this.props.dataIdAccessor]}
             >
               {this.props.columns.map(column => (
                 <td
+                  onClick={() =>
+                    column.onClick
+                      ? column.onClick(row[this.props.dataIdAccessor])
+                      : () => {}
+                  }
                   className={classNames('Table-Element', column.columnClass, {
                     'Table-Element--light': this.props.light,
                     'Table-Header--condensed': this.props.condensed,

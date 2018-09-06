@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 
 import Table from 'primitives/other/table';
 
-import { includes } from 'constants/lodash';
+import { without, includes } from 'constants/lodash';
+import { PlusCircle, Circle } from 'constants/icons';
 
 import './style.css';
 
@@ -34,7 +36,42 @@ export default class CollapsibleTable extends Component {
     }, []);
   }
 
+  get composedColumns() {
+    const { columns, data, dataIdAccessor } = this.props;
+    const { openRows } = this.state;
+    const isHeaderOpen = !openRows.length;
+    const Icon = isHeaderOpen ? PlusCircle : Circle;
+    return [
+      {
+        accessor: 'collapsible',
+        columnClass: classNames('CollapsibleTable-Icon', {
+          'CollapsibleTable-Icon--open': isHeaderOpen,
+          'CollapsibleTable-Icon--closed': !isHeaderOpen,
+        }),
+        onClick: rowId => {
+          let newOpenRows = [];
+          if (rowId && includes(openRows)) {
+            newOpenRows = without(openRows, rowId);
+          } else if (rowId) {
+            newOpenRows = [...openRows, rowId];
+          } else if (isHeaderOpen) {
+            newOpenRows = data.map(row => row[dataIdAccessor]);
+          }
+          this.setState({ openRows: newOpenRows });
+        },
+        Header: () => <Icon size={16} />,
+      },
+      ...columns,
+    ];
+  }
+
   render() {
-    return <Table {...this.props} data={this.filteredData} />;
+    return (
+      <Table
+        {...this.props}
+        data={this.filteredData}
+        columns={this.composedColumns}
+      />
+    );
   }
 }

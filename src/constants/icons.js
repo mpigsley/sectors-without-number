@@ -2,6 +2,7 @@ import Check from 'react-feather/dist/icons/check';
 import ChevronDown from 'react-feather/dist/icons/chevron-down';
 import ChevronRight from 'react-feather/dist/icons/chevron-right';
 import ChevronUp from 'react-feather/dist/icons/chevron-up';
+import Circle from 'react-feather/dist/icons/circle';
 import Crosshair from 'react-feather/dist/icons/crosshair';
 import Edit2 from 'react-feather/dist/icons/edit-2';
 import Edit3 from 'react-feather/dist/icons/edit-3';
@@ -19,6 +20,7 @@ import Minus from 'react-feather/dist/icons/minus';
 import MoreHorizontal from 'react-feather/dist/icons/more-horizontal';
 import Package from 'react-feather/dist/icons/package';
 import Plus from 'react-feather/dist/icons/plus';
+import PlusCircle from 'react-feather/dist/icons/plus-circle';
 import RefreshCw from 'react-feather/dist/icons/refresh-cw';
 import RotateCcw from 'react-feather/dist/icons/rotate-ccw';
 import Settings from 'react-feather/dist/icons/settings';
@@ -32,6 +34,7 @@ export {
   ChevronDown,
   ChevronRight,
   ChevronUp,
+  Circle,
   Crosshair,
   Edit2,
   Edit3,
@@ -49,6 +52,7 @@ export {
   MoreHorizontal,
   Package,
   Plus,
+  PlusCircle,
   RefreshCw,
   RotateCcw,
   Settings,

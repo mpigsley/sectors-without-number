@@ -34,6 +34,7 @@ import capitalize from 'lodash/capitalize';
 import toUpper from 'lodash/toUpper';
 import intersection from 'lodash/intersection';
 import dropRight from 'lodash/dropRight';
+import without from 'lodash/without';
 
 export {
   includes,
@@ -72,4 +73,5 @@ export {
   toUpper,
   intersection,
   dropRight,
+  without,
 };
