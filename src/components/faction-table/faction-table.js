@@ -4,28 +4,38 @@ import classNames from 'classnames';
 import Measure from 'react-measure';
 import { FormattedMessage, intlShape } from 'react-intl';
 
+import CollapsibleTable from 'primitives/other/collapsible-table';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import ButtonLink from 'primitives/other/button-link';
 import BasicLink from 'primitives/other/basic-link';
 import Loading from 'primitives/regions/loading';
 import Button from 'primitives/other/button';
-import Table from 'primitives/other/table';
 
 import { RotateCcw } from 'constants/icons';
+import { isArray } from 'constants/lodash';
 
 import './style.css';
+
+const formatOptionalMessage = (intl, key, builder) => {
+  const id = builder(key);
+  return intl.messages[id] ? intl.formatMessage({ id }) : key;
+};
 
 const buildFactionTableColumns = (intl, windowWidth) => {
   const columnConfig = [
     {
       accessor: 'name',
       Header: 'misc.name',
+      Cell: name =>
+        formatOptionalMessage(intl, name, key => `faction.assets.${key}`),
       width: 150,
     },
     {
       accessor: 'type',
       Header: 'misc.factionCategories',
+      Cell: category =>
+        formatOptionalMessage(intl, category, key => `faction.category.${key}`),
       centered: true,
       width: 75,
     },
@@ -74,7 +84,10 @@ const buildFactionTableColumns = (intl, windowWidth) => {
     {
       accessor: 'goal',
       Header: 'misc.goal',
-      Cell: goal => intl.formatMessage({ id: `faction.goal.${goal}` }),
+      Cell: goal =>
+        goal !== '-'
+          ? intl.formatMessage({ id: `faction.goal.${goal}` })
+          : goal,
       centered: true,
       width: 125,
     },
@@ -82,9 +95,11 @@ const buildFactionTableColumns = (intl, windowWidth) => {
       accessor: 'tags',
       Header: 'misc.tags',
       Cell: tags =>
-        tags
-          .map(tag => intl.formatMessage({ id: `faction.tags.${tag}` }))
-          .join(', '),
+        isArray(tags)
+          ? tags
+              .map(tag => intl.formatMessage({ id: `faction.tags.${tag}` }))
+              .join(', ')
+          : '-',
       centered: true,
       width: 250,
     },
@@ -169,7 +184,7 @@ export default class FactionTable extends Component {
         <Measure>
           {({ measureRef, contentRect }) => (
             <div ref={measureRef} className="FactionTable-Table">
-              <Table
+              <CollapsibleTable
                 dataIdAccessor="key"
                 onRowClick={openSidebar}
                 columns={buildFactionTableColumns(

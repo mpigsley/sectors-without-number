@@ -49,6 +49,7 @@ export const currentSectorFactionTable = createSelector(
           key: assetId,
           name: asset.type,
           type: category,
+          balance: asset.upkeep,
           hitPoints: `${asset.hitPoints} / ${hp}`,
           homeworld: entity
             ? {

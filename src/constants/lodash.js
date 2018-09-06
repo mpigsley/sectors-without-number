@@ -23,6 +23,7 @@ import uniq from 'lodash/uniq';
 import sortBy from 'lodash/sortBy';
 import keys from 'lodash/keys';
 import difference from 'lodash/difference';
+import isArray from 'lodash/isArray';
 import isEqual from 'lodash/isEqual';
 import find from 'lodash/find';
 import reduce from 'lodash/reduce';
@@ -60,6 +61,7 @@ export {
   sortBy,
   keys,
   difference,
+  isArray,
   isEqual,
   find,
   reduce,
