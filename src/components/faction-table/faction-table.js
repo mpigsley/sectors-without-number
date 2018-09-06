@@ -12,7 +12,7 @@ import BasicLink from 'primitives/other/basic-link';
 import Loading from 'primitives/regions/loading';
 import Button from 'primitives/other/button';
 
-import { RotateCcw } from 'constants/icons';
+import { RotateCcw, Minus, ChevronUp, ChevronDown } from 'constants/icons';
 import { isArray } from 'constants/lodash';
 
 import './style.css';
@@ -22,13 +22,43 @@ const formatOptionalMessage = (intl, key, builder) => {
   return intl.messages[id] ? intl.formatMessage({ id }) : key;
 };
 
-const buildFactionTableColumns = (intl, windowWidth) => {
+const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
   const columnConfig = [
     {
       accessor: 'name',
       Header: 'misc.name',
-      Cell: name =>
-        formatOptionalMessage(intl, name, key => `faction.assets.${key}`),
+      Cell: (name, { key, relationship }) => {
+        const id = `faction.assets.${name}`;
+        if (intl.messages[id]) {
+          return intl.formatMessage({ id });
+        }
+        let icon;
+        if (relationship === 'neutral') {
+          icon = <Minus size={14} className="FactionTable-Relationship" />;
+        } else if (relationship === 'friendly') {
+          icon = (
+            <ChevronUp
+              size={14}
+              className="FactionTable-Relationship FactionTable-Relationship--friendly"
+            />
+          );
+        } else if (relationship === 'hostile') {
+          icon = (
+            <ChevronDown
+              size={14}
+              className="FactionTable-Relationship FactionTable-Relationship--hostile"
+            />
+          );
+        }
+        return (
+          <FlexContainer align="center">
+            <BasicLink to={`/elements/${sector}/faction/${key}`}>
+              {name}
+            </BasicLink>
+            {icon}
+          </FlexContainer>
+        );
+      },
       width: 150,
     },
     {
@@ -125,7 +155,6 @@ export default class FactionTable extends Component {
     currentSector: PropTypes.string.isRequired,
     currentFaction: PropTypes.shape({}),
     currentElement: PropTypes.string,
-    openSidebar: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -138,14 +167,7 @@ export default class FactionTable extends Component {
   }
 
   render() {
-    const {
-      isLoading,
-      table,
-      intl,
-      children,
-      currentSector,
-      openSidebar,
-    } = this.props;
+    const { isLoading, table, intl, children, currentSector } = this.props;
 
     if (isLoading) {
       return <Loading />;
@@ -186,11 +208,11 @@ export default class FactionTable extends Component {
             <div ref={measureRef} className="FactionTable-Table">
               <CollapsibleTable
                 dataIdAccessor="key"
-                onRowClick={openSidebar}
-                columns={buildFactionTableColumns(
+                columns={buildFactionTableColumns({
+                  windowWidth: contentRect.entry.width,
+                  sector: currentSector,
                   intl,
-                  contentRect.entry.width,
-                )}
+                })}
                 data={table}
               />
             </div>

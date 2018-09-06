@@ -15,6 +15,7 @@ import List from 'react-feather/dist/icons/list';
 import Lock from 'react-feather/dist/icons/lock';
 import LogIn from 'react-feather/dist/icons/log-in';
 import LogOut from 'react-feather/dist/icons/log-out';
+import Minus from 'react-feather/dist/icons/minus';
 import MoreHorizontal from 'react-feather/dist/icons/more-horizontal';
 import Package from 'react-feather/dist/icons/package';
 import Plus from 'react-feather/dist/icons/plus';
@@ -44,6 +45,7 @@ export {
   Lock,
   LogIn,
   LogOut,
+  Minus,
   MoreHorizontal,
   Package,
   Plus,

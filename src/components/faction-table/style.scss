@@ -1,3 +1,4 @@
+@import 'styles/theme';
 @import 'styles/constants';
 
 .FactionTable {
@@ -36,6 +37,18 @@
 .FactionTable-Income {
   margin-left: 0.3rem;
   margin-right: 0.1rem;
+}
+
+.FactionTable-Relationship {
+  margin-left: 0.5rem;
+
+  &--friendly {
+    color: $cyber;
+  }
+
+  &--hostile {
+    color: $error;
+  }
 }
 
 @media (max-width: 1200px) {

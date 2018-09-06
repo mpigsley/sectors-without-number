@@ -21,11 +21,14 @@ class Table extends Component {
   static propTypes = {
     className: PropTypes.string,
     dataIdAccessor: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        className: PropTypes.string,
+      }),
+    ).isRequired,
     light: PropTypes.bool,
     condensed: PropTypes.bool,
     sortable: PropTypes.bool,
-    onRowClick: PropTypes.func,
     columns: PropTypes.arrayOf(
       PropTypes.shape({
         accessor: PropTypes.string.isRequired,
@@ -45,7 +48,6 @@ class Table extends Component {
     condensed: false,
     sortable: false,
     className: undefined,
-    onRowClick: () => {},
   };
 
   state = {
@@ -139,13 +141,10 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.sortedData.map(row => (
+          {this.sortedData.map(({ className, ...row }) => (
             <tr
-              className="Table-Row"
+              className={classNames('Table-Row', className)}
               key={row[this.props.dataIdAccessor]}
-              onClick={() =>
-                this.props.onRowClick(row[this.props.dataIdAccessor])
-              }
             >
               {this.props.columns.map(column => (
                 <td

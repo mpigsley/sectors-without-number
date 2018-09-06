@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
-import { push } from 'connected-react-router';
 
 import {
   currentSectorSelector,
@@ -24,16 +23,4 @@ const mapStateToProps = createStructuredSelector({
   currentFaction,
 });
 
-const mapDispatchToProps = (dispatch, { match }) => ({
-  openSidebar: factionId =>
-    dispatch(push(`/elements/${match.params.sector}/faction/${factionId}`)),
-});
-
-export default injectIntl(
-  withRouter(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps,
-    )(FactionTable),
-  ),
-);
+export default injectIntl(withRouter(connect(mapStateToProps)(FactionTable)));

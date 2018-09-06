@@ -12,8 +12,12 @@
   }
 }
 
-.Table-Row:last-of-type .Table-Element {
-  border: none;
+.Table-Row {
+  color: $light2;
+
+  &:last-of-type .Table-Element {
+    border: none;
+  }
 }
 
 .Table-Header {
@@ -40,7 +44,6 @@
 }
 
 .Table-Element {
-  color: $light2;
   font-weight: 200;
   padding: 6px;
   border-bottom: 1px solid $dark1;

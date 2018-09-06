@@ -5,6 +5,8 @@ import Table from 'primitives/other/table';
 
 import { includes } from 'constants/lodash';
 
+import './style.css';
+
 export default class CollapsibleTable extends Component {
   static propTypes = {
     dataIdAccessor: PropTypes.string.isRequired,
@@ -25,7 +27,10 @@ export default class CollapsibleTable extends Component {
     const { openRows } = this.state;
     return data.reduce((allData, { children, ...parentRow }) => {
       const isRowOpen = includes(openRows, parentRow[dataIdAccessor]);
-      return [...allData, parentRow, ...(isRowOpen ? children : [])];
+      const childRows = isRowOpen
+        ? children.map(c => ({ ...c, className: 'CollapsibleTable-Child' }))
+        : [];
+      return [...allData, parentRow, ...childRows];
     }, []);
   }
 
