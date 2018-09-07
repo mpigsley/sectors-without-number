@@ -30,17 +30,25 @@ export default class CollapsibleTable extends Component {
     return data.reduce((allData, { children, ...parentRow }) => {
       const isRowOpen = includes(openRows, parentRow[dataIdAccessor]);
       const childRows = isRowOpen
-        ? children.map(c => ({ ...c, className: 'CollapsibleTable-Child' }))
+        ? children.map(c => ({
+            ...c,
+            collapsible: 'child',
+            rowClass: 'CollapsibleTable-Child',
+          }))
         : [];
-      return [...allData, parentRow, ...childRows];
+      return [
+        ...allData,
+        { collapsible: 'parent', ...parentRow },
+        ...childRows,
+      ];
     }, []);
   }
 
   get composedColumns() {
     const { columns, data, dataIdAccessor } = this.props;
     const { openRows } = this.state;
-    const isHeaderOpen = !openRows.length;
-    const Icon = isHeaderOpen ? PlusCircle : Circle;
+    const isHeaderOpen = openRows.length;
+    const HeaderIcon = isHeaderOpen ? PlusCircle : Circle;
     return [
       {
         accessor: 'collapsible',
@@ -50,16 +58,24 @@ export default class CollapsibleTable extends Component {
         }),
         onClick: rowId => {
           let newOpenRows = [];
-          if (rowId && includes(openRows)) {
+          if (rowId && includes(openRows, rowId)) {
             newOpenRows = without(openRows, rowId);
           } else if (rowId) {
             newOpenRows = [...openRows, rowId];
-          } else if (isHeaderOpen) {
+          } else if (!isHeaderOpen) {
             newOpenRows = data.map(row => row[dataIdAccessor]);
           }
           this.setState({ openRows: newOpenRows });
         },
-        Header: () => <Icon size={16} />,
+        Header: () => <HeaderIcon size={16} />,
+        Cell: (collapsible, row) => {
+          if (collapsible === 'parent') {
+            const isCellOpen = includes(openRows, row[dataIdAccessor]);
+            const CellIcon = isCellOpen ? PlusCircle : Circle;
+            return <CellIcon size={16} />;
+          }
+          return null;
+        },
       },
       ...columns,
     ];

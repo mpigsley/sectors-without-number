@@ -85,7 +85,7 @@ export default function FactionAssets({ assets, className }) {
           <FormattedMessage id={`faction.assets.${key}.description`} />
         </p>
         <LabeledItem className="FactionAssets-Item" label="misc.hitPoints">
-          {hitPoints.current} / {hitPoints.total}
+          {hitPoints.current} / {hitPoints.total || '-'}
         </LabeledItem>
         <LabeledItem className="FactionAssets-Item" label="misc.initialCost">
           {cost}

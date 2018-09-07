@@ -50,7 +50,7 @@ export const currentSectorFactionTable = createSelector(
           name: asset.type,
           type: category,
           balance: asset.upkeep,
-          hitPoints: `${asset.hitPoints} / ${hp}`,
+          hitPoints: `${asset.hitPoints} / ${hp || '-'}`,
           homeworld: entity
             ? {
                 link: `/sector/${sector}/${Entities.planet.key}/${

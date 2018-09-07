@@ -27,7 +27,7 @@ export default function FactionAssetForm({
 
   let assetHitPoints;
   if (type && FACTION_ASSETS[type]) {
-    assetHitPoints = ` (${FACTION_ASSETS[type].hp})`;
+    assetHitPoints = ` (${FACTION_ASSETS[type].hp || '-'})`;
   }
 
   return (
@@ -45,6 +45,7 @@ export default function FactionAssetForm({
           <LabeledInput
             isVertical
             type="number"
+            disabled={!(FACTION_ASSETS[type] || {}).hp}
             label={
               <span>
                 <FormattedMessage id="misc.hitPoints" />
@@ -53,7 +54,9 @@ export default function FactionAssetForm({
             }
             value={hitPoints}
             onChange={({ target }) =>
-              onUpdate({ hitPoints: parseInt(target.value, 10) })
+              onUpdate({
+                hitPoints: target.value === '' ? 0 : parseInt(target.value, 10),
+              })
             }
           />
           <LabeledInput

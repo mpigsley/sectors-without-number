@@ -24,7 +24,7 @@ class Table extends Component {
     data: PropTypes.arrayOf(
       PropTypes.shape({
         onClick: PropTypes.func,
-        className: PropTypes.string,
+        rowClass: PropTypes.string,
       }),
     ).isRequired,
     light: PropTypes.bool,
@@ -145,9 +145,9 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.sortedData.map(({ className, onClick, ...row }) => (
+          {this.sortedData.map(({ rowClass, onClick, ...row }) => (
             <tr
-              className={classNames('Table-Row', className)}
+              className={classNames('Table-Row', rowClass)}
               key={row[this.props.dataIdAccessor]}
             >
               {this.props.columns.map(column => (

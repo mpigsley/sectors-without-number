@@ -2,6 +2,10 @@
 
 .CollapsibleTable-Child {
   color: $light1;
+
+  .CollapsibleTable-Icon {
+    cursor: default;
+  }
 }
 
 tbody .CollapsibleTable-Icon {
