@@ -126,11 +126,12 @@ export const currentFactionAttributes = createSelector(
 export const currentFactionAssets = createSelector(
   [currentSectorSelector, entitySelector, currentFaction],
   (sector, entities, faction = {}) =>
-    map(faction.assets, ({ location, type, hitPoints }) => {
+    map(faction.assets, ({ location, type, hitPoints }, id) => {
       const locationEntity = entities[Entities.planet.key][location];
       const { hp, ...asset } = FACTION_ASSETS[type];
       return {
         ...asset,
+        id,
         hitPoints: {
           total: hp,
           current: hitPoints,

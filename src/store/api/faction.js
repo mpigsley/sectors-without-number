@@ -14,7 +14,7 @@ export const editFaction = (sectorId, factionId, faction) =>
     .doc(sectorId)
     .collection('faction')
     .doc(factionId)
-    .set(faction, { merge: true })
+    .set(faction)
     .then(() => ({ factionId, faction }));
 
 export const deleteFaction = (sectorId, factionId) =>

@@ -24,6 +24,7 @@ const renderRoll = ({ dice, add, other }) => (
 export default function FactionAssets({ assets, className }) {
   const renderAsset = asset => {
     const {
+      id,
       key,
       category,
       rating,
@@ -71,7 +72,7 @@ export default function FactionAssets({ assets, className }) {
     return (
       <FlexContainer
         className="FactionAssets-Asset"
-        key={key}
+        key={id}
         direction="column"
       >
         <Header type={HeaderType.header4} noMargin>
