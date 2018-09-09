@@ -10,7 +10,7 @@ import ProfileModal from 'components/profile-modal';
 import HexMap from 'components/hex-map';
 
 import ExportTypes from 'constants/export-types';
-import { isEmpty, map } from 'constants/lodash';
+import { map } from 'constants/lodash';
 import hexGenerator from 'utils/hex/generator';
 import { coordinateKey } from 'utils/common';
 import Loading from './loading';
@@ -23,6 +23,7 @@ export default class SectorMap extends Component {
     children: PropTypes.node.isRequired,
     renderSector: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    doesNotExist: PropTypes.bool.isRequired,
     topLevelEntities: PropTypes.shape().isRequired,
     sector: PropTypes.shape({
       rows: PropTypes.number,
@@ -88,7 +89,7 @@ export default class SectorMap extends Component {
   render() {
     if (this.props.isLoading) {
       return <Loading />;
-    } else if (isEmpty(this.props.sector)) {
+    } else if (this.props.doesNotExist) {
       return <Error generateSector={this.props.generateSector} />;
     }
 

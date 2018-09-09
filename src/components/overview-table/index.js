@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
+import { createStructuredSelector } from 'reselect';
 
 import {
   getPrintableEntities,
@@ -7,9 +8,9 @@ import {
 } from 'store/selectors/entity.selectors';
 import OverviewTable from './overview-table';
 
-const mapStateToProps = state => ({
-  entities: getPrintableEntities(state),
-  currentSector: getCurrentSector(state),
+const mapStateToProps = createStructuredSelector({
+  entities: getPrintableEntities,
+  currentSector: getCurrentSector,
 });
 
 export default injectIntl(connect(mapStateToProps)(OverviewTable));

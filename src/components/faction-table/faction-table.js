@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import Measure from 'react-measure';
 import { FormattedMessage, intlShape } from 'react-intl';
 
+import FactionNotSaved from 'components/faction-table/faction-not-saved';
 import CollapsibleTable from 'primitives/other/collapsible-table';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
@@ -152,11 +153,14 @@ export default class FactionTable extends Component {
     isLoggedIn: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isSaved: PropTypes.bool.isRequired,
+    isInitialized: PropTypes.bool.isRequired,
+    doesNotExist: PropTypes.bool.isRequired,
     table: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     children: PropTypes.node.isRequired,
     currentSector: PropTypes.string.isRequired,
     currentFaction: PropTypes.shape({}),
     currentElement: PropTypes.string,
+    toSafeRoute: PropTypes.func.isRequired,
   };
 
   static defaultProps = {
@@ -164,22 +168,27 @@ export default class FactionTable extends Component {
     currentElement: undefined,
   };
 
+  componentDidUpdate({ isInitialized }) {
+    if (!isInitialized && this.props.isInitialized && this.props.doesNotExist) {
+      this.props.toSafeRoute();
+    }
+  }
+
   get isSidebarOpen() {
-    return !!this.props.currentFaction || !!this.props.currentElement;
+    const { currentFaction, currentElement } = this.props;
+    return !!currentFaction || !!currentElement;
   }
 
   renderHeaderActions() {
-    const { intl, currentSector, table, isLoggedIn, isSaved } = this.props;
+    const { intl, currentSector, table, isLoggedIn } = this.props;
     if (!isLoggedIn) {
       return null;
     }
     return (
       <FlexContainer>
-        {isSaved && (
-          <ButtonLink to={`/elements/${currentSector}/faction/new`} minimal>
-            <FormattedMessage id="misc.createFaction" />
-          </ButtonLink>
-        )}
+        <ButtonLink to={`/elements/${currentSector}/faction/new`} minimal>
+          <FormattedMessage id="misc.createFaction" />
+        </ButtonLink>
         {table.length && (
           <Button minimal className="FactionTable-ExportOption">
             <FormattedMessage
@@ -193,10 +202,19 @@ export default class FactionTable extends Component {
   }
 
   render() {
-    const { isLoading, table, intl, children, currentSector } = this.props;
+    const {
+      isLoading,
+      isSaved,
+      table,
+      intl,
+      children,
+      currentSector,
+    } = this.props;
 
     if (isLoading) {
       return <Loading />;
+    } else if (!isSaved) {
+      return <FactionNotSaved />;
     }
 
     return (

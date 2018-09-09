@@ -11,6 +11,7 @@ import { currentSectorIsLoading } from 'store/selectors/sector.selectors';
 import {
   getCurrentTopLevelEntities,
   getCurrentSector,
+  sectorDoesNotExist,
 } from 'store/selectors/entity.selectors';
 import {
   renderSectorSelector,
@@ -21,6 +22,7 @@ import {
 import SectorMap from './sector-map';
 
 const mapStateToProps = createStructuredSelector({
+  doesNotExist: sectorDoesNotExist,
   renderSector: renderSectorSelector,
   sector: getCurrentSector,
   isLoading: currentSectorIsLoading,

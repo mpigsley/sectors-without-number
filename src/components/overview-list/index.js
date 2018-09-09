@@ -2,24 +2,27 @@ import { connect } from 'react-redux';
 import { push } from 'connected-react-router';
 import { injectIntl } from 'react-intl';
 import { withRouter } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 
-import { fetchSector } from 'store/actions/combined.actions';
-import { getCurrentEntities } from 'store/selectors/entity.selectors';
+import {
+  getCurrentEntities,
+  sectorDoesNotExist,
+} from 'store/selectors/entity.selectors';
 import {
   currentSectorSelector,
   isInitializedSelector,
 } from 'store/selectors/base.selectors';
 import OverviewList from './overview-list';
 
-const mapStateToProps = state => ({
-  currentSector: currentSectorSelector(state),
-  entities: getCurrentEntities(state),
-  isInitialized: isInitializedSelector(state),
+const mapStateToProps = createStructuredSelector({
+  currentSector: currentSectorSelector,
+  entities: getCurrentEntities,
+  isInitialized: isInitializedSelector,
+  doesNotExist: sectorDoesNotExist,
 });
 
 const mapDispatchToProps = dispatch => ({
   toSafeRoute: () => dispatch(push('/')),
-  fetchSector: () => dispatch(fetchSector()),
 });
 
 export default injectIntl(

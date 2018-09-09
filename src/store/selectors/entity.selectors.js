@@ -32,6 +32,7 @@ import {
   flatten,
   map,
   size,
+  isEmpty,
 } from 'constants/lodash';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
@@ -123,6 +124,11 @@ export const getCurrentEntities = createDeepEqualSelector(
 export const getCurrentSector = createDeepEqualSelector(
   [currentSectorSelector, entitySelector],
   (currentSector, entities) => entities[Entities.sector.key][currentSector],
+);
+
+export const sectorDoesNotExist = createDeepEqualSelector(
+  [getCurrentSector],
+  isEmpty,
 );
 
 export const getCurrentPlanets = createDeepEqualSelector(

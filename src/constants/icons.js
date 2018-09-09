@@ -23,6 +23,7 @@ import Plus from 'react-feather/dist/icons/plus';
 import PlusCircle from 'react-feather/dist/icons/plus-circle';
 import RefreshCw from 'react-feather/dist/icons/refresh-cw';
 import RotateCcw from 'react-feather/dist/icons/rotate-ccw';
+import Save from 'react-feather/dist/icons/save';
 import Settings from 'react-feather/dist/icons/settings';
 import Unlock from 'react-feather/dist/icons/unlock';
 import User from 'react-feather/dist/icons/user';
@@ -55,6 +56,7 @@ export {
   PlusCircle,
   RefreshCw,
   RotateCcw,
+  Save,
   Settings,
   Unlock,
   User,

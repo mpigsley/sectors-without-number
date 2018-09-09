@@ -15,11 +15,12 @@ import './style.css';
 export default class OverviewList extends Component {
   static propTypes = {
     toSafeRoute: PropTypes.func.isRequired,
-    fetchSector: PropTypes.func.isRequired,
+    // fetchSector: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     currentSector: PropTypes.string.isRequired,
     entities: PropTypes.shape().isRequired,
     isInitialized: PropTypes.bool.isRequired,
+    doesNotExist: PropTypes.bool.isRequired,
     match: PropTypes.shape({
       params: PropTypes.shape({
         entityType: PropTypes.string,
@@ -28,14 +29,9 @@ export default class OverviewList extends Component {
     intl: intlShape.isRequired,
   };
 
-  componentWillMount() {
-    if (
-      !this.props.entities[Entities.sector.key][this.props.currentSector] &&
-      this.props.isInitialized
-    ) {
+  componentDidUpdate({ isInitialized }) {
+    if (!isInitialized && this.props.isInitialized && this.props.doesNotExist) {
       this.props.toSafeRoute();
-    } else {
-      this.props.fetchSector();
     }
   }
 
