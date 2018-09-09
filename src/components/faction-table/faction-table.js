@@ -11,7 +11,6 @@ import Header, { HeaderType } from 'primitives/text/header';
 import ButtonLink from 'primitives/other/button-link';
 import BasicLink from 'primitives/other/basic-link';
 import Loading from 'primitives/regions/loading';
-import Button from 'primitives/other/button';
 
 import { RotateCcw, Minus, ChevronUp, ChevronDown } from 'constants/icons';
 import { isArray } from 'constants/lodash';
@@ -181,7 +180,7 @@ export default class FactionTable extends Component {
   }
 
   renderHeaderActions() {
-    const { intl, currentSector, table, isLoggedIn } = this.props;
+    const { currentSector, isLoggedIn } = this.props;
     if (!isLoggedIn) {
       return null;
     }
@@ -190,14 +189,6 @@ export default class FactionTable extends Component {
         <ButtonLink to={`/elements/${currentSector}/faction/new`} minimal>
           <FormattedMessage id="misc.createFaction" />
         </ButtonLink>
-        {table.length && (
-          <Button minimal className="FactionTable-ExportOption">
-            <FormattedMessage
-              id="misc.exportEntity"
-              values={{ entity: intl.formatMessage({ id: 'misc.factions' }) }}
-            />
-          </Button>
-        )}
       </FlexContainer>
     );
   }
