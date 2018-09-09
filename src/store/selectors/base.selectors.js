@@ -1,5 +1,6 @@
 /* User */
 export const userModelSelector = state => state.user.model;
+export const isLoggedInSelector = state => !!state.user.model;
 export const userModelLocaleSelector = state =>
   (state.user.model || {}).locale || 'en';
 export const isUserEditModalOpenSelector = state => state.user.isEditModalOpen;

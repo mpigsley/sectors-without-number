@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
+import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import {
@@ -8,7 +9,7 @@ import {
   logout,
 } from 'store/actions/user.actions';
 import {
-  userUidSelector,
+  isLoggedInSelector,
   currentSectorSelector,
   isSharedSectorSelector,
   lastOverviewEntitySelector,
@@ -16,11 +17,11 @@ import {
 
 import Navigation from './navigation';
 
-const mapStateToProps = state => ({
-  isLoggedIn: !!userUidSelector(state),
-  currentSector: currentSectorSelector(state),
-  isSharedSector: isSharedSectorSelector(state),
-  lastOverviewEntity: lastOverviewEntitySelector(state),
+const mapStateToProps = createStructuredSelector({
+  isLoggedIn: isLoggedInSelector,
+  currentSector: currentSectorSelector,
+  isSharedSector: isSharedSectorSelector,
+  lastOverviewEntity: lastOverviewEntitySelector,
 });
 
 const mapDispatchTopProps = (dispatch, props) => ({

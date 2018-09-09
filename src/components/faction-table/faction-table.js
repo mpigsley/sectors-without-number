@@ -149,7 +149,9 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
 export default class FactionTable extends Component {
   static propTypes = {
     intl: intlShape.isRequired,
+    isLoggedIn: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    isSaved: PropTypes.bool.isRequired,
     table: PropTypes.arrayOf(PropTypes.shape()).isRequired,
     children: PropTypes.node.isRequired,
     currentSector: PropTypes.string.isRequired,
@@ -164,6 +166,30 @@ export default class FactionTable extends Component {
 
   get isSidebarOpen() {
     return !!this.props.currentFaction || !!this.props.currentElement;
+  }
+
+  renderHeaderActions() {
+    const { intl, currentSector, table, isLoggedIn, isSaved } = this.props;
+    if (!isLoggedIn) {
+      return null;
+    }
+    return (
+      <FlexContainer>
+        {isSaved && (
+          <ButtonLink to={`/elements/${currentSector}/faction/new`} minimal>
+            <FormattedMessage id="misc.createFaction" />
+          </ButtonLink>
+        )}
+        {table.length && (
+          <Button minimal className="FactionTable-ExportOption">
+            <FormattedMessage
+              id="misc.exportEntity"
+              values={{ entity: intl.formatMessage({ id: 'misc.factions' }) }}
+            />
+          </Button>
+        )}
+      </FlexContainer>
+    );
   }
 
   render() {
@@ -187,21 +213,7 @@ export default class FactionTable extends Component {
           <Header type={HeaderType.header2} noMargin>
             <FormattedMessage id="misc.factions" />
           </Header>
-          <FlexContainer>
-            <ButtonLink
-              to={`/elements/${currentSector}/faction/new`}
-              minimal
-              className="FactionTable-CreateAction"
-            >
-              <FormattedMessage id="misc.createFaction" />
-            </ButtonLink>
-            <Button minimal>
-              <FormattedMessage
-                id="misc.exportEntity"
-                values={{ entity: intl.formatMessage({ id: 'misc.factions' }) }}
-              />
-            </Button>
-          </FlexContainer>
+          {this.renderHeaderActions()}
         </FlexContainer>
         <Measure>
           {({ measureRef, contentRect }) => (
