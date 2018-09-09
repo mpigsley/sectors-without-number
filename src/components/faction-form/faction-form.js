@@ -253,6 +253,11 @@ export default function FactionForm({
         />
         {map(form.assets, (asset, key) => (
           <FactionAssetForm
+            attributes={{
+              force: form.force || 0,
+              cunning: form.cunning || 0,
+              wealth: form.wealth || 0,
+            }}
             key={key}
             intl={intl}
             homeworlds={homeworldOptions}

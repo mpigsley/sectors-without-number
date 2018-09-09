@@ -10,6 +10,7 @@ import { createFaction, editFaction, deleteFaction } from 'store/api/faction';
 
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { createId } from 'utils/common';
+import { pickBy } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@faction';
 export const CREATED = `${ACTION_PREFIX}/CREATED`;
@@ -41,6 +42,7 @@ export const submitForm = intl => (dispatch, getState) => {
 
   const modifiedForm = {
     ...form,
+    assets: pickBy(form.assets || {}, ({ type }) => type),
     force: form.force || 0,
     cunning: form.cunning || 0,
     wealth: form.wealth || 0,

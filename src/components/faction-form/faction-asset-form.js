@@ -8,7 +8,7 @@ import LabeledInput from 'primitives/form/labeled-input';
 import ItemRow from 'primitives/other/item-row';
 import Input from 'primitives/form/input';
 
-import { map } from 'constants/lodash';
+import { find, filter, sortBy } from 'constants/lodash';
 import { FACTION_ASSETS } from 'constants/faction';
 
 export default function FactionAssetForm({
@@ -19,11 +19,24 @@ export default function FactionAssetForm({
   hitPoints,
   location,
   homeworlds,
+  attributes,
 }) {
-  const assetOptions = map(FACTION_ASSETS, ({ key }) => ({
-    label: intl.formatMessage({ id: `faction.assets.${key}` }),
-    value: key,
-  }));
+  const filteredOptions = filter(
+    FACTION_ASSETS,
+    ({ category, rating }) =>
+      !attributes[category] || rating <= attributes[category],
+  );
+  const allOptions = filteredOptions;
+  if (type && !find(allOptions, { type })) {
+    allOptions.push(FACTION_ASSETS[type]);
+  }
+  const assetOptions = sortBy(
+    allOptions.map(({ key }) => ({
+      label: intl.formatMessage({ id: `faction.assets.${key}` }),
+      value: key,
+    })),
+    'label',
+  );
 
   let assetHitPoints;
   if (type && FACTION_ASSETS[type]) {
@@ -86,6 +99,11 @@ FactionAssetForm.propTypes = {
       label: PropTypes.string.isRequired,
     }),
   ).isRequired,
+  attributes: PropTypes.shape({
+    force: PropTypes.number.isRequired,
+    cunning: PropTypes.number.isRequired,
+    wealth: PropTypes.number.isRequired,
+  }).isRequired,
 };
 
 FactionAssetForm.defaultProps = {

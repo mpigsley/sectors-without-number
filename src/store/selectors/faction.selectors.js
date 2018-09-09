@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import { FACTION_ASSET_CATEGORIES, FACTION_ASSETS } from 'constants/faction';
 import Entities from 'constants/entities';
-import { map, reduce } from 'constants/lodash';
+import { every, map, reduce } from 'constants/lodash';
 import { factionHitPoints, factionBaseIncome } from 'utils/faction';
 
 import {
@@ -146,5 +146,8 @@ export const currentFactionAssets = createSelector(
 
 export const isValidFactionForm = createSelector(
   [factionFormSelector],
-  ({ name }) => !!name && name.length <= LAYER_NAME_LENGTH,
+  ({ name, assets }) =>
+    !!name &&
+    name.length <= LAYER_NAME_LENGTH &&
+    every(assets || [], ({ location }) => location),
 );

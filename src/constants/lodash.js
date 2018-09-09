@@ -36,6 +36,7 @@ import intersection from 'lodash/intersection';
 import dropRight from 'lodash/dropRight';
 import without from 'lodash/without';
 import clamp from 'lodash/clamp';
+import every from 'lodash/every';
 
 export {
   includes,
@@ -76,4 +77,5 @@ export {
   dropRight,
   without,
   clamp,
+  every,
 };
