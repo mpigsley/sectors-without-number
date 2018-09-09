@@ -10,7 +10,7 @@ import SaveFooter from 'primitives/other/save-footer';
 import ItemRow from 'primitives/other/item-row';
 
 import { RefreshCw } from 'constants/icons';
-import { omit, sortBy, map, dropRight } from 'constants/lodash';
+import { omit, sortBy, map, dropRight, clamp } from 'constants/lodash';
 import { FACTION_GOALS, FACTION_TAGS } from 'constants/faction';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 
@@ -105,27 +105,42 @@ export default function FactionForm({
               value={form.force}
               type="number"
               isVertical
-              onChange={({ target }) =>
-                updateFaction({ force: parseInt(target.value, 10) })
-              }
+              onChange={({ target }) => {
+                const val = parseInt(target.value, 10);
+                let force = '';
+                if (!Number.isNaN(val)) {
+                  force = clamp(val, 0, 8);
+                }
+                updateFaction({ force });
+              }}
             />
             <LabeledInput
               label="faction.category.cunning"
               value={form.cunning}
               type="number"
               isVertical
-              onChange={({ target }) =>
-                updateFaction({ cunning: parseInt(target.value, 10) })
-              }
+              onChange={({ target }) => {
+                const val = parseInt(target.value, 10);
+                let cunning = '';
+                if (!Number.isNaN(val)) {
+                  cunning = clamp(val, 0, 8);
+                }
+                updateFaction({ cunning });
+              }}
             />
             <LabeledInput
               label="faction.category.wealth"
               value={form.wealth}
               type="number"
               isVertical
-              onChange={({ target }) =>
-                updateFaction({ wealth: parseInt(target.value, 10) })
-              }
+              onChange={({ target }) => {
+                const val = parseInt(target.value, 10);
+                let wealth = '';
+                if (!Number.isNaN(val)) {
+                  wealth = clamp(val, 0, 8);
+                }
+                updateFaction({ wealth });
+              }}
             />
           </ItemRow>
           <ItemRow>
@@ -139,27 +154,30 @@ export default function FactionForm({
               value={form.hitPoints}
               type="number"
               isVertical
-              onChange={({ target }) =>
-                updateFaction({ hitPoints: parseInt(target.value, 10) })
-              }
+              onChange={({ target }) => {
+                const val = parseInt(target.value, 10);
+                updateFaction({ hitPoints: Number.isNaN(val) ? '' : val });
+              }}
             />
             <LabeledInput
               label="misc.balance"
               value={form.balance}
               type="number"
               isVertical
-              onChange={({ target }) =>
-                updateFaction({ balance: parseInt(target.value, 10) })
-              }
+              onChange={({ target }) => {
+                const val = parseInt(target.value, 10);
+                updateFaction({ balance: Number.isNaN(val) ? '' : val });
+              }}
             />
             <LabeledInput
               label="misc.experience"
               value={form.experience}
               type="number"
               isVertical
-              onChange={({ target }) =>
-                updateFaction({ experience: parseInt(target.value, 10) })
-              }
+              onChange={({ target }) => {
+                const val = parseInt(target.value, 10);
+                updateFaction({ experience: Number.isNaN(val) ? '' : val });
+              }}
             />
           </ItemRow>
           <LabeledInput

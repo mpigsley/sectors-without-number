@@ -53,11 +53,10 @@ export default function FactionAssetForm({
               </span>
             }
             value={hitPoints}
-            onChange={({ target }) =>
-              onUpdate({
-                hitPoints: target.value === '' ? 0 : parseInt(target.value, 10),
-              })
-            }
+            onChange={({ target }) => {
+              const val = parseInt(target.value, 10);
+              onUpdate({ hitPoints: Number.isNaN(val) ? 0 : val });
+            }}
           />
           <LabeledInput
             dropUp

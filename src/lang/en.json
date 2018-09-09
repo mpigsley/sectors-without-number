@@ -2297,6 +2297,7 @@
   "misc.elements": "Elements",
   "misc.email": "Email",
   "misc.emailPassword": "Email and password are required.",
+  "misc.emptyFactionTable": "Faction table is empty. Create a faction to begin.",
   "misc.enemies": "Enemies",
   "misc.entities": "Entities",
   "misc.entityDeleted": "{entity} Deleted",

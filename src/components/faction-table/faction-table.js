@@ -201,6 +201,18 @@ export default class FactionTable extends Component {
     );
   }
 
+  renderEmptyState() {
+    const { table } = this.props;
+    if (table.length) {
+      return null;
+    }
+    return (
+      <FlexContainer justify="center" className="FactionTable-Empty">
+        <FormattedMessage id="misc.emptyFactionTable" />
+      </FlexContainer>
+    );
+  }
+
   render() {
     const {
       isLoading,
@@ -245,6 +257,7 @@ export default class FactionTable extends Component {
                 })}
                 data={table}
               />
+              {this.renderEmptyState()}
             </div>
           )}
         </Measure>

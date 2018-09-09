@@ -39,9 +39,19 @@ export const submitForm = intl => (dispatch, getState) => {
   const currentId = currentEntitySelector(state);
   const isCreating = factionIsCreatingSelector(state);
 
+  const modifiedForm = {
+    ...form,
+    force: form.force || 0,
+    cunning: form.cunning || 0,
+    wealth: form.wealth || 0,
+    hitPoints: form.hitPoints || 0,
+    balance: form.balance || 0,
+    experience: form.experience || 0,
+  };
+
   const promise = isCreating
-    ? createFaction(sectorId, form)
-    : editFaction(sectorId, currentId, form);
+    ? createFaction(sectorId, modifiedForm)
+    : editFaction(sectorId, currentId, modifiedForm);
 
   return promise
     .then(({ factionId, faction }) => {

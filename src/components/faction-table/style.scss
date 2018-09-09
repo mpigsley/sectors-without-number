@@ -30,6 +30,12 @@
   overflow: auto;
 }
 
+.FactionTable-Empty {
+  color: $light2;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
 .FactionTable-ExportOption {
   margin-left: 1rem;
 }
