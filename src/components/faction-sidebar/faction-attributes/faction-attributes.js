@@ -26,7 +26,7 @@ const titledItem = (key, description, title) => {
 const attributeItem = (label, value, superscript) => (
   <LabeledItem isVertical label={label} className="FactionAttributes-Attribute">
     <FlexContainer flex="1" justify="center">
-      <span className="FactionAttributes-Value">{value}</span>
+      <span className="FactionAttributes-Value">{value || 0}</span>
       <span className="FactionAttributes-Superscript">{superscript}</span>
     </FlexContainer>
   </LabeledItem>
@@ -34,7 +34,7 @@ const attributeItem = (label, value, superscript) => (
 
 export default function FactionAttributes({ faction, attributes, className }) {
   let homeworldElement;
-  if (attributes.homeworld) {
+  if ((attributes.homeworld || {}).link) {
     homeworldElement = (
       <LabeledItem label="misc.homeworld">
         <BasicLink to={attributes.homeworld.link}>

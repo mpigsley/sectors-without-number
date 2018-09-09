@@ -35,21 +35,15 @@ export const createBlankAsset = () => ({
 
 export const submitForm = intl => (dispatch, getState) => {
   const state = getState();
-  const form = factionFormSelector(state);
+  const { assets, ...form } = factionFormSelector(state);
   const sectorId = currentSectorSelector(state);
   const currentId = currentEntitySelector(state);
   const isCreating = factionIsCreatingSelector(state);
 
-  const modifiedForm = {
-    ...form,
-    assets: pickBy(form.assets || {}, ({ type }) => type),
-    force: form.force || 0,
-    cunning: form.cunning || 0,
-    wealth: form.wealth || 0,
-    hitPoints: form.hitPoints || 0,
-    balance: form.balance || 0,
-    experience: form.experience || 0,
-  };
+  const modifiedForm = pickBy(
+    { ...form, assets: pickBy(assets || {}, ({ type }) => type) },
+    attr => attr,
+  );
 
   const promise = isCreating
     ? createFaction(sectorId, modifiedForm)

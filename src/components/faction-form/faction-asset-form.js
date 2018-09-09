@@ -23,8 +23,7 @@ export default function FactionAssetForm({
 }) {
   const filteredOptions = filter(
     FACTION_ASSETS,
-    ({ category, rating }) =>
-      !attributes[category] || rating <= attributes[category],
+    ({ category, rating }) => rating <= (attributes[category] || 0),
   );
   const allOptions = filteredOptions;
   if (type && !find(allOptions, { type })) {

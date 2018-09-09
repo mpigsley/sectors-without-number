@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import { FACTION_ASSET_CATEGORIES, FACTION_ASSETS } from 'constants/faction';
 import Entities from 'constants/entities';
-import { every, map, reduce } from 'constants/lodash';
+import { sortBy, every, map, reduce } from 'constants/lodash';
 import { factionHitPoints, factionBaseIncome } from 'utils/faction';
 
 import {
@@ -27,57 +27,60 @@ export const currentSectorFactions = createSelector(
 export const currentSectorFactionTable = createSelector(
   [currentSectorFactions, entitySelector, currentSectorSelector],
   (factions, entities, sector) =>
-    map(factions, (faction, factionId) => {
-      const {
-        force,
-        cunning,
-        wealth,
-        hitPoints,
-        homeworld,
-        assets,
-        ...rest
-      } = faction;
+    sortBy(
+      map(factions, (faction, factionId) => {
+        const {
+          force,
+          cunning,
+          wealth,
+          hitPoints,
+          homeworld,
+          assets,
+          ...rest
+        } = faction;
 
-      let income = factionBaseIncome(faction);
-      const children = map(assets, (asset, assetId) => {
-        const { category, hp, upkeep } = FACTION_ASSETS[asset.type];
-        if (upkeep) {
-          income -= upkeep;
-        }
-        const entity = entities[Entities.planet.key][asset.location];
+        let income = factionBaseIncome(faction);
+        const children = map(assets, (asset, assetId) => {
+          const { category, hp, upkeep } = FACTION_ASSETS[asset.type];
+          if (upkeep) {
+            income -= upkeep;
+          }
+          const entity = entities[Entities.planet.key][asset.location];
+          return {
+            key: assetId,
+            name: asset.type,
+            type: category,
+            balance: asset.upkeep,
+            hitPoints: `${asset.hitPoints || 0} / ${hp || '-'}`,
+            homeworld: entity
+              ? {
+                  link: `/sector/${sector}/${Entities.planet.key}/${
+                    asset.location
+                  }`,
+                  name: entity.name,
+                }
+              : {},
+          };
+        });
+
+        const entity = entities[Entities.planet.key][homeworld];
         return {
-          key: assetId,
-          name: asset.type,
-          type: category,
-          balance: asset.upkeep,
-          hitPoints: `${asset.hitPoints} / ${hp || '-'}`,
+          ...rest,
+          key: factionId,
+          income,
+          type: `${force || 0} / ${cunning || 0} / ${wealth || 0}`,
+          hitPoints: `${hitPoints || 0} / ${factionHitPoints(faction)}`,
           homeworld: entity
             ? {
-                link: `/sector/${sector}/${Entities.planet.key}/${
-                  asset.location
-                }`,
+                link: `/sector/${sector}/${Entities.planet.key}/${homeworld}`,
                 name: entity.name,
               }
             : {},
+          children: sortBy(children, 'name'),
         };
-      });
-
-      const entity = entities[Entities.planet.key][homeworld];
-      return {
-        ...rest,
-        key: factionId,
-        income,
-        type: `${force} / ${cunning} / ${wealth}`,
-        hitPoints: `${hitPoints} / ${factionHitPoints(faction)}`,
-        homeworld: entity
-          ? {
-              link: `/sector/${sector}/${Entities.planet.key}/${homeworld}`,
-              name: entity.name,
-            }
-          : {},
-        children,
-      };
-    }),
+      }),
+      'name',
+    ),
 );
 
 export const currentFaction = createSelector(

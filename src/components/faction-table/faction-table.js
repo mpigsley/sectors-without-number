@@ -102,7 +102,8 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
     {
       accessor: 'homeworld',
       Header: 'misc.homeworld',
-      Cell: loc => <BasicLink to={loc.link}>{loc.name}</BasicLink>,
+      Cell: loc =>
+        loc.link ? <BasicLink to={loc.link}>{loc.name}</BasicLink> : '-',
       centered: true,
       width: 100,
     },
@@ -129,7 +130,7 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
         isArray(tags)
           ? tags
               .map(tag => intl.formatMessage({ id: `faction.tags.${tag}` }))
-              .join(', ')
+              .join(', ') || '-'
           : '-',
       centered: true,
       width: 250,
