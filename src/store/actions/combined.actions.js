@@ -49,7 +49,6 @@ export const initialize = location => dispatch =>
       isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
       isGameView ? getNavigationData(sectorId) : Promise.resolve({}),
       isGameView ? getLayerData(sectorId) : Promise.resolve({}),
-      isGameView ? getFactionData(sectorId) : Promise.resolve({}),
       uid ? getSyncedSectors(uid) : Promise.resolve(),
     ];
     if (locale && locale !== 'en' && Locale[locale]) {
@@ -60,37 +59,44 @@ export const initialize = location => dispatch =>
         }),
       );
     }
-    return Promise.all(promises).then(
-      ([
-        { entities, share },
-        routes,
-        layers,
-        factions,
-        sectors,
-        userLocale,
-      ]) => {
-        if (((entities || {})[Entities.sector.key] || {})[sectorId]) {
-          document.title = `Sector - ${
-            entities[Entities.sector.key][sectorId].name
-          }`;
+    return Promise.all(promises)
+      .then(data => {
+        if (!isGameView || data[0].share) {
+          return Promise.resolve([{}, ...data]);
         }
-        dispatch({
-          type: INITIALIZED,
-          user,
-          entities: mergeEntityUpdates(
-            { [Entities.sector.key]: sectors },
-            entities || {},
-          ),
+        return getFactionData(sectorId).then(factions => [factions, ...data]);
+      })
+      .then(
+        ([
+          factions,
+          { entities, share },
           routes,
           layers,
-          factions,
-          sectorId,
-          share,
-          saved: keys(sectors || {}),
-          locale: userLocale,
-        });
-      },
-    );
+          sectors,
+          userLocale,
+        ]) => {
+          if (((entities || {})[Entities.sector.key] || {})[sectorId]) {
+            document.title = `Sector - ${
+              entities[Entities.sector.key][sectorId].name
+            }`;
+          }
+          dispatch({
+            type: INITIALIZED,
+            user,
+            entities: mergeEntityUpdates(
+              { [Entities.sector.key]: sectors },
+              entities || {},
+            ),
+            routes,
+            layers,
+            factions,
+            sectorId,
+            share,
+            saved: keys(sectors || {}),
+            locale: userLocale,
+          });
+        },
+      );
   });
 
 export const fetchSector = () => (dispatch, getState) => {
