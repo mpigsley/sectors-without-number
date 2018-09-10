@@ -28,7 +28,7 @@ export default function FactionAssetForm({
     ({ category, rating }) => rating <= (attributes[category] || 8),
   );
   const allOptions = filteredOptions;
-  if (type && !find(allOptions, { type })) {
+  if (type && !find(allOptions, { key: type })) {
     allOptions.push(FACTION_ASSETS[type]);
   }
   const assetOptions = sortBy(
