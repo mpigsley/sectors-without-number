@@ -11,16 +11,16 @@ import {
 import {
   isLoggedInSelector,
   currentSectorSelector,
-  isSharedSectorSelector,
   lastOverviewEntitySelector,
 } from 'store/selectors/base.selectors';
+import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 
 import Navigation from './navigation';
 
 const mapStateToProps = createStructuredSelector({
   isLoggedIn: isLoggedInSelector,
   currentSector: currentSectorSelector,
-  isSharedSector: isSharedSectorSelector,
+  isSharedSector: isViewingSharedSector,
   lastOverviewEntity: lastOverviewEntitySelector,
 });
 

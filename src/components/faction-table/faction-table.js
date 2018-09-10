@@ -170,6 +170,7 @@ export default class FactionTable extends Component {
     isLoggedIn: PropTypes.bool.isRequired,
     isLoading: PropTypes.bool.isRequired,
     isSaved: PropTypes.bool.isRequired,
+    isShared: PropTypes.bool.isRequired,
     isInitialized: PropTypes.bool.isRequired,
     doesNotExist: PropTypes.bool.isRequired,
     table: PropTypes.arrayOf(PropTypes.shape()).isRequired,
@@ -185,9 +186,13 @@ export default class FactionTable extends Component {
     currentElement: undefined,
   };
 
-  componentDidUpdate({ isInitialized }) {
-    if (!isInitialized && this.props.isInitialized && this.props.doesNotExist) {
-      this.props.toSafeRoute();
+  componentDidUpdate(prevProps) {
+    const { isInitialized, doesNotExist, isShared, toSafeRoute } = this.props;
+    if (
+      (!prevProps.isInitialized && isInitialized && doesNotExist) ||
+      isShared
+    ) {
+      toSafeRoute();
     }
   }
 

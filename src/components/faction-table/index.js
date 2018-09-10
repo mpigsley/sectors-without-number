@@ -16,6 +16,7 @@ import {
 } from 'store/selectors/faction.selectors';
 import {
   isCurrentSectorSaved,
+  isViewingSharedSector,
   currentSectorIsLoading,
 } from 'store/selectors/sector.selectors';
 import { sectorDoesNotExist } from 'store/selectors/entity.selectors';
@@ -26,6 +27,7 @@ const mapStateToProps = createStructuredSelector({
   isInitialized: isInitializedSelector,
   isLoggedIn: isLoggedInSelector,
   isSaved: isCurrentSectorSaved,
+  isShared: isViewingSharedSector,
   doesNotExist: sectorDoesNotExist,
   table: currentSectorFactionTable,
   isLoading: currentSectorIsLoading,
