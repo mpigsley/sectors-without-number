@@ -4,7 +4,7 @@ import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import { FACTION_ASSET_CATEGORIES, FACTION_ASSETS } from 'constants/faction';
 import Entities from 'constants/entities';
 import { sortBy, every, map, reduce } from 'constants/lodash';
-import { factionHitPoints, factionBaseIncome } from 'utils/faction';
+import { factionHitPoints, factionIncomeAndOwnedAssets } from 'utils/faction';
 
 import {
   entitySelector,
@@ -39,12 +39,9 @@ export const currentSectorFactionTable = createSelector(
           ...rest
         } = faction;
 
-        let income = factionBaseIncome(faction);
+        const { income } = factionIncomeAndOwnedAssets(faction);
         const children = map(assets, (asset, assetId) => {
-          const { category, hp, upkeep } = FACTION_ASSETS[asset.type];
-          if (upkeep) {
-            income -= upkeep;
-          }
+          const { category, hp } = FACTION_ASSETS[asset.type];
           const entity = entities[Entities.planet.key][asset.location];
           return {
             key: assetId,
@@ -101,28 +98,7 @@ export const currentFactionAttributes = createSelector(
       };
     }
 
-    let income = factionBaseIncome(faction);
-    const owned = reduce(
-      faction.assets,
-      (obj, { type }) => {
-        const { category, upkeep } = FACTION_ASSETS[type];
-        if (upkeep) {
-          income -= upkeep;
-        }
-        switch (category) {
-          case FACTION_ASSET_CATEGORIES.force:
-            return { ...obj, force: obj.force + 1 };
-          case FACTION_ASSET_CATEGORIES.cunning:
-            return { ...obj, cunning: obj.cunning + 1 };
-          case FACTION_ASSET_CATEGORIES.wealth:
-            return { ...obj, wealth: obj.wealth + 1 };
-          default:
-            return obj;
-        }
-      },
-      { force: 0, cunning: 0, wealth: 0 },
-    );
-
+    const { income, owned } = factionIncomeAndOwnedAssets(faction);
     return { hitPoints: factionHitPoints(faction), income, owned, homeworld };
   },
 );
