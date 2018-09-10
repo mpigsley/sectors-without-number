@@ -17,6 +17,7 @@ import {
   userUidSelector,
   currentSectorSelector,
   currentEntitySelector,
+  isSharedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorFetched } from 'store/selectors/sector.selectors';
 import { currentSectorLayers } from 'store/selectors/layer.selectors';
@@ -103,6 +104,7 @@ export const fetchSector = () => (dispatch, getState) => {
   const state = getState();
   const sectorId = currentSectorSelector(state);
   const currentSector = getCurrentSector(state);
+  const isShared = isSharedSectorSelector(state);
   if (currentSector) {
     document.title = `Sector - ${currentSector.name}`;
   }
@@ -114,7 +116,7 @@ export const fetchSector = () => (dispatch, getState) => {
     getSectorEntities(sectorId, userId),
     getNavigationData(sectorId),
     getLayerData(sectorId),
-    getFactionData(sectorId),
+    isShared ? Promise.resolve({}) : getFactionData(sectorId),
   ]).then(([{ entities, share }, routes, layers, factions]) =>
     dispatch({
       type: FETCHED_SECTOR,
