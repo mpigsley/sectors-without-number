@@ -15,7 +15,6 @@ import './style.css';
 export default class OverviewList extends Component {
   static propTypes = {
     toSafeRoute: PropTypes.func.isRequired,
-    // fetchSector: PropTypes.func.isRequired,
     children: PropTypes.node.isRequired,
     currentSector: PropTypes.string.isRequired,
     entities: PropTypes.shape().isRequired,
