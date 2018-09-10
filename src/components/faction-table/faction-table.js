@@ -12,7 +12,13 @@ import ButtonLink from 'primitives/other/button-link';
 import BasicLink from 'primitives/other/basic-link';
 import Loading from 'primitives/regions/loading';
 
-import { RotateCcw, Minus, ChevronUp, ChevronDown } from 'constants/icons';
+import {
+  RotateCcw,
+  Minus,
+  ChevronUp,
+  ChevronDown,
+  EyeOff,
+} from 'constants/icons';
 import { isArray } from 'constants/lodash';
 
 import './style.css';
@@ -27,10 +33,17 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
     {
       accessor: 'name',
       Header: 'misc.name',
-      Cell: (name, { key, relationship }) => {
+      Cell: (name, { key, relationship, stealthed }) => {
         const id = `faction.assets.${name}`;
+        let title;
         if (intl.messages[id]) {
-          return intl.formatMessage({ id });
+          title = intl.formatMessage({ id });
+        } else {
+          title = (
+            <BasicLink to={`/elements/${sector}/faction/${key}`}>
+              {name}
+            </BasicLink>
+          );
         }
         let icon;
         if (relationship === 'neutral') {
@@ -50,12 +63,15 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
             />
           );
         }
+        let stealth = null;
+        if (stealthed) {
+          stealth = <EyeOff size={14} className="FactionTable-Stealthed" />;
+        }
         return (
           <FlexContainer align="center">
-            <BasicLink to={`/elements/${sector}/faction/${key}`}>
-              {name}
-            </BasicLink>
+            {title}
             {icon}
+            {stealth}
           </FlexContainer>
         );
       },
@@ -88,9 +104,10 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
             </Fragment>
           );
         }
+        const convertedBalance = typeof balance === 'string' ? 0 : balance || 0;
         return (
           <FlexContainer align="center" justify="center">
-            {income ? `${balance} / ` : balance}
+            {income ? `${convertedBalance} / ` : convertedBalance}
             {incomeElement}
           </FlexContainer>
         );

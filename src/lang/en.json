@@ -2411,6 +2411,7 @@
   "misc.situation": "Situation",
   "misc.size": "Size",
   "misc.solid": "Solid",
+  "misc.stealthed": "Stealthed",
   "misc.successfullyRemoved": "Your {entity} has been successfully removed.",
   "misc.syncedAutomatically": "Your current sector(s) will be synced automatically",
   "misc.syncingSector": "Syncing Sector",

@@ -49,6 +49,7 @@ export const currentSectorFactionTable = createSelector(
           return {
             key: assetId,
             name: asset.type,
+            stealthed: asset.stealthed,
             type: category,
             balance: asset.upkeep,
             hitPoints: `${asset.hitPoints || 0} / ${hp || '-'}`,
@@ -129,12 +130,13 @@ export const currentFactionAttributes = createSelector(
 export const currentFactionAssets = createSelector(
   [currentSectorSelector, entitySelector, currentFaction],
   (sector, entities, faction = {}) =>
-    map(faction.assets, ({ location, type, hitPoints }, id) => {
+    map(faction.assets, ({ location, type, hitPoints, stealthed }, id) => {
       const locationEntity = entities[Entities.planet.key][location];
       const { hp, ...asset } = FACTION_ASSETS[type];
       return {
         ...asset,
         id,
+        stealthed,
         hitPoints: {
           total: hp,
           current: hitPoints,

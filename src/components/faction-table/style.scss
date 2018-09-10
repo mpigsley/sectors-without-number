@@ -57,6 +57,10 @@
   }
 }
 
+.FactionTable-Stealthed {
+  margin-left: 0.5rem;
+}
+
 @media (max-width: 1200px) {
   .FactionTable--sidebarOpen {
     grid-template-columns: [table] auto [sidebar] $small-sidebar-width [end];

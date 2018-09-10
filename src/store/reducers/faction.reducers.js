@@ -16,6 +16,7 @@ const initialAsset = () => ({
   type: undefined,
   hitPoints: 0,
   location: undefined,
+  stealthed: false,
 });
 
 const initialForm = () => ({

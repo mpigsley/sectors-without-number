@@ -10,7 +10,7 @@ import { createFaction, editFaction, deleteFaction } from 'store/api/faction';
 
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { createId } from 'utils/common';
-import { pickBy } from 'constants/lodash';
+import { isNil, pickBy, omitBy } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@faction';
 export const CREATED = `${ACTION_PREFIX}/CREATED`;
@@ -40,9 +40,9 @@ export const submitForm = intl => (dispatch, getState) => {
   const currentId = currentEntitySelector(state);
   const isCreating = factionIsCreatingSelector(state);
 
-  const modifiedForm = pickBy(
+  const modifiedForm = omitBy(
     { ...form, assets: pickBy(assets || {}, ({ type }) => type) },
-    attr => attr,
+    isNil,
   );
 
   const promise = isCreating

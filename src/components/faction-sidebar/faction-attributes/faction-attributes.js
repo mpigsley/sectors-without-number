@@ -163,6 +163,7 @@ FactionAttributes.propTypes = {
     goal: PropTypes.string,
     description: PropTypes.string,
     relationship: PropTypes.string,
+    stealthed: PropTypes.bool,
   }).isRequired,
 };
 

@@ -37,6 +37,7 @@ export default function FactionAssets({ assets, className }) {
       counter,
       location,
       upkeep,
+      stealthed,
     } = asset;
 
     let attackRow = <FormattedMessage id="misc.none" />;
@@ -69,6 +70,22 @@ export default function FactionAssets({ assets, className }) {
       );
     }
 
+    let noteRow;
+    if ((notes || []).length) {
+      noteRow = (
+        <LabeledItem className="FactionAssets-Item" label="entity.notes">
+          <span>
+            {(notes || []).map((note, i) => (
+              <Fragment key={note}>
+                <FormattedMessage id={`faction.note.${note}`} />
+                {i + 1 === notes.length ? '' : ', '}
+              </Fragment>
+            ))}
+          </span>
+        </LabeledItem>
+      );
+    }
+
     return (
       <FlexContainer
         className="FactionAssets-Asset"
@@ -88,6 +105,9 @@ export default function FactionAssets({ assets, className }) {
         <LabeledItem className="FactionAssets-Item" label="misc.hitPoints">
           {hitPoints.current} / {hitPoints.total || '-'}
         </LabeledItem>
+        <LabeledItem className="FactionAssets-Item" label="misc.stealthed">
+          <FormattedMessage id={stealthed ? 'misc.yes' : 'misc.no'} />
+        </LabeledItem>
         <LabeledItem className="FactionAssets-Item" label="misc.initialCost">
           {cost}
         </LabeledItem>
@@ -95,16 +115,7 @@ export default function FactionAssets({ assets, className }) {
           {techLevel}
         </LabeledItem>
         {upkeepRow}
-        <LabeledItem className="FactionAssets-Item" label="entity.notes">
-          <span>
-            {(notes || []).map((note, i) => (
-              <Fragment key={note}>
-                <FormattedMessage id={`faction.note.${note}`} />
-                {i + 1 === notes.length ? '' : ', '}
-              </Fragment>
-            ))}
-          </span>
-        </LabeledItem>
+        {noteRow}
         <LabeledItem className="FactionAssets-Item" label="misc.attack">
           {attackRow}
         </LabeledItem>

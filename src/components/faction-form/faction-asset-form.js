@@ -10,6 +10,7 @@ import Input from 'primitives/form/input';
 
 import { find, filter, sortBy } from 'constants/lodash';
 import { FACTION_ASSETS } from 'constants/faction';
+import { EyeOff } from 'constants/icons';
 
 export default function FactionAssetForm({
   intl,
@@ -20,6 +21,7 @@ export default function FactionAssetForm({
   location,
   homeworlds,
   attributes,
+  stealthed,
 }) {
   const filteredOptions = filter(
     FACTION_ASSETS,
@@ -53,7 +55,7 @@ export default function FactionAssetForm({
           options={assetOptions}
           onChange={({ value }) => onUpdate({ type: value })}
         />
-        <ItemRow>
+        <ItemRow className="FactionAssetForm-Row">
           <LabeledInput
             isVertical
             type="number"
@@ -79,6 +81,16 @@ export default function FactionAssetForm({
             options={homeworlds}
             onChange={({ value }) => onUpdate({ location: value })}
           />
+          <LabeledInput
+            isVertical
+            className="FactionAssetForm-IconInput"
+            type="checkbox"
+            label={<EyeOff className="FactionAssetForm-IconLabel" size={16} />}
+            checked={stealthed}
+            onChange={({ target } = {}) =>
+              onUpdate({ stealthed: target.checked })
+            }
+          />
         </ItemRow>
       </FlexContainer>
     </DeletableRow>
@@ -92,6 +104,7 @@ FactionAssetForm.propTypes = {
   type: PropTypes.string,
   hitPoints: PropTypes.number.isRequired,
   location: PropTypes.string,
+  stealthed: PropTypes.bool.isRequired,
   homeworlds: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.string.isRequired,
