@@ -79,7 +79,7 @@ export default function FactionAssetForm({
             label="misc.location"
             value={location}
             options={homeworlds}
-            onChange={({ value }) => onUpdate({ location: value })}
+            onChange={option => onUpdate({ location: (option || {}).value })}
           />
           <LabeledInput
             isVertical
