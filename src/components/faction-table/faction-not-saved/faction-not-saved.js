@@ -7,9 +7,29 @@ import Header, { HeaderType } from 'primitives/text/header';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
 
-import { Save } from 'constants/icons';
+import { Save, LogIn } from 'constants/icons';
 
-export default function FactionNotSaved({ saveSector }) {
+export default function FactionNotSaved({
+  saveSector,
+  openLoginModal,
+  isLoggedIn,
+}) {
+  let action;
+  if (isLoggedIn) {
+    action = (
+      <Button onClick={saveSector}>
+        <LinkIcon icon={Save} size="20" />
+        <FormattedMessage id="misc.save" />
+      </Button>
+    );
+  } else {
+    action = (
+      <Button onClick={openLoginModal}>
+        <LinkIcon icon={LogIn} size="20" />
+        <FormattedMessage id="misc.logIn" />
+      </Button>
+    );
+  }
   return (
     <ContentContainer direction="column" align="center" justify="center">
       <Header type={HeaderType.header2}>
@@ -18,14 +38,13 @@ export default function FactionNotSaved({ saveSector }) {
       <Header type={HeaderType.header4}>
         <FormattedMessage id="misc.factionSaveSector" />
       </Header>
-      <Button onClick={saveSector}>
-        <LinkIcon icon={Save} size="20" />
-        <FormattedMessage id="misc.save" />
-      </Button>
+      {action}
     </ContentContainer>
   );
 }
 
 FactionNotSaved.propTypes = {
   saveSector: PropTypes.func.isRequired,
+  openLoginModal: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
 };

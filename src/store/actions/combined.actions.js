@@ -30,7 +30,7 @@ import Locale from 'constants/locale';
 import Entities from 'constants/entities';
 import { mergeEntityUpdates } from 'utils/entity';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { zipObject, keys, omit } from 'constants/lodash';
+import { zipObject, keys, omit, size } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@combined';
 export const INITIALIZED = `${ACTION_PREFIX}/INITIALIZED`;
@@ -62,7 +62,8 @@ export const initialize = location => dispatch =>
     }
     return Promise.all(promises)
       .then(data => {
-        if (!isGameView || data[0].share) {
+        const { entities, share } = data[0];
+        if (!isGameView || share || !size(entities)) {
           return Promise.resolve([{}, ...data]);
         }
         return getFactionData(sectorId).then(factions => [factions, ...data]);
