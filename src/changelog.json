@@ -1,4 +1,14 @@
 {
+  "7.0.0": {
+    "description": "Adds faction manager.",
+    "date": "9-11-2018",
+    "changes": [
+      "Add factions with their assets.",
+      "Track experience, hit points, and more for each faction and asset.",
+      "Automatic income and max hit point calculations.",
+      "See full descriptions of tags, goals, and asset types from the book."
+    ]
+  },
   "6.5.2": {
     "description": "Fix user language selection and allow English to be reselected.",
     "date": "8-29-2018"
