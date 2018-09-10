@@ -1,9 +1,9 @@
 import { createSelector } from 'reselect';
 
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
-import { FACTION_ASSET_CATEGORIES, FACTION_ASSETS } from 'constants/faction';
+import { FACTION_ASSETS } from 'constants/faction';
 import Entities from 'constants/entities';
-import { sortBy, every, map, reduce } from 'constants/lodash';
+import { sortBy, every, map } from 'constants/lodash';
 import { factionHitPoints, factionIncomeAndOwnedAssets } from 'utils/faction';
 
 import {
