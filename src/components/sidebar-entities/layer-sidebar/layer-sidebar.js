@@ -124,9 +124,11 @@ export default class LayerSidebar extends Component {
           <SectionHeader
             header="misc.regions"
             addItemName="misc.region"
-            onAdd={
-              this.props.isShared ? undefined : this.props.initializeRegionForm
-            }
+            onAdd={() => {
+              if (!this.props.isShared) {
+                this.props.initializeRegionForm();
+              }
+            }}
           />
           {newRegion}
           {sortBy(
