@@ -96,7 +96,7 @@ export const signup = intl => (dispatch, getState) => {
   }
   return doSignup(email, password)
     .then(onLogin(dispatch, state))
-    .then(result => result.sendEmailVerification())
+    .then(result => (result.user || result).sendEmailVerification())
     .catch(error => {
       dispatch({ type: AUTH_FAILURE });
       console.error(error);

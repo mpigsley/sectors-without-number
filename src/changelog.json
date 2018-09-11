@@ -1,4 +1,8 @@
 {
+  "7.0.1": {
+    "description": "Ensure email verification is sent.",
+    "date": "9-11-2018"
+  },
   "7.0.0": {
     "description": "Adds faction manager.",
     "date": "9-11-2018",
