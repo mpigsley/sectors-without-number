@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 
-import FlexContainer from 'primitives/container/flex-container';
+import ItemRow from 'primitives/other/item-row';
 import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 import ExportTypes from 'constants/export-types';
@@ -46,29 +46,26 @@ export default function ExportModal({
         </Button>,
       ]}
     >
-      <FlexContainer justify="spaceBetween">
+      <ItemRow className="ExportModal-Buttons">
         <Button
-          className="ExportModal-Button"
           primary={exportType === ExportTypes.condensed.key}
           onClick={() => setEntityExport(ExportTypes.condensed.key)}
         >
           <FormattedMessage id="misc.condensed" />
         </Button>
         <Button
-          className="ExportModal-Button"
           primary={exportType === ExportTypes.expanded.key}
           onClick={() => setEntityExport(ExportTypes.expanded.key)}
         >
           <FormattedMessage id="misc.expanded" />
         </Button>
         <Button
-          className="ExportModal-Button"
           primary={exportType === ExportTypes.json.key}
           onClick={() => setEntityExport(ExportTypes.json.key)}
         >
           <FormattedMessage id="misc.jsonFormat" />
         </Button>
-      </FlexContainer>
+      </ItemRow>
       <FormattedMessage id={ExportTypes[exportType].description} />
     </Modal>
   );

@@ -39,6 +39,11 @@ module.exports = functions.firestore
       .collection('layers')
       .doc(sectorId)
       .collection('layer');
+    const factionQuery = admin
+      .firestore()
+      .collection('factions')
+      .doc(sectorId)
+      .collection('faction');
 
     return Promise.all([
       new Promise((resolve, reject) =>
@@ -46,6 +51,9 @@ module.exports = functions.firestore
       ),
       new Promise((resolve, reject) =>
         deleteBatch(layerQuery, resolve, reject)
+      ),
+      new Promise((resolve, reject) =>
+        deleteBatch(factionQuery, resolve, reject)
       ),
     ]).catch(
       error => new functions.https.HttpsError('unknown', error.message, error)

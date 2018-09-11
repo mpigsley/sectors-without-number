@@ -1,0 +1,23 @@
+@import 'styles/theme';
+@import 'styles/constants';
+
+.SidebarContainer {
+  background-color: $dark3;
+  height: 100vh;
+  width: $large-sidebar-width;
+}
+
+.SidebarContainer-Footer {
+  padding: 0.6rem 0;
+  border-top: 1px solid $dark2;
+}
+
+.SidebarContainer-Patreon {
+  color: $cyber;
+}
+
+@media (max-width: 1200px) {
+  .SidebarContainer {
+    width: $small-sidebar-width;
+  }
+}

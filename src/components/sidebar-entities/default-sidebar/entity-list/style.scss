@@ -1,21 +1,8 @@
 @import 'styles/theme';
 
-.EntityList-AddButton {
-  margin: 0;
-}
-
 .EntityList-SubHeader {
   color: $light2;
   margin: 0 1rem;
-}
-
-.EntityList-Size {
-  color: $light1;
-  font-size: 1rem;
-}
-
-.EntityList-Name {
-  cursor: pointer;
 }
 
 .EntityList-SubHeaderHidden {

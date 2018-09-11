@@ -1,5 +1,4 @@
 import includes from 'lodash/includes';
-import debounce from 'lodash/debounce';
 import delay from 'lodash/delay';
 import omit from 'lodash/omit';
 import map from 'lodash/map';
@@ -24,6 +23,7 @@ import uniq from 'lodash/uniq';
 import sortBy from 'lodash/sortBy';
 import keys from 'lodash/keys';
 import difference from 'lodash/difference';
+import isArray from 'lodash/isArray';
 import isEqual from 'lodash/isEqual';
 import find from 'lodash/find';
 import reduce from 'lodash/reduce';
@@ -33,10 +33,13 @@ import findKey from 'lodash/findKey';
 import capitalize from 'lodash/capitalize';
 import toUpper from 'lodash/toUpper';
 import intersection from 'lodash/intersection';
+import dropRight from 'lodash/dropRight';
+import without from 'lodash/without';
+import clamp from 'lodash/clamp';
+import every from 'lodash/every';
 
 export {
   includes,
-  debounce,
   delay,
   omit,
   map,
@@ -61,6 +64,7 @@ export {
   sortBy,
   keys,
   difference,
+  isArray,
   isEqual,
   find,
   reduce,
@@ -70,4 +74,8 @@ export {
   capitalize,
   toUpper,
   intersection,
+  dropRight,
+  without,
+  clamp,
+  every,
 };

@@ -1,5 +1,15 @@
 @import 'styles/theme';
 
+.EntityAttributes {
+  &--hidden {
+    color: $light1;
+  }
+
+  &--itemMultiline {
+    white-space: pre-line;
+  }
+}
+
 .EntityAttributes-Section {
   margin-bottom: 1rem;
 }
@@ -24,56 +34,12 @@
   width: calc(100% - 2rem);
 }
 
-.EntityAttributes-Attribute {
-  color: $light2;
-  font-size: 0.9rem;
-  padding: 0.2rem 0;
-
-  &--hidden {
-    color: $light1;
-  }
-}
-
-.EntityAttributes-Header {
-  padding-right: 0.5rem;
-  min-width: 7rem;
-}
-
-.EntityAttributes-Item {
-  flex: 1;
-  width: 100%;
-
-  &--multiline {
-    white-space: pre-line;
-  }
-}
-
 .EntityTag--edit {
   margin: 0 1rem 0.5rem;
 }
 
-.EntityTag-Action {
-  color: $light2;
-  cursor: pointer;
-  margin-right: 0.5rem;
-  transition: all 0.2s;
-
-  &:hover {
-    color: $light3;
-  }
-}
-
 .EntityTag-Dropdown {
   flex: 1;
-}
-
-.EntityTag-AddButton {
-  margin: 0;
-}
-
-.EntityTags-Name,
-.EntityAttributes-Name {
-  cursor: pointer;
 }
 
 .EntityAttributes-Checkbox {

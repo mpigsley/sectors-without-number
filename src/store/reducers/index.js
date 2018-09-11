@@ -4,6 +4,7 @@ import entity from './entity.reducers';
 import sidebar from './sidebar.reducers';
 import navigation from './navigation.reducers';
 import layer from './layer.reducers';
+import faction from './faction.reducers';
 
 export default {
   sector,
@@ -12,4 +13,5 @@ export default {
   sidebar,
   navigation,
   layer,
+  faction,
 };

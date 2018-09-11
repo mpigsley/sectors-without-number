@@ -1,5 +1,6 @@
 /* User */
 export const userModelSelector = state => state.user.model;
+export const isLoggedInSelector = state => !!state.user.model;
 export const userModelLocaleSelector = state =>
   (state.user.model || {}).locale || 'en';
 export const isUserEditModalOpenSelector = state => state.user.isEditModalOpen;
@@ -60,3 +61,8 @@ export const layerIsEditingSelector = state => state.layer.isEditing;
 export const layerRegionFormSelector = state => state.layer.regionForm;
 export const layerColorPickerSelector = state => state.layer.colorPicker;
 export const layerRegionPaintSelector = state => state.layer.regionPaint;
+
+/* Faction */
+export const factionsSelector = state => state.faction.models;
+export const factionFormSelector = state => state.faction.form;
+export const factionIsCreatingSelector = state => state.faction.isCreating;

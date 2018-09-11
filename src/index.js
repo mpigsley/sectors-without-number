@@ -41,7 +41,10 @@ ReactDOM.render(
           <Route exact path="/" component={Home} />
           <Route path="/configure" component={Configure} />
           <Route path="/changelog" component={Changelog} />
-          <Route path="/(sector|overview)/:sector" component={GameRoutes} />
+          <Route
+            path="/(sector|overview|elements)/:sector"
+            component={GameRoutes}
+          />
         </AppWrapper>
       </Switch>
     </ConnectedRouter>

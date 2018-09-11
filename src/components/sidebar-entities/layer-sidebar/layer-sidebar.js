@@ -8,9 +8,7 @@ import classNames from 'classnames';
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
-import LinkIcon from 'primitives/other/link-icon';
-import Button from 'primitives/other/button';
-import { EyeOff, Plus } from 'constants/icons';
+import { EyeOff } from 'constants/icons';
 import { map, sortBy } from 'constants/lodash';
 
 import RegionRow from './region-row';
@@ -108,29 +106,6 @@ export default class LayerSidebar extends Component {
     );
   }
 
-  renderAddButton() {
-    if (this.props.isShared) {
-      return null;
-    }
-    return (
-      <Button
-        minimal
-        className="LayerSidebar-AddButton"
-        onClick={() => this.props.initializeRegionForm()}
-      >
-        <LinkIcon size={15} icon={Plus} />
-        <FormattedMessage
-          id="misc.addEntity"
-          values={{
-            entity: this.props.intl.formatMessage({
-              id: 'misc.region',
-            }),
-          }}
-        />
-      </Button>
-    );
-  }
-
   render() {
     if (!this.props.layerId || this.props.isEditing) {
       return <LayerForm />;
@@ -146,12 +121,13 @@ export default class LayerSidebar extends Component {
         <FlexContainer className="LayerSidebar" direction="column" flex="1">
           {this.renderHidden()}
           {this.renderDescription()}
-          <SectionHeader>
-            <FlexContainer justify="spaceBetween" align="flexEnd">
-              <FormattedMessage id="misc.regions" />
-              {this.renderAddButton()}
-            </FlexContainer>
-          </SectionHeader>
+          <SectionHeader
+            header="misc.regions"
+            addItemName="misc.region"
+            onAdd={
+              this.props.isShared ? undefined : this.props.initializeRegionForm
+            }
+          />
           {newRegion}
           {sortBy(
             map(this.props.layer.regions || {}, (region, regionId) => ({

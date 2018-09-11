@@ -10,12 +10,14 @@ import {
 } from 'store/api/entity';
 import { getNavigationData } from 'store/api/navigation';
 import { getLayerData, createLayer, deleteLayer } from 'store/api/layer';
+import { getFactionData } from 'store/api/faction';
 
 import {
   isInitializedSelector,
   userUidSelector,
   currentSectorSelector,
   currentEntitySelector,
+  isSharedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorFetched } from 'store/selectors/sector.selectors';
 import { currentSectorLayers } from 'store/selectors/layer.selectors';
@@ -28,7 +30,7 @@ import Locale from 'constants/locale';
 import Entities from 'constants/entities';
 import { mergeEntityUpdates } from 'utils/entity';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { zipObject, keys, omit } from 'constants/lodash';
+import { zipObject, keys, omit, size } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@combined';
 export const INITIALIZED = `${ACTION_PREFIX}/INITIALIZED`;
@@ -41,8 +43,9 @@ export const initialize = location => dispatch =>
     const { uid, locale } = user || {};
     const sectorId = location.pathname.split('/')[2];
     const isGameView =
-      location.pathname.startsWith('/sector') ||
-      location.pathname.startsWith('/overview');
+      location.pathname.startsWith('/sector/') ||
+      location.pathname.startsWith('/overview/') ||
+      location.pathname.startsWith('/elements/');
     const promises = [
       isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
       isGameView ? getNavigationData(sectorId) : Promise.resolve({}),
@@ -57,35 +60,52 @@ export const initialize = location => dispatch =>
         }),
       );
     }
-    return Promise.all(promises).then(
-      ([{ entities, share }, routes, layers, sectors, userLocale]) => {
-        if (((entities || {})[Entities.sector.key] || {})[sectorId]) {
-          document.title = `Sector - ${
-            entities[Entities.sector.key][sectorId].name
-          }`;
+    return Promise.all(promises)
+      .then(data => {
+        const { entities, share } = data[0];
+        if (!isGameView || share || !size(entities)) {
+          return Promise.resolve([{}, ...data]);
         }
-        dispatch({
-          type: INITIALIZED,
-          user,
-          entities: mergeEntityUpdates(
-            { [Entities.sector.key]: sectors },
-            entities || {},
-          ),
+        return getFactionData(sectorId).then(factions => [factions, ...data]);
+      })
+      .then(
+        ([
+          factions,
+          { entities, share },
           routes,
           layers,
-          sectorId,
-          share,
-          saved: keys(sectors || {}),
-          locale: userLocale,
-        });
-      },
-    );
+          sectors,
+          userLocale,
+        ]) => {
+          if (((entities || {})[Entities.sector.key] || {})[sectorId]) {
+            document.title = `Sector - ${
+              entities[Entities.sector.key][sectorId].name
+            }`;
+          }
+          dispatch({
+            type: INITIALIZED,
+            user,
+            entities: mergeEntityUpdates(
+              { [Entities.sector.key]: sectors },
+              entities || {},
+            ),
+            routes,
+            layers,
+            factions,
+            sectorId,
+            share,
+            saved: keys(sectors || {}),
+            locale: userLocale,
+          });
+        },
+      );
   });
 
 export const fetchSector = () => (dispatch, getState) => {
   const state = getState();
   const sectorId = currentSectorSelector(state);
   const currentSector = getCurrentSector(state);
+  const isShared = isSharedSectorSelector(state);
   if (currentSector) {
     document.title = `Sector - ${currentSector.name}`;
   }
@@ -97,7 +117,8 @@ export const fetchSector = () => (dispatch, getState) => {
     getSectorEntities(sectorId, userId),
     getNavigationData(sectorId),
     getLayerData(sectorId),
-  ]).then(([{ entities, share }, routes, layers]) =>
+    isShared ? Promise.resolve({}) : getFactionData(sectorId),
+  ]).then(([{ entities, share }, routes, layers, factions]) =>
     dispatch({
       type: FETCHED_SECTOR,
       sectorId,
@@ -105,6 +126,7 @@ export const fetchSector = () => (dispatch, getState) => {
       share,
       routes,
       layers,
+      factions,
     }),
   );
 };

@@ -19,7 +19,7 @@
     "test:watch": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "deploy": "npm run build && firebase deploy",
-    "deploy:prod": "sh -ac '. .env.prod; npm run deploy'",
+    "deploy:prod": "firebase use prod && sh -ac '. .env.prod; npm run deploy'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "translate": "node ./src/utils/convert-translations.js"
@@ -47,18 +47,20 @@
     "react-intl": "^2.4.0",
     "react-loadable": "^5.4.0",
     "react-markdown": "^3.3.4",
+    "react-measure": "^2.1.0",
     "react-modal": "^3.4.5",
     "react-redux": "^5.0.7",
     "react-redux-toastr": "^7.3.0",
     "react-router-dom": "^4.3.1",
     "react-select": "^1.2.1",
     "redux": "^4.0.0",
+    "redux-devtools-extension": "^2.13.5",
     "redux-thunk": "^2.3.0",
     "reselect": "^3.0.1",
     "tinycolor2": "^1.4.1"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^9.0.0",
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
     "eslint": "^4.9.0",
@@ -73,8 +75,7 @@
     "prettier": "^1.13.7",
     "react-scripts": "^1.0.1",
     "react-test-renderer": "^16.4.1",
-    "redux-devtools-extension": "^2.13.5",
-    "source-map-explorer": "^1.5.0"
+    "source-map-explorer": "^1.6.0"
   },
   "jest": {
     "collectCoverageFrom": [

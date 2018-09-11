@@ -14,7 +14,7 @@ import {
 import {
   syncLockSelector,
   savedSectorSelector,
-  userModelSelector,
+  isLoggedInSelector,
   userUidSelector,
   currentSectorSelector,
 } from 'store/selectors/base.selectors';
@@ -50,7 +50,7 @@ export const syncLock = (action, parameters = {}) => (dispatch, getState) => {
 
 export const preventSync = (state, dispatch, intl, isGenerating) => {
   const isSyncing = !isCurrentSectorSaved(state);
-  const isLoggedIn = !!userModelSelector(state);
+  const isLoggedIn = isLoggedInSelector(state);
   const reachedSectorLimit = savedSectorSelector(state).length >= SECTOR_LIMIT;
   if (!isLoggedIn && !isGenerating) {
     dispatch(
@@ -263,7 +263,7 @@ export const getTopLevelEntity = (topLevelEntities, key) => {
 };
 
 export const deleteEntities = ({ state, deleted }, intl) => {
-  const isLoggedIn = !!userModelSelector(state);
+  const isLoggedIn = isLoggedInSelector(state);
   const isSaved = isCurrentSectorSaved(state);
   const currentEntityType = getCurrentEntityType(state);
   if (!isSaved) {

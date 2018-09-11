@@ -9,9 +9,9 @@ import { without } from 'lodash';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import LinkIcon from 'primitives/other/link-icon';
-import Dropdown from 'primitives/form/dropdown';
-import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
+import LabeledItem from 'primitives/other/labeled-item';
+import LabeledInput from 'primitives/form/labeled-input';
 
 import { omit, map, values, pickBy, size } from 'constants/lodash';
 import { RefreshCw, EyeOff } from 'constants/icons';
@@ -58,74 +58,59 @@ export default function EntityAttributes({
     let descriptionAttribute = null;
     if (isSidebarEditActive) {
       nameAttribute = (
-        <FlexContainer align="center" className="EntityAttributes-Attribute">
-          <b className="EntityAttributes-Header">
-            <FormattedMessage id="misc.name" />:
-          </b>
-          <IconInput
-            wrapperClassName="EntityAttributes-Item"
-            value={entity.name}
-            onChange={({ target }) =>
-              updateEntityInEdit({ name: target.value })
-            }
-            onIconClick={() =>
-              updateEntityInEdit({ name: Entities[entityType].nameGenerator() })
-            }
-            icon={RefreshCw}
-          />
-          <Input
-            className="EntityAttributes-Checkbox"
-            disabled
-            checked={false}
-            onChange={() => {}}
-            type="checkbox"
-          />
-        </FlexContainer>
+        <LabeledInput
+          label="misc.name"
+          value={entity.name}
+          onChange={({ target }) => updateEntityInEdit({ name: target.value })}
+          onIconClick={() =>
+            updateEntityInEdit({
+              name: Entities[entityType].nameGenerator(),
+            })
+          }
+          icon={RefreshCw}
+          checkboxes={[
+            <Input
+              key="checkbox"
+              disabled
+              checked={false}
+              onChange={() => {}}
+              type="checkbox"
+            />,
+          ]}
+        />
       );
       descriptionAttribute = (
-        <FlexContainer align="center" className="EntityAttributes-Attribute">
-          <Input
-            rows="5"
-            type="textarea"
-            placeholder="Description"
-            value={(entity.attributes || {}).description || ''}
-            onChange={({ target } = {}) =>
-              updateEntityInEdit({ attributes: { description: target.value } })
-            }
-          />
-        </FlexContainer>
+        <LabeledInput
+          label="misc.description"
+          rows="5"
+          type="textarea"
+          placeholder={intl.formatMessage({ id: 'misc.description' })}
+          value={(entity.attributes || {}).description || ''}
+          onChange={({ target } = {}) =>
+            updateEntityInEdit({ attributes: { description: target.value } })
+          }
+        />
       );
       if (entityType !== Entities.sector.key) {
         hiddenAttribute = (
-          <FlexContainer align="center" className="EntityAttributes-Attribute">
-            <b className="EntityAttributes-Header">
-              <FormattedMessage id="misc.isHidden" />:
-            </b>
-            <Input
-              className="EntityAttributes-Item"
-              type="checkbox"
-              checked={!!entity.isHidden || isAncestorHidden}
-              disabled={isAncestorHidden}
-              onChange={({ target } = {}) =>
-                updateEntityInEdit({ isHidden: target.checked })
-              }
-            />
-          </FlexContainer>
+          <LabeledInput
+            label="misc.isHidden"
+            type="checkbox"
+            checked={!!entity.isHidden || isAncestorHidden}
+            disabled={isAncestorHidden}
+            onChange={({ target } = {}) =>
+              updateEntityInEdit({ isHidden: target.checked })
+            }
+          />
         );
       }
     } else if ((entity.attributes || {}).description) {
       descriptionAttribute = (
-        <FlexContainer
-          direction="column"
-          className="EntityAttributes-Attribute"
-        >
-          <b className="EntityAttributes-Header">
-            <FormattedMessage id="misc.description" />:
-          </b>
-          <span className="EntityAttributes-Item EntityAttributes-Item--multiline">
+        <LabeledItem label="misc.description" isVertical>
+          <span className="EntityAttributes--itemMultiline">
             {(entity.attributes || {}).description}
           </span>
-        </FlexContainer>
+        </LabeledItem>
       );
     }
 
@@ -139,78 +124,69 @@ export default function EntityAttributes({
       }
 
       return (
-        <FlexContainer
+        <LabeledItem
           key={key}
-          className={classNames('EntityAttributes-Attribute', {
-            'EntityAttributes-Attribute--hidden': visibility === false,
+          label={name}
+          className={classNames({
+            'EntityAttributes--itemHidden': visibility === false,
           })}
         >
-          <b className="EntityAttributes-Header">
-            <FormattedMessage id={name} />:
-          </b>
-          <span className="EntityAttributes-Item">
-            {attributes[attribute] ? (
-              <FormattedMessage id={attributes[attribute].name} />
-            ) : (
-              attribute
-            )}
-          </span>
-        </FlexContainer>
+          {attributes[attribute] ? (
+            <FormattedMessage id={attributes[attribute].name} />
+          ) : (
+            attribute
+          )}
+        </LabeledItem>
       );
     };
 
     // eslint-disable-next-line react/prop-types
     const renderAttributeEdit = ({ key, name, attributes }, attribute) => (
-      <FlexContainer
+      <LabeledInput
         key={key}
-        align="center"
-        className="EntityAttributes-Attribute"
-      >
-        <b className="EntityAttributes-Header">
-          <FormattedMessage id={name} />:
-        </b>
-        <Dropdown
-          allowCreate
-          wrapperClassName="EntityAttributes-Item"
-          value={attribute}
-          onChange={item =>
-            updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
-          }
-          icon={RefreshCw}
-          onItemClick={() =>
-            updateEntityInEdit({
-              attributes: {
-                [key]: chance.pickone(
-                  without(Object.keys(attributes), attribute),
-                ),
-              },
-            })
-          }
-          options={[
-            ...map(attributes, attr => ({
-              value: attr.key,
-              label: intl.formatMessage({ id: attr.name }),
-            })),
-            ...(!attributes[attribute]
-              ? [{ value: attribute, label: attribute }]
-              : []),
-          ]}
-        />
-        <Input
-          className="EntityAttributes-Checkbox"
-          checked={
-            (entity.visibility || {})[`attr.${key}`] === undefined
-              ? false
-              : !(entity.visibility || {})[`attr.${key}`]
-          }
-          onChange={({ target }) =>
-            updateEntityInEdit({
-              visibility: { [`attr.${key}`]: !target.checked },
-            })
-          }
-          type="checkbox"
-        />
-      </FlexContainer>
+        label={name}
+        type="dropdown"
+        allowCreate
+        value={attribute}
+        onChange={item =>
+          updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
+        }
+        icon={RefreshCw}
+        onItemClick={() =>
+          updateEntityInEdit({
+            attributes: {
+              [key]: chance.pickone(
+                without(Object.keys(attributes), attribute),
+              ),
+            },
+          })
+        }
+        options={[
+          ...map(attributes, attr => ({
+            value: attr.key,
+            label: intl.formatMessage({ id: attr.name }),
+          })),
+          ...(attribute && !attributes[attribute]
+            ? [{ value: attribute, label: attribute }]
+            : []),
+        ]}
+        checkboxes={[
+          <Input
+            key="visibility"
+            checked={
+              (entity.visibility || {})[`attr.${key}`] === undefined
+                ? false
+                : !(entity.visibility || {})[`attr.${key}`]
+            }
+            onChange={({ target }) =>
+              updateEntityInEdit({
+                visibility: { [`attr.${key}`]: !target.checked },
+              })
+            }
+            type="checkbox"
+          />,
+        ]}
+      />
     );
 
     let attributes = null;
@@ -256,11 +232,11 @@ export default function EntityAttributes({
 
     attributesSection = (
       <div key="attributes">
-        <SectionHeader isOpen={isAttributesOpen} onClick={toggleAttributesOpen}>
-          <span className="EntityAttributes-Name">
-            <FormattedMessage id="misc.attributes" />
-          </span>
-        </SectionHeader>
+        <SectionHeader
+          header="misc.attributes"
+          isOpen={isAttributesOpen}
+          onClick={toggleAttributesOpen}
+        />
         {renderSubHeader()}
         {attributes}
       </div>

@@ -1,0 +1,38 @@
+@import 'styles/theme';
+
+.CollapsibleTable-Child {
+  color: $light1;
+
+  .CollapsibleTable-Icon {
+    cursor: default;
+  }
+}
+
+tbody .CollapsibleTable-Icon {
+  border-bottom-width: 0;
+}
+
+.CollapsibleTable-Icon {
+  cursor: pointer;
+  margin: auto;
+  text-align: center;
+  transition: color 0.2s linear;
+  width: 1.5rem;
+
+  svg {
+    margin-bottom: 0.2rem;
+    vertical-align: middle;
+  }
+
+  &--open {
+    color: $primary;
+
+    &:hover {
+      color: $primary-alt;
+    }
+  }
+
+  &--closed {
+    color: $dark1;
+  }
+}

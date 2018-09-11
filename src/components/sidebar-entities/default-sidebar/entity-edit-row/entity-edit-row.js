@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { intlShape } from 'react-intl';
 
-import FlexContainer from 'primitives/container/flex-container';
+import DeletableRow from 'primitives/form/deletable-row';
 import Input from 'primitives/form/input';
 import IconInput from 'primitives/form/icon-input';
 import Dropdown from 'primitives/form/dropdown';
 
-import { X, RefreshCw, RotateCcw } from 'constants/icons';
+import { RefreshCw } from 'constants/icons';
 import Entities from 'constants/entities';
 import { coordinateKey, coordinatesFromKey } from 'utils/common';
 
@@ -67,22 +67,13 @@ export default function EntityEditRow({
     );
   }
 
-  let iconAction = (
-    <X className="EntityEditRow-Action" size={25} onClick={deleteChildInEdit} />
-  );
-  if (entity.isDeleted) {
-    iconAction = (
-      <RotateCcw
-        className="EntityEditRow-Action"
-        size={25}
-        onClick={undoDeleteChildInEdit}
-      />
-    );
-  }
-
   return (
-    <FlexContainer align="center" className="EntityEditRow">
-      {iconAction}
+    <DeletableRow
+      align="center"
+      className="EntityEditRow"
+      undoDelete={entity.isDeleted}
+      onAction={entity.isDeleted ? undoDeleteChildInEdit : deleteChildInEdit}
+    >
       {dropdown}
       {input}
       <Input
@@ -115,7 +106,7 @@ export default function EntityEditRow({
         />
       </span>
       <ReactHint events position="left" />
-    </FlexContainer>
+    </DeletableRow>
   );
 }
 

@@ -11,9 +11,10 @@ import SectionHeader from 'primitives/text/section-header';
 import ColorPicker from 'primitives/other/color-picker';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
-import Dropdown from 'primitives/form/dropdown';
 import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
+import LabeledInput from 'primitives/form/labeled-input';
+import ItemRow from 'primitives/other/item-row';
 
 import { size, map } from 'constants/lodash';
 import { X, EyeOff, Crosshair } from 'constants/icons';
@@ -146,9 +147,7 @@ export default class NavigationSidebar extends Component {
     }
     return (
       <FlexContainer direction="column">
-        <SectionHeader>
-          <FormattedMessage id="misc.navRoutes" />
-        </SectionHeader>
+        <SectionHeader header="misc.navRoutes" />
         <FlexContainer
           justify="flexEnd"
           align="center"
@@ -264,48 +263,32 @@ export default class NavigationSidebar extends Component {
               onChange={value => updateNavSettings('color', value)}
             />
           </div>
-          <FlexContainer className="NavigationSidebar-FormRow">
-            <FlexContainer
-              className="NavigationSidebar-FormColumn"
-              direction="column"
-              flex="1"
-            >
-              <Label htmlFor="width" noPadding>
-                <FormattedMessage id="misc.lineWidth" />
-              </Label>
-              <Dropdown
-                id="width"
-                name="width"
-                clearable={false}
-                value={width}
-                options={this.lineWidths}
-                onChange={({ value }) => updateNavSettings('width', value)}
-              />
-            </FlexContainer>
-            <FlexContainer
-              className="NavigationSidebar-FormColumn"
-              direction="column"
-              flex="1"
-            >
-              <Label htmlFor="type" noPadding>
-                <FormattedMessage id="misc.lineType" />
-              </Label>
-              <Dropdown
-                id="type"
-                name="type"
-                clearable={false}
-                value={type}
-                options={this.lineTypes}
-                onChange={({ value }) => updateNavSettings('type', value)}
-              />
-            </FlexContainer>
-          </FlexContainer>
+          <ItemRow className="NavigationSidebar-FormRow">
+            <LabeledInput
+              isVertical
+              label="misc.lineWidth"
+              type="dropdown"
+              clearable={false}
+              value={width}
+              options={this.lineWidths}
+              onChange={({ value }) => updateNavSettings('width', value)}
+            />
+            <LabeledInput
+              isVertical
+              label="misc.lineType"
+              type="dropdown"
+              clearable={false}
+              value={type}
+              options={this.lineTypes}
+              onChange={({ value }) => updateNavSettings('type', value)}
+            />
+          </ItemRow>
           <FlexContainer
             className="NavigationSidebar-FormRow"
             justify="spaceBetween"
             align="flexEnd"
           >
-            <span>
+            <ItemRow>
               <Button
                 primary
                 onClick={() =>
@@ -321,7 +304,7 @@ export default class NavigationSidebar extends Component {
                 />
               </Button>
               {cancelButton}
-            </span>
+            </ItemRow>
             {helpButton}
           </FlexContainer>
           {this.renderRoutes()}

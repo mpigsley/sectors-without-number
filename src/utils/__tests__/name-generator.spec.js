@@ -28,9 +28,9 @@ describe('generateSectorName', () => {
 
   it('contains a greek letter', () => {
     const name = generateSectorName(chance);
-    expect(GreekLetters.filter(letter => name.includes(letter))).toHaveLength(
-      1,
-    );
+    expect(
+      GreekLetters.filter(letter => name.includes(letter)).length,
+    ).toBeGreaterThanOrEqual(1);
   });
 
   it('is two or three words', () => {

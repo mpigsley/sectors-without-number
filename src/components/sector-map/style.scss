@@ -1,13 +1,20 @@
 @import 'styles/theme';
+@import 'styles/constants';
 
 .SectorMap {
+  display: grid;
+  grid-template-columns: [map] auto [sidebar] $large-sidebar-width [end];
   overflow: hidden;
 }
 
+.SectorMap-Map {
+  position: relative;
+  grid-column: map / sidebar;
+}
+
 .SectorMap-Sidebar {
-  background-color: $dark3;
-  display: flex;
-  width: 465px;
+  grid-column: sidebar / end;
+  overflow: auto;
 }
 
 @media (max-width: 700px) {
@@ -17,8 +24,8 @@
 }
 
 @media (max-width: 1200px) {
-  .SectorMap-Sidebar {
-    width: 374px;
+  .SectorMap {
+    grid-template-columns: [map] auto [sidebar] $small-sidebar-width [end];
   }
 }
 

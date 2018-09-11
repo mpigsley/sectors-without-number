@@ -1,0 +1,16 @@
+.ItemRow {
+  width: 100%;
+}
+
+.ItemRow-Item {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}

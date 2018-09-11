@@ -6,6 +6,7 @@ import ActionLayout from 'components/sidebar-actions/action-layout';
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
+import SaveFooter from 'primitives/other/save-footer';
 
 import Entities from 'constants/entities';
 import { some, size } from 'constants/lodash';
@@ -101,20 +102,10 @@ export default class EntityActions extends Component {
       return null;
     }
     return (
-      <FlexContainer>
-        <button
-          className="EntityActions-FooterButton EntityActions-Cancel"
-          onClick={this.props.deactivateSidebarEdit}
-        >
-          <FormattedMessage id="misc.cancel" />
-        </button>
-        <button
-          className="EntityActions-FooterButton EntityActions-Save"
-          onClick={this.props.saveEntityEdit}
-        >
-          <FormattedMessage id="misc.save" />
-        </button>
-      </FlexContainer>
+      <SaveFooter
+        onCancel={this.props.deactivateSidebarEdit}
+        onSave={this.props.saveEntityEdit}
+      />
     );
   };
 

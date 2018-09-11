@@ -1,0 +1,30 @@
+@import 'styles/theme';
+
+.LabeledItem {
+  color: $light2;
+  font-size: 0.9rem;
+  padding: 0.2rem 0 0.5rem;
+
+  &--vertical {
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+
+    .LabeledItem-Label {
+      min-width: auto;
+      padding: 0;
+    }
+  }
+}
+
+.LabeledItem-Label {
+  margin: 0;
+  min-width: 7rem;
+  padding-right: 0.5rem;
+  text-align: left;
+}
+
+.LabeledItem-Item {
+  flex: 1;
+  width: 100%;
+}

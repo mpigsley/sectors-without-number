@@ -1,0 +1,68 @@
+@import 'styles/theme';
+@import 'styles/constants';
+
+.FactionTable {
+  display: grid;
+  grid-template-columns: [table] auto [sidebar] 0px [end];
+  grid-template-rows: [header] 4rem [table] auto [end];
+
+  &--sidebarOpen {
+    grid-template-columns: [table] auto [sidebar] $large-sidebar-width [end];
+  }
+}
+
+.FactionTable-Header {
+  grid-column: table / sidebar;
+  grid-row: header / table;
+  padding: 0 2rem;
+}
+
+.FactionTable-Table {
+  grid-column: table / sidebar;
+  grid-row: table / end;
+  overflow: auto;
+  padding: 2rem;
+}
+
+.FactionTable-Sidebar {
+  grid-column: sidebar / end;
+  grid-row: header / end;
+  overflow: auto;
+}
+
+.FactionTable-Empty {
+  color: $light2;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+
+.FactionTable-ExportOption {
+  margin-left: 1rem;
+}
+
+.FactionTable-Income {
+  margin-left: 0.3rem;
+  margin-right: 0.1rem;
+}
+
+.FactionTable-Relationship {
+  margin-left: 0.5rem;
+
+  &--friendly {
+    color: $cyber;
+  }
+
+  &--hostile {
+    color: $error;
+  }
+}
+
+.FactionTable-Stealthed {
+  margin-left: 0.5rem;
+}
+
+@media (max-width: 1200px) {
+  .FactionTable--sidebarOpen {
+    grid-template-columns: [table] auto [sidebar] $small-sidebar-width [end];
+  }
+}

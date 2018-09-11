@@ -21,7 +21,12 @@ class Table extends Component {
   static propTypes = {
     className: PropTypes.string,
     dataIdAccessor: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    data: PropTypes.arrayOf(
+      PropTypes.shape({
+        onClick: PropTypes.func,
+        rowClass: PropTypes.string,
+      }),
+    ).isRequired,
     light: PropTypes.bool,
     condensed: PropTypes.bool,
     sortable: PropTypes.bool,
@@ -58,7 +63,10 @@ class Table extends Component {
     });
   }
 
-  onHeaderClick = accessor => () => {
+  onHeaderClick = (accessor, onClick) => () => {
+    if (onClick) {
+      return onClick();
+    }
     if (!this.props.sortable) {
       return null;
     }
@@ -114,9 +122,9 @@ class Table extends Component {
         <thead>
           <tr>
             {this.props.columns.map(
-              ({ Header, accessor, columnClass, centered }) => (
+              ({ Header, accessor, columnClass, centered, onClick }) => (
                 <th
-                  onClick={this.onHeaderClick(accessor)}
+                  onClick={this.onHeaderClick(accessor, onClick)}
                   className={classNames('Table-Header', columnClass, {
                     'Table-Header--light': this.props.light,
                     'Table-Header--condensed': this.props.condensed,
@@ -137,10 +145,18 @@ class Table extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.sortedData.map(row => (
-            <tr className="Table-Row" key={row[this.props.dataIdAccessor]}>
+          {this.sortedData.map(({ rowClass, onClick, ...row }) => (
+            <tr
+              className={classNames('Table-Row', rowClass)}
+              key={row[this.props.dataIdAccessor]}
+            >
               {this.props.columns.map(column => (
                 <td
+                  onClick={() =>
+                    column.onClick
+                      ? column.onClick(row[this.props.dataIdAccessor])
+                      : () => {}
+                  }
                   className={classNames('Table-Element', column.columnClass, {
                     'Table-Element--light': this.props.light,
                     'Table-Header--condensed': this.props.condensed,

@@ -10,26 +10,19 @@
 
 .NavigationSidebar-FormRow {
   margin: 0 1rem 1rem;
+  width: calc(100% - 2rem);
 
   button {
     margin: 0;
   }
+}
 
-  .NavigationSidebar-Cancel {
-    margin-left: 0.5rem;
-  }
+.NavigationSidebar-Cancel {
+  margin-left: 0.5rem;
 }
 
 .NavigationSidebar-FormColumn {
-  margin: 0.2rem;
-
-  &:first-of-type {
-    margin-left: 0;
-  }
-
-  &:last-of-type {
-    margin-right: 0;
-  }
+  margin: 0.2rem 0;
 }
 
 .NavigationSidebar-NavItem {

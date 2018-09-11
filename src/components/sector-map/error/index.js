@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -22,30 +22,32 @@ export default function Error({ generateSector }) {
   });
 
   return (
-    <div>
+    <Fragment>
       <HexMap
         height={window.innerHeight}
         width={window.innerWidth}
         hexes={hexes}
       />
-      <AbsoluteContainer>
-        <ContentContainer direction="column" align="center" justify="center">
-          <Header type={HeaderType.header2}>
-            <FormattedMessage id="misc.noSector" />
-          </Header>
-          <SubContainer wrap justify="center" align="center">
-            <ButtonLink to="/">
-              <LinkIcon icon={Home} size="20" />
-              <FormattedMessage id="misc.dashboard" />
-            </ButtonLink>
-            <Button onClick={generateSector}>
-              <LinkIcon icon={Zap} size="20" />
-              <FormattedMessage id="misc.generate" />
-            </Button>
-          </SubContainer>
-        </ContentContainer>
-      </AbsoluteContainer>
-    </div>
+      <div className="SectorMap-Container">
+        <AbsoluteContainer>
+          <ContentContainer direction="column" align="center" justify="center">
+            <Header type={HeaderType.header2}>
+              <FormattedMessage id="misc.noSector" />
+            </Header>
+            <SubContainer wrap justify="center" align="center">
+              <ButtonLink to="/">
+                <LinkIcon icon={Home} size="20" />
+                <FormattedMessage id="misc.dashboard" />
+              </ButtonLink>
+              <Button onClick={generateSector}>
+                <LinkIcon icon={Zap} size="20" />
+                <FormattedMessage id="misc.generate" />
+              </Button>
+            </SubContainer>
+          </ContentContainer>
+        </AbsoluteContainer>
+      </div>
+    </Fragment>
   );
 }
 
