@@ -1,4 +1,8 @@
 {
+  "7.0.3": {
+    "description": "Fix problem with shared sectors not rendering.",
+    "date": "9-12-2018"
+  },
   "7.0.2": {
     "description": "Fix add region button in layer sidebar.",
     "date": "9-11-2018"
