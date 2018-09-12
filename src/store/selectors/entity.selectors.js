@@ -16,10 +16,13 @@ import {
   layersSelector,
 } from 'store/selectors/base.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
+import { currentSectorFactions } from 'store/selectors/faction.selectors';
+
 import Entities from 'constants/entities';
 import { allSectorKeys, coordinateKey } from 'utils/common';
 import { areNeighbors } from 'utils/hex/common';
 import {
+  keys,
   omit,
   filter,
   pickBy,
@@ -33,6 +36,8 @@ import {
   map,
   size,
   isEmpty,
+  reduce,
+  forEach,
 } from 'constants/lodash';
 
 const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
@@ -170,6 +175,50 @@ export const getCurrentEntity = createSelector(
     return !currentEntity
       ? entities[Entities.sector.key][currentSector]
       : entities[currentEntityType][currentEntity];
+  },
+);
+
+export const getEntityAttributes = createSelector(
+  [
+    getCurrentEntity,
+    currentEntitySelector,
+    currentSectorFactions,
+    isViewingSharedSector,
+  ],
+  (entity, entityKey, currentFactions, isShared) => {
+    const hiddenAttributes = isShared
+      ? keys(pickBy(entity.visibility, vision => vision === false)).map(key =>
+          key.replace('attr.', ''),
+        )
+      : [];
+    const attributes = omit(entity.attributes, hiddenAttributes) || {};
+    if (isShared) {
+      return attributes;
+    }
+    const { factions, assets } = reduce(
+      currentFactions,
+      (obj, faction, key) => {
+        const objFactions = [...obj.factions];
+        if (faction.homeworld === entityKey) {
+          objFactions.push({ key, name: faction.name });
+        }
+        const objAssets = [...obj.assets];
+        forEach(faction.assets, (asset, assetKey) => {
+          if (asset.location === entityKey) {
+            objAssets.push({ key: assetKey, name: asset.type });
+          }
+        });
+        return { factions: objFactions, assets: objAssets };
+      },
+      { factions: [], assets: [] },
+    );
+    if (factions.length) {
+      attributes.factions = factions;
+    }
+    if (assets.length) {
+      attributes.assets = assets;
+    }
+    return attributes;
   },
 );
 

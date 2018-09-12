@@ -13,7 +13,7 @@ import Input from 'primitives/form/input';
 import LabeledItem from 'primitives/other/labeled-item';
 import LabeledInput from 'primitives/form/labeled-input';
 
-import { omit, map, values, pickBy, size } from 'constants/lodash';
+import { omit, map, values, size } from 'constants/lodash';
 import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 
@@ -27,6 +27,7 @@ export default function EntityAttributes({
   isSidebarEditActive,
   entity,
   entityType,
+  entityAttributes,
   updateEntityInEdit,
   isAttributesOpen,
   isTagsOpen,
@@ -36,21 +37,16 @@ export default function EntityAttributes({
   intl,
   isShared,
 }) {
-  const hiddenAttributes = isShared
-    ? Object.keys(pickBy(entity.visibility, vision => vision === false)).map(
-        key => key.replace('attr.', ''),
-      )
-    : [];
-  const allAttributes = omit(entity.attributes, hiddenAttributes);
-  const noAttributes = !entity.attributes || !size(allAttributes);
+  console.log(entityAttributes);
+  const noAttributes = !size(entityAttributes);
   if (!isSidebarEditActive && noAttributes) {
     return null;
   }
 
   let attributesSection = null;
-  const hasNonTagAttributes = values(omit({ ...allAttributes }, 'tags')).filter(
-    v => v,
-  ).length;
+  const hasNonTagAttributes = values(
+    omit({ ...entityAttributes }, 'tags'),
+  ).filter(v => v).length;
 
   if (isSidebarEditActive || hasNonTagAttributes) {
     let nameAttribute = null;
@@ -85,7 +81,7 @@ export default function EntityAttributes({
           rows="5"
           type="textarea"
           placeholder={intl.formatMessage({ id: 'misc.description' })}
-          value={(entity.attributes || {}).description || ''}
+          value={entityAttributes.description || ''}
           onChange={({ target } = {}) =>
             updateEntityInEdit({ attributes: { description: target.value } })
           }
@@ -104,11 +100,11 @@ export default function EntityAttributes({
           />
         );
       }
-    } else if ((entity.attributes || {}).description) {
+    } else if (entityAttributes.description) {
       descriptionAttribute = (
         <LabeledItem label="misc.description" isVertical>
           <span className="EntityAttributes--itemMultiline">
-            {(entity.attributes || {}).description}
+            {entityAttributes.description}
           </span>
         </LabeledItem>
       );
@@ -200,7 +196,7 @@ export default function EntityAttributes({
           {(Entities[entityType].attributes || []).map(attribute =>
             (isSidebarEditActive ? renderAttributeEdit : renderAttribute)(
               attribute,
-              (entity.attributes || {})[attribute.key],
+              entityAttributes[attribute.key],
               (entity.visibility || {})[`attr.${attribute.key}`],
             ),
           )}
@@ -265,8 +261,22 @@ export default function EntityAttributes({
 EntityAttributes.propTypes = {
   isSidebarEditActive: PropTypes.bool.isRequired,
   entity: PropTypes.shape({
-    attributes: PropTypes.shape(),
     visibility: PropTypes.shape(),
+  }).isRequired,
+  entityAttributes: PropTypes.shape({
+    description: PropTypes.string,
+    factions: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      }),
+    ),
+    assets: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      }),
+    ),
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   updateEntityInEdit: PropTypes.func.isRequired,
