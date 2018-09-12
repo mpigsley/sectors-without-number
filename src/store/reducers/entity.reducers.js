@@ -7,8 +7,6 @@ import {
   mapKeys,
   omit,
   keys,
-  pick,
-  pickBy,
 } from 'constants/lodash';
 import Entities from 'constants/entities';
 import {
@@ -74,6 +72,11 @@ export default function entity(state = initialState, action) {
       const currentSector = isGameView ? pathname.split('/')[2] : null;
       const uniqSectors = uniq([...state.saved, currentSector]).filter(s => s);
       const currentEntityType = isGameView ? pathname.split('/')[3] : null;
+      let share =
+        isGameView && includes(uniqSectors, state.share) ? state.share : null;
+      if (!state.share) {
+        share = includes(state.saved, currentSector) ? null : currentSector;
+      }
       return {
         ...state,
         currentSector,
@@ -82,17 +85,8 @@ export default function entity(state = initialState, action) {
           isOverview && currentEntityType
             ? currentEntityType
             : state.lastOverviewEntity,
-        share:
-          isGameView && includes(uniqSectors, state.share) ? state.share : null,
+        share,
         currentEntity: isGameView ? pathname.split('/')[4] : null,
-        models: mapValues(state.models, (entities, entityType) => {
-          if (entityType === Entities.sector.key) {
-            return pick(entities, ...uniqSectors);
-          }
-          return pickBy(entities, ({ sector }) =>
-            includes(uniqSectors, sector),
-          );
-        }),
       };
     }
     case UPDATED_ID_MAPPING: {
