@@ -37,7 +37,6 @@ export default function EntityAttributes({
   intl,
   isShared,
 }) {
-  console.log(entityAttributes);
   const noAttributes = !size(entityAttributes);
   if (!isSidebarEditActive && noAttributes) {
     return null;
