@@ -6,6 +6,7 @@ import { intlShape } from 'react-intl';
 import EntityAttribute from 'components/sidebar-entities/default-sidebar/entity-attribute';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
+import BasicLink from 'primitives/other/basic-link';
 import LinkIcon from 'primitives/other/link-icon';
 import Input from 'primitives/form/input';
 import LabeledItem from 'primitives/other/labeled-item';
@@ -19,6 +20,18 @@ import EntityTags from './entity-tags';
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
+
+const renderLinkList = (label, items) => (
+  <LabeledItem label={label} isVertical>
+    <ul>
+      {items.map(({ key, name, link }) => (
+        <li key={key}>
+          <BasicLink to={link}>{name}</BasicLink>
+        </li>
+      ))}
+    </ul>
+  </LabeledItem>
+);
 
 export default function EntityAttributes({
   isSidebarEditActive,
@@ -48,6 +61,8 @@ export default function EntityAttributes({
     let nameAttribute = null;
     let hiddenAttribute = null;
     let descriptionAttribute = null;
+    let factionsAttribute = null;
+    let assetsAttribute = null;
     if (isSidebarEditActive) {
       nameAttribute = (
         <LabeledInput
@@ -96,14 +111,33 @@ export default function EntityAttributes({
           />
         );
       }
-    } else if (entityAttributes.description) {
-      descriptionAttribute = (
-        <LabeledItem label="misc.description" isVertical>
-          <span className="EntityAttributes--itemMultiline">
-            {entityAttributes.description}
-          </span>
-        </LabeledItem>
-      );
+    } else {
+      if (entityAttributes.factions) {
+        factionsAttribute = renderLinkList(
+          'misc.factions',
+          entityAttributes.factions,
+        );
+      }
+      if (entityAttributes.assets) {
+        assetsAttribute = renderLinkList(
+          'misc.assets',
+          entityAttributes.assets.map(({ type, faction, ...asset }) => ({
+            ...asset,
+            name: `${faction} - ${intl.formatMessage({
+              id: `faction.assets.${type}`,
+            })}`,
+          })),
+        );
+      }
+      if (entityAttributes.description) {
+        descriptionAttribute = (
+          <LabeledItem label="misc.description" isVertical>
+            <span className="EntityAttributes--itemMultiline">
+              {entityAttributes.description}
+            </span>
+          </LabeledItem>
+        );
+      }
     }
 
     let attributes = null;
@@ -121,6 +155,8 @@ export default function EntityAttributes({
               entityAttribute={entityAttributes[attribute.key]}
             />
           ))}
+          {factionsAttribute}
+          {assetsAttribute}
           {hiddenAttribute}
           {descriptionAttribute}
         </FlexContainer>
@@ -189,13 +225,16 @@ EntityAttributes.propTypes = {
     factions: PropTypes.arrayOf(
       PropTypes.shape({
         key: PropTypes.string.isRequired,
+        link: PropTypes.string.isRequired,
         name: PropTypes.string.isRequired,
       }),
     ),
     assets: PropTypes.arrayOf(
       PropTypes.shape({
         key: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
+        link: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        faction: PropTypes.string.isRequired,
       }),
     ),
   }).isRequired,

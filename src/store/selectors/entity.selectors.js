@@ -19,6 +19,7 @@ import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import { currentSectorFactions } from 'store/selectors/faction.selectors';
 
 import Entities from 'constants/entities';
+import Elements from 'constants/elements';
 import { allSectorKeys, coordinateKey } from 'utils/common';
 import { areNeighbors } from 'utils/hex/common';
 import {
@@ -180,12 +181,13 @@ export const getCurrentEntity = createSelector(
 
 export const getEntityAttributes = createSelector(
   [
+    currentSectorSelector,
     getCurrentEntity,
     currentEntitySelector,
     currentSectorFactions,
     isViewingSharedSector,
   ],
-  (entity, entityKey, currentFactions, isShared) => {
+  (currentSector, entity, entityKey, currentFactions, isShared) => {
     const hiddenAttributes = isShared
       ? keys(pickBy(entity.visibility, vision => vision === false)).map(key =>
           key.replace('attr.', ''),
@@ -199,13 +201,25 @@ export const getEntityAttributes = createSelector(
       currentFactions,
       (obj, faction, key) => {
         const objFactions = [...obj.factions];
+        const link = `/elements/${currentSector}/${
+          Elements.faction.key
+        }/${key}`;
         if (faction.homeworld === entityKey) {
-          objFactions.push({ key, name: faction.name });
+          objFactions.push({
+            key,
+            link,
+            name: faction.name,
+          });
         }
         const objAssets = [...obj.assets];
         forEach(faction.assets, (asset, assetKey) => {
           if (asset.location === entityKey) {
-            objAssets.push({ key: assetKey, name: asset.type });
+            objAssets.push({
+              link,
+              key: assetKey,
+              type: asset.type,
+              faction: faction.name,
+            });
           }
         });
         return { factions: objFactions, assets: objAssets };
