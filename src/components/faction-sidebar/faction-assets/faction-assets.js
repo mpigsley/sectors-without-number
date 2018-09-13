@@ -122,15 +122,17 @@ export default function FactionAssets({ assets, className }) {
         <LabeledItem className="FactionAssets-Item" label="misc.counter">
           {counterRow}
         </LabeledItem>
-        <LabeledItem label="misc.location">
-          <ButtonLink
-            className="FactionAttributes-Link"
-            minimal
-            to={location.link}
-          >
-            {location.name}
-          </ButtonLink>
-        </LabeledItem>
+        {location.link && (
+          <LabeledItem label="misc.location">
+            <ButtonLink
+              className="FactionAttributes-Link"
+              minimal
+              to={location.link}
+            >
+              {location.name}
+            </ButtonLink>
+          </LabeledItem>
+        )}
       </FlexContainer>
     );
   };
