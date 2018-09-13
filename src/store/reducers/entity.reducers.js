@@ -7,6 +7,7 @@ import {
   mapKeys,
   omit,
   keys,
+  without,
 } from 'constants/lodash';
 import Entities from 'constants/entities';
 import {
@@ -26,6 +27,7 @@ import { mergeEntityUpdates } from 'utils/entity';
 const initialState = {
   models: mapValues(Entities, () => ({})),
   saved: [],
+  generated: [],
   share: null,
   currentSector: null,
   currentEntityType: null,
@@ -46,6 +48,10 @@ export default function entity(state = initialState, action) {
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),
+        generated: uniq([
+          ...state.generated,
+          ...keys(action.entities[Entities.sector.key]),
+        ]),
       };
     case FETCHED_SECTOR:
       return {
@@ -75,7 +81,9 @@ export default function entity(state = initialState, action) {
       let share =
         isGameView && includes(uniqSectors, state.share) ? state.share : null;
       if (!state.share) {
-        share = includes(state.saved, currentSector) ? null : currentSector;
+        share = includes([...state.saved, ...state.generated], currentSector)
+          ? null
+          : currentSector;
       }
       return {
         ...state,
@@ -93,6 +101,7 @@ export default function entity(state = initialState, action) {
       const transformedSector = action.mapping[state.currentSector];
       return {
         ...state,
+        generated: without(state.generated, ...keys(action.mapping)),
         currentSector: transformedSector || state.currentSector,
         currentEntity:
           action.mapping[state.currentEntity] || state.currentEntity,

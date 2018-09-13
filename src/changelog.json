@@ -1,4 +1,8 @@
 {
+  "7.0.4": {
+    "description": "Allow newly generated sectors to be saved.",
+    "date": "9-13-2018"
+  },
   "7.0.3": {
     "description": "Fix problem with shared sectors not rendering.",
     "date": "9-12-2018"
