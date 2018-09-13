@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
-import { FormattedMessage, intlShape } from 'react-intl';
-import classNames from 'classnames';
-import Chance from 'chance';
-import { without } from 'lodash';
+import { intlShape } from 'react-intl';
 
+import EntityAttribute from 'components/sidebar-entities/default-sidebar/entity-attribute';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import LinkIcon from 'primitives/other/link-icon';
@@ -13,7 +11,7 @@ import Input from 'primitives/form/input';
 import LabeledItem from 'primitives/other/labeled-item';
 import LabeledInput from 'primitives/form/labeled-input';
 
-import { omit, map, values, size } from 'constants/lodash';
+import { omit, values, size } from 'constants/lodash';
 import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 
@@ -21,7 +19,6 @@ import EntityTags from './entity-tags';
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
-const chance = new Chance();
 
 export default function EntityAttributes({
   isSidebarEditActive,
@@ -109,81 +106,6 @@ export default function EntityAttributes({
       );
     }
 
-    const renderAttribute = (
-      { key, name, attributes }, // eslint-disable-line react/prop-types
-      attribute,
-      visibility,
-    ) => {
-      if (!attributes || !attribute || (visibility === false && isShared)) {
-        return null;
-      }
-
-      return (
-        <LabeledItem
-          key={key}
-          label={name}
-          className={classNames({
-            'EntityAttributes--itemHidden': visibility === false,
-          })}
-        >
-          {attributes[attribute] ? (
-            <FormattedMessage id={attributes[attribute].name} />
-          ) : (
-            attribute
-          )}
-        </LabeledItem>
-      );
-    };
-
-    // eslint-disable-next-line react/prop-types
-    const renderAttributeEdit = ({ key, name, attributes }, attribute) => (
-      <LabeledInput
-        key={key}
-        label={name}
-        type="dropdown"
-        allowCreate
-        value={attribute}
-        onChange={item =>
-          updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
-        }
-        icon={RefreshCw}
-        onItemClick={() =>
-          updateEntityInEdit({
-            attributes: {
-              [key]: chance.pickone(
-                without(Object.keys(attributes), attribute),
-              ),
-            },
-          })
-        }
-        options={[
-          ...map(attributes, attr => ({
-            value: attr.key,
-            label: intl.formatMessage({ id: attr.name }),
-          })),
-          ...(attribute && !attributes[attribute]
-            ? [{ value: attribute, label: attribute }]
-            : []),
-        ]}
-        checkboxes={[
-          <Input
-            key="visibility"
-            checked={
-              (entity.visibility || {})[`attr.${key}`] === undefined
-                ? false
-                : !(entity.visibility || {})[`attr.${key}`]
-            }
-            onChange={({ target }) =>
-              updateEntityInEdit({
-                visibility: { [`attr.${key}`]: !target.checked },
-              })
-            }
-            type="checkbox"
-          />,
-        ]}
-      />
-    );
-
     let attributes = null;
     if (isAttributesOpen) {
       attributes = (
@@ -192,13 +114,13 @@ export default function EntityAttributes({
           className="EntityAttributes-Attributes"
         >
           {nameAttribute}
-          {(Entities[entityType].attributes || []).map(attribute =>
-            (isSidebarEditActive ? renderAttributeEdit : renderAttribute)(
-              attribute,
-              entityAttributes[attribute.key],
-              (entity.visibility || {})[`attr.${attribute.key}`],
-            ),
-          )}
+          {(Entities[entityType].attributes || []).map(attribute => (
+            <EntityAttribute
+              key={attribute.key}
+              attribute={attribute}
+              entityAttribute={entityAttributes[attribute.key]}
+            />
+          ))}
           {hiddenAttribute}
           {descriptionAttribute}
         </FlexContainer>
