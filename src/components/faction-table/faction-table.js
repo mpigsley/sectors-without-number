@@ -113,7 +113,7 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
         );
       },
       centered: true,
-      width: 75,
+      width: 100,
     },
     {
       accessor: 'homeworld',
@@ -121,7 +121,7 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
       Cell: loc =>
         loc.link ? <BasicLink to={loc.link}>{loc.name}</BasicLink> : '-',
       centered: true,
-      width: 100,
+      width: 200,
     },
     {
       accessor: 'experience',

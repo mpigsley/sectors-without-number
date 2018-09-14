@@ -43,6 +43,9 @@ export const currentSectorFactionTable = createSelector(
         const children = map(assets, (asset, assetId) => {
           const { category, hp } = FACTION_ASSETS[asset.type];
           const entity = entities[Entities.planet.key][asset.location];
+          const parent = entity
+            ? entities[entity.parentEntity][entity.parent]
+            : undefined;
           return {
             key: assetId,
             name: asset.type,
@@ -55,13 +58,16 @@ export const currentSectorFactionTable = createSelector(
                   link: `/sector/${sector}/${Entities.planet.key}/${
                     asset.location
                   }`,
-                  name: entity.name,
+                  name: `${entity.name}${parent ? ` (${parent.name})` : ''}`,
                 }
               : {},
           };
         });
 
         const entity = entities[Entities.planet.key][homeworld];
+        const parent = entity
+          ? entities[entity.parentEntity][entity.parent]
+          : undefined;
         return {
           ...rest,
           key: factionId,
@@ -71,7 +77,7 @@ export const currentSectorFactionTable = createSelector(
           homeworld: entity
             ? {
                 link: `/sector/${sector}/${Entities.planet.key}/${homeworld}`,
-                name: entity.name,
+                name: `${entity.name}${parent ? ` (${parent.name})` : ''}`,
               }
             : {},
           children: sortBy(children, 'name'),
@@ -90,11 +96,14 @@ export const currentFactionAttributes = createSelector(
   [currentSectorSelector, entitySelector, currentFaction],
   (sector, entities, faction = {}) => {
     const entity = entities[Entities.planet.key][faction.homeworld];
+    const parent = entity
+      ? entities[entity.parentEntity][entity.parent]
+      : undefined;
     let homeworld = {};
     if (entity) {
       homeworld = {
         link: `/sector/${sector}/${Entities.planet.key}/${faction.homeworld}`,
-        name: entity.name,
+        name: `${entity.name}${parent ? ` (${parent.name})` : ''}`,
       };
     }
 
@@ -108,6 +117,9 @@ export const currentFactionAssets = createSelector(
   (sector, entities, faction = {}) =>
     map(faction.assets, ({ location, type, hitPoints, stealthed }, id) => {
       const locationEntity = entities[Entities.planet.key][location];
+      const parent = locationEntity
+        ? entities[locationEntity.parentEntity][locationEntity.parent]
+        : undefined;
       const { hp, ...asset } = FACTION_ASSETS[type];
       return {
         ...asset,
@@ -117,10 +129,14 @@ export const currentFactionAssets = createSelector(
           total: hp,
           current: hitPoints,
         },
-        location: {
-          link: `/sector/${sector}/${Entities.planet.key}/${location}`,
-          name: locationEntity.name,
-        },
+        location: locationEntity
+          ? {
+              link: `/sector/${sector}/${Entities.planet.key}/${location}`,
+              name: `${locationEntity.name}${
+                parent ? ` (${parent.name})` : ''
+              }`,
+            }
+          : {},
       };
     }),
 );

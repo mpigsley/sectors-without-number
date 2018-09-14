@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 import Chance from 'chance';
-import { without } from 'lodash';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -16,7 +15,7 @@ import Input from 'primitives/form/input';
 import { EyeOff, RefreshCw } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
-import { filter, includes, map, pull } from 'constants/lodash';
+import { filter, includes, map, pull, without } from 'constants/lodash';
 
 const ReactHint = ReactHintFactory(React);
 const chance = new Chance();

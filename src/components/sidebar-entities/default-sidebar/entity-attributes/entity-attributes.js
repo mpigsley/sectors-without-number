@@ -1,19 +1,18 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
-import { FormattedMessage, intlShape } from 'react-intl';
-import classNames from 'classnames';
-import Chance from 'chance';
-import { without } from 'lodash';
+import { intlShape } from 'react-intl';
 
+import EntityAttribute from 'components/sidebar-entities/default-sidebar/entity-attribute';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
+import BasicLink from 'primitives/other/basic-link';
 import LinkIcon from 'primitives/other/link-icon';
 import Input from 'primitives/form/input';
 import LabeledItem from 'primitives/other/labeled-item';
 import LabeledInput from 'primitives/form/labeled-input';
 
-import { omit, map, values, pickBy, size } from 'constants/lodash';
+import { omit, values, size } from 'constants/lodash';
 import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 
@@ -21,12 +20,24 @@ import EntityTags from './entity-tags';
 import './style.css';
 
 const ReactHint = ReactHintFactory(React);
-const chance = new Chance();
+
+const renderLinkList = (label, items) => (
+  <LabeledItem label={label} isVertical>
+    <ul>
+      {items.map(({ key, name, link }) => (
+        <li key={key}>
+          <BasicLink to={link}>{name}</BasicLink>
+        </li>
+      ))}
+    </ul>
+  </LabeledItem>
+);
 
 export default function EntityAttributes({
   isSidebarEditActive,
   entity,
   entityType,
+  entityAttributes,
   updateEntityInEdit,
   isAttributesOpen,
   isTagsOpen,
@@ -36,26 +47,22 @@ export default function EntityAttributes({
   intl,
   isShared,
 }) {
-  const hiddenAttributes = isShared
-    ? Object.keys(pickBy(entity.visibility, vision => vision === false)).map(
-        key => key.replace('attr.', ''),
-      )
-    : [];
-  const allAttributes = omit(entity.attributes, hiddenAttributes);
-  const noAttributes = !entity.attributes || !size(allAttributes);
+  const noAttributes = !size(entityAttributes);
   if (!isSidebarEditActive && noAttributes) {
     return null;
   }
 
   let attributesSection = null;
-  const hasNonTagAttributes = values(omit({ ...allAttributes }, 'tags')).filter(
-    v => v,
-  ).length;
+  const hasNonTagAttributes = values(
+    omit({ ...entityAttributes }, 'tags'),
+  ).filter(v => v).length;
 
   if (isSidebarEditActive || hasNonTagAttributes) {
     let nameAttribute = null;
     let hiddenAttribute = null;
     let descriptionAttribute = null;
+    let factionsAttribute = null;
+    let assetsAttribute = null;
     if (isSidebarEditActive) {
       nameAttribute = (
         <LabeledInput
@@ -85,7 +92,7 @@ export default function EntityAttributes({
           rows="5"
           type="textarea"
           placeholder={intl.formatMessage({ id: 'misc.description' })}
-          value={(entity.attributes || {}).description || ''}
+          value={entityAttributes.description || ''}
           onChange={({ target } = {}) =>
             updateEntityInEdit({ attributes: { description: target.value } })
           }
@@ -104,90 +111,34 @@ export default function EntityAttributes({
           />
         );
       }
-    } else if ((entity.attributes || {}).description) {
-      descriptionAttribute = (
-        <LabeledItem label="misc.description" isVertical>
-          <span className="EntityAttributes--itemMultiline">
-            {(entity.attributes || {}).description}
-          </span>
-        </LabeledItem>
-      );
-    }
-
-    const renderAttribute = (
-      { key, name, attributes }, // eslint-disable-line react/prop-types
-      attribute,
-      visibility,
-    ) => {
-      if (!attributes || !attribute || (visibility === false && isShared)) {
-        return null;
+    } else {
+      if (entityAttributes.factions) {
+        factionsAttribute = renderLinkList(
+          'misc.factions',
+          entityAttributes.factions,
+        );
       }
-
-      return (
-        <LabeledItem
-          key={key}
-          label={name}
-          className={classNames({
-            'EntityAttributes--itemHidden': visibility === false,
-          })}
-        >
-          {attributes[attribute] ? (
-            <FormattedMessage id={attributes[attribute].name} />
-          ) : (
-            attribute
-          )}
-        </LabeledItem>
-      );
-    };
-
-    // eslint-disable-next-line react/prop-types
-    const renderAttributeEdit = ({ key, name, attributes }, attribute) => (
-      <LabeledInput
-        key={key}
-        label={name}
-        type="dropdown"
-        allowCreate
-        value={attribute}
-        onChange={item =>
-          updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
-        }
-        icon={RefreshCw}
-        onItemClick={() =>
-          updateEntityInEdit({
-            attributes: {
-              [key]: chance.pickone(
-                without(Object.keys(attributes), attribute),
-              ),
-            },
-          })
-        }
-        options={[
-          ...map(attributes, attr => ({
-            value: attr.key,
-            label: intl.formatMessage({ id: attr.name }),
+      if (entityAttributes.assets) {
+        assetsAttribute = renderLinkList(
+          'misc.assets',
+          entityAttributes.assets.map(({ type, faction, ...asset }) => ({
+            ...asset,
+            name: `${faction} - ${intl.formatMessage({
+              id: `faction.assets.${type}`,
+            })}`,
           })),
-          ...(attribute && !attributes[attribute]
-            ? [{ value: attribute, label: attribute }]
-            : []),
-        ]}
-        checkboxes={[
-          <Input
-            key="visibility"
-            checked={
-              (entity.visibility || {})[`attr.${key}`] === undefined
-                ? false
-                : !(entity.visibility || {})[`attr.${key}`]
-            }
-            onChange={({ target }) =>
-              updateEntityInEdit({
-                visibility: { [`attr.${key}`]: !target.checked },
-              })
-            }
-            type="checkbox"
-          />,
-        ]}
-      />
-    );
+        );
+      }
+      if (entityAttributes.description) {
+        descriptionAttribute = (
+          <LabeledItem label="misc.description" isVertical>
+            <span className="EntityAttributes--itemMultiline">
+              {entityAttributes.description}
+            </span>
+          </LabeledItem>
+        );
+      }
+    }
 
     let attributes = null;
     if (isAttributesOpen) {
@@ -197,13 +148,15 @@ export default function EntityAttributes({
           className="EntityAttributes-Attributes"
         >
           {nameAttribute}
-          {(Entities[entityType].attributes || []).map(attribute =>
-            (isSidebarEditActive ? renderAttributeEdit : renderAttribute)(
-              attribute,
-              (entity.attributes || {})[attribute.key],
-              (entity.visibility || {})[`attr.${attribute.key}`],
-            ),
-          )}
+          {(Entities[entityType].attributes || []).map(attribute => (
+            <EntityAttribute
+              key={attribute.key}
+              attribute={attribute}
+              entityAttribute={entityAttributes[attribute.key]}
+            />
+          ))}
+          {factionsAttribute}
+          {assetsAttribute}
           {hiddenAttribute}
           {descriptionAttribute}
         </FlexContainer>
@@ -265,8 +218,25 @@ export default function EntityAttributes({
 EntityAttributes.propTypes = {
   isSidebarEditActive: PropTypes.bool.isRequired,
   entity: PropTypes.shape({
-    attributes: PropTypes.shape(),
     visibility: PropTypes.shape(),
+  }).isRequired,
+  entityAttributes: PropTypes.shape({
+    description: PropTypes.string,
+    factions: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        link: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+      }),
+    ),
+    assets: PropTypes.arrayOf(
+      PropTypes.shape({
+        key: PropTypes.string.isRequired,
+        link: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        faction: PropTypes.string.isRequired,
+      }),
+    ),
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   updateEntityInEdit: PropTypes.func.isRequired,

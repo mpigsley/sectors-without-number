@@ -61,24 +61,15 @@ const onLogin = dispatch => result => {
     .catch(error => {
       dispatch({ type: AUTH_FAILURE });
       console.error(error);
+      throw error;
     });
 };
 
 export const facebookLogin = () => (dispatch, getState) =>
-  doFacebookLogin()
-    .then(onLogin(dispatch, getState()))
-    .catch(error => {
-      dispatch({ type: AUTH_FAILURE });
-      console.error(error);
-    });
+  doFacebookLogin().then(onLogin(dispatch, getState()));
 
 export const googleLogin = () => (dispatch, getState) =>
-  doGoogleLogin()
-    .then(onLogin(dispatch, getState()))
-    .catch(error => {
-      dispatch({ type: AUTH_FAILURE });
-      console.error(error);
-    });
+  doGoogleLogin().then(onLogin(dispatch, getState()));
 
 export const signup = intl => (dispatch, getState) => {
   const state = getState();
@@ -96,11 +87,7 @@ export const signup = intl => (dispatch, getState) => {
   }
   return doSignup(email, password)
     .then(onLogin(dispatch, state))
-    .then(result => (result.user || result).sendEmailVerification())
-    .catch(error => {
-      dispatch({ type: AUTH_FAILURE });
-      console.error(error);
-    });
+    .then(result => (result.user || result).sendEmailVerification());
 };
 
 export const login = intl => (dispatch, getState) => {
@@ -112,12 +99,7 @@ export const login = intl => (dispatch, getState) => {
       error: intl.formatMessage({ id: 'misc.emailPassword' }),
     });
   }
-  return doLogin(email, password)
-    .then(onLogin(dispatch, state))
-    .catch(error => {
-      dispatch({ type: AUTH_FAILURE });
-      console.error(error);
-    });
+  return doLogin(email, password).then(onLogin(dispatch, state));
 };
 
 export const passwordReset = intl => (dispatch, getState) => {

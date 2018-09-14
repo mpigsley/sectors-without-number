@@ -1,6 +1,8 @@
 export const ROWS = 10;
 export const COLUMNS = 8;
 export const SECTOR_LIMIT = 10;
+export const MIN_DIMENSION = 5;
+export const MAX_DIMENSION = 20;
 export const LAYER_NAME_LENGTH = 40;
 export const DEFAULT_HEX_WIDTH = 50; // Hex width when not rendering sector
 export const HEX_PADDING = 2; // Pixels between hexes
