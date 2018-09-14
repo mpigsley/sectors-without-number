@@ -13,12 +13,12 @@ import Button from 'primitives/other/button';
 import ItemRow from 'primitives/other/item-row';
 import LabeledInput from 'primitives/form/labeled-input';
 
+import { MIN_DIMENSION, MAX_DIMENSION } from 'constants/defaults';
 import { Zap, RefreshCw } from 'constants/icons';
+import { clamp } from 'constants/lodash';
 import { generateSectorName } from 'utils/name-generator';
 
 import './style.css';
-
-const MAX_DIMENSION = 20;
 
 export default function Configure({
   additionalPointsOfInterest,
@@ -33,11 +33,8 @@ export default function Configure({
   intl,
 }) {
   const limitDimensions = func => e => {
-    if (Number.parseInt(e.target.value, 10) > MAX_DIMENSION) {
-      e.target.value = `${MAX_DIMENSION}`;
-    } else if (Number.parseInt(e.target.value, 10) < 1) {
-      e.target.value = '1';
-    }
+    const num = Number.parseInt(e.target.value, 10);
+    e.target.value = clamp(num, MIN_DIMENSION, MAX_DIMENSION);
     func(e);
   };
 
