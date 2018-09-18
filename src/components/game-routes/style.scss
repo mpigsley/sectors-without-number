@@ -12,3 +12,9 @@
     grid-template-columns: [navigation] 75px [game] auto [end];
   }
 }
+
+@media print {
+  .GameRoutes {
+    display: block;
+  }
+}

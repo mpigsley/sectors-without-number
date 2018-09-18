@@ -63,3 +63,9 @@ $margin: 1.55rem;
     display: none;
   }
 }
+
+@media print {
+  .Navigation {
+    display: none;
+  }
+}

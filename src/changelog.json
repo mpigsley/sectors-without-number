@@ -1,4 +1,8 @@
 {
+  "7.1.1": {
+    "description": "Fix condensed and expanded printables.",
+    "date": "9-18-2018"
+  },
   "7.1.0": {
     "description": "Show factions and assets in sector sidebar.",
     "date": "9-14-2018",

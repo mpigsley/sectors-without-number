@@ -28,9 +28,3 @@
     grid-template-columns: [map] auto [sidebar] $small-sidebar-width [end];
   }
 }
-
-@media print {
-  .SectorMap {
-    display: none;
-  }
-}
