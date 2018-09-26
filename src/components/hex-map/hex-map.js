@@ -242,6 +242,7 @@ export default class HexMap extends Component {
         {this.renderEmptyMessage()}
         {this.renderToolbar()}
         <canvas
+          id="hex-map"
           width={this.props.width * this.ratio}
           height={this.props.height * this.ratio}
           style={{

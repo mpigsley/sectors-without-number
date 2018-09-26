@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 
-import ItemRow from 'primitives/other/item-row';
+import FlexContainer from 'primitives/container/flex-container';
 import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 import ExportTypes from 'constants/export-types';
-import { createJSONDownload } from 'utils/export';
+import { createJSONDownload, createImageDownlaod } from 'utils/export';
 import { mapValues, omit } from 'constants/lodash';
 
 import './style.css';
@@ -30,6 +30,9 @@ export default function ExportModal({
         ),
         sector.name,
       );
+    } else if (exportType === ExportTypes.image.key) {
+      closeExport();
+      return createImageDownlaod('hex-map');
     }
     return startPrint();
   };
@@ -46,7 +49,7 @@ export default function ExportModal({
         </Button>,
       ]}
     >
-      <ItemRow className="ExportModal-Buttons">
+      <FlexContainer justify="center">
         <Button
           primary={exportType === ExportTypes.condensed.key}
           onClick={() => setEntityExport(ExportTypes.condensed.key)}
@@ -59,14 +62,24 @@ export default function ExportModal({
         >
           <FormattedMessage id="misc.expanded" />
         </Button>
+      </FlexContainer>
+      <FlexContainer justify="center" className="ExportModal-Buttons">
+        <Button
+          primary={exportType === ExportTypes.image.key}
+          onClick={() => setEntityExport(ExportTypes.image.key)}
+        >
+          <FormattedMessage id="misc.image" />
+        </Button>
         <Button
           primary={exportType === ExportTypes.json.key}
           onClick={() => setEntityExport(ExportTypes.json.key)}
         >
           <FormattedMessage id="misc.jsonFormat" />
         </Button>
-      </ItemRow>
-      <FormattedMessage id={ExportTypes[exportType].description} />
+      </FlexContainer>
+      <FlexContainer className="ExportModal-Description" justify="center">
+        <FormattedMessage id={ExportTypes[exportType].description} />
+      </FlexContainer>
     </Modal>
   );
 }

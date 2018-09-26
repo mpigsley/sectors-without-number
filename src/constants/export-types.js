@@ -7,6 +7,10 @@ const ExportTypes = {
     key: 'expanded',
     description: 'misc.oneEntity',
   },
+  image: {
+    key: 'image',
+    description: 'misc.imageExport',
+  },
   json: {
     key: 'json',
     description: 'misc.jsonDescription',

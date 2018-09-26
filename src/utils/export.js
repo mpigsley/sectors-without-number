@@ -14,6 +14,18 @@ export const createCSVDownload = (csvContent, fileName = 'data') => {
   link.click();
 };
 
+export const createImageDownlaod = canvasId => {
+  const canvas = document.getElementById(canvasId);
+  const image = canvas
+    .toDataURL('image/jpg')
+    .replace('image/jpg', 'image/octet-stream');
+  const link = document.createElement('a');
+  link.setAttribute('href', image);
+  link.setAttribute('download', 'sector-map.jpg');
+  document.body.appendChild(link); // Required for FF
+  link.click();
+};
+
 export const createJSONDownload = (jsonContent, fileName = 'data') => {
   const str = JSON.stringify(jsonContent, null, 2);
   const dataUri = `data:application/json;charset=utf-8,${encodeURIComponent(

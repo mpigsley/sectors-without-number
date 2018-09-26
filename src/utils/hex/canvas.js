@@ -56,7 +56,9 @@ export default ({
   paintRegion,
   layerHexes,
 }) => {
-  ctx.clearRect(0, 0, width * ratio, height * ratio);
+  ctx.fillStyle = '#11203b';
+  ctx.rect(0, 0, width * ratio, height * ratio);
+  ctx.fill();
 
   const step = 2 * ratio;
   ctx.strokeStyle = COLORS.DARK3;
