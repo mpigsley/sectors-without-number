@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import Spinner from 'primitives/other/spinner';
 
-import './style.css';
+import './style.scss';
 
 export default function Button({
   children,

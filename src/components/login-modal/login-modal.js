@@ -10,7 +10,7 @@ import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
 import { X } from 'constants/icons';
 
-import './style.css';
+import './style.scss';
 
 const LOGIN_PAGE_TYPES = {
   login: 'login',

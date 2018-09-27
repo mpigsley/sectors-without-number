@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FlexContainer from 'primitives/container/flex-container';
 import { RotateCcw, X } from 'constants/icons';
 
-import './style.css';
+import './style.scss';
 
 export default function DeletableRow({
   onAction,

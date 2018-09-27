@@ -9,7 +9,7 @@ import ButtonLink from 'primitives/other/button-link';
 
 import { RotateCcw } from 'constants/icons';
 
-import './style.css';
+import './style.scss';
 
 // eslint-disable-next-line react/prop-types
 const renderRoll = ({ dice, add, other }) => (

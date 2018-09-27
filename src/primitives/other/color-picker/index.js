@@ -3,7 +3,7 @@ import tinycolor from 'tinycolor2';
 import PropTypes from 'prop-types';
 
 import FlexContainer from 'primitives/container/flex-container';
-import './style.css';
+import './style.scss';
 
 const DEFAULT_COLORS = [
   '#dbdbdb',

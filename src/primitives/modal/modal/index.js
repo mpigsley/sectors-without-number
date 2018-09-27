@@ -9,7 +9,7 @@ import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import Button from 'primitives/other/button';
 
-import './style.css';
+import './style.scss';
 
 export default function Modal({
   title,

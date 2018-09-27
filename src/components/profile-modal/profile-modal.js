@@ -8,7 +8,7 @@ import Modal from 'primitives/modal/modal';
 import LOCALES from 'constants/locale';
 import { map } from 'constants/lodash';
 
-import './style.css';
+import './style.scss';
 
 export default function ProfileModal({
   closeEditModal,

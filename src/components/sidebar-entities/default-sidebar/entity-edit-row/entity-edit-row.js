@@ -12,7 +12,7 @@ import { RefreshCw } from 'constants/icons';
 import Entities from 'constants/entities';
 import { coordinateKey, coordinatesFromKey } from 'utils/common';
 
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 

@@ -10,7 +10,7 @@ import LinkRow from 'primitives/other/link-row';
 import { omitBy, map, size } from 'constants/lodash';
 import Entities from 'constants/entities';
 
-import './style.css';
+import './style.scss';
 
 export default class OverviewList extends Component {
   static propTypes = {

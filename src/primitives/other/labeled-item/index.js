@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl';
 import FlexContainer from 'primitives/container/flex-container';
 import Label from 'primitives/form/label';
 
-import './style.css';
+import './style.scss';
 
 export default function LabeledItem({
   isVertical,

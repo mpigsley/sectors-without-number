@@ -1,5 +1,5 @@
-@import 'styles/utilities';
-@import 'styles/theme';
+@import '~styles/utilities';
+@import '~styles/theme';
 
 $hexSize: variableSize(140, 200);
 $hexBorder: 1px solid $dark1;

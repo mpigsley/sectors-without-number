@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import Dropdown from 'primitives/form/dropdown';
 
-import './style.css';
+import './style.scss';
 
 export default function Input({ className, width, error, type, ...rest }) {
   let style = {};

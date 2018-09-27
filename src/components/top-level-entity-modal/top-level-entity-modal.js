@@ -29,7 +29,7 @@ import {
   flatten,
 } from 'constants/lodash';
 
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 const TopLevelLeveEntities = filter(Entities, entity => entity.topLevel);

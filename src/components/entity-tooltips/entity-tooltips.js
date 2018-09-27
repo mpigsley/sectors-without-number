@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import FlexContainer from 'primitives/container/flex-container';
 import { map } from 'constants/lodash';
 
-import './style.css';
+import './style.scss';
 
 export default function EntityTooltips({ hoverKey, holdKey, layer, hexes }) {
   const renderTooltip = system => {

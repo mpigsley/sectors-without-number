@@ -16,7 +16,7 @@ import { coordinateKey } from 'utils/common';
 import Loading from './loading';
 import Error from './error';
 
-import './style.css';
+import './style.scss';
 
 export default class SectorMap extends Component {
   static propTypes = {

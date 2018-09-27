@@ -8,7 +8,7 @@ import ConfirmModal from 'primitives/modal/confirm-modal';
 
 import FactionAssets from './faction-assets';
 import FactionAttributes from './faction-attributes';
-import './style.css';
+import './style.scss';
 
 export default class FactionSidebar extends Component {
   static propTypes = {

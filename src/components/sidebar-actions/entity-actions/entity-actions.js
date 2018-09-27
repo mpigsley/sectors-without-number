@@ -11,7 +11,7 @@ import SaveFooter from 'primitives/other/save-footer';
 import Entities from 'constants/entities';
 import { some, size } from 'constants/lodash';
 
-import './style.css';
+import './style.scss';
 
 export default class EntityActions extends Component {
   static propTypes = {

@@ -4,7 +4,7 @@ import Measure from 'react-measure';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import { getPixelRatio } from 'utils/canvas-helpers';
 
-import './style.css';
+import './style.scss';
 
 export default class StarField extends Component {
   constructor(props) {

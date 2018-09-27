@@ -11,7 +11,7 @@ import { map, values } from 'constants/lodash';
 import { sortByKey } from 'utils/common';
 import Entities from 'constants/entities';
 
-import './style.css';
+import './style.scss';
 import '../style.css';
 
 export default class CondensedPrintable extends Component {

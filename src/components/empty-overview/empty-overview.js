@@ -6,7 +6,7 @@ import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import Loading from 'primitives/regions/loading';
 
-import './style.css';
+import './style.scss';
 
 export default function EmptyOverview({ children, isInitialized }) {
   let body = <Loading />;

@@ -21,7 +21,7 @@ import {
 } from 'constants/icons';
 import { isArray } from 'constants/lodash';
 
-import './style.css';
+import './style.scss';
 
 const formatOptionalMessage = (intl, key, builder) => {
   const id = builder(key);

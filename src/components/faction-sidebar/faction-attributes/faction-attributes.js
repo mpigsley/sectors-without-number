@@ -8,7 +8,7 @@ import BasicLink from 'primitives/other/basic-link';
 
 import { RotateCcw } from 'constants/icons';
 
-import './style.css';
+import './style.scss';
 
 const titledItem = (key, description, title) => {
   let titleElement;

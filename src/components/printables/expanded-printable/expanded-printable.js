@@ -9,7 +9,7 @@ import Header, { HeaderType } from 'primitives/text/header';
 import { map } from 'constants/lodash';
 import Entities from 'constants/entities';
 
-import './style.css';
+import './style.scss';
 import '../style.css';
 
 export default class ExpandedPrintable extends Component {

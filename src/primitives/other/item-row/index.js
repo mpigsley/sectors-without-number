@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
 
-import './style.css';
+import './style.scss';
 
 export default function ItemRow({ children, className }) {
   return (

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 
-import './style.css';
+import './style.scss';
 
 export default function HomeFeatured({ name, sector, website }) {
   if (!sector || !website) {

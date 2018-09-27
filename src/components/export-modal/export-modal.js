@@ -9,7 +9,7 @@ import ExportTypes from 'constants/export-types';
 import { createJSONDownload, createImageDownlaod } from 'utils/export';
 import { mapValues, omit } from 'constants/lodash';
 
-import './style.css';
+import './style.scss';
 
 export default function ExportModal({
   isExportOpen,

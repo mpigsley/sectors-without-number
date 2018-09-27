@@ -6,7 +6,7 @@ import LabeledItem from 'primitives/other/labeled-item';
 import IconInput from 'primitives/form/icon-input';
 import Input from 'primitives/form/input';
 
-import './style.css';
+import './style.scss';
 
 export default function LabeledInput({
   label,

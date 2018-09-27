@@ -7,7 +7,7 @@ import Table from 'primitives/other/table';
 import { without, includes } from 'constants/lodash';
 import { PlusCircle, Circle } from 'constants/icons';
 
-import './style.css';
+import './style.scss';
 
 export default class CollapsibleTable extends Component {
   static propTypes = {

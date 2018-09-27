@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import FlexContainer from '../flex-container';
 
-import './style.css';
+import './style.scss';
 
 export default function SubContainer(props) {
   const { children, className, noMargin, fullWidth, ...rest } = props;

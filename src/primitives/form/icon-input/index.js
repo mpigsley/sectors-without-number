@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import Input from 'primitives/form/input';
 
-import './style.css';
+import './style.scss';
 
 const defaultFunc = () => {};
 

@@ -20,7 +20,7 @@ import { size, map } from 'constants/lodash';
 import { X, EyeOff, Crosshair } from 'constants/icons';
 import { sortByKey } from 'utils/common';
 
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 

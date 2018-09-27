@@ -6,7 +6,7 @@ import { injectIntl, intlShape } from 'react-intl';
 import { isNil } from 'constants/lodash';
 import { ChevronDown, ChevronUp } from 'constants/icons';
 
-import './style.css';
+import './style.scss';
 
 const nextDirection = direction => {
   if (direction === 1) {

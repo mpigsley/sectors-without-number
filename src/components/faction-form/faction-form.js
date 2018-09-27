@@ -15,7 +15,7 @@ import { FACTION_GOALS, FACTION_TAGS } from 'constants/faction';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 
 import FactionAssetForm from './faction-asset-form';
-import './style.css';
+import './style.scss';
 
 const chance = new Chance();
 

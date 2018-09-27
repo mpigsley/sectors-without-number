@@ -17,7 +17,7 @@ import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 
 import EntityTags from './entity-tags';
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 

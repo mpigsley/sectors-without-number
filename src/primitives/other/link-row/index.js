@@ -7,7 +7,7 @@ import { ChevronRight } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 
-import './style.css';
+import './style.scss';
 
 export default class LinkRow extends Component {
   state = {

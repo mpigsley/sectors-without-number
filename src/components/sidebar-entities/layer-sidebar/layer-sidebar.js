@@ -13,7 +13,7 @@ import { map, sortBy } from 'constants/lodash';
 
 import RegionRow from './region-row';
 import LayerForm from './layer-form';
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 

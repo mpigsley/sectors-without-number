@@ -6,7 +6,7 @@ import AbsoluteContainer from 'primitives/container/absolute-container';
 import StarField from 'primitives/regions/star-field';
 import Button from 'primitives/other/button';
 
-import './style.css';
+import './style.scss';
 
 export default function StarBackground({
   children,

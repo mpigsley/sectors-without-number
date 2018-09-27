@@ -13,7 +13,7 @@ import { getTopLevelEntity } from 'utils/entity';
 import hexCanvas from 'utils/hex/canvas';
 import { getPixelRatio, getHoveredHex } from 'utils/canvas-helpers';
 
-import './style.css';
+import './style.scss';
 
 export default class HexMap extends Component {
   static propTypes = {

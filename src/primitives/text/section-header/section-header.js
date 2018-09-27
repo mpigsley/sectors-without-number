@@ -8,7 +8,7 @@ import Button from 'primitives/other/button';
 
 import { ChevronRight, ChevronDown, Plus } from 'constants/icons';
 
-import './style.css';
+import './style.scss';
 
 export default function SectionHeader({
   intl,

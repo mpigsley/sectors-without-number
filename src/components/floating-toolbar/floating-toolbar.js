@@ -19,7 +19,7 @@ import {
 } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 

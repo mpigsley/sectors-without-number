@@ -10,7 +10,7 @@ import Input from 'primitives/form/input';
 
 import { Check, X, Edit3, MoreHorizontal, EyeOff } from 'constants/icons';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 

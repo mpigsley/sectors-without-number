@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import ButtonLink from 'primitives/other/button-link';
 
-import './style.css';
+import './style.scss';
 
 export default function BasicLink({ className, ...rest }) {
   return (

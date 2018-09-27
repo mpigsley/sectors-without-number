@@ -12,7 +12,7 @@ import Saved from 'components/home/saved';
 import { size, map, sortBy } from 'constants/lodash';
 import featured from 'featured.json';
 
-import './style.css';
+import './style.scss';
 
 export default function Home({ intl, saved, generateSector }) {
   const renderSavedSectors = () => {
