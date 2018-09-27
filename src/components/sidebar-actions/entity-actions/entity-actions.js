@@ -44,52 +44,56 @@ export default class EntityActions extends Component {
   };
 
   onConfirmDelete = () => this.setState({ isConfirmDeleteOpen: true });
+
   onCancelDelete = () => this.setState({ isConfirmDeleteOpen: false });
+
   onDeleteEntity = () => {
+    const { deleteEntity } = this.props;
     this.onCancelDelete();
-    this.props.deleteEntity();
+    deleteEntity();
   };
 
   get backUrl() {
+    const { entityType, entity, currentSector } = this.props;
     let backUrl = '/';
     const isSpecialEntity =
-      [Entities.navigation.key, Entities.layer.key].indexOf(
-        this.props.entityType,
-      ) !== -1;
-    if (this.props.entity.parent || isSpecialEntity) {
-      backUrl = `${backUrl}sector/${this.props.currentSector}`;
-      if (
-        this.props.entity.parentEntity &&
-        this.props.entity.parentEntity !== Entities.sector.key
-      ) {
-        backUrl = `${backUrl}/${this.props.entity.parentEntity}/${
-          this.props.entity.parent
-        }`;
+      [Entities.navigation.key, Entities.layer.key].indexOf(entityType) !== -1;
+    if (entity.parent || isSpecialEntity) {
+      backUrl = `${backUrl}sector/${currentSector}`;
+      if (entity.parentEntity && entity.parentEntity !== Entities.sector.key) {
+        backUrl = `${backUrl}/${entity.parentEntity}/${entity.parent}`;
       }
     }
     return backUrl;
   }
 
   buildActions = () => {
+    const {
+      isSaved,
+      isShared,
+      intl,
+      saveSector,
+      activateSidebarEdit,
+    } = this.props;
     const actions = [];
-    if (!this.props.isSaved && !this.props.isShared) {
+    if (!isSaved && !isShared) {
       actions.push({
         key: 'save',
-        children: this.props.intl.formatMessage({ id: 'misc.save' }),
-        onClick: this.props.saveSector,
+        children: intl.formatMessage({ id: 'misc.save' }),
+        onClick: saveSector,
       });
     }
-    if (!this.props.isShared) {
+    if (!isShared) {
       actions.push({
         key: 'edit',
-        children: this.props.intl.formatMessage({ id: 'misc.edit' }),
-        onClick: this.props.activateSidebarEdit,
+        children: intl.formatMessage({ id: 'misc.edit' }),
+        onClick: activateSidebarEdit,
       });
     }
-    if (this.props.isSaved && !this.props.isShared) {
+    if (isSaved && !isShared) {
       actions.push({
         key: 'delete',
-        children: this.props.intl.formatMessage({ id: 'misc.delete' }),
+        children: intl.formatMessage({ id: 'misc.delete' }),
         onClick: this.onConfirmDelete,
       });
     }
@@ -98,22 +102,25 @@ export default class EntityActions extends Component {
   };
 
   renderFooter = () => {
-    if (!this.props.isSidebarEditActive) {
+    const {
+      isSidebarEditActive,
+      deactivateSidebarEdit,
+      saveEntityEdit,
+    } = this.props;
+    if (!isSidebarEditActive) {
       return null;
     }
     return (
-      <SaveFooter
-        onCancel={this.props.deactivateSidebarEdit}
-        onSave={this.props.saveEntityEdit}
-      />
+      <SaveFooter onCancel={deactivateSidebarEdit} onSave={saveEntityEdit} />
     );
   };
 
   renderSectorBuilderText() {
+    const { entityChildren, entityType, isSidebarEditActive } = this.props;
     if (
-      some(this.props.entityChildren, size) ||
-      this.props.entityType !== Entities.sector.key ||
-      this.props.isSidebarEditActive
+      some(entityChildren, size) ||
+      entityType !== Entities.sector.key ||
+      isSidebarEditActive
     ) {
       return null;
     }
@@ -143,37 +150,45 @@ export default class EntityActions extends Component {
   }
 
   render() {
+    const {
+      isSidebarEditActive,
+      entity,
+      entityType,
+      children,
+      intl,
+    } = this.props;
+    const { isConfirmDeleteOpen } = this.state;
     return (
       <ActionLayout
-        renderActions={!this.props.isSidebarEditActive}
+        renderActions={!isSidebarEditActive}
         backUrl={this.backUrl}
         actions={this.buildActions()}
         footer={this.renderFooter()}
         name={[
           <Header key="header" type={HeaderType.header2}>
-            {this.props.entity.name}
+            {entity.name}
           </Header>,
           <Header
             key="sub-header"
             type={HeaderType.header3}
             className="EntityActions-TypeHeader"
           >
-            (<FormattedMessage id={Entities[this.props.entityType].name} />)
+            (<FormattedMessage id={Entities[entityType].name} />)
           </Header>,
         ]}
       >
         {this.renderSectorBuilderText()}
-        {this.props.children}
+        {children}
         <ConfirmModal
-          isOpen={this.state.isConfirmDeleteOpen}
+          isOpen={isConfirmDeleteOpen}
           onConfirm={this.onDeleteEntity}
           onCancel={this.onCancelDelete}
         >
           <FormattedMessage
             id="misc.toDeleteEntity"
             values={{
-              entity: this.props.intl.formatMessage({
-                id: Entities[this.props.entityType].name,
+              entity: intl.formatMessage({
+                id: Entities[entityType].name,
               }),
             }}
           />

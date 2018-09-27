@@ -24,9 +24,10 @@ export default class ExpandedPrintable extends Component {
   };
 
   componentDidMount() {
+    const { endPrint } = this.props;
     setTimeout(() => {
       window.print();
-      this.props.endPrint();
+      endPrint();
     }, 1);
   }
 
@@ -34,6 +35,7 @@ export default class ExpandedPrintable extends Component {
     const conf = Entities[entityType];
 
     const blockAttributes = [];
+    const { intl } = this.props;
     if (entity.tags && entity.tags.length) {
       blockAttributes.push(
         <div key="tags">
@@ -41,7 +43,7 @@ export default class ExpandedPrintable extends Component {
             <FormattedMessage id="misc.tags" />:{' '}
           </b>
           {entity.tags
-            .map(tag => this.props.intl.formatMessage({ id: `tags.${tag}` }))
+            .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
             .join(', ')}
         </div>,
       );
@@ -55,7 +57,7 @@ export default class ExpandedPrintable extends Component {
               <b>
                 <FormattedMessage id={name} />:{' '}
               </b>
-              {this.props.intl.messages[entity[key]] ? (
+              {intl.messages[entity[key]] ? (
                 <FormattedMessage id={entity[key]} />
               ) : (
                 entity[key]
@@ -129,21 +131,21 @@ export default class ExpandedPrintable extends Component {
     );
   };
 
-  renderEntities = () =>
-    map(this.props.entities, (entityList, entityType) =>
+  renderEntities = () => {
+    const { entities } = this.props;
+    return map(entities, (entityList, entityType) =>
       map(entityList, (entity, entityId) =>
         this.renderEntity(entityId, entityType, entity),
       ),
     );
+  };
 
   render() {
+    const { printable } = this.props;
     return (
       <div className="Printable">
         <div className="Printable-Container">
-          <MapPrintable
-            hexes={this.props.printable.hexes}
-            viewbox={this.props.printable.viewbox}
-          />
+          <MapPrintable hexes={printable.hexes} viewbox={printable.viewbox} />
         </div>
         <div className="Printable-EntityContainer">{this.renderEntities()}</div>
       </div>

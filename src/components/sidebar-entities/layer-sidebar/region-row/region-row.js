@@ -34,7 +34,8 @@ export default function RegionRow({
 }) {
   if (!regionId && !regionForm) {
     return null;
-  } else if (!regionId || regionId === (regionForm || {}).regionId) {
+  }
+  if (!regionId || regionId === (regionForm || {}).regionId) {
     const isOutOfRange = regionForm.name.length > 40;
     return (
       <FlexContainer className="RegionRow" align="center">

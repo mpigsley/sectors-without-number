@@ -26,9 +26,10 @@ export default class CondensedPrintable extends Component {
   };
 
   componentDidMount() {
+    const { endPrint } = this.props;
     setTimeout(() => {
       window.print();
-      this.props.endPrint();
+      endPrint();
     }, 1);
   }
 
@@ -67,12 +68,13 @@ export default class CondensedPrintable extends Component {
       });
     }
     if (Entities[entityType].tags) {
+      const { intl } = this.props;
       columns.push({
         accessor: 'tags',
         Header: 'misc.tags',
         Cell: tags =>
           tags
-            .map(tag => this.props.intl.formatMessage({ id: `tags.${tag}` }))
+            .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
             .join(', ') || '-',
       });
     }
@@ -112,16 +114,14 @@ export default class CondensedPrintable extends Component {
       .map(this.renderEntityType);
 
   render() {
+    const { printable, entities } = this.props;
     return (
       <div className="Printable">
         <div className="Printable-Container">
-          <MapPrintable
-            hexes={this.props.printable.hexes}
-            viewbox={this.props.printable.viewbox}
-          />
+          <MapPrintable hexes={printable.hexes} viewbox={printable.viewbox} />
         </div>
         <div className="Printable-EntityContainer">
-          {this.renderEntities(this.props.entities)}
+          {this.renderEntities(entities)}
         </div>
       </div>
     );

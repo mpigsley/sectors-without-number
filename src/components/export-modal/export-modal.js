@@ -30,7 +30,8 @@ export default function ExportModal({
         ),
         sector.name,
       );
-    } else if (exportType === ExportTypes.image.key) {
+    }
+    if (exportType === ExportTypes.image.key) {
       closeExport();
       return createImageDownlaod('hex-map');
     }

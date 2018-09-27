@@ -4,21 +4,19 @@ import classNames from 'classnames';
 
 import './style.css';
 
-export default function FlexContainer(props) {
-  const {
-    align,
-    className,
-    justify,
-    direction,
-    children,
-    wrap,
-    scroll,
-    flex,
-    shrink,
-    style,
-    ...rest
-  } = props;
-
+export default function FlexContainer({
+  align,
+  className,
+  justify,
+  direction,
+  children,
+  wrap,
+  scroll,
+  flex,
+  shrink,
+  style,
+  ...rest
+}) {
   const containerStyle = flex !== null ? { ...style, flex } : style;
 
   return (
@@ -26,7 +24,7 @@ export default function FlexContainer(props) {
       {...rest}
       style={containerStyle}
       className={classNames('FlexContainer', className, {
-        [`FlexContainer-Align--${props.align}`]: align,
+        [`FlexContainer-Align--${align}`]: align,
         [`FlexContainer-Justify--${justify}`]: justify,
         [`FlexContainer-Direction--${direction}`]: direction,
         [`FlexContainer-Shrink--${shrink}`]: shrink,

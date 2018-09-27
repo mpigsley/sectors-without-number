@@ -24,6 +24,7 @@ export default function Button({
   return (
     <button
       {...rest}
+      type="button"
       className={classNames(className, {
         Button: !minimal,
         'Button-Minimal': minimal,

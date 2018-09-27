@@ -79,7 +79,8 @@ export const signup = intl => (dispatch, getState) => {
       type: AUTH_FAILURE,
       error: intl.formatMessage({ id: 'misc.emailPassword' }),
     });
-  } else if (password !== confirm) {
+  }
+  if (password !== confirm) {
     return dispatch({
       type: AUTH_FAILURE,
       error: intl.formatMessage({ id: 'misc.noPasswordMatch' }),

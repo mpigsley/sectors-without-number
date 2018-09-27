@@ -20,9 +20,14 @@ export default class CollapsibleTable extends Component {
     columns: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   };
 
-  state = {
-    openRows: this.props.data.map(row => row[this.props.dataIdAccessor]),
-  };
+  constructor(props) {
+    super(props);
+
+    const { data, dataIdAccessor } = props;
+    this.state = {
+      openRows: data.map(row => row[dataIdAccessor]),
+    };
+  }
 
   get filteredData() {
     const { data, dataIdAccessor } = this.props;

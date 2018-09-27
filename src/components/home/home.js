@@ -30,7 +30,8 @@ export default function Home({ intl, saved, generateSector }) {
             ({ created }) => {
               if (!created) {
                 return -new Date();
-              } else if (created.toDate) {
+              }
+              if (created.toDate) {
                 return -created.toDate();
               }
               return -new Date(created);
@@ -79,7 +80,11 @@ export default function Home({ intl, saved, generateSector }) {
               </span>
               <FormattedMessage id="misc.configure" />
             </Link>
-            <button onClick={generateSector} className="Home-Action">
+            <button
+              type="submit"
+              onClick={generateSector}
+              className="Home-Action"
+            >
               <span className="Home-HexagonWrap">
                 <span className="Home-Hexagon" />
               </span>

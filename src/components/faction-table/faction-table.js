@@ -239,7 +239,8 @@ export default class FactionTable extends Component {
 
     if (isLoading) {
       return <Loading />;
-    } else if (!isSaved) {
+    }
+    if (!isSaved) {
       return <FactionNotSaved />;
     }
 

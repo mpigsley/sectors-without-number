@@ -78,7 +78,8 @@ export default function sector(state = initialState, action) {
             name: Entities.sector.nameGenerator(),
           },
         };
-      } else if (pathname.startsWith('/sector/')) {
+      }
+      if (pathname.startsWith('/sector/')) {
         return { ...state, renderSector: true };
       }
       return { ...state, renderSector: false };

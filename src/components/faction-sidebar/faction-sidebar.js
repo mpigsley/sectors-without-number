@@ -42,7 +42,7 @@ export default class FactionSidebar extends Component {
     if (!faction) {
       return null;
     }
-    const { isAttributesOpen, isAssetsOpen } = this.state;
+    const { isAttributesOpen, isAssetsOpen, isConfirmDeleteOpen } = this.state;
     return (
       <SidebarContainer
         title={faction.name}
@@ -86,7 +86,7 @@ export default class FactionSidebar extends Component {
           {isAssetsOpen && <FactionAssets className="FactionSidebar-Content" />}
         </div>
         <ConfirmModal
-          isOpen={this.state.isConfirmDeleteOpen}
+          isOpen={isConfirmDeleteOpen}
           onConfirm={removeFaction}
           onCancel={() => this.setState({ isConfirmDeleteOpen: false })}
         >
