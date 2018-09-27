@@ -14,6 +14,7 @@ import {
   sidebarEditChildrenSelector,
   savedSectorSelector,
   layersSelector,
+  topLevelKeySelector,
 } from 'store/selectors/base.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import { currentSectorFactions } from 'store/selectors/faction.selectors';
@@ -21,6 +22,7 @@ import { currentSectorFactions } from 'store/selectors/faction.selectors';
 import Entities from 'constants/entities';
 import Elements from 'constants/elements';
 import { allSectorKeys, coordinateKey } from 'utils/common';
+import { getTopLevelEntity } from 'utils/entity';
 import { areNeighbors } from 'utils/hex/common';
 import {
   keys,
@@ -104,6 +106,12 @@ export const getCurrentTopLevelEntities = createSelector(
     ),
 );
 
+export const topLevelEntityModalOpen = createDeepEqualSelector(
+  [topLevelKeySelector, getCurrentTopLevelEntities],
+  (topLevelKey, topLevelEntities) =>
+    !!topLevelKey && !!getTopLevelEntity(topLevelEntities, topLevelKey),
+);
+
 export const getCurrentEntities = createDeepEqualSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
   (currentSector, entities, isShared) =>
@@ -111,7 +119,8 @@ export const getCurrentEntities = createDeepEqualSelector(
       pickBy(entityList, (entity, entityId) => {
         if (entity.sector !== currentSector && entityId !== currentSector) {
           return false;
-        } else if (!isShared) {
+        }
+        if (!isShared) {
           return true;
         }
         let { isHidden } = entity;
