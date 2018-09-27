@@ -13,20 +13,16 @@ $offset-c2: 4;
 $lay-c1: 3;
 $lay-c2: 4;
 
-.Home-HeroContainer {
-  height: 100vh;
-}
-
 .Home-Hero {
   overflow: hidden;
   position: relative;
   width: 100%;
+  margin: 8rem 0 5rem;
 }
 
 .Home-Glitch {
   cursor: default;
   display: block;
-  margin-top: 5rem;
 
   &:hover {
     animation: text-bag 4s linear infinite;
@@ -157,20 +153,6 @@ $innerHex: 5px;
   }
 }
 
-.Home-ArrowDown {
-  animation: fadein 1.5s, bounce 6s linear infinite;
-  border-bottom: 4px solid $dark2;
-  border-right: 4px solid $dark2;
-  height: variableSize(30, 45);
-  transform: scale(2, 1) rotate(45deg);
-  transition: opacity 1s linear;
-  width: variableSize(30, 45);
-
-  &--hidden {
-    opacity: 0;
-  }
-}
-
 .Home-SectionHeader {
   align-items: flex-end;
   background: linear-gradient(transparent, transparent, $transparentDark);
@@ -218,37 +200,6 @@ $grid-height: 12rem;
   .Home-Action {
     margin: 0;
     margin-bottom: 1.5rem;
-  }
-}
-
-@keyframes bounce {
-  0% {
-    margin-bottom: 2rem;
-    margin-top: 0.5rem;
-  }
-  10% {
-    margin-bottom: 2rem;
-    margin-top: 0.5rem;
-  }
-  12% {
-    margin-bottom: 2.5rem;
-    margin-top: 0;
-  }
-  14% {
-    margin-bottom: 2rem;
-    margin-top: 0.5rem;
-  }
-  16% {
-    margin-bottom: 2.2rem;
-    margin-top: 0.3rem;
-  }
-  18% {
-    margin-bottom: 2rem;
-    margin-top: 0.5rem;
-  }
-  100% {
-    margin-bottom: 2rem;
-    margin-top: 0.5rem;
   }
 }
 
