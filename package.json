@@ -63,17 +63,17 @@
     "babel-eslint": "^9.0.0",
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.0.4",
-    "eslint": "^4.9.0",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-config-prettier": "^2.6.0",
-    "eslint-plugin-import": "^2.13.0",
-    "eslint-plugin-jsx-a11y": "^6.0.3",
-    "eslint-plugin-prettier": "^2.6.1",
-    "eslint-plugin-react": "^7.10.0",
-    "firebase-tools": "^4.0.0",
-    "prettier": "^1.13.7",
-    "react-scripts": "^1.0.1",
+    "eslint": "^5.6.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-prettier": "^2.7.0",
+    "eslint-plugin-react": "^7.11.1",
+    "firebase-tools": "^4.2.1",
+    "prettier": "^1.14.3",
+    "react-scripts": "2.0.0",
     "react-test-renderer": "^16.4.1",
     "source-map-explorer": "^1.6.0"
   },
@@ -83,5 +83,11 @@
       "!node_modules",
       "!src/components/**/index.js"
     ]
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

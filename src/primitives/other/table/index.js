@@ -11,7 +11,8 @@ import './style.css';
 const nextDirection = direction => {
   if (direction === 1) {
     return -1;
-  } else if (direction === -1) {
+  }
+  if (direction === -1) {
     return 0;
   }
   return 1;
@@ -56,52 +57,53 @@ class Table extends Component {
     sortDirection: 0,
   };
 
-  componentWillReceiveProps() {
-    this.setState({
-      sort: undefined,
-      sortDirection: 0,
-    });
+  static getDerivedStateFromProps() {
+    return { sort: undefined, sortDirection: 0 };
   }
 
   onHeaderClick = (accessor, onClick) => () => {
     if (onClick) {
       return onClick();
     }
-    if (!this.props.sortable) {
+    const { sortable } = this.props;
+    if (!sortable) {
       return null;
     }
-    let sortDirection = nextDirection(this.state.sortDirection);
-    if (accessor !== this.state.sort) {
-      sortDirection = 1;
+    const { sortDirection, sort } = this.state;
+    let newSortDirection = nextDirection(sortDirection);
+    if (accessor !== sort) {
+      newSortDirection = 1;
     }
     return this.setState({
-      sort: !sortDirection ? undefined : accessor,
-      sortDirection,
+      sort: !newSortDirection ? undefined : accessor,
+      sortDirection: newSortDirection,
     });
   };
 
   get sortedData() {
-    if (!this.props.sortable || !this.state.sortDirection) {
-      return this.props.data;
+    const { sortable, data } = this.props;
+    const { sortDirection, sort } = this.state;
+    if (!sortable || !sortDirection) {
+      return data;
     }
-    return [...this.props.data].sort((a, b) => {
-      if (a[this.state.sort] > b[this.state.sort]) {
-        return this.state.sortDirection;
-      } else if (a[this.state.sort] < b[this.state.sort]) {
-        return -this.state.sortDirection;
+    return [...data].sort((a, b) => {
+      if (a[sort] > b[sort]) {
+        return sortDirection;
+      }
+      if (a[sort] < b[sort]) {
+        return -sortDirection;
       }
       return 0;
     });
   }
 
   renderSortIcon(accessor) {
-    if (
-      !this.props.sortable ||
-      this.state.sort !== accessor ||
-      !this.state.sortDirection
-    ) {
+    const { sortable } = this.props;
+    const { sort, sortDirection } = this.state;
+    if (!sortable || sort !== accessor || !sortDirection) {
       return null;
-    } else if (this.state.sortDirection < 0) {
+    }
+    if (sortDirection < 0) {
       return <ChevronUp size={12} className="Table-SortIcon" />;
     }
     return <ChevronDown size={12} className="Table-SortIcon" />;
@@ -109,32 +111,42 @@ class Table extends Component {
 
   renderRowItem(row, { Cell, accessor, translateItem }) {
     let item = row[accessor];
-    if (item && translateItem && this.props.intl.messages[row[accessor]]) {
-      item = this.props.intl.formatMessage({ id: row[accessor] });
+    const { intl } = this.props;
+    if (item && translateItem && intl.messages[row[accessor]]) {
+      item = intl.formatMessage({ id: row[accessor] });
     }
     item = isNil(item) ? '-' : item;
     return Cell ? Cell(item, row) : item;
   }
 
   render() {
+    const {
+      className,
+      columns,
+      light,
+      condensed,
+      sortable,
+      intl,
+      dataIdAccessor,
+    } = this.props;
     return (
-      <table className={classNames('Table', this.props.className)}>
+      <table className={classNames('Table', className)}>
         <thead>
           <tr>
-            {this.props.columns.map(
+            {columns.map(
               ({ Header, accessor, columnClass, centered, onClick }) => (
                 <th
                   onClick={this.onHeaderClick(accessor, onClick)}
                   className={classNames('Table-Header', columnClass, {
-                    'Table-Header--light': this.props.light,
-                    'Table-Header--condensed': this.props.condensed,
-                    'Table-Header--sortable': this.props.sortable,
+                    'Table-Header--light': light,
+                    'Table-Header--condensed': condensed,
+                    'Table-Header--sortable': sortable,
                     'Table--centered': centered,
                   })}
                   key={accessor}
                 >
                   {typeof Header === 'string' ? (
-                    this.props.intl.formatMessage({ id: Header })
+                    intl.formatMessage({ id: Header })
                   ) : (
                     <Header />
                   )}
@@ -148,18 +160,18 @@ class Table extends Component {
           {this.sortedData.map(({ rowClass, onClick, ...row }) => (
             <tr
               className={classNames('Table-Row', rowClass)}
-              key={row[this.props.dataIdAccessor]}
+              key={row[dataIdAccessor]}
             >
-              {this.props.columns.map(column => (
+              {columns.map(column => (
                 <td
                   onClick={() =>
                     column.onClick
-                      ? column.onClick(row[this.props.dataIdAccessor])
+                      ? column.onClick(row[dataIdAccessor])
                       : () => {}
                   }
                   className={classNames('Table-Element', column.columnClass, {
-                    'Table-Element--light': this.props.light,
-                    'Table-Header--condensed': this.props.condensed,
+                    'Table-Element--light': light,
+                    'Table-Header--condensed': condensed,
                     'Table--centered': column.centered,
                   })}
                   key={column.accessor}
