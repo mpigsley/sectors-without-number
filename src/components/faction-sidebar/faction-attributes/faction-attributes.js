@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -83,15 +83,15 @@ export default function FactionAttributes({ faction, attributes, className }) {
           {faction.tags.map(tag =>
             titledItem(
               tag,
-              <Fragment>
-                <FormattedMessage id={`faction.tags.${tag}.description`} />
+              <>
+                ><FormattedMessage id={`faction.tags.${tag}.description`} />
                 <FlexContainer className="FactionAttributes-TagEffect">
                   <span className="FactionAttributes-Effect">
                     <FormattedMessage id="misc.effect" />
                   </span>
                   <FormattedMessage id={`faction.tags.${tag}.effect`} />
                 </FlexContainer>
-              </Fragment>,
+              </>,
               <FormattedMessage id={`faction.tags.${tag}`} />,
             ),
           )}

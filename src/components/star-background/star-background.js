@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -25,13 +25,13 @@ export default function StarBackground({
   }
 
   return (
-    <Fragment>
-      <StarField />
+    <>
+      ><StarField />
       <AbsoluteContainer className="StarBackground-Container" {...props}>
         {children}
         {loginButton}
       </AbsoluteContainer>
-    </Fragment>
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 
@@ -45,7 +45,8 @@ export default class OverviewList extends Component {
       match,
     } = this.props;
     return (
-      <Fragment>
+      <>
+        >
         <FlexContainer>
           <FlexContainer
             direction="column"
@@ -87,7 +88,7 @@ export default class OverviewList extends Component {
           {children}
         </FlexContainer>
         <ProfileModal />
-      </Fragment>
+      </>
     );
   }
 }

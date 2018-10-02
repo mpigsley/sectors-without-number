@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { map, mapValues } from 'constants/lodash';
@@ -59,7 +59,8 @@ export default class DefaultSidebar extends Component {
     const { openLists } = this.state;
     const { entityChildren } = this.props;
     return (
-      <Fragment>
+      <>
+        >
         <EntityAttributes
           isAttributesOpen={openLists.attributes}
           isTagsOpen={openLists.tags}
@@ -75,7 +76,7 @@ export default class DefaultSidebar extends Component {
             toggleListOpen={this.toggleListOpen(entityType)}
           />
         ))}
-      </Fragment>
+      </>
     );
   }
 }

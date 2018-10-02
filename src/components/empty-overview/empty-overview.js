@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -12,14 +12,15 @@ export default function EmptyOverview({ children, isInitialized }) {
   let body = <Loading />;
   if (isInitialized) {
     body = (
-      <Fragment>
+      <>
+        >
         <Header type={HeaderType.header2} className="EmptyOverview-Header1">
           <FormattedMessage id="misc.entityOverview" />
         </Header>
         <Header type={HeaderType.header3} className="EmptyOverview-Header2">
           {children || <FormattedMessage id="misc.selectEntity" />}
         </Header>
-      </Fragment>
+      </>
     );
   }
   return (

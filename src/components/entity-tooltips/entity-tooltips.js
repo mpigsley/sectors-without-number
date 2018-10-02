@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
@@ -47,11 +47,7 @@ export default function EntityTooltips({ hoverKey, holdKey, layer, hexes }) {
     );
   };
 
-  return (
-    <Fragment>
-      {hexes.filter(({ hexKey }) => hexKey).map(renderTooltip)}
-    </Fragment>
-  );
+  return <>{hexes.filter(({ hexKey }) => hexKey).map(renderTooltip)}</>;
 }
 
 EntityTooltips.propTypes = {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import Loading from 'primitives/regions/loading';
 import HexMap from 'components/hex-map';
@@ -13,13 +13,14 @@ export default function SectorLoading() {
   });
 
   return (
-    <Fragment>
+    <>
+      >
       <HexMap
         height={window.innerHeight}
         width={window.innerWidth}
         hexes={hexes}
       />
       <Loading />
-    </Fragment>
+    </>
   );
 }

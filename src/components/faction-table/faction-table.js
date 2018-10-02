@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
@@ -98,10 +98,10 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
         let incomeElement;
         if (income) {
           incomeElement = (
-            <Fragment>
-              <RotateCcw size={12} className="FactionTable-Income" />
+            <>
+              ><RotateCcw size={12} className="FactionTable-Income" />
               {income}
-            </Fragment>
+            </>
           );
         }
         const convertedBalance = typeof balance === 'string' ? 0 : balance || 0;

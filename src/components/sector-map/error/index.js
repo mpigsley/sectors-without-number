@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -22,7 +22,8 @@ export default function Error({ generateSector }) {
   });
 
   return (
-    <Fragment>
+    <>
+      >
       <HexMap
         height={window.innerHeight}
         width={window.innerWidth}
@@ -47,7 +48,7 @@ export default function Error({ generateSector }) {
           </ContentContainer>
         </AbsoluteContainer>
       </div>
-    </Fragment>
+    </>
   );
 }
 

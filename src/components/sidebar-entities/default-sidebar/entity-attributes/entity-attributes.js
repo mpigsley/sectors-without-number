@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { intlShape } from 'react-intl';
@@ -197,8 +197,8 @@ export default function EntityAttributes({
   }
 
   return (
-    <Fragment>
-      {attributesSection}
+    <>
+      >{attributesSection}
       <EntityTags
         key="tags"
         isSidebarEditActive={isSidebarEditActive}
@@ -211,7 +211,7 @@ export default function EntityAttributes({
         isShared={isShared}
       />
       <ReactHint events position="left" />
-    </Fragment>
+    </>
   );
 }
 

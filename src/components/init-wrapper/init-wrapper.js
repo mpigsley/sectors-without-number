@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
 
 export default class InitWrapper extends Component {
@@ -18,6 +18,6 @@ export default class InitWrapper extends Component {
 
   render() {
     const { children } = this.props;
-    return <Fragment>{children}</Fragment>;
+    return children;
   }
 }
