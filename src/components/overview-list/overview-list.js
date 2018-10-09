@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 
-import ProfileModal from 'components/profile-modal';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import LinkRow from 'primitives/other/link-row';
@@ -45,49 +44,44 @@ export default class OverviewList extends Component {
       match,
     } = this.props;
     return (
-      <>
-        <FlexContainer>
-          <FlexContainer
-            direction="column"
-            align="center"
-            className="OverviewList"
-          >
-            <Header type={HeaderType.header2}>
-              <FormattedMessage id="misc.entities" />
-            </Header>
-            <div className="OverviewList-List">
-              {map(
-                omitBy(
-                  entities,
-                  (list, type) =>
-                    type === Entities.sector.key ||
-                    Entities[type].action !== 'entity',
-                ),
-                (entityList, entityType) => (
-                  <LinkRow
-                    key={entityType}
-                    to={`/overview/${currentSector}/${entityType}`}
-                    title={intl.formatMessage({
-                      id: Entities[entityType].name,
-                    })}
-                    additional={
-                      isInitialized ? `${size(entityList)}` : undefined
-                    }
-                    arrowClassName="OverviewList-Arrow"
-                    className={
-                      match.params.entityType === entityType
-                        ? 'OverviewList-Item--selected'
-                        : ''
-                    }
-                  />
-                ),
-              )}
-            </div>
-          </FlexContainer>
-          {children}
+      <FlexContainer>
+        <FlexContainer
+          direction="column"
+          align="center"
+          className="OverviewList"
+        >
+          <Header type={HeaderType.header2}>
+            <FormattedMessage id="misc.entities" />
+          </Header>
+          <div className="OverviewList-List">
+            {map(
+              omitBy(
+                entities,
+                (list, type) =>
+                  type === Entities.sector.key ||
+                  Entities[type].action !== 'entity',
+              ),
+              (entityList, entityType) => (
+                <LinkRow
+                  key={entityType}
+                  to={`/overview/${currentSector}/${entityType}`}
+                  title={intl.formatMessage({
+                    id: Entities[entityType].name,
+                  })}
+                  additional={isInitialized ? `${size(entityList)}` : undefined}
+                  arrowClassName="OverviewList-Arrow"
+                  className={
+                    match.params.entityType === entityType
+                      ? 'OverviewList-Item--selected'
+                      : ''
+                  }
+                />
+              ),
+            )}
+          </div>
         </FlexContainer>
-        <ProfileModal />
-      </>
+        {children}
+      </FlexContainer>
     );
   }
 }
