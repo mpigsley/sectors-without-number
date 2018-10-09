@@ -46,7 +46,6 @@ export default class OverviewList extends Component {
     } = this.props;
     return (
       <>
-        >
         <FlexContainer>
           <FlexContainer
             direction="column"

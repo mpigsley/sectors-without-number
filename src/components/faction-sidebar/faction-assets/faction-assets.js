@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -76,12 +76,10 @@ export default function FactionAssets({ assets, className }) {
         <LabeledItem className="FactionAssets-Item" label="entity.notes">
           <span>
             {(notes || []).map((note, i) => (
-              <>
-                {' '}
-                key=
-                {note}><FormattedMessage id={`faction.note.${note}`} />
+              <Fragment key={note}>
+                <FormattedMessage id={`faction.note.${note}`} />
                 {i + 1 === notes.length ? '' : ', '}
-              </>
+              </Fragment>
             ))}
           </span>
         </LabeledItem>

@@ -60,7 +60,6 @@ export default class DefaultSidebar extends Component {
     const { entityChildren } = this.props;
     return (
       <>
-        >
         <EntityAttributes
           isAttributesOpen={openLists.attributes}
           isTagsOpen={openLists.tags}

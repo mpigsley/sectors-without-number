@@ -14,7 +14,6 @@ export default function SectorLoading() {
 
   return (
     <>
-      >
       <HexMap
         height={window.innerHeight}
         width={window.innerWidth}

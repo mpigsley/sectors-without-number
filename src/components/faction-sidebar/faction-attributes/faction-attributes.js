@@ -84,7 +84,7 @@ export default function FactionAttributes({ faction, attributes, className }) {
             titledItem(
               tag,
               <>
-                ><FormattedMessage id={`faction.tags.${tag}.description`} />
+                <FormattedMessage id={`faction.tags.${tag}.description`} />
                 <FlexContainer className="FactionAttributes-TagEffect">
                   <span className="FactionAttributes-Effect">
                     <FormattedMessage id="misc.effect" />

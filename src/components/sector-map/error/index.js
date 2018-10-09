@@ -23,7 +23,6 @@ export default function Error({ generateSector }) {
 
   return (
     <>
-      >
       <HexMap
         height={window.innerHeight}
         width={window.innerWidth}

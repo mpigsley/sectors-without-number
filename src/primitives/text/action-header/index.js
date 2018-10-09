@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -12,12 +12,10 @@ import './style.scss';
 const renderAction = ({ key, to, ...props }, index) => {
   const Btn = to ? ButtonLink : Button;
   return (
-    <>
-      {' '}
-      key=
-      {key}>{index ? <span className="ActionHeader-Spacer" /> : null}
+    <Fragment key={key}>
+      {index ? <span className="ActionHeader-Spacer" /> : null}
       <Btn minimal to={to} {...props} />
-    </>
+    </Fragment>
   );
 };
 

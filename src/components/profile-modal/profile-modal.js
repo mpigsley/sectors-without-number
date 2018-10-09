@@ -20,7 +20,6 @@ export default function ProfileModal({
 }) {
   return (
     <>
-      >
       <Modal
         isOpen={isEditModalOpen}
         onCancel={closeEditModal}

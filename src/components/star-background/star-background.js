@@ -26,7 +26,7 @@ export default function StarBackground({
 
   return (
     <>
-      ><StarField />
+      <StarField />
       <AbsoluteContainer className="StarBackground-Container" {...props}>
         {children}
         {loginButton}

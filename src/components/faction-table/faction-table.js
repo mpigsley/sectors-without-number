@@ -99,7 +99,7 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
         if (income) {
           incomeElement = (
             <>
-              ><RotateCcw size={12} className="FactionTable-Income" />
+              <RotateCcw size={12} className="FactionTable-Income" />
               {income}
             </>
           );

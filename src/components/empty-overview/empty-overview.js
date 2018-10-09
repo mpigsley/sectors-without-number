@@ -13,7 +13,6 @@ export default function EmptyOverview({ children, isInitialized }) {
   if (isInitialized) {
     body = (
       <>
-        >
         <Header type={HeaderType.header2} className="EmptyOverview-Header1">
           <FormattedMessage id="misc.entityOverview" />
         </Header>

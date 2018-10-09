@@ -198,7 +198,7 @@ export default function EntityAttributes({
 
   return (
     <>
-      >{attributesSection}
+      {attributesSection}
       <EntityTags
         key="tags"
         isSidebarEditActive={isSidebarEditActive}
