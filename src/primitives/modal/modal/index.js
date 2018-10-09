@@ -9,20 +9,19 @@ import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import Button from 'primitives/other/button';
 
-import './style.css';
+import './style.scss';
 
-export default function Modal(props) {
-  const {
-    title,
-    children,
-    cancelText,
-    onCancel,
-    actionButtons,
-    width,
-    hideHeader,
-    ...rest
-  } = props;
-
+export default function Modal({
+  title,
+  children,
+  cancelText,
+  onCancel,
+  actionButtons,
+  width,
+  hideHeader,
+  overlayClassName,
+  ...rest
+}) {
   let header = null;
   if (!hideHeader) {
     header = (
@@ -51,7 +50,7 @@ export default function Modal(props) {
         beforeClose: 'Modal--closed',
       }}
       overlayClassName={{
-        base: classNames('Modal-Overlay', props.overlayClassName),
+        base: classNames('Modal-Overlay', overlayClassName),
         afterOpen: 'Modal-Overlay--open',
         beforeClose: 'Modal-Overlay--closed',
       }}

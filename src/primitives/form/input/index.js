@@ -4,12 +4,11 @@ import classNames from 'classnames';
 
 import Dropdown from 'primitives/form/dropdown';
 
-import './style.css';
+import './style.scss';
 
-export default function Input(props) {
-  const { className, width, error, type, ...rest } = props;
+export default function Input({ className, width, error, type, ...rest }) {
   let style = {};
-  if (props.width) {
+  if (width) {
     style = { width };
   }
   if (type === 'textarea') {
@@ -22,7 +21,8 @@ export default function Input(props) {
         })}
       />
     );
-  } else if (type === 'dropdown') {
+  }
+  if (type === 'dropdown') {
     return (
       <Dropdown wrapperClassName="Input-Dropdown" style={style} {...rest} />
     );

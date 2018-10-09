@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { getTopLevelEntity } from 'utils/entity';
 import Entities from 'constants/entities';
 
-import './style.css';
+import './style.scss';
 
 const hexPadding = 2;
 

@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 
@@ -10,7 +10,7 @@ import LinkRow from 'primitives/other/link-row';
 import { omitBy, map, size } from 'constants/lodash';
 import Entities from 'constants/entities';
 
-import './style.css';
+import './style.scss';
 
 export default class OverviewList extends Component {
   static propTypes = {
@@ -28,15 +28,24 @@ export default class OverviewList extends Component {
     intl: intlShape.isRequired,
   };
 
-  componentDidUpdate({ isInitialized }) {
-    if (!isInitialized && this.props.isInitialized && this.props.doesNotExist) {
-      this.props.toSafeRoute();
+  componentDidUpdate(props) {
+    const { isInitialized, doesNotExist, toSafeRoute } = this.props;
+    if (!props.isInitialized && isInitialized && doesNotExist) {
+      toSafeRoute();
     }
   }
 
   render() {
+    const {
+      entities,
+      currentSector,
+      children,
+      intl,
+      isInitialized,
+      match,
+    } = this.props;
     return (
-      <Fragment>
+      <>
         <FlexContainer>
           <FlexContainer
             direction="column"
@@ -49,7 +58,7 @@ export default class OverviewList extends Component {
             <div className="OverviewList-List">
               {map(
                 omitBy(
-                  this.props.entities,
+                  entities,
                   (list, type) =>
                     type === Entities.sector.key ||
                     Entities[type].action !== 'entity',
@@ -57,18 +66,16 @@ export default class OverviewList extends Component {
                 (entityList, entityType) => (
                   <LinkRow
                     key={entityType}
-                    to={`/overview/${this.props.currentSector}/${entityType}`}
-                    title={this.props.intl.formatMessage({
+                    to={`/overview/${currentSector}/${entityType}`}
+                    title={intl.formatMessage({
                       id: Entities[entityType].name,
                     })}
                     additional={
-                      this.props.isInitialized
-                        ? `${size(entityList)}`
-                        : undefined
+                      isInitialized ? `${size(entityList)}` : undefined
                     }
                     arrowClassName="OverviewList-Arrow"
                     className={
-                      this.props.match.params.entityType === entityType
+                      match.params.entityType === entityType
                         ? 'OverviewList-Item--selected'
                         : ''
                     }
@@ -77,10 +84,10 @@ export default class OverviewList extends Component {
               )}
             </div>
           </FlexContainer>
-          {this.props.children}
+          {children}
         </FlexContainer>
         <ProfileModal />
-      </Fragment>
+      </>
     );
   }
 }

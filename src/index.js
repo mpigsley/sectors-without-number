@@ -16,8 +16,9 @@ import Home from 'components/home';
 import Configure from 'components/configure';
 import Changelog from 'components/changelog';
 import GameRoutes from 'components/game-routes';
+import * as serviceWorker from './serviceWorker';
 
-import 'styles/global.css';
+import 'styles/global.scss';
 import 'react-hint/css/index.css';
 
 Fastclick();
@@ -51,3 +52,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
+
+serviceWorker.unregister();

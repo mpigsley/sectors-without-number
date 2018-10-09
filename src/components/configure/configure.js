@@ -18,7 +18,7 @@ import { Zap, RefreshCw } from 'constants/icons';
 import { clamp } from 'constants/lodash';
 import { generateSectorName } from 'utils/name-generator';
 
-import './style.css';
+import './style.scss';
 
 export default function Configure({
   additionalPointsOfInterest,

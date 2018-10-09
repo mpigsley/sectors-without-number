@@ -16,7 +16,7 @@ import { coordinateKey } from 'utils/common';
 import Loading from './loading';
 import Error from './error';
 
-import './style.css';
+import './style.scss';
 
 export default class SectorMap extends Component {
   static propTypes = {
@@ -48,25 +48,29 @@ export default class SectorMap extends Component {
     sector: {},
   };
 
-  componentWillMount() {
-    const splitPath = this.props.location.pathname.split('/');
+  constructor(props) {
+    super(props);
+
+    const { location, toSafeRoute, match, fetchSector } = props;
+    const splitPath = location.pathname.split('/');
     if (
       splitPath.length > 5 ||
       (splitPath[4] || splitPath[2] || '').length !== 20
     ) {
-      this.props.toSafeRoute(this.props.match.params.sector);
+      toSafeRoute(match.params.sector);
     } else {
-      this.props.fetchSector();
+      fetchSector();
     }
   }
 
   renderTooltips(hexData) {
-    if (!this.props.renderSector) {
+    const { renderSector, topLevelEntities } = this.props;
+    if (!renderSector) {
       return null;
     }
     return (
       <EntityTooltips
-        hexes={map(this.props.topLevelEntities, entity => ({
+        hexes={map(topLevelEntities, entity => ({
           ...entity,
           ...hexData.find(
             ({ hexKey }) => coordinateKey(entity.x, entity.y) === hexKey,
@@ -77,20 +81,29 @@ export default class SectorMap extends Component {
   }
 
   renderPrintable(printable) {
-    if (!this.props.isPrinting) {
+    const { isPrinting, exportType } = this.props;
+    if (!isPrinting) {
       return null;
     }
-    if (this.props.exportType === ExportTypes.expanded.key) {
+    if (exportType === ExportTypes.expanded.key) {
       return <ExpandedPrintable printable={printable} />;
     }
     return <CondensedPrintable printable={printable} />;
   }
 
   render() {
-    if (this.props.isLoading) {
+    const {
+      isLoading,
+      doesNotExist,
+      generateSector,
+      sector,
+      children,
+    } = this.props;
+    if (isLoading) {
       return <Loading />;
-    } else if (this.props.doesNotExist) {
-      return <Error generateSector={this.props.generateSector} />;
+    }
+    if (doesNotExist) {
+      return <Error generateSector={generateSector} />;
     }
 
     return (
@@ -102,8 +115,8 @@ export default class SectorMap extends Component {
               renderSector: true,
               height,
               width,
-              rows: this.props.sector.rows,
-              columns: this.props.sector.columns,
+              rows: sector.rows,
+              columns: sector.columns,
             });
             return (
               <div ref={measureRef} className="SectorMap-Map">
@@ -114,7 +127,7 @@ export default class SectorMap extends Component {
             );
           }}
         </Measure>
-        <div className="SectorMap-Sidebar">{this.props.children}</div>
+        <div className="SectorMap-Sidebar">{children}</div>
         <TopLevelEntityModal />
         <ProfileModal />
       </div>

@@ -5,7 +5,7 @@ import FlexContainer from 'primitives/container/flex-container';
 import Input from 'primitives/form/input';
 import Label from 'primitives/form/label';
 
-import './style.css';
+import './style.scss';
 
 export default function Checkbox({ label, value, onChange, ...rest }) {
   return (

@@ -7,7 +7,7 @@ import Table from 'primitives/other/table';
 import { without, includes } from 'constants/lodash';
 import { PlusCircle, Circle } from 'constants/icons';
 
-import './style.css';
+import './style.scss';
 
 export default class CollapsibleTable extends Component {
   static propTypes = {
@@ -20,9 +20,14 @@ export default class CollapsibleTable extends Component {
     columns: PropTypes.arrayOf(PropTypes.shape()).isRequired,
   };
 
-  state = {
-    openRows: this.props.data.map(row => row[this.props.dataIdAccessor]),
-  };
+  constructor(props) {
+    super(props);
+
+    const { data, dataIdAccessor } = props;
+    this.state = {
+      openRows: data.map(row => row[dataIdAccessor]),
+    };
+  }
 
   get filteredData() {
     const { data, dataIdAccessor } = this.props;

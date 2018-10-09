@@ -10,7 +10,7 @@ import Input from 'primitives/form/input';
 
 import { Check, X, Edit3, MoreHorizontal, EyeOff } from 'constants/icons';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 
@@ -34,7 +34,8 @@ export default function RegionRow({
 }) {
   if (!regionId && !regionForm) {
     return null;
-  } else if (!regionId || regionId === (regionForm || {}).regionId) {
+  }
+  if (!regionId || regionId === (regionForm || {}).regionId) {
     const isOutOfRange = regionForm.name.length > 40;
     return (
       <FlexContainer className="RegionRow" align="center">

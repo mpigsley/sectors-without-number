@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import MapHex from './map-hex';
-import './style.css';
+import './style.scss';
 
 export default function MapPrintable({ viewbox, hexes, topLevelEntities }) {
   return (

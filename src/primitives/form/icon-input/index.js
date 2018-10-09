@@ -4,12 +4,17 @@ import classNames from 'classnames';
 
 import Input from 'primitives/form/input';
 
-import './style.css';
+import './style.scss';
 
 const defaultFunc = () => {};
 
-export default function IconInput(props) {
-  const { icon, onIconClick, wrapperClassName, ...rest } = props;
+export default function IconInput({
+  icon,
+  onIconClick,
+  wrapperClassName,
+  className,
+  ...rest
+}) {
   const Icon = icon;
   return (
     <div className={classNames('IconInput', wrapperClassName)}>
@@ -20,10 +25,7 @@ export default function IconInput(props) {
         onClick={onIconClick || defaultFunc}
         size={15}
       />
-      <Input
-        {...rest}
-        className={classNames('IconInput-Input', props.className)}
-      />
+      <Input {...rest} className={classNames('IconInput-Input', className)} />
     </div>
   );
 }

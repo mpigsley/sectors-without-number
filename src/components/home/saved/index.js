@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 
-import './style.css';
+import './style.scss';
 
 export default function HomeSaved({ name, sector, rows, columns, created }) {
   let date = new Date(created);

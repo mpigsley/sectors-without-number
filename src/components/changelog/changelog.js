@@ -8,7 +8,7 @@ import FlexContainer from 'primitives/container/flex-container';
 
 import changelog from 'changelog.json';
 
-import './style.css';
+import './style.scss';
 
 export default function Changelog() {
   return (

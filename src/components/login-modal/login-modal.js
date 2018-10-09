@@ -10,7 +10,7 @@ import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
 import { X } from 'constants/icons';
 
-import './style.css';
+import './style.scss';
 
 const LOGIN_PAGE_TYPES = {
   login: 'login',
@@ -44,23 +44,28 @@ export default class ConfirmModal extends Component {
   };
 
   onConfirm = () => {
-    if (this.state.page === LOGIN_PAGE_TYPES.login) {
-      this.props.login();
-    } else if (this.state.page === LOGIN_PAGE_TYPES.signup) {
-      this.props.signup();
+    const { page } = this.state;
+    const { login, signup, passwordReset } = this.props;
+    if (page === LOGIN_PAGE_TYPES.login) {
+      login();
+    } else if (page === LOGIN_PAGE_TYPES.signup) {
+      signup();
     } else {
-      this.props.passwordReset();
+      passwordReset();
     }
   };
 
   onEditText = ({ target }) => {
-    this.props.updateUserForm(target.dataset.key, target.value);
+    const { updateUserForm } = this.props;
+    updateUserForm(target.dataset.key, target.value);
   };
 
   renderPassword() {
-    if (this.state.page === LOGIN_PAGE_TYPES.forget) {
+    const { page } = this.state;
+    if (page === LOGIN_PAGE_TYPES.forget) {
       return null;
     }
+    const { intl, password } = this.props;
     return (
       <div>
         <Label htmlFor="password">
@@ -71,8 +76,8 @@ export default class ConfirmModal extends Component {
           name="password"
           data-key="password"
           type="password"
-          placeholder={this.props.intl.formatMessage({ id: 'misc.password' })}
-          value={this.props.password}
+          placeholder={intl.formatMessage({ id: 'misc.password' })}
+          value={password}
           onChange={this.onEditText}
         />
       </div>
@@ -80,7 +85,8 @@ export default class ConfirmModal extends Component {
   }
 
   renderForgotPassword() {
-    if (this.state.page !== LOGIN_PAGE_TYPES.login) {
+    const { page } = this.state;
+    if (page !== LOGIN_PAGE_TYPES.login) {
       return null;
     }
     return (
@@ -96,9 +102,11 @@ export default class ConfirmModal extends Component {
   }
 
   renderPasswordConfirm() {
-    if (this.state.page !== LOGIN_PAGE_TYPES.signup) {
+    const { page } = this.state;
+    if (page !== LOGIN_PAGE_TYPES.signup) {
       return null;
     }
+    const { intl, confirm } = this.props;
     return (
       <div>
         <Label htmlFor="confirm">
@@ -109,8 +117,8 @@ export default class ConfirmModal extends Component {
           name="confirm"
           data-key="confirm"
           type="password"
-          placeholder={this.props.intl.formatMessage({ id: 'misc.confirm' })}
-          value={this.props.confirm}
+          placeholder={intl.formatMessage({ id: 'misc.confirm' })}
+          value={confirm}
           onChange={this.onEditText}
         />
       </div>
@@ -118,49 +126,49 @@ export default class ConfirmModal extends Component {
   }
 
   renderError() {
-    if (!this.props.error) {
+    const { error } = this.props;
+    if (!error) {
       return null;
     }
     return (
       <FlexContainer className="LoginModal-Error" justify="center">
-        {this.props.error}
+        {error}
       </FlexContainer>
     );
   }
 
   render() {
+    const { page } = this.state;
+    const {
+      isLoginModalOpen,
+      closeLoginModal,
+      facebookLogin,
+      googleLogin,
+      intl,
+      email,
+    } = this.props;
     let actionText = <FormattedMessage id="misc.sendReset" />;
-    if (this.state.page === LOGIN_PAGE_TYPES.login) {
+    if (page === LOGIN_PAGE_TYPES.login) {
       actionText = <FormattedMessage id="misc.logIn" />;
-    } else if (this.state.page === LOGIN_PAGE_TYPES.signup) {
+    } else if (page === LOGIN_PAGE_TYPES.signup) {
       actionText = <FormattedMessage id="misc.signUp" />;
     }
 
     return (
       <ReactModal
         contentLabel="Signup & Login"
-        isOpen={this.props.isLoginModalOpen}
-        onCancel={this.props.closeLoginModal}
+        isOpen={isLoginModalOpen}
+        onCancel={closeLoginModal}
         className="LoginModal"
         overlayClassName="LoginModal-Overlay"
         ariaHideApp={false}
       >
-        <X
-          className="LoginModal-Close"
-          onClick={this.props.closeLoginModal}
-          size={30}
-        />
+        <X className="LoginModal-Close" onClick={closeLoginModal} size={30} />
         <FlexContainer justify="center" align="center" direction="column">
-          <Button
-            className="LoginModal-Facebook"
-            onClick={this.props.facebookLogin}
-          >
+          <Button className="LoginModal-Facebook" onClick={facebookLogin}>
             <FormattedMessage id="misc.facebook" />
           </Button>
-          <Button
-            className="LoginModal-Google"
-            onClick={this.props.googleLogin}
-          >
+          <Button className="LoginModal-Google" onClick={googleLogin}>
             <FormattedMessage id="misc.google" />
           </Button>
         </FlexContainer>
@@ -177,19 +185,21 @@ export default class ConfirmModal extends Component {
         </FlexContainer>
         <FlexContainer className="LoginModal-Switcher" justify="center">
           <button
+            type="submit"
             onClick={() => this.setState({ page: LOGIN_PAGE_TYPES.login })}
             className={classNames('LoginModal-SwitchButton', {
               'LoginModal-SwitchButton--active':
-                this.state.page === LOGIN_PAGE_TYPES.login,
+                page === LOGIN_PAGE_TYPES.login,
             })}
           >
             <FormattedMessage id="misc.logIn" />
           </button>
           <button
+            type="submit"
             onClick={() => this.setState({ page: LOGIN_PAGE_TYPES.signup })}
             className={classNames('LoginModal-SwitchButton', {
               'LoginModal-SwitchButton--active':
-                this.state.page === LOGIN_PAGE_TYPES.signup,
+                page === LOGIN_PAGE_TYPES.signup,
             })}
           >
             <FormattedMessage id="misc.signUp" />
@@ -207,8 +217,8 @@ export default class ConfirmModal extends Component {
             id="email"
             name="email"
             data-key="email"
-            placeholder={this.props.intl.formatMessage({ id: 'misc.email' })}
-            value={this.props.email}
+            placeholder={intl.formatMessage({ id: 'misc.email' })}
+            value={email}
             onChange={this.onEditText}
           />
           {this.renderPassword()}

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 
-import './style.css';
+import './style.scss';
 
 export default function SaveFooter({
   onCancel,
@@ -16,12 +16,14 @@ export default function SaveFooter({
   return (
     <FlexContainer>
       <button
+        type="button"
         className="SaveFooter-Button SaveFooter-Cancel"
         onClick={onCancel}
       >
         <FormattedMessage id={cancelText} />
       </button>
       <button
+        type="submit"
         disabled={disabled}
         className="SaveFooter-Button SaveFooter-Save"
         onClick={onSave}

@@ -7,7 +7,7 @@ import { ChevronRight } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 
-import './style.css';
+import './style.scss';
 
 export default class LinkRow extends Component {
   state = {
@@ -23,9 +23,8 @@ export default class LinkRow extends Component {
       className,
       arrowClassName,
     } = this.props;
-    const Icon = this.state.hovered
-      ? ChevronRight
-      : additionalIcon || ChevronRight;
+    const { hovered } = this.state;
+    const Icon = hovered ? ChevronRight : additionalIcon || ChevronRight;
     return (
       <Link
         to={to}
@@ -45,7 +44,7 @@ export default class LinkRow extends Component {
             )}
           </FlexContainer>
           <Icon
-            size={additionalIcon && !this.state.hovered ? 16 : 20}
+            size={additionalIcon && !hovered ? 16 : 20}
             className={classNames('LinkRow-RightArrow', arrowClassName, {
               'LinkRow-AdditionalIcon': additionalIcon,
             })}

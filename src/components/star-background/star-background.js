@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
@@ -6,7 +6,7 @@ import AbsoluteContainer from 'primitives/container/absolute-container';
 import StarField from 'primitives/regions/star-field';
 import Button from 'primitives/other/button';
 
-import './style.css';
+import './style.scss';
 
 export default function StarBackground({
   children,
@@ -25,13 +25,13 @@ export default function StarBackground({
   }
 
   return (
-    <Fragment>
+    <>
       <StarField />
       <AbsoluteContainer className="StarBackground-Container" {...props}>
         {children}
         {loginButton}
       </AbsoluteContainer>
-    </Fragment>
+    </>
   );
 }
 

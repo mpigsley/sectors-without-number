@@ -15,7 +15,7 @@ import { generateCSV, createCSVDownload } from 'utils/export';
 import { sortByKey } from 'utils/common';
 import { values, size } from 'constants/lodash';
 
-import './style.css';
+import './style.scss';
 
 export default function OverviewTable({
   entities,

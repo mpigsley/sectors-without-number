@@ -9,7 +9,7 @@ import SaveFooter from 'primitives/other/save-footer';
 
 import Entities from 'constants/entities';
 
-import './style.css';
+import './style.scss';
 
 export default class EntityActions extends Component {
   static propTypes = {
@@ -41,25 +41,29 @@ export default class EntityActions extends Component {
   };
 
   onConfirmDelete = () => this.setState({ isConfirmDeleteOpen: true });
+
   onCancelDelete = () => this.setState({ isConfirmDeleteOpen: false });
+
   onDeleteEntity = () => {
+    const { removeLayer } = this.props;
     this.onCancelDelete();
-    this.props.removeLayer();
+    removeLayer();
   };
 
   buildActions = () => {
+    const { isSaved, isShared, layer, intl, initializeLayerEdit } = this.props;
     const actions = [];
-    if (this.props.isSaved && !this.props.isShared) {
-      if (this.props.layer) {
+    if (isSaved && !isShared) {
+      if (layer) {
         actions.push({
           key: 'edit',
-          children: this.props.intl.formatMessage({ id: 'misc.edit' }),
-          onClick: this.props.initializeLayerEdit,
+          children: intl.formatMessage({ id: 'misc.edit' }),
+          onClick: initializeLayerEdit,
         });
       }
       actions.push({
         key: 'delete',
-        children: this.props.intl.formatMessage({ id: 'misc.delete' }),
+        children: intl.formatMessage({ id: 'misc.delete' }),
         onClick: this.onConfirmDelete,
       });
     }
@@ -67,12 +71,13 @@ export default class EntityActions extends Component {
   };
 
   renderName() {
-    if (!this.props.layer) {
-      return this.props.intl.formatMessage({ id: Entities.layer.name });
+    const { layer, intl } = this.props;
+    if (!layer) {
+      return intl.formatMessage({ id: Entities.layer.name });
     }
     return [
       <Header key="header" type={HeaderType.header2}>
-        {this.props.layer.name}
+        {layer.name}
       </Header>,
       <Header
         key="sub-header"
@@ -108,6 +113,8 @@ export default class EntityActions extends Component {
   }
 
   render() {
+    const { children, intl } = this.props;
+    const { isConfirmDeleteOpen } = this.state;
     return (
       <ActionLayout
         backUrl={this.backUrl}
@@ -115,16 +122,16 @@ export default class EntityActions extends Component {
         name={this.renderName()}
         footer={this.renderFooter()}
       >
-        {this.props.children}
+        {children}
         <ConfirmModal
-          isOpen={this.state.isConfirmDeleteOpen}
+          isOpen={isConfirmDeleteOpen}
           onConfirm={this.onDeleteEntity}
           onCancel={this.onCancelDelete}
         >
           <FormattedMessage
             id="misc.toDeleteEntity"
             values={{
-              entity: this.props.intl.formatMessage({
+              entity: intl.formatMessage({
                 id: Entities.layer.name,
               }),
             }}

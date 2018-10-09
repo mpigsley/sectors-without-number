@@ -6,7 +6,7 @@ import Header, { HeaderType } from 'primitives/text/header';
 import ButtonLink from 'primitives/other/button-link';
 import Button from 'primitives/other/button';
 
-import './style.css';
+import './style.scss';
 
 // eslint-disable-next-line react/prop-types
 const renderAction = ({ key, to, ...props }, index) => {

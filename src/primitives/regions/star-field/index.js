@@ -4,7 +4,7 @@ import Measure from 'react-measure';
 import AbsoluteContainer from 'primitives/container/absolute-container';
 import { getPixelRatio } from 'utils/canvas-helpers';
 
-import './style.css';
+import './style.scss';
 
 export default class StarField extends Component {
   constructor(props) {
@@ -24,9 +24,8 @@ export default class StarField extends Component {
   }
 
   shouldComponentUpdate(props, state) {
-    return (
-      this.state.width !== state.width || this.state.height !== state.height
-    );
+    const { width, height } = this.state;
+    return width !== state.width || height !== state.height;
   }
 
   componentDidUpdate() {
@@ -35,19 +34,15 @@ export default class StarField extends Component {
 
   drawStars() {
     const context = this.canvas.current.getContext('2d');
-    context.clearRect(
-      0,
-      0,
-      this.state.width * this.ratio,
-      this.state.height * this.ratio,
-    );
+    const { width, height } = this.state;
+    context.clearRect(0, 0, width * this.ratio, height * this.ratio);
     const getRandom = (min, max) =>
       Math.floor(Math.random() * (max - min + 1)) + min;
-    const stars = (this.state.width * this.state.height) / 500;
+    const stars = (width * height) / 500;
     const colorRange = [0, 60, 240];
     for (let i = 0; i < stars; i += 1) {
-      const x = Math.random() * this.state.width * this.ratio;
-      const y = Math.random() * this.state.height * this.ratio;
+      const x = Math.random() * width * this.ratio;
+      const y = Math.random() * height * this.ratio;
       const radius = Math.random() * 1.2 * this.ratio;
       const hue = colorRange[getRandom(0, colorRange.length - 1)];
       const sat = getRandom(50, 100);
@@ -59,6 +54,7 @@ export default class StarField extends Component {
   }
 
   render() {
+    const { width, height } = this.state;
     return (
       <Measure
         onResize={({ entry }) =>
@@ -68,13 +64,10 @@ export default class StarField extends Component {
         {({ measureRef }) => (
           <AbsoluteContainer ref={measureRef} className="StarField-Container">
             <canvas
-              width={this.state.width * this.ratio}
-              height={this.state.height * this.ratio}
+              width={width * this.ratio}
+              height={height * this.ratio}
               ref={this.canvas}
-              style={{
-                width: this.state.width,
-                height: this.state.height,
-              }}
+              style={{ width, height }}
             />
           </AbsoluteContainer>
         )}

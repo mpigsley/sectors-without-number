@@ -16,7 +16,7 @@ import Entities from 'constants/entities';
 import EntityLinkRow from '../entity-link-row';
 import EntityEditRow from '../entity-edit-row';
 
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 

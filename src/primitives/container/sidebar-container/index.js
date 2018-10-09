@@ -6,7 +6,7 @@ import FlexContainer from 'primitives/container/flex-container';
 import ActionHeader from 'primitives/text/action-header';
 import ButtonLink from 'primitives/other/button-link';
 
-import './style.css';
+import './style.scss';
 
 export default function SidebarContainer({ title, actions, footer, children }) {
   return (

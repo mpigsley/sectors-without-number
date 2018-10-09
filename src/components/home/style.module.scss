@@ -1,5 +1,5 @@
-@import 'styles/utilities';
-@import 'styles/theme';
+@import '~styles/utilities';
+@import '~styles/theme';
 
 $hexSize: variableSize(140, 200);
 $hexBorder: 1px solid $dark1;
@@ -13,14 +13,14 @@ $offset-c2: 4;
 $lay-c1: 3;
 $lay-c2: 4;
 
-.Home-Hero {
+.hero {
   overflow: hidden;
   position: relative;
   width: 100%;
   margin: 8rem 0 5rem;
 }
 
-.Home-Glitch {
+.glitch {
   cursor: default;
   display: block;
 
@@ -28,7 +28,7 @@ $lay-c2: 4;
     animation: text-bag 4s linear infinite;
     transform: skewX(0deg) scaleY(1);
 
-    .Home-MainHeader {
+    .mainHeader {
       &:before {
         left: -(#{$offset-c2}px);
         text-shadow: #{$lay-c2}px 0 $color-c2;
@@ -43,7 +43,7 @@ $lay-c2: 4;
   }
 }
 
-.Home-MainHeader {
+.mainHeader {
   animation: fadein 1.5s;
   color: $cyber;
   display: block;
@@ -67,19 +67,19 @@ $lay-c2: 4;
   }
 }
 
-.Home-SubHeader {
+.subHeader {
   animation: fadein 1.5s;
   font-size: variableSize(26, 72);
   font-style: italic;
   font-weight: bold;
 }
 
-.Home-Actions {
+.actions {
   animation: fadein 1.5s;
   margin-top: variableSize(20, 70);
 }
 
-.Home-Action {
+.action {
   align-items: center;
   background-color: transparent;
   border: $hexBorder;
@@ -106,7 +106,7 @@ $lay-c2: 4;
     background: $transparentDark;
     background: radial-gradient($transparentDark, transparent);
 
-    .Home-Hexagon {
+    .hexagon {
       animation-duration: 4s;
     }
   }
@@ -114,7 +114,7 @@ $lay-c2: 4;
 
 $innerHex: 5px;
 
-.Home-HexagonWrap {
+.hexagonWrap {
   bottom: $innerHex;
   left: $innerHex;
   position: absolute;
@@ -123,7 +123,7 @@ $innerHex: 5px;
   top: $innerHex;
 }
 
-.Home-Hexagon {
+.hexagon {
   animation: spin 8s linear infinite;
   border-bottom: $hexBorder;
   border-top: $hexBorder;
@@ -153,7 +153,7 @@ $innerHex: 5px;
   }
 }
 
-.Home-SectionHeader {
+.sectionHeader {
   align-items: flex-end;
   background: linear-gradient(transparent, transparent, $transparentDark);
   border-bottom: $hexBorder;
@@ -170,7 +170,7 @@ $innerHex: 5px;
 $grid-width: 20rem;
 $grid-height: 12rem;
 
-.Home-Grid {
+.grid {
   display: grid;
   grid-auto-rows: $grid-height;
   grid-gap: 2rem;
@@ -181,23 +181,23 @@ $grid-height: 12rem;
 }
 
 @media (max-width: 1100px) {
-  .Home-Grid {
+  .grid {
     grid-template-columns: repeat(2, $grid-width);
   }
 }
 
 @media (max-width: 750px) {
-  .Home-Grid {
+  .grid {
     grid-template-columns: $grid-width;
   }
 }
 
 @media (max-width: 500px) {
-  .Home-Actions {
+  .actions {
     flex-direction: column;
   }
 
-  .Home-Action {
+  .action {
     margin: 0;
     margin-bottom: 1.5rem;
   }

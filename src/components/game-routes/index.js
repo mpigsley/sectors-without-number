@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Loadable from 'react-loadable';
 
 const LoadableGameRoutes = Loadable.Map({
   delay: 400,
-  loading: () => <Fragment />,
+  loading: () => <></>,
   loader: {
     Component: () =>
       import(/* webpackChunkName: "game-routes" */ 'components/game-routes/routes'),

@@ -19,7 +19,7 @@ import {
 } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 
@@ -43,36 +43,38 @@ export default class FloatingToolbar extends Component {
     }).isRequired,
   };
 
-  componentWillMount() {
-    if (
-      this.props.isShared &&
-      includes(this.props.location.pathname.split('/'), 'navigation')
-    ) {
-      this.props.redirectToHome(this.props.sectorId);
+  constructor(props) {
+    super(props);
+
+    const { isShared, location, sectorId, redirectToHome } = props;
+    if (isShared && includes(location.pathname.split('/'), 'navigation')) {
+      redirectToHome(sectorId);
     }
   }
 
   renderSectorLock() {
-    if (this.props.mapLocked) {
+    const { mapLocked } = this.props;
+    if (mapLocked) {
       return <Lock size={18} />;
     }
     return <Unlock size={18} />;
   }
 
   renderLock() {
-    if (this.props.isShared) {
+    const { isShared, mapLocked, intl, toggleMapLock } = this.props;
+    if (isShared) {
       return null;
     }
     return (
       <FlexContainer
         data-rh={
-          !this.props.mapLocked
-            ? this.props.intl.formatMessage({ id: 'misc.mapLockInfo' })
+          !mapLocked
+            ? intl.formatMessage({ id: 'misc.mapLockInfo' })
             : undefined
         }
-        onClick={this.props.toggleMapLock}
+        onClick={toggleMapLock}
         className={classNames('FloatingToolbar-Item', {
-          'FloatingToolbar-Lock--active': this.props.mapLocked,
+          'FloatingToolbar-Lock--active': mapLocked,
         })}
       >
         {this.renderSectorLock()}
@@ -81,26 +83,28 @@ export default class FloatingToolbar extends Component {
   }
 
   renderSwitcherIcon() {
-    if (this.props.playerView) {
+    const { playerView } = this.props;
+    if (playerView) {
       return <EyeOff size={18} />;
     }
     return <Eye size={18} />;
   }
 
   renderViewSwitcher() {
-    if (this.props.isSharedSector) {
+    const { isSharedSector, playerView, intl, togglePlayerView } = this.props;
+    if (isSharedSector) {
       return null;
     }
     return (
       <FlexContainer
         data-rh={
-          !this.props.playerView
-            ? this.props.intl.formatMessage({ id: 'misc.playerViewSwitcher' })
+          !playerView
+            ? intl.formatMessage({ id: 'misc.playerViewSwitcher' })
             : undefined
         }
-        onClick={this.props.togglePlayerView}
+        onClick={togglePlayerView}
         className={classNames('FloatingToolbar-Item', {
-          'FloatingToolbar-Lock--active': this.props.playerView,
+          'FloatingToolbar-Lock--active': playerView,
         })}
       >
         {this.renderSwitcherIcon()}
@@ -110,13 +114,14 @@ export default class FloatingToolbar extends Component {
 
   renderLayer(key, text, editLink) {
     let actionButton = null;
-    if (!this.props.isShared && this.props.isSaved && editLink) {
+    const { isShared, isSaved, layers, toggleLayer, sectorLayers } = this.props;
+    if (!isShared && isSaved && editLink) {
       actionButton = (
         <Link to={editLink} className="FloatingToolbar-ItemAction">
           <Edit2 size={18} />
         </Link>
       );
-    } else if (this.props.isShared && includes(keys(this.props.layers), key)) {
+    } else if (isShared && includes(keys(layers), key)) {
       actionButton = (
         <Link to={editLink} className="FloatingToolbar-ItemAction">
           <List size={18} />
@@ -126,12 +131,11 @@ export default class FloatingToolbar extends Component {
     return (
       <FlexContainer key={key} className="FloatingToolbar-SubItemOuter">
         <FlexContainer
-          onClick={() => this.props.toggleLayer(key)}
+          onClick={() => toggleLayer(key)}
           className={classNames('FloatingToolbar-SubItemName', {
             'FloatingToolbar-SubItemName--edit': actionButton,
             'FloatingToolbar-SubItemName--active':
-              this.props.sectorLayers[key] === undefined ||
-              this.props.sectorLayers[key],
+              sectorLayers[key] === undefined || sectorLayers[key],
           })}
         >
           {text}
@@ -142,13 +146,14 @@ export default class FloatingToolbar extends Component {
   }
 
   renderCreateLayer() {
-    if (this.props.isShared || !this.props.isSaved) {
+    const { isShared, isSaved, sectorId } = this.props;
+    if (isShared || !isSaved) {
       return null;
     }
     return (
       <FlexContainer className="FloatingToolbar-SubItemOuter">
         <Link
-          to={`/sector/${this.props.sectorId}/layer`}
+          to={`/sector/${sectorId}/layer`}
           className="FloatingToolbar-SubItemName FloatingToolbar-CreateLayer"
         >
           <Plus size={18} /> <FormattedMessage id="misc.createLayer" />
@@ -158,6 +163,7 @@ export default class FloatingToolbar extends Component {
   }
 
   render() {
+    const { intl, sectorId, layers } = this.props;
     return (
       <div className="FloatingToolbar-Container">
         <FlexContainer className="FloatingToolbar" direction="column">
@@ -171,26 +177,22 @@ export default class FloatingToolbar extends Component {
             >
               {this.renderLayer(
                 'systemText',
-                this.props.intl.formatMessage({ id: 'misc.hexSystemText' }),
+                intl.formatMessage({ id: 'misc.hexSystemText' }),
               )}
               {this.renderLayer(
                 'navigation',
-                this.props.intl.formatMessage({ id: 'misc.navRoutes' }),
-                `/sector/${this.props.sectorId}/navigation`,
+                intl.formatMessage({ id: 'misc.navRoutes' }),
+                `/sector/${sectorId}/navigation`,
               )}
               {sortBy(
-                map(this.props.layers, (layer, key) => ({
+                map(layers, (layer, key) => ({
                   ...layer,
                   sort: layer.name.toLowerCase(),
                   key,
                 })),
                 'sort',
               ).map(({ key, name }) =>
-                this.renderLayer(
-                  key,
-                  name,
-                  `/sector/${this.props.sectorId}/layer/${key}`,
-                ),
+                this.renderLayer(key, name, `/sector/${sectorId}/layer/${key}`),
               )}
               {this.renderCreateLayer()}
             </FlexContainer>

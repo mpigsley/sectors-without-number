@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
-import './style.css';
+import './style.scss';
 
 export const HeaderType = {
   header1: 'header1',

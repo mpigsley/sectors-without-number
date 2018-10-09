@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Select, { Creatable } from 'react-select';
 
-import './style.css';
+import './style.scss';
 
 export default function Dropdown({
   onItemClick,

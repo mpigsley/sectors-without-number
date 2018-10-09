@@ -16,7 +16,7 @@ import {
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 
-import './style.css';
+import './style.scss';
 
 export default function Navigation({
   logout,

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
@@ -12,7 +12,7 @@ import Saved from 'components/home/saved';
 import { size, map, sortBy } from 'constants/lodash';
 import featured from 'featured.json';
 
-import './style.css';
+import style from './style.module.scss';
 
 export default function Home({ intl, saved, generateSector }) {
   const renderSavedSectors = () => {
@@ -20,17 +20,18 @@ export default function Home({ intl, saved, generateSector }) {
       return null;
     }
     return (
-      <Fragment>
-        <Header type={HeaderType.header2} className="Home-SectionHeader">
+      <>
+        <Header type={HeaderType.header2} className={style.sectionHeader}>
           <FormattedMessage id="misc.savedSectors" />
         </Header>
-        <div className="Home-Grid">
+        <div className={style.grid}>
           {sortBy(
             map(saved, (data, key) => ({ key, ...data })),
             ({ created }) => {
               if (!created) {
                 return -new Date();
-              } else if (created.toDate) {
+              }
+              if (created.toDate) {
                 return -created.toDate();
               }
               return -new Date(created);
@@ -39,25 +40,25 @@ export default function Home({ intl, saved, generateSector }) {
             <Saved key={key} {...data} sector={key} />
           ))}
         </div>
-      </Fragment>
+      </>
     );
   };
 
   return (
-    <Fragment>
+    <>
       <StarBackground>
         <FlexContainer
           direction="column"
           align="center"
           justify="center"
           flex="1"
-          className="Home-Hero"
+          className={style.hero}
         >
-          <div className="Home-Glitch">
+          <div className={style.glitch}>
             <Header
               noMargin
               type={HeaderType.header1}
-              className="Home-MainHeader"
+              className={style.mainHeader}
               data-text={intl.formatMessage({
                 id: 'misc.sectorsWithoutNumber',
               })}
@@ -66,32 +67,36 @@ export default function Home({ intl, saved, generateSector }) {
                 id: 'misc.sectorsWithoutNumber',
               })}
             </Header>
-            <Header type={HeaderType.header2} className="Home-SubHeader">
+            <Header type={HeaderType.header2} className={style.subHeader}>
               {intl.formatMessage({
                 id: 'misc.sectorGenerator',
               })}
             </Header>
           </div>
-          <FlexContainer className="Home-Actions">
-            <Link to="/configure" className="Home-Action">
-              <span className="Home-HexagonWrap">
-                <span className="Home-Hexagon" />
+          <FlexContainer className={style.actions}>
+            <Link to="/configure" className={style.action}>
+              <span className={style.hexagonWrap}>
+                <span className={style.hexagon} />
               </span>
               <FormattedMessage id="misc.configure" />
             </Link>
-            <button onClick={generateSector} className="Home-Action">
-              <span className="Home-HexagonWrap">
-                <span className="Home-Hexagon" />
+            <button
+              type="submit"
+              onClick={generateSector}
+              className={style.action}
+            >
+              <span className={style.hexagonWrap}>
+                <span className={style.hexagon} />
               </span>
               <FormattedMessage id="misc.generate" />
             </button>
           </FlexContainer>
         </FlexContainer>
         {renderSavedSectors()}
-        <Header type={HeaderType.header2} className="Home-SectionHeader">
+        <Header type={HeaderType.header2} className={style.sectionHeader}>
           <FormattedMessage id="misc.featured" />
         </Header>
-        <div className="Home-Grid">
+        <div className={style.grid}>
           {featured.map(({ username, ...data }) => (
             <Featured key={username} {...data} />
           ))}
@@ -102,7 +107,7 @@ export default function Home({ intl, saved, generateSector }) {
           />
         </div>
       </StarBackground>
-    </Fragment>
+    </>
   );
 }
 

@@ -1,11 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
 import { map } from 'constants/lodash';
 
-import './style.css';
+import './style.scss';
 
 export default function EntityTooltips({ hoverKey, holdKey, layer, hexes }) {
   const renderTooltip = system => {
@@ -47,11 +47,7 @@ export default function EntityTooltips({ hoverKey, holdKey, layer, hexes }) {
     );
   };
 
-  return (
-    <Fragment>
-      {hexes.filter(({ hexKey }) => hexKey).map(renderTooltip)}
-    </Fragment>
-  );
+  return <>{hexes.filter(({ hexKey }) => hexKey).map(renderTooltip)}</>;
 }
 
 EntityTooltips.propTypes = {

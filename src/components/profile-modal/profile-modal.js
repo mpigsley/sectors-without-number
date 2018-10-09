@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { intlShape, FormattedMessage } from 'react-intl';
 
@@ -8,7 +8,7 @@ import Modal from 'primitives/modal/modal';
 import LOCALES from 'constants/locale';
 import { map } from 'constants/lodash';
 
-import './style.css';
+import './style.scss';
 
 export default function ProfileModal({
   closeEditModal,
@@ -19,7 +19,7 @@ export default function ProfileModal({
   intl,
 }) {
   return (
-    <Fragment>
+    <>
       <Modal
         isOpen={isEditModalOpen}
         onCancel={closeEditModal}
@@ -54,7 +54,7 @@ export default function ProfileModal({
           />
         </div>
       </Modal>
-    </Fragment>
+    </>
   );
 }
 

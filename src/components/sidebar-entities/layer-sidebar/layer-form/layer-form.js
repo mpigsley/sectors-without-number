@@ -6,7 +6,7 @@ import FlexContainer from 'primitives/container/flex-container';
 import LabeledInput from 'primitives/form/labeled-input';
 
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
-import './style.css';
+import './style.scss';
 
 export default function LayerForm({ intl, layerForm, updateLayer }) {
   return (

@@ -13,7 +13,7 @@ import { map, sortBy } from 'constants/lodash';
 
 import RegionRow from './region-row';
 import LayerForm from './layer-form';
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 
@@ -52,7 +52,8 @@ export default class LayerSidebar extends Component {
   };
 
   onRenderContent = () => {
-    if (!this.props.colorPicker) {
+    const { colorPicker, updateRegion, layer } = this.props;
+    if (!colorPicker) {
       return null;
     }
     return (
@@ -60,9 +61,9 @@ export default class LayerSidebar extends Component {
         <CompactPicker
           className="LayerSidebar-ColorHint--picker"
           onChangeComplete={({ hex }) =>
-            this.props.updateRegion(this.props.colorPicker, { color: hex })
+            updateRegion(colorPicker, { color: hex })
           }
-          color={this.props.layer.regions[this.props.colorPicker].color}
+          color={layer.regions[colorPicker].color}
         />
       </div>
     );
@@ -73,7 +74,8 @@ export default class LayerSidebar extends Component {
   };
 
   renderHidden() {
-    if (!this.props.layer.isHidden) {
+    const { layer } = this.props;
+    if (!layer.isHidden) {
       return null;
     }
     return (
@@ -81,14 +83,15 @@ export default class LayerSidebar extends Component {
         <EyeOff size={18} />
         <FormattedMessage
           id="misc.layerHidden"
-          values={{ entity: this.props.layer.name }}
+          values={{ entity: layer.name }}
         />
       </FlexContainer>
     );
   }
 
   renderDescription() {
-    if (!this.props.layer.description) {
+    const { layer } = this.props;
+    if (!layer.description) {
       return null;
     }
     return (
@@ -99,20 +102,30 @@ export default class LayerSidebar extends Component {
         <span className="LayerSidebar-Label">
           <FormattedMessage id="misc.description" />
         </span>
-        <p className="LayerSidebar-Description">
-          {this.props.layer.description}
-        </p>
+        <p className="LayerSidebar-Description">{layer.description}</p>
       </FlexContainer>
     );
   }
 
   render() {
-    if (!this.props.layerId || this.props.isEditing) {
+    const {
+      layerId,
+      isEditing,
+      isShared,
+      initializeRegionForm,
+      layer,
+      regionForm,
+      colorPicker,
+      intl,
+      removeRegion,
+    } = this.props;
+    const { regionDeletion } = this.state;
+    if (!layerId || isEditing) {
       return <LayerForm />;
     }
 
     let newRegion = null;
-    if (this.props.regionForm && !this.props.regionForm.regionId) {
+    if (regionForm && !regionForm.regionId) {
       newRegion = <RegionRow />;
     }
 
@@ -125,14 +138,14 @@ export default class LayerSidebar extends Component {
             header="misc.regions"
             addItemName="misc.region"
             onAdd={() => {
-              if (!this.props.isShared) {
-                this.props.initializeRegionForm();
+              if (!isShared) {
+                initializeRegionForm();
               }
             }}
           />
           {newRegion}
           {sortBy(
-            map(this.props.layer.regions || {}, (region, regionId) => ({
+            map(layer.regions || {}, (region, regionId) => ({
               ...region,
               sort: region.name.toLowerCase(),
               regionId,
@@ -151,7 +164,7 @@ export default class LayerSidebar extends Component {
           persist
           attribute="data-color"
           className={classNames({
-            'LayerSidebar-ColorHint': this.props.colorPicker,
+            'LayerSidebar-ColorHint': colorPicker,
           })}
           events={{ click: true }}
           position="right"
@@ -159,11 +172,11 @@ export default class LayerSidebar extends Component {
         />
         <ReactHint events attribute="data-paint" position="right" />
         <ConfirmModal
-          intl={this.props.intl}
-          isOpen={!!this.state.regionDeletion}
+          intl={intl}
+          isOpen={!!regionDeletion}
           onCancel={() => this.setState({ regionDeletion: null })}
           onConfirm={() => {
-            this.props.removeRegion(this.state.regionDeletion);
+            removeRegion(regionDeletion);
             this.setState({ regionDeletion: null });
           }}
         />

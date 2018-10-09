@@ -17,7 +17,8 @@ export const getHoveredHex = ({ x, y, hexes }) => {
   );
   if (!containedInBoundingBox.length) {
     return undefined;
-  } else if (containedInBoundingBox.length === 1) {
+  }
+  if (containedInBoundingBox.length === 1) {
     return containedInBoundingBox[0].hexKey;
   }
   return containedInBoundingBox.reduce(

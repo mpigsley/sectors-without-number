@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 import { map, mapValues } from 'constants/lodash';
@@ -16,53 +16,66 @@ export default class DefaultSidebar extends Component {
     entityType: undefined,
   };
 
-  state = {
-    openLists: {
-      ...mapValues(this.props.entityChildren, () => true),
-      attributes: true,
-      tags: true,
-    },
-  };
+  constructor(props) {
+    super(props);
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.entityType !== this.props.entityType) {
-      this.setState({
+    const { entityType, entityChildren } = props;
+    this.state = {
+      entityType, // eslint-disable-line
+      openLists: {
+        ...mapValues(entityChildren, () => true),
+        attributes: true,
+        tags: true,
+      },
+    };
+  }
+
+  static getDerivedStateFromProps(props, state) {
+    if (state.entityType !== props.entityType) {
+      return {
+        ...state,
+        entityType: props.entityType,
         openLists: {
-          ...mapValues(nextProps.entityChildren, () => true),
+          ...mapValues(props.entityChildren, () => true),
           attributes: true,
           tags: true,
         },
-      });
+      };
     }
+    return state;
   }
 
-  toggleListOpen = entityType => () =>
+  toggleListOpen = entityType => () => {
+    const { openLists } = this.state;
     this.setState({
       openLists: {
-        ...this.state.openLists,
-        [entityType]: !this.state.openLists[entityType],
+        ...openLists,
+        [entityType]: !openLists[entityType],
       },
     });
+  };
 
   render() {
+    const { openLists } = this.state;
+    const { entityChildren } = this.props;
     return (
-      <Fragment>
+      <>
         <EntityAttributes
-          isAttributesOpen={this.state.openLists.attributes}
-          isTagsOpen={this.state.openLists.tags}
+          isAttributesOpen={openLists.attributes}
+          isTagsOpen={openLists.tags}
           toggleAttributesOpen={this.toggleListOpen('attributes')}
           toggleTagsOpen={this.toggleListOpen('tags')}
         />
-        {map(this.props.entityChildren, (entities, entityType) => (
+        {map(entityChildren, (entities, entityType) => (
           <EntityList
             key={entityType}
             entities={entities}
             entityType={entityType}
-            isOpen={this.state.openLists[entityType]}
+            isOpen={openLists[entityType]}
             toggleListOpen={this.toggleListOpen(entityType)}
           />
         ))}
-      </Fragment>
+      </>
     );
   }
 }

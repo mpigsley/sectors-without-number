@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { intlShape } from 'react-intl';
@@ -17,7 +17,7 @@ import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 
 import EntityTags from './entity-tags';
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 
@@ -197,7 +197,7 @@ export default function EntityAttributes({
   }
 
   return (
-    <Fragment>
+    <>
       {attributesSection}
       <EntityTags
         key="tags"
@@ -211,7 +211,7 @@ export default function EntityAttributes({
         isShared={isShared}
       />
       <ReactHint events position="left" />
-    </Fragment>
+    </>
   );
 }
 

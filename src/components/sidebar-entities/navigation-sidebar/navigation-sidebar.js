@@ -20,7 +20,7 @@ import { size, map } from 'constants/lodash';
 import { X, EyeOff, Crosshair } from 'constants/icons';
 import { sortByKey } from 'utils/common';
 
-import './style.css';
+import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 
@@ -43,56 +43,62 @@ export default class NavigationSidebar extends Component {
     intl: intlShape.isRequired,
   };
 
-  state = {
-    isHelpOpen: !size(this.props.routes),
-    isConfirmDeleteOpen: false,
-    deletionRoute: null,
-  };
+  constructor(props) {
+    super(props);
 
-  componentWillUnmount() {
-    this.props.resetNavSettings();
+    const { routes, intl } = this.props;
+    this.state = {
+      isHelpOpen: !size(routes),
+      isConfirmDeleteOpen: false,
+      deletionRoute: null,
+    };
+    this.lineWidths = [
+      {
+        value: 'thin',
+        label: intl.formatMessage({ id: 'misc.thin' }),
+      },
+      {
+        value: 'normal',
+        label: intl.formatMessage({ id: 'misc.normal' }),
+      },
+      {
+        value: 'wide',
+        label: intl.formatMessage({ id: 'misc.wide' }),
+      },
+    ];
+    this.lineTypes = [
+      {
+        value: 'solid',
+        label: intl.formatMessage({ id: 'misc.solid' }),
+      },
+      {
+        value: 'dotted',
+        label: intl.formatMessage({ id: 'misc.dotted' }),
+      },
+      {
+        value: 'short',
+        label: intl.formatMessage({ id: 'misc.shortDashes' }),
+      },
+      {
+        value: 'long',
+        label: intl.formatMessage({ id: 'misc.longDashes' }),
+      },
+    ];
   }
 
-  lineWidths = [
-    {
-      value: 'thin',
-      label: this.props.intl.formatMessage({ id: 'misc.thin' }),
-    },
-    {
-      value: 'normal',
-      label: this.props.intl.formatMessage({ id: 'misc.normal' }),
-    },
-    {
-      value: 'wide',
-      label: this.props.intl.formatMessage({ id: 'misc.wide' }),
-    },
-  ];
-
-  lineTypes = [
-    {
-      value: 'solid',
-      label: this.props.intl.formatMessage({ id: 'misc.solid' }),
-    },
-    {
-      value: 'dotted',
-      label: this.props.intl.formatMessage({ id: 'misc.dotted' }),
-    },
-    {
-      value: 'short',
-      label: this.props.intl.formatMessage({ id: 'misc.shortDashes' }),
-    },
-    {
-      value: 'long',
-      label: this.props.intl.formatMessage({ id: 'misc.longDashes' }),
-    },
-  ];
+  componentWillUnmount() {
+    const { resetNavSettings } = this.props;
+    resetNavSettings();
+  }
 
   renderConfirmDeleteModal() {
+    const { isConfirmDeleteOpen, deletionRoute } = this.state;
+    const { removeRoute } = this.props;
     return (
       <ConfirmModal
-        isOpen={this.state.isConfirmDeleteOpen}
+        isOpen={isConfirmDeleteOpen}
         onConfirm={() => {
-          this.props.removeRoute(this.state.deletionRoute);
+          removeRoute(deletionRoute);
           this.setState({ isConfirmDeleteOpen: false });
         }}
         onCancel={() => this.setState({ isConfirmDeleteOpen: false })}
@@ -106,12 +112,14 @@ export default class NavigationSidebar extends Component {
   }
 
   renderHelpModal() {
+    const { intl } = this.props;
+    const { isHelpOpen } = this.state;
     return (
       <Modal
         width={600}
-        title={this.props.intl.formatMessage({ id: 'misc.navHelp' })}
-        isOpen={this.state.isHelpOpen}
-        cancelText={this.props.intl.formatMessage({ id: 'misc.continue' })}
+        title={intl.formatMessage({ id: 'misc.navHelp' })}
+        isOpen={isHelpOpen}
+        cancelText={intl.formatMessage({ id: 'misc.continue' })}
         onCancel={() => this.setState({ isHelpOpen: false })}
       >
         <FlexContainer direction="column" align="flexStart">
@@ -142,7 +150,8 @@ export default class NavigationSidebar extends Component {
   }
 
   renderRoutes() {
-    if (!size(this.props.routes)) {
+    const { routes, intl, locateRoute, toggleVisibility } = this.props;
+    if (!size(routes)) {
       return null;
     }
     return (
@@ -154,7 +163,7 @@ export default class NavigationSidebar extends Component {
           className="NavigationSidebar-SubHeader"
         >
           <LinkIcon
-            data-rh={this.props.intl.formatMessage({
+            data-rh={intl.formatMessage({
               id: 'misc.selectHidden',
             })}
             className="NavigationSidebar-SubHeaderHidden"
@@ -163,7 +172,7 @@ export default class NavigationSidebar extends Component {
           />
         </FlexContainer>
         <FlexContainer direction="column">
-          {map(this.props.routes, (route, routeId) => ({ ...route, routeId }))
+          {map(routes, (route, routeId) => ({ ...route, routeId }))
             .sort(sortByKey('from'))
             .map(({ from, to, hiddenByEntity, isHidden, routeId }) => (
               <FlexContainer
@@ -186,7 +195,7 @@ export default class NavigationSidebar extends Component {
                   <Crosshair
                     className="NavigationSidebar-Delete"
                     size={20}
-                    onClick={() => this.props.locateRoute(routeId)}
+                    onClick={() => locateRoute(routeId)}
                   />
                   <Header type={HeaderType.header4} noMargin>
                     {from}
@@ -201,7 +210,7 @@ export default class NavigationSidebar extends Component {
                 <span
                   data-rh={
                     hiddenByEntity
-                      ? this.props.intl.formatMessage({
+                      ? intl.formatMessage({
                           id: 'misc.routeHiddenByParent',
                         })
                       : undefined
@@ -211,7 +220,7 @@ export default class NavigationSidebar extends Component {
                     className="NavigationSidebar-Checkbox"
                     disabled={hiddenByEntity}
                     checked={!!isHidden}
-                    onChange={() => this.props.toggleVisibility(routeId)}
+                    onChange={() => toggleVisibility(routeId)}
                     type="checkbox"
                   />
                 </span>
@@ -223,16 +232,18 @@ export default class NavigationSidebar extends Component {
   }
 
   render() {
-    const { settings, updateNavSettings, completeRoute } = this.props;
+    const {
+      settings,
+      updateNavSettings,
+      completeRoute,
+      cancelNavigation,
+    } = this.props;
     const { color, type, width, isCreatingRoute } = settings;
 
     let cancelButton = null;
     if (isCreatingRoute) {
       cancelButton = (
-        <Button
-          className="NavigationSidebar-Cancel"
-          onClick={this.props.cancelNavigation}
-        >
+        <Button className="NavigationSidebar-Cancel" onClick={cancelNavigation}>
           <FormattedMessage id="misc.cancel" />
         </Button>
       );

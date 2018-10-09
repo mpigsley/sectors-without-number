@@ -13,7 +13,7 @@ import FactionForm from 'components/faction-form';
 
 import Elements from 'constants/elements';
 
-import './style.css';
+import './style.scss';
 
 const DEFAULT_ELEMENT_TYPE = Elements.faction.key;
 
