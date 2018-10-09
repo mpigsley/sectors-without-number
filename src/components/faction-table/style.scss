@@ -5,6 +5,7 @@
   display: grid;
   grid-template-columns: [table] auto [sidebar] 0px [end];
   grid-template-rows: [header] 4rem [table] auto [end];
+  overflow: hidden;
 
   &--sidebarOpen {
     grid-template-columns: [table] auto [sidebar] $large-sidebar-width [end];
