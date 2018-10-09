@@ -213,7 +213,7 @@ export const getEntityAttributes = createSelector(
         const link = `/elements/${currentSector}/${
           Elements.faction.key
         }/${key}`;
-        if (faction.homeworld === entityKey) {
+        if (entityKey && faction.homeworld === entityKey) {
           objFactions.push({
             key,
             link,
@@ -222,7 +222,7 @@ export const getEntityAttributes = createSelector(
         }
         const objAssets = [...obj.assets];
         forEach(faction.assets, (asset, assetKey) => {
-          if (asset.location === entityKey) {
+          if (entityKey && asset.location === entityKey) {
             objAssets.push({
               link,
               key: assetKey,
