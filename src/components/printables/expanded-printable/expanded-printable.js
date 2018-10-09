@@ -10,7 +10,7 @@ import { map } from 'constants/lodash';
 import Entities from 'constants/entities';
 
 import './style.scss';
-import '../style.css';
+import '../style.scss';
 
 export default class ExpandedPrintable extends Component {
   static propTypes = {

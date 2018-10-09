@@ -12,7 +12,7 @@ import { sortByKey } from 'utils/common';
 import Entities from 'constants/entities';
 
 import './style.scss';
-import '../style.css';
+import '../style.scss';
 
 export default class CondensedPrintable extends Component {
   static propTypes = {

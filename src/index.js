@@ -18,7 +18,7 @@ import Changelog from 'components/changelog';
 import GameRoutes from 'components/game-routes';
 import * as serviceWorker from './serviceWorker';
 
-import 'styles/global.css';
+import 'styles/global.scss';
 import 'react-hint/css/index.css';
 
 Fastclick();
