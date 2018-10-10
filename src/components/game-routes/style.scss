@@ -1,7 +1,11 @@
+@import '~styles/theme';
+@import '~styles/constants';
+
 .GameRoutes {
   display: grid;
-  grid-template-columns: [navigation] 185px [game] auto [end];
+  grid-template-columns: [navigation] $large-navigation-width [game] auto [end];
   height: 100vh;
+  width: 100vw;
 }
 
 .GameRoutes-Navigation {
@@ -10,7 +14,7 @@
 
 @media (max-width: 1500px) {
   .GameRoutes {
-    grid-template-columns: [navigation] 75px [game] auto [end];
+    grid-template-columns: [navigation] $small-navigation-width [game] auto [end];
   }
 }
 

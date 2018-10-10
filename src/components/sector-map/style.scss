@@ -10,6 +10,7 @@
 .SectorMap-Map {
   position: relative;
   grid-column: map / sidebar;
+  width: calc(100vw - #{$large-sidebar-width} - #{$large-navigation-width});
 }
 
 .SectorMap-Sidebar {
@@ -26,5 +27,15 @@
 @media (max-width: 1200px) {
   .SectorMap {
     grid-template-columns: [map] auto [sidebar] $small-sidebar-width [end];
+  }
+
+  .SectorMap-Map {
+    width: calc(100vw - #{$small-sidebar-width} - #{$small-navigation-width});
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1500px) {
+  .SectorMap-Map {
+    width: calc(100vw - #{$large-sidebar-width} - #{$small-navigation-width});
   }
 }
