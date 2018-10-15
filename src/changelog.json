@@ -1,4 +1,14 @@
 {
+  "7.4.1": {
+    "description": "Various bug fixes from factions update.",
+    "date": "10-15-2018",
+    "changes": [
+      "Sector sidebar will always render on the right side of the view even when resizing the viewport.",
+      "Profile modal should now render when on the elements/factions page.",
+      "Signup/login errors will now show up in the authentication modal.",
+      "Factions/assets without a homebase/location will not render in the main sector sidebar."
+    ]
+  },
   "7.4.0": {
     "description": "Upgrade underlying site packages in preperation for offline support and better performance.",
     "date": "10-9-2018"
