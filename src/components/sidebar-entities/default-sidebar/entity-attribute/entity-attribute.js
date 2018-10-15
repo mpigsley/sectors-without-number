@@ -104,7 +104,7 @@ EntityAttribute.propTypes = {
   entityAttribute: PropTypes.string.isRequired,
   isShared: PropTypes.bool.isRequired,
   entity: PropTypes.shape({
-    visibility: PropTypes.shape().isRequired,
+    visibility: PropTypes.shape(),
   }).isRequired,
   intl: intlShape.isRequired,
 };
