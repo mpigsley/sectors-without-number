@@ -1,4 +1,8 @@
 {
+  "7.4.0": {
+    "description": "Upgrade underlying site packages in preperation for offline support and better performance.",
+    "date": "10-9-2018"
+  },
   "7.3.0": {
     "description": "Don't make home page title screen the full height of the viewport.",
     "date": "9-27-2018"
