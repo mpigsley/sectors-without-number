@@ -349,7 +349,7 @@ export const saveEntities = (
         title: intl.formatMessage({ id: 'misc.error' }),
         message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
       });
-      if (err.code === 'permission-denied') {
+      if (err.code === 'permission-denied' && err.details) {
         action = InfoToast({
           title: intl.formatMessage({ id: 'misc.reachedLimit' }),
           message: intl.formatMessage(

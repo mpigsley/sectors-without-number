@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
+import ProfileModal from 'components/profile-modal';
 import Navigation from 'components/navigation';
 import SectorMap from 'components/sector-map';
 import Sidebar from 'components/sidebar';
@@ -74,6 +75,7 @@ export default function GameRoutes() {
           to={`/elements/:sector/${DEFAULT_ELEMENT_TYPE}`}
         />
       </Switch>
+      <ProfileModal />
     </div>
   );
 }

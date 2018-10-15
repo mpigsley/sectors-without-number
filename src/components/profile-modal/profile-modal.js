@@ -19,42 +19,38 @@ export default function ProfileModal({
   intl,
 }) {
   return (
-    <>
-      <Modal
-        isOpen={isEditModalOpen}
-        onCancel={closeEditModal}
-        title={intl.formatMessage({ id: 'misc.editProfile' })}
-        actionButtons={[
-          <Button primary key="save" onClick={updateUser}>
-            <FormattedMessage id="misc.saveUser" />
-          </Button>,
-        ]}
-      >
-        <div className="ProfileModel-Content">
-          <LabeledInput
-            isVertical
-            label="misc.username"
-            value={form.displayName || ''}
-            onChange={({ target }) =>
-              updateUserForm('displayName', target.value)
-            }
-          />
-          <LabeledInput
-            isVertical
-            label="misc.language"
-            dropUp
-            type="dropdown"
-            clearable={false}
-            value={form.locale}
-            options={map(LOCALES, ({ value, name }) => ({
-              value,
-              label: name,
-            }))}
-            onChange={({ value }) => updateUserForm('locale', value)}
-          />
-        </div>
-      </Modal>
-    </>
+    <Modal
+      isOpen={isEditModalOpen}
+      onCancel={closeEditModal}
+      title={intl.formatMessage({ id: 'misc.editProfile' })}
+      actionButtons={[
+        <Button primary key="save" onClick={updateUser}>
+          <FormattedMessage id="misc.saveUser" />
+        </Button>,
+      ]}
+    >
+      <div className="ProfileModel-Content">
+        <LabeledInput
+          isVertical
+          label="misc.username"
+          value={form.displayName || ''}
+          onChange={({ target }) => updateUserForm('displayName', target.value)}
+        />
+        <LabeledInput
+          isVertical
+          label="misc.language"
+          dropUp
+          type="dropdown"
+          clearable={false}
+          value={form.locale}
+          options={map(LOCALES, ({ value, name }) => ({
+            value,
+            label: name,
+          }))}
+          onChange={({ value }) => updateUserForm('locale', value)}
+        />
+      </div>
+    </Modal>
   );
 }
 
