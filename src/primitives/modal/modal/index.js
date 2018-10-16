@@ -15,6 +15,7 @@ export default function Modal({
   title,
   children,
   cancelText,
+  footerText,
   onCancel,
   actionButtons,
   width,
@@ -58,18 +59,25 @@ export default function Modal({
       <FlexContainer direction="column">
         {header}
         <div className="Modal-Content">{children}</div>
-        <FlexContainer justify="flexEnd" className="Modal-Section Modal-Footer">
-          <Button className="Model-FooterButton" onClick={onCancel}>
-            {cancelText || <FormattedMessage id="misc.cancel" />}
-          </Button>
-          {React.Children.map(actionButtons, button =>
-            React.cloneElement(button, {
-              className: classNames(
-                button.props.className,
-                'Model-FooterButton',
-              ),
-            }),
-          )}
+        <FlexContainer
+          align="center"
+          justify={footerText ? 'spaceBetween' : 'flexEnd'}
+          className="Modal-Section Modal-Footer"
+        >
+          {footerText}
+          <span>
+            <Button className="Model-FooterButton" onClick={onCancel}>
+              {cancelText || <FormattedMessage id="misc.cancel" />}
+            </Button>
+            {React.Children.map(actionButtons, button =>
+              React.cloneElement(button, {
+                className: classNames(
+                  button.props.className,
+                  'Model-FooterButton',
+                ),
+              }),
+            )}
+          </span>
         </FlexContainer>
       </FlexContainer>
     </ReactModal>
@@ -82,6 +90,7 @@ Modal.propTypes = {
   children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   cancelText: PropTypes.string,
+  footerText: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   actionButtons: PropTypes.arrayOf(PropTypes.node),
   width: PropTypes.number,
@@ -89,10 +98,11 @@ Modal.propTypes = {
 };
 
 Modal.defaultProps = {
-  className: null,
-  overlayClassName: null,
+  className: undefined,
+  overlayClassName: undefined,
   cancelText: undefined,
-  actionButtons: null,
+  footerText: undefined,
+  actionButtons: undefined,
   width: 400,
   hideHeader: false,
 };
