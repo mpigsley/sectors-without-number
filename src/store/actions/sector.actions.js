@@ -15,6 +15,8 @@ export const PRINTING_STARTED = `${ACTION_PREFIX}/PRINTING_STARTED`;
 export const PRINTING_COMPLETE = `${ACTION_PREFIX}/PRINTING_COMPLETE`;
 export const CLEARED_MAP_KEYS = `${ACTION_PREFIX}/CLEARED_MAP_KEYS`;
 export const TOGGLE_PLAYER_VIEW = `${ACTION_PREFIX}/TOGGLE_PLAYER_VIEW`;
+export const OPENED_SECTOR_EXPANSION = `${ACTION_PREFIX}/OPENED_SECTOR_EXPANSION`;
+export const CLOSED_SECTOR_EXPANSION = `${ACTION_PREFIX}/CLOSED_SECTOR_EXPANSION`;
 
 export const entityHold = key => syncLock(ENTITY_HELD, { key });
 export const entityRelease = () => syncLock(RELEASE_HELD);
@@ -30,6 +32,8 @@ export const setEntityExport = exportType =>
   syncLock(SET_EXPORT_TYPE, { exportType });
 export const openExport = () => ({ type: OPENED_EXPORT });
 export const closeExport = () => ({ type: CLOSED_EXPORT });
+export const openSectorExpansion = () => ({ type: OPENED_SECTOR_EXPANSION });
+export const closeSectorExpansion = () => ({ type: CLOSED_SECTOR_EXPANSION });
 export const startPrint = () => ({ type: PRINTING_STARTED });
 export const endPrint = () => ({ type: PRINTING_COMPLETE });
 export const clearMapKeys = () => ({ type: CLEARED_MAP_KEYS });

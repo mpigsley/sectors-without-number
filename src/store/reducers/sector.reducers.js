@@ -11,6 +11,8 @@ import {
   SET_EXPORT_TYPE,
   OPENED_EXPORT,
   CLOSED_EXPORT,
+  OPENED_SECTOR_EXPANSION,
+  CLOSED_SECTOR_EXPANSION,
   PRINTING_STARTED,
   PRINTING_COMPLETE,
   CLEARED_MAP_KEYS,
@@ -39,6 +41,7 @@ const initialState = {
   syncLock: false,
   exportType: ExportTypes.condensed.key,
   isExportOpen: false,
+  isSectorExpansionOpen: false,
   isPrinting: false,
   playerView: false,
   configuration: {
@@ -136,6 +139,10 @@ export default function sector(state = initialState, action) {
         isExportOpen: false,
         exportType: ExportTypes.condensed.key,
       };
+    case OPENED_SECTOR_EXPANSION:
+      return { ...state, isSectorExpansionOpen: true };
+    case CLOSED_SECTOR_EXPANSION:
+      return { ...state, isSectorExpansionOpen: false };
     case PRINTING_STARTED:
       return { ...state, isExportOpen: false, isPrinting: true };
     case PRINTING_COMPLETE:
