@@ -17,6 +17,7 @@ import {
   userUidSelector,
   currentSectorSelector,
   currentEntitySelector,
+  navigationRoutesSelector,
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorFetched } from 'store/selectors/sector.selectors';
 import { currentSectorLayers } from 'store/selectors/layer.selectors';
@@ -30,7 +31,16 @@ import Locale from 'constants/locale';
 import Entities from 'constants/entities';
 import { mergeEntityUpdates } from 'utils/entity';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { zipObject, keys, omit, size, reduce } from 'constants/lodash';
+import { coordinatesFromKey } from 'utils/common';
+import {
+  mapValues,
+  zipObject,
+  keys,
+  omit,
+  size,
+  reduce,
+} from 'constants/lodash';
+import { coordinateKey } from '../../utils/common';
 
 const ACTION_PREFIX = '@@combined';
 export const INITIALIZED = `${ACTION_PREFIX}/INITIALIZED`;
@@ -214,33 +224,45 @@ export const expandSector = ({ top, left, right, bottom }) => (
   const columns = sector.columns + left + right;
   const rows = sector.rows + top + bottom;
 
+  let updatedTopLevel = {};
+  let updatedRoutes = {};
   const sectorUpdate = {
     [Entities.sector.key]: {
       [sectorId]: { columns, rows },
     },
   };
 
-  if (!top && !left) {
-    return dispatch({
-      type: EXPAND_SECTOR,
-      entities: sectorUpdate,
-    });
+  if (top || left) {
+    const topLevelEntities = getCurrentTopLevelEntities(state);
+    updatedTopLevel = reduce(
+      topLevelEntities,
+      (entities, { x, y, ...entity }, entityId) => ({
+        ...entities,
+        [entity.type]: {
+          ...(entities[entity.type] || {}),
+          [entityId]: { ...entity, x: x + left, y: y + top },
+        },
+      }),
+      {},
+    );
+
+    const routes = navigationRoutesSelector(state);
+    const sectorRoutes = routes[sectorId];
+    if (sectorRoutes) {
+      updatedRoutes = mapValues(sectorRoutes, ({ route, ...navigation }) => ({
+        ...navigation,
+        route: route.map(key => {
+          const { x, y } = coordinatesFromKey(key);
+          return coordinateKey(x + left, y + top);
+        }),
+      }));
+    }
   }
 
-  const topLevelEntities = getCurrentTopLevelEntities(state);
-  const updatedTopLevel = reduce(
-    topLevelEntities,
-    (entities, { x, y, ...entity }, entityId) => ({
-      ...entities,
-      [entity.type]: {
-        ...(entities[entity.type] || {}),
-        [entityId]: { ...entity, x: x + left, y: y + top },
-      },
-    }),
-    {},
-  );
-  return dispatch({
+  dispatch({
     type: EXPAND_SECTOR,
+    sectorId,
+    routes: updatedRoutes,
     entities: {
       ...sectorUpdate,
       ...updatedTopLevel,
