@@ -33,6 +33,7 @@ import { mergeEntityUpdates } from 'utils/entity';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { coordinatesFromKey } from 'utils/common';
 import {
+  mapKeys,
   mapValues,
   zipObject,
   keys,
@@ -221,11 +222,13 @@ export const expandSector = ({ top, left, right, bottom }) => (
   const state = getState();
   const sectorId = currentSectorSelector(state);
   const sector = getCurrentSector(state);
+  const routes = navigationRoutesSelector(state);
   const columns = sector.columns + left + right;
   const rows = sector.rows + top + bottom;
 
   let updatedTopLevel = {};
-  let updatedRoutes = {};
+  let updatedRoutes = routes[sectorId];
+  let updatedLayers = currentSectorLayers(state);
   const sectorUpdate = {
     [Entities.sector.key]: {
       [sectorId]: { columns, rows },
@@ -246,10 +249,8 @@ export const expandSector = ({ top, left, right, bottom }) => (
       {},
     );
 
-    const routes = navigationRoutesSelector(state);
-    const sectorRoutes = routes[sectorId];
-    if (sectorRoutes) {
-      updatedRoutes = mapValues(sectorRoutes, ({ route, ...navigation }) => ({
+    if (updatedRoutes) {
+      updatedRoutes = mapValues(updatedRoutes, ({ route, ...navigation }) => ({
         ...navigation,
         route: route.map(key => {
           const { x, y } = coordinatesFromKey(key);
@@ -257,12 +258,21 @@ export const expandSector = ({ top, left, right, bottom }) => (
         }),
       }));
     }
+
+    updatedLayers = mapValues(updatedLayers, ({ hexes, ...layer }) => ({
+      ...layer,
+      hexes: mapKeys(hexes, (value, key) => {
+        const { x, y } = coordinatesFromKey(key);
+        return coordinateKey(x + left, y + top);
+      }),
+    }));
   }
 
   dispatch({
     type: EXPAND_SECTOR,
     sectorId,
     routes: updatedRoutes,
+    layers: updatedLayers,
     entities: {
       ...sectorUpdate,
       ...updatedTopLevel,

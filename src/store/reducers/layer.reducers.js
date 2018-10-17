@@ -6,6 +6,7 @@ import {
   INITIALIZED,
   CREATED_LAYER,
   DELETED_LAYER,
+  EXPAND_SECTOR,
 } from 'store/actions/combined.actions';
 import {
   RESET_FORMS,
@@ -40,6 +41,7 @@ export default function layer(state = initialState, action) {
   switch (action.type) {
     case INITIALIZED:
     case FETCHED_SECTOR:
+    case EXPAND_SECTOR:
       if (!action.sectorId) {
         return state;
       }
