@@ -20,6 +20,7 @@ import {
   FETCHED_SECTOR,
   CREATED_LAYER,
   DELETED_LAYER,
+  EXPAND_SECTOR,
 } from 'store/actions/combined.actions';
 import { LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 import { mergeEntityUpdates } from 'utils/entity';
@@ -45,6 +46,7 @@ export default function entity(state = initialState, action) {
         share: action.share,
       };
     case UPDATED_ENTITIES:
+    case EXPAND_SECTOR:
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),

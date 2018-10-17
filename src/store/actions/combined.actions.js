@@ -23,19 +23,21 @@ import { currentSectorLayers } from 'store/selectors/layer.selectors';
 import {
   getSectorLayers,
   getCurrentSector,
+  getCurrentTopLevelEntities,
 } from 'store/selectors/entity.selectors';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
 import { mergeEntityUpdates } from 'utils/entity';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { zipObject, keys, omit, size } from 'constants/lodash';
+import { zipObject, keys, omit, size, reduce } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@combined';
 export const INITIALIZED = `${ACTION_PREFIX}/INITIALIZED`;
 export const FETCHED_SECTOR = `${ACTION_PREFIX}/FETCHED_SECTOR`;
 export const CREATED_LAYER = `${ACTION_PREFIX}/CREATED_LAYER`;
 export const DELETED_LAYER = `${ACTION_PREFIX}/DELETED_LAYER`;
+export const EXPAND_SECTOR = `${ACTION_PREFIX}/EXPAND_SECTOR`;
 
 export const initialize = location => dispatch =>
   getCurrentUser().then(user => {
@@ -200,4 +202,48 @@ export const removeLayer = intl => (dispatch, getState) => {
         }),
       );
     });
+};
+
+export const expandSector = ({ top, left, right, bottom }) => (
+  dispatch,
+  getState,
+) => {
+  const state = getState();
+  const sectorId = currentSectorSelector(state);
+  const sector = getCurrentSector(state);
+  const columns = sector.columns + left + right;
+  const rows = sector.rows + top + bottom;
+
+  const sectorUpdate = {
+    [Entities.sector.key]: {
+      [sectorId]: { columns, rows },
+    },
+  };
+
+  if (!top && !left) {
+    return dispatch({
+      type: EXPAND_SECTOR,
+      entities: sectorUpdate,
+    });
+  }
+
+  const topLevelEntities = getCurrentTopLevelEntities(state);
+  const updatedTopLevel = reduce(
+    topLevelEntities,
+    (entities, { x, y, ...entity }, entityId) => ({
+      ...entities,
+      [entity.type]: {
+        ...(entities[entity.type] || {}),
+        [entityId]: { ...entity, x: x + left, y: y + top },
+      },
+    }),
+    {},
+  );
+  return dispatch({
+    type: EXPAND_SECTOR,
+    entities: {
+      ...sectorUpdate,
+      ...updatedTopLevel,
+    },
+  });
 };

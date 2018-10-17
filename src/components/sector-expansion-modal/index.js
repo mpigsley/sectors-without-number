@@ -3,6 +3,7 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import { closeSectorExpansion } from 'store/actions/sector.actions';
+import { expandSector } from 'store/actions/combined.actions';
 import { getCurrentSector } from 'store/selectors/entity.selectors';
 import { isSectorExpansionOpenSelector } from 'store/selectors/base.selectors';
 
@@ -16,6 +17,6 @@ const mapStateToProps = createStructuredSelector({
 export default injectIntl(
   connect(
     mapStateToProps,
-    { closeSectorExpansion },
+    { closeSectorExpansion, expandSector },
   )(SectorExpansionModal),
 );

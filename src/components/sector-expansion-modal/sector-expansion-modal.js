@@ -20,14 +20,10 @@ export default class SectorExpansionModal extends Component {
       columns: PropTypes.number.isRequired,
     }).isRequired,
     closeSectorExpansion: PropTypes.func.isRequired,
+    expandSector: PropTypes.func.isRequired,
   };
 
-  state = {
-    top: 0,
-    bottom: 0,
-    left: 0,
-    right: 0,
-  };
+  state = { top: 0, bottom: 0, left: 0, right: 0 };
 
   static getDerivedStateFromProps(props, state) {
     if (props.isOpen === false) {
@@ -38,6 +34,11 @@ export default class SectorExpansionModal extends Component {
 
   onUpdateSide = side => e =>
     this.setState({ [side]: Math.max(0, parseInt(e.target.value, 10)) });
+
+  expand = () => {
+    const { expandSector } = this.props;
+    expandSector(this.state);
+  };
 
   render() {
     const { intl, isOpen, sector, closeSectorExpansion } = this.props;
@@ -53,7 +54,7 @@ export default class SectorExpansionModal extends Component {
         )}
         title={intl.formatMessage({ id: 'misc.expandSector' })}
         actionButtons={[
-          <Button primary key="continue" onClick={() => {}}>
+          <Button primary key="continue" onClick={this.expand}>
             <FormattedMessage id="misc.expand" />
           </Button>,
         ]}

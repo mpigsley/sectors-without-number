@@ -24,7 +24,11 @@ import {
   DELETED_ENTITIES,
   UPDATED_ID_MAPPING,
 } from 'store/actions/entity.actions';
-import { INITIALIZED, FETCHED_SECTOR } from 'store/actions/combined.actions';
+import {
+  INITIALIZED,
+  FETCHED_SECTOR,
+  EXPAND_SECTOR,
+} from 'store/actions/combined.actions';
 import { LOGGED_OUT } from 'store/actions/user.actions';
 
 import { keys, uniq } from 'constants/lodash';
@@ -89,6 +93,7 @@ export default function sector(state = initialState, action) {
       return { ...state, renderSector: false };
     }
     case UPDATED_ENTITIES:
+    case EXPAND_SECTOR:
       return {
         ...state,
         holdKey: null,
@@ -99,6 +104,7 @@ export default function sector(state = initialState, action) {
         hoverKey: null,
         topLevelKey: null,
         syncLock: true,
+        isSectorExpansionOpen: false,
       };
     case SAVED_SECTOR:
     case DELETED_ENTITIES:

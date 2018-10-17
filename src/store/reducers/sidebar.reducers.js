@@ -9,6 +9,7 @@ import {
   UPDATED_CHILD_IN_EDIT,
   CREATED_CHILD_IN_EDIT,
 } from 'store/actions/sidebar.actions';
+import { EXPAND_SECTOR } from 'store/actions/combined.actions';
 import { UPDATED_ENTITIES } from 'store/actions/entity.actions';
 import { omit, omitBy, isNil } from 'constants/lodash';
 
@@ -30,6 +31,7 @@ export default function sidebarEdit(state = initialState, action) {
     case UPDATED_ENTITIES:
     case DEACTIVATED_EDIT:
     case LOCATION_CHANGE:
+    case EXPAND_SECTOR:
       return initialState;
     case UPDATED_ENTITY_IN_EDIT:
       return {
