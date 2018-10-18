@@ -44,7 +44,7 @@ export default class LinkRow extends Component {
             )}
           </FlexContainer>
           <Icon
-            size={additionalIcon && !hovered ? 16 : 20}
+            size={16}
             className={classNames('LinkRow-RightArrow', arrowClassName, {
               'LinkRow-AdditionalIcon': additionalIcon,
             })}

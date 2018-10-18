@@ -45,15 +45,15 @@ export default function EntityTags({
   intl,
   isShared,
 }) {
+  const entityTags = (entity.attributes || {}).tags || [];
   if (
     !Entities[entityType].tags ||
-    (!isSidebarEditActive && !(entity.attributes.tags || []).length)
+    (!isSidebarEditActive && !entityTags.length)
   ) {
     return null;
   }
 
   let tags;
-  const entityTags = (entity.attributes || {}).tags || [];
   if (isSidebarEditActive) {
     tags = entityTags.sort().map(tag => (
       <DeletableRow

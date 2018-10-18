@@ -38,7 +38,8 @@ export const CREATED_LAYER = `${ACTION_PREFIX}/CREATED_LAYER`;
 export const DELETED_LAYER = `${ACTION_PREFIX}/DELETED_LAYER`;
 
 export const initialize = location => dispatch =>
-  getCurrentUser().then(user => {
+  getCurrentUser().then(() => {
+    const user = { uid: 'Ls0WTrED4aSS561kppKgaX8DYp32' };
     const { uid, locale } = user || {};
     const sectorId = location.pathname.split('/')[2];
     const isGameView =
