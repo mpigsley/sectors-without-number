@@ -300,10 +300,11 @@ export const deleteEntities = ({ state, deleted }, intl) => {
     });
 };
 
-export const saveEntities = (
-  { state, updated, created, deleted, entities },
-  intl,
+export const saveEntities = ({ updated, created, deleted, entities }, intl) => (
+  dispatch,
+  getState,
 ) => {
+  const state = getState();
   const uid = userUidSelector(state);
   const isSaved = isCurrentSectorSaved(state);
   let promise;

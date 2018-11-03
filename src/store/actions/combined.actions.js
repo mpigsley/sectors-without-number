@@ -26,10 +26,12 @@ import {
   getCurrentSector,
   getCurrentTopLevelEntities,
 } from 'store/selectors/entity.selectors';
+import { releaseSyncLock } from 'store/actions/sector.actions';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
-import { mergeEntityUpdates, preventSync } from 'utils/entity';
+import { mergeEntityUpdates, saveEntities, preventSync } from 'utils/entity';
+
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { coordinatesFromKey } from 'utils/common';
 import {
@@ -271,14 +273,21 @@ export const expandSector = ({ top, left, right, bottom }, intl) => (
     }));
   }
 
-  return dispatch({
+  const entities = { ...sectorUpdate, ...updatedTopLevel };
+  dispatch({
     type: EXPAND_SECTOR,
     sectorId,
     routes: updatedRoutes,
     layers: updatedLayers,
-    entities: {
-      ...sectorUpdate,
-      ...updatedTopLevel,
-    },
+    entities,
   });
+
+  return Promise.resolve([
+    dispatch(releaseSyncLock()),
+    dispatch(saveEntities({ updated: entities }, intl)).then(({ action }) => {
+      if (action) {
+        dispatch(action);
+      }
+    }),
+  ]);
 };
