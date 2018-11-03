@@ -8,6 +8,7 @@ import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 
 import { MAX_DIMENSION } from 'constants/defaults';
+import { mapValues } from 'constants/lodash';
 
 import style from './style.module.scss';
 
@@ -32,12 +33,15 @@ export default class SectorExpansionModal extends Component {
     return state;
   }
 
-  onUpdateSide = side => e =>
-    this.setState({ [side]: Math.max(0, parseInt(e.target.value, 10)) });
+  onUpdateSide = side => e => {
+    const parsed = Number.parseInt(e.target.value, 10);
+    const value = Number.isNaN(parsed) ? '' : parsed;
+    this.setState({ [side]: value });
+  };
 
   expand = () => {
     const { expandSector } = this.props;
-    expandSector(this.state);
+    expandSector(mapValues(this.state, val => val || 0));
   };
 
   render() {
