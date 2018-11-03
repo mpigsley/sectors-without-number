@@ -1,4 +1,5 @@
 import Firebase from 'firebase/app';
+import { forEach } from 'constants/lodash';
 
 export const createLayer = (sectorId, layer) =>
   Firebase.firestore()
@@ -8,7 +9,7 @@ export const createLayer = (sectorId, layer) =>
     .add(layer)
     .then(doc => ({ layerId: doc.id, layer }));
 
-export const editLayer = (sectorId, layerId, layer) =>
+export const updateLayer = (sectorId, layerId, layer) =>
   Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
@@ -16,6 +17,21 @@ export const editLayer = (sectorId, layerId, layer) =>
     .doc(layerId)
     .set(layer, { merge: true })
     .then(() => ({ layerId, layer }));
+
+export const updateLayers = (sectorId, layers) => {
+  const batch = Firebase.firestore().batch();
+  forEach(layers, (update, layerId) =>
+    batch.update(
+      Firebase.firestore()
+        .collection('layers')
+        .doc(sectorId)
+        .collection('layer')
+        .doc(layerId),
+      update,
+    ),
+  );
+  return batch.commit();
+};
 
 export const deleteLayer = (sectorId, layerId) =>
   Firebase.firestore()

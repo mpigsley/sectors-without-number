@@ -9,7 +9,12 @@ import {
   updateEntity,
 } from 'store/api/entity';
 import { getNavigationData } from 'store/api/navigation';
-import { getLayerData, createLayer, deleteLayer } from 'store/api/layer';
+import {
+  getLayerData,
+  createLayer,
+  deleteLayer,
+  updateLayers,
+} from 'store/api/layer';
 import { getFactionData } from 'store/api/faction';
 
 import {
@@ -282,12 +287,13 @@ export const expandSector = ({ top, left, right, bottom }, intl) => (
     entities,
   });
 
-  return Promise.resolve([
+  return Promise.all([
+    saveEntities({ state, updated: entities }, intl),
     dispatch(releaseSyncLock()),
-    dispatch(saveEntities({ updated: entities }, intl)).then(({ action }) => {
-      if (action) {
-        dispatch(action);
-      }
-    }),
-  ]);
+    updateLayers(sectorId, updatedLayers),
+  ]).then(([{ action }]) => {
+    if (action) {
+      dispatch(action);
+    }
+  });
 };

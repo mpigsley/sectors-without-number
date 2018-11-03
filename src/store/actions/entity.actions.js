@@ -113,8 +113,8 @@ export const generateEntity = (entity, parameters, intl) => (
 
   if (!isSector) {
     return initialSyncToast(state, dispatch, intl).then(isInitialSync =>
-      dispatch(saveEntities({ created: entities, entities }, intl)).then(
-        results => updateHandler(state, dispatch, results, isInitialSync),
+      saveEntities({ state, created: entities, entities }, intl).then(results =>
+        updateHandler(state, dispatch, results, isInitialSync),
       ),
     );
   }
@@ -155,8 +155,8 @@ export const moveTopLevelEntity = intl => (dispatch, getState) => {
     initialSyncToast(state, dispatch, intl),
     dispatch({ type: UPDATED_ENTITIES, entities }),
   ]).then(([isInitialSync]) =>
-    dispatch(saveEntities({ updated: entities, entities }, intl)).then(
-      results => updateHandler(state, dispatch, results, isInitialSync),
+    saveEntities({ state, updated: entities, entities }, intl).then(results =>
+      updateHandler(state, dispatch, results, isInitialSync),
     ),
   );
 };
@@ -200,7 +200,7 @@ export const saveSector = intl => (dispatch, getState) => {
     initialSyncToast(state, dispatch, intl),
     dispatch({ type: SAVED_SECTOR }),
   ]).then(([isInitialSync]) =>
-    dispatch(saveEntities(intl)).then(results =>
+    saveEntities({ state }, intl).then(results =>
       updateHandler(state, dispatch, results, isInitialSync),
     ),
   );
@@ -299,16 +299,15 @@ export const saveEntityEdit = intl => (dispatch, getState) => {
         entities: filteredUpdatedEntities,
       }),
     ]).then(([isInitialSync]) =>
-      dispatch(
-        saveEntities(
-          {
-            entities: filteredUpdatedEntities,
-            updated: updatedEntities,
-            created: createdEntities,
-            deleted: deletedEntities,
-          },
-          intl,
-        ),
+      saveEntities(
+        {
+          entities: filteredUpdatedEntities,
+          updated: updatedEntities,
+          created: createdEntities,
+          deleted: deletedEntities,
+          state,
+        },
+        intl,
       ).then(results => updateHandler(state, dispatch, results, isInitialSync)),
     );
   }
