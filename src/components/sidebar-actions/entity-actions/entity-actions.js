@@ -101,7 +101,7 @@ export default class EntityActions extends Component {
         onClick: this.onConfirmDelete,
       });
     }
-    if (entityType === Entities.sector.key) {
+    if (entityType === Entities.sector.key && isSaved && !isShared) {
       actions.push({
         key: 'expand',
         children: intl.formatMessage({ id: 'misc.expand' }),
