@@ -33,6 +33,15 @@ export default class SectorExpansionModal extends Component {
     return state;
   }
 
+  get isValidExpansion() {
+    const { sector } = this.props;
+    const { top, bottom, left, right } = this.state;
+    return (
+      sector.columns + (left || 0) + (right || 0) <= MAX_DIMENSION &&
+      sector.rows + (top || 0) + (bottom || 0) <= MAX_DIMENSION
+    );
+  }
+
   onUpdateSide = side => e => {
     const parsed = Number.parseInt(e.target.value, 10);
     const value = Number.isNaN(parsed) ? '' : parsed;
@@ -58,7 +67,12 @@ export default class SectorExpansionModal extends Component {
         )}
         title={intl.formatMessage({ id: 'misc.expandSector' })}
         actionButtons={[
-          <Button primary key="continue" onClick={this.expand}>
+          <Button
+            primary
+            key="continue"
+            onClick={this.expand}
+            disabled={!this.isValidExpansion}
+          >
             <FormattedMessage id="misc.expand" />
           </Button>,
         ]}

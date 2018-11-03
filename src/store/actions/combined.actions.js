@@ -35,10 +35,11 @@ import { releaseSyncLock } from 'store/actions/sector.actions';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
+import { MAX_DIMENSION } from 'constants/defaults';
 import { mergeEntityUpdates, saveEntities, preventSync } from 'utils/entity';
 
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { coordinatesFromKey } from 'utils/common';
+import { coordinatesFromKey, coordinateKey } from 'utils/common';
 import {
   mapKeys,
   mapValues,
@@ -48,7 +49,6 @@ import {
   size,
   reduce,
 } from 'constants/lodash';
-import { coordinateKey } from '../../utils/common';
 
 const ACTION_PREFIX = '@@combined';
 export const INITIALIZED = `${ACTION_PREFIX}/INITIALIZED`;
@@ -226,12 +226,15 @@ export const expandSector = ({ top, left, right, bottom }, intl) => (
   dispatch,
   getState,
 ) => {
-  if (dispatch(preventSync(intl))) {
+  const state = getState();
+  const sector = getCurrentSector(state);
+  const isValid =
+    sector.columns + (left || 0) + (right || 0) <= MAX_DIMENSION &&
+    sector.rows + (top || 0) + (bottom || 0) <= MAX_DIMENSION;
+  if (dispatch(preventSync(intl)) || !isValid) {
     return Promise.resolve();
   }
-  const state = getState();
   const sectorId = currentSectorSelector(state);
-  const sector = getCurrentSector(state);
   const routes = navigationRoutesSelector(state);
   const columns = sector.columns + left + right;
   const rows = sector.rows + top + bottom;
