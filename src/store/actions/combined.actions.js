@@ -29,7 +29,7 @@ import {
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
-import { mergeEntityUpdates } from 'utils/entity';
+import { mergeEntityUpdates, preventSync } from 'utils/entity';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { coordinatesFromKey } from 'utils/common';
 import {
@@ -215,10 +215,13 @@ export const removeLayer = intl => (dispatch, getState) => {
     });
 };
 
-export const expandSector = ({ top, left, right, bottom }) => (
+export const expandSector = ({ top, left, right, bottom }, intl) => (
   dispatch,
   getState,
 ) => {
+  if (dispatch(preventSync(intl))) {
+    return Promise.resolve();
+  }
   const state = getState();
   const sectorId = currentSectorSelector(state);
   const sector = getCurrentSector(state);
@@ -268,7 +271,7 @@ export const expandSector = ({ top, left, right, bottom }) => (
     }));
   }
 
-  dispatch({
+  return dispatch({
     type: EXPAND_SECTOR,
     sectorId,
     routes: updatedRoutes,

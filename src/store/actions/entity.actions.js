@@ -88,11 +88,11 @@ export const generateEntity = (entity, parameters, intl) => (
   dispatch,
   getState,
 ) => {
-  const state = getState();
   const isSector = entity.entityType === Entities.sector.key;
-  if (preventSync(state, dispatch, intl, isSector)) {
+  if (dispatch(preventSync(intl, isSector))) {
     return Promise.resolve();
   }
+  const state = getState();
   const entities = generateEntityUtil({
     entity,
     currentSector: currentSectorSelector(state),
@@ -122,10 +122,10 @@ export const generateEntity = (entity, parameters, intl) => (
 };
 
 export const moveTopLevelEntity = intl => (dispatch, getState) => {
-  const state = getState();
-  if (preventSync(state, dispatch, intl)) {
+  if (dispatch(preventSync(intl))) {
     return dispatch(entityRelease());
   }
+  const state = getState();
   const topLevelEntities = getCurrentTopLevelEntities(state);
   const holdKey = holdKeySelector(state);
   const holdEntity = getTopLevelEntity(topLevelEntities, holdKey);
@@ -162,10 +162,10 @@ export const moveTopLevelEntity = intl => (dispatch, getState) => {
 };
 
 export const deleteEntity = intl => (dispatch, getState) => {
-  const state = getState();
-  if (preventSync(state, dispatch, intl)) {
+  if (dispatch(preventSync(intl))) {
     return Promise.resolve();
   }
+  const state = getState();
   const entity = getCurrentEntity(state);
   const currentSector = currentSectorSelector(state);
   if (!entity.parent) {
@@ -192,10 +192,10 @@ export const deleteEntity = intl => (dispatch, getState) => {
 };
 
 export const saveSector = intl => (dispatch, getState) => {
-  const state = getState();
-  if (preventSync(state, dispatch, intl)) {
+  if (dispatch(preventSync(intl))) {
     return Promise.resolve();
   }
+  const state = getState();
   return Promise.all([
     initialSyncToast(state, dispatch, intl),
     dispatch({ type: SAVED_SECTOR }),
@@ -207,10 +207,10 @@ export const saveSector = intl => (dispatch, getState) => {
 };
 
 export const saveEntityEdit = intl => (dispatch, getState) => {
-  const state = getState();
-  if (preventSync(state, dispatch, intl)) {
+  if (dispatch(preventSync(intl))) {
     return dispatch(deactivateSidebarEdit());
   }
+  const state = getState();
   const currentEntityType = getCurrentEntityType(state);
   const currentEntityId = getCurrentEntityId(state);
   const { entity, children } = sidebarEditSelector(state);
