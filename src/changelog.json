@@ -1,4 +1,8 @@
 {
+  "7.4.2": {
+    "description": "Fix blank sidebar when system has planets without tags.",
+    "date": "10-18-2018"
+  },
   "7.4.1": {
     "description": "Various bug fixes from factions update.",
     "date": "10-15-2018",

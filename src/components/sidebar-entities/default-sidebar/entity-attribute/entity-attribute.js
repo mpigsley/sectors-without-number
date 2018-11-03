@@ -101,10 +101,14 @@ EntityAttribute.propTypes = {
     name: PropTypes.string.isRequired,
     attributes: PropTypes.shape().isRequired,
   }).isRequired,
-  entityAttribute: PropTypes.string.isRequired,
+  entityAttribute: PropTypes.string,
   isShared: PropTypes.bool.isRequired,
   entity: PropTypes.shape({
     visibility: PropTypes.shape(),
   }).isRequired,
   intl: intlShape.isRequired,
+};
+
+EntityAttribute.defaultProps = {
+  entityAttribute: undefined,
 };
