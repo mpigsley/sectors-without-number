@@ -8,7 +8,7 @@ import {
   getSyncedSectors,
   updateEntity,
 } from 'store/api/entity';
-import { getNavigationData } from 'store/api/navigation';
+import { getNavigationData, updateRoutes } from 'store/api/navigation';
 import {
   getLayerData,
   createLayer,
@@ -291,6 +291,7 @@ export const expandSector = ({ top, left, right, bottom }, intl) => (
     saveEntities({ state, updated: entities }, intl),
     dispatch(releaseSyncLock()),
     updateLayers(sectorId, updatedLayers),
+    updateRoutes(sectorId, updatedRoutes),
   ]).then(([{ action }]) => {
     if (action) {
       dispatch(action);
