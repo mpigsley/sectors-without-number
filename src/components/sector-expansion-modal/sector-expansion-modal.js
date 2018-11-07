@@ -77,6 +77,9 @@ export default class SectorExpansionModal extends Component {
           </Button>,
         ]}
       >
+        <p className={style.recommendation}>
+          <FormattedMessage id="misc.expansionRecommendation" />
+        </p>
         <FlexContainer direction="column" align="center">
           <Input
             className={style.top}
