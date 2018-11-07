@@ -44,7 +44,7 @@ export default class SectorExpansionModal extends Component {
 
   onUpdateSide = side => e => {
     const parsed = Number.parseInt(e.target.value, 10);
-    const value = Number.isNaN(parsed) ? '' : parsed;
+    const value = Number.isNaN(parsed) ? '' : Math.max(0, parsed);
     this.setState({ [side]: value });
   };
 
