@@ -11,7 +11,11 @@ import {
   TOGGLED_VISIBILITY,
   SET_ROUTE_LOCATOR,
 } from 'store/actions/navigation.actions';
-import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
+import {
+  FETCHED_SECTOR,
+  INITIALIZED,
+  EXPAND_SECTOR,
+} from 'store/actions/combined.actions';
 
 const initialSettings = () => ({
   route: [],
@@ -32,6 +36,7 @@ export default function navigation(state = initialState, action) {
   switch (action.type) {
     case INITIALIZED:
     case FETCHED_SECTOR:
+    case EXPAND_SECTOR:
       return {
         ...state,
         routes: {

@@ -48,7 +48,8 @@ export const syncLock = (action, parameters = {}) => (dispatch, getState) => {
   return dispatch({ type: action, ...parameters });
 };
 
-export const preventSync = (state, dispatch, intl, isGenerating) => {
+export const preventSync = (intl, isGenerating) => (dispatch, getState) => {
+  const state = getState();
   const isSyncing = !isCurrentSectorSaved(state);
   const isLoggedIn = isLoggedInSelector(state);
   const reachedSectorLimit = savedSectorSelector(state).length >= SECTOR_LIMIT;

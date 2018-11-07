@@ -22,9 +22,9 @@ export default class LayerSidebar extends Component {
     intl: intlShape.isRequired,
     layer: PropTypes.shape({
       description: PropTypes.string,
-      isHidden: PropTypes.bool.isRequired,
+      isHidden: PropTypes.bool,
       regions: PropTypes.shape(),
-      name: PropTypes.string.isRequired,
+      name: PropTypes.string,
     }),
     layerId: PropTypes.string,
     isEditing: PropTypes.bool.isRequired,

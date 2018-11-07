@@ -1,0 +1,40 @@
+@import '~styles/theme';
+@import '~styles/constants';
+
+.square {
+  border: 1px solid $light2;
+  height: 125px;
+  font-size: 1.4rem;
+  width: 125px;
+}
+
+.recommendation {
+  margin-top: 0;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+%input {
+  text-align: center;
+  width: 75px;
+}
+
+.top {
+  @extend %input;
+  margin-bottom: 1rem;
+}
+
+.bottom {
+  @extend %input;
+  margin-top: 1rem;
+}
+
+.left {
+  @extend %input;
+  margin-right: 1rem;
+}
+
+.right {
+  @extend %input;
+  margin-left: 1rem;
+}

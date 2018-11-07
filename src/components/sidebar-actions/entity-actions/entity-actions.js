@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 
+import SectorExpansionModal from 'components/sector-expansion-modal';
 import ActionLayout from 'components/sidebar-actions/action-layout';
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import FlexContainer from 'primitives/container/flex-container';
@@ -29,6 +30,7 @@ export default class EntityActions extends Component {
     saveEntityEdit: PropTypes.func.isRequired,
     deleteEntity: PropTypes.func.isRequired,
     saveSector: PropTypes.func.isRequired,
+    openSectorExpansion: PropTypes.func.isRequired,
     isSaved: PropTypes.bool.isRequired,
     isShared: PropTypes.bool.isRequired,
     isSidebarEditActive: PropTypes.bool.isRequired,
@@ -74,6 +76,8 @@ export default class EntityActions extends Component {
       intl,
       saveSector,
       activateSidebarEdit,
+      openSectorExpansion,
+      entityType,
     } = this.props;
     const actions = [];
     if (!isSaved && !isShared) {
@@ -97,7 +101,13 @@ export default class EntityActions extends Component {
         onClick: this.onConfirmDelete,
       });
     }
-
+    if (entityType === Entities.sector.key && isSaved && !isShared) {
+      actions.push({
+        key: 'expand',
+        children: intl.formatMessage({ id: 'misc.expand' }),
+        onClick: openSectorExpansion,
+      });
+    }
     return actions;
   };
 
@@ -193,6 +203,7 @@ export default class EntityActions extends Component {
             }}
           />
         </ConfirmModal>
+        <SectorExpansionModal />
       </ActionLayout>
     );
   }

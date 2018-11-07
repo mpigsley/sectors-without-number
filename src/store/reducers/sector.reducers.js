@@ -11,6 +11,8 @@ import {
   SET_EXPORT_TYPE,
   OPENED_EXPORT,
   CLOSED_EXPORT,
+  OPENED_SECTOR_EXPANSION,
+  CLOSED_SECTOR_EXPANSION,
   PRINTING_STARTED,
   PRINTING_COMPLETE,
   CLEARED_MAP_KEYS,
@@ -22,7 +24,11 @@ import {
   DELETED_ENTITIES,
   UPDATED_ID_MAPPING,
 } from 'store/actions/entity.actions';
-import { INITIALIZED, FETCHED_SECTOR } from 'store/actions/combined.actions';
+import {
+  INITIALIZED,
+  FETCHED_SECTOR,
+  EXPAND_SECTOR,
+} from 'store/actions/combined.actions';
 import { LOGGED_OUT } from 'store/actions/user.actions';
 
 import { keys, uniq } from 'constants/lodash';
@@ -39,6 +45,7 @@ const initialState = {
   syncLock: false,
   exportType: ExportTypes.condensed.key,
   isExportOpen: false,
+  isSectorExpansionOpen: false,
   isPrinting: false,
   playerView: false,
   configuration: {
@@ -86,6 +93,7 @@ export default function sector(state = initialState, action) {
       return { ...state, renderSector: false };
     }
     case UPDATED_ENTITIES:
+    case EXPAND_SECTOR:
       return {
         ...state,
         holdKey: null,
@@ -96,6 +104,7 @@ export default function sector(state = initialState, action) {
         hoverKey: null,
         topLevelKey: null,
         syncLock: true,
+        isSectorExpansionOpen: false,
       };
     case SAVED_SECTOR:
     case DELETED_ENTITIES:
@@ -136,6 +145,10 @@ export default function sector(state = initialState, action) {
         isExportOpen: false,
         exportType: ExportTypes.condensed.key,
       };
+    case OPENED_SECTOR_EXPANSION:
+      return { ...state, isSectorExpansionOpen: true };
+    case CLOSED_SECTOR_EXPANSION:
+      return { ...state, isSectorExpansionOpen: false };
     case PRINTING_STARTED:
       return { ...state, isExportOpen: false, isPrinting: true };
     case PRINTING_COMPLETE:

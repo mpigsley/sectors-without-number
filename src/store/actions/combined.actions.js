@@ -8,8 +8,13 @@ import {
   getSyncedSectors,
   updateEntity,
 } from 'store/api/entity';
-import { getNavigationData } from 'store/api/navigation';
-import { getLayerData, createLayer, deleteLayer } from 'store/api/layer';
+import { getNavigationData, updateRoutes } from 'store/api/navigation';
+import {
+  getLayerData,
+  createLayer,
+  deleteLayer,
+  updateLayers,
+} from 'store/api/layer';
 import { getFactionData } from 'store/api/faction';
 
 import {
@@ -17,25 +22,40 @@ import {
   userUidSelector,
   currentSectorSelector,
   currentEntitySelector,
+  navigationRoutesSelector,
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorFetched } from 'store/selectors/sector.selectors';
 import { currentSectorLayers } from 'store/selectors/layer.selectors';
 import {
   getSectorLayers,
   getCurrentSector,
+  getCurrentTopLevelEntities,
 } from 'store/selectors/entity.selectors';
+import { releaseSyncLock } from 'store/actions/sector.actions';
 
 import Locale from 'constants/locale';
 import Entities from 'constants/entities';
-import { mergeEntityUpdates } from 'utils/entity';
+import { MAX_DIMENSION } from 'constants/defaults';
+import { mergeEntityUpdates, saveEntities, preventSync } from 'utils/entity';
+
 import { SuccessToast, ErrorToast } from 'utils/toasts';
-import { zipObject, keys, omit, size } from 'constants/lodash';
+import { coordinatesFromKey, coordinateKey } from 'utils/common';
+import {
+  mapKeys,
+  mapValues,
+  zipObject,
+  keys,
+  omit,
+  size,
+  reduce,
+} from 'constants/lodash';
 
 const ACTION_PREFIX = '@@combined';
 export const INITIALIZED = `${ACTION_PREFIX}/INITIALIZED`;
 export const FETCHED_SECTOR = `${ACTION_PREFIX}/FETCHED_SECTOR`;
 export const CREATED_LAYER = `${ACTION_PREFIX}/CREATED_LAYER`;
 export const DELETED_LAYER = `${ACTION_PREFIX}/DELETED_LAYER`;
+export const EXPAND_SECTOR = `${ACTION_PREFIX}/EXPAND_SECTOR`;
 
 export const initialize = location => dispatch =>
   getCurrentUser().then(user => {
@@ -200,4 +220,84 @@ export const removeLayer = intl => (dispatch, getState) => {
         }),
       );
     });
+};
+
+export const expandSector = ({ top, left, right, bottom }, intl) => (
+  dispatch,
+  getState,
+) => {
+  const state = getState();
+  const sector = getCurrentSector(state);
+  const isValid =
+    sector.columns + (left || 0) + (right || 0) <= MAX_DIMENSION &&
+    sector.rows + (top || 0) + (bottom || 0) <= MAX_DIMENSION;
+  if (dispatch(preventSync(intl)) || !isValid) {
+    return Promise.resolve();
+  }
+  const sectorId = currentSectorSelector(state);
+  const routes = navigationRoutesSelector(state);
+  const columns = sector.columns + left + right;
+  const rows = sector.rows + top + bottom;
+
+  let updatedTopLevel = {};
+  let updatedRoutes = routes[sectorId];
+  let updatedLayers = currentSectorLayers(state);
+  const sectorUpdate = {
+    [Entities.sector.key]: {
+      [sectorId]: { columns, rows },
+    },
+  };
+
+  if (top || left) {
+    const topLevelEntities = getCurrentTopLevelEntities(state);
+    updatedTopLevel = reduce(
+      topLevelEntities,
+      (entities, { x, y, ...entity }, entityId) => ({
+        ...entities,
+        [entity.type]: {
+          ...(entities[entity.type] || {}),
+          [entityId]: { ...entity, x: x + left, y: y + top },
+        },
+      }),
+      {},
+    );
+
+    if (updatedRoutes) {
+      updatedRoutes = mapValues(updatedRoutes, ({ route, ...navigation }) => ({
+        ...navigation,
+        route: route.map(key => {
+          const { x, y } = coordinatesFromKey(key);
+          return coordinateKey(x + left, y + top);
+        }),
+      }));
+    }
+
+    updatedLayers = mapValues(updatedLayers, ({ hexes, ...layer }) => ({
+      ...layer,
+      hexes: mapKeys(hexes, (value, key) => {
+        const { x, y } = coordinatesFromKey(key);
+        return coordinateKey(x + left, y + top);
+      }),
+    }));
+  }
+
+  const entities = { ...sectorUpdate, ...updatedTopLevel };
+  dispatch({
+    type: EXPAND_SECTOR,
+    sectorId,
+    routes: updatedRoutes,
+    layers: updatedLayers,
+    entities,
+  });
+
+  return Promise.all([
+    saveEntities({ state, updated: entities }, intl),
+    dispatch(releaseSyncLock()),
+    updateLayers(sectorId, updatedLayers),
+    updateRoutes(sectorId, updatedRoutes),
+  ]).then(([{ action }]) => {
+    if (action) {
+      dispatch(action);
+    }
+  });
 };

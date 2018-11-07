@@ -1,7 +1,7 @@
 import Chance from 'chance';
 import Firebase from 'firebase/app';
 
-import { editLayer } from 'store/api/layer';
+import { updateLayer as syncUpdateLayer } from 'store/api/layer';
 import {
   layerFormSelector,
   currentSectorSelector,
@@ -51,7 +51,7 @@ export const submitForm = intl => (dispatch, getState) => {
 
   return !layerId
     ? dispatch(addLayer(update, intl))
-    : editLayer(sectorId, layerId, update)
+    : syncUpdateLayer(sectorId, layerId, update)
         .then(({ layer }) => {
           dispatch(
             SuccessToast({
@@ -100,7 +100,7 @@ export const submitRegionForm = intl => (dispatch, getState) => {
   const { regionId, ...regionForm } = layerRegionFormSelector(state);
   const sectorId = currentSectorSelector(state);
   const layerId = currentEntitySelector(state);
-  return editLayer(sectorId, layerId, {
+  return syncUpdateLayer(sectorId, layerId, {
     regions: {
       ...(currentLayer(state).regions || {}),
       [regionId || createId()]: {
@@ -147,7 +147,7 @@ export const updateRegion = (regionId, update) => (dispatch, getState) => {
     },
   };
   dispatch({ type: EDITED, sectorId, layerId, layer });
-  return editLayer(sectorId, layerId, layer);
+  return syncUpdateLayer(sectorId, layerId, layer);
 };
 
 export const removeRegion = (regionId, intl) => (dispatch, getState) => {
@@ -177,7 +177,7 @@ export const removeRegion = (regionId, intl) => (dispatch, getState) => {
       hexes: omit({ ...current.hexes, ...reducedHexes }, ...deletedHexIds),
     },
   });
-  return editLayer(sectorId, layerId, {
+  return syncUpdateLayer(sectorId, layerId, {
     regions: { [regionId]: Firebase.firestore.FieldValue.delete() },
     hexes: {
       ...omit(reducedHexes, ...deletedHexIds),
@@ -247,7 +247,7 @@ export const toggleRegionAtHex = hexId => (dispatch, getState) => {
         hexes: omit(current.hexes, hexId),
       },
     });
-    return editLayer(sectorId, layerId, {
+    return syncUpdateLayer(sectorId, layerId, {
       hexes: { [hexId]: Firebase.firestore.FieldValue.delete() },
     });
   }
@@ -255,5 +255,5 @@ export const toggleRegionAtHex = hexId => (dispatch, getState) => {
     hexes: { ...(current.hexes || {}), [hexId]: { regions: newRegions } },
   };
   dispatch({ ...commonAction, layer });
-  return editLayer(sectorId, layerId, layer);
+  return syncUpdateLayer(sectorId, layerId, layer);
 };

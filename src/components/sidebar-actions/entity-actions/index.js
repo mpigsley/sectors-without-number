@@ -24,6 +24,8 @@ import {
   activateSidebarEdit,
   deactivateSidebarEdit,
 } from 'store/actions/sidebar.actions';
+import { openSectorExpansion } from 'store/actions/sector.actions';
+
 import EntityActions from './entity-actions';
 
 const mapStateToProps = state => ({
@@ -42,6 +44,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   saveEntityEdit: () => dispatch(saveEntityEdit(props.intl)),
   saveSector: () => dispatch(saveSector(props.intl)),
   deleteEntity: () => dispatch(deleteEntity(props.intl)),
+  openSectorExpansion: () => dispatch(openSectorExpansion()),
 });
 
 export default injectIntl(
