@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
 
-import { isNil } from 'constants/lodash';
+import { find, isNil } from 'constants/lodash';
 import { ChevronDown, ChevronUp } from 'constants/icons';
 
 import './style.scss';
@@ -57,8 +57,11 @@ class Table extends Component {
     sortDirection: 0,
   };
 
-  static getDerivedStateFromProps() {
-    return { sort: undefined, sortDirection: 0 };
+  static getDerivedStateFromProps({ columns }, state) {
+    if (state.sort && !find(columns, { accessor: state.sort })) {
+      return { sort: undefined, sortDirection: 0 };
+    }
+    return state;
   }
 
   onHeaderClick = (accessor, onClick) => () => {

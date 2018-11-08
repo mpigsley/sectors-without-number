@@ -28,6 +28,7 @@
   padding: 6px;
   text-align: left;
   vertical-align: bottom;
+  white-space: nowrap;
 
   &--light {
     border-bottom-color: $light3;
