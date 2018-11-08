@@ -15,8 +15,10 @@
     "test": "react-scripts test --env=jsdom --coverage",
     "test:watch": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && firebase deploy",
+    "deploy": "npm run build && firebase deploy --except functions",
+    "deploy:functions": "firebase deploy --only functions",
     "deploy:prod": "firebase use prod && sh -ac '. .env.prod; npm run deploy'",
+    "deploy:prod:functions": "firebase use prod && sh -ac '. .env.prod; npm run deploy:functions'",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "translate": "node ./src/utils/convert-translations.js"
