@@ -1,4 +1,8 @@
 {
+  "7.5.2": {
+    "description": "Fix row/column inputs being weird on configure page.",
+    "date": "12-1-2018"
+  },
   "7.5.1": {
     "description": "Fix overview table sorting when clicking on header text.",
     "date": "11-8-2018"
