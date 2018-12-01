@@ -15,7 +15,6 @@ import LabeledInput from 'primitives/form/labeled-input';
 
 import { MIN_DIMENSION, MAX_DIMENSION } from 'constants/defaults';
 import { Zap, RefreshCw } from 'constants/icons';
-import { clamp } from 'constants/lodash';
 import { generateSectorName } from 'utils/name-generator';
 
 import './style.scss';
@@ -32,12 +31,6 @@ export default function Configure({
   name,
   intl,
 }) {
-  const limitDimensions = func => e => {
-    const num = Number.parseInt(e.target.value, 10);
-    e.target.value = clamp(num, MIN_DIMENSION, MAX_DIMENSION);
-    func(e);
-  };
-
   const updateInput = ({ target }) => {
     const key = target.getAttribute('data-key');
     let { value } = target;
@@ -53,6 +46,15 @@ export default function Configure({
     const chance = new Chance();
     updateConfiguration('name', genFunc(chance));
   };
+
+  const isValid = () =>
+    !!name &&
+    !!rows &&
+    !!columns &&
+    rows <= MAX_DIMENSION &&
+    rows >= MIN_DIMENSION &&
+    columns <= MAX_DIMENSION &&
+    columns >= MIN_DIMENSION;
 
   return (
     <StarBackground>
@@ -76,7 +78,7 @@ export default function Configure({
               isVertical
               label="misc.rows"
               data-key="rows"
-              onChange={limitDimensions(updateInput)}
+              onChange={updateInput}
               name="rows"
               type="number"
               value={rows || ''}
@@ -85,12 +87,16 @@ export default function Configure({
               isVertical
               label="misc.columns"
               data-key="columns"
-              onChange={limitDimensions(updateInput)}
+              onChange={updateInput}
               name="columns"
               type="number"
               value={columns || ''}
             />
           </ItemRow>
+          <p className="Configure-Info">
+            Sectors must have between {MIN_DIMENSION} and {MAX_DIMENSION} rows
+            and columns.
+          </p>
           <Checkbox
             data-key="isBuilder"
             value={isBuilder}
@@ -122,7 +128,7 @@ export default function Configure({
           justify="center"
           align="center"
         >
-          <Button onClick={generateSector}>
+          <Button disabled={!isValid()} onClick={generateSector}>
             <LinkIcon icon={Zap} size="20" />
             <FormattedMessage id="misc.generate" />
           </Button>

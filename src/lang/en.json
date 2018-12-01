@@ -2176,7 +2176,7 @@
   "faction.assets.scavengerFleets": "Scavenger Fleets",
   "faction.assets.scavengerFleets.description": "These rag-tag armadas bring enormous technical and mercantile resources to their patrons, along with a facility with heavy guns. As an action, a Scavenger Fleet can be moved to any world within three hexes. Scavenger Fleets cost 2 FacCreds a turn in maintenance.",
   "faction.assets.shippingCombine": "Shipping Combine",
-  "faction.assets.shippingCombine.description": "Transport alrge amounts of equipment and personnel between worlds. As an action, the combine may move any number of non-Force assets, including itself, to any world within two hexes at a cost of one FacCred per asset.",
+  "faction.assets.shippingCombine.description": "Transport large amounts of equipment and personnel between worlds. As an action, the combine may move any number of non-Force assets, including itself, to any world within two hexes at a cost of one FacCred per asset.",
   "faction.assets.surveyors": "Surveyors",
   "faction.assets.surveyors.description": "Explor potential resource and investment options on worlds. The preence of a surveyor crew allows one additional die to be rolled on Expand Influence actions. As an action, a surveyor crew can be moved to any world within two hexes.",
   "faction.assets.transitWeb": "Transit Web",

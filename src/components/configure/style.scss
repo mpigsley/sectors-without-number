@@ -1,11 +1,9 @@
+@import '~styles/theme';
+
 .Configure-PaddedButtons {
   margin-top: 2rem;
 }
 
-.Configure-Invalid {
-  color: red;
-  padding: 1rem 0;
-  text-align: center;
-  width: 20rem;
-  margin: 0 auto;
+.Configure-Info {
+  color: $light1;
 }
