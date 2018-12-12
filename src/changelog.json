@@ -1,4 +1,8 @@
 {
+  "7.5.3": {
+    "description": "Upgrade firebase dependencies.",
+    "date": "12-12-2018"
+  },
   "7.5.2": {
     "description": "Fix row/column inputs being weird on configure page.",
     "date": "12-1-2018"
