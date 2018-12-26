@@ -74,8 +74,8 @@ export const initialize = location => dispatch =>
     if (locale && locale !== 'en' && Locale[locale]) {
       promises.push(
         Locale[locale].localeFetch().then(([userLocale, localeData]) => {
-          addLocaleData(localeData);
-          return userLocale;
+          addLocaleData(localeData.default);
+          return userLocale.default;
         }),
       );
     }
