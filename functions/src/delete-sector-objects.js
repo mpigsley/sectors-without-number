@@ -1,7 +1,7 @@
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
-const BATCH_SIZE = 500;
+const BATCH_SIZE = 250;
 const deleteBatch = (query, resolve, reject) =>
   query
     .limit(BATCH_SIZE)

@@ -2,6 +2,7 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const _ = require('lodash');
 
+const BATCH_SIZE = 250;
 const SECTOR_LIMIT = 10;
 const ENTITY_TYPES = [
   'asteroidBase',
@@ -89,7 +90,7 @@ module.exports = functions.https.onCall((data, context) => {
                 .doc();
               batches[batchIndex].set(newRef, savableEntity);
               batchCount += 1;
-              if (batchCount === 500) {
+              if (batchCount === BATCH_SIZE) {
                 batches.push(admin.firestore().batch());
                 batchIndex += 1;
                 batchCount = 0;

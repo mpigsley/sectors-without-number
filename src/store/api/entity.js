@@ -97,6 +97,7 @@ export const updateEntities = entities => {
   return batch.commit();
 };
 
+const BATCH_SIZE = 250;
 export const deleteEntities = entities => {
   const batches = [Firebase.firestore().batch()];
   let batchCount = 0;
@@ -112,7 +113,7 @@ export const deleteEntities = entities => {
           .doc(entityId),
       );
       batchCount += 1;
-      if (batchCount === 500) {
+      if (batchCount === BATCH_SIZE) {
         batches.push(Firebase.firestore().batch());
         batchIndex += 1;
         batchCount = 0;
