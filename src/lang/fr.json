@@ -2056,7 +2056,7 @@
   "misc.hexSystemText": "Texte dans les hex",
   "misc.hiddenParrent": "Une entité parent masque ce {entity}.",
   "misc.hideEntity": "Masquer {entity}",
-  "misc.hideOccAndSit": "Bewohner",
+  "misc.hideOccAndSit": "Masquer l'occupation et la situation des joueurs",
   "misc.hideTagsFromPlayers": "Masquer les marqueurs pour les joueurs",
   "misc.home": "Accueil",
   "misc.initializeEmpty": "Initialiser un secteur vide",

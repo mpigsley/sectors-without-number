@@ -1,4 +1,8 @@
 {
+  "7.5.6": {
+    "description": "Updated German, English, French, and Hebrew translations.",
+    "date": "1-11-2019"
+  },
   "7.5.5": {
     "description": "Fix API error when syncing large sectors.",
     "date": "12-31-2018",
