@@ -35,7 +35,7 @@ export default function LayerForm({ intl, layerForm, updateLayer }) {
       <LabeledInput
         type="checkbox"
         label="misc.isHidden"
-        value={layerForm.isHidden}
+        checked={layerForm.isHidden}
         onChange={({ target }) => updateLayer('isHidden', target.checked)}
       />
     </FlexContainer>

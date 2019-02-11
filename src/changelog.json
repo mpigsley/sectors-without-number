@@ -1,4 +1,8 @@
 {
+  "7.5.8": {
+    "description": "Fix bug where layers couldn't be un-hidden.",
+    "date": "2-11-2019"
+  },
   "7.5.7": {
     "description": "Fix misspellings in english translation.",
     "date": "1-28-2019"
