@@ -1,4 +1,8 @@
 {
+  "7.6.0": {
+    "description": "When you go to edit any entity, you can add images to show your players.",
+    "date": "2-16-2019"
+  },
   "7.5.8": {
     "description": "Fix bug where layers couldn't be un-hidden.",
     "date": "2-11-2019"
