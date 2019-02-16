@@ -6,10 +6,17 @@ import { map, mapValues } from 'constants/lodash';
 import EntityAttributes from './entity-attributes';
 import EntityList from './entity-list';
 
+import styles from './styles.module.scss';
+
 export default class DefaultSidebar extends Component {
   static propTypes = {
+    isShared: PropTypes.bool.isRequired,
+    isSidebarEditActive: PropTypes.bool.isRequired,
     entityChildren: PropTypes.shape().isRequired,
     entityType: PropTypes.string,
+    entity: PropTypes.shape({
+      image: PropTypes.string,
+    }).isRequired,
   };
 
   static defaultProps = {
@@ -55,11 +62,23 @@ export default class DefaultSidebar extends Component {
     });
   };
 
+  renderEntityImage() {
+    const { entity, isShared, isSidebarEditActive } = this.props;
+    const isHidden = (entity.visibility || {})['attr.image'] === false;
+    if (isSidebarEditActive || !entity.image || (isShared && isHidden)) {
+      return null;
+    }
+    return (
+      <img src={entity.image} className={styles.entityImg} alt={entity.name} />
+    );
+  }
+
   render() {
     const { openLists } = this.state;
     const { entityChildren } = this.props;
     return (
       <>
+        {this.renderEntityImage()}
         <EntityAttributes
           isAttributesOpen={openLists.attributes}
           isTagsOpen={openLists.tags}
