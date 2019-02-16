@@ -59,6 +59,7 @@ export default function EntityAttributes({
 
   if (isSidebarEditActive || hasNonTagAttributes) {
     let nameAttribute = null;
+    let imageAttribute = null;
     let hiddenAttribute = null;
     let descriptionAttribute = null;
     let factionsAttribute = null;
@@ -81,6 +82,32 @@ export default function EntityAttributes({
               disabled
               checked={false}
               onChange={() => {}}
+              type="checkbox"
+            />,
+          ]}
+        />
+      );
+      imageAttribute = (
+        <LabeledInput
+          label="misc.image"
+          value={entity.image}
+          onChange={({ target }) => updateEntityInEdit({ image: target.value })}
+          checkboxes={[
+            <Input
+              key="checkbox"
+              checked={
+                (entity.visibility || {})['attr.image'] === undefined
+                  ? false
+                  : !(entity.visibility || {})['attr.image']
+              }
+              onChange={({ target }) =>
+                updateEntityInEdit({
+                  visibility: {
+                    ...entity.visibility,
+                    'attr.image': !target.checked,
+                  },
+                })
+              }
               type="checkbox"
             />,
           ]}
@@ -148,6 +175,7 @@ export default function EntityAttributes({
           className="EntityAttributes-Attributes"
         >
           {nameAttribute}
+          {imageAttribute}
           {(Entities[entityType].attributes || []).map(attribute => (
             <EntityAttribute
               key={attribute.key}
