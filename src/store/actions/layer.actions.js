@@ -168,19 +168,23 @@ export const removeRegion = (regionId, intl) => (dispatch, getState) => {
   const deletedHexIds = keys(
     pickBy(reducedHexes, ({ regions }) => !regions.length),
   );
+  const updatedHexes = omit(
+    { ...current.hexes, ...reducedHexes },
+    ...deletedHexIds,
+  );
   dispatch({
     type: EDITED,
     sectorId,
     layerId,
     layer: {
       regions: omit(current.regions, regionId),
-      hexes: omit({ ...current.hexes, ...reducedHexes }, ...deletedHexIds),
+      hexes: updatedHexes,
     },
   });
   return syncUpdateLayer(sectorId, layerId, {
     regions: { [regionId]: Firebase.firestore.FieldValue.delete() },
     hexes: {
-      ...omit(reducedHexes, ...deletedHexIds),
+      ...updatedHexes,
       ...zipObject(
         deletedHexIds,
         deletedHexIds.map(() => Firebase.firestore.FieldValue.delete()),
