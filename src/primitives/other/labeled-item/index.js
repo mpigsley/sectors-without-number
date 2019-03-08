@@ -12,6 +12,7 @@ export default function LabeledItem({
   isVertical,
   isRequired,
   label,
+  labelWidth,
   children,
   className,
 }) {
@@ -27,7 +28,11 @@ export default function LabeledItem({
         'LabeledItem--vertical': isVertical,
       })}
     >
-      <Label noPadding className="LabeledItem-Label">
+      <Label
+        noPadding
+        style={{ minWidth: isVertical ? 'auto' : labelWidth }}
+        className="LabeledItem-Label"
+      >
         {labelItem}
         {requiredFlag}
       </Label>
@@ -40,6 +45,7 @@ LabeledItem.propTypes = {
   isVertical: PropTypes.bool,
   isRequired: PropTypes.bool,
   label: PropTypes.node.isRequired,
+  labelWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
 };
@@ -47,5 +53,6 @@ LabeledItem.propTypes = {
 LabeledItem.defaultProps = {
   isVertical: false,
   isRequired: false,
+  labelWidth: '7rem',
   className: undefined,
 };

@@ -7,6 +7,8 @@ import SectionHeader from 'primitives/text/section-header';
 
 import './style.scss';
 
+const labelWidth = '10rem';
+
 export default function SettingsSidebar({ settings, updateSettings }) {
   return (
     <FlexContainer direction="column">
@@ -16,6 +18,7 @@ export default function SettingsSidebar({ settings, updateSettings }) {
         <LabeledInput
           type="checkbox"
           label="settings.showEntityCount"
+          labelWidth={labelWidth}
           checked={settings.showEntityCount}
           onChange={({ target } = {}) =>
             updateSettings('showEntityCount', target.checked)
@@ -24,6 +27,7 @@ export default function SettingsSidebar({ settings, updateSettings }) {
         <LabeledInput
           type="checkbox"
           label="settings.showSystemName"
+          labelWidth={labelWidth}
           checked={settings.showSystemName}
           onChange={({ target } = {}) =>
             updateSettings('showSystemName', target.checked)
@@ -32,6 +36,7 @@ export default function SettingsSidebar({ settings, updateSettings }) {
         <LabeledInput
           type="checkbox"
           label="settings.showSystemNumber"
+          labelWidth={labelWidth}
           checked={settings.showSystemNumber}
           onChange={({ target } = {}) =>
             updateSettings('showSystemNumber', target.checked)
