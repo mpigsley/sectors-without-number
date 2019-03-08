@@ -2,16 +2,15 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import { updateSettings } from 'store/actions/settings.actions';
+import { settingsSelector } from 'store/selectors/base.selectors';
 
 import SettingsSidebar from './settings-sidebar';
 
 const mapStateToProps = state => ({
-  settings: state.settings,
+  settings: settingsSelector(state),
 });
 
-const mapDispatchToProps = dispatch => ({
-  updateSettings: (key, value) => dispatch(updateSettings(key, value)),
-});
+const mapDispatchToProps = { updateSettings };
 
 export default injectIntl(
   connect(

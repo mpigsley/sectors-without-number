@@ -30,6 +30,9 @@ import {
   currentEntityTypeSelector,
   routeLocatorSelector,
   layerRegionPaintSelector,
+  settingsShowEntityCount,
+  settingsShowSystemName,
+  settingsShowSystemNumber,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -59,9 +62,9 @@ const mapStateToProps = createStructuredSelector({
   paintRegion: currentPaintRegion,
   paintRegionId: layerRegionPaintSelector,
   layerHexes: visibleLayerHexColors,
-  showEntityCount: state => state.settings.showEntityCount,
-  showSystemName: state => state.settings.showSystemName,
-  showSystemNumber: state => state.settings.showSystemNumber,
+  showEntityCount: settingsShowEntityCount,
+  showSystemName: settingsShowSystemName,
+  showSystemNumber: settingsShowSystemNumber,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

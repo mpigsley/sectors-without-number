@@ -68,3 +68,10 @@ export const layerRegionPaintSelector = state => state.layer.regionPaint;
 export const factionsSelector = state => state.faction.models;
 export const factionFormSelector = state => state.faction.form;
 export const factionIsCreatingSelector = state => state.faction.isCreating;
+
+/* Settings */
+export const settingsSelector = state => state.settings;
+export const settingsShowEntityCount = state => state.settings.showEntityCount;
+export const settingsShowSystemName = state => state.settings.showSystemName;
+export const settingsShowSystemNumber = state =>
+  state.settings.showSystemNumber;
