@@ -58,7 +58,7 @@ export default class HexMap extends Component {
     paintRegionId: PropTypes.string,
     showEntityCount: PropTypes.bool,
     showSystemName: PropTypes.bool,
-    showSystemNumber: PropTypes.bool
+    showSystemNumber: PropTypes.bool,
   };
 
   static defaultProps = {
@@ -70,6 +70,9 @@ export default class HexMap extends Component {
     currentEntityType: Entities.sector.key,
     hexes: [],
     paintRegionId: null,
+    showEntityCount: true,
+    showSystemName: true,
+    showSystemNumber: true,
   };
 
   constructor(props) {
@@ -90,10 +93,14 @@ export default class HexMap extends Component {
   }
 
   componentDidUpdate() {
+    const { showEntityCount, showSystemName, showSystemNumber } = this.props;
     hexCanvas({
       ctx: this.ctx,
       ratio: this.ratio,
       ...this.props,
+      showEntityCount,
+      showSystemName,
+      showSystemNumber,
     });
   }
 

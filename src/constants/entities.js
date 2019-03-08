@@ -237,16 +237,14 @@ const sector = {
   children: [blackHole.key, note.key, system.key],
 };
 
-
 // that is not realy an entity
-// this entry is here to display the settings in the entity sidebar 
+// this entry is here to display the settings in the entity sidebar
 const settings = {
   key: 'settings',
   name: 'entity.settings',
   shortName: 'entity.settings',
   sidebar: 'settings',
 };
-
 
 export default mapValues(
   {

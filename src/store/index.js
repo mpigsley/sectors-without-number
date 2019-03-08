@@ -4,8 +4,8 @@ import { reducer as toastrReducer } from 'react-redux-toastr';
 import { createBrowserHistory } from 'history';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
+import throttle from 'lodash/throttle';
 import { loadState, saveState } from './localStorage';
-import throttle from 'lodash/throttle'
 
 import reducers from './reducers';
 

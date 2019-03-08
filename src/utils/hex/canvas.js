@@ -57,7 +57,7 @@ export default ({
   layerHexes,
   showEntityCount,
   showSystemName,
-  showSystemNumber
+  showSystemNumber,
 }) => {
   ctx.fillStyle = '#11203b';
   ctx.rect(0, 0, width * ratio, height * ratio);

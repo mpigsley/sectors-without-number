@@ -5,11 +5,11 @@ import { updateSettings } from 'store/actions/settings.actions';
 
 import SettingsSidebar from './settings-sidebar';
 
-const mapStateToProps = state => ({ 
+const mapStateToProps = state => ({
   settings: state.settings,
 });
 
-const mapDispatchToProps = (dispatch, props) => ({
+const mapDispatchToProps = dispatch => ({
   updateSettings: (key, value) => dispatch(updateSettings(key, value)),
 });
 
