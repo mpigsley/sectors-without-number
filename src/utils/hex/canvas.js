@@ -55,6 +55,9 @@ export default ({
   routeLocator,
   paintRegion,
   layerHexes,
+  showEntityCount,
+  showSystemName,
+  showSystemNumber
 }) => {
   ctx.fillStyle = '#11203b';
   ctx.rect(0, 0, width * ratio, height * ratio);
@@ -256,26 +259,36 @@ export default ({
   hexEntities.filter(hex => hex.highlighted).forEach(hex => {
     // Draw Text
     ctx.font = `${9 * ratio}px Titillium Web,sans-serif`;
+    ctx.textAlign = 'center';
     ctx.fillStyle = includes(hexesWithDarkText, hex.hexKey)
       ? '#000000'
       : '#b2b2b2';
     const renderText =
       hex.width > 45 * ratio &&
       (sectorLayers.systemText === undefined || sectorLayers.systemText);
-    if (renderText) {
+    if (renderText && showSystemNumber) {
       ctx.fillText(
         hex.hexKey,
-        hex.xOffset - step * 5,
+        hex.xOffset,
         hex.yOffset + hex.height / 2 - step * 2,
       );
     }
     if (hex.entity) {
       if (renderText) {
-        ctx.fillText(
-          hex.entity.numChildren,
-          hex.xOffset - step,
-          hex.yOffset - hex.height / 2 + step * 4,
-        );
+        if (showSystemName) {
+          ctx.fillText(
+            hex.entity.name,
+            hex.xOffset,
+            hex.yOffset + hex.height / 2 - step * 7,
+          );
+        }
+        if (showEntityCount) {
+          ctx.fillText(
+            hex.entity.numChildren,
+            hex.xOffset,
+            hex.yOffset - hex.height / 2 + step * 4,
+          );
+        }
       }
       ctx.fillStyle =
         hex.entityType === Entities.blackHole.key ? '#000000' : '#dbdbdb';

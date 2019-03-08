@@ -56,6 +56,9 @@ export default class HexMap extends Component {
       isCreatingRoute: PropTypes.bool.isRequired,
     }).isRequired,
     paintRegionId: PropTypes.string,
+    showEntityCount: PropTypes.bool,
+    showSystemName: PropTypes.bool,
+    showSystemNumber: PropTypes.bool
   };
 
   static defaultProps = {

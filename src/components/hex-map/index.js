@@ -59,6 +59,9 @@ const mapStateToProps = createStructuredSelector({
   paintRegion: currentPaintRegion,
   paintRegionId: layerRegionPaintSelector,
   layerHexes: visibleLayerHexColors,
+  showEntityCount: state => state.settings.showEntityCount,
+  showSystemName: state => state.settings.showSystemName,
+  showSystemNumber: state => state.settings.showSystemNumber,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

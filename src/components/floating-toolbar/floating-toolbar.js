@@ -8,6 +8,7 @@ import { FormattedMessage, intlShape } from 'react-intl';
 import { sortBy, map, includes, keys } from 'constants/lodash';
 import {
   List,
+  Settings,
   Plus,
   Lock,
   Unlock,
@@ -115,7 +116,13 @@ export default class FloatingToolbar extends Component {
   renderLayer(key, text, editLink) {
     let actionButton = null;
     const { isShared, isSaved, layers, toggleLayer, sectorLayers } = this.props;
-    if (!isShared && isSaved && editLink) {
+    if (key === 'systemText') {
+      actionButton = (
+        <Link to={editLink} className="FloatingToolbar-ItemAction">
+          <Settings size={18} />
+        </Link>
+      );
+    } else if (!isShared && isSaved && editLink) {
       actionButton = (
         <Link to={editLink} className="FloatingToolbar-ItemAction">
           <Edit2 size={18} />
@@ -178,6 +185,7 @@ export default class FloatingToolbar extends Component {
               {this.renderLayer(
                 'systemText',
                 intl.formatMessage({ id: 'misc.hexSystemText' }),
+                `/sector/${sectorId}/settings`,
               )}
               {this.renderLayer(
                 'navigation',

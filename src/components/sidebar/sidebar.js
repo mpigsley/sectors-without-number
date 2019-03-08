@@ -7,6 +7,7 @@ import DefaultSidebar from 'components/sidebar-entities/default-sidebar';
 import NoteSidebar from 'components/sidebar-entities/note-sidebar';
 import NavigationSidebar from 'components/sidebar-entities/navigation-sidebar';
 import LayerSidebar from 'components/sidebar-entities/layer-sidebar';
+import SettingsSidebar from 'components/sidebar-entities/settings-sidebar';
 
 import DefaultActions from 'components/sidebar-actions/default-actions';
 import EntityActions from 'components/sidebar-actions/entity-actions';
@@ -17,6 +18,7 @@ const SIDEBAR_TYPE = {
   note: NoteSidebar,
   navigation: NavigationSidebar,
   layer: LayerSidebar,
+  settings: SettingsSidebar,
 };
 
 const ACTION_TYPE = {

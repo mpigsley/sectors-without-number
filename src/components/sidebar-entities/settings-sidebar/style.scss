@@ -1,0 +1,9 @@
+@import '~styles/theme';
+
+.SettingsSidebar-Content {
+  margin: 0 1rem;
+
+  .LabeledItem-Label {
+    min-width: 10rem;
+  }
+}
