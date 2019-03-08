@@ -5,6 +5,7 @@ export const ENTITY_HELD = `${ACTION_PREFIX}/ENTITY_HELD`;
 export const RELEASE_HELD = `${ACTION_PREFIX}/RELEASE_HELD`;
 export const ENTITY_HOVERED = `${ACTION_PREFIX}/ENTITY_HOVERED`;
 export const UPDATED_CONFIGURATION = `${ACTION_PREFIX}/UPDATED_CONFIGURATION`;
+export const UPDATED_IMPORT = `${ACTION_PREFIX}/UPDATED_IMPORT`;
 export const RELEASED_SYNC_LOCK = `${ACTION_PREFIX}/RELEASED_SYNC_LOCK`;
 export const TOP_LEVEL_ENTITY_CREATED = `${ACTION_PREFIX}/TOP_LEVEL_ENTITY_CREATED`;
 export const CANCELED_TOP_LEVEL_ENTITY_CREATE = `${ACTION_PREFIX}/CANCELED_TOP_LEVEL_ENTITY_CREATE`;
@@ -28,6 +29,8 @@ export const cancelTopLevelEntityCreate = () =>
   syncLock(CANCELED_TOP_LEVEL_ENTITY_CREATE);
 export const updateConfiguration = (key, value) =>
   syncLock(UPDATED_CONFIGURATION, { key, value });
+export const updateImport = (key, value) =>
+  syncLock(UPDATED_IMPORT, { key, value });
 export const setEntityExport = exportType =>
   syncLock(SET_EXPORT_TYPE, { exportType });
 export const openExport = () => ({ type: OPENED_EXPORT });

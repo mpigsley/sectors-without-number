@@ -14,6 +14,7 @@ import store, { history } from 'store';
 import AppWrapper from 'components/app-wrapper';
 import Home from 'components/home';
 import Configure from 'components/configure';
+import Import from 'components/import';
 import Changelog from 'components/changelog';
 import GameRoutes from 'components/game-routes';
 import * as serviceWorker from './serviceWorker';
@@ -41,6 +42,7 @@ ReactDOM.render(
         <AppWrapper>
           <Route exact path="/" component={Home} />
           <Route path="/configure" component={Configure} />
+          <Route path="/import" component={Import} />
           <Route path="/changelog" component={Changelog} />
           <Route
             path="/(sector|overview|elements)/:sector"

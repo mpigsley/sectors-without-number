@@ -1,0 +1,31 @@
+@import '~styles/theme';
+
+.Import-PaddedButtons {
+  margin-top: 2rem;
+}
+
+.Import-Info {
+  color: $light1;
+}
+
+.Import-Form {
+  min-width: 350px;
+}
+
+.Import-JsonInput {
+    min-height: 200px;
+}
+
+.Import-JsonValid {
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-shadow: 0 0 15px #000;
+  
+  &.Yes {
+    color: green;
+  }
+
+  &.No {
+    color: red;
+  }
+}

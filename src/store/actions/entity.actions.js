@@ -23,10 +23,14 @@ import {
   getCurrentSector,
 } from 'store/selectors/entity.selectors';
 import { currentSectorLayers } from 'store/selectors/layer.selectors';
-import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
+import {
+  importDataSelector,
+  isCurrentSectorSaved,
+} from 'store/selectors/sector.selectors';
 
 import {
   generateEntity as generateEntityUtil,
+  importEntity as importEntityUtil,
   deleteEntity as deleteEntityUtil,
   blacklistedAttributes,
   getTopLevelEntity,
@@ -118,6 +122,45 @@ export const generateEntity = (entity, parameters, intl) => (
       ),
     );
   }
+  return dispatch(releaseSyncLock());
+};
+
+export const importEntity = (entityType, entityId, intl) => (
+  dispatch,
+  getState,
+) => {
+  const isSector = entityType === Entities.sector.key;
+  if (dispatch(preventSync(intl, isSector))) {
+    return Promise.resolve();
+  }
+  const state = getState();
+  const entities = importEntityUtil({
+    entityType,
+    entityId,
+    currentSector: currentSectorSelector(state),
+    data: importDataSelector(state),
+  });
+
+  dispatch({
+    type: UPDATED_ENTITIES,
+    entities,
+  });
+
+  const currentSector = currentSectorSelector(state);
+  const existingSector = sectorSelector(state)[currentSector];
+  const newSectorKeys = Object.keys(entities.sector || {});
+  if ((!currentSector || !existingSector) && newSectorKeys.length) {
+    dispatch(push(`/sector/${newSectorKeys[0]}`));
+  }
+
+  if (!isSector) {
+    return initialSyncToast(state, dispatch, intl).then(isInitialSync =>
+      saveEntities({ state, created: entities, entities }, intl).then(results =>
+        updateHandler(state, dispatch, results, isInitialSync),
+      ),
+    );
+  }
+
   return dispatch(releaseSyncLock());
 };
 

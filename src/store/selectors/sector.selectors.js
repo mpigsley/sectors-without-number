@@ -8,8 +8,9 @@ import {
   shareSectorSelector,
   fetchedSectorSelector,
   playerViewSelector,
+  importJsonSelector,
 } from 'store/selectors/base.selectors';
-import { omitBy, includes } from 'constants/lodash';
+import { omitBy, includes, map } from 'constants/lodash';
 
 export const getUserSectors = createSelector(
   [sectorSelector, savedSectorSelector],
@@ -39,4 +40,33 @@ export const isViewingSharedSector = createSelector(
 export const currentSectorIsLoading = createSelector(
   [isInitializedSelector, isCurrentSectorFetched],
   (isInitialized, isCurrentFetched) => !isInitialized || !isCurrentFetched,
+);
+
+export const importDataSelector = createSelector(
+  [importJsonSelector],
+  jsonStr => {
+    try {
+      return JSON.parse(jsonStr);
+    } catch (e) {
+      return undefined;
+    }
+  },
+);
+
+export const importIsDataValidSelector = createSelector(
+  [importDataSelector],
+  data => !!data,
+);
+
+export const importSectorsSelector = createSelector(
+  [importDataSelector, importIsDataValidSelector],
+  (data, valid) => {
+    if (valid) {
+      return map(data.sector, (value, key) => ({
+        value: key,
+        label: value.name,
+      }));
+    }
+    return [];
+  },
 );

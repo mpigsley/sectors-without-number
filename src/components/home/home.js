@@ -90,6 +90,12 @@ export default function Home({ intl, saved, generateSector }) {
               </span>
               <FormattedMessage id="misc.generate" />
             </button>
+            <Link to="/import" className={style.action}>
+              <span className={style.hexagonWrap}>
+                <span className={style.hexagon} />
+              </span>
+              <FormattedMessage id="misc.import" />
+            </Link>
           </FlexContainer>
         </FlexContainer>
         {renderSavedSectors()}

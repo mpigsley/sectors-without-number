@@ -75,3 +75,7 @@ export const settingsShowNumberOfChildren = state =>
   state.settings.showNumberOfChildren;
 export const settingsShowEntityName = state => state.settings.showEntityName;
 export const settingsShowCoordinates = state => state.settings.showCoordinates;
+
+/* Import */
+export const importJsonSelector = state => state.sector.import.json;
+export const importSelectedSectorSelector = state => state.sector.import.sector;
