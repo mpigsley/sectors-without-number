@@ -2338,6 +2338,8 @@
   "misc.image": "Image",
   "misc.imageExport": "The sector image with current layers will be exported to a JPG image.",
   "misc.import": "Import",
+  "misc.importJsonValid": "The JSON is valid!",
+  "misc.importJsonInvalid": "The JSON is NOT valid!",
   "misc.initialCost": "Initial Cost",
   "misc.initializeEmpty": "Initialize Empty Sector",
   "misc.isHidden": "Is Hidden",

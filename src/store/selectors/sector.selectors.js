@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import validateImportJson from 'utils/import-json-validator';
 
 import {
   isInitializedSelector,
@@ -55,7 +56,7 @@ export const importDataSelector = createSelector(
 
 export const importIsDataValidSelector = createSelector(
   [importDataSelector],
-  data => !!data,
+  data => !!data && validateImportJson(data),
 );
 
 export const importSectorsSelector = createSelector(

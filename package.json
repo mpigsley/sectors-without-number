@@ -33,6 +33,7 @@
     "history": "^4.7.2",
     "is-url-external": "^1.0.3",
     "lodash": "^4.17.11",
+    "jsonschema": "^1.2.4",
     "node-sass": "^4.9.3",
     "pluralize": "^7.0.0",
     "prop-types": "^15.6.2",
