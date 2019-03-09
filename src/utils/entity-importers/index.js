@@ -56,8 +56,8 @@ const createImporter = (entitiyType, propertiesToPick) => ({
 };
 
 const defProps = ['name', 'isHidden'];
-const defPropsWithAttr = defProps.concat(['visibility', 'attributes']);
-const defPropsWithPos = defProps.concat(['x', 'y']);
+const defPropsWithAttr = defProps.concat(['image', 'visibility', 'attributes']);
+const defPropsWithPos = defPropsWithAttr.concat(['x', 'y']);
 
 const importFields = {
   [Entities.asteroidBase.key]: defPropsWithAttr,
@@ -65,7 +65,7 @@ const importFields = {
   [Entities.blackHole.key]: defPropsWithPos,
   [Entities.deepSpaceStation.key]: defPropsWithAttr,
   [Entities.gasGiantMine.key]: defPropsWithAttr,
-  [Entities.moon.key]: defProps,
+  [Entities.moon.key]: defPropsWithAttr,
   [Entities.moonBase.key]: defPropsWithAttr,
   [Entities.note.key]: defProps,
   [Entities.orbitalRuin.key]: defPropsWithAttr,
