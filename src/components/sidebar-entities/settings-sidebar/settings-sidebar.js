@@ -12,34 +12,34 @@ const labelWidth = '10rem';
 export default function SettingsSidebar({ settings, updateSettings }) {
   return (
     <FlexContainer direction="column">
-      <SectionHeader header="settings.hexSystemText" />
+      <SectionHeader header="misc.hexSystemText" />
 
       <FlexContainer direction="column" className="SettingsSidebar-Content">
         <LabeledInput
           type="checkbox"
-          label="settings.showEntityCount"
+          label="misc.settings.showNumberOfChildren"
           labelWidth={labelWidth}
-          checked={settings.showEntityCount}
+          checked={settings.showNumberOfChildren}
           onChange={({ target } = {}) =>
-            updateSettings('showEntityCount', target.checked)
+            updateSettings('showNumberOfChildren', target.checked)
           }
         />
         <LabeledInput
           type="checkbox"
-          label="settings.showSystemName"
+          label="misc.settings.showEntityName"
           labelWidth={labelWidth}
-          checked={settings.showSystemName}
+          checked={settings.showEntityName}
           onChange={({ target } = {}) =>
-            updateSettings('showSystemName', target.checked)
+            updateSettings('showEntityName', target.checked)
           }
         />
         <LabeledInput
           type="checkbox"
-          label="settings.showSystemNumber"
+          label="misc.settings.showCoordinates"
           labelWidth={labelWidth}
-          checked={settings.showSystemNumber}
+          checked={settings.showCoordinates}
           onChange={({ target } = {}) =>
-            updateSettings('showSystemNumber', target.checked)
+            updateSettings('showCoordinates', target.checked)
           }
         />
       </FlexContainer>
@@ -49,9 +49,9 @@ export default function SettingsSidebar({ settings, updateSettings }) {
 
 SettingsSidebar.propTypes = {
   settings: PropTypes.shape({
-    showEntityCount: PropTypes.bool,
-    showSystemName: PropTypes.bool,
-    showSystemNumber: PropTypes.bool,
+    showNumberOfChildren: PropTypes.bool,
+    showEntityName: PropTypes.bool,
+    showCoordinates: PropTypes.bool,
   }).isRequired,
   updateSettings: PropTypes.func.isRequired,
 };

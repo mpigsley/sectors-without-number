@@ -1,9 +1,9 @@
 import { UPDATE_SETTINGS } from 'store/actions/settings.actions';
 
 const initialState = {
-  showEntityCount: true,
-  showSystemName: false,
-  showSystemNumber: true,
+  showNumberOfChildren: true,
+  showEntityName: false,
+  showCoordinates: true,
 };
 
 export default function settings(state = initialState, action) {

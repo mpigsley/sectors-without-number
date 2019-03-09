@@ -71,7 +71,7 @@ export const factionIsCreatingSelector = state => state.faction.isCreating;
 
 /* Settings */
 export const settingsSelector = state => state.settings;
-export const settingsShowEntityCount = state => state.settings.showEntityCount;
-export const settingsShowSystemName = state => state.settings.showSystemName;
-export const settingsShowSystemNumber = state =>
-  state.settings.showSystemNumber;
+export const settingsShowNumberOfChildren = state =>
+  state.settings.showNumberOfChildren;
+export const settingsShowEntityName = state => state.settings.showEntityName;
+export const settingsShowCoordinates = state => state.settings.showCoordinates;

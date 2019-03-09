@@ -237,12 +237,13 @@ const sector = {
   children: [blackHole.key, note.key, system.key],
 };
 
-// that is not realy an entity
+// that is not really an entity
 // this entry is here to display the settings in the entity sidebar
+// this also causes an empty 'settings' object in the exported JSON
 const settings = {
   key: 'settings',
-  name: 'entity.settings',
-  shortName: 'entity.settings',
+  name: 'misc.settings',
+  shortName: 'misc.settings',
   sidebar: 'settings',
 };
 

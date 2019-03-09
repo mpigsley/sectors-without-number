@@ -55,9 +55,9 @@ export default ({
   routeLocator,
   paintRegion,
   layerHexes,
-  showEntityCount,
-  showSystemName,
-  showSystemNumber,
+  showNumberOfChildren,
+  showEntityName,
+  showCoordinates,
 }) => {
   ctx.fillStyle = '#11203b';
   ctx.rect(0, 0, width * ratio, height * ratio);
@@ -266,7 +266,7 @@ export default ({
     const renderText =
       hex.width > 45 * ratio &&
       (sectorLayers.systemText === undefined || sectorLayers.systemText);
-    if (renderText && showSystemNumber) {
+    if (renderText && showCoordinates) {
       ctx.fillText(
         hex.hexKey,
         hex.xOffset,
@@ -275,14 +275,14 @@ export default ({
     }
     if (hex.entity) {
       if (renderText) {
-        if (showSystemName) {
+        if (showEntityName) {
           ctx.fillText(
             hex.entity.name,
             hex.xOffset,
             hex.yOffset + hex.height / 2 - step * 7,
           );
         }
-        if (showEntityCount) {
+        if (showNumberOfChildren) {
           ctx.fillText(
             hex.entity.numChildren,
             hex.xOffset,
