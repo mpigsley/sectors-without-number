@@ -570,7 +570,6 @@
   "misc.goal": "Cel",
   "misc.google": "Zaloguj przez Google",
   "misc.haveNumSectors": "Masz przynajmniej tyle sektorów: {num}",
-  "misc.hexSystemText": "Tekst Systemowy Heksagonu",
   "misc.hiddenParrent": "Byt-rodzic ukrywa: {entity}",
   "misc.hideEntity": "Ukryj {entity}",
   "misc.hideOccAndSit": "Ukryj Zajęcie i Sytuację przed Graczami",

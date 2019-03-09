@@ -12,7 +12,7 @@ const labelWidth = '10rem';
 export default function SettingsSidebar({ settings, updateSettings }) {
   return (
     <FlexContainer direction="column">
-      <SectionHeader header="misc.hexSystemText" />
+      <SectionHeader header="misc.hexText" />
 
       <FlexContainer direction="column" className="SettingsSidebar-Content">
         <LabeledInput

@@ -184,7 +184,7 @@ export default class FloatingToolbar extends Component {
             >
               {this.renderLayer(
                 'systemText',
-                intl.formatMessage({ id: 'misc.hexSystemText' }),
+                intl.formatMessage({ id: 'misc.hexText' }),
                 `/sector/${sectorId}/settings`,
               )}
               {this.renderLayer(

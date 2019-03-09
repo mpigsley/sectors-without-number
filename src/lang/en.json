@@ -2327,7 +2327,7 @@
   "misc.goal": "Goal",
   "misc.google": "Log In with Google",
   "misc.haveNumSectors": "You have at least {num} sectors.",
-  "misc.hexSystemText": "Hex System Text",
+  "misc.hexText": "Hex Text",
   "misc.hiddenParrent": "A parent entity is hiding this {entity}.",
   "misc.hideEntity": "Hide {entity}",
   "misc.hideOccAndSit": "Hide Occupation & Situation from Players",
