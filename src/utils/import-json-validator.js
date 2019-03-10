@@ -1,5 +1,4 @@
 import Entities from 'constants/entities';
-import { worldTagKeys } from 'constants/world-tags';
 import { Validator } from 'jsonschema';
 
 const idPattern = '^[0-9a-zA-Z]{20}$';
@@ -34,10 +33,10 @@ function generateAttributesProps(entityType) {
   });
 
   attrPros.tags = { type: 'array', uniqueItems: true };
-  if (entityType === Entities.planet.key) {
-    const worldTags = Object.keys(worldTagKeys);
-    attrPros.tags.items = [{ type: 'string', enum: worldTags }];
-    worldTags.forEach(tag => {
+  if (Entities[entityType].tags) {
+    const tags = Object.keys(Entities[entityType].tags);
+    attrPros.tags.items = [{ type: 'string', enum: tags }];
+    tags.forEach(tag => {
       visProps[`tag.${tag}`] = {
         type: 'boolean',
       };
