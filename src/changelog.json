@@ -1,4 +1,9 @@
 {
+  "7.7.0": {
+    "description": "Add hex settings page and ability to show name of system/black hole within the hex.",
+    "contributor": "Irame",
+    "date": "3-10-2019"
+  },
   "7.6.1": {
     "description": "Fix bug where all hex data was removed from layer when a region was deleted.",
     "date": "2-19-2019"
