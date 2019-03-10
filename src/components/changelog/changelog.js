@@ -23,7 +23,7 @@ export default function Changelog() {
               ...changelog[version],
               version,
             }))
-            .map(({ version, date, description, changes }) => (
+            .map(({ version, date, description, contributor, changes }) => (
               <FlexContainer
                 className="Changelog-Item"
                 key={version}
@@ -36,6 +36,17 @@ export default function Changelog() {
                     ({dayjs(date).format('MMMM D, YYYY')})
                   </span>
                 </Header>
+                {!!contributor && (
+                  <span>
+                    <b>Contributor:</b>{' '}
+                    <a
+                      className="Changelog-ContributorLink"
+                      href={`https://github.com/${contributor}`}
+                    >
+                      {contributor}
+                    </a>
+                  </span>
+                )}
                 <span>
                   <b>Description:</b> {description}
                 </span>

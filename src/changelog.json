@@ -1,4 +1,8 @@
 {
+  "7.7.1": {
+    "description": "Fix minor security warning in the lodash dependency.",
+    "date": "3-10-2019"
+  },
   "7.7.0": {
     "description": "Add hex settings page and ability to show name of system/black hole within the hex.",
     "contributor": "Irame",
