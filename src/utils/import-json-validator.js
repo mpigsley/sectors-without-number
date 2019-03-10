@@ -1,4 +1,5 @@
 import Entities from 'constants/entities';
+import { worldTagKeys } from 'constants/world-tags';
 import { Validator } from 'jsonschema';
 
 const idPattern = '^[0-9a-zA-Z]{20}$';
@@ -32,6 +33,21 @@ function generateAttributesProps(entityType) {
     };
   });
 
+  attrPros.tags = { type: 'array', uniqueItems: true };
+  if (entityType === Entities.planet.key) {
+    const worldTags = Object.keys(worldTagKeys);
+    attrPros.tags.items = [{ type: 'string', enum: worldTags }];
+    worldTags.forEach(tag => {
+      visProps[`tag.${tag}`] = {
+        type: 'boolean',
+      };
+    });
+  } else {
+    // there is sometimes a empty tag array in exported entety attributes
+    // tags for non planets are not evaluated so don't allow any
+    attrPros.tags.maxItems = 0;
+  }
+
   return {
     image: { type: 'string' },
     attributes: {
@@ -39,12 +55,14 @@ function generateAttributesProps(entityType) {
       properties: {
         ...attrPros,
       },
+      additionalProperties: false,
     },
     visibility: {
       type: 'object',
       properties: {
         ...visProps,
       },
+      additionalProperties: false,
     },
   };
 }
@@ -89,6 +107,7 @@ function generateEntitiesSchema(entityType, requiredProps = ['name']) {
         type: 'object',
         properties,
         requiredProps,
+        additionalProperties: true,
       },
     },
     additionalProperties: false,
