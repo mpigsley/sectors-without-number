@@ -35,7 +35,7 @@ function generateAttributesProps(entityType) {
   attrPros.tags = { type: 'array', uniqueItems: true };
   if (Entities[entityType].tags) {
     const tags = Object.keys(Entities[entityType].tags);
-    attrPros.tags.items = [{ type: 'string', enum: tags }];
+    attrPros.tags.items = { type: 'string', enum: tags };
     tags.forEach(tag => {
       visProps[`tag.${tag}`] = {
         type: 'boolean',
