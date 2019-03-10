@@ -3,111 +3,124 @@ import { Validator } from 'jsonschema';
 
 const idPattern = '^[0-9a-zA-Z]{20}$';
 
-const defEntityProps = {
-  name: { type: 'string' },
-  isHidden: { type: 'boolean' },
-  parent: { type: 'string', pattern: idPattern },
-  parentEntity: {
-    type: 'string',
-    enum: [
-      'asteroidBase',
-      'asteroidBelt',
-      'blackHole',
-      'deepSpaceStation',
-      'gasGiantMine',
-      'layer',
-      'moon',
-      'moonBase',
-      'navigation',
-      'note',
-      'orbitalRuin',
-      'planet',
-      'refuelingStation',
-      'researchBase',
-      'sector',
-      'spaceStation',
-      'system',
-      'settings',
-    ],
-  },
-};
+function generateParentsProps(entityType) {
+  const parents = Object.keys(Entities).filter(key =>
+    Entities[key].children.includes(entityType),
+  );
 
-const entityWithAttrProps = {
-  image: { type: 'string' },
-  attributes: {
-    type: 'object',
-    properties: {
-      occupation: { type: 'string' },
-      situation: { type: 'string' },
-      description: { type: 'string' },
+  if (parents.length === 0) return {};
+
+  return {
+    parent: { type: 'string', pattern: idPattern },
+    parentEntity: {
+      type: 'string',
+      enum: parents,
     },
-  },
-  visibility: {
-    type: 'object',
-    properties: {
-      'attr.occupation': { type: 'boolean' },
-      'attr.situation': { type: 'boolean' },
+  };
+}
+
+function generateAttributesProps(entityType) {
+  const attrPros = { description: { type: 'string' } };
+  const visProps = { 'attr.image': { type: 'boolean' } };
+  Entities[entityType].attributes.forEach(attr => {
+    attrPros[attr.key] = {
+      type: 'string',
+      enum: Object.values(attr.attributes).map(a => a.key),
+    };
+    visProps[`attr.${attr.key}`] = {
+      type: 'boolean',
+    };
+  });
+
+  return {
+    image: { type: 'string' },
+    attributes: {
+      type: 'object',
+      properties: {
+        ...attrPros,
+      },
     },
-  },
-};
+    visibility: {
+      type: 'object',
+      properties: {
+        ...visProps,
+      },
+    },
+  };
+}
 
-const entitiyWithPosProps = {
-  x: { type: 'number', multipleOf: 1.0, minimum: 1 },
-  y: { type: 'number', multipleOf: 1.0, minimum: 1 },
-};
+function generateEntitiesSchema(entityType, requiredProps = ['name']) {
+  let properties = {
+    name: { type: 'string' },
+    ...generateParentsProps(entityType),
+  };
 
-function generateEntitiesSchema(properties, required = ['name']) {
+  if (entityType === Entities.sector.key) {
+    properties = {
+      ...properties,
+      rows: { type: 'number', multipleOf: 1.0, minimum: 1, maximum: 20 },
+      columns: { type: 'number', multipleOf: 1.0, minimum: 1, maximum: 20 },
+    };
+  } else {
+    properties = {
+      ...properties,
+      isHidden: { type: 'boolean' },
+    };
+  }
+
+  if (entityType !== Entities.note.key) {
+    properties = {
+      ...properties,
+      ...generateAttributesProps(entityType),
+    };
+  }
+
+  if (Entities[entityType].topLevel) {
+    properties = {
+      ...properties,
+      x: { type: 'number', multipleOf: 1.0, minimum: 1 },
+      y: { type: 'number', multipleOf: 1.0, minimum: 1 },
+    };
+  }
+
   return {
     patternProperties: {
       [idPattern]: {
         type: 'object',
         properties,
-        required,
+        requiredProps,
       },
     },
     additionalProperties: false,
   };
 }
 
-const sectorsSchema = generateEntitiesSchema({
-  name: { type: 'string' },
-  rows: { type: 'number', multipleOf: 1.0, minimum: 1, maximum: 20 },
-  columns: { type: 'number', multipleOf: 1.0, minimum: 1, maximum: 20 },
-});
-
-const defEntitiesSchema = generateEntitiesSchema({
-  ...defEntityProps,
-});
-
-const defEntitiesSchemaWithAttr = generateEntitiesSchema({
-  ...defEntityProps,
-  ...entityWithAttrProps,
-});
-
-const defEntitiesSchemaWithPos = generateEntitiesSchema({
-  ...defEntityProps,
-  ...entityWithAttrProps,
-  ...entitiyWithPosProps,
-});
-
 const schema = {
   type: 'object',
   properties: {
-    [Entities.asteroidBase.key]: defEntitiesSchemaWithAttr,
-    [Entities.asteroidBelt.key]: defEntitiesSchemaWithAttr,
-    [Entities.blackHole.key]: defEntitiesSchemaWithPos,
-    [Entities.deepSpaceStation.key]: defEntitiesSchemaWithAttr,
-    [Entities.gasGiantMine.key]: defEntitiesSchemaWithAttr,
-    [Entities.moon.key]: defEntitiesSchemaWithAttr,
-    [Entities.moonBase.key]: defEntitiesSchemaWithAttr,
-    [Entities.note.key]: defEntitiesSchema,
-    [Entities.orbitalRuin.key]: defEntitiesSchemaWithAttr,
-    [Entities.planet.key]: defEntitiesSchemaWithAttr,
-    [Entities.refuelingStation.key]: defEntitiesSchemaWithAttr,
-    [Entities.researchBase.key]: defEntitiesSchemaWithAttr,
-    [Entities.sector.key]: sectorsSchema,
-    [Entities.spaceStation.key]: defEntitiesSchemaWithAttr,
-    [Entities.system.key]: defEntitiesSchemaWithPos,
+    ...[
+      Entities.asteroidBase.key,
+      Entities.asteroidBelt.key,
+      Entities.blackHole.key,
+      Entities.deepSpaceStation.key,
+      Entities.gasGiantMine.key,
+      Entities.moon.key,
+      Entities.moonBase.key,
+      Entities.note.key,
+      Entities.orbitalRuin.key,
+      Entities.planet.key,
+      Entities.refuelingStation.key,
+      Entities.researchBase.key,
+      Entities.sector.key,
+      Entities.spaceStation.key,
+      Entities.system.key,
+    ].reduce(
+      (o, entityType) => ({
+        ...o,
+        [entityType]: generateEntitiesSchema(entityType),
+      }),
+      {},
+    ),
   },
   additionalProperties: true,
 };
