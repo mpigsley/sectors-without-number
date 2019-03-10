@@ -2079,7 +2079,6 @@
   "misc.goal": "Ziel",
   "misc.google": "Mit Google einloggen",
   "misc.haveNumSectors": "Du hast mindestens {num} Sektoren.",
-  "misc.hexSystemText": "Hex-Systemtext",
   "misc.hiddenParrent": "Ein überstehenden Objekt verbirgt dieses {entity}",
   "misc.hideEntity": "verstecke {entity}",
   "misc.hideOccAndSit": "Verstecke Bewohner & Situation vor dem Spielern",

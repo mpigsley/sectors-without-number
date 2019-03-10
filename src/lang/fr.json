@@ -2053,7 +2053,6 @@
   "misc.generate": "Générer",
   "misc.google": "Connexion avec Google",
   "misc.haveNumSectors": "Vous avez au moins {num} secteurs.",
-  "misc.hexSystemText": "Texte dans les hex",
   "misc.hiddenParrent": "Une entité parent masque ce {entity}.",
   "misc.hideEntity": "Masquer {entity}",
   "misc.hideOccAndSit": "Masquer l'occupation et la situation des joueurs",
