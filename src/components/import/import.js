@@ -10,6 +10,7 @@ import SubContainer from 'primitives/container/sub-container';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
 import LabeledInput from 'primitives/form/labeled-input';
+import Label from 'primitives/form/label';
 
 import { Zap } from 'constants/icons';
 
@@ -24,9 +25,19 @@ export default function Import({
   sector,
   intl,
 }) {
-  const updateJson = ({ target }) => {
+  const updateJson = jsonData => {
     updateImport('sector', undefined);
-    updateImport('json', target.value);
+    updateImport('json', jsonData);
+  };
+
+  const updateJsonFromTextarea = ({ target }) => updateJson(target.value);
+
+  const updateJsonFromFile = ({ target }) => {
+    if (target.files.length > 0) {
+      const fileReader = new FileReader();
+      fileReader.onloadend = e => updateJson(e.target.result);
+      fileReader.readAsText(target.files[0]);
+    }
   };
 
   const updateSector = ({ value }) => {
@@ -47,14 +58,26 @@ export default function Import({
           direction="column"
           align="flexStart"
         >
+          <Label className="Import-Help">
+            <FormattedMessage id="misc.importHelp" />
+          </Label>
+          <LabeledInput
+            className="Import-JsonFile"
+            isVertical
+            type="file"
+            label="misc.jsonFile"
+            name="jsonFile"
+            accept=".json"
+            onChange={updateJsonFromFile}
+          />
           <LabeledInput
             className="Import-JsonInput"
             isVertical
             type="textarea"
             label="misc.jsonData"
-            name="json"
+            name="jsonData"
             value={json}
-            onChange={updateJson}
+            onChange={updateJsonFromTextarea}
           />
           <span
             className={classNames(

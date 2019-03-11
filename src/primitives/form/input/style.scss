@@ -52,6 +52,11 @@
     width: 20px;
   }
 
+  &[type='file'] {
+    line-height: normal;
+    padding: 9px;
+  }
+
   &--error {
     border-color: red;
   }
