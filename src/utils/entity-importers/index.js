@@ -3,20 +3,20 @@ import Entities from 'constants/entities';
 import { has, pick, pickBy, mapValues } from 'constants/lodash';
 import { createId } from 'utils/common';
 
-const createMultipleImporter = (entitiyType, importFunction) => params => {
+const createMultipleImporter = (entityType, importFunction) => params => {
   const { data, oldParent, parentEntity } = params;
   if (!oldParent || !parentEntity) {
-    throw new Error(`Parent must be defined to import multiple ${entitiyType}`);
+    throw new Error(`Parent must be defined to import multiple ${entityType}`);
   }
-  if (!has(data, entitiyType)) {
+  if (!has(data, entityType)) {
     throw new Error(
-      `The import data has not right structure to import multiple ${entitiyType}`,
+      `The import data has not right structure to import multiple ${entityType}`,
     );
   }
 
   const keyMpping = Object.keys(
     pickBy(
-      data[entitiyType],
+      data[entityType],
       entity =>
         entity.parent === oldParent && entity.parentEntity === parentEntity,
     ),
@@ -31,24 +31,24 @@ const createMultipleImporter = (entitiyType, importFunction) => params => {
   return { children, keyMpping };
 };
 
-const createImporter = (entitiyType, propertiesToPick) => ({
+const createImporter = (entityType, propertiesToPick) => ({
   data,
   key,
   sector,
   newParent,
   parentEntity,
 }) => {
-  if (entitiyType !== Entities.sector.key && !sector) {
-    throw new Error(`Sector id must be defined to import a ${entitiyType}`);
+  if (entityType !== Entities.sector.key && !sector) {
+    throw new Error(`Sector id must be defined to import a ${entityType}`);
   }
-  if (!has(data, [entitiyType, key])) {
+  if (!has(data, [entityType, key])) {
     throw new Error(
-      `The import data has not right structure to import ${entitiyType}`,
+      `The import data has not right structure to import ${entityType}`,
     );
   }
 
   return {
-    ...pick(data[entitiyType][key], propertiesToPick),
+    ...pick(data[entityType][key], propertiesToPick),
     sector,
     parent: newParent,
     parentEntity,
