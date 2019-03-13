@@ -5,11 +5,9 @@ import Entities from 'constants/entities';
 import {
   importIsDataValidSelector,
   importSectorsSelector,
+  importSectorSelector,
 } from 'store/selectors/sector.selectors';
-import {
-  importJsonSelector,
-  importSelectedSectorSelector,
-} from 'store/selectors/base.selectors';
+import { importJsonSelector } from 'store/selectors/base.selectors';
 import { importEntity } from 'store/actions/entity.actions';
 import { updateImport } from 'store/actions/sector.actions';
 import Import from './import';
@@ -17,7 +15,7 @@ import Import from './import';
 const mapStateToProps = state => ({
   parsedSectors: importSectorsSelector(state),
   json: importJsonSelector(state),
-  sector: importSelectedSectorSelector(state),
+  sector: importSectorSelector(state),
   isJsonValid: importIsDataValidSelector(state),
 });
 

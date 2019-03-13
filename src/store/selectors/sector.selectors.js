@@ -10,6 +10,7 @@ import {
   fetchedSectorSelector,
   playerViewSelector,
   importJsonSelector,
+  importSelectedSectorSelector,
 } from 'store/selectors/base.selectors';
 import { omitBy, includes, map } from 'constants/lodash';
 
@@ -69,5 +70,14 @@ export const importSectorsSelector = createSelector(
       }));
     }
     return [];
+  },
+);
+
+export const importSectorSelector = createSelector(
+  [importSectorsSelector, importSelectedSectorSelector],
+  (parsedSectors, selectedSector) => {
+    if (selectedSector) return selectedSector;
+    if (parsedSectors.length) return parsedSectors[0].value;
+    return undefined;
   },
 );
