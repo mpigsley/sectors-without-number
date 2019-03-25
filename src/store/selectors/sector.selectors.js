@@ -6,12 +6,14 @@ import {
   currentSectorSelector,
   sectorSelector,
   savedSectorSelector,
+  entitySelector,
   shareSectorSelector,
   fetchedSectorSelector,
   playerViewSelector,
   importJsonSelector,
   importSelectedSectorSelector,
 } from 'store/selectors/base.selectors';
+import Entities from 'constants/entities';
 import { omitBy, includes, map } from 'constants/lodash';
 
 export const getUserSectors = createSelector(
@@ -56,8 +58,10 @@ export const importDataSelector = createSelector(
 );
 
 export const importIsDataValidSelector = createSelector(
-  [importDataSelector],
-  data => !!data && validateImportJson(data),
+  [importDataSelector, currentSectorSelector, entitySelector],
+  (data, currentSector, entities) =>
+    !!data &&
+    validateImportJson(data, entities[Entities.sector.key][currentSector]),
 );
 
 export const importSectorsSelector = createSelector(

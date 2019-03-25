@@ -1,4 +1,5 @@
 import Entities from 'constants/entities';
+import { MIN_DIMENSION, MAX_DIMENSION } from 'constants/defaults';
 import { Validator } from 'jsonschema';
 
 const idPattern = '^[0-9a-zA-Z]{20}$';
@@ -75,8 +76,18 @@ function generateEntitiesSchema(entityType, requiredProps = ['name']) {
   if (entityType === Entities.sector.key) {
     properties = {
       ...properties,
-      rows: { type: 'number', multipleOf: 1.0, minimum: 1, maximum: 20 },
-      columns: { type: 'number', multipleOf: 1.0, minimum: 1, maximum: 20 },
+      rows: {
+        type: 'number',
+        multipleOf: 1.0,
+        minimum: MIN_DIMENSION,
+        maximum: MAX_DIMENSION,
+      },
+      columns: {
+        type: 'number',
+        multipleOf: 1.0,
+        minimum: MIN_DIMENSION,
+        maximum: MAX_DIMENSION,
+      },
     };
   } else {
     properties = {
@@ -143,7 +154,20 @@ const schema = {
   additionalProperties: true,
 };
 
-export default function validate(jsonData) {
+export default function validate(jsonData, currentSector) {
   const v = new Validator();
-  return v.validate(jsonData, schema).valid;
+  return (
+    v.validate(jsonData, schema).valid &&
+    Object.keys(jsonData)
+      .filter(entityType => Entities[entityType].topLevel)
+      .every(entityType =>
+        Object.values(jsonData[entityType]).every(entity => {
+          const sector =
+            jsonData[Entities.sector.key][entity.parent] || currentSector;
+          return (
+            sector && entity.x <= sector.columns && entity.y <= sector.rows
+          );
+        }),
+      )
+  );
 }
