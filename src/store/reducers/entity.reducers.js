@@ -46,15 +46,18 @@ export default function entity(state = initialState, action) {
         share: action.share,
       };
     case UPDATED_ENTITIES:
-    case EXPAND_SECTOR:
+    case EXPAND_SECTOR: {
       return {
         ...state,
         models: mergeEntityUpdates(state.models, action.entities),
-        generated: uniq([
-          ...state.generated,
-          ...keys(action.entities[Entities.sector.key]),
-        ]),
+        generated: state.share
+          ? state.generated
+          : uniq([
+              ...state.generated,
+              ...keys(action.entities[Entities.sector.key]),
+            ]),
       };
+    }
     case FETCHED_SECTOR:
       return {
         ...state,
