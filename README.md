@@ -20,7 +20,7 @@ This project is a front-end application written in React + Redux with a [Firebas
 4.  Ensure you enable authentication and the Firestore database in the web interface.
 5.  `$(npm bin)/firebase login` or use your global firebase instance if you installed it globally.
 6.  `$(npm bin)/firebase use --add` and select the project you configured in the firebase console.
-7.  `npm run deploy` to setup the cloud functions
+7.  `npm run deploy:functions` to setup the cloud functions.
 8.  `npm start`
 
 ### Deploying to Firebase
