@@ -13,12 +13,11 @@ export const history = createBrowserHistory();
 const middleware = [thunk, routerMiddleware(history)];
 
 const store = createStore(
-  connectRouter(history)(
-    combineReducers({
-      ...reducers,
-      toastr: toastrReducer,
-    }),
-  ),
+  combineReducers({
+    ...reducers,
+    toastr: toastrReducer,
+    router: connectRouter(history),
+  }),
   loadState(),
   composeWithDevTools(applyMiddleware(...middleware)),
 );
