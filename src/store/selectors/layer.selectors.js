@@ -77,18 +77,21 @@ export const visibleLayer = createSelector(
   },
 );
 
-export const visibleLayerHexes = createSelector([visibleLayer], layer => {
-  const regionMap = (layer || {}).regions || {};
-  const hexMap = (layer || {}).hexes || {};
-  return zipObject(
-    keys(hexMap),
-    map(hexMap, ({ regions }) =>
-      sortBy(regions.map(regionId => regionMap[regionId]).filter(r => r), [
-        ({ name }) => name.toLowerCase(),
-      ]),
-    ),
-  );
-});
+export const visibleLayerHexes = createSelector(
+  [visibleLayer],
+  layer => {
+    const regionMap = (layer || {}).regions || {};
+    const hexMap = (layer || {}).hexes || {};
+    return zipObject(
+      keys(hexMap),
+      map(hexMap, ({ regions }) =>
+        sortBy(regions.map(regionId => regionMap[regionId]).filter(r => r), [
+          ({ name }) => name.toLowerCase(),
+        ]),
+      ),
+    );
+  },
+);
 
 export const visibleLayerHexColors = createSelector(
   [visibleLayerHexes],

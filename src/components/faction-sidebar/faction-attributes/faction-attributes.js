@@ -169,5 +169,4 @@ FactionAttributes.propTypes = {
 
 FactionAttributes.defaultProps = {
   className: undefined,
-  homeworld: undefined,
 };
