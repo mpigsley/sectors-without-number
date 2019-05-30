@@ -31,9 +31,6 @@ Firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_SENDER_ID,
 });
 
-// Temporary until deprecation notice goes away
-Firebase.firestore().settings({ timestampsInSnapshots: true });
-
 ReactDOM.render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
