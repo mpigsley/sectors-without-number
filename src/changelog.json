@@ -1,4 +1,13 @@
 {
+  "7.8.0": {
+    "description": "Upgrade Dependencies.",
+    "date": "5-30-2019",
+    "changes": [
+      "Upgrade build tools and front-end packages.",
+      "Fix a few english language typos.",
+      "Add a handful more Hebrew world tag translations."
+    ]
+  },
   "7.7.2": {
     "description": "Fix bug where player's could see hidden items in some cases by navigating home and then going back.",
     "date": "5-21-2019"
