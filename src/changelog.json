@@ -1,7 +1,7 @@
 {
   "7.8.0": {
     "description": "Upgrade Dependencies.",
-    "date": "5-30-2019",
+    "date": "6-25-2019",
     "changes": [
       "Upgrade build tools and front-end packages.",
       "Fix a few english language typos.",
