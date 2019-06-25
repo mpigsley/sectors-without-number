@@ -11,6 +11,7 @@ import 'firebase/functions';
 
 import store, { history } from 'store';
 
+import { initialize } from 'store/actions/combined.actions';
 import AppWrapper from 'components/app-wrapper';
 import Home from 'components/home';
 import Configure from 'components/configure';
@@ -31,8 +32,7 @@ Firebase.initializeApp({
   messagingSenderId: process.env.REACT_APP_SENDER_ID,
 });
 
-// Temporary until deprecation notice goes away
-Firebase.firestore().settings({ timestampsInSnapshots: true });
+store.dispatch(initialize());
 
 ReactDOM.render(
   <Provider store={store}>

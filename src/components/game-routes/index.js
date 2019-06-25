@@ -6,7 +6,9 @@ const LoadableGameRoutes = Loadable.Map({
   loading: () => <></>,
   loader: {
     Component: () =>
-      import(/* webpackChunkName: "game-routes" */ 'components/game-routes/routes'),
+      import(
+        /* webpackChunkName: "game-routes" */ 'components/game-routes/routes'
+      ),
   },
   render: (loaded, props) => {
     const Routes = loaded.Component.default;

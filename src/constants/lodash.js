@@ -37,6 +37,7 @@ import dropRight from 'lodash/dropRight';
 import without from 'lodash/without';
 import clamp from 'lodash/clamp';
 import every from 'lodash/every';
+import throttle from 'lodash/throttle';
 
 export {
   includes,
@@ -78,4 +79,5 @@ export {
   without,
   clamp,
   every,
+  throttle,
 };

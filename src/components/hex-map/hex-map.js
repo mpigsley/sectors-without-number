@@ -207,9 +207,7 @@ export default class HexMap extends Component {
         if (isSidebarEditActive) {
           deactivateSidebarEdit();
         }
-        const route = `/sector/${match.params.sector}/${
-          entity.type
-        }/${entityId}`;
+        const route = `/sector/${match.params.sector}/${entity.type}/${entityId}`;
         if (location.pathname !== route) {
           toEntity(entity.type, entityId);
         }

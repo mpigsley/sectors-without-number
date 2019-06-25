@@ -235,6 +235,7 @@ EntityTags.propTypes = {
   isSidebarEditActive: PropTypes.bool.isRequired,
   entity: PropTypes.shape({
     attributes: PropTypes.shape(),
+    visibility: PropTypes.shape(),
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   updateEntityInEdit: PropTypes.func.isRequired,

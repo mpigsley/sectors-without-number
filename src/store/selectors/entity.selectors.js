@@ -210,9 +210,7 @@ export const getEntityAttributes = createSelector(
       currentFactions,
       (obj, faction, key) => {
         const objFactions = [...obj.factions];
-        const link = `/elements/${currentSector}/${
-          Elements.faction.key
-        }/${key}`;
+        const link = `/elements/${currentSector}/${Elements.faction.key}/${key}`;
         if (entityKey && faction.homeworld === entityKey) {
           objFactions.push({
             key,

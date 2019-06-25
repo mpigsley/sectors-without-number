@@ -55,9 +55,7 @@ export const currentSectorFactionTable = createSelector(
             hitPoints: `${asset.hitPoints || 0} / ${hp || '-'}`,
             homeworld: entity
               ? {
-                  link: `/sector/${sector}/${Entities.planet.key}/${
-                    asset.location
-                  }`,
+                  link: `/sector/${sector}/${Entities.planet.key}/${asset.location}`,
                   name: `${entity.name}${parent ? ` (${parent.name})` : ''}`,
                 }
               : {},

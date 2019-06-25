@@ -164,10 +164,21 @@ FactionAttributes.propTypes = {
     description: PropTypes.string,
     relationship: PropTypes.string,
     stealthed: PropTypes.bool,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    force: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+    cunning: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+      .isRequired,
+    wealth: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+      .isRequired,
+    hitPoints: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+      .isRequired,
+    balance: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+      .isRequired,
+    experience: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+      .isRequired,
   }).isRequired,
 };
 
 FactionAttributes.defaultProps = {
   className: undefined,
-  homeworld: undefined,
 };

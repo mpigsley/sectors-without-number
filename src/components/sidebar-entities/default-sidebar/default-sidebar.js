@@ -15,7 +15,9 @@ export default class DefaultSidebar extends Component {
     entityChildren: PropTypes.shape().isRequired,
     entityType: PropTypes.string,
     entity: PropTypes.shape({
+      name: PropTypes.string.isRequired,
       image: PropTypes.string,
+      visibility: PropTypes.shape(),
     }).isRequired,
   };
 
