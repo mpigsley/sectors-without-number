@@ -100,9 +100,7 @@ export const initialize = () => (dispatch, getState) =>
           userLocale,
         ]) => {
           if (((entities || {})[Entities.sector.key] || {})[sectorId]) {
-            document.title = `Sector - ${
-              entities[Entities.sector.key][sectorId].name
-            }`;
+            document.title = `Sector - ${entities[Entities.sector.key][sectorId].name}`;
           }
           dispatch({
             type: INITIALIZED,

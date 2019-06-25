@@ -246,7 +246,10 @@ export default function EntityAttributes({
 EntityAttributes.propTypes = {
   isSidebarEditActive: PropTypes.bool.isRequired,
   entity: PropTypes.shape({
+    name: PropTypes.string.isRequired,
     visibility: PropTypes.shape(),
+    image: PropTypes.string,
+    isHidden: PropTypes.bool,
   }).isRequired,
   entityAttributes: PropTypes.shape({
     description: PropTypes.string,

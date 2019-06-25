@@ -277,6 +277,23 @@ FactionForm.propTypes = {
   isValid: PropTypes.bool.isRequired,
   form: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    force: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+    cunning: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
+    wealth: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
+    hitPoints: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
+    balance: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
+    experience: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+      .isRequired,
+    relationship: PropTypes.string,
+    homeworld: PropTypes.string,
+    goal: PropTypes.string,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    description: PropTypes.string.isRequired,
+    assets: PropTypes.shape().isRequired,
   }).isRequired,
   updateFaction: PropTypes.func.isRequired,
   updateFactionAsset: PropTypes.func.isRequired,

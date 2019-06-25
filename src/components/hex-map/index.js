@@ -80,9 +80,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   updateNavSettings: (key, value) => dispatch(updateNavSettings(key, value)),
   toggleRegionAtHex: hexKey => dispatch(toggleRegionAtHex(hexKey)),
   toEntity: (entityType, entityId) => {
-    const route = `/sector/${
-      props.match.params.sector
-    }/${entityType}/${entityId}`;
+    const route = `/sector/${props.match.params.sector}/${entityType}/${entityId}`;
     if (props.location.pathname !== route) {
       dispatch(push(route));
     }
