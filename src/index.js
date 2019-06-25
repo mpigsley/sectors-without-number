@@ -11,6 +11,7 @@ import 'firebase/functions';
 
 import store, { history } from 'store';
 
+import { initialize } from 'store/actions/combined.actions';
 import AppWrapper from 'components/app-wrapper';
 import Home from 'components/home';
 import Configure from 'components/configure';
@@ -30,6 +31,8 @@ Firebase.initializeApp({
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_SENDER_ID,
 });
+
+store.dispatch(initialize());
 
 ReactDOM.render(
   <Provider store={store}>

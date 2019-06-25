@@ -23,6 +23,7 @@ import {
   currentSectorSelector,
   currentEntitySelector,
   navigationRoutesSelector,
+  routerLocationSelector,
 } from 'store/selectors/base.selectors';
 import { isCurrentSectorFetched } from 'store/selectors/sector.selectors';
 import { currentSectorLayers } from 'store/selectors/layer.selectors';
@@ -57,9 +58,11 @@ export const CREATED_LAYER = `${ACTION_PREFIX}/CREATED_LAYER`;
 export const DELETED_LAYER = `${ACTION_PREFIX}/DELETED_LAYER`;
 export const EXPAND_SECTOR = `${ACTION_PREFIX}/EXPAND_SECTOR`;
 
-export const initialize = location => dispatch =>
+export const initialize = () => (dispatch, getState) =>
   getCurrentUser().then(user => {
     const { uid, locale } = user || {};
+    const state = getState();
+    const location = routerLocationSelector(state);
     const sectorId = location.pathname.split('/')[2];
     const isGameView =
       location.pathname.startsWith('/sector/') ||

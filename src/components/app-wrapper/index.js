@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 import {
   userLocaleSelector,
@@ -12,4 +13,4 @@ const mapStateToProps = state => ({
   locale: userLocaleSelector(state),
 });
 
-export default connect(mapStateToProps)(AppWrapper);
+export default withRouter(connect(mapStateToProps)(AppWrapper));
