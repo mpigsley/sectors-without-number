@@ -107,11 +107,7 @@ module.exports = functions.https.onCall((data, context) => {
 
       saveEntityTree();
 
-      return Promise.all(
-        batches
-          .filter(batch => batch._writes.length) // eslint-disable-line no-underscore-dangle
-          .map(batch => batch.commit())
-      ).then(() => ({
+      return Promise.all(batches.map(batch => batch.commit())).then(() => ({
         mapping,
       }));
     })
