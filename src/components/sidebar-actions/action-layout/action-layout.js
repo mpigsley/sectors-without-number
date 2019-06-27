@@ -31,12 +31,7 @@ export default function ActionLayout({
         key: 'share',
         children: intl.formatMessage({ id: 'misc.share' }),
         onClick: () => {
-          let url = window.location.href;
-          const split = url.split('/');
-          if (split.length === 7) {
-            url = split.slice(0, 5).join('/');
-          }
-          copy(url);
+          copy(window.location.href);
           toastr.success(
             intl.formatMessage({ id: 'misc.clipboardCopy' }),
             intl.formatMessage(
