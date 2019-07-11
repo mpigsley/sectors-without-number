@@ -32,7 +32,7 @@
     "firebase": "^6.2.3",
     "history": "^4.9.0",
     "is-url-external": "^1.0.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.14",
     "pluralize": "^8.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
