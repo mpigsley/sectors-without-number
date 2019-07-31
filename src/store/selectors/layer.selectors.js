@@ -3,9 +3,7 @@ import { createSelector } from 'reselect';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import {
   intersection,
-  zipObject,
   keys,
-  map,
   mapValues,
   sortBy,
   pick,
@@ -41,16 +39,16 @@ export const currentLayer = createSelector(
   (layers, current) => (layers || {})[current],
 );
 
-export const activeLayer = createSelector(
+export const activeLayers = createSelector(
   [currentSectorLayers, getSectorLayers],
   (layers, sectorLayerMap) => {
     const syncedLayers = pick(sectorLayerMap, keys(layers || {}));
-    const activeLayerId = reduce(
+    const activeLayerIds = reduce(
       syncedLayers,
-      (active, layer, layerId) => (layer ? layerId : active),
-      undefined,
+      (active, layer, layerId) => (layer ? [...active, layerId] : active),
+      [],
     );
-    return (layers || {})[activeLayerId];
+    return activeLayerIds.map(id => (layers || {})[id]);
   },
 );
 
@@ -59,35 +57,52 @@ export const currentPaintRegion = createSelector(
   (layer, regionPaint) => ((layer || {}).regions || {})[regionPaint],
 );
 
-export const visibleLayer = createSelector(
-  [currentLayer, activeLayer, isViewingSharedSector],
+export const visibleLayers = createSelector(
+  [currentLayer, activeLayers, isViewingSharedSector],
   (current, active, isShared) => {
-    const layer = current || active || {};
-    const visibleRegions = pickBy(
-      layer.regions || {},
-      ({ isHidden }) => !isShared || !isHidden,
-    );
-    return {
-      ...layer,
-      regions: visibleRegions,
-      hexes: mapValues(layer.hexes || {}, ({ regions }) => ({
-        regions: intersection(regions, keys(visibleRegions)),
-      })),
-    };
+    const layers = (current ? [current] : active) || [];
+    return layers.map(layer => {
+      const visibleRegions = pickBy(
+        layer.regions || {},
+        ({ isHidden }) => !isShared || !isHidden,
+      );
+      return {
+        ...layer,
+        regions: visibleRegions,
+        hexes: mapValues(layer.hexes || {}, ({ regions }) => ({
+          regions: intersection(regions, keys(visibleRegions)),
+        })),
+      };
+    });
   },
 );
 
 export const visibleLayerHexes = createSelector(
-  [visibleLayer],
-  layer => {
-    const regionMap = (layer || {}).regions || {};
-    const hexMap = (layer || {}).hexes || {};
-    return zipObject(
-      keys(hexMap),
-      map(hexMap, ({ regions }) =>
-        sortBy(regions.map(regionId => regionMap[regionId]).filter(r => r), [
-          ({ name }) => name.toLowerCase(),
+  [visibleLayers],
+  layers => {
+    const visibleHexes = layers.reduce(
+      (hexMapping, { hexes = {} } = {}) => ({
+        ...hexMapping,
+        ...mapValues(hexes, (hex, key) => [
+          ...(hexMapping[key] || []),
+          ...hex.regions,
         ]),
+      }),
+      {},
+    );
+
+    const visibleRegions = layers.reduce(
+      (regionMapping, { regions = {}, name } = {}) => ({
+        ...regionMapping,
+        ...mapValues(regions, region => ({ ...region, layerName: name })),
+      }),
+      {},
+    );
+
+    return mapValues(visibleHexes, regions =>
+      sortBy(
+        regions.map(region => visibleRegions[region]).filter(r => r),
+        ({ name }) => name.toLowerCase(),
       ),
     );
   },
@@ -96,4 +111,18 @@ export const visibleLayerHexes = createSelector(
 export const visibleLayerHexColors = createSelector(
   [visibleLayerHexes],
   hexes => mapValues(hexes, list => list.map(({ color }) => color)),
+);
+
+export const hexLayerNameMapping = createSelector(
+  [visibleLayerHexes],
+  hexes =>
+    mapValues(hexes, list =>
+      list.reduce(
+        (layerMapping, { layerName, name }) => ({
+          ...layerMapping,
+          [layerName]: [...(layerMapping[layerName] || []), name],
+        }),
+        {},
+      ),
+    ),
 );

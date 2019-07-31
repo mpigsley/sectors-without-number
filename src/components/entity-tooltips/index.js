@@ -5,13 +5,13 @@ import {
   holdKeySelector,
   hoverKeySelector,
 } from 'store/selectors/base.selectors';
-import { visibleLayer } from 'store/selectors/layer.selectors';
+import { hexLayerNameMapping } from 'store/selectors/layer.selectors';
 import EntityTooltips from './entity-tooltips';
 
 const mapStateToProps = createStructuredSelector({
   holdKey: holdKeySelector,
   hoverKey: hoverKeySelector,
-  layer: visibleLayer,
+  hexLayerNames: hexLayerNameMapping,
 });
 
 export default connect(mapStateToProps)(EntityTooltips);

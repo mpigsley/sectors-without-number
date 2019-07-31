@@ -22,7 +22,6 @@ import {
   getCurrentEntity,
   getCurrentSector,
 } from 'store/selectors/entity.selectors';
-import { currentSectorLayers } from 'store/selectors/layer.selectors';
 import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 
 import {
@@ -347,13 +346,8 @@ export const toggleLayer = layerId => (dispatch, getState) => {
     return Promise.resolve();
   }
 
-  const customLayers = currentSectorLayers(state);
-  let layers = sector.layers || {};
+  const layers = sector.layers || {};
   const layerToggle = layers[layerId] !== undefined && !layers[layerId];
-  layers =
-    customLayers[layerId] && layerToggle
-      ? { ...layers, ...mapValues(customLayers, () => false) }
-      : layers;
 
   const sectorUpdate = {
     layers: {
