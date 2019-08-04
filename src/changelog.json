@@ -1,4 +1,8 @@
 {
+  "7.10.0": {
+    "description": "Update JSON export messaging and add more hebrew translations.",
+    "date": "8-4-2019"
+  },
   "7.9.0": {
     "description": "Allow multiple selected layers at once.",
     "date": "8-4-2019"

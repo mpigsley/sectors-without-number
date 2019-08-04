@@ -582,7 +582,6 @@
   "misc.initialCost": "Wstępny Koszt",
   "misc.initializeEmpty": "Inicjalizuj Pusty Sektor",
   "misc.isHidden": "W Ukryciu",
-  "misc.jsonDescription": "Ściągnij cały sektor w formacie JSON, aby zaimportować go do innego programu.",
   "misc.jsonFormat": "Format JSON",
   "misc.language": "Język",
   "misc.layerDescription": "Opis Warstwy",

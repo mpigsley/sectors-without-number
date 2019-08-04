@@ -2060,7 +2060,6 @@
   "misc.home": "Accueil",
   "misc.initializeEmpty": "Initialiser un secteur vide",
   "misc.isHidden": "Est caché",
-  "misc.jsonDescription": "Télacharger le secteur entier au format JSON pour importer dans un programme fait sur mesure.",
   "misc.jsonFormat": "Format JSON",
   "misc.language": "Langue",
   "misc.layerDescription": "Description du calque",

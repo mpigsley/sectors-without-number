@@ -2091,7 +2091,6 @@
   "misc.initialCost": "Startkosten",
   "misc.initializeEmpty": "Leeren Sektor erstellen",
   "misc.isHidden": "Ist versteckt",
-  "misc.jsonDescription": "Lade den gesamten Sektor als JSON herunter um ihn in einem eigenem Program zu laden",
   "misc.jsonFormat": "JSOn Formatierung",
   "misc.language": "Sprache",
   "misc.layerDescription": "Ebenen Beschreibung",
