@@ -8,7 +8,7 @@ import {
   layerRegionFormSelector,
   layerColorPickerSelector,
 } from 'store/selectors/base.selectors';
-import { visibleLayer } from 'store/selectors/layer.selectors';
+import { visibleLayers } from 'store/selectors/layer.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import {
   initializeRegionForm,
@@ -19,7 +19,7 @@ import {
 import LayerSidebar from './layer-sidebar';
 
 const mapStateToProps = createStructuredSelector({
-  layer: visibleLayer,
+  layers: visibleLayers,
   layerId: currentEntitySelector,
   isEditing: layerIsEditingSelector,
   regionForm: layerRegionFormSelector,

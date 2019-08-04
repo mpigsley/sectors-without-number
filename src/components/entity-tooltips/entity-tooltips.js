@@ -3,23 +3,28 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
-import { map } from 'constants/lodash';
+import { map, size } from 'constants/lodash';
 
 import './style.scss';
 
-export default function EntityTooltips({ hoverKey, holdKey, layer, hexes }) {
+export default function EntityTooltips({
+  hoverKey,
+  holdKey,
+  hexLayerNames,
+  hexes,
+}) {
   const renderTooltip = system => {
     let hexLayerRegions;
-    const hexLayer = (layer.hexes || {})[system.hexKey];
-    if (((hexLayer || {}).regions || []).length) {
-      const regionNames = map(
-        hexLayer.regions,
-        region => layer.regions[region].name,
-      ).join(', ');
+    const hexLayer = hexLayerNames[system.hexKey];
+    if (size(hexLayer)) {
       hexLayerRegions = (
-        <span className="EntityTooltips-Regions">
-          <b>{layer.name}:</b> {regionNames}
-        </span>
+        <FlexContainer direction="column" className="EntityTooltips-Regions">
+          {map(hexLayer, (names, layerName) => (
+            <span key={layerName}>
+              <b>{layerName}:</b> {names.join(', ')}
+            </span>
+          ))}
+        </FlexContainer>
       );
     }
     return (
@@ -53,11 +58,7 @@ export default function EntityTooltips({ hoverKey, holdKey, layer, hexes }) {
 EntityTooltips.propTypes = {
   hoverKey: PropTypes.string,
   holdKey: PropTypes.string,
-  layer: PropTypes.shape({
-    name: PropTypes.string,
-    hexes: PropTypes.shape(),
-    regions: PropTypes.shape(),
-  }).isRequired,
+  hexLayerNames: PropTypes.shape().isRequired,
   hexes: PropTypes.arrayOf(
     PropTypes.shape({
       hexKey: PropTypes.string,

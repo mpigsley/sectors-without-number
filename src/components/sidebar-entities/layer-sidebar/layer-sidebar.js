@@ -20,12 +20,14 @@ const ReactHint = ReactHintFactory(React);
 export default class LayerSidebar extends Component {
   static propTypes = {
     intl: intlShape.isRequired,
-    layer: PropTypes.shape({
-      description: PropTypes.string,
-      isHidden: PropTypes.bool,
-      regions: PropTypes.shape(),
-      name: PropTypes.string,
-    }),
+    layers: PropTypes.arrayOf(
+      PropTypes.shape({
+        description: PropTypes.string,
+        isHidden: PropTypes.bool,
+        regions: PropTypes.shape(),
+        name: PropTypes.string,
+      }),
+    ).isRequired,
     layerId: PropTypes.string,
     isEditing: PropTypes.bool.isRequired,
     isShared: PropTypes.bool.isRequired,
@@ -41,7 +43,6 @@ export default class LayerSidebar extends Component {
   };
 
   static defaultProps = {
-    layer: null,
     layerId: null,
     regionForm: null,
     colorPicker: null,
@@ -52,10 +53,11 @@ export default class LayerSidebar extends Component {
   };
 
   onRenderContent = () => {
-    const { colorPicker, updateRegion, layer } = this.props;
+    const { colorPicker, updateRegion, layers } = this.props;
     if (!colorPicker) {
       return null;
     }
+
     return (
       <div className="LayerSidebar-ColorHint--content">
         <CompactPicker
@@ -63,7 +65,7 @@ export default class LayerSidebar extends Component {
           onChangeComplete={({ hex }) =>
             updateRegion(colorPicker, { color: hex })
           }
-          color={layer.regions[colorPicker].color}
+          color={layers[0].regions[colorPicker].color}
         />
       </div>
     );
@@ -74,8 +76,8 @@ export default class LayerSidebar extends Component {
   };
 
   renderHidden() {
-    const { layer } = this.props;
-    if (!layer.isHidden) {
+    const { layers } = this.props;
+    if (!layers[0].isHidden) {
       return null;
     }
     return (
@@ -83,15 +85,15 @@ export default class LayerSidebar extends Component {
         <EyeOff size={18} />
         <FormattedMessage
           id="misc.layerHidden"
-          values={{ entity: layer.name }}
+          values={{ entity: layers[0].name }}
         />
       </FlexContainer>
     );
   }
 
   renderDescription() {
-    const { layer } = this.props;
-    if (!layer.description) {
+    const { layers } = this.props;
+    if (!layers[0].description) {
       return null;
     }
     return (
@@ -102,7 +104,7 @@ export default class LayerSidebar extends Component {
         <span className="LayerSidebar-Label">
           <FormattedMessage id="misc.description" />
         </span>
-        <p className="LayerSidebar-Description">{layer.description}</p>
+        <p className="LayerSidebar-Description">{layers[0].description}</p>
       </FlexContainer>
     );
   }
@@ -113,7 +115,7 @@ export default class LayerSidebar extends Component {
       isEditing,
       isShared,
       initializeRegionForm,
-      layer,
+      layers,
       regionForm,
       colorPicker,
       intl,
@@ -141,7 +143,7 @@ export default class LayerSidebar extends Component {
           />
           {newRegion}
           {sortBy(
-            map(layer.regions || {}, (region, regionId) => ({
+            map(layers[0].regions || {}, (region, regionId) => ({
               ...region,
               sort: region.name.toLowerCase(),
               regionId,
