@@ -128,7 +128,7 @@ export default function EntityTags({
         ({ key }) =>
           !isShared || (entity.visibility || {})[`tag.${key}`] !== false,
       )
-      .map(({ key, name, description, ...lists }) => {
+      .map(({ key, name, ...lists }) => {
         let visibility;
         if (!isShared && (entity.visibility || {})[`tag.${key}`] === false) {
           visibility = <LinkIcon icon={EyeOff} size={18} />;

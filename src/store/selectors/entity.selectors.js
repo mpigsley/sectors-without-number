@@ -136,6 +136,31 @@ export const getCurrentEntities = createDeepEqualSelector(
     ),
 );
 
+export const getExportEntities = createDeepEqualSelector(
+  [getCurrentEntities, isViewingSharedSector],
+  (entities, isShared) =>
+    mapValues(omit(entities, 'settings', 'navigation', 'layer'), entityTypes =>
+      mapValues(entityTypes, entity => ({
+        ...omit(entity, 'sector', 'visibility'),
+        created: entity.created ? entity.created.toDate() : undefined,
+        updated: entity.updated ? entity.updated.toDate() : undefined,
+        attributes: {
+          ...pickBy(entity.attributes, (value, key) => {
+            return (
+              !isShared || !includes(keys(entity.visibility), `attr.${key}`)
+            );
+          }),
+          tags: (entity.attributes || {}).tags
+            ? entity.attributes.tags.filter(
+                tag =>
+                  !isShared || !includes(keys(entity.visibility), `tag.${tag}`),
+              )
+            : undefined,
+        },
+      })),
+    ),
+);
+
 export const getCurrentSector = createDeepEqualSelector(
   [currentSectorSelector, entitySelector],
   (currentSector, entities) => entities[Entities.sector.key][currentSector],
