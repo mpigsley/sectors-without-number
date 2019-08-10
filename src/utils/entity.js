@@ -376,7 +376,7 @@ export const translateEntities = (entities, intl) =>
           const attribute = find(Entities[entityType].attributes, {
             key,
           });
-          if (!attribute) {
+          if (!attribute || !attribute.attributes[value]) {
             return null;
           }
           return intl.formatMessage({
