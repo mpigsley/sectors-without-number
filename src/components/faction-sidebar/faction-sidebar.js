@@ -66,11 +66,13 @@ export default class FactionSidebar extends Component {
         ]}
       >
         <div>
-          <img
-            src={faction.image}
-            className={styles.image}
-            alt={faction.name}
-          />
+          {!!faction.image && (
+            <img
+              src={faction.image}
+              className={styles.image}
+              alt={faction.name}
+            />
+          )}
           <SectionHeader
             isOpen={isAttributesOpen}
             onIconClick={() =>
