@@ -10,6 +10,7 @@ import {
   isObject,
   findKey,
   find,
+  reduce,
 } from 'constants/lodash';
 import {
   syncLockSelector,
@@ -365,3 +366,60 @@ export const saveEntities = (
       };
     });
 };
+
+export const translateEntities = (entities, intl) =>
+  mapValues(entities, (entityTypes, entityType) =>
+    mapValues(entityTypes, entity => {
+      let translatedAttributes = mapValues(
+        omit(entity.attributes, 'tags'),
+        (value, key) => {
+          const attribute = find(Entities[entityType].attributes, {
+            key,
+          });
+          if (!attribute) {
+            return null;
+          }
+          return intl.formatMessage({
+            id: attribute.attributes[value].name,
+          });
+        },
+      );
+
+      if (((entity.attributes || {}).tags || []).length) {
+        translatedAttributes = {
+          ...translatedAttributes,
+          tags: entity.attributes.tags.map(tag => {
+            const { key, name, ...lists } =
+              (Entities[entityType].tags || {})[tag] || {};
+            if (!key) {
+              return null;
+            }
+            const baseId = `tags.${key}`;
+            return {
+              name: intl.formatMessage({ id: baseId }),
+              description: intl.formatMessage({
+                id: `${baseId}.description`,
+              }),
+              ...reduce(
+                lists,
+                (obj, listLength, listKey) => ({
+                  ...obj,
+                  [listKey]: [...Array(listLength).keys()].map(index =>
+                    intl.formatMessage({
+                      id: `${baseId}.${listKey}.${index}`,
+                    }),
+                  ),
+                }),
+                {},
+              ),
+            };
+          }),
+        };
+      }
+
+      return {
+        ...entity,
+        attributes: translatedAttributes,
+      };
+    }),
+  );

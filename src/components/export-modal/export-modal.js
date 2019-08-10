@@ -7,7 +7,7 @@ import Modal from 'primitives/modal/modal';
 import Button from 'primitives/other/button';
 import ExportTypes from 'constants/export-types';
 import { createJSONDownload, createImageDownlaod } from 'utils/export';
-import { mapValues, omit } from 'constants/lodash';
+import { translateEntities } from 'utils/entity';
 
 import './style.scss';
 
@@ -24,12 +24,7 @@ export default function ExportModal({
   const onContinue = () => {
     if (exportType === ExportTypes.json.key) {
       closeExport();
-      return createJSONDownload(
-        mapValues(entities, entityTypes =>
-          mapValues(entityTypes, entity => omit(entity, 'sector')),
-        ),
-        sector.name,
-      );
+      return createJSONDownload(translateEntities(entities, intl), sector.name);
     }
     if (exportType === ExportTypes.image.key) {
       closeExport();

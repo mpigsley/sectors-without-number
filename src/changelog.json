@@ -1,4 +1,12 @@
 {
+  "7.12.0": {
+    "description": "Translate entity attributes in JSON export.",
+    "date": "8-10-2019",
+    "changes": [
+      "Cut out unnecessary parts of the JSON export.",
+      "Ensure hidden items are filtered from players."
+    ]
+  },
   "7.11.0": {
     "description": "Add image option to faction entities.",
     "date": "8-10-2019"

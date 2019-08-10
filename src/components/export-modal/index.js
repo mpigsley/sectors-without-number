@@ -7,7 +7,7 @@ import {
   isExportOpenSelector,
 } from 'store/selectors/base.selectors';
 import {
-  getCurrentEntities,
+  getExportEntities,
   getCurrentSector,
 } from 'store/selectors/entity.selectors';
 import {
@@ -22,7 +22,7 @@ const mapStateToProps = createStructuredSelector({
   exportType: exportTypeSelector,
   isExportOpen: isExportOpenSelector,
   sector: getCurrentSector,
-  entities: getCurrentEntities,
+  entities: getExportEntities,
 });
 
 export default injectIntl(
