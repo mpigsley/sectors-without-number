@@ -99,6 +99,11 @@ export default function FactionForm({
             value={form.name}
             onChange={({ target }) => updateFaction({ name: target.value })}
           />
+          <LabeledInput
+            label="misc.image"
+            value={form.image}
+            onChange={({ target }) => updateFaction({ image: target.value })}
+          />
           <ItemRow>
             <LabeledInput
               label="faction.category.force"
@@ -277,6 +282,7 @@ FactionForm.propTypes = {
   isValid: PropTypes.bool.isRequired,
   form: PropTypes.shape({
     name: PropTypes.string.isRequired,
+    image: PropTypes.string,
     force: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     cunning: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
       .isRequired,

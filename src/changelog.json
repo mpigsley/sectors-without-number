@@ -1,4 +1,8 @@
 {
+  "7.11.0": {
+    "description": "Add image option to faction entities.",
+    "date": "8-10-2019"
+  },
   "7.10.0": {
     "description": "Update JSON export messaging and add more hebrew translations.",
     "date": "8-4-2019"

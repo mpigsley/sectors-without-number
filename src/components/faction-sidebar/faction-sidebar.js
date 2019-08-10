@@ -8,13 +8,14 @@ import ConfirmModal from 'primitives/modal/confirm-modal';
 
 import FactionAssets from './faction-assets';
 import FactionAttributes from './faction-attributes';
-import './style.scss';
+import styles from './styles.module.scss';
 
 export default class FactionSidebar extends Component {
   static propTypes = {
     intl: intlShape.isRequired,
     faction: PropTypes.shape({
       name: PropTypes.string.isRequired,
+      image: PropTypes.string,
     }),
     currentSector: PropTypes.string.isRequired,
     currentFaction: PropTypes.string.isRequired,
@@ -65,6 +66,11 @@ export default class FactionSidebar extends Component {
         ]}
       >
         <div>
+          <img
+            src={faction.image}
+            className={styles.image}
+            alt={faction.name}
+          />
           <SectionHeader
             isOpen={isAttributesOpen}
             onIconClick={() =>
@@ -73,17 +79,14 @@ export default class FactionSidebar extends Component {
             header="misc.attributes"
           />
           {isAttributesOpen && (
-            <FactionAttributes
-              className="FactionSidebar-Content"
-              faction={faction}
-            />
+            <FactionAttributes className={styles.content} faction={faction} />
           )}
           <SectionHeader
             isOpen={isAssetsOpen}
             onIconClick={() => this.setState({ isAssetsOpen: !isAssetsOpen })}
             header="misc.assets"
           />
-          {isAssetsOpen && <FactionAssets className="FactionSidebar-Content" />}
+          {isAssetsOpen && <FactionAssets className={styles.content} />}
         </div>
         <ConfirmModal
           isOpen={isConfirmDeleteOpen}
