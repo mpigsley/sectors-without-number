@@ -38,11 +38,11 @@ export default function OverviewTable({
           </Link>
         ),
       },
+      { accessor: 'location', Header: 'misc.location', centered: true },
     ];
     if (Entities[entityType].topLevel) {
       return [
         ...common,
-        { accessor: 'location', Header: 'misc.location', centered: true },
         { accessor: 'children', Header: 'misc.children', centered: true },
         { accessor: 'neighbors', Header: 'misc.neighbors' },
       ];

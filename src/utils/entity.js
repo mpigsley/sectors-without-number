@@ -11,6 +11,7 @@ import {
   findKey,
   find,
   reduce,
+  isNumber,
 } from 'constants/lodash';
 import {
   syncLockSelector,
@@ -255,15 +256,6 @@ export const mergeEntityUpdates = (state, updates) => ({
   ),
 });
 
-export const getTopLevelEntity = (topLevelEntities, key) => {
-  const entityId = findKey(
-    topLevelEntities,
-    ({ x, y }) => coordinateKey(x, y) === key,
-  );
-  const entity = topLevelEntities[entityId];
-  return { entity, entityId, entityType: (entity || {}).type };
-};
-
 export const deleteEntities = ({ state, deleted }, intl) => {
   const isLoggedIn = isLoggedInSelector(state);
   const isSaved = isCurrentSectorSaved(state);
@@ -423,3 +415,24 @@ export const translateEntities = (entities, intl) =>
       };
     }),
   );
+
+export const getTopLevelEntity = (topLevelEntities, key) => {
+  const entityId = findKey(
+    topLevelEntities,
+    ({ x, y }) => coordinateKey(x, y) === key,
+  );
+  const entity = topLevelEntities[entityId];
+  return { entity, entityId, entityType: (entity || {}).type };
+};
+
+export const findTopLevelEntity = (entities, entity) => {
+  let traversable = entity;
+  let bailout = 20;
+
+  while (!(isNumber(traversable.x) && isNumber(traversable.y)) && bailout > 0) {
+    traversable = entities[traversable.parentEntity][traversable.parent];
+    bailout -= 1;
+  }
+
+  return bailout ? traversable : undefined;
+};

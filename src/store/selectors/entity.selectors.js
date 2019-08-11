@@ -22,7 +22,7 @@ import { currentSectorFactions } from 'store/selectors/faction.selectors';
 import Entities from 'constants/entities';
 import Elements from 'constants/elements';
 import { allSectorKeys, coordinateKey } from 'utils/common';
-import { getTopLevelEntity } from 'utils/entity';
+import { getTopLevelEntity, findTopLevelEntity } from 'utils/entity';
 import { areNeighbors } from 'utils/hex/common';
 import {
   keys,
@@ -412,40 +412,45 @@ export const getPrintableEntities = createDeepEqualSelector(
             entities,
             entity => currentEntities[entity.parentEntity][entity.parent],
           ),
-          (entity, entityId) => ({
-            ...zipObject(
-              (Entities[entityType].attributes || []).map(({ key }) => key),
-              (Entities[entityType].attributes || []).map(
-                ({ key, attributes }) =>
-                  isShared && (entity.visibility || {})[`attr.${key}`] === false
-                    ? undefined
-                    : (attributes[(entity.attributes || {})[key]] || {}).name ||
-                      (entity.attributes || {})[key],
+          (entity, entityId) => {
+            const topLevelEntity = findTopLevelEntity(currentEntities, entity);
+            return {
+              ...zipObject(
+                (Entities[entityType].attributes || []).map(({ key }) => key),
+                (Entities[entityType].attributes || []).map(
+                  ({ key, attributes }) =>
+                    isShared &&
+                    (entity.visibility || {})[`attr.${key}`] === false
+                      ? undefined
+                      : (attributes[(entity.attributes || {})[key]] || {})
+                          .name || (entity.attributes || {})[key],
+                ),
               ),
-            ),
-            tags: ((entity.attributes || {}).tags || []).filter(
-              tag =>
-                !isShared || (entity.visibility || {})[`tag.${tag}`] !== false,
-            ),
-            description: (entity.attributes || {}).description,
-            key: entityId,
-            name: entity.name,
-            link: `/sector/${currentSector}/${entityType}/${entityId}`,
-            location: Entities[entityType].topLevel
-              ? coordinateKey(entity.x, entity.y)
-              : undefined,
-            children: entityChildren[entityId] || 0,
-            parent: currentEntities[entity.parentEntity][entity.parent].name,
-            parentType: Entities[entity.parentEntity].name,
-            parentLink: `/sector/${currentSector}${
-              entity.parentEntity !== Entities.sector.key
-                ? `/${entity.parentEntity}/${entity.parent}`
-                : ''
-            }`,
-            neighbors: Entities[entityType].topLevel
-              ? entityNeighbors[entityId].map(({ name }) => name).join(', ')
-              : undefined,
-          }),
+              tags: ((entity.attributes || {}).tags || []).filter(
+                tag =>
+                  !isShared ||
+                  (entity.visibility || {})[`tag.${tag}`] !== false,
+              ),
+              description: (entity.attributes || {}).description,
+              key: entityId,
+              name: entity.name,
+              link: `/sector/${currentSector}/${entityType}/${entityId}`,
+              location: topLevelEntity
+                ? coordinateKey(topLevelEntity.x, topLevelEntity.y)
+                : undefined,
+              children: entityChildren[entityId] || 0,
+              parent: currentEntities[entity.parentEntity][entity.parent].name,
+              parentType: Entities[entity.parentEntity].name,
+              parentLink: `/sector/${currentSector}${
+                entity.parentEntity !== Entities.sector.key
+                  ? `/${entity.parentEntity}/${entity.parent}`
+                  : ''
+              }`,
+              neighbors: Entities[entityType].topLevel
+                ? entityNeighbors[entityId].map(({ name }) => name).join(', ')
+                : undefined,
+            };
+          },
         ),
     ),
 );
