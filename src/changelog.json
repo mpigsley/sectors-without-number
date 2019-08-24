@@ -1,4 +1,9 @@
 {
+  "7.13.1": {
+    "description": "Fix bug where overview and print would not work if a note was added on the main sector entity.",
+    "date": "8-24-2019",
+    "changes": ["Condensed printable tables span the full width of the page."]
+  },
   "7.13.0": {
     "description": "Add \"location\" to every entity in overview tables.",
     "date": "8-11-2019"

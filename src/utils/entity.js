@@ -11,7 +11,6 @@ import {
   findKey,
   find,
   reduce,
-  isNumber,
 } from 'constants/lodash';
 import {
   syncLockSelector,
@@ -429,7 +428,7 @@ export const findTopLevelEntity = (entities, entity) => {
   let traversable = entity;
   let bailout = 20;
 
-  while (!(isNumber(traversable.x) && isNumber(traversable.y)) && bailout > 0) {
+  while (traversable.parentEntity !== Entities.sector.key && bailout > 0) {
     traversable = entities[traversable.parentEntity][traversable.parent];
     bailout -= 1;
   }
