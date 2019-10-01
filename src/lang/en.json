@@ -2286,6 +2286,7 @@
   "misc.dashboard": "Dashboard",
   "misc.delete": "Delete",
   "misc.description": "Description",
+  "misc.dimensionBounds": "Sectors must have between {minNumber} and {maxNumber} rows and columns.",
   "misc.dotted": "Dotted",
   "misc.edit": "Edit",
   "misc.editDeleteRoute": "Edit/Delete Route",

@@ -94,8 +94,10 @@ export default function Configure({
             />
           </ItemRow>
           <p className="Configure-Info">
-            Sectors must have between {MIN_DIMENSION} and {MAX_DIMENSION} rows
-            and columns.
+            <FormattedMessage
+              id="misc.dimensionBounds"
+              values={{ minNumber: MIN_DIMENSION, maxNumber: MAX_DIMENSION }}
+            />
           </p>
           <Checkbox
             data-key="isBuilder"

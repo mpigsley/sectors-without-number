@@ -1,4 +1,8 @@
 {
+  "7.14.0": {
+    "description": "Add Occupation & Situation to Black Holes, Systems, and Moons.",
+    "date": "10-1-2019"
+  },
   "7.13.2": {
     "description": "Update translation data. Complete Hebrew.",
     "date": "9-30-2019"

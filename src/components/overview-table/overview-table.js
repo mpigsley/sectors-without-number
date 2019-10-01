@@ -40,11 +40,17 @@ export default function OverviewTable({
       },
       { accessor: 'location', Header: 'misc.location', centered: true },
     ];
+    const attributes = Entities[entityType].attributes.map(({ key, name }) => ({
+      accessor: key,
+      Header: name,
+      translateItem: true,
+    }));
     if (Entities[entityType].topLevel) {
       return [
         ...common,
         { accessor: 'children', Header: 'misc.children', centered: true },
         { accessor: 'neighbors', Header: 'misc.neighbors' },
+        ...attributes,
       ];
     }
     const columns = [
@@ -66,11 +72,7 @@ export default function OverviewTable({
         centered: true,
       });
     }
-    if ((Entities[entityType].attributes || []).length) {
-      Entities[entityType].attributes.forEach(({ key, name }) => {
-        columns.push({ accessor: key, Header: name, translateItem: true });
-      });
-    }
+    attributes.map(attr => columns.push(attr));
     if (Entities[entityType].tags) {
       columns.push({
         accessor: 'tags',
