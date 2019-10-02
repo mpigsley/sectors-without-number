@@ -32,6 +32,7 @@ export default function FactionForm({
   location,
   homeworlds,
   hitPoints,
+  currentFaction,
 }) {
   const relationshipOptions = [
     {
@@ -241,6 +242,14 @@ export default function FactionForm({
             }
           />
           <LabeledInput
+            label="misc.factionColor"
+            type="color"
+            value={
+              form.color || new Chance(currentFaction).color({ format: 'hex' })
+            }
+            onChange={color => updateFaction({ color })}
+          />
+          <LabeledInput
             label="misc.description"
             rows="5"
             type="textarea"
@@ -283,6 +292,7 @@ FactionForm.propTypes = {
   form: PropTypes.shape({
     name: PropTypes.string.isRequired,
     image: PropTypes.string,
+    color: PropTypes.string,
     force: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     cunning: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
       .isRequired,
@@ -311,4 +321,5 @@ FactionForm.propTypes = {
   }).isRequired,
   homeworlds: PropTypes.shape().isRequired,
   hitPoints: PropTypes.number.isRequired,
+  currentFaction: PropTypes.string.isRequired,
 };

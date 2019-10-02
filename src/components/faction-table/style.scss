@@ -62,6 +62,10 @@
   margin-left: 0.5rem;
 }
 
+.FactionTable-Color {
+  margin: 0 0.5rem 0 0 !important;
+}
+
 @media (max-width: 1200px) {
   .FactionTable--sidebarOpen {
     grid-template-columns: [table] auto [sidebar] $small-sidebar-width [end];

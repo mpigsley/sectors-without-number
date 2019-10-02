@@ -25,7 +25,7 @@ export default function LabeledInput({
       className={className}
       label={label}
       labelWidth={labelWidth}
-      isVertical={isVertical || type === 'textarea'}
+      isVertical={isVertical || type === 'textarea' || type === 'color'}
       isRequired={isRequired}
     >
       <InputComponent type={type} icon={icon} {...rest} />

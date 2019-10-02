@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import Chance from 'chance';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { FormattedMessage, intlShape } from 'react-intl';
@@ -8,6 +9,7 @@ import FactionNotSaved from 'components/faction-table/faction-not-saved';
 import CollapsibleTable from 'primitives/other/collapsible-table';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
+import ColorSwatch from 'primitives/other/color-swatch';
 import ButtonLink from 'primitives/other/button-link';
 import BasicLink from 'primitives/other/basic-link';
 import Loading from 'primitives/regions/loading';
@@ -33,16 +35,23 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
     {
       accessor: 'name',
       Header: 'misc.name',
-      Cell: (name, { key, relationship, stealthed }) => {
+      Cell: (name, { key, relationship, stealthed, color }) => {
         const id = `faction.assets.${name}`;
         let title;
         if (intl.messages[id]) {
           title = intl.formatMessage({ id });
         } else {
           title = (
-            <BasicLink to={`/elements/${sector}/faction/${key}`}>
-              {name}
-            </BasicLink>
+            <>
+              <ColorSwatch
+                color={color || new Chance(key).color({ format: 'hex' })}
+                className="FactionTable-Color"
+                size={16}
+              />
+              <BasicLink to={`/elements/${sector}/faction/${key}`}>
+                {name}
+              </BasicLink>
+            </>
           );
         }
         let icon;
