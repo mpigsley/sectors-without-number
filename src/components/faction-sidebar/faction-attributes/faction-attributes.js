@@ -191,6 +191,7 @@ FactionAttributes.propTypes = {
     experience: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
       .isRequired,
   }).isRequired,
+  currentFaction: PropTypes.string.isRequired,
 };
 
 FactionAttributes.defaultProps = {
