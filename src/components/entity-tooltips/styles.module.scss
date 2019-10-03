@@ -1,6 +1,6 @@
 @import '~styles/theme';
 
-.EntityTooltips-Tooltip {
+.tooltip {
   max-width: 15rem;
   opacity: 0;
   pointer-events: none;
@@ -13,7 +13,7 @@
   }
 }
 
-.EntityTooltips-Text {
+.text {
   background-color: $light4;
   padding: 0.8rem;
   border-radius: 6px;
@@ -33,25 +33,41 @@
   }
 }
 
-.EntityTooltips-Name {
+.name {
   color: $dark4;
   font-size: 1.1rem;
   margin: 0;
+  white-space: nowrap;
 }
 
-.EntityTooltips-Key {
+.key {
   color: $light1;
   font-size: 0.8rem;
-  margin-left: 0.5rem;
+  margin: 0 0 0.1rem 0.5rem;
 }
 
-.EntityTooltips-Regions {
-  color: $dark1;
-  font-size: 0.8rem;
+.regions {
   margin-top: 0.4rem;
   text-align: center;
+}
+
+.layer {
+  font-size: 0.75rem;
+  margin-bottom: 0.3rem;
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
   b {
     color: $dark2;
+    line-height: 0.85rem;
+    margin: 0;
+  }
+
+  span {
+    color: $dark1;
+    line-height: 0.85rem;
+    margin: 0 0 0 0.2rem;
   }
 }

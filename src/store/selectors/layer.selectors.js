@@ -140,9 +140,9 @@ export const hexLayerNameMapping = createSelector(
   hexes =>
     mapValues(hexes, list =>
       list.reduce(
-        (layerMapping, { layerName, name }) => ({
+        (layerMapping, { layerName, name, color }) => ({
           ...layerMapping,
-          [layerName]: [...(layerMapping[layerName] || []), name],
+          [layerName]: [...(layerMapping[layerName] || []), { name, color }],
         }),
         {},
       ),
