@@ -18,3 +18,11 @@
     outline: none;
   }
 }
+
+.ColorPicker-Swatch {
+  margin: 0 0.2rem;
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+}

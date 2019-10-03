@@ -51,6 +51,7 @@ export default function ColorPicker({ onChange, value }) {
       </FlexContainer>
       {DEFAULT_COLORS.map(color => (
         <ColorSwatch
+          className="ColorPicker-Swatch"
           color={color}
           onClick={() => handleChange({ target: { value: color } })}
           key={color}
