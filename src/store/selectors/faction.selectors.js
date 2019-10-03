@@ -3,7 +3,7 @@ import { createSelector } from 'reselect';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import { FACTION_ASSETS } from 'constants/faction';
 import Entities from 'constants/entities';
-import { sortBy, every, map, reduce, forEach, uniq } from 'constants/lodash';
+import { sortBy, every, map, reduce, forEach, uniqBy } from 'constants/lodash';
 import { findTopLevelEntity } from 'utils/entity';
 import { coordinateKey } from 'utils/common';
 import {
@@ -153,7 +153,7 @@ export const isValidFactionForm = createSelector(
     every(assets || [], ({ location }) => location),
 );
 
-export const currentFactionLayer = createSelector(
+export const factionLayerHexes = createSelector(
   [currentSectorFactions, entitySelector],
   (factions, entities) =>
     reduce(
@@ -162,7 +162,7 @@ export const currentFactionLayer = createSelector(
         const color = factionColor(faction.color, key);
 
         let newLayer = { ...layer };
-        const buildObj = (obj, entity, entityType) => {
+        const buildObj = (obj, name, entity, entityType) => {
           if (!entity) {
             return obj;
           }
@@ -174,18 +174,34 @@ export const currentFactionLayer = createSelector(
           const locKey = coordinateKey(x, y);
           return {
             ...obj,
-            [locKey]: uniq([...(obj[locKey] || []), color]),
+            [locKey]: uniqBy(
+              [
+                ...(obj[locKey] || []),
+                {
+                  key: `${name}-${color}`,
+                  layerName: 'Factions',
+                  name,
+                  color,
+                },
+              ],
+              'key',
+            ),
           };
         };
 
         newLayer = buildObj(
           newLayer,
+          faction.name,
           faction.homeworld,
           faction.homeworldEntity,
         );
-
         forEach(faction.assets, asset => {
-          newLayer = buildObj(newLayer, asset.location, asset.locationEntity);
+          newLayer = buildObj(
+            newLayer,
+            faction.name,
+            asset.location,
+            asset.locationEntity,
+          );
         });
 
         return newLayer;

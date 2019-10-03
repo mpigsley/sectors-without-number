@@ -15,7 +15,7 @@
 
 .text {
   background-color: $light4;
-  padding: 0.8rem;
+  padding: 0.6rem;
   border-radius: 6px;
   transform: translateX(-50%) translateY(-100%);
   z-index: 1;
@@ -69,5 +69,6 @@
     color: $dark1;
     line-height: 0.85rem;
     margin: 0 0 0 0.2rem;
+    white-space: nowrap;
   }
 }
