@@ -1,4 +1,8 @@
 {
+  "7.15.1": {
+    "description": "Ensure the faction layer is shown by default since it is default to visible",
+    "date": "10-3-2019"
+  },
   "7.15.0": {
     "description": "Automatic Faction Layer",
     "date": "10-3-2019",

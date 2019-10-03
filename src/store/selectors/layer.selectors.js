@@ -108,7 +108,7 @@ export const visibleLayerHexes = createSelector(
       ),
     );
 
-    if (isShared || !layerMap.factions) {
+    if (isShared || layerMap.factions === false) {
       return hexes;
     }
 
