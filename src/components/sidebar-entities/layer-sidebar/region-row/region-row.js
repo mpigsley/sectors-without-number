@@ -6,6 +6,7 @@ import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
+import ColorSwatch from 'primitives/other/color-swatch';
 import Input from 'primitives/form/input';
 
 import { Check, X, Edit3, MoreHorizontal, EyeOff } from 'constants/icons';
@@ -56,6 +57,7 @@ export default function RegionRow({
         <Input
           value={regionForm.name}
           error={isOutOfRange}
+          maxLength={LAYER_NAME_LENGTH}
           placeholder={intl.formatMessage(
             { id: 'misc.nameLimit' },
             { num: LAYER_NAME_LENGTH },
@@ -131,17 +133,16 @@ export default function RegionRow({
   return (
     <FlexContainer className="RegionRow" align="center">
       {paintIcon}
-      <span
+      <ColorSwatch
+        color={region.color}
+        size={25}
+        hoverable={!isShared}
         {...(isShared ? {} : { 'data-color': true })}
-        style={{ backgroundColor: region.color }}
         onClick={() =>
           colorPicker !== regionId && !isShared
             ? openColorPicker(regionId)
             : undefined
         }
-        className={classNames('RegionRow-Color', {
-          'RegionRow-Color--hoverable': !isShared,
-        })}
       />
       <Header
         type={HeaderType.header4}

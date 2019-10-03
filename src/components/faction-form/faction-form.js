@@ -93,6 +93,7 @@ export default function FactionForm({
           <LabeledInput
             isRequired
             label="misc.name"
+            maxLength={LAYER_NAME_LENGTH}
             error={form.name.length > LAYER_NAME_LENGTH}
             placeholder={intl.formatMessage(
               { id: 'misc.nameLimit' },

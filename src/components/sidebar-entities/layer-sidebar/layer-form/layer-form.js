@@ -15,6 +15,7 @@ export default function LayerForm({ intl, layerForm, updateLayer }) {
         isVertical
         isRequired
         label="misc.layerName"
+        maxLength={LAYER_NAME_LENGTH}
         error={layerForm.name.length > LAYER_NAME_LENGTH}
         placeholder={intl.formatMessage(
           { id: 'misc.nameLimit' },

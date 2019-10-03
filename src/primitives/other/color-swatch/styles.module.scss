@@ -5,4 +5,13 @@
   &:last-of-type {
     margin-right: 0;
   }
+
+  &--hoverable {
+    transition: box-shadow 0.2s linear;
+
+    &:hover {
+      box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.9);
+      cursor: pointer;
+    }
+  }
 }

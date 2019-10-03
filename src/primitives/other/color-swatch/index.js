@@ -4,7 +4,13 @@ import classNames from 'classnames';
 
 import styles from './styles.module.scss';
 
-export default function ColorSwatch({ className, color, size, ...rest }) {
+export default function ColorSwatch({
+  className,
+  color,
+  size,
+  hoverable,
+  ...rest
+}) {
   return (
     <div
       style={{
@@ -13,7 +19,9 @@ export default function ColorSwatch({ className, color, size, ...rest }) {
         width: size,
         height: size,
       }}
-      className={classNames(styles.swatch, className)}
+      className={classNames(styles.swatch, className, {
+        [styles['swatch--hoverable']]: hoverable,
+      })}
       {...rest}
     />
   );
@@ -23,9 +31,11 @@ ColorSwatch.propTypes = {
   className: PropTypes.string,
   color: PropTypes.string.isRequired,
   size: PropTypes.number,
+  hoverable: PropTypes.bool,
 };
 
 ColorSwatch.defaultProps = {
   className: undefined,
   size: 36,
+  hoverable: false,
 };
