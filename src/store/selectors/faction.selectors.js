@@ -3,8 +3,14 @@ import { createSelector } from 'reselect';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import { FACTION_ASSETS } from 'constants/faction';
 import Entities from 'constants/entities';
-import { sortBy, every, map } from 'constants/lodash';
-import { factionHitPoints, factionIncomeAndOwnedAssets } from 'utils/faction';
+import { sortBy, every, map, reduce, forEach, uniqBy } from 'constants/lodash';
+import { findTopLevelEntity } from 'utils/entity';
+import { coordinateKey } from 'utils/common';
+import {
+  factionHitPoints,
+  factionIncomeAndOwnedAssets,
+  factionColor,
+} from 'utils/faction';
 
 import {
   entitySelector,
@@ -145,4 +151,61 @@ export const isValidFactionForm = createSelector(
     !!name &&
     name.length <= LAYER_NAME_LENGTH &&
     every(assets || [], ({ location }) => location),
+);
+
+export const factionLayerHexes = createSelector(
+  [currentSectorFactions, entitySelector],
+  (factions, entities) =>
+    reduce(
+      factions,
+      (layer, faction, key) => {
+        const color = factionColor(faction.color, key);
+
+        let newLayer = { ...layer };
+        const buildObj = (obj, name, entity, entityType) => {
+          if (!entity) {
+            return obj;
+          }
+          const entityObj = entities[entityType || Entities.planet.key][entity];
+          if (!entityObj) {
+            return obj;
+          }
+          const { x, y } = findTopLevelEntity(entities, entityObj);
+          const locKey = coordinateKey(x, y);
+          return {
+            ...obj,
+            [locKey]: uniqBy(
+              [
+                ...(obj[locKey] || []),
+                {
+                  key: `${name}-${color}`,
+                  layerName: 'Factions',
+                  name,
+                  color,
+                },
+              ],
+              'key',
+            ),
+          };
+        };
+
+        newLayer = buildObj(
+          newLayer,
+          faction.name,
+          faction.homeworld,
+          faction.homeworldEntity,
+        );
+        forEach(faction.assets, asset => {
+          newLayer = buildObj(
+            newLayer,
+            faction.name,
+            asset.location,
+            asset.locationEntity,
+          );
+        });
+
+        return newLayer;
+      },
+      {},
+    ),
 );

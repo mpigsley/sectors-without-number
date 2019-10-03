@@ -9,6 +9,7 @@ import {
   pick,
   pickBy,
   reduce,
+  uniq,
 } from 'constants/lodash';
 import {
   currentEntitySelector,
@@ -19,6 +20,7 @@ import {
 } from 'store/selectors/base.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import { getSectorLayers } from 'store/selectors/entity.selectors';
+import { factionLayerHexes } from 'store/selectors/faction.selectors';
 
 export const isValidLayerForm = createSelector(
   [layerFormSelector],
@@ -78,8 +80,8 @@ export const visibleLayers = createSelector(
 );
 
 export const visibleLayerHexes = createSelector(
-  [visibleLayers],
-  layers => {
+  [visibleLayers, factionLayerHexes, getSectorLayers, isViewingSharedSector],
+  (layers, factionHexes, layerMap, isShared) => {
     const visibleHexes = layers.reduce(
       (hexMapping, { hexes = {} } = {}) => ({
         ...hexMapping,
@@ -99,18 +101,31 @@ export const visibleLayerHexes = createSelector(
       {},
     );
 
-    return mapValues(visibleHexes, regions =>
+    const hexes = mapValues(visibleHexes, regions =>
       sortBy(
         regions.map(region => visibleRegions[region]).filter(r => r),
         ({ name }) => name.toLowerCase(),
       ),
+    );
+
+    if (isShared || !layerMap.factions) {
+      return hexes;
+    }
+
+    return reduce(
+      factionHexes,
+      (obj, hexObj, hex) => ({
+        ...obj,
+        [hex]: [...(obj[hex] || []), ...hexObj],
+      }),
+      hexes,
     );
   },
 );
 
 export const visibleLayerHexColors = createSelector(
   [visibleLayerHexes],
-  hexes => mapValues(hexes, list => list.map(({ color }) => color)),
+  hexes => mapValues(hexes, list => uniq(list.map(({ color }) => color))),
 );
 
 export const hexLayerNameMapping = createSelector(
@@ -118,9 +133,9 @@ export const hexLayerNameMapping = createSelector(
   hexes =>
     mapValues(hexes, list =>
       list.reduce(
-        (layerMapping, { layerName, name }) => ({
+        (layerMapping, { layerName, name, color }) => ({
           ...layerMapping,
-          [layerName]: [...(layerMapping[layerName] || []), name],
+          [layerName]: [...(layerMapping[layerName] || []), { name, color }],
         }),
         {},
       ),

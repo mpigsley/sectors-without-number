@@ -170,7 +170,7 @@ export default class FloatingToolbar extends Component {
   }
 
   render() {
-    const { intl, sectorId, layers } = this.props;
+    const { isShared, intl, sectorId, layers } = this.props;
     return (
       <div className="FloatingToolbar-Container">
         <FlexContainer className="FloatingToolbar" direction="column">
@@ -192,6 +192,12 @@ export default class FloatingToolbar extends Component {
                 intl.formatMessage({ id: 'misc.navRoutes' }),
                 `/sector/${sectorId}/navigation`,
               )}
+              {!isShared &&
+                this.renderLayer(
+                  'factions',
+                  intl.formatMessage({ id: 'misc.factions' }),
+                  `/elements/${sectorId}/faction`,
+                )}
               {sortBy(
                 map(layers, (layer, key) => ({
                   ...layer,

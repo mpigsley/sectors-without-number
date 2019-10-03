@@ -1,3 +1,5 @@
+import Chance from 'chance';
+
 import { FACTION_ASSETS, FACTION_ASSET_CATEGORIES } from 'constants/faction';
 import { forEach, reduce } from 'constants/lodash';
 
@@ -56,3 +58,6 @@ export const factionIncomeAndOwnedAssets = faction => {
 
   return { income, owned };
 };
+
+export const factionColor = (color, key) =>
+  color || new Chance(key).color({ format: 'hex' });

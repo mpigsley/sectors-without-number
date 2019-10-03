@@ -3,6 +3,8 @@ import tinycolor from 'tinycolor2';
 import PropTypes from 'prop-types';
 
 import FlexContainer from 'primitives/container/flex-container';
+import ColorSwatch from 'primitives/other/color-swatch';
+
 import './style.scss';
 
 const DEFAULT_COLORS = [
@@ -28,7 +30,7 @@ export default function ColorPicker({ onChange, value }) {
     .toHexString()}`;
 
   return (
-    <FlexContainer align="center">
+    <FlexContainer align="center" flex="1">
       <FlexContainer
         style={{ backgroundColor: value, border }}
         align="center"
@@ -48,9 +50,9 @@ export default function ColorPicker({ onChange, value }) {
         />
       </FlexContainer>
       {DEFAULT_COLORS.map(color => (
-        <div
-          style={{ backgroundColor: color }}
-          className="ColorPicker-Preset"
+        <ColorSwatch
+          className="ColorPicker-Swatch"
+          color={color}
           onClick={() => handleChange({ target: { value: color } })}
           key={color}
         />

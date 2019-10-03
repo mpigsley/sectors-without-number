@@ -13,6 +13,7 @@ import { RefreshCw } from 'constants/icons';
 import { omit, sortBy, map, dropRight, clamp } from 'constants/lodash';
 import { FACTION_GOALS, FACTION_TAGS } from 'constants/faction';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
+import { factionColor } from 'utils/faction';
 
 import FactionAssetForm from './faction-asset-form';
 import './style.scss';
@@ -32,6 +33,7 @@ export default function FactionForm({
   location,
   homeworlds,
   hitPoints,
+  currentFaction,
 }) {
   const relationshipOptions = [
     {
@@ -91,6 +93,7 @@ export default function FactionForm({
           <LabeledInput
             isRequired
             label="misc.name"
+            maxLength={LAYER_NAME_LENGTH}
             error={form.name.length > LAYER_NAME_LENGTH}
             placeholder={intl.formatMessage(
               { id: 'misc.nameLimit' },
@@ -241,6 +244,12 @@ export default function FactionForm({
             }
           />
           <LabeledInput
+            label="misc.factionColor"
+            type="color"
+            value={factionColor(form.color, currentFaction)}
+            onChange={color => updateFaction({ color })}
+          />
+          <LabeledInput
             label="misc.description"
             rows="5"
             type="textarea"
@@ -283,6 +292,7 @@ FactionForm.propTypes = {
   form: PropTypes.shape({
     name: PropTypes.string.isRequired,
     image: PropTypes.string,
+    color: PropTypes.string,
     force: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
     cunning: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
       .isRequired,
@@ -311,4 +321,5 @@ FactionForm.propTypes = {
   }).isRequired,
   homeworlds: PropTypes.shape().isRequired,
   hitPoints: PropTypes.number.isRequired,
+  currentFaction: PropTypes.string.isRequired,
 };

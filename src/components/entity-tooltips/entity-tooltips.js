@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import FlexContainer from 'primitives/container/flex-container';
+import ColorSwatch from 'primitives/other/color-swatch';
 import { map, size } from 'constants/lodash';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export default function EntityTooltips({
   hoverKey,
@@ -18,11 +19,22 @@ export default function EntityTooltips({
     const hexLayer = hexLayerNames[system.hexKey];
     if (size(hexLayer)) {
       hexLayerRegions = (
-        <FlexContainer direction="column" className="EntityTooltips-Regions">
-          {map(hexLayer, (names, layerName) => (
-            <span key={layerName}>
-              <b>{layerName}:</b> {names.join(', ')}
-            </span>
+        <FlexContainer direction="column" className={styles.regions}>
+          {map(hexLayer, (layer, layerName) => (
+            <FlexContainer
+              key={layerName}
+              direction="column"
+              align="flexStart"
+              className={styles.layer}
+            >
+              <b>{layerName}</b>
+              {layer.map(({ name, color }) => (
+                <FlexContainer key={name} align="center">
+                  <ColorSwatch size={10} color={color} />
+                  <span>{name}</span>
+                </FlexContainer>
+              ))}
+            </FlexContainer>
           ))}
         </FlexContainer>
       );
@@ -30,20 +42,19 @@ export default function EntityTooltips({
     return (
       <div
         key={system.hexKey}
-        className={classNames('EntityTooltips-Tooltip', {
-          'EntityTooltips-Tooltip--hovered':
-            system.hexKey === hoverKey && !holdKey,
+        className={classNames(styles.tooltip, {
+          [styles['tooltip--hovered']]: system.hexKey === hoverKey && !holdKey,
         })}
         style={{
           top: system.yOffset - system.height / 2 - 10,
           left: system.xOffset,
         }}
       >
-        <div className="EntityTooltips-Text">
+        <div className={styles.text}>
           <FlexContainer direction="column" align="center">
             <FlexContainer align="flexEnd">
-              <div className="EntityTooltips-Name">{system.name}</div>
-              <div className="EntityTooltips-Key">({system.hexKey})</div>
+              <div className={styles.name}>{system.name}</div>
+              <div className={styles.key}>({system.hexKey})</div>
             </FlexContainer>
             {hexLayerRegions}
           </FlexContainer>
@@ -52,7 +63,7 @@ export default function EntityTooltips({
     );
   };
 
-  return <>{hexes.filter(({ hexKey }) => hexKey).map(renderTooltip)}</>;
+  return hexes.filter(({ hexKey }) => hexKey).map(renderTooltip);
 }
 
 EntityTooltips.propTypes = {

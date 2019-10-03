@@ -22,18 +22,6 @@
   transition: color 0.2s linear;
 }
 
-.RegionRow-Color {
-  border-radius: 5px;
-  height: 25px;
-  margin-right: 0.5rem;
-  width: 25px;
-
-  &--hoverable:hover {
-    box-shadow: 1px 1px 3px 0 rgba(0, 0, 0, 0.9);
-    cursor: pointer;
-  }
-}
-
 .RegionRow-HiddenIcon {
   color: $light1;
   margin-left: 0.5rem;
@@ -41,7 +29,7 @@
 
 .RegionRow-Name {
   flex: 1;
-  margin: 0;
+  margin: 0 0 0 0.5rem;
   text-align: left;
 
   &--hidden {

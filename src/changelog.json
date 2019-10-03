@@ -1,4 +1,12 @@
 {
+  "7.15.0": {
+    "description": "Automatic Faction Layer",
+    "date": "10-3-2019",
+    "changes": [
+      "Factions now have an associated color used to paint the faction layer.",
+      "Color swatches are now added directly to the hover tooltip."
+    ]
+  },
   "7.14.0": {
     "description": "Add Occupation & Situation to Black Holes, Systems, and Moons.",
     "date": "10-1-2019"

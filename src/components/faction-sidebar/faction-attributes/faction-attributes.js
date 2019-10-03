@@ -4,9 +4,11 @@ import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import LabeledItem from 'primitives/other/labeled-item';
+import ColorSwatch from 'primitives/other/color-swatch';
 import BasicLink from 'primitives/other/basic-link';
 
 import { RotateCcw } from 'constants/icons';
+import { factionColor } from 'utils/faction';
 
 import './style.scss';
 
@@ -32,7 +34,12 @@ const attributeItem = (label, value, superscript) => (
   </LabeledItem>
 );
 
-export default function FactionAttributes({ faction, attributes, className }) {
+export default function FactionAttributes({
+  faction,
+  attributes,
+  className,
+  currentFaction,
+}) {
   let homeworldElement;
   if ((attributes.homeworld || {}).link) {
     homeworldElement = (
@@ -137,6 +144,12 @@ export default function FactionAttributes({ faction, attributes, className }) {
       </FlexContainer>
       {homeworldElement}
       {relationship}
+      <LabeledItem label="misc.factionColor">
+        <ColorSwatch
+          size={16}
+          color={factionColor(faction.color, currentFaction)}
+        />
+      </LabeledItem>
       {goal}
       {description}
       {tags}
@@ -163,6 +176,7 @@ FactionAttributes.propTypes = {
     goal: PropTypes.string,
     description: PropTypes.string,
     relationship: PropTypes.string,
+    color: PropTypes.string,
     stealthed: PropTypes.bool,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     force: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
@@ -177,6 +191,7 @@ FactionAttributes.propTypes = {
     experience: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
       .isRequired,
   }).isRequired,
+  currentFaction: PropTypes.string.isRequired,
 };
 
 FactionAttributes.defaultProps = {

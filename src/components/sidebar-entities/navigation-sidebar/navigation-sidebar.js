@@ -8,7 +8,7 @@ import ConfirmModal from 'primitives/modal/confirm-modal';
 import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
-import ColorPicker from 'primitives/other/color-picker';
+import ColorPicker from 'primitives/form/color-picker';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
 import Label from 'primitives/form/label';

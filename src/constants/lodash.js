@@ -20,6 +20,7 @@ import merge from 'lodash/merge';
 import omitBy from 'lodash/omitBy';
 import forEach from 'lodash/forEach';
 import uniq from 'lodash/uniq';
+import uniqBy from 'lodash/uniqBy';
 import sortBy from 'lodash/sortBy';
 import keys from 'lodash/keys';
 import difference from 'lodash/difference';
@@ -62,6 +63,7 @@ export {
   omitBy,
   forEach,
   uniq,
+  uniqBy,
   sortBy,
   keys,
   difference,
