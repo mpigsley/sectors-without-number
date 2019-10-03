@@ -188,13 +188,14 @@ export default class FloatingToolbar extends Component {
                 `/sector/${sectorId}/settings`,
               )}
               {this.renderLayer(
-                'factions',
-                intl.formatMessage({ id: 'misc.factions' }),
-              )}
-              {this.renderLayer(
                 'navigation',
                 intl.formatMessage({ id: 'misc.navRoutes' }),
                 `/sector/${sectorId}/navigation`,
+              )}
+              {this.renderLayer(
+                'factions',
+                intl.formatMessage({ id: 'misc.factions' }),
+                `/sector/${sectorId}/factions`,
               )}
               {sortBy(
                 map(layers, (layer, key) => ({
