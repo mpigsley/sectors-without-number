@@ -9,7 +9,6 @@ import {
   pick,
   pickBy,
   reduce,
-  uniq,
 } from 'constants/lodash';
 import {
   currentEntitySelector,
