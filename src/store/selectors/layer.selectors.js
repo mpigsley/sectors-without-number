@@ -9,6 +9,7 @@ import {
   pick,
   pickBy,
   reduce,
+  uniq,
 } from 'constants/lodash';
 import {
   currentEntitySelector,
@@ -19,6 +20,7 @@ import {
 } from 'store/selectors/base.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import { getSectorLayers } from 'store/selectors/entity.selectors';
+import { currentFactionLayer } from 'store/selectors/faction.selectors';
 
 export const isValidLayerForm = createSelector(
   [layerFormSelector],
@@ -108,9 +110,30 @@ export const visibleLayerHexes = createSelector(
   },
 );
 
+/** Check this out */
 export const visibleLayerHexColors = createSelector(
-  [visibleLayerHexes],
-  hexes => mapValues(hexes, list => list.map(({ color }) => color)),
+  [
+    visibleLayerHexes,
+    currentFactionLayer,
+    getSectorLayers,
+    isViewingSharedSector,
+  ],
+  (hexes, factionHexes, layerMap, isShared) => {
+    const visibleHexes = mapValues(hexes, list =>
+      list.map(({ color }) => color),
+    );
+    if (isShared || !layerMap.factions) {
+      return visibleHexes;
+    }
+    return reduce(
+      factionHexes,
+      (obj, colors, hex) => ({
+        ...obj,
+        [hex]: [...(obj[hex] || []), ...colors],
+      }),
+      visibleHexes,
+    );
+  },
 );
 
 export const hexLayerNameMapping = createSelector(

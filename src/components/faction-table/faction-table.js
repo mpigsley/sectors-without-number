@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Chance from 'chance';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { FormattedMessage, intlShape } from 'react-intl';
@@ -22,6 +21,7 @@ import {
   EyeOff,
 } from 'constants/icons';
 import { isArray } from 'constants/lodash';
+import { factionColor } from 'utils/faction';
 
 import './style.scss';
 
@@ -44,7 +44,7 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
           title = (
             <>
               <ColorSwatch
-                color={color || new Chance(key).color({ format: 'hex' })}
+                color={factionColor(color, key)}
                 className="FactionTable-Color"
                 size={16}
               />

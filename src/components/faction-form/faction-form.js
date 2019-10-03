@@ -13,6 +13,7 @@ import { RefreshCw } from 'constants/icons';
 import { omit, sortBy, map, dropRight, clamp } from 'constants/lodash';
 import { FACTION_GOALS, FACTION_TAGS } from 'constants/faction';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
+import { factionColor } from 'utils/faction';
 
 import FactionAssetForm from './faction-asset-form';
 import './style.scss';
@@ -244,9 +245,7 @@ export default function FactionForm({
           <LabeledInput
             label="misc.factionColor"
             type="color"
-            value={
-              form.color || new Chance(currentFaction).color({ format: 'hex' })
-            }
+            value={factionColor(form.color, currentFaction)}
             onChange={color => updateFaction({ color })}
           />
           <LabeledInput
