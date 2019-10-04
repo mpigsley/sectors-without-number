@@ -10,9 +10,13 @@ import Header, { HeaderType } from 'primitives/text/header';
 import './style.scss';
 
 export default class LinkRow extends Component {
-  state = {
-    hovered: false,
-  };
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      hovered: false,
+    };
+  }
 
   render() {
     const {

@@ -38,7 +38,7 @@ export default function Changelog() {
                 </Header>
                 {!!contributor && (
                   <span>
-                    <b>Contributor:</b>{' '}
+                    <b>Contributor:</b>
                     <a
                       className="Changelog-ContributorLink"
                       href={`https://github.com/${contributor}`}

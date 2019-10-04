@@ -174,27 +174,6 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
 };
 
 export default class FactionTable extends Component {
-  static propTypes = {
-    intl: intlShape.isRequired,
-    isLoggedIn: PropTypes.bool.isRequired,
-    isLoading: PropTypes.bool.isRequired,
-    isSaved: PropTypes.bool.isRequired,
-    isShared: PropTypes.bool.isRequired,
-    isInitialized: PropTypes.bool.isRequired,
-    doesNotExist: PropTypes.bool.isRequired,
-    table: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-    children: PropTypes.node.isRequired,
-    currentSector: PropTypes.string.isRequired,
-    currentFaction: PropTypes.shape({}),
-    currentElement: PropTypes.string,
-    toSafeRoute: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    currentFaction: undefined,
-    currentElement: undefined,
-  };
-
   componentDidUpdate(prevProps) {
     const { isInitialized, doesNotExist, isShared, toSafeRoute } = this.props;
     if (
@@ -290,3 +269,24 @@ export default class FactionTable extends Component {
     );
   }
 }
+
+FactionTable.propTypes = {
+  intl: intlShape.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  isSaved: PropTypes.bool.isRequired,
+  isShared: PropTypes.bool.isRequired,
+  isInitialized: PropTypes.bool.isRequired,
+  doesNotExist: PropTypes.bool.isRequired,
+  table: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+  children: PropTypes.node.isRequired,
+  currentSector: PropTypes.string.isRequired,
+  currentFaction: PropTypes.shape({}),
+  currentElement: PropTypes.string,
+  toSafeRoute: PropTypes.func.isRequired,
+};
+
+FactionTable.defaultProps = {
+  currentFaction: undefined,
+  currentElement: undefined,
+};

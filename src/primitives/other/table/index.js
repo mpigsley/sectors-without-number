@@ -19,43 +19,14 @@ const nextDirection = direction => {
 };
 
 class Table extends Component {
-  static propTypes = {
-    className: PropTypes.string,
-    dataIdAccessor: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(
-      PropTypes.shape({
-        onClick: PropTypes.func,
-        rowClass: PropTypes.string,
-      }),
-    ).isRequired,
-    light: PropTypes.bool,
-    condensed: PropTypes.bool,
-    sortable: PropTypes.bool,
-    columns: PropTypes.arrayOf(
-      PropTypes.shape({
-        accessor: PropTypes.string.isRequired,
-        Header: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
-          .isRequired,
-        Cell: PropTypes.func,
-        columnClass: PropTypes.string,
-        centered: PropTypes.bool,
-        translateItems: PropTypes.bool,
-      }),
-    ).isRequired,
-    intl: intlShape.isRequired,
-  };
+  constructor(props) {
+    super(props);
 
-  static defaultProps = {
-    light: false,
-    condensed: false,
-    sortable: false,
-    className: undefined,
-  };
-
-  state = {
-    sort: undefined,
-    sortDirection: 0,
-  };
+    this.state = {
+      sort: undefined,
+      sortDirection: 0,
+    };
+  }
 
   static getDerivedStateFromProps({ columns }, state) {
     if (state.sort && !find(columns, { accessor: state.sort })) {
@@ -189,5 +160,38 @@ class Table extends Component {
     );
   }
 }
+
+Table.propTypes = {
+  className: PropTypes.string,
+  dataIdAccessor: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      onClick: PropTypes.func,
+      rowClass: PropTypes.string,
+    }),
+  ).isRequired,
+  light: PropTypes.bool,
+  condensed: PropTypes.bool,
+  sortable: PropTypes.bool,
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      accessor: PropTypes.string.isRequired,
+      Header: PropTypes.oneOfType([PropTypes.func, PropTypes.string])
+        .isRequired,
+      Cell: PropTypes.func,
+      columnClass: PropTypes.string,
+      centered: PropTypes.bool,
+      translateItems: PropTypes.bool,
+    }),
+  ).isRequired,
+  intl: intlShape.isRequired,
+};
+
+Table.defaultProps = {
+  light: false,
+  condensed: false,
+  sortable: false,
+  className: undefined,
+};
 
 export default injectIntl(Table);

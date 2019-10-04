@@ -15,16 +15,6 @@ import './style.scss';
 import '../style.scss';
 
 export default class CondensedPrintable extends Component {
-  static propTypes = {
-    entities: PropTypes.shape().isRequired,
-    printable: PropTypes.shape({
-      hexes: PropTypes.arrayOf(PropTypes.object).isRequired,
-      viewbox: PropTypes.string.isRequired,
-    }).isRequired,
-    intl: intlShape.isRequired,
-    endPrint: PropTypes.func.isRequired,
-  };
-
   componentDidMount() {
     const { endPrint } = this.props;
     setTimeout(() => {
@@ -127,3 +117,13 @@ export default class CondensedPrintable extends Component {
     );
   }
 }
+
+CondensedPrintable.propTypes = {
+  entities: PropTypes.shape().isRequired,
+  printable: PropTypes.shape({
+    hexes: PropTypes.arrayOf(PropTypes.object).isRequired,
+    viewbox: PropTypes.string.isRequired,
+  }).isRequired,
+  intl: intlShape.isRequired,
+  endPrint: PropTypes.func.isRequired,
+};

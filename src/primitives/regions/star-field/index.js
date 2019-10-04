@@ -12,12 +12,11 @@ export default class StarField extends Component {
 
     this.ratio = getPixelRatio();
     this.canvas = React.createRef();
+    this.state = {
+      height: window.innerHeight,
+      width: window.innerWidth,
+    };
   }
-
-  state = {
-    height: window.innerHeight,
-    width: window.innerWidth,
-  };
 
   componentDidMount() {
     this.drawStars();

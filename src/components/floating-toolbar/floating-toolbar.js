@@ -25,25 +25,6 @@ import './style.scss';
 const ReactHint = ReactHintFactory(React);
 
 export default class FloatingToolbar extends Component {
-  static propTypes = {
-    sectorId: PropTypes.string.isRequired,
-    mapLocked: PropTypes.bool.isRequired,
-    toggleMapLock: PropTypes.func.isRequired,
-    playerView: PropTypes.bool.isRequired,
-    togglePlayerView: PropTypes.func.isRequired,
-    layers: PropTypes.shape().isRequired,
-    sectorLayers: PropTypes.shape().isRequired,
-    toggleLayer: PropTypes.func.isRequired,
-    isSharedSector: PropTypes.bool.isRequired,
-    isShared: PropTypes.bool.isRequired,
-    isSaved: PropTypes.bool.isRequired,
-    redirectToHome: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -260,3 +241,22 @@ export default class FloatingToolbar extends Component {
     );
   }
 }
+
+FloatingToolbar.propTypes = {
+  sectorId: PropTypes.string.isRequired,
+  mapLocked: PropTypes.bool.isRequired,
+  toggleMapLock: PropTypes.func.isRequired,
+  playerView: PropTypes.bool.isRequired,
+  togglePlayerView: PropTypes.func.isRequired,
+  layers: PropTypes.shape().isRequired,
+  sectorLayers: PropTypes.shape().isRequired,
+  toggleLayer: PropTypes.func.isRequired,
+  isSharedSector: PropTypes.bool.isRequired,
+  isShared: PropTypes.bool.isRequired,
+  isSaved: PropTypes.bool.isRequired,
+  redirectToHome: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+};

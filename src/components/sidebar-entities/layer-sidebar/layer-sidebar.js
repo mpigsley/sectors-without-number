@@ -18,39 +18,12 @@ import './style.scss';
 const ReactHint = ReactHintFactory(React);
 
 export default class LayerSidebar extends Component {
-  static propTypes = {
-    intl: intlShape.isRequired,
-    layers: PropTypes.arrayOf(
-      PropTypes.shape({
-        description: PropTypes.string,
-        isHidden: PropTypes.bool,
-        regions: PropTypes.shape(),
-        name: PropTypes.string,
-      }),
-    ).isRequired,
-    layerId: PropTypes.string,
-    isEditing: PropTypes.bool.isRequired,
-    isShared: PropTypes.bool.isRequired,
-    regionForm: PropTypes.shape({
-      name: PropTypes.string,
-      regionId: PropTypes.string,
-      isHidden: PropTypes.bool,
-    }),
-    colorPicker: PropTypes.string,
-    initializeRegionForm: PropTypes.func.isRequired,
-    updateRegion: PropTypes.func.isRequired,
-    removeRegion: PropTypes.func.isRequired,
-  };
-
-  static defaultProps = {
-    layerId: null,
-    regionForm: null,
-    colorPicker: null,
-  };
-
-  state = {
-    regionDeletion: null,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      regionDeletion: null,
+    };
+  }
 
   onRenderContent = () => {
     const { colorPicker, updateRegion, layers } = this.props;
@@ -182,3 +155,33 @@ export default class LayerSidebar extends Component {
     );
   }
 }
+
+LayerSidebar.propTypes = {
+  intl: intlShape.isRequired,
+  layers: PropTypes.arrayOf(
+    PropTypes.shape({
+      description: PropTypes.string,
+      isHidden: PropTypes.bool,
+      regions: PropTypes.shape(),
+      name: PropTypes.string,
+    }),
+  ).isRequired,
+  layerId: PropTypes.string,
+  isEditing: PropTypes.bool.isRequired,
+  isShared: PropTypes.bool.isRequired,
+  regionForm: PropTypes.shape({
+    name: PropTypes.string,
+    regionId: PropTypes.string,
+    isHidden: PropTypes.bool,
+  }),
+  colorPicker: PropTypes.string,
+  initializeRegionForm: PropTypes.func.isRequired,
+  updateRegion: PropTypes.func.isRequired,
+  removeRegion: PropTypes.func.isRequired,
+};
+
+LayerSidebar.defaultProps = {
+  layerId: null,
+  regionForm: null,
+  colorPicker: null,
+};

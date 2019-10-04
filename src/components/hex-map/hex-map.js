@@ -16,59 +16,6 @@ import { getPixelRatio, getHoveredHex } from 'utils/canvas-helpers';
 import './style.scss';
 
 export default class HexMap extends Component {
-  static propTypes = {
-    entityHover: PropTypes.func.isRequired,
-    entityHold: PropTypes.func.isRequired,
-    entityRelease: PropTypes.func.isRequired,
-    moveTopLevelEntity: PropTypes.func.isRequired,
-    topLevelEntityCreate: PropTypes.func.isRequired,
-    deactivateSidebarEdit: PropTypes.func.isRequired,
-    clearMapKeys: PropTypes.func.isRequired,
-    addRouteLocation: PropTypes.func.isRequired,
-    completeRoute: PropTypes.func.isRequired,
-    updateNavSettings: PropTypes.func.isRequired,
-    toggleRegionAtHex: PropTypes.func.isRequired,
-    toEntity: PropTypes.func.isRequired,
-    topLevelEntities: PropTypes.shape().isRequired,
-    isShared: PropTypes.bool.isRequired,
-    isSidebarEditActive: PropTypes.bool.isRequired,
-    isSector: PropTypes.bool,
-    mapLocked: PropTypes.bool.isRequired,
-    hoverKey: PropTypes.string,
-    holdKey: PropTypes.string,
-    currentEntityType: PropTypes.string,
-    height: PropTypes.number,
-    width: PropTypes.number,
-    hexes: PropTypes.arrayOf(
-      PropTypes.shape({
-        hexKey: PropTypes.string.isRequired,
-      }),
-    ),
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        sector: PropTypes.string,
-      }),
-    }).isRequired,
-    location: PropTypes.shape({
-      pathname: PropTypes.string.isRequired,
-    }).isRequired,
-    navigationSettings: PropTypes.shape({
-      isCreatingRoute: PropTypes.bool.isRequired,
-    }).isRequired,
-    paintRegionId: PropTypes.string,
-  };
-
-  static defaultProps = {
-    height: null,
-    width: null,
-    isSector: false,
-    hoverKey: null,
-    holdKey: null,
-    currentEntityType: Entities.sector.key,
-    hexes: [],
-    paintRegionId: null,
-  };
-
   constructor(props) {
     super(props);
 
@@ -283,3 +230,56 @@ export default class HexMap extends Component {
     );
   }
 }
+
+HexMap.propTypes = {
+  entityHover: PropTypes.func.isRequired,
+  entityHold: PropTypes.func.isRequired,
+  entityRelease: PropTypes.func.isRequired,
+  moveTopLevelEntity: PropTypes.func.isRequired,
+  topLevelEntityCreate: PropTypes.func.isRequired,
+  deactivateSidebarEdit: PropTypes.func.isRequired,
+  clearMapKeys: PropTypes.func.isRequired,
+  addRouteLocation: PropTypes.func.isRequired,
+  completeRoute: PropTypes.func.isRequired,
+  updateNavSettings: PropTypes.func.isRequired,
+  toggleRegionAtHex: PropTypes.func.isRequired,
+  toEntity: PropTypes.func.isRequired,
+  topLevelEntities: PropTypes.shape().isRequired,
+  isShared: PropTypes.bool.isRequired,
+  isSidebarEditActive: PropTypes.bool.isRequired,
+  isSector: PropTypes.bool,
+  mapLocked: PropTypes.bool.isRequired,
+  hoverKey: PropTypes.string,
+  holdKey: PropTypes.string,
+  currentEntityType: PropTypes.string,
+  height: PropTypes.number,
+  width: PropTypes.number,
+  hexes: PropTypes.arrayOf(
+    PropTypes.shape({
+      hexKey: PropTypes.string.isRequired,
+    }),
+  ),
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      sector: PropTypes.string,
+    }),
+  }).isRequired,
+  location: PropTypes.shape({
+    pathname: PropTypes.string.isRequired,
+  }).isRequired,
+  navigationSettings: PropTypes.shape({
+    isCreatingRoute: PropTypes.bool.isRequired,
+  }).isRequired,
+  paintRegionId: PropTypes.string,
+};
+
+HexMap.defaultProps = {
+  height: null,
+  width: null,
+  isSector: false,
+  hoverKey: null,
+  holdKey: null,
+  currentEntityType: Entities.sector.key,
+  hexes: [],
+  paintRegionId: null,
+};

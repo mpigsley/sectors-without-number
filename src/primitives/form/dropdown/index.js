@@ -13,12 +13,10 @@ export default function Dropdown({
   wrapperClassName,
   ...rest
 }) {
-  const newProps = Object.assign(
-    {
-      promptTextCreator: label => label,
-    },
-    rest,
-  );
+  const newProps = {
+    promptTextCreator: label => label,
+    ...rest,
+  };
   const DropdownComponent = allowCreate ? Creatable : Select;
   const Icon = icon;
   return (

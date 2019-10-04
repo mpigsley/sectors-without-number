@@ -11,26 +11,15 @@ import FactionAttributes from './faction-attributes';
 import styles from './styles.module.scss';
 
 export default class FactionSidebar extends Component {
-  static propTypes = {
-    intl: intlShape.isRequired,
-    faction: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string,
-    }),
-    currentSector: PropTypes.string.isRequired,
-    currentFaction: PropTypes.string.isRequired,
-    removeFaction: PropTypes.func.isRequired,
-  };
+  constructor(props) {
+    super(props);
 
-  static defaultProps = {
-    faction: undefined,
-  };
-
-  state = {
-    isConfirmDeleteOpen: false,
-    isAttributesOpen: true,
-    isAssetsOpen: true,
-  };
+    this.state = {
+      isConfirmDeleteOpen: false,
+      isAttributesOpen: true,
+      isAssetsOpen: true,
+    };
+  }
 
   render() {
     const {
@@ -106,3 +95,18 @@ export default class FactionSidebar extends Component {
     );
   }
 }
+
+FactionSidebar.propTypes = {
+  intl: intlShape.isRequired,
+  faction: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string,
+  }),
+  currentSector: PropTypes.string.isRequired,
+  currentFaction: PropTypes.string.isRequired,
+  removeFaction: PropTypes.func.isRequired,
+};
+
+FactionSidebar.defaultProps = {
+  faction: undefined,
+};

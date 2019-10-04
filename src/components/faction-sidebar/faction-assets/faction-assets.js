@@ -45,7 +45,7 @@ export default function FactionAssets({ assets, className }) {
       attackRow = (
         <span>
           <FormattedMessage id={`faction.category.${attack.attack}`} />
-          {' v '}
+          <span className="FactionAssets-Spacer">v</span>
           <FormattedMessage id={`faction.category.${attack.defense}`} />
           {', '}
           {renderRoll(attack.damage)}
@@ -96,7 +96,7 @@ export default function FactionAssets({ assets, className }) {
           <span className="FactionAssets-Header">
             <FormattedMessage id={`faction.assets.${key}`} />
           </span>
-          (<FormattedMessage id={`faction.category.${category}`} /> {rating} -{' '}
+          (<FormattedMessage id={`faction.category.${category}`} /> {rating} -
           <FormattedMessage id={`faction.type.${type}`} />)
         </Header>
         <p className="FactionAssets-Description">

@@ -73,11 +73,12 @@ module.exports = functions.https.onCall((data, context) => {
               }
 
               const timestamp = admin.firestore.FieldValue.serverTimestamp();
-              const savableEntity = Object.assign({}, entity, {
+              const savableEntity = {
+                ...entity,
                 creator: context.auth.uid,
                 created: timestamp,
                 updated: timestamp,
-              });
+              };
               if (newParentId) {
                 savableEntity.parent = newParentId;
                 savableEntity.sector = thisSectorId;

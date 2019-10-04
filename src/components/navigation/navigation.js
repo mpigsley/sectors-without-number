@@ -15,6 +15,7 @@ import {
 } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
+import { useIsMobile } from 'utils/effects';
 
 import './style.scss';
 
@@ -28,6 +29,11 @@ export default function Navigation({
   location,
   lastOverviewEntity,
 }) {
+  const isMobile = useIsMobile();
+  if (isMobile) {
+    return null;
+  }
+
   let userButton;
   let logoutButton = null;
   if (isLoggedIn) {
