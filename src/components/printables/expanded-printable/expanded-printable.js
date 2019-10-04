@@ -13,16 +13,6 @@ import './style.scss';
 import '../style.scss';
 
 export default class ExpandedPrintable extends Component {
-  static propTypes = {
-    entities: PropTypes.shape().isRequired,
-    printable: PropTypes.shape({
-      hexes: PropTypes.arrayOf(PropTypes.object).isRequired,
-      viewbox: PropTypes.string.isRequired,
-    }).isRequired,
-    intl: intlShape.isRequired,
-    endPrint: PropTypes.func.isRequired,
-  };
-
   componentDidMount() {
     const { endPrint } = this.props;
     setTimeout(() => {
@@ -39,8 +29,8 @@ export default class ExpandedPrintable extends Component {
     if (entity.tags && entity.tags.length) {
       blockAttributes.push(
         <div key="tags">
-          <b>
-            <FormattedMessage id="misc.tags" />:{' '}
+          <b className="ExpandedPrintable-Name">
+            <FormattedMessage id="misc.tags" />:
           </b>
           {entity.tags
             .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
@@ -54,8 +44,8 @@ export default class ExpandedPrintable extends Component {
         .forEach(({ key, name }) =>
           blockAttributes.push(
             <div key={key}>
-              <b>
-                <FormattedMessage id={name} />:{' '}
+              <b className="ExpandedPrintable-Name">
+                <FormattedMessage id={name} />:
               </b>
               {intl.messages[entity[key]] ? (
                 <FormattedMessage id={entity[key]} />
@@ -69,8 +59,8 @@ export default class ExpandedPrintable extends Component {
     if (entity.neighbors) {
       blockAttributes.push(
         <div key="neighbors">
-          <b>
-            <FormattedMessage id="misc.neighbors" />:{' '}
+          <b className="ExpandedPrintable-Name">
+            <FormattedMessage id="misc.neighbors" />:
           </b>
           {entity.neighbors}
         </div>,
@@ -79,8 +69,8 @@ export default class ExpandedPrintable extends Component {
     if (entity.children) {
       blockAttributes.push(
         <div key="children">
-          <b>
-            <FormattedMessage id="misc.children" />:{' '}
+          <b className="ExpandedPrintable-Name">
+            <FormattedMessage id="misc.children" />:
           </b>
           {entity.children}
         </div>,
@@ -89,8 +79,8 @@ export default class ExpandedPrintable extends Component {
     if (entity.description) {
       blockAttributes.push(
         <div key="description">
-          <b>
-            <FormattedMessage id="misc.description" />:{' '}
+          <b className="ExpandedPrintable-Name">
+            <FormattedMessage id="misc.description" />:
           </b>
           {entity.description}
         </div>,
@@ -152,3 +142,13 @@ export default class ExpandedPrintable extends Component {
     );
   }
 }
+
+ExpandedPrintable.propTypes = {
+  entities: PropTypes.shape().isRequired,
+  printable: PropTypes.shape({
+    hexes: PropTypes.arrayOf(PropTypes.object).isRequired,
+    viewbox: PropTypes.string.isRequired,
+  }).isRequired,
+  intl: intlShape.isRequired,
+  endPrint: PropTypes.func.isRequired,
+};
