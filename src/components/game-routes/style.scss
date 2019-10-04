@@ -18,6 +18,12 @@
   }
 }
 
+@media (max-width: 700px) {
+  .GameRoutes {
+    grid-template-columns: auto;
+  }
+}
+
 @media print {
   .GameRoutes {
     display: block;

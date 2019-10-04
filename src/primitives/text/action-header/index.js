@@ -26,6 +26,7 @@ export default function ActionHeader({ title, actions }) {
       <FlexContainer
         justify="center"
         shrink="0"
+        wrap
         className="ActionHeader-SubHeader"
       >
         {actions.map(renderAction)}

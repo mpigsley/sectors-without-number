@@ -24,3 +24,8 @@ export const useDimensions = () => {
   );
   return dimensions;
 };
+
+export const useIsMobile = () => {
+  const { width } = useDimensions();
+  return width <= 700;
+};

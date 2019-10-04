@@ -12,7 +12,7 @@ import ExportTypes from 'constants/export-types';
 import { map, includes } from 'constants/lodash';
 import hexGenerator from 'utils/hex/generator';
 import { coordinateKey } from 'utils/common';
-import { useDimensions } from 'utils/effects';
+import { useIsMobile } from 'utils/effects';
 import Loading from './loading';
 import Error from './error';
 
@@ -34,7 +34,7 @@ export default function SectorMap({
   isPrinting,
   fetchedSectors,
 }) {
-  const dimensions = useDimensions();
+  const isMobile = useIsMobile();
   useEffect(() => {
     const splitPath = location.pathname.split('/');
     if (
@@ -53,7 +53,7 @@ export default function SectorMap({
   if (doesNotExist) {
     return <Error generateSector={generateSector} />;
   }
-  if (dimensions.width < 500) {
+  if (isMobile) {
     return children;
   }
 

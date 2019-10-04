@@ -21,3 +21,9 @@
     width: $small-sidebar-width;
   }
 }
+
+@media (max-width: 700px) {
+  .SidebarContainer {
+    width: 100%;
+  }
+}
