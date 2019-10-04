@@ -17,6 +17,7 @@ import {
   renderSectorSelector,
   exportTypeSelector,
   isPrintingSelector,
+  fetchedSectorSelector,
 } from 'store/selectors/base.selectors';
 
 import SectorMap from './sector-map';
@@ -29,6 +30,7 @@ const mapStateToProps = createStructuredSelector({
   topLevelEntities: getCurrentTopLevelEntities,
   exportType: exportTypeSelector,
   isPrinting: isPrintingSelector,
+  fetchedSectors: fetchedSectorSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
