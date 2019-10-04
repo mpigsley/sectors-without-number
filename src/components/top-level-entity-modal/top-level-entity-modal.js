@@ -62,19 +62,6 @@ const generateChildrenNames = (parentEntity, currentSector) => {
 };
 
 export default class TopLevelEntityModal extends Component {
-  static propTypes = {
-    isOpen: PropTypes.bool.isRequired,
-    topLevelKey: PropTypes.string,
-    currentSector: PropTypes.string.isRequired,
-    cancelTopLevelEntityCreate: PropTypes.func.isRequired,
-    generateEntity: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
-  };
-
-  static defaultProps = {
-    topLevelKey: '',
-  };
-
   constructor(props) {
     super(props);
 
@@ -393,3 +380,16 @@ export default class TopLevelEntityModal extends Component {
     );
   }
 }
+
+TopLevelEntityModal.propTypes = {
+  isOpen: PropTypes.bool.isRequired,
+  topLevelKey: PropTypes.string,
+  currentSector: PropTypes.string.isRequired,
+  cancelTopLevelEntityCreate: PropTypes.func.isRequired,
+  generateEntity: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
+};
+
+TopLevelEntityModal.defaultProps = {
+  topLevelKey: '',
+};

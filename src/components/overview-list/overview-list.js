@@ -12,21 +12,6 @@ import Entities from 'constants/entities';
 import './style.scss';
 
 export default class OverviewList extends Component {
-  static propTypes = {
-    toSafeRoute: PropTypes.func.isRequired,
-    children: PropTypes.node.isRequired,
-    currentSector: PropTypes.string.isRequired,
-    entities: PropTypes.shape().isRequired,
-    isInitialized: PropTypes.bool.isRequired,
-    doesNotExist: PropTypes.bool.isRequired,
-    match: PropTypes.shape({
-      params: PropTypes.shape({
-        entityType: PropTypes.string,
-      }).isRequired,
-    }).isRequired,
-    intl: intlShape.isRequired,
-  };
-
   componentDidUpdate(props) {
     const { isInitialized, doesNotExist, toSafeRoute } = this.props;
     if (!props.isInitialized && isInitialized && doesNotExist) {
@@ -85,3 +70,18 @@ export default class OverviewList extends Component {
     );
   }
 }
+
+OverviewList.propTypes = {
+  toSafeRoute: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  currentSector: PropTypes.string.isRequired,
+  entities: PropTypes.shape().isRequired,
+  isInitialized: PropTypes.bool.isRequired,
+  doesNotExist: PropTypes.bool.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      entityType: PropTypes.string,
+    }).isRequired,
+  }).isRequired,
+  intl: intlShape.isRequired,
+};

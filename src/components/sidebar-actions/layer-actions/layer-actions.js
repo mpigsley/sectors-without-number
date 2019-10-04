@@ -11,34 +11,14 @@ import Entities from 'constants/entities';
 
 import './style.scss';
 
-export default class EntityActions extends Component {
-  static propTypes = {
-    children: PropTypes.node.isRequired,
-    removeLayer: PropTypes.func.isRequired,
-    initializeLayerEdit: PropTypes.func.isRequired,
-    submitForm: PropTypes.func.isRequired,
-    cancelForm: PropTypes.func.isRequired,
-    route: PropTypes.func.isRequired,
-    layer: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }),
-    layerId: PropTypes.string,
-    isEditing: PropTypes.bool.isRequired,
-    isSaved: PropTypes.bool.isRequired,
-    isShared: PropTypes.bool.isRequired,
-    isValid: PropTypes.bool.isRequired,
-    sector: PropTypes.string.isRequired,
-    intl: intlShape.isRequired,
-  };
+export default class LayerActions extends Component {
+  constructor(props) {
+    super(props);
 
-  static defaultProps = {
-    layer: null,
-    layerId: null,
-  };
-
-  state = {
-    isConfirmDeleteOpen: false,
-  };
+    this.state = {
+      isConfirmDeleteOpen: false,
+    };
+  }
 
   onConfirmDelete = () => this.setState({ isConfirmDeleteOpen: true });
 
@@ -141,3 +121,27 @@ export default class EntityActions extends Component {
     );
   }
 }
+
+LayerActions.propTypes = {
+  children: PropTypes.node.isRequired,
+  removeLayer: PropTypes.func.isRequired,
+  initializeLayerEdit: PropTypes.func.isRequired,
+  submitForm: PropTypes.func.isRequired,
+  cancelForm: PropTypes.func.isRequired,
+  route: PropTypes.func.isRequired,
+  layer: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }),
+  layerId: PropTypes.string,
+  isEditing: PropTypes.bool.isRequired,
+  isSaved: PropTypes.bool.isRequired,
+  isShared: PropTypes.bool.isRequired,
+  isValid: PropTypes.bool.isRequired,
+  sector: PropTypes.string.isRequired,
+  intl: intlShape.isRequired,
+};
+
+LayerActions.defaultProps = {
+  layer: null,
+  layerId: null,
+};

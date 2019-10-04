@@ -13,18 +13,11 @@ import { mapValues } from 'constants/lodash';
 import style from './style.module.scss';
 
 export default class SectorExpansionModal extends Component {
-  static propTypes = {
-    intl: intlShape.isRequired,
-    isOpen: PropTypes.bool.isRequired,
-    sector: PropTypes.shape({
-      rows: PropTypes.number.isRequired,
-      columns: PropTypes.number.isRequired,
-    }).isRequired,
-    closeSectorExpansion: PropTypes.func.isRequired,
-    expandSector: PropTypes.func.isRequired,
-  };
+  constructor(props) {
+    super(props);
 
-  state = { top: 0, bottom: 0, left: 0, right: 0 };
+    this.state = { top: 0, bottom: 0, left: 0, right: 0 };
+  }
 
   static getDerivedStateFromProps(props, state) {
     if (props.isOpen === false) {
@@ -119,3 +112,14 @@ export default class SectorExpansionModal extends Component {
     );
   }
 }
+
+SectorExpansionModal.propTypes = {
+  intl: intlShape.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  sector: PropTypes.shape({
+    rows: PropTypes.number.isRequired,
+    columns: PropTypes.number.isRequired,
+  }).isRequired,
+  closeSectorExpansion: PropTypes.func.isRequired,
+  expandSector: PropTypes.func.isRequired,
+};

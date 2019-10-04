@@ -15,35 +15,13 @@ import { some, size } from 'constants/lodash';
 import './style.scss';
 
 export default class EntityActions extends Component {
-  static propTypes = {
-    currentSector: PropTypes.string.isRequired,
-    entityChildren: PropTypes.shape().isRequired,
-    entity: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      parent: PropTypes.string,
-      parentEntity: PropTypes.string,
-    }).isRequired,
-    entityType: PropTypes.string,
-    children: PropTypes.node.isRequired,
-    activateSidebarEdit: PropTypes.func.isRequired,
-    deactivateSidebarEdit: PropTypes.func.isRequired,
-    saveEntityEdit: PropTypes.func.isRequired,
-    deleteEntity: PropTypes.func.isRequired,
-    saveSector: PropTypes.func.isRequired,
-    openSectorExpansion: PropTypes.func.isRequired,
-    isSaved: PropTypes.bool.isRequired,
-    isShared: PropTypes.bool.isRequired,
-    isSidebarEditActive: PropTypes.bool.isRequired,
-    intl: intlShape.isRequired,
-  };
+  constructor(props) {
+    super(props);
 
-  static defaultProps = {
-    entityType: undefined,
-  };
-
-  state = {
-    isConfirmDeleteOpen: false,
-  };
+    this.state = {
+      isConfirmDeleteOpen: false,
+    };
+  }
 
   onConfirmDelete = () => this.setState({ isConfirmDeleteOpen: true });
 
@@ -208,3 +186,29 @@ export default class EntityActions extends Component {
     );
   }
 }
+
+EntityActions.propTypes = {
+  currentSector: PropTypes.string.isRequired,
+  entityChildren: PropTypes.shape().isRequired,
+  entity: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    parent: PropTypes.string,
+    parentEntity: PropTypes.string,
+  }).isRequired,
+  entityType: PropTypes.string,
+  children: PropTypes.node.isRequired,
+  activateSidebarEdit: PropTypes.func.isRequired,
+  deactivateSidebarEdit: PropTypes.func.isRequired,
+  saveEntityEdit: PropTypes.func.isRequired,
+  deleteEntity: PropTypes.func.isRequired,
+  saveSector: PropTypes.func.isRequired,
+  openSectorExpansion: PropTypes.func.isRequired,
+  isSaved: PropTypes.bool.isRequired,
+  isShared: PropTypes.bool.isRequired,
+  isSidebarEditActive: PropTypes.bool.isRequired,
+  intl: intlShape.isRequired,
+};
+
+EntityActions.defaultProps = {
+  entityType: undefined,
+};

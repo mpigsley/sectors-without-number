@@ -18,30 +18,14 @@ const LOGIN_PAGE_TYPES = {
   forget: 'forget',
 };
 
-export default class ConfirmModal extends Component {
-  static propTypes = {
-    isLoginModalOpen: PropTypes.bool.isRequired,
-    closeLoginModal: PropTypes.func.isRequired,
-    updateUserForm: PropTypes.func.isRequired,
-    facebookLogin: PropTypes.func.isRequired,
-    googleLogin: PropTypes.func.isRequired,
-    signup: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired,
-    passwordReset: PropTypes.func.isRequired,
-    email: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired,
-    confirm: PropTypes.string.isRequired,
-    error: PropTypes.string,
-    intl: intlShape.isRequired,
-  };
+export default class LoginModal extends Component {
+  constructor(props) {
+    super(props);
 
-  static defaultProps = {
-    error: null,
-  };
-
-  state = {
-    page: LOGIN_PAGE_TYPES.login,
-  };
+    this.state = {
+      page: LOGIN_PAGE_TYPES.login,
+    };
+  }
 
   onConfirm = () => {
     const { page } = this.state;
@@ -235,3 +219,23 @@ export default class ConfirmModal extends Component {
     );
   }
 }
+
+LoginModal.propTypes = {
+  isLoginModalOpen: PropTypes.bool.isRequired,
+  closeLoginModal: PropTypes.func.isRequired,
+  updateUserForm: PropTypes.func.isRequired,
+  facebookLogin: PropTypes.func.isRequired,
+  googleLogin: PropTypes.func.isRequired,
+  signup: PropTypes.func.isRequired,
+  login: PropTypes.func.isRequired,
+  passwordReset: PropTypes.func.isRequired,
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  confirm: PropTypes.string.isRequired,
+  error: PropTypes.string,
+  intl: intlShape.isRequired,
+};
+
+LoginModal.defaultProps = {
+  error: null,
+};

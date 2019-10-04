@@ -25,24 +25,6 @@ import './style.scss';
 const ReactHint = ReactHintFactory(React);
 
 export default class NavigationSidebar extends Component {
-  static propTypes = {
-    settings: PropTypes.shape({
-      color: PropTypes.string.isRequired,
-      type: PropTypes.string.isRequired,
-      width: PropTypes.string.isRequired,
-      isCreatingRoute: PropTypes.bool.isRequired,
-    }).isRequired,
-    routes: PropTypes.shape().isRequired,
-    resetNavSettings: PropTypes.func.isRequired,
-    cancelNavigation: PropTypes.func.isRequired,
-    updateNavSettings: PropTypes.func.isRequired,
-    completeRoute: PropTypes.func.isRequired,
-    removeRoute: PropTypes.func.isRequired,
-    toggleVisibility: PropTypes.func.isRequired,
-    locateRoute: PropTypes.func.isRequired,
-    intl: intlShape.isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -327,3 +309,21 @@ export default class NavigationSidebar extends Component {
     );
   }
 }
+
+NavigationSidebar.propTypes = {
+  settings: PropTypes.shape({
+    color: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    width: PropTypes.string.isRequired,
+    isCreatingRoute: PropTypes.bool.isRequired,
+  }).isRequired,
+  routes: PropTypes.shape().isRequired,
+  resetNavSettings: PropTypes.func.isRequired,
+  cancelNavigation: PropTypes.func.isRequired,
+  updateNavSettings: PropTypes.func.isRequired,
+  completeRoute: PropTypes.func.isRequired,
+  removeRoute: PropTypes.func.isRequired,
+  toggleVisibility: PropTypes.func.isRequired,
+  locateRoute: PropTypes.func.isRequired,
+  intl: intlShape.isRequired,
+};

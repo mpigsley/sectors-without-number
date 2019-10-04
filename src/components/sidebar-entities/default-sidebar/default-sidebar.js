@@ -9,22 +9,6 @@ import EntityList from './entity-list';
 import styles from './styles.module.scss';
 
 export default class DefaultSidebar extends Component {
-  static propTypes = {
-    isShared: PropTypes.bool.isRequired,
-    isSidebarEditActive: PropTypes.bool.isRequired,
-    entityChildren: PropTypes.shape().isRequired,
-    entityType: PropTypes.string,
-    entity: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      image: PropTypes.string,
-      visibility: PropTypes.shape(),
-    }).isRequired,
-  };
-
-  static defaultProps = {
-    entityType: undefined,
-  };
-
   constructor(props) {
     super(props);
 
@@ -100,3 +84,19 @@ export default class DefaultSidebar extends Component {
     );
   }
 }
+
+DefaultSidebar.propTypes = {
+  isShared: PropTypes.bool.isRequired,
+  isSidebarEditActive: PropTypes.bool.isRequired,
+  entityChildren: PropTypes.shape().isRequired,
+  entityType: PropTypes.string,
+  entity: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    image: PropTypes.string,
+    visibility: PropTypes.shape(),
+  }).isRequired,
+};
+
+DefaultSidebar.defaultProps = {
+  entityType: undefined,
+};

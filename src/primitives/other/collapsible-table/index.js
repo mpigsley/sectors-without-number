@@ -10,16 +10,6 @@ import { PlusCircle, Circle } from 'constants/icons';
 import './style.scss';
 
 export default class CollapsibleTable extends Component {
-  static propTypes = {
-    dataIdAccessor: PropTypes.string.isRequired,
-    data: PropTypes.arrayOf(
-      PropTypes.shape({
-        children: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-      }),
-    ).isRequired,
-    columns: PropTypes.arrayOf(PropTypes.shape()).isRequired,
-  };
-
   constructor(props) {
     super(props);
 
@@ -96,3 +86,13 @@ export default class CollapsibleTable extends Component {
     );
   }
 }
+
+CollapsibleTable.propTypes = {
+  dataIdAccessor: PropTypes.string.isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      children: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+    }),
+  ).isRequired,
+  columns: PropTypes.arrayOf(PropTypes.shape()).isRequired,
+};
