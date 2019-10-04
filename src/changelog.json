@@ -1,6 +1,10 @@
 {
+  "7.16.0": {
+    "description": "On mobile devices the sidebar will expand to the full width.",
+    "date": "10-4-2019"
+  },
   "7.15.1": {
-    "description": "Ensure the faction layer is shown by default since it is default to visible",
+    "description": "Ensure the faction layer is shown by default since it is default to visible.",
     "date": "10-3-2019"
   },
   "7.15.0": {
