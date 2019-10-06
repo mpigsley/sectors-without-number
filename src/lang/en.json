@@ -2337,6 +2337,7 @@
   "misc.hitPoints": "Hit Points",
   "misc.home": "Home",
   "misc.homeworld": "Homeworld",
+  "misc.hp": "HP",
   "misc.image": "Image",
   "misc.imageExport": "The sector image with current layers will be exported to a JPG image.",
   "misc.initialCost": "Initial Cost",

@@ -1,16 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import DeletableRow from 'primitives/form/deletable-row';
 import LabeledInput from 'primitives/form/labeled-input';
 import ItemRow from 'primitives/other/item-row';
-import Input from 'primitives/form/input';
 
 import { find, filter, sortBy } from 'constants/lodash';
 import { FACTION_ASSETS } from 'constants/faction';
 import { EyeOff } from 'constants/icons';
+
+import styles from './styles.module.scss';
+
+const ReactHint = ReactHintFactory(React);
 
 export default function FactionAssetForm({
   intl,
@@ -45,24 +49,27 @@ export default function FactionAssetForm({
   }
 
   return (
-    <DeletableRow className="FactionAssetForm" onAction={onDelete}>
+    <DeletableRow className={styles.container} onAction={onDelete}>
       <FlexContainer direction="column" flex="1">
-        <Input
-          dropUp
-          type="dropdown"
-          clearable={false}
-          value={type}
-          options={assetOptions}
-          onChange={({ value }) => onUpdate({ type: value })}
-        />
-        <ItemRow className="FactionAssetForm-Row">
+        <ItemRow className={styles.topRow}>
+          <LabeledInput
+            dropUp
+            isVertical
+            type="dropdown"
+            clearable={false}
+            label="misc.asset"
+            value={type}
+            options={assetOptions}
+            onChange={({ value }) => onUpdate({ type: value })}
+          />
           <LabeledInput
             isVertical
             type="number"
+            className={styles.hitPoints}
             disabled={!(FACTION_ASSETS[type] || {}).hp}
             label={
               <span>
-                <FormattedMessage id="misc.hitPoints" />
+                <FormattedMessage id="misc.hp" />
                 {assetHitPoints}
               </span>
             }
@@ -73,6 +80,24 @@ export default function FactionAssetForm({
             }}
           />
           <LabeledInput
+            isVertical
+            className={styles.iconInput}
+            type="checkbox"
+            label={
+              <EyeOff
+                data-rh={intl.formatMessage({ id: 'misc.stealthed' })}
+                className={styles.iconLabel}
+                size={16}
+              />
+            }
+            checked={stealthed}
+            onChange={({ target } = {}) =>
+              onUpdate({ stealthed: target.checked })
+            }
+          />
+        </ItemRow>
+        <ItemRow>
+          <LabeledInput
             dropUp
             isVertical
             type="dropdown"
@@ -81,18 +106,9 @@ export default function FactionAssetForm({
             options={homeworlds}
             onChange={option => onUpdate({ location: (option || {}).value })}
           />
-          <LabeledInput
-            isVertical
-            className="FactionAssetForm-IconInput"
-            type="checkbox"
-            label={<EyeOff className="FactionAssetForm-IconLabel" size={16} />}
-            checked={stealthed}
-            onChange={({ target } = {}) =>
-              onUpdate({ stealthed: target.checked })
-            }
-          />
         </ItemRow>
       </FlexContainer>
+      <ReactHint events position="left" />
     </DeletableRow>
   );
 }

@@ -16,7 +16,7 @@ import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import { factionColor } from 'utils/faction';
 
 import FactionAssetForm from './faction-asset-form';
-import './style.scss';
+import styles from './styles.module.scss';
 
 const chance = new Chance();
 
@@ -89,7 +89,7 @@ export default function FactionForm({
     >
       <div>
         <SectionHeader header="misc.attributes" />
-        <div className="FactionForm">
+        <div className={styles.container}>
           <LabeledInput
             isRequired
             label="misc.name"
