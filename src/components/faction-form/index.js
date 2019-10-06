@@ -8,7 +8,7 @@ import {
   currentEntitySelector,
   factionIsCreatingSelector,
 } from 'store/selectors/base.selectors';
-import { getCurrentPlanets } from 'store/selectors/entity.selectors';
+import { getCurrentEntities } from 'store/selectors/entity.selectors';
 import {
   currentFormHitPoints,
   isValidFactionForm,
@@ -27,7 +27,7 @@ const mapStateToProps = createStructuredSelector({
   isCreating: factionIsCreatingSelector,
   isValid: isValidFactionForm,
   form: factionFormSelector,
-  homeworlds: getCurrentPlanets,
+  currentEntities: getCurrentEntities,
   hitPoints: currentFormHitPoints,
 });
 

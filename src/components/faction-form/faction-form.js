@@ -31,7 +31,7 @@ export default function FactionForm({
   submitForm,
   toRoute,
   location,
-  homeworlds,
+  currentEntities,
   hitPoints,
   currentFaction,
 }) {
@@ -49,14 +49,6 @@ export default function FactionForm({
       label: intl.formatMessage({ id: 'faction.relationship.hostile' }),
     },
   ];
-
-  const homeworldOptions = sortBy(
-    map(homeworlds, ({ name }, value) => ({
-      value,
-      label: name,
-    })),
-    'label',
-  );
 
   const goalOptions = sortBy(
     map(FACTION_GOALS, value => ({
@@ -204,7 +196,7 @@ export default function FactionForm({
               })
             }
           />
-          <LabeledInput
+          {/* <LabeledInput
             label="misc.homeworld"
             placeholder=""
             type="dropdown"
@@ -217,7 +209,7 @@ export default function FactionForm({
                 homeworld: chance.pickone(homeworldOptions).value,
               })
             }
-          />
+          /> */}
           <LabeledInput
             label="misc.goal"
             placeholder=""
@@ -274,7 +266,7 @@ export default function FactionForm({
             }}
             key={key}
             intl={intl}
-            homeworlds={homeworldOptions}
+            currentEntities={currentEntities}
             onDelete={() => updateFaction({ assets: omit(form.assets, key) })}
             onUpdate={update => updateFactionAsset(key, update)}
             {...asset}
@@ -319,7 +311,7 @@ FactionForm.propTypes = {
   location: PropTypes.shape({
     pathname: PropTypes.string.isRequired,
   }).isRequired,
-  homeworlds: PropTypes.shape().isRequired,
+  currentEntities: PropTypes.shape().isRequired,
   hitPoints: PropTypes.number.isRequired,
   currentFaction: PropTypes.string.isRequired,
 };

@@ -32,7 +32,7 @@ import {
 import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
-const TopLevelLeveEntities = filter(Entities, entity => entity.topLevel);
+const TopLevelLevelEntities = filter(Entities, entity => entity.topLevel);
 const generateChildrenNames = (parentEntity, currentSector) => {
   let names = {};
   let currentSort = 0;
@@ -344,7 +344,7 @@ export default class TopLevelEntityModal extends Component {
                   ...generateChildrenNames(newType, currentSector),
                 });
               }}
-              options={TopLevelLeveEntities.map(attr => ({
+              options={TopLevelLevelEntities.map(attr => ({
                 value: attr.key,
                 label: intl.formatMessage({ id: attr.name }),
               }))}

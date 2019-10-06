@@ -53,12 +53,14 @@ const buildEntity = entity => ({
   ...entity,
 });
 
+// *********** Extraneous ***********
 const layer = {
   key: 'layer',
   name: 'entity.layer',
   shortName: 'entity.layer',
   sidebar: 'layer',
   action: 'layer',
+  extraneous: true,
 };
 
 const navigation = {
@@ -66,6 +68,7 @@ const navigation = {
   name: 'entity.navigation',
   shortName: 'entity.navigation',
   sidebar: 'navigation',
+  extraneous: true,
 };
 
 const note = {
@@ -74,7 +77,17 @@ const note = {
   shortName: 'entity.note',
   sidebar: 'note',
   action: 'entity',
+  extraneous: true,
 };
+
+const settings = {
+  key: 'settings',
+  name: 'misc.settings',
+  shortName: 'misc.settings',
+  sidebar: 'settings',
+  extraneous: true,
+};
+// **********************************
 
 const researchBase = {
   key: 'researchBase',
@@ -250,16 +263,6 @@ const sector = {
   action: 'entity',
   nameGenerator: generateSectorName,
   children: [blackHole.key, note.key, system.key],
-};
-
-// that is not really an entity
-// this entry is here to display the settings in the entity sidebar
-// this also causes an empty 'settings' object in the exported JSON
-const settings = {
-  key: 'settings',
-  name: 'misc.settings',
-  shortName: 'misc.settings',
-  sidebar: 'settings',
 };
 
 export default mapValues(
