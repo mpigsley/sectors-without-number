@@ -8,12 +8,14 @@ import SectionHeader from 'primitives/text/section-header';
 import LabeledInput from 'primitives/form/labeled-input';
 import SaveFooter from 'primitives/other/save-footer';
 import ItemRow from 'primitives/other/item-row';
+import Input from 'primitives/form/input';
 
 import { RefreshCw } from 'constants/icons';
-import { omit, sortBy, map, dropRight, clamp } from 'constants/lodash';
+import { omit, sortBy, map, dropRight, clamp, filter } from 'constants/lodash';
 import { FACTION_GOALS, FACTION_TAGS } from 'constants/faction';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import { factionColor } from 'utils/faction';
+import Entities from 'constants/entities';
 
 import FactionAssetForm from './faction-asset-form';
 import styles from './styles.module.scss';
@@ -180,6 +182,46 @@ export default function FactionForm({
               }}
             />
           </ItemRow>
+          <ItemRow align="flexEnd">
+            <LabeledInput
+              isVertical
+              type="dropdown"
+              label="misc.homeworld"
+              clearable={false}
+              value={form.homeworldEntity || Entities.planet.key}
+              options={filter(
+                Entities,
+                ({ key, extraneous }) =>
+                  !extraneous && key !== Entities.sector.key,
+              ).map(attr => ({
+                value: attr.key,
+                label: intl.formatMessage({ id: attr.name }),
+              }))}
+              onChange={option =>
+                updateFaction({
+                  homeworldEntity: (option || {}).value,
+                  homeworld: undefined,
+                })
+              }
+            />
+            <Input
+              dropUp
+              isVertical
+              type="dropdown"
+              value={form.homeworld}
+              className={styles.loneInput}
+              options={map(
+                currentEntities[form.homeworldEntity || Entities.planet.key],
+                (entity, value) => ({
+                  label: entity.name,
+                  value,
+                }),
+              )}
+              onChange={option =>
+                updateFaction({ homeworld: (option || {}).value })
+              }
+            />
+          </ItemRow>
           <LabeledInput
             label="misc.relationship"
             placeholder=""
@@ -196,20 +238,6 @@ export default function FactionForm({
               })
             }
           />
-          {/* <LabeledInput
-            label="misc.homeworld"
-            placeholder=""
-            type="dropdown"
-            value={form.homeworld}
-            options={homeworldOptions}
-            onChange={item => updateFaction({ homeworld: (item || {}).value })}
-            icon={RefreshCw}
-            onItemClick={() =>
-              updateFaction({
-                homeworld: chance.pickone(homeworldOptions).value,
-              })
-            }
-          /> */}
           <LabeledInput
             label="misc.goal"
             placeholder=""
@@ -298,6 +326,7 @@ FactionForm.propTypes = {
       .isRequired,
     relationship: PropTypes.string,
     homeworld: PropTypes.string,
+    homeworldEntity: PropTypes.string,
     goal: PropTypes.string,
     tags: PropTypes.arrayOf(PropTypes.string).isRequired,
     description: PropTypes.string.isRequired,
