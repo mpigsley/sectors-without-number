@@ -171,11 +171,6 @@ export const sectorDoesNotExist = createDeepEqualSelector(
   isEmpty,
 );
 
-export const getCurrentPlanets = createDeepEqualSelector(
-  [getCurrentEntities],
-  entities => entities[Entities.planet.key],
-);
-
 export const getMapLock = createDeepEqualSelector(
   [getCurrentSector],
   currentSector => !!(currentSector || {}).mapLocked,

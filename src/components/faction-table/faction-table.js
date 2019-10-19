@@ -126,7 +126,7 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
     },
     {
       accessor: 'homeworld',
-      Header: 'misc.homeworld',
+      Header: 'misc.location',
       Cell: loc =>
         loc.link ? <BasicLink to={loc.link}>{loc.name}</BasicLink> : '-',
       centered: true,

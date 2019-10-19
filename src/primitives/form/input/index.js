@@ -25,7 +25,11 @@ export default function Input({ className, width, error, type, ...rest }) {
   }
   if (type === 'dropdown') {
     return (
-      <Dropdown wrapperClassName="Input-Dropdown" style={style} {...rest} />
+      <Dropdown
+        wrapperClassName={classNames('Input-Dropdown', className)}
+        style={style}
+        {...rest}
+      />
     );
   }
   if (type === 'color') {

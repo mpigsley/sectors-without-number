@@ -6,11 +6,12 @@ import FlexContainer from 'primitives/container/flex-container';
 
 import './style.scss';
 
-export default function ItemRow({ children, className }) {
+export default function ItemRow({ children, className, ...rest }) {
   return (
     <FlexContainer
       className={classNames('ItemRow', className)}
       justify="spaceBetween"
+      {...rest}
     >
       {React.Children.map(
         children,
