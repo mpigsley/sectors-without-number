@@ -5,6 +5,7 @@ import { getTopLevelEntity } from 'utils/entity';
 import { distanceBetween } from 'utils/canvas-helpers';
 import Entities from 'constants/entities';
 import { getHexPoints } from 'utils/hex/common';
+import { isValidColor } from 'utils/common';
 import { TARGET_COLOR_WIDTH } from 'constants/defaults';
 
 const NAVIGATION_WIDTHS = {
@@ -136,7 +137,14 @@ export default ({
 
         if (hexLayer.length === 1) {
           const [fillStyle] = hexLayer;
-          ctx.fillStyle = fillStyle;
+          if (isValidColor(fillStyle)) {
+            ctx.fillStyle = fillStyle;
+          } else {
+            console.warn(
+              `WARNING: Invalid color "${fillStyle}". Replacing with black.`,
+            );
+            ctx.fillStyle = 'black';
+          }
         } else if (hexLayer.length > 1) {
           const gradient = ctx.createLinearGradient(
             points[1].x,
@@ -151,7 +159,13 @@ export default ({
           numSteps = numSteps < hexLayer.length ? hexLayer.length : numSteps;
           const gStep = 1 / numSteps;
           for (let i = 0; i < numSteps; i += 1) {
-            const color = hexLayer[i % hexLayer.length];
+            let color = hexLayer[i % hexLayer.length];
+            if (!isValidColor(color)) {
+              console.warn(
+                `WARNING: Invalid color "${color}". Replacing with black.`,
+              );
+              color = 'black';
+            }
             gradient.addColorStop(gStep * i, color);
             const nextColor = hexLayer[(i + 1) % hexLayer.length];
             if (nextColor) {

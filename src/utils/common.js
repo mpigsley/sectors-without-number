@@ -142,3 +142,6 @@ export const sortByKey = (key, stripDiatrics = false) => (a, b) => {
 };
 
 export const toCommaArray = (element, i) => `${i !== 0 ? ', ' : ''}${element}`;
+
+export const isValidColor = hexCode =>
+  /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i.test(hexCode);
