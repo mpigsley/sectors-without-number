@@ -1,4 +1,12 @@
 {
+  "7.17.1": {
+    "description": "Validate hexcodes before drawing them on the sector to prevent errors.",
+    "date": "10-23-2019"
+  },
+  "7.17.0": {
+    "description": "Faction and their assets can be located on any entity in your sector.",
+    "date": "10-19-2019"
+  },
   "7.16.0": {
     "description": "On mobile devices the sidebar will expand to the full width.",
     "date": "10-4-2019"
