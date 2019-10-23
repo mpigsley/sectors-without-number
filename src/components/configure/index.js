@@ -2,12 +2,13 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import Entities from 'constants/entities';
+import { configurationSelector } from 'store/selectors/base.selectors';
 import { generateEntity } from 'store/actions/entity.actions';
 import { updateConfiguration } from 'store/actions/sector.actions';
 import Configure from './configure';
 
 const mapStateToProps = state => ({
-  ...state.sector.configuration,
+  ...configurationSelector(state),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

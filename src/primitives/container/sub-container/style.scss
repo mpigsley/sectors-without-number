@@ -1,6 +1,10 @@
 .SubContainer {
-  text-align: center;
+  margin: 1rem;
 
-  &--fullWidth { width: calc(100% - 1rem) }
-  &--margin { margin: 0 1rem; }
+  &--fullWidth {
+    width: calc(100% - 1rem);
+  }
+  &--margin {
+    margin: 0 1rem;
+  }
 }

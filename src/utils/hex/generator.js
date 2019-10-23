@@ -19,10 +19,19 @@ import {
   getColumns,
 } from 'utils/hex/common';
 
-const getHexSize = ({ width, height, columns, rows, renderSector }) => {
-  const modifiedBuffer = Math.min(PIXEL_BUFFER / (800 / width), PIXEL_BUFFER);
-  const bufferedHeight = height - 2 * modifiedBuffer;
-  const bufferedWidth = width - 2 * modifiedBuffer;
+const getHexSize = ({ width, height, columns, rows, radius, renderSector }) => {
+  let genHeight = height;
+  let genWidth = width;
+  if (radius) {
+    genHeight = radius * 2 - 1;
+    genWidth = genHeight;
+  }
+  const modifiedBuffer = Math.min(
+    PIXEL_BUFFER / (800 / genWidth),
+    PIXEL_BUFFER,
+  );
+  const bufferedHeight = genHeight - 2 * modifiedBuffer;
+  const bufferedWidth = genWidth - 2 * modifiedBuffer;
   let scaledWidth = DEFAULT_HEX_WIDTH;
   if (renderSector) {
     const pixelHeight = getHexHeight(bufferedHeight, rows);

@@ -6,16 +6,9 @@ import FlexContainer from '../flex-container';
 
 import './style.scss';
 
-export default function SubContainer(props) {
-  const { children, className, noMargin, fullWidth, ...rest } = props;
+export default function SubContainer({ children, className, ...rest }) {
   return (
-    <FlexContainer
-      {...rest}
-      className={classNames('SubContainer', className, {
-        'SubContainer--margin': !noMargin,
-        'SubContainer--fullWidth': fullWidth,
-      })}
-    >
+    <FlexContainer {...rest} className={classNames('SubContainer', className)}>
       {children}
     </FlexContainer>
   );
@@ -24,12 +17,8 @@ export default function SubContainer(props) {
 SubContainer.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
-  noMargin: PropTypes.bool,
-  fullWidth: PropTypes.bool,
 };
 
 SubContainer.defaultProps = {
   className: null,
-  noMargin: false,
-  fullWidth: false,
 };

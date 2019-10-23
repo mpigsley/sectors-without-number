@@ -1,0 +1,14 @@
+@import '~styles/theme';
+
+.container {
+  max-width: 24rem;
+  width: calc(100% - 2rem);
+}
+
+.paddedButtons {
+  margin-top: 2rem;
+}
+
+.info {
+  color: $light1;
+}

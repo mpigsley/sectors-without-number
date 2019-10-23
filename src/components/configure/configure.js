@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import PropTypes from 'prop-types';
 import Chance from 'chance';
 import { intlShape, FormattedMessage } from 'react-intl';
@@ -13,11 +13,16 @@ import Button from 'primitives/other/button';
 import ItemRow from 'primitives/other/item-row';
 import LabeledInput from 'primitives/form/labeled-input';
 
-import { MIN_DIMENSION, MAX_DIMENSION } from 'constants/defaults';
+import {
+  MIN_DIMENSION,
+  MAX_DIMENSION,
+  MIN_RADIUS,
+  MAX_RADIUS,
+} from 'constants/defaults';
 import { Zap, RefreshCw } from 'constants/icons';
 import { generateSectorName } from 'utils/name-generator';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export default function Configure({
   additionalPointsOfInterest,
@@ -27,6 +32,8 @@ export default function Configure({
   isBuilder,
   hideTags,
   columns,
+  radius,
+  type,
   rows,
   name,
   intl,
@@ -47,14 +54,58 @@ export default function Configure({
     updateConfiguration('name', genFunc(chance));
   };
 
-  const isValid = () =>
-    !!name &&
-    !!rows &&
-    !!columns &&
-    rows <= MAX_DIMENSION &&
-    rows >= MIN_DIMENSION &&
-    columns <= MAX_DIMENSION &&
-    columns >= MIN_DIMENSION;
+  const isValid = useMemo(() => {
+    let validType =
+      !!rows &&
+      !!columns &&
+      rows <= MAX_DIMENSION &&
+      rows >= MIN_DIMENSION &&
+      columns <= MAX_DIMENSION &&
+      columns >= MIN_DIMENSION;
+    if (type === 'radial') {
+      validType = !!radius && radius <= MAX_RADIUS && radius >= MIN_RADIUS;
+    }
+    return !!name && validType;
+  }, [type, name, rows, columns, radius]);
+
+  let dimensionConfig;
+  const isAxial = type === 'axial';
+  if (isAxial) {
+    dimensionConfig = (
+      <ItemRow>
+        <LabeledInput
+          isVertical
+          label="misc.rows"
+          data-key="rows"
+          onChange={updateInput}
+          name="rows"
+          type="number"
+          value={rows || ''}
+        />
+        <LabeledInput
+          isVertical
+          label="misc.columns"
+          data-key="columns"
+          onChange={updateInput}
+          name="columns"
+          type="number"
+          value={columns || ''}
+        />
+      </ItemRow>
+    );
+  } else {
+    dimensionConfig = (
+      <LabeledInput
+        isVertical
+        label="misc.radius"
+        data-key="radius"
+        onChange={updateInput}
+        name="radius"
+        type="number"
+        value={radius || ''}
+      />
+    );
+  }
 
   return (
     <StarBackground>
@@ -62,7 +113,11 @@ export default function Configure({
         <Header type={HeaderType.header2}>
           <FormattedMessage id="misc.configure" />
         </Header>
-        <SubContainer noMargin direction="column" align="flexStart">
+        <SubContainer
+          direction="column"
+          align="flexStart"
+          className={styles.container}
+        >
           <LabeledInput
             isVertical
             label="misc.sectorName"
@@ -73,30 +128,35 @@ export default function Configure({
             onChange={updateInput}
             onIconClick={regenerateName(generateSectorName)}
           />
-          <ItemRow>
-            <LabeledInput
-              isVertical
-              label="misc.rows"
-              data-key="rows"
-              onChange={updateInput}
-              name="rows"
-              type="number"
-              value={rows || ''}
-            />
-            <LabeledInput
-              isVertical
-              label="misc.columns"
-              data-key="columns"
-              onChange={updateInput}
-              name="columns"
-              type="number"
-              value={columns || ''}
-            />
-          </ItemRow>
-          <p className="Configure-Info">
+          <LabeledInput
+            isVertical
+            clearable={false}
+            searchable={false}
+            label="misc.sectorType"
+            name="type"
+            data-key="type"
+            type="dropdown"
+            value={type}
+            options={[
+              {
+                value: 'axial',
+                label: intl.formatMessage({ id: 'misc.axial' }),
+              },
+              {
+                value: 'radial',
+                label: intl.formatMessage({ id: 'misc.radial' }),
+              },
+            ]}
+            onChange={({ value }) => updateConfiguration('type', value)}
+          />
+          {dimensionConfig}
+          <p className={styles.info}>
             <FormattedMessage
-              id="misc.dimensionBounds"
-              values={{ minNumber: MIN_DIMENSION, maxNumber: MAX_DIMENSION }}
+              id={isAxial ? 'misc.dimensionBounds' : 'misc.radialBounds'}
+              values={{
+                minNumber: isAxial ? MIN_DIMENSION : MIN_RADIUS,
+                maxNumber: isAxial ? MAX_DIMENSION : MAX_RADIUS,
+              }}
             />
           </p>
           <Checkbox
@@ -125,12 +185,12 @@ export default function Configure({
           />
         </SubContainer>
         <SubContainer
-          className="Configure-PaddedButtons"
+          className={styles.paddedButtons}
           wrap
           justify="center"
           align="center"
         >
-          <Button disabled={!isValid()} onClick={generateSector}>
+          <Button disabled={!isValid} onClick={generateSector}>
             <LinkIcon icon={Zap} size="20" />
             <FormattedMessage id="misc.generate" />
           </Button>
@@ -148,13 +208,16 @@ Configure.propTypes = {
   hideTags: PropTypes.bool.isRequired,
   hideOccAndSit: PropTypes.bool.isRequired,
   columns: PropTypes.number,
+  radius: PropTypes.number,
   rows: PropTypes.number,
   name: PropTypes.string,
+  type: PropTypes.string.isRequired,
   intl: intlShape.isRequired,
 };
 
 Configure.defaultProps = {
   columns: undefined,
+  radius: undefined,
   rows: undefined,
   name: '',
 };

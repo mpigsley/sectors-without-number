@@ -32,7 +32,7 @@ import {
 import { LOGGED_OUT } from 'store/actions/user.actions';
 
 import { keys, uniq } from 'constants/lodash';
-import { ROWS, COLUMNS } from 'constants/defaults';
+import { ROWS, COLUMNS, RADIUS } from 'constants/defaults';
 import Entities from 'constants/entities';
 import ExportTypes from 'constants/export-types';
 
@@ -54,8 +54,10 @@ const initialState = {
     additionalPointsOfInterest: true,
     hideOccAndSit: true,
     hideTags: true,
+    type: 'axial',
     columns: COLUMNS,
     rows: ROWS,
+    radius: RADIUS,
   },
 };
 
