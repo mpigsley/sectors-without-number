@@ -110,7 +110,7 @@ export default function OverviewTable({
     ].concat(
       tableData.map(data =>
         columns.map(({ accessor, translateItem }) =>
-          translateItem
+          translateItem && intl.messages[data[accessor]]
             ? intl.formatMessage({ id: data[accessor] })
             : data[accessor],
         ),
