@@ -17,7 +17,7 @@ import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 
 import EntityTags from './entity-tags';
-import './style.scss';
+import styles from './styles.module.scss';
 
 const ReactHint = ReactHintFactory(React);
 
@@ -159,7 +159,7 @@ export default function EntityAttributes({
       if (entityAttributes.description) {
         descriptionAttribute = (
           <LabeledItem label="misc.description" isVertical>
-            <span className="EntityAttributes--itemMultiline">
+            <span className={styles['container--itemMultiline']}>
               {entityAttributes.description}
             </span>
           </LabeledItem>
@@ -170,10 +170,7 @@ export default function EntityAttributes({
     let attributes = null;
     if (isAttributesOpen) {
       attributes = (
-        <FlexContainer
-          direction="column"
-          className="EntityAttributes-Attributes"
-        >
+        <FlexContainer direction="column" className={styles.attributes}>
           {nameAttribute}
           {imageAttribute}
           {(Entities[entityType].attributes || []).map(attribute => (
@@ -199,11 +196,11 @@ export default function EntityAttributes({
         <FlexContainer
           justify="flexEnd"
           align="center"
-          className="EntityAttributes-SubHeader"
+          className={styles.subHeader}
         >
           <LinkIcon
             data-rh={intl.formatMessage({ id: 'misc.selectHidden' })}
-            className="EntityAttributes-SubHeaderHidden"
+            className={styles.subHeaderHidden}
             icon={EyeOff}
             size={18}
           />

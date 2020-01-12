@@ -12,20 +12,22 @@ import Dropdown from 'primitives/form/dropdown';
 import LinkIcon from 'primitives/other/link-icon';
 import Input from 'primitives/form/input';
 
-import { EyeOff, RefreshCw } from 'constants/icons';
+import { EyeOff, RefreshCw, Settings } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
 import { filter, includes, map, pull, without } from 'constants/lodash';
+
+import styles from './styles.module.scss';
 
 const ReactHint = ReactHintFactory(React);
 const chance = new Chance();
 
 const renderList = (listLength, listKey, key) => (
-  <div key={listKey} className="EntityAttributes-Content">
+  <div key={listKey} className={styles.content}>
     <b>
       <FormattedMessage id={`misc.${listKey}`} />:
     </b>
-    <ul className="EntityAttributes-ContentList">
+    <ul className={styles.contentList}>
       {[...Array(listLength).keys()].map(index => (
         <li key={`${listKey}-${index}`}>
           <FormattedMessage id={`tags.${key}.${listKey}.${index}`} />
@@ -59,7 +61,7 @@ export default function EntityTags({
       <DeletableRow
         key={tag}
         align="center"
-        className="EntityTag--edit"
+        className={styles.entityTagEdit}
         onAction={() =>
           updateEntityInEdit({
             attributes: { tags: pull(entityTags, tag) },
@@ -68,7 +70,7 @@ export default function EntityTags({
         }
       >
         <Dropdown
-          wrapperClassName="EntityTag-Dropdown"
+          wrapperClassName={styles.dropdown}
           value={tag}
           clearable={false}
           onChange={({ value }) =>
@@ -102,7 +104,7 @@ export default function EntityTags({
             .sort(sortByKey('label', true))}
         />
         <Input
-          className="EntityAttributes-Checkbox"
+          className={styles.checkbox}
           disabled={!tag}
           checked={
             !tag || (entity.visibility || {})[`tag.${tag}`] === undefined
@@ -134,12 +136,12 @@ export default function EntityTags({
           visibility = <LinkIcon icon={EyeOff} size={18} />;
         }
         return (
-          <div key={key} className="EntityAttributes-Tag">
+          <div key={key} className={styles.tag}>
             <Header type={HeaderType.header4}>
               {visibility}
               <FormattedMessage id={`tags.${key}`} />
             </Header>
-            <p className="EntityAttributes-Content">
+            <p className={styles.content}>
               <FormattedMessage id={`tags.${key}.description`} />
             </p>
             {map(lists, (listLength, listKey) =>
@@ -162,6 +164,17 @@ export default function EntityTags({
           values={{
             entity: intl.formatMessage({ id: Entities[entityType].name }),
           }}
+        />
+      }
+      additional={
+        <Settings
+          size={20}
+          className={styles.customTagBtn}
+          onClick={e => {
+            e.stopPropagation();
+            // open modal
+          }}
+          data-rh={intl.formatMessage({ id: 'misc.configureTags' })}
         />
       }
       isOpen={isOpen}
@@ -200,7 +213,7 @@ export default function EntityTags({
 
   let tagsSection = null;
   if (isOpen) {
-    tagsSection = <div className="EntityAttributes-Section">{tags}</div>;
+    tagsSection = <div className={styles.section}>{tags}</div>;
   }
 
   let subHeader = null;
@@ -209,11 +222,11 @@ export default function EntityTags({
       <FlexContainer
         justify="flexEnd"
         align="center"
-        className="EntityAttributes-SubHeader"
+        className={styles.subHeader}
       >
         <LinkIcon
           data-rh={intl.formatMessage({ id: 'misc.selectHidden' })}
-          className="EntityAttributes-SubHeaderHidden"
+          className={styles.subHeaderHidden}
           icon={EyeOff}
           size={18}
         />

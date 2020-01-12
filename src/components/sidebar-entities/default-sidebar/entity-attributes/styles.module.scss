@@ -1,6 +1,6 @@
 @import '~styles/theme';
 
-.EntityAttributes {
+.container {
   &--hidden {
     color: $light1;
   }
@@ -10,48 +10,57 @@
   }
 }
 
-.EntityAttributes-Section {
+.section {
   margin-bottom: 1rem;
 }
 
-.EntityAttributes-Tag {
+.tag {
   margin: 0 1rem 2rem 1rem;
   text-align: left;
 }
 
-.EntityAttributes-Content {
+.content {
   font-size: 0.9rem;
   font-weight: 200;
   color: $light2;
 }
 
-.EntityAttributes-ContentList {
+.contentList {
   margin-top: 0.1rem;
 }
 
-.EntityAttributes-Attributes {
+.attributes {
   margin: 0 1rem 1rem 1rem;
   width: calc(100% - 2rem);
 }
 
-.EntityTag--edit {
+.entityTagEdit {
   margin: 0 1rem 0.5rem;
 }
 
-.EntityTag-Dropdown {
+.dropdown {
   flex: 1;
 }
 
-.EntityAttributes-Checkbox {
+.checkbox {
   margin-left: 0.5rem;
   margin-right: 0;
 }
 
-.EntityAttributes-SubHeader {
+.subHeader {
   color: $light2;
   margin: 0 1rem;
 }
 
-.EntityAttributes-SubHeaderHidden {
+.subHeaderHidden {
   margin: 0rem 0.1rem 0 0.5rem;
+}
+
+.customTagBtn {
+  cursor: pointer;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light2;
+  }
 }
