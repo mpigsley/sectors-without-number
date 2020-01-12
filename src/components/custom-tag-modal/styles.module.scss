@@ -1,0 +1,64 @@
+@import '~styles/theme';
+
+.modal {
+  height: 80%;
+  max-height: 600px;
+  max-width: 900px;
+}
+
+.modalContent {
+  height: 538px;
+  padding: 0;
+}
+
+.innerContainer {
+  height: 100%;
+}
+
+.tagsContainer {
+  background-color: $dark3;
+  width: 35%;
+}
+
+.header {
+  border-bottom: 1px solid $dark2;
+  margin: 0;
+  padding: 0 1rem;
+  height: 60px;
+  width: calc(100% - 2rem);
+}
+
+.footer {
+  background-color: $dark3;
+  border-left: 1px solid $dark2;
+  margin: 0;
+  padding: 0 1rem;
+  height: 60px;
+  width: calc(100% - 2rem - 1px);
+}
+
+.scrollable {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.selectedRow {
+  background-color: $dark2;
+}
+
+.detailsContainer {
+  @extend .scrollable;
+  padding: 1rem 2rem;
+}
+
+.rowIcon {
+  color: $light1;
+}
+
+.entityTypes {
+  margin-right: 0.5rem;
+}
+
+.empty * {
+  color: $light1;
+}
