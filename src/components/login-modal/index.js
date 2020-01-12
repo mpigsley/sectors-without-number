@@ -4,7 +4,6 @@ import { injectIntl } from 'react-intl';
 import {
   closeLoginModal,
   updateUserForm,
-  facebookLogin,
   googleLogin,
   signup,
   login,
@@ -19,7 +18,6 @@ const mapStateToProps = ({ user }) => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  facebookLogin: () => dispatch(facebookLogin()),
   googleLogin: () => dispatch(googleLogin()),
   signup: () => dispatch(signup(props.intl)),
   login: () => dispatch(login(props.intl)),

@@ -10,7 +10,6 @@ import { pick } from 'constants/lodash';
 import {
   updateCurrentUser,
   getUserData,
-  doFacebookLogin,
   doGoogleLogin,
   doSignup,
   doLogin,
@@ -60,15 +59,6 @@ const onLogin = dispatch => result => {
     },
   );
 };
-
-export const facebookLogin = () => (dispatch, getState) =>
-  doFacebookLogin()
-    .then(onLogin(dispatch, getState()))
-    .catch(error => {
-      dispatch({ type: AUTH_FAILURE, error: error.message });
-      console.error(error);
-      throw error;
-    });
 
 export const googleLogin = () => (dispatch, getState) =>
   doGoogleLogin()

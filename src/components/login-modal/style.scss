@@ -37,17 +37,6 @@
   z-index: 1000;
 }
 
-.LoginModal-Facebook {
-  background-color: $facebook;
-  border: none;
-  color: $light3;
-  margin-bottom: 1rem;
-
-  &:hover {
-    color: $light4;
-  }
-}
-
 .LoginModal-Google {
   background-color: $google;
   border: none;

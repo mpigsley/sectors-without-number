@@ -126,7 +126,6 @@ export default class LoginModal extends Component {
     const {
       isLoginModalOpen,
       closeLoginModal,
-      facebookLogin,
       googleLogin,
       intl,
       email,
@@ -149,9 +148,6 @@ export default class LoginModal extends Component {
       >
         <X className="LoginModal-Close" onClick={closeLoginModal} size={30} />
         <FlexContainer justify="center" align="center" direction="column">
-          <Button className="LoginModal-Facebook" onClick={facebookLogin}>
-            <FormattedMessage id="misc.facebook" />
-          </Button>
           <Button className="LoginModal-Google" onClick={googleLogin}>
             <FormattedMessage id="misc.google" />
           </Button>
@@ -224,7 +220,6 @@ LoginModal.propTypes = {
   isLoginModalOpen: PropTypes.bool.isRequired,
   closeLoginModal: PropTypes.func.isRequired,
   updateUserForm: PropTypes.func.isRequired,
-  facebookLogin: PropTypes.func.isRequired,
   googleLogin: PropTypes.func.isRequired,
   signup: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,

@@ -48,11 +48,6 @@ export const updateCurrentUser = (uid, { displayName, ...rest }) => {
   return Promise.all(promises);
 };
 
-export const doFacebookLogin = () => {
-  const provider = new Firebase.auth.FacebookAuthProvider();
-  return Firebase.auth().signInWithPopup(provider);
-};
-
 export const doGoogleLogin = () => {
   const provider = new Firebase.auth.GoogleAuthProvider();
   return Firebase.auth().signInWithPopup(provider);
