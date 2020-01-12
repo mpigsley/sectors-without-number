@@ -18,10 +18,10 @@ export const getSyncedSectors = uid =>
     .then(typeSnapshot => {
       let sectors = {};
       typeSnapshot.forEach(doc => {
-        sectors = {
-          ...sectors,
-          [doc.id]: doc.data(),
-        };
+        const data = doc.data();
+        if (!data.deleted) {
+          sectors = { ...sectors, [doc.id]: data };
+        }
       });
       return sectors;
     });
@@ -35,10 +35,10 @@ export const getSectorEntities = (sectorId, uid) => {
     .doc(sectorId)
     .get()
     .then(doc => {
-      if (!doc.exists) {
+      const data = doc.exists ? doc.data() : undefined;
+      if (!data || data.deleted) {
         return { entities };
       }
-      const data = doc.data();
       entities[Entities.sector.key] = {
         [doc.id]: data,
       };
@@ -96,6 +96,17 @@ export const updateEntities = entities => {
   );
   return batch.commit();
 };
+
+export const deleteSector = sectorId =>
+  Firebase.firestore()
+    .collection('entities')
+    .doc(Entities.sector.key)
+    .collection('entity')
+    .doc(sectorId)
+    .set(
+      { deleted: Firebase.firestore.FieldValue.serverTimestamp() },
+      { merge: true },
+    );
 
 const BATCH_SIZE = 250;
 export const deleteEntities = entities => {

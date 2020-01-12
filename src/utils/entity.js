@@ -21,12 +21,14 @@ import {
 } from 'store/selectors/base.selectors';
 import {
   getCurrentEntities,
+  getCurrentEntityId,
   getCurrentEntityType,
 } from 'store/selectors/entity.selectors';
 import { isCurrentSectorSaved } from 'store/selectors/sector.selectors';
 
 import {
   uploadEntities,
+  deleteSector,
   deleteEntities as syncDeleteEntities,
   updateEntities as syncUpdateEntities,
 } from 'store/api/entity';
@@ -259,16 +261,19 @@ export const deleteEntities = ({ state, deleted }, intl) => {
   const isLoggedIn = isLoggedInSelector(state);
   const isSaved = isCurrentSectorSaved(state);
   const currentEntityType = getCurrentEntityType(state);
-  if (!isSaved) {
-    return Promise.resolve();
-  }
-  if (!isLoggedIn) {
+  if (!isSaved || !isLoggedIn) {
     return Promise.resolve();
   }
   const entityName = intl.formatMessage({
     id: Entities[currentEntityType].name,
   });
-  return syncDeleteEntities(deleted)
+  let promise;
+  if (currentEntityType === Entities.sector.key) {
+    promise = deleteSector(getCurrentEntityId(state));
+  } else {
+    promise = syncDeleteEntities(deleted);
+  }
+  return promise
     .then(() => ({
       action: SuccessToast({
         title: intl.formatMessage(
