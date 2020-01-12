@@ -1,4 +1,8 @@
 {
+  "7.18.0": {
+    "description": "Soft-delete sectors to prevent accidental data loss.",
+    "date": "1-12-2020"
+  },
   "7.17.2": {
     "description": "Fix system export in the overview table.",
     "date": "11-29-2019"
