@@ -44,6 +44,7 @@ export default function EntityTags({
   updateEntityInEdit,
   isOpen,
   toggleOpen,
+  openCustomTagModal,
   intl,
   isShared,
 }) {
@@ -167,15 +168,17 @@ export default function EntityTags({
         />
       }
       additional={
-        <Settings
-          size={20}
-          className={styles.customTagBtn}
-          onClick={e => {
-            e.stopPropagation();
-            // open modal
-          }}
-          data-rh={intl.formatMessage({ id: 'misc.configureTags' })}
-        />
+        isShared ? null : (
+          <Settings
+            size={20}
+            className={styles.customTagBtn}
+            onClick={e => {
+              e.stopPropagation();
+              openCustomTagModal();
+            }}
+            data-rh={intl.formatMessage({ id: 'misc.configureTags' })}
+          />
+        )
       }
       isOpen={isOpen}
       onClick={toggleOpen}
@@ -254,6 +257,7 @@ EntityTags.propTypes = {
   updateEntityInEdit: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
   toggleOpen: PropTypes.func.isRequired,
+  openCustomTagModal: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   isShared: PropTypes.bool.isRequired,
 };

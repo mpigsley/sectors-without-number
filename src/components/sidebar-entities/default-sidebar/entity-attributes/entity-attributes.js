@@ -43,6 +43,7 @@ export default function EntityAttributes({
   isTagsOpen,
   toggleAttributesOpen,
   toggleTagsOpen,
+  openCustomTagModal,
   isAncestorHidden,
   intl,
   isShared,
@@ -227,6 +228,7 @@ export default function EntityAttributes({
       <EntityTags
         key="tags"
         isSidebarEditActive={isSidebarEditActive}
+        openCustomTagModal={openCustomTagModal}
         entity={entity}
         entityType={entityType}
         updateEntityInEdit={updateEntityInEdit}
@@ -272,6 +274,7 @@ EntityAttributes.propTypes = {
   isTagsOpen: PropTypes.bool.isRequired,
   toggleAttributesOpen: PropTypes.func.isRequired,
   toggleTagsOpen: PropTypes.func.isRequired,
+  openCustomTagModal: PropTypes.func.isRequired,
   isAncestorHidden: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
   isShared: PropTypes.bool.isRequired,
