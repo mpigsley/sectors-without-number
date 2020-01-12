@@ -3,6 +3,7 @@ import { push } from 'connected-react-router';
 import Firebase from 'firebase/app';
 
 import { getCurrentUser } from 'store/api/user';
+import { getCustomTags } from 'store/api/tag';
 import {
   getSectorEntities,
   getSyncedSectors,
@@ -72,7 +73,8 @@ export const initialize = () => (dispatch, getState) =>
       isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
       isGameView ? getNavigationData(sectorId) : Promise.resolve({}),
       isGameView ? getLayerData(sectorId) : Promise.resolve({}),
-      uid ? getSyncedSectors(uid) : Promise.resolve(),
+      uid ? getSyncedSectors(uid) : Promise.resolve({}),
+      uid ? getCustomTags(uid) : Promise.resolve({}),
     ];
     if (locale && locale !== 'en' && Locale[locale]) {
       promises.push(
@@ -97,6 +99,7 @@ export const initialize = () => (dispatch, getState) =>
           routes,
           layers,
           sectors,
+          tags,
           userLocale,
         ]) => {
           if (((entities || {})[Entities.sector.key] || {})[sectorId]) {
@@ -105,6 +108,7 @@ export const initialize = () => (dispatch, getState) =>
           dispatch({
             type: INITIALIZED,
             user,
+            tags,
             entities: mergeEntityUpdates(
               { [Entities.sector.key]: sectors },
               entities || {},
@@ -114,7 +118,7 @@ export const initialize = () => (dispatch, getState) =>
             factions,
             sectorId,
             share,
-            saved: keys(sectors || {}),
+            saved: keys(sectors),
             locale: userLocale,
           });
         },
