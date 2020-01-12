@@ -103,7 +103,10 @@ export const deleteSector = sectorId =>
     .doc(Entities.sector.key)
     .collection('entity')
     .doc(sectorId)
-    .set({ deleted: true }, { merge: true });
+    .set(
+      { deleted: Firebase.firestore.FieldValue.serverTimestamp() },
+      { merge: true },
+    );
 
 const BATCH_SIZE = 250;
 export const deleteEntities = entities => {
