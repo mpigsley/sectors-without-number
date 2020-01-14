@@ -1,5 +1,3 @@
-import { LOCATION_CHANGE } from 'connected-react-router';
-
 import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
 import {
   FORM_UPDATED,
@@ -7,19 +5,9 @@ import {
   CLOSE_MODAL,
 } from 'store/actions/tag.actions';
 
-const initialForm = () => ({
-  name: '',
-  description: '',
-  enemies: [],
-  friends: [],
-  complications: [],
-  things: [],
-});
-
 export const initialState = {
   models: {},
-  form: initialForm(),
-  isOpen: false,
+  isOpen: true,
 };
 
 export default function tag(state = initialState, action) {
@@ -33,10 +21,8 @@ export default function tag(state = initialState, action) {
           ...(action.tags || {}),
         },
       };
-    case LOCATION_CHANGE:
-      return { ...state, form: initialForm() };
     case OPEN_MODAL:
-      return { ...state, isOpen: true, form: initialForm() };
+      return { ...state, isOpen: true };
     case CLOSE_MODAL:
       return { ...state, isOpen: false };
     case FORM_UPDATED:

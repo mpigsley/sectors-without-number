@@ -3,11 +3,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape } from 'react-intl';
 
+import TagDetails from 'components/custom-tag-modal/tag-details';
+import TagForm from 'components/custom-tag-modal/tag-form';
+
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import SectionHeader from 'primitives/text/section-header';
 import LinkRow from 'primitives/other/link-row';
-import Button from 'primitives/other/button';
 import Modal from 'primitives/modal/modal';
 
 import Entities from 'constants/entities';
@@ -17,17 +19,21 @@ import { mapValues, map, sortBy } from 'constants/lodash';
 
 import styles from './styles.module.scss';
 
-const renderList = (rows, key) => (
-  <div key={key} className={styles.content}>
-    <b>
-      <FormattedMessage id={`misc.${key}`} />:
-    </b>
-    <ul className={styles.contentList}>
-      {rows.map((row, i) => (
-        <li key={`${key}-${i}`}>{row}</li> // eslint-disable-line
-      ))}
-    </ul>
-  </div>
+const EmptyPlaceholder = () => (
+  <FlexContainer
+    flex="1"
+    direction="column"
+    align="center"
+    justify="center"
+    className={styles.empty}
+  >
+    <Header type={HeaderType.header3} noMargin>
+      <FormattedMessage id="misc.customTags" />
+    </Header>
+    <Header type={HeaderType.header4}>
+      <FormattedMessage id="misc.addSelectTag" />
+    </Header>
+  </FlexContainer>
 );
 
 export default function CustomTagModal({
@@ -35,12 +41,13 @@ export default function CustomTagModal({
   isCustomTagModalOpen,
   closeCustomTagModal,
 }) {
+  const [isFormOpen, setIsFormOpen] = useState();
   const [selected, setSelected] = useState();
   const sortedWorldTags = useMemo(
     () =>
       sortBy(
         mapValues(WorldTags, ({ key, ...lists }) => ({
-          preconfigured: true,
+          core: true,
           name: intl.formatMessage({ id: `tags.${key}` }),
           types: [Entities.planet.key],
           description: intl.formatMessage({ id: `tags.${key}.description` }),
@@ -59,62 +66,21 @@ export default function CustomTagModal({
     selected,
   ]);
 
-  let detailsContent = (
-    <FlexContainer
-      flex="1"
-      direction="column"
-      align="center"
-      justify="center"
-      className={styles.empty}
-    >
-      <Header type={HeaderType.header3} noMargin>
-        <FormattedMessage id="misc.customTags" />
-      </Header>
-      <Header type={HeaderType.header4}>
-        <FormattedMessage id="misc.addSelectTag" />
-      </Header>
-    </FlexContainer>
-  );
-  if (selectedTag) {
-    const { preconfigured, name, description, types, ...lists } = selectedTag;
+  const onTagSelect = key => {
+    setIsFormOpen(false);
+    setSelected(key);
+  };
+
+  let detailsContent = <EmptyPlaceholder />;
+  if (isFormOpen) {
     detailsContent = (
-      <FlexContainer flex="1" direction="column">
-        <div className={styles.detailsContainer}>
-          <Header type={HeaderType.header2}>{name}</Header>
-          <FlexContainer justify="center">
-            {preconfigured && (
-              <Lock
-                size={20}
-                className={styles.detailsIcon}
-                data-rh="Preconfigured Tag"
-                data-rh-at="top"
-              />
-            )}
-          </FlexContainer>
-          <p>{description}</p>
-          <p>
-            <b className={styles.entityTypes}>
-              <FormattedMessage id="misc.entityType" />:
-            </b>
-            {types
-              .map(type => intl.formatMessage({ id: `entity.${type}` }))
-              .join(', ')}
-          </p>
-          {map(lists, renderList)}
-        </div>
-        {!preconfigured && (
-          <FlexContainer
-            align="center"
-            justify="flexEnd"
-            className={styles.footer}
-          >
-            <Button noMargin>
-              <FormattedMessage id="misc.edit" />
-            </Button>
-          </FlexContainer>
-        )}
-      </FlexContainer>
+      <TagForm
+        selectedTag={selectedTag}
+        onCancel={() => setIsFormOpen(false)}
+      />
     );
+  } else if (selectedTag) {
+    detailsContent = <TagDetails intl={intl} selectedTag={selectedTag} />;
   }
 
   return (
@@ -122,7 +88,6 @@ export default function CustomTagModal({
       hideFooter
       width="90%"
       className={styles.modal}
-      contentClassName={styles.modalContent}
       isOpen={isCustomTagModalOpen}
       onCancel={closeCustomTagModal}
       title={intl.formatMessage({ id: 'misc.configureTags' })}
@@ -133,7 +98,10 @@ export default function CustomTagModal({
             header="misc.tags"
             addItemName="misc.tag"
             className={styles.header}
-            onAdd={() => {}}
+            onAdd={() => {
+              setSelected();
+              setIsFormOpen(true);
+            }}
           />
           <div className={styles.scrollable}>
             {map(sortedWorldTags, ({ name, preconfigured }, key) => (
@@ -151,7 +119,7 @@ export default function CustomTagModal({
                       )
                     : null
                 }
-                onClick={() => setSelected(key)}
+                onClick={() => onTagSelect(key)}
               />
             ))}
           </div>
