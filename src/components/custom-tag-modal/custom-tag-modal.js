@@ -75,6 +75,7 @@ export default function CustomTagModal({
   if (isFormOpen) {
     detailsContent = (
       <TagForm
+        intl={intl}
         selectedTag={selectedTag}
         onCancel={() => setIsFormOpen(false)}
       />
@@ -104,13 +105,13 @@ export default function CustomTagModal({
             }}
           />
           <div className={styles.scrollable}>
-            {map(sortedWorldTags, ({ name, preconfigured }, key) => (
+            {map(sortedWorldTags, ({ name, core }, key) => (
               <LinkRow
                 title={name}
                 key={key}
                 className={selected === key ? styles.selectedRow : null}
                 additionalIcon={
-                  preconfigured
+                  core
                     ? ({ className, ...rest }) => (
                         <Lock
                           className={classNames(className, styles.rowIcon)}

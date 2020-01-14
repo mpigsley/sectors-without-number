@@ -36,7 +36,7 @@ export default function TagDetails({ intl, selectedTag }) {
               size={20}
               className={styles.detailsIcon}
               data-rh={intl.formatMessage({ id: 'misc.coreTag' })}
-              data-rh-at="top"
+              data-rh-at="bottom"
             />
           )}
         </FlexContainer>
