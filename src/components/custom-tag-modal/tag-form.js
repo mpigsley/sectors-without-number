@@ -5,12 +5,14 @@ import { intlShape, FormattedMessage } from 'react-intl';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import LabeledInput from 'primitives/form/labeled-input';
-import ItemRow from 'primitives/other/item-row';
 import Button from 'primitives/other/button';
+
+import { filter } from 'constants/lodash';
+import Entities from 'constants/entities';
 
 import styles from './styles.module.scss';
 
-const initialFormState = () => ({
+const initialFormState = (previous = {}) => ({
   name: '',
   description: '',
   types: [],
@@ -18,10 +20,11 @@ const initialFormState = () => ({
   friends: [],
   complications: [],
   things: [],
+  ...previous,
 });
 
 export default function TagForm({ intl, selectedTag, onCancel }) {
-  const [form, setForm] = useState(initialFormState());
+  const [form, setForm] = useState(initialFormState(selectedTag));
 
   const isValid = useMemo(() => !!form.name && form.types.length, [
     form.name,
@@ -45,25 +48,45 @@ export default function TagForm({ intl, selectedTag, onCancel }) {
             <FormattedMessage id="misc.createTag" />
           )}
         </Header>
-        <ItemRow>
-          <LabeledInput
-            label={intl.formatMessage({ id: 'misc.name' })}
-            value={form.name}
-            isVertical
-            onChange={({ target }) => onUpdateForm('name', target.value)}
-          />
-        </ItemRow>
-        <ItemRow>
-          <LabeledInput
-            label={intl.formatMessage({ id: 'misc.description' })}
-            value={form.description}
-            rows="5"
-            type="textarea"
-            isVertical
-            onChange={({ target }) => onUpdateForm('description', target.value)}
-          />
-        </ItemRow>
-        <FlexContainer align="center" justify="flexEnd">
+        <LabeledInput
+          isRequired
+          label="misc.name"
+          value={form.name}
+          isVertical
+          onChange={({ target }) => onUpdateForm('name', target.value)}
+        />
+        <LabeledInput
+          label="misc.description"
+          value={form.description}
+          rows="5"
+          type="textarea"
+          isVertical
+          onChange={({ target }) => onUpdateForm('description', target.value)}
+        />
+        <LabeledInput
+          multi
+          isRequired
+          isVertical
+          type="dropdown"
+          label="misc.entityType"
+          clearable={false}
+          value={form.types}
+          options={filter(
+            Entities,
+            ({ key, extraneous }) => !extraneous && key !== Entities.sector.key,
+          ).map(attr => ({
+            value: attr.key,
+            label: intl.formatMessage({ id: attr.name }),
+          }))}
+          onChange={options =>
+            onUpdateForm('types', options.map(option => option.value))
+          }
+        />
+        <FlexContainer
+          align="center"
+          justify="flexEnd"
+          className={styles.btnContainer}
+        >
           <Button noMargin onClick={onCancel} className={styles.formBtn}>
             <FormattedMessage id="misc.cancel" />
           </Button>
