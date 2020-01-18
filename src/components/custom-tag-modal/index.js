@@ -7,7 +7,11 @@ import {
   getCustomTagForm,
   getIsCustomTagModalOpen,
 } from 'store/selectors/base.selectors';
-import { createTag, closeCustomTagModal } from 'store/actions/tag.actions';
+import {
+  createTag,
+  editTag,
+  closeCustomTagModal,
+} from 'store/actions/tag.actions';
 
 import CustomTagModal from './custom-tag-modal';
 
@@ -20,6 +24,6 @@ const mapStateToProps = createStructuredSelector({
 export default injectIntl(
   connect(
     mapStateToProps,
-    { createTag, closeCustomTagModal },
+    { createTag, editTag, closeCustomTagModal },
   )(CustomTagModal),
 );

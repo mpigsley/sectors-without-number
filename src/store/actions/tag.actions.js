@@ -1,5 +1,5 @@
 import { userUidSelector } from 'store/selectors/base.selectors';
-import { createCustomTag } from 'store/api/tag';
+import { createCustomTag, updateCustomTag } from 'store/api/tag';
 import { ErrorToast } from 'utils/toasts';
 
 const ACTION_PREFIX = '@@tag';
@@ -28,3 +28,18 @@ export const createTag = (intl, newTag) => (dispatch, getState) => {
       );
     });
 };
+
+export const editTag = (intl, tagId, tagUpdate) => dispatch =>
+  updateCustomTag(tagId, tagUpdate)
+    .then(update =>
+      dispatch({ type: ITEM_ADDED, item: { [update.tagId]: update.tag } }),
+    )
+    .catch(err => {
+      console.error(err);
+      dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
+    });

@@ -40,6 +40,7 @@ export default function CustomTagModal({
   intl,
   tags,
   createTag,
+  editTag,
   isCustomTagModalOpen,
   closeCustomTagModal,
 }) {
@@ -84,6 +85,9 @@ export default function CustomTagModal({
         intl={intl}
         selectedTag={selectedTag}
         onCancel={() => setIsFormOpen(false)}
+        editTag={tagUpdate =>
+          editTag(intl, selected, tagUpdate).then(() => setIsFormOpen(false))
+        }
         createTag={newTag =>
           createTag(intl, newTag).then(newTagId => {
             setIsFormOpen(false);
@@ -157,4 +161,5 @@ CustomTagModal.propTypes = {
   isCustomTagModalOpen: PropTypes.bool.isRequired,
   closeCustomTagModal: PropTypes.func.isRequired,
   createTag: PropTypes.func.isRequired,
+  editTag: PropTypes.func.isRequired,
 };

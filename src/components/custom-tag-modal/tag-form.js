@@ -31,7 +31,13 @@ const initialFormState = (previous = {}) => ({
   places: initialArrayState(previous.places),
 });
 
-export default function TagForm({ intl, selectedTag, onCancel, createTag }) {
+export default function TagForm({
+  intl,
+  selectedTag,
+  onCancel,
+  createTag,
+  editTag,
+}) {
   const [form, setForm] = useState(initialFormState(selectedTag));
   const [isSaving, setIsSaving] = useState(false);
 
@@ -48,7 +54,8 @@ export default function TagForm({ intl, selectedTag, onCancel, createTag }) {
     const transformArray = array =>
       array.map(row => row.value).filter(row => !!row);
     setIsSaving(true);
-    createTag(
+    const apiCall = selectedTag ? editTag : createTag;
+    apiCall(
       omit(
         {
           ...form,
@@ -59,6 +66,7 @@ export default function TagForm({ intl, selectedTag, onCancel, createTag }) {
           places: transformArray(form.places),
         },
         'key',
+        'creator',
       ),
     );
   };
@@ -197,6 +205,7 @@ TagForm.propTypes = {
   }),
   onCancel: PropTypes.func.isRequired,
   createTag: PropTypes.func.isRequired,
+  editTag: PropTypes.func.isRequired,
 };
 
 TagForm.defaultProps = {
