@@ -46,7 +46,14 @@ module.exports = functions.https.onCall((data, context) => {
     .where('creator', '==', context.auth.uid)
     .get()
     .then(snapshot => {
-      if (snapshot.size >= SECTOR_LIMIT) {
+      let activeSectorCount = 0;
+      snapshot.forEach(doc => {
+        const sectorData = doc.data();
+        if (!sectorData.deleted) {
+          activeSectorCount += 1;
+        }
+      });
+      if (activeSectorCount >= SECTOR_LIMIT) {
         throw new functions.https.HttpsError(
           'permission-denied',
           'You have reached your limit on total number of sectors.',
