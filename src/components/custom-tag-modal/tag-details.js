@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { intlShape, FormattedMessage } from 'react-intl';
 
@@ -24,7 +24,9 @@ const renderList = (rows, key) => (
   </div>
 );
 
-export default function TagDetails({ intl, onEdit, selectedTag }) {
+export default function TagDetails({ intl, onEdit, onDelete, selectedTag }) {
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isConfirming, setIsConfirming] = useState(false);
   const {
     key,
     creator,
@@ -34,6 +36,67 @@ export default function TagDetails({ intl, onEdit, selectedTag }) {
     types,
     ...lists
   } = selectedTag;
+
+  let footerBtns;
+  if (!core) {
+    if (isConfirming) {
+      footerBtns = (
+        <FlexContainer
+          align="center"
+          justify="spaceBetween"
+          className={styles.footer}
+        >
+          <FormattedMessage
+            id="misc.toDeleteEntity"
+            values={{ entity: intl.formatMessage({ id: 'misc.tag' }) }}
+          />
+          <FlexContainer>
+            <Button
+              noMargin
+              disabled={isDeleting}
+              className={styles.formBtn}
+              onClick={() => setIsConfirming(false)}
+            >
+              <FormattedMessage id="misc.no" />
+            </Button>
+            <Button
+              primary
+              noMargin
+              disabled={isDeleting}
+              loading={isDeleting}
+              className={styles.formBtn}
+              onClick={() => {
+                setIsDeleting(true);
+                onDelete();
+              }}
+            >
+              <FormattedMessage id="misc.yes" />
+            </Button>
+          </FlexContainer>
+        </FlexContainer>
+      );
+    } else {
+      footerBtns = (
+        <FlexContainer
+          align="center"
+          justify="flexEnd"
+          className={styles.footer}
+        >
+          <Button
+            noMargin
+            className={styles.formBtn}
+            onClick={() => setIsConfirming(true)}
+          >
+            <FormattedMessage id="misc.delete" />
+          </Button>
+          <Button primary noMargin className={styles.formBtn} onClick={onEdit}>
+            <FormattedMessage id="misc.edit" />
+          </Button>
+        </FlexContainer>
+      );
+    }
+  }
+
   return (
     <div className={styles.detailsContainer}>
       <Header type={HeaderType.header2}>{name}</Header>
@@ -59,20 +122,7 @@ export default function TagDetails({ intl, onEdit, selectedTag }) {
           .join(', ')}
       </p>
       {map(lists, renderList)}
-      {!core && (
-        <FlexContainer
-          align="center"
-          justify="flexEnd"
-          className={styles.footer}
-        >
-          <Button noMargin className={styles.formBtn} onClick={() => {}}>
-            <FormattedMessage id="misc.delete" />
-          </Button>
-          <Button primary noMargin className={styles.formBtn} onClick={onEdit}>
-            <FormattedMessage id="misc.edit" />
-          </Button>
-        </FlexContainer>
-      )}
+      {footerBtns}
     </div>
   );
 }
@@ -80,6 +130,7 @@ export default function TagDetails({ intl, onEdit, selectedTag }) {
 TagDetails.propTypes = {
   intl: intlShape.isRequired,
   onEdit: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   selectedTag: PropTypes.shape({
     key: PropTypes.string.isRequired,
     creator: PropTypes.string,

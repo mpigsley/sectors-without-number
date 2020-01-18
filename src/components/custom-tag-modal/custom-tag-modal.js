@@ -41,6 +41,7 @@ export default function CustomTagModal({
   tags,
   createTag,
   editTag,
+  deleteTag,
   isCustomTagModalOpen,
   closeCustomTagModal,
 }) {
@@ -103,7 +104,7 @@ export default function CustomTagModal({
       <TagDetails
         intl={intl}
         selectedTag={selectedTag}
-        onDelete={() => {}}
+        onDelete={() => deleteTag(intl, selected).then(() => setSelected())}
         onEdit={() => setIsFormOpen(true)}
       />
     );
@@ -162,4 +163,5 @@ CustomTagModal.propTypes = {
   closeCustomTagModal: PropTypes.func.isRequired,
   createTag: PropTypes.func.isRequired,
   editTag: PropTypes.func.isRequired,
+  deleteTag: PropTypes.func.isRequired,
 };

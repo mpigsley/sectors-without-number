@@ -10,6 +10,7 @@ import {
 import {
   createTag,
   editTag,
+  deleteTag,
   closeCustomTagModal,
 } from 'store/actions/tag.actions';
 
@@ -24,6 +25,6 @@ const mapStateToProps = createStructuredSelector({
 export default injectIntl(
   connect(
     mapStateToProps,
-    { createTag, editTag, closeCustomTagModal },
+    { createTag, editTag, deleteTag, closeCustomTagModal },
   )(CustomTagModal),
 );
