@@ -15,7 +15,7 @@ import Input from 'primitives/form/input';
 import { EyeOff, RefreshCw, Settings } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
-import { filter, includes, map, pull, without } from 'constants/lodash';
+import { filter, includes, map, pull, without, keys } from 'constants/lodash';
 
 import styles from './styles.module.scss';
 
@@ -49,12 +49,7 @@ export default function EntityTags({
   isShared,
 }) {
   const entityTags = (entity.attributes || {}).tags || [];
-  if (
-    !Entities[entityType].tags ||
-    (!isSidebarEditActive && !entityTags.length)
-  ) {
-    return null;
-  }
+  const coreTags = Entities[entityType].tags || {};
 
   let tags;
   if (isSidebarEditActive) {
@@ -87,15 +82,13 @@ export default function EntityTags({
               attributes: {
                 tags: [
                   ...without(entityTags, tag),
-                  chance.pickone(
-                    without(Object.keys(Entities[entityType].tags), tag),
-                  ),
+                  chance.pickone(without(keys(coreTags), tag)),
                 ],
               },
             })
           }
           options={filter(
-            Entities[entityType].tags,
+            coreTags,
             ({ key }) => !includes(entity.attributes.tags, key) || key === tag,
           )
             .map(({ key }) => ({
@@ -126,10 +119,11 @@ export default function EntityTags({
     ));
   } else {
     tags = entityTags
-      .map(tag => Entities[entityType].tags[tag])
+      .map(tag => coreTags[tag])
       .filter(
-        ({ key }) =>
-          !isShared || (entity.visibility || {})[`tag.${key}`] !== false,
+        tag =>
+          tag &&
+          (!isShared || (entity.visibility || {})[`tag.${tag.key}`] !== false),
       )
       .map(({ key, name, ...lists }) => {
         let visibility;
@@ -151,10 +145,6 @@ export default function EntityTags({
           </div>
         );
       });
-  }
-
-  if (!isSidebarEditActive && !tags.length) {
-    return null;
   }
 
   let header = (
