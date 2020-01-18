@@ -95,7 +95,14 @@ export default function CustomTagModal({
       />
     );
   } else if (selectedTag) {
-    detailsContent = <TagDetails intl={intl} selectedTag={selectedTag} />;
+    detailsContent = (
+      <TagDetails
+        intl={intl}
+        selectedTag={selectedTag}
+        onDelete={() => {}}
+        onEdit={() => setIsFormOpen(true)}
+      />
+    );
   }
 
   return (

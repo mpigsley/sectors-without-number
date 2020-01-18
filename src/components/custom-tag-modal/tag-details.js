@@ -24,7 +24,7 @@ const renderList = (rows, key) => (
   </div>
 );
 
-export default function TagDetails({ intl, selectedTag }) {
+export default function TagDetails({ intl, onEdit, selectedTag }) {
   const {
     key,
     creator,
@@ -35,49 +35,51 @@ export default function TagDetails({ intl, selectedTag }) {
     ...lists
   } = selectedTag;
   return (
-    <FlexContainer flex="1" direction="column">
-      <div className={styles.detailsContainer}>
-        <Header type={HeaderType.header2}>{name}</Header>
-        <FlexContainer justify="center">
-          <span>
-            {core && (
-              <Lock
-                size={20}
-                className={styles.detailsIcon}
-                data-rh={intl.formatMessage({ id: 'misc.coreTag' })}
-                data-rh-at="bottom"
-              />
-            )}
-          </span>
-        </FlexContainer>
-        <p>{description}</p>
-        <p>
-          <b className={styles.entityTypes}>
-            <FormattedMessage id="misc.entityType" />:
-          </b>
-          {types
-            .map(type => intl.formatMessage({ id: `entity.${type}` }))
-            .join(', ')}
-        </p>
-        {map(lists, renderList)}
-      </div>
+    <div className={styles.detailsContainer}>
+      <Header type={HeaderType.header2}>{name}</Header>
+      <FlexContainer justify="center">
+        <span>
+          {core && (
+            <Lock
+              size={20}
+              className={styles.detailsIcon}
+              data-rh={intl.formatMessage({ id: 'misc.coreTag' })}
+              data-rh-at="bottom"
+            />
+          )}
+        </span>
+      </FlexContainer>
+      <p>{description}</p>
+      <p>
+        <b className={styles.entityTypes}>
+          <FormattedMessage id="misc.entityType" />:
+        </b>
+        {types
+          .map(type => intl.formatMessage({ id: `entity.${type}` }))
+          .join(', ')}
+      </p>
+      {map(lists, renderList)}
       {!core && (
         <FlexContainer
           align="center"
           justify="flexEnd"
           className={styles.footer}
         >
-          <Button noMargin>
+          <Button noMargin className={styles.formBtn} onClick={() => {}}>
+            <FormattedMessage id="misc.delete" />
+          </Button>
+          <Button primary noMargin className={styles.formBtn} onClick={onEdit}>
             <FormattedMessage id="misc.edit" />
           </Button>
         </FlexContainer>
       )}
-    </FlexContainer>
+    </div>
   );
 }
 
 TagDetails.propTypes = {
   intl: intlShape.isRequired,
+  onEdit: PropTypes.func.isRequired,
   selectedTag: PropTypes.shape({
     key: PropTypes.string.isRequired,
     creator: PropTypes.string,

@@ -112,83 +112,81 @@ export default function TagForm({ intl, selectedTag, onCancel, createTag }) {
   };
 
   return (
-    <FlexContainer flex="1" direction="column">
-      <div className={styles.detailsContainer}>
-        <Header type={HeaderType.header2}>
-          {selectedTag ? (
-            <FormattedMessage
-              id="misc.editEntity"
-              values={{ entity: selectedTag.name }}
-            />
-          ) : (
-            <FormattedMessage id="misc.createTag" />
-          )}
-        </Header>
-        <LabeledInput
-          isRequired
-          label="misc.name"
-          value={form.name}
-          isVertical
-          onChange={({ target }) => onUpdateForm('name', target.value)}
-        />
-        <LabeledInput
-          label="misc.description"
-          value={form.description}
-          rows="5"
-          type="textarea"
-          isVertical
-          onChange={({ target }) => onUpdateForm('description', target.value)}
-        />
-        <LabeledInput
-          multi
-          isRequired
-          isVertical
-          type="dropdown"
-          label="misc.entityType"
-          clearable={false}
-          value={form.types}
-          options={filter(
-            Entities,
-            ({ key, extraneous }) => !extraneous && key !== Entities.sector.key,
-          ).map(attr => ({
-            value: attr.key,
-            label: intl.formatMessage({ id: attr.name }),
-          }))}
-          onChange={options =>
-            onUpdateForm('types', options.map(option => option.value))
-          }
-        />
-        {renderExpandableArray('enemies', 'enemy')}
-        {renderExpandableArray('friends', 'friend')}
-        {renderExpandableArray('complications', 'complication')}
-        {renderExpandableArray('things', 'thing')}
-        {renderExpandableArray('places', 'place')}
-        <FlexContainer
-          align="center"
-          justify="flexEnd"
-          className={styles.btnContainer}
+    <div className={styles.detailsContainer}>
+      <Header type={HeaderType.header2}>
+        {selectedTag ? (
+          <FormattedMessage
+            id="misc.editEntity"
+            values={{ entity: selectedTag.name }}
+          />
+        ) : (
+          <FormattedMessage id="misc.createTag" />
+        )}
+      </Header>
+      <LabeledInput
+        isRequired
+        label="misc.name"
+        value={form.name}
+        isVertical
+        onChange={({ target }) => onUpdateForm('name', target.value)}
+      />
+      <LabeledInput
+        label="misc.description"
+        value={form.description}
+        rows="5"
+        type="textarea"
+        isVertical
+        onChange={({ target }) => onUpdateForm('description', target.value)}
+      />
+      <LabeledInput
+        multi
+        isRequired
+        isVertical
+        type="dropdown"
+        label="misc.entityType"
+        clearable={false}
+        value={form.types}
+        options={filter(
+          Entities,
+          ({ key, extraneous }) => !extraneous && key !== Entities.sector.key,
+        ).map(attr => ({
+          value: attr.key,
+          label: intl.formatMessage({ id: attr.name }),
+        }))}
+        onChange={options =>
+          onUpdateForm('types', options.map(option => option.value))
+        }
+      />
+      {renderExpandableArray('enemies', 'enemy')}
+      {renderExpandableArray('friends', 'friend')}
+      {renderExpandableArray('complications', 'complication')}
+      {renderExpandableArray('things', 'thing')}
+      {renderExpandableArray('places', 'place')}
+      <FlexContainer
+        align="center"
+        justify="flexEnd"
+        className={styles.btnContainer}
+      >
+        <Button
+          noMargin
+          disabled={isSaving}
+          onClick={onCancel}
+          className={styles.formBtn}
         >
-          <Button
-            noMargin
-            disabled={isSaving}
-            onClick={onCancel}
-            className={styles.formBtn}
-          >
-            <FormattedMessage id="misc.cancel" />
-          </Button>
-          <Button
-            noMargin
-            primary
-            loading={isSaving}
-            disabled={!isValid || isSaving}
-            className={styles.formBtn}
-            onClick={onCreateTag}
-          >
-            <FormattedMessage id={selectedTag ? 'misc.edit' : 'misc.create'} />
-          </Button>
-        </FlexContainer>
-      </div>
-    </FlexContainer>
+          <FormattedMessage id="misc.cancel" />
+        </Button>
+        <Button
+          noMargin
+          primary
+          loading={isSaving}
+          disabled={!isValid || isSaving}
+          className={styles.formBtn}
+          onClick={onCreateTag}
+        >
+          <FormattedMessage id={selectedTag ? 'misc.edit' : 'misc.create'} />
+        </Button>
+      </FlexContainer>
+    </div>
   );
 }
 

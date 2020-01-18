@@ -32,7 +32,8 @@
 
 .detailsContainer {
   @extend .scrollable;
-  padding: 0 2rem 1rem;
+  padding-left: 2rem;
+  flex: 1;
 
   .formHeader {
     margin: 1rem 0;
