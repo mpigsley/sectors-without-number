@@ -1,4 +1,8 @@
 {
+  "7.19.1": {
+    "description": "Take into account deleted sectors when comparing against sector limit.",
+    "date": "1-18-2020"
+  },
   "7.19.0": {
     "description": "Remove broken and unused Facebook login.",
     "date": "1-12-2020"
