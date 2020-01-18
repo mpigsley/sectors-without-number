@@ -98,7 +98,6 @@ export default function CustomTagModal({
           <SectionHeader
             header="misc.tags"
             addItemName="misc.tag"
-            className={styles.header}
             onAdd={() => {
               setSelected();
               setIsFormOpen(true);

@@ -13,14 +13,6 @@
   width: 35%;
 }
 
-.header {
-  border-bottom: 1px solid $dark2;
-  margin: 0;
-  padding: 0 1rem;
-  height: 60px;
-  width: calc(100% - 2rem);
-}
-
 .formBtn {
   margin-left: 1rem;
 }
@@ -41,6 +33,11 @@
 .detailsContainer {
   @extend .scrollable;
   padding: 0 2rem 1rem;
+
+  .formHeader {
+    margin: 1rem 0;
+    width: 100%;
+  }
 }
 
 .rowIcon {
@@ -53,4 +50,8 @@
 
 .empty * {
   color: $light1;
+}
+
+.deletableRow {
+  margin-bottom: 0.5rem;
 }

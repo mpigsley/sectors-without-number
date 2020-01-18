@@ -4,23 +4,31 @@ import { intlShape, FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
+import SectionHeader from 'primitives/text/section-header';
 import LabeledInput from 'primitives/form/labeled-input';
+import DeletableRow from 'primitives/form/deletable-row';
 import Button from 'primitives/other/button';
+import Input from 'primitives/form/input';
 
-import { filter } from 'constants/lodash';
+import { filter, find } from 'constants/lodash';
 import Entities from 'constants/entities';
+import { createId } from 'utils/common';
 
 import styles from './styles.module.scss';
+
+const initialArrayState = array =>
+  (array || []).map(value => ({ key: createId(), value }));
 
 const initialFormState = (previous = {}) => ({
   name: '',
   description: '',
   types: [],
-  enemies: [],
-  friends: [],
-  complications: [],
-  things: [],
   ...previous,
+  enemies: initialArrayState(previous.enemies),
+  friends: initialArrayState(previous.friends),
+  complications: initialArrayState(previous.complications),
+  things: initialArrayState(previous.things),
+  places: initialArrayState(previous.places),
 });
 
 export default function TagForm({ intl, selectedTag, onCancel }) {
@@ -33,6 +41,54 @@ export default function TagForm({ intl, selectedTag, onCancel }) {
 
   const onUpdateForm = (key, value) => {
     setForm({ ...form, [key]: value });
+  };
+
+  const renderExpandableArray = typeKey => {
+    const onAddItemToArray = () => {
+      if (!find(form[typeKey], item => item.value === '')) {
+        onUpdateForm(typeKey, [
+          ...form[typeKey],
+          { key: createId(), value: '' },
+        ]);
+      }
+    };
+
+    const onUpdateItemInArray = (rowKey, value) =>
+      onUpdateForm(
+        typeKey,
+        form[typeKey].map(item =>
+          item.key === rowKey ? { ...item, value } : item,
+        ),
+      );
+
+    const onDeleteItemFromArary = rowKey =>
+      onUpdateForm(typeKey, form[typeKey].filter(item => item.key !== rowKey));
+
+    return (
+      <FlexContainer key={typeKey} direction="column">
+        <SectionHeader
+          header={`misc.${typeKey}`}
+          addItemName={`misc.${typeKey}`}
+          className={styles.formHeader}
+          onAdd={() => onAddItemToArray()}
+        />
+        {form[typeKey].map(row => (
+          <DeletableRow
+            key={row.key}
+            align="center"
+            className={styles.deletableRow}
+            onAction={() => onDeleteItemFromArary(row.key)}
+          >
+            <Input
+              value={row.value}
+              onChange={({ target }) =>
+                onUpdateItemInArray(row.key, target.value)
+              }
+            />
+          </DeletableRow>
+        ))}
+      </FlexContainer>
+    );
   };
 
   return (
@@ -82,6 +138,11 @@ export default function TagForm({ intl, selectedTag, onCancel }) {
             onUpdateForm('types', options.map(option => option.value))
           }
         />
+        {renderExpandableArray('enemies')}
+        {renderExpandableArray('friends')}
+        {renderExpandableArray('complications')}
+        {renderExpandableArray('things')}
+        {renderExpandableArray('places')}
         <FlexContainer
           align="center"
           justify="flexEnd"
