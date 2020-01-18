@@ -1,7 +1,30 @@
+import { userUidSelector } from 'store/selectors/base.selectors';
+import { createCustomTag } from 'store/api/tag';
+import { ErrorToast } from 'utils/toasts';
+
 const ACTION_PREFIX = '@@tag';
-export const FORM_UPDATED = `${ACTION_PREFIX}/FORM_UPDATED`;
 export const OPEN_MODAL = `${ACTION_PREFIX}/OPEN_MODAL`;
 export const CLOSE_MODAL = `${ACTION_PREFIX}/CLOSE_MODAL`;
+export const ITEM_ADDED = `${ACTION_PREFIX}/ITEM_ADDED`;
 
 export const openCustomTagModal = () => ({ type: OPEN_MODAL });
 export const closeCustomTagModal = () => ({ type: CLOSE_MODAL });
+
+export const createTag = (intl, newTag) => (dispatch, getState) => {
+  const state = getState();
+  const uid = userUidSelector(state);
+  return createCustomTag(uid, newTag)
+    .then(({ tagId, tag }) => {
+      dispatch({ type: ITEM_ADDED, item: { [tagId]: tag } });
+      return tagId;
+    })
+    .catch(err => {
+      console.error(err);
+      dispatch(
+        ErrorToast({
+          title: intl.formatMessage({ id: 'misc.error' }),
+          message: intl.formatMessage({ id: 'misc.reportProblemPersists' }),
+        }),
+      );
+    });
+};

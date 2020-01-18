@@ -10,7 +10,7 @@ import DeletableRow from 'primitives/form/deletable-row';
 import Button from 'primitives/other/button';
 import Input from 'primitives/form/input';
 
-import { filter, find } from 'constants/lodash';
+import { filter, find, omit } from 'constants/lodash';
 import Entities from 'constants/entities';
 import { createId } from 'utils/common';
 
@@ -31,8 +31,9 @@ const initialFormState = (previous = {}) => ({
   places: initialArrayState(previous.places),
 });
 
-export default function TagForm({ intl, selectedTag, onCancel }) {
+export default function TagForm({ intl, selectedTag, onCancel, createTag }) {
   const [form, setForm] = useState(initialFormState(selectedTag));
+  const [isSaving, setIsSaving] = useState(false);
 
   const isValid = useMemo(() => !!form.name && form.types.length, [
     form.name,
@@ -41,6 +42,25 @@ export default function TagForm({ intl, selectedTag, onCancel }) {
 
   const onUpdateForm = (key, value) => {
     setForm({ ...form, [key]: value });
+  };
+
+  const onCreateTag = () => {
+    const transformArray = array =>
+      array.map(row => row.value).filter(row => !!row);
+    setIsSaving(true);
+    createTag(
+      omit(
+        {
+          ...form,
+          enemies: transformArray(form.enemies),
+          friends: transformArray(form.friends),
+          complications: transformArray(form.complications),
+          things: transformArray(form.things),
+          places: transformArray(form.places),
+        },
+        'key',
+      ),
+    );
   };
 
   const renderExpandableArray = (typeKey, singularKey) => {
@@ -148,14 +168,21 @@ export default function TagForm({ intl, selectedTag, onCancel }) {
           justify="flexEnd"
           className={styles.btnContainer}
         >
-          <Button noMargin onClick={onCancel} className={styles.formBtn}>
+          <Button
+            noMargin
+            disabled={isSaving}
+            onClick={onCancel}
+            className={styles.formBtn}
+          >
             <FormattedMessage id="misc.cancel" />
           </Button>
           <Button
             noMargin
             primary
-            disabled={!isValid}
+            loading={isSaving}
+            disabled={!isValid || isSaving}
             className={styles.formBtn}
+            onClick={onCreateTag}
           >
             <FormattedMessage id={selectedTag ? 'misc.edit' : 'misc.create'} />
           </Button>
@@ -171,6 +198,7 @@ TagForm.propTypes = {
     name: PropTypes.string.isRequired,
   }),
   onCancel: PropTypes.func.isRequired,
+  createTag: PropTypes.func.isRequired,
 };
 
 TagForm.defaultProps = {

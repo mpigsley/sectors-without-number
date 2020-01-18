@@ -1,9 +1,5 @@
 import { FETCHED_SECTOR, INITIALIZED } from 'store/actions/combined.actions';
-import {
-  FORM_UPDATED,
-  OPEN_MODAL,
-  CLOSE_MODAL,
-} from 'store/actions/tag.actions';
+import { OPEN_MODAL, CLOSE_MODAL, ITEM_ADDED } from 'store/actions/tag.actions';
 
 export const initialState = {
   models: {},
@@ -25,14 +21,8 @@ export default function tag(state = initialState, action) {
       return { ...state, isOpen: true };
     case CLOSE_MODAL:
       return { ...state, isOpen: false };
-    case FORM_UPDATED:
-      return {
-        ...state,
-        form: {
-          ...state.form,
-          [action.key]: action.value,
-        },
-      };
+    case ITEM_ADDED:
+      return { ...state, models: { ...state.models, ...action.item } };
     default:
       return state;
   }

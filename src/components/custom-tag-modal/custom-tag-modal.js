@@ -15,7 +15,7 @@ import Modal from 'primitives/modal/modal';
 import Entities from 'constants/entities';
 import WorldTags from 'constants/world-tags';
 import { Lock } from 'constants/icons';
-import { mapValues, map, sortBy } from 'constants/lodash';
+import { find, mapValues, map, sortBy } from 'constants/lodash';
 
 import styles from './styles.module.scss';
 
@@ -38,6 +38,8 @@ const EmptyPlaceholder = () => (
 
 export default function CustomTagModal({
   intl,
+  tags,
+  createTag,
   isCustomTagModalOpen,
   closeCustomTagModal,
 }) {
@@ -46,22 +48,26 @@ export default function CustomTagModal({
   const sortedWorldTags = useMemo(
     () =>
       sortBy(
-        mapValues(WorldTags, ({ key, ...lists }) => ({
-          core: true,
-          name: intl.formatMessage({ id: `tags.${key}` }),
-          types: [Entities.planet.key],
-          description: intl.formatMessage({ id: `tags.${key}.description` }),
-          ...mapValues(lists, (listSize, listKey) =>
-            [...Array(listSize).keys()].map(index =>
-              intl.formatMessage({ id: `tags.${key}.${listKey}.${index}` }),
+        [
+          ...map(tags, (tag, key) => ({ ...tag, key })),
+          ...map(WorldTags, ({ key, ...lists }) => ({
+            key,
+            core: true,
+            name: intl.formatMessage({ id: `tags.${key}` }),
+            types: [Entities.planet.key],
+            description: intl.formatMessage({ id: `tags.${key}.description` }),
+            ...mapValues(lists, (listSize, listKey) =>
+              [...Array(listSize).keys()].map(index =>
+                intl.formatMessage({ id: `tags.${key}.${listKey}.${index}` }),
+              ),
             ),
-          ),
-        })),
+          })),
+        ],
         'name',
       ),
-    [intl],
+    [intl, tags],
   );
-  const selectedTag = useMemo(() => sortedWorldTags[selected], [
+  const selectedTag = useMemo(() => find(sortedWorldTags, { key: selected }), [
     sortedWorldTags,
     selected,
   ]);
@@ -78,6 +84,14 @@ export default function CustomTagModal({
         intl={intl}
         selectedTag={selectedTag}
         onCancel={() => setIsFormOpen(false)}
+        createTag={newTag =>
+          createTag(intl, newTag).then(newTagId => {
+            setIsFormOpen(false);
+            if (newTagId) {
+              setSelected(newTagId);
+            }
+          })
+        }
       />
     );
   } else if (selectedTag) {
@@ -104,7 +118,7 @@ export default function CustomTagModal({
             }}
           />
           <div className={styles.scrollable}>
-            {map(sortedWorldTags, ({ name, core }, key) => (
+            {map(sortedWorldTags, ({ key, name, core }) => (
               <LinkRow
                 title={name}
                 key={key}
@@ -132,6 +146,8 @@ export default function CustomTagModal({
 
 CustomTagModal.propTypes = {
   intl: intlShape.isRequired,
+  tags: PropTypes.shape().isRequired,
   isCustomTagModalOpen: PropTypes.bool.isRequired,
   closeCustomTagModal: PropTypes.func.isRequired,
+  createTag: PropTypes.func.isRequired,
 };

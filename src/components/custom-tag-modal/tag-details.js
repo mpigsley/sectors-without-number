@@ -25,20 +25,30 @@ const renderList = (rows, key) => (
 );
 
 export default function TagDetails({ intl, selectedTag }) {
-  const { core, name, description, types, ...lists } = selectedTag;
+  const {
+    key,
+    creator,
+    core,
+    name,
+    description,
+    types,
+    ...lists
+  } = selectedTag;
   return (
     <FlexContainer flex="1" direction="column">
       <div className={styles.detailsContainer}>
         <Header type={HeaderType.header2}>{name}</Header>
         <FlexContainer justify="center">
-          {core && (
-            <Lock
-              size={20}
-              className={styles.detailsIcon}
-              data-rh={intl.formatMessage({ id: 'misc.coreTag' })}
-              data-rh-at="bottom"
-            />
-          )}
+          <span>
+            {core && (
+              <Lock
+                size={20}
+                className={styles.detailsIcon}
+                data-rh={intl.formatMessage({ id: 'misc.coreTag' })}
+                data-rh-at="bottom"
+              />
+            )}
+          </span>
         </FlexContainer>
         <p>{description}</p>
         <p>
@@ -69,6 +79,8 @@ export default function TagDetails({ intl, selectedTag }) {
 TagDetails.propTypes = {
   intl: intlShape.isRequired,
   selectedTag: PropTypes.shape({
+    key: PropTypes.string.isRequired,
+    creator: PropTypes.string,
     core: PropTypes.bool,
     name: PropTypes.string.isRequired,
     description: PropTypes.string,
