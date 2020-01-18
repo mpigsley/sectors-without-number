@@ -22,7 +22,7 @@ const initialArrayState = array =>
 const initialFormState = (previous = {}) => ({
   name: '',
   description: '',
-  types: [],
+  types: [Entities.planet.key],
   ...previous,
   enemies: initialArrayState(previous.enemies),
   friends: initialArrayState(previous.friends),
@@ -43,7 +43,7 @@ export default function TagForm({ intl, selectedTag, onCancel }) {
     setForm({ ...form, [key]: value });
   };
 
-  const renderExpandableArray = typeKey => {
+  const renderExpandableArray = (typeKey, singularKey) => {
     const onAddItemToArray = () => {
       if (!find(form[typeKey], item => item.value === '')) {
         onUpdateForm(typeKey, [
@@ -68,7 +68,7 @@ export default function TagForm({ intl, selectedTag, onCancel }) {
       <FlexContainer key={typeKey} direction="column">
         <SectionHeader
           header={`misc.${typeKey}`}
-          addItemName={`misc.${typeKey}`}
+          addItemName={`misc.${singularKey}`}
           className={styles.formHeader}
           onAdd={() => onAddItemToArray()}
         />
@@ -138,11 +138,11 @@ export default function TagForm({ intl, selectedTag, onCancel }) {
             onUpdateForm('types', options.map(option => option.value))
           }
         />
-        {renderExpandableArray('enemies')}
-        {renderExpandableArray('friends')}
-        {renderExpandableArray('complications')}
-        {renderExpandableArray('things')}
-        {renderExpandableArray('places')}
+        {renderExpandableArray('enemies', 'enemy')}
+        {renderExpandableArray('friends', 'friend')}
+        {renderExpandableArray('complications', 'complication')}
+        {renderExpandableArray('things', 'thing')}
+        {renderExpandableArray('places', 'place')}
         <FlexContainer
           align="center"
           justify="flexEnd"
