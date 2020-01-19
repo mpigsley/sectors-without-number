@@ -18,6 +18,7 @@ import { values, size } from 'constants/lodash';
 import './style.scss';
 
 export default function OverviewTable({
+  customTags,
   entities,
   match,
   currentSector,
@@ -39,11 +40,24 @@ export default function OverviewTable({
         ),
       },
       { accessor: 'location', Header: 'misc.location', centered: true },
+      {
+        accessor: 'tags',
+        Header: 'misc.tags',
+        Cell: tags =>
+          tags
+            .map(tag =>
+              intl.formatMessage({
+                id: `tags.${tag}`,
+                defaultMessage: (customTags[tag] || {}).name,
+              }),
+            )
+            .filter(tag => tag)
+            .join(', ') || '-',
+      },
     ];
     const attributes = Entities[entityType].attributes.map(({ key, name }) => ({
       accessor: key,
       Header: name,
-      translateItem: true,
     }));
     if (Entities[entityType].topLevel) {
       return [
@@ -73,16 +87,6 @@ export default function OverviewTable({
       });
     }
     attributes.map(attr => columns.push(attr));
-    if (Entities[entityType].tags) {
-      columns.push({
-        accessor: 'tags',
-        Header: 'misc.tags',
-        Cell: tags =>
-          tags
-            .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
-            .join(', ') || '-',
-      });
-    }
     return columns;
   };
 
@@ -109,11 +113,25 @@ export default function OverviewTable({
       columns.map(col => intl.formatMessage({ id: col.Header })),
     ].concat(
       tableData.map(data =>
-        columns.map(({ accessor, translateItem }) =>
-          translateItem && intl.messages[data[accessor]]
-            ? intl.formatMessage({ id: data[accessor] })
-            : data[accessor],
-        ),
+        columns.map(({ accessor }) => {
+          if (!data[accessor]) {
+            return '';
+          }
+          return accessor === 'tags'
+            ? data[accessor]
+                .map(tag =>
+                  intl.formatMessage({
+                    id: `tags.${tag}`,
+                    defaultMessage: (customTags[tag] || {}).name,
+                  }),
+                )
+                .filter(tag => tag)
+                .join(', ')
+            : intl.formatMessage({
+                id: data[accessor],
+                defaultMessage: `${data[accessor]}` || '',
+              });
+        }),
       ),
     );
     return createCSVDownload(
@@ -156,6 +174,7 @@ export default function OverviewTable({
 }
 
 OverviewTable.propTypes = {
+  customTags: PropTypes.shape().isRequired,
   entities: PropTypes.shape().isRequired,
   currentSector: PropTypes.shape({
     name: PropTypes.string,

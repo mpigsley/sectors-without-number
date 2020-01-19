@@ -384,32 +384,34 @@ export const translateEntities = (entities, intl) =>
       if (((entity.attributes || {}).tags || []).length) {
         translatedAttributes = {
           ...translatedAttributes,
-          tags: entity.attributes.tags.map(tag => {
-            const { key, name, ...lists } =
-              (Entities[entityType].tags || {})[tag] || {};
-            if (!key) {
-              return null;
-            }
-            const baseId = `tags.${key}`;
-            return {
-              name: intl.formatMessage({ id: baseId }),
-              description: intl.formatMessage({
-                id: `${baseId}.description`,
-              }),
-              ...reduce(
-                lists,
-                (obj, listLength, listKey) => ({
-                  ...obj,
-                  [listKey]: [...Array(listLength).keys()].map(index =>
-                    intl.formatMessage({
-                      id: `${baseId}.${listKey}.${index}`,
-                    }),
-                  ),
+          tags: entity.attributes.tags
+            .map(tag => {
+              const { key, name, ...lists } =
+                (Entities[entityType].tags || {})[tag] || {};
+              if (!key) {
+                return null;
+              }
+              const baseId = `tags.${key}`;
+              return {
+                name: intl.formatMessage({ id: baseId }),
+                description: intl.formatMessage({
+                  id: `${baseId}.description`,
                 }),
-                {},
-              ),
-            };
-          }),
+                ...reduce(
+                  lists,
+                  (obj, listLength, listKey) => ({
+                    ...obj,
+                    [listKey]: [...Array(listLength).keys()].map(index =>
+                      intl.formatMessage({
+                        id: `${baseId}.${listKey}.${index}`,
+                      }),
+                    ),
+                  }),
+                  {},
+                ),
+              };
+            })
+            .filter(tag => tag),
         };
       }
 

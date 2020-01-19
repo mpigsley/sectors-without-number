@@ -65,6 +65,9 @@ export default function EntityTags({
   intl,
   isShared,
 }) {
+  if (entityType === Entities.sector.key) {
+    return null;
+  }
   const entityTags = (entity.attributes || {}).tags || [];
   const allTags = {
     ...(Entities[entityType].tags || {}),

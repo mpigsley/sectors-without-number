@@ -2,11 +2,12 @@
 
 .ExpandedPrintable-Entity {
   page-break-after: always;
+  width: 100%;
 }
 
 .ExpandedPrintable-Header {
   border-bottom: 1px solid $light3;
-  flex: 1;
+  width: 100%;
 
   * {
     margin-bottom: 0.5rem;

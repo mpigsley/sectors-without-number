@@ -83,11 +83,14 @@ class Table extends Component {
     return <ChevronDown size={12} className="Table-SortIcon" />;
   }
 
-  renderRowItem(row, { Cell, accessor, translateItem }) {
-    let item = row[accessor];
+  renderRowItem(row, { Cell, accessor }) {
     const { intl } = this.props;
-    if (item && translateItem && intl.messages[row[accessor]]) {
-      item = intl.formatMessage({ id: row[accessor] });
+    let item = row[accessor];
+    if (intl.messages[row[accessor]]) {
+      item = intl.formatMessage({
+        id: row[accessor],
+        defaultMessage: row[accessor],
+      });
     }
     item = isNil(item) ? '-' : item;
     return Cell ? Cell(item, row) : item;
@@ -181,7 +184,6 @@ Table.propTypes = {
       Cell: PropTypes.func,
       columnClass: PropTypes.string,
       centered: PropTypes.bool,
-      translateItems: PropTypes.bool,
     }),
   ).isRequired,
   intl: intlShape.isRequired,
