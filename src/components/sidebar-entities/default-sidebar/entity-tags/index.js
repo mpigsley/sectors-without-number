@@ -11,10 +11,12 @@ import { isSidebarEditActiveSelector } from 'store/selectors/base.selectors';
 import { updateEntityInEdit } from 'store/actions/sidebar.actions';
 import { openCustomTagModal } from 'store/actions/tag.actions';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
+import { getTagsForCurrentEntity } from 'store/selectors/tag.selectors';
 
 import EntityTags from './entity-tags';
 
 const mapStateToProps = createStructuredSelector({
+  customTags: getTagsForCurrentEntity,
   entity: getCurrentEntity,
   entityId: getCurrentEntityId,
   entityType: getCurrentEntityType,

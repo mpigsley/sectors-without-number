@@ -15,29 +15,46 @@ import Input from 'primitives/form/input';
 import { EyeOff, RefreshCw, Settings } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
-import { filter, includes, map, pull, without, keys } from 'constants/lodash';
+import {
+  filter,
+  includes,
+  map,
+  pull,
+  without,
+  keys,
+  isNumber,
+} from 'constants/lodash';
 
 import styles from './styles.module.scss';
 
 const ReactHint = ReactHintFactory(React);
 const chance = new Chance();
 
-const renderList = (listLength, listKey, key) => (
-  <div key={listKey} className={styles.content}>
-    <b>
-      <FormattedMessage id={`misc.${listKey}`} />:
-    </b>
-    <ul className={styles.contentList}>
-      {[...Array(listLength).keys()].map(index => (
-        <li key={`${listKey}-${index}`}>
-          <FormattedMessage id={`tags.${key}.${listKey}.${index}`} />
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+const renderList = (listOrLength, listKey, key) => {
+  const contentList = isNumber(listOrLength)
+    ? [...Array(listOrLength).keys()]
+    : listOrLength;
+  return (
+    <div key={listKey} className={styles.content}>
+      <b>
+        <FormattedMessage id={`misc.${listKey}`} />:
+      </b>
+      <ul className={styles.contentList}>
+        {contentList.map(item => (
+          <li key={`${listKey}-${item}`}>
+            <FormattedMessage
+              id={`tags.${key}.${listKey}.${item}`}
+              defaultMessage={item}
+            />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+};
 
 export default function EntityTags({
+  customTags,
   entityType,
   entity,
   isSidebarEditActive,
@@ -49,7 +66,10 @@ export default function EntityTags({
   isShared,
 }) {
   const entityTags = (entity.attributes || {}).tags || [];
-  const coreTags = Entities[entityType].tags || {};
+  const allTags = {
+    ...(Entities[entityType].tags || {}),
+    ...customTags,
+  };
 
   let tags;
   if (isSidebarEditActive) {
@@ -82,18 +102,21 @@ export default function EntityTags({
               attributes: {
                 tags: [
                   ...without(entityTags, tag),
-                  chance.pickone(without(keys(coreTags), tag)),
+                  chance.pickone(without(keys(allTags), tag)),
                 ],
               },
             })
           }
           options={filter(
-            coreTags,
+            allTags,
             ({ key }) => !includes(entity.attributes.tags, key) || key === tag,
           )
-            .map(({ key }) => ({
+            .map(({ key, name }) => ({
               value: key,
-              label: intl.formatMessage({ id: `tags.${key}` }),
+              label: intl.formatMessage({
+                id: `tags.${key}`,
+                defaultMessage: name,
+              }),
             }))
             .sort(sortByKey('label', true))}
         />
@@ -119,13 +142,13 @@ export default function EntityTags({
     ));
   } else {
     tags = entityTags
-      .map(tag => coreTags[tag])
+      .map(tag => allTags[tag])
       .filter(
         tag =>
           tag &&
           (!isShared || (entity.visibility || {})[`tag.${tag.key}`] !== false),
       )
-      .map(({ key, name, ...lists }) => {
+      .map(({ key, name, description, ...lists }) => {
         let visibility;
         if (!isShared && (entity.visibility || {})[`tag.${key}`] === false) {
           visibility = <LinkIcon icon={EyeOff} size={18} />;
@@ -134,14 +157,15 @@ export default function EntityTags({
           <div key={key} className={styles.tag}>
             <Header type={HeaderType.header4}>
               {visibility}
-              <FormattedMessage id={`tags.${key}`} />
+              <FormattedMessage id={`tags.${key}`} defaultMessage={name} />
             </Header>
             <p className={styles.content}>
-              <FormattedMessage id={`tags.${key}.description`} />
+              <FormattedMessage
+                id={`tags.${key}.description`}
+                defaultMessage={description}
+              />
             </p>
-            {map(lists, (listLength, listKey) =>
-              renderList(listLength, listKey, key),
-            )}
+            {map(lists, (list, listKey) => renderList(list, listKey, key))}
           </div>
         );
       });
@@ -244,6 +268,7 @@ export default function EntityTags({
 }
 
 EntityTags.propTypes = {
+  customTags: PropTypes.shape().isRequired,
   isSidebarEditActive: PropTypes.bool.isRequired,
   entity: PropTypes.shape({
     attributes: PropTypes.shape(),

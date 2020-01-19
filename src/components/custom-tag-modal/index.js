@@ -4,7 +4,6 @@ import { injectIntl } from 'react-intl';
 
 import {
   getCustomTags,
-  getCustomTagForm,
   getIsCustomTagModalOpen,
 } from 'store/selectors/base.selectors';
 import {
@@ -18,7 +17,6 @@ import CustomTagModal from './custom-tag-modal';
 
 const mapStateToProps = createStructuredSelector({
   isCustomTagModalOpen: getIsCustomTagModalOpen,
-  form: getCustomTagForm,
   tags: getCustomTags,
 });
 

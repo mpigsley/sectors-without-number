@@ -9,7 +9,7 @@ import { omit } from 'constants/lodash';
 
 export const initialState = {
   models: {},
-  isOpen: true,
+  isOpen: false,
 };
 
 export default function tag(state = initialState, action) {

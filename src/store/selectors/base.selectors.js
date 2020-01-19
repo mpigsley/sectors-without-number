@@ -78,5 +78,4 @@ export const settingsShowCoordinates = state => state.settings.showCoordinates;
 
 /* Tag */
 export const getCustomTags = state => state.tag.models;
-export const getCustomTagForm = state => state.tag.form;
 export const getIsCustomTagModalOpen = state => state.tag.isOpen;
