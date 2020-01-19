@@ -53,6 +53,7 @@ const initialState = {
     isBuilder: false,
     additionalPointsOfInterest: true,
     hideOccAndSit: true,
+    customTags: true,
     hideTags: true,
     columns: COLUMNS,
     rows: ROWS,

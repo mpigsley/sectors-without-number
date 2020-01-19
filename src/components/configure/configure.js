@@ -5,6 +5,7 @@ import { intlShape, FormattedMessage } from 'react-intl';
 
 import StarBackground from 'components/star-background';
 import Header, { HeaderType } from 'primitives/text/header';
+import FlexContainer from 'primitives/container/flex-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
 import Checkbox from 'primitives/form/checkbox';
@@ -22,8 +23,10 @@ import './style.scss';
 export default function Configure({
   additionalPointsOfInterest,
   updateConfiguration,
+  openCustomTagModal,
   generateSector,
   hideOccAndSit,
+  customTags,
   isBuilder,
   hideTags,
   columns,
@@ -99,6 +102,25 @@ export default function Configure({
               values={{ minNumber: MIN_DIMENSION, maxNumber: MAX_DIMENSION }}
             />
           </p>
+          <FlexContainer
+            align="flexEnd"
+            justify="spaceBetween"
+            className="Configure-ManageContainer"
+          >
+            <Checkbox
+              data-key="customTags"
+              value={customTags}
+              onChange={updateInput}
+              label={intl.formatMessage({ id: 'misc.useCustomTags' })}
+            />
+            <Button
+              minimal
+              className="Configure-ManageLink"
+              onClick={openCustomTagModal}
+            >
+              (<FormattedMessage id="misc.manage" />)
+            </Button>
+          </FlexContainer>
           <Checkbox
             data-key="isBuilder"
             value={isBuilder}
@@ -143,10 +165,12 @@ export default function Configure({
 Configure.propTypes = {
   additionalPointsOfInterest: PropTypes.bool.isRequired,
   updateConfiguration: PropTypes.func.isRequired,
+  openCustomTagModal: PropTypes.func.isRequired,
   generateSector: PropTypes.func.isRequired,
   isBuilder: PropTypes.bool.isRequired,
   hideTags: PropTypes.bool.isRequired,
   hideOccAndSit: PropTypes.bool.isRequired,
+  customTags: PropTypes.bool.isRequired,
   columns: PropTypes.number,
   rows: PropTypes.number,
   name: PropTypes.string,

@@ -4,6 +4,7 @@ import { injectIntl } from 'react-intl';
 import Entities from 'constants/entities';
 import { generateEntity } from 'store/actions/entity.actions';
 import { updateConfiguration } from 'store/actions/sector.actions';
+import { openCustomTagModal } from 'store/actions/tag.actions';
 import Configure from './configure';
 
 const mapStateToProps = state => ({
@@ -11,6 +12,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
+  openCustomTagModal: () => dispatch(openCustomTagModal()),
   updateConfiguration: (key, value) =>
     dispatch(updateConfiguration(key, value)),
   generateSector: () =>
