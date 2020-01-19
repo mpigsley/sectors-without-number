@@ -1,8 +1,7 @@
 import Chance from 'chance';
 
 import { zipObject } from 'constants/lodash';
-import { generateName } from 'utils/name-generator';
-import { worldTagKeys } from 'constants/world-tags';
+import { generateName, generateRandomTags } from 'utils/name-generator';
 import Atmosphere from 'constants/atmosphere';
 import Temperature from 'constants/temperature';
 import Biosphere from 'constants/biosphere';
@@ -17,6 +16,8 @@ export const generatePlanet = ({
   generate = true,
   isHidden,
   hideTags = false,
+  useCustomTags = true,
+  customTags,
 } = {}) => {
   if (!sector) {
     throw new Error('Sector must be defined to generate a planet');
@@ -31,7 +32,10 @@ export const generatePlanet = ({
     planet = { ...planet, isHidden };
   }
   if (generate) {
-    const tags = chance.pickset(Object.keys(worldTagKeys), 2);
+    const tags = generateRandomTags({
+      entityType: Entities.planet.key,
+      customTags: useCustomTags ? customTags : {},
+    });
     if (hideTags) {
       planet.visibility = zipObject(
         tags.map(tag => `tag.${tag}`),
@@ -89,24 +93,18 @@ export const generatePlanet = ({
   return planet;
 };
 
-export const generatePlanets = ({
-  sector,
-  parent,
-  parentEntity,
-  children,
-  hideTags,
-}) => {
-  if (!sector) {
+export const generatePlanets = config => {
+  if (!config.sector) {
     throw new Error('Sector id must be defined to generate planets');
   }
-  if (!parent || !parentEntity) {
+  if (!config.parent || !config.parentEntity) {
     throw new Error('Parent must be defined to generate planets');
   }
 
-  let numChildren = children;
+  let numChildren = config.children;
   if (!numChildren) {
     const chance = new Chance();
-    if (parentEntity === Entities.blackHole.key) {
+    if (config.parentEntity === Entities.blackHole.key) {
       numChildren = [...Array(chance.weighted([0, 1], [15, 1]))];
     } else {
       numChildren = [...Array(chance.weighted([1, 2, 3], [8, 3, 2]))];
@@ -116,12 +114,9 @@ export const generatePlanets = ({
   return {
     children: numChildren.map(({ name, generate } = {}) =>
       generatePlanet({
-        sector,
-        parent,
-        parentEntity,
+        ...config,
         name,
         generate,
-        hideTags,
       }),
     ),
   };

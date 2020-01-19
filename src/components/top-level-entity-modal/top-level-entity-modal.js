@@ -39,6 +39,7 @@ const generateChildrenNames = (parentEntity, currentSector) => {
   Entities[parentEntity].children.forEach(child => {
     const { children } = EntityGenerators[child].generateAll({
       additionalPointsOfInterest: true,
+      customTags: true,
       sector: currentSector,
       parentEntity,
       parent: createId(),

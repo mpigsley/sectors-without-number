@@ -14,6 +14,7 @@ import {
   sectorSelector,
   syncLockSelector,
   isSharedSectorSelector,
+  customTagSelector,
 } from 'store/selectors/base.selectors';
 import {
   getCurrentTopLevelEntities,
@@ -96,6 +97,7 @@ export const generateEntity = (entity, parameters, intl) => (
     entity,
     currentSector: currentSectorSelector(state),
     configuration: configurationSelector(state),
+    customTags: customTagSelector(state),
     parameters,
   });
   dispatch({

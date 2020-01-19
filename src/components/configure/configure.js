@@ -26,7 +26,7 @@ export default function Configure({
   openCustomTagModal,
   generateSector,
   hideOccAndSit,
-  customTags,
+  useCustomTags,
   isBuilder,
   hideTags,
   columns,
@@ -108,8 +108,8 @@ export default function Configure({
             className="Configure-ManageContainer"
           >
             <Checkbox
-              data-key="customTags"
-              value={customTags}
+              data-key="useCustomTags"
+              value={useCustomTags}
               onChange={updateInput}
               label={intl.formatMessage({ id: 'misc.useCustomTags' })}
             />
@@ -170,7 +170,7 @@ Configure.propTypes = {
   isBuilder: PropTypes.bool.isRequired,
   hideTags: PropTypes.bool.isRequired,
   hideOccAndSit: PropTypes.bool.isRequired,
-  customTags: PropTypes.bool.isRequired,
+  useCustomTags: PropTypes.bool.isRequired,
   columns: PropTypes.number,
   rows: PropTypes.number,
   name: PropTypes.string,

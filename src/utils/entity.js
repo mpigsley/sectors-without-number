@@ -111,6 +111,7 @@ export const generateEntity = ({
   entity,
   currentSector,
   configuration,
+  customTags = {},
   parameters = {},
 }) => {
   const { entityType, name } = entity;
@@ -144,6 +145,7 @@ export const generateEntity = ({
           parentEntity,
           children: isFirstLevel ? entityChildren : undefined,
           coordinates: filteredCoordinates,
+          customTags,
           ...config,
         });
         filteredCoordinates = coordinates || filteredCoordinates;
