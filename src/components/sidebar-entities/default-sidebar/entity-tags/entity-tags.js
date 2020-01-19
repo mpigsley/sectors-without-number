@@ -205,8 +205,14 @@ export default function EntityTags({
   }
 
   let tagsSection = null;
-  if (isOpen) {
+  if (isOpen && tags.length) {
     tagsSection = <div className={styles.section}>{tags}</div>;
+  } else if (isOpen && !isSidebarEditActive) {
+    tagsSection = (
+      <FlexContainer justify="center" className={styles.emptyTags}>
+        <FormattedMessage id="misc.noTags" />
+      </FlexContainer>
+    );
   }
 
   let subHeader = null;
