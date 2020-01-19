@@ -1,13 +1,13 @@
 import { createSelector } from 'reselect';
 
 import {
-  getCustomTags,
+  customTagSelector,
   currentEntityTypeSelector,
 } from 'store/selectors/base.selectors';
 import { pickBy, includes, mapValues, omit } from 'constants/lodash';
 
 const getNormalizedTags = createSelector(
-  [getCustomTags],
+  [customTagSelector],
   tags => mapValues(tags, (tag, key) => ({ ...omit(tag, 'creator'), key })),
 );
 

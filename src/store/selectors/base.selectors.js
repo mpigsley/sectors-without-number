@@ -77,5 +77,5 @@ export const settingsShowEntityName = state => state.settings.showEntityName;
 export const settingsShowCoordinates = state => state.settings.showCoordinates;
 
 /* Tag */
-export const getCustomTags = state => state.tag.models;
-export const getIsCustomTagModalOpen = state => state.tag.isOpen;
+export const customTagSelector = state => state.tag.models;
+export const isCustomTagModalOpenSelector = state => state.tag.isOpen;

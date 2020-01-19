@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import {
+  customTagSelector,
   isSidebarEditActiveSelector,
   sidebarEditChildrenSelector,
 } from 'store/selectors/base.selectors';
@@ -14,6 +15,7 @@ const mapStateToProps = (state, props) => ({
   isSidebarEditActive: isSidebarEditActiveSelector(state),
   editableEntities: sidebarEditChildrenSelector(state)[props.entityType],
   isShared: isViewingSharedSector(state),
+  customTags: customTagSelector(state),
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

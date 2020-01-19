@@ -3,8 +3,8 @@ import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
 import {
-  getCustomTags,
-  getIsCustomTagModalOpen,
+  customTagSelector,
+  isCustomTagModalOpenSelector,
 } from 'store/selectors/base.selectors';
 import {
   createTag,
@@ -16,8 +16,8 @@ import {
 import CustomTagModal from './custom-tag-modal';
 
 const mapStateToProps = createStructuredSelector({
-  isCustomTagModalOpen: getIsCustomTagModalOpen,
-  tags: getCustomTags,
+  isCustomTagModalOpen: isCustomTagModalOpenSelector,
+  tags: customTagSelector,
 });
 
 export default injectIntl(

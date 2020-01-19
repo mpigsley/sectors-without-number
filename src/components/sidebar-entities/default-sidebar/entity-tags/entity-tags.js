@@ -44,7 +44,7 @@ const renderList = (listOrLength, listKey, key) => {
           <li key={`${listKey}-${item}`}>
             <FormattedMessage
               id={`tags.${key}.${listKey}.${item}`}
-              defaultMessage={item}
+              defaultMessage={`${item}`}
             />
           </li>
         ))}
