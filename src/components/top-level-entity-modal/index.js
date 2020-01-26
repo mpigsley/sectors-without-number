@@ -6,6 +6,7 @@ import { cancelTopLevelEntityCreate } from 'store/actions/sector.actions';
 import { generateEntity } from 'store/actions/entity.actions';
 import { topLevelEntityModalOpen } from 'store/selectors/entity.selectors';
 import {
+  customTagSelector,
   topLevelKeySelector,
   currentSectorSelector,
 } from 'store/selectors/base.selectors';
@@ -16,6 +17,7 @@ const mapStateToProps = createStructuredSelector({
   topLevelKey: topLevelKeySelector,
   currentSector: currentSectorSelector,
   isOpen: topLevelEntityModalOpen,
+  customTags: customTagSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({

@@ -27,11 +27,11 @@ export default function Configure({
   generateSector,
   hideOccAndSit,
   useCustomTags,
+  sectorName,
   isBuilder,
   hideTags,
   columns,
   rows,
-  name,
   intl,
 }) {
   const updateInput = ({ target }) => {
@@ -47,11 +47,11 @@ export default function Configure({
 
   const regenerateName = genFunc => () => {
     const chance = new Chance();
-    updateConfiguration('name', genFunc(chance));
+    updateConfiguration('sectorName', genFunc(chance));
   };
 
   const isValid = () =>
-    !!name &&
+    !!sectorName &&
     !!rows &&
     !!columns &&
     rows <= MAX_DIMENSION &&
@@ -70,9 +70,9 @@ export default function Configure({
             isVertical
             label="misc.sectorName"
             name="name"
-            data-key="name"
+            data-key="sectorName"
             icon={RefreshCw}
-            value={name}
+            value={sectorName}
             onChange={updateInput}
             onIconClick={regenerateName(generateSectorName)}
           />
@@ -171,14 +171,14 @@ Configure.propTypes = {
   hideTags: PropTypes.bool.isRequired,
   hideOccAndSit: PropTypes.bool.isRequired,
   useCustomTags: PropTypes.bool.isRequired,
+  sectorName: PropTypes.string,
   columns: PropTypes.number,
   rows: PropTypes.number,
-  name: PropTypes.string,
   intl: intlShape.isRequired,
 };
 
 Configure.defaultProps = {
   columns: undefined,
   rows: undefined,
-  name: '',
+  sectorName: '',
 };

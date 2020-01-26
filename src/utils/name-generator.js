@@ -1,18 +1,10 @@
 /* eslint-disable no-bitwise */
 import Chance from 'chance';
 
-import {
-  forEach,
-  capitalize,
-  toUpper,
-  keys,
-  pickBy,
-  includes,
-} from 'constants/lodash';
+import { forEach, capitalize, toUpper } from 'constants/lodash';
 import CosmicNames from 'constants/language/cosmic-names';
 import GreekLetters from 'constants/language/greek-letters';
 import MarsCraters from 'constants/language/mars-craters';
-import Entities from 'constants/entities';
 
 const tweakSeeds = hexSeeds => {
   const newSeeds = hexSeeds.concat([
@@ -129,15 +121,3 @@ export const generateMineName = (chance = new Chance()) =>
   `${chance.pickone(MarsCraters)}${
     chance.pickone([true, false]) ? ' Mine' : ''
   }${chance.pickone([true, false]) ? ' Project' : ''}`;
-
-export const generateRandomTags = ({
-  entityType,
-  customTags = {},
-  numToPick = 2,
-}) => {
-  const tagKeys = keys({
-    ...(Entities[entityType].tags || {}),
-    ...pickBy(customTags, tag => includes(tag.types, entityType)),
-  });
-  return new Chance().pickset(tagKeys, numToPick);
-};

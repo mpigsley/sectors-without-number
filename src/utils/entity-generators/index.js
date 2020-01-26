@@ -1,4 +1,5 @@
 import Entities from 'constants/entities';
+import { mapValues } from 'constants/lodash';
 
 import generateSector from './sector-generator';
 import { generateSystems, generateSystem } from './system-generator';
@@ -40,65 +41,74 @@ import {
   generateSpaceStation,
 } from './space-station-generator';
 
-export default {
-  [Entities.asteroidBase.key]: {
-    generateOne: generateAsteroidBase,
-    generateAll: generateAsteroidBases,
+export default mapValues(
+  {
+    [Entities.asteroidBase.key]: {
+      generateOne: generateAsteroidBase,
+      generateAll: generateAsteroidBases,
+    },
+    [Entities.asteroidBelt.key]: {
+      generateOne: generateAsteroidBelt,
+      generateAll: generateAsteroidBelts,
+    },
+    [Entities.blackHole.key]: {
+      generateOne: generateBlackHole,
+      generateAll: generateBlackHoles,
+    },
+    [Entities.deepSpaceStation.key]: {
+      generateOne: generateDeepSpaceStation,
+      generateAll: generateDeepSpaceStations,
+    },
+    [Entities.gasGiantMine.key]: {
+      generateOne: generateGasGiantMine,
+      generateAll: generateGasGiantMines,
+    },
+    [Entities.moon.key]: {
+      generateOne: generateMoon,
+      generateAll: generateMoons,
+    },
+    [Entities.moonBase.key]: {
+      generateOne: generateMoonBase,
+      generateAll: generateMoonBases,
+    },
+    [Entities.note.key]: {
+      generateOne: generateNote,
+      generateAll: () => ({ children: [] }),
+    },
+    [Entities.orbitalRuin.key]: {
+      generateOne: generateOrbitalRuin,
+      generateAll: generateOrbitalRuins,
+    },
+    [Entities.planet.key]: {
+      generateOne: generatePlanet,
+      generateAll: generatePlanets,
+    },
+    [Entities.refuelingStation.key]: {
+      generateOne: generateRefuelingStation,
+      generateAll: generateRefuelingStations,
+    },
+    [Entities.researchBase.key]: {
+      generateOne: generateResearchBase,
+      generateAll: generateResearchBases,
+    },
+    [Entities.sector.key]: {
+      generateOne: generateSector,
+      generateAll: () => ({ children: [] }),
+    },
+    [Entities.spaceStation.key]: {
+      generateOne: generateSpaceStation,
+      generateAll: generateSpaceStations,
+    },
+    [Entities.system.key]: {
+      generateOne: generateSystem,
+      generateAll: generateSystems,
+    },
   },
-  [Entities.asteroidBelt.key]: {
-    generateOne: generateAsteroidBelt,
-    generateAll: generateAsteroidBelts,
-  },
-  [Entities.blackHole.key]: {
-    generateOne: generateBlackHole,
-    generateAll: generateBlackHoles,
-  },
-  [Entities.deepSpaceStation.key]: {
-    generateOne: generateDeepSpaceStation,
-    generateAll: generateDeepSpaceStations,
-  },
-  [Entities.gasGiantMine.key]: {
-    generateOne: generateGasGiantMine,
-    generateAll: generateGasGiantMines,
-  },
-  [Entities.moon.key]: {
-    generateOne: generateMoon,
-    generateAll: generateMoons,
-  },
-  [Entities.moonBase.key]: {
-    generateOne: generateMoonBase,
-    generateAll: generateMoonBases,
-  },
-  [Entities.note.key]: {
-    generateOne: generateNote,
-    generateAll: () => ({ children: [] }),
-  },
-  [Entities.orbitalRuin.key]: {
-    generateOne: generateOrbitalRuin,
-    generateAll: generateOrbitalRuins,
-  },
-  [Entities.planet.key]: {
-    generateOne: generatePlanet,
-    generateAll: generatePlanets,
-  },
-  [Entities.refuelingStation.key]: {
-    generateOne: generateRefuelingStation,
-    generateAll: generateRefuelingStations,
-  },
-  [Entities.researchBase.key]: {
-    generateOne: generateResearchBase,
-    generateAll: generateResearchBases,
-  },
-  [Entities.sector.key]: {
-    generateOne: generateSector,
-    generateAll: () => ({ children: [] }),
-  },
-  [Entities.spaceStation.key]: {
-    generateOne: generateSpaceStation,
-    generateAll: generateSpaceStations,
-  },
-  [Entities.system.key]: {
-    generateOne: generateSystem,
-    generateAll: generateSystems,
-  },
-};
+  ({ generateOne, generateAll }, key) => ({
+    generateAll,
+    generateOne:
+      key === Entities.sector.key
+        ? generateOne
+        : config => generateOne(key, config),
+  }),
+);

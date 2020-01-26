@@ -183,7 +183,7 @@ export const generateEntity = ({
       [entityId]: EntityGenerators[entityType].generateOne({
         sector,
         ...configuration,
-        name: name || configuration.name,
+        name: name || configuration.sectorName,
         ...parameters,
       }),
     },

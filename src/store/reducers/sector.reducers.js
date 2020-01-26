@@ -49,7 +49,7 @@ const initialState = {
   isPrinting: false,
   playerView: false,
   configuration: {
-    name: Entities.sector.nameGenerator(),
+    sectorName: Entities.sector.nameGenerator(),
     isBuilder: false,
     additionalPointsOfInterest: true,
     hideOccAndSit: true,

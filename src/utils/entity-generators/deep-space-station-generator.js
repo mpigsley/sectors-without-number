@@ -1,79 +1,52 @@
 import Chance from 'chance';
 
-import { generateStationName } from 'utils/name-generator';
 import Occupation from 'constants/space-station/occupation';
 import Situation from 'constants/space-station/situation';
+import Entities from 'constants/entities';
+import commonGenerator from './common-generator';
 
-export const generateDeepSpaceStation = ({
-  sector,
-  name = generateStationName(),
-  hideOccAndSit = false,
-  parent,
-  parentEntity,
-  generate = true,
-  isHidden,
-} = {}) => {
-  if (!sector) {
-    throw new Error(
-      'Sector id must be defined to generate a deep space station',
-    );
-  }
-  if (!parent || !parentEntity) {
-    throw new Error('Parent must be defined to generate a deep space station');
-  }
-
-  const chance = new Chance();
-  let station = { name, sector, parent, parentEntity };
-  if (isHidden !== undefined) {
-    station = { ...station, isHidden };
-  }
-  if (generate) {
+export const generateDeepSpaceStation = commonGenerator(
+  (entity, { hideOccAndSit = false, generate = true }) => {
+    if (!generate) {
+      return entity;
+    }
+    let visibility = {};
     if (hideOccAndSit) {
-      station.visibility = {
+      visibility = {
         'attr.occupation': false,
         'attr.situation': false,
       };
     }
-    station = {
-      ...station,
+    const chance = new Chance();
+    return {
+      ...entity,
+      visibility: {
+        ...entity.visibility,
+        ...visibility,
+      },
       attributes: {
+        ...entity.attributes,
         occupation: chance.pickone(Object.keys(Occupation.attributes)),
         situation: chance.pickone(Object.keys(Situation.attributes)),
       },
     };
-  }
-  return station;
-};
+  },
+);
 
 export const generateDeepSpaceStations = ({
-  sector,
-  parent,
-  parentEntity,
   children = [...Array(new Chance().weighted([0, 1], [3, 1]))],
-  additionalPointsOfInterest,
-  hideOccAndSit,
+  additionalPointsOfInterest = true,
+  ...config
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
   }
-  if (!sector) {
-    throw new Error(
-      'Sector id must be defined to generate deep space stations',
-    );
-  }
-  if (!parent || !parentEntity) {
-    throw new Error('Parent must be defined to generate deep space stations');
-  }
-
   return {
     children: children.map(({ name, generate } = {}) =>
-      generateDeepSpaceStation({
-        sector,
-        parent,
-        parentEntity,
+      generateDeepSpaceStation(Entities.deepSpaceStation.key, {
         name,
         generate,
-        hideOccAndSit,
+        ...config,
       }),
     ),
   };
