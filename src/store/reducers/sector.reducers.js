@@ -84,7 +84,7 @@ export default function sector(state = initialState, action) {
           fetched: state.fetched,
           configuration: {
             ...initialState.configuration,
-            name: Entities.sector.nameGenerator(),
+            sectorName: Entities.sector.nameGenerator(),
           },
         };
       }

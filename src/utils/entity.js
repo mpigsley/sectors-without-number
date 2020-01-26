@@ -126,6 +126,8 @@ export const generateEntity = ({
     configuration.rows,
   );
 
+  console.log(config); // eslint-disable-line
+
   let childrenEntities = {};
   const generateChildren = (parent, parentEntity, isFirstLevel = false) =>
     Entities[parentEntity].children
