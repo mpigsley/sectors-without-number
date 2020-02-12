@@ -27,6 +27,7 @@ export default function Configure({
   generateSector,
   hideOccAndSit,
   useCustomTags,
+  isLoggedIn,
   sectorName,
   isBuilder,
   hideTags,
@@ -102,25 +103,27 @@ export default function Configure({
               values={{ minNumber: MIN_DIMENSION, maxNumber: MAX_DIMENSION }}
             />
           </p>
-          <FlexContainer
-            align="flexEnd"
-            justify="spaceBetween"
-            className="Configure-ManageContainer"
-          >
-            <Checkbox
-              data-key="useCustomTags"
-              value={useCustomTags}
-              onChange={updateInput}
-              label={intl.formatMessage({ id: 'misc.useCustomTags' })}
-            />
-            <Button
-              minimal
-              className="Configure-ManageLink"
-              onClick={openCustomTagModal}
+          {isLoggedIn && (
+            <FlexContainer
+              align="flexEnd"
+              justify="spaceBetween"
+              className="Configure-ManageContainer"
             >
-              (<FormattedMessage id="misc.manage" />)
-            </Button>
-          </FlexContainer>
+              <Checkbox
+                data-key="useCustomTags"
+                value={useCustomTags}
+                onChange={updateInput}
+                label={intl.formatMessage({ id: 'misc.useCustomTags' })}
+              />
+              <Button
+                minimal
+                className="Configure-ManageLink"
+                onClick={openCustomTagModal}
+              >
+                (<FormattedMessage id="misc.manage" />)
+              </Button>
+            </FlexContainer>
+          )}
           <Checkbox
             data-key="isBuilder"
             value={isBuilder}
@@ -171,6 +174,7 @@ Configure.propTypes = {
   hideTags: PropTypes.bool.isRequired,
   hideOccAndSit: PropTypes.bool.isRequired,
   useCustomTags: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
   sectorName: PropTypes.string,
   columns: PropTypes.number,
   rows: PropTypes.number,

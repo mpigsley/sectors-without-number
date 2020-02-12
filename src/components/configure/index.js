@@ -2,13 +2,17 @@ import { connect } from 'react-redux';
 import { injectIntl } from 'react-intl';
 
 import Entities from 'constants/entities';
-import { configurationSelector } from 'store/selectors/base.selectors';
+import {
+  isLoggedInSelector,
+  configurationSelector,
+} from 'store/selectors/base.selectors';
 import { generateEntity } from 'store/actions/entity.actions';
 import { updateConfiguration } from 'store/actions/sector.actions';
 import { openCustomTagModal } from 'store/actions/tag.actions';
 import Configure from './configure';
 
 const mapStateToProps = state => ({
+  isLoggedIn: isLoggedInSelector(state),
   ...configurationSelector(state),
 });
 
