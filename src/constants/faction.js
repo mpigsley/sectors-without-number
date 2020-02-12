@@ -744,7 +744,7 @@ export const FACTION_ASSETS = {
     key: 'pretechInfantry',
     category: FACTION_ASSET_CATEGORIES.force,
     rating: 6,
-    hp: 12,
+    hp: 16,
     cost: 20,
     techLevel: 4,
     type: FACTION_ASSET_TYPES.militaryUnit,

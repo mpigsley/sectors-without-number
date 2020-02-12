@@ -1,4 +1,8 @@
 {
+  "7.19.2": {
+    "description": "Fix incorrect hp for pretech infantry asset.",
+    "date": "2-12-2020"
+  },
   "7.19.1": {
     "description": "Take into account deleted sectors when comparing against sector limit.",
     "date": "1-18-2020"
