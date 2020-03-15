@@ -1,4 +1,8 @@
 {
+  "7.20.0": {
+    "description": "Custom entity tags.",
+    "date": "3-15-2020"
+  },
   "7.19.2": {
     "description": "Fix incorrect hp for pretech infantry asset.",
     "date": "2-12-2020"
