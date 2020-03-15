@@ -3,7 +3,7 @@ import Chance from 'chance';
 import Entities from 'constants/entities';
 import { includes, keys, pickBy, zipObject } from 'constants/lodash';
 
-const generateRandomTags = ({ entityType, customTags, numToPick = 2 }) => {
+const generateRandomTags = ({ entityType, customTags }) => {
   const tagKeys = keys({
     ...(Entities[entityType].tags || {}),
     ...pickBy(customTags, tag => includes(tag.types, entityType)),
