@@ -43,13 +43,12 @@ import { mergeEntityUpdates, saveEntities, preventSync } from 'utils/entity';
 import { SuccessToast, ErrorToast } from 'utils/toasts';
 import { coordinatesFromKey, coordinateKey } from 'utils/common';
 import {
+  keys,
   mapKeys,
   mapValues,
-  zipObject,
-  keys,
   omit,
-  size,
   reduce,
+  zipObject,
 } from 'constants/lodash';
 
 const ACTION_PREFIX = '@@combined';
@@ -59,106 +58,110 @@ export const CREATED_LAYER = `${ACTION_PREFIX}/CREATED_LAYER`;
 export const DELETED_LAYER = `${ACTION_PREFIX}/DELETED_LAYER`;
 export const EXPAND_SECTOR = `${ACTION_PREFIX}/EXPAND_SECTOR`;
 
-export const initialize = () => (dispatch, getState) =>
-  getCurrentUser().then(user => {
-    const { uid, locale } = user || {};
-    const state = getState();
-    const location = routerLocationSelector(state);
-    const sectorId = location.pathname.split('/')[2];
-    const isGameView =
-      location.pathname.startsWith('/sector/') ||
-      location.pathname.startsWith('/overview/') ||
-      location.pathname.startsWith('/elements/');
-    const promises = [
-      isGameView ? getSectorEntities(sectorId, uid) : Promise.resolve({}),
-      isGameView ? getNavigationData(sectorId) : Promise.resolve({}),
-      isGameView ? getLayerData(sectorId) : Promise.resolve({}),
-      uid ? getSyncedSectors(uid) : Promise.resolve({}),
-      uid ? getCustomTags(uid) : Promise.resolve({}),
-    ];
-    if (locale && locale !== 'en' && Locale[locale]) {
-      promises.push(
-        Locale[locale].localeFetch().then(([userLocale, localeData]) => {
-          addLocaleData(localeData.default);
-          return userLocale.default;
-        }),
-      );
-    }
-    return Promise.all(promises)
-      .then(data => {
-        const { entities, share } = data[0];
-        if (!isGameView || share || !size(entities)) {
-          return Promise.resolve([{}, ...data]);
-        }
-        return getFactionData(sectorId).then(factions => [factions, ...data]);
-      })
-      .then(
-        ([
-          factions,
-          { entities, share },
-          routes,
-          layers,
-          sectors,
-          tags,
-          userLocale,
-        ]) => {
-          if (((entities || {})[Entities.sector.key] || {})[sectorId]) {
-            document.title = `Sector - ${entities[Entities.sector.key][sectorId].name}`;
-          }
-          dispatch({
-            type: INITIALIZED,
-            user,
-            tags,
-            entities: mergeEntityUpdates(
-              { [Entities.sector.key]: sectors },
-              entities || {},
-            ),
-            routes,
-            layers,
-            factions,
-            sectorId,
-            share,
-            saved: keys(sectors),
-            locale: userLocale,
-          });
-        },
-      );
-  });
+export const initialize = () => async (dispatch, getState) => {
+  const state = getState();
+  const location = routerLocationSelector(state);
+  const sectorId = location.pathname.split('/')[2];
+  const isGameView =
+    location.pathname.startsWith('/sector/') ||
+    location.pathname.startsWith('/overview/') ||
+    location.pathname.startsWith('/elements/');
 
-export const fetchSector = () => (dispatch, getState) => {
+  const user = await getCurrentUser();
+  const { uid, locale } = user || {};
+
+  let userLocale;
+  if (locale && locale !== 'en' && Locale[locale]) {
+    const [localeObj, localeData] = await Locale[locale].localeFetch();
+    addLocaleData(localeData.default);
+    userLocale = localeObj.default;
+  }
+
+  let share;
+  let entities;
+  let routes = {};
+  let layers = {};
+  let factions = {};
+  if (isGameView) {
+    [{ entities, share }, routes, layers] = await Promise.all([
+      getSectorEntities(sectorId, uid),
+      getNavigationData(sectorId),
+      getLayerData(sectorId),
+    ]);
+
+    if (!share && entities) {
+      factions = await getFactionData(sectorId);
+    }
+  }
+
+  const sectorData = ((entities || {})[Entities.sector.key] || {})[sectorId];
+  if (sectorData) {
+    document.title = `Sector - ${sectorData.name}`;
+  }
+
+  let sectors = {};
+  let tags = {};
+  if (uid) {
+    [sectors, tags] = await Promise.all([
+      getSyncedSectors(uid),
+      getCustomTags(uid),
+    ]);
+  } else if ((sectorData || {}).creator) {
+    tags = await getCustomTags(sectorData.creator);
+  }
+
+  dispatch({
+    type: INITIALIZED,
+    user,
+    tags,
+    entities: mergeEntityUpdates(
+      { [Entities.sector.key]: sectors },
+      entities || {},
+    ),
+    routes,
+    layers,
+    factions,
+    sectorId,
+    share,
+    saved: keys(sectors),
+    locale: userLocale,
+  });
+};
+
+export const fetchSector = () => async (dispatch, getState) => {
   const state = getState();
   const sectorId = currentSectorSelector(state);
+
   const currentSector = getCurrentSector(state);
   if (currentSector) {
     document.title = `Sector - ${currentSector.name}`;
   }
+
   if (!isInitializedSelector(state) || isCurrentSectorFetched(state)) {
-    return Promise.resolve();
+    return;
   }
+
   const userId = userUidSelector(state);
-  return Promise.all([
+  const [{ entities, share }, routes, layers] = await Promise.all([
     getSectorEntities(sectorId, userId),
     getNavigationData(sectorId),
     getLayerData(sectorId),
-  ])
-    .then(data => {
-      const { entities, share } = data[0];
-      if (share || !size(entities)) {
-        return Promise.resolve([{}, ...data]);
-      }
-      return getFactionData(sectorId).then(factions => [factions, ...data]);
-    })
-    .then(([factions, { entities, share }, routes, layers]) =>
-      dispatch({
-        type: FETCHED_SECTOR,
-        sectorId,
-        entities,
-        share,
-        routes,
-        layers,
-        factions,
-      }),
-    );
+  ]);
+
+  let factions = {};
+  if (!share && entities) {
+    factions = await getFactionData(sectorId);
+  }
+
+  dispatch({
+    type: FETCHED_SECTOR,
+    sectorId,
+    entities,
+    share,
+    routes,
+    layers,
+    factions,
+  });
 };
 
 export const addLayer = (model, intl) => (dispatch, getState) => {

@@ -27,7 +27,7 @@ export const getSyncedSectors = uid =>
     });
 
 export const getSectorEntities = (sectorId, uid) => {
-  let entities = {};
+  let entities;
   return Firebase.firestore()
     .collection('entities')
     .doc(Entities.sector.key)
@@ -39,8 +39,8 @@ export const getSectorEntities = (sectorId, uid) => {
       if (!data || data.deleted) {
         return { entities };
       }
-      entities[Entities.sector.key] = {
-        [doc.id]: data,
+      entities = {
+        [Entities.sector.key]: { [doc.id]: data },
       };
       return Promise.all(
         map(omit(Entities, Entities.sector.key), ({ key }) =>
