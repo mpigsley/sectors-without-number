@@ -33,14 +33,14 @@ import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
 const TopLevelLevelEntities = filter(Entities, entity => entity.topLevel);
-const generateChildrenNames = (parentEntity, currentSector) => {
+const generateChildrenNames = (parentEntity, currentSector, customTags) => {
   let names = {};
   let currentSort = 0;
   Entities[parentEntity].children.forEach(child => {
     const { children } = EntityGenerators[child].generateAll({
-      additionalPointsOfInterest: true,
       sector: currentSector,
       parentEntity,
+      customTags,
       parent: createId(),
     });
     names = {
@@ -65,12 +65,12 @@ export default class TopLevelEntityModal extends Component {
   constructor(props) {
     super(props);
 
-    const { isOpen, currentSector } = props;
+    const { isOpen, currentSector, customTags } = props;
     this.state = {
       isOpen, // eslint-disable-line
       currentSort: 0,
       name: Entities.system.nameGenerator(),
-      ...generateChildrenNames(Entities.system.key, currentSector),
+      ...generateChildrenNames(Entities.system.key, currentSector, customTags),
       entityType: Entities.system.key,
     };
   }
@@ -80,7 +80,11 @@ export default class TopLevelEntityModal extends Component {
       return {
         isOpen: props.isOpen,
         name: Entities[state.entityType].nameGenerator(),
-        ...generateChildrenNames(state.entityType, props.currentSector),
+        ...generateChildrenNames(
+          state.entityType,
+          props.currentSector,
+          props.customTags,
+        ),
       };
     }
     return { ...state, isOpen: props.isOpen };
@@ -311,6 +315,7 @@ export default class TopLevelEntityModal extends Component {
       cancelTopLevelEntityCreate,
       intl,
       currentSector,
+      customTags,
     } = this.props;
     const { entityType, name } = this.state;
     return (
@@ -341,7 +346,7 @@ export default class TopLevelEntityModal extends Component {
                 const newType = (item || {}).value;
                 this.setState({
                   entityType: newType,
-                  ...generateChildrenNames(newType, currentSector),
+                  ...generateChildrenNames(newType, currentSector, customTags),
                 });
               }}
               options={TopLevelLevelEntities.map(attr => ({
@@ -387,6 +392,7 @@ TopLevelEntityModal.propTypes = {
   currentSector: PropTypes.string.isRequired,
   cancelTopLevelEntityCreate: PropTypes.func.isRequired,
   generateEntity: PropTypes.func.isRequired,
+  customTags: PropTypes.shape().isRequired,
   intl: intlShape.isRequired,
 };
 

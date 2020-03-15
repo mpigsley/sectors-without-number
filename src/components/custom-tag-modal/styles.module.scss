@@ -1,0 +1,62 @@
+@import '~styles/theme';
+
+.modal {
+  max-width: 900px;
+}
+
+.innerContainer {
+  height: 500px;
+}
+
+.tagsContainer {
+  background-color: $dark3;
+  width: 35%;
+}
+
+.formBtn {
+  margin-left: 1rem;
+}
+
+.btnContainer {
+  margin-top: 0.8rem;
+}
+
+.scrollable {
+  height: 100%;
+  overflow-y: auto;
+}
+
+.selectedRow {
+  background-color: $dark2;
+}
+
+.detailsContainer {
+  @extend .scrollable;
+  padding-left: 2rem;
+  flex: 1;
+
+  .formHeader {
+    margin: 1rem 0;
+    width: 100%;
+  }
+}
+
+.rowIcon {
+  color: $light1;
+}
+
+.entityTypes {
+  margin-right: 0.5rem;
+}
+
+.empty * {
+  color: $light1;
+}
+
+.deletableRow {
+  margin-bottom: 0.5rem;
+}
+
+.contentList {
+  margin-top: 0;
+}

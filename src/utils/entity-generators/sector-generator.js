@@ -2,11 +2,11 @@ import { ROWS, COLUMNS } from 'constants/defaults';
 import { generateSectorName } from 'utils/name-generator';
 
 export default ({
-  name = generateSectorName(),
+  sectorName = generateSectorName(),
   rows = ROWS,
   columns = COLUMNS,
 } = {}) => ({
-  name,
+  name: sectorName,
   rows,
   columns,
 });

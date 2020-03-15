@@ -111,6 +111,7 @@ export const generateEntity = ({
   entity,
   currentSector,
   configuration,
+  customTags = {},
   parameters = {},
 }) => {
   const { entityType, name } = entity;
@@ -144,6 +145,7 @@ export const generateEntity = ({
           parentEntity,
           children: isFirstLevel ? entityChildren : undefined,
           coordinates: filteredCoordinates,
+          customTags,
           ...config,
         });
         filteredCoordinates = coordinates || filteredCoordinates;
@@ -181,7 +183,7 @@ export const generateEntity = ({
       [entityId]: EntityGenerators[entityType].generateOne({
         sector,
         ...configuration,
-        name: name || configuration.name,
+        name: name || configuration.sectorName,
         ...parameters,
       }),
     },
@@ -384,32 +386,34 @@ export const translateEntities = (entities, intl) =>
       if (((entity.attributes || {}).tags || []).length) {
         translatedAttributes = {
           ...translatedAttributes,
-          tags: entity.attributes.tags.map(tag => {
-            const { key, name, ...lists } =
-              (Entities[entityType].tags || {})[tag] || {};
-            if (!key) {
-              return null;
-            }
-            const baseId = `tags.${key}`;
-            return {
-              name: intl.formatMessage({ id: baseId }),
-              description: intl.formatMessage({
-                id: `${baseId}.description`,
-              }),
-              ...reduce(
-                lists,
-                (obj, listLength, listKey) => ({
-                  ...obj,
-                  [listKey]: [...Array(listLength).keys()].map(index =>
-                    intl.formatMessage({
-                      id: `${baseId}.${listKey}.${index}`,
-                    }),
-                  ),
+          tags: entity.attributes.tags
+            .map(tag => {
+              const { key, name, ...lists } =
+                (Entities[entityType].tags || {})[tag] || {};
+              if (!key) {
+                return null;
+              }
+              const baseId = `tags.${key}`;
+              return {
+                name: intl.formatMessage({ id: baseId }),
+                description: intl.formatMessage({
+                  id: `${baseId}.description`,
                 }),
-                {},
-              ),
-            };
-          }),
+                ...reduce(
+                  lists,
+                  (obj, listLength, listKey) => ({
+                    ...obj,
+                    [listKey]: [...Array(listLength).keys()].map(index =>
+                      intl.formatMessage({
+                        id: `${baseId}.${listKey}.${index}`,
+                      }),
+                    ),
+                  }),
+                  {},
+                ),
+              };
+            })
+            .filter(tag => tag),
         };
       }
 

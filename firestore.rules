@@ -36,6 +36,13 @@ service cloud.firestore {
         && getSector(sectorId).data.creator == request.auth.uid;
       allow read;
     }
+    match /tags/{tagId} {
+      allow create: if request.auth != null
+        && request.resource.data.creator == request.auth.uid;
+      allow update, delete: if request.auth != null
+        && resource.data.creator == request.auth.uid;
+      allow read;
+    }
     match /{document=**} {
       allow read, write: if false;
     }

@@ -2,6 +2,7 @@
 
 .LinkRow {
   color: $dark3;
+  cursor: pointer;
   display: flex;
   padding: 0.8rem 1.5rem;
   text-decoration: none;
@@ -22,7 +23,7 @@
 }
 
 .LinkRow-RightArrow {
-  color: $dark3;
+  color: transparent;
   pointer-events: none;
   transition: color 0.5s;
 }

@@ -5,6 +5,7 @@ import { intlShape, FormattedMessage } from 'react-intl';
 
 import StarBackground from 'components/star-background';
 import Header, { HeaderType } from 'primitives/text/header';
+import FlexContainer from 'primitives/container/flex-container';
 import ContentContainer from 'primitives/container/content-container';
 import SubContainer from 'primitives/container/sub-container';
 import Checkbox from 'primitives/form/checkbox';
@@ -22,13 +23,16 @@ import './style.scss';
 export default function Configure({
   additionalPointsOfInterest,
   updateConfiguration,
+  openCustomTagModal,
   generateSector,
   hideOccAndSit,
+  useCustomTags,
+  isLoggedIn,
+  sectorName,
   isBuilder,
   hideTags,
   columns,
   rows,
-  name,
   intl,
 }) {
   const updateInput = ({ target }) => {
@@ -44,11 +48,11 @@ export default function Configure({
 
   const regenerateName = genFunc => () => {
     const chance = new Chance();
-    updateConfiguration('name', genFunc(chance));
+    updateConfiguration('sectorName', genFunc(chance));
   };
 
   const isValid = () =>
-    !!name &&
+    !!sectorName &&
     !!rows &&
     !!columns &&
     rows <= MAX_DIMENSION &&
@@ -67,9 +71,9 @@ export default function Configure({
             isVertical
             label="misc.sectorName"
             name="name"
-            data-key="name"
+            data-key="sectorName"
             icon={RefreshCw}
-            value={name}
+            value={sectorName}
             onChange={updateInput}
             onIconClick={regenerateName(generateSectorName)}
           />
@@ -99,6 +103,27 @@ export default function Configure({
               values={{ minNumber: MIN_DIMENSION, maxNumber: MAX_DIMENSION }}
             />
           </p>
+          {isLoggedIn && (
+            <FlexContainer
+              align="flexEnd"
+              justify="spaceBetween"
+              className="Configure-ManageContainer"
+            >
+              <Checkbox
+                data-key="useCustomTags"
+                value={useCustomTags}
+                onChange={updateInput}
+                label={intl.formatMessage({ id: 'misc.useCustomTags' })}
+              />
+              <Button
+                minimal
+                className="Configure-ManageLink"
+                onClick={openCustomTagModal}
+              >
+                (<FormattedMessage id="misc.manage" />)
+              </Button>
+            </FlexContainer>
+          )}
           <Checkbox
             data-key="isBuilder"
             value={isBuilder}
@@ -143,18 +168,21 @@ export default function Configure({
 Configure.propTypes = {
   additionalPointsOfInterest: PropTypes.bool.isRequired,
   updateConfiguration: PropTypes.func.isRequired,
+  openCustomTagModal: PropTypes.func.isRequired,
   generateSector: PropTypes.func.isRequired,
   isBuilder: PropTypes.bool.isRequired,
   hideTags: PropTypes.bool.isRequired,
   hideOccAndSit: PropTypes.bool.isRequired,
+  useCustomTags: PropTypes.bool.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
+  sectorName: PropTypes.string,
   columns: PropTypes.number,
   rows: PropTypes.number,
-  name: PropTypes.string,
   intl: intlShape.isRequired,
 };
 
 Configure.defaultProps = {
   columns: undefined,
   rows: undefined,
-  name: '',
+  sectorName: '',
 };

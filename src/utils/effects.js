@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { debounce } from 'lodash';
 
 export const useResize = cb =>
@@ -28,4 +28,12 @@ export const useDimensions = () => {
 export const useIsMobile = () => {
   const { width } = useDimensions();
   return width <= 700;
+};
+
+export const usePrevious = value => {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
 };

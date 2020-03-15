@@ -20,7 +20,10 @@ export default function Modal({
   actionButtons,
   width,
   hideHeader,
+  hideFooter,
+  className,
   overlayClassName,
+  contentClassName,
   ...rest
 }) {
   let header = null;
@@ -46,7 +49,7 @@ export default function Modal({
       style={{ content: { width } }}
       {...rest}
       className={{
-        base: 'Modal',
+        base: classNames('Modal', className),
         afterOpen: 'Modal--open',
         beforeClose: 'Modal--closed',
       }}
@@ -56,29 +59,33 @@ export default function Modal({
         beforeClose: 'Modal-Overlay--closed',
       }}
     >
-      <FlexContainer direction="column">
+      <FlexContainer direction="column" className="Modal-InnerContainer">
         {header}
-        <div className="Modal-Content">{children}</div>
-        <FlexContainer
-          align="center"
-          justify={footerText ? 'spaceBetween' : 'flexEnd'}
-          className="Modal-Section Modal-Footer"
-        >
-          {footerText}
-          <span>
-            <Button className="Model-FooterButton" onClick={onCancel}>
-              {cancelText || <FormattedMessage id="misc.cancel" />}
-            </Button>
-            {React.Children.map(actionButtons, button =>
-              React.cloneElement(button, {
-                className: classNames(
-                  button.props.className,
-                  'Model-FooterButton',
-                ),
-              }),
-            )}
-          </span>
-        </FlexContainer>
+        <div className={classNames('Modal-Content', contentClassName)}>
+          {children}
+        </div>
+        {!hideFooter && (
+          <FlexContainer
+            align="center"
+            justify={footerText ? 'spaceBetween' : 'flexEnd'}
+            className="Modal-Section Modal-Footer"
+          >
+            {footerText}
+            <span>
+              <Button className="Model-FooterButton" onClick={onCancel}>
+                {cancelText || <FormattedMessage id="misc.cancel" />}
+              </Button>
+              {React.Children.map(actionButtons, button =>
+                React.cloneElement(button, {
+                  className: classNames(
+                    button.props.className,
+                    'Model-FooterButton',
+                  ),
+                }),
+              )}
+            </span>
+          </FlexContainer>
+        )}
       </FlexContainer>
     </ReactModal>
   );
@@ -87,22 +94,26 @@ export default function Modal({
 Modal.propTypes = {
   className: PropTypes.string,
   overlayClassName: PropTypes.string,
+  contentClassName: PropTypes.string,
   children: PropTypes.node.isRequired,
   title: PropTypes.string.isRequired,
   cancelText: PropTypes.string,
   footerText: PropTypes.string,
   onCancel: PropTypes.func.isRequired,
   actionButtons: PropTypes.arrayOf(PropTypes.node),
-  width: PropTypes.number,
+  width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   hideHeader: PropTypes.bool,
+  hideFooter: PropTypes.bool,
 };
 
 Modal.defaultProps = {
   className: undefined,
   overlayClassName: undefined,
+  contentClassName: undefined,
   cancelText: undefined,
   footerText: undefined,
   actionButtons: undefined,
   width: 400,
   hideHeader: false,
+  hideFooter: false,
 };

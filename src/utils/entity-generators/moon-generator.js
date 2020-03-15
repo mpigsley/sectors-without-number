@@ -1,51 +1,21 @@
 import Chance from 'chance';
 
-import { generateName } from 'utils/name-generator';
+import Entities from 'constants/entities';
+import commonGenerator from './common-generator';
 
-export const generateMoon = ({
-  sector,
-  parent,
-  parentEntity,
-  name = generateName(),
-  isHidden,
-} = {}) => {
-  if (!sector) {
-    throw new Error('Sector must be defined to generate a moon');
-  }
-  if (!parent || !parentEntity) {
-    throw new Error('Parent id and type must be defined to generate a moon');
-  }
-  let moon = { name, parent, parentEntity, sector };
-  if (isHidden !== undefined) {
-    moon = { ...moon, isHidden };
-  }
-  return moon;
-};
+export const generateMoon = commonGenerator(entity => entity);
 
 export const generateMoons = ({
-  sector,
-  parent,
-  parentEntity,
-  additionalPointsOfInterest,
   children = [...Array(new Chance().weighted([0, 1, 2, 3], [20, 5, 2, 1]))],
+  additionalPointsOfInterest = true,
+  ...config
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
   }
-  if (!sector) {
-    throw new Error('Sector id must be defined to generate moons');
-  }
-  if (!parent || !parentEntity) {
-    throw new Error('Parent must be defined to generate moons');
-  }
-
   return {
-    children: children.map(() =>
-      generateMoon({
-        sector,
-        parent,
-        parentEntity,
-      }),
+    children: children.map(({ name, generate } = {}) =>
+      generateMoon(Entities.moon.key, { name, generate, ...config }),
     ),
   };
 };

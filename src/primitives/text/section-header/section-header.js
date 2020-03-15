@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -70,7 +71,11 @@ export default function SectionHeader({
   }
 
   return (
-    <FlexContainer align="center" className="SectionHeader" {...rest}>
+    <FlexContainer
+      align="center"
+      className={classNames('SectionHeader', className)}
+      {...rest}
+    >
       {chevron}
       <FlexContainer flex="1" justify="spaceBetween" align="flexEnd">
         <h3 className="SectionHeader-Inner">{headerItem}</h3>

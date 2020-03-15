@@ -1,0 +1,57 @@
+@import '~styles/theme';
+
+.section {
+  margin-bottom: 1rem;
+}
+
+.tag {
+  margin: 0 1rem 2rem 1rem;
+  text-align: left;
+}
+
+.content {
+  font-size: 0.9rem;
+  font-weight: 200;
+  color: $light2;
+}
+
+.contentList {
+  margin-top: 0.1rem;
+}
+
+.entityTagEdit {
+  margin: 0 1rem 0.5rem;
+}
+
+.dropdown {
+  flex: 1;
+}
+
+.checkbox {
+  margin-left: 0.5rem;
+  margin-right: 0;
+}
+
+.subHeader {
+  color: $light2;
+  margin: 0 1rem;
+}
+
+.subHeaderHidden {
+  margin: 0rem 0.1rem 0 0.5rem;
+}
+
+.customTagBtn {
+  cursor: pointer;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light2;
+  }
+}
+
+.emptyTags {
+  color: $light1;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}

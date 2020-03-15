@@ -5,6 +5,7 @@ import { map, mapValues } from 'constants/lodash';
 
 import EntityAttributes from './entity-attributes';
 import EntityList from './entity-list';
+import EntityTags from './entity-tags';
 
 import styles from './styles.module.scss';
 
@@ -66,10 +67,8 @@ export default class DefaultSidebar extends Component {
       <>
         {this.renderEntityImage()}
         <EntityAttributes
-          isAttributesOpen={openLists.attributes}
-          isTagsOpen={openLists.tags}
-          toggleAttributesOpen={this.toggleListOpen('attributes')}
-          toggleTagsOpen={this.toggleListOpen('tags')}
+          isOpen={openLists.attributes}
+          toggleOpen={this.toggleListOpen('attributes')}
         />
         {map(entityChildren, (entities, entityType) => (
           <EntityList
@@ -80,6 +79,10 @@ export default class DefaultSidebar extends Component {
             toggleListOpen={this.toggleListOpen(entityType)}
           />
         ))}
+        <EntityTags
+          isOpen={openLists.tags}
+          toggleOpen={this.toggleListOpen('tags')}
+        />
       </>
     );
   }

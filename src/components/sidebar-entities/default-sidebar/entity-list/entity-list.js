@@ -30,6 +30,7 @@ const EntityList = ({
   toggleListOpen,
   intl,
   isShared,
+  customTags,
 }) => {
   const numEntities = size(entities);
   if (!numEntities && !isSidebarEditActive) {
@@ -126,7 +127,12 @@ const EntityList = ({
         additional = coordinateKey(entity.x, entity.y);
       } else if (!isShared) {
         additional = ((entity.attributes || {}).tags || [])
-          .map(tag => intl.formatMessage({ id: `tags.${tag}` }))
+          .map(tag =>
+            intl.formatMessage({
+              id: `tags.${tag}`,
+              defaultMessage: (customTags[tag] || {}).name,
+            }),
+          )
           .map(toCommaArray)
           .join('');
       }
@@ -162,6 +168,7 @@ EntityList.propTypes = {
   toggleListOpen: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
   isShared: PropTypes.bool.isRequired,
+  customTags: PropTypes.shape().isRequired,
 };
 
 EntityList.defaultProps = {

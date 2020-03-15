@@ -22,6 +22,10 @@
   z-index: 1000;
 }
 
+.Modal-InnerContainer {
+  height: 100%;
+}
+
 .Modal-Title {
   margin: 0;
 }
@@ -44,6 +48,7 @@
 
 .Modal-Content {
   background-color: $dark2;
+  flex: 1;
   padding: 1.5rem 1rem;
 }
 

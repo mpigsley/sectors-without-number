@@ -1,62 +1,32 @@
 import Chance from 'chance';
 
 import { xor } from 'constants/lodash';
-import { generateName } from 'utils/name-generator';
+import Entities from 'constants/entities';
+import commonGenerator from './common-generator';
 
-export const generateSystem = ({
-  sector,
-  x,
-  y,
-  name = generateName(),
-  parent,
-  parentEntity,
-  isHidden,
-} = {}) => {
-  if (!sector) {
-    throw new Error('Sector id must be defined to generate a system');
-  }
+export const generateSystem = commonGenerator((entity, { x, y }) => {
   if (!x || !y) {
     throw new Error('Sector coordinate must be provided to generate a system');
   }
-  if (!parent || !parentEntity) {
-    throw new Error('Parent must be defined to generate system');
-  }
-
-  let system = { x, y, name, sector, parent, parentEntity };
-  if (isHidden !== undefined) {
-    system = { ...system, isHidden };
-  }
-  return system;
-};
+  return { x, y, ...entity };
+});
 
 export const generateSystems = ({
-  sector,
-  parent,
-  parentEntity,
-  rows,
-  columns,
-  coordinates,
-  additionalPointsOfInterest,
+  additionalPointsOfInterest = true,
+  ...config
 }) => {
-  if (!sector) {
-    throw new Error('Sector id must be defined to generate systems');
-  }
-  if (!parent || !parentEntity) {
-    throw new Error('Parent must be defined to generate systems');
-  }
-
   const chance = new Chance();
-  const numHexes = rows * columns;
+  const numHexes = config.rows * config.columns;
   const apoiModifier = additionalPointsOfInterest ? 10 : 4;
   const systemNum =
     chance.integer({ min: 0, max: Math.floor(numHexes / apoiModifier) }) +
     Math.floor(numHexes / 5);
-  const chosenCoordinates = chance.pickset(coordinates, systemNum);
+  const chosenCoordinates = chance.pickset(config.coordinates, systemNum);
 
   return {
-    coordinates: xor(coordinates, chosenCoordinates),
+    coordinates: xor(config.coordinates, chosenCoordinates),
     children: chosenCoordinates.map(coordinate =>
-      generateSystem({ sector, ...coordinate, parent, parentEntity }),
+      generateSystem(Entities.system.key, { ...coordinate, ...config }),
     ),
   };
 };

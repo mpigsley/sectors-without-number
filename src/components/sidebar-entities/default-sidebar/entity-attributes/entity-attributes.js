@@ -16,8 +16,7 @@ import { omit, values, size } from 'constants/lodash';
 import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 
-import EntityTags from './entity-tags';
-import './style.scss';
+import styles from './styles.module.scss';
 
 const ReactHint = ReactHintFactory(React);
 
@@ -39,13 +38,10 @@ export default function EntityAttributes({
   entityType,
   entityAttributes,
   updateEntityInEdit,
-  isAttributesOpen,
-  isTagsOpen,
-  toggleAttributesOpen,
-  toggleTagsOpen,
+  isOpen,
+  toggleOpen,
   isAncestorHidden,
   intl,
-  isShared,
 }) {
   const noAttributes = !size(entityAttributes);
   if (!isSidebarEditActive && noAttributes) {
@@ -159,7 +155,7 @@ export default function EntityAttributes({
       if (entityAttributes.description) {
         descriptionAttribute = (
           <LabeledItem label="misc.description" isVertical>
-            <span className="EntityAttributes--itemMultiline">
+            <span className={styles['container--itemMultiline']}>
               {entityAttributes.description}
             </span>
           </LabeledItem>
@@ -168,12 +164,9 @@ export default function EntityAttributes({
     }
 
     let attributes = null;
-    if (isAttributesOpen) {
+    if (isOpen) {
       attributes = (
-        <FlexContainer
-          direction="column"
-          className="EntityAttributes-Attributes"
-        >
+        <FlexContainer direction="column" className={styles.attributes}>
           {nameAttribute}
           {imageAttribute}
           {(Entities[entityType].attributes || []).map(attribute => (
@@ -192,18 +185,18 @@ export default function EntityAttributes({
     }
 
     const renderSubHeader = () => {
-      if (!isSidebarEditActive || !isAttributesOpen) {
+      if (!isSidebarEditActive || !isOpen) {
         return null;
       }
       return (
         <FlexContainer
           justify="flexEnd"
           align="center"
-          className="EntityAttributes-SubHeader"
+          className={styles.subHeader}
         >
           <LinkIcon
             data-rh={intl.formatMessage({ id: 'misc.selectHidden' })}
-            className="EntityAttributes-SubHeaderHidden"
+            className={styles.subHeaderHidden}
             icon={EyeOff}
             size={18}
           />
@@ -215,8 +208,8 @@ export default function EntityAttributes({
       <div key="attributes">
         <SectionHeader
           header="misc.attributes"
-          isOpen={isAttributesOpen}
-          onClick={toggleAttributesOpen}
+          isOpen={isOpen}
+          onClick={toggleOpen}
         />
         {renderSubHeader()}
         {attributes}
@@ -227,17 +220,6 @@ export default function EntityAttributes({
   return (
     <>
       {attributesSection}
-      <EntityTags
-        key="tags"
-        isSidebarEditActive={isSidebarEditActive}
-        entity={entity}
-        entityType={entityType}
-        updateEntityInEdit={updateEntityInEdit}
-        isOpen={isTagsOpen}
-        toggleOpen={toggleTagsOpen}
-        intl={intl}
-        isShared={isShared}
-      />
       <ReactHint events position="left" />
     </>
   );
@@ -271,11 +253,8 @@ EntityAttributes.propTypes = {
   }).isRequired,
   entityType: PropTypes.string.isRequired,
   updateEntityInEdit: PropTypes.func.isRequired,
-  isAttributesOpen: PropTypes.bool.isRequired,
-  isTagsOpen: PropTypes.bool.isRequired,
-  toggleAttributesOpen: PropTypes.func.isRequired,
-  toggleTagsOpen: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  toggleOpen: PropTypes.func.isRequired,
   isAncestorHidden: PropTypes.bool.isRequired,
   intl: intlShape.isRequired,
-  isShared: PropTypes.bool.isRequired,
 };

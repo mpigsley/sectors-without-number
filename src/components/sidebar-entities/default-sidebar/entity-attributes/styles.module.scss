@@ -1,0 +1,15 @@
+@import '~styles/theme';
+
+.attributes {
+  margin: 0 1rem 1rem 1rem;
+  width: calc(100% - 2rem);
+}
+
+.subHeader {
+  color: $light2;
+  margin: 0 1rem;
+}
+
+.subHeaderHidden {
+  margin: 0rem 0.1rem 0 0.5rem;
+}

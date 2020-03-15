@@ -1,77 +1,52 @@
 import Chance from 'chance';
 
-import { generateStationName } from 'utils/name-generator';
 import Occupation from 'constants/refueling-station/occupation';
 import Situation from 'constants/refueling-station/situation';
+import Entities from 'constants/entities';
+import commonGenerator from './common-generator';
 
-export const generateRefuelingStation = ({
-  sector,
-  parent,
-  parentEntity,
-  name = generateStationName(),
-  hideOccAndSit = false,
-  generate = true,
-  isHidden,
-} = {}) => {
-  if (!sector) {
-    throw new Error('Sector must be defined to generate a refueling station');
-  }
-  if (!parent || !parentEntity) {
-    throw new Error(
-      'Parent id and type must be defined to generate a refueling station',
-    );
-  }
-
-  const chance = new Chance();
-  let refuelingStation = { name, parent, parentEntity, sector };
-  if (isHidden !== undefined) {
-    refuelingStation = { ...refuelingStation, isHidden };
-  }
-  if (generate) {
+export const generateRefuelingStation = commonGenerator(
+  (entity, { hideOccAndSit = false, generate = true }) => {
+    if (!generate) {
+      return entity;
+    }
+    let visibility = {};
     if (hideOccAndSit) {
-      refuelingStation.visibility = {
+      visibility = {
         'attr.occupation': false,
         'attr.situation': false,
       };
     }
-    refuelingStation = {
-      ...refuelingStation,
+    const chance = new Chance();
+    return {
+      ...entity,
+      visibility: {
+        ...entity.visibility,
+        ...visibility,
+      },
       attributes: {
+        ...entity.attributes,
         occupation: chance.pickone(Object.keys(Occupation.attributes)),
         situation: chance.pickone(Object.keys(Situation.attributes)),
       },
     };
-  }
-  return refuelingStation;
-};
+  },
+);
 
 export const generateRefuelingStations = ({
-  sector,
-  parent,
-  parentEntity,
-  additionalPointsOfInterest,
   children = [...Array(new Chance().weighted([0, 1], [3, 1]))],
-  hideOccAndSit,
+  additionalPointsOfInterest = true,
+  ...config
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
   }
-  if (!sector) {
-    throw new Error('Sector id must be defined to generate refueling stations');
-  }
-  if (!parent || !parentEntity) {
-    throw new Error('Parent must be defined to generate refueling stations');
-  }
-
   return {
     children: children.map(({ name, generate } = {}) =>
-      generateRefuelingStation({
+      generateRefuelingStation(Entities.refuelingStation.key, {
         name,
         generate,
-        sector,
-        parent,
-        parentEntity,
-        hideOccAndSit,
+        ...config,
       }),
     ),
   };

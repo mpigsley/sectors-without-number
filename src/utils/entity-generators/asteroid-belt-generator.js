@@ -1,75 +1,52 @@
 import Chance from 'chance';
 
-import { generateAsteroidBeltName } from 'utils/name-generator';
 import Occupation from 'constants/asteroid-belt/occupation';
 import Situation from 'constants/asteroid-belt/situation';
+import Entities from 'constants/entities';
+import commonGenerator from './common-generator';
 
-export const generateAsteroidBelt = ({
-  sector,
-  name = generateAsteroidBeltName(),
-  hideOccAndSit = false,
-  parent,
-  parentEntity,
-  generate = true,
-  isHidden,
-} = {}) => {
-  if (!sector) {
-    throw new Error('Sector id must be defined to generate an asteroid belt');
-  }
-  if (!parent || !parentEntity) {
-    throw new Error('Parent must be defined to generate an asteroid belt');
-  }
-
-  const chance = new Chance();
-  let asteroidBelt = { name, sector, parent, parentEntity };
-  if (isHidden !== undefined) {
-    asteroidBelt = { ...asteroidBelt, isHidden };
-  }
-  if (generate) {
+export const generateAsteroidBelt = commonGenerator(
+  (entity, { hideOccAndSit = false, generate = true }) => {
+    if (!generate) {
+      return entity;
+    }
+    let visibility;
     if (hideOccAndSit) {
-      asteroidBelt.visibility = {
+      visibility = {
         'attr.occupation': false,
         'attr.situation': false,
       };
     }
-    asteroidBelt = {
-      ...asteroidBelt,
+    const chance = new Chance();
+    return {
+      ...entity,
+      visibility: {
+        ...entity.visiblity,
+        ...visibility,
+      },
       attributes: {
+        ...entity.attributes,
         occupation: chance.pickone(Object.keys(Occupation.attributes)),
         situation: chance.pickone(Object.keys(Situation.attributes)),
       },
     };
-  }
-  return asteroidBelt;
-};
+  },
+);
 
 export const generateAsteroidBelts = ({
-  sector,
-  parent,
-  parentEntity,
   children = [...Array(new Chance().weighted([0, 1], [4, 1]))],
-  additionalPointsOfInterest,
-  hideOccAndSit,
+  additionalPointsOfInterest = true,
+  ...config
 }) => {
   if (!additionalPointsOfInterest) {
     return { children: [] };
   }
-  if (!sector) {
-    throw new Error('Sector id must be defined to generate asteroid belts');
-  }
-  if (!parent || !parentEntity) {
-    throw new Error('Parent must be defined to generate asteroid belts');
-  }
-
   return {
     children: children.map(({ name, generate } = {}) =>
-      generateAsteroidBelt({
-        sector,
-        parent,
-        parentEntity,
+      generateAsteroidBelt(Entities.asteroidBelt.key, {
         name,
         generate,
-        hideOccAndSit,
+        ...config,
       }),
     ),
   };

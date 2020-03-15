@@ -49,10 +49,11 @@ const initialState = {
   isPrinting: false,
   playerView: false,
   configuration: {
-    name: Entities.sector.nameGenerator(),
+    sectorName: Entities.sector.nameGenerator(),
     isBuilder: false,
     additionalPointsOfInterest: true,
     hideOccAndSit: true,
+    useCustomTags: true,
     hideTags: true,
     columns: COLUMNS,
     rows: ROWS,
@@ -83,7 +84,7 @@ export default function sector(state = initialState, action) {
           fetched: state.fetched,
           configuration: {
             ...initialState.configuration,
-            name: Entities.sector.nameGenerator(),
+            sectorName: Entities.sector.nameGenerator(),
           },
         };
       }

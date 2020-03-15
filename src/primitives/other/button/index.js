@@ -13,6 +13,7 @@ export default function Button({
   primary,
   skinny,
   loading,
+  noMargin,
   ...rest
 }) {
   let loadingSpinner = null;
@@ -30,6 +31,7 @@ export default function Button({
         'Button-Minimal': minimal,
         'Button-Primary': primary,
         'Button-Skinny': skinny,
+        'Button-NoMargin': noMargin,
       })}
     >
       {loadingSpinner}
@@ -49,6 +51,7 @@ Button.propTypes = {
   primary: PropTypes.bool,
   skinny: PropTypes.bool,
   loading: PropTypes.bool,
+  noMargin: PropTypes.bool,
 };
 
 Button.defaultProps = {
@@ -57,4 +60,5 @@ Button.defaultProps = {
   primary: false,
   skinny: false,
   loading: false,
+  noMargin: false,
 };

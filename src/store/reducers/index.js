@@ -6,6 +6,7 @@ import navigation from './navigation.reducers';
 import layer from './layer.reducers';
 import faction from './faction.reducers';
 import settings from './settings.reducers';
+import tag from './tag.reducers';
 
 export default {
   sector,
@@ -16,4 +17,5 @@ export default {
   layer,
   faction,
   settings,
+  tag,
 };
