@@ -106,8 +106,12 @@ export const initialize = () => async (dispatch, getState) => {
       getSyncedSectors(uid),
       getCustomTags(uid),
     ]);
-  } else if ((sectorData || {}).creator) {
-    tags = await getCustomTags(sectorData.creator);
+  }
+
+  const sectorCreator = (sectorData || {}).creator;
+  if (sectorCreator && (!uid || sectorCreator !== uid)) {
+    const nonUserTags = await getCustomTags(sectorCreator);
+    tags = { ...tags, ...nonUserTags };
   }
 
   dispatch({

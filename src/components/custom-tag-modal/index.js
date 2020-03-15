@@ -2,10 +2,8 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
 
-import {
-  customTagSelector,
-  isCustomTagModalOpenSelector,
-} from 'store/selectors/base.selectors';
+import { isCustomTagModalOpenSelector } from 'store/selectors/base.selectors';
+import { getUsersCustomTags } from 'store/selectors/tag.selectors';
 import {
   createTag,
   editTag,
@@ -17,7 +15,7 @@ import CustomTagModal from './custom-tag-modal';
 
 const mapStateToProps = createStructuredSelector({
   isCustomTagModalOpen: isCustomTagModalOpenSelector,
-  tags: customTagSelector,
+  tags: getUsersCustomTags,
 });
 
 export default injectIntl(
