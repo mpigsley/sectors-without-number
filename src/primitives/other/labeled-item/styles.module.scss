@@ -1,6 +1,6 @@
 @import '~styles/theme';
 
-.LabeledItem {
+.container {
   color: $light2;
   font-size: 0.9rem;
   padding: 0.2rem 0 0.5rem;
@@ -16,13 +16,14 @@
   }
 }
 
-.LabeledItem-Label {
+.label {
   margin: 0;
   padding-right: 0.5rem;
   text-align: left;
 }
 
-.LabeledItem-Item {
+.item {
   flex: 1;
+  white-space: pre-line;
   width: 100%;
 }
