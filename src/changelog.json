@@ -1,4 +1,8 @@
 {
+  "7.20.1": {
+    "description": "Show custom tags within the JSON export.",
+    "date": "3-16-2020"
+  },
   "7.20.0": {
     "description": "Custom entity tags.",
     "date": "3-15-2020"

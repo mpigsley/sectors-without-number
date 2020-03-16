@@ -148,12 +148,13 @@ export const getExportEntities = createDeepEqualSelector(
           ...pickBy(
             entity.attributes,
             (value, key) =>
-              !isShared || !includes(keys(entity.visibility), `attr.${key}`),
+              !isShared || (entity.visibility || {})[`attr.${key}`] !== false,
           ),
           tags: (entity.attributes || {}).tags
             ? entity.attributes.tags.filter(
                 tag =>
-                  !isShared || !includes(keys(entity.visibility), `tag.${tag}`),
+                  !isShared ||
+                  (entity.visibility || {})[`tag.${tag}`] !== false,
               )
             : undefined,
         },

@@ -365,7 +365,7 @@ export const saveEntities = (
     });
 };
 
-export const translateEntities = (entities, intl) =>
+export const translateEntities = (entities, customTags, intl) =>
   mapValues(entities, (entityTypes, entityType) =>
     mapValues(entityTypes, entity => {
       let translatedAttributes = mapValues(
@@ -388,6 +388,9 @@ export const translateEntities = (entities, intl) =>
           ...translatedAttributes,
           tags: entity.attributes.tags
             .map(tag => {
+              if (customTags[tag]) {
+                return customTags[tag];
+              }
               const { key, name, ...lists } =
                 (Entities[entityType].tags || {})[tag] || {};
               if (!key) {

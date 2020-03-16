@@ -1,4 +1,5 @@
 import React from 'react';
+import dayjs from 'dayjs';
 import PropTypes from 'prop-types';
 import { FormattedMessage, intlShape } from 'react-intl';
 
@@ -17,6 +18,7 @@ export default function ExportModal({
   closeExport,
   startPrint,
   setEntityExport,
+  customTags,
   intl,
   entities,
   sector,
@@ -24,7 +26,10 @@ export default function ExportModal({
   const onContinue = () => {
     if (exportType === ExportTypes.json.key) {
       closeExport();
-      return createJSONDownload(translateEntities(entities, intl), sector.name);
+      return createJSONDownload(
+        translateEntities(entities, customTags, intl),
+        `${sector.name} - ${dayjs().format('MMMM D, YYYY')}`,
+      );
     }
     if (exportType === ExportTypes.image.key) {
       closeExport();
@@ -81,6 +86,7 @@ export default function ExportModal({
 }
 
 ExportModal.propTypes = {
+  customTags: PropTypes.shape().isRequired,
   isExportOpen: PropTypes.bool.isRequired,
   exportType: PropTypes.string.isRequired,
   closeExport: PropTypes.func.isRequired,
