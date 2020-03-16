@@ -386,6 +386,7 @@ export const translateEntities = (entities, customTags, intl) =>
       if (((entity.attributes || {}).tags || []).length) {
         translatedAttributes = {
           ...translatedAttributes,
+          description: entity.attributes.description,
           tags: entity.attributes.tags
             .map(tag => {
               if (customTags[tag]) {
