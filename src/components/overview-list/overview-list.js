@@ -6,17 +6,32 @@ import FlexContainer from 'primitives/container/flex-container';
 import ActionHeader from 'primitives/text/action-header';
 import LinkRow from 'primitives/other/link-row';
 
-import { map, size } from 'constants/lodash';
+import { generateCSV, createCSVDownload } from 'utils/export';
+import { map, reduce, size } from 'constants/lodash';
 import { usePrevious } from 'utils/effects';
 import Entities from 'constants/entities';
 
 import styles from './styles.module.scss';
 
+const EXPORT_COLUMNS = [
+  { id: 'misc.name', accessor: 'name' },
+  { id: 'misc.entityType', accessor: 'entityType' },
+  { id: 'misc.location', accessor: 'location' },
+  { id: 'misc.children', accessor: 'children' },
+  { id: 'misc.neighbors', accessor: 'neighbors' },
+  { id: 'misc.parent', accessor: 'parent' },
+  { id: 'misc.occupation', accessor: 'occupation' },
+  { id: 'misc.situation', accessor: 'situation' },
+  { id: 'misc.tags', accessor: 'tags' },
+];
+
 export default function OverviewList({
   openCustomTagModal,
+  customTags,
   toSafeRoute,
   children,
   currentSector,
+  currentSectorId,
   entities,
   isInitialized,
   doesNotExist,
@@ -29,6 +44,46 @@ export default function OverviewList({
       toSafeRoute();
     }
   }, [previousIsInitialized, isInitialized, doesNotExist, toSafeRoute]);
+
+  const exportTable = () => {
+    const table = [
+      EXPORT_COLUMNS.map(({ id }) => intl.formatMessage({ id })),
+    ].concat(
+      reduce(
+        entities,
+        (list, entityTypeList, entityType) => [
+          ...list,
+          ...map(entityTypeList, data =>
+            EXPORT_COLUMNS.map(({ accessor }) => {
+              if (accessor === 'entityType') {
+                return intl.formatMessage({ id: `entity.${entityType}` });
+              }
+              if (!data[accessor]) {
+                return '';
+              }
+              if (accessor === 'tags') {
+                return data[accessor]
+                  .map(tag =>
+                    intl.formatMessage({
+                      id: `tags.${tag}`,
+                      defaultMessage: (customTags[tag] || {}).name,
+                    }),
+                  )
+                  .filter(tag => tag)
+                  .join(', ');
+              }
+              return intl.formatMessage({
+                id: data[accessor],
+                defaultMessage: `${data[accessor]}` || '',
+              });
+            }),
+          ),
+        ],
+        [],
+      ),
+    );
+    return createCSVDownload(generateCSV(table), currentSector.name);
+  };
 
   return (
     <FlexContainer>
@@ -43,10 +98,10 @@ export default function OverviewList({
             {
               key: 'export',
               children: intl.formatMessage({ id: 'misc.exportAll' }),
-              onClick: () => {},
+              onClick: exportTable,
             },
             {
-              key: 'export',
+              key: 'manage-tags',
               children: intl.formatMessage({ id: 'misc.manageCustomTags' }),
               onClick: openCustomTagModal,
             },
@@ -56,7 +111,7 @@ export default function OverviewList({
           {map(entities, (entityList, entityType) => (
             <LinkRow
               key={entityType}
-              to={`/overview/${currentSector}/${entityType}`}
+              to={`/overview/${currentSectorId}/${entityType}`}
               title={intl.formatMessage({
                 id: Entities[entityType].name,
               })}
@@ -80,8 +135,12 @@ OverviewList.propTypes = {
   openCustomTagModal: PropTypes.func.isRequired,
   toSafeRoute: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
-  currentSector: PropTypes.string.isRequired,
+  currentSector: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  currentSectorId: PropTypes.string.isRequired,
   entities: PropTypes.shape().isRequired,
+  customTags: PropTypes.shape().isRequired,
   isInitialized: PropTypes.bool.isRequired,
   doesNotExist: PropTypes.bool.isRequired,
   match: PropTypes.shape({
