@@ -70,7 +70,9 @@ export default function FactionForm({
 
   return (
     <SidebarContainer
-      title={isCreating ? 'New Faction' : form.name}
+      title={
+        isCreating ? intl.formatMessage({ id: 'misc.newFaction' }) : form.name
+      }
       footer={
         <SaveFooter
           onCancel={() =>

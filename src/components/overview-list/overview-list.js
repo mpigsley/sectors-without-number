@@ -1,18 +1,19 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape } from 'react-intl';
+import { intlShape } from 'react-intl';
 
-import Header, { HeaderType } from 'primitives/text/header';
 import FlexContainer from 'primitives/container/flex-container';
+import ActionHeader from 'primitives/text/action-header';
 import LinkRow from 'primitives/other/link-row';
 
-import { omitBy, map, size } from 'constants/lodash';
+import { map, size } from 'constants/lodash';
 import { usePrevious } from 'utils/effects';
 import Entities from 'constants/entities';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 export default function OverviewList({
+  openCustomTagModal,
   toSafeRoute,
   children,
   currentSector,
@@ -31,35 +32,43 @@ export default function OverviewList({
 
   return (
     <FlexContainer>
-      <FlexContainer direction="column" align="center" className="OverviewList">
-        <Header type={HeaderType.header2}>
-          <FormattedMessage id="misc.entities" />
-        </Header>
-        <div className="OverviewList-List">
-          {map(
-            omitBy(
-              entities,
-              (list, type) =>
-                type === Entities.sector.key ||
-                Entities[type].action !== 'entity',
-            ),
-            (entityList, entityType) => (
-              <LinkRow
-                key={entityType}
-                to={`/overview/${currentSector}/${entityType}`}
-                title={intl.formatMessage({
-                  id: Entities[entityType].name,
-                })}
-                additional={isInitialized ? `${size(entityList)}` : undefined}
-                arrowClassName="OverviewList-Arrow"
-                className={
-                  match.params.entityType === entityType
-                    ? 'OverviewList-Item--selected'
-                    : ''
-                }
-              />
-            ),
-          )}
+      <FlexContainer
+        direction="column"
+        align="center"
+        className={styles.container}
+      >
+        <ActionHeader
+          title={intl.formatMessage({ id: 'misc.entities' })}
+          actions={[
+            {
+              key: 'export',
+              children: intl.formatMessage({ id: 'misc.exportAll' }),
+              onClick: () => {},
+            },
+            {
+              key: 'export',
+              children: intl.formatMessage({ id: 'misc.manageCustomTags' }),
+              onClick: openCustomTagModal,
+            },
+          ]}
+        />
+        <div className={styles.list}>
+          {map(entities, (entityList, entityType) => (
+            <LinkRow
+              key={entityType}
+              to={`/overview/${currentSector}/${entityType}`}
+              title={intl.formatMessage({
+                id: Entities[entityType].name,
+              })}
+              additional={isInitialized ? `${size(entityList)}` : undefined}
+              arrowClassName={styles.arrow}
+              className={
+                match.params.entityType === entityType
+                  ? styles.selectedItem
+                  : ''
+              }
+            />
+          ))}
         </div>
       </FlexContainer>
       {children}
@@ -68,6 +77,7 @@ export default function OverviewList({
 }
 
 OverviewList.propTypes = {
+  openCustomTagModal: PropTypes.func.isRequired,
   toSafeRoute: PropTypes.func.isRequired,
   children: PropTypes.node.isRequired,
   currentSector: PropTypes.string.isRequired,

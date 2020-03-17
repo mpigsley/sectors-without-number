@@ -5,24 +5,27 @@ import { withRouter } from 'react-router-dom';
 import { createStructuredSelector } from 'reselect';
 
 import {
-  getCurrentEntities,
+  getPrintableEntities,
   sectorDoesNotExist,
 } from 'store/selectors/entity.selectors';
 import {
   currentSectorSelector,
   isInitializedSelector,
 } from 'store/selectors/base.selectors';
+import { openCustomTagModal } from 'store/actions/tag.actions';
+
 import OverviewList from './overview-list';
 
 const mapStateToProps = createStructuredSelector({
   currentSector: currentSectorSelector,
-  entities: getCurrentEntities,
+  entities: getPrintableEntities,
   isInitialized: isInitializedSelector,
   doesNotExist: sectorDoesNotExist,
 });
 
 const mapDispatchToProps = dispatch => ({
   toSafeRoute: () => dispatch(push('/')),
+  openCustomTagModal: () => dispatch(openCustomTagModal()),
 });
 
 export default injectIntl(

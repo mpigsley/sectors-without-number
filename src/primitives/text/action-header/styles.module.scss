@@ -1,15 +1,16 @@
 @import '~styles/theme';
 
-.ActionHeader {
+.container {
   border-bottom: 1px solid $dark2;
   overflow: hidden;
+  width: 100%;
 }
 
-.ActionHeader-SubHeader {
+.subHeader {
   padding-bottom: 0.6rem;
 }
 
-.ActionHeader-Spacer {
+.spacer {
   background-color: $dark1;
   width: 1px;
   margin: 0.2rem;

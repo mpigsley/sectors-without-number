@@ -1,21 +1,21 @@
 @import '~styles/theme';
 
-.OverviewList {
+.container {
   flex: 1;
   max-height: 100vh;
   max-width: 400px;
   min-width: 300px;
-  overflow: auto;
 }
 
-.OverviewList-List {
+.list {
+  overflow: auto;
   width: 100%;
 }
 
-.OverviewList-Item--selected {
+.selectedItem {
   background-color: $dark3;
 }
 
-.OverviewList-Arrow {
+.arrow {
   color: $dark4;
 }
