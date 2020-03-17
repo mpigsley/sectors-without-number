@@ -1,4 +1,13 @@
 {
+  "7.21.0": {
+    "description": "Enhanced overview list header.",
+    "date": "3-17-2020",
+    "changes": [
+      "Overview list header now allows all entities to be exported as CSV at once.",
+      "Manage custom tags directly from the overview list header.",
+      "Outline selected hex in white so that it stands out against layer fill colors."
+    ]
+  },
   "7.20.4": {
     "description": "Fix bug where updated custom tags disappear.",
     "date": "3-17-2020"
