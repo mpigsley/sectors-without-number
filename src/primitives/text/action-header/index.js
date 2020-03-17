@@ -6,14 +6,14 @@ import Header, { HeaderType } from 'primitives/text/header';
 import ButtonLink from 'primitives/other/button-link';
 import Button from 'primitives/other/button';
 
-import './style.scss';
+import styles from './styles.module.scss';
 
 // eslint-disable-next-line react/prop-types
 const renderAction = ({ key, to, ...props }, index) => {
   const Btn = to ? ButtonLink : Button;
   return (
     <Fragment key={key}>
-      {index ? <span className="ActionHeader-Spacer" /> : null}
+      {index ? <span className={styles.spacer} /> : null}
       <Btn minimal to={to} {...props} />
     </Fragment>
   );
@@ -27,7 +27,7 @@ export default function ActionHeader({ title, actions }) {
         justify="center"
         shrink="0"
         wrap
-        className="ActionHeader-SubHeader"
+        className={styles.subHeader}
       >
         {actions.map(renderAction)}
       </FlexContainer>
@@ -35,7 +35,7 @@ export default function ActionHeader({ title, actions }) {
   }
 
   return (
-    <div className="ActionHeader">
+    <div className={styles.container}>
       <FlexContainer align="center" shrink="0">
         <FlexContainer flex="1" justify="center" align="flexEnd">
           {typeof title === 'string' ? (

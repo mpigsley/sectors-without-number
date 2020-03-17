@@ -14,10 +14,21 @@ const NAVIGATION_WIDTHS = {
   wide: 5,
 };
 
+const COLORS = {
+  DARK4: '#091833',
+  DARK3: '#11203b',
+  DARK2: '#182742',
+  DARK1: '#3c4b66',
+  LIGHT: '#dbdbdb',
+  PRIMARY: '#863c4e',
+  PRIMARY_ALT: '#792f41',
+  TRANSPARENT: 'transparent',
+};
+
 const ARROW_SIZE = 10;
 const drawArrowhead = (ctx, radians, x, y, ratio, isForward) => {
   const size = ARROW_SIZE * ratio;
-  ctx.fillStyle = '#dbdbdb';
+  ctx.fillStyle = COLORS.LIGHT;
   ctx.lineWidth = 2;
   ctx.save();
   ctx.beginPath();
@@ -29,15 +40,6 @@ const drawArrowhead = (ctx, radians, x, y, ratio, isForward) => {
   ctx.closePath();
   ctx.restore();
   ctx.fill();
-};
-
-const COLORS = {
-  DARK4: '#091833',
-  DARK3: '#11203b',
-  DARK2: '#182742',
-  DARK1: '#3c4b66',
-  PRIMARY: '#863c4e',
-  PRIMARY_ALT: '#792f41',
 };
 
 export default ({
@@ -60,13 +62,13 @@ export default ({
   showEntityName,
   showCoordinates,
 }) => {
-  ctx.fillStyle = '#11203b';
+  ctx.fillStyle = COLORS.DARK3;
   ctx.rect(0, 0, width * ratio, height * ratio);
   ctx.fill();
 
   const step = 2 * ratio;
   ctx.strokeStyle = COLORS.DARK3;
-  ctx.lineWidth = 2 * ratio;
+  ctx.lineWidth = 3 * ratio;
 
   const hexEntities = hexes
     .map(hex => ({
@@ -101,6 +103,7 @@ export default ({
       rest.forEach(({ x, y }) => {
         ctx.lineTo(x, y);
       });
+      ctx.closePath();
       ctx.fillStyle = COLORS.DARK4;
       if (highlighted) {
         ctx.fillStyle = COLORS.DARK2;
@@ -110,6 +113,9 @@ export default ({
       }
       if (activeKey === hexKey) {
         ctx.fillStyle = COLORS.PRIMARY_ALT;
+        ctx.strokeStyle = COLORS.LIGHT;
+      } else {
+        ctx.strokeStyle = COLORS.TRANSPARENT;
       }
       if (holdKey === hexKey || (hoverKey === hexKey && holdKey)) {
         ctx.fillStyle = COLORS.DARK1;
@@ -254,7 +260,7 @@ export default ({
 
     // Draw Path
     ctx.lineWidth = 2 * ratio;
-    ctx.strokeStyle = '#dbdbdb';
+    ctx.strokeStyle = COLORS.LIGHT;
     ctx.setLineDash([1, 0]);
     ctx.beginPath();
     ctx.moveTo(xStart, yStart);
