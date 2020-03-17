@@ -16,7 +16,10 @@ export const updateCustomTag = (tagId, tag) =>
     .collection('tags')
     .doc(tagId)
     .set(tag, { merge: true })
-    .then(() => ({ tagId, tag }));
+    .then(resp => {
+      console.log(resp);
+      return { tagId, tag };
+    });
 
 export const deleteCustomTag = tagId =>
   Firebase.firestore()

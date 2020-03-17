@@ -1,4 +1,3 @@
-import { addLocaleData } from 'react-intl';
 import { push } from 'connected-react-router';
 import Firebase from 'firebase/app';
 

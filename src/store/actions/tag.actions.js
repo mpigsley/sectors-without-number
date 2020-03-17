@@ -1,4 +1,7 @@
-import { userUidSelector } from 'store/selectors/base.selectors';
+import {
+  customTagSelector,
+  userUidSelector,
+} from 'store/selectors/base.selectors';
 import {
   createCustomTag,
   updateCustomTag,
@@ -34,11 +37,16 @@ export const createTag = (intl, newTag) => (dispatch, getState) => {
     });
 };
 
-export const editTag = (intl, tagId, tagUpdate) => dispatch =>
+export const editTag = (intl, tagId, tagUpdate) => (dispatch, getState) =>
   updateCustomTag(tagId, tagUpdate)
-    .then(update =>
-      dispatch({ type: ITEM_ADDED, item: { [update.tagId]: update.tag } }),
-    )
+    .then(update => {
+      const state = getState();
+      const editedTag = customTagSelector(state)[tagId];
+      dispatch({
+        type: ITEM_ADDED,
+        item: { [update.tagId]: { ...editedTag, ...update.tag } },
+      });
+    })
     .catch(err => {
       console.error(err);
       dispatch(

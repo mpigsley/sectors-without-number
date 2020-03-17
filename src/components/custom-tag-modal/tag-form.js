@@ -16,6 +16,9 @@ import { createId } from 'utils/common';
 
 import styles from './styles.module.scss';
 
+const transformArray = array =>
+  array.map(row => row.value).filter(row => !!row);
+
 const initialArrayState = array =>
   (array || []).map(value => ({ key: createId(), value }));
 
@@ -51,8 +54,6 @@ export default function TagForm({
   };
 
   const onCreateTag = () => {
-    const transformArray = array =>
-      array.map(row => row.value).filter(row => !!row);
     setIsSaving(true);
     const apiCall = selectedTag ? editTag : createTag;
     apiCall(
@@ -197,7 +198,7 @@ export default function TagForm({
           className={styles.formBtn}
           onClick={onCreateTag}
         >
-          <FormattedMessage id={selectedTag ? 'misc.edit' : 'misc.create'} />
+          <FormattedMessage id={selectedTag ? 'misc.save' : 'misc.create'} />
         </Button>
       </FlexContainer>
     </div>
