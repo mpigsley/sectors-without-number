@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Home, Zap } from 'react-feather';
 import { FormattedMessage } from 'react-intl';
 
 import SubContainer from 'primitives/container/sub-container';
@@ -10,7 +11,6 @@ import Button from 'primitives/other/button';
 import ButtonLink from 'primitives/other/button-link';
 import LinkIcon from 'primitives/other/link-icon';
 import HexMap from 'components/hex-map';
-import { Home, Zap } from 'constants/icons';
 
 import hexGenerator from 'utils/hex/generator';
 

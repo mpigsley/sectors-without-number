@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { Lock } from 'react-feather';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import TagDetails from 'components/custom-tag-modal/tag-details';
@@ -14,7 +15,6 @@ import Modal from 'primitives/modal/modal';
 
 import Entities from 'constants/entities';
 import WorldTags from 'constants/world-tags';
-import { Lock } from 'constants/icons';
 import { find, mapValues, map, sortBy } from 'constants/lodash';
 
 import styles from './styles.module.scss';

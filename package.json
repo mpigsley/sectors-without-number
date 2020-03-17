@@ -39,14 +39,14 @@
     "react-color": "^2.17.3",
     "react-dom": "^16.10.1",
     "react-fastclick": "^3.0.2",
-    "react-feather": "^1.1.6",
+    "react-feather": "^2.0.3",
     "react-hint": "^3.2.0",
     "react-intl": "^2.9.0",
     "react-loadable": "^5.5.0",
     "react-markdown": "^4.1.0",
     "react-measure": "^2.3.0",
     "react-modal": "^3.8.1",
-    "react-redux": "^6.0.0",
+    "react-redux": "^7.2.0",
     "react-redux-toastr": "^7.5.1",
     "react-router-dom": "^5.0.1",
     "react-select": "^1.2.1",
@@ -72,7 +72,7 @@
     "prettier": "^1.18.2",
     "react-scripts": "^3.2.0",
     "react-test-renderer": "^16.5.2",
-    "source-map-explorer": "^1.6.0"
+    "source-map-explorer": "^2.4.0"
   },
   "jest": {
     "collectCoverageFrom": [

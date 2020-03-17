@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { PlusCircle, Circle } from 'react-feather';
 
 import Table from 'primitives/other/table';
 
 import { without, includes } from 'constants/lodash';
-import { PlusCircle, Circle } from 'constants/icons';
 
 import './style.scss';
 

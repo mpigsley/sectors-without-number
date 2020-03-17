@@ -72,9 +72,8 @@ export const initialize = () => async (dispatch, getState) => {
 
   let userLocale;
   if (locale && locale !== 'en' && Locale[locale]) {
-    const [localeObj, localeData] = await Locale[locale].localeFetch();
-    addLocaleData(localeData.default);
-    userLocale = localeObj.default;
+    const localeData = await Locale[locale].localeFetch();
+    userLocale = localeData.default;
   }
 
   let share;
@@ -176,7 +175,10 @@ export const addLayer = (model, intl) => (dispatch, getState) => {
     const currentLayerIds = keys(currentSectorLayers(state));
     const layers = {
       ...sectorLayers,
-      ...zipObject(currentLayerIds, currentLayerIds.map(() => false)),
+      ...zipObject(
+        currentLayerIds,
+        currentLayerIds.map(() => false),
+      ),
       [layerId]: true,
     };
     return updateEntity(sectorId, Entities.sector.key, { layers })

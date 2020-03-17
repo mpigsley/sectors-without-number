@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
+import { Save, LogIn } from 'react-feather';
 
 import ContentContainer from 'primitives/container/content-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
-
-import { Save, LogIn } from 'constants/icons';
 
 export default function FactionNotSaved({
   saveSector,

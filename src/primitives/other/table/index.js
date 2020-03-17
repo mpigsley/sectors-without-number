@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { injectIntl, intlShape } from 'react-intl';
+import { ChevronDown, ChevronUp } from 'react-feather';
 
 import { find, isNil } from 'constants/lodash';
-import { ChevronDown, ChevronUp } from 'constants/icons';
 
 import './style.scss';
 

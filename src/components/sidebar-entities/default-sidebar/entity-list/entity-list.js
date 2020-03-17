@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactHintFactory from 'react-hint';
 import { intlShape } from 'react-intl';
+import { EyeOff } from 'react-feather';
+import ReactHintFactory from 'react-hint';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
 import LinkIcon from 'primitives/other/link-icon';
 import Dice from 'primitives/icons/dice';
 
-import { EyeOff } from 'constants/icons';
 import { sortByKey, coordinateKey, toCommaArray } from 'utils/common';
 import { map, size, isNumber } from 'constants/lodash';
 import Entities from 'constants/entities';

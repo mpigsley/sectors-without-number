@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { EyeOff } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
 
@@ -12,7 +13,6 @@ import Input from 'primitives/form/input';
 import { find, filter, sortBy, map } from 'constants/lodash';
 import { FACTION_ASSETS } from 'constants/faction';
 import Entities from 'constants/entities';
-import { EyeOff } from 'constants/icons';
 
 import styles from './styles.module.scss';
 

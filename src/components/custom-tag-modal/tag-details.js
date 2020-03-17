@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { Lock } from 'react-feather';
 import { intlShape, FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import Button from 'primitives/other/button';
 
-import { Lock } from 'constants/icons';
 import { map } from 'constants/lodash';
 
 import styles from './styles.module.scss';

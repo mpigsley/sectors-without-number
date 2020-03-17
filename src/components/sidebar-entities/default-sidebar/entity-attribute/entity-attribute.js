@@ -1,15 +1,15 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { intlShape, FormattedMessage } from 'react-intl';
-import classNames from 'classnames';
 import Chance from 'chance';
+import PropTypes from 'prop-types';
+import classNames from 'classnames';
+import { RefreshCw } from 'react-feather';
+import { intlShape, FormattedMessage } from 'react-intl';
 
 import Input from 'primitives/form/input';
 import LabeledInput from 'primitives/form/labeled-input';
 import LabeledItem from 'primitives/other/labeled-item';
 
 import { keys, map, without } from 'constants/lodash';
-import { RefreshCw } from 'constants/icons';
 
 const chance = new Chance();
 

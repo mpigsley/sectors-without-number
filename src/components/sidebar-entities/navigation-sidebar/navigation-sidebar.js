@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import ReactHintFactory from 'react-hint';
 import PropTypes from 'prop-types';
+import ReactHintFactory from 'react-hint';
+import { X, EyeOff, Crosshair } from 'react-feather';
 import { intlShape, FormattedMessage } from 'react-intl';
 
 import Modal from 'primitives/modal/modal';
@@ -17,7 +18,6 @@ import LabeledInput from 'primitives/form/labeled-input';
 import ItemRow from 'primitives/other/item-row';
 
 import { size, map } from 'constants/lodash';
-import { X, EyeOff, Crosshair } from 'constants/icons';
 import { sortByKey } from 'utils/common';
 
 import './style.scss';

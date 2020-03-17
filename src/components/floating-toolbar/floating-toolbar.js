@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
-
-import { sortBy, map, includes, keys } from 'constants/lodash';
 import {
   List,
   Settings,
@@ -17,7 +15,9 @@ import {
   Edit2,
   Eye,
   EyeOff,
-} from 'constants/icons';
+} from 'react-feather';
+
+import { sortBy, map, includes, keys } from 'constants/lodash';
 import FlexContainer from 'primitives/container/flex-container';
 
 import './style.scss';

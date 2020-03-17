@@ -1,6 +1,7 @@
 import React from 'react';
 import Chance from 'chance';
 import PropTypes from 'prop-types';
+import { RefreshCw } from 'react-feather';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import SidebarContainer from 'primitives/container/sidebar-container';
@@ -10,7 +11,6 @@ import SaveFooter from 'primitives/other/save-footer';
 import ItemRow from 'primitives/other/item-row';
 import Input from 'primitives/form/input';
 
-import { RefreshCw } from 'constants/icons';
 import { omit, sortBy, map, dropRight, clamp, filter } from 'constants/lodash';
 import { FACTION_GOALS, FACTION_TAGS } from 'constants/faction';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';

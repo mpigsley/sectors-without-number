@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
+import { ChevronRight } from 'react-feather';
 
-import { ChevronRight } from 'constants/icons';
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 

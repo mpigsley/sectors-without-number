@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import classNames from 'classnames';
+import { X } from 'react-feather';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import Button from 'primitives/other/button';
 import FlexContainer from 'primitives/container/flex-container';
 import Label from 'primitives/form/label';
 import Input from 'primitives/form/input';
-import { X } from 'constants/icons';
 
 import './style.scss';
 

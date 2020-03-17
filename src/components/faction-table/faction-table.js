@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Measure from 'react-measure';
 import { FormattedMessage, intlShape } from 'react-intl';
+import {
+  RotateCcw,
+  Minus,
+  ChevronUp,
+  ChevronDown,
+  EyeOff,
+} from 'react-feather';
 
 import FactionNotSaved from 'components/faction-table/faction-not-saved';
 import CollapsibleTable from 'primitives/other/collapsible-table';
@@ -13,13 +20,6 @@ import ButtonLink from 'primitives/other/button-link';
 import BasicLink from 'primitives/other/basic-link';
 import Loading from 'primitives/regions/loading';
 
-import {
-  RotateCcw,
-  Minus,
-  ChevronUp,
-  ChevronDown,
-  EyeOff,
-} from 'constants/icons';
 import { isArray } from 'constants/lodash';
 import { factionColor } from 'utils/faction';
 

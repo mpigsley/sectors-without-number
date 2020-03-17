@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { FormattedMessage, intlShape } from 'react-intl';
+import { ChevronRight, ChevronDown, Plus } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
 import LinkIcon from 'primitives/other/link-icon';
 import Button from 'primitives/other/button';
-
-import { ChevronRight, ChevronDown, Plus } from 'constants/icons';
 
 import './style.scss';
 

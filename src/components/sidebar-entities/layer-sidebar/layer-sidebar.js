@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { FormattedMessage, intlShape } from 'react-intl';
+import classNames from 'classnames';
+import { EyeOff } from 'react-feather';
 import ReactHintFactory from 'react-hint';
 import CompactPicker from 'react-color/lib/Compact';
-import classNames from 'classnames';
+import { FormattedMessage, intlShape } from 'react-intl';
 
 import ConfirmModal from 'primitives/modal/confirm-modal';
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
-import { EyeOff } from 'constants/icons';
 import { map, sortBy } from 'constants/lodash';
 
 import RegionRow from './region-row';

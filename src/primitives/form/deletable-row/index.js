@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { RotateCcw, X } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
-import { RotateCcw, X } from 'constants/icons';
 
 import './style.scss';
 

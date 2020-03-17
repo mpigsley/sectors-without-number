@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
+import { RefreshCw, X, Plus } from 'react-feather';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import Modal from 'primitives/modal/modal';
@@ -13,7 +14,6 @@ import FlexContainer from 'primitives/container/flex-container';
 import Dice from 'primitives/icons/dice';
 import Header, { HeaderType } from 'primitives/text/header';
 
-import { RefreshCw, X, Plus } from 'constants/icons';
 import Entities from 'constants/entities';
 import { createId, coordinatesFromKey } from 'utils/common';
 import EntityGenerators from 'utils/entity-generators';

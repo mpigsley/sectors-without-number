@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
-import classNames from 'classnames';
+import { Check, X, Edit3, MoreHorizontal, EyeOff } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
 import Header, { HeaderType } from 'primitives/text/header';
 import ColorSwatch from 'primitives/other/color-swatch';
 import Input from 'primitives/form/input';
 
-import { Check, X, Edit3, MoreHorizontal, EyeOff } from 'constants/icons';
 import { LAYER_NAME_LENGTH } from 'constants/defaults';
 import './style.scss';
 

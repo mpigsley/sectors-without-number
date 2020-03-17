@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactHintFactory from 'react-hint';
 import { intlShape } from 'react-intl';
+import ReactHintFactory from 'react-hint';
+import { RefreshCw, EyeOff } from 'react-feather';
 
 import EntityAttribute from 'components/sidebar-entities/default-sidebar/entity-attribute';
 import FlexContainer from 'primitives/container/flex-container';
@@ -13,7 +14,6 @@ import LabeledItem from 'primitives/other/labeled-item';
 import LabeledInput from 'primitives/form/labeled-input';
 
 import { omit, values, size } from 'constants/lodash';
-import { RefreshCw, EyeOff } from 'constants/icons';
 import Entities from 'constants/entities';
 
 import styles from './styles.module.scss';

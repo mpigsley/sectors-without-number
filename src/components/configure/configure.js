@@ -1,6 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Chance from 'chance';
+import PropTypes from 'prop-types';
+import { Zap, RefreshCw } from 'react-feather';
 import { intlShape, FormattedMessage } from 'react-intl';
 
 import StarBackground from 'components/star-background';
@@ -15,7 +16,6 @@ import ItemRow from 'primitives/other/item-row';
 import LabeledInput from 'primitives/form/labeled-input';
 
 import { MIN_DIMENSION, MAX_DIMENSION } from 'constants/defaults';
-import { Zap, RefreshCw } from 'constants/icons';
 import { generateSectorName } from 'utils/name-generator';
 
 import './style.scss';

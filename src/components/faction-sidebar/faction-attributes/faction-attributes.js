@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { RotateCcw } from 'react-feather';
 import { FormattedMessage } from 'react-intl';
 
 import FlexContainer from 'primitives/container/flex-container';
@@ -7,7 +8,6 @@ import LabeledItem from 'primitives/other/labeled-item';
 import ColorSwatch from 'primitives/other/color-swatch';
 import BasicLink from 'primitives/other/basic-link';
 
-import { RotateCcw } from 'constants/icons';
 import { factionColor } from 'utils/faction';
 
 import './style.scss';

@@ -1,8 +1,9 @@
 import React from 'react';
+import Chance from 'chance';
 import PropTypes from 'prop-types';
 import ReactHintFactory from 'react-hint';
 import { FormattedMessage, intlShape } from 'react-intl';
-import Chance from 'chance';
+import { EyeOff, RefreshCw, Settings } from 'react-feather';
 
 import FlexContainer from 'primitives/container/flex-container';
 import SectionHeader from 'primitives/text/section-header';
@@ -12,7 +13,6 @@ import Dropdown from 'primitives/form/dropdown';
 import LinkIcon from 'primitives/other/link-icon';
 import Input from 'primitives/form/input';
 
-import { EyeOff, RefreshCw, Settings } from 'constants/icons';
 import Entities from 'constants/entities';
 import { sortByKey } from 'utils/common';
 import {

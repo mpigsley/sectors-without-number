@@ -90,7 +90,10 @@ export default function TagForm({
       );
 
     const onDeleteItemFromArary = rowKey =>
-      onUpdateForm(typeKey, form[typeKey].filter(item => item.key !== rowKey));
+      onUpdateForm(
+        typeKey,
+        form[typeKey].filter(item => item.key !== rowKey),
+      );
 
     return (
       <FlexContainer key={typeKey} direction="column">
@@ -162,7 +165,10 @@ export default function TagForm({
           label: intl.formatMessage({ id: attr.name }),
         }))}
         onChange={options =>
-          onUpdateForm('types', options.map(option => option.value))
+          onUpdateForm(
+            'types',
+            options.map(option => option.value),
+          )
         }
       />
       {renderExpandableArray('enemies', 'enemy')}
