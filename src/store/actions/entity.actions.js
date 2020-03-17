@@ -287,7 +287,10 @@ export const saveEntityEdit = intl => (dispatch, getState) => {
   allEntities = merge(
     allEntities,
     mapValues(deletedEntities, deletedIds =>
-      zipObject(deletedIds, deletedIds.map(() => null)),
+      zipObject(
+        deletedIds,
+        deletedIds.map(() => null),
+      ),
     ),
   );
 

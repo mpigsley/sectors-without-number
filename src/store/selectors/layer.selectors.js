@@ -128,16 +128,14 @@ export const visibleLayerHexColors = createSelector(
   hexes => mapValues(hexes, list => uniq(list.map(({ color }) => color))),
 );
 
-export const hexLayerNameMapping = createSelector(
-  [visibleLayerHexes],
-  hexes =>
-    mapValues(hexes, list =>
-      list.reduce(
-        (layerMapping, { layerName, name, color }) => ({
-          ...layerMapping,
-          [layerName]: [...(layerMapping[layerName] || []), { name, color }],
-        }),
-        {},
-      ),
+export const hexLayerNameMapping = createSelector([visibleLayerHexes], hexes =>
+  mapValues(hexes, list =>
+    list.reduce(
+      (layerMapping, { layerName, name, color }) => ({
+        ...layerMapping,
+        [layerName]: [...(layerMapping[layerName] || []), { name, color }],
+      }),
+      {},
     ),
+  ),
 );

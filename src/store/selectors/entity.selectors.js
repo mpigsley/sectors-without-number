@@ -413,13 +413,13 @@ export const getPrintableEntities = createDeepEqualSelector(
             return {
               ...zipObject(
                 (Entities[entityType].attributes || []).map(({ key }) => key),
-                (Entities[entityType].attributes || []).map(
-                  ({ key, attributes }) =>
-                    isShared &&
-                    (entity.visibility || {})[`attr.${key}`] === false
-                      ? undefined
-                      : (attributes[(entity.attributes || {})[key]] || {})
-                          .name || (entity.attributes || {})[key],
+                (
+                  Entities[entityType].attributes || []
+                ).map(({ key, attributes }) =>
+                  isShared && (entity.visibility || {})[`attr.${key}`] === false
+                    ? undefined
+                    : (attributes[(entity.attributes || {})[key]] || {}).name ||
+                      (entity.attributes || {})[key],
                 ),
               ),
               tags: ((entity.attributes || {}).tags || []).filter(

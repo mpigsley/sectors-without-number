@@ -48,8 +48,5 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(EntityActions),
+  connect(mapStateToProps, mapDispatchToProps)(EntityActions),
 );

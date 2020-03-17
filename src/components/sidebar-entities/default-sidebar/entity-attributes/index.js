@@ -24,8 +24,5 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default injectIntl(
-  connect(
-    mapStateToProps,
-    { updateEntityInEdit },
-  )(EntityAttributes),
+  connect(mapStateToProps, { updateEntityInEdit })(EntityAttributes),
 );

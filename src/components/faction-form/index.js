@@ -41,8 +41,5 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(FactionForm),
+  connect(mapStateToProps, mapDispatchToProps)(FactionForm),
 );

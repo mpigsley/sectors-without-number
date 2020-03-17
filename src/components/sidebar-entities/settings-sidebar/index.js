@@ -13,8 +13,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = { updateSettings };
 
 export default injectIntl(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(SettingsSidebar),
+  connect(mapStateToProps, mapDispatchToProps)(SettingsSidebar),
 );

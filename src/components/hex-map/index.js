@@ -88,10 +88,5 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  withRouter(
-    connect(
-      mapStateToProps,
-      mapDispatchToProps,
-    )(HexMap),
-  ),
+  withRouter(connect(mapStateToProps, mapDispatchToProps)(HexMap)),
 );

@@ -31,10 +31,5 @@ const mapDispatchTopProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  withRouter(
-    connect(
-      mapStateToProps,
-      mapDispatchTopProps,
-    )(Navigation),
-  ),
+  withRouter(connect(mapStateToProps, mapDispatchTopProps)(Navigation)),
 );

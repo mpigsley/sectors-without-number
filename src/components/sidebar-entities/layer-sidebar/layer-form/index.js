@@ -11,9 +11,4 @@ const mapStateToProps = createStructuredSelector({
   layerForm: layerFormSelector,
 });
 
-export default injectIntl(
-  connect(
-    mapStateToProps,
-    { updateLayer },
-  )(LayerForm),
-);
+export default injectIntl(connect(mapStateToProps, { updateLayer })(LayerForm));

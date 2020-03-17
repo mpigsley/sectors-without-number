@@ -15,7 +15,4 @@ const mapStateToProps = createStructuredSelector({
   uid: userUidSelector,
 });
 
-export default connect(
-  mapStateToProps,
-  { openLoginModal },
-)(StarBackground);
+export default connect(mapStateToProps, { openLoginModal })(StarBackground);

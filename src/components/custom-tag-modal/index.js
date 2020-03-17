@@ -19,8 +19,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 export default injectIntl(
-  connect(
-    mapStateToProps,
-    { createTag, editTag, deleteTag, closeCustomTagModal },
-  )(CustomTagModal),
+  connect(mapStateToProps, {
+    createTag,
+    editTag,
+    deleteTag,
+    closeCustomTagModal,
+  })(CustomTagModal),
 );

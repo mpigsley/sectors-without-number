@@ -149,7 +149,10 @@ export const generateEntity = ({
           ...config,
         });
         filteredCoordinates = coordinates || filteredCoordinates;
-        const childrenObj = zipObject(children.map(() => createId()), children);
+        const childrenObj = zipObject(
+          children.map(() => createId()),
+          children,
+        );
         childrenEntities = {
           ...childrenEntities,
           [childEntity]: {

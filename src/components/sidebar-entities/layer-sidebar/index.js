@@ -34,8 +34,5 @@ const mapDispatchToProps = (dispatch, props) => ({
 });
 
 export default injectIntl(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-  )(LayerSidebar),
+  connect(mapStateToProps, mapDispatchToProps)(LayerSidebar),
 );
