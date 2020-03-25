@@ -1,3 +1,4 @@
+import { addLocaleData } from 'react-intl';
 import { push } from 'connected-react-router';
 import Firebase from 'firebase/app';
 
@@ -71,8 +72,9 @@ export const initialize = () => async (dispatch, getState) => {
 
   let userLocale;
   if (locale && locale !== 'en' && Locale[locale]) {
-    const localeData = await Locale[locale].localeFetch();
-    userLocale = localeData.default;
+    const [localeObj, localeData] = await Locale[locale].localeFetch();
+    addLocaleData(localeData.default);
+    userLocale = localeObj.default;
   }
 
   let share;

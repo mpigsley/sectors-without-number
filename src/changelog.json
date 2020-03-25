@@ -1,4 +1,8 @@
 {
+  "7.21.1": {
+    "description": "Fix translations rendering as lookup keys.",
+    "date": "3-25-2020"
+  },
   "7.21.0": {
     "description": "Enhanced overview list header.",
     "date": "3-17-2020",
