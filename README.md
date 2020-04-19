@@ -16,12 +16,16 @@ This project is a front-end application written in React + Redux with a [Firebas
 
 1.  `npm i` and `cd functions && npm i`
 2.  `cp .env.example .env`
-3.  Create a [firebase project](https://console.firebase.google.com/) and fill out `.env`.
-4.  Ensure you enable authentication and the Firestore database in the web interface.
-5.  `$(npm bin)/firebase login` or use your global firebase instance if you installed it globally.
-6.  `$(npm bin)/firebase use --add` and select the project you configured in the firebase console.
-7.  `npm run deploy:functions` to setup the cloud functions.
-8.  `npm start`
+3.  Create a [firebase project](https://console.firebase.google.com/)
+4.  Create a Firestore Database (make sure it's of the "Cloud Firestore" database type.)
+5.  Create a web application (checking the box for "Also set up Firebase Hosting ...")
+6.  Navigate to "Project Overview" -> "Project Settings" -> scroll down to "Your apps" -> "Firebase SDK Snippet" -> click the "config" radio button and use the values displayed in `firebaseConfig` to fill out the values required in the `.env` file created in step 2 (be aware these values do not need to be closed with quotation marks in the `.env` file)
+7.  Ensure you enable authentication by navigating to "Develop" -> "Authentication" -> click "Set up sign-in method" -> choose a preferred auth provider (or use  email + password)
+8.  `node_modules/.bin/firebase login` or use your global firebase instance if you installed it globally (you might have to follow the google auth flow to authorize the firebase CLI)
+9.  `node_modules/.bin/firebase use --add` and select the project you configured in the firebase console.
+10.  `npm run deploy:functions` to setup the cloud functions.
+11.  `npm run deploy` must be run at least once to create necessary configuration / rules files (also ships the app to firebase)
+12.  `npm start` to host the app locally
 
 ### Deploying to Firebase
 
