@@ -1,4 +1,8 @@
 {
+  "7.21.3": {
+    "description": "Update French & Hebrew Translations.",
+    "date": "5-28-2020"
+  },
   "7.21.2": {
     "description": "Fix \"Getting Started\" instructions in the GitHub README.",
     "contributor": "koslowdavida",
