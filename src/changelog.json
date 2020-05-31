@@ -1,4 +1,9 @@
 {
+  "7.21.4": {
+    "description": "Upgrade function endpoints to Node 10.",
+    "date": "5-31-2020",
+    "changes": ["Patch a minor security alert on an included package."]
+  },
   "7.21.3": {
     "description": "Update French & Hebrew Translations.",
     "date": "5-28-2020"
