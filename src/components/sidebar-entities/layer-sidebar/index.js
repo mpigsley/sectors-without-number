@@ -1,8 +1,10 @@
 import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
 import { injectIntl } from 'react-intl';
+import { push } from 'connected-react-router';
+import { createStructuredSelector } from 'reselect';
 
 import {
+  currentSectorSelector,
   currentEntitySelector,
   layerIsEditingSelector,
   layerRegionFormSelector,
@@ -25,12 +27,14 @@ const mapStateToProps = createStructuredSelector({
   regionForm: layerRegionFormSelector,
   colorPicker: layerColorPickerSelector,
   isShared: isViewingSharedSector,
+  sectorId: currentSectorSelector,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
   initializeRegionForm: regionId => dispatch(initializeRegionForm(regionId)),
   updateRegion: (regionId, update) => dispatch(updateRegion(regionId, update)),
   removeRegion: regionId => dispatch(removeRegion(regionId, props.intl)),
+  toSafeRoute: sectorId => dispatch(push(`/sector/${sectorId}`)),
 });
 
 export default injectIntl(
