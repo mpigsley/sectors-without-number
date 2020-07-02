@@ -19,7 +19,7 @@ const ReactHint = ReactHintFactory(React);
 
 export default function LayerSidebar({
   intl,
-  layers,
+  currentLayer,
   layerId,
   sectorId,
   isEditing,
@@ -34,16 +34,20 @@ export default function LayerSidebar({
   const [regionDeletion, setRegionDeletion] = useState();
 
   useEffect(() => {
-    if (!layers.length && sectorId) {
+    if (layerId && !currentLayer && sectorId) {
       toSafeRoute(sectorId);
     }
-  }, [layers.length, toSafeRoute, sectorId]);
+  }, [layerId, currentLayer, toSafeRoute, sectorId]);
 
-  if (!layers.length) {
+  if (!layerId || isEditing) {
+    return <LayerForm />;
+  }
+
+  if (!currentLayer) {
     return null;
   }
 
-  const { name, regions, isHidden, description } = layers[0];
+  const { name, regions, isHidden, description } = currentLayer;
 
   let content;
   if (colorPicker) {
@@ -83,10 +87,6 @@ export default function LayerSidebar({
         <p className="LayerSidebar-Description">{description}</p>
       </FlexContainer>
     );
-  }
-
-  if (!layerId || isEditing) {
-    return <LayerForm />;
   }
 
   let newRegion = null;
@@ -147,14 +147,12 @@ export default function LayerSidebar({
 
 LayerSidebar.propTypes = {
   intl: intlShape.isRequired,
-  layers: PropTypes.arrayOf(
-    PropTypes.shape({
-      description: PropTypes.string,
-      isHidden: PropTypes.bool,
-      regions: PropTypes.shape(),
-      name: PropTypes.string,
-    }),
-  ).isRequired,
+  currentLayer: PropTypes.shape({
+    description: PropTypes.string,
+    isHidden: PropTypes.bool,
+    regions: PropTypes.shape(),
+    name: PropTypes.string,
+  }),
   layerId: PropTypes.string,
   sectorId: PropTypes.string.isRequired,
   isEditing: PropTypes.bool.isRequired,
@@ -172,6 +170,7 @@ LayerSidebar.propTypes = {
 };
 
 LayerSidebar.defaultProps = {
+  currentLayer: null,
   layerId: null,
   regionForm: null,
   colorPicker: null,

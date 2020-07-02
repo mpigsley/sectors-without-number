@@ -1,4 +1,8 @@
 {
+  "7.21.6": {
+    "description": "Fix bug preventing create layer sidebar from staying open.",
+    "date": "7-2-2020"
+  },
   "7.21.5": {
     "description": "Fix issue in layer details that caused the site to error when toggling player view on.",
     "date": "6-29-2020"

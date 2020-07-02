@@ -10,7 +10,7 @@ import {
   layerRegionFormSelector,
   layerColorPickerSelector,
 } from 'store/selectors/base.selectors';
-import { visibleLayers } from 'store/selectors/layer.selectors';
+import { currentLayer } from 'store/selectors/layer.selectors';
 import { isViewingSharedSector } from 'store/selectors/sector.selectors';
 import {
   initializeRegionForm,
@@ -21,13 +21,13 @@ import {
 import LayerSidebar from './layer-sidebar';
 
 const mapStateToProps = createStructuredSelector({
-  layers: visibleLayers,
-  layerId: currentEntitySelector,
-  isEditing: layerIsEditingSelector,
-  regionForm: layerRegionFormSelector,
   colorPicker: layerColorPickerSelector,
+  regionForm: layerRegionFormSelector,
+  isEditing: layerIsEditingSelector,
   isShared: isViewingSharedSector,
   sectorId: currentSectorSelector,
+  layerId: currentEntitySelector,
+  currentLayer,
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
