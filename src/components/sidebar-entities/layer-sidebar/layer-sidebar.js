@@ -49,20 +49,17 @@ export default function LayerSidebar({
 
   const { name, regions, isHidden, description } = currentLayer;
 
-  let content;
-  if (colorPicker) {
-    content = (
-      <div className="LayerSidebar-ColorHint--content">
-        <CompactPicker
-          className="LayerSidebar-ColorHint--picker"
-          onChangeComplete={({ hex }) =>
-            updateRegion(colorPicker, { color: hex })
-          }
-          color={regions[colorPicker].color}
-        />
-      </div>
-    );
-  }
+  const renderPickerContent = () => (
+    <div className="LayerSidebar-ColorHint--content">
+      <CompactPicker
+        className="LayerSidebar-ColorHint--picker"
+        onChangeComplete={({ hex }) =>
+          updateRegion(colorPicker, { color: hex })
+        }
+        color={regions[colorPicker].color}
+      />
+    </div>
+  );
 
   let hiddenText;
   if (isHidden) {
@@ -129,7 +126,7 @@ export default function LayerSidebar({
         })}
         events={{ click: true }}
         position="right"
-        onRenderContent={content}
+        onRenderContent={renderPickerContent}
       />
       <ReactHint events attribute="data-paint" position="right" />
       <ConfirmModal

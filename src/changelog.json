@@ -1,4 +1,8 @@
 {
+  "7.21.7": {
+    "description": "Fix bug preventing layer color picker from opening.",
+    "date": "7-8-2020"
+  },
   "7.21.6": {
     "description": "Fix bug preventing create layer sidebar from staying open.",
     "date": "7-2-2020"
