@@ -6,7 +6,7 @@ import CosmicNames from 'constants/language/cosmic-names';
 import GreekLetters from 'constants/language/greek-letters';
 import MarsCraters from 'constants/language/mars-craters';
 
-const tweakSeeds = hexSeeds => {
+const tweakSeeds = (hexSeeds) => {
   const newSeeds = hexSeeds.concat([
     hexSeeds.reduce((a, b) => a + b, 0) % 0x10000,
   ]);
@@ -27,16 +27,17 @@ const generateFullRandomName = (chance = new Chance()) => {
     const d = ((hexSeeds[2] >> 8) & 0x1f) << 1;
     hexSeeds = tweakSeeds(hexSeeds);
     if (n < 3 || longNameFlag) {
-      name += '..lexegezacebisousesarmaindirea.eratenberalavetiedorquanteisrion'.substr(
-        d,
-        2,
-      );
+      name +=
+        '..lexegezacebisousesarmaindirea.eratenberalavetiedorquanteisrion'.substr(
+          d,
+          2,
+        );
     }
   }
   return capitalize(name.split('.').join(''));
 };
 
-const romanize = num => {
+const romanize = (num) => {
   const lookup = {
     M: 1000,
     CM: 900,

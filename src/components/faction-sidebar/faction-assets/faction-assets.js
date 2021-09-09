@@ -21,7 +21,7 @@ const renderRoll = ({ dice, add, other }) => (
 );
 
 export default function FactionAssets({ assets, className }) {
-  const renderAsset = asset => {
+  const renderAsset = (asset) => {
     const {
       id,
       key,

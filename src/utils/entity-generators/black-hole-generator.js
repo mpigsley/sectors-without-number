@@ -30,7 +30,7 @@ export const generateBlackHoles = ({
 
   return {
     coordinates: xor(config.coordinates, chosenCoordinates),
-    children: chosenCoordinates.map(coordinate =>
+    children: chosenCoordinates.map((coordinate) =>
       generateBlackHole(Entities.blackHole.key, { ...coordinate, ...config }),
     ),
   };

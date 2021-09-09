@@ -6,7 +6,7 @@ import { settingsSelector } from 'store/selectors/base.selectors';
 
 import SettingsSidebar from './settings-sidebar';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   settings: settingsSelector(state),
 });
 

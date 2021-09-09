@@ -13,7 +13,7 @@ export default function AppWrapper({ children, userLocale, locale, location }) {
         <ReduxToastr position="bottom-left" newestOnTop={false} progressBar />
         <LoginModal />
         <CustomTagModal />
-        {React.Children.map(children, child =>
+        {React.Children.map(children, (child) =>
           React.cloneElement(child, { location }),
         )}
       </>

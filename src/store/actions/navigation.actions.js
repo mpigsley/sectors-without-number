@@ -31,7 +31,7 @@ export const updateNavSettings = (key, value) => ({
   value,
 });
 
-export const addRouteLocation = location => (dispatch, getState) => {
+export const addRouteLocation = (location) => (dispatch, getState) => {
   const state = getState();
   const existingLocations = navigationSettingsRouteSelector(state);
   const newLocations = uniq([...existingLocations, location]);
@@ -43,7 +43,7 @@ export const addRouteLocation = location => (dispatch, getState) => {
   }
 };
 
-export const completeRoute = intl => (dispatch, getState) => {
+export const completeRoute = (intl) => (dispatch, getState) => {
   const state = getState();
   const { isCreatingRoute, ...update } = navigationSettingsSelector(state);
   if (update.route.length < 2) {
@@ -62,7 +62,7 @@ export const completeRoute = intl => (dispatch, getState) => {
       );
       return dispatch({ type: COMPLETED_ROUTE, sectorId, key, route });
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       return dispatch(
         ErrorToast({
@@ -97,7 +97,7 @@ export const removeRoute = (routeId, intl) => (dispatch, getState) => {
       );
       return dispatch({ type: DELETED_ROUTE, sectorId, routeId });
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       return dispatch(
         ErrorToast({
@@ -119,7 +119,7 @@ export const toggleVisibility = (routeId, intl) => (dispatch, getState) => {
   dispatch({ type: TOGGLED_VISIBILITY, sectorId, routeId, isHidden });
   return setVisibility(sectorId, routeId, isHidden)
     .then(() => dispatch(releaseSyncLock()))
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       return dispatch(
         ErrorToast({
@@ -131,7 +131,7 @@ export const toggleVisibility = (routeId, intl) => (dispatch, getState) => {
 };
 
 let locationTimer;
-export const locateRoute = routeId => dispatch => {
+export const locateRoute = (routeId) => (dispatch) => {
   if (locationTimer) {
     clearTimeout(locationTimer);
   }

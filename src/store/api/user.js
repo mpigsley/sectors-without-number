@@ -2,8 +2,8 @@ import Firebase from 'firebase/app';
 import { size } from 'constants/lodash';
 
 export const getCurrentUser = () =>
-  new Promise(resolve => {
-    Firebase.auth().onAuthStateChanged(user => {
+  new Promise((resolve) => {
+    Firebase.auth().onAuthStateChanged((user) => {
       if (!(user || {}).uid) {
         return resolve(null);
       }
@@ -11,7 +11,7 @@ export const getCurrentUser = () =>
         .collection('users')
         .doc(user.uid)
         .get()
-        .then(doc => {
+        .then((doc) => {
           if (doc.exists) {
             resolve({ ...doc.data(), ...user.toJSON() });
           }
@@ -20,12 +20,12 @@ export const getCurrentUser = () =>
     });
   });
 
-export const getUserData = uid =>
+export const getUserData = (uid) =>
   Firebase.firestore()
     .collection('users')
     .doc(uid)
     .get()
-    .then(doc => {
+    .then((doc) => {
       if (!doc.exists) {
         return null;
       }
@@ -61,5 +61,5 @@ export const doLogin = (email, password) =>
 
 export const doLogout = () => Firebase.auth().signOut();
 
-export const doPasswordReset = email =>
+export const doPasswordReset = (email) =>
   Firebase.auth().sendPasswordResetEmail(email);

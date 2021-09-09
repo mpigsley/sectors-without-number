@@ -13,7 +13,7 @@ import { getAllTopLevelEntities } from 'store/selectors/entity.selectors';
 export const getCurrentSectorNavigation = createSelector(
   [currentSectorSelector, navigationRoutesSelector, getAllTopLevelEntities],
   (sector, routes, entities) =>
-    mapValues(routes[sector], route => {
+    mapValues(routes[sector], (route) => {
       const firstKey = route.route[0];
       const lastKey = route.route[route.route.length - 1];
       const firstEntity = find(

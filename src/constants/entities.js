@@ -43,7 +43,7 @@ const emptySituation = {
   attributes: {},
 };
 
-const buildEntity = entity => ({
+const buildEntity = (entity) => ({
   topLevel: false,
   nameGenerator: () => {},
   attributes: [],

@@ -6,15 +6,15 @@ const deleteBatch = (query, resolve, reject) =>
   query
     .limit(BATCH_SIZE)
     .get()
-    .then(snapshot => {
+    .then((snapshot) => {
       if (snapshot.size === 0) {
         return 0;
       }
       const batch = admin.firestore().batch();
-      snapshot.docs.forEach(doc => batch.delete(doc.ref));
+      snapshot.docs.forEach((doc) => batch.delete(doc.ref));
       return batch.commit().then(() => snapshot.size);
     })
-    .then(numDeleted => {
+    .then((numDeleted) => {
       if (numDeleted === 0) {
         return resolve();
       }
@@ -56,6 +56,6 @@ module.exports = functions.firestore
         deleteBatch(factionQuery, resolve, reject)
       ),
     ]).catch(
-      error => new functions.https.HttpsError('unknown', error.message, error)
+      (error) => new functions.https.HttpsError('unknown', error.message, error)
     );
   });

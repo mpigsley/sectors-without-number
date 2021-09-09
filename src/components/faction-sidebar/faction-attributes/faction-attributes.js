@@ -87,7 +87,7 @@ export default function FactionAttributes({
     tags = (
       <LabeledItem isVertical label="misc.tags">
         <FlexContainer direction="column">
-          {faction.tags.map(tag =>
+          {faction.tags.map((tag) =>
             titledItem(
               tag,
               <>

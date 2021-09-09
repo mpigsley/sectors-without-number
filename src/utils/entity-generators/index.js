@@ -109,6 +109,6 @@ export default mapValues(
     generateOne:
       key === Entities.sector.key
         ? generateOne
-        : config => generateOne(key, config),
+        : (config) => generateOne(key, config),
   }),
 );

@@ -15,7 +15,7 @@ export default function ItemRow({ children, className, ...rest }) {
     >
       {React.Children.map(
         children,
-        item =>
+        (item) =>
           item &&
           React.cloneElement(item, {
             className: classNames(item.props.className, 'ItemRow-Item'),

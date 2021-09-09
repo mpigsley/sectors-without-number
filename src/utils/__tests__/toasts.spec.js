@@ -4,7 +4,7 @@ import { SuccessToast, ErrorToast } from '../toasts';
 
 jest.mock('react-redux-toastr', () => ({
   actions: {
-    add: jest.fn(data => data),
+    add: jest.fn((data) => data),
   },
 }));
 

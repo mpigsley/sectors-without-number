@@ -34,7 +34,7 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  toSafeRoute: sector => dispatch(push(sector ? `/sector/${sector}` : '/')),
+  toSafeRoute: (sector) => dispatch(push(sector ? `/sector/${sector}` : '/')),
   fetchSector: () => dispatch(fetchSector()),
   generateSector: () =>
     dispatch(

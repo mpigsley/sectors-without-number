@@ -27,7 +27,7 @@ const mapStateToProps = createStructuredSelector({
   customTags: customTagSelector,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   toSafeRoute: () => dispatch(push('/')),
   openCustomTagModal: () => dispatch(openCustomTagModal()),
 });

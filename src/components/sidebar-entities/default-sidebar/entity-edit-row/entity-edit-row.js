@@ -32,7 +32,7 @@ export default function EntityEditRow({
     <Input
       name="name"
       value={entity.name}
-      onChange={e => updateChildInEdit({ name: e.target.value })}
+      onChange={(e) => updateChildInEdit({ name: e.target.value })}
     />
   );
   if (entityConfig.nameGenerator) {
@@ -41,7 +41,7 @@ export default function EntityEditRow({
         name="name"
         icon={RefreshCw}
         value={entity.name}
-        onChange={e => updateChildInEdit({ name: e.target.value })}
+        onChange={(e) => updateChildInEdit({ name: e.target.value })}
         onIconClick={() =>
           updateChildInEdit({ name: entityConfig.nameGenerator() })
         }
@@ -59,7 +59,7 @@ export default function EntityEditRow({
         onChange={({ value }) => updateChildInEdit(coordinatesFromKey(value))}
         options={[...emptyHexKeys, coordinateKey(entity.x, entity.y)]
           .sort()
-          .map(key => ({
+          .map((key) => ({
             value: key,
             label: key,
           }))}

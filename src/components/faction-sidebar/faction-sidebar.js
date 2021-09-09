@@ -22,13 +22,8 @@ export default class FactionSidebar extends Component {
   }
 
   render() {
-    const {
-      faction,
-      intl,
-      currentSector,
-      currentFaction,
-      removeFaction,
-    } = this.props;
+    const { faction, intl, currentSector, currentFaction, removeFaction } =
+      this.props;
     if (!faction) {
       return null;
     }

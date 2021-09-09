@@ -8,16 +8,16 @@ export const uploadEntities = (entities, sectorId) =>
     .httpsCallable('saveEntities')({ sectorId, entities })
     .then(({ data }) => data);
 
-export const getSyncedSectors = uid =>
+export const getSyncedSectors = (uid) =>
   Firebase.firestore()
     .collection('entities')
     .doc(Entities.sector.key)
     .collection('entity')
     .where('creator', '==', uid)
     .get()
-    .then(typeSnapshot => {
+    .then((typeSnapshot) => {
       let sectors = {};
-      typeSnapshot.forEach(doc => {
+      typeSnapshot.forEach((doc) => {
         const data = doc.data();
         if (!data.deleted) {
           sectors = { ...sectors, [doc.id]: data };
@@ -34,7 +34,7 @@ export const getSectorEntities = (sectorId, uid) => {
     .collection('entity')
     .doc(sectorId)
     .get()
-    .then(doc => {
+    .then((doc) => {
       const data = doc.exists ? doc.data() : undefined;
       if (!data || data.deleted) {
         return { entities };
@@ -50,8 +50,8 @@ export const getSectorEntities = (sectorId, uid) => {
             .collection('entity')
             .where('sector', '==', sectorId)
             .get()
-            .then(typeSnapshot => {
-              typeSnapshot.forEach(typeDoc => {
+            .then((typeSnapshot) => {
+              typeSnapshot.forEach((typeDoc) => {
                 entities = {
                   ...entities,
                   [key]: {
@@ -77,7 +77,7 @@ export const updateEntity = (entityId, entityType, update) =>
     .doc(entityId)
     .set(update, { merge: true });
 
-export const updateEntities = entities => {
+export const updateEntities = (entities) => {
   const batch = Firebase.firestore().batch();
   forEach(entities, (entityUpdates, entityType) =>
     forEach(entityUpdates, (update, entityId) =>
@@ -97,7 +97,7 @@ export const updateEntities = entities => {
   return batch.commit();
 };
 
-export const deleteSector = sectorId =>
+export const deleteSector = (sectorId) =>
   Firebase.firestore()
     .collection('entities')
     .doc(Entities.sector.key)
@@ -109,13 +109,13 @@ export const deleteSector = sectorId =>
     );
 
 const BATCH_SIZE = 250;
-export const deleteEntities = entities => {
+export const deleteEntities = (entities) => {
   const batches = [Firebase.firestore().batch()];
   let batchCount = 0;
   let batchIndex = 0;
   const promises = [];
   forEach(entities, (entityIds, entityType) =>
-    entityIds.forEach(entityId => {
+    entityIds.forEach((entityId) => {
       batches[batchIndex].delete(
         Firebase.firestore()
           .collection('entities')
@@ -132,6 +132,6 @@ export const deleteEntities = entities => {
     }),
   );
   return Promise.all(promises).then(() =>
-    Promise.all(batches.map(batch => batch.commit())),
+    Promise.all(batches.map((batch) => batch.commit())),
   );
 };

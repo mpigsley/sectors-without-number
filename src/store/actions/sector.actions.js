@@ -18,17 +18,17 @@ export const TOGGLE_PLAYER_VIEW = `${ACTION_PREFIX}/TOGGLE_PLAYER_VIEW`;
 export const OPENED_SECTOR_EXPANSION = `${ACTION_PREFIX}/OPENED_SECTOR_EXPANSION`;
 export const CLOSED_SECTOR_EXPANSION = `${ACTION_PREFIX}/CLOSED_SECTOR_EXPANSION`;
 
-export const entityHold = key => syncLock(ENTITY_HELD, { key });
+export const entityHold = (key) => syncLock(ENTITY_HELD, { key });
 export const entityRelease = () => syncLock(RELEASE_HELD);
-export const entityHover = key => syncLock(ENTITY_HOVERED, { key });
+export const entityHover = (key) => syncLock(ENTITY_HOVERED, { key });
 export const releaseSyncLock = () => ({ type: RELEASED_SYNC_LOCK });
-export const topLevelEntityCreate = key =>
+export const topLevelEntityCreate = (key) =>
   syncLock(TOP_LEVEL_ENTITY_CREATED, { key });
 export const cancelTopLevelEntityCreate = () =>
   syncLock(CANCELED_TOP_LEVEL_ENTITY_CREATE);
 export const updateConfiguration = (key, value) =>
   syncLock(UPDATED_CONFIGURATION, { key, value });
-export const setEntityExport = exportType =>
+export const setEntityExport = (exportType) =>
   syncLock(SET_EXPORT_TYPE, { exportType });
 export const openExport = () => ({ type: OPENED_EXPORT });
 export const closeExport = () => ({ type: CLOSED_EXPORT });

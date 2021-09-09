@@ -10,7 +10,7 @@ import { updateEntityInEdit } from 'store/actions/sidebar.actions';
 
 import NoteSidebar from './note-sidebar';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   note: getCurrentEntity(state),
   isSidebarEditActive: isSidebarEditActiveSelector(state),
   isAncestorHidden: isAncestorHidden(state),

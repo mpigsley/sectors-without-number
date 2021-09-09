@@ -39,7 +39,7 @@ const mapDispatchToProps = (dispatch, props) => ({
   initializeLayerEdit: () => dispatch(initializeLayerEdit()),
   submitForm: () => dispatch(submitForm(props.intl)),
   cancelForm: () => dispatch(resetForms()),
-  route: to => dispatch(push(to)),
+  route: (to) => dispatch(push(to)),
 });
 
 export default injectIntl(

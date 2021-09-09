@@ -7,7 +7,7 @@ import { customTagSelector } from 'store/selectors/base.selectors';
 
 import ExpendedPrintable from './expanded-printable';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   entities: getPrintableEntities(state),
   customTags: customTagSelector(state),
 });

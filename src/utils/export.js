@@ -1,7 +1,7 @@
 export const generateCSV = (table = []) =>
   table.reduce(
     (csvString, infoArray) =>
-      `${csvString}${infoArray.map(item => `"${item}"`).join(',')}\n`,
+      `${csvString}${infoArray.map((item) => `"${item}"`).join(',')}\n`,
     'data:text/csv;charset=utf-8,',
   );
 
@@ -14,7 +14,7 @@ export const createCSVDownload = (csvContent, fileName = 'data') => {
   link.click();
 };
 
-export const createImageDownlaod = canvasId => {
+export const createImageDownlaod = (canvasId) => {
   const canvas = document.getElementById(canvasId);
   const image = canvas
     .toDataURL('image/jpg')

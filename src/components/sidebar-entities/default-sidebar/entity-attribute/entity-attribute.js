@@ -53,7 +53,7 @@ export default function EntityAttribute({
       type="dropdown"
       allowCreate
       value={entityAttribute}
-      onChange={item =>
+      onChange={(item) =>
         updateEntityInEdit({ attributes: { [key]: (item || {}).value } })
       }
       icon={RefreshCw}
@@ -65,7 +65,7 @@ export default function EntityAttribute({
         })
       }
       options={[
-        ...map(attributes, attr => ({
+        ...map(attributes, (attr) => ({
           value: attr.key,
           label: intl.formatMessage({ id: attr.name }),
         })),

@@ -42,7 +42,7 @@ export const updateUserForm = (key, value) => ({
   value,
 });
 
-const onLogin = dispatch => result => {
+const onLogin = (dispatch) => (result) => {
   const uid = result.user ? result.user.uid : result.uid;
   return Promise.all([getSyncedSectors(uid), getUserData(uid)]).then(
     ([sectors, userData]) => {
@@ -63,13 +63,13 @@ const onLogin = dispatch => result => {
 export const googleLogin = () => (dispatch, getState) =>
   doGoogleLogin()
     .then(onLogin(dispatch, getState()))
-    .catch(error => {
+    .catch((error) => {
       dispatch({ type: AUTH_FAILURE, error: error.message });
       console.error(error);
       throw error;
     });
 
-export const signup = intl => (dispatch, getState) => {
+export const signup = (intl) => (dispatch, getState) => {
   const state = getState();
   const { email, password, confirm } = userFormSelector(state);
   if (!email || !password || !confirm) {
@@ -86,15 +86,15 @@ export const signup = intl => (dispatch, getState) => {
   }
   return doSignup(email, password)
     .then(onLogin(dispatch, state))
-    .then(result => (result.user || result).sendEmailVerification())
-    .catch(error => {
+    .then((result) => (result.user || result).sendEmailVerification())
+    .catch((error) => {
       dispatch({ type: AUTH_FAILURE, error: error.message });
       console.error(error);
       throw error;
     });
 };
 
-export const login = intl => (dispatch, getState) => {
+export const login = (intl) => (dispatch, getState) => {
   const state = getState();
   const { email, password } = userFormSelector(state);
   if (!email || !password) {
@@ -105,14 +105,14 @@ export const login = intl => (dispatch, getState) => {
   }
   return doLogin(email, password)
     .then(onLogin(dispatch, state))
-    .catch(error => {
+    .catch((error) => {
       dispatch({ type: AUTH_FAILURE, error: error.message });
       console.error(error);
       throw error;
     });
 };
 
-export const passwordReset = intl => (dispatch, getState) => {
+export const passwordReset = (intl) => (dispatch, getState) => {
   const state = getState();
   const { email } = userFormSelector(state);
   return doPasswordReset(email)
@@ -125,13 +125,13 @@ export const passwordReset = intl => (dispatch, getState) => {
         }),
       );
     })
-    .catch(error => {
+    .catch((error) => {
       dispatch({ type: AUTH_FAILURE, error: error.message });
       console.error(error);
     });
 };
 
-export const updateUser = intl => (dispatch, getState) => {
+export const updateUser = (intl) => (dispatch, getState) => {
   const state = getState();
   const uid = userUidSelector(state);
   let filteredForm = pick(userFormSelector(state), 'displayName', 'locale');
@@ -149,7 +149,7 @@ export const updateUser = intl => (dispatch, getState) => {
         });
       }
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch(
         ErrorToast({
           title: intl.formatMessage({ id: 'misc.error' }),
@@ -160,13 +160,13 @@ export const updateUser = intl => (dispatch, getState) => {
     });
 };
 
-export const logout = intl => dispatch =>
+export const logout = (intl) => (dispatch) =>
   doLogout()
     .then(() => {
       dispatch(push('/'));
       dispatch({ type: LOGGED_OUT });
     })
-    .catch(err => {
+    .catch((err) => {
       dispatch(
         ErrorToast({
           title: intl.formatMessage({ id: 'misc.error' }),

@@ -37,13 +37,13 @@ export default function ExpandedPrintable({
             <FormattedMessage id="misc.tags" />:
           </b>
           {entity.tags
-            .map(tag =>
+            .map((tag) =>
               intl.formatMessage({
                 id: `tags.${tag}`,
                 defaultMessage: (customTags[tag] || {}).name,
               }),
             )
-            .filter(tag => tag)
+            .filter((tag) => tag)
             .join(', ')}
         </div>,
       );

@@ -20,7 +20,7 @@ export const UPDATED_FORM = `${ACTION_PREFIX}/UPDATED_FORM`;
 export const UPDATED_ASSET_FORM = `${ACTION_PREFIX}/UPDATED_ASSET_FORM`;
 export const CREATED_BLANK_ASSET = `${ACTION_PREFIX}/CREATED_BLANK_ASSET`;
 
-export const updateFaction = update => ({ type: UPDATED_FORM, update });
+export const updateFaction = (update) => ({ type: UPDATED_FORM, update });
 
 export const updateFactionAsset = (key, update) => ({
   type: UPDATED_ASSET_FORM,
@@ -33,7 +33,7 @@ export const createBlankAsset = () => ({
   key: createId(),
 });
 
-export const submitForm = intl => (dispatch, getState) => {
+export const submitForm = (intl) => (dispatch, getState) => {
   const state = getState();
   const { assets, ...form } = factionFormSelector(state);
   const sectorId = currentSectorSelector(state);
@@ -65,7 +65,7 @@ export const submitForm = intl => (dispatch, getState) => {
       });
       dispatch(push(`/elements/${sectorId}/faction/${factionId}`));
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       dispatch(
         ErrorToast({
@@ -76,7 +76,7 @@ export const submitForm = intl => (dispatch, getState) => {
     });
 };
 
-export const removeFaction = intl => (dispatch, getState) => {
+export const removeFaction = (intl) => (dispatch, getState) => {
   const state = getState();
   const factionId = currentEntitySelector(state);
   if (!factionId) {
@@ -100,7 +100,7 @@ export const removeFaction = intl => (dispatch, getState) => {
         }),
       );
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       return dispatch(
         ErrorToast({

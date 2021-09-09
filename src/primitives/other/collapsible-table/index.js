@@ -15,7 +15,7 @@ export default class CollapsibleTable extends Component {
 
     const { data, dataIdAccessor } = props;
     this.state = {
-      openRows: data.map(row => row[dataIdAccessor]),
+      openRows: data.map((row) => row[dataIdAccessor]),
     };
   }
 
@@ -25,7 +25,7 @@ export default class CollapsibleTable extends Component {
     return data.reduce((allData, { children, ...parentRow }) => {
       const isRowOpen = includes(openRows, parentRow[dataIdAccessor]);
       const childRows = isRowOpen
-        ? children.map(c => ({
+        ? children.map((c) => ({
             ...c,
             collapsible: 'child',
             rowClass: 'CollapsibleTable-Child',
@@ -51,14 +51,14 @@ export default class CollapsibleTable extends Component {
           'CollapsibleTable-Icon--open': isHeaderOpen,
           'CollapsibleTable-Icon--closed': !isHeaderOpen,
         }),
-        onClick: rowId => {
+        onClick: (rowId) => {
           let newOpenRows = [];
           if (rowId && includes(openRows, rowId)) {
             newOpenRows = without(openRows, rowId);
           } else if (rowId) {
             newOpenRows = [...openRows, rowId];
           } else if (!isHeaderOpen) {
-            newOpenRows = data.map(row => row[dataIdAccessor]);
+            newOpenRows = data.map((row) => row[dataIdAccessor]);
           }
           this.setState({ openRows: newOpenRows });
         },

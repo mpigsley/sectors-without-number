@@ -6,7 +6,7 @@ import { getPrintableEntities } from 'store/selectors/entity.selectors';
 import { customTagSelector } from 'store/selectors/base.selectors';
 import CondensedPrintable from './condensed-printable';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   entities: getPrintableEntities(state),
   customTags: customTagSelector(state),
 });

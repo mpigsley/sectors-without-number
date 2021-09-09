@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import { debounce } from 'lodash';
 
-export const useResize = cb =>
+export const useResize = (cb) =>
   useEffect(() => {
     window.addEventListener('resize', cb);
     return () => window.removeEventListener('resize', cb);
@@ -30,7 +30,7 @@ export const useIsMobile = () => {
   return width <= 700;
 };
 
-export const usePrevious = value => {
+export const usePrevious = (value) => {
   const ref = useRef();
   useEffect(() => {
     ref.current = value;

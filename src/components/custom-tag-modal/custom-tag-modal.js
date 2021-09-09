@@ -59,7 +59,7 @@ export default function CustomTagModal({
             types: [Entities.planet.key],
             description: intl.formatMessage({ id: `tags.${key}.description` }),
             ...mapValues(lists, (listSize, listKey) =>
-              [...Array(listSize).keys()].map(index =>
+              [...Array(listSize).keys()].map((index) =>
                 intl.formatMessage({ id: `tags.${key}.${listKey}.${index}` }),
               ),
             ),
@@ -69,12 +69,12 @@ export default function CustomTagModal({
       ),
     [intl, tags],
   );
-  const selectedTag = useMemo(() => find(sortedWorldTags, { key: selected }), [
-    sortedWorldTags,
-    selected,
-  ]);
+  const selectedTag = useMemo(
+    () => find(sortedWorldTags, { key: selected }),
+    [sortedWorldTags, selected],
+  );
 
-  const onTagSelect = key => {
+  const onTagSelect = (key) => {
     setIsFormOpen(false);
     setSelected(key);
   };
@@ -86,11 +86,11 @@ export default function CustomTagModal({
         intl={intl}
         selectedTag={selectedTag}
         onCancel={() => setIsFormOpen(false)}
-        editTag={tagUpdate =>
+        editTag={(tagUpdate) =>
           editTag(intl, selected, tagUpdate).then(() => setIsFormOpen(false))
         }
-        createTag={newTag =>
-          createTag(intl, newTag).then(newTagId => {
+        createTag={(newTag) =>
+          createTag(intl, newTag).then((newTagId) => {
             setIsFormOpen(false);
             if (newTagId) {
               setSelected(newTagId);

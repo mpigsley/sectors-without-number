@@ -8,7 +8,7 @@ import {
 
 import AppWrapper from './app-wrapper';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   userLocale: userModelLocaleSelector(state),
   locale: userLocaleSelector(state),
   location: routerLocationSelector(state),

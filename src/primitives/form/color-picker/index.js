@@ -25,9 +25,7 @@ export default function ColorPicker({ onChange, value }) {
     return onChange(target.value);
   };
 
-  const border = `1px solid ${tinycolor(value)
-    .darken(10)
-    .toHexString()}`;
+  const border = `1px solid ${tinycolor(value).darken(10).toHexString()}`;
 
   return (
     <FlexContainer align="center" flex="1">
@@ -49,7 +47,7 @@ export default function ColorPicker({ onChange, value }) {
           }}
         />
       </FlexContainer>
-      {DEFAULT_COLORS.map(color => (
+      {DEFAULT_COLORS.map((color) => (
         <ColorSwatch
           className="ColorPicker-Swatch"
           color={color}

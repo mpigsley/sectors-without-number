@@ -41,7 +41,7 @@ export default class HexMap extends Component {
     });
   }
 
-  onContextMenu = e => {
+  onContextMenu = (e) => {
     e.preventDefault();
     const {
       currentEntityType,
@@ -60,7 +60,7 @@ export default class HexMap extends Component {
     }
   };
 
-  getHexFromEvent = event => {
+  getHexFromEvent = (event) => {
     let totalOffsetX = 0;
     let totalOffsetY = 0;
     let currentElement = event.target;
@@ -79,7 +79,7 @@ export default class HexMap extends Component {
     });
   };
 
-  mouseDown = event => {
+  mouseDown = (event) => {
     if (event.nativeEvent.which === 3) {
       return; // right click
     }
@@ -118,7 +118,7 @@ export default class HexMap extends Component {
     }, 600);
   };
 
-  mouseUp = event => {
+  mouseUp = (event) => {
     this.isMousedDown = false;
     if (event.nativeEvent.which === 3) {
       return; // right click
@@ -168,7 +168,7 @@ export default class HexMap extends Component {
     }
   };
 
-  mouseMove = event => {
+  mouseMove = (event) => {
     const { hoverKey, entityHover } = this.props;
     const hexKey = this.getHexFromEvent(event);
     if ((hexKey && hexKey !== hoverKey) || (!hexKey && hoverKey)) {

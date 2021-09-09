@@ -19,7 +19,7 @@ export default function Changelog() {
             Changelog
           </Header>
           {Object.keys(changelog)
-            .map(version => ({
+            .map((version) => ({
               ...changelog[version],
               version,
             }))
@@ -57,7 +57,7 @@ export default function Changelog() {
                 )}
                 <ul className="Changelog-List">
                   {changes &&
-                    changes.map(change => (
+                    changes.map((change) => (
                       <li className="Changelog-Change" key={change}>
                         {change}
                       </li>

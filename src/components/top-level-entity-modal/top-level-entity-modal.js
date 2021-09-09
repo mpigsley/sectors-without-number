@@ -32,11 +32,11 @@ import {
 import './style.scss';
 
 const ReactHint = ReactHintFactory(React);
-const TopLevelLevelEntities = filter(Entities, entity => entity.topLevel);
+const TopLevelLevelEntities = filter(Entities, (entity) => entity.topLevel);
 const generateChildrenNames = (parentEntity, currentSector, customTags) => {
   let names = {};
   let currentSort = 0;
-  Entities[parentEntity].children.forEach(child => {
+  Entities[parentEntity].children.forEach((child) => {
     const { children } = EntityGenerators[child].generateAll({
       sector: currentSector,
       parentEntity,
@@ -99,7 +99,7 @@ export default class TopLevelEntityModal extends Component {
     this.setState({ [target.dataset.key]: target.value });
   };
 
-  onChangeChildType = (entityType, entityId) => item => {
+  onChangeChildType = (entityType, entityId) => (item) => {
     const { children } = this.state;
     if (entityType !== item.value) {
       const oldEntity = children[entityType][entityId];
@@ -119,37 +119,41 @@ export default class TopLevelEntityModal extends Component {
     }
   };
 
-  onEditChild = (entityType, entityId) => ({ target }) => {
-    const { children } = this.state;
-    this.setState({
-      children: {
-        ...children,
-        [entityType]: {
-          ...children[entityType],
-          [entityId]: {
-            ...children[entityType][entityId],
-            name: target.value,
+  onEditChild =
+    (entityType, entityId) =>
+    ({ target }) => {
+      const { children } = this.state;
+      this.setState({
+        children: {
+          ...children,
+          [entityType]: {
+            ...children[entityType],
+            [entityId]: {
+              ...children[entityType][entityId],
+              name: target.value,
+            },
           },
         },
-      },
-    });
-  };
+      });
+    };
 
-  onChangeGenerate = (entityType, entityId) => ({ target }) => {
-    const { children } = this.state;
-    this.setState({
-      children: {
-        ...children,
-        [entityType]: {
-          ...children[entityType],
-          [entityId]: {
-            ...children[entityType][entityId],
-            generate: target.checked,
+  onChangeGenerate =
+    (entityType, entityId) =>
+    ({ target }) => {
+      const { children } = this.state;
+      this.setState({
+        children: {
+          ...children,
+          [entityType]: {
+            ...children[entityType],
+            [entityId]: {
+              ...children[entityType][entityId],
+              generate: target.checked,
+            },
           },
         },
-      },
-    });
-  };
+      });
+    };
 
   onNewChildName = (entityType, entityId) => {
     const { children } = this.state;
@@ -206,7 +210,7 @@ export default class TopLevelEntityModal extends Component {
       { name, entityType },
       {
         generate: true,
-        children: mapValues(children, child => values(child)),
+        children: mapValues(children, (child) => values(child)),
         ...coordinatesFromKey(topLevelKey),
         parent: currentSector,
         parentEntity: Entities.sector.key,
@@ -234,7 +238,7 @@ export default class TopLevelEntityModal extends Component {
           value={rowType}
           clearable={false}
           onChange={this.onChangeChildType(rowType, key)}
-          options={Entities[entityType].children.map(child => ({
+          options={Entities[entityType].children.map((child) => ({
             value: child,
             label: intl.formatMessage({ id: Entities[child].name }),
           }))}
@@ -342,14 +346,14 @@ export default class TopLevelEntityModal extends Component {
             <Dropdown
               value={entityType}
               clearable={false}
-              onChange={item => {
+              onChange={(item) => {
                 const newType = (item || {}).value;
                 this.setState({
                   entityType: newType,
                   ...generateChildrenNames(newType, currentSector, customTags),
                 });
               }}
-              options={TopLevelLevelEntities.map(attr => ({
+              options={TopLevelLevelEntities.map((attr) => ({
                 value: attr.key,
                 label: intl.formatMessage({ id: attr.name }),
               }))}

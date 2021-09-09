@@ -32,9 +32,9 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  updateFaction: update => dispatch(updateFaction(update)),
+  updateFaction: (update) => dispatch(updateFaction(update)),
   createBlankAsset: () => dispatch(createBlankAsset()),
-  toRoute: route => dispatch(push(route)),
+  toRoute: (route) => dispatch(push(route)),
   updateFactionAsset: (key, update) =>
     dispatch(updateFactionAsset(key, update)),
   submitForm: () => dispatch(submitForm(props.intl)),

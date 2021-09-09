@@ -28,21 +28,21 @@ export default function CondensedPrintable({
     }, 1);
   }, [endPrint]);
 
-  const getColumnsFromType = entityType => {
+  const getColumnsFromType = (entityType) => {
     const common = [
       { accessor: 'name', Header: 'misc.name' },
       {
         accessor: 'tags',
         Header: 'misc.tags',
-        Cell: tags =>
+        Cell: (tags) =>
           tags
-            .map(tag =>
+            .map((tag) =>
               intl.formatMessage({
                 id: `tags.${tag}`,
                 defaultMessage: (customTags[tag] || {}).name,
               }),
             )
-            .filter(tag => tag)
+            .filter((tag) => tag)
             .join(', ') || '-',
       },
     ];

@@ -85,9 +85,9 @@ const printablePadding = 40;
 const printableBorder = 3;
 const getPrintableData = (hexes, { rows, columns }) => {
   const printableHexHeight = toHeight(printableHexWidth);
-  const onlySector = hexes.filter(hex => hex.highlighted) || [];
+  const onlySector = hexes.filter((hex) => hex.highlighted) || [];
   const { width, height, xOffset, yOffset, i, j } =
-    hexes.find(hex => hex.hexKey === '0000') || {};
+    hexes.find((hex) => hex.hexKey === '0000') || {};
   const newTotalWidth =
     getTotalWidth(printableHexWidth, columns) +
     printablePadding * 2 +
@@ -98,7 +98,7 @@ const getPrintableData = (hexes, { rows, columns }) => {
     printableBorder * rows;
   return {
     viewbox: `0 0 ${newTotalWidth} ${newTotalHeight}`,
-    hexes: onlySector.map(hex => ({
+    hexes: onlySector.map((hex) => ({
       ...hex,
       width: printableHexWidth,
       height: printableHexHeight,
@@ -120,7 +120,7 @@ const getPrintableData = (hexes, { rows, columns }) => {
   };
 };
 
-export default config => {
+export default (config) => {
   if (config.width < 200 || config.height < 200) {
     return { hexes: [], printable: {} };
   }

@@ -39,7 +39,7 @@ export default class DefaultSidebar extends Component {
     return state;
   }
 
-  toggleListOpen = entityType => () => {
+  toggleListOpen = (entityType) => () => {
     const { openLists } = this.state;
     this.setState({
       openLists: {

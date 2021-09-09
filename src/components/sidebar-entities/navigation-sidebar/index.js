@@ -30,9 +30,10 @@ const mapDispatchToProps = (dispatch, props) => ({
   cancelNavigation: () => dispatch(cancelNavigation()),
   updateNavSettings: (key, value) => dispatch(updateNavSettings(key, value)),
   completeRoute: () => dispatch(completeRoute(props.intl)),
-  removeRoute: routeId => dispatch(removeRoute(routeId, props.intl)),
-  toggleVisibility: routeId => dispatch(toggleVisibility(routeId, props.intl)),
-  locateRoute: routeId => dispatch(locateRoute(routeId)),
+  removeRoute: (routeId) => dispatch(removeRoute(routeId, props.intl)),
+  toggleVisibility: (routeId) =>
+    dispatch(toggleVisibility(routeId, props.intl)),
+  locateRoute: (routeId) => dispatch(locateRoute(routeId)),
 });
 
 export default injectIntl(

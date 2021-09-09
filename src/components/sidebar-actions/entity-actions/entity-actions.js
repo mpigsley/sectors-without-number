@@ -90,11 +90,8 @@ export default class EntityActions extends Component {
   };
 
   renderFooter = () => {
-    const {
-      isSidebarEditActive,
-      deactivateSidebarEdit,
-      saveEntityEdit,
-    } = this.props;
+    const { isSidebarEditActive, deactivateSidebarEdit, saveEntityEdit } =
+      this.props;
     if (!isSidebarEditActive) {
       return null;
     }
@@ -138,13 +135,8 @@ export default class EntityActions extends Component {
   }
 
   render() {
-    const {
-      isSidebarEditActive,
-      entity,
-      entityType,
-      children,
-      intl,
-    } = this.props;
+    const { isSidebarEditActive, entity, entityType, children, intl } =
+      this.props;
     const { isConfirmDeleteOpen } = this.state;
     return (
       <ActionLayout

@@ -11,7 +11,7 @@ export const coordinateKey = (x, y) => {
 };
 
 // Assumes x/y is less than 100
-export const coordinatesFromKey = key => {
+export const coordinatesFromKey = (key) => {
   if (!key) {
     return { x: null, y: null };
   }
@@ -36,7 +36,7 @@ export const allSectorKeys = (width = 0, height = 0) =>
     .map(({ x, y }) => coordinateKey(x, y))
     .sort();
 
-export const removeDiacritics = str => {
+export const removeDiacritics = (str) => {
   const diacriticsMap = {
     A: /[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F]/g,
     AA: /[\uA732]/g,
@@ -132,16 +132,18 @@ export const removeDiacritics = str => {
   );
 };
 
-export const sortByKey = (key, stripDiatrics = false) => (a, b) => {
-  const strip = stripDiatrics ? removeDiacritics : str => str;
-  const keyA = isNumber(a[key]) ? a[key] : strip(a[key] || '').toUpperCase();
-  const keyB = isNumber(b[key]) ? b[key] : strip(b[key] || '').toUpperCase();
-  if (keyA < keyB) return -1;
-  if (keyA > keyB) return 1;
-  return 0;
-};
+export const sortByKey =
+  (key, stripDiatrics = false) =>
+  (a, b) => {
+    const strip = stripDiatrics ? removeDiacritics : (str) => str;
+    const keyA = isNumber(a[key]) ? a[key] : strip(a[key] || '').toUpperCase();
+    const keyB = isNumber(b[key]) ? b[key] : strip(b[key] || '').toUpperCase();
+    if (keyA < keyB) return -1;
+    if (keyA > keyB) return 1;
+    return 0;
+  };
 
 export const toCommaArray = (element, i) => `${i !== 0 ? ', ' : ''}${element}`;
 
-export const isValidColor = hexCode =>
+export const isValidColor = (hexCode) =>
   /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/i.test(hexCode);

@@ -16,7 +16,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch, props) => ({
   closeSectorExpansion: () => dispatch(closeSectorExpansion()),
-  expandSector: state => dispatch(expandSector(state, props.intl)),
+  expandSector: (state) => dispatch(expandSector(state, props.intl)),
 });
 
 export default injectIntl(

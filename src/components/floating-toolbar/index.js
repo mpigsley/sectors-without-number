@@ -31,11 +31,11 @@ const mapStateToProps = createStructuredSelector({
   playerView: playerViewSelector,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   toggleMapLock: () => dispatch(toggleMapLock()),
   togglePlayerView: () => dispatch(togglePlayerView()),
-  toggleLayer: layer => dispatch(toggleLayer(layer)),
-  redirectToHome: sectorId => dispatch(push(`/sector/${sectorId}`)),
+  toggleLayer: (layer) => dispatch(toggleLayer(layer)),
+  redirectToHome: (sectorId) => dispatch(push(`/sector/${sectorId}`)),
 });
 
 export default injectIntl(

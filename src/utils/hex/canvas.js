@@ -71,7 +71,7 @@ export default ({
   ctx.lineWidth = 3 * ratio;
 
   const hexEntities = hexes
-    .map(hex => ({
+    .map((hex) => ({
       ...hex,
       xOffset: hex.xOffset * ratio,
       yOffset: hex.yOffset * ratio,
@@ -79,7 +79,7 @@ export default ({
       height: hex.height * ratio,
       ...getTopLevelEntity(topLevelEntities, hex.hexKey),
     }))
-    .map(hex => ({
+    .map((hex) => ({
       ...hex,
       points: getHexPoints(hex),
     }));
@@ -277,8 +277,8 @@ export default ({
   }
 
   hexEntities
-    .filter(hex => hex.highlighted)
-    .forEach(hex => {
+    .filter((hex) => hex.highlighted)
+    .forEach((hex) => {
       // Draw Text
       ctx.font = `${9 * ratio}px Titillium Web,sans-serif`;
       ctx.textAlign = 'center';

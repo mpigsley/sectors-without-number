@@ -14,7 +14,7 @@ export default function EntityTooltips({
   hexLayerNames,
   hexes,
 }) {
-  const renderTooltip = system => {
+  const renderTooltip = (system) => {
     let hexLayerRegions;
     const hexLayer = hexLayerNames[system.hexKey];
     if (size(hexLayer)) {

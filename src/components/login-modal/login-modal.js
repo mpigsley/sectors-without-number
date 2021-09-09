@@ -123,13 +123,8 @@ export default class LoginModal extends Component {
 
   render() {
     const { page } = this.state;
-    const {
-      isLoginModalOpen,
-      closeLoginModal,
-      googleLogin,
-      intl,
-      email,
-    } = this.props;
+    const { isLoginModalOpen, closeLoginModal, googleLogin, intl, email } =
+      this.props;
     let actionText = <FormattedMessage id="misc.sendReset" />;
     if (page === LOGIN_PAGE_TYPES.login) {
       actionText = <FormattedMessage id="misc.logIn" />;

@@ -57,7 +57,7 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
       isNil,
     ),
     children: pickBy(
-      mapValues(childrenByType, childType => {
+      mapValues(childrenByType, (childType) => {
         const sortedChildren = sortBy(
           mapValues(childType, ({ name, x, y, isHidden }, key) => ({
             key,
@@ -88,7 +88,7 @@ export const activateSidebarEdit = () => (dispatch, getState) => {
   });
 };
 
-export const updateEntityInEdit = changes => (dispatch, getState) => {
+export const updateEntityInEdit = (changes) => (dispatch, getState) => {
   const state = getState();
   if (syncLockSelector(state)) {
     return Promise.resolve();
@@ -135,7 +135,7 @@ export const undoDeleteChildInEdit = (entityType, entityId) =>
 export const updateChildInEdit = (entityType, entityId, updates) =>
   syncLock(UPDATED_CHILD_IN_EDIT, { entityType, entityId, updates });
 
-export const createChildInEdit = entityType => (dispatch, getState) => {
+export const createChildInEdit = (entityType) => (dispatch, getState) => {
   const state = getState();
   if (syncLockSelector(state)) {
     return Promise.resolve();

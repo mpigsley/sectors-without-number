@@ -14,13 +14,13 @@ const RATING_TO_HP = {
   8: 20,
 };
 
-export const factionHitPoints = faction =>
+export const factionHitPoints = (faction) =>
   4 +
   (RATING_TO_HP[faction[FACTION_ASSET_CATEGORIES.wealth]] || 0) +
   (RATING_TO_HP[faction[FACTION_ASSET_CATEGORIES.force]] || 0) +
   (RATING_TO_HP[faction[FACTION_ASSET_CATEGORIES.cunning]] || 0);
 
-export const factionIncomeAndOwnedAssets = faction => {
+export const factionIncomeAndOwnedAssets = (faction) => {
   let income =
     Math.ceil(faction[FACTION_ASSET_CATEGORIES.wealth] / 2) +
     Math.floor(

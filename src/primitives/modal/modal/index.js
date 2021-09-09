@@ -75,7 +75,7 @@ export default function Modal({
               <Button className="Model-FooterButton" onClick={onCancel}>
                 {cancelText || <FormattedMessage id="misc.cancel" />}
               </Button>
-              {React.Children.map(actionButtons, button =>
+              {React.Children.map(actionButtons, (button) =>
                 React.cloneElement(button, {
                   className: classNames(
                     button.props.className,

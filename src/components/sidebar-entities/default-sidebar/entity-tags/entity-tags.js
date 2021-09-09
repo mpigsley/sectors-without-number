@@ -40,7 +40,7 @@ const renderList = (listOrLength, listKey, key) => {
         <FormattedMessage id={`misc.${listKey}`} />:
       </b>
       <ul className={styles.contentList}>
-        {contentList.map(item => (
+        {contentList.map((item) => (
           <li key={`${listKey}-${item}`}>
             <FormattedMessage
               id={`tags.${key}.${listKey}.${item}`}
@@ -76,7 +76,7 @@ export default function EntityTags({
 
   let tags;
   if (isSidebarEditActive) {
-    tags = entityTags.sort().map(tag => (
+    tags = entityTags.sort().map((tag) => (
       <DeletableRow
         key={tag}
         align="center"
@@ -145,9 +145,9 @@ export default function EntityTags({
     ));
   } else {
     tags = entityTags
-      .map(tag => allTags[tag])
+      .map((tag) => allTags[tag])
       .filter(
-        tag =>
+        (tag) =>
           tag &&
           (!isShared || (entity.visibility || {})[`tag.${tag.key}`] !== false),
       )
@@ -189,7 +189,7 @@ export default function EntityTags({
           <Settings
             size={20}
             className={styles.customTagBtn}
-            onClick={e => {
+            onClick={(e) => {
               e.stopPropagation();
               openCustomTagModal();
             }}

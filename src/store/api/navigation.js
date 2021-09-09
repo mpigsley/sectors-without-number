@@ -7,7 +7,7 @@ export const createRoute = (sectorId, route) =>
     .doc(sectorId)
     .collection('routes')
     .add(route)
-    .then(doc => ({ key: doc.id, route }));
+    .then((doc) => ({ key: doc.id, route }));
 
 export const deleteRoute = (sectorId, routeId) =>
   Firebase.firestore()
@@ -40,15 +40,15 @@ export const updateRoutes = (sectorId, routes) => {
   return batch.commit();
 };
 
-export const getNavigationData = sectorId =>
+export const getNavigationData = (sectorId) =>
   Firebase.firestore()
     .collection('navigation')
     .doc(sectorId)
     .collection('routes')
     .get()
-    .then(snapshot => {
+    .then((snapshot) => {
       const routes = {};
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         routes[doc.id] = doc.data();
       });
       return routes;

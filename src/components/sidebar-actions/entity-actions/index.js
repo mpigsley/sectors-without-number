@@ -28,7 +28,7 @@ import { openSectorExpansion } from 'store/actions/sector.actions';
 
 import EntityActions from './entity-actions';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isSaved: isCurrentSectorSaved(state),
   isShared: isViewingSharedSector(state),
   currentSector: currentSectorSelector(state),

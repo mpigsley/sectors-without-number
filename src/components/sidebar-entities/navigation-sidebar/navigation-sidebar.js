@@ -214,12 +214,8 @@ export default class NavigationSidebar extends Component {
   }
 
   render() {
-    const {
-      settings,
-      updateNavSettings,
-      completeRoute,
-      cancelNavigation,
-    } = this.props;
+    const { settings, updateNavSettings, completeRoute, cancelNavigation } =
+      this.props;
     const { color, type, width, isCreatingRoute } = settings;
 
     let cancelButton = null;
@@ -253,7 +249,7 @@ export default class NavigationSidebar extends Component {
             </Label>
             <ColorPicker
               value={color}
-              onChange={value => updateNavSettings('color', value)}
+              onChange={(value) => updateNavSettings('color', value)}
             />
           </div>
           <ItemRow className="NavigationSidebar-FormRow">

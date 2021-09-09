@@ -89,8 +89,12 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
     {
       accessor: 'type',
       Header: 'misc.factionCategories',
-      Cell: category =>
-        formatOptionalMessage(intl, category, key => `faction.category.${key}`),
+      Cell: (category) =>
+        formatOptionalMessage(
+          intl,
+          category,
+          (key) => `faction.category.${key}`,
+        ),
       centered: true,
       width: 75,
     },
@@ -127,8 +131,9 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
     {
       accessor: 'homeworld',
       Header: 'misc.location',
-      Cell: loc =>
-        loc.link ? <BasicLink to={loc.link}>{loc.name}</BasicLink> : '-',
+      // eslint-disable-next-line react/prop-types
+      Cell: ({ link, name }) =>
+        link ? <BasicLink to={link}>{name}</BasicLink> : '-',
       centered: true,
       width: 200,
     },
@@ -141,7 +146,7 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
     {
       accessor: 'goal',
       Header: 'misc.goal',
-      Cell: goal =>
+      Cell: (goal) =>
         goal !== '-'
           ? intl.formatMessage({ id: `faction.goal.${goal}` })
           : goal,
@@ -151,10 +156,10 @@ const buildFactionTableColumns = ({ intl, windowWidth, sector }) => {
     {
       accessor: 'tags',
       Header: 'misc.tags',
-      Cell: tags =>
+      Cell: (tags) =>
         isArray(tags)
           ? tags
-              .map(tag => intl.formatMessage({ id: `faction.tags.${tag}` }))
+              .map((tag) => intl.formatMessage({ id: `faction.tags.${tag}` }))
               .join(', ') || '-'
           : '-',
       centered: true,
@@ -216,14 +221,8 @@ export default class FactionTable extends Component {
   }
 
   render() {
-    const {
-      isLoading,
-      isSaved,
-      table,
-      intl,
-      children,
-      currentSector,
-    } = this.props;
+    const { isLoading, isSaved, table, intl, children, currentSector } =
+      this.props;
 
     if (isLoading) {
       return <Loading />;

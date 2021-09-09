@@ -51,7 +51,7 @@ export default function EntityAttributes({
   let attributesSection = null;
   const hasNonTagAttributes = values(
     omit({ ...entityAttributes }, 'tags'),
-  ).filter(v => v).length;
+  ).filter((v) => v).length;
 
   if (isSidebarEditActive || hasNonTagAttributes) {
     let nameAttribute = null;
@@ -169,7 +169,7 @@ export default function EntityAttributes({
         <FlexContainer direction="column" className={styles.attributes}>
           {nameAttribute}
           {imageAttribute}
-          {(Entities[entityType].attributes || []).map(attribute => (
+          {(Entities[entityType].attributes || []).map((attribute) => (
             <EntityAttribute
               key={attribute.key}
               attribute={attribute}

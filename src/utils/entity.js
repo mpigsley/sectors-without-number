@@ -44,12 +44,14 @@ import { createId, coordinateKey, allSectorCoordinates } from 'utils/common';
 import Entities from 'constants/entities';
 import { SECTOR_LIMIT } from 'constants/defaults';
 
-export const syncLock = (action, parameters = {}) => (dispatch, getState) => {
-  if (syncLockSelector(getState())) {
-    return Promise.resolve();
-  }
-  return dispatch({ type: action, ...parameters });
-};
+export const syncLock =
+  (action, parameters = {}) =>
+  (dispatch, getState) => {
+    if (syncLockSelector(getState())) {
+      return Promise.resolve();
+    }
+    return dispatch({ type: action, ...parameters });
+  };
 
 export const preventSync = (intl, isGenerating) => (dispatch, getState) => {
   const state = getState();
@@ -83,7 +85,7 @@ export const preventSync = (intl, isGenerating) => (dispatch, getState) => {
 export const SYNC_TOAST_ID = 'initial-sync';
 export const initialSyncToast = (state, dispatch, intl) => {
   if (!isCurrentSectorSaved(state)) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       dispatch(
         InfoToast({
           title: intl.formatMessage({ id: 'misc.syncingSector' }),
@@ -130,12 +132,12 @@ export const generateEntity = ({
   const generateChildren = (parent, parentEntity, isFirstLevel = false) =>
     Entities[parentEntity].children
       .filter(
-        childEntity =>
+        (childEntity) =>
           !isFirstLevel ||
           !parameters.children ||
           (parameters.children || {})[childEntity],
       )
-      .forEach(childEntity => {
+      .forEach((childEntity) => {
         const entityChildren = (parameters.children || {})[childEntity];
         const { children, coordinates } = EntityGenerators[
           childEntity
@@ -161,16 +163,16 @@ export const generateEntity = ({
           },
         };
         Object.keys(
-          pickBy(childrenObj, childObj => {
+          pickBy(childrenObj, (childObj) => {
             const childGenerate = (
               find(
                 entityChildren || [],
-                child => child.name === childObj.name,
+                (child) => child.name === childObj.name,
               ) || {}
             ).generate;
             return !isFirstLevel || childGenerate !== false;
           }),
-        ).map(newKey => generateChildren(newKey, childEntity));
+        ).map((newKey) => generateChildren(newKey, childEntity));
       });
 
   if (
@@ -197,9 +199,9 @@ export const generateEntity = ({
 export const deleteEntity = ({ entityType, entityId, entities }) => {
   let childrenEntities = {};
   const deleteChildren = (parent, parentType) =>
-    Entities[parentType].children.forEach(childType => {
+    Entities[parentType].children.forEach((childType) => {
       const childrenToDelete = Object.keys(
-        pickBy(entities[childType], child => child.parent === parent),
+        pickBy(entities[childType], (child) => child.parent === parent),
       );
 
       childrenEntities = {
@@ -210,7 +212,7 @@ export const deleteEntity = ({ entityType, entityId, entities }) => {
         ],
       };
 
-      childrenToDelete.forEach(childId => deleteChildren(childId, childType));
+      childrenToDelete.forEach((childId) => deleteChildren(childId, childType));
     });
 
   deleteChildren(entityId, entityType);
@@ -245,7 +247,7 @@ export const mergeEntityUpdates = (state, updates) => ({
           };
           const tags =
             mergedEntity.attributes && mergedEntity.attributes.tags
-              ? mergedEntity.attributes.tags.filter(tag => tag)
+              ? mergedEntity.attributes.tags.filter((tag) => tag)
               : null;
           const attributes = omitBy(
             { ...mergedEntity.attributes, tags },
@@ -253,7 +255,7 @@ export const mergeEntityUpdates = (state, updates) => ({
           );
           return omitBy(
             { ...mergedEntity, attributes },
-            obj => isNil(obj) || (isObject(obj) && !size(obj)),
+            (obj) => isNil(obj) || (isObject(obj) && !size(obj)),
           );
         }),
       },
@@ -291,7 +293,7 @@ export const deleteEntities = ({ state, deleted }, intl) => {
         ),
       }),
     }))
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       return {
         action: ErrorToast({
@@ -339,14 +341,14 @@ export const saveEntities = (
     }
   }
   return promise
-    .then(uploaded => ({
+    .then((uploaded) => ({
       action: SuccessToast({
         title: intl.formatMessage({ id: 'misc.sectorSaved' }),
         message: intl.formatMessage({ id: 'misc.yourSectorSaved' }),
       }),
       mapping: (uploaded || {}).mapping || {},
     }))
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       let action = ErrorToast({
         title: intl.formatMessage({ id: 'misc.error' }),
@@ -370,7 +372,7 @@ export const saveEntities = (
 
 export const translateEntities = (entities, customTags, intl) =>
   mapValues(entities, (entityTypes, entityType) =>
-    mapValues(entityTypes, entity => {
+    mapValues(entityTypes, (entity) => {
       let translatedAttributes = mapValues(
         omit(entity.attributes, 'tags'),
         (value, key) => {
@@ -391,7 +393,7 @@ export const translateEntities = (entities, customTags, intl) =>
           ...translatedAttributes,
           description: entity.attributes.description,
           tags: entity.attributes.tags
-            .map(tag => {
+            .map((tag) => {
               if (customTags[tag]) {
                 return customTags[tag];
               }
@@ -410,7 +412,7 @@ export const translateEntities = (entities, customTags, intl) =>
                   lists,
                   (obj, listLength, listKey) => ({
                     ...obj,
-                    [listKey]: [...Array(listLength).keys()].map(index =>
+                    [listKey]: [...Array(listLength).keys()].map((index) =>
                       intl.formatMessage({
                         id: `${baseId}.${listKey}.${index}`,
                       }),
@@ -420,7 +422,7 @@ export const translateEntities = (entities, customTags, intl) =>
                 ),
               };
             })
-            .filter(tag => tag),
+            .filter((tag) => tag),
         };
       }
 

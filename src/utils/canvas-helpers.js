@@ -13,7 +13,7 @@ const isWithin = ({ x, y }, { x1, x2, y1, y2 }) =>
 
 export const getHoveredHex = ({ x, y, hexes }) => {
   const containedInBoundingBox = hexes.filter(
-    hex => isWithin({ x, y }, getHexBoundingBox(hex)) && hex.highlighted,
+    (hex) => isWithin({ x, y }, getHexBoundingBox(hex)) && hex.highlighted,
   );
   if (!containedInBoundingBox.length) {
     return undefined;

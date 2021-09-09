@@ -29,7 +29,7 @@ describe('generateSectorName', () => {
   it('contains a greek letter', () => {
     const name = generateSectorName(chance);
     expect(
-      GreekLetters.filter(letter => name.includes(letter)).length,
+      GreekLetters.filter((letter) => name.includes(letter)).length,
     ).toBeGreaterThanOrEqual(1);
   });
 

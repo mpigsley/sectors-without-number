@@ -28,7 +28,7 @@ export default function OverviewTable({
     id: Pluralize(Entities[match.params.entityType].name),
   });
 
-  const getColumnsFromType = entityType => {
+  const getColumnsFromType = (entityType) => {
     const common = [
       {
         accessor: 'name',
@@ -43,15 +43,15 @@ export default function OverviewTable({
       {
         accessor: 'tags',
         Header: 'misc.tags',
-        Cell: tags =>
+        Cell: (tags) =>
           tags
-            .map(tag =>
+            .map((tag) =>
               intl.formatMessage({
                 id: `tags.${tag}`,
                 defaultMessage: (customTags[tag] || {}).name,
               }),
             )
-            .filter(tag => tag)
+            .filter((tag) => tag)
             .join(', ') || '-',
       },
     ];
@@ -86,7 +86,7 @@ export default function OverviewTable({
         centered: true,
       });
     }
-    attributes.map(attr => columns.push(attr));
+    attributes.map((attr) => columns.push(attr));
     return columns;
   };
 
@@ -110,22 +110,22 @@ export default function OverviewTable({
 
   const exportTable = () => {
     const table = [
-      columns.map(col => intl.formatMessage({ id: col.Header })),
+      columns.map((col) => intl.formatMessage({ id: col.Header })),
     ].concat(
-      tableData.map(data =>
+      tableData.map((data) =>
         columns.map(({ accessor }) => {
           if (!data[accessor]) {
             return '';
           }
           return accessor === 'tags'
             ? data[accessor]
-                .map(tag =>
+                .map((tag) =>
                   intl.formatMessage({
                     id: `tags.${tag}`,
                     defaultMessage: (customTags[tag] || {}).name,
                   }),
                 )
-                .filter(tag => tag)
+                .filter((tag) => tag)
                 .join(', ')
             : intl.formatMessage({
                 id: data[accessor],

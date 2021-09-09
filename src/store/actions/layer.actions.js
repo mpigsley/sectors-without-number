@@ -43,7 +43,7 @@ export const updateLayer = (key, value) => ({
   value,
 });
 
-export const submitForm = intl => (dispatch, getState) => {
+export const submitForm = (intl) => (dispatch, getState) => {
   const state = getState();
   const update = layerFormSelector(state);
   const sectorId = currentSectorSelector(state);
@@ -61,7 +61,7 @@ export const submitForm = intl => (dispatch, getState) => {
           );
           dispatch({ type: EDITED, sectorId, layerId, layer });
         })
-        .catch(err => {
+        .catch((err) => {
           console.error(err);
           dispatch(
             ErrorToast({
@@ -75,7 +75,7 @@ export const submitForm = intl => (dispatch, getState) => {
 export const initializeLayerEdit = () => (dispatch, getState) =>
   dispatch({ type: INITIALIZE_LAYER_EDIT, layer: currentLayer(getState()) });
 
-export const initializeRegionForm = regionId => (dispatch, getState) => {
+export const initializeRegionForm = (regionId) => (dispatch, getState) => {
   const layer = currentLayer(getState());
   let region = { name: '', isHidden: false };
   if (regionId) {
@@ -88,14 +88,14 @@ export const initializeRegionForm = regionId => (dispatch, getState) => {
   dispatch({ type: INITIALIZE_REGION_EDIT, region });
 };
 
-export const updateRegionForm = update => ({
+export const updateRegionForm = (update) => ({
   type: REGION_FORM_UPDATED,
   update,
 });
 
 export const cancelRegionForm = () => ({ type: CANCEL_REGION_EDIT });
 
-export const submitRegionForm = intl => (dispatch, getState) => {
+export const submitRegionForm = (intl) => (dispatch, getState) => {
   const state = getState();
   const { regionId, ...regionForm } = layerRegionFormSelector(state);
   const sectorId = currentSectorSelector(state);
@@ -118,7 +118,7 @@ export const submitRegionForm = intl => (dispatch, getState) => {
       );
       dispatch({ type: EDITED, sectorId, layerId, layer });
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       dispatch(
         ErrorToast({
@@ -160,9 +160,9 @@ export const removeRegion = (regionId, intl) => (dispatch, getState) => {
   const current = currentLayer(state);
   const reducedHexes = mapValues(
     pickBy(current.hexes, ({ regions }) => includes(regions, regionId)),
-    hex => ({
+    (hex) => ({
       ...hex,
-      regions: hex.regions.filter(reg => reg !== regionId),
+      regions: hex.regions.filter((reg) => reg !== regionId),
     }),
   );
   const deletedHexIds = keys(
@@ -205,7 +205,7 @@ export const removeRegion = (regionId, intl) => (dispatch, getState) => {
         }),
       ),
     )
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       return dispatch(
         ErrorToast({
@@ -216,21 +216,21 @@ export const removeRegion = (regionId, intl) => (dispatch, getState) => {
     });
 };
 
-export const openColorPicker = regionId => ({
+export const openColorPicker = (regionId) => ({
   type: OPENED_COLOR_PICKER,
   regionId,
 });
 
 export const closeColorPicker = () => ({ type: CLOSED_COLOR_PICKER });
 
-export const beginRegionPaint = regionId => ({
+export const beginRegionPaint = (regionId) => ({
   type: BEGAN_REGION_PAINT,
   regionId,
 });
 
 export const closeRegionPaint = () => ({ type: CLOSED_REGION_PAINT });
 
-export const toggleRegionAtHex = hexId => (dispatch, getState) => {
+export const toggleRegionAtHex = (hexId) => (dispatch, getState) => {
   const state = getState();
   const layerId = currentEntitySelector(state);
   const regionId = layerRegionPaintSelector(state);
@@ -241,7 +241,7 @@ export const toggleRegionAtHex = hexId => (dispatch, getState) => {
   const current = currentLayer(state);
   const existingHexRegions = ((current.hexes || {})[hexId] || {}).regions || [];
   const newRegions = includes(existingHexRegions, regionId)
-    ? existingHexRegions.filter(reg => reg !== regionId)
+    ? existingHexRegions.filter((reg) => reg !== regionId)
     : [...existingHexRegions, regionId];
   const commonAction = { type: EDITED, sectorId, layerId };
   if (!newRegions.length) {

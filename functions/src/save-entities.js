@@ -45,9 +45,9 @@ module.exports = functions.https.onCall((data, context) => {
     .collection('entity')
     .where('creator', '==', context.auth.uid)
     .get()
-    .then(snapshot => {
+    .then((snapshot) => {
       let activeSectorCount = 0;
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         const sectorData = doc.data();
         if (!sectorData.deleted) {
           activeSectorCount += 1;
@@ -115,11 +115,11 @@ module.exports = functions.https.onCall((data, context) => {
 
       saveEntityTree();
 
-      return Promise.all(batches.map(batch => batch.commit())).then(() => ({
+      return Promise.all(batches.map((batch) => batch.commit())).then(() => ({
         mapping,
       }));
     })
-    .catch(error => {
+    .catch((error) => {
       throw error.code === 'permission-denied'
         ? error
         : new functions.https.HttpsError('unknown', error.message, error);

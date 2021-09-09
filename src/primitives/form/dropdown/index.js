@@ -14,7 +14,7 @@ export default function Dropdown({
   ...rest
 }) {
   const newProps = {
-    promptTextCreator: label => label,
+    promptTextCreator: (label) => label,
     ...rest,
   };
   const DropdownComponent = allowCreate ? Creatable : Select;

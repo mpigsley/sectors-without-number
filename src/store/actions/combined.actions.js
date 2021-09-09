@@ -193,7 +193,7 @@ export const addLayer = (model, intl) => (dispatch, getState) => {
         dispatch({ type: CREATED_LAYER, sectorId, layerId, layer, layers });
         dispatch(push(`/sector/${sectorId}/layer/${layerId}`));
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         dispatch(
           ErrorToast({
@@ -205,7 +205,7 @@ export const addLayer = (model, intl) => (dispatch, getState) => {
   });
 };
 
-export const removeLayer = intl => (dispatch, getState) => {
+export const removeLayer = (intl) => (dispatch, getState) => {
   const state = getState();
   const sectorId = currentSectorSelector(state);
   const layerId = currentEntitySelector(state);
@@ -226,7 +226,7 @@ export const removeLayer = intl => (dispatch, getState) => {
       dispatch(push(`/sector/${sectorId}`));
       dispatch({ type: DELETED_LAYER, sectorId, layerId, layers });
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       dispatch(
         ErrorToast({
@@ -237,82 +237,84 @@ export const removeLayer = intl => (dispatch, getState) => {
     });
 };
 
-export const expandSector = ({ top, left, right, bottom }, intl) => (
-  dispatch,
-  getState,
-) => {
-  const state = getState();
-  const sector = getCurrentSector(state);
-  const isValid =
-    sector.columns + (left || 0) + (right || 0) <= MAX_DIMENSION &&
-    sector.rows + (top || 0) + (bottom || 0) <= MAX_DIMENSION;
-  if (dispatch(preventSync(intl)) || !isValid) {
-    return Promise.resolve();
-  }
-  const sectorId = currentSectorSelector(state);
-  const routes = navigationRoutesSelector(state);
-  const columns = sector.columns + left + right;
-  const rows = sector.rows + top + bottom;
+export const expandSector =
+  ({ top, left, right, bottom }, intl) =>
+  (dispatch, getState) => {
+    const state = getState();
+    const sector = getCurrentSector(state);
+    const isValid =
+      sector.columns + (left || 0) + (right || 0) <= MAX_DIMENSION &&
+      sector.rows + (top || 0) + (bottom || 0) <= MAX_DIMENSION;
+    if (dispatch(preventSync(intl)) || !isValid) {
+      return Promise.resolve();
+    }
+    const sectorId = currentSectorSelector(state);
+    const routes = navigationRoutesSelector(state);
+    const columns = sector.columns + left + right;
+    const rows = sector.rows + top + bottom;
 
-  let updatedTopLevel = {};
-  let updatedRoutes = routes[sectorId];
-  let updatedLayers = currentSectorLayers(state);
-  const sectorUpdate = {
-    [Entities.sector.key]: {
-      [sectorId]: { columns, rows },
-    },
-  };
+    let updatedTopLevel = {};
+    let updatedRoutes = routes[sectorId];
+    let updatedLayers = currentSectorLayers(state);
+    const sectorUpdate = {
+      [Entities.sector.key]: {
+        [sectorId]: { columns, rows },
+      },
+    };
 
-  if (top || left) {
-    const topLevelEntities = getCurrentTopLevelEntities(state);
-    updatedTopLevel = reduce(
-      topLevelEntities,
-      (entities, { x, y, ...entity }, entityId) => ({
-        ...entities,
-        [entity.type]: {
-          ...(entities[entity.type] || {}),
-          [entityId]: { ...entity, x: x + left, y: y + top },
-        },
-      }),
-      {},
-    );
+    if (top || left) {
+      const topLevelEntities = getCurrentTopLevelEntities(state);
+      updatedTopLevel = reduce(
+        topLevelEntities,
+        (entities, { x, y, ...entity }, entityId) => ({
+          ...entities,
+          [entity.type]: {
+            ...(entities[entity.type] || {}),
+            [entityId]: { ...entity, x: x + left, y: y + top },
+          },
+        }),
+        {},
+      );
 
-    if (updatedRoutes) {
-      updatedRoutes = mapValues(updatedRoutes, ({ route, ...navigation }) => ({
-        ...navigation,
-        route: route.map(key => {
+      if (updatedRoutes) {
+        updatedRoutes = mapValues(
+          updatedRoutes,
+          ({ route, ...navigation }) => ({
+            ...navigation,
+            route: route.map((key) => {
+              const { x, y } = coordinatesFromKey(key);
+              return coordinateKey(x + left, y + top);
+            }),
+          }),
+        );
+      }
+
+      updatedLayers = mapValues(updatedLayers, ({ hexes, ...layer }) => ({
+        ...layer,
+        hexes: mapKeys(hexes, (value, key) => {
           const { x, y } = coordinatesFromKey(key);
           return coordinateKey(x + left, y + top);
         }),
       }));
     }
 
-    updatedLayers = mapValues(updatedLayers, ({ hexes, ...layer }) => ({
-      ...layer,
-      hexes: mapKeys(hexes, (value, key) => {
-        const { x, y } = coordinatesFromKey(key);
-        return coordinateKey(x + left, y + top);
-      }),
-    }));
-  }
+    const entities = { ...sectorUpdate, ...updatedTopLevel };
+    dispatch({
+      type: EXPAND_SECTOR,
+      sectorId,
+      routes: updatedRoutes,
+      layers: updatedLayers,
+      entities,
+    });
 
-  const entities = { ...sectorUpdate, ...updatedTopLevel };
-  dispatch({
-    type: EXPAND_SECTOR,
-    sectorId,
-    routes: updatedRoutes,
-    layers: updatedLayers,
-    entities,
-  });
-
-  return Promise.all([
-    saveEntities({ state, updated: entities }, intl),
-    dispatch(releaseSyncLock()),
-    updateLayers(sectorId, updatedLayers),
-    updateRoutes(sectorId, updatedRoutes),
-  ]).then(([{ action }]) => {
-    if (action) {
-      dispatch(action);
-    }
-  });
-};
+    return Promise.all([
+      saveEntities({ state, updated: entities }, intl),
+      dispatch(releaseSyncLock()),
+      updateLayers(sectorId, updatedLayers),
+      updateRoutes(sectorId, updatedRoutes),
+    ]).then(([{ action }]) => {
+      if (action) {
+        dispatch(action);
+      }
+    });
+  };

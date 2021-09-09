@@ -50,7 +50,7 @@ export const activeLayers = createSelector(
       (active, layer, layerId) => (layer ? [...active, layerId] : active),
       [],
     );
-    return activeLayerIds.map(id => (layers || {})[id]);
+    return activeLayerIds.map((id) => (layers || {})[id]);
   },
 );
 
@@ -63,7 +63,7 @@ export const visibleLayers = createSelector(
   [currentLayer, activeLayers, isViewingSharedSector],
   (current, active, isShared) => {
     const layers = (current ? [current] : active) || [];
-    return layers.map(layer => {
+    return layers.map((layer) => {
       const visibleRegions = pickBy(
         layer.regions || {},
         ({ isHidden }) => !isShared || !isHidden,
@@ -96,14 +96,14 @@ export const visibleLayerHexes = createSelector(
     const visibleRegions = layers.reduce(
       (regionMapping, { regions = {}, name } = {}) => ({
         ...regionMapping,
-        ...mapValues(regions, region => ({ ...region, layerName: name })),
+        ...mapValues(regions, (region) => ({ ...region, layerName: name })),
       }),
       {},
     );
 
-    const hexes = mapValues(visibleHexes, regions =>
+    const hexes = mapValues(visibleHexes, (regions) =>
       sortBy(
-        regions.map(region => visibleRegions[region]).filter(r => r),
+        regions.map((region) => visibleRegions[region]).filter((r) => r),
         ({ name }) => name.toLowerCase(),
       ),
     );
@@ -125,17 +125,19 @@ export const visibleLayerHexes = createSelector(
 
 export const visibleLayerHexColors = createSelector(
   [visibleLayerHexes],
-  hexes => mapValues(hexes, list => uniq(list.map(({ color }) => color))),
+  (hexes) => mapValues(hexes, (list) => uniq(list.map(({ color }) => color))),
 );
 
-export const hexLayerNameMapping = createSelector([visibleLayerHexes], hexes =>
-  mapValues(hexes, list =>
-    list.reduce(
-      (layerMapping, { layerName, name, color }) => ({
-        ...layerMapping,
-        [layerName]: [...(layerMapping[layerName] || []), { name, color }],
-      }),
-      {},
+export const hexLayerNameMapping = createSelector(
+  [visibleLayerHexes],
+  (hexes) =>
+    mapValues(hexes, (list) =>
+      list.reduce(
+        (layerMapping, { layerName, name, color }) => ({
+          ...layerMapping,
+          [layerName]: [...(layerMapping[layerName] || []), { name, color }],
+        }),
+        {},
+      ),
     ),
-  ),
 );

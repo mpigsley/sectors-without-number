@@ -28,13 +28,13 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  updateRegionForm: update => dispatch(updateRegionForm(update)),
+  updateRegionForm: (update) => dispatch(updateRegionForm(update)),
   cancelRegionForm: () => dispatch(cancelRegionForm()),
   submitRegionForm: () => dispatch(submitRegionForm(props.intl)),
-  openColorPicker: regionId => dispatch(openColorPicker(regionId)),
-  initializeRegionForm: regionId => dispatch(initializeRegionForm(regionId)),
+  openColorPicker: (regionId) => dispatch(openColorPicker(regionId)),
+  initializeRegionForm: (regionId) => dispatch(initializeRegionForm(regionId)),
   updateRegion: (regionId, update) => dispatch(updateRegion(regionId, update)),
-  beginRegionPaint: regionId => dispatch(beginRegionPaint(regionId)),
+  beginRegionPaint: (regionId) => dispatch(beginRegionPaint(regionId)),
   closeRegionPaint: () => dispatch(closeRegionPaint()),
 });
 

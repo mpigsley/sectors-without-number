@@ -61,7 +61,7 @@ const EntityList = ({
     );
   };
 
-  const renderEntitySubHeader = rowEntities => {
+  const renderEntitySubHeader = (rowEntities) => {
     if (!isSidebarEditActive || !size(rowEntities) || !isOpen) {
       return null;
     }
@@ -92,7 +92,7 @@ const EntityList = ({
     );
   };
 
-  const renderEntity = entity => {
+  const renderEntity = (entity) => {
     if (!isSidebarEditActive) {
       return (
         <EntityLinkRow
@@ -111,7 +111,7 @@ const EntityList = ({
     );
   };
 
-  const renderEntities = rowEntities => {
+  const renderEntities = (rowEntities) => {
     if (!isOpen) {
       return null;
     }
@@ -127,7 +127,7 @@ const EntityList = ({
         additional = coordinateKey(entity.x, entity.y);
       } else if (!isShared) {
         additional = ((entity.attributes || {}).tags || [])
-          .map(tag =>
+          .map((tag) =>
             intl.formatMessage({
               id: `tags.${tag}`,
               defaultMessage: (customTags[tag] || {}).name,

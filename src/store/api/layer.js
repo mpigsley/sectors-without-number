@@ -7,7 +7,7 @@ export const createLayer = (sectorId, layer) =>
     .doc(sectorId)
     .collection('layer')
     .add(layer)
-    .then(doc => ({ layerId: doc.id, layer }));
+    .then((doc) => ({ layerId: doc.id, layer }));
 
 export const updateLayer = (sectorId, layerId, layer) =>
   Firebase.firestore()
@@ -41,15 +41,15 @@ export const deleteLayer = (sectorId, layerId) =>
     .doc(layerId)
     .delete();
 
-export const getLayerData = sectorId =>
+export const getLayerData = (sectorId) =>
   Firebase.firestore()
     .collection('layers')
     .doc(sectorId)
     .collection('layer')
     .get()
-    .then(snapshot => {
+    .then((snapshot) => {
       const layers = {};
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         layers[doc.id] = doc.data();
       });
       return layers;

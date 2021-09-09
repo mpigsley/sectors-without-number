@@ -25,7 +25,7 @@ export const generateSystems = ({
 
   return {
     coordinates: xor(config.coordinates, chosenCoordinates),
-    children: chosenCoordinates.map(coordinate =>
+    children: chosenCoordinates.map((coordinate) =>
       generateSystem(Entities.system.key, { ...coordinate, ...config }),
     ),
   };

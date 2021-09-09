@@ -11,7 +11,7 @@ import { getCurrentEntityType } from 'store/selectors/entity.selectors';
 import { openExport } from 'store/actions/sector.actions';
 import DefaultActions from './default-actions';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isSaved: isCurrentSectorSaved(state),
   isShared: isViewingSharedSector(state),
   currentSector: currentSectorSelector(state),

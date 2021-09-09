@@ -12,7 +12,7 @@ import {
 } from 'store/selectors/entity.selectors';
 import EntityEditRow from './entity-edit-row';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   emptyHexKeys: getEmptyHexKeys(state),
   isCurrentOrAncestorHidden: isCurrentOrAncestorHidden(state),
 });
@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch, props) => ({
     dispatch(deleteChildInEdit(props.entityType, props.entity.entityId)),
   undoDeleteChildInEdit: () =>
     dispatch(undoDeleteChildInEdit(props.entityType, props.entity.entityId)),
-  updateChildInEdit: updates =>
+  updateChildInEdit: (updates) =>
     dispatch(
       updateChildInEdit(props.entityType, props.entity.entityId, updates),
     ),

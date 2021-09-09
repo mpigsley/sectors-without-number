@@ -11,7 +11,7 @@ import { updateConfiguration } from 'store/actions/sector.actions';
 import { openCustomTagModal } from 'store/actions/tag.actions';
 import Configure from './configure';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isLoggedIn: isLoggedInSelector(state),
   ...configurationSelector(state),
 });

@@ -55,7 +55,7 @@ export default function GameRoutes() {
               <Route
                 exact
                 path={`${match.path}/:element`}
-                render={route =>
+                render={(route) =>
                   route.match.params.element === 'new' ? (
                     <FactionForm {...route} />
                   ) : (

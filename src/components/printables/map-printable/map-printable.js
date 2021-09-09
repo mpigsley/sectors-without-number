@@ -12,7 +12,7 @@ export default function MapPrintable({ viewbox, hexes, topLevelEntities }) {
         viewBox={viewbox}
         preserveAspectRatio="xMidYMid meet"
       >
-        {hexes.map(hex => (
+        {hexes.map((hex) => (
           <MapHex
             data={hex}
             key={hex.hexKey}

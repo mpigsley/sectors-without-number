@@ -57,13 +57,13 @@ export default function SectorMap({
     return children;
   }
 
-  const renderTooltips = hexData => {
+  const renderTooltips = (hexData) => {
     if (!renderSector) {
       return null;
     }
     return (
       <EntityTooltips
-        hexes={map(topLevelEntities, entity => ({
+        hexes={map(topLevelEntities, (entity) => ({
           ...entity,
           ...hexData.find(
             ({ hexKey }) => coordinateKey(entity.x, entity.y) === hexKey,
@@ -73,7 +73,7 @@ export default function SectorMap({
     );
   };
 
-  const renderPrintable = printable => {
+  const renderPrintable = (printable) => {
     if (!isPrinting) {
       return null;
     }

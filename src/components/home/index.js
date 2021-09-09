@@ -7,7 +7,7 @@ import { getUserSectors } from 'store/selectors/sector.selectors';
 
 import Home from './home';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   saved: getUserSectors(state),
 });
 

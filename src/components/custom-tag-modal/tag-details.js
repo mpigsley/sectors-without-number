@@ -27,15 +27,8 @@ const renderList = (rows, key) => (
 export default function TagDetails({ intl, onEdit, onDelete, selectedTag }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [isConfirming, setIsConfirming] = useState(false);
-  const {
-    key,
-    creator,
-    core,
-    name,
-    description,
-    types,
-    ...lists
-  } = selectedTag;
+  const { key, creator, core, name, description, types, ...lists } =
+    selectedTag;
 
   let footerBtns;
   if (!core) {
@@ -118,7 +111,7 @@ export default function TagDetails({ intl, onEdit, onDelete, selectedTag }) {
           <FormattedMessage id="misc.entityType" />:
         </b>
         {types
-          .map(type => intl.formatMessage({ id: `entity.${type}` }))
+          .map((type) => intl.formatMessage({ id: `entity.${type}` }))
           .join(', ')}
       </p>
       {map(lists, renderList)}

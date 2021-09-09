@@ -5,7 +5,7 @@ import { isCurrentOrAncestorHidden } from 'store/selectors/entity.selectors';
 
 import EntityLinkRow from './entity-link-row';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentSector: currentSectorSelector(state),
   isCurrentOrAncestorHidden: isCurrentOrAncestorHidden(state),
 });

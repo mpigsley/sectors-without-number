@@ -13,7 +13,7 @@ import {
   isUserEditModalOpenSelector,
 } from '../../store/selectors/base.selectors';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   form: userFormSelector(state),
   isEditModalOpen: isUserEditModalOpenSelector(state),
 });

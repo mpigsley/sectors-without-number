@@ -5,7 +5,7 @@ import { getCurrentTopLevelEntities } from 'store/selectors/entity.selectors';
 
 import MapPrintable from './map-printable';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   topLevelEntities: getCurrentTopLevelEntities(state),
 });
 

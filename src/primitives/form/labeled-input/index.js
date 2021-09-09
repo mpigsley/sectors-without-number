@@ -29,7 +29,7 @@ export default function LabeledInput({
       isRequired={isRequired}
     >
       <InputComponent type={type} icon={icon} {...rest} />
-      {React.Children.map(checkboxes, checkbox =>
+      {React.Children.map(checkboxes, (checkbox) =>
         React.cloneElement(checkbox, {
           className: classNames(
             checkbox.props.className,

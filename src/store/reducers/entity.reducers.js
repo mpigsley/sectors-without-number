@@ -81,7 +81,9 @@ export default function entity(state = initialState, action) {
         pathname.startsWith('/elements/') ||
         isOverview;
       const currentSector = isGameView ? pathname.split('/')[2] : null;
-      const uniqSectors = uniq([...state.saved, currentSector]).filter(s => s);
+      const uniqSectors = uniq([...state.saved, currentSector]).filter(
+        (s) => s,
+      );
       const currentEntityType = isGameView ? pathname.split('/')[3] : null;
       let share =
         isGameView && includes(uniqSectors, state.share) ? state.share : null;
@@ -111,13 +113,13 @@ export default function entity(state = initialState, action) {
         currentEntity:
           action.mapping[state.currentEntity] || state.currentEntity,
         saved: uniq([
-          ...state.saved.map(saveId => action.mapping[saveId] || saveId),
+          ...state.saved.map((saveId) => action.mapping[saveId] || saveId),
           transformedSector,
-        ]).filter(s => s),
-        models: mapValues(state.models, entities =>
+        ]).filter((s) => s),
+        models: mapValues(state.models, (entities) =>
           mapValues(
             mapKeys(entities, (_, key) => action.mapping[key] || key),
-            entityObj => {
+            (entityObj) => {
               const sector =
                 action.mapping[entityObj.sector] || entityObj.sector;
               let update = { ...entityObj };
@@ -140,7 +142,7 @@ export default function entity(state = initialState, action) {
       return {
         ...state,
         saved: state.saved.filter(
-          saveId => deletedSectorIds.indexOf(saveId) < 0,
+          (saveId) => deletedSectorIds.indexOf(saveId) < 0,
         ),
         models: {
           ...state.models,

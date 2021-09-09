@@ -68,17 +68,17 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  entityHover: key => dispatch(entityHover(key)),
-  entityHold: key => dispatch(entityHold(key)),
+  entityHover: (key) => dispatch(entityHover(key)),
+  entityHold: (key) => dispatch(entityHold(key)),
   entityRelease: () => dispatch(entityRelease()),
   moveTopLevelEntity: () => dispatch(moveTopLevelEntity(props.intl)),
-  topLevelEntityCreate: key => dispatch(topLevelEntityCreate(key)),
+  topLevelEntityCreate: (key) => dispatch(topLevelEntityCreate(key)),
   deactivateSidebarEdit: () => dispatch(deactivateSidebarEdit()),
   clearMapKeys: () => dispatch(clearMapKeys()),
-  addRouteLocation: key => dispatch(addRouteLocation(key)),
+  addRouteLocation: (key) => dispatch(addRouteLocation(key)),
   completeRoute: () => dispatch(completeRoute(props.intl)),
   updateNavSettings: (key, value) => dispatch(updateNavSettings(key, value)),
-  toggleRegionAtHex: hexKey => dispatch(toggleRegionAtHex(hexKey)),
+  toggleRegionAtHex: (hexKey) => dispatch(toggleRegionAtHex(hexKey)),
   toEntity: (entityType, entityId) => {
     const route = `/sector/${props.match.params.sector}/${entityType}/${entityId}`;
     if (props.location.pathname !== route) {

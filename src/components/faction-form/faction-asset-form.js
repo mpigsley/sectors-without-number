@@ -111,11 +111,11 @@ export default function FactionAssetForm({
               Entities,
               ({ key, extraneous }) =>
                 !extraneous && key !== Entities.sector.key,
-            ).map(attr => ({
+            ).map((attr) => ({
               value: attr.key,
               label: intl.formatMessage({ id: attr.name }),
             }))}
-            onChange={option =>
+            onChange={(option) =>
               onUpdate({
                 locationEntity: (option || {}).value,
                 location: undefined,
@@ -135,7 +135,7 @@ export default function FactionAssetForm({
                 value,
               }),
             )}
-            onChange={option => onUpdate({ location: (option || {}).value })}
+            onChange={(option) => onUpdate({ location: (option || {}).value })}
           />
         </ItemRow>
       </FlexContainer>

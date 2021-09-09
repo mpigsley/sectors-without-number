@@ -31,10 +31,10 @@ const mapStateToProps = createStructuredSelector({
 });
 
 const mapDispatchToProps = (dispatch, props) => ({
-  initializeRegionForm: regionId => dispatch(initializeRegionForm(regionId)),
+  initializeRegionForm: (regionId) => dispatch(initializeRegionForm(regionId)),
   updateRegion: (regionId, update) => dispatch(updateRegion(regionId, update)),
-  removeRegion: regionId => dispatch(removeRegion(regionId, props.intl)),
-  toSafeRoute: sectorId => dispatch(push(`/sector/${sectorId}`)),
+  removeRegion: (regionId) => dispatch(removeRegion(regionId, props.intl)),
+  toSafeRoute: (sectorId) => dispatch(push(`/sector/${sectorId}`)),
 });
 
 export default injectIntl(

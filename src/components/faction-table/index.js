@@ -36,7 +36,7 @@ const mapStateToProps = createStructuredSelector({
   currentFaction,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   toSafeRoute: () => dispatch(push('/')),
 });
 

@@ -84,45 +84,43 @@ const updateHandler = (state, dispatch, { action, mapping }, isSynced) => {
   });
 };
 
-export const generateEntity = (entity, parameters, intl) => (
-  dispatch,
-  getState,
-) => {
-  const isSector = entity.entityType === Entities.sector.key;
-  if (dispatch(preventSync(intl, isSector))) {
-    return Promise.resolve();
-  }
-  const state = getState();
-  const entities = generateEntityUtil({
-    entity,
-    currentSector: currentSectorSelector(state),
-    configuration: configurationSelector(state),
-    customTags: customTagSelector(state),
-    parameters,
-  });
-  dispatch({
-    type: UPDATED_ENTITIES,
-    entities,
-  });
+export const generateEntity =
+  (entity, parameters, intl) => (dispatch, getState) => {
+    const isSector = entity.entityType === Entities.sector.key;
+    if (dispatch(preventSync(intl, isSector))) {
+      return Promise.resolve();
+    }
+    const state = getState();
+    const entities = generateEntityUtil({
+      entity,
+      currentSector: currentSectorSelector(state),
+      configuration: configurationSelector(state),
+      customTags: customTagSelector(state),
+      parameters,
+    });
+    dispatch({
+      type: UPDATED_ENTITIES,
+      entities,
+    });
 
-  const currentSector = currentSectorSelector(state);
-  const existingSector = sectorSelector(state)[currentSector];
-  const newSectorKeys = Object.keys(entities.sector || {});
-  if ((!currentSector || !existingSector) && newSectorKeys.length) {
-    dispatch(push(`/sector/${newSectorKeys[0]}`));
-  }
+    const currentSector = currentSectorSelector(state);
+    const existingSector = sectorSelector(state)[currentSector];
+    const newSectorKeys = Object.keys(entities.sector || {});
+    if ((!currentSector || !existingSector) && newSectorKeys.length) {
+      dispatch(push(`/sector/${newSectorKeys[0]}`));
+    }
 
-  if (!isSector) {
-    return initialSyncToast(state, dispatch, intl).then(isInitialSync =>
-      saveEntities({ state, created: entities, entities }, intl).then(results =>
-        updateHandler(state, dispatch, results, isInitialSync),
-      ),
-    );
-  }
-  return dispatch(releaseSyncLock());
-};
+    if (!isSector) {
+      return initialSyncToast(state, dispatch, intl).then((isInitialSync) =>
+        saveEntities({ state, created: entities, entities }, intl).then(
+          (results) => updateHandler(state, dispatch, results, isInitialSync),
+        ),
+      );
+    }
+    return dispatch(releaseSyncLock());
+  };
 
-export const moveTopLevelEntity = intl => (dispatch, getState) => {
+export const moveTopLevelEntity = (intl) => (dispatch, getState) => {
   if (dispatch(preventSync(intl))) {
     return dispatch(entityRelease());
   }
@@ -156,13 +154,13 @@ export const moveTopLevelEntity = intl => (dispatch, getState) => {
     initialSyncToast(state, dispatch, intl),
     dispatch({ type: UPDATED_ENTITIES, entities }),
   ]).then(([isInitialSync]) =>
-    saveEntities({ state, updated: entities, entities }, intl).then(results =>
+    saveEntities({ state, updated: entities, entities }, intl).then((results) =>
       updateHandler(state, dispatch, results, isInitialSync),
     ),
   );
 };
 
-export const deleteEntity = intl => (dispatch, getState) => {
+export const deleteEntity = (intl) => (dispatch, getState) => {
   if (dispatch(preventSync(intl))) {
     return Promise.resolve();
   }
@@ -187,12 +185,12 @@ export const deleteEntity = intl => (dispatch, getState) => {
     type: DELETED_ENTITIES,
     entities: deleted,
   });
-  return deleteEntities({ state, deleted }, intl).then(results =>
+  return deleteEntities({ state, deleted }, intl).then((results) =>
     updateHandler(state, dispatch, results),
   );
 };
 
-export const saveSector = intl => (dispatch, getState) => {
+export const saveSector = (intl) => (dispatch, getState) => {
   if (dispatch(preventSync(intl))) {
     return Promise.resolve();
   }
@@ -201,13 +199,13 @@ export const saveSector = intl => (dispatch, getState) => {
     initialSyncToast(state, dispatch, intl),
     dispatch({ type: SAVED_SECTOR }),
   ]).then(([isInitialSync]) =>
-    saveEntities({ state }, intl).then(results =>
+    saveEntities({ state }, intl).then((results) =>
       updateHandler(state, dispatch, results, isInitialSync),
     ),
   );
 };
 
-export const saveEntityEdit = intl => (dispatch, getState) => {
+export const saveEntityEdit = (intl) => (dispatch, getState) => {
   if (dispatch(preventSync(intl))) {
     return dispatch(deactivateSidebarEdit());
   }
@@ -286,7 +284,7 @@ export const saveEntityEdit = intl => (dispatch, getState) => {
   };
   allEntities = merge(
     allEntities,
-    mapValues(deletedEntities, deletedIds =>
+    mapValues(deletedEntities, (deletedIds) =>
       zipObject(
         deletedIds,
         deletedIds.map(() => null),
@@ -312,7 +310,9 @@ export const saveEntityEdit = intl => (dispatch, getState) => {
           state,
         },
         intl,
-      ).then(results => updateHandler(state, dispatch, results, isInitialSync)),
+      ).then((results) =>
+        updateHandler(state, dispatch, results, isInitialSync),
+      ),
     );
   }
   return Promise.all([
@@ -343,7 +343,7 @@ export const toggleMapLock = () => (dispatch, getState) => {
   }).then(() => dispatch(releaseSyncLock()));
 };
 
-export const toggleLayer = layerId => (dispatch, getState) => {
+export const toggleLayer = (layerId) => (dispatch, getState) => {
   const state = getState();
   const sectorId = currentSectorSelector(state);
   const sector = getCurrentSector(state);

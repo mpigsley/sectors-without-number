@@ -26,7 +26,7 @@ export const createTag = (intl, newTag) => (dispatch, getState) => {
       dispatch({ type: ITEM_ADDED, item: { [tagId]: tag } });
       return tagId;
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       dispatch(
         ErrorToast({
@@ -39,7 +39,7 @@ export const createTag = (intl, newTag) => (dispatch, getState) => {
 
 export const editTag = (intl, tagId, tagUpdate) => (dispatch, getState) =>
   updateCustomTag(tagId, tagUpdate)
-    .then(update => {
+    .then((update) => {
       const state = getState();
       const editedTag = customTagSelector(state)[tagId];
       dispatch({
@@ -47,7 +47,7 @@ export const editTag = (intl, tagId, tagUpdate) => (dispatch, getState) =>
         item: { [update.tagId]: { ...editedTag, ...update.tag } },
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       dispatch(
         ErrorToast({
@@ -57,10 +57,10 @@ export const editTag = (intl, tagId, tagUpdate) => (dispatch, getState) =>
       );
     });
 
-export const deleteTag = (intl, tagId) => dispatch =>
+export const deleteTag = (intl, tagId) => (dispatch) =>
   deleteCustomTag(tagId)
     .then(() => dispatch({ type: ITEM_DELETED, item: tagId }))
-    .catch(err => {
+    .catch((err) => {
       console.error(err);
       dispatch(
         ErrorToast({

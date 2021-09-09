@@ -4,8 +4,8 @@ const prettier = require('prettier');
 
 const ExportedFile = require('../../Sectors Without Number Translations.json');
 
-const convertKey = key => key.toUpperCase().trim();
-const convertTranslation = str =>
+const convertKey = (key) => key.toUpperCase().trim();
+const convertTranslation = (str) =>
   str
     .replace('{singular noun}', '{entity}')
     .replace('{plural noun}', '{entities}')
@@ -34,7 +34,7 @@ const TRANSLATIONS = {
 };
 
 // Compile objects
-forEach(ExportedFile, list =>
+forEach(ExportedFile, (list) =>
   forEach(list, (translations, key) =>
     forEach(translations, (translation, language) => {
       const langKey = convertKey(language || '');
@@ -55,7 +55,7 @@ Promise.all(
           `./src/lang/${LOCALE_BY_LANG[lang]}.json`,
           prettier.format(JSON.stringify(obj), { parser: 'json' }),
           'utf8',
-          err => {
+          (err) => {
             if (err) {
               reject(err);
             } else {

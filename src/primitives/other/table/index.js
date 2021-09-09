@@ -8,7 +8,7 @@ import { find, isNil } from 'constants/lodash';
 
 import './style.scss';
 
-const nextDirection = direction => {
+const nextDirection = (direction) => {
   if (direction === 1) {
     return -1;
   }
@@ -139,7 +139,7 @@ class Table extends Component {
               className={classNames('Table-Row', rowClass)}
               key={row[dataIdAccessor]}
             >
-              {columns.map(column => (
+              {columns.map((column) => (
                 <td
                   onClick={() =>
                     column.onClick

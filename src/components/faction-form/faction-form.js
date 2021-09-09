@@ -53,7 +53,7 @@ export default function FactionForm({
   ];
 
   const goalOptions = sortBy(
-    map(FACTION_GOALS, value => ({
+    map(FACTION_GOALS, (value) => ({
       value,
       label: intl.formatMessage({ id: `faction.goal.${value}` }),
     })),
@@ -61,7 +61,7 @@ export default function FactionForm({
   );
 
   const tagOptions = sortBy(
-    map(FACTION_TAGS, value => ({
+    map(FACTION_TAGS, (value) => ({
       value,
       label: intl.formatMessage({ id: `faction.tags.${value}` }),
     })),
@@ -195,11 +195,11 @@ export default function FactionForm({
                 Entities,
                 ({ key, extraneous }) =>
                   !extraneous && key !== Entities.sector.key,
-              ).map(attr => ({
+              ).map((attr) => ({
                 value: attr.key,
                 label: intl.formatMessage({ id: attr.name }),
               }))}
-              onChange={option =>
+              onChange={(option) =>
                 updateFaction({
                   homeworldEntity: (option || {}).value,
                   homeworld: undefined,
@@ -219,7 +219,7 @@ export default function FactionForm({
                   value,
                 }),
               )}
-              onChange={option =>
+              onChange={(option) =>
                 updateFaction({ homeworld: (option || {}).value })
               }
             />
@@ -230,7 +230,7 @@ export default function FactionForm({
             type="dropdown"
             value={form.relationship}
             options={relationshipOptions}
-            onChange={item =>
+            onChange={(item) =>
               updateFaction({ relationship: (item || {}).value })
             }
             icon={RefreshCw}
@@ -246,7 +246,7 @@ export default function FactionForm({
             type="dropdown"
             value={form.goal}
             options={goalOptions}
-            onChange={item => updateFaction({ goal: (item || {}).value })}
+            onChange={(item) => updateFaction({ goal: (item || {}).value })}
             icon={RefreshCw}
             onItemClick={() =>
               updateFaction({
@@ -261,15 +261,15 @@ export default function FactionForm({
             type="dropdown"
             value={form.tags}
             options={tagOptions}
-            onChange={items =>
-              updateFaction({ tags: items.map(item => (item || {}).value) })
+            onChange={(items) =>
+              updateFaction({ tags: items.map((item) => (item || {}).value) })
             }
           />
           <LabeledInput
             label="misc.factionColor"
             type="color"
             value={factionColor(form.color, currentFaction)}
-            onChange={color => updateFaction({ color })}
+            onChange={(color) => updateFaction({ color })}
           />
           <LabeledInput
             label="misc.description"
@@ -298,7 +298,7 @@ export default function FactionForm({
             intl={intl}
             currentEntities={currentEntities}
             onDelete={() => updateFaction({ assets: omit(form.assets, key) })}
-            onUpdate={update => updateFactionAsset(key, update)}
+            onUpdate={(update) => updateFactionAsset(key, update)}
             {...asset}
           />
         ))}

@@ -4,8 +4,8 @@
  */
 
 const sizeDiff = Math.sqrt(3) / 2;
-export const toWidth = height => height / sizeDiff;
-export const toHeight = width => width * sizeDiff;
+export const toWidth = (height) => height / sizeDiff;
+export const toHeight = (width) => width * sizeDiff;
 
 // Height/Vertical Calculations
 export const getTotalHeight = (hexHeight, rows) => (rows + 1 / 2) * hexHeight;

@@ -20,47 +20,27 @@ export const generatePlanet = commonGenerator((entity, { generate = true }) => {
         ['0', '1', '2', '3', '4', '4+', '5'],
         [1, 2, 7, 7, 16, 2, 1],
       )}`,
-      atmosphere: chance.weighted(Object.keys(Atmosphere.attributes), [
-        1,
-        2,
-        3,
-        24,
-        3,
-        2,
-        1,
-      ]),
-      temperature: chance.weighted(Object.keys(Temperature.attributes), [
-        1,
-        2,
-        7,
-        16,
-        7,
-        2,
-        1,
-      ]),
-      biosphere: chance.weighted(Object.keys(Biosphere.attributes), [
-        1,
-        2,
-        7,
-        16,
-        7,
-        2,
-        1,
-      ]),
-      population: chance.weighted(Object.keys(Population.attributes), [
-        1,
-        2,
-        7,
-        16,
-        7,
-        2,
-        1,
-      ]),
+      atmosphere: chance.weighted(
+        Object.keys(Atmosphere.attributes),
+        [1, 2, 3, 24, 3, 2, 1],
+      ),
+      temperature: chance.weighted(
+        Object.keys(Temperature.attributes),
+        [1, 2, 7, 16, 7, 2, 1],
+      ),
+      biosphere: chance.weighted(
+        Object.keys(Biosphere.attributes),
+        [1, 2, 7, 16, 7, 2, 1],
+      ),
+      population: chance.weighted(
+        Object.keys(Population.attributes),
+        [1, 2, 7, 16, 7, 2, 1],
+      ),
     },
   };
 });
 
-export const generatePlanets = config => {
+export const generatePlanets = (config) => {
   let numChildren = config.children;
   if (!numChildren) {
     const chance = new Chance();

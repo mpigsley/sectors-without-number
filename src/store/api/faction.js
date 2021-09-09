@@ -6,7 +6,7 @@ export const createFaction = (sectorId, faction) =>
     .doc(sectorId)
     .collection('faction')
     .add(faction)
-    .then(doc => ({ factionId: doc.id, faction }));
+    .then((doc) => ({ factionId: doc.id, faction }));
 
 export const editFaction = (sectorId, factionId, faction) =>
   Firebase.firestore()
@@ -25,15 +25,15 @@ export const deleteFaction = (sectorId, factionId) =>
     .doc(factionId)
     .delete();
 
-export const getFactionData = sectorId =>
+export const getFactionData = (sectorId) =>
   Firebase.firestore()
     .collection('factions')
     .doc(sectorId)
     .collection('faction')
     .get()
-    .then(snapshot => {
+    .then((snapshot) => {
       const factions = {};
-      snapshot.forEach(doc => {
+      snapshot.forEach((doc) => {
         factions[doc.id] = doc.data();
       });
       return factions;

@@ -53,7 +53,7 @@ export default function OverviewList({
         entities,
         (list, entityTypeList, entityType) => [
           ...list,
-          ...map(entityTypeList, data =>
+          ...map(entityTypeList, (data) =>
             EXPORT_COLUMNS.map(({ accessor }) => {
               if (accessor === 'entityType') {
                 return intl.formatMessage({ id: `entity.${entityType}` });
@@ -63,13 +63,13 @@ export default function OverviewList({
               }
               if (accessor === 'tags') {
                 return data[accessor]
-                  .map(tag =>
+                  .map((tag) =>
                     intl.formatMessage({
                       id: `tags.${tag}`,
                       defaultMessage: (customTags[tag] || {}).name,
                     }),
                   )
-                  .filter(tag => tag)
+                  .filter((tag) => tag)
                   .join(', ');
               }
               return intl.formatMessage({

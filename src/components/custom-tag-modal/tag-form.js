@@ -16,11 +16,11 @@ import { createId } from 'utils/common';
 
 import styles from './styles.module.scss';
 
-const transformArray = array =>
-  array.map(row => row.value).filter(row => !!row);
+const transformArray = (array) =>
+  array.map((row) => row.value).filter((row) => !!row);
 
-const initialArrayState = array =>
-  (array || []).map(value => ({ key: createId(), value }));
+const initialArrayState = (array) =>
+  (array || []).map((value) => ({ key: createId(), value }));
 
 const initialFormState = (previous = {}) => ({
   name: '',
@@ -44,10 +44,10 @@ export default function TagForm({
   const [form, setForm] = useState(initialFormState(selectedTag));
   const [isSaving, setIsSaving] = useState(false);
 
-  const isValid = useMemo(() => !!form.name && form.types.length, [
-    form.name,
-    form.types,
-  ]);
+  const isValid = useMemo(
+    () => !!form.name && form.types.length,
+    [form.name, form.types],
+  );
 
   const onUpdateForm = (key, value) => {
     setForm({ ...form, [key]: value });
@@ -74,7 +74,7 @@ export default function TagForm({
 
   const renderExpandableArray = (typeKey, singularKey) => {
     const onAddItemToArray = () => {
-      if (!find(form[typeKey], item => item.value === '')) {
+      if (!find(form[typeKey], (item) => item.value === '')) {
         onUpdateForm(typeKey, [
           ...form[typeKey],
           { key: createId(), value: '' },
@@ -85,15 +85,15 @@ export default function TagForm({
     const onUpdateItemInArray = (rowKey, value) =>
       onUpdateForm(
         typeKey,
-        form[typeKey].map(item =>
+        form[typeKey].map((item) =>
           item.key === rowKey ? { ...item, value } : item,
         ),
       );
 
-    const onDeleteItemFromArary = rowKey =>
+    const onDeleteItemFromArary = (rowKey) =>
       onUpdateForm(
         typeKey,
-        form[typeKey].filter(item => item.key !== rowKey),
+        form[typeKey].filter((item) => item.key !== rowKey),
       );
 
     return (
@@ -104,7 +104,7 @@ export default function TagForm({
           className={styles.formHeader}
           onAdd={() => onAddItemToArray()}
         />
-        {form[typeKey].map(row => (
+        {form[typeKey].map((row) => (
           <DeletableRow
             key={row.key}
             align="center"
@@ -161,14 +161,14 @@ export default function TagForm({
         options={filter(
           Entities,
           ({ key, extraneous }) => !extraneous && key !== Entities.sector.key,
-        ).map(attr => ({
+        ).map((attr) => ({
           value: attr.key,
           label: intl.formatMessage({ id: attr.name }),
         }))}
-        onChange={options =>
+        onChange={(options) =>
           onUpdateForm(
             'types',
-            options.map(option => option.value),
+            options.map((option) => option.value),
           )
         }
       />

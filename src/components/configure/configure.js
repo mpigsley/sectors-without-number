@@ -46,7 +46,7 @@ export default function Configure({
     updateConfiguration(key, value);
   };
 
-  const regenerateName = genFunc => () => {
+  const regenerateName = (genFunc) => () => {
     const chance = new Chance();
     updateConfiguration('sectorName', genFunc(chance));
   };

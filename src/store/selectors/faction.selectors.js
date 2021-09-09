@@ -201,7 +201,7 @@ export const factionLayerHexes = createSelector(
           faction.homeworld,
           faction.homeworldEntity,
         );
-        forEach(faction.assets, asset => {
+        forEach(faction.assets, (asset) => {
           newLayer = buildObj(
             newLayer,
             faction.name,

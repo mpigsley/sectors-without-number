@@ -48,7 +48,7 @@ const createDeepEqualSelector = createSelectorCreator(defaultMemoize, isEqual);
 export const getSavedEntities = createDeepEqualSelector(
   [entitySelector, savedSectorSelector],
   (entities, savedSectors) =>
-    mapValues(entities, entityList =>
+    mapValues(entities, (entityList) =>
       pickBy(entityList, ({ sector }) => includes(savedSectors, sector)),
     ),
 );
@@ -115,7 +115,7 @@ export const topLevelEntityModalOpen = createDeepEqualSelector(
 export const getCurrentEntities = createDeepEqualSelector(
   [currentSectorSelector, entitySelector, isViewingSharedSector],
   (currentSector, entities, isShared) =>
-    mapValues(entities, entityList =>
+    mapValues(entities, (entityList) =>
       pickBy(entityList, (entity, entityId) => {
         if (entity.sector !== currentSector && entityId !== currentSector) {
           return false;
@@ -139,26 +139,28 @@ export const getCurrentEntities = createDeepEqualSelector(
 export const getExportEntities = createDeepEqualSelector(
   [getCurrentEntities, isViewingSharedSector],
   (entities, isShared) =>
-    mapValues(omit(entities, 'settings', 'navigation', 'layer'), entityTypes =>
-      mapValues(entityTypes, entity => ({
-        ...omit(entity, 'sector', 'visibility'),
-        created: entity.created ? entity.created.toDate() : undefined,
-        updated: entity.updated ? entity.updated.toDate() : undefined,
-        attributes: {
-          ...pickBy(
-            entity.attributes,
-            (value, key) =>
-              !isShared || (entity.visibility || {})[`attr.${key}`] !== false,
-          ),
-          tags: (entity.attributes || {}).tags
-            ? entity.attributes.tags.filter(
-                tag =>
-                  !isShared ||
-                  (entity.visibility || {})[`tag.${tag}`] !== false,
-              )
-            : undefined,
-        },
-      })),
+    mapValues(
+      omit(entities, 'settings', 'navigation', 'layer'),
+      (entityTypes) =>
+        mapValues(entityTypes, (entity) => ({
+          ...omit(entity, 'sector', 'visibility'),
+          created: entity.created ? entity.created.toDate() : undefined,
+          updated: entity.updated ? entity.updated.toDate() : undefined,
+          attributes: {
+            ...pickBy(
+              entity.attributes,
+              (value, key) =>
+                !isShared || (entity.visibility || {})[`attr.${key}`] !== false,
+            ),
+            tags: (entity.attributes || {}).tags
+              ? entity.attributes.tags.filter(
+                  (tag) =>
+                    !isShared ||
+                    (entity.visibility || {})[`tag.${tag}`] !== false,
+                )
+              : undefined,
+          },
+        })),
     ),
 );
 
@@ -174,12 +176,12 @@ export const sectorDoesNotExist = createDeepEqualSelector(
 
 export const getMapLock = createDeepEqualSelector(
   [getCurrentSector],
-  currentSector => !!(currentSector || {}).mapLocked,
+  (currentSector) => !!(currentSector || {}).mapLocked,
 );
 
 export const getSectorLayers = createDeepEqualSelector(
   [getCurrentSector],
-  currentSector => (currentSector || {}).layers || {},
+  (currentSector) => (currentSector || {}).layers || {},
 );
 
 export const getCurrentEntity = createSelector(
@@ -219,8 +221,8 @@ export const getEntityAttributes = createSelector(
   ],
   (currentSector, entity, entityKey, currentFactions, isShared) => {
     const hiddenAttributes = isShared
-      ? keys(pickBy(entity.visibility, vision => vision === false)).map(key =>
-          key.replace('attr.', ''),
+      ? keys(pickBy(entity.visibility, (vision) => vision === false)).map(
+          (key) => key.replace('attr.', ''),
         )
       : [];
     const attributes = omit(entity.attributes, hiddenAttributes) || {};
@@ -279,7 +281,7 @@ export const getActiveEntityKey = createDeepEqualSelector(
 
 export const getCurrentEntityType = createDeepEqualSelector(
   [currentEntityTypeSelector],
-  currentEntityType => currentEntityType || Entities.sector.key,
+  (currentEntityType) => currentEntityType || Entities.sector.key,
 );
 
 export const getCurrentEntityId = createDeepEqualSelector(
@@ -298,7 +300,7 @@ export const getCurrentEntityChildren = createDeepEqualSelector(
     const entityChildren = Entities[currentEntityType].children;
     return zipObject(
       entityChildren,
-      entityChildren.map(entityType =>
+      entityChildren.map((entityType) =>
         pickBy(
           entities[entityType],
           ({ parent, isHidden }) =>
@@ -352,7 +354,7 @@ export const isCurrentOrAncestorHidden = createDeepEqualSelector(
 
 export const getEntityChildren = createDeepEqualSelector(
   [getCurrentEntities],
-  currentEntities =>
+  (currentEntities) =>
     flatten(
       values(omit(currentEntities, Entities.sector.key)).map(values),
     ).reduce(
@@ -366,7 +368,7 @@ export const getEntityChildren = createDeepEqualSelector(
 
 export const getEntityNeighbors = createDeepEqualSelector(
   [getCurrentEntities],
-  currentEntities =>
+  (currentEntities) =>
     map(
       Object.assign(
         {},
@@ -383,7 +385,7 @@ export const getEntityNeighbors = createDeepEqualSelector(
         ...mapping,
         [entity.entityId]: entities
           .filter(
-            b => areNeighbors(entity, b) && b.entityId !== entity.entityId,
+            (b) => areNeighbors(entity, b) && b.entityId !== entity.entityId,
           )
           .map(({ entityId, ...rest }) => rest),
       }),
@@ -406,24 +408,24 @@ export const getPrintableEntities = createDeepEqualSelector(
         mapValues(
           pickBy(
             entities,
-            entity => currentEntities[entity.parentEntity][entity.parent],
+            (entity) => currentEntities[entity.parentEntity][entity.parent],
           ),
           (entity, entityId) => {
             const topLevelEntity = findTopLevelEntity(currentEntities, entity);
             return {
               ...zipObject(
                 (Entities[entityType].attributes || []).map(({ key }) => key),
-                (
-                  Entities[entityType].attributes || []
-                ).map(({ key, attributes }) =>
-                  isShared && (entity.visibility || {})[`attr.${key}`] === false
-                    ? undefined
-                    : (attributes[(entity.attributes || {})[key]] || {}).name ||
-                      (entity.attributes || {})[key],
+                (Entities[entityType].attributes || []).map(
+                  ({ key, attributes }) =>
+                    isShared &&
+                    (entity.visibility || {})[`attr.${key}`] === false
+                      ? undefined
+                      : (attributes[(entity.attributes || {})[key]] || {})
+                          .name || (entity.attributes || {})[key],
                 ),
               ),
               tags: ((entity.attributes || {}).tags || []).filter(
-                tag =>
+                (tag) =>
                   !isShared ||
                   (entity.visibility || {})[`tag.${tag}`] !== false,
               ),
