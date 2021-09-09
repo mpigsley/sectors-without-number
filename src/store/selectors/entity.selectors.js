@@ -431,7 +431,7 @@ export const getPrintableEntities = createDeepEqualSelector(
               key: entityId,
               name: entity.name,
               link: `/sector/${currentSector}/${entityType}/${entityId}`,
-              location: topLevelEntity
+              location: (topLevelEntity || {}).x
                 ? coordinateKey(topLevelEntity.x, topLevelEntity.y)
                 : undefined,
               children: entityChildren[entityId] || 0,
