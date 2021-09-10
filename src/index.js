@@ -9,7 +9,7 @@ import 'firebase/auth';
 import 'firebase/firestore';
 import 'firebase/functions';
 
-import store, { history } from 'store';
+import configureStore, { history } from 'store';
 
 import { initialize } from 'store/actions/combined.actions';
 import AppWrapper from 'components/app-wrapper';
@@ -31,6 +31,8 @@ Firebase.initializeApp({
   storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
   messagingSenderId: process.env.REACT_APP_SENDER_ID,
 });
+
+const store = configureStore();
 
 store.dispatch(initialize());
 
