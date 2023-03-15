@@ -26,7 +26,7 @@ module.exports = functions.https.onCall((data, context) => {
   if (!context.auth) {
     throw new functions.https.HttpsError(
       'failed-precondition',
-      'The function must be called while authenticated.'
+      'The function must be called while authenticated.',
     );
   }
 
@@ -34,7 +34,7 @@ module.exports = functions.https.onCall((data, context) => {
   if (!sectorId && (!entities || !_.size(entities.sector))) {
     throw new functions.https.HttpsError(
       'invalid-argument',
-      'To save entities a new sector must exist or an existing sector should be given.'
+      'To save entities a new sector must exist or an existing sector should be given.',
     );
   }
 
@@ -53,11 +53,11 @@ module.exports = functions.https.onCall((data, context) => {
           activeSectorCount += 1;
         }
       });
-      if (activeSectorCount >= SECTOR_LIMIT) {
+      if (activeSectorCount > SECTOR_LIMIT) {
         throw new functions.https.HttpsError(
           'permission-denied',
           'You have reached your limit on total number of sectors.',
-          { limit: SECTOR_LIMIT }
+          { limit: SECTOR_LIMIT },
         );
       }
 
@@ -109,7 +109,7 @@ module.exports = functions.https.onCall((data, context) => {
                 savableSectorId = newRef.id;
               }
               return saveEntityTree(oldId, newRef.id, savableSectorId);
-            })
+            }),
         );
       };
 

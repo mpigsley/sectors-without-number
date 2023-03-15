@@ -47,15 +47,15 @@ module.exports = functions.firestore
 
     return Promise.all([
       new Promise((resolve, reject) =>
-        deleteBatch(navigationQuery, resolve, reject)
+        deleteBatch(navigationQuery, resolve, reject),
       ),
       new Promise((resolve, reject) =>
-        deleteBatch(layerQuery, resolve, reject)
+        deleteBatch(layerQuery, resolve, reject),
       ),
       new Promise((resolve, reject) =>
-        deleteBatch(factionQuery, resolve, reject)
+        deleteBatch(factionQuery, resolve, reject),
       ),
     ]).catch(
-      error => new functions.https.HttpsError('unknown', error.message, error)
+      error => new functions.https.HttpsError('unknown', error.message, error),
     );
   });

@@ -18,7 +18,7 @@ export default function NoteSidebar({
   if (!isSidebarEditActive) {
     return (
       <ReactMarkdown
-        source={(note.attributes || {}).content || ''}
+        children={(note.attributes || {}).content || ''}
         className="NoteSidebar-Display"
       />
     );

@@ -19,8 +19,6 @@
     "deploy:functions": "firebase deploy --only functions",
     "deploy:prod": "firebase use prod && sh -ac '. .env.prod; npm run deploy'",
     "deploy:prod:functions": "firebase use prod && sh -ac '. .env.prod; npm run deploy:functions'",
-    "lint": "eslint .",
-    "lint:fix": "eslint --fix .",
     "translate": "node ./src/utils/convert-translations.js"
   },
   "dependencies": {
@@ -43,7 +41,7 @@
     "react-hint": "^3.2.0",
     "react-intl": "^2.9.0",
     "react-loadable": "^5.5.0",
-    "react-markdown": "^4.1.0",
+    "react-markdown": "^8.0.5",
     "react-measure": "^2.3.0",
     "react-modal": "^3.8.1",
     "react-redux": "^7.2.0",
@@ -59,19 +57,11 @@
   "devDependencies": {
     "enzyme": "^3.1.1",
     "enzyme-adapter-react-16": "^1.15.2",
-    "eslint": "^6.5.1",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.1",
-    "eslint-plugin-react": "^7.15.1",
-    "firebase-tools": "^7.7.0",
-    "node-sass": "^4.12.0",
-    "prettier": "^1.18.2",
-    "react-scripts": "^3.2.0",
+    "firebase-tools": "^11.24.1",
+    "prettier": "^2.8.4",
+    "react-scripts": "^5.0.1",
     "react-test-renderer": "^16.5.2",
+    "sass": "^1.59.3",
     "source-map-explorer": "^2.4.0"
   },
   "jest": {

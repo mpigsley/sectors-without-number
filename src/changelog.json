@@ -1,4 +1,8 @@
 {
+  "7.21.8": {
+    "description": "Fix bug preventing sector edits if you've reached the 10 sector max.",
+    "date": "3-15-2023"
+  },
   "7.21.7": {
     "description": "Fix bug preventing layer color picker from opening.",
     "date": "7-8-2020"
@@ -14,7 +18,9 @@
   "7.21.4": {
     "description": "Upgrade function endpoints to Node 10.",
     "date": "5-31-2020",
-    "changes": ["Patch a minor security alert on an included package."]
+    "changes": [
+      "Patch a minor security alert on an included package."
+    ]
   },
   "7.21.3": {
     "description": "Update French & Hebrew Translations.",
@@ -113,7 +119,9 @@
   "7.13.1": {
     "description": "Fix bug where overview and print would not work if a note was added on the main sector entity.",
     "date": "8-24-2019",
-    "changes": ["Condensed printable tables span the full width of the page."]
+    "changes": [
+      "Condensed printable tables span the full width of the page."
+    ]
   },
   "7.13.0": {
     "description": "Add \"location\" to every entity in overview tables.",
@@ -612,7 +620,9 @@
   "3.6.1": {
     "description": "Fix child num offset in print dialog.",
     "date": "2-12-2018",
-    "changes": ["Render systems & black holes differently in print view."]
+    "changes": [
+      "Render systems & black holes differently in print view."
+    ]
   },
   "3.6.0": {
     "description": "Add a short description to any entity when in edit mode.",
