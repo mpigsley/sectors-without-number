@@ -1,4 +1,4 @@
-# Sectors Without Number
+modify# Sectors Without Number
 
 Revised edition compliant [Stars Without Number](http://www.sinenomine-pub.com/?page_id=395) sector generator.
 
