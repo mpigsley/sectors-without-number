@@ -1,5 +1,5 @@
 File Modified
-# My name is Swathi 
+# My name is Swathi from CSE 
 # Sectors Without Number
 
 Revised edition compliant [Stars Without Number](http://www.sinenomine-pub.com/?page_id=395) sector generator.
