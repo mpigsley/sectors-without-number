@@ -1,4 +1,9 @@
 {
+  "7.21.9": {
+    "description": "Fixed English typos across the site.",
+    "date": "12-21-2023",
+    "contributor": "eternallyBaffled"
+  },
   "7.21.8": {
     "description": "Fix bug preventing sector edits if you've reached the 10 sector max.",
     "date": "3-15-2023"
