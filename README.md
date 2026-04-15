@@ -31,6 +31,10 @@ This project is a front-end application written in React + Redux with a [Firebas
 
 After you've logged into firebase and selected the project from the CLI, you can deploy by simply running `npm run deploy`.
 
+Keep in mind that `npm run deploy` targets whichever project is currently active in the Firebase CLI (see `.firebaserc` / `firebase use`) — it does **not** read your `.env` files to choose the project. The `.env` file only supplies the `REACT_APP_*` values that get baked into the client bundle by `react-scripts build`; the Firebase CLI picks the deploy target independently.
+
+If you maintain multiple environments (e.g. staging and prod), switch between them with `firebase use <alias>` before running `npm run deploy`, or use `npm run deploy:prod` which runs `firebase use prod` and sources `.env.prod` for you. Run `firebase projects:list` to see which projects your current account can access, and `firebase login:list` / `firebase login --reauth` if you hit permission errors like `Failed to get Firebase project <id>`.
+
 ## Internationalization
 
 Translations for all the strings on the site are [in a google sheet](https://docs.google.com/spreadsheets/d/162lUcFa6cZdEy3hHQGqMRlgHNhTTL-szWexLtdpLllY/edit?usp=sharing). If you would like to help out just request access and tell me what language you'd like to work on.
