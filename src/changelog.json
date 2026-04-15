@@ -1,4 +1,8 @@
 {
+  "7.21.10": {
+    "description": "Show inline planet tags in the system view for players when those tags are marked visible.",
+    "date": "4-15-2026"
+  },
   "7.21.9": {
     "description": "Fixed English typos across the site.",
     "date": "12-21-2023",

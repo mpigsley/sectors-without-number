@@ -125,12 +125,18 @@ const EntityList = ({
       let additional;
       if (Entities[entityType].topLevel) {
         additional = coordinateKey(entity.x, entity.y);
-      } else if (!isShared) {
-        additional = ((entity.attributes || {}).tags || [])
+      } else {
+        const visibility = entity.visibility || {};
+        const allTags = {
+          ...(Entities[entityType].tags || {}),
+          ...customTags,
+        };
+        additional = (entity.attributes?.tags || [])
+          .filter(tag => !isShared || visibility[`tag.${tag}`] !== false)
           .map(tag =>
             intl.formatMessage({
               id: `tags.${tag}`,
-              defaultMessage: (customTags[tag] || {}).name,
+              defaultMessage: allTags[tag]?.name,
             }),
           )
           .map(toCommaArray)
