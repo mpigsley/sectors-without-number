@@ -1,4 +1,9 @@
 {
+  "7.21.11": {
+    "description": "Include routes, layers, and factions in the JSON export.",
+    "date": "5-11-2026",
+    "contributor": "rburman-tech"
+  },
   "7.21.10": {
     "description": "Show inline planet tags in the system view for players when those tags are marked visible.",
     "date": "4-15-2026"

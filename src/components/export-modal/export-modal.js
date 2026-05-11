@@ -9,6 +9,7 @@ import Button from 'primitives/other/button';
 import ExportTypes from 'constants/export-types';
 import { createJSONDownload, createImageDownlaod } from 'utils/export';
 import { translateEntities } from 'utils/entity';
+import { translateFactions } from 'utils/faction';
 
 import './style.scss';
 
@@ -34,7 +35,7 @@ export default function ExportModal({
           ...translateEntities(entities, customTags, intl),
           routes,
           layers,
-          factions,
+          factions: translateFactions(factions, intl),
         },
         `${sector.name} - ${dayjs().format('MMMM D, YYYY')}`,
       );

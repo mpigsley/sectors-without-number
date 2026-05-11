@@ -1,7 +1,12 @@
 import Chance from 'chance';
 
-import { FACTION_ASSETS, FACTION_ASSET_CATEGORIES } from 'constants/faction';
-import { forEach, reduce } from 'constants/lodash';
+import {
+  FACTION_ASSETS,
+  FACTION_ASSET_CATEGORIES,
+  FACTION_GOALS,
+  FACTION_TAGS,
+} from 'constants/faction';
+import { forEach, mapValues, reduce } from 'constants/lodash';
 
 const RATING_TO_HP = {
   1: 1,
@@ -61,3 +66,68 @@ export const factionIncomeAndOwnedAssets = faction => {
 
 export const factionColor = (color, key) =>
   color || new Chance(key).color({ format: 'hex' });
+
+const translateOrKey = (intl, id, key) =>
+  intl.messages[id] ? intl.formatMessage({ id }) : key;
+
+export const translateFactions = (factions, intl) =>
+  mapValues(factions, faction => {
+    const translated = { ...faction };
+
+    if (faction.goal && FACTION_GOALS[faction.goal]) {
+      const baseId = `faction.goal.${faction.goal}`;
+      translated.goal = {
+        name: translateOrKey(intl, baseId, faction.goal),
+        description: translateOrKey(
+          intl,
+          `${baseId}.description`,
+          faction.goal,
+        ),
+      };
+    }
+
+    if (faction.relationship) {
+      translated.relationship = translateOrKey(
+        intl,
+        `faction.relationship.${faction.relationship}`,
+        faction.relationship,
+      );
+    }
+
+    if ((faction.tags || []).length) {
+      translated.tags = faction.tags
+        .map(tag => {
+          if (!FACTION_TAGS[tag]) {
+            return tag;
+          }
+          const baseId = `faction.tags.${tag}`;
+          return {
+            name: translateOrKey(intl, baseId, tag),
+            description: translateOrKey(intl, `${baseId}.description`, tag),
+            effect: translateOrKey(intl, `${baseId}.effect`, tag),
+          };
+        });
+    }
+
+    if (faction.assets) {
+      translated.assets = mapValues(faction.assets, asset => {
+        if (!asset || !FACTION_ASSETS[asset.type]) {
+          return asset;
+        }
+        const baseId = `faction.assets.${asset.type}`;
+        return {
+          ...asset,
+          type: {
+            name: translateOrKey(intl, baseId, asset.type),
+            description: translateOrKey(
+              intl,
+              `${baseId}.description`,
+              asset.type,
+            ),
+          },
+        };
+      });
+    }
+
+    return translated;
+  });
