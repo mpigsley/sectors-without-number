@@ -22,12 +22,20 @@ export default function ExportModal({
   intl,
   entities,
   sector,
+  routes,
+  layers,
+  factions,
 }) {
   const onContinue = () => {
     if (exportType === ExportTypes.json.key) {
       closeExport();
       return createJSONDownload(
-        translateEntities(entities, customTags, intl),
+        {
+          ...translateEntities(entities, customTags, intl),
+          routes,
+          layers,
+          factions,
+        },
         `${sector.name} - ${dayjs().format('MMMM D, YYYY')}`,
       );
     }
@@ -97,4 +105,7 @@ ExportModal.propTypes = {
     name: PropTypes.string,
   }).isRequired,
   entities: PropTypes.shape().isRequired,
+  routes: PropTypes.shape().isRequired,
+  layers: PropTypes.shape().isRequired,
+  factions: PropTypes.shape().isRequired,
 };
