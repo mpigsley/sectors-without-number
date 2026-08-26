@@ -1,4 +1,8 @@
 {
+  "7.21.12": {
+    "description": "Fix bug where signing in while viewing a sector left the map empty of systems until a page refresh.",
+    "date": "8-26-2026"
+  },
   "7.21.11": {
     "description": "Include routes, layers, and factions in the JSON export.",
     "date": "5-11-2026",

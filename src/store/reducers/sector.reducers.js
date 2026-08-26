@@ -29,7 +29,7 @@ import {
   FETCHED_SECTOR,
   EXPAND_SECTOR,
 } from 'store/actions/combined.actions';
-import { LOGGED_OUT } from 'store/actions/user.actions';
+import { LOGGED_IN, LOGGED_OUT } from 'store/actions/user.actions';
 
 import { keys, uniq } from 'constants/lodash';
 import { ROWS, COLUMNS } from 'constants/defaults';
@@ -158,6 +158,8 @@ export default function sector(state = initialState, action) {
       return { ...state, holdKey: null, hoverKey: null };
     case TOGGLE_PLAYER_VIEW:
       return { ...state, playerView: !state.playerView };
+    case LOGGED_IN:
+      return { ...state, fetched: [] };
     case LOGGED_OUT:
       return initialState;
     default:
