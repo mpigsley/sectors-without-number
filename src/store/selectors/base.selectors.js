@@ -31,6 +31,7 @@ export const topLevelKeySelector = state => state.sector.topLevelKey;
 export const syncLockSelector = state => state.sector.syncLock;
 export const exportTypeSelector = state => state.sector.exportType;
 export const isExportOpenSelector = state => state.sector.isExportOpen;
+export const isImportOpenSelector = state => state.sector.isImportOpen;
 export const isSectorExpansionOpenSelector = state =>
   state.sector.isSectorExpansionOpen;
 export const isPrintingSelector = state => state.sector.isPrinting;

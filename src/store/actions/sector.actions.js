@@ -11,6 +11,8 @@ export const CANCELED_TOP_LEVEL_ENTITY_CREATE = `${ACTION_PREFIX}/CANCELED_TOP_L
 export const SET_EXPORT_TYPE = `${ACTION_PREFIX}/SET_EXPORT_TYPE`;
 export const OPENED_EXPORT = `${ACTION_PREFIX}/OPENED_EXPORT`;
 export const CLOSED_EXPORT = `${ACTION_PREFIX}/CLOSED_EXPORT`;
+export const OPENED_IMPORT = `${ACTION_PREFIX}/OPENED_IMPORT`;
+export const CLOSED_IMPORT = `${ACTION_PREFIX}/CLOSED_IMPORT`;
 export const PRINTING_STARTED = `${ACTION_PREFIX}/PRINTING_STARTED`;
 export const PRINTING_COMPLETE = `${ACTION_PREFIX}/PRINTING_COMPLETE`;
 export const CLEARED_MAP_KEYS = `${ACTION_PREFIX}/CLEARED_MAP_KEYS`;
@@ -32,6 +34,8 @@ export const setEntityExport = exportType =>
   syncLock(SET_EXPORT_TYPE, { exportType });
 export const openExport = () => ({ type: OPENED_EXPORT });
 export const closeExport = () => ({ type: CLOSED_EXPORT });
+export const openImport = () => ({ type: OPENED_IMPORT });
+export const closeImport = () => ({ type: CLOSED_IMPORT });
 export const openSectorExpansion = () => ({ type: OPENED_SECTOR_EXPANSION });
 export const closeSectorExpansion = () => ({ type: CLOSED_SECTOR_EXPANSION });
 export const startPrint = () => ({ type: PRINTING_STARTED });

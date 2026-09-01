@@ -8,7 +8,7 @@ import {
 } from 'store/selectors/sector.selectors';
 import { getCurrentEntityType } from 'store/selectors/entity.selectors';
 
-import { openExport } from 'store/actions/sector.actions';
+import { openExport, openImport } from 'store/actions/sector.actions';
 import ActionLayout from './action-layout';
 
 const mapStateToProps = state => ({
@@ -19,5 +19,5 @@ const mapStateToProps = state => ({
 });
 
 export default injectIntl(
-  connect(mapStateToProps, { openExport })(ActionLayout),
+  connect(mapStateToProps, { openExport, openImport })(ActionLayout),
 );

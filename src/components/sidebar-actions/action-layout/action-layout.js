@@ -5,6 +5,7 @@ import copy from 'copy-to-clipboard';
 import { intlShape } from 'react-intl';
 
 import ExportModal from 'components/export-modal';
+import ImportModal from 'components/import-modal';
 import SidebarContainer from 'primitives/container/sidebar-container';
 
 import Entities from 'constants/entities';
@@ -21,6 +22,7 @@ export default function ActionLayout({
   isSaved,
   isShared,
   openExport,
+  openImport,
   intl,
 }) {
   let allActions = [];
@@ -47,6 +49,10 @@ export default function ActionLayout({
       });
     }
 
+    const importAction = isSaved && !isShared
+      ? [{ key: 'import', children: intl.formatMessage({ id: 'misc.import' }), onClick: openImport }]
+      : [];
+
     allActions = [
       {
         key: 'back',
@@ -60,6 +66,7 @@ export default function ActionLayout({
         children: intl.formatMessage({ id: 'misc.export' }),
         onClick: openExport,
       },
+      ...importAction,
     ];
   }
 
@@ -67,6 +74,7 @@ export default function ActionLayout({
     <SidebarContainer title={name} actions={allActions} footer={footer}>
       {children}
       <ExportModal />
+      <ImportModal />
     </SidebarContainer>
   );
 }
@@ -88,6 +96,7 @@ ActionLayout.propTypes = {
   isSaved: PropTypes.bool.isRequired,
   isShared: PropTypes.bool.isRequired,
   openExport: PropTypes.func.isRequired,
+  openImport: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
 };
 
