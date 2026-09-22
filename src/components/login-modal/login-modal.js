@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
 import classNames from 'classnames';
 import { X } from 'react-feather';
+import { Link } from 'react-router-dom';
 import { FormattedMessage, intlShape } from 'react-intl';
 
 import Button from 'primitives/other/button';
@@ -210,6 +211,31 @@ export default class LoginModal extends Component {
               {actionText}
             </Button>
           </FlexContainer>
+          <p className="LoginModal-Legal">
+            <FormattedMessage
+              id="misc.agreeToTerms"
+              values={{
+                terms: (
+                  <Link
+                    to="/terms"
+                    className="LoginModal-LegalLink"
+                    onClick={closeLoginModal}
+                  >
+                    <FormattedMessage id="misc.termsOfService" />
+                  </Link>
+                ),
+                privacy: (
+                  <Link
+                    to="/privacy"
+                    className="LoginModal-LegalLink"
+                    onClick={closeLoginModal}
+                  >
+                    <FormattedMessage id="misc.privacyPolicy" />
+                  </Link>
+                ),
+              }}
+            />
+          </p>
         </FlexContainer>
       </ReactModal>
     );

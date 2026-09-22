@@ -106,6 +106,14 @@ export default function Home({ intl, saved, generateSector }) {
             })}
           />
         </div>
+        <FlexContainer className={style.footer} justify="center">
+          <Link to="/privacy" className={style.footerLink}>
+            <FormattedMessage id="misc.privacyPolicy" />
+          </Link>
+          <Link to="/terms" className={style.footerLink}>
+            <FormattedMessage id="misc.termsOfService" />
+          </Link>
+        </FlexContainer>
       </StarBackground>
     </>
   );

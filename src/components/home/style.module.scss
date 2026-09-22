@@ -180,6 +180,22 @@ $grid-height: 12rem;
   margin-top: 1rem;
 }
 
+.footer {
+  margin: -5rem 0 2rem;
+}
+
+.footerLink {
+  color: $light1;
+  font-size: 0.9rem;
+  margin: 0 0.75rem;
+  text-decoration: none;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light3;
+  }
+}
+
 @media (max-width: 1100px) {
   .grid {
     grid-template-columns: repeat(2, $grid-width);

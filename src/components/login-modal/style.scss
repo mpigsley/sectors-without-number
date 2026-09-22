@@ -117,3 +117,19 @@
   margin-top: 1rem;
   text-align: center;
 }
+
+.LoginModal-Legal {
+  color: $light1;
+  font-size: 0.8rem;
+  margin: 1.5rem 0 0;
+  text-align: center;
+}
+
+.LoginModal-LegalLink {
+  color: $light2;
+  transition: color 0.2s linear;
+
+  &:hover {
+    color: $light4;
+  }
+}

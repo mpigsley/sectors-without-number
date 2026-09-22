@@ -16,6 +16,7 @@ import AppWrapper from 'components/app-wrapper';
 import Home from 'components/home';
 import Configure from 'components/configure';
 import Changelog from 'components/changelog';
+import { PrivacyPolicy, TermsOfService } from 'components/legal';
 import GameRoutes from 'components/game-routes';
 import * as serviceWorker from './serviceWorker';
 
@@ -42,6 +43,8 @@ ReactDOM.render(
           <Route exact path="/" component={Home} />
           <Route path="/configure" component={Configure} />
           <Route path="/changelog" component={Changelog} />
+          <Route path="/privacy" component={PrivacyPolicy} />
+          <Route path="/terms" component={TermsOfService} />
           <Route
             path="/(sector|overview|elements)/:sector"
             component={GameRoutes}
